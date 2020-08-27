@@ -3,10 +3,10 @@ PT 2020 en S3T
 
 __ADAPTER CE README à votre projet__
 
-Le code d'example qui a été donné dans le projet tutoré est placé ici juste pour vérifier que l'environnement supporte bien javaFx.
+Le source du code exemple qui a été donné dans le projet tutoré sous Moodle est placé dans ce dépôt pour l'initialiser et pour vérifier que l'environnement supporte bien javaFx. Vous êtes tout à fait libre de l'enlever.
   * Le test qu'il contient n'a pour seule valeur que de vérifier que l'application s'exécute (mvn test).
-  * le test ne fonctionne pas dans Eclipse (problème de thread)
-  * Pour exécuter l'application qui elle fonctionne : 
+  * Le test ne fonctionne pas dans Eclipse (problème de thread) mais bien en ligne de commande.
+  * Pour exécuter l'application : 
     ```shell
     mvn exec:java -Dexec.mainClass=example.App &
     mvn exec:java -Dexec.mainClass=example.App &
