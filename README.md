@@ -13,6 +13,7 @@ Membres de l'équipe :
 -Maxime Lecerf
 -Kevin Pouzaud
 -Vincent Calatayud
+-Chatelain Baptiste
 
 
 Le source du code exemple qui a été donné dans le projet tutoré sous Moodle est placé dans ce dépôt pour l'initialiser et pour vérifier que l'environnement supporte bien javaFx. Vous êtes tout à fait libre de l'enlever.
