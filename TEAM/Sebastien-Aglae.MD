@@ -2,10 +2,10 @@
 Etudiant en informatique
    * aime 
        * coder
-	   * manger
-	   * dormir
-	* code en
-		* java
-		* C#
-		* VB
+       * manger
+       * dormir
+   * code en
+       * java
+       * C#
+       * VB
 
