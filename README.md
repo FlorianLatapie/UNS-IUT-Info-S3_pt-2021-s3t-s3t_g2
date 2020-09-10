@@ -7,7 +7,7 @@ Membres de l'équipe :
 -Latapie Florian Chef d'équipe (FlorianLatapie)
 -Langlade Théo (LangladeTheo)
 -Boulton Nina (ninaboulton)
--Blondin Remy (RemyBlndn)
+-Blondin Remy (RemyBldn)
 -Sébastien Aglaé (sebastienaglae)
 -Maxime Lecerf  Sous Chef (Maxime-Lecerf-Info)
 -Kevin Pouzaud (G2-KevinPouzaud)
