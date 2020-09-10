@@ -1,5 +1,4 @@
-__AGLAE Sébastien__
-
+**Sébastien Aglaé**
 Etudiant en informatique
    * aime 
        * coder
@@ -9,3 +8,4 @@ Etudiant en informatique
 		* java
 		* C#
 		* VB
+
