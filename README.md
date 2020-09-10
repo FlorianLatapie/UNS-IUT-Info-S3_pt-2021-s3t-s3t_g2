@@ -4,6 +4,7 @@ PT 2020 en S3T
 __ADAPTER CE README à votre projet__
 
 Membres de l'équipe : 
+-Le Bihan Leo
 -Latapie Florian (Chef d'équipe)
 -Langlade Théo
 -Boulton Nina
