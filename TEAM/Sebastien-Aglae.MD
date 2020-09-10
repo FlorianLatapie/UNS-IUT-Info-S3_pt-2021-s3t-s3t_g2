@@ -1,11 +1,11 @@
-__AGLAE Sébastien__
-
+**Sébastien Aglaé**
 Etudiant en informatique
    * aime 
        * coder
-	   * manger
-	   * dormir
-	* code en
-		* java
-		* C#
-		* VB
+       * manger
+       * dormir
+   * code en
+       * java
+       * C#
+       * VB
+
