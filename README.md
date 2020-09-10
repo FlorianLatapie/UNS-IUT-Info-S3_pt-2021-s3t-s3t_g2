@@ -16,6 +16,7 @@ Membres de l'équipe :
 -Jehan Berthé (Jehan-Berthé)
 -Aurélien Arnault(AurélienArnault)
 -Bouchemot Yanis (yanis-bouchemot)
+-Le Bihan Leo (LeBihanLeo)
 
 
 Le source du code exemple qui a été donné dans le projet tutoré sous Moodle est placé dans ce dépôt pour l'initialiser et pour vérifier que l'environnement supporte bien javaFx. Vous êtes tout à fait libre de l'enlever.
