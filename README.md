@@ -19,6 +19,7 @@ Membres de l'équipe :
 -Le Bihan Leo (LeBihanLeo)
 -Devauchelle Alex (AlexDevauchelle)
 -Chatelain Baptiste (Baptiste-Chatelain)
+- Gontero Tom (GonteroTom)
 
 
 Le source du code exemple qui a été donné dans le projet tutoré sous Moodle est placé dans ce dépôt pour l'initialiser et pour vérifier que l'environnement supporte bien javaFx. Vous êtes tout à fait libre de l'enlever.
