@@ -4,18 +4,14 @@ PT 2020 en S3T
 __ADAPTER CE README à votre projet__
 
 Membres de l'équipe : 
--Le Bihan Léo
 -Latapie Florian (Chef d'équipe)
--Bouchemot Yanis
 -Langlade Théo
 -Boulton Nina
 -Blondin Remy
 -Sébastien Aglaé
 -Maxime Lecerf
 -Kevin Pouzaud
--Jehan Berthé
--Devauchelle Alex
--Emeric Maximil
+-Vincent Calatayud
 
 
 Le source du code exemple qui a été donné dans le projet tutoré sous Moodle est placé dans ce dépôt pour l'initialiser et pour vérifier que l'environnement supporte bien javaFx. Vous êtes tout à fait libre de l'enlever.
