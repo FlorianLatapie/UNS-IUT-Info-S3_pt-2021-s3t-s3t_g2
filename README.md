@@ -14,7 +14,7 @@ Membres de l'équipe :
 - Vincent Calatayud (G2-VincentCalatayud)
 - Emeric Maximil (Emeric-Maximil)
 - Jehan Berthé (Jehan-Berthé)
-- Aurélien Arnault(AurélienArnault)
+- Aurélien Arnault(AurelienARNAULT)
 - Bouchemot Yanis (yanis-bouchemot)
 - Le Bihan Leo (LeBihanLeo)
 - Devauchelle Alex (AlexDevauchelle)
