@@ -1,9 +1,9 @@
 ---
-Nom: ''
-A propos: ''
-Titre: ''
+Nom: '[...]'
+A propos: '[...]'
+Titre: '[...]'
 labels: US
-Assigné à: ''
+Assigné à: '[...]'
 ---
 
 **Titre:**
