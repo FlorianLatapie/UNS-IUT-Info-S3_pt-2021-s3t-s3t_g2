@@ -1,9 +1,9 @@
 ---
-name: Bug report fr
-about: Rapport d'erreur
-title: ''
-labels: ''
-assignees: ''
+Nom : Bug report fr
+À propos : Rapport d'erreur
+Titre : ''
+Labels : ''
+Assignés : ''
 
 ---
 
@@ -24,15 +24,15 @@ Une description claire et concise de l'effet initial attendu.
 Le cas échéant, ajoutez des captures pour expliciter votre problème.
 
 **Configuration d'ordinateur (s'il-vous-plaît, complétez les informations suivantes):**
- - OS : [e.g. iOS]
- - Navigateur [e.g. Chrome, Safari]
- - Version [e.g. 22]
+ - OS : [ex : iOS]
+ - Navigateur [ex : Chrome, Safari]
+ - Version [ex : 22]
 
 **Smartphone (s'il-vous-plaît, complétez les informations suivantes):**
- - Appareil : [e.g. iPhone6]
- - OS : [e.g. iOS8.1]
- - Navigateur [e.g. stock browser, safari]
- - Version [e.g. 22]
+ - Appareil : [ex : iPhone6]
+ - OS : [ex : iOS8.1]
+ - Navigateur [ex : stock browser, safari]
+ - Version [ex : 22]
 
 **Contexte additionnel**
 Ajoutez tout autre contexte à votre problème.
