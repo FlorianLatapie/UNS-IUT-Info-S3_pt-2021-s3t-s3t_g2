@@ -1,6 +1,6 @@
 ---
-name: ''
-about: ''
+name: User Stories
+about: Création d'une US
 title: ''
 labels: ''
 assignees: ''
