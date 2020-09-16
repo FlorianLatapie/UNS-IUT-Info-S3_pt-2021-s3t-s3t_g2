@@ -1,9 +1,9 @@
 ---
-Nom: 
-A propos: Describe the User Story
+Nom:'' 
+A propos: ''
 Titre: ''
 labels: US
-Assigné à:
+Assigné à:''
 ---
 **Titre:**
 
@@ -27,9 +27,6 @@ Assigné à:
 
   
 **Critère d'acceptation pour compléter l'US**
-Précisez l'ensemble des conditions que la story doit satisfaire pour être considérée comme complète et terminée.
-
-Plus spécifiquement décrivez un ensemble de scénario qui deviendront des tests d'acceptation. Précisez bien les données associées comme vous le voyez dans les scénarios d'exemples données ci-dessous. 
 
 **Etant donné que** [...]<br>
 **Et que** [...]<br>
