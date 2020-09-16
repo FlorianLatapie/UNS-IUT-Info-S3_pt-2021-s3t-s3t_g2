@@ -1,6 +1,6 @@
 ---
-name: ''
-about: ''
+name: Bug report fr
+about: Rapport d'erreur
 title: ''
 labels: ''
 assignees: ''
