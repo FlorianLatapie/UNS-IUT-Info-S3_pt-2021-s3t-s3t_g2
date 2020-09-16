@@ -17,9 +17,9 @@ Assigné à: '[...]'
 **Priorité:** 
 
   1. _**Doit avoir :** 
-  2. _**Should Have/Devrait avoir** : 
-  3. _**Could have/Aurait pu**: 
-  4. _**Won't have/N'aura pas** :
+  2. _**Devrait avoir** : 
+  3. _**Aurait pu**: 
+  4. _**N'aura pas** :
   
   
 **Estimation/Estimate :** 
