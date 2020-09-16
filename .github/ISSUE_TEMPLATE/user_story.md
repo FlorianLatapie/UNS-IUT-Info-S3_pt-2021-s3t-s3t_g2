@@ -1,10 +1,11 @@
 ---
-Nom:'' 
+Nom: ''
 A propos: ''
 Titre: ''
 labels: US
-Assigné à:''
+Assigné à: ''
 ---
+
 **Titre:**
 
 
@@ -30,7 +31,7 @@ Assigné à:''
 
 **Etant donné que** [...]<br>
 **Et que** [...]<br>
-(**Et que** [...])<br>
+(**Et que** [...]) *OPTIONNEL*<br>
 **Quand** [...]<br>
 **Alors** [...]<br>
   
@@ -41,7 +42,7 @@ _**Scénario:**_
 ```
 
 _**Scénario:**_<br>
-```
+``` 
 [...]
 ```
 
