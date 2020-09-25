@@ -1,8 +1,6 @@
 # S3T-PT-2020
 PT 2020 en S3T
 
-__ADAPTER CE README à votre projet__
-
 Membres de l'équipe : 
 - Latapie Florian Chef d'équipe (FlorianLatapie)
 - Langlade Théo (LangladeTheo)
