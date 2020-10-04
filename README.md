@@ -25,7 +25,7 @@ Chefs de section :
 - Autres classes java : Alex Devauchelle, Sébastien Aglaé 
 - Interfaces Graphiques JavaFx : Sébastien Aglaé  
 - Gestion GitHub : Aurélien Arnaud 
-- Classes réseau : seb aussi 
-- Programmation algorithmes des bots : alex 
+- Classes réseau : Sébastien Aglaé 
+- Programmation algorithmes des bots : Alex Devauchelle
 - Gestion des votes : N/D
  
