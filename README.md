@@ -2,12 +2,12 @@
 PT 2020 en S3T
 
 Membres de l'équipe : 
-- Latapie Florian Chef d'équipe (FlorianLatapie)
+- Latapie Florian **Chef d'équipe** (FlorianLatapie)
 - Langlade Théo (LangladeTheo)
 - Boulton Nina (ninaboulton)
 - Blondin Remy (RemyBldn)
 - Sébastien Aglaé (sebastienaglae)
-- Maxime Lecerf  Sous Chef (Maxime-Lecerf-Info)
+- Maxime Lecerf  **Sous Chef d'équipe** (Maxime-Lecerf-Info)
 - Kevin Pouzaud (G2-KevinPouzaud)
 - Vincent Calatayud (G2-VincentCalatayud)
 - Emeric Maximil (Emeric-Maximil)
@@ -20,10 +20,12 @@ Membres de l'équipe :
 - Gontero Tom (GonteroTom)
 - Floran Tatopoulos (FloranTatopoulos)
 
-Le source du code exemple qui a été donné dans le projet tutoré sous Moodle est placé dans ce dépôt pour l'initialiser et pour vérifier que l'environnement supporte bien javaFx. Vous êtes tout à fait libre de l'enlever.
-  * Le test qu'il contient n'a pour seule valeur que de vérifier que l'application s'exécute (mvn test).
-  * Le test ne fonctionne pas dans Eclipse (problème de thread) mais bien en ligne de commande.
-  * Pour exécuter l'application : 
-    ```shell
-    mvn exec:java -Dexec.mainClass=example.App &
- 
+Chefs de section : 
+- Classes et tests métier java : Alex Devauchelle
+- Autres classes java : Alex Devauchelle, Sébastien Aglaé 
+- Interfaces Graphiques JavaFx : Sébastien Aglaé  
+- Gestion GitHub : Aurélien Arnaud 
+- Classes réseau : seb aussi 
+- Programmation algorithmes des bots : alex 
+- Gestion des votes : N/D
+
