@@ -29,3 +29,8 @@ Chefs de section :
 - Programmation algorithmes des bots : Alex Devauchelle
 - Gestion des votes : N/D
  
+ Politique de branches:
+ 
+![alt text1][logo]
+
+[logo]: ./Branches.png "Branches"
