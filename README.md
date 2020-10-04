@@ -1,5 +1,5 @@
-# S3T-PT-2020
-PT 2020 en S3T
+# S3T-G2
+Projet Tutoré 2020 en S3T Groupe 2 
 
 **Membres de l'équipe :** 
 - Latapie Florian **Chef d'équipe** (FlorianLatapie)
