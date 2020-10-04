@@ -1,4 +1,4 @@
-package Jeu;
+package jeu;
 
 /**
  * The Class menace.
@@ -7,6 +7,6 @@ package Jeu;
  * @since 04/10/2020
  * @category carteAction
  */
-public class menace extends carteAction {
+public class Menace extends CarteAction {
 
 }

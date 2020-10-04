@@ -1,12 +1,11 @@
-package Jeu;
+package jeu;
 
 /**
- * The Class joueur.
+ * The Class zombie.
  * @author Alex
  * @version 0
  * @since 04/10/2020
  */
-public class joueur {
+public class Zombie {
 
-	
 }

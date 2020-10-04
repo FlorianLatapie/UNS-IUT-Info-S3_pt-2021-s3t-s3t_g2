@@ -1,4 +1,4 @@
-package Controleur;
+package controleur;
 
 /**
  * The Class controleurJeu.
@@ -6,6 +6,6 @@ package Controleur;
  * @version 0
  * @since 04/10/2020
  */
-public class controleurJeu {
+public class ControleurJeu {
 
 }

@@ -1,4 +1,4 @@
-package Jeu;
+package jeu;
 
 /**
  * The Class personnage.
@@ -6,6 +6,6 @@ package Jeu;
  * @version 0
  * @since 04/10/2020
  */
-public class personnage {
+public class Personnage {
 
 }

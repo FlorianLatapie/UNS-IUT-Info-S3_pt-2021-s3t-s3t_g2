@@ -1,4 +1,4 @@
-package Jeu;
+package jeu;
 
 /**
  * The Class laBrute.
@@ -7,6 +7,6 @@ package Jeu;
  * @since 04/10/2020
  * @category personnage
  */
-public class laBrute extends personnage {
+public class LaBrute extends Personnage {
 
 }

@@ -1,12 +1,12 @@
-package Jeu;
+package jeu;
 
 /**
- * The Class sprint.
+ * The Class arme.
  * @author Alex
  * @version 0
  * @since 04/10/2020
  * @category carteAction
  */
-public class sprint extends carteAction {
+public class Arme extends CarteAction {
 
 }
