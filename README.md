@@ -1,7 +1,7 @@
 # S3T-PT-2020
 PT 2020 en S3T
 
-Membres de l'équipe : 
+**Membres de l'équipe :** 
 - Latapie Florian **Chef d'équipe** (FlorianLatapie)
 - Langlade Théo (LangladeTheo)
 - Boulton Nina (ninaboulton)
@@ -20,7 +20,7 @@ Membres de l'équipe :
 - Gontero Tom (GonteroTom)
 - Floran Tatopoulos (FloranTatopoulos)
 
-Chefs de section : 
+**Chefs de section :**
 - Classes et tests métier java : Alex Devauchelle
 - Autres classes java : Alex Devauchelle, Sébastien Aglaé 
 - Interfaces Graphiques JavaFx : Sébastien Aglaé  
@@ -29,7 +29,7 @@ Chefs de section :
 - Programmation algorithmes des bots : Alex Devauchelle
 - Gestion des votes : N/D
  
- Politique de branches:
+**Politique de branches:**
  
  Master et Production push que par les chefs de section.
  
