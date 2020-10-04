@@ -31,6 +31,8 @@ Chefs de section :
  
  Politique de branches:
  
+ Master et Production push que par les chefs de section.
+ 
 ![alt text1][logo]
 
 [logo]: ./Branches.png "Branches"
