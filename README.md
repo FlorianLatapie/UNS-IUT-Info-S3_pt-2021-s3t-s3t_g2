@@ -28,4 +28,4 @@ Chefs de section :
 - Classes réseau : seb aussi 
 - Programmation algorithmes des bots : alex 
 - Gestion des votes : N/D
-
+ 
