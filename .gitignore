@@ -24,7 +24,7 @@ local.properties
 *.pydevproject
 
 # CDT-specific (C/C++ Development Tooling)
-.cproject
+.cprojects
 
 # CDT- autotools
 .autotools
@@ -207,3 +207,7 @@ buildNumber.properties
 .mvn/timing.properties
 # https://github.com/takari/maven-wrapper#usage-without-binary-jar
 .mvn/wrapper/maven-wrapper.jar
+*.xml
+.project
+.idea/.name
+.classpath
