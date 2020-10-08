@@ -7,5 +7,13 @@ package jeu;
  * @since 04/10/2020
  */
 public class Personnage {
+	private Joueur joueur;
 
+	public Joueur getJoueur() {
+		return joueur;
+	}
+
+	public void setJoueur(Joueur joueur) {
+		this.joueur = joueur;
+	}
 }
