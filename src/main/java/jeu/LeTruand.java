@@ -8,13 +8,9 @@ package jeu;
  * @category personnage
  */
 public class LeTruand extends Personnage {
-	private Joueur joueur;
 
-	public Joueur getJoueur() {
-		return joueur;
+	public LeTruand(Joueur joueur) {
+		super(joueur, TypePersonnage.TRUAND);
 	}
-
-	public void setJoueur(Joueur joueur) {
-		this.joueur = joueur;
-	}
+	
 }

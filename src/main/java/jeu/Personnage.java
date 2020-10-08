@@ -8,6 +8,16 @@ package jeu;
  */
 public class Personnage {
 	private Joueur joueur;
+	private TypePersonnage type;
+	
+	public TypePersonnage getType() {
+		return type;
+	}
+
+	public Personnage (Joueur joueur, TypePersonnage type) {
+		this.type = type;
+		this.joueur = joueur;
+	}
 
 	public Joueur getJoueur() {
 		return joueur;
@@ -16,4 +26,5 @@ public class Personnage {
 	public void setJoueur(Joueur joueur) {
 		this.joueur = joueur;
 	}
+	
 }

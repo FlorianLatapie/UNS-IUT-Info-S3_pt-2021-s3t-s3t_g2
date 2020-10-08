@@ -13,7 +13,7 @@ public class Lieu {
 	private int nbPlaces;
 	private int nbZombies;
 	private boolean ouvert;
-	ArrayList<Personnage> personnage;
+	private ArrayList<Personnage> personnage;
 	
 	//Getter Setter
 	public int getNum() {
@@ -78,7 +78,21 @@ public class Lieu {
 	}
 		
 	
-	
+	public boolean zombieEntre() {
+		int force = 0;
+		for(int a=0; a<this.personnage.size(); a++) {
+			if(personnage.get(a).getType() == TypePersonnage.BRUTE) {
+				force += 2;
+			}
+			else {
+				force += 1;
+			}
+		}
+		if (force > this.nbZombies){
+			return false;
+		}
+		return true;
+	}
 
 
 }

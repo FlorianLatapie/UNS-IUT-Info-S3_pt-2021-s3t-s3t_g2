@@ -8,13 +8,10 @@ package jeu;
  * @category personnage
  */
 public class LaBlonde extends Personnage {
-	private Joueur joueur;
-
-	public Joueur getJoueur() {
-		return joueur;
+	
+	public LaBlonde(Joueur joueur) {
+		super(joueur, TypePersonnage.BLONDE);
 	}
 
-	public void setJoueur(Joueur joueur) {
-		this.joueur = joueur;
-	}
+
 }

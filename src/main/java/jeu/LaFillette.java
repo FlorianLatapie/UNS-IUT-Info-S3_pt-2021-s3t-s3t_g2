@@ -8,13 +8,9 @@ package jeu;
  * @category personnage
  */
 public class LaFillette extends Personnage {
-	private Joueur joueur;
 
-	public Joueur getJoueur() {
-		return joueur;
+	public LaFillette(Joueur joueur) {
+		super(joueur, TypePersonnage.FILLETTE);
 	}
-
-	public void setJoueur(Joueur joueur) {
-		this.joueur = joueur;
-	}
+	
 }
