@@ -7,6 +7,6 @@ package jeu;
  * @since 04/10/2020
  * @category carteAction
  */
-public class CameraDeSecurite {
+public class CameraDeSecurite extends CarteAction{
 
 }
