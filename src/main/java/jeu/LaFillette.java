@@ -11,6 +11,9 @@ public class LaFillette extends Personnage {
 
 	public LaFillette(Joueur joueur) {
 		super(joueur, TypePersonnage.FILLETTE);
+		super.point=1;
+		super.nbrZretenu=1;
+		super.nbrVoixPourVoter=1;
 	}
 	
 }

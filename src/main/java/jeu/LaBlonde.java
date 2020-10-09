@@ -11,6 +11,9 @@ public class LaBlonde extends Personnage {
 	
 	public LaBlonde(Joueur joueur) {
 		super(joueur, TypePersonnage.BLONDE);
+		super.point=7;
+		super.nbrZretenu=1;
+		super.nbrVoixPourVoter=1;
 	}
 
 

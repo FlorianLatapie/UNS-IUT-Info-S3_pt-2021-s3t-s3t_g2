@@ -11,6 +11,10 @@ public class LaBrute extends Personnage {
 
 	public LaBrute(Joueur joueur) {
 		super(joueur, TypePersonnage.BRUTE);
+		super.point=5;
+		super.nbrZretenu=2;
+		super.nbrVoixPourVoter=1;
+
 	}
 	
 }
