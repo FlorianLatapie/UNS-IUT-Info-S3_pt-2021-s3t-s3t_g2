@@ -1,11 +1,193 @@
 package jeu;
 
+import java.util.ArrayList;
+
 /**
  * The Class jeu.
+ * 
  * @author Alex
  * @version 0
  * @since 04/10/2020
  */
 public class Jeu {
+	ArrayList<Lieu> lieux;
+	ArrayList<Joueur> joueurs;
+	ArrayList<CarteAction> cartes;
+
+	public Jeu(ArrayList<Joueur> listeJoueursInitiale) {
+		lieux = new ArrayList<>();
+		joueurs = new ArrayList<>();
+		cartes = new ArrayList<>();
+		initCarte();
+		for (int i = 0; i < listeJoueursInitiale.size() - 1; i++)
+			joueurs.add(listeJoueursInitiale.get(i));
+		initJoueurs();
+		initLieu();
+
+	}
+	
+	
+
+	private void initCarte() {
+
+		Materiel materiel1 = new Materiel();
+		Menace menace1 = new Menace();
+		Sprint sprint1 = new Sprint();
+		CameraDeSecurite camSecu1 = new CameraDeSecurite();
+		Materiel materiel2 = new Materiel();
+		Menace menace2 = new Menace();
+		Sprint sprint2 = new Sprint();
+		CameraDeSecurite camSecu2 = new CameraDeSecurite();
+		Materiel materiel3 = new Materiel();
+		Menace menace3 = new Menace();
+		Sprint sprint3 = new Sprint();
+		CameraDeSecurite camSecu3 = new CameraDeSecurite();
+		Cachette cachette1 = new Cachette();
+		Cachette cachette2 = new Cachette();
+		Cachette cachette3 = new Cachette();
+		Arme bate = new Arme();
+		Arme grenade = new Arme();
+		Arme tronconeuse = new Arme();
+		Arme fusil = new Arme();
+		Arme revolver = new Arme();
+		Arme hache = new Arme();
+		cartes.add(hache);
+		cartes.add(revolver);
+		cartes.add(tronconeuse);
+		cartes.add(fusil);
+		cartes.add(grenade);
+		cartes.add(bate);
+		cartes.add(sprint1);
+		cartes.add(sprint2);
+		cartes.add(sprint3);
+		cartes.add(menace1);
+		cartes.add(menace2);
+		cartes.add(menace3);
+		cartes.add(materiel1);
+		cartes.add(materiel2);
+		cartes.add(materiel3);
+		cartes.add(cachette1);
+		cartes.add(cachette2);
+		cartes.add(cachette3);
+		cartes.add(camSecu1);
+		cartes.add(camSecu2);
+		cartes.add(camSecu3);
+
+	}
+
+	private void initLieu() {
+
+		Lieu parking = new Lieu();
+		Lieu PCsecu = new Lieu();
+		Lieu supermarche = new Lieu();
+		Lieu magasin1 = new Lieu();
+		Lieu magasin2 = new Lieu();
+		Lieu magasin3 = new Lieu();
+		if (joueurs.size() < 4)
+			magasin2.fermer();
+		lieux.add(supermarche);
+		lieux.add(PCsecu);
+		lieux.add(magasin3);
+		lieux.add(magasin2);
+		lieux.add(magasin1);
+		lieux.add(parking);
+
+	}
+
+	private void initJoueurs() {
+		if (joueurs.size() < 4)
+			for (int i = 0; i < joueurs.size(); i++)
+				joueurs.get(i).setPersonnagesRed();
+		else
+			for (int i = 0; i < joueurs.size(); i++)
+				joueurs.get(i).setPersonnages();
+	}
+
+	public void fouilleCamion(Joueur piocheur, Joueur receveur , CarteAction cartePiocheur , CarteAction carteReceveur , CarteAction carteDefause) {
+		for (int i = 0 ; i < joueurs.size(); i++) {
+			if (joueurs.get(i).equals(piocheur))
+				joueurs.get(i).addCarte(cartePiocheur);
+			if (joueurs.get(i).equals(receveur))
+				joueurs.get(i).addCarte(carteReceveur);
+		}
+		cartes.remove(cartePiocheur);
+		cartes.remove(carteDefause);
+		cartes.remove(carteReceveur);
+	}
+	
+	
+	public void resultatChefVigile(Joueur nouveauChef) {
+		for (int i = 0 ; i < joueurs.size(); i++) {
+			if (joueurs.get(i).equals(nouveauChef))
+				joueurs.get(i).setChefVigile(true);
+			else
+				joueurs.get(i).setChefVigile(false);
+		}
+			
+	}
+	
+	public void resultatChefVigile() {
+		for (int i = 0 ; i < joueurs.size(); i++) {
+			joueurs.get(i).setChefVigile(false);
+		}
+			
+	}
+	
+	
+	public void entreZombie(ArrayList<Integer> listeInt) {
+		for (int i = 0; i<4 ;i++) {
+			lieux.get(listeInt.get(i)).addZombie();
+		}	
+	}
+	
+	public void placementDesPersonnages(ArrayList<Integer> lieuDest, ArrayList<Integer> lieuDep) {
+		for (int i = 0; i < joueurs.size(); i++)
+			if (joueurs.get(i).estVivant()) 
+				joueurs.get(i).setPersonnageAtLieu(joueurs.get(i).getPersonnageAtLieu(lieuDep.get(i)), lieuDest.get(i));
+	}
+	
+	public boolean estFini() {
+		//TO DO
+		return false;
+	}
+	
+	public Joueur getWinner() {
+		//TO DO
+		return null;
+	}
+	
+	public ArrayList<Joueur> getJoueurs() {
+		return joueurs;
+	}
+
+	public ArrayList<Lieu> getLieux() {
+		return lieux;
+	}
+
+
+
+	public ArrayList<CarteAction> getCartes() {
+		return cartes;
+	}
+
+
+
+	public ArrayList<Integer> getZombies() {
+		ArrayList<Integer> listeNbrZombie = new ArrayList<>();
+		for (int i = 0; i< lieux.size(); i++)
+			listeNbrZombie.add(lieux.get(i).getNbrZombies());	
+		return listeNbrZombie;
+	}
+
+
+
+	public void lastAttaqueZombie() {
+		// TO DO
+		
+	}
+	
+	
+	
+	
 
 }
