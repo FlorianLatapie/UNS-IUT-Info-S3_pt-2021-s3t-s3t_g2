@@ -8,5 +8,7 @@ package jeu;
  * @category carteAction
  */
 public class CameraDeSecurite extends CarteAction{
-
+	public CameraDeSecurite() {
+		super("Camera de securité");
+	}
 }

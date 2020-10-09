@@ -8,5 +8,8 @@ package jeu;
  * @category carteAction
  */
 public class Cachette extends CarteAction {
-
+	public Cachette() {
+		super("Cachette");
+		
+	}
 }

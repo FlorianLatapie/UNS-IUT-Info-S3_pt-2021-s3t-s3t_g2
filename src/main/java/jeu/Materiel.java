@@ -8,5 +8,7 @@ package jeu;
  * @category carteAction
  */
 public class Materiel extends CarteAction {
-
+	public Materiel() {
+		super("Materiel");
+	}
 }

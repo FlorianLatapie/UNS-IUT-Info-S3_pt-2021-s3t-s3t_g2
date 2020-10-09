@@ -8,5 +8,7 @@ package jeu;
  * @category carteAction
  */
 public class Sprint extends CarteAction {
-
+	public Sprint() {
+		super("Sprint");
+	}
 }
