@@ -43,9 +43,6 @@ public class Lieu {
 	public ArrayList<Personnage> getPersonnage() {
 		return personnage;
 	}
-	public void setPersonnage(ArrayList<Personnage> personnage) {
-		this.personnage = personnage;
-	}
 	
 	//Constructeurs
 	public Lieu(int num) {
@@ -93,5 +90,8 @@ public class Lieu {
 		return true;
 	}
 
+	public void addZombie(){
+		this.nbZombies += 1;
+	}
 
 }
