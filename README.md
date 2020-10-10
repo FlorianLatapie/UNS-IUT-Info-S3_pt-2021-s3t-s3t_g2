@@ -47,8 +47,8 @@ Les branches **Bot Faible**, **Bot Moyen** et **Bot Fort** contiennent les codes
 
 La branche **Réseau** contient le code réseau. Elle sera fusionnée avec toutes les branches de 1 niveau inférieur.
 
-La branche **Production** sert à fusionner plusieurs branches de niveaux supérieur afin de vérifier que les codes sont bons avant de push dans la branche Master.
+La branche **Production** sert à fusionner plusieurs branches de niveau supérieur afin de vérifier que les codes sont bons avant de push dans la branche Master.
 
 La branche **Master** est la branche qui contiendra notre projet fonctionnel.
 
-Seul les chefs de sections pourront push dans les branches Master et Production.
+Seuls les chefs de section pourront push dans les branches Master et Production.
