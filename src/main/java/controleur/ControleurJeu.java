@@ -1,6 +1,5 @@
 package controleur;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -18,7 +17,7 @@ public class ControleurJeu {
 	private InterfaceGrahique ig = new InterfaceGrahique();
 	private GestionnaireReseau rg = new GestionnaireReseau();
 
-	public ControleurJeu() throws ClassNotFoundException, IOException{
+	public Controleur() throws ClassNotFoundException, IOException{
 		jeu = new Jeu(ig.configJoueurs());
 		
 	}

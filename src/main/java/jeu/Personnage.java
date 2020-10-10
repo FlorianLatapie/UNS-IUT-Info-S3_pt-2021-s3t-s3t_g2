@@ -81,10 +81,7 @@ package jeu;
 		}
 		//-------------------------------------------------------
 		public void changerDeLieux(Lieu newLieu) {
-			monLieu.getPersonnage().remove(this);
-			newLieu.getPersonnage().add(this);
 			monLieu=newLieu;
-			
 		}
 		
 		public Lieu getMonLieu() {
