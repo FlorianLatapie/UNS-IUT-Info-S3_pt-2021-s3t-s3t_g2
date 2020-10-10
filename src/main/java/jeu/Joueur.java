@@ -68,10 +68,6 @@ public class Joueur {
 		this.enVie = enVie;
 	}
 
-	public void setPersonnages(ArrayList<Personnage> personnages) {
-		this.personnages = personnages;
-	}
-
 	/**
 	 * 
 	 * @return chefDesVigiles
@@ -89,6 +85,12 @@ public class Joueur {
 	
 	public void setCouleur(Color couleur) {
 		this.couleur = couleur;
+	}
+	
+	public void setPersonnageAtLieu(Personnage p, Lieu l) {
+		if(personnages.contains(p)) {
+			p.changerDeLieux(l);
+		}
 	}
 
 }
