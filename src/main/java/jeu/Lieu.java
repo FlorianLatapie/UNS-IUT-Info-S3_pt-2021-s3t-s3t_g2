@@ -48,9 +48,8 @@ public class Lieu {
 	}
 	
 	//Constructeurs
-	public Lieu(int num, int nbZomb) {
+	public Lieu(int num) {
 		this.num = num;
-		this.nbZombies=nbZomb;
 		if(this.num == 1 || this.num==5) {
 			this.nbPlaces=3;
 		}

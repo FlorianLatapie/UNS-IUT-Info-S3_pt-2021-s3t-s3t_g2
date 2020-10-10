@@ -18,7 +18,7 @@ public class Jeu {
 		lieux = new ArrayList<>();
 		joueurs = new ArrayList<>();
 		cartes = new ArrayList<>();
-		initCarte();
+//		initCarte();
 		for (int i = 0; i < listeJoueursInitiale.size() - 1; i++)
 			joueurs.add(listeJoueursInitiale.get(i));
 		initJoueurs();
@@ -27,7 +27,7 @@ public class Jeu {
 	}
 	
 	
-
+	/*
 	private void initCarte() {
 
 		Materiel materiel1 = new Materiel();
@@ -48,7 +48,7 @@ public class Jeu {
 		Arme bate = new Arme();
 		Arme grenade = new Arme();
 		Arme tronconeuse = new Arme();
-		Arme fusil = new Arme();
+    	Arme fusil = new Arme();
 		Arme revolver = new Arme();
 		Arme hache = new Arme();
 		cartes.add(hache);
@@ -74,22 +74,23 @@ public class Jeu {
 		cartes.add(camSecu3);
 
 	}
+	*/
 
 	private void initLieu() {
 
-		Lieu parking = new Lieu();
-		Lieu PCsecu = new Lieu();
-		Lieu supermarche = new Lieu();
-		Lieu magasin1 = new Lieu();
-		Lieu magasin2 = new Lieu();
-		Lieu magasin3 = new Lieu();
+		Lieu parking = new Lieu(4);
+		Lieu PCsecu = new Lieu(5);
+		Lieu supermarche = new Lieu(6);
+		Lieu megatoys = new Lieu(3);
+		Lieu cachou = new Lieu(2);
+		Lieu toilettes = new Lieu(1);
 		if (joueurs.size() < 4)
-			magasin2.fermer();
+			cachou.setOuvert(false);
 		lieux.add(supermarche);
 		lieux.add(PCsecu);
-		lieux.add(magasin3);
-		lieux.add(magasin2);
-		lieux.add(magasin1);
+		lieux.add(toilettes);
+		lieux.add(megatoys);
+		lieux.add(cachou );
 		lieux.add(parking);
 
 	}
@@ -175,7 +176,7 @@ public class Jeu {
 	public ArrayList<Integer> getZombies() {
 		ArrayList<Integer> listeNbrZombie = new ArrayList<>();
 		for (int i = 0; i< lieux.size(); i++)
-			listeNbrZombie.add(lieux.get(i).getNbrZombies());	
+			listeNbrZombie.add(lieux.get(i).getNbZombies());	
 		return listeNbrZombie;
 	}
 
