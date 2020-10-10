@@ -144,15 +144,11 @@ public class Jeu {
 	
 	public void entreZombie(ArrayList<Integer> listeInt) {
 		for (int i = 0; i<4 ;i++) {
-			lieux.get(listeInt.get(i)).setNbZombies(nbZombies);;
+			lieux.get(listeInt.get(i)).addZombie();
 		}	
 	}
 	
-	public void placementDesPersonnages(ArrayList<Integer> lieuDest, ArrayList<Integer> lieuDep) {
-		for (int i = 0; i < joueurs.size(); i++)
-			if (joueurs.get(i).isEnVie()) 
-				joueurs.get(i).setPersonnageAtLieu(joueurs.get(i).getPersonnageAtLieu(lieuDep.get(i)), lieuDest.get(i));
-	}
+	
 	
 	public boolean estFini() {
 		//TO DO
@@ -191,6 +187,26 @@ public class Jeu {
 
 	public void lastAttaqueZombie() {
 		// TO DO
+		
+	}
+
+
+	public void deplacePerso(Joueur joueur, Personnage choixPerso, Integer dest) {
+		for (int i = 0 ; i < joueurs.size() ; i++ ) {
+			if (joueurs.get(i).equals(joueur))
+				for (int j=0 ; j<joueurs.get(i).getPersonnages().size();j++)
+					joueurs.get(i).getPersonnages().get(j).changerDeLieux(lieux.get(dest));
+			
+		}
+
+		
+	}
+
+
+	public void sacrifie(Personnage personnage) {
+		personnage.getJoueur().getPersonnages().remove(personnage);
+		personnage.getMonLieu().getPersonnage().remove(personnage);
+		
 		
 	}
 	

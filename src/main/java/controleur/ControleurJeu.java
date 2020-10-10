@@ -24,7 +24,7 @@ public class ControleurJeu {
 	
 	public void start() throws Exception {
 		if (jeu.estFini()) {
-			ig.Fini(jeu.getWinner());
+			//ig.Fini(jeu.getWinner());
 		}
 		else {
 			fouilleCamion();
@@ -48,7 +48,7 @@ public class ControleurJeu {
 	
 	
 	private void electionChefVigi() {
-		jeu.resultatChefVigile(vote(5));
+		jeu.resultatChefVigile(voteJoueur(5));
 	}
 
 	private ArrayList<Integer> arriveZombie() {
@@ -82,25 +82,22 @@ public class ControleurJeu {
 	
 	private void deplacementPerso(ArrayList<Integer> destination,ArrayList<Integer> lieuZombie) {
 		//affiche les choix de Destination
-		ig.afficheDestination(destination);
+		//ig.afficheDestination(destination);
 		
 		//affiche les nouveaux zombies
 		jeu.entreZombie(lieuZombie);
-		ig.afficheZombie(jeu.getZombies());		
+		//ig.afficheZombie(jeu.getZombies());		
 		
 		//carte SPRINT NOT TO DO
 		
 		//chaque joueur choisi un personnage a deplacer
 		for (int i = 0 ; i < jeu.getJoueurs().size();i++) {
-			if (jeu.getJoueurs().get(i).estVivant()) {
+			if (jeu.getJoueurs().get(i).isEnVie()) {
 				//choisit un perso 
-				jeu.deplacePerso(jeu.getJoueurs().get(i),choixPerso)
+				Personnage choixPerso;
+				jeu.deplacePerso(jeu.getJoueurs().get(i),choixPerso,destination.get(i));
 			}
-		}
-			
-		
-		
-		
+		}	
 	}
 
 
@@ -108,16 +105,17 @@ public class ControleurJeu {
 	private void attaqueFinalZombie() {
 		jeu.lastAttaqueZombie();
 		for (int i=0;i<jeu.getLieux().size();i++) {
-			if (jeu.getLieux().get(i).ouvert()) {
+			if (jeu.getLieux().get(i).isOuvert()) {
 				if (jeu.getLieux().get(i).getNum()==4) {//si parking
-					for (int i=0;i<jeu.getLieux().get(i).getNbrZombie();i++) {
-						jeu.sacrifie(vote(jeu.getLieux().get(i).getNum()));
+					for (int j=0;j<jeu.getLieux().get(j).getNbZombies();j++) {
+						jeu.sacrifie(votePerso(jeu.getLieux().get(j).getNum()));
 					}
 				}
 				else if (jeu.getLieux().get(i).estAttaquable()) {
 					//les joueurs sur le lieu peuvent utiliser leur cartes NOT TO DO
 					if (jeu.getLieux().get(i).estAttaquable()) {
-						jeu.sacrifie(vote(jeu.getLieux().get(i).getNum()));
+						jeu.sacrifie(votePerso(jeu.getLieux().get(i).getNum()));
+						jeu.getLieux().get(i).setNbZombies(0);
 					}
 					
 				}
@@ -128,11 +126,16 @@ public class ControleurJeu {
 
 	
 	//NOT TO DO
-	private Joueur vote(int lieu) {
+	private Personnage votePerso(int lieu) {
 		//gestion des cartes NOT TO DO
-		int rnd = new Random().nextInt(jeu.getLieux().get(lieu).getJoueurs().size());
-	    return jeu.getLieux().get(lieu).getJoueurs().get(rnd);
-		
+		int rnd = new Random().nextInt(jeu.getLieux().get(lieu).getPersonnage().size());
+	    return jeu.getLieux().get(lieu).getPersonnage().get(rnd);
+	}
+	
+	private Joueur voteJoueur(int lieu) {
+		//gestion des cartes NOT TO DO
+		int rnd = new Random().nextInt(jeu.getLieux().get(lieu).afficheJoueurSurLieu().size());
+	    return jeu.getLieux().get(lieu).afficheJoueurSurLieu().get(rnd);
 	}
 	
 

@@ -77,7 +77,7 @@ public class Lieu {
 	}
 		
 	
-	public boolean zombieEntre() {
+	public boolean estAttaquable() {
 		int force = 0;
 		for(int a=0; a<this.personnage.size(); a++) {
 			if(personnage.get(a).getType() == TypePersonnage.BRUTE) {
