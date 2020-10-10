@@ -97,19 +97,26 @@ public class Jeu {
 
 	private void initJoueurs() {
 		if (joueurs.size() < 4)
-			for (int i = 0; i < joueurs.size(); i++)
-				joueurs.get(i).setPersonnagesRed();
+			for (int i = 0; i < joueurs.size(); i++) {
+				joueurs.get(i).getPersonnages().add(new LaBlonde(joueurs.get(i)));
+				joueurs.get(i).getPersonnages().add(new LaBrute(joueurs.get(i)));
+				joueurs.get(i).getPersonnages().add(new LeTruand(joueurs.get(i)));
+				joueurs.get(i).getPersonnages().add(new LaFillette(joueurs.get(i)));
+			}
 		else
-			for (int i = 0; i < joueurs.size(); i++)
-				joueurs.get(i).setPersonnages();
+			for (int i = 0; i < joueurs.size(); i++) {
+				joueurs.get(i).getPersonnages().add(new LaBlonde(joueurs.get(i)));
+				joueurs.get(i).getPersonnages().add(new LaBrute(joueurs.get(i)));
+				joueurs.get(i).getPersonnages().add(new LeTruand(joueurs.get(i)));
+			}
 	}
 
 	public void fouilleCamion(Joueur piocheur, Joueur receveur , CarteAction cartePiocheur , CarteAction carteReceveur , CarteAction carteDefause) {
 		for (int i = 0 ; i < joueurs.size(); i++) {
 			if (joueurs.get(i).equals(piocheur))
-				joueurs.get(i).addCarte(cartePiocheur);
+				joueurs.get(i).getCartes().add(cartePiocheur);
 			if (joueurs.get(i).equals(receveur))
-				joueurs.get(i).addCarte(carteReceveur);
+				joueurs.get(i).getCartes().add(carteReceveur);
 		}
 		cartes.remove(cartePiocheur);
 		cartes.remove(carteDefause);
@@ -120,16 +127,16 @@ public class Jeu {
 	public void resultatChefVigile(Joueur nouveauChef) {
 		for (int i = 0 ; i < joueurs.size(); i++) {
 			if (joueurs.get(i).equals(nouveauChef))
-				joueurs.get(i).setChefVigile(true);
+				joueurs.get(i).setChefDesVigiles(true);
 			else
-				joueurs.get(i).setChefVigile(false);
+				joueurs.get(i).setChefDesVigiles(false);
 		}
 			
 	}
 	
 	public void resultatChefVigile() {
 		for (int i = 0 ; i < joueurs.size(); i++) {
-			joueurs.get(i).setChefVigile(false);
+			joueurs.get(i).setChefDesVigiles(false);
 		}
 			
 	}
@@ -137,13 +144,13 @@ public class Jeu {
 	
 	public void entreZombie(ArrayList<Integer> listeInt) {
 		for (int i = 0; i<4 ;i++) {
-			lieux.get(listeInt.get(i)).addZombie();
+			lieux.get(listeInt.get(i)).setNbZombies(nbZombies);;
 		}	
 	}
 	
 	public void placementDesPersonnages(ArrayList<Integer> lieuDest, ArrayList<Integer> lieuDep) {
 		for (int i = 0; i < joueurs.size(); i++)
-			if (joueurs.get(i).estVivant()) 
+			if (joueurs.get(i).isEnVie()) 
 				joueurs.get(i).setPersonnageAtLieu(joueurs.get(i).getPersonnageAtLieu(lieuDep.get(i)), lieuDest.get(i));
 	}
 	

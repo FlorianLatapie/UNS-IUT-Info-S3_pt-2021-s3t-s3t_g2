@@ -30,14 +30,6 @@ public class Joueur {
 		enVie = true;
 		personnages = new ArrayList<Personnage>();
 		cartes = new ArrayList<CarteAction>();
-		Personnage br = new LaBrute(this);
-		Personnage tr = new LeTruand(this);
-		Personnage bl = new LaBlonde(this);
-		Personnage fi = new LaFillette(this);
-		personnages.add(br);
-		personnages.add(tr);
-		personnages.add(bl);
-		personnages.add(fi);
 	}
 
 	/**
@@ -46,14 +38,6 @@ public class Joueur {
 	 */
 	public Color getCouleur() {
 		return couleur;
-	}
-
-	/**
-	 * 
-	 * @return enVie
-	 */
-	public boolean estEnVie() {
-		return enVie;
 	}
 
 	/**
@@ -74,25 +58,37 @@ public class Joueur {
 
 	/**
 	 * 
+	 * @return enVie
+	 */
+	public boolean isEnVie() {
+		return enVie;
+	}
+	
+	public void setEnVie(boolean enVie) {
+		this.enVie = enVie;
+	}
+
+	public void setPersonnages(ArrayList<Personnage> personnages) {
+		this.personnages = personnages;
+	}
+
+	/**
+	 * 
 	 * @return chefDesVigiles
 	 */
-	public boolean estChefDesVigiles() {
+	public boolean isChefDesVigiles() {
 		return chefDesVigiles;
 	}
 
-	/**
-	 * 
-	 * @param personnage
-	 */
-	public void supprimerPersonnage(Personnage personnage) {
-		this.personnages.remove(personnage);
+	public void setChefDesVigiles(boolean chefDesVigiles) {
+		this.chefDesVigiles = chefDesVigiles;
 	}
 
-	/**
-	 * 
-	 * @param carte
-	 */
-	public void ajouterCarte(CarteAction carte) {
-		this.cartes.add(carte);
+	
+
+	
+	public void setCouleur(Color couleur) {
+		this.couleur = couleur;
 	}
+
 }
