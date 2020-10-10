@@ -5,7 +5,7 @@ package jeu;
  * @author Alex
  * @version 0
  * @since 04/10/2020
- */s
+ */
  public abstract class Personnage {
 		
 		protected Lieu monLieu;// position actuel du personnage
@@ -89,8 +89,8 @@ package jeu;
 		}
 
 		//-------------------------------------------------------	
-		public Joueur getMonJoueur() {
-			return monJoueur;
+		public Joueur getJoueur() {
+			return this.joueur;
 		}
 		
 		public void setJoueur(Joueur joueur) {
