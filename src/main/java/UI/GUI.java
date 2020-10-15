@@ -50,15 +50,15 @@ public class GUI extends Application {
 		
 		primaryStage.setMaxWidth(largeur);
 		primaryStage.setMaxHeight(hauteur);
-		primaryStage.setMinWidth(largeur-20);
-		primaryStage.setMinHeight(hauteur-80);
+		//primaryStage.setMinWidth(largeur-20);
+		//primaryStage.setMinHeight(hauteur-80);
 		
 		primaryStage.setFullScreen(true);
 		
 		
 		BorderPane root = new BorderPane();
-		/*
-		HBox top = new HBox();
+		
+		/*HBox top = new HBox();
 		top.setPrefHeight(hauteur/4);
 		top.setBackground(new Background(new BackgroundFill(Color.AQUA,CornerRadii.EMPTY,null)));
 		top.setAlignment(Pos.CENTER);
@@ -67,16 +67,44 @@ public class GUI extends Application {
 		title.setFont(Font.font("Segoe UI", FontWeight.BOLD, 100));
 		top.getChildren().add(title);*/
 		
-		Rectangle Rect = new Rectangle(300,300); 
-		Label t = new Label("sample text");
-		t.setFont(Font.font("Segoe UI", 50));
+		//Rectangle Rect = new Rectangle(500,500); 
+		Label titre = new Label("titre du jeu");
+		titre.setFont(Font.font("Segoe UI", 50));
 		
-		StackPane sp = new StackPane(Rect, t);
-		sp.setPrefWidth(100);
-		sp.setPrefHeight(100);
-		sp.setBackground(new Background(new BackgroundFill(Color.ORANGE,CornerRadii.EMPTY,null)));
+		Button Jouer = new Button("Jouer");
+		Button Options = new Button("Options");
+		Button Regles = new Button("Règles");
+		Button Quitter = new Button("Quitter");
 		
-		root.setCenter(sp);
+		Quitter.setOnAction(
+				event -> {
+					Platform.runLater(new Runnable() {
+						public void run() {
+							Platform.exit();
+						}
+					});
+				}
+			);
+		
+		VBox centreMenu = new VBox(); 
+		centreMenu.setBackground(new Background(new BackgroundFill(Color.BLUE,CornerRadii.EMPTY,null)));
+		centreMenu.setPrefSize(600, 600);
+		centreMenu.setMaxSize(600, 600);
+		centreMenu.setAlignment(Pos.CENTER);
+		
+		
+		
+		HBox fond = new HBox(centreMenu);
+		fond.setAlignment(Pos.CENTER);
+		centreMenu.getChildren().addAll(titre,Jouer,Options,Regles,Quitter);
+		
+		fond.setPrefWidth(100);
+		fond.setPrefHeight(100);
+		fond.setAlignment(Pos.CENTER);
+		fond.setBackground(new Background(new BackgroundFill(Color.ORANGE,CornerRadii.EMPTY,null)));
+		//root.setTop(top);
+		
+		root.setCenter(fond);
 		
 		//root.setTop(top);
 		Scene scene = new Scene(root);
