@@ -1,0 +1,38 @@
+seq:26
+className:InformerJoueursDefenseJoueurCourant
+doc:Informer les joueurs de la défense du joueur courant
+keyword:RAZID
+protocol:TCP
+values:
+value:
+name:lieu
+type:int
+doc:NoDoc
+value:
+name:couleurJoueurCourant
+type:Couleur
+doc:NoDoc
+value:
+name:cartesJouees
+type:List<CarteType>
+doc:La liste des cartes jouées par le joueur courant. Il peut s’agir de cartes matériel (sauf dans le lieu 4), arme ou cachette
+value:
+name:pions
+type:List<PionType>
+doc:Liste de pions (identifiés uniquement par leur valeur) qui sont cachés (nécessite une carte cachette par pion)
+value:
+name:forceActuelle
+type:int
+doc:NoDoc
+value:
+name:nombreZombie
+type:int
+doc:NoDoc
+value:
+name:partieId
+type:String
+doc:NoDoc
+value:
+name:numeroTour
+type:int
+doc:NoDoc

@@ -1,0 +1,22 @@
+seq:2
+className:InitialiserTour
+doc:Initialiser un tour
+keyword:IT
+protocol:TCP
+values:
+value:
+name:chefDesVigiles
+type:Couleur
+doc:NoDoc
+value:
+name:couleursJoueurs
+type:List<Couleur>
+doc:NoDoc
+value:
+name:partieId
+type:String
+doc:NoDoc
+value:
+name:numeroTour
+type:int
+doc:Un entier dans l’intervalle [1 ; 999] servant d’identifiant du tour courant. Le premier tour commence à 1 et le numéro est incrémenté de 1 à chaque fois.

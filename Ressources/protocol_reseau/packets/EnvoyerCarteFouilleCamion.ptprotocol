@@ -1,0 +1,18 @@
+seq:32
+className:EnvoyerCarteFouilleCamion
+doc:Envoyer les cartes lors phase de fouille du camion
+keyword:FCLC
+protocol:TCP
+values:
+value:
+name:cartes
+type:List<CarteType>
+doc:NoDoc
+value:
+name:partieId
+type:String
+doc:NoDoc
+value:
+name:numeroTour
+type:int
+doc:NoDoc

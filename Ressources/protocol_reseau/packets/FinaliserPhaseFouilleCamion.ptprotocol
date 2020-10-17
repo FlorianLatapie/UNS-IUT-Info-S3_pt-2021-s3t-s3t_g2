@@ -1,0 +1,26 @@
+seq:35
+className:FinaliserPhaseFouilleCamion
+doc:Finaliser la phase de fouille du camion
+keyword:RFC
+protocol:TCP
+values:
+value:
+name:carteJoueurGarde
+type:CarteType
+doc:NoDoc
+value:
+name:carteJoueurOfferte
+type:CarteType
+doc:NoDoc
+value:
+name:carteDefausse
+type:CarteType
+doc:NoDoc
+value:
+name:partieId
+type:String
+doc:NoDoc
+value:
+name:numeroTour
+type:int
+doc:NoDoc

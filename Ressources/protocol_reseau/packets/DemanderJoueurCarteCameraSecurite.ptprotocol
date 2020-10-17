@@ -1,0 +1,14 @@
+seq:8
+className:DemanderJoueurCarteCameraSecurite
+doc:Demander au joueur s’il souhaite jouer une carte caméra de sécurité
+keyword:AZDCS
+protocol:TCP
+values:
+value:
+name:partieId
+type:String
+doc:NoDoc
+value:
+name:numeroTour
+type:int
+doc:NoDoc

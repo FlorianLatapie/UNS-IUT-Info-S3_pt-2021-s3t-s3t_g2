@@ -1,0 +1,26 @@
+seq:29
+className:InformerJoueursDefenseJoueurCourantFestinZombies
+doc:Informer les joueurs de la défense du joueur courant
+keyword:RAZIF
+protocol:TCP
+values:
+value:
+name:lieuCourant
+type:int
+doc:NoDoc
+value:
+name:pion
+type:PionCouleur
+doc:Pion (identifiés par leur couleur/valeur) qui a été mangé lors de l’attaque actuelle
+value:
+name:nombreZombie
+type:int
+doc:NoDoc
+value:
+name:partieId
+type:String
+doc:NoDoc
+value:
+name:nombreTour
+type:int
+doc:NoDoc

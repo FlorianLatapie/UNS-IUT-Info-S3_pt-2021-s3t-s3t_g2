@@ -1,0 +1,30 @@
+seq:19
+className:DefinirDeplacement
+doc:Définir son déplacement 
+keyword:DPR
+protocol:TCP
+values:
+value:
+name:destination
+type:int
+doc:NoDoc
+value:
+name:pion
+type:PionType
+doc:Un entier (7,5,3 ou 1) représentant le pion déplacé à la destination
+value:
+name:carteJoueur
+type:String
+doc:Réponse du joueur « NUL » s’il ne souhaite pas jouer de carte ou « SPR » s’il joue une carte sprint.
+value:
+name:partieId
+type:String
+doc:NoDoc
+value:
+name:numeroTour
+type:int
+doc:NoDoc
+value:
+name:joueurId
+type:String
+doc:NoDoc

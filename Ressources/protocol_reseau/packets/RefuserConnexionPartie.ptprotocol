@@ -1,0 +1,10 @@
+seq:59
+className:RefuserConnexionPartie
+doc:Refuser la connexion à une partie
+keyword:RCP
+protocol:TCP
+values:
+value:
+name:partieId
+type:String
+doc:NoDoc

@@ -1,0 +1,14 @@
+seq:61
+className:AnnoncerDeconnexion
+doc:Annoncer d’une déconnexion
+keyword:DJ
+protocol:TCP
+values:
+value:
+name:partieId
+type:String
+doc:NoDoc
+value:
+name:numeroTour
+type:int
+doc:NoDoc

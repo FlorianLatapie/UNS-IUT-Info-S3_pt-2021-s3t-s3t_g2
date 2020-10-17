@@ -1,0 +1,22 @@
+seq:51
+className:ChoisirDestination
+doc:Choisir sa destination
+keyword:PICD
+protocol:TCP
+values:
+value:
+name:destination
+type:int
+doc:NoDoc
+value:
+name:pion
+type:int
+doc:NoDoc
+value:
+name:partieId
+type:String
+doc:NoDoc
+value:
+name:partieJoueur
+type:String
+doc:NoDoc

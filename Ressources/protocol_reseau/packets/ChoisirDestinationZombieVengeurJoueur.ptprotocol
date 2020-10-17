@@ -1,0 +1,14 @@
+seq:14
+className:ChoisirDestinationZombieVengeurJoueur
+doc:Choisir la destination du zombie vengeur d’un joueur
+keyword:CDZVI
+protocol:TCP
+values:
+value:
+name:partieId
+type:String
+doc:NoDoc
+value:
+name:numeroTour
+type:int
+doc:NoDoc

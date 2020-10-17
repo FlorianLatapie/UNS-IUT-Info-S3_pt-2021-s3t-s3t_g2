@@ -1,0 +1,18 @@
+seq:4
+className:InformerLieuxArriveeZombies
+doc:Informer des lieux d’arrivée des zombies
+keyword:AZLAZ
+protocol:TCP
+values:
+value:
+name:lieux
+type:List<Integer>
+doc:Une liste contenant 4 entiers entre 1 et 6 représentant les lieux où arrivent les 4 zombies du tour. Pas d’ordre particulier pour cette liste.
+value:
+name:partieId
+type:String
+doc:NoDoc
+value:
+name:numeroTour
+type:int
+doc:NoDoc

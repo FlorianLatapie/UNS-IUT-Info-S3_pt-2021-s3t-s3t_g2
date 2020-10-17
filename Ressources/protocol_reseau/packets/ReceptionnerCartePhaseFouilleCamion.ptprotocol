@@ -1,0 +1,22 @@
+seq:34
+className:ReceptionnerCartePhaseFouilleCamion
+doc:Réceptionner une carte lors phase de fouille du camion
+keyword:FCRC
+protocol:TCP
+values:
+value:
+name:carteOfferte
+type:CarteType
+doc:NoDoc
+value:
+name:carteJoueurOffrant
+type:CarteType
+doc:NoDoc
+value:
+name:partieId
+type:String
+doc:NoDoc
+value:
+name:numeroTour
+type:int
+doc:NoDoc

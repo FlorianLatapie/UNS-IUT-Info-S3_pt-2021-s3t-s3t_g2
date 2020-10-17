@@ -1,0 +1,26 @@
+seq:42
+className:IndiquerCartesJouees
+doc:Informer des cartes jouées
+keyword:PVIC
+protocol:TCP
+values:
+value:
+name:couleurJoueur
+type:Couleur
+doc:NoDoc
+value:
+name:nbCarteJoueur
+type:int
+doc:NoDoc
+value:
+name:nbVoixJoueurCourant
+type:int
+doc:NoDoc
+value:
+name:partieId
+type:String
+doc:NoDoc
+value:
+name:numeroTour
+type:int
+doc:NoDoc

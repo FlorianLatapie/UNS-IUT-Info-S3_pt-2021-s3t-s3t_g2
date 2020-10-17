@@ -1,0 +1,22 @@
+seq:7
+className:InformerJoueurUtilisationCameraSecurite
+doc:Informer les joueurs de l’utilisation ou non d’une carte caméra de sécurité
+keyword:AZICS
+protocol:TCP
+values:
+value:
+name:couleurJoueurCourant
+type:Couleur
+doc:NoDoc
+value:
+name:utilisationCamera
+type:CarteType
+doc:« NUL » si le joueur courant n’a pas joué de carte ou « CDS » s’il a joué une carte caméra de sécurité.
+value:
+name:partieId
+type:String
+doc:NoDoc
+value:
+name:numeroTour
+type:int
+doc:NoDoc

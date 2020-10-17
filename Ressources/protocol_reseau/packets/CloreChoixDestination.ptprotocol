@@ -1,0 +1,14 @@
+seq:13
+className:CloreChoixDestination
+doc:Clore les choix d’une destination
+keyword:CDFC
+protocol:TCP
+values:
+value:
+name:partieId
+type:String
+doc:NoDoc
+value:
+name:numeroTour
+type:int
+doc:NoDoc
