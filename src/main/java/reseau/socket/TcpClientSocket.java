@@ -73,11 +73,11 @@ public abstract class TcpClientSocket {
                 socket.setTcpNoDelay(false);
                 logger.log(Level.FINEST, "Client on port : {}", port);
                 outputStream = new ObjectOutputStream(socket.getOutputStream());
-                logger.log(Level.INFO, "Message sent : {}", message);
+                logger.log(Level.INFO, "Message sent : {0}", message);
                 outputStream.writeObject(message);
                 inputStream = new ObjectInputStream(socket.getInputStream());
                 r = (String) inputStream.readObject();
-                logger.log(Level.INFO, "Message received : {}", r);
+                logger.log(Level.INFO, "Message received : {0}", r);
                 inputStream.close();
                 outputStream.close();
                 error = true;
