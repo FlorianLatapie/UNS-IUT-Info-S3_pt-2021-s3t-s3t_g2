@@ -1,0 +1,18 @@
+seq:50
+className:InformerResultatDes
+doc:Informer du résultat des dés
+keyword:PIRD
+protocol:TCP
+values:
+value:
+name:des
+type:List<Integer>
+doc:2 nombres entier entre 1 et 6 représentant chacun un dé et donc un lieu
+value:
+name:pions
+type:List<Integer>
+doc:liste de nombres entiers entre 1 et 6 représentant les possibilité de placement d’un de ses pions.
+value:
+name:partieId
+type:String
+doc:NoDoc

@@ -1,0 +1,22 @@
+seq:12
+className:IndiquerChoixDestinationJoueur
+doc:Indiquer le choix d’une destination
+keyword:CDDJ
+protocol:TCP
+values:
+value:
+name:destination
+type:int
+doc:NoDoc
+value:
+name:partieId
+type:String
+doc:NoDoc
+value:
+name:numeroTour
+type:int
+doc:NoDoc
+value:
+name:joueurId
+type:String
+doc:NoDoc

@@ -1,0 +1,14 @@
+seq:45
+className:CloreVote
+doc:Clore les votes
+keyword:PVVC
+protocol:TCP
+values:
+value:
+name:partieId
+type:String
+doc:NoDoc
+value:
+name:numeroTour
+type:int
+doc:NoDoc

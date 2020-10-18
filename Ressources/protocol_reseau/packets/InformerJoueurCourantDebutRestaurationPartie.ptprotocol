@@ -1,0 +1,14 @@
+seq:63
+className:InformerJoueurCourantDebutRestaurationPartie
+doc:Informer le joueur courant du début de la restauration d’une partie
+keyword:DRP
+protocol:TCP
+values:
+value:
+name:nombreMessage
+type:int
+doc:NoDoc
+value:
+name:partieId
+type:String
+doc:NoDoc

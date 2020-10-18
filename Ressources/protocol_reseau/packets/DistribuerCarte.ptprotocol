@@ -1,0 +1,14 @@
+seq:48
+className:DistribuerCarte
+doc:Distribuer la carte
+keyword:DC
+protocol:TCP
+values:
+value:
+name:carte
+type:CarteType
+doc:La carte du joueur. Chaque carte est une chaine 3 caractères : MEN [menace], CDS [caméra de sécurité], SPR [sprint], MAT [matériel], CAM [caméra], ACS [arme canon scié], ATR [armes tronçonneuse], AGR [arme grenade], ARE [arme revolver], AHI [arme hache d’incendie], ABA [arme batte]
+value:
+name:partieId
+type:String
+doc:NoDoc

@@ -1,0 +1,22 @@
+seq:41
+className:IndiquerCarteJouees
+doc:Indiquer les cartes jouées
+keyword:PVC
+protocol:TCP
+values:
+value:
+name:nombreCarteMenace
+type:int
+doc:NoDoc
+value:
+name:partieId
+type:String
+doc:NoDoc
+value:
+name:numeroTour
+type:int
+doc:NoDoc
+value:
+name:joueurId
+type:String
+doc:NoDoc

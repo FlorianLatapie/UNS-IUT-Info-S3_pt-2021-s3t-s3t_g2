@@ -1,0 +1,18 @@
+seq:27
+className:DemanderJoueurPionSacrifie
+doc:Demander au joueur quel pion il sacrifie
+keyword:RAZDS
+protocol:TCP
+values:
+value:
+name:lieuCourant
+type:int
+doc:NoDoc
+value:
+name:partieId
+type:String
+doc:NoDoc
+value:
+name:numeroTour
+type:int
+doc:NoDoc

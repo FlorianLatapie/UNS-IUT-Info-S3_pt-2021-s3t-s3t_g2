@@ -1,0 +1,10 @@
+seq:65
+className:FinTransmissionMessage
+doc:Fin de transmission des messages un par un 
+keyword:FTMRP
+protocol:TCP
+values:
+value:
+name:partieId
+type:String
+doc:NoDoc

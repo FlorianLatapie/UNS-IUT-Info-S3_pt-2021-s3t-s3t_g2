@@ -1,0 +1,14 @@
+seq:49
+className:LancerDes 
+doc:Lancer les dés
+keyword:PILD
+protocol:TCP
+values:
+value:
+name:partieId
+type:String
+doc:NoDoc
+value:
+name:joueurId
+type:String
+doc:NoDoc

@@ -1,0 +1,18 @@
+seq:37
+className:FinaliserPhaseElectionChefVigiles
+doc:Finaliser la phase d’élection du chef des vigiles
+keyword:RECV
+protocol:TCP
+values:
+value:
+name:couleurEluVigile
+type:Couleur
+doc:NoDoc
+value:
+name:partieId
+type:String
+doc:NoDoc
+value:
+name:numeroTour
+type:int
+doc:NoDoc

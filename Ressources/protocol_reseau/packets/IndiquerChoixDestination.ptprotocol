@@ -1,0 +1,22 @@
+seq:15
+className:IndiquerChoixDestination
+doc:Indique le choix d’une destination
+keyword:CDDZVJE
+protocol:TCP
+values:
+value:
+name:destinationZombieVengeur
+type:int
+doc:NoDoc
+value:
+name:partieId
+type:String
+doc:NoDoc
+value:
+name:numeroTour
+type:int
+doc:NoDoc
+value:
+name:joueurId
+type:String
+doc:NoDoc
