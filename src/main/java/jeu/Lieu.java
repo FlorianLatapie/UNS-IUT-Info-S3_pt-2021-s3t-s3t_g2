@@ -93,5 +93,8 @@ public class Lieu {
 		return true;
 	}
 
+	public void addZombie(){
+		this.nbZombies += 1;
+	}
 
 }
