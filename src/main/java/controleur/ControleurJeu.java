@@ -35,20 +35,27 @@ public class ControleurJeu {
 	public ControleurJeu() throws ClassNotFoundException, IOException {
 		intPartieId = new Random().nextInt(10000000);
 		partieId = "P" + intPartieId;
-
+		
 		sc = new Scanner(System.in);
 		System.out.println("Saissisez le nb de joueur réel :");
 		nbjr = sc.nextInt();
+		
+		while (nbjr > 5 || nbjr < 0) {
+			System.out.println("nb de joueur réel incorrect");
+			System.out.println("Saissisez le nb de joueur réel :");
+			nbjr = sc.nextInt();
+		}
 
-		System.out.println("Saissisez le nb de joueur virtuel :");
-		nbjv = sc.nextInt();
+		nbjv = 5 - nbjr;
 
 		HashMap<Integer, Color> listeCouleur = new HashMap<Integer, Color>();
 		listeCouleur.put(1, Color.BLACK);
-		listeCouleur.put(2, Color.WHITE);
+		listeCouleur.put(2, Color.RED);
 		listeCouleur.put(3, Color.BLUE);
 		listeCouleur.put(4, Color.GREEN);
-		// ....
+		listeCouleur.put(5, Color.YELLOW);
+		listeCouleur.put(6, Color.ORANGE);
+		
 
 		HashMap<String, String> niveauBot = new HashMap<String, String>();
 		niveauBot.put("1", "facile");

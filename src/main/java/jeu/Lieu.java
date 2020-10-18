@@ -1,6 +1,8 @@
 package jeu;
 
+import java.awt.Color;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 /**
  * The Class lieu.
@@ -12,6 +14,7 @@ public class Lieu {
 	private int num;
 	private int nbPlaces;
 	private int nbZombies;
+	public String name;
 	private boolean ouvert;
 	private ArrayList<Personnage> personnage;
 	
@@ -49,6 +52,16 @@ public class Lieu {
 	
 	//Constructeurs
 	public Lieu(int num) {
+		HashMap<Integer, String> listeLieu = new HashMap<Integer, String>();
+		listeLieu.put(1, "Toillets");
+		listeLieu.put(2, "Cachou");
+		listeLieu.put(3, "Megatoys");
+		listeLieu.put(4, "Parking");
+		listeLieu.put(5, "PC de sécurité");
+		listeLieu.put(6, "Supermarché");
+		
+		this.name = listeLieu.get(num);
+		
 		this.num = num;
 		if(this.num == 1 || this.num==5) {
 			this.nbPlaces=3;
@@ -97,4 +110,7 @@ public class Lieu {
 		this.nbZombies += 1;
 	}
 
+	public String toString() {
+		return this.name;
+	}
 }
