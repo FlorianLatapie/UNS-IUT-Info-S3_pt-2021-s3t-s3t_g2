@@ -85,17 +85,16 @@ public class ControleurJeu {
 			if (choix.equals("1") || choix.equals("facile")) {
 				// listeJoueur.add(new botFacile(listeCouleur.get(randomKey)));
 
-			}
-			else if (choix.equals("2") || choix.equals("moyen")) {
+			} else if (choix.equals("2") || choix.equals("moyen")) {
 				// listeJoueur.add(new botMoyen(listeCouleur.get(randomKey)));
-			}
-			else if (choix.equals("3") || choix.equals("difficile")) {
+			} else if (choix.equals("3") || choix.equals("difficile")) {
 				// listeJoueur.add(new botDifficile(listeCouleur.get(randomKey)));
 			}
 		}
 		jeu = new Jeu(listeJoueur);
 	}
 
+	
 	
 	public void start() throws Exception {
 		if (jeu.estFini()) {
@@ -113,19 +112,33 @@ public class ControleurJeu {
 		}
 	}
 
-	private void fouilleCamion() {
-		// NOT TO DO
+	
+	
+	public Joueur fouilleCamion() {
+		return voteJoueur(4);
 	}
 
-	private void electionChefVigi() {
-		jeu.resultatChefVigile(voteJoueur(5));
+	
+	
+	public Jeu getJeu() {
+		return jeu;
 	}
 
-	private ArrayList<Integer> arriveZombie() {
-		int z1 = new Random().nextInt(7);
-		int z2 = new Random().nextInt(7);
-		int z3 = new Random().nextInt(7);
-		int z4 = new Random().nextInt(7);
+	
+	
+	public Joueur electionChefVigi() {
+		Joueur j = voteJoueur(5);
+		jeu.resultatChefVigile(j);
+		return j;
+	}
+
+	
+	
+	public ArrayList<Integer> arriveZombie() {
+		int z1 = new Random().nextInt(6) + 1;
+		int z2 = new Random().nextInt(6) + 1;
+		int z3 = new Random().nextInt(6) + 1;
+		int z4 = new Random().nextInt(6) + 1;
 		ArrayList<Integer> lieuZombie = new ArrayList<>();
 		lieuZombie.add(z1);
 		lieuZombie.add(z2);
@@ -137,8 +150,10 @@ public class ControleurJeu {
 		// ecran et defausse la carte
 		return lieuZombie;
 	}
+	
+	
 
-	private ArrayList<Integer> choixDestination() {
+	public ArrayList<Integer> choixDestination() {
 		// si nouveau chef il choisit en premier et affiche son choix
 		// les joueurs choissisent le lieu de destination
 
@@ -147,7 +162,9 @@ public class ControleurJeu {
 
 	}
 
-	private void deplacementPerso(ArrayList<Integer> destination, ArrayList<Integer> lieuZombie) {
+	
+	
+	public void deplacementPerso(ArrayList<Integer> destination, ArrayList<Integer> lieuZombie) {
 		// affiche les choix de Destination
 		// ig.afficheDestination(destination);
 
@@ -167,7 +184,9 @@ public class ControleurJeu {
 		}
 	}
 
-	private void attaqueFinalZombie() {
+	
+	
+	public void attaqueFinalZombie() {
 		jeu.lastAttaqueZombie();
 		for (int i = 0; i < jeu.getLieux().size(); i++) {
 			if (jeu.getLieux().get(i).isOuvert()) {
@@ -188,14 +207,18 @@ public class ControleurJeu {
 		}
 	}
 
+	
+	
 	// NOT TO DO
-	private Personnage votePerso(int lieu) {
+	public Personnage votePerso(int lieu) {
 		// gestion des cartes NOT TO DO
 		int rnd = new Random().nextInt(jeu.getLieux().get(lieu).getPersonnage().size());
 		return jeu.getLieux().get(lieu).getPersonnage().get(rnd);
 	}
 
-	private Joueur voteJoueur(int lieu) {
+	
+	
+	public Joueur voteJoueur(int lieu) {
 		// gestion des cartes NOT TO DO
 		int rnd = new Random().nextInt(jeu.getLieux().get(lieu).afficheJoueurSurLieu().size());
 		return jeu.getLieux().get(lieu).afficheJoueurSurLieu().get(rnd);
