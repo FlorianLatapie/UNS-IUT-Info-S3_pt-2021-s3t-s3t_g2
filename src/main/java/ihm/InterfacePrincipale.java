@@ -29,11 +29,9 @@ public class InterfacePrincipale extends Application {
 		primaryStage.setFullScreen(true);
 		// on passe en plein écran
 		primaryStage.setFullScreen(true);
-		primaryStage.setFullScreenExitHint("Attention cette application passe en plein écran"); // on cache le message
-																								// du plein écran
+
 		
-		
-		root.getChildren().add(new OptionPane(sControl));
+		root.getChildren().add(new PausePane(sControl));
 		root.getChildren().add(new AccueilPane(sControl));
 
 		primaryStage.setScene(scene);
