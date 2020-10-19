@@ -7,7 +7,7 @@ import javafx.collections.ObservableList;
 
 public class DataControl {
 
-	public static enum ApplicationPane { ACCUEIL, AIDE, CREATION, JEU, OPTION }
+	public static enum ApplicationPane { ACCUEIL, AIDE, CREATION, JEU, OPTION, PAUSE}
 	public static enum ApplicationLangue { FRANCAIS, ENGLISH }
 	
 	public final static Locale localeEN = new Locale("en", "UK");

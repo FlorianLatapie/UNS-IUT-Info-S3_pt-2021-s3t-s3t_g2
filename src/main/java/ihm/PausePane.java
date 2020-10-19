@@ -27,7 +27,7 @@ import javafx.scene.text.FontWeight;
 public class PausePane extends BorderPane { 
 
 	private ScreenControl sControl = null;
-	private final ApplicationPane paneName = ApplicationPane.OPTION;
+	private final ApplicationPane paneName = ApplicationPane.PAUSE;
 
 
 	public PausePane(ScreenControl sc) {

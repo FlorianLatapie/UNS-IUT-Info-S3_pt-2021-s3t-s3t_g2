@@ -23,21 +23,27 @@ public class AccueilPane extends BorderPane { //ATTENTION : le type Pane est à 
 	
 	private ScreenControl sControl = null;
 	private final ApplicationPane paneName = ApplicationPane.ACCUEIL;
+	
+	private int tailleCarreCentral = 600;
+	private int HBouton = tailleCarreCentral/8;
+	private int LBouton = tailleCarreCentral/4;
+	private int marge = tailleCarreCentral/40;
+	private Insets margeBoutons = new Insets(marge,marge,marge,marge) ; 
 
 	public AccueilPane(ScreenControl sc) {
 
 		sControl = sc;
 		Label titre = new Label("ZOMBIES la blonde la brute et le truand");
-		titre.setFont(Font.font("Segoe UI", 30));
+		titre.setFont(Font.font("Segoe UI", tailleCarreCentral/20));
 		
 		Button Jouer = new Button("Jouer");
-		Jouer.setPrefSize(100, 50);
+		Jouer.setPrefSize(LBouton, HBouton);
 		Button Options = new Button("Options");
-		Options.setPrefSize(100, 50);
+		Options.setPrefSize(LBouton, HBouton);
 		Button Regles = new Button("Règles");
-		Regles.setPrefSize(100, 50);
+		Regles.setPrefSize(LBouton, HBouton);
 		Button Quitter = new Button("Quitter");
-		Quitter.setPrefSize(100, 50);
+		Quitter.setPrefSize(LBouton, HBouton);
 		
 		Options.setOnAction(EventHandler -> sc.setPaneOnTop(ApplicationPane.OPTION));
 		
@@ -53,8 +59,8 @@ public class AccueilPane extends BorderPane { //ATTENTION : le type Pane est à 
 		
 		VBox centreMenu = new VBox(); 
 		centreMenu.setBackground(new Background(new BackgroundFill(Color.BLUE,CornerRadii.EMPTY,null)));
-		centreMenu.setPrefSize(600, 600);
-		centreMenu.setMaxSize(600, 600);
+		centreMenu.setPrefSize(tailleCarreCentral, tailleCarreCentral);
+		centreMenu.setMaxSize(tailleCarreCentral, tailleCarreCentral);
 		centreMenu.setAlignment(Pos.CENTER);
 		
 		
@@ -67,6 +73,12 @@ public class AccueilPane extends BorderPane { //ATTENTION : le type Pane est à 
 		grilleBoutons.add(Options,0 ,1);
 		grilleBoutons.add(Regles, 1, 0);
 		grilleBoutons.add(Quitter, 1, 1);
+		
+		grilleBoutons.setMargin(Jouer, margeBoutons);
+		grilleBoutons.setMargin(Options, margeBoutons);
+		grilleBoutons.setMargin(Regles, margeBoutons);
+		grilleBoutons.setMargin(Quitter, margeBoutons);
+		
 		
 		centreMenu.setMargin(titre,new Insets(0,0,100,0));
 		centreMenu.getChildren().addAll(titre,grilleBoutons);
