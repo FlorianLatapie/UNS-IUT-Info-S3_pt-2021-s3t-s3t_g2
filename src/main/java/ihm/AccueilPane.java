@@ -27,53 +27,6 @@ public class AccueilPane extends BorderPane { //ATTENTION : le type Pane est à 
 	public AccueilPane(ScreenControl sc) {
 
 		sControl = sc;
-		
-		/*//Phase 1 : construire l'interface
-		HBox hbtop = new HBox(); 
-		VBox vbdroite = new VBox(); 
-		VBox vbgauche = new VBox(); 
-		VBox vbcentre = new VBox(); 
-				
-		Label titre = new Label("Memory");
-		
-		titre.setFont(Font.font("Pristina", FontWeight.BOLD, 45));
-		hbtop.getChildren().add(titre);
-		hbtop.setAlignment(Pos.CENTER);
-		
-		Button bNewPartie = new Button ("Nouvelle partie");
-		vbcentre.getChildren().add(bNewPartie);
-		bNewPartie.setOnAction(EventHandler -> sc.setPaneOnTop(ApplicationPane.CREATION));
-		
-		Button bHelp = new Button ("Aide");
-		vbcentre.getChildren().add(bHelp);
-		bHelp.setOnAction(EventHandler -> sc.setPaneOnTop(ApplicationPane.AIDE));
-		
-		Button bOption = new Button ("Options");
-		vbcentre.getChildren().add(bOption);
-		bOption.setOnAction(EventHandler -> sc.setPaneOnTop(ApplicationPane.OPTION));
-		
-		vbcentre.setAlignment(Pos.CENTER);
-		
-		Button bQuitter = new Button ("Quitter");
-		vbdroite.getChildren().add(bQuitter);
-		vbdroite.setAlignment(Pos.BOTTOM_RIGHT);
-		vbdroite.setPrefWidth(100);
-		
-		vbgauche.setPrefWidth(100);
-		
-		bQuitter.setOnAction(actionEvent -> Platform.exit());
-		
-		//Phase 2 : l'action sur le bouton Nouvelle Partie, affiche l'écran de création d'une partie (message à destination du controleur de dialogue)
-				
-		//Phase 2 : l'action dur le bouton Aide, aafiche l'écran d'aide (message à destination du controleur de dialogue)
-		
-		//Phase 2 : l'action sur le bouton Options , aafiche l'écran de réglage des options (message à destination du controleur de dialogue)
-		
-		this.setTop(hbtop);
-		this.setRight(vbdroite);
-		this.setLeft(vbgauche);
-		this.setCenter(vbcentre);*/
-		
 		Label titre = new Label("ZOMBIES la blonde la brute et le truand");
 		titre.setFont(Font.font("Segoe UI", 30));
 		
@@ -85,6 +38,8 @@ public class AccueilPane extends BorderPane { //ATTENTION : le type Pane est à 
 		Regles.setPrefSize(100, 50);
 		Button Quitter = new Button("Quitter");
 		Quitter.setPrefSize(100, 50);
+		
+		Options.setOnAction(EventHandler -> sc.setPaneOnTop(ApplicationPane.OPTION));
 		
 		Quitter.setOnAction(
 				event -> {
