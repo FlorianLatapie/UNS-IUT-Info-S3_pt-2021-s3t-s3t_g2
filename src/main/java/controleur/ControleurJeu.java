@@ -230,5 +230,51 @@ public class ControleurJeu {
 		int rnd = new Random().nextInt(jeu.getLieux().get(lieu).afficheJoueurSurLieu().size());
 		return jeu.getLieux().get(lieu).afficheJoueurSurLieu().get(rnd);
 	}
+	
+	public String getPartieId() {
+		return partieId;
+	}
+
+
+
+	public int getIntPartieId() {
+		return intPartieId;
+	}
+
+
+
+	public String getNomPartie() {
+		return nomPartie;
+	}
+
+
+
+	public int getNbjtotal() {
+		return nbjtotal;
+	}
+
+
+
+	public int getNbjr() {
+		return nbjr;
+	}
+
+
+
+	public int getNbjv() {
+		return nbjv;
+	}
+
+
+
+	public int getNbjractuel() {
+		return nbjractuel;
+	}
+
+
+
+	public int getNbjvactuel() {
+		return nbjvactuel;
+	}
 
 }
