@@ -1,5 +1,6 @@
 package jeu;
 
+import controleur.ControleurJeu;
 import reseau.packet.Packet;
 import reseau.socket.NetWorkManager;
 import reseau.socket.SideConnection;
@@ -16,7 +17,7 @@ import java.text.MessageFormat;
  */
 public class PacketHandlerUdp {
     private final NetWorkManager nwm;
-    private final Object core;//TODO Add the game manager (core)
+    private final ControleurJeu core;
 
     /**
      * @param netWorkManager le controleur réseau
@@ -24,7 +25,7 @@ public class PacketHandlerUdp {
      */
     public PacketHandlerUdp(NetWorkManager netWorkManager, Object core) {
         this.nwm = netWorkManager;
-        this.core = core;//TODO Add the game manager (core)
+        this.core = (ControleurJeu) core;
     }
 
     /**

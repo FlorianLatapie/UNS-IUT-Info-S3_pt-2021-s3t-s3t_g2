@@ -1,5 +1,6 @@
 package jeu;
 
+import controleur.ControleurJeu;
 import reseau.packet.Packet;
 import reseau.socket.NetWorkManager;
 
@@ -14,7 +15,7 @@ import java.text.MessageFormat;
  */
 public class PacketHandlerTcp {
     private final NetWorkManager nwm;
-    private final Object core; //TODO Add the game manager (core)
+    private final ControleurJeu core;
 
     /**
      * @param netWorkManager le controleur réseau
@@ -22,7 +23,7 @@ public class PacketHandlerTcp {
      */
     public PacketHandlerTcp(NetWorkManager netWorkManager, Object core) {
         this.nwm = netWorkManager;
-        this.core = core;//TODO Add the game manager (core)
+        this.core = (ControleurJeu) core;
     }
 
     /**
@@ -30,7 +31,7 @@ public class PacketHandlerTcp {
      *
      * @param packet  le paquet du message
      * @param message le message sous forme de chaine de caractere
-     * @param socket le socket du paquet
+     * @param socket  le socket du paquet
      * @return reponse au paquet
      * @throws IllegalStateException si il n'y a pas de traitement pour ce paquet
      */
