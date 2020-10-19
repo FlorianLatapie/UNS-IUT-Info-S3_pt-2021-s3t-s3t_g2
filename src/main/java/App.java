@@ -1,4 +1,4 @@
-import UI.GUI;
+import ihm.InterfacePrincipale;
 
 /**
  * Lance l'application et son interface graphique 
@@ -11,7 +11,7 @@ import UI.GUI;
 public class App {
 	
 	public static void main(String[] args) {
-		GUI.lancement(args);
+		InterfacePrincipale.lancement(args);
 	}
 
 }
