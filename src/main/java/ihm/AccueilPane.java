@@ -26,12 +26,14 @@ import javafx.scene.text.FontWeight;
  * @version 0.1
  * @since 04/10/2020
  */
-public class AccueilPane extends BorderPane { 
-	//ScreenControl permet de gérer les variables globales comme la langue ou le volume 
+public class AccueilPane extends BorderPane {
+	// ScreenControl permet de gérer les variables globales comme la langue ou le
+	// volume
 	private ScreenControl sControl = null;
-	private final ApplicationPane paneName = ApplicationPane.ACCUEIL; //nom du pane 
-	//définition des variable pour la suite du pane 
-	private int tailleCarreCentral = 600; //l'interface est sur un stackPane qui peut trouner avec des crans dd 90 degrés 
+	private final ApplicationPane paneName = ApplicationPane.ACCUEIL; // nom du pane
+	// définition des variable pour la suite du pane
+	private int tailleCarreCentral = 600; // l'interface est sur un stackPane qui peut trouner avec des crans dd 90
+											// degrés
 	private int hBouton = 100;
 	private int lBouton = 200;
 	private int marge = tailleCarreCentral / 25;
@@ -43,22 +45,21 @@ public class AccueilPane extends BorderPane {
 	public AccueilPane(ScreenControl sc) {
 
 		sControl = sc;
-		
-		// titre 
+
+		// titre
 		Label titre1 = new Label("ZOMBIES");
 		titre1.setFont(Font.font("Segoe UI", 60));
 		titre1.setTextFill(Color.BLACK);
-		
+
 		Label titre2 = new Label("LA BLONDE LA BRUTE ET LE TRUAND");
 		titre2.setFont(Font.font("Segoe UI", 25));
 		titre2.setTextFill(Color.BLACK);
-		
-		VBox titre = new VBox(titre1,titre2);
+
+		VBox titre = new VBox(titre1, titre2);
 		titre.setAlignment(Pos.CENTER);
 		titre.setBackground(new Background(new BackgroundFill(Color.RED, coin, null)));
-		
-		
-		// boutons 
+
+		// boutons
 		Button bJouer = new Button("Jouer");
 		bJouer.setPrefSize(lBouton, hBouton);
 		bJouer.setMinSize(lBouton, hBouton);
@@ -70,7 +71,7 @@ public class AccueilPane extends BorderPane {
 		bOptions.setMinSize(lBouton, hBouton);
 		bOptions.setFont(policeBouton);
 		bOptions.setStyle(coinBoutons);
-		
+
 		Button bRegles = new Button("Règles");
 		bRegles.setPrefSize(lBouton, hBouton);
 		bRegles.setMinSize(lBouton, hBouton);
@@ -87,15 +88,13 @@ public class AccueilPane extends BorderPane {
 		bOptions.setOnAction(EventHandler -> sc.setPaneOnTop(ApplicationPane.OPTION));
 		// Regles.setOnAction(EventHandler -> sc.setPaneOnTop(ApplicationPane.Regles));
 		bQuitter.setOnAction(event -> {
-			Platform.runLater(new Runnable() {
-				public void run() {
-					Platform.exit();
-				}
-			});
+			boolean resultat = ConfirmationPane.afficher("Quitter le jeu",
+					"Êtes-vous sûr de vouloir quitter le jeu ? \nSi vous quittez, la partie en cours sera perdue.");
+			if (resultat)
+				Platform.exit();
 		});
 
-		
-		// grille contenant les 4 boutons 
+		// grille contenant les 4 boutons
 		GridPane grilleBoutons = new GridPane();
 		grilleBoutons.setAlignment(Pos.CENTER);
 		grilleBoutons.add(bJouer, 0, 0);
@@ -107,31 +106,31 @@ public class AccueilPane extends BorderPane {
 		grilleBoutons.setMargin(bOptions, margeBoutons);
 		grilleBoutons.setMargin(bRegles, margeBoutons);
 		grilleBoutons.setMargin(bQuitter, margeBoutons);
-		
+
 		// image fond
-		//ImageView imgFond = new ImageView("../existe pas.extension");
-		
-		
-		// carre central qui contient tous les éléments (bouton et titre) 
+		// ImageView imgFond = new ImageView("../existe pas.extension");
+
+		// carre central qui contient tous les éléments (bouton et titre)
 		VBox centreMenu = new VBox();
-		//centreMenu.setBackground(new Background(new BackgroundFill(Color.LIGHTGREY,CornerRadii.EMPTY,null)));
+		// centreMenu.setBackground(new Background(new
+		// BackgroundFill(Color.LIGHTGREY,CornerRadii.EMPTY,null)));
 		centreMenu.setPrefSize(tailleCarreCentral, tailleCarreCentral);
 		centreMenu.setMaxSize(tailleCarreCentral, tailleCarreCentral);
 		centreMenu.setAlignment(Pos.CENTER);
 		centreMenu.setMargin(titre, new Insets(0, 0, 100, 0));
-		//titre.setPadding(margeBoutons);
+		// titre.setPadding(margeBoutons);
 		centreMenu.getChildren().addAll(titre, grilleBoutons);
-		
-		// rotation de l'interface 
-		//centreMenu.setRotate(90);
-		
-		// boite du fond qui contient tout 
+
+		// rotation de l'interface
+		// centreMenu.setRotate(90);
+
+		// boite du fond qui contient tout
 		HBox fond = new HBox(centreMenu);
 		fond.setAlignment(Pos.CENTER);
 		fond.setPrefWidth(100);
 		fond.setPrefHeight(100);
-		fond.setBackground(new Background(new BackgroundFill(Color.BLACK,CornerRadii.EMPTY,null)));
-		//fond.getChildren().add(imgFond);
+		fond.setBackground(new Background(new BackgroundFill(Color.BLACK, CornerRadii.EMPTY, null)));
+		// fond.getChildren().add(imgFond);
 		this.setCenter(fond);
 
 		sControl.registerNode(paneName, this);
