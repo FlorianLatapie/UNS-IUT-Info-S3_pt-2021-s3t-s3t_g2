@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<?import javafx.scene.text.TextFlow?>
+<?import javafx.scene.text.Text?>
+<AnchorPane fx:controller="controllers.JoinGameController" id="AnchorPane" prefHeight="200" prefWidth="320" xmlns:fx="http://javafx.com/fxml/1"
+            xmlns="http://javafx.com/javafx/8.0.40">
+    <HBox spacing="10" alignment="CENTER">
+        <VBox alignment="BOTTOM_CENTER">
+            <Button fx:id="backButton" onAction="#clickedButton"/>
+        </VBox>
+        <VBox spacing="10" alignment="CENTER">
+            <TextFlow textAlignment="CENTER">
+                <Text text="Jouer"/>
+            </TextFlow>
+            <ScrollPane>
+                <GridPane alignment="CENTER" hgap="5" vgap="5">
+                    <Button GridPane.columnIndex="0" GridPane.rowIndex="0"
+                            fx:id="idGame1" onAction="#clickedButton"/>
+                    <Button GridPane.columnIndex="0" GridPane.rowIndex="1"
+                            fx:id="idGame2" onAction="#clickedButton"/>
+                    <Button GridPane.columnIndex="0" GridPane.rowIndex="2"
+                            fx:id="idGame3" onAction="#clickedButton"/>
+                    <Button GridPane.columnIndex="0" GridPane.rowIndex="3"
+                            fx:id="idGame4" onAction="#clickedButton"/>
+                </GridPane>
+            </ScrollPane>
+        </VBox>
+        <VBox alignment="BOTTOM_CENTER">
+            <Button fx:id="joinButton" onAction="#clickedButton"/>
+        </VBox>
+    </HBox>
+</AnchorPane>
