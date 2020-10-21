@@ -16,5 +16,10 @@ public class LaBrute extends Personnage {
 		super.nbrVoixPourVoter=1;
 
 	}
+
+	@Override
+	public String toSrting() {
+		return "La Brute";
+	}
 	
 }

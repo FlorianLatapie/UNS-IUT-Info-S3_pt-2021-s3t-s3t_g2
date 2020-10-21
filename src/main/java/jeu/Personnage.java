@@ -101,5 +101,7 @@ package jeu;
 		public TypePersonnage getType() {
 			return type;
 		}
+		
+		public abstract String toSrting();
 	
 }

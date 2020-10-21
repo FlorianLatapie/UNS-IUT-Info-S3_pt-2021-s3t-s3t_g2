@@ -15,5 +15,11 @@ public class LaFillette extends Personnage {
 		super.nbrZretenu=1;
 		super.nbrVoixPourVoter=1;
 	}
+
+	@Override
+	public String toSrting() {
+		return "La Fillette";
+	}
+	
 	
 }

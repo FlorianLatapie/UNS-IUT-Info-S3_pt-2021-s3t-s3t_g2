@@ -15,5 +15,10 @@ public class LeTruand extends Personnage {
 		super.nbrZretenu=1;
 		super.nbrVoixPourVoter=2;
 	}
+
+	@Override
+	public String toSrting() {
+		return "Le Truand";
+	}
 	
 }
