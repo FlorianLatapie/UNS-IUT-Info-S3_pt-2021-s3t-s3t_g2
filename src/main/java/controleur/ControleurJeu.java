@@ -35,11 +35,11 @@ public class ControleurJeu {
 	public ControleurJeu() throws ClassNotFoundException, IOException {
 		intPartieId = new Random().nextInt(10000000);
 		partieId = "P" + intPartieId;
-		
+
 		sc = new Scanner(System.in);
 		System.out.println("Saissisez le nb de joueur réel :");
 		nbjr = sc.nextInt();
-		
+
 		while (nbjr > 5 || nbjr < 0) {
 			System.out.println("nb de joueur réel incorrect");
 			System.out.println("Saissisez le nb de joueur réel :");
@@ -55,7 +55,6 @@ public class ControleurJeu {
 		listeCouleur.put(4, Color.GREEN);
 		listeCouleur.put(5, Color.YELLOW);
 		listeCouleur.put(6, Color.ORANGE);
-		
 
 		HashMap<String, String> niveauBot = new HashMap<String, String>();
 		niveauBot.put("1", "facile");
@@ -98,13 +97,11 @@ public class ControleurJeu {
 				// listeJoueur.add(new botDifficile(listeCouleur.get(randomKey)));
 			}
 		}
-		
+
 		jeu = new Jeu(listeJoueur);
 		placementPersonnage();
 	}
 
-	
-	
 	public void start() throws Exception {
 		if (jeu.estFini()) {
 			// ig.Fini(jeu.getWinner());
@@ -121,28 +118,20 @@ public class ControleurJeu {
 		}
 	}
 
-	
-	
 	public Joueur fouilleCamion() {
 		return voteJoueur(4);
 	}
 
-	
-	
 	public Jeu getJeu() {
 		return jeu;
 	}
 
-	
-	
 	public Joueur electionChefVigi() {
 		Joueur j = voteJoueur(5);
 		jeu.resultatChefVigile(j);
 		return j;
 	}
 
-	
-	
 	public ArrayList<Integer> arriveZombie() {
 		int z1 = new Random().nextInt(6) + 1;
 		int z2 = new Random().nextInt(6) + 1;
@@ -159,8 +148,6 @@ public class ControleurJeu {
 		// ecran et defausse la carte
 		return lieuZombie;
 	}
-	
-	
 
 	public ArrayList<Integer> choixDestination() {
 		// si nouveau chef il choisit en premier et affiche son choix
@@ -171,8 +158,6 @@ public class ControleurJeu {
 
 	}
 
-	
-	
 	public void deplacementPerso(ArrayList<Integer> destination, ArrayList<Integer> lieuZombie) {
 		// affiche les choix de Destination
 		// ig.afficheDestination(destination);
@@ -193,8 +178,6 @@ public class ControleurJeu {
 		}
 	}
 
-	
-	
 	public void attaqueFinalZombie() {
 		jeu.lastAttaqueZombie();
 		for (int i = 0; i < jeu.getLieux().size(); i++) {
@@ -216,8 +199,6 @@ public class ControleurJeu {
 		}
 	}
 
-	
-	
 	// NOT TO DO
 	public Personnage votePerso(int lieu) {
 		// gestion des cartes NOT TO DO
@@ -225,97 +206,89 @@ public class ControleurJeu {
 		return jeu.getLieux().get(lieu).getPersonnage().get(rnd);
 	}
 
-	
-	
 	public Joueur voteJoueur(int lieu) {
 		// gestion des cartes NOT TO DO
 		int rnd = new Random().nextInt(jeu.getLieux().get(lieu).afficheJoueurSurLieu().size());
 		return jeu.getLieux().get(lieu).afficheJoueurSurLieu().get(rnd);
 	}
-	
-	
+
 	private void placementPersonnage() {
 		for (int i = 0; i < jeu.getJoueurs().size(); i++) {
-			ArrayList <Personnage> p = jeu.getJoueurs().get(i).getPersonnages();
-			for (int a = 0; a < jeu.getJoueurs().get(i).getPersonnages().size(); a++ ) {
+			ArrayList<Personnage> p = new ArrayList<>();
+			for (int a = 0; a < jeu.getJoueurs().get(i).getPersonnages().size(); a++) {
+				p.add(jeu.getJoueurs().get(i).getPersonnages().get(a));
+			}
+			for (int a = 0; a < jeu.getJoueurs().get(i).getPersonnages().size(); a++) {
+				System.out.println("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
 				System.out.println("Lancement des dés.");
-				int x = new Random().nextInt(6); 
-				int y = new Random().nextInt(6); 
+				int x = new Random().nextInt(6);
+				int y = new Random().nextInt(6);
 				System.out.println("Résultat du lancement :");
-				System.out.println(x + "     "  + jeu.getLieux().get(x));
-				System.out.println(y + "     "  + jeu.getLieux().get(y));
-				System.out.println( "Joueur " + i +" choisit un numéro:");
+				System.out.println(x + "     " + jeu.getLieux().get(x));
+				System.out.println(y + "     " + jeu.getLieux().get(y));
+				System.out.println("Joueur " + i + " choisit un numéro:");
 				int dest = sc.nextInt();
 				while (dest != x && dest != y) {
+					System.out.println("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
 					System.out.println("Numéro incorrect!\n");
-					System.out.println(x + "     "  + jeu.getLieux().get(x));
-					System.out.println(y + "     "  + jeu.getLieux().get(y));
-					System.out.println("Joueur " + i +" choisit un numéro:");
+					System.out.println(x + "     " + jeu.getLieux().get(x));
+					System.out.println(y + "     " + jeu.getLieux().get(y));
+					System.out.println("Joueur " + i + " choisit un numéro:");
 					dest = sc.nextInt();
 				}
-				System.out.println("Joueur " + i +" choisit un personage a déplacer à " + jeu.getLieux().get(dest));
-				ArrayList <Integer> num = new ArrayList<>();
-				for (int b = 0; b < jeu.getJoueurs().get(i).getPersonnages().size(); b++ ) {
+				System.out.println("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
+				System.out.println("Joueur " + i + " choisit un personage a déplacer à " + jeu.getLieux().get(dest));
+				ArrayList<Integer> num = new ArrayList<>();
+				for (int b = 0; b < p.size(); b++) {
 					num.add(b);
-					System.out.println( b + "     "  +  jeu.getJoueurs().get(i).getPersonnages().get(b));
+					System.out.println(b + "     " + p.get(b));
 				}
 				System.out.println();
 				int pers = sc.nextInt();
-				while (!num.contains(pers)){
+				while (!num.contains(pers)) {
+					System.out.println("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
 					System.out.println("Numéro incorect !\n");
-					System.out.println("Joueur " + i +" choisit un personage a déplacer à " + jeu.getLieux().get(dest));
-					for (int b = 0; b < jeu.getJoueurs().get(i).getPersonnages().size(); b++ ) {
-						System.out.println( b + "     "  +  jeu.getJoueurs().get(i).getPersonnages().get(b));
+					System.out
+							.println("Joueur " + i + " choisit un personage a déplacer à " + jeu.getLieux().get(dest));
+					for (int b = 0; b < p.size(); b++) {
+						System.out.println(b + "     " + p.get(b));
 					}
 					pers = sc.nextInt();
 					System.out.println();
 				}
 				p.remove(pers);
+				System.out.println("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
 			}
 		}
 	}
-	
+
 	public String getPartieId() {
 		return partieId;
 	}
-
-
 
 	public int getIntPartieId() {
 		return intPartieId;
 	}
 
-
-
 	public String getNomPartie() {
 		return nomPartie;
 	}
-
-
 
 	public int getNbjtotal() {
 		return nbjtotal;
 	}
 
-
-
 	public int getNbjr() {
 		return nbjr;
 	}
-
-
 
 	public int getNbjv() {
 		return nbjv;
 	}
 
-
-
 	public int getNbjractuel() {
 		return nbjractuel;
 	}
-
-
 
 	public int getNbjvactuel() {
 		return nbjvactuel;
