@@ -1,12 +1,12 @@
 package ihm;
 
-import ihm.ScreenControl;
+
 import javafx.application.Application;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
-import javafx.stage.StageStyle;
+
 
 public class InterfacePrincipale extends Application {
 	private StackPane root = new StackPane();
@@ -26,7 +26,6 @@ public class InterfacePrincipale extends Application {
 		// primaryStage.setMinWidth(largeur-20);
 		// primaryStage.setMinHeight(hauteur-80);
 
-		primaryStage.setFullScreen(true);
 		// on passe en plein écran
 		primaryStage.setFullScreen(true);
 
