@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane fx:controller="controllers.Pause" id="AnchorPane" xmlns:fx="http://javafx.com/fxml/1"
+            xmlns="http://javafx.com/javafx/8.0.40">
+    <HBox spacing = "10" alignment = "center"
+          id="vbox">
+        <VBox spacing = "10" alignment = "center">
+            <TextFlow textAlignment="CENTER">
+                <Text text="PAUSE"/>
+            </TextFlow>
+            <Button fx:id="Options" onAction="#clickedButton" />
+            <Button fx:id="Regles_du_jeu" onAction="#clickedButton" />
+            <Button fx:id="Re" onAction="#clickedButton" />
+            <Button fx:id="Quitter" onAction="#clickedButton" />
+            <Button fx:id="Retour" onAction="#clickedButton" />
+        </VBox>
+
+    </HBox>
+</AnchorPane>
