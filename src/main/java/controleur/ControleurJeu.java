@@ -98,7 +98,9 @@ public class ControleurJeu {
 				// listeJoueur.add(new botDifficile(listeCouleur.get(randomKey)));
 			}
 		}
+		
 		jeu = new Jeu(listeJoueur);
+		placementPersonnage();
 	}
 
 	
@@ -229,6 +231,48 @@ public class ControleurJeu {
 		// gestion des cartes NOT TO DO
 		int rnd = new Random().nextInt(jeu.getLieux().get(lieu).afficheJoueurSurLieu().size());
 		return jeu.getLieux().get(lieu).afficheJoueurSurLieu().get(rnd);
+	}
+	
+	
+	private void placementPersonnage() {
+		for (int i = 0; i < jeu.getJoueurs().size(); i++) {
+			ArrayList <Personnage> p = jeu.getJoueurs().get(i).getPersonnages();
+			for (int a = 0; a < jeu.getJoueurs().get(i).getPersonnages().size(); a++ ) {
+				System.out.println("Lancement des dés.");
+				int x = new Random().nextInt(6); 
+				int y = new Random().nextInt(6); 
+				System.out.println("Résultat du lancement :");
+				System.out.println(x + "     "  + jeu.getLieux().get(x));
+				System.out.println(y + "     "  + jeu.getLieux().get(y));
+				System.out.println( "Joueur " + i +" choisit un numéro:");
+				int dest = sc.nextInt();
+				while (dest != x && dest != y) {
+					System.out.println("Numéro incorrect!\n");
+					System.out.println(x + "     "  + jeu.getLieux().get(x));
+					System.out.println(y + "     "  + jeu.getLieux().get(y));
+					System.out.println("Joueur " + i +" choisit un numéro:");
+					dest = sc.nextInt();
+				}
+				System.out.println("Joueur " + i +" choisit un personage a déplacer à " + jeu.getLieux().get(dest));
+				ArrayList <Integer> num = new ArrayList<>();
+				for (int b = 0; b < jeu.getJoueurs().get(i).getPersonnages().size(); b++ ) {
+					num.add(b);
+					System.out.println( b + "     "  +  jeu.getJoueurs().get(i).getPersonnages().get(b));
+				}
+				System.out.println();
+				int pers = sc.nextInt();
+				while (!num.contains(pers)){
+					System.out.println("Numéro incorect !\n");
+					System.out.println("Joueur " + i +" choisit un personage a déplacer à " + jeu.getLieux().get(dest));
+					for (int b = 0; b < jeu.getJoueurs().get(i).getPersonnages().size(); b++ ) {
+						System.out.println( b + "     "  +  jeu.getJoueurs().get(i).getPersonnages().get(b));
+					}
+					pers = sc.nextInt();
+					System.out.println();
+				}
+				p.remove(pers);
+			}
+		}
 	}
 	
 	public String getPartieId() {
