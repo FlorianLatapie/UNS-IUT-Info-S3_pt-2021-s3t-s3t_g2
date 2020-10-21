@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox fx:controller="controllers.ConfigurationController"
+      id="vbox"
+      xmlns:fx="http://javafx.com/fxml/1"
+      xmlns="http://javafx.com/javafx/8.0.40">
+
+    <children>
+        <Label fx:id="label" />
+
+        <Button fx:id="menuButton" onAction="#clickedButton" />
+        <Button fx:id="quitButton" onAction="#clickedButton" />
+    </children>
+</VBox>
