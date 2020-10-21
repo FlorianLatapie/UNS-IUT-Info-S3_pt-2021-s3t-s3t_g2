@@ -102,6 +102,6 @@ package jeu;
 			return type;
 		}
 		
-		public abstract String toSrting();
+		public abstract String toString();
 	
 }

@@ -17,7 +17,7 @@ public class LeTruand extends Personnage {
 	}
 
 	@Override
-	public String toSrting() {
+	public String toString() {
 		return "Le Truand";
 	}
 	

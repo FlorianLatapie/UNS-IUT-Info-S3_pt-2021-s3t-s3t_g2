@@ -17,7 +17,7 @@ public class LaBlonde extends Personnage {
 	}
 
 	@Override
-	public String toSrting() {
+	public String toString() {
 		return "La Blonde";
 	}
 

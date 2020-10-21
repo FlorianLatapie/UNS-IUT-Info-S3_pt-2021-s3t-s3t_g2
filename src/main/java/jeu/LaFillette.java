@@ -17,7 +17,7 @@ public class LaFillette extends Personnage {
 	}
 
 	@Override
-	public String toSrting() {
+	public String toString() {
 		return "La Fillette";
 	}
 	
