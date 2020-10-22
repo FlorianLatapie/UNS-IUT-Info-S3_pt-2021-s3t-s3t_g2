@@ -198,7 +198,7 @@ public class Jeu {
 	 * @return la liste des lieux
 	 */
 	public HashMap<Integer, Lieu> getLieux() {
-		return  lieux;
+		return lieux;
 	}
 
 	/**
@@ -277,10 +277,13 @@ public class Jeu {
 	 */
 	public void deplacePerso(Joueur joueur, Personnage choixPerso, Integer dest) {
 		for (int i = 0; i < joueurs.size(); i++) {
-			if (joueurs.get(i).equals(joueur))
-				for (int j = 0; j < joueurs.get(i).getPersonnages().size(); j++)
-					joueurs.get(i).getPersonnages().get(j).changerDeLieux(lieux.get(dest));
-					this.lieux.get(dest).addPersonnage(choixPerso);
+			if (joueurs.get(i).equals(joueur)) {
+				int l = choixPerso.getMonLieu().getNum();
+				choixPerso.changerDeLieux(lieux.get(dest));
+				this.lieux.get(dest).addPersonnage(choixPerso);
+				this.lieux.get(l).getPersonnage().remove(choixPerso);
+			}
+				
 		}
 
 	}
@@ -294,6 +297,18 @@ public class Jeu {
 		personnage.getJoueur().getPersonnages().remove(personnage);
 		personnage.getMonLieu().getPersonnage().remove(personnage);
 
+	}
+	
+	public void afficheJeu() {
+		for (int i = 1; i < 7; i++) {
+			System.out.println(this.lieux.get(i) + ":");
+			for (int a=0; a< this.lieux.get(i).getPersonnage().size(); a++) {
+				System.out.println("(" + this.lieux.get(i).getPersonnage().get(a).getJoueur() + ") " +  this.lieux.get(i).getPersonnage().get(a));
+			}
+			System.out.println("Nombre de place-> " + this.lieux.get(i).getNbPlaces());
+			System.out.println("Nombre de Zombie-> " + this.lieux.get(i).getNbZombies() + "\n");
+			
+		}
 	}
 
 }
