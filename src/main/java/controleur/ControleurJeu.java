@@ -27,6 +27,7 @@ public class ControleurJeu {
 	private int nbjractuel; // Nombre de joueurs réel actuellement connecté
 	private int nbjvactuel; // Nombre de joueurs virtuel actuellement connecté
 	private Scanner sc;
+	private String retourLigne = "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n";
 
 	private Jeu jeu;
 	// private InterfaceGrahique ig = new InterfaceGrahique();
@@ -213,51 +214,65 @@ public class ControleurJeu {
 	}
 
 	private void placementPersonnage() {
+		System.out.println(jeu.getJoueurs().size());
 		for (int i = 0; i < jeu.getJoueurs().size(); i++) {
 			ArrayList<Personnage> p = new ArrayList<>();
 			for (int a = 0; a < jeu.getJoueurs().get(i).getPersonnages().size(); a++) {
 				p.add(jeu.getJoueurs().get(i).getPersonnages().get(a));
 			}
 			for (int a = 0; a < jeu.getJoueurs().get(i).getPersonnages().size(); a++) {
-				System.out.println("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
+				System.out.println(this.retourLigne);
 				System.out.println("Lancement des dés.");
 				int x = new Random().nextInt(6);
 				int y = new Random().nextInt(6);
 				System.out.println("Résultat du lancement :");
 				System.out.println(x + "     " + jeu.getLieux().get(x));
 				System.out.println(y + "     " + jeu.getLieux().get(y));
-				System.out.println("Joueur " + i + " choisit un numéro:");
-				int dest = sc.nextInt();
-				while (dest != x && dest != y) {
-					System.out.println("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
-					System.out.println("Numéro incorrect!\n");
-					System.out.println(x + "     " + jeu.getLieux().get(x));
-					System.out.println(y + "     " + jeu.getLieux().get(y));
-					System.out.println("Joueur " + i + " choisit un numéro:");
-					dest = sc.nextInt();
+				
+				int destEntre;
+				if (jeu.getLieux().get(x).isFull() && jeu.getLieux().get(y).isFull()) {
+					destEntre = 4;
 				}
-				System.out.println("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
-				System.out.println("Joueur " + i + " choisit un personage a déplacer à " + jeu.getLieux().get(dest));
+				else if (jeu.getLieux().get(x).isFull() && !jeu.getLieux().get(y).isFull() ) {
+					destEntre = x;
+				}
+				else if (!jeu.getLieux().get(x).isFull() && jeu.getLieux().get(y).isFull() ) {
+					destEntre = y;
+				}
+				else {
+					System.out.println("Joueur " + i + " choisit un numéro:");
+					destEntre = sc.nextInt();
+					while (destEntre != x && destEntre != y) {
+						System.out.println(this.retourLigne);
+						System.out.println("Numéro incorrect!\n");
+						System.out.println(x + "     " + jeu.getLieux().get(x));
+						System.out.println(y + "     " + jeu.getLieux().get(y));
+						System.out.println("Joueur " + i + " choisit un numéro:");
+						destEntre = sc.nextInt();
+					}
+					
+				}
+				System.out.println("Joueur " + i + " choisit un personage a déplacer à " + jeu.getLieux().get(destEntre));
 				ArrayList<Integer> num = new ArrayList<>();
 				for (int b = 0; b < p.size(); b++) {
 					num.add(b);
 					System.out.println(b + "     " + p.get(b));
 				}
 				System.out.println();
-				int pers = sc.nextInt();
-				while (!num.contains(pers)) {
-					System.out.println("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
+				int persEntre  = sc.nextInt();
+				while (!num.contains(persEntre )) {
+					System.out.println(this.retourLigne);
 					System.out.println("Numéro incorect !\n");
-					System.out
-							.println("Joueur " + i + " choisit un personage a déplacer à " + jeu.getLieux().get(dest));
+					System.out.println("Joueur " + i + " choisit un personage a déplacer à " + jeu.getLieux().get(destEntre));
 					for (int b = 0; b < p.size(); b++) {
 						System.out.println(b + "     " + p.get(b));
 					}
-					pers = sc.nextInt();
+					persEntre = sc.nextInt();
 					System.out.println();
 				}
-				p.remove(pers);
-				System.out.println("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
+				jeu.deplacePerso(jeu.getJoueurs().get(i),jeu.getJoueurs().get(i).getPersonnages().get(persEntre) , destEntre);
+				p.remove(persEntre);
+				System.out.println(this.retourLigne);
 			}
 		}
 	}
