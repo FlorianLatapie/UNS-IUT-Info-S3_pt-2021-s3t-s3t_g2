@@ -2,6 +2,7 @@ package reseau.packet;
 
 import reseau.ptprotocol.PtProtocol;
 import reseau.ptprotocol.PtValue;
+import reseau.tool.PacketTool;
 import reseau.tool.PtTool;
 
 import java.text.MessageFormat;
@@ -87,7 +88,7 @@ public class Packet {
      * Permet a partir d'une chaine de caractere d'obtenir les valeurs du message
      *
      * @param message le message du protocol réseau
-     * @param argNum numero de l'argument
+     * @param argNum  numero de l'argument
      * @return les valeurs du message (Il faut cast selon le bon type (.getDocs()))
      * @throws IllegalArgumentException si le nombre de parametre n'est pas correcte
      * @throws IllegalArgumentException si l'un des parametres n'est pas du bon type
@@ -120,10 +121,12 @@ public class Packet {
     /**
      * Permet d'identifier un packet via son mot-clé
      *
-     * @param key le mot clé identifiant le paquet
+     * @param key le mot clé identifiant le paquet ou le message
      * @return si le mot-clé correspond a celui du paquet
      */
     public boolean isPacket(String key) {
+        if (key.contains("-"))
+            return this.key.equals(PacketTool.getKeyFromMessage(key));
         return this.key.equals(key);
     }
 

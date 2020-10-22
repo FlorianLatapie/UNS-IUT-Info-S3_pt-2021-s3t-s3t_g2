@@ -96,6 +96,8 @@ public abstract class PtTool {
                     return ((String) value);
                 case "int":
                     Integer i = ((Integer) value);
+                    if (i < 0)
+                        throw new IllegalArgumentException("La valeur a convertir est inferieur a 0");
                     return i.toString();
                 case "VoteType":
                     VoteType vt = ((VoteType) value);
