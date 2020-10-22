@@ -137,9 +137,11 @@ public class Lieu {
 	}
 
 	public boolean isFull() {
-		if (this.personnage.size() < this.nbPlaces) {
-			return false;
+		if (this.personnage != null) {
+			if (this.personnage.size() < this.nbPlaces) {
+				return true;
+			}
 		}
-		return true;
+		return false;
 	}
 }
