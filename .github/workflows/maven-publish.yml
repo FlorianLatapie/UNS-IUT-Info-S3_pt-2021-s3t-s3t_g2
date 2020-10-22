@@ -5,13 +5,7 @@ name: Maven Package
 
 on:
   push:
-    branches:
-      -master
-      -BotFaible
-      -IDJR
-      -PP
-      -Production
-      -Reseaux
+    branches: [master]
 
 jobs:
   build:
