@@ -113,4 +113,11 @@ public class Lieu {
 	public String toString() {
 		return this.name;
 	}
+	
+	public boolean isFull(){
+		if (this.personnage.size() < this.nbPlaces) {
+			return false;
+		}
+		return true;
+	}
 }
