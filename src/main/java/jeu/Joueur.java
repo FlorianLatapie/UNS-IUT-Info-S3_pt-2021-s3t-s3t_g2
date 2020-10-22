@@ -19,17 +19,19 @@ public class Joueur {
 	private ArrayList<Personnage> personnages;
 	private ArrayList<CarteAction> cartes;
 	private boolean chefDesVigiles;
+	private String nom;
 
 	/**
 	 * Constructeur Joueur
 	 * 
 	 * @param couleur
 	 */
-	public Joueur(Color couleur) {
+	public Joueur(Color couleur, String nom) {
 		this.couleur = couleur;
 		enVie = true;
 		personnages = new ArrayList<Personnage>();
 		cartes = new ArrayList<CarteAction>();
+		this.nom = nom;
 	}
 
 	/**
@@ -89,6 +91,10 @@ public class Joueur {
 	
 	public void setCouleur(Color couleur) {
 		this.couleur = couleur;
+	}
+	
+	public String toString() {
+		return this.nom;
 	}
 
 }
