@@ -3,10 +3,11 @@ package jeu;
 import java.util.ArrayList;
 
 /**
- * The Class jeu.
+ * <h1> La classe jeu </h1>
  * 
- * @author Alex
- * @version 0
+ * 
+ * @author Alex le dieu
+ * @version 0.1
  * @since 04/10/2020
  */
 public class Jeu {
@@ -19,12 +20,19 @@ public class Jeu {
 		joueurs = new ArrayList<>();
 		cartes = new ArrayList<>();
 //		initCarte();
-		for (int i = 0; i < listeJoueursInitiale.size() - 1; i++)
+		for (int i = 0; i < listeJoueursInitiale.size(); i++)
 			joueurs.add(listeJoueursInitiale.get(i));
 		initJoueurs();
 		initLieu();
 
 	}
+	
+	
+	/**
+	 * Initialise les cartes du jeu
+	 * 
+	 * 
+	 */
 	
 	
 	/*
@@ -76,6 +84,11 @@ public class Jeu {
 	}
 	*/
 
+	/**
+	 * Initialise les lieux du jeu
+	 * 
+	 * 
+	 */
 	private void initLieu() {
 
 		Lieu parking = new Lieu(4);
@@ -95,6 +108,13 @@ public class Jeu {
 
 	}
 
+	
+	
+	/**
+	 * Initialise les joueurs du jeu
+	 * 
+	 * 
+	 */
 	private void initJoueurs() {
 		if (joueurs.size() < 4)
 			for (int i = 0; i < joueurs.size(); i++) {
@@ -111,6 +131,15 @@ public class Jeu {
 			}
 	}
 
+	
+	/**
+	 * Applique les résultats de la fouille du camion : attribut la carte piocheur au piocheur, la carte receveur au receveur et sort les 3 cartes du jeu
+	 * @param piocheur le piocheur
+	 * @param receveur le receveur
+	 * @param cartePiocheur la carte que le piocheur a choisi de garder
+	 * @param carteReceveur la carte que le piocheur a choisi de donner au receveur
+	 * @param carteDefause la carte que le piocheur n'a pas attribuer
+	 */
 	public void fouilleCamion(Joueur piocheur, Joueur receveur , CarteAction cartePiocheur , CarteAction carteReceveur , CarteAction carteDefause) {
 		for (int i = 0 ; i < joueurs.size(); i++) {
 			if (joueurs.get(i).equals(piocheur))
@@ -123,7 +152,10 @@ public class Jeu {
 		cartes.remove(carteReceveur);
 	}
 	
-	
+	/**
+	 * Applique le nouveau chef des vigiles si un chef est élu
+	 * @param nouveauChef le joueurs élu en tant que chef des vigiles
+	 */
 	public void resultatChefVigile(Joueur nouveauChef) {
 		for (int i = 0 ; i < joueurs.size(); i++) {
 			if (joueurs.get(i).equals(nouveauChef))
@@ -134,6 +166,9 @@ public class Jeu {
 			
 	}
 	
+	/**
+	 * Supprime le chef des vigiles 
+	 */
 	public void resultatChefVigile() {
 		for (int i = 0 ; i < joueurs.size(); i++) {
 			joueurs.get(i).setChefDesVigiles(false);
@@ -142,6 +177,10 @@ public class Jeu {
 	}
 	
 	
+	/**
+	 * Lance l'ajout des zombies dans les lieux du jeu
+	 * @param listeInt id des lieux où les nouveaux zombie arrivent
+	 */
 	public void entreZombie(ArrayList<Integer> listeInt) {
 		for (int i = 0; i<4 ;i++) {
 			lieux.get(listeInt.get(i)).addZombie();
@@ -149,33 +188,55 @@ public class Jeu {
 	}
 	
 	
-	
+	/**
+	 * Test si le jeu est fini
+	 * @return true si le jeu est fini sinon false
+	 */
 	public boolean estFini() {
 		//TO DO
 		return false;
 	}
 	
+	/**
+	 * Donne le joueur gagnant
+	 * @return le joueur gagnant
+	 */
 	public Joueur getWinner() {
 		//TO DO
 		return null;
 	}
 	
+	/**
+	 * Donne la liste des joueurs
+	 * @return la liste des joueurs
+	 */
 	public ArrayList<Joueur> getJoueurs() {
 		return joueurs;
 	}
 
+	/**
+	 * Donne la liste des lieux
+	 * @return la liste des lieux
+	 */
 	public ArrayList<Lieu> getLieux() {
 		return lieux;
 	}
 
 
 
+	/**
+	 * Donne la liste des cartes
+	 * @return la liste des cartes
+	 */
 	public ArrayList<CarteAction> getCartes() {
 		return cartes;
 	}
 
 
-
+	/**
+	 * Donne la liste des zombies par lieux
+	 * @return la liste des zombies par lieux
+	 */
 	public ArrayList<Integer> getZombies() {
 		ArrayList<Integer> listeNbrZombie = new ArrayList<>();
 		for (int i = 0; i< lieux.size(); i++)
@@ -185,12 +246,22 @@ public class Jeu {
 
 
 
+	/**
+	 * Applique la derniere attaque des zombies donc ajoute un zombie au lieu qui a le plus de blondes et un zombie au lieu qui a le plus de personnages
+	 * 
+	 */
 	public void lastAttaqueZombie() {
 		// TO DO
 		
 	}
 
 
+	/**
+	 *Deplace le personnage du joueur au lieu choisi
+	 * @param joueur le joueur dont le personnage est déplacé
+	 * @param choixPerso le personnage qui est déplacé
+	 * @param dest le lieu de destination du personnage
+	 */
 	public void deplacePerso(Joueur joueur, Personnage choixPerso, Integer dest) {
 		for (int i = 0 ; i < joueurs.size() ; i++ ) {
 			if (joueurs.get(i).equals(joueur))
@@ -203,6 +274,10 @@ public class Jeu {
 	}
 
 
+	/**
+	 * Supprime le personnage du jeu 
+	 * @param personnage le personnage qui va être supprimé du jeu
+	 */
 	public void sacrifie(Personnage personnage) {
 		personnage.getJoueur().getPersonnages().remove(personnage);
 		personnage.getMonLieu().getPersonnage().remove(personnage);
