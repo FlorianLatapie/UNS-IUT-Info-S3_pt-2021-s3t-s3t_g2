@@ -27,16 +27,120 @@ public class ControleurJeu {
 	private int nbjvactuel; // Nombre de joueurs virtuel actuellement connecté
 	private Scanner sc;
 	private String retourLigne = "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n";
-
 	private Jeu jeu;
 	// private InterfaceGrahique ig = new InterfaceGrahique();
 	// private GestionnaireReseau rg = new GestionnaireReseau();
 
 	public ControleurJeu() throws ClassNotFoundException, IOException {
-		intPartieId = new Random().nextInt(10000000);
-		partieId = "P" + intPartieId;
+		this.intPartieId = new Random().nextInt(10000000);
+		this.partieId = "P" + intPartieId;
 
 		sc = new Scanner(System.in);
+
+		jeu = new Jeu(this.createJoeur());
+		this.placementPersonnage();
+		this.jeu.afficheJeu();
+	}
+
+	/*
+	 * public void start() throws Exception { if (jeu.estFini()) { //
+	 * ig.Fini(jeu.getWinner()); } else { fouilleCamion(); electionChefVigi();
+	 * ArrayList<Integer> lieuZombie = new ArrayList<>(); lieuZombie =
+	 * arriveZombie(); ArrayList<Integer> destination = new ArrayList<>();
+	 * destination = choixDestination(); deplacementPerso(destination, lieuZombie);
+	 * attaqueFinalZombie(); start(); } }
+	 */
+
+	private Joueur fouilleCamion() {
+		return voteJoueur(4);
+	}
+
+	public Jeu getJeu() {
+		return jeu;
+	}
+
+	private Joueur electionChefVigi() {
+		Joueur j = voteJoueur(5);
+		jeu.resultatChefVigile(j);
+		return j;
+	}
+
+	private ArrayList<Integer> arriveZombie() {
+		int z1 = new Random().nextInt(6) + 1;
+		int z2 = new Random().nextInt(6) + 1;
+		int z3 = new Random().nextInt(6) + 1;
+		int z4 = new Random().nextInt(6) + 1;
+		ArrayList<Integer> lieuZombie = new ArrayList<>();
+		lieuZombie.add(z1);
+		lieuZombie.add(z2);
+		lieuZombie.add(z3);
+		lieuZombie.add(z4);
+		// l'afficher sur l'ecran du CV s'il y en a un et s'il a un perso sur le lieu 5
+		// (PC)
+		// regarder si un joueur utilise une carte camSecu et si oui l'afficher sur son
+		// ecran et defausse la carte
+		return lieuZombie;
+	}
+
+	private ArrayList<Integer> choixDestination() {
+		// si nouveau chef il choisit en premier et affiche son choix
+		// les joueurs choissisent le lieu de destination
+
+		ArrayList<Integer> resultat = new ArrayList<>();
+		return resultat;
+
+	}
+
+	private void deplacementPerso(ArrayList<Integer> destination, ArrayList<Integer> lieuZombie) {
+		// affiche les choix de Destination
+		// ig.afficheDestination(destination);
+
+		// affiche les nouveaux zombies
+		jeu.entreZombie(lieuZombie);
+		// ig.afficheZombie(jeu.getZombies());
+
+		// carte SPRINT NOT TO DO
+
+		// chaque joueur choisi un personnage a deplacer
+		for (int i = 0; i < jeu.getJoueurs().size(); i++) {
+			if (jeu.getJoueurs().get(i).isEnVie()) {
+				// choisit un perso
+				Personnage choixPerso = null; // TO UPDATE
+				jeu.deplacePerso(jeu.getJoueurs().get(i), choixPerso, destination.get(i));
+			}
+		}
+	}
+
+	/*
+	 * //faux: on ne vote pas pour un personnage mais pour un joueur qui choisi un
+	 * perso a sacrifier //A modifier private void attaqueFinalZombie() {
+	 * jeu.lastAttaqueZombie(); for (int i = 1; i < 7; i++) { if
+	 * (jeu.getLieux().get(i).isOuvert()) { if (i == 4) {// si parking for (int j =
+	 * 0; j < jeu.getLieux().get(i).getNbZombies(); j++) {
+	 * jeu.sacrifie(votePerso(i)); } } else if
+	 * (jeu.getLieux().get(i).estAttaquable()) { // les joueurs sur le lieu peuvent
+	 * utiliser leur cartes NOT TO DO if (jeu.getLieux().get(i).estAttaquable()) {
+	 * jeu.sacrifie(votePerso(i)); jeu.getLieux().get(i).setNbZombies(0); }
+	 * 
+	 * }
+	 * 
+	 * } } }
+	 */
+
+	// NOT TO DO
+	private Personnage votePerso(int lieu) {
+		// gestion des cartes NOT TO DO
+		int rnd = new Random().nextInt(jeu.getLieux().get(lieu).getPersonnage().size());
+		return jeu.getLieux().get(lieu).getPersonnage().get(rnd);
+	}
+
+	private Joueur voteJoueur(int lieu) {
+		// gestion des cartes NOT TO DO
+		int rnd = new Random().nextInt(jeu.getLieux().get(lieu).afficheJoueurSurLieu().size());
+		return jeu.getLieux().get(lieu).afficheJoueurSurLieu().get(rnd);
+	}
+
+	private ArrayList<Joueur> createJoeur() {
 		System.out.println("Saissisez le nb de joueur réel :");
 		nbjr = sc.nextInt();
 
@@ -72,7 +176,7 @@ public class ControleurJeu {
 				System.out.println("Saissie non valide, recommencer:");
 				choix = sc.nextInt();
 			}
-			listeJoueur.add(new Joueur(listeCouleur.get(choix), "joueur " +  i));
+			listeJoueur.add(new Joueur(listeCouleur.get(choix), "joueur " + i));
 			listeCouleur.remove(choix);
 
 		}
@@ -96,135 +200,13 @@ public class ControleurJeu {
 				// listeJoueur.add(new botDifficile(listeCouleur.get(randomKey)));
 			}
 		}
+		return listeJoueur;
 
-		jeu = new Jeu(listeJoueur);
-		placementPersonnage();
-		jeu.afficheJeu();
-	}
-
-	/*
-	public void start() throws Exception {
-		if (jeu.estFini()) {
-			// ig.Fini(jeu.getWinner());
-		} else {
-			fouilleCamion();
-			electionChefVigi();
-			ArrayList<Integer> lieuZombie = new ArrayList<>();
-			lieuZombie = arriveZombie();
-			ArrayList<Integer> destination = new ArrayList<>();
-			destination = choixDestination();
-			deplacementPerso(destination, lieuZombie);
-			attaqueFinalZombie();
-			start();
-		}
-	}
-	*/
-	
-	public Joueur fouilleCamion() {
-		return voteJoueur(4);
-	}
-
-	public Jeu getJeu() {
-		return jeu;
-	}
-
-	public Joueur electionChefVigi() {
-		Joueur j = voteJoueur(5);
-		jeu.resultatChefVigile(j);
-		return j;
-	}
-
-	public ArrayList<Integer> arriveZombie() {
-		int z1 = new Random().nextInt(6) + 1;
-		int z2 = new Random().nextInt(6) + 1;
-		int z3 = new Random().nextInt(6) + 1;
-		int z4 = new Random().nextInt(6) + 1;
-		ArrayList<Integer> lieuZombie = new ArrayList<>();
-		lieuZombie.add(z1);
-		lieuZombie.add(z2);
-		lieuZombie.add(z3);
-		lieuZombie.add(z4);
-		// l'afficher sur l'ecran du CV s'il y en a un et s'il a un perso sur le lieu 5
-		// (PC)
-		// regarder si un joueur utilise une carte camSecu et si oui l'afficher sur son
-		// ecran et defausse la carte
-		return lieuZombie;
-	}
-
-	public ArrayList<Integer> choixDestination() {
-		// si nouveau chef il choisit en premier et affiche son choix
-		// les joueurs choissisent le lieu de destination
-
-		ArrayList<Integer> resultat = new ArrayList<>();
-		return resultat;
-
-	}
-
-	public void deplacementPerso(ArrayList<Integer> destination, ArrayList<Integer> lieuZombie) {
-		// affiche les choix de Destination
-		// ig.afficheDestination(destination);
-
-		// affiche les nouveaux zombies
-		jeu.entreZombie(lieuZombie);
-		// ig.afficheZombie(jeu.getZombies());
-
-		// carte SPRINT NOT TO DO
-
-		// chaque joueur choisi un personnage a deplacer
-		for (int i = 0; i < jeu.getJoueurs().size(); i++) {
-			if (jeu.getJoueurs().get(i).isEnVie()) {
-				// choisit un perso
-				Personnage choixPerso = null; // TO UPDATE
-				jeu.deplacePerso(jeu.getJoueurs().get(i), choixPerso, destination.get(i));
-			}
-		}
-	}
-	
-	/*
-	//faux: on ne vote pas pour un personnage mais pour un joueur qui choisi un perso a sacrifier
-	//A modifier
-	public void attaqueFinalZombie() {
-		jeu.lastAttaqueZombie();
-		for (int i = 1; i < 7; i++) {
-			if (jeu.getLieux().get(i).isOuvert()) {
-				if (i == 4) {// si parking
-					for (int j = 0; j < jeu.getLieux().get(i).getNbZombies(); j++) {
-						jeu.sacrifie(votePerso(i));
-					}
-				} else if (jeu.getLieux().get(i).estAttaquable()) {
-					// les joueurs sur le lieu peuvent utiliser leur cartes NOT TO DO
-					if (jeu.getLieux().get(i).estAttaquable()) {
-						jeu.sacrifie(votePerso(i));
-						jeu.getLieux().get(i).setNbZombies(0);
-					}
-
-				}
-
-			}
-		}
-	}
-	*/
-	
-	// NOT TO DO
-	public Personnage votePerso(int lieu) {
-		// gestion des cartes NOT TO DO
-		int rnd = new Random().nextInt(jeu.getLieux().get(lieu).getPersonnage().size());
-		return jeu.getLieux().get(lieu).getPersonnage().get(rnd);
-	}
-
-	public Joueur voteJoueur(int lieu) {
-		// gestion des cartes NOT TO DO
-		int rnd = new Random().nextInt(jeu.getLieux().get(lieu).afficheJoueurSurLieu().size());
-		return jeu.getLieux().get(lieu).afficheJoueurSurLieu().get(rnd);
 	}
 
 	private void placementPersonnage() {
 		for (int i = 0; i < jeu.getJoueurs().size(); i++) {
-			ArrayList<Personnage> p = new ArrayList<>();
 			ArrayList<Personnage> use = new ArrayList<>();
-			for (int a = 0; a < jeu.getJoueurs().get(i).getPersonnages().size(); a++) {
-				p.add(jeu.getJoueurs().get(i).getPersonnages().get(a));
-			}
 			for (int a = 0; a < jeu.getJoueurs().get(i).getPersonnages().size(); a++) {
 				System.out.println(this.retourLigne);
 				System.out.println("Lancement des dés.");
@@ -236,18 +218,15 @@ public class ControleurJeu {
 					System.out.println(x + "\t" + jeu.getLieux().get(x) + ": Complet");
 					System.out.println(y + "\t" + jeu.getLieux().get(y) + ": Complet");
 					destEntre = 4;
-				}
-				else if (jeu.getLieux().get(x).isFull() && !jeu.getLieux().get(y).isFull() ) {
+				} else if (jeu.getLieux().get(x).isFull() && !jeu.getLieux().get(y).isFull()) {
 					System.out.println(x + "\t" + jeu.getLieux().get(x) + ": Complet");
 					System.out.println(y + "\t" + jeu.getLieux().get(y) + ": Pas Complet");
 					destEntre = y;
-				}
-				else if (!jeu.getLieux().get(x).isFull() && jeu.getLieux().get(y).isFull() ) {
+				} else if (!jeu.getLieux().get(x).isFull() && jeu.getLieux().get(y).isFull()) {
 					System.out.println(x + "\t" + jeu.getLieux().get(x) + ": Pas Complet");
 					System.out.println(y + "\t" + jeu.getLieux().get(y) + ": Complet");
 					destEntre = x;
-				}
-				else {
+				} else {
 					System.out.println(x + "\t" + jeu.getLieux().get(x) + ": Pas Complet");
 					System.out.println(y + "\t" + jeu.getLieux().get(y) + ": Pas Complet");
 					System.out.println("Joueur " + i + " choisit un numéro:");
@@ -261,28 +240,30 @@ public class ControleurJeu {
 						destEntre = sc.nextInt();
 					}
 				}
-				System.out.println("Joueur " + i + " choisit un personage a déplacer à " + jeu.getLieux().get(destEntre));
+				System.out
+						.println("Joueur " + i + " choisit un personage a déplacer à " + jeu.getLieux().get(destEntre));
 				ArrayList<Integer> num = new ArrayList<>();
-				for (int b = 0; b < p.size(); b++) {
-					if (!use.contains(p.get(b))) {
+				for (int b = 0; b < jeu.getJoueurs().get(i).getPersonnages().size(); b++) {
+					if (!use.contains(jeu.getJoueurs().get(i).getPersonnages().get(b))) {
 						num.add(b);
-						System.out.println(b + "     " + p.get(b));
+						System.out.println(b + "     " + jeu.getJoueurs().get(i).getPersonnages().get(b));
 					}
 				}
-				int persEntre  = sc.nextInt();
-				while (!num.contains(persEntre )) {
+				int persEntre = sc.nextInt();
+				while (!num.contains(persEntre)) {
 					System.out.println(this.retourLigne);
 					System.out.println("Numéro incorect !\n");
-					System.out.println("Joueur " + i + " choisit un personage a déplacer à " + jeu.getLieux().get(destEntre));
-					for (int b = 0; b < p.size(); b++) {
-						if (!use.contains(p.get(b))) {
-							System.out.println(b + "\t" + p.get(b));
+					System.out.println(
+							"Joueur " + i + " choisit un personage a déplacer à " + jeu.getLieux().get(destEntre));
+					for (int b = 0; b < jeu.getJoueurs().get(i).getPersonnages().size(); b++) {
+						if (!use.contains(jeu.getJoueurs().get(i).getPersonnages().get(b))) {
+							System.out.println(b + "\t" + jeu.getJoueurs().get(i).getPersonnages().get(b));
 						}
 					}
 					persEntre = sc.nextInt();
 				}
 				jeu.getLieux().get(destEntre).addPersonnage(jeu.getJoueurs().get(i).getPersonnages().get(persEntre));
-				use.add(p.get(persEntre));
+				use.add(jeu.getJoueurs().get(i).getPersonnages().get(persEntre));
 				System.out.println(this.retourLigne);
 			}
 		}
