@@ -1,4 +1,4 @@
-package lieu;
+package jeu;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -7,7 +7,7 @@ import jeu.Joueur;
 import jeu.Lieu;
 import jeu.Personnage;
 
-import org.junit.Assert;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 class LieuTest {
@@ -21,13 +21,13 @@ class LieuTest {
 		ArrayList<Personnage> characters = new ArrayList<Personnage>();
 		
 		Lieu place = new Lieu(numTest);
-		Assert.assertNotNull(place);
+		Assertions.assertNotNull(place);
 		ArrayList<Personnage> perso = place.getPersonnage(); 
 		ArrayList<Joueur> n = new ArrayList<Joueur>();
 	
-		Assert.assertTrue(place.estAttaquable());
-		Assert.assertTrue(place.isOuvert());
-		Assert.assertTrue(place.isFull());
+		Assertions.assertTrue(place.estAttaquable());
+		Assertions.assertTrue(place.isOuvert());
+		Assertions.assertTrue(place.isFull());
 }
 
 	
