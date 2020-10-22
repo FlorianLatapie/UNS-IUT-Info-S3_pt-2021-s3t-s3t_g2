@@ -251,8 +251,22 @@ public class Jeu {
 	 * 
 	 */
 	public void lastAttaqueZombie() {
-		// TO DO
+		int idLieuP =0;
+		int idLieuB =0;
+		for(int i = 0; i<this.getLieux().size(); i++)	{
+			if(this.getLieux().get(i).getPersonnage().size()>this.getLieux().get(idLieuP).getPersonnage().size()) {
+				idLieuP=i;
+			}
+		}	
 		
+		for(int i = 0; i<this.getLieux().size(); i++)	{
+			if(this.getLieux().get(i).getBlonde().size()>this.getLieux().get(idLieuB).getBlonde().size()) {
+				idLieuB=i;
+			}
+		}
+		
+		this.getLieux().get(idLieuP).addZombie();
+		this.getLieux().get(idLieuB).addZombie();
 	}
 
 

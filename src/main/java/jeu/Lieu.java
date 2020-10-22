@@ -127,6 +127,10 @@ public class Lieu {
 	public void addZombie() {
 		this.nbZombies += 1;
 	}
+	
+	public void addZombie(int i) {
+		this.nbZombies += i;
+	}
 
 	public String toString() {
 		return this.name;
