@@ -73,7 +73,7 @@ public class Lieu {
 	// Constructeurs
 	public Lieu(int num) {
 		HashMap<Integer, String> listeLieu = new HashMap<Integer, String>();
-		listeLieu.put(1, "Toillets");
+		listeLieu.put(1, "Toilletes");
 		listeLieu.put(2, "Cachou");
 		listeLieu.put(3, "Megatoys");
 		listeLieu.put(4, "Parking");
@@ -98,7 +98,7 @@ public class Lieu {
 		this.ouvert = true;
 	}
 
-	// methodes
+	// Méthodes
 	public ArrayList<Joueur> afficheJoueurSurLieu() {
 		ArrayList<Joueur> n = new ArrayList<Joueur>();
 		for (int i = 0; i < personnage.size(); i++) {
@@ -127,7 +127,7 @@ public class Lieu {
 	public void addZombie() {
 		this.nbZombies += 1;
 	}
-	
+
 	public void addZombie(int i) {
 		this.nbZombies += i;
 	}
