@@ -42,12 +42,12 @@ public class ConfirmationPane {
 		label.setFont(Font.font("Arial", FontWeight.BOLD, 20));
 		label.setPadding(new Insets(10));
 
-		Button boutonOui = new Button("Quitter");
+		Button boutonOui = new Button("QUITTER");
 		boutonOui.setPrefSize(200, 50);
 		boutonOui.setStyle("-fx-background-color: #ff0000; -fx-background-radius: 5px; -fx-text-fill: #ffffff");
 		boutonOui.setFont(Font.font("Arial", FontWeight.BOLD, 20));
 
-		Button boutonNon = new Button("Annuler");
+		Button boutonNon = new Button("ANNULER");
 		boutonNon.setPrefSize(200, 50);
 		boutonNon.setStyle("-fx-background-color: #A9A9A9; -fx-background-radius: 5px; -fx-text-fill: #ffffff");
 		boutonNon.setFont(Font.font("Arial", FontWeight.BOLD, 20));

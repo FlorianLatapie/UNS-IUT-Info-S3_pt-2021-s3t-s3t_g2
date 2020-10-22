@@ -35,8 +35,6 @@ public class PausePane extends StackPane {
 	public PausePane(ScreenControl sc) {
 
 		sControl = sc;
-		
-		
 
 		stackPane.setAlignment(Pos.CENTER);
 		
@@ -103,18 +101,25 @@ public class PausePane extends StackPane {
 		bQuitter.setAlignment(Pos.CENTER);
 		bQuitter.setPrefSize(500, 60);
 		bQuitter.setOnAction(actionEvent -> Platform.exit());
+		
+		bQuitter.setOnAction(event -> {
+			boolean resultat = ConfirmationPane.afficher("Quitter le jeu",
+					"Êtes-vous sûr de vouloir quitter le jeu ? \nSi vous quittez, la partie en cours sera perdue.");
+			if (resultat)
+				Platform.exit();
+		});
 
 		Button bRetour = new Button("Retour");
 		bRetour.setFont(Font.font("Arial", FontWeight.BOLD, 30));
 		bRetour.setAlignment(Pos.CENTER);
 		bRetour.setPrefSize(500, 60);
-		bRetour.setOnAction(EventHandler -> sc.setPaneOnTop(ApplicationPane.ACCUEIL));
+		bRetour.setOnAction(EventHandler -> sc.setPaneOnTop(ApplicationPane.PLATEAU));
 
 		vbBoutons.getChildren().add(bOption);
 		vbBoutons.getChildren().add(bRegles);
 		vbBoutons.getChildren().add(bRecommencer);
-		vbBoutons.getChildren().add(bQuitter);
 		vbBoutons.getChildren().add(bRetour);
+		vbBoutons.getChildren().add(bQuitter);
 		vbBoutons.setMargin(bRegles, new Insets(10));
 		vbBoutons.setMargin(bQuitter, new Insets(10));
 

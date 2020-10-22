@@ -7,6 +7,7 @@ import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.effect.GaussianBlur;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
@@ -14,6 +15,7 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
@@ -26,67 +28,118 @@ import javafx.scene.text.FontWeight;
  * @version 0.1
  * @since 04/10/2020
  */
-public class AccueilPane extends BorderPane {
-	// ScreenControl permet de gérer les variables globales comme la langue ou le
-	// volume
+public class AccueilPane extends StackPane {
+	// ScreenControl permet de gérer les variables globales comme la langue ou le volume
 	private ScreenControl sControl = null;
-	private final ApplicationPane paneName = ApplicationPane.ACCUEIL; // nom du pane
+	private final ApplicationPane paneName = ApplicationPane.ACCUEIL;
 	// définition des variable pour la suite du pane
-	private int tailleCarreCentral = 600; // l'interface est sur un stackPane qui peut trouner avec des crans dd 90
-											// degrés
+	private int tailleCarreCentral = 600; // l'interface est sur un stackPane qui peut tourner avec des crans de 90 degrés
 	private int hBouton = 100;
 	private int lBouton = 200;
 	private int marge = tailleCarreCentral / 25;
 	private Insets margeBoutons = new Insets(marge, marge, marge, marge);
-	private Font policeBouton = Font.font("Segoe UI", tailleCarreCentral / 17);
+	private Font policeBouton = Font.font("Segoe UI", FontWeight.BOLD, 33);
 	private CornerRadii coin = new CornerRadii(15.0);
-	private String coinBoutons = " -fx-background-radius: 20px";
+	private String styleBoutons = " -fx-background-color:#000000; -fx-background-radius: 15px; -fx-text-fill: #ffffff";
+	private StackPane stackPane = new StackPane();
+	private GaussianBlur flou = new GaussianBlur(30);
 
 	public AccueilPane(ScreenControl sc) {
 
 		sControl = sc;
-
-		// titre
+		stackPane.setAlignment(Pos.CENTER);
 		Label titre1 = new Label("ZOMBIES");
-		titre1.setFont(Font.font("Segoe UI", 60));
+		titre1.setFont(Font.font("Segoe UI", FontWeight.BOLD, 160));
 		titre1.setTextFill(Color.BLACK);
+		
 
 		Label titre2 = new Label("LA BLONDE LA BRUTE ET LE TRUAND");
-		titre2.setFont(Font.font("Segoe UI", 25));
+		titre2.setFont(Font.font("Segoe UI", 35));
 		titre2.setTextFill(Color.BLACK);
 
 		VBox titre = new VBox(titre1, titre2);
 		titre.setAlignment(Pos.CENTER);
 		titre.setBackground(new Background(new BackgroundFill(Color.RED, coin, null)));
-
+		titre.setPrefWidth(800);
+		titre.setMinWidth(800);
+		titre2.setPadding(new Insets(0,0,20,0));
 		// boutons
-		Button bJouer = new Button("Jouer");
+		Button bJouer = new Button("JOUER");
 		bJouer.setPrefSize(lBouton, hBouton);
 		bJouer.setMinSize(lBouton, hBouton);
 		bJouer.setFont(policeBouton);
-		bJouer.setStyle(coinBoutons);
+		bJouer.setStyle(styleBoutons);
+		bJouer.setOnAction(EventHandler -> sc.setPaneOnTop(ApplicationPane.PLATEAU));
+		
+		bJouer.setOnMouseEntered(event -> {
+			
+			bJouer.setStyle("-fx-background-color:#ff0000;  -fx-text-fill:#000000; -fx-background-radius: 15px;");
 
-		Button bOptions = new Button("Options");
+		});
+
+		bJouer.setOnMouseExited(event -> {
+
+			bJouer.setStyle(styleBoutons);
+
+		});
+
+		Button bOptions = new Button("OPTIONS");
 		bOptions.setPrefSize(lBouton, hBouton);
 		bOptions.setMinSize(lBouton, hBouton);
 		bOptions.setFont(policeBouton);
-		bOptions.setStyle(coinBoutons);
+		bOptions.setStyle(styleBoutons);
+		
+		bOptions.setOnMouseEntered(event -> {
+			
+			bOptions.setStyle("-fx-background-color:#ff0000;  -fx-text-fill:#000000; -fx-background-radius: 15px;");
 
-		Button bRegles = new Button("Règles");
+		});
+
+		bOptions.setOnMouseExited(event -> {
+
+			bOptions.setStyle(styleBoutons);
+
+		});
+
+		Button bRegles = new Button("REGLES");
 		bRegles.setPrefSize(lBouton, hBouton);
 		bRegles.setMinSize(lBouton, hBouton);
 		bRegles.setFont(policeBouton);
-		bRegles.setStyle(coinBoutons);
+		bRegles.setStyle(styleBoutons);
+		
+		bRegles.setOnMouseEntered(event -> {
+			
+			bRegles.setStyle("-fx-background-color:#ff0000;  -fx-text-fill:#000000; -fx-background-radius: 15px;");
 
-		Button bQuitter = new Button("Quitter");
+		});
+
+		bRegles.setOnMouseExited(event -> {
+
+			bRegles.setStyle(styleBoutons);
+
+		});
+
+		Button bQuitter = new Button("QUITTER");
 		bQuitter.setPrefSize(lBouton, hBouton);
 		bQuitter.setMinSize(lBouton, hBouton);
 		bQuitter.setFont(policeBouton);
-		bQuitter.setStyle(coinBoutons);
+		bQuitter.setStyle(styleBoutons);
+		
+		bQuitter.setOnMouseEntered(event -> {
+			
+			bQuitter.setStyle("-fx-background-color:#ff0000;  -fx-text-fill:#000000; -fx-background-radius: 15px;");
 
-		// Jouer.setOnAction(EventHandler -> sc.setPaneOnTop(ApplicationPane.JOUER));
+		});
+
+		bQuitter.setOnMouseExited(event -> {
+
+			bQuitter.setStyle(styleBoutons);
+
+		});
+
+		// bJouer.setOnAction(EventHandler -> sc.setPaneOnTop(ApplicationPane.JOUER));
 		bOptions.setOnAction(EventHandler -> sc.setPaneOnTop(ApplicationPane.OPTION));
-		// Regles.setOnAction(EventHandler -> sc.setPaneOnTop(ApplicationPane.Regles));
+		// bRegles.setOnAction(EventHandler -> sc.setPaneOnTop(ApplicationPane.Regles));
 		bQuitter.setOnAction(event -> {
 			boolean resultat = ConfirmationPane.afficher("Quitter le jeu",
 					"Êtes-vous sûr de vouloir quitter le jeu ? \nSi vous quittez, la partie en cours sera perdue.");
@@ -108,9 +161,9 @@ public class AccueilPane extends BorderPane {
 		grilleBoutons.setMargin(bQuitter, margeBoutons);
 
 		// image fond
-		// ImageView imgFond = new ImageView("../existe pas.extension");
+		ImageView imgFond = new ImageView("https://storage.needpix.com/rsynced_images/halloween-cemetery-1505893112JQ0.jpg");
 
-		// carre central qui contient tous les éléments (bouton et titre)
+		// carre central qui contient tous les éléments (boutons et titre)
 		VBox centreMenu = new VBox();
 		// centreMenu.setBackground(new Background(new
 		// BackgroundFill(Color.LIGHTGREY,CornerRadii.EMPTY,null)));
@@ -122,20 +175,25 @@ public class AccueilPane extends BorderPane {
 		centreMenu.getChildren().addAll(titre, grilleBoutons);
 
 		// rotation de l'interface
-		// centreMenu.setRotate(90);
+		 //centreMenu.setRotate(90);
 
 		// boite du fond qui contient tout
-		HBox fond = new HBox(centreMenu);
+		HBox fond = new HBox();
 		fond.setAlignment(Pos.CENTER);
 		fond.setPrefWidth(100);
 		fond.setPrefHeight(100);
-		fond.setBackground(new Background(new BackgroundFill(Color.BLACK, CornerRadii.EMPTY, null)));
-		// fond.getChildren().add(imgFond);
-		this.setCenter(fond);
-
+		fond.setEffect(flou);
+		fond.getChildren().add(imgFond);
+		
+		stackPane.getChildren().addAll(fond, centreMenu);
+		
+		
+		this.getChildren().add(stackPane);
 		sControl.registerNode(paneName, this);
 		sControl.setPaneOnTop(paneName);
 
 	}
+	
+	
 
 }
