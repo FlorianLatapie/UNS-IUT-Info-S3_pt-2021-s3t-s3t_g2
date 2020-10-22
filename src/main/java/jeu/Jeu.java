@@ -1,6 +1,8 @@
 package jeu;
 
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.HashMap;
 
 /**
  * <h1>La classe jeu</h1>
@@ -11,12 +13,12 @@ import java.util.ArrayList;
  * @since 04/10/2020
  */
 public class Jeu {
-	ArrayList<Lieu> lieux;
+	HashMap<Integer, Lieu> lieux;
 	ArrayList<Joueur> joueurs;
 	ArrayList<CarteAction> cartes;
 
 	public Jeu(ArrayList<Joueur> listeJoueursInitiale) {
-		lieux = new ArrayList<>();
+		lieux = new HashMap<>();
 		joueurs = new ArrayList<>();
 		cartes = new ArrayList<>();
 //		initCarte();
@@ -72,12 +74,12 @@ public class Jeu {
 		Lieu toilettes = new Lieu(1);
 		if (joueurs.size() < 4)
 			cachou.setOuvert(false);
-		lieux.add(supermarche);
-		lieux.add(PCsecu);
-		lieux.add(toilettes);
-		lieux.add(megatoys);
-		lieux.add(cachou);
-		lieux.add(parking);
+		lieux.put(1, toilettes);
+		lieux.put(2, cachou);
+		lieux.put(3, megatoys);
+		lieux.put(4, parking);
+		lieux.put(5, PCsecu);
+		lieux.put(6, supermarche);
 
 	}
 
@@ -156,7 +158,7 @@ public class Jeu {
 	 * @param listeInt id des lieux où les nouveaux zombie arrivent
 	 */
 	public void entreZombie(ArrayList<Integer> listeInt) {
-		for (int i = 0; i < 4; i++) {
+		for (int i = 0; i < listeInt.size(); i++) {
 			lieux.get(listeInt.get(i)).addZombie();
 		}
 	}
@@ -195,8 +197,8 @@ public class Jeu {
 	 * 
 	 * @return la liste des lieux
 	 */
-	public ArrayList<Lieu> getLieux() {
-		return lieux;
+	public HashMap<Integer, Lieu> getLieux() {
+		return  lieux;
 	}
 
 	/**
@@ -213,10 +215,10 @@ public class Jeu {
 	 * 
 	 * @return la liste des zombies par lieux
 	 */
-	public ArrayList<Integer> getZombies() {
-		ArrayList<Integer> listeNbrZombie = new ArrayList<>();
-		for (int i = 0; i < lieux.size(); i++)
-			listeNbrZombie.add(lieux.get(i).getNbZombies());
+	public HashMap<Lieu, Integer> getZombies() {
+		HashMap<Lieu, Integer> listeNbrZombie = new HashMap<>();
+		for (int i = 1; i < 7; i++)
+			listeNbrZombie.put(lieux.get(i), lieux.get(i).getNbZombies());
 		return listeNbrZombie;
 	}
 
@@ -230,14 +232,14 @@ public class Jeu {
 		int idLieuB = 0;
 		boolean maxP = true;
 		boolean maxB = true;
-		for (int i = 1; i < lieux.size(); i++) {
+		for (int i = 1; i < 7; i++) {
 			if (lieux.get(i).getPersonnage().size() > lieux.get(idLieuP).getPersonnage().size()) {
 				idLieuP = i;
 			} else if (lieux.get(i).getPersonnage().size() == lieux.get(idLieuP).getPersonnage().size())
 				maxP = false;
 		}
 
-		for (int i = 1; i < lieux.size(); i++) {
+		for (int i = 1; i < 7; i++) {
 			if (lieux.get(i).getBlonde().size() > lieux.get(idLieuB).getBlonde().size()) {
 				idLieuB = i;
 			} else if (lieux.get(i).getBlonde().size() == lieux.get(idLieuB).getBlonde().size())
@@ -248,16 +250,16 @@ public class Jeu {
 		if (maxB)
 			lieux.get(idLieuB).addZombie();
 
-		for (int i = 0; i < lieux.size(); i++) {
-			if ((i == 0) || (i == 3)) {
+		for (int i = 1; i < 7; i++) {
+			if ((i == 1) || (i == 5)) {
 				if (lieux.get(i).getNbZombies() >= 3)
 					lieux.get(i).setOuvert(false);
 			}
-			if ((i == 1) || (i == 2)) {
+			if ((i == 2) || (i == 3)) {
 				if (lieux.get(i).getNbZombies() >= 4)
 					lieux.get(i).setOuvert(false);
 			}
-			if ((i == 4)) {
+			if ((i == 6)) {
 				if (lieux.get(i).getNbZombies() >= 6)
 					lieux.get(i).setOuvert(false);
 			}
@@ -278,7 +280,7 @@ public class Jeu {
 			if (joueurs.get(i).equals(joueur))
 				for (int j = 0; j < joueurs.get(i).getPersonnages().size(); j++)
 					joueurs.get(i).getPersonnages().get(j).changerDeLieux(lieux.get(dest));
-
+					this.lieux.get(dest).addPersonnage(choixPerso);
 		}
 
 	}
