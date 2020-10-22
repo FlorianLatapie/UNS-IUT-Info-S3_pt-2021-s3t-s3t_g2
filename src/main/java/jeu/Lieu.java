@@ -1,4 +1,5 @@
 package jeu;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -66,14 +67,14 @@ public class Lieu {
 
 	public void setPersonnage(ArrayList<Personnage> personnage) {
 		if (personnage.size() > this.nbPlaces) {
-			throw new RuntimeException( this.toString() + " est full!" );
+			throw new RuntimeException(this.toString() + " est full!");
 		}
 		this.personnage = personnage;
 	}
-	
-	public void addPersonnage(Personnage p){
+
+	public void addPersonnage(Personnage p) {
 		if (this.isFull()) {
-			throw new RuntimeException( this.toString() + " est full!" );
+			throw new RuntimeException(this.toString() + " est full!");
 		}
 		this.personnage.add(p);
 	}
@@ -104,6 +105,7 @@ public class Lieu {
 			this.nbPlaces = 6;
 		}
 		this.ouvert = true;
+		personnage = new ArrayList<>();
 	}
 
 	// Méthodes
@@ -131,7 +133,6 @@ public class Lieu {
 		}
 		return true;
 	}
-	
 
 	public void addZombie() {
 		this.nbZombies += 1;
@@ -146,7 +147,7 @@ public class Lieu {
 	}
 
 	public boolean isFull() {
-		if (this.personnage != null) {
+		if (personnage != null) {
 			if (this.personnage.size() == this.nbPlaces) {
 				return true;
 			}
