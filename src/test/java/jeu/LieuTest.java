@@ -1,6 +1,6 @@
 package jeu;
 
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.*;
 
 import java.awt.Color;
 import java.util.ArrayList;
