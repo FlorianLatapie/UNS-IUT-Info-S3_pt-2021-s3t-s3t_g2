@@ -95,7 +95,7 @@ public class Packet {
      */
     public Object getValue(String message, int argNum) {
         String[] tmp = message.split("-");
-        if (tmp.length < argNum || argNum == 0)
+        if (tmp.length < argNum || argNum <= 0)
             throw new IllegalArgumentException(MessageFormat.format("[{0}] L''index est en dehors du tableau {1} !\n{2}", key, argNum, getDocs()));
 
         Object obj = PtTool.convertStringToObject(tmp[argNum], types[argNum - 1]);
