@@ -11,13 +11,14 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class PacketTest {
     static Packet packet;
+    static PtProtocol ptProtocol;
 
     @BeforeAll
     static void setUp() {
         PtValues ptValues = new PtValues();
         PtValue ptValue1 = new PtValue("nombre", "int", "Salut a tous");
         ptValues.addValue(ptValue1);
-        PtProtocol ptProtocol = new PtProtocol("0", "TestClasse", "Dit bonjour", "DB", "UDP", ptValues);
+        ptProtocol = new PtProtocol("0", "TestClasse", "Dit bonjour", "DB", "UDP", ptValues);
 
         packet = new Packet(ptProtocol);
     }
@@ -47,11 +48,38 @@ class PacketTest {
         Object[] values = packet.getValues("DB-1000");
         Assertions.assertEquals(1000, (int) values[1]);
         Assertions.assertEquals(2, values.length);
+        assertThrows(IllegalArgumentException.class, () -> {
+            packet.getValues("DB");
+        });
+        assertThrows(IllegalArgumentException.class, () -> {
+            packet.getValues("DB-2-2-2-2");
+        });
+        assertThrows(IllegalArgumentException.class, () -> {
+            packet.getValues("");
+        });
+        assertThrows(IllegalArgumentException.class, () -> {
+            packet.getValues("DB-az");
+        });
     }
 
     @Test
     void getValue() {
         assertEquals(1000, (int) packet.getValue("DB-1000", 1));
+        assertThrows(IllegalArgumentException.class, () -> {
+            packet.getValue("DB-1000", 0);
+        });
+        assertThrows(IllegalArgumentException.class, () -> {
+            packet.getValue("DB-1000", -10);
+        });
+        assertThrows(IllegalArgumentException.class, () -> {
+            packet.getValue("DB-1000", 1000);
+        });
+        assertThrows(IllegalArgumentException.class, () -> {
+            packet.getValue("DB-1000", 1000);
+        });
+        assertThrows(IllegalArgumentException.class, () -> {
+            packet.getValue("DB-na", 1);
+        });
     }
 
     @Test
@@ -66,5 +94,10 @@ class PacketTest {
     void getKey() {
         assertEquals("DB", packet.getKey());
         assertNotEquals("db", packet.getKey());
+    }
+
+    @Test
+    void toStringTest() {
+        assertEquals(ptProtocol.toString(), packet.toString());
     }
 }
