@@ -57,20 +57,23 @@ public class ControleurJeu {
 		}
 	}
 
-	private Joueur fouilleCamion() {
-		return voteJoueur(4);
+	private void fouilleCamion() {
+		Joueur j = voteJoueur(4);
+		System.out.println(j + " fouille le camion!");
+		System.out.println("Le camion est vide.");
 	}
 
 	public Jeu getJeu() {
 		return jeu;
 	}
 
-	private Joueur electionChefVigi() {
+	private void electionChefVigi() {
 		Joueur j = voteJoueur(5);
 		jeu.resultatChefVigile(j);
-		return j;
+		System.out.println(j + " est le nouveau chef des vigiles!");
 	}
-
+	
+	//attention le chef des vigiles peu voir le résultat que s'il a été elu le tour meme
 	private ArrayList<Integer> arriveZombie() {
 		int z1 = new Random().nextInt(6) + 1;
 		int z2 = new Random().nextInt(6) + 1;
@@ -81,6 +84,14 @@ public class ControleurJeu {
 		lieuZombie.add(z2);
 		lieuZombie.add(z3);
 		lieuZombie.add(z4);
+		for (int i = 0; i < this.jeu.getJoueurs().size(); i++) {
+			if (this.jeu.getJoueurs().get(i).isChefDesVigiles()) {
+				System.out.println(jeu.getJoueurs().get(i)+ " , chef des vigiles, regarde les résulats de l'arrivé des Zombies:");
+				for (int a = 0; a < lieuZombie.size(); a++) {
+					System.out.println(this.jeu.getLieux().get(lieuZombie.get(a)) + "-> Zombie + 1");
+				}
+			}
+		}
 		// l'afficher sur l'ecran du CV s'il y en a un et s'il a un perso sur le lieu 5
 		// (PC)
 		// regarder si un joueur utilise une carte camSecu et si oui l'afficher sur son
@@ -89,30 +100,77 @@ public class ControleurJeu {
 	}
 
 	private ArrayList<Integer> choixDestination() {
-		// si nouveau chef il choisit en premier et affiche son choix
-		// les joueurs choissisent le lieu de destination
-
 		ArrayList<Integer> resultat = new ArrayList<>();
+		for (int i = 0; i < jeu.getJoueurs().size(); i++) {
+			int lieu;
+			ArrayList<Integer> dest = new ArrayList<>();
+			if (jeu.getJoueurs().get(i).isEnVie()) {
+				System.out.println(jeu.getJoueurs().get(i)+ " choisis une destination (un numéro):");
+				for (int a = 1; a < 7; a++) {
+					for (int j = 0; j <jeu.getJoueurs().get(i).getPersonnages().size(); j++) {
+						if (jeu.getJoueurs().get(i).getPersonnages().get(j).getMonLieu() != jeu.getLieux().get(a) && jeu.getLieux().get(a).isOuvert()) {
+							dest.add(a);
+						}
+					}
+				}
+				for (int a=0; a<dest.size(); a++) {
+					System.out.println(dest.get(a) + "\t" + jeu.getLieux().get(dest.get(a)));
+				}
+				lieu = sc.nextInt();
+				while (!dest.contains(lieu)) {
+					System.out.println();
+					System.out.println("Numéro incorect !\n");
+					System.out.println(jeu.getJoueurs().get(i)+ " choisis une destination:");
+					for (int a=0; a<dest.size(); a++) {
+						System.out.println(dest.get(a) + "\t" + jeu.getLieux().get(dest.get(a)));
+					}
+					lieu = sc.nextInt();
+				}
+				resultat.add(lieu);
+			} 
+		}
 		return resultat;
-
 	}
 
 	private void deplacementPerso(ArrayList<Integer> destination, ArrayList<Integer> lieuZombie) {
 		// affiche les choix de Destination
 		// ig.afficheDestination(destination);
-
 		// affiche les nouveaux zombies
 		jeu.entreZombie(lieuZombie);
 		// ig.afficheZombie(jeu.getZombies());
-
 		// carte SPRINT NOT TO DO
-
-		// chaque joueur choisi un personnage a deplacer
+		int compteur = 0;
 		for (int i = 0; i < jeu.getJoueurs().size(); i++) {
+			int choixPerso;
+			ArrayList <Integer> pers = new ArrayList<>();
 			if (jeu.getJoueurs().get(i).isEnVie()) {
-				// choisit un perso
-				Personnage choixPerso = null; // TO UPDATE
-				jeu.deplacePerso(jeu.getJoueurs().get(i), choixPerso, destination.get(i));
+				if (!jeu.getLieux().get(destination.get(compteur)).isFull() && jeu.getLieux().get(destination.get(compteur)).isOuvert()) {
+					System.out.println(jeu.getJoueurs().get(i) + " choisit un personage a déplacer à " + jeu.getLieux().get(destination.get(compteur)));
+				}else {
+					System.out.println(jeu.getJoueurs().get(i) + " choisit un personage a déplacer à " + jeu.getLieux().get(4));
+				}
+				for (int a=0; a<jeu.getJoueurs().get(i).getPersonnages().size(); a++) {
+					if (jeu.getJoueurs().get(i).getPersonnages().get(a).getMonLieu() != jeu.getLieux().get(destination.get(compteur))){
+						pers.add(a);
+						System.out.println(a + "\t" + jeu.getJoueurs().get(i).getPersonnages().get(a));
+					}
+				}
+				choixPerso = sc.nextInt();
+				while(!pers.contains(choixPerso)) {
+					System.out.println();
+					System.out.println("Numéro Incorect!\n");
+					System.out.println(jeu.getJoueurs().get(i) + " choisit un personage a déplacer à " + jeu.getLieux().get(destination.get(compteur)));
+					for (int a=0; a<pers.size(); a++) {
+							System.out.println(pers.get(a) + "\t" + jeu.getJoueurs().get(i).getPersonnages().get(pers.get(a)));
+					}
+					choixPerso = sc.nextInt();
+				}
+				if (!jeu.getLieux().get(destination.get(compteur)).isFull() && jeu.getLieux().get(destination.get(compteur)).isOuvert()) {
+					jeu.deplacePerso(jeu.getJoueurs().get(i), jeu.getJoueurs().get(i).getPersonnages().get(choixPerso), destination.get(compteur));
+				}else {
+					jeu.deplacePerso(jeu.getJoueurs().get(i), jeu.getJoueurs().get(i).getPersonnages().get(choixPerso), 4);
+				}
+				compteur += 1;
 			}
 		}
 	}
@@ -196,15 +254,12 @@ public class ControleurJeu {
 	private ArrayList<Joueur> createJoeur() {
 		System.out.println("Saissisez le nb de joueur réel :");
 		nbjr = sc.nextInt();
-
 		while (nbjr > 5 || nbjr < 0) {
 			System.out.println("nb de joueur réel incorrect");
 			System.out.println("Saissisez le nb de joueur réel :");
 			nbjr = sc.nextInt();
 		}
-
 		nbjv = 5 - nbjr;
-
 		HashMap<Integer, Color> listeCouleur = new HashMap<Integer, Color>();
 		listeCouleur.put(1, Color.BLACK);
 		listeCouleur.put(2, Color.RED);
@@ -212,14 +267,11 @@ public class ControleurJeu {
 		listeCouleur.put(4, Color.GREEN);
 		listeCouleur.put(5, Color.YELLOW);
 		listeCouleur.put(6, Color.ORANGE);
-
 		HashMap<String, String> niveauBot = new HashMap<String, String>();
 		niveauBot.put("1", "facile");
 		niveauBot.put("2", "moyen");
 		niveauBot.put("3", "difficile");
-
 		ArrayList<Joueur> listeJoueur = new ArrayList<Joueur>();
-
 		for (int i = 0; i < nbjr; i++) {
 			System.out.println("==Couleur Disponible==\n");
 			System.out.println(listeCouleur);
@@ -231,9 +283,7 @@ public class ControleurJeu {
 			}
 			listeJoueur.add(new Joueur(listeCouleur.get(choix), "joueur " + i));
 			listeCouleur.remove(choix);
-
 		}
-
 		for (int j = 0; j < nbjv; j++) {
 			System.out.println(niveauBot);
 			System.out.println("Choissisez le niveau du joueur virtuel " + j + " :\n");
@@ -255,7 +305,6 @@ public class ControleurJeu {
 		}
 		System.out.println(this.retourLigne);
 		return listeJoueur;
-
 	}
 
 	private void placementPersonnage() {
@@ -314,7 +363,7 @@ public class ControleurJeu {
 					}
 				}
 				System.out
-						.println("Joueur " + i + " choisit un personage a déplacer à " + jeu.getLieux().get(destEntre));
+						.println("Joueur " + i + " choisit un personage a placer à " + jeu.getLieux().get(destEntre));
 				ArrayList<Integer> num = new ArrayList<>();
 				for (int b = 0; b < jeu.getJoueurs().get(i).getPersonnages().size(); b++) {
 					if (jeu.getJoueurs().get(i).getPersonnages().get(b).getMonLieu() == null) {
