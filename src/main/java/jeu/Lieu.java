@@ -142,4 +142,8 @@ public class Lieu {
 		}
 		return false;
 	}
+
+	public void setNbZombies(int nbZombies) {
+		this.nbZombies = nbZombies;
+	}
 }
