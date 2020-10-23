@@ -1,0 +1,10 @@
+seq:0
+className:TerminerPartie
+doc:Terminer la partie
+keyword:TP
+protocol:TCP
+values:
+value:
+name:partieId
+type:String
+doc:NoDoc

@@ -1,0 +1,18 @@
+seq:36
+className:DebuterPhaseElectionChefVigiles
+doc:Débuter de la phase d’élection du chef des vigiles
+keyword:PECV
+protocol:TCP
+values:
+value:
+name:pionPresent
+type:List<PionCouleur>
+doc:NoDoc
+value:
+name:partieId
+type:String
+doc:NoDoc
+value:
+name:numeroTour
+type:int
+doc:NoDoc

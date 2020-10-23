@@ -1,0 +1,22 @@
+seq:17
+className:InformerChoixDestinationZombieVengeurJoueur
+doc:Informer sur le choix d’une destination du zombie vengeur d’un joueur
+keyword:CDZVDI
+protocol:TCP
+values:
+value:
+name:joueurElimine
+type:Couleur
+doc:NoDoc
+value:
+name:destinationZombieVengeur
+type:int
+doc:NoDoc
+value:
+name:partieId
+type:String
+doc:NoDoc
+value:
+name:numeroTour
+type:int
+doc:NoDoc

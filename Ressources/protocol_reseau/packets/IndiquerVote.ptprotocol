@@ -1,0 +1,22 @@
+seq:44
+className:IndiquerVote
+doc:Indiquer son vote
+keyword:PVCV
+protocol:TCP
+values:
+value:
+name:couleurVotant
+type:Couleur
+doc:NoDoc
+value:
+name:partieId
+type:String
+doc:NoDoc
+value:
+name:numeroTour
+type:int
+doc:NoDoc
+value:
+name:joueurId
+type:String
+doc:NoDoc

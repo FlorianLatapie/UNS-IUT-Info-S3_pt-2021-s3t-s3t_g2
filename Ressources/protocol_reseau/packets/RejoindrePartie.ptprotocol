@@ -1,0 +1,18 @@
+seq:58
+className:RejoindrePartie
+doc:Rejoindre à une partie
+keyword:DCP
+protocol:TCP
+values:
+value:
+name:nom
+type:String
+doc:Le nom du joueur
+value:
+name:typeJoueur
+type:TypeJoueur
+doc:Le type du joueur soir « JR » soit « BOT »
+value:
+name:partieId
+type:String
+doc:NoDoc

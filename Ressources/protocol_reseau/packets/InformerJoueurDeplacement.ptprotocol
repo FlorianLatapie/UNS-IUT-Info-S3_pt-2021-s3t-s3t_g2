@@ -1,0 +1,30 @@
+seq:52
+className:InformerJoueurDeplacement
+doc:Informer les joueurs du déplacement
+keyword:PIIG
+protocol:TCP
+values:
+value:
+name:couleur
+type:Couleur
+doc:La couleur du joueur courant. La couleur est identifiée par un lettre [N(oir), V(ert), B(leu), R(ouge), J(aune), M(arron)].
+value:
+name:des
+type:List<Integer>
+doc:2 nombres entier représentant les résultats obtenus aux dés
+value:
+name:possibilitePions
+type:List<Integer>
+doc:Liste de nombres entiers entre 1 et 6 représentant les possibilité de placement d’un des pions.
+value:
+name:destination
+type:int
+doc:NoDoc
+value:
+name:pion
+type:int
+doc:NoDoc
+value:
+name:partieId
+type:String
+doc:NoDoc

@@ -1,0 +1,14 @@
+seq:57
+className:RechercherPartie
+doc:Rechercher une partie
+keyword:RP
+protocol:UDP
+values:
+value:
+name:typepartie
+type:TypePartie
+doc:Le type de la partie recherchée. Peut prendre une des valeurs suivantes (JRU,BOTU,MIXTE)
+value:
+name:nbMaxPartieRechercher
+type:int
+doc:Le nombre maximum de la partie rechercher. Peut prendre une des quatre valeurs suivante 3,4,5 ou 6

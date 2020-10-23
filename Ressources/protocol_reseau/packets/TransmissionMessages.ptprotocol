@@ -1,0 +1,18 @@
+seq:64
+className:TransmissionMessages
+doc:Transmission des messages un par un 
+keyword:TMRP
+protocol:TCP
+values:
+value:
+name:numeroMessage
+type:int
+doc:NoDoc
+value:
+name:partieId
+type:String
+doc:NoDoc
+value:
+name:message
+type:String
+doc:NoDoc

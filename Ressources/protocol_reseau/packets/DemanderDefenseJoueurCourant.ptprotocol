@@ -1,0 +1,18 @@
+seq:24
+className:DemanderDefenseJoueurCourant
+doc:Demander une défense au joueur courant
+keyword:RAZDD
+protocol:TCP
+values:
+value:
+name:numeroLieu
+type:int
+doc:NoDoc
+value:
+name:partieId
+type:String
+doc:NoDoc
+value:
+name:numeroTour
+type:int
+doc:NoDoc

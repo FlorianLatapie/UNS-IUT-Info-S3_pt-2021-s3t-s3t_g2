@@ -1,0 +1,10 @@
+seq:62
+className:InformerJoueursRestaurationPartie
+doc:Informer les joueurs de la restauration d’une partie
+keyword:RP
+protocol:TCP
+values:
+value:
+name:partieId
+type:String
+doc:NoDoc

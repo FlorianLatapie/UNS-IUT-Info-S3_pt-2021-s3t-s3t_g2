@@ -1,0 +1,22 @@
+seq:9
+className:DebuterPhaseChoixDestination
+doc:Débuter de la phase de choix d’une destination
+keyword:PCD
+protocol:TCP
+values:
+value:
+name:couleurVigile
+type:Couleur
+doc:NoDoc
+value:
+name:vigileElu
+type:VigileEtat
+doc:« NE » si le chef des vigiles a été nouvellement élu (élu lors de la phase précédente) ou « NUL » si aucun joueur n’a été élu durant le tour.
+value:
+name:partieId
+type:String
+doc:NoDoc
+value:
+name:numeroTour
+type:int
+doc:NoDoc

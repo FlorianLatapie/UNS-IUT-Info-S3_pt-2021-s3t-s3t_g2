@@ -1,0 +1,22 @@
+seq:11
+className:InformerDestinationChefVigiles
+doc:Informer de la destination du chef des vigiles
+keyword:CDCDV
+protocol:TCP
+values:
+value:
+name:couleurVigile
+type:Couleur
+doc:NoDoc
+value:
+name:destination
+type:int
+doc:NoDoc
+value:
+name:partieId
+type:String
+doc:NoDoc
+value:
+name:numeroTour
+type:int
+doc:NoDoc

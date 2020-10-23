@@ -1,0 +1,18 @@
+seq:3
+className:LancerDesArriveeZombies
+doc:Lancer les dés pour l’arrivée des zombies
+keyword:AZLD
+protocol:TCP
+values:
+value:
+name:partieId
+type:String
+doc:NoDoc
+value:
+name:numeroTour
+type:int
+doc:NoDoc
+value:
+name:joueurId
+type:String
+doc:NoDoc

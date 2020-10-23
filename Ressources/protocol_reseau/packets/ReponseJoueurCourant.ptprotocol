@@ -1,0 +1,22 @@
+seq:5
+className:ReponseJoueurCourant
+doc:Réponse du joueur courant
+keyword:AZRCS
+protocol:TCP
+values:
+value:
+name:reponseJoueur
+type:CarteType
+doc:Réponse du joueur « NUL » s’il ne souhaite pas jouer de carte ou « CDS » s’il joue une carte caméra de sécurité.
+value:
+name:partieId
+type:String
+doc:NoDoc
+value:
+name:numeroTour
+type:int
+doc:NoDoc
+value:
+name:joueurId
+type:String
+doc:NoDoc
