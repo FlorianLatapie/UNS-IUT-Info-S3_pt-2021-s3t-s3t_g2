@@ -1,4 +1,4 @@
-//Fichier modifié le 02/05/2020 par Blondin Remy G1
+
 package ihm;
 
 import ihm.DataControl.ApplicationPane;
@@ -121,7 +121,7 @@ public class PausePane extends StackPane {
 		vbBoutons.getChildren().add(bRetour);
 		vbBoutons.getChildren().add(bQuitter);
 		vbBoutons.setMargin(bRegles, new Insets(10));
-		vbBoutons.setMargin(bQuitter, new Insets(10));
+		vbBoutons.setMargin(bRetour, new Insets(10));
 
 		vbCentral.getChildren().addAll(vbTitre, vbBoutons);
 
