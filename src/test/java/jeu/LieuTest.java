@@ -6,12 +6,6 @@ import java.awt.Color;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-import jeu.Joueur;
-import jeu.LaBlonde;
-import jeu.LaBrute;
-import jeu.LaFillette;
-import jeu.Lieu;
-import jeu.Personnage;
 import org.junit.jupiter.api.Assertions;
 
 import org.junit.jupiter.api.Test;
@@ -51,11 +45,20 @@ class LieuTest {
 
 	@Test
 	void test_Lieu_Setters() {
-		int numTest = 4;
+		int numTest = 3;
 		Lieu place = new Lieu(numTest);
 		assertTrue(place.isOuvert());
 		place.setOuvert(false);
 		assertFalse(place.isOuvert());
+		assertThrows(RuntimeException.class, () -> {
+			LaBlonde maBlonde = new LaBlonde(new Joueur(Color.BLACK, "popol"));
+			LaBrute maBrute = new LaBrute(new Joueur(Color.BLACK, "tata lili"));
+			LaFillette maFillette = new LaFillette(new Joueur(Color.BLACK, "toutou"));
+			LaFillette maFillette1 = new LaFillette(new Joueur(Color.BLACK, "toutou"));
+			LaBrute maBrute1 = new LaBrute(new Joueur(Color.BLACK, "op"));
+			place.setPersonnage(
+					new ArrayList<Personnage>(Arrays.asList(maFillette, maBrute, maBlonde, maFillette1, maBrute1)));
+		});
 	}
 
 	@Test
@@ -86,6 +89,10 @@ class LieuTest {
 		LaBlonde maBlonde = new LaBlonde(Bob);
 		place.setPersonnage(new ArrayList<Personnage>(Arrays.asList(maBlonde)));
 		assertFalse(place.estAttaquable());
+		LaBrute maBrute = new LaBrute(Bob);
+		place.setPersonnage(new ArrayList<Personnage>(Arrays.asList(maBrute)));
+		place.addZombie(4);
+		assertTrue(place.estAttaquable());
 
 	}
 
@@ -121,8 +128,15 @@ class LieuTest {
 		LaBlonde maBlonde = new LaBlonde(new Joueur(Color.BLACK, "popol"));
 		LaBrute maBrute = new LaBrute(new Joueur(Color.BLACK, "tata lili"));
 		LaFillette maFillette = new LaFillette(new Joueur(Color.BLACK, "toutou"));
-		assertFalse(place.isFull());
+		LaFillette maFillette1 = new LaFillette(new Joueur(Color.BLACK, "toutou"));
 		place.setPersonnage(new ArrayList<Personnage>(Arrays.asList(maFillette, maBrute, maBlonde)));
+		assertFalse(place.isFull());
+		place.addPersonnage(maFillette1);
 		assertTrue(place.isFull());
+		assertThrows(RuntimeException.class, () -> {
+			LaBlonde maBlondeError = new LaBlonde(new Joueur(Color.BLACK, "yep"));
+			place.addPersonnage(maBlondeError);
+		});
+
 	}
 }

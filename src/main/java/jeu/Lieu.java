@@ -23,24 +23,12 @@ public class Lieu {
 		return num;
 	}
 
-	public void setNum(int num) {
-		this.num = num;
-	}
-
 	public int getNbPlaces() {
 		return nbPlaces;
 	}
 
-	public void setNbPlaces(int nbPlaces) {
-		this.nbPlaces = nbPlaces;
-	}
-
 	public int getNbZombies() {
 		return nbZombies;
-	}
-
-	public void setNbZombies(int nbZombies) {
-		this.nbZombies = nbZombies;
 	}
 
 	public boolean isOuvert() {
@@ -82,7 +70,7 @@ public class Lieu {
 	// Constructeurs
 	public Lieu(int num) {
 		HashMap<Integer, String> listeLieu = new HashMap<Integer, String>();
-		listeLieu.put(1, "Toilletes");
+		listeLieu.put(1, "Toilettes");
 		listeLieu.put(2, "Cachou");
 		listeLieu.put(3, "Megatoys");
 		listeLieu.put(4, "Parking");
