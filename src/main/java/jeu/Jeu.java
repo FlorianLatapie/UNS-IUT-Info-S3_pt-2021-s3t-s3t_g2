@@ -153,13 +153,19 @@ public class Jeu {
 	}
 
 	/**
-	 * Lance l'ajout des zombies dans les lieux du jeu
+	 * Lance l'ajout des zombies dans les lieux du jeu et ferme si nécessaire les lieux 
 	 * 
 	 * @param listeInt id des lieux où les nouveaux zombie arrivent
 	 */
 	public void entreZombie(ArrayList<Integer> listeInt) {
 		for (int i = 0; i < listeInt.size(); i++) {
 			lieux.get(listeInt.get(i)).addZombie();
+		}
+		for(int i =1; i < 7; i++) {
+			if (i != 4 && this.lieux.get(i).getNbZombies() >= 8 &&  this.lieux.get(i).getPersonnage().isEmpty()) {
+				this.lieux.get(i).setOuvert(false);
+				this.lieux.get(i).setNbZombies(0);
+			}
 		}
 	}
 
@@ -250,22 +256,6 @@ public class Jeu {
 		if (maxB)
 			lieux.get(idLieuB).addZombie();
 
-		for (int i = 1; i < 7; i++) {
-			if ((i == 1) || (i == 5)) {
-				if (lieux.get(i).getNbZombies() >= 3)
-					lieux.get(i).setOuvert(false);
-			}
-			if ((i == 2) || (i == 3)) {
-				if (lieux.get(i).getNbZombies() >= 4)
-					lieux.get(i).setOuvert(false);
-			}
-			if ((i == 6)) {
-				if (lieux.get(i).getNbZombies() >= 6)
-					lieux.get(i).setOuvert(false);
-			}
-
-		}
-
 	}
 
 	/**
@@ -300,6 +290,11 @@ public class Jeu {
 	}
 	
 	public void afficheJeu() {
+		for (int i = 0; i < this.joueurs.size(); i++) {
+			if(this.joueurs.get(i).isChefDesVigiles()) {
+				System.out.println(">>> " + this.joueurs.get(i) + " est le chef des Vigiles <<<" );
+			}
+		}
 		for (int i = 1; i < 7; i++) {
 			System.out.println(this.lieux.get(i) + ":");
 			for (int a=0; a< this.lieux.get(i).getPersonnage().size(); a++) {
