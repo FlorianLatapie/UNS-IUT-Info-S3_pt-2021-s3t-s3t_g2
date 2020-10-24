@@ -1,29 +1,30 @@
 package jeu;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * <h1>La classe jeu</h1>
  * 
  * 
- * @author Alex le dieu
+ * @author Alex
  * @version 0.1
  * @since 04/10/2020
  */
 public class Jeu {
 	HashMap<Integer, Lieu> lieux;
-	ArrayList<Joueur> joueurs;
+	HashMap<Integer,Joueur> joueurs;
 	ArrayList<CarteAction> cartes;
 
-	public Jeu(ArrayList<Joueur> listeJoueursInitiale) {
+	public Jeu(List<Joueur> listeJoueursInitiale) {
 		lieux = new HashMap<>();
-		joueurs = new ArrayList<>();
+		joueurs = new HashMap<>();
 		cartes = new ArrayList<>();
 //		initCarte();
 		for (int i = 0; i < listeJoueursInitiale.size(); i++)
-			joueurs.add(listeJoueursInitiale.get(i));
+			joueurs.put(i,listeJoueursInitiale.get(i));
 		initJoueurs();
 		initLieu();
 
@@ -67,7 +68,7 @@ public class Jeu {
 	private void initLieu() {
 
 		Lieu parking = new Lieu(4);
-		Lieu PCsecu = new Lieu(5);
+		Lieu pCsecu = new Lieu(5);
 		Lieu supermarche = new Lieu(6);
 		Lieu megatoys = new Lieu(3);
 		Lieu cachou = new Lieu(2);
@@ -78,7 +79,7 @@ public class Jeu {
 		lieux.put(2, cachou);
 		lieux.put(3, megatoys);
 		lieux.put(4, parking);
-		lieux.put(5, PCsecu);
+		lieux.put(5, pCsecu);
 		lieux.put(6, supermarche);
 
 	}
@@ -91,16 +92,20 @@ public class Jeu {
 	private void initJoueurs() {
 		if (joueurs.size() < 4)
 			for (int i = 0; i < joueurs.size(); i++) {
-				joueurs.get(i).getPersonnages().add(new LaBlonde(joueurs.get(i)));
-				joueurs.get(i).getPersonnages().add(new LaBrute(joueurs.get(i)));
-				joueurs.get(i).getPersonnages().add(new LeTruand(joueurs.get(i)));
-				joueurs.get(i).getPersonnages().add(new LaFillette(joueurs.get(i)));
+				HashMap<Integer,Personnage> dp = new HashMap<>();
+				dp.put(0, new LaBlonde(joueurs.get(i)));
+				dp.put(1, new LaBrute(joueurs.get(i)));
+				dp.put(2, new LeTruand(joueurs.get(i)));
+				dp.put(3, new LaFillette(joueurs.get(i)));
+				joueurs.get(i).setPersonnages(dp);
 			}
 		else
 			for (int i = 0; i < joueurs.size(); i++) {
-				joueurs.get(i).getPersonnages().add(new LaBlonde(joueurs.get(i)));
-				joueurs.get(i).getPersonnages().add(new LaBrute(joueurs.get(i)));
-				joueurs.get(i).getPersonnages().add(new LeTruand(joueurs.get(i)));
+				HashMap<Integer,Personnage> dp = new HashMap<>();
+				dp.put(0, new LaBlonde(joueurs.get(i)));
+				dp.put(1, new LaBrute(joueurs.get(i)));
+				dp.put(2, new LeTruand(joueurs.get(i)));
+				joueurs.get(i).setPersonnages(dp);
 			}
 	}
 
@@ -116,6 +121,7 @@ public class Jeu {
 	 */
 	public void fouilleCamion(Joueur piocheur, Joueur receveur, CarteAction cartePiocheur, CarteAction carteReceveur,
 			CarteAction carteDefause) {
+		/*
 		for (int i = 0; i < joueurs.size(); i++) {
 			if (joueurs.get(i).equals(piocheur))
 				joueurs.get(i).getCartes().add(cartePiocheur);
@@ -124,7 +130,7 @@ public class Jeu {
 		}
 		cartes.remove(cartePiocheur);
 		cartes.remove(carteDefause);
-		cartes.remove(carteReceveur);
+		cartes.remove(carteReceveur);*/
 	}
 
 	/**
@@ -157,38 +163,19 @@ public class Jeu {
 	 * 
 	 * @param listeInt id des lieux où les nouveaux zombie arrivent
 	 */
-	public void entreZombie(ArrayList<Integer> listeInt) {
+	public void entreZombie(List<Integer> listeInt) {
 		for (int i = 0; i < listeInt.size(); i++) {
 			lieux.get(listeInt.get(i)).addZombie();
 		}
 	}
 
-	/**
-	 * Test si le jeu est fini
-	 * 
-	 * @return true si le jeu est fini sinon false
-	 */
-	public boolean estFini() {
-		// TO DO
-		return false;
-	}
-
-	/**
-	 * Donne le joueur gagnant
-	 * 
-	 * @return le joueur gagnant
-	 */
-	public Joueur getWinner() {
-		// TO DO
-		return null;
-	}
 
 	/**
 	 * Donne la liste des joueurs
 	 * 
 	 * @return la liste des joueurs
 	 */
-	public ArrayList<Joueur> getJoueurs() {
+	public Map<Integer,Joueur> getJoueurs() {
 		return joueurs;
 	}
 
@@ -197,7 +184,7 @@ public class Jeu {
 	 * 
 	 * @return la liste des lieux
 	 */
-	public HashMap<Integer, Lieu> getLieux() {
+	public Map<Integer, Lieu> getLieux() {
 		return lieux;
 	}
 
@@ -206,21 +193,11 @@ public class Jeu {
 	 * 
 	 * @return la liste des cartes
 	 */
-	public ArrayList<CarteAction> getCartes() {
+	public List<CarteAction> getCartes() {
 		return cartes;
 	}
 
-	/**
-	 * Donne la liste des zombies par lieux
-	 * 
-	 * @return la liste des zombies par lieux
-	 */
-	public HashMap<Lieu, Integer> getZombies() {
-		HashMap<Lieu, Integer> listeNbrZombie = new HashMap<>();
-		for (int i = 1; i < 7; i++)
-			listeNbrZombie.put(lieux.get(i), lieux.get(i).getNbZombies());
-		return listeNbrZombie;
-	}
+
 
 	/**
 	 * Applique la derniere attaque des zombies donc ajoute un zombie au lieu qui a
@@ -228,18 +205,18 @@ public class Jeu {
 	 * 
 	 */
 	public void lastAttaqueZombie() {
-		int idLieuP = 0;
-		int idLieuB = 0;
+		int idLieuP = 1;
+		int idLieuB = 1;
 		boolean maxP = true;
 		boolean maxB = true;
-		for (int i = 1; i < 7; i++) {
+		for (int i = 2; i < 7; i++) {
 			if (lieux.get(i).getPersonnage().size() > lieux.get(idLieuP).getPersonnage().size()) {
 				idLieuP = i;
 			} else if (lieux.get(i).getPersonnage().size() == lieux.get(idLieuP).getPersonnage().size())
 				maxP = false;
 		}
 
-		for (int i = 1; i < 7; i++) {
+		for (int i = 2; i < 7; i++) {
 			if (lieux.get(i).getBlonde().size() > lieux.get(idLieuB).getBlonde().size()) {
 				idLieuB = i;
 			} else if (lieux.get(i).getBlonde().size() == lieux.get(idLieuB).getBlonde().size())
@@ -259,15 +236,31 @@ public class Jeu {
 	 * @param choixPerso le personnage qui est déplacé
 	 * @param dest       le lieu de destination du personnage
 	 */
-	public void deplacePerso(Joueur joueur, Personnage choixPerso, Integer dest) {
+	public void deplacePerso(Joueur joueur, Integer choixPerso, Integer dest) {
 		for (int i = 0; i < joueurs.size(); i++) {
 			if (joueurs.get(i).equals(joueur)) {
-				int l = choixPerso.getMonLieu().getNum();
-				choixPerso.changerDeLieux(lieux.get(dest));
-				this.lieux.get(dest).addPersonnage(choixPerso);
-				this.lieux.get(l).getPersonnage().remove(choixPerso);
+				int l = joueurs.get(i).getPersonnages().get(choixPerso).getMonLieu().getNum();
+				joueurs.get(i).getPersonnages().get(choixPerso).changerDeLieux(lieux.get(dest));
+				this.lieux.get(dest).addPersonnage(joueurs.get(i).getPersonnages().get(choixPerso));
+				this.lieux.get(l).getPersonnage().remove(joueurs.get(i).getPersonnages().get(choixPerso));
 			}
-				
+		}
+
+	}
+	
+	/**
+	 * Place le personnage du joueur au lieu choisi
+	 * 
+	 * @param joueur     le joueur dont le personnage est placé
+	 * @param choixPerso le personnage qui est déplacé
+	 * @param dest       le lieu de destination du personnage
+	 */
+	public void placePerso(Joueur joueur, Integer choixPerso, Integer dest) {
+		for (int i = 0; i < joueurs.size(); i++) {
+			if (joueurs.get(i).equals(joueur)) {
+				joueurs.get(i).getPersonnages().get(choixPerso).changerDeLieux(lieux.get(dest));
+				this.lieux.get(dest).addPersonnage(joueurs.get(i).getPersonnages().get(choixPerso));
+			}
 		}
 
 	}
@@ -277,11 +270,16 @@ public class Jeu {
 	 * 
 	 * @param personnage le personnage qui va être supprimé du jeu
 	 */
-	public void sacrifie(Personnage personnage) {
-		personnage.getJoueur().getPersonnages().remove(personnage);
-		personnage.getMonLieu().getPersonnage().remove(personnage);
-
+	public void sacrifie(Joueur joueur, Integer choixPerso) {
+		for (int i = 0; i < joueurs.size(); i++) {
+			if (joueurs.get(i).equals(joueur)) {
+				int l = joueurs.get(i).getPersonnages().get(choixPerso).getMonLieu().getNum();
+				this.lieux.get(l).getPersonnage().remove(joueurs.get(i).getPersonnages().get(choixPerso));
+				joueurs.get(i).getPersonnages().remove(choixPerso);
+			}
+		}	
 	}
+	
 	
 	/*
 	* Ferme les lieux a envahie
@@ -294,7 +292,6 @@ public class Jeu {
 			}
 		}
 	}
-	
 	
 	public void afficheJeu() {
 		for (int i = 0; i < this.joueurs.size(); i++) {
