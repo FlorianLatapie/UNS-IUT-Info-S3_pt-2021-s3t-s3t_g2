@@ -2,6 +2,7 @@ package jeu;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 /**
  * The Class lieu.
@@ -39,12 +40,12 @@ public class Lieu {
 		this.ouvert = open;
 	}
 
-	public ArrayList<Personnage> getPersonnage() {
+	public List<Personnage> getPersonnage() {
 		return personnage;
 	}
 
-	public ArrayList<Personnage> getBlonde() {
-		ArrayList retour = new ArrayList();
+	public List<Personnage> getBlonde() {
+		ArrayList<Personnage> retour = new ArrayList<Personnage>();
 		for (int i = 0; i < this.personnage.size(); i++) {
 			if (this.personnage.get(i) instanceof LaBlonde) {
 				retour.add(this.personnage.get(i));
@@ -97,7 +98,7 @@ public class Lieu {
 	}
 
 	// Méthodes
-	public ArrayList<Joueur> afficheJoueurSurLieu() {
+	public List<Joueur> afficheJoueurSurLieu() {
 		ArrayList<Joueur> n = new ArrayList<Joueur>();
 		for (int i = 0; i < personnage.size(); i++) {
 			if (!(n.contains(personnage.get(i).getJoueur()))) {
@@ -124,10 +125,10 @@ public class Lieu {
 					force += 1;
 				}
 			}
-			if (force > 0 && force <= this.nbZombies) {
+			if (this.nbZombies > 0 && force <= this.nbZombies) {
 				return true;
 			}
-			return true;
+			return false;
 		}
 		return false;
 		
