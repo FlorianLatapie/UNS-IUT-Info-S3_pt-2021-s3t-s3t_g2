@@ -161,12 +161,6 @@ public class Jeu {
 		for (int i = 0; i < listeInt.size(); i++) {
 			lieux.get(listeInt.get(i)).addZombie();
 		}
-		for(int i =1; i < 7; i++) {
-			if (i != 4 && this.lieux.get(i).getNbZombies() >= 8 &&  this.lieux.get(i).getPersonnage().isEmpty()) {
-				this.lieux.get(i).setOuvert(false);
-				this.lieux.get(i).setNbZombies(0);
-			}
-		}
 	}
 
 	/**
@@ -288,6 +282,19 @@ public class Jeu {
 		personnage.getMonLieu().getPersonnage().remove(personnage);
 
 	}
+	
+	/*
+	* Ferme les lieux a envahie
+	*/
+	public void fermerLieu() {
+		for(int i =1; i < 7; i++) {
+			if (i != 4 && this.lieux.get(i).getNbZombies() >= 8 &&  this.lieux.get(i).getPersonnage().isEmpty()) {
+				this.lieux.get(i).setOuvert(false);
+				this.lieux.get(i).setNbZombies(0);
+			}
+		}
+	}
+	
 	
 	public void afficheJeu() {
 		for (int i = 0; i < this.joueurs.size(); i++) {
