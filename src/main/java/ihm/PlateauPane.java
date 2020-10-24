@@ -26,6 +26,7 @@ public class PlateauPane extends StackPane {
 	private Insets margeBoutonPause = new Insets(margeP, margeP, margeP, margeP);
 	private int lhBoutonPause = 80;
 	private String coinBoutons = " -fx-background-radius: 5px";
+	private Font policeBoutonPause = Font.font("Segoe UI", FontWeight.BOLD, 33);
 	
 	private int margeJ = 20;
 	private Insets margeTexteJoueur = new Insets(margeJ, 10,margeJ,10);
@@ -53,28 +54,30 @@ public class PlateauPane extends StackPane {
 		AnchorPane aPlateau = new AnchorPane(); 
 		
 		///////////////////////////////////////////
-		Button bPause1 = new Button(); 
+		Button bPause1 = new Button("| |"); 
 		bPause1.setPrefSize(lhBoutonPause, lhBoutonPause);
 		bPause1.setMinSize(lhBoutonPause, lhBoutonPause);
 		bPause1.setStyle(coinBoutons);
 		bPause1.setOnAction(EventHandler -> sc.setPaneOnTop(ApplicationPane.PAUSE));
+		bPause1.setFont(policeBoutonPause);
 		hBas.setMargin(bPause1, margeBoutonPause);
 		
-		Button bPause2 = new Button(); 
+		Button bPause2 = new Button("| |"); 
 		bPause2.setPrefSize(lhBoutonPause, lhBoutonPause);
 		bPause2.setMinSize(lhBoutonPause, lhBoutonPause);
 		bPause2.setStyle(coinBoutons);
 		bPause2.setOnAction(EventHandler -> sc.setPaneOnTop(ApplicationPane.PAUSE));
+		bPause2.setFont(policeBoutonPause);
 		hBas.setMargin(bPause2, margeBoutonPause);
 		
 		VBox j1 = new VBox();
-		Label nbPerso1 = new Label("## personnages l.52");
+		Label nbPerso1 = new Label("## personnages");
 		nbPerso1.setFont(Font.font("Segoe UI", 20));
 		nbPerso1.setTextFill(Color.BLACK);
-		Label nbCartes1 = new Label("## de cartes l.55");
+		Label nbCartes1 = new Label("## de cartes");
 		nbCartes1.setFont(Font.font("Segoe UI", 20));
 		nbCartes1.setTextFill(Color.BLACK);
-		Label nomJoueur1 = new Label("Nom Joueur 1 l.58");
+		Label nomJoueur1 = new Label("Nom Joueur 1");
 		nomJoueur1.setFont(Font.font("Segoe UI", 20));
 		nomJoueur1.setTextFill(Color.BLACK);
 		
@@ -88,13 +91,13 @@ public class PlateauPane extends StackPane {
 		j1.getChildren().addAll(nbPerso1,nbCartes1,nomJoueur1);
 		
 		VBox j2 = new VBox();
-		Label nbPerso2 = new Label("## personnages l.67");
+		Label nbPerso2 = new Label("## personnages");
 		nbPerso2.setFont(Font.font("Segoe UI", 20));
 		nbPerso2.setTextFill(Color.BLACK);
-		Label nbCartes2 = new Label("## de cartes l.70");
+		Label nbCartes2 = new Label("## de cartes");
 		nbCartes2.setFont(Font.font("Segoe UI", 20));
 		nbCartes2.setTextFill(Color.BLACK);
-		Label nomJoueur2 = new Label("Nom Joueur 2 l.73");
+		Label nomJoueur2 = new Label("Nom Joueur 2");
 		nomJoueur2.setFont(Font.font("Segoe UI", 20));
 		nomJoueur2.setTextFill(Color.BLACK);
 		
@@ -113,28 +116,30 @@ public class PlateauPane extends StackPane {
 		
 /////////////////////////////////////////////////////
 		
-		Button bPause3 = new Button(); 
+		Button bPause3 = new Button("| |"); 
 		bPause3.setPrefSize(lhBoutonPause, lhBoutonPause);
 		bPause3.setMinSize(lhBoutonPause, lhBoutonPause);
 		bPause3.setStyle(coinBoutons);
 		bPause3.setOnAction(EventHandler -> sc.setPaneOnTop(ApplicationPane.PAUSE));
+		bPause3.setFont(policeBoutonPause);
 		hHaut.setMargin(bPause3, margeBoutonPause);
 		
-		Button bPause4 = new Button(); 
+		Button bPause4 = new Button("| |"); 
 		bPause4.setPrefSize(lhBoutonPause, lhBoutonPause);
 		bPause4.setMinSize(lhBoutonPause, lhBoutonPause);
 		bPause4.setStyle(coinBoutons);
 		bPause4.setOnAction(EventHandler -> sc.setPaneOnTop(ApplicationPane.PAUSE));
+		bPause4.setFont(policeBoutonPause);
 		hHaut.setMargin(bPause4, margeBoutonPause);
 		
 		VBox j3 = new VBox();
-		Label nbPerso3 = new Label("## personnages l.102");
+		Label nbPerso3 = new Label("## personnages");
 		nbPerso3.setFont(Font.font("Segoe UI", 20));
 		nbPerso3.setTextFill(Color.BLACK);
-		Label nbCartes3 = new Label("## de cartes l.105");
+		Label nbCartes3 = new Label("## de cartes");
 		nbCartes3.setFont(Font.font("Segoe UI", 20));
 		nbCartes3.setTextFill(Color.BLACK);
-		Label nomJoueur3 = new Label("Nom Joueur 3 l.108");
+		Label nomJoueur3 = new Label("Nom Joueur 3");
 		nomJoueur3.setFont(Font.font("Segoe UI", 20));
 		nomJoueur3.setTextFill(Color.BLACK);
 		
@@ -148,13 +153,13 @@ public class PlateauPane extends StackPane {
 		j3.getChildren().addAll(nbPerso3,nbCartes3,nomJoueur3);
 		
 		VBox j4 = new VBox();
-		Label nbPerso4 = new Label("## personnages l.117");
+		Label nbPerso4 = new Label("## personnages");
 		nbPerso4.setFont(Font.font("Segoe UI", 20));
 		nbPerso4.setTextFill(Color.BLACK);
-		Label nbCartes4 = new Label("## de cartes l.120");
+		Label nbCartes4 = new Label("## de cartes");
 		nbCartes4.setFont(Font.font("Segoe UI", 20));
 		nbCartes4.setTextFill(Color.BLACK);
-		Label nomJoueur4 = new Label("Nom Joueur 4 l.123");
+		Label nomJoueur4 = new Label("Nom Joueur 4");
 		nomJoueur4.setFont(Font.font("Segoe UI", 20));
 		nomJoueur4.setTextFill(Color.BLACK);
 		
@@ -175,13 +180,13 @@ public class PlateauPane extends StackPane {
 		////////////////////////////////////////////////
 		
 		VBox j5 = new VBox();
-		Label nbPerso5 = new Label("## personnages l.137");
+		Label nbPerso5 = new Label("## personnages");
 		nbPerso5.setFont(Font.font("Segoe UI", 20));
 		nbPerso5.setTextFill(Color.BLACK);
-		Label nbCartes5 = new Label("## de cartes l.140");
+		Label nbCartes5 = new Label("## de cartes");
 		nbCartes5.setFont(Font.font("Segoe UI", 20));
 		nbCartes5.setTextFill(Color.BLACK);
-		Label nomJoueur5 = new Label("Nom Joueur 5 l.143");
+		Label nomJoueur5 = new Label("Nom Joueur 5");
 		nomJoueur5.setFont(Font.font("Segoe UI", 20));
 		nomJoueur5.setTextFill(Color.BLACK);
 		
@@ -205,13 +210,13 @@ public class PlateauPane extends StackPane {
 		/*
 		// obsolete 
 		VBox j6 = new VBox();
-		Label nbPerso6 = new Label("## personnages l.157");
+		Label nbPerso6 = new Label("## personnages");
 		nbPerso6.setFont(Font.font("Segoe UI", 20));
 		nbPerso6.setTextFill(Color.BLACK);
-		Label nbCartes6 = new Label("## de cartes l.161");
+		Label nbCartes6 = new Label("## de cartes");
 		nbCartes6.setFont(Font.font("Segoe UI", 20));
 		nbCartes6.setTextFill(Color.BLACK);
-		Label nomJoueur6 = new Label("Nom Joueur 1 l.164");
+		Label nomJoueur6 = new Label("Nom Joueur 1");
 		nomJoueur6.setFont(Font.font("Segoe UI", 20));
 		nomJoueur6.setTextFill(Color.BLACK);
 		
@@ -232,19 +237,19 @@ public class PlateauPane extends StackPane {
 		
 		aPlateau.setMaxSize(taillePlateau, taillePlateau);
 		
-		Label estBarricade1 = new Label("Barricadé\n"+"Oui/Non l.235");
+		Label estBarricade1 = new Label("Barricadé\n"+"Oui/Non");
 		estBarricade1.setFont(fontInfo);
 		estBarricade1.setTextFill(Color.BLACK);
 		
-		Label titre1 = new Label("Toilettes l.239");
+		Label titre1 = new Label("Toilettes");
 		titre1.setFont(fontTitre);
 		titre1.setTextFill(Color.BLACK);
 		
-		Label estFerme1 = new Label("Fermé\n"+"Oui/Non l.243");
+		Label estFerme1 = new Label("Fermé\n"+"Oui/Non");
 		estFerme1.setFont(fontInfo);
 		estFerme1.setTextFill(Color.BLACK);
 		
-		Label force1 = new Label("Force\ntotale de\nl'équipe :\n"+"## l.247");
+		Label force1 = new Label("Force\ntotale de\nl'équipe :\n"+"##");
 		force1.setFont(fontInfo);
 		force1.setTextFill(Color.BLACK);
 		
@@ -253,7 +258,7 @@ public class PlateauPane extends StackPane {
 		joueursPresents1.setBackground(new Background(new BackgroundFill(Color.DARKGREY, CornerRadii.EMPTY, null)));
 		//todo 
 		
-		Label nbZombies1 = new Label("## de\nzombies l.256");
+		Label nbZombies1 = new Label("## de\nzombies");
 		nbZombies1.setFont(fontInfo);
 		nbZombies1.setTextFill(Color.BLACK);
 		
@@ -278,25 +283,25 @@ public class PlateauPane extends StackPane {
 		g1.setMargin(nbZombies1, margeLieu);
 		
 		
-		aPlateau.setTopAnchor(g1, ((taillePlateau/2)-178.6/2));
-		aPlateau.setLeftAnchor(g1, ((taillePlateau/2)-421.33/2));
+		aPlateau.setTopAnchor(g1, 10.0);
+		aPlateau.setLeftAnchor(g1, 50.0);
 		
 			
 		////
 		
-		Label estBarricade2 = new Label("Barricadé\n"+"Oui/Non l.286");
+		Label estBarricade2 = new Label("Barricadé\n"+"Oui/Non");
 		estBarricade2.setFont(fontInfo);
 		estBarricade2.setTextFill(Color.BLACK);
 		
-		Label titre2 = new Label("Cachou l.237");
+		Label titre2 = new Label("Cachou");
 		titre2.setFont(fontTitre);
 		titre2.setTextFill(Color.BLACK);
 		
-		Label estFerme2 = new Label("Fermé\n"+"Oui/Non l.294");
+		Label estFerme2 = new Label("Fermé\n"+"Oui/Non");
 		estFerme2.setFont(fontInfo);
 		estFerme2.setTextFill(Color.BLACK);
 		
-		Label force2 = new Label("Force\ntotale de\nl'équipe :\n"+"## l.298");
+		Label force2 = new Label("Force\ntotale de\nl'équipe :\n"+"##");
 		force2.setFont(fontInfo);
 		force2.setTextFill(Color.BLACK);
 		
@@ -305,7 +310,7 @@ public class PlateauPane extends StackPane {
 		joueursPresents2.setBackground(new Background(new BackgroundFill(Color.DARKGREY, CornerRadii.EMPTY, null)));
 		//todo 
 		
-		Label nbZombies2 = new Label("## de\nzombies l.307");
+		Label nbZombies2 = new Label("## de\nzombies");
 		nbZombies2.setFont(fontInfo);
 		nbZombies2.setTextFill(Color.BLACK);
 		
@@ -331,11 +336,218 @@ public class PlateauPane extends StackPane {
 		
 		
 		aPlateau.setTopAnchor(g2, 10.0);
-		aPlateau.setLeftAnchor(g2, ((taillePlateau/2)-422.33/2));
+		aPlateau.setLeftAnchor(g2, 500.0);
 		
-		aPlateau.getChildren().addAll(g1,g2);
+		///
 		
-		aPlateau.setBackground(new Background(new BackgroundFill(Color.RED, CornerRadii.EMPTY, null)));
+		Label estBarricade3 = new Label("Barricadé\n"+"Oui/Non");
+		estBarricade3.setFont(fontInfo);
+		estBarricade3.setTextFill(Color.BLACK);
+		
+		Label titre3 = new Label("Megatoys");
+		titre3.setFont(fontTitre);
+		titre3.setTextFill(Color.BLACK);
+		
+		Label estFerme3 = new Label("Fermé\n"+"Oui/Non");
+		estFerme3.setFont(fontInfo);
+		estFerme3.setTextFill(Color.BLACK);
+		
+		Label force3 = new Label("Force\ntotale de\nl'équipe :\n"+"##");
+		force3.setFont(fontInfo);
+		force3.setTextFill(Color.BLACK);
+		
+		GridPane joueursPresents3 = new GridPane(); 
+		joueursPresents3.setPrefSize(200, 200);
+		joueursPresents3.setBackground(new Background(new BackgroundFill(Color.DARKGREY, CornerRadii.EMPTY, null)));
+		//todo 
+		
+		Label nbZombies3 = new Label("## de\nzombies");
+		nbZombies3.setFont(fontInfo);
+		nbZombies3.setTextFill(Color.BLACK);
+		
+		
+		GridPane g3 = new GridPane(); 
+		g3.add(estBarricade3, 0, 0);
+		g3.add(titre3, 1, 0);
+		g3.add(estFerme3, 2, 0);
+		
+		g3.add(force3, 0, 2);
+		g3.add(joueursPresents3, 1, 2);
+		g3.add(nbZombies3, 2, 2);
+		
+		g3.setAlignment(Pos.CENTER);
+		g3.setBackground(new Background(new BackgroundFill(Color.LIGHTGREY, CornerRadii.EMPTY, null)));
+		
+		g3.setMargin(estBarricade3, margeLieu);
+		g3.setMargin(titre3, margeLieu);
+		g3.setMargin(estFerme3, margeLieu);
+		g3.setMargin(force3, margeLieu);
+		g3.setMargin(joueursPresents3, margeLieu);
+		g3.setMargin(nbZombies3, margeLieu);
+		
+		g3.setRotate(-90.0);
+		
+		aPlateau.setTopAnchor(g3, 350.0);
+		aPlateau.setLeftAnchor(g3, 50.0);
+		
+		///
+		Label estBarricade4 = new Label("Barricadé\n"+"Oui/Non");
+		estBarricade4.setFont(fontInfo);
+		estBarricade4.setTextFill(Color.BLACK);
+		
+		Label titre4 = new Label("Parking");
+		titre4.setFont(fontTitre);
+		titre4.setTextFill(Color.BLACK);
+		
+		Label estFerme4 = new Label("Fermé\n"+"Oui/Non");
+		estFerme4.setFont(fontInfo);
+		estFerme4.setTextFill(Color.BLACK);
+		
+		Label force4 = new Label("Force\ntotale de\nl'équipe :\n"+"##");
+		force4.setFont(fontInfo);
+		force4.setTextFill(Color.BLACK);
+		
+		GridPane joueursPresents4 = new GridPane(); 
+		joueursPresents4.setPrefSize(200, 200);
+		joueursPresents4.setBackground(new Background(new BackgroundFill(Color.DARKGREY, CornerRadii.EMPTY, null)));
+		//todo 
+		
+		Label nbZombies4 = new Label("## de\nzombies");
+		nbZombies4.setFont(fontInfo);
+		nbZombies4.setTextFill(Color.BLACK);
+		
+		
+		GridPane g4 = new GridPane(); 
+		g4.add(estBarricade4, 0, 0);
+		g4.add(titre4, 1, 0);
+		g4.add(estFerme4, 2, 0);
+		
+		g4.add(force4, 0, 2);
+		g4.add(joueursPresents4, 1, 2);
+		g4.add(nbZombies4, 2, 2);
+		
+		g4.setAlignment(Pos.CENTER);
+		g4.setBackground(new Background(new BackgroundFill(Color.LIGHTGREY, CornerRadii.EMPTY, null)));
+		
+		g4.setMargin(estBarricade4, margeLieu);
+		g4.setMargin(titre4, margeLieu);
+		g4.setMargin(estFerme4, margeLieu);
+		g4.setMargin(force4, margeLieu);
+		g4.setMargin(joueursPresents4, margeLieu);
+		g4.setMargin(nbZombies4, margeLieu);
+		
+		g4.setRotate(90.0);
+		
+		aPlateau.setTopAnchor(g4, 350.0);
+		aPlateau.setLeftAnchor(g4, 500.0);
+		
+		///
+		
+		Label estBarricade5 = new Label("Barricadé\n"+"Oui/Non");
+		estBarricade5.setFont(fontInfo);
+		estBarricade5.setTextFill(Color.BLACK);
+		
+		Label titre5 = new Label("PC de Sécurité");
+		titre5.setFont(fontTitre);
+		titre5.setTextFill(Color.BLACK);
+		
+		Label estFerme5 = new Label("Fermé\n"+"Oui/Non");
+		estFerme5.setFont(fontInfo);
+		estFerme5.setTextFill(Color.BLACK);
+		
+		Label force5 = new Label("Force\ntotale de\nl'équipe :\n"+"##");
+		force5.setFont(fontInfo);
+		force5.setTextFill(Color.BLACK);
+		
+		GridPane joueursPresents5 = new GridPane(); 
+		joueursPresents5.setPrefSize(200, 200);
+		joueursPresents5.setBackground(new Background(new BackgroundFill(Color.DARKGREY, CornerRadii.EMPTY, null)));
+		//todo 
+		
+		Label nbZombies5 = new Label("## de\nzombies");
+		nbZombies5.setFont(fontInfo);
+		nbZombies5.setTextFill(Color.BLACK);
+		
+		
+		GridPane g5 = new GridPane(); 
+		g5.add(estBarricade5, 0, 0);
+		g5.add(titre5, 1, 0);
+		g5.add(estFerme5, 2, 0);
+		
+		g5.add(force5, 0, 2);
+		g5.add(joueursPresents5, 1, 2);
+		g5.add(nbZombies5, 2, 2);
+		
+		g5.setAlignment(Pos.CENTER);
+		g5.setBackground(new Background(new BackgroundFill(Color.LIGHTGREY, CornerRadii.EMPTY, null)));
+		
+		g5.setMargin(estBarricade5, margeLieu);
+		g5.setMargin(titre5, margeLieu);
+		g5.setMargin(estFerme5, margeLieu);
+		g5.setMargin(force5, margeLieu);
+		g5.setMargin(joueursPresents5, margeLieu);
+		g5.setMargin(nbZombies5, margeLieu);
+		
+		g5.setRotate(180.0);
+		
+		aPlateau.setTopAnchor(g5, 700.0);
+		aPlateau.setLeftAnchor(g5, 50.0);
+		
+		///
+		
+		Label estBarricade6 = new Label("Barricadé\n"+"Oui/Non");
+		estBarricade6.setFont(fontInfo);
+		estBarricade6.setTextFill(Color.BLACK);
+		
+		Label titre6 = new Label("Supermarché");
+		titre6.setFont(fontTitre);
+		titre6.setTextFill(Color.BLACK);
+		
+		Label estFerme6 = new Label("Fermé\n"+"Oui/Non");
+		estFerme6.setFont(fontInfo);
+		estFerme6.setTextFill(Color.BLACK);
+		
+		Label force6 = new Label("Force\ntotale de\nl'équipe :\n"+"##");
+		force6.setFont(fontInfo);
+		force6.setTextFill(Color.BLACK);
+		
+		GridPane joueursPresents6 = new GridPane(); 
+		joueursPresents6.setPrefSize(200, 200);
+		joueursPresents6.setBackground(new Background(new BackgroundFill(Color.DARKGREY, CornerRadii.EMPTY, null)));
+		//todo 
+		
+		Label nbZombies6 = new Label("## de\nzombies");
+		nbZombies6.setFont(fontInfo);
+		nbZombies6.setTextFill(Color.BLACK);
+		
+		
+		GridPane g6 = new GridPane(); 
+		g6.add(estBarricade6, 0, 0);
+		g6.add(titre6, 1, 0);
+		g6.add(estFerme6, 2, 0);
+		
+		g6.add(force6, 0, 2);
+		g6.add(joueursPresents6, 1, 2);
+		g6.add(nbZombies6, 2, 2);
+		
+		g6.setAlignment(Pos.CENTER);
+		g6.setBackground(new Background(new BackgroundFill(Color.LIGHTGREY, CornerRadii.EMPTY, null)));
+		
+		g6.setMargin(estBarricade6, margeLieu);
+		g6.setMargin(titre6, margeLieu);
+		g6.setMargin(estFerme6, margeLieu);
+		g6.setMargin(force6, margeLieu);
+		g6.setMargin(joueursPresents6, margeLieu);
+		g6.setMargin(nbZombies6, margeLieu);
+		
+		g6.setRotate(180.0);
+		
+		aPlateau.setTopAnchor(g6, 700.0);
+		aPlateau.setLeftAnchor(g6, 500.0);
+		
+		aPlateau.getChildren().addAll(g1,g2,g3,g4,g5,g6);
+		
+		//aPlateau.setBackground(new Background(new BackgroundFill(Color.RED, CornerRadii.EMPTY, null)));
 		
 		////////////////////////////////////////////////////
 		borderJoueurs.setTop(hHaut);

@@ -41,6 +41,7 @@ public class AccueilPane extends StackPane {
 	private Font policeBouton = Font.font("Segoe UI", FontWeight.BOLD, 33);
 	private CornerRadii coin = new CornerRadii(15.0);
 	private String styleBoutons = " -fx-background-color:#000000; -fx-background-radius: 15px; -fx-text-fill: #ffffff";
+	private String styleBoutonsSouris = "-fx-background-color:#ff0000;  -fx-text-fill:#000000; -fx-background-radius: 15px;";
 	private StackPane stackPane = new StackPane();
 	private GaussianBlur flou = new GaussianBlur(30);
 
@@ -48,11 +49,12 @@ public class AccueilPane extends StackPane {
 
 		sControl = sc;
 		stackPane.setAlignment(Pos.CENTER);
+		
+		//titre 
 		Label titre1 = new Label("ZOMBIES");
 		titre1.setFont(Font.font("Segoe UI", FontWeight.BOLD, 160));
 		titre1.setTextFill(Color.BLACK);
 		
-
 		Label titre2 = new Label("LA BLONDE LA BRUTE ET LE TRUAND");
 		titre2.setFont(Font.font("Segoe UI", 35));
 		titre2.setTextFill(Color.BLACK);
@@ -63,6 +65,7 @@ public class AccueilPane extends StackPane {
 		titre.setPrefWidth(800);
 		titre.setMinWidth(800);
 		titre2.setPadding(new Insets(0,0,20,0));
+		
 		// boutons
 		Button bJouer = new Button("JOUER");
 		bJouer.setPrefSize(lBouton, hBouton);
@@ -72,13 +75,10 @@ public class AccueilPane extends StackPane {
 		bJouer.setOnAction(EventHandler -> sc.setPaneOnTop(ApplicationPane.PLATEAU));
 		
 		bJouer.setOnMouseEntered(event -> {
-			
-			bJouer.setStyle("-fx-background-color:#ff0000;  -fx-text-fill:#000000; -fx-background-radius: 15px;");
-
+			bJouer.setStyle(styleBoutonsSouris);
 		});
 
 		bJouer.setOnMouseExited(event -> {
-
 			bJouer.setStyle(styleBoutons);
 
 		});
@@ -91,7 +91,7 @@ public class AccueilPane extends StackPane {
 		
 		bOptions.setOnMouseEntered(event -> {
 			
-			bOptions.setStyle("-fx-background-color:#ff0000;  -fx-text-fill:#000000; -fx-background-radius: 15px;");
+			bOptions.setStyle(styleBoutonsSouris);
 
 		});
 
@@ -109,7 +109,7 @@ public class AccueilPane extends StackPane {
 		
 		bRegles.setOnMouseEntered(event -> {
 			
-			bRegles.setStyle("-fx-background-color:#ff0000;  -fx-text-fill:#000000; -fx-background-radius: 15px;");
+			bRegles.setStyle(styleBoutonsSouris);
 
 		});
 
@@ -127,7 +127,7 @@ public class AccueilPane extends StackPane {
 		
 		bQuitter.setOnMouseEntered(event -> {
 			
-			bQuitter.setStyle("-fx-background-color:#ff0000;  -fx-text-fill:#000000; -fx-background-radius: 15px;");
+			bQuitter.setStyle(styleBoutonsSouris);
 
 		});
 
