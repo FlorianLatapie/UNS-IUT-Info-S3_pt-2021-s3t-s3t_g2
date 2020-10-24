@@ -125,7 +125,7 @@ public class Lieu {
 					force += 1;
 				}
 			}
-			if (this.nbZombies > 0 && force <= this.nbZombies) {
+			if (force > 0 && force <= this.nbZombies) {
 				return true;
 			}
 			return false;
