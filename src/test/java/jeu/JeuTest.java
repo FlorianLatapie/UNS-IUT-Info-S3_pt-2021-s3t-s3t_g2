@@ -13,26 +13,18 @@ import org.junit.jupiter.api.Test;
 class JeuTest {
 	Joueur j1 = new Joueur(Color.red, "Bob");
 	Joueur j2 = new Joueur(Color.blue, "Lea");
-	Joueur j3 = new Joueur(Color.green, "Jo");
-	Joueur j4 = new Joueur(Color.orange, "Louis");
-	Joueur j5 = new Joueur(Color.cyan, "Julie");
+	
 	List<Joueur> lj = new ArrayList<>(Arrays.asList(j1,j2));
-	List<Joueur> lj2 = new ArrayList<>(Arrays.asList(j1,j2,j3,j4,j5));
+	
 	Jeu j = new Jeu(lj);
-	Jeu jeu2 = new Jeu(lj2);
-	HashMap<Integer,Joueur> dj=new HashMap<>();
+	
 	
 	@Test
 	void testJeu_Constructor() {
+		HashMap<Integer,Joueur> dj=new HashMap<>();
 		dj.put(0, j1);
 		dj.put(1, j2);		
 		assertEquals(j.getJoueurs(),dj);
-		j.afficheJeu();
-		dj.put(2, j3);
-		dj.put(3, j4);
-		dj.put(4, j5);
-		
-		assertEquals(jeu2.getJoueurs(),dj);
 	}
 
 	@Test
@@ -44,6 +36,22 @@ class JeuTest {
 		assertEquals(j.getJoueurs().get(0).getNom(),j1.getNom());
 		assertEquals(j.getJoueurs().get(1).getNom(),j2.getNom());
 		assertEquals(2,j.getJoueurs().size());
+	}
+	@Test
+	void testJeu_PlusieurJoueur() {
+		HashMap<Integer,Joueur> dj=new HashMap<>();
+		Joueur j3 = new Joueur(Color.green, "Jo");
+		Joueur j4 = new Joueur(Color.orange, "Louis");
+		Joueur j5 = new Joueur(Color.cyan, "Julie");
+		List<Joueur> lj2 = new ArrayList<>(Arrays.asList(j1,j2,j3,j4,j5));
+		Jeu jeu2 = new Jeu(lj2);
+		dj.put(0, j1);
+		dj.put(1, j2);	
+		dj.put(2, j3);
+		dj.put(3, j4);
+		dj.put(4, j5);
+		assertEquals(jeu2.getJoueurs(),dj);
+		j.afficheJeu();
 	}
 	
 	
@@ -100,13 +108,13 @@ class JeuTest {
 		j.placePerso(j.getJoueurs().get(0), 0, 2);
 		j.placePerso(j.getJoueurs().get(0), 1, 2);
 		j.afficheJeu();
-		assertEquals(3,j.getJoueurs().get(0).getPersonnages().size());
+		assertEquals(4,j.getJoueurs().get(0).getPersonnages().size());
 		assertEquals(2,j.getLieux().get(2).getPersonnage().size());
 		j.sacrifie(j.getJoueurs().get(0), 0);
-		assertEquals(2,j.getJoueurs().get(0).getPersonnages().size());
+		assertEquals(3,j.getJoueurs().get(0).getPersonnages().size());
 		assertEquals(1,j.getLieux().get(2).getPersonnage().size());
 		j.sacrifie(j.getJoueurs().get(0), 1);
-		assertEquals(1,j.getJoueurs().get(0).getPersonnages().size());
+		assertEquals(2,j.getJoueurs().get(0).getPersonnages().size());
 		assertEquals(0,j.getLieux().get(2).getPersonnage().size());
 	}
 	
