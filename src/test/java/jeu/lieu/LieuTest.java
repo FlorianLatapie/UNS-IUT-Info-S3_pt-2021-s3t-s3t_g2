@@ -1,4 +1,4 @@
-package jeu;
+package jeu.lieu;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -9,6 +9,13 @@ import java.util.Arrays;
 import org.junit.jupiter.api.Assertions;
 
 import org.junit.jupiter.api.Test;
+
+import jeu.Joueur;
+import jeu.LaBlonde;
+import jeu.LaBrute;
+import jeu.LaFillette;
+import jeu.Lieu;
+import jeu.Personnage;
 
 class LieuTest {
 
@@ -39,7 +46,7 @@ class LieuTest {
 		assertEquals(place.getNum(), numTest);
 		assertEquals(place.getNbPlaces(), 24);
 		assertEquals(place.getNbZombies(), 0);
-		assertTrue(place.getPersonnage() != null);
+		assertNotNull(place.getPersonnage());
 
 	}
 
@@ -83,7 +90,7 @@ class LieuTest {
 
 	@Test
 	void test_estAttaquable() {
-		int numTest = 4;
+		int numTest = 1;
 		Lieu place = new Lieu(numTest);
 		Joueur Bob = new Joueur(Color.BLACK, "titi");
 		LaBlonde maBlonde = new LaBlonde(Bob);

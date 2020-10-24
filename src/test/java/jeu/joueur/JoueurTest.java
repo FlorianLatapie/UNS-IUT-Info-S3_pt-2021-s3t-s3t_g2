@@ -1,8 +1,10 @@
-package joueur;
+package jeu.joueur;
 
 import static org.junit.jupiter.api.Assertions.*;
 import java.awt.Color;
 import java.util.ArrayList;
+import java.util.HashMap;
+
 import org.junit.jupiter.api.Test;
 import jeu.Joueur;
 import jeu.LaBlonde;
@@ -36,8 +38,8 @@ class JoueurTest {
 	 */
 	@Test
 	void testJoueurGettersAndSetters() {
-		ArrayList<Personnage> p = new ArrayList<>();
-		p.add(b);
+		HashMap<Integer,Personnage> p = new HashMap<>();
+		p.put(0,b);
 
 		/**
 		 * Vérification des getters suite à la création d'un joueur
