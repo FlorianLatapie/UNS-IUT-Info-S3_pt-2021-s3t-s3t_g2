@@ -107,19 +107,30 @@ public class Lieu {
 		return n;
 	}
 
+	//le lieu doit contenir des prosnnages pour être attaqué
 	public boolean estAttaquable() {
-		int force = 0;
-		for (int a = 0; a < this.personnage.size(); a++) {
-			if (personnage.get(a).getType() == TypePersonnage.BRUTE) {
-				force += 2;
-			} else {
-				force += 1;
+		if (this.ouvert) {
+			if (this.num == 4 && this.nbZombies > 0 && this.personnage.size() > 0) { //si parking
+				return true;
 			}
+			if (this.num == 6 && this.nbZombies >= 4 && this.personnage.size() > 0) { //si supermarché
+				return true;
+			}
+			int force = 0;
+			for (int a = 0; a < this.personnage.size(); a++) {
+				if (personnage.get(a).getType() == TypePersonnage.BRUTE) {
+					force += 2;
+				} else {
+					force += 1;
+				}
+			}
+			if (force > 0 && force <= this.nbZombies) {
+				return true;
+			}
+			return true;
 		}
-		if (force > this.nbZombies) {
-			return false;
-		}
-		return true;
+		return false;
+		
 	}
 
 	public void addZombie() {
