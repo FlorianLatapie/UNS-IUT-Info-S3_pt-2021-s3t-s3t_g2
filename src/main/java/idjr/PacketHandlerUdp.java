@@ -1,6 +1,5 @@
-package jeu;
+package idjr;
 
-import reseau.packet.Packet;
 import reseau.socket.NetWorkManager;
 import reseau.socket.SideConnection;
 import reseau.type.Status;

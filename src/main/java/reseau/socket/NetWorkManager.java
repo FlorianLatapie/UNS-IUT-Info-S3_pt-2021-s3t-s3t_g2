@@ -1,7 +1,5 @@
 package reseau.socket;
 
-import jeu.PacketHandlerTcp;
-import jeu.PacketHandlerUdp;
 import reseau.packet.Packet;
 import reseau.tool.NetworkTool;
 import reseau.tool.PtTool;
@@ -9,6 +7,9 @@ import reseau.tool.PtTool;
 import java.io.IOException;
 import java.net.InetAddress;
 import java.util.Map;
+
+import idjr.PacketHandlerTcp;
+import idjr.PacketHandlerUdp;
 
 /**
  * <h1> Permet de gerer la partie reseau </h1>
