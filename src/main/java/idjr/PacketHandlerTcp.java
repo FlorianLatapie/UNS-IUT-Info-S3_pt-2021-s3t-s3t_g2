@@ -40,13 +40,16 @@ public class PacketHandlerTcp {
     public String traitement(Packet packet, String message, Socket socket) {
         switch (packet.getKey()) {
             case "DPD":
-                return deplacerJoueur(packet,message);
+                return deplacerPion(packet,message);
+            case "PIIJ":
+            	return lancerDes(packet,message),resLancerDes(packet,message) ; //savoir comment return plusieur choses
+            //TODO voir CDDJ
             default:
                 throw new IllegalStateException(MessageFormat.format("[UDP] Il n''y a pas de traitement possible pour {0}", packet.getKey()));
         }
     }
     
-    public String deplacerJoueur(Packet packet, String message) {
+    public String deplacerPion(Packet packet, String message) {
     	Scanner sc = new Scanner(System.in);
     	System.out.println("Entrez une destination");
     	int dest = sc.nextInt();
@@ -59,4 +62,13 @@ public class PacketHandlerTcp {
     	return nwm.getPacketsTcp().get("DPR").build(dest,pion,carteSprint,packet.getValue(message, 3),packet.getValue(message, 4),core.getJoueurId());
     	
     }
+    
+    public String lancerDes(Packet packet, String message) {
+    	return nwm.getPacketsTcp().get("PILD").build(packet.getValue(message, 3),core.getJoueurId());
+    }
+    
+    public String resLancerDes(Packet packet, String message) {
+    	return nwm.getPacketsTcp().get("PILD").build(packet.getValue(message, 3),core.getJoueurId());
+    }
+    
 }
