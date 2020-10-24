@@ -25,6 +25,7 @@ public class Joueur {
 	 * Constructeur Joueur
 	 * 
 	 * @param couleur
+	 * @param nom
 	 */
 	public Joueur(Color couleur, String nom) {
 		this.couleur = couleur;
@@ -42,12 +43,20 @@ public class Joueur {
 		return couleur;
 	}
 
+	public void setCouleur(Color couleur) {
+		this.couleur = couleur;
+	}
+
 	/**
 	 * 
 	 * @return personnages
 	 */
 	public ArrayList<Personnage> getPersonnages() {
 		return personnages;
+	}
+
+	public void setPersonnages(ArrayList<Personnage> personnages) {
+		this.personnages = personnages;
 	}
 
 	/**
@@ -65,13 +74,9 @@ public class Joueur {
 	public boolean isEnVie() {
 		return enVie;
 	}
-	
+
 	public void setEnVie(boolean enVie) {
 		this.enVie = enVie;
-	}
-
-	public void setPersonnages(ArrayList<Personnage> personnages) {
-		this.personnages = personnages;
 	}
 
 	/**
@@ -86,15 +91,8 @@ public class Joueur {
 		this.chefDesVigiles = chefDesVigiles;
 	}
 
-	
-
-	
-	public void setCouleur(Color couleur) {
-		this.couleur = couleur;
-	}
-	
+	@Override
 	public String toString() {
 		return this.nom;
 	}
-
 }
