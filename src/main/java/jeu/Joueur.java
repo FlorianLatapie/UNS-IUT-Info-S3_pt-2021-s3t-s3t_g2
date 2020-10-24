@@ -9,7 +9,6 @@ import java.util.ArrayList;
  * @author Maxime Lecerf
  * @author Emeric Maximil
  * @author Jehan Berthe
- * @version 1.0
  * @since 05/10/2020
  */
 
@@ -36,7 +35,6 @@ public class Joueur {
 	}
 
 	/**
-	 * 
 	 * @return couleur
 	 */
 	public Color getCouleur() {
@@ -48,7 +46,6 @@ public class Joueur {
 	}
 
 	/**
-	 * 
 	 * @return personnages
 	 */
 	public ArrayList<Personnage> getPersonnages() {
@@ -60,7 +57,6 @@ public class Joueur {
 	}
 
 	/**
-	 * 
 	 * @return cartes
 	 */
 	public ArrayList<CarteAction> getCartes() {
@@ -68,7 +64,6 @@ public class Joueur {
 	}
 
 	/**
-	 * 
 	 * @return enVie
 	 */
 	public boolean isEnVie() {
@@ -80,7 +75,6 @@ public class Joueur {
 	}
 
 	/**
-	 * 
 	 * @return chefDesVigiles
 	 */
 	public boolean isChefDesVigiles() {
@@ -89,6 +83,13 @@ public class Joueur {
 
 	public void setChefDesVigiles(boolean chefDesVigiles) {
 		this.chefDesVigiles = chefDesVigiles;
+	}
+	
+	/**
+	 * @return nom
+	 */
+	public String getNom() {
+		return nom;
 	}
 
 	@Override
