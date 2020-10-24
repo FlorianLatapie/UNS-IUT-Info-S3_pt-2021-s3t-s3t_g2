@@ -187,10 +187,10 @@ public class ControleurJeu {
 				}
 				if (!jeu.getLieux().get(destination.get(compteur)).isFull()
 						&& jeu.getLieux().get(destination.get(compteur)).isOuvert()) {
-					jeu.deplacePerso(jeu.getJoueurs().get(i), jeu.getJoueurs().get(i).getPersonnages().get(choixPerso),
+					jeu.deplacePerso(jeu.getJoueurs().get(i), choixPerso,
 							destination.get(compteur));
 				} else {
-					jeu.deplacePerso(jeu.getJoueurs().get(i), jeu.getJoueurs().get(i).getPersonnages().get(choixPerso),
+					jeu.deplacePerso(jeu.getJoueurs().get(i), choixPerso,
 							4);
 				}
 				compteur += 1;
@@ -228,7 +228,7 @@ public class ControleurJeu {
 							}
 							persEntre = sc.nextInt();
 						}
-						jeu.sacrifie(jou.getPersonnages().get(persEntre));
+						jeu.sacrifie(jou,persEntre);
 					}
 				} else if (jeu.getLieux().get(i).estAttaquable()) {
 					if (jeu.getLieux().get(i).estAttaquable()) {
@@ -251,7 +251,7 @@ public class ControleurJeu {
 							}
 							persEntre = sc.nextInt();
 						}
-						jeu.sacrifie(jou.getPersonnages().get(persEntre));
+						jeu.sacrifie(jou,persEntre);
 					}
 
 				}
