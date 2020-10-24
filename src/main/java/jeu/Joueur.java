@@ -2,6 +2,9 @@ package jeu;
 
 import java.awt.Color;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * Class Joueur
@@ -15,7 +18,7 @@ import java.util.ArrayList;
 public class Joueur {
 	private Color couleur;
 	private boolean enVie;
-	private ArrayList<Personnage> personnages;
+	private HashMap<Integer,Personnage> personnages;
 	private ArrayList<CarteAction> cartes;
 	private boolean chefDesVigiles;
 	private String nom;
@@ -29,8 +32,8 @@ public class Joueur {
 	public Joueur(Color couleur, String nom) {
 		this.couleur = couleur;
 		enVie = true;
-		personnages = new ArrayList<Personnage>();
-		cartes = new ArrayList<CarteAction>();
+		personnages = new HashMap<>();
+		cartes = new ArrayList<>();
 		this.nom = nom;
 	}
 
@@ -48,18 +51,18 @@ public class Joueur {
 	/**
 	 * @return personnages
 	 */
-	public ArrayList<Personnage> getPersonnages() {
+	public Map<Integer,Personnage> getPersonnages() {
 		return personnages;
 	}
 
-	public void setPersonnages(ArrayList<Personnage> personnages) {
+	public void setPersonnages(HashMap<Integer, Personnage> personnages) {
 		this.personnages = personnages;
 	}
 
 	/**
 	 * @return cartes
 	 */
-	public ArrayList<CarteAction> getCartes() {
+	public List<CarteAction> getCartes() {
 		return cartes;
 	}
 
@@ -90,6 +93,14 @@ public class Joueur {
 	 */
 	public String getNom() {
 		return nom;
+	}
+	
+	/**
+	 * Supprime le personnage choisi
+	 * @param cle du perso a supr
+	 */
+	public void removePerso(Integer choix) {
+		personnages.remove(choix);
 	}
 
 	@Override
