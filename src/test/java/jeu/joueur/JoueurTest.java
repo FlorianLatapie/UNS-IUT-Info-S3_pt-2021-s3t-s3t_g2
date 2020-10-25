@@ -2,9 +2,7 @@ package jeu.joueur;
 
 import static org.junit.jupiter.api.Assertions.*;
 import java.awt.Color;
-import java.util.ArrayList;
 import java.util.HashMap;
-
 import org.junit.jupiter.api.Test;
 import jeu.Joueur;
 import jeu.LaBlonde;
