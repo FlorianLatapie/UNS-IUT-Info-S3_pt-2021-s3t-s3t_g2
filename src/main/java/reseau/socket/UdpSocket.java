@@ -3,6 +3,7 @@ package reseau.socket;
 import reseau.tool.PtTool;
 import reseau.tool.ThreadTool;
 import reseau.type.ServerState;
+import reseau.packet.Packet;
 
 import java.io.IOException;
 import java.net.*;
