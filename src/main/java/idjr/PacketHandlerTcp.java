@@ -6,6 +6,7 @@ import java.util.Scanner;
 
 import reseau.packet.Packet;
 import reseau.socket.NetWorkManager;
+import reseau.type.PionCouleur;
 import reseau.type.PionType;
 
 /**
@@ -49,9 +50,11 @@ public class PacketHandlerTcp {
 		case "PCD":
 			return choixDestVigil(packet, message);
 		case "CDCDV":
-			return choisirDest(packet,message);
+			return choisirDest(packet, message);
 		case "CDZVI":
-			
+			return DestZombieVengeur(packet, message);
+		case "RAZDS":
+			return choisirSacrifice(packet, message);
 
 			// TODO voir CDDJ
 		default:
@@ -64,7 +67,7 @@ public class PacketHandlerTcp {
 		Scanner sc = new Scanner(System.in);
 		System.out.println("Entrez une destination");
 		int dest = sc.nextInt();
-		System.out.println("Entrez un pion");
+		System.out.println("Entrez un pion (Piontype)");
 		PionType pion = PionType.valueOf(sc.nextLine());
 		System.out.println("Entrez une carte Sprint(si disponible 'SPR' sinon 'NUL')");
 		String carteSprint = sc.nextLine();
@@ -83,7 +86,7 @@ public class PacketHandlerTcp {
 		Scanner sc = new Scanner(System.in);
 		System.out.println("Entrez une destination");
 		int dest = sc.nextInt();
-		System.out.println("Entrez un pion");
+		System.out.println("Entrez un pion (Piontype)");
 		PionType pion = PionType.valueOf(sc.nextLine());
 		sc.close();
 		return nwm.getPacketsTcp().get("PICD").build(dest, pion, packet.getValue(message, 3), core.getJoueurId());
@@ -116,22 +119,30 @@ public class PacketHandlerTcp {
 			Scanner sc = new Scanner(System.in);
 			System.out.println("Entrez une destination");
 			int dest = sc.nextInt();
-			System.out.println("Entrez un pion");
+			System.out.println("Entrez un pion (Piontype)");
 			PionType pion = PionType.valueOf(sc.nextLine());
 			sc.close();
-			return nwm.getPacketsTcp().get("CDDJ").build(dest, packet.getValue(message, 3),
-					packet.getValue(message, 4), core.getJoueurId());
+			return nwm.getPacketsTcp().get("CDDJ").build(dest, packet.getValue(message, 3), packet.getValue(message, 4),
+					core.getJoueurId());
 		}
 	}
-	
+
 	public String DestZombieVengeur(Packet packet, String message) {
 		Scanner sc = new Scanner(System.in);
 		System.out.println("Entrez une destination pour le zombie vengeur");
 		int destZomb = sc.nextInt();
 		sc.close();
-		return nwm.getPacketsTcp().get("CDDJ").build(destZomb, packet.getValue(message, 1),
-				packet.getValue(message, 2), core.getJoueurId());
-	
+		return nwm.getPacketsTcp().get("CDDZVJE").build(destZomb, packet.getValue(message, 1), packet.getValue(message, 2),
+				core.getJoueurId());
+
+	}
+
+	public String choisirSacrifice(Packet packet, String message) {
+		Scanner sc = new Scanner(System.in);
+		System.out.println("Entrez un pion (PionCouleur)");
+		PionCouleur pion = PionCouleur.valueOf(sc.nextLine());
+		return nwm.getPacketsTcp().get("RAZCS").build(packet.getValue(message, 1), pion, packet.getValue(message, 2),
+				packet.getValue(message, 3), core.getJoueurId());
 	}
 
 }
