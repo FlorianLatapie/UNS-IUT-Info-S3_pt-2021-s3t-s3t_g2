@@ -124,6 +124,14 @@ public class PacketHandlerTcp {
 		}
 	}
 	
-	public String 
+	public String DestZombieVengeur(Packet packet, String message) {
+		Scanner sc = new Scanner(System.in);
+		System.out.println("Entrez une destination pour le zombie vengeur");
+		int destZomb = sc.nextInt();
+		sc.close();
+		return nwm.getPacketsTcp().get("CDDJ").build(destZomb, packet.getValue(message, 1),
+				packet.getValue(message, 2), core.getJoueurId());
+	
+	}
 
 }
