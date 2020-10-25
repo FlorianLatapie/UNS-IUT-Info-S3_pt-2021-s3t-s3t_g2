@@ -17,7 +17,7 @@ public class LaBruteTest {
         Personnage p1 = new LaBrute(j1);
         assertEquals(p1.getPoint(),5);
         assertEquals(p1.getNbrZretenu(),2);
-        assertEquals(p1.nbrVoixDeVote(),1);
+        assertEquals(p1.getNbrVoixPourVoter(),1);
 
     }
 }

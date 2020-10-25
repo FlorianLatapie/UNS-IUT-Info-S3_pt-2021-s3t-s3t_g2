@@ -19,7 +19,7 @@ public class LaBlondeTest {
 	       
         assertEquals(p1.getPoint(),7);
         assertEquals(p1.getNbrZretenu(),1);
-        assertEquals(p1.nbrVoixDeVote(),1);
+        assertEquals(p1.getNbrVoixPourVoter(),1);
 
     }
 

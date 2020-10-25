@@ -40,7 +40,7 @@ public class PersonnageTest {
         assertEquals(p1.getNbrZretenu(),1);
         
         
-        assertEquals(p1.nbrVoixDeVote(),1);
+        assertEquals(p1.getNbrVoixPourVoter(),1);
         
         Lieu newLieu = new Lieu(4);
         p1.changerDeLieux(newLieu);
