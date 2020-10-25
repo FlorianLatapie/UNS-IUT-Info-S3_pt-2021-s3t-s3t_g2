@@ -33,7 +33,6 @@ public class Jeu {
 	/**
 	 * Initialise les cartes du jeu
 	 * 
-	 * 
 	 */
 
 	/*
@@ -63,7 +62,6 @@ public class Jeu {
 	/**
 	 * Initialise les lieux du jeu
 	 * 
-	 * 
 	 */
 	private void initLieu() {
 
@@ -86,7 +84,6 @@ public class Jeu {
 
 	/**
 	 * Initialise les joueurs du jeu
-	 * 
 	 * 
 	 */
 	private void initJoueurs() {
@@ -281,8 +278,9 @@ public class Jeu {
 	}
 	
 	
-	/*
+	/**
 	* Ferme les lieux a envahie
+	* 
 	*/
 	public void fermerLieu() {
 		for(int i =1; i < 7; i++) {
@@ -293,6 +291,10 @@ public class Jeu {
 		}
 	}
 	
+	/**
+	* Affiche l'etat du jeu
+	* 
+	*/
 	public void afficheJeu() {
 		for (int i = 0; i < this.joueurs.size(); i++) {
 			if(this.joueurs.get(i).isChefDesVigiles()) {
