@@ -54,6 +54,8 @@ package jeu;
 			this.estVivant = estVivant;
 		}
 		
+	
+		
 		//-------------------------------------------------------
 		/**
 		 * Renvoie true si le personnage est caché, sinon false
@@ -91,6 +93,10 @@ package jeu;
 		public int getPoint() {
 			return point;
 		}
+		
+		public void setPoint(int point) {
+			this.point = point;
+		}
 
 		//-------------------------------------------------------	
 		/**
@@ -99,6 +105,7 @@ package jeu;
 		public int getNbrZretenu() {
 			return nbrZretenu;
 		}
+		
 		
 		//-------------------------------------------------------
 		/**
