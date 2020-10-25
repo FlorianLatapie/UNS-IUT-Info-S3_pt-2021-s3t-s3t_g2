@@ -11,10 +11,11 @@ import jeu.*;
 /**
  * The Class controleurJeu.
  * 
- * @author Alex
+ * @author Alex, Aurelien
  * @version 0
  * @since 04/10/2020
  */
+
 public class ControleurJeu {
 	private String partieId; // "P" + Numero de la partie Ex : P9458
 	private int intPartieId;
@@ -30,10 +31,12 @@ public class ControleurJeu {
 	// private InterfaceGrahique ig = new InterfaceGrahique();
 	// private GestionnaireReseau rg = new GestionnaireReseau();
 
+	/**
+	 * @throws Exception
+	 */
 	public ControleurJeu() throws Exception {
 		this.intPartieId = new Random().nextInt(10000000);
 		this.partieId = "P" + intPartieId;
-
 		sc = new Scanner(System.in);
 
 		jeu = new Jeu(this.createJoeur());
@@ -42,6 +45,10 @@ public class ControleurJeu {
 		this.start();
 	}
 
+	/**
+	 * Execute le déroulement d'une parite
+	 * @throws Exception
+	 */
 	public void start() throws Exception {
 		fouilleCamion();
 		electionChefVigi();
@@ -53,18 +60,19 @@ public class ControleurJeu {
 		if (this.finJeu()) {
 			return;
 		}
-		deplacementPerso(destination);
-		if (this.finJeu()) {
+		if (!deplacementPerso(destination)) {
 			return;
 		}
-		attaqueZombie();
-		if (this.finJeu()) {
+		if (!attaqueZombie()) {
 			return;
 		}
 		mortJoueur();
 		start();
 	}
 
+	/**
+	 * Affiche le joueur qui fouille le camion
+	 */
 	private void fouilleCamion() {
 		if (jeu.getLieux().get(4).afficheJoueurSurLieu().size() > 0) {
 			Joueur j = voteJoueur(4);
@@ -74,22 +82,33 @@ public class ControleurJeu {
 		}
 	}
 
+	/**
+	 * @return le jeu
+	 */
 	public Jeu getJeu() {
 		return jeu;
 	}
 
+	/**
+	 * Affiche et met a jour le nouveau chef des vigiles
+	 */
 	private void electionChefVigi() {
 		if (jeu.getLieux().get(5).afficheJoueurSurLieu().size() > 0) {
 			Joueur j = voteJoueur(5);
 			jeu.resultatChefVigile(j);
 			System.out.println(j + " est le nouveau chef des vigiles!");
 			System.out.println(this.retourLigne);
+		} else {
+			System.out.println("Pas de nouveau chef des vigiles!");
+			System.out.println(this.retourLigne);
 		}
-		System.out.println("Pas de nouveau chef des vigiles!");
+
 	}
 
-	// attention le chef des vigiles peu voir le résultat que s'il a été elu le tour
-	// meme
+	/**
+	 * definie l'arrivé des zombies et l'affiche pour le chef des vigiles
+	 * @return liste des numéro des lieux d'arrivé des zomibie 
+	 */
 	private ArrayList<Integer> arriveZombie() {
 		int z1 = new Random().nextInt(6) + 1;
 		int z2 = new Random().nextInt(6) + 1;
@@ -117,6 +136,9 @@ public class ControleurJeu {
 		return lieuZombie;
 	}
 
+	/**
+	 * @return
+	 */
 	private ArrayList<Integer> choixDestination() {
 		ArrayList<Integer> resultat = new ArrayList<>();
 		for (int i = 0; i < jeu.getJoueurs().size(); i++) {
@@ -138,6 +160,8 @@ public class ControleurJeu {
 				lieu = new Random().nextInt(6) + 1; // temporaire
 				System.out.println(lieu); // temporaire
 				while (!dest.contains(lieu)) {
+					System.out.println(this.retourLigne);
+					this.jeu.afficheJeu();
 					System.out.println();
 					System.out.println("Numéro incorect !\n");
 					System.out.println(jeu.getJoueurs().get(i) + " choisis une destination (un numéro):");
@@ -156,23 +180,39 @@ public class ControleurJeu {
 		return resultat;
 	}
 
-	private void deplacementPerso(ArrayList<Integer> destination) {
-		// affiche les choix de Destination
+	/**
+	 * @param destination
+	 * @return
+	 */
+	private boolean deplacementPerso(ArrayList<Integer> destination) {
 		// ig.afficheDestination(destination);
-		// affiche les nouveaux zombies
 		// ig.afficheZombie(jeu.getZombies());
 		// carte SPRINT NOT TO DO
 		int compteur = 0;
 		for (int i = 0; i < jeu.getJoueurs().size(); i++) {
-			this.jeu.afficheJeu();
 			int choixPerso;
 			ArrayList<Integer> pers = new ArrayList<>();
 			if (jeu.getJoueurs().get(i).isEnVie()) {
+				this.jeu.afficheJeu();
+				int compt = 0;
+				for (int j = 0; j < jeu.getJoueurs().size(); j++) {
+					if (jeu.getJoueurs().get(j).isEnVie()) {
+						System.out.println("Destination " + jeu.getJoueurs().get(j) + ": "
+								+ jeu.getLieux().get(destination.get(compt)));
+						compt += 1;
+					}
+				}
+				System.out.println();
 				if (!jeu.getLieux().get(destination.get(compteur)).isFull()
 						&& jeu.getLieux().get(destination.get(compteur)).isOuvert()) {
 					System.out.println(jeu.getJoueurs().get(i) + " choisit un personage a déplacer à "
 							+ jeu.getLieux().get(destination.get(compteur)));
 				} else {
+					if (!jeu.getLieux().get(destination.get(compteur)).isOuvert()) {
+						System.out.println(jeu.getLieux().get(destination.get(compteur)) + " est fermé.");
+					} else if (jeu.getLieux().get(destination.get(compteur)).isFull()) {
+						System.out.println(jeu.getLieux().get(destination.get(compteur)) + " est complet.");
+					}
 					System.out.println(
 							jeu.getJoueurs().get(i) + " choisit un personage a déplacer à " + jeu.getLieux().get(4));
 				}
@@ -187,6 +227,16 @@ public class ControleurJeu {
 				choixPerso = new Random().nextInt(3); // temporaire
 				System.out.println(choixPerso); // temporaire
 				while (!pers.contains(choixPerso)) {
+					System.out.println(this.retourLigne);
+					this.jeu.afficheJeu();
+					int compt1 = 0;
+					for (int j = 0; j < jeu.getJoueurs().size(); j++) {
+						if (jeu.getJoueurs().get(j).isEnVie()) {
+							System.out.println("Destination " + jeu.getJoueurs().get(j) + ": "
+									+ jeu.getLieux().get(destination.get(compt1)));
+							compt1 += 1;
+						}
+					}
 					System.out.println();
 					System.out.println("Numéro Incorect!\n");
 					System.out.println(jeu.getJoueurs().get(i) + " choisit un personage a déplacer à "
@@ -208,14 +258,17 @@ public class ControleurJeu {
 				compteur += 1;
 			}
 			System.out.println(this.retourLigne);
+			if (this.finJeu()) {
+				return false;
+			}
 		}
-
+		return true;
 	}
 
-	// faux: on ne vote pas pour un personnage mais pour un joueur qui choisi un
-	// perso a sacrifier
-	// A modifier
-	private void attaqueZombie() {
+	/**
+	 * @return false si fin du jeu, sinon true
+	 */
+	private boolean attaqueZombie() {
 		jeu.lastAttaqueZombie();
 		for (int i = 1; i < 7; i++) {
 			if (jeu.getLieux().get(i).isOuvert()) {
@@ -238,7 +291,8 @@ public class ControleurJeu {
 							persEntre = new Random().nextInt(3); // temporaire
 							System.out.println(persEntre); // temporaire
 							while (!num.contains(persEntre)) {
-								jeu.afficheJeu();
+								System.out.println(this.retourLigne);
+								this.jeu.afficheJeu();
 								System.out.println();
 								System.out.println("Numéro incorect !\n");
 								System.out.println(
@@ -254,53 +308,65 @@ public class ControleurJeu {
 							System.out.println(this.retourLigne);
 							jeu.getLieux().get(i).setNbZombies(jeu.getLieux().get(i).getNbZombies() - 1);
 						}
+						if (this.finJeu()) {
+							return false;
+						}
 					}
 				} else if (jeu.getLieux().get(i).estAttaquable()) {
-					if (jeu.getLieux().get(i).estAttaquable()) {
-						jeu.afficheJeu();
-						Joueur jou = this.voteJoueur(jeu.getLieux().get(i).getNum());
+					jeu.afficheJeu();
+					Joueur jou = this.voteJoueur(jeu.getLieux().get(i).getNum());
+					System.out.println(jou + " choisis un numéro a sacrifier a " + jeu.getLieux().get(i) + ": ");
+					ArrayList<Integer> num = new ArrayList<>();
+					int persEntre;
+					for (Integer b : jou.getPersonnages().keySet()) {
+						if (jeu.getLieux().get(i).getPersonnage().contains(jou.getPersonnages().get(b))) {
+							num.add(b);
+							System.out.println(b + "     " + jou.getPersonnages().get(b));
+						}
+					}
+					// persEntre = sc.nextInt();
+					persEntre = new Random().nextInt(3); // temporaire
+					System.out.println(persEntre); // temporaire
+					while (!num.contains(persEntre)) {
+						System.out.println(this.retourLigne);
+						this.jeu.afficheJeu();
+						System.out.println();
+						System.out.println("Numéro incorect !\n");
 						System.out.println(jou + " choisis un numéro a sacrifier a " + jeu.getLieux().get(i) + ": ");
-						ArrayList<Integer> num = new ArrayList<>();
-						int persEntre;
-						for (Integer b : jou.getPersonnages().keySet()) {
-							if (jeu.getLieux().get(i).getPersonnage().contains(jou.getPersonnages().get(b))) {
-								num.add(b);
-								System.out.println(b + "     " + jou.getPersonnages().get(b));
-							}
+						for (int b = 0; b < num.size(); b++) {
+							System.out.println(num.get(b) + "\t" + jou.getPersonnages().get(num.get(b)));
 						}
 						// persEntre = sc.nextInt();
 						persEntre = new Random().nextInt(3); // temporaire
 						System.out.println(persEntre); // temporaire
-						while (!num.contains(persEntre)) {
-							jeu.afficheJeu();
-							System.out.println();
-							System.out.println("Numéro incorect !\n");
-							System.out
-									.println(jou + " choisis un numéro a sacrifier a " + jeu.getLieux().get(i) + ": ");
-							for (int b = 0; b < num.size(); b++) {
-								System.out.println(num.get(b) + "\t" + jou.getPersonnages().get(num.get(b)));
-							}
-							// persEntre = sc.nextInt();
-							persEntre = new Random().nextInt(3); // temporaire
-							System.out.println(persEntre); // temporaire
-						}
-						jeu.sacrifie(jou, persEntre);
-						System.out.println(this.retourLigne);
 					}
-					jeu.getLieux().get(i).setNbZombies(0);
+					jeu.sacrifie(jou, persEntre);
+					System.out.println(this.retourLigne);
+				}
+				jeu.getLieux().get(i).setNbZombies(0);
+				if (this.finJeu()) {
+					return false;
 				}
 
 			}
 		}
 		System.out.println(this.retourLigne);
+		return true;
 	}
 
+	/**
+	 * @param lieu
+	 * @return
+	 */
 	private Joueur voteJoueur(int lieu) {
 		// gestion des cartes NOT TO DO
 		int rnd = new Random().nextInt(jeu.getLieux().get(lieu).afficheJoueurSurLieu().size());
 		return jeu.getLieux().get(lieu).afficheJoueurSurLieu().get(rnd);
 	}
 
+	/**
+	 * @return
+	 */
 	private ArrayList<Joueur> createJoeur() {
 		System.out.println("Saissisez le nb de joueur réel :");
 		// nbjr = sc.nextInt();
@@ -363,6 +429,9 @@ public class ControleurJeu {
 		return listeJoueur;
 	}
 
+	/**
+	 * 
+	 */
 	private void placementPersonnage() {
 		for (int a = 0; a < jeu.getJoueurs().get(0).getPersonnages().size(); a++) {
 			for (int i = 0; i < jeu.getJoueurs().size(); i++) {
@@ -377,6 +446,7 @@ public class ControleurJeu {
 					System.out.println(x + "\t" + jeu.getLieux().get(x) + ": Complet");
 					System.out.println(y + "\t" + jeu.getLieux().get(y) + ": Complet");
 					ArrayList<Integer> pos = new ArrayList<>();
+					System.out.println();
 					System.out.println("Joueur " + i + " choisit un numéro:");
 					for (int b = 1; b < 7; b++) {
 						if (!this.jeu.getLieux().get(b).isFull() && this.jeu.getLieux().get(b).isOuvert()) {
@@ -411,19 +481,22 @@ public class ControleurJeu {
 					System.out.println(y + "\t" + jeu.getLieux().get(y) + ": Pas Complet");
 					System.out.println("Joueur " + i + " choisit un numéro:");
 					// destEntre = sc.nextInt();
-					destEntre = new Random().nextInt(7) + 1; // temporaire
+					destEntre = new Random().nextInt(6) + 1; // temporaire
 					System.out.println(destEntre); // temporaire
 					while (destEntre != x && destEntre != y) {
+						System.out.println(this.retourLigne);
+						this.jeu.afficheJeu();
 						System.out.println();
 						System.out.println("Numéro incorrect!\n");
 						System.out.println(x + "\t" + jeu.getLieux().get(x) + ": Pas Complet");
 						System.out.println(y + "\t" + jeu.getLieux().get(y) + ": Pas Complet");
 						System.out.println("Joueur " + i + " choisit un numéro:");
 						// destEntre = sc.nextInt();
-						destEntre = new Random().nextInt(7) + 1; // temporaire
+						destEntre = new Random().nextInt(6) + 1; // temporaire
 						System.out.println(destEntre); // temporaire
 					}
 				}
+				System.out.println();
 				System.out.println("Joueur " + i + " choisit un personage a placer à " + jeu.getLieux().get(destEntre));
 				ArrayList<Integer> num = new ArrayList<>();
 				for (int b = 0; b < jeu.getJoueurs().get(i).getPersonnages().size(); b++) {
@@ -436,10 +509,12 @@ public class ControleurJeu {
 				int persEntre = new Random().nextInt(3); // temporaire
 				System.out.println(persEntre); // temporaire
 				while (!num.contains(persEntre)) {
+					System.out.println(this.retourLigne);
+					this.jeu.afficheJeu();
 					System.out.println();
 					System.out.println("Numéro incorect !\n");
 					System.out.println(
-							"Joueur " + i + " choisit un personage a déplacer à " + jeu.getLieux().get(destEntre));
+							"Joueur " + i + " choisit un personage a placer à " + jeu.getLieux().get(destEntre));
 					for (int b = 0; b < num.size(); b++) {
 						System.out
 								.println(num.get(b) + "\t" + jeu.getJoueurs().get(i).getPersonnages().get(num.get(b)));
@@ -454,6 +529,9 @@ public class ControleurJeu {
 		}
 	}
 
+	/**
+	 * 
+	 */
 	public void mortJoueur() {
 		for (int i = 0; i < this.jeu.getJoueurs().size(); i++) {
 			if (this.jeu.getJoueurs().get(i).isEnVie() && this.jeu.getJoueurs().get(i).getPersonnages().size() == 0) {
@@ -473,6 +551,8 @@ public class ControleurJeu {
 				dest = new Random().nextInt(6) + 1; // temporaire
 				System.out.println(dest); // temporaire
 				while (!num.contains(dest)) {
+					System.out.println(this.retourLigne);
+					this.jeu.afficheJeu();
 					System.out.println();
 					System.out.println("Numéro incorect !\n");
 					System.out.println(this.jeu.getJoueurs().get(i) + " choisis un lieu ou ajouter un Zombie:");
@@ -489,6 +569,9 @@ public class ControleurJeu {
 		System.out.println(this.retourLigne);
 	}
 
+	/**
+	 * @return
+	 */
 	public boolean finJeu() {
 		ArrayList<Lieu> lieu = new ArrayList<>();
 		int nbPerso = 0;
@@ -496,8 +579,6 @@ public class ControleurJeu {
 			if (this.jeu.getJoueurs().get(i).isEnVie()) {
 				nbPerso += this.jeu.getJoueurs().get(i).getPersonnages().size();
 				for (Integer j : this.jeu.getJoueurs().get(i).getPersonnages().keySet()) {
-					System.out.println(
-							this.jeu.getJoueurs().get(i) + "" + this.jeu.getJoueurs().get(i).getPersonnages().get(j));
 					if (!lieu.contains(this.jeu.getJoueurs().get(i).getPersonnages().get(j).getMonLieu())) {
 						lieu.add(this.jeu.getJoueurs().get(i).getPersonnages().get(j).getMonLieu());
 					}
@@ -505,6 +586,14 @@ public class ControleurJeu {
 			}
 		}
 		if ((lieu.size() < 2 && lieu.get(0) != this.jeu.getLieux().get(4)) || nbPerso <= 4) {
+			for (int i = 0; i < this.jeu.getJoueurs().size(); i++) {
+				if (this.jeu.getJoueurs().get(i).isEnVie()
+						&& this.jeu.getJoueurs().get(i).getPersonnages().size() == 0) {
+					this.jeu.getJoueurs().get(i).setEnVie(false);
+				}
+			}
+			jeu.afficheJeu();
+			System.out.println();
 			int pointVainqueur = 0;
 			ArrayList<Joueur> vainqueur = new ArrayList<>();
 			for (int i = 0; i < this.jeu.getJoueurs().size(); i++) {
@@ -524,6 +613,7 @@ public class ControleurJeu {
 				} else {
 					System.out.println(" Point " + this.jeu.getJoueurs().get(i) + "(mort): " + point);
 				}
+				System.out.println();
 			}
 			if (vainqueur.size() == 1) {
 				System.out.println(">>>>> " + vainqueur.get(0) + " a gangné ! <<<<<");
