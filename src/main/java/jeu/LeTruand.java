@@ -1,7 +1,7 @@
 package jeu;
 
 /**
- * <h1> Le personnage "Le truand" </h1>
+ * <h1>Le personnage "Le truand"</h1>
  *
  * @version 0.1
  * @author Leo
@@ -13,22 +13,22 @@ package jeu;
  */
 public class LeTruand extends Personnage {
 
-    /**
-     * @param joueur le joueur cible
-     */
-    public LeTruand(Joueur joueur) {
-        super(joueur, TypePersonnage.TRUAND);
-        super.point = 3;
-        super.nbrZretenu = 1;
-        super.nbrVoixPourVoter = 2;
-    }
+	/**
+	 * @param joueur le joueur cible
+	 */
+	public LeTruand(Joueur joueur) {
+		super(joueur, TypePersonnage.TRUAND);
+		super.point = 3;
+		super.nbrZretenu = 1;
+		super.nbrVoixPourVoter = 2;
+	}
 
-    /**
-     * @return le nom du personnage
-     */
-    @Override
-    public String toString() {
-        return "Le Truand";
-    }
+	/**
+	 * @return le nom du personnage
+	 */
+	@Override
+	public String toString() {
+		return "Le Truand";
+	}
 
 }

@@ -15,17 +15,12 @@ class PersonnageTest {
         String nom = "Joueur1";
         Joueur j1 = new Joueur(c, nom);
         LaBlonde p1 = new LaBlonde(j1);
-        p1.setEstVivant(true);
-        assertTrue(p1.isEstVivant());
+
 
         p1.setEstCache(true);
         assertTrue(p1.isEstCache());
 
-        p1.setNbrElection(3);
-        assertEquals(3, p1.getNbrElection());
-
-        p1.setPoint(2);
-        assertEquals(2, p1.getPoint());
+        assertEquals(7, p1.getPoint());
 
         assertEquals(1, p1.getNbrZretenu());
 
@@ -38,9 +33,7 @@ class PersonnageTest {
 
         Joueur j2 = new Joueur(c, nom);
         assertEquals(p1.getJoueur(), j1);
-        p1.setJoueur(j2);
-        assertEquals(p1.getJoueur(), j2);
 
-        assertEquals(p1.getType(), p1.getType());
+        assertEquals(TypePersonnage.BLONDE, p1.getType());
     }
 }

@@ -36,8 +36,8 @@ class JoueurTest {
 	 */
 	@Test
 	void testJoueurGettersAndSetters() {
-		HashMap<Integer,Personnage> p = new HashMap<>();
-		p.put(0,b);
+		HashMap<Integer, Personnage> p = new HashMap<>();
+		p.put(0, b);
 
 		/**
 		 * Vérification des getters suite à la création d'un joueur

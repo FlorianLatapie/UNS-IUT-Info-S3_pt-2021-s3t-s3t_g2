@@ -23,7 +23,7 @@ public class Jeu {
     /**
      * @param listeJoueursInitiale La liste des joueurs initiaux
      */
-    public Jeu(List<Joueur> listeJoueursInitiale) {
+	public Jeu(List<Joueur> listeJoueursInitiale) {
         lieux = new HashMap<>();
         joueurs = new HashMap<>();
         cartes = new ArrayList<>();
@@ -300,7 +300,7 @@ public class Jeu {
         return lieux;
     }
 
-    /**
+    /*
      * Donne la liste des cartes
      *
      * @return la liste des cartes

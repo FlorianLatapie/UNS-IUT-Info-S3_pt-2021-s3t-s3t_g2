@@ -3,19 +3,13 @@ package jeu.lieu;
 import static org.junit.jupiter.api.Assertions.*;
 
 import java.awt.Color;
-import java.util.ArrayList;
-import java.util.Arrays;
-
 import org.junit.jupiter.api.Assertions;
-
 import org.junit.jupiter.api.Test;
-
 import jeu.Joueur;
 import jeu.LaBlonde;
 import jeu.LaBrute;
 import jeu.LaFillette;
 import jeu.Lieu;
-import jeu.Personnage;
 
 class LieuTest {
 
@@ -63,8 +57,11 @@ class LieuTest {
 			LaFillette maFillette = new LaFillette(new Joueur(Color.BLACK, "toutou"));
 			LaFillette maFillette1 = new LaFillette(new Joueur(Color.BLACK, "toutou"));
 			LaBrute maBrute1 = new LaBrute(new Joueur(Color.BLACK, "op"));
-			place.setPersonnage(
-					new ArrayList<Personnage>(Arrays.asList(maFillette, maBrute, maBlonde, maFillette1, maBrute1)));
+			place.addPersonnage(maFillette);
+			place.addPersonnage(maBrute);
+			place.addPersonnage(maBlonde);
+			place.addPersonnage(maFillette1);
+			place.addPersonnage(maBrute1);
 		});
 	}
 
@@ -73,7 +70,7 @@ class LieuTest {
 		int numTest = 4;
 		Lieu place = new Lieu(numTest);
 		LaBlonde maBlonde = new LaBlonde(new Joueur(Color.BLACK, "blonde"));
-		place.setPersonnage(new ArrayList<Personnage>(Arrays.asList(maBlonde)));
+		place.addPersonnage(maBlonde);
 		assertEquals(place.getBlonde().size(), 1);
 
 	}
@@ -84,7 +81,7 @@ class LieuTest {
 		Lieu place = new Lieu(numTest);
 		Joueur Bob = new Joueur(Color.BLACK, "toto");
 		LaBlonde maBlonde = new LaBlonde(Bob);
-		place.setPersonnage(new ArrayList<Personnage>(Arrays.asList(maBlonde)));
+		place.addPersonnage(maBlonde);
 		assertTrue(place.afficheJoueurSurLieu().add(Bob));
 	}
 
@@ -94,13 +91,12 @@ class LieuTest {
 		Lieu place = new Lieu(numTest);
 		Joueur Bob = new Joueur(Color.BLACK, "titi");
 		LaBlonde maBlonde = new LaBlonde(Bob);
-		place.setPersonnage(new ArrayList<Personnage>(Arrays.asList(maBlonde)));
+		place.addPersonnage(maBlonde);
 		assertFalse(place.estAttaquable());
 		LaBrute maBrute = new LaBrute(Bob);
-		place.setPersonnage(new ArrayList<Personnage>(Arrays.asList(maBrute)));
-		place.addZombie(4);
+		place.addPersonnage(maBrute);
+		place.setNbZombies(place.getNbPlaces() + 4);
 		assertTrue(place.estAttaquable());
-
 	}
 
 	@Test
@@ -116,7 +112,7 @@ class LieuTest {
 	void test_addZombie2() {
 		int numTest = 4;
 		Lieu place = new Lieu(numTest);
-		place.addZombie(2);
+		place.setNbZombies(2);
 		assertEquals(place.getNbZombies(), 2);
 	}
 
@@ -136,7 +132,9 @@ class LieuTest {
 		LaBrute maBrute = new LaBrute(new Joueur(Color.BLACK, "tata lili"));
 		LaFillette maFillette = new LaFillette(new Joueur(Color.BLACK, "toutou"));
 		LaFillette maFillette1 = new LaFillette(new Joueur(Color.BLACK, "toutou"));
-		place.setPersonnage(new ArrayList<Personnage>(Arrays.asList(maFillette, maBrute, maBlonde)));
+		place.addPersonnage(maBlonde);
+		place.addPersonnage(maBrute);
+		place.addPersonnage(maFillette);
 		assertFalse(place.isFull());
 		place.addPersonnage(maFillette1);
 		assertTrue(place.isFull());
