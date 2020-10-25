@@ -45,6 +45,8 @@ package jeu;
 			this.estVivant = estVivant;
 		}
 		
+	
+		
 		//-------------------------------------------------------
 		public boolean isEstCache() {
 			return estCache;
@@ -69,11 +71,16 @@ package jeu;
 		public int getPoint() {
 			return point;
 		}
+		
+		public void setPoint(int point) {
+			this.point = point;
+		}
 
 		//-------------------------------------------------------	
 		public int getNbrZretenu() {
 			return nbrZretenu;
 		}
+		
 		
 		//-------------------------------------------------------
 		public int nbrVoixDeVote() {
