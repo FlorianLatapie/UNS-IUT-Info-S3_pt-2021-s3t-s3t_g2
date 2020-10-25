@@ -12,7 +12,6 @@ import java.util.List;
  * @since 04/10/2020
  */
 public class Lieu {
-	//déclaration des attributs nécessaires pour les getters setters et constructeurs
 	private int num;
 	private int nbPlaces;
 	private int nbZombies;
@@ -82,21 +81,18 @@ public class Lieu {
 	 */
 	public void setPersonnage(ArrayList<Personnage> personnage) {
 		if (personnage.size() > this.nbPlaces) {
-			/*si la taille du personnage est trop grande par rapport au nombre de places alors
-			il ne peut pas être créé !
-			*/
 			throw new RuntimeException(this.toString() + " est full!");
 		}
 		this.personnage = personnage;
 	}
 
 	/**
+	 * Ajoute un personnage dans un lieu
+	 * 
 	 * @param p le personnage choisi
 	 */
 	public void addPersonnage(Personnage p) {
-		//ajoute un personnage dans un lieu
 		if (this.isFull()) {
-			//si le lieu est plein on ne peut pas ajouter de personnage
 			throw new RuntimeException(this.toString() + " est full!");
 		}
 		this.personnage.add(p);
@@ -105,11 +101,12 @@ public class Lieu {
 	// Constructeurs
 	
 	/**
+	 * Initialise les différents lieux possibles et donne le nombre de places disponibles en fonction du numero de partie
+	 *
 	 * @param num le numéro de partie
 	 */
 	public Lieu(int num) {
 		HashMap<Integer, String> listeLieu = new HashMap<Integer, String>();
-		//declaration des différents lieus possibles
 		listeLieu.put(1, "Toilettes");
 		listeLieu.put(2, "Cachou");
 		listeLieu.put(3, "Megatoys");
@@ -118,7 +115,6 @@ public class Lieu {
 		listeLieu.put(6, "Supermarché");
 
 		this.name = listeLieu.get(num);
-		//donne le nombre de places disponibles en fonction du numero de partie
 		this.num = num;
 		if (this.num == 1 || this.num == 5) {
 			this.nbPlaces = 3;
@@ -137,40 +133,46 @@ public class Lieu {
 	}
 
 	// Méthodes
+	
+	/**
+	 * affiche les différents personnages qui se trouvent sur un lieu
+	 * 
+	 * @return le joueur affiché
+	 */
 	public List<Joueur> afficheJoueurSurLieu() {
-		//affiche les différents personnages qui se trouvent sur un lieu
 		ArrayList<Joueur> n = new ArrayList<Joueur>();
 		for (int i = 0; i < personnage.size(); i++) {
 			if (!(n.contains(personnage.get(i).getJoueur()))) {
-				//si le lieu ne contient deja pas le même personnage
 				n.add(personnage.get(i).getJoueur());
 			}
 		}
 		return n;
 	}
 
-	//le lieu doit contenir des personnages pour être attaqué
+	/**
+	 * Indique si le lieu peut etre attaquable ou non
+	 * 
+	 * le lieu doit contenir des personnages pour être attaqué
+	 * 
+	 * @return true ou false
+	 */
 	public boolean estAttaquable() {
-		if (this.ouvert) {//le lieu doit etre ouvert pour être attaquable
-			if (this.num == 4 && this.nbZombies > 0 && this.personnage.size() > 0) { //si parking
+		if (this.ouvert) {
+			if (this.num == 4 && this.nbZombies > 0 && this.personnage.size() > 0) {
 				return true;
 			}
-			if (this.num == 6 && this.nbZombies >= 4 && this.personnage.size() > 0) { //si supermarché
+			if (this.num == 6 && this.nbZombies >= 4 && this.personnage.size() > 0) {
 				return true;
 			}
 			int force = 0;
 			for (int a = 0; a < this.personnage.size(); a++) {
 				if (personnage.get(a).getType() == TypePersonnage.BRUTE) {
-					//si le personnage est une brute alors sa force augmente de 2
 					force += 2;
-				} else { //sinon de 1
+				} else {
 					force += 1;
 				}
 			}
 			if (force > 0 && force <= this.nbZombies) {
-				/*la force du joueur doit etre suffisante face aux zombies pour que le lieu 
-				soit attaquable
-				*/
 				return true;
 			}
 			return false;
@@ -179,13 +181,19 @@ public class Lieu {
 		
 	}
 
+	/**
+	 * ajoute un zombie dans le lieu
+	 */
 	public void addZombie() {
-		//ajoute un zombie dans le lieu
 		this.nbZombies += 1;
 	}
-
+	
+	/**
+	 * ajoute un ou plusieurs zombies dans le lieu
+	 * 
+	 * @param i nombre de zombiee
+	 */
 	public void addZombie(int i) {
-		//ajoute un ou plusieurs zombies dans le lieu
 		this.nbZombies += i;
 	}
 
@@ -193,11 +201,14 @@ public class Lieu {
 		return this.name;
 	}
 
+	/**
+	 * indique si le lieu est plein ou non
+	 * 
+	 * @return true ou false
+	 */
 	public boolean isFull() {
-		//indique que le lieu est plein
 		if (personnage != null) {
 			if (this.personnage.size() == this.nbPlaces) {
-				//si les personnages remplissent toutes les places c'est plein !
 				return true;
 			}
 		}
