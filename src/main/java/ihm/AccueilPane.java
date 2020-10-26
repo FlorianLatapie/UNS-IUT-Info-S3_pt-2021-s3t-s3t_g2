@@ -29,11 +29,13 @@ import javafx.scene.text.FontWeight;
  * @since 04/10/2020
  */
 public class AccueilPane extends StackPane {
-	// ScreenControl permet de gérer les variables globales comme la langue ou le volume
+	// ScreenControl permet de gérer les variables globales comme la langue ou le
+	// volume
 	private ScreenControl sControl = null;
 	private final ApplicationPane paneName = ApplicationPane.ACCUEIL;
 	// définition des variable pour la suite du pane
-	private int tailleCarreCentral = 600; // l'interface est sur un stackPane qui peut tourner avec des crans de 90 degrés
+	private int tailleCarreCentral = 600; // l'interface est sur un stackPane qui peut tourner avec des crans de 90
+											// degrés
 	private int hBouton = 100;
 	private int lBouton = 200;
 	private int marge = tailleCarreCentral / 25;
@@ -49,97 +51,78 @@ public class AccueilPane extends StackPane {
 
 		sControl = sc;
 		stackPane.setAlignment(Pos.CENTER);
-		
-		//titre 
+
+		// titre
 		Label titre1 = new Label("ZOMBIES");
 		titre1.setFont(Font.font("Segoe UI", FontWeight.BOLD, 160));
 		titre1.setTextFill(Color.BLACK);
-		
+
 		Label titre2 = new Label("LA BLONDE LA BRUTE ET LE TRUAND");
 		titre2.setFont(Font.font("Segoe UI", 35));
 		titre2.setTextFill(Color.BLACK);
+		titre2.setPadding(new Insets(0, 0, 20, 0));
 
 		VBox titre = new VBox(titre1, titre2);
 		titre.setAlignment(Pos.CENTER);
 		titre.setBackground(new Background(new BackgroundFill(Color.RED, coin, null)));
 		titre.setPrefWidth(800);
 		titre.setMinWidth(800);
-		titre2.setPadding(new Insets(0,0,20,0));
-		
+
 		// boutons
 		Button bJouer = new Button("JOUER");
 		bJouer.setPrefSize(lBouton, hBouton);
 		bJouer.setMinSize(lBouton, hBouton);
 		bJouer.setFont(policeBouton);
 		bJouer.setStyle(styleBoutons);
-		bJouer.setOnAction(EventHandler -> sc.setPaneOnTop(ApplicationPane.PLATEAU));
-		
+
 		bJouer.setOnMouseEntered(event -> {
 			bJouer.setStyle(styleBoutonsSouris);
 		});
-
 		bJouer.setOnMouseExited(event -> {
 			bJouer.setStyle(styleBoutons);
-
 		});
+		bJouer.setOnAction(EventHandler -> sc.setPaneOnTop(ApplicationPane.CONFIG));
 
 		Button bOptions = new Button("OPTIONS");
 		bOptions.setPrefSize(lBouton, hBouton);
 		bOptions.setMinSize(lBouton, hBouton);
 		bOptions.setFont(policeBouton);
 		bOptions.setStyle(styleBoutons);
-		
+
 		bOptions.setOnMouseEntered(event -> {
-			
 			bOptions.setStyle(styleBoutonsSouris);
-
 		});
-
 		bOptions.setOnMouseExited(event -> {
-
 			bOptions.setStyle(styleBoutons);
-
 		});
+		bOptions.setOnAction(EventHandler -> sc.setPaneOnTop(ApplicationPane.OPTION));
 
 		Button bRegles = new Button("REGLES");
 		bRegles.setPrefSize(lBouton, hBouton);
 		bRegles.setMinSize(lBouton, hBouton);
 		bRegles.setFont(policeBouton);
 		bRegles.setStyle(styleBoutons);
-		
+
 		bRegles.setOnMouseEntered(event -> {
-			
 			bRegles.setStyle(styleBoutonsSouris);
-
 		});
-
 		bRegles.setOnMouseExited(event -> {
-
 			bRegles.setStyle(styleBoutons);
-
 		});
+		// bRegles.setOnAction(EventHandler -> sc.setPaneOnTop(ApplicationPane.Regles));
 
 		Button bQuitter = new Button("QUITTER");
 		bQuitter.setPrefSize(lBouton, hBouton);
 		bQuitter.setMinSize(lBouton, hBouton);
 		bQuitter.setFont(policeBouton);
 		bQuitter.setStyle(styleBoutons);
-		
+
 		bQuitter.setOnMouseEntered(event -> {
-			
 			bQuitter.setStyle(styleBoutonsSouris);
-
 		});
-
 		bQuitter.setOnMouseExited(event -> {
-
 			bQuitter.setStyle(styleBoutons);
-
 		});
-
-		// bJouer.setOnAction(EventHandler -> sc.setPaneOnTop(ApplicationPane.JOUER));
-		bOptions.setOnAction(EventHandler -> sc.setPaneOnTop(ApplicationPane.OPTION));
-		// bRegles.setOnAction(EventHandler -> sc.setPaneOnTop(ApplicationPane.Regles));
 		bQuitter.setOnAction(event -> {
 			boolean resultat = ConfirmationPane.afficher("Quitter le jeu",
 					"Êtes-vous sûr de vouloir quitter le jeu ? \nSi vous quittez, la partie en cours sera perdue.");
@@ -161,12 +144,14 @@ public class AccueilPane extends StackPane {
 		grilleBoutons.setMargin(bQuitter, margeBoutons);
 
 		// image fond
-		ImageView imgFond = new ImageView("https://storage.needpix.com/rsynced_images/halloween-cemetery-1505893112JQ0.jpg");
+		ImageView imgFond = new ImageView(
+				"https://storage.needpix.com/rsynced_images/halloween-cemetery-1505893112JQ0.jpg");
 
 		// carre central qui contient tous les éléments (boutons et titre)
 		VBox centreMenu = new VBox();
 		// centreMenu.setBackground(new Background(new
 		// BackgroundFill(Color.LIGHTGREY,CornerRadii.EMPTY,null)));
+		centreMenu.setMinSize(tailleCarreCentral, tailleCarreCentral);
 		centreMenu.setPrefSize(tailleCarreCentral, tailleCarreCentral);
 		centreMenu.setMaxSize(tailleCarreCentral, tailleCarreCentral);
 		centreMenu.setAlignment(Pos.CENTER);
@@ -175,7 +160,7 @@ public class AccueilPane extends StackPane {
 		centreMenu.getChildren().addAll(titre, grilleBoutons);
 
 		// rotation de l'interface
-		 //centreMenu.setRotate(90);
+		// centreMenu.setRotate(90);
 
 		// boite du fond qui contient tout
 		HBox fond = new HBox();
@@ -184,16 +169,13 @@ public class AccueilPane extends StackPane {
 		fond.setPrefHeight(100);
 		fond.setEffect(flou);
 		fond.getChildren().add(imgFond);
-		
+
 		stackPane.getChildren().addAll(fond, centreMenu);
-		
-		
+
 		this.getChildren().add(stackPane);
 		sControl.registerNode(paneName, this);
 		sControl.setPaneOnTop(paneName);
 
 	}
-	
-	
 
 }
