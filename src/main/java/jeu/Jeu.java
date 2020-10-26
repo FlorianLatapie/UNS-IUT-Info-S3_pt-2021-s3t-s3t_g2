@@ -19,8 +19,17 @@ public class Jeu {
     HashMap<Integer, Lieu> lieux;
     HashMap<Integer, Joueur> joueurs;
     ArrayList<CarteAction> cartes;
+    Boolean newChef;
 
-    /**
+    public Boolean getNewChef() {
+		return newChef;
+	}
+
+	public void setNewChef(Boolean newChef) {
+		this.newChef = newChef;
+	}
+
+	/**
      * @param listeJoueursInitiale La liste des joueurs initiaux
      */
 	public Jeu(List<Joueur> listeJoueursInitiale) {
