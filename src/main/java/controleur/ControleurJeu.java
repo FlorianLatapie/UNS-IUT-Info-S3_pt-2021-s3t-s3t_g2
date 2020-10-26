@@ -52,15 +52,37 @@ public class ControleurJeu {
 		fouilleCamion();
 		electionChefVigi();
 		ArrayList<Integer> lieuZombie = arriveZombie();
-		ArrayList<Integer> destination = choixDestination();
+		ArrayList<Integer> destination = new ArrayList<>();
+		for (int i = 0; i<jeu.getJoueurs().size(); i++) {
+			if (jeu.getJoueurs().get(i).isChefDesVigiles()) {
+				destination.add(choixDestination(i));
+			}
+		}
+		for (int i = 0; i<jeu.getJoueurs().size(); i++) {
+			if (!jeu.getJoueurs().get(i).isChefDesVigiles()) {
+				destination.add(choixDestination(i));
+			}
+		}
+		int compteur = 0;
+		for (int i = 0; i<jeu.getJoueurs().size(); i++) {
+			if (jeu.getJoueurs().get(i).isChefDesVigiles()) {
+				if (!deplacementPerso(destination.get(compteur), i))
+					compteur += 1;
+					return;
+			}
+		}
+		for (int i = 0; i<jeu.getJoueurs().size(); i++) {
+			if (!jeu.getJoueurs().get(i).isChefDesVigiles()) {
+				if (!deplacementPerso(destination.get(compteur), i))
+					compteur += 1;
+					return;
+			}
+		}
 		jeu.entreZombie(lieuZombie);
 		jeu.fermerLieu();
-
 		if (this.finJeu())
 			return;
-
-		if (!deplacementPerso(destination))
-			return;
+		
 		jeu.fermerLieu();
 
 		if (!attaqueZombie())
@@ -139,17 +161,16 @@ public class ControleurJeu {
 	/**
 	 * @return
 	 */
-	private ArrayList<Integer> choixDestination() {
-		ArrayList<Integer> resultat = new ArrayList<>();
-		for (int i = 0; i < jeu.getJoueurs().size(); i++) {
+	private int choixDestination(int joueur) {
+			int resultat = 0;
 			System.out.println(jeu.afficheJeu());
 			int lieu;
 			ArrayList<Integer> dest = new ArrayList<>();
-			if (jeu.getJoueurs().get(i).isEnVie()) {
-				out.println(jeu.getJoueurs().get(i) + " choisis une destination (un numéro):");
+			if (jeu.getJoueurs().get(joueur).isEnVie()) {
+				out.println(jeu.getJoueurs().get(joueur) + " choisis une destination (un numéro):");
 				for (int a = 1; a < 7; a++) {
-					for (Integer j : this.jeu.getJoueurs().get(i).getPersonnages().keySet()) {
-						if (jeu.getJoueurs().get(i).getPersonnages().get(j).getMonLieu() != jeu.getLieux().get(a)
+					for (Integer j : this.jeu.getJoueurs().get(joueur).getPersonnages().keySet()) {
+						if (jeu.getJoueurs().get(joueur).getPersonnages().get(j).getMonLieu() != jeu.getLieux().get(a)
 								&& jeu.getLieux().get(a).isOuvert() && !dest.contains(a)) {
 							dest.add(a);
 							out.println(a + "\t" + jeu.getLieux().get(a));
@@ -164,7 +185,7 @@ public class ControleurJeu {
 					System.out.println(jeu.afficheJeu());
 					out.println();
 					out.println("Numéro incorect !\n");
-					out.println(jeu.getJoueurs().get(i) + " choisis une destination (un numéro):");
+					out.println(jeu.getJoueurs().get(joueur) + " choisis une destination (un numéro):");
 					for (Integer integer : dest) {
 						out.println(integer + "\t" + jeu.getLieux().get(integer));
 					}
@@ -172,11 +193,9 @@ public class ControleurJeu {
 					lieu = new Random().nextInt(6) + 1; // temporaire
 					out.println(lieu); // temporaire
 				}
-				resultat.add(lieu);
+				resultat = lieu;
 			}
 			out.println(RETOUR_LIGNE);
-		}
-
 		return resultat;
 	}
 
@@ -184,43 +203,41 @@ public class ControleurJeu {
 	 * @param destination
 	 * @return
 	 */
-	private boolean deplacementPerso(ArrayList<Integer> destination) {
+	private boolean deplacementPerso(int destination, int joueur) {
 		// ig.afficheDestination(destination);
 		// ig.afficheZombie(jeu.getZombies());
 		// carte SPRINT NOT TO DO
-		int compteur = 0;
-		for (int i = 0; i < jeu.getJoueurs().size(); i++) {
 			int choixPerso;
 			ArrayList<Integer> pers = new ArrayList<>();
-			if (jeu.getJoueurs().get(i).isEnVie()) {
+			if (jeu.getJoueurs().get(joueur).isEnVie()) {
 				System.out.println(jeu.afficheJeu());
 				int compt = 0;
 				for (int j = 0; j < jeu.getJoueurs().size(); j++) {
 					if (jeu.getJoueurs().get(j).isEnVie()) {
 						out.println("Destination " + jeu.getJoueurs().get(j) + ": "
-								+ jeu.getLieux().get(destination.get(compt)));
+								+ jeu.getLieux().get(destination));
 						compt += 1;
 					}
 				}
 				out.println();
-				if (!jeu.getLieux().get(destination.get(compteur)).isFull()
-						&& jeu.getLieux().get(destination.get(compteur)).isOuvert()) {
+				if (!jeu.getLieux().get(destination).isFull()
+						&& jeu.getLieux().get(destination).isOuvert()) {
 					out.println(MessageFormat.format("{0} choisit un personage a déplacer à {1}",
-							jeu.getJoueurs().get(i), jeu.getLieux().get(destination.get(compteur))));
+							jeu.getJoueurs().get(joueur), jeu.getLieux().get(destination)));
 				} else {
-					if (!jeu.getLieux().get(destination.get(compteur)).isOuvert()) {
-						out.println(jeu.getLieux().get(destination.get(compteur)) + " est fermé.");
-					} else if (jeu.getLieux().get(destination.get(compteur)).isFull()) {
-						out.println(jeu.getLieux().get(destination.get(compteur)) + " est complet.");
+					if (!jeu.getLieux().get(destination).isOuvert()) {
+						out.println(jeu.getLieux().get(destination) + " est fermé.");
+					} else if (jeu.getLieux().get(destination).isFull()) {
+						out.println(jeu.getLieux().get(destination) + " est complet.");
 					}
 					out.println(
-							jeu.getJoueurs().get(i) + " choisit un personage a déplacer à " + jeu.getLieux().get(4));
+							jeu.getJoueurs().get(joueur) + " choisit un personage a déplacer à " + jeu.getLieux().get(4));
 				}
-				for (Integer a : this.jeu.getJoueurs().get(i).getPersonnages().keySet()) {
-					if (jeu.getJoueurs().get(i).getPersonnages().get(a).getMonLieu() != jeu.getLieux()
-							.get(destination.get(compteur))) {
+				for (Integer a : this.jeu.getJoueurs().get(joueur).getPersonnages().keySet()) {
+					if (jeu.getJoueurs().get(joueur).getPersonnages().get(a).getMonLieu() != jeu.getLieux()
+							.get(destination)) {
 						pers.add(a);
-						out.println(a + "\t" + jeu.getJoueurs().get(i).getPersonnages().get(a));
+						out.println(a + "\t" + jeu.getJoueurs().get(joueur).getPersonnages().get(a));
 					}
 				}
 				// choixPerso = sc.nextInt();
@@ -233,34 +250,32 @@ public class ControleurJeu {
 					for (int j = 0; j < jeu.getJoueurs().size(); j++) {
 						if (jeu.getJoueurs().get(j).isEnVie()) {
 							out.println("Destination " + jeu.getJoueurs().get(j) + ": "
-									+ jeu.getLieux().get(destination.get(compt1)));
+									+ jeu.getLieux().get(destination));
 							compt1 += 1;
 						}
 					}
 					out.println();
 					out.println("Numéro Incorect!\n");
-					out.println(jeu.getJoueurs().get(i) + " choisit un personage a déplacer à "
-							+ jeu.getLieux().get(destination.get(compteur)));
+					out.println(jeu.getJoueurs().get(joueur) + " choisit un personage a déplacer à "
+							+ jeu.getLieux().get(destination));
 					for (Integer per : pers) {
-						out.println(per + "\t" + jeu.getJoueurs().get(i).getPersonnages().get(per));
+						out.println(per + "\t" + jeu.getJoueurs().get(joueur).getPersonnages().get(per));
 					}
 					// choixPerso = sc.nextInt();
 					choixPerso = new Random().nextInt(3); // temporaire
 					out.println(choixPerso); // temporaire
 				}
-				if (!jeu.getLieux().get(destination.get(compteur)).isFull()
-						&& jeu.getLieux().get(destination.get(compteur)).isOuvert()) {
-					jeu.deplacePerso(jeu.getJoueurs().get(i), choixPerso, destination.get(compteur));
+				if (!jeu.getLieux().get(destination).isFull()
+						&& jeu.getLieux().get(destination).isOuvert()) {
+					jeu.deplacePerso(jeu.getJoueurs().get(joueur), choixPerso, destination);
 				} else {
-					jeu.deplacePerso(jeu.getJoueurs().get(i), choixPerso, 4);
+					jeu.deplacePerso(jeu.getJoueurs().get(joueur), choixPerso, 4);
 				}
-				compteur += 1;
 			}
 			out.println(RETOUR_LIGNE);
 			if (this.finJeu()) {
 				return false;
 			}
-		}
 		return true;
 	}
 
