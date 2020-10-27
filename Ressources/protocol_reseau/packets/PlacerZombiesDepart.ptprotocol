@@ -11,4 +11,4 @@ doc:Une liste contenant 4 entier entre 1 et 6 représentant les lieux où se tro
 value:
 name:partieId
 type:String
-doc:NoDoc
+doc:L’identifiant de la partie fournie à la création de la partie.

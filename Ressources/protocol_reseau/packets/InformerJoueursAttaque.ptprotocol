@@ -7,24 +7,24 @@ values:
 value:
 name:numeroLieu
 type:int
-doc:NoDoc
+doc:Le numéro du lieu courant
 value:
 name:pionsLieux
 type:List<PionCouleur>
-doc:NoDoc
+doc:Liste des pions personnages présents dans le lieux. Pas d’ordre particulier pour cette liste. Les lieux sont identifiés par deux caractères Couleur/Valeur séparés par des «,».
 value:
 name:forcePion
 type:int
-doc:NoDoc
+doc:La force actuelle que représente les pions personnages présent
 value:
 name:nombreZombie
 type:int
-doc:NoDoc
+doc:Le nombre de zombies
 value:
 name:partieId
 type:String
-doc:NoDoc
+doc:L’identifiant de la partie fournie à la création de la partie.
 value:
 name:numeroTour
 type:int
-doc:NoDoc
+doc:L'identifiant du tour courant.

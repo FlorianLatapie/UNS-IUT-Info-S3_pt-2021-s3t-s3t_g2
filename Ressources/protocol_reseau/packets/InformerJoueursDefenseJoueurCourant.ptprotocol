@@ -7,11 +7,11 @@ values:
 value:
 name:lieu
 type:int
-doc:NoDoc
+doc:Le numéro du lieu courant
 value:
 name:couleurJoueurCourant
 type:Couleur
-doc:NoDoc
+doc:La couleur du joueur courant. La couleur est identifiée comme précédemment.
 value:
 name:cartesJouees
 type:List<CarteType>
@@ -23,16 +23,16 @@ doc:Liste de pions (identifiés uniquement par leur valeur) qui sont cachés (n�
 value:
 name:forceActuelle
 type:int
-doc:NoDoc
+doc:La force actuelle que représente les pions personnages présent (actualisé avec la défense actuelle)
 value:
 name:nombreZombie
 type:int
-doc:NoDoc
+doc:Le nombre de zombies (actualisé avec la défense actuelle)
 value:
 name:partieId
 type:String
-doc:NoDoc
+doc:L’identifiant de la partie fournie à la création de la partie.
 value:
 name:numeroTour
 type:int
-doc:NoDoc
+doc:L’identifiant du tour courant.

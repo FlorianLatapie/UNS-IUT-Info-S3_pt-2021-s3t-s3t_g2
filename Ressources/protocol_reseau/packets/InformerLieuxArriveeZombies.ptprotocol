@@ -11,8 +11,8 @@ doc:Une liste contenant 4 entiers entre 1 et 6 représentant les lieux où arriv
 value:
 name:partieId
 type:String
-doc:NoDoc
+doc:L’identifiant de la partie fournie à l’initialisation de la partie.
 value:
 name:numeroTour
 type:int
-doc:NoDoc
+doc:l’identifiant du tour courant.

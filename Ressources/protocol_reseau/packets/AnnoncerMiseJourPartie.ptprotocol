@@ -23,7 +23,7 @@ doc:Le nom de la partie
 value:
 name:nbJoueurMaxPartie
 type:int
-doc:NoDoc
+doc:Nombre de joueurs maximum sur la partie
 value:
 name:nbJoueurReelMaxPartie
 type:int

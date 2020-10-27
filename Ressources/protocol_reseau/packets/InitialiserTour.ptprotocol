@@ -7,15 +7,15 @@ values:
 value:
 name:chefDesVigiles
 type:Couleur
-doc:NoDoc
+doc:Indique le chef des vigiles actuel à l’aide de la couleur de celui-ci. La couleur est identifiée par un lettre [N(oir), V(ert), B(leu), R(ouge), J(aune), M(arron)].
 value:
 name:couleursJoueurs
 type:List<Couleur>
-doc:NoDoc
+doc:La liste des couleurs de chaque joueur dans l’ordre du tour en commençant par le chef des vigile. Cette liste ne contient que les joueurs encore en jeu. Chaque couleur est identifiée par un lettre [N(oir), V(ert), B(leu), R(ouge), J(aune), M(arron)] et les couleurs sont séparées par des « , ».
 value:
 name:partieId
 type:String
-doc:NoDoc
+doc:L’identifiant de la partie fournie à l’initialisation de la partie.
 value:
 name:numeroTour
 type:int

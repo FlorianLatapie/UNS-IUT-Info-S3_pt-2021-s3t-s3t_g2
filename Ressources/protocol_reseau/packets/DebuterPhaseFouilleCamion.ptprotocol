@@ -11,12 +11,12 @@ doc:Liste des pions présents sur le lieu, identifiés par deux caractères Coul
 value:
 name:taillePioche
 type:int
-doc:NoDoc
+doc:Taille de la pioche
 value:
 name:partieId
 type:String
-doc:NoDoc
+doc:L’identifiant de la partie fournie à l’initialisation de la partie.
 value:
 name:numeroTour
 type:int
-doc:NoDoc
+doc:L’identifiant du tour courant.
