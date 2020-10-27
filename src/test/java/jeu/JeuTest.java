@@ -2,6 +2,8 @@ package jeu;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import java.net.InetAddress;
+import java.net.UnknownHostException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -11,12 +13,15 @@ import org.junit.jupiter.api.Test;
 import reseau.type.Couleur;
 
 class JeuTest {
-    Joueur j1 = new Joueur("P0", "127.0.0.1", Couleur.ROUGE, 1025, "Bob");
-    Joueur j2 = new Joueur("P1", "127.0.0.1", Couleur.BLEU, 1024, "Lea");
+    Joueur j1 = new Joueur(0, InetAddress.getByName("127.0.0.1"), Couleur.ROUGE, 1025, "Bob");
+    Joueur j2 = new Joueur(1, InetAddress.getByName("127.0.0.1"), Couleur.BLEU, 1024, "Lea");
 
     List<Joueur> lj = new ArrayList<>(Arrays.asList(j1, j2));
 
     Jeu j = new Jeu(lj);
+
+    JeuTest() throws UnknownHostException {
+    }
 
     @Test
     void testJeu_Constructor() {
@@ -38,11 +43,11 @@ class JeuTest {
     }
 
     @Test
-    void testJeu_PlusieurJoueur() {
+    void testJeu_PlusieurJoueur() throws UnknownHostException {
         HashMap<Integer, Joueur> dj = new HashMap<>();
-        Joueur j3 = new Joueur("P3", "127.0.0.1", Couleur.VERT, 1024, "Jo");
-        Joueur j4 = new Joueur("P4", "127.0.0.1", Couleur.MARRON, 1025, "Louis");
-        Joueur j5 = new Joueur("P5", "127.0.0.1", Couleur.ROUGE, 1026, "Julie");
+        Joueur j3 = new Joueur(2, InetAddress.getByName("127.0.0.1"), Couleur.VERT, 1024, "Jo");
+        Joueur j4 = new Joueur(3, InetAddress.getByName("127.0.0.1"), Couleur.MARRON, 1025, "Louis");
+        Joueur j5 = new Joueur(4, InetAddress.getByName("127.0.0.1"), Couleur.ROUGE, 1026, "Julie");
         List<Joueur> lj2 = new ArrayList<>(Arrays.asList(j1, j2, j3, j4, j5));
         Jeu jeu2 = new Jeu(lj2);
         dj.put(0, j1);

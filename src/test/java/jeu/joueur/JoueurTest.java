@@ -2,6 +2,8 @@ package jeu.joueur;
 
 import static org.junit.jupiter.api.Assertions.*;
 import java.awt.Color;
+import java.net.InetAddress;
+import java.net.UnknownHostException;
 import java.util.HashMap;
 import org.junit.jupiter.api.Test;
 import jeu.Joueur;
@@ -21,8 +23,11 @@ import reseau.type.Couleur;
 class JoueurTest {
 	Couleur c = Couleur.BLEU;
 	String nom = "Joueur1";
-	Joueur j = new Joueur("P0", "127.0.0.1", c,1024, nom);
+	Joueur j = new Joueur(0, InetAddress.getByName("127.0.0.1"), c,1024, nom);
 	LaBlonde b = new LaBlonde(j);
+
+	JoueurTest() throws UnknownHostException {
+	}
 
 	/**
 	 * Test du contructeur d'un joueur
