@@ -19,7 +19,10 @@ public class DataControl {
 	public final static Locale localeFR = new Locale("fr", "FR");
 	public final static String localMsgURL = "Ressources.Textes.messages";
 
-	// public final static int effectVolume = 50;
+	public static final ObservableList<String> couleursJoueur = FXCollections.observableArrayList("Noir", "Vert",
+			"Marron", "Rouge", "Bleu", "Jaune");
+
+	// public final static int audioDescV = 50;
 
 	// public static final String VOLUMEON = "./Ressources/Icones/MusiqueOn.png";
 	// public static final String VOLUMEOFF = "./Ressources/Icones/MusiqueOff.png";
