@@ -7,8 +7,8 @@ values:
 value:
 name:partieId
 type:String
-doc:NoDoc
+doc:L’identifiant de la partie fournie à la création de la partie.
 value:
 name:joueurId
 type:String
-doc:NoDoc
+doc:Un identifiant unique caractérisant le joueur

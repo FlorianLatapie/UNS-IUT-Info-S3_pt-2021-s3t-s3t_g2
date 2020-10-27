@@ -7,7 +7,7 @@ values:
 value:
 name:nbPionPlace
 type:int
-doc:NoDoc
+doc:Nombre de pions déjà placé sur le plateau
 value:
 name:pionsRestant
 type:List<Integer>
@@ -15,4 +15,4 @@ doc:Liste des pions restant au joueur qu’il n’a pas encore placé sur le pla
 value:
 name:partieId
 type:String
-doc:NoDoc
+doc:L’identifiant de la partie fournie à la création de la partie.

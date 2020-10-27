@@ -19,11 +19,11 @@ doc:Le port pour rejoindre la partie sous la forme d’un entier entre 1024 et 6
 value:
 name:nom
 type:String
-doc:NoDoc
+doc:Le nom de la partie
 value:
 name:nbJoueurMaxPartie
 type:int
-doc:NoDoc
+doc:Nombre de joueurs maximum sur la partie
 value:
 name:nbJoueurReelsMaxPartie
 type:int

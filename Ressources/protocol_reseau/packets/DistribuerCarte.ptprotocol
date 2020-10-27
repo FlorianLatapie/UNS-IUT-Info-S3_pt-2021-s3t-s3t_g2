@@ -11,4 +11,4 @@ doc:La carte du joueur. Chaque carte est une chaine 3 caractères : MEN [menace]
 value:
 name:partieId
 type:String
-doc:NoDoc
+doc:L’identifiant de la partie fournie à l’initialisation de la partie.

@@ -7,20 +7,20 @@ values:
 value:
 name:cartesJouees
 type:List<CarteType>
-doc:NoDoc
+doc:La liste des cartes jouées par le joueur courant. Il peut s’agir de cartes matériel (sauf dans le lieu 4), arme ou cachette
 value:
 name:pions
 type:List<PionType>
-doc:NoDoc
+doc:Liste de pions (identifiés uniquement par leur valeur) qui sont cachés (nécessite une carte cachette par pion)
 value:
 name:partieId
 type:String
-doc:NoDoc
+doc:L’identifiant de la partie fournie à la création de la partie.
 value:
 name:numeroTour
 type:int
-doc:NoDoc
+doc:L’identifiant du tour courant.
 value:
 name:joueurId
 type:String
-doc:NoDoc
+doc:Un identifiant unique caractérisant le joueur

@@ -15,4 +15,4 @@ doc:Le type du joueur soir « JR » soit « BOT »
 value:
 name:partieId
 type:String
-doc:NoDoc
+doc:L’identifiant unique de la partie.

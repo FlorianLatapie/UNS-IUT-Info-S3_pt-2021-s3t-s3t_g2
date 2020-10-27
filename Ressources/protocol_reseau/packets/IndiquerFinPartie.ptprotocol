@@ -11,12 +11,12 @@ doc:« LIEUX » si tous les personnages sont dans le même lieux, « PION » si 
 value:
 name:couleurJoueurGagnant
 type:Couleur
-doc:NoDoc
+doc:La couleur du joueur gagnant
 value:
 name:partieId
 type:String
-doc:NoDoc
+doc:L’identifiant de la partie fournie à l’initialisation de la partie.
 value:
 name:nombreTour
 type:int
-doc:NoDoc
+doc:L’identifiant du tour courant.

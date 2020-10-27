@@ -7,11 +7,11 @@ values:
 value:
 name:numeroLieuPerso
 type:int
-doc:NoDoc
+doc:Le numéro du lieu qui attire un zombie en fonction du nombre de personnage. 0 si aucun
 value:
 name:numeroLieuPin
 type:int
-doc:NoDoc
+doc:Le numéro du lieu qui attire un zombie en fonction du nombre de pin-ups. 0 si aucun
 value:
 name:lieuxOuverts
 type:List<Integer>
@@ -27,8 +27,8 @@ doc:Liste du nombre de pions personnages pour chaque lieu ouvert dans le même o
 value:
 name:partieId
 type:String
-doc:NoDoc
+doc:L’identifiant de la partie fournie à l’initialisation de la partie.
 value:
 name:numeroTour
 type:int
-doc:NoDoc
+doc:L’identifiant du tour courant.

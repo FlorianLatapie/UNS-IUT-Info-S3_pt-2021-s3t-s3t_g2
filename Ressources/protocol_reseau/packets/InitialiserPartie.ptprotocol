@@ -19,8 +19,8 @@ doc:Le nombre 2 ou un espace « » si aucun lieu n’est fermé.
 value:
 name:nombrePion
 type:int
-doc:NoDoc
+doc:Le nombre de pion, c’est-à-dire 3 ou 4 en fonction du nombre de joueurs.
 value:
 name:partieId
 type:String
-doc:NoDoc
+doc:L’identifiant de la partie fournie à la création de la partie.
