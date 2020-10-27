@@ -7,7 +7,7 @@ values:
 value:
 name:partieId
 type:String
-doc:NoDoc
+doc:L’identifiant de la partie
 value:
 name:joueurId
 type:String

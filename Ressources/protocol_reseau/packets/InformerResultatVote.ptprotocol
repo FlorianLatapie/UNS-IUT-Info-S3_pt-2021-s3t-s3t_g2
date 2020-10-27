@@ -7,7 +7,7 @@ values:
 value:
 name:joueurMaxVoix
 type:Couleur
-doc:NoDoc
+doc:La couleur du joueur ayant le plus de voix (gagnant/perdant du vote). La couleur est identifiée comme précédemment. « NUL » s’il y a égalité.
 value:
 name:couleursJoueurs
 type:List<Couleur>
@@ -23,8 +23,8 @@ doc:La liste des voix reçues par chaque joueur (un entier positif ou nul) et or
 value:
 name:partieId
 type:String
-doc:NoDoc
+doc:L’identifiant de la partie fournie à l’initialisation de la partie.
 value:
 name:numeroTour
 type:int
-doc:NoDoc
+doc:L’identifiant du tour courant.

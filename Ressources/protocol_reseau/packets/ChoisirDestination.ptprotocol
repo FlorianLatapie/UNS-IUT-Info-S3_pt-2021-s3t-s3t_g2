@@ -7,16 +7,16 @@ values:
 value:
 name:destination
 type:int
-doc:NoDoc
+doc:Un entier représentant la destination
 value:
 name:pion
 type:int
-doc:NoDoc
+doc:Un entier représentant le pion positionné
 value:
 name:partieId
 type:String
-doc:NoDoc
+doc:L’identifiant de la partie fournie à la création de la partie.
 value:
 name:partieJoueur
 type:String
-doc:NoDoc
+doc:Un identifiant unique caractérisant le joueur

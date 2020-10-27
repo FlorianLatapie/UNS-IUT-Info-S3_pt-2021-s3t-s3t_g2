@@ -7,8 +7,8 @@ values:
 value:
 name:partieId
 type:String
-doc:NoDoc
+doc:L’identifiant de la partie qui vient de se finir
 value:
 name:partieIdNouveau
 type:String
-doc:NoDoc
+doc:L’identifiant de la nouvelle partie.

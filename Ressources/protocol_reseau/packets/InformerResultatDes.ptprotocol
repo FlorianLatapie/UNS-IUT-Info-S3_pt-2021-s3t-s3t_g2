@@ -15,4 +15,4 @@ doc:liste de nombres entiers entre 1 et 6 représentant les possibilité de plac
 value:
 name:partieId
 type:String
-doc:NoDoc
+doc:L’identifiant de la partie fournie à la création de la partie.
