@@ -121,8 +121,15 @@ class PtToolTest {
         assertEquals(expected, PtTool.convertParamToString(integers, "List<Integer>"));
         assertNotEquals("az", PtTool.convertParamToString(integers, "List<Integer>"));
 
-        assertNull(PtTool.convertParamToString(integers, Character.class.getSimpleName()));
-        assertNull(PtTool.convertParamToString(integers, "Oui"));
+        List<String> strings = new ArrayList<>();
+        strings.add("5");
+        strings.add("Lol");
+        expected = "5,Lol";
+        assertEquals(expected, PtTool.convertParamToString(strings, "List<String>"));
+        assertNotEquals("az", PtTool.convertParamToString(strings, "List<String>"));
+
+        assertNull(PtTool.convertParamToString(strings, Character.class.getSimpleName()));
+        assertNull(PtTool.convertParamToString(strings, "Oui"));
     }
 
     @Test
@@ -247,6 +254,13 @@ class PtToolTest {
         expected = "5,0";
         assertEquals(expected, PtTool.convertParamToString(integers, "List<Integer>"));
         assertNotEquals("az", PtTool.convertParamToString(integers, "List<Integer>"));
+
+        List<String> strings = new ArrayList<>();
+        strings.add("Euh");
+        strings.add("Oui");
+        expected = "Euh,Oui";
+        assertEquals(expected, PtTool.convertParamToString(strings, "List<String>"));
+        assertNotEquals("az", PtTool.convertParamToString(strings, "List<String>"));
 
         assertNull(PtTool.convertStringToObject("Lol", Character.class.getSimpleName()));
         assertNull(PtTool.convertStringToObject(expected, "Oui"));
