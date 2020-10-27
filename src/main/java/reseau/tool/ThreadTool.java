@@ -54,4 +54,29 @@ public abstract class ThreadTool {
 
         return p;
     }
+
+    /**
+     * Envoie une requete TCP de facon asynchrone
+     *
+     * @param ip      l'ip de destination serveur
+     * @param port    le port destination serveur
+     * @param message le message a envoyé
+     * @param ip1      l'ip du serveur TCP client
+     * @param port1    port du serveur TCP client
+     * @return le message de retour
+     */
+    public static String taskPacketTcp(InetAddress ip, int port, String message, InetAddress ip1, int port1) {
+        ExecutorService executorService = Executors.newSingleThreadExecutor();
+        Callable<String> callable = () -> TcpClientSocket.connect(ip, port, message, ip1, port1);
+        Future<String> future = executorService.submit(callable);
+        String p = "";
+        try {
+            p = future.get();
+        } catch (InterruptedException | ExecutionException e) {
+            e.printStackTrace();
+        }
+        executorService.shutdown();
+
+        return p;
+    }
 }
