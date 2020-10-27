@@ -23,6 +23,10 @@ class PacketToolTest {
         expected = new ArrayList<>();
         assertNotEquals(expected, PacketTool.strToListEnum(message, Status.class));
 
+        List<Status> expected1 = new ArrayList<>();
+        message = " ";
+        assertEquals(expected1, PacketTool.strToListEnum(message, Status.class));
+
         String message1 = "Annule,az";
         assertThrows(IllegalArgumentException.class, () -> PacketTool.strToListEnum(message1, Status.class));
     }
@@ -33,14 +37,22 @@ class PacketToolTest {
         expected.add(0);
         expected.add(1);
         expected.add(2);
-        expected.add(-3);
-        String message = "0,1,2,-3";
+        expected.add(3);
+        String message = "0,1,2,3";
         assertEquals(expected, PacketTool.strToListInteger(message));
         expected = new ArrayList<>();
         assertNotEquals(expected, PacketTool.strToListInteger(message));
 
+        List<Integer> expected1 = new ArrayList<>();
+         message = " ";
+        assertEquals(expected1, PacketTool.strToListInteger(message));
+
         String message1 = "Annule,az";
         assertThrows(IllegalArgumentException.class, () -> PacketTool.strToListInteger(message1));
+
+        assertThrows(IllegalArgumentException.class, () -> PacketTool.strToListInteger("-1,-2"));
+        assertThrows(IllegalArgumentException.class, () -> PacketTool.strToListInteger("-1,0"));
+        assertThrows(IllegalArgumentException.class, () -> PacketTool.strToListInteger("0,-1"));
     }
 
     @Test
@@ -53,18 +65,30 @@ class PacketToolTest {
         assertEquals(expected, PacketTool.listEnumToStr(actual));
         expected = "";
         assertNotEquals(expected, PacketTool.listEnumToStr(actual));
+
+        List<Status> actual1 = new ArrayList<>();
+        String expected1 = " ";
+        assertEquals(expected1, PacketTool.listEnumToStr(actual1));
     }
 
     @Test
     void listStrToInteger() {
         List<Integer> actual = new ArrayList<>();
-        actual.add(-9);
+        actual.add(9);
         actual.add(5);
         actual.add(1);
-        String expected = "-9,5,1";
+        String expected = "9,5,1";
         assertEquals(expected, PacketTool.listStrToInteger(actual));
         expected = "";
         assertNotEquals(expected, PacketTool.listStrToInteger(actual));
+
+        List<Integer> actual1 = new ArrayList<>();
+        String expected1 = " ";
+        assertEquals(expected1, PacketTool.listStrToInteger(actual1));
+
+        List<Integer> actual2 = new ArrayList<>();
+        actual2.add(-9);
+        assertThrows(IllegalArgumentException.class, () -> PacketTool.listStrToInteger(actual2));
     }
 
     @Test
@@ -85,6 +109,10 @@ class PacketToolTest {
         actual.put(PionType.FILETTE, filette);
         String expected = "BLONDE:5;BRUTE:2;TRUAND:3,5;FILETTE:-1";
         //Assertions.assertEquals(expected, PacketTool.subListToStr(actual));
+
+        HashMap<PionType, List<Integer>> actual1 = new HashMap<>();
+        String expected1 = " ";
+        assertEquals(expected1, PacketTool.subListToStr(actual1));
 
         expected = "BLONDE:5;BRUTE:2;TRUAND:3,5";
         assertNotEquals(expected, PacketTool.subListToStr(actual));
@@ -111,6 +139,10 @@ class PacketToolTest {
         expected.put(PionType.FILETTE, filette);
         String message = "BLONDE:5;BRUTE:2;TRUAND:3,5;FILETTE:-1";
         assertEquals(expected, PacketTool.strToSubList(message));
+
+        HashMap<PionType, List<Integer>> expected1 = new HashMap<>();
+        String message2 = " ";
+        assertEquals(expected1, PacketTool.strToSubList(message2));
 
         message = "BLONDE:5;BRUTE:2;TRUAND:3,5";
         assertNotEquals(expected, PacketTool.strToSubList(message));

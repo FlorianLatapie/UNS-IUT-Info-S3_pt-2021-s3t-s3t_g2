@@ -25,6 +25,9 @@ public abstract class PacketTool {
      * @return une chaine de caractere en liste
      */
     public static <T extends Enum<T>> List<T> strToListEnum(String list, Class<T> enumType) {
+        if (list.equals(" "))
+            return new ArrayList<>();
+
         String[] tmp = list.split(",");
         List<T> temp = new ArrayList<>();
         for (String t : tmp)
@@ -38,12 +41,21 @@ public abstract class PacketTool {
      *
      * @param list liste a convertir
      * @return une chaine de caractere en liste d'entier
+     * @throws IllegalArgumentException si un entier est inferieur a 0
      */
     public static List<Integer> strToListInteger(String list) {
         String[] tmp = list.split(",");
+
+        if (list.equals(" "))
+            return new ArrayList<>();
+
         List<Integer> temp = new ArrayList<>();
-        for (String t : tmp)
-            temp.add(Integer.parseInt(t));
+        for (String t : tmp) {
+            int tmp1 = Integer.parseInt(t);
+            if (tmp1 < 0)
+                throw new IllegalArgumentException("Ne peut pas etre inferieur a 0");
+            temp.add(tmp1);
+        }
 
         return temp;
     }
@@ -59,6 +71,10 @@ public abstract class PacketTool {
         StringBuilder tmp = new StringBuilder();
         @SuppressWarnings("unchecked")
         List<T> list = (List<T>) l;
+
+        if (list.isEmpty())
+            return " ";
+
         for (T t : list)
             tmp.append(t).append(",");
 
@@ -70,11 +86,19 @@ public abstract class PacketTool {
      *
      * @param list list liste a convertir
      * @return une liste d'entier en chaine de caractere
+     * @throws IllegalArgumentException si un entier est inferieur a 0
      */
     public static String listStrToInteger(List<Integer> list) {
+        if (list.isEmpty())
+            return " ";
+
         StringBuilder tmp = new StringBuilder();
-        for (int t : list)
+
+        for (int t : list) {
+            if (t < 0)
+                throw new IllegalArgumentException("Ne peut pas etre inferieur a 0");
             tmp.append(t).append(",");
+        }
 
         return tmp.substring(0, tmp.length() - 1);
     }
@@ -86,6 +110,9 @@ public abstract class PacketTool {
      * @return un hashmap en chaine de caractere
      */
     public static String subListToStr(Map<PionType, List<Integer>> list) {
+        if (list.isEmpty())
+            return " ";
+
         StringBuilder tmp = new StringBuilder();
         for (Map.Entry<PionType, List<Integer>> pion : list.entrySet()) {
             if (pion.getValue().isEmpty())
@@ -108,6 +135,9 @@ public abstract class PacketTool {
      * @return une chaine de caractere en hashmap
      */
     public static HashMap<PionType, List<Integer>> strToSubList(String message) {
+        if (message.equals(" "))
+            return new HashMap<>();
+
         HashMap<PionType, List<Integer>> sublist = new HashMap<>();
         String[] sublist1 = message.split(";");
         for (String sl : sublist1) {

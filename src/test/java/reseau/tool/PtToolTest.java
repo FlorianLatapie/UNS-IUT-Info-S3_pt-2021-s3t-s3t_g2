@@ -115,9 +115,9 @@ class PtToolTest {
         assertNotEquals("az", PtTool.convertParamToString(pionCouleurs, "List<PionCouleur>"));
 
         List<Integer> integers = new ArrayList<>();
-        integers.add(-5);
+        integers.add(5);
         integers.add(0);
-        expected = "-5,0";
+        expected = "5,0";
         assertEquals(expected, PtTool.convertParamToString(integers, "List<Integer>"));
         assertNotEquals("az", PtTool.convertParamToString(integers, "List<Integer>"));
 
@@ -242,9 +242,9 @@ class PtToolTest {
         assertNotEquals(pionCouleurs, PtTool.convertStringToObject("azza", "List<PionCouleur>"));
 
         List<Integer> integers = new ArrayList<>();
-        integers.add(-5);
+        integers.add(5);
         integers.add(0);
-        expected = "-5,0";
+        expected = "5,0";
         assertEquals(expected, PtTool.convertParamToString(integers, "List<Integer>"));
         assertNotEquals("az", PtTool.convertParamToString(integers, "List<Integer>"));
 
