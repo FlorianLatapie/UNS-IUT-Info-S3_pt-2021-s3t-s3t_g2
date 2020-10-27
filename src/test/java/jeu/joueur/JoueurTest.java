@@ -7,6 +7,7 @@ import org.junit.jupiter.api.Test;
 import jeu.Joueur;
 import jeu.LaBlonde;
 import jeu.Personnage;
+import reseau.type.Couleur;
 
 /**
  * Class JoueurTest
@@ -18,9 +19,9 @@ import jeu.Personnage;
  */
 
 class JoueurTest {
-	Color c = Color.BLUE;
+	Couleur c = Couleur.BLEU;
 	String nom = "Joueur1";
-	Joueur j = new Joueur(c, nom);
+	Joueur j = new Joueur("P0", "127.0.0.1", c,1024, nom);
 	LaBlonde b = new LaBlonde(j);
 
 	/**
@@ -52,9 +53,9 @@ class JoueurTest {
 		 * Modifications de la couleur
 		 */
 		assertSame(j.getCouleur(), c);
-		j.setCouleur(Color.RED);
+		j.setCouleur(Couleur.ROUGE);
 		assertNotSame(j.getCouleur(), c);
-		assertSame(j.getCouleur(), Color.RED);
+			assertSame(j.getCouleur(), Couleur.ROUGE);
 
 		/**
 		 * Modification du statut enVie

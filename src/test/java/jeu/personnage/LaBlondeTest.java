@@ -8,13 +8,14 @@ import org.junit.jupiter.api.Test;
 
 import jeu.Joueur;
 import jeu.LaBlonde;
+import reseau.type.Couleur;
 
 class LaBlondeTest {
 	@Test
 	void test() {
-		Color c = Color.BLUE;
+		Couleur c = Couleur.BLEU;
 		String nom = "Joueur1";
-		Joueur j1 = new Joueur(c, nom);
+		Joueur j1 = new Joueur("P0", "127.0.0.1", c,1050, nom);
 		LaBlonde p1 = new LaBlonde(j1);
 
 		assertEquals(7, p1.getPoint());

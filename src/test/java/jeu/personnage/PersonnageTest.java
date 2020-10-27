@@ -7,13 +7,14 @@ import java.awt.Color;
 import org.junit.jupiter.api.Test;
 
 import jeu.*;
+import reseau.type.Couleur;
 
 class PersonnageTest {
     @Test
     void test_test_Personnage() {
-        Color c = Color.BLUE;
+        Couleur c = Couleur.BLEU;
         String nom = "Joueur1";
-        Joueur j1 = new Joueur(c, nom);
+        Joueur j1 = new Joueur("P0", "127.0.0.1", c,1030, nom);
         LaBlonde p1 = new LaBlonde(j1);
 
 
@@ -31,7 +32,7 @@ class PersonnageTest {
 
         assertEquals(p1.getMonLieu(), newLieu);
 
-        Joueur j2 = new Joueur(c, nom);
+        Joueur j2 = new Joueur("P1", "127.0.0.1", c,1030, nom);
         assertEquals(p1.getJoueur(), j1);
 
         assertEquals(TypePersonnage.BLONDE, p1.getType());
