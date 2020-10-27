@@ -145,7 +145,7 @@ public class AccueilPane extends StackPane {
 
 		// image fond
 		ImageView imgFond = new ImageView(
-				"https://storage.needpix.com/rsynced_images/halloween-cemetery-1505893112JQ0.jpg");
+				DataControl.PLATEAU);
 
 		// carre central qui contient tous les éléments (boutons et titre)
 		VBox centreMenu = new VBox();
@@ -171,6 +171,7 @@ public class AccueilPane extends StackPane {
 		fond.getChildren().add(imgFond);
 
 		stackPane.getChildren().addAll(fond, centreMenu);
+		stackPane.setBackground(new Background(new BackgroundFill(Color.BLACK,CornerRadii.EMPTY,null)));
 
 		this.getChildren().add(stackPane);
 		sControl.registerNode(paneName, this);

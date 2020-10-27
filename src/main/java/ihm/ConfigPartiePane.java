@@ -42,7 +42,7 @@ public class ConfigPartiePane extends StackPane {
 	private ScreenControl sControl = null;
 	private final ApplicationPane paneName = ApplicationPane.CONFIG;
 	// définition des variable pour la suite du pane
-	private int tailleCarreCentral = 600; // l'interface est sur un stackPane qui peut tourner avec des crans de 90
+	private int tailleCarreCentral = 800; // l'interface est sur un stackPane qui peut tourner avec des crans de 90
 											// degrés
 	private int hBouton = 75;
 	private int lBouton = 150;
@@ -56,12 +56,14 @@ public class ConfigPartiePane extends StackPane {
 	private GaussianBlur flou = new GaussianBlur(30);
 
 	private Font policeNom = Font.font("Segoe UI", 17);
-	private int hauteurElemtents = 35;
-	private int spacing = 20;
+	private int hauteurElemtents = 60;
+	private int largeurTF = 250;
+	private int largeurComboBox= 250;
+	private int spacing = 30;
 	private CornerRadii coinfb = new CornerRadii(5.0);
 	private Background fondBlanc = new Background(new BackgroundFill(Color.WHITE, coinfb, null));
-	
-	private Insets botPadding = new Insets (0,10,0,10);
+
+	private Insets botPadding = new Insets(0, 10, 0, 10);
 
 	public ConfigPartiePane(ScreenControl sc) {
 
@@ -69,15 +71,15 @@ public class ConfigPartiePane extends StackPane {
 		stackPane.setAlignment(Pos.CENTER);
 
 		// titre
-		Label titre1 = new Label("Configuration de\nla partie");
+		Label titre1 = new Label("Configuration de \n\tla partie");
 		titre1.setFont(Font.font("Segoe UI", FontWeight.BOLD, 80));
 		titre1.setTextFill(Color.BLACK);
 
 		VBox titre = new VBox(titre1);
 		titre.setAlignment(Pos.CENTER);
 		titre.setBackground(new Background(new BackgroundFill(Color.RED, coin, null)));
-		titre.setPrefWidth(800);
-		titre.setMinWidth(800);
+		titre.setPrefWidth(730);
+		titre.setMinWidth(730);
 
 		// boutons
 		Button bJouer = new Button("JOUER");
@@ -120,10 +122,7 @@ public class ConfigPartiePane extends StackPane {
 		VBox vJoueurs = new VBox();
 		// vJoueurs.setAlignment(Pos.CENTER);
 
-		Label titrej = new Label("Choisissez votre nom et votre couleur");
-		titrej.setFont(Font.font("Segoe UI", FontWeight.BOLD, 30));
-		titrej.setBackground(fondBlanc);
-		titrej.setTextFill(Color.BLACK);
+		
 
 		// --box joueur--
 
@@ -132,10 +131,13 @@ public class ConfigPartiePane extends StackPane {
 		TextField nom1 = new TextField();
 		nom1.setText("Joueur 1");
 		nom1.setFont(policeNom);
+		nom1.setPrefSize(largeurTF, hauteurElemtents);
+		nom1.setMinHeight(hauteurElemtents);
 		ComboBox<String> couleur1 = new ComboBox<String>();
 		couleur1.setMinHeight(hauteurElemtents);
+		couleur1.setPrefSize(largeurComboBox, hauteurElemtents);
 		couleur1.getItems().addAll(DataControl.couleursJoueur);
-		
+
 		HBox hBot1 = new HBox();
 		Label lBot1 = new Label("Bot ");
 		lBot1.setFont(policeNom);
@@ -143,12 +145,11 @@ public class ConfigPartiePane extends StackPane {
 		CheckBox estBot1 = new CheckBox();
 		estBot1.setMinHeight(hauteurElemtents);
 		estBot1.setSelected(false);
-		
+
 		hBot1.setBackground(fondBlanc);
 		hBot1.setSpacing(spacing);
 		hBot1.setPadding(botPadding);
-		hBot1.getChildren().addAll(lBot1,estBot1);
-		
+		hBot1.getChildren().addAll(lBot1, estBot1);
 
 		j1.setAlignment(Pos.CENTER);
 		j1.setSpacing(spacing);
@@ -162,10 +163,13 @@ public class ConfigPartiePane extends StackPane {
 		TextField nom2 = new TextField();
 		nom2.setText("Joueur 2");
 		nom2.setFont(policeNom);
+		nom2.setPrefSize(largeurTF, hauteurElemtents);
+		nom2.setMinHeight(hauteurElemtents);
 		ComboBox<String> couleur2 = new ComboBox<String>();
+		couleur2.setPrefSize(largeurComboBox, hauteurElemtents);
 		couleur2.setMinHeight(hauteurElemtents);
 		couleur2.getItems().addAll(DataControl.couleursJoueur);
-		
+
 		HBox hBot2 = new HBox();
 		Label lBot2 = new Label("Bot ");
 		lBot2.setFont(policeNom);
@@ -173,29 +177,31 @@ public class ConfigPartiePane extends StackPane {
 		CheckBox estBot2 = new CheckBox();
 		estBot2.setMinHeight(hauteurElemtents);
 		estBot2.setSelected(false);
-		
+
 		hBot2.setBackground(fondBlanc);
 		hBot2.setSpacing(spacing);
 		hBot2.setPadding(botPadding);
-		hBot2.getChildren().addAll(lBot2,estBot2);
-		
+		hBot2.getChildren().addAll(lBot2, estBot2);
 
 		j2.setAlignment(Pos.CENTER);
 		j2.setSpacing(spacing);
 		j2.getChildren().addAll(nom2, couleur2, hBot2);
 		j2.setDisable(false);
-		
+
 		///
-		
+
 		HBox j3 = new HBox();
 
 		TextField nom3 = new TextField();
 		nom3.setText("Joueur 3");
 		nom3.setFont(policeNom);
+		nom3.setPrefSize(largeurTF, hauteurElemtents);
+		nom3.setMinHeight(hauteurElemtents);
 		ComboBox<String> couleur3 = new ComboBox<String>();
 		couleur3.setMinHeight(hauteurElemtents);
+		couleur3.setPrefSize(largeurComboBox, hauteurElemtents);
 		couleur3.getItems().addAll(DataControl.couleursJoueur);
-		
+
 		HBox hBot3 = new HBox();
 		Label lBot3 = new Label("Bot ");
 		lBot3.setFont(policeNom);
@@ -203,29 +209,31 @@ public class ConfigPartiePane extends StackPane {
 		CheckBox estBot3 = new CheckBox();
 		estBot3.setMinHeight(hauteurElemtents);
 		estBot3.setSelected(false);
-		
+
 		hBot3.setBackground(fondBlanc);
 		hBot3.setSpacing(spacing);
 		hBot3.setPadding(botPadding);
-		hBot3.getChildren().addAll(lBot3,estBot3);
-		
+		hBot3.getChildren().addAll(lBot3, estBot3);
 
 		j3.setAlignment(Pos.CENTER);
 		j3.setSpacing(spacing);
 		j3.getChildren().addAll(nom3, couleur3, hBot3);
 		j3.setDisable(false);
-		
+
 		///
-		
+
 		HBox j4 = new HBox();
 
 		TextField nom4 = new TextField();
 		nom4.setText("Joueur 4");
 		nom4.setFont(policeNom);
+		nom4.setPrefSize(largeurTF, hauteurElemtents);
+		nom4.setMinHeight(hauteurElemtents);
 		ComboBox<String> couleur4 = new ComboBox<String>();
 		couleur4.setMinHeight(hauteurElemtents);
+		couleur4.setPrefSize(largeurComboBox, hauteurElemtents);
 		couleur4.getItems().addAll(DataControl.couleursJoueur);
-		
+
 		HBox hBot4 = new HBox();
 		Label lBot4 = new Label("Bot ");
 		lBot4.setFont(policeNom);
@@ -233,31 +241,31 @@ public class ConfigPartiePane extends StackPane {
 		CheckBox estBot4 = new CheckBox();
 		estBot4.setMinHeight(hauteurElemtents);
 		estBot4.setSelected(false);
-		
+
 		hBot4.setBackground(fondBlanc);
 		hBot4.setSpacing(spacing);
 		hBot4.setPadding(botPadding);
-		hBot4.getChildren().addAll(lBot4,estBot4);
-		
+		hBot4.getChildren().addAll(lBot4, estBot4);
 
 		j4.setAlignment(Pos.CENTER);
 		j4.setSpacing(spacing);
 		j4.getChildren().addAll(nom4, couleur4, hBot4);
 		j4.setDisable(false);
-		
-		
+
 		///
-		
-		
+
 		HBox j5 = new HBox();
 
 		TextField nom5 = new TextField();
 		nom5.setText("Joueur 5");
 		nom5.setFont(policeNom);
+		nom5.setPrefSize(largeurTF, hauteurElemtents);
+		nom5.setMinHeight(hauteurElemtents);
 		ComboBox<String> couleur5 = new ComboBox<String>();
 		couleur5.setMinHeight(hauteurElemtents);
+		couleur5.setPrefSize(largeurComboBox, hauteurElemtents);
 		couleur5.getItems().addAll(DataControl.couleursJoueur);
-		
+
 		HBox hBot5 = new HBox();
 		Label lBot5 = new Label("Bot ");
 		lBot5.setFont(policeNom);
@@ -265,31 +273,31 @@ public class ConfigPartiePane extends StackPane {
 		CheckBox estBot5 = new CheckBox();
 		estBot5.setMinHeight(hauteurElemtents);
 		estBot5.setSelected(false);
-		
+
 		hBot5.setBackground(fondBlanc);
 		hBot5.setSpacing(spacing);
 		hBot5.setPadding(botPadding);
-		hBot5.getChildren().addAll(lBot5,estBot5);
-		
+		hBot5.getChildren().addAll(lBot5, estBot5);
 
 		j5.setAlignment(Pos.CENTER);
 		j5.setSpacing(spacing);
 		j5.getChildren().addAll(nom5, couleur5, hBot5);
 		j5.setDisable(false);
-		
-		
+
 		///
-		
-		
+
 		HBox j6 = new HBox();
 
 		TextField nom6 = new TextField();
 		nom6.setText("Joueur 6");
 		nom6.setFont(policeNom);
+		nom6.setPrefSize(largeurTF, hauteurElemtents);
+		nom6.setMinHeight(hauteurElemtents);
 		ComboBox<String> couleur6 = new ComboBox<String>();
 		couleur6.setMinHeight(hauteurElemtents);
+		couleur6.setPrefSize(largeurComboBox, hauteurElemtents);
 		couleur6.getItems().addAll(DataControl.couleursJoueur);
-		
+
 		HBox hBot6 = new HBox();
 		Label lBot6 = new Label("Bot ");
 		lBot6.setFont(policeNom);
@@ -297,12 +305,11 @@ public class ConfigPartiePane extends StackPane {
 		CheckBox estBot6 = new CheckBox();
 		estBot6.setMinHeight(hauteurElemtents);
 		estBot6.setSelected(false);
-		
+
 		hBot6.setBackground(fondBlanc);
 		hBot6.setSpacing(spacing);
 		hBot6.setPadding(botPadding);
-		hBot6.getChildren().addAll(lBot6,estBot6);
-		
+		hBot6.getChildren().addAll(lBot6, estBot6);
 
 		j6.setAlignment(Pos.CENTER);
 		j6.setSpacing(spacing);
@@ -311,8 +318,8 @@ public class ConfigPartiePane extends StackPane {
 
 		///
 
-		vJoueurs.setSpacing(10);
-		vJoueurs.getChildren().addAll(titrej, j1, j2, j3, j4, j5, j6);
+		vJoueurs.setSpacing(14);
+		vJoueurs.getChildren().addAll(j1, j2, j3, j4, j5, j6);
 		// vJoueurs.setBackground(new Background(new
 		// BackgroundFill(Color.BLUE,CornerRadii.EMPTY,null)));
 
@@ -321,12 +328,11 @@ public class ConfigPartiePane extends StackPane {
 		vbCenter.getChildren().addAll(vJoueurs);
 
 		// image fond
-		ImageView imgFond = new ImageView(
-				"https://storage.needpix.com/rsynced_images/halloween-cemetery-1505893112JQ0.jpg");
-
+		ImageView imgFond = new ImageView(DataControl.PLATEAU);
 		// carre central qui contient tous les éléments (boutons et titre)
 		BorderPane centreMenu = new BorderPane();
-		//centreMenu.setBackground(new Background(new BackgroundFill(Color.LIGHTGREY,CornerRadii.EMPTY,null)));
+		// centreMenu.setBackground(new Background(new
+		// BackgroundFill(Color.LIGHTGREY,CornerRadii.EMPTY,null)));
 		centreMenu.setMinSize(tailleCarreCentral, tailleCarreCentral);
 		centreMenu.setPrefSize(tailleCarreCentral, tailleCarreCentral);
 		centreMenu.setMaxSize(tailleCarreCentral, tailleCarreCentral);
@@ -350,6 +356,7 @@ public class ConfigPartiePane extends StackPane {
 		fond.getChildren().add(imgFond);
 
 		stackPane.getChildren().addAll(fond, centreMenu);
+		stackPane.setBackground(new Background(new BackgroundFill(Color.BLACK,CornerRadii.EMPTY,null)));
 
 		this.getChildren().add(stackPane);
 		sControl.registerNode(paneName, this);

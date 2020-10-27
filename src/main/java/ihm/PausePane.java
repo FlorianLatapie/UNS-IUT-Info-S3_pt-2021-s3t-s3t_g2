@@ -30,6 +30,8 @@ public class PausePane extends StackPane {
 	private ScreenControl sControl = null;
 	private StackPane stackPane = new StackPane();
 	private GaussianBlur flou = new GaussianBlur(30);
+	private String styleBoutons = " -fx-background-color:#000000; -fx-background-radius: 15px; -fx-text-fill: #ffffff";
+	private String styleBoutonsSouris = "-fx-background-color:#ff0000;  -fx-text-fill:#000000; -fx-background-radius: 15px;";
 	private final ApplicationPane paneName = ApplicationPane.PAUSE;
 
 	public PausePane(ScreenControl sc) {
@@ -40,13 +42,11 @@ public class PausePane extends StackPane {
 		
 		Rectangle rect = new Rectangle();
 		rect.setStroke(Color.BLACK);
-		rect.setFill(Color.LIGHTGRAY);
 		rect.setWidth(700);
 		rect.setHeight(600);
 		rect.setX(100);
-		rect.setY(100);
-		rect.setOpacity(.8);
-		
+		rect.setY(100);		
+		rect.setOpacity(.6);
 
 		VBox vbFond = new VBox();
 		vbFond.setAlignment(Pos.CENTER);
@@ -65,42 +65,62 @@ public class PausePane extends StackPane {
 
 		VBox vbBoutons = new VBox();
 		vbBoutons.setAlignment(Pos.CENTER);
-
 		Label titre = new Label("Pause");
+		titre.setStyle("-fx-text-fill: #ff0000");
 		titre.setFont(Font.font("Arial", FontWeight.BOLD, 75));
 		vbTitre.getChildren().add(titre);
 		vbTitre.setMargin(vbBoutons, new Insets(70));
-
-		Label fr = new Label("Français");
-		Label en = new Label("English");
-
-		fr.setFont(Font.font("Arial", 20));
-
-		fr.setAlignment(Pos.CENTER);
-
-		en.setFont(Font.font("Arial", 20));
-		en.setAlignment(Pos.CENTER);
 
 		Button bOption = new Button("Options");
 		bOption.setFont(Font.font("Arial", FontWeight.BOLD, 30));
 		bOption.setAlignment(Pos.CENTER);
 		bOption.setPrefSize(500, 60);
+		bOption.setStyle(styleBoutons);
+		bOption.setOnAction(EventHandler -> sc.setPaneOnTop(ApplicationPane.OPTION));
+		
+		bOption.setOnMouseEntered(event -> {
+			bOption.setStyle(styleBoutonsSouris);
+		});
+		bOption.setOnMouseExited(event -> {
+			bOption.setStyle(styleBoutons);
+		});
 
 		Button bRegles = new Button("Règles du jeu");
 		bRegles.setFont(Font.font("Arial", FontWeight.BOLD, 30));
 		bRegles.setAlignment(Pos.CENTER);
 		bRegles.setPrefSize(500, 60);
+		bRegles.setStyle(styleBoutons);
+		bRegles.setOnMouseEntered(event -> {
+			bRegles.setStyle(styleBoutonsSouris);
+		});
+		bRegles.setOnMouseExited(event -> {
+			bRegles.setStyle(styleBoutons);
+		});
 
 		Button bRecommencer = new Button("Recommencer");
 		bRecommencer.setFont(Font.font("Arial", FontWeight.BOLD, 30));
 		bRecommencer.setAlignment(Pos.CENTER);
 		bRecommencer.setPrefSize(500, 60);
+		bRecommencer.setStyle(styleBoutons);
+		bRecommencer.setOnMouseEntered(event -> {
+			bRecommencer.setStyle(styleBoutonsSouris);
+		});
+		bRecommencer.setOnMouseExited(event -> {
+			bRecommencer.setStyle(styleBoutons);
+		});
 
 		Button bQuitter = new Button("Quitter");
 		bQuitter.setFont(Font.font("Arial", FontWeight.BOLD, 30));
 		bQuitter.setAlignment(Pos.CENTER);
 		bQuitter.setPrefSize(500, 60);
+		bQuitter.setStyle(styleBoutons);
 		bQuitter.setOnAction(actionEvent -> Platform.exit());
+		bQuitter.setOnMouseEntered(event -> {
+			bQuitter.setStyle(styleBoutonsSouris);
+		});
+		bQuitter.setOnMouseExited(event -> {
+			bQuitter.setStyle(styleBoutons);
+		});
 		
 		bQuitter.setOnAction(event -> {
 			boolean resultat = ConfirmationPane.afficher("Quitter le jeu",
@@ -113,6 +133,7 @@ public class PausePane extends StackPane {
 		bRetour.setFont(Font.font("Arial", FontWeight.BOLD, 30));
 		bRetour.setAlignment(Pos.CENTER);
 		bRetour.setPrefSize(500, 60);
+		bRetour.setStyle(styleBoutons);
 		bRetour.setOnAction(EventHandler -> sc.setPaneOnTop(ApplicationPane.PLATEAU));
 
 		vbBoutons.getChildren().add(bOption);
@@ -125,10 +146,11 @@ public class PausePane extends StackPane {
 
 		vbCentral.getChildren().addAll(vbTitre, vbBoutons);
 
-		ImageView img = new ImageView("http://tof.canardpc.com/view/3bd6756b-7865-4945-b524-426f6cd21e6c.jpg");
+		ImageView img = new ImageView(DataControl.PLATEAU);
 		vbFond.getChildren().add(img);
 		
 		stackPane.getChildren().addAll(vbFond, rect, vbCentral);
+		stackPane.setBackground(new Background(new BackgroundFill(Color.BLACK,CornerRadii.EMPTY,null)));
 
 		this.getChildren().add(stackPane);
 		sControl.registerNode(paneName, this);
