@@ -42,7 +42,7 @@ public class PacketHandlerTcp {
                 return dcp(packet, message, socket);
             default:
                 throw new IllegalStateException(
-                        MessageFormat.format("[UDP] Il n''y a pas de traitement possible pour {0}", packet.getKey()));
+                        MessageFormat.format("[TCP] Il n''y a pas de traitement possible pour {0}", packet.getKey()));
         }
     }
 
@@ -50,7 +50,8 @@ public class PacketHandlerTcp {
 
         switch (core.getStatus()) {
             case ATTENTE:
-                String id = core.ajouterJoueur(socket.getInetAddress().getHostAddress(), socket.getLocalPort(), (String) packet.getValue(message, 1));
+                System.out.println( socket.getLocalPort());
+                String id = core.ajouterJoueur(socket.getInetAddress(), socket.getPort(), (String) packet.getValue(message, 1));
                 return nwm.getPacketsTcp().get("ACP").build(core.getPartieId(), id);
             case ANNULEE:
             case COMPLETE:

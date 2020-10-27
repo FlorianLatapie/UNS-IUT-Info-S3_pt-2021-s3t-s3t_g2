@@ -87,13 +87,13 @@ public class ControleurJeu {
                     e.printStackTrace();
                 }
             }
-            System.out.println("azaz");
+            status = Status.COMPLETE;
+
             jeu = new Jeu(joueurs);
 
-            status = Status.COMPLETE;
             //TODO UN OU PLUSIEURS LIEUX FERME
             //TODO 3 ou 4 PION
-            m = nwm.getPacketsTcp().get("IP").build(getJoueursListe(),getCouleurJoueursListe(), 0,3,partieId);
+            m = nwm.getPacketsUdp().get("IP").build(getJoueursListe(), getCouleurJoueursListe(), 0, 3, partieId);
             nwm.getUdpSocket().sendPacket(m);
 
             //TODO ATTENDRE TOUS LES JOUEURS
@@ -123,7 +123,7 @@ public class ControleurJeu {
         System.out.println(nwm.getTcpPort());
     }
 
-    public String ajouterJoueur(String ip, int port, String nom) {
+    public String ajouterJoueur(InetAddress ip, int port, String nom) {
         Couleur couleur = couleursRestante.get(rd.nextInt(couleursRestante.size()));
         Joueur joueur = new Joueur(getNewJoueurId(), ip, couleur, port, nom);
         joueurs.add(joueur);
@@ -131,8 +131,8 @@ public class ControleurJeu {
         return joueur.getJoueurId();
     }
 
-    private String getNewJoueurId() {
-        String tmp = "J" + nextJoueurId;
+    private int getNewJoueurId() {
+        int tmp = nextJoueurId;
         nextJoueurId++;
         return tmp;
     }
@@ -140,8 +140,8 @@ public class ControleurJeu {
     private List<Integer> getJoueursListe() {
         //TODO BONNE ORDRE ? VIGILE
         List<Integer> indexs = new ArrayList<>();
-        for (int i = 0; i < joueurs.size(); i++)
-            indexs.add(i + 1);
+        for (Joueur j : joueurs)
+            indexs.add(j.getJoueurIdint());
 
         return indexs;
     }
@@ -590,92 +590,79 @@ public class ControleurJeu {
     }
 
     private void placementPersonnage() {
-        for (int a = 0; a < jeu.getJoueurs().get(0).getPersonnages().size(); a++) {
-            for (int i = 0; i < jeu.getJoueurs().size(); i++) {
-                System.out.println(jeu.afficheJeu());
+        for (int i = 0; i < jeu.getJoueurs().size(); i++) {
+            for (int n = 0; n < jeu.getJoueurs().get(i).getPersonnages().size(); n++) {
+                //TODO PIIJ nbPionPlace que du joueur ?
+                String message = nwm.getPacketsTcp().get("PIIJ").build(nbPlace(), persoPlace(jeu.getJoueurs().get(i)), partieId);
+                ThreadTool.taskPacketTcp(jeu.getJoueurs().get(i).getIp(), jeu.getJoueurs().get(i).getPort(), message);
+
+                out.println(jeu.afficheJeu());
                 out.println();
                 out.println("Lancement des dés.");
-                int x = new Random().nextInt(6) + 1;
-                int y = new Random().nextInt(6) + 1;
+                int x = rd.nextInt(6) + 1;
+                int y = rd.nextInt(6) + 1;
                 out.println("Résultat du lancement :");
-                int destEntre;
-                int persEntre;
+                List<Integer> des = new ArrayList<>();
+                des.add(x);
+                des.add(y);
+
+                message = nwm.getPacketsTcp().get("PIRD").build(des, placementDest(x, y, i), partieId);
+                String rep = ThreadTool.taskPacketTcp(jeu.getJoueurs().get(i).getIp(), jeu.getJoueurs().get(i).getPort(), message);
                 //TODO
-                destEntre = placementDest(x, y, i);
-                persEntre = placementPerso(i, destEntre);
+
+                int destEntre = (int) nwm.getPacketsTcp().get("PICD").getValue(rep, 1);
+                int persEntre = placementPerso(i, destEntre);
                 jeu.placePerso(jeu.getJoueurs().get(i), persEntre, destEntre);
                 out.println(RETOUR_LIGNE);
             }
         }
     }
 
-    private int placementDest(int x, int y, int i) {
-        int destEntre;
-        if (jeu.getLieux().get(x).isFull() && jeu.getLieux().get(y).isFull()) {
-            //TODO CHOIX AU JOUEUR OU C PAS FULL SAUF 1 POSSOBILITE
-            out.println(MessageFormat.format("{0}\t{1}: Complet", x, jeu.getLieux().get(x)));
-            out.println(MessageFormat.format("{0}\t{1}: Complet", y, jeu.getLieux().get(y)));
-            ArrayList<Integer> pos = new ArrayList<>();
-            out.println();
-            out.println(MessageFormat.format("Joueur {0} choisit un numéro:", i));
-            for (int b = 1; b < 7; b++) {
-                if (!this.jeu.getLieux().get(b).isFull() && this.jeu.getLieux().get(b).isOuvert()) {
-                    pos.add(b);
-                    out.println(b + "\t" + jeu.getLieux().get(b) + ": Pas Complet");
-                }
-            }
-            if (pos.size() == 1) {
+    private int nbPlace() {
+        int tmp = 0;
+        for (Lieu l : jeu.getLieux().values())
+            for (Personnage ignored : l.getPersonnage())
+                tmp++;
 
-                return pos.get(0);
-            }
+        return tmp;
+    }
+
+    private List<Integer> persoPlace(Joueur joueur) {
+        List<Integer> tmp = new ArrayList<>();
+        for (Personnage p : joueur.getPersonnages().values())
+            tmp.add(p.getPoint());
+
+        return tmp;
+    }
+
+    private boolean estPlace(Joueur joueur, TypePersonnage type) {
+        for (Lieu l : jeu.getLieux().values())
+            for (Personnage p : l.getPersonnage())
+                if (p.getJoueur() == joueur && p.getType() == type)
+                    return true;
+
+        return false;
+    }
+
+    private List<Integer> placementDest(int x, int y, int i) {
+        List<Integer> posi = new ArrayList<>();
+        if (jeu.getLieux().get(x).isFull() && jeu.getLieux().get(y).isFull()) {
+            for (Lieu l : jeu.getLieux().values())
+                posi.add(l.getNum());
+            //TODO CHOIX AU JOUEUR OU C PAS FULL SAUF 1 POSSOBILITE
+
             // TODO CHOIX DE LA POSITION
             // TODO POS = NB LIEUX POSSIBLE
-            // destEntre = sc.nextInt();
-            destEntre = new Random().nextInt(4) + 1; // temporaire
-            out.println(destEntre); // temporaire
-            while (!pos.contains(destEntre)) {
-                out.println();
-                out.println("Numéro incorect !\n");
-                out.println(MessageFormat.format("Joueur {0} choisit un numéro:", i));
-                for (Integer po : pos) {
-                    out.println(MessageFormat.format("{0}\t{1}: Complet", po, jeu.getLieux().get(po)));
-                }
-                // destEntre = sc.nextInt();
-                destEntre = new Random().nextInt(4) + 1; // temporaire
-                out.println(destEntre); // temporaire
-            }
         } else if (jeu.getLieux().get(x).isFull() && !jeu.getLieux().get(y).isFull()) {
-            out.println(MessageFormat.format("{0}\t{1}: Complet", x, jeu.getLieux().get(x)));
-            out.println(MessageFormat.format("{0}\t{1}: Pas Complet", y, jeu.getLieux().get(y)));
-            destEntre = y;
+            posi.add(y);
         } else if (!jeu.getLieux().get(x).isFull() && jeu.getLieux().get(y).isFull()) {
-            out.println(MessageFormat.format("{0}\t{1}: Pas Complet", x, jeu.getLieux().get(x)));
-            out.println(MessageFormat.format("{0}\t{1}: Complet", y, jeu.getLieux().get(y)));
-            destEntre = x;
+            posi.add(x);
         } else {
-            out.println(MessageFormat.format("{0}\t{1}: Pas Complet", x, jeu.getLieux().get(x)));
-            out.println(MessageFormat.format("{0}\t{1}: Pas Complet", y, jeu.getLieux().get(y)));
-            out.println(MessageFormat.format("Joueur {0} choisit un numéro:", i));
-            //TODO ENVOIE POS
-            // destEntre = sc.nextInt();
-            destEntre = new Random().nextInt(6) + 1; // temporaire
-            out.println(destEntre); // temporaire
-            while (destEntre != x && destEntre != y) {
-                out.println(RETOUR_LIGNE);
-                System.out.println(jeu.afficheJeu());
-                out.println();
-                out.println("Numéro incorrect!\n");
-                out.println(MessageFormat.format("{0}\t{1}: Pas Complet", x, jeu.getLieux().get(x)));
-                out.println(MessageFormat.format("{0}\t{1}: Pas Complet", y, jeu.getLieux().get(y)));
-                out.println(MessageFormat.format("Joueur {0} choisit un numéro:", i));
-                // destEntre = sc.nextInt();
-                destEntre = new Random().nextInt(6) + 1; // temporaire
-                out.println(destEntre); // temporaire
-            }
+            posi.add(x);
+            posi.add(y);
         }
 
-        //TODO POS HERE
-        return destEntre;
+        return posi;
     }
 
     private int placementPerso(int i, int destEntre) {

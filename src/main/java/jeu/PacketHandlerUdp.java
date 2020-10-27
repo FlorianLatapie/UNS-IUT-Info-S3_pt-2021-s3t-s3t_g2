@@ -46,6 +46,9 @@ public class PacketHandlerUdp {
 		case "AMP":
 			amp(packet, message);
 			break;
+			case "IP":
+				ip(packet, message);
+				break;
 		default:
 			throw new IllegalStateException(
 					MessageFormat.format("[UDP] Il n''y a pas de traitement possible pour {0}", packet.getKey()));
@@ -79,15 +82,15 @@ public class PacketHandlerUdp {
 	public void acp(Packet packet, String message) {
 		if (SideConnection.CLIENT != nwm.getSideConnection())
 			return;
-
-		System.out.println(
-				MessageFormat.format("Une nouvelle partie vient d''etre trouvé !\n{0}", packet.getValue(message, 1)));
 	}
 
 	public void amp(Packet packet, String message) {
 		if (SideConnection.CLIENT != nwm.getSideConnection())
 			return;
+	}
 
-		System.out.println(MessageFormat.format("Mise a jour d''une partie !\n{0}", packet.getValue(message, 1)));
+	public void ip(Packet packet, String message) {
+		if (SideConnection.CLIENT != nwm.getSideConnection())
+			return;
 	}
 }

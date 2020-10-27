@@ -3,6 +3,7 @@ package jeu;
 import reseau.type.Couleur;
 import temp.CarteAction;
 
+import java.net.InetAddress;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -22,9 +23,15 @@ public class Joueur {
         return joueurId;
     }
 
-    private String joueurId;
-    private String ip;
-    private int port;
+    private final String joueurId;
+
+    public int getJoueurIdint() {
+        return joueurIdint;
+    }
+
+    private final int joueurIdint;
+    private final InetAddress ip;
+    private final int port;
 
     private Couleur couleur;
     private boolean enVie;
@@ -34,13 +41,14 @@ public class Joueur {
     private final String nom;
 
     /**
-     * @param joueurId
+     * @param joueurIdint
      * @param ip
      * @param port
-     * @param nom      le nom du joueur
+     * @param nom         le nom du joueur
      */
-    public Joueur(String joueurId, String ip,Couleur couleur, int port, String nom) {
-        this.joueurId = joueurId;
+    public Joueur(int joueurIdint, InetAddress ip, Couleur couleur, int port, String nom) {
+        this.joueurIdint = joueurIdint;
+        this.joueurId = "J" + joueurIdint;
         this.couleur = couleur;
         this.ip = ip;
         this.port = port;
@@ -130,5 +138,13 @@ public class Joueur {
     @Override
     public String toString() {
         return this.nom;
+    }
+
+    public InetAddress getIp() {
+        return ip;
+    }
+
+    public int getPort() {
+        return port;
     }
 }
