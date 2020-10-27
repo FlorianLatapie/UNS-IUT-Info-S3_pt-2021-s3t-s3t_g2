@@ -148,6 +148,10 @@ public abstract class PtTool {
                     @SuppressWarnings("unchecked")
                     List<Integer> il = (List<Integer>) value;
                     return PacketTool.listStrToInteger(il);
+                case "List<String>":
+                    @SuppressWarnings("unchecked")
+                    List<String> il1 = (List<String>) value;
+                    return PacketTool.listStrToStr(il1);
                 default:
                     throw new IllegalStateException("Unexpected value: " + type);
             }
@@ -206,6 +210,8 @@ public abstract class PtTool {
                     return PacketTool.strToListEnum(param, PionCouleur.class);
                 case "List<Integer>":
                     return PacketTool.strToListInteger(param);
+                case "List<String>":
+                    return PacketTool.strToListStr(param);
                 default:
                     throw new IllegalStateException("Unexpected value: " + type);
             }
