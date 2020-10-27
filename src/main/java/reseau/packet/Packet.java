@@ -112,8 +112,9 @@ public class Packet {
      */
     public String getDocs() {
         StringBuilder tmp = new StringBuilder("Nom : " + ptProtocol.getClassName() + "\nDoc : " + ptProtocol.getDoc() + "\n");
+        int i = 1;
         for (PtValue doc : ptProtocol.getValues().getValues())
-            tmp.append(doc).append("\n");
+            tmp.append("[").append(i++).append("]").append(doc).append("\n");
 
         return tmp.toString();
     }
