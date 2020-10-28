@@ -8,6 +8,8 @@ import reseau.tool.PtTool;
 
 import java.io.IOException;
 import java.net.InetAddress;
+import java.net.InetSocketAddress;
+import java.net.Socket;
 import java.util.Map;
 
 /**
@@ -31,16 +33,7 @@ public class NetWorkManager {
     private final PacketHandlerTcp packetHandlerTcp;
     private SideConnection sideConnection;
 
-    //Temp
-    public String partieId; //Numero de la partie
-    public String nomPartie; //Nom de la partie
-    public int partieIdi; //Numero de la partie
-    public int nbjtotal; //Nombre de joueurs total
-    public int nbjr; //Nombre de joueurs réel
-    public int nbjv; //Nombre de joueurs virtuel
-    public int nbjractuel = 0; //Nombre de joueurs réel actuellement connecté
-    public int nbjvactuel = 0; //Nombre de joueurs virtuel actuellement connecté
-    static int partiIdAttrib = 0;
+    public Socket socketTCPSocket;
 
     /**
      * @param core partie
@@ -51,8 +44,6 @@ public class NetWorkManager {
         tcpPackets = PtTool.loadPacket(PATHTOPACKET, "TCP");
         this.packetHandlerUdp = new PacketHandlerUdp(this, core);
         this.packetHandlerTcp = new PacketHandlerTcp(this, core);
-        this.partieId = "P" + partiIdAttrib;
-        partiIdAttrib++;
     }
 
     /**
@@ -60,18 +51,38 @@ public class NetWorkManager {
      *
      * @param sideConnection s'il s'agit du CLIENT ou du SERVER
      * @param address        l'adresse ip a utilisée
+     * @throws IOException              si il ne peut pas charger les fichiers du protocole réseau
      * @throws IllegalArgumentException si les paquets n'ont pas ete initialisé correctement
      */
-    public void initConnection(SideConnection sideConnection, InetAddress address) {
+    public void initConnection(SideConnection sideConnection, InetAddress address) throws IOException {
         this.sideConnection = sideConnection;
         tcpPort = NetworkTool.getPortSocket(1024, 64000);
         if (udpPackets.isEmpty() || tcpPackets.isEmpty())
             throw new IllegalArgumentException("Il n'y a pas de définitions pour les paquets TCP/UDP");
+        System.out.println("Mon port est " + tcpPort);
+        if (sideConnection == SideConnection.SERVER) {
+            this.address = address;
+            udpSocket = new UdpSocket(this);
+            tcpServerSocket = new TcpServerSocket(this);
+            udpSocket.start(address);
+            tcpServerSocket.start(address, tcpPort);
+        } else {
+            this.address = address;
+            socketTCPSocket = new Socket();
+            socketTCPSocket.bind(new InetSocketAddress("localhost", tcpPort));
+            udpSocket = new UdpSocket(this);
+            tcpServerSocket = new TcpServerSocket(this);
+            udpSocket.start(address);
+            //tcpServerSocket.start(address, tcpPort);
+        }
+    }
 
-        this.address = address;
-        udpSocket = new UdpSocket(this);
-        tcpServerSocket = new TcpServerSocket(this);
-        udpSocket.start(address);
+    public void startServerTCP() {
+        try {
+            socketTCPSocket.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         tcpServerSocket.start(address, tcpPort);
     }
 
@@ -118,15 +129,6 @@ public class NetWorkManager {
      */
     public InetAddress getAddress() {
         return address;
-    }
-
-    /**
-     * Obtient le numero de la partie sous forme chaine de caractere
-     *
-     * @return le numero de la partie sous forme chaine de caractere
-     */
-    public String getPartieId() {
-        return partieId;
     }
 
     /**
