@@ -51,41 +51,14 @@ public class PacketHandlerUdp {
     }
 
     public void rp(Packet packet, String message) {
-        if (SideConnection.SERVER != nwm.getSideConnection())
-            return;
 
-        TypePartie typePartie = (TypePartie) packet.getValue(message, 1);
-
-        String m = nwm.getPacketsUdp().get("AMP").build(
-                nwm.getPartieId(), nwm.getAddress().getHostAddress(), nwm.getTcpPort(), nwm.nomPartie, nwm.nbjtotal,
-                nwm.nbjr, nwm.nbjv, nwm.nbjractuel, nwm.nbjvactuel, Status.ATTENTE);
-        switch (typePartie) {
-            case JRU:
-                if (nwm.nbjr == 6)
-                    nwm.getUdpSocket().sendPacket(m);
-                break;
-            case BOTU:
-                if (nwm.nbjv == 6)
-                    nwm.getUdpSocket().sendPacket(m);
-                break;
-            case MIXTE:
-            default:
-                nwm.getUdpSocket().sendPacket(m);
-        }
     }
 
     public void acp(Packet packet, String message) {
-        if (SideConnection.CLIENT != nwm.getSideConnection())
-            return;
 
-        System.out.println(MessageFormat.format("Une nouvelle partie vient d''etre trouvé !\n{0}",
-                packet.getValue(message, 1)));
     }
 
     public void amp(Packet packet, String message) {
-        if (SideConnection.CLIENT != nwm.getSideConnection())
-            return;
 
-        System.out.println(MessageFormat.format("Mise a jour d''une partie !\n{0}", packet.getValue(message, 1)));
     }
 }
