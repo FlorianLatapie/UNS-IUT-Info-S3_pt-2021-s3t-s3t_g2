@@ -2,7 +2,7 @@ seq:47
 className:InitialiserPartie
 doc:Initialiser la partie
 keyword:IP
-protocol:UDP
+protocol:TCP
 values:
 value:
 name:joueurs
