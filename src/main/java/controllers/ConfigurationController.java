@@ -10,20 +10,21 @@ import javafx.scene.control.Label;
 import javafx.stage.Stage;
 
 public class ConfigurationController {
-    @FXML
-    private Label label;
 
     @FXML
-    private Button quitButton;
-
+    private Button playbutton;
+    
     @FXML
-    private Button menuButton;
+    private Button backbutton;
+
+
+
 
     @FXML
     private void initialize() {
-        label.setText("Config");
-        quitButton.setText("Quitter");
-        menuButton.setText("Menu");
+        playbutton.setText("Jouer");
+        backbutton.setText("Retour");
+
     }
 
     @FXML
@@ -31,13 +32,15 @@ public class ConfigurationController {
         Stage stage = null;
         Parent root = null;
 
-        if(event.getSource() == quitButton) {
-            System.exit(0);
+        if(event.getSource() == backbutton) {
+        	stage = (Stage) backbutton.getScene().getWindow();
+            root = FXMLLoader.load(getClass().getResource("/views/JoinGameView.fxml"));
         }
+        
 
-        else {
-            stage = (Stage) menuButton.getScene().getWindow();
-            root = FXMLLoader.load(getClass().getResource("/views/MenuView.fxml"));
+        if(event.getSource() == playbutton) {
+        	stage = (Stage) playbutton.getScene().getWindow();
+            root = FXMLLoader.load(getClass().getResource("/views/NotYetImplementedView.fxml"));
         }
 
         Scene scene = new Scene(root);
