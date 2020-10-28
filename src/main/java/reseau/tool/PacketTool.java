@@ -61,6 +61,25 @@ public abstract class PacketTool {
     }
 
     /**
+     * Transforme une chaine de caractere en liste de chaine de caractere
+     *
+     * @param list liste a convertir
+     * @return une chaine de caractere en liste de chaine de caractere
+     */
+    public static List<String> strToListStr(String list) {
+        String[] tmp = list.split(",");
+
+        if (list.equals(" "))
+            return new ArrayList<>();
+
+        List<String> temp = new ArrayList<>();
+        for (String t : tmp)
+            temp.add(t);
+
+        return temp;
+    }
+
+    /**
      * Transforme une liste reseau.enum en chaine de caractere
      *
      * @param l   list liste a convertir
@@ -99,6 +118,24 @@ public abstract class PacketTool {
                 throw new IllegalArgumentException("Ne peut pas etre inferieur a 0");
             tmp.append(t).append(",");
         }
+
+        return tmp.substring(0, tmp.length() - 1);
+    }
+
+    /**
+     * Transforme une liste de chaine de caractere en chaine de caractere
+     *
+     * @param list list liste a convertir
+     * @return une liste de chaine de caractere en chaine de caractere
+     */
+    public static String listStrToStr(List<String> list) {
+        if (list.isEmpty())
+            return " ";
+
+        StringBuilder tmp = new StringBuilder();
+
+        for (String t : list)
+            tmp.append(t).append(",");
 
         return tmp.substring(0, tmp.length() - 1);
     }

@@ -56,6 +56,23 @@ class PacketToolTest {
     }
 
     @Test
+    void strToListStr() {
+        List<String> expected = new ArrayList<>();
+        expected.add("Yo");
+        expected.add("123");
+        expected.add("Po");
+        expected.add("pm");
+        String message = "Yo,123,Po,pm";
+        assertEquals(expected, PacketTool.strToListStr(message));
+        expected = new ArrayList<>();
+        assertNotEquals(expected, PacketTool.strToListStr(message));
+
+        List<String> expected1 = new ArrayList<>();
+        message = " ";
+        assertEquals(expected1, PacketTool.strToListStr(message));
+    }
+
+    @Test
     void listEnumToStr() {
         List<Status> actual = new ArrayList<>();
         actual.add(Status.ANNULEE);
@@ -89,6 +106,22 @@ class PacketToolTest {
         List<Integer> actual2 = new ArrayList<>();
         actual2.add(-9);
         assertThrows(IllegalArgumentException.class, () -> PacketTool.listStrToInteger(actual2));
+    }
+
+    @Test
+    void listStrToStr() {
+        List<String> actual = new ArrayList<>();
+        actual.add("Oui");
+        actual.add("5");
+        actual.add("Bof");
+        String expected = "Oui,5,Bof";
+        assertEquals(expected, PacketTool.listStrToStr(actual));
+        expected = "";
+        assertNotEquals(expected, PacketTool.listStrToStr(actual));
+
+        List<String> actual1 = new ArrayList<>();
+        String expected1 = " ";
+        assertEquals(expected1, PacketTool.listStrToStr(actual1));
     }
 
     @Test

@@ -83,8 +83,10 @@ public class TcpServerSocket {
 
                 ObjectOutputStream outputStream = new ObjectOutputStream(socket.getOutputStream());
                 String response = process(socket, message);
-                outputStream.writeObject(response);
-                logger.log(Level.INFO, "Message sent : {0}", response);
+                if (response != null) {
+                    outputStream.writeObject(response);
+                    logger.log(Level.INFO, "Message sent : {0}", response);
+                }
 
                 inputStream.close();
                 outputStream.close();
