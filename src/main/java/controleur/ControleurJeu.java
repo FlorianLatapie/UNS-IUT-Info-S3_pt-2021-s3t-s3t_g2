@@ -93,12 +93,17 @@ public class ControleurJeu {
 
             //TODO UN OU PLUSIEURS LIEUX FERME
             //TODO 3 ou 4 PION
+            //TODO VIGILE DEF ICI
+            joueurs.get(0).setChefDesVigiles(true);
             m = nwm.getPacketsUdp().get("IP").build(getJoueursListe(), getCouleurJoueursListe(), 0, 3, partieId);
             nwm.getUdpSocket().sendPacket(m);
 
             //TODO ATTENDRE TOUS LES JOUEURS
             //TODO (COMPLETE ACP)
             this.placementPersonnage();
+            List<Integer> tmp = this.arriveZombie();
+            jeu.entreZombie(tmp);
+            //TODO PIPZ
             out.println(jeu.afficheJeu());
             this.start();
         });
@@ -137,11 +142,11 @@ public class ControleurJeu {
         return tmp;
     }
 
-    private List<Integer> getJoueursListe() {
+    private List<String> getJoueursListe() {
         //TODO BONNE ORDRE ? VIGILE
-        List<Integer> indexs = new ArrayList<>();
+        List<String> indexs = new ArrayList<>();
         for (Joueur j : joueurs)
-            indexs.add(j.getJoueurIdint());
+            indexs.add(j.getNom());
 
         return indexs;
     }
@@ -184,10 +189,14 @@ public class ControleurJeu {
     private void fouilleCamion() {
         //TODO PREVENIR QUI FOUILLE LE CAMION
         if (!jeu.getLieux().get(4).afficheJoueurSurLieu().isEmpty()) {
+            //TODO PFC
             Joueur j = voteJoueur(4);
+            //TODO PFC J fouille
             out.println(j + " fouille le camion!");
             out.println("Le camion est vide.");
             out.println(RETOUR_LIGNE);
+
+            //TODO RFC
         }
     }
 
@@ -204,10 +213,12 @@ public class ControleurJeu {
     private void electionChefVigi() {
         //TODO PREVENIR QUI EST LE CHEF DES VIGILES
         if (!jeu.getLieux().get(5).afficheJoueurSurLieu().isEmpty()) {
+            //TODO PECV
             Joueur j = voteJoueur(5);
             jeu.resultatChefVigile(j);
             out.println(j + " est le nouveau chef des vigiles!");
             jeu.setNewChef(true);
+            //TODO RECV
         } else {
             out.println("Pas de nouveau chef des vigiles!");
             jeu.setNewChef(false);
@@ -222,6 +233,8 @@ public class ControleurJeu {
      * @return liste des numéro des lieux d'arrivé des zomibie
      */
     private ArrayList<Integer> arriveZombie() {
+        //TODO PAZ
+        //TODO AZLD
         int z1 = new Random().nextInt(6) + 1;
         int z2 = new Random().nextInt(6) + 1;
         int z3 = new Random().nextInt(6) + 1;
@@ -590,9 +603,10 @@ public class ControleurJeu {
     }
 
     private void placementPersonnage() {
-        for (int i = 0; i < jeu.getJoueurs().size(); i++) {
-            for (int n = 0; n < jeu.getJoueurs().get(i).getPersonnages().size(); n++) {
+        for (int n = 0; n < jeu.getJoueurs().get(0).getPersonnages().size(); n++){
+            for (int i = 0; i < jeu.getJoueurs().size(); i++) {
                 //TODO PIIJ nbPionPlace que du joueur ?
+                System.out.println(persoPlace(jeu.getJoueurs().get(i)));
                 String message = nwm.getPacketsTcp().get("PIIJ").build(nbPlace(), persoPlace(jeu.getJoueurs().get(i)), partieId);
                 ThreadTool.taskPacketTcp(jeu.getJoueurs().get(i).getIp(), jeu.getJoueurs().get(i).getPort(), message);
 
@@ -606,16 +620,37 @@ public class ControleurJeu {
                 des.add(x);
                 des.add(y);
 
+                System.out.println(placementDest(x, y, i));
+                System.out.println(des);
+
                 message = nwm.getPacketsTcp().get("PIRD").build(des, placementDest(x, y, i), partieId);
                 String rep = ThreadTool.taskPacketTcp(jeu.getJoueurs().get(i).getIp(), jeu.getJoueurs().get(i).getPort(), message);
                 //TODO
 
                 int destEntre = (int) nwm.getPacketsTcp().get("PICD").getValue(rep, 1);
-                int persEntre = placementPerso(i, destEntre);
-                jeu.placePerso(jeu.getJoueurs().get(i), persEntre, destEntre);
+                int persEntre = (int) nwm.getPacketsTcp().get("PICD").getValue(rep, 2);
+                System.out.println(destEntre);
+                System.out.println(persEntre);
+                jeu.placePerso(jeu.getJoueurs().get(i), valeurToIndex(persEntre), destEntre);
                 out.println(RETOUR_LIGNE);
             }
         }
+
+        //TODO UDP PIIG
+    }
+
+    private int valeurToIndex(int valeur) {
+        switch (valeur) {
+            case 7:
+                return 0;
+            case 5:
+                return 1;
+            case 3:
+                return 2;
+            case 1:
+                return 3;
+        }
+        return 0;
     }
 
     private int nbPlace() {
@@ -645,6 +680,7 @@ public class ControleurJeu {
     }
 
     private List<Integer> placementDest(int x, int y, int i) {
+        //TODO LISTE OK ?
         List<Integer> posi = new ArrayList<>();
         if (jeu.getLieux().get(x).isFull() && jeu.getLieux().get(y).isFull()) {
             for (Lieu l : jeu.getLieux().values())
