@@ -42,7 +42,7 @@ public abstract class ThreadTool {
      */
     public static String taskPacketTcp(InetAddress ip, int port, String message) {
         ExecutorService executorService = Executors.newSingleThreadExecutor();
-        Callable<String> callable = () -> TcpClientSocket.connect(ip, port, message);
+        Callable<String> callable = () -> TcpClientSocket.connect(ip, port, message,null,0);
         Future<String> future = executorService.submit(callable);
         String p = "";
         try {
