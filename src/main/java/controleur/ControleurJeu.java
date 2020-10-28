@@ -123,7 +123,11 @@ public class ControleurJeu {
             ip = ips.get(val);
         }
 
-        nwm.initConnection(SideConnection.SERVER, ip);
+        try {
+            nwm.initConnection(SideConnection.SERVER, ip);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         System.out.println(ip.getHostAddress());
         System.out.println(nwm.getTcpPort());
     }
