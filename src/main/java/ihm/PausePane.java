@@ -135,6 +135,13 @@ public class PausePane extends StackPane {
 		bRetour.setPrefSize(500, 60);
 		bRetour.setStyle(styleBoutons);
 		bRetour.setOnAction(EventHandler -> sc.setPaneOnTop(ApplicationPane.PLATEAU));
+		bRetour.setOnMouseEntered(event -> {
+			bRetour.setStyle(styleBoutonsSouris);
+		});
+		bRetour.setOnMouseExited(event -> {
+			bRetour.setStyle(styleBoutons);
+		});
+		
 
 		vbBoutons.getChildren().add(bOption);
 		vbBoutons.getChildren().add(bRegles);
