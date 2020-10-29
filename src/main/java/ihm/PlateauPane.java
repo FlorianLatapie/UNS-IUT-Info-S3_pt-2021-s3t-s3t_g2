@@ -1,6 +1,9 @@
 package ihm;
 
+import java.util.Map;
+
 import ihm.DataControl.ApplicationPane;
+import ihm.eventListener.LieuxListener;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
@@ -17,8 +20,9 @@ import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
+import jeu.Lieu;
 
-public class PlateauPane extends StackPane {
+public class PlateauPane extends StackPane implements LieuxListener{
 	private ScreenControl sControl = null;
 	private final ApplicationPane paneName = ApplicationPane.PLATEAU; // nom du pane
 	
@@ -559,5 +563,14 @@ public class PlateauPane extends StackPane {
 		
 		sControl.registerNode(paneName, this);
 		sControl.setPaneOnTop(paneName);
+		
+
+		
+	}
+
+	@Override
+	public void lieuxChanged(Map<Integer, Lieu> lieux) {
+		// TODO modifier l'affichage en recuperant les element dans lieux
+		
 	}
 }

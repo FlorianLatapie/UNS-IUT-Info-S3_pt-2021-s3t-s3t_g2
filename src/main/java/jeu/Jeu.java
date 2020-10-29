@@ -7,6 +7,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import ihm.eventListener.LieuxListener;
+
 /**
  * <h1> Le plateau de jeu </h1>
  *
@@ -20,6 +22,17 @@ public class Jeu {
     HashMap<Integer, Joueur> joueurs;
     ArrayList<CarteAction> cartes;
     Boolean newChef;
+    private List<LieuxListener> listeners = new ArrayList<LieuxListener>();
+    
+    public void addListener(LieuxListener toAdd) {
+    	listeners.add(toAdd);
+    }
+    
+    public void lieuxChanged() {
+    	//Notify everybody that may be interested
+    	for (LieuxListener hl : listeners)
+    		hl.lieuxChanged(lieux);
+    }
 
     public Boolean getNewChef() {
 		return newChef;
@@ -172,6 +185,7 @@ public class Jeu {
         for (int i = 0; i < listeInt.size(); i++) {
             lieux.get(listeInt.get(i)).addZombie();
         }
+        lieuxChanged();
     }
 
     /**
@@ -201,6 +215,7 @@ public class Jeu {
         if (maxB)
             lieux.get(idLieuB).addZombie();
 
+        lieuxChanged();
     }
 
     /**
@@ -219,6 +234,7 @@ public class Jeu {
                 this.lieux.get(l).getPersonnage().remove(joueurs.get(i).getPersonnages().get(choixPerso));
             }
         }
+        lieuxChanged();
 
     }
 
@@ -236,6 +252,7 @@ public class Jeu {
                 this.lieux.get(dest).addPersonnage(joueurs.get(i).getPersonnages().get(choixPerso));
             }
         }
+        lieuxChanged();
 
     }
 
@@ -253,6 +270,7 @@ public class Jeu {
                 joueurs.get(i).getPersonnages().remove(choixPerso);
             }
         }
+        lieuxChanged();
     }
 
     /**
@@ -265,6 +283,7 @@ public class Jeu {
                 this.lieux.get(i).setNbZombies(0);
             }
         }
+        lieuxChanged();
     }
 
     /**
