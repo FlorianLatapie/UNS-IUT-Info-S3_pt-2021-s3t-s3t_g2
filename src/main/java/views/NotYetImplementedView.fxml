@@ -11,7 +11,7 @@
       <VBox alignment="CENTER" layoutX="14.0" layoutY="14.0" prefHeight="442.0" prefWidth="876.0">
          <children>
             <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Not yet implemented" />
-            <Button fx:id="backButton" mnemonicParsing="false" onAction="#clickedButton" text="Retour" />
+            <Button fx:id="backButton" mnemonicParsing="false" onAction="#clickedButton" text="%bouton.retour" />
          </children>
       </VBox>
    </children>

@@ -30,7 +30,7 @@
    <center>
       <VBox alignment="CENTER" prefHeight="345.0" prefWidth="269.0" BorderPane.alignment="CENTER">
          <children>
-            <Text text="Jouer" />
+            <Text text="%boutton.jouer" />
             <ScrollPane fitToWidth="true" prefHeight="218.0" prefWidth="513.0">
                <content>
                   <GridPane alignment="CENTER" hgap="5" vgap="5">

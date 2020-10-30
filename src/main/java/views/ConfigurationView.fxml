@@ -38,11 +38,11 @@
          </rowConstraints>
          <children>
             <Rectangle arcHeight="5.0" arcWidth="5.0" height="20.0" stroke="BLACK" strokeType="INSIDE" width="20.0" />
-            <TextArea maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="30.0" prefWidth="200.0" promptText="Nom du joueur" GridPane.columnIndex="1" />
+            <TextArea maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="30.0" prefWidth="200.0" promptText="%texte.jNom" GridPane.columnIndex="1" />
             <CheckBox mnemonicParsing="false" text="Commence" GridPane.columnIndex="2" />
             <ColorPicker promptText="Couleur" GridPane.columnIndex="3" />
             <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="20.0" stroke="BLACK" strokeType="INSIDE" width="20.0" GridPane.rowIndex="1" />
-            <TextArea maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="30.0" prefWidth="200.0" promptText="Nom du joueur" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+            <TextArea maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="30.0" prefWidth="200.0" promptText="%texte.jNom" GridPane.columnIndex="1" GridPane.rowIndex="1" />
             <CheckBox mnemonicParsing="false" text="Commence" GridPane.columnIndex="2" GridPane.rowIndex="1" />
             <ColorPicker promptText="Couleur" GridPane.columnIndex="3" GridPane.rowIndex="1" />
          </children>
@@ -71,10 +71,10 @@
    <bottom>
       <BorderPane prefHeight="67.0" prefWidth="876.0" BorderPane.alignment="CENTER">
          <left>
-            <Button fx:id="backbutton" minHeight="31.0" minWidth="88.0" mnemonicParsing="false" onAction="#clickedButton" prefHeight="31.0" prefWidth="88.0" text="Retour" BorderPane.alignment="CENTER" />
+            <Button fx:id="backbutton" minHeight="31.0" minWidth="88.0" mnemonicParsing="false" onAction="#clickedButton" prefHeight="31.0" prefWidth="88.0" text="%bouton.retour" BorderPane.alignment="CENTER" />
          </left>
          <right>
-            <Button fx:id="playbutton" minHeight="31.0" minWidth="88.0" mnemonicParsing="false" onAction="#clickedButton" prefHeight="31.0" prefWidth="88.0" text="Jouer" BorderPane.alignment="CENTER" />
+            <Button fx:id="playbutton" minHeight="31.0" minWidth="88.0" mnemonicParsing="false" onAction="#clickedButton" prefHeight="31.0" prefWidth="88.0" text="%boutton.jouer" BorderPane.alignment="CENTER" />
          </right>
          <center>
             <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Partie P12345" BorderPane.alignment="CENTER" />

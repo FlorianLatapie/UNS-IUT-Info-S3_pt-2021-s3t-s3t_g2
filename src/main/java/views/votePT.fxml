@@ -79,32 +79,32 @@
                                     <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                                  </rowConstraints>
                                  <children>
-                                    <Button mnemonicParsing="false" prefHeight="32.0" prefWidth="86.0" text="Cahcou" GridPane.columnIndex="1">
+                                    <Button mnemonicParsing="false" prefHeight="32.0" prefWidth="86.0" text="%texte.lieu2" GridPane.columnIndex="1">
                                        <GridPane.margin>
                                           <Insets bottom="5.0" left="5.0" />
                                        </GridPane.margin>
                                     </Button>
-                                    <Button mnemonicParsing="false" prefHeight="32.0" prefWidth="86.0" text="Megatoys" GridPane.rowIndex="1">
+                                    <Button mnemonicParsing="false" prefHeight="32.0" prefWidth="86.0" text="%texte.lieu3" GridPane.rowIndex="1">
                                        <GridPane.margin>
                                           <Insets bottom="5.0" left="10.0" />
                                        </GridPane.margin>
                                     </Button>
-                                    <Button mnemonicParsing="false" prefHeight="32.0" prefWidth="86.0" text="Parking" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                                    <Button mnemonicParsing="false" prefHeight="32.0" prefWidth="86.0" text="%texte.lieu4" GridPane.columnIndex="1" GridPane.rowIndex="1">
                                        <GridPane.margin>
                                           <Insets bottom="5.0" left="5.0" />
                                        </GridPane.margin>
                                     </Button>
-                                    <Button mnemonicParsing="false" text="PC de sécurité" GridPane.rowIndex="2">
+                                    <Button mnemonicParsing="false" text="%texte.lieu5" GridPane.rowIndex="2">
                                        <GridPane.margin>
                                           <Insets left="10.0" />
                                        </GridPane.margin>
                                     </Button>
-                                    <Button mnemonicParsing="false" text="Supermarché" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                                    <Button mnemonicParsing="false" text="%texte.lieu6" GridPane.columnIndex="1" GridPane.rowIndex="2">
                                        <GridPane.margin>
                                           <Insets left="5.0" />
                                        </GridPane.margin>
                                     </Button>
-                                    <Button mnemonicParsing="false" prefHeight="32.0" prefWidth="88.0" text="Toilettes">
+                                    <Button mnemonicParsing="false" prefHeight="32.0" prefWidth="88.0" text="%texte.lieu1">
                                        <GridPane.margin>
                                           <Insets bottom="5.0" left="10.0" />
                                        </GridPane.margin>
@@ -119,7 +119,7 @@
                      <children>
                         <TextFlow prefHeight="64.0" prefWidth="339.0" textAlignment="CENTER">
                            <children>
-                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Nom du joueur=(Joueur6)" textAlignment="CENTER" wrappingWidth="128.13070678710938" />
+                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="%texte.jNom =(Joueur6)" textAlignment="CENTER" wrappingWidth="128.13070678710938" />
                            </children>
                         </TextFlow>
                         <VBox prefHeight="200.0" prefWidth="100.0">
@@ -136,17 +136,17 @@
                               </TextFlow>
                               <HBox alignment="CENTER" prefHeight="75.0" prefWidth="339.0">
                                  <children>
-                                    <Button mnemonicParsing="false" text="Joueur1">
+                                    <Button mnemonicParsing="false" text="%texte.joueur">
                                        <HBox.margin>
                                           <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                                        </HBox.margin>
                                     </Button>
-                                    <Button mnemonicParsing="false" text="Joueur2">
+                                    <Button mnemonicParsing="false" text="%texte.joueur">
                                        <HBox.margin>
                                           <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                                        </HBox.margin>
                                     </Button>
-                                    <Button mnemonicParsing="false" text="Joueur3">
+                                    <Button mnemonicParsing="false" text="%texte.joueur">
                                        <HBox.margin>
                                           <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                                        </HBox.margin>
@@ -155,12 +155,12 @@
                               </HBox>
                               <HBox alignment="TOP_CENTER" prefHeight="75.0" prefWidth="339.0">
                                  <children>
-                                    <Button mnemonicParsing="false" text="Joueur4">
+                                    <Button mnemonicParsing="false" text="%texte.joueur">
                                        <HBox.margin>
                                           <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                                        </HBox.margin>
                                     </Button>
-                                    <Button mnemonicParsing="false" text="Joueur5">
+                                    <Button mnemonicParsing="false" text="%texte.joueur">
                                        <HBox.margin>
                                           <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                                        </HBox.margin>
@@ -197,7 +197,7 @@
                                     <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                                  </VBox.margin>
                               </Button>
-                              <Button mnemonicParsing="false" prefHeight="32.0" prefWidth="67.0" text="Lancer">
+                              <Button mnemonicParsing="false" prefHeight="32.0" prefWidth="67.0" text="%texte.lancerDe">
                                  <VBox.margin>
                                     <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                                  </VBox.margin>
@@ -217,22 +217,22 @@
                   </TextFlow>
                   <HBox alignment="CENTER_LEFT" prefHeight="134.0" prefWidth="458.0">
                      <children>
-                        <Button mnemonicParsing="false" prefHeight="32.0" prefWidth="94.0" text="carte1">
+                        <Button mnemonicParsing="false" prefHeight="32.0" prefWidth="94.0" text="%texte.carte">
                            <HBox.margin>
                               <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                            </HBox.margin>
                         </Button>
-                        <Button mnemonicParsing="false" prefHeight="32.0" prefWidth="94.0" text="carte2">
+                        <Button mnemonicParsing="false" prefHeight="32.0" prefWidth="94.0" text="%texte.carte">
                            <HBox.margin>
                               <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                            </HBox.margin>
                         </Button>
-                        <Button mnemonicParsing="false" prefHeight="32.0" prefWidth="94.0" text="carte3">
+                        <Button mnemonicParsing="false" prefHeight="32.0" prefWidth="94.0" text="%texte.carte">
                            <HBox.margin>
                               <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                            </HBox.margin>
                         </Button>
-                        <Button mnemonicParsing="false" prefHeight="32.0" prefWidth="94.0" text="carte4">
+                        <Button mnemonicParsing="false" prefHeight="32.0" prefWidth="94.0" text="%texte.carte">
                            <HBox.margin>
                               <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                            </HBox.margin>

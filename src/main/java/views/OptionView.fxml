@@ -10,17 +10,17 @@
    <center>
       <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
          <children>
-            <Button mnemonicParsing="false" prefHeight="26.0" prefWidth="70.0" text="Francais">
+            <Button mnemonicParsing="false" prefHeight="26.0" prefWidth="70.0" text="%texte.langue1">
                <VBox.margin>
                   <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                </VBox.margin>
             </Button>
-            <Button minWidth="70.0" mnemonicParsing="false" text="Anglais">
+            <Button minWidth="70.0" mnemonicParsing="false" text="%texte.langue2">
                <VBox.margin>
                   <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                </VBox.margin>
             </Button>
-            <Button minWidth="70.0" mnemonicParsing="false" text="Retour">
+            <Button minWidth="70.0" mnemonicParsing="false" text="%bouton.retour">
                <VBox.margin>
                   <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                </VBox.margin>

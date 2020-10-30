@@ -43,12 +43,24 @@ public class Pause {
         Parent root = null;
 
         if(event.getSource() == Quitter) {
-            System.exit(0);
+        	stage = (Stage) Quitter.getScene().getWindow();
+            root = FXMLLoader.load(getClass().getResource("/views/StartPage.fxml"));
         }
 
+        else if(event.getSource() == Re){
+            stage = (Stage) Re.getScene().getWindow();
+            root = FXMLLoader.load(getClass().getResource("/views/JoinGameView.fxml"));
+        }
+        
+        else if(event.getSource() == Regles_du_jeu){
+        }
+        
+        else if(event.getSource() == Retour){
+        }
+        
         else {
             stage = (Stage) Options.getScene().getWindow();
-            root = FXMLLoader.load(getClass().getResource("/views/MenuView.fxml"));
+            root = FXMLLoader.load(getClass().getResource("/views/OptionsView.fxml"));
         }
 
         Scene scene = new Scene(root);
