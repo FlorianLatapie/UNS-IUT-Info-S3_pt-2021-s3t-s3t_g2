@@ -1,3 +1,6 @@
+import controleur.ControleurJeu;
+import ihm.Core;
+import ihm.DataControl;
 import ihm.InterfacePrincipale;
 
 /**
@@ -8,10 +11,9 @@ import ihm.InterfacePrincipale;
  * @since 10/10/2020
  * @category (default package)
  */
-public class App {
-	
+public class App { 
 	public static void main(String[] args) {
-		InterfacePrincipale.lancement(args);
+		Core c = new Core(); 
+		InterfacePrincipale.lancement(args,c);
 	}
-
 }

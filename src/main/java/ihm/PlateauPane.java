@@ -24,6 +24,7 @@ import jeu.Lieu;
 
 public class PlateauPane extends StackPane implements LieuxListener{
 	private ScreenControl sControl = null;
+	private Core core = null;
 	private final ApplicationPane paneName = ApplicationPane.PLATEAU; // nom du pane
 	
 	private int margeP = 24;
@@ -46,7 +47,8 @@ public class PlateauPane extends StackPane implements LieuxListener{
 	private Font fontInfo = Font.font("Segoe UI", tailleFont);
 	private Font fontTitre = Font.font("Segoe UI", FontWeight.BOLD, tailleFont);
 	
-	public PlateauPane(ScreenControl sc) {
+	public PlateauPane(ScreenControl sc, Core c) {
+		core = c;
 		sControl = sc;
 		
 		HBox hHaut = new HBox(); 
@@ -81,7 +83,7 @@ public class PlateauPane extends StackPane implements LieuxListener{
 		Label nbCartes1 = new Label("## de cartes");
 		nbCartes1.setFont(Font.font("Segoe UI", 20));
 		nbCartes1.setTextFill(Color.BLACK);
-		Label nomJoueur1 = new Label("Nom Joueur 1");
+		Label nomJoueur1 = new Label("nom Joueur1");
 		nomJoueur1.setFont(Font.font("Segoe UI", 20));
 		nomJoueur1.setTextFill(Color.BLACK);
 		

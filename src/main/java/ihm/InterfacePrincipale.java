@@ -11,6 +11,7 @@ public class InterfacePrincipale extends Application {
 	private Node currentTopNode = null;
 	private ScreenControl sControl = null;
 	private Scene scene = new Scene(root);
+	private static Core core;
 
 	@Override
 	public void start(Stage primaryStage) throws Exception {
@@ -28,9 +29,9 @@ public class InterfacePrincipale extends Application {
 		primaryStage.setFullScreen(true);
 
 		root.getChildren().add(new PausePane(sControl));
-		root.getChildren().add(new PlateauPane(sControl));
+		root.getChildren().add(new PlateauPane(sControl,core));
 		root.getChildren().add(new OptionPane(sControl));
-		root.getChildren().add(new ConfigPartiePane(sControl));
+		root.getChildren().add(new ConfigPartiePane(sControl,core));
 		root.getChildren().add(new AccueilPane(sControl));
 
 		primaryStage.setScene(scene);
@@ -39,7 +40,8 @@ public class InterfacePrincipale extends Application {
 
 	}
 
-	public static void lancement(String[] args) {
+	public static void lancement(String[] args,Core c) {
+		core = c;
 		InterfacePrincipale.launch(args);
 	}
 

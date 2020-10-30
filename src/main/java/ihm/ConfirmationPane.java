@@ -54,6 +54,7 @@ public class ConfirmationPane {
 
 		boutonOui.setOnAction(e -> {
 			reponse = true;
+			
 			window.close();
 
 		});
