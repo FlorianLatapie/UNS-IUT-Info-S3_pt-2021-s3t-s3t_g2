@@ -29,9 +29,9 @@ import javafx.scene.text.FontWeight;
  * @since 04/10/2020
  */
 public class AccueilPane extends StackPane {
-	// ScreenControl permet de gérer les variables globales comme la langue ou le
-	// volume
+
 	private ScreenControl sControl = null;
+	private Core core = null;
 	private final ApplicationPane paneName = ApplicationPane.ACCUEIL;
 	// définition des variable pour la suite du pane
 	private int tailleCarreCentral = 600; // l'interface est sur un stackPane qui peut tourner avec des crans de 90
@@ -47,8 +47,8 @@ public class AccueilPane extends StackPane {
 	private StackPane stackPane = new StackPane();
 	private GaussianBlur flou = new GaussianBlur(30);
 
-	public AccueilPane(ScreenControl sc) {
-
+	public AccueilPane(ScreenControl sc, Core c) {
+		core = c;
 		sControl = sc;
 		stackPane.setAlignment(Pos.CENTER);
 
@@ -95,7 +95,10 @@ public class AccueilPane extends StackPane {
 		bOptions.setOnMouseExited(event -> {
 			bOptions.setStyle(styleBoutons);
 		});
-		bOptions.setOnAction(EventHandler -> sc.setPaneOnTop(ApplicationPane.OPTION));
+		bOptions.setOnAction(EventHandler -> {
+			core.setPauseDepuis(paneName);
+			sc.setPaneOnTop(ApplicationPane.OPTION);
+		});
 
 		Button bRegles = new Button("REGLES");
 		bRegles.setPrefSize(lBouton, hBouton);
@@ -144,8 +147,7 @@ public class AccueilPane extends StackPane {
 		grilleBoutons.setMargin(bQuitter, margeBoutons);
 
 		// image fond
-		ImageView imgFond = new ImageView(
-				DataControl.FOND);
+		ImageView imgFond = new ImageView(DataControl.FOND);
 
 		// carre central qui contient tous les éléments (boutons et titre)
 		VBox centreMenu = new VBox();
@@ -171,7 +173,7 @@ public class AccueilPane extends StackPane {
 		fond.getChildren().add(imgFond);
 
 		stackPane.getChildren().addAll(fond, centreMenu);
-		stackPane.setBackground(new Background(new BackgroundFill(Color.BLACK,CornerRadii.EMPTY,null)));
+		stackPane.setBackground(new Background(new BackgroundFill(Color.BLACK, CornerRadii.EMPTY, null)));
 
 		this.getChildren().add(stackPane);
 		sControl.registerNode(paneName, this);

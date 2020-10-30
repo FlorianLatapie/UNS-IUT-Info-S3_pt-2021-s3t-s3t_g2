@@ -28,11 +28,11 @@ public class InterfacePrincipale extends Application {
 		// on passe en plein écran
 		primaryStage.setFullScreen(true);
 
-		root.getChildren().add(new PausePane(sControl));
+		root.getChildren().add(new PausePane(sControl, core));
 		root.getChildren().add(new PlateauPane(sControl,core));
-		root.getChildren().add(new OptionPane(sControl));
+		root.getChildren().add(new OptionPane(sControl, core));
 		root.getChildren().add(new ConfigPartiePane(sControl,core));
-		root.getChildren().add(new AccueilPane(sControl));
+		root.getChildren().add(new AccueilPane(sControl, core));
 
 		primaryStage.setScene(scene);
 

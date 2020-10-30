@@ -1,12 +1,23 @@
 package ihm;
 
 import controleur.ControleurJeu;
+import ihm.DataControl.ApplicationPane;
 
 public class Core {
 	private ControleurJeu cj = null;
 	private int nbJoueur = 5; 
 	private int nbBot = 4; 
 	private String nomPartie = "partieParDéfaut";
+	
+	private ApplicationPane pauseDepuis = ApplicationPane.ACCUEIL;
+
+	public ApplicationPane getPauseDepuis() {
+		return pauseDepuis;
+	}
+
+	public void setPauseDepuis(ApplicationPane pauseDepuis) {
+		this.pauseDepuis = pauseDepuis;
+	}
 
 	public String getNomPartie() {
 		return nomPartie;

@@ -28,6 +28,7 @@ import javafx.scene.text.FontWeight;
 public class OptionPane extends StackPane {
 
 	private ScreenControl sControl = null;
+	private Core core = null;
 	private StackPane stackPane = new StackPane();
 	private GaussianBlur flou = new GaussianBlur(30);
 	private String styleBoutons = " -fx-background-color:#000000; -fx-background-radius: 15px; -fx-text-fill: #ffffff";
@@ -37,8 +38,8 @@ public class OptionPane extends StackPane {
 	private int tailleCarreCentral = 700;
 	private Font policeBouton = Font.font("Segoe UI", FontWeight.BOLD, 33);
 
-	public OptionPane(ScreenControl sc) {
-
+	public OptionPane(ScreenControl sc, Core c) {
+		core = c;
 		sControl = sc;
 
 		stackPane.setAlignment(Pos.CENTER);
@@ -124,12 +125,12 @@ public class OptionPane extends StackPane {
 			bAcc.setStyle(styleBoutons);
 		});
 
-		Button bRetour = new Button("Retour");
+		Button bRetour = new Button("RETOUR");
 		bRetour.setFont(policeBouton);
 		bRetour.setAlignment(Pos.CENTER);
 		bRetour.setPrefSize(150, 60);
 		bRetour.setStyle(styleBoutons);
-		bRetour.setOnAction(EventHandler -> sc.setPaneOnTop(ApplicationPane.ACCUEIL));
+		bRetour.setOnAction(EventHandler -> sc.setPaneOnTop(core.getPauseDepuis()));
 		bRetour.setOnMouseEntered(event -> {
 			bRetour.setStyle(styleBoutonsSouris);
 		});

@@ -28,39 +28,39 @@ import javafx.scene.text.FontWeight;
 public class PausePane extends StackPane {
 
 	private ScreenControl sControl = null;
+	private Core core; 
 	private StackPane stackPane = new StackPane();
 	private GaussianBlur flou = new GaussianBlur(30);
 	private String styleBoutons = " -fx-background-color:#000000; -fx-background-radius: 15px; -fx-text-fill: #ffffff";
 	private String styleBoutonsSouris = "-fx-background-color:#ff0000;  -fx-text-fill:#000000; -fx-background-radius: 15px;";
 	private final ApplicationPane paneName = ApplicationPane.PAUSE;
 
-	public PausePane(ScreenControl sc) {
-
+	public PausePane(ScreenControl sc, Core c) {
+		core = c; 
 		sControl = sc;
 
 		stackPane.setAlignment(Pos.CENTER);
-		
+
 		Rectangle rect = new Rectangle();
 		rect.setStroke(Color.RED);
 		rect.setStrokeWidth(2);
 		rect.setWidth(700);
 		rect.setHeight(600);
 		rect.setX(100);
-		rect.setY(100);		
+		rect.setY(100);
 		rect.setOpacity(.3);
 
 		VBox vbFond = new VBox();
 		vbFond.setAlignment(Pos.CENTER);
 		vbFond.setSpacing(20);
 		vbFond.setEffect(flou);
-		
 
 		VBox vbCentral = new VBox();
 		vbCentral.setAlignment(Pos.CENTER);
 		vbCentral.setPrefSize(700, 600);
 		vbCentral.setMinSize(700, 600);
 		vbCentral.setMaxSize(700, 600);
-		
+
 		VBox vbTitre = new VBox();
 		vbTitre.setAlignment(Pos.CENTER);
 
@@ -77,8 +77,11 @@ public class PausePane extends StackPane {
 		bOption.setAlignment(Pos.CENTER);
 		bOption.setPrefSize(500, 60);
 		bOption.setStyle(styleBoutons);
-		bOption.setOnAction(EventHandler -> sc.setPaneOnTop(ApplicationPane.OPTION));
-		
+		bOption.setOnAction(EventHandler -> {
+			core.setPauseDepuis(paneName);
+			sc.setPaneOnTop(ApplicationPane.OPTION);
+		});
+
 		bOption.setOnMouseEntered(event -> {
 			bOption.setStyle(styleBoutonsSouris);
 		});
@@ -116,14 +119,14 @@ public class PausePane extends StackPane {
 		bQuitter.setPrefSize(500, 60);
 		bQuitter.setStyle(styleBoutons);
 		bQuitter.setOnAction(actionEvent -> Platform.exit());
-		
+
 		bQuitter.setOnMouseEntered(event -> {
 			bQuitter.setStyle(styleBoutonsSouris);
 		});
 		bQuitter.setOnMouseExited(event -> {
 			bQuitter.setStyle(styleBoutons);
 		});
-		
+
 		bQuitter.setOnAction(event -> {
 			boolean resultat = ConfirmationPane.afficher("Quitter le jeu",
 					"Êtes-vous sûr de vouloir quitter le jeu ? \nSi vous quittez, la partie en cours sera perdue.");
@@ -156,9 +159,9 @@ public class PausePane extends StackPane {
 
 		ImageView img = new ImageView(DataControl.FOND);
 		vbFond.getChildren().add(img);
-		
+
 		stackPane.getChildren().addAll(vbFond, rect, vbCentral);
-		stackPane.setBackground(new Background(new BackgroundFill(Color.BLACK,CornerRadii.EMPTY,null)));
+		stackPane.setBackground(new Background(new BackgroundFill(Color.BLACK, CornerRadii.EMPTY, null)));
 
 		this.getChildren().add(stackPane);
 		sControl.registerNode(paneName, this);
