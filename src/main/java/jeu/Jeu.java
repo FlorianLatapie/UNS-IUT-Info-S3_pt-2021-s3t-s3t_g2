@@ -175,6 +175,18 @@ public class Jeu {
             joueurs.get(i).setChefDesVigiles(false);
         }
     }
+    
+    /**
+     * retourne le chef des vigiles
+     */
+    public Joueur getChefVIgile() {
+    	for (Joueur joueur : this.getJoueurs().values()) {
+			if (joueur.isChefDesVigiles()) {
+				return joueur;
+			}
+		}
+    	return null;
+    }
 
     /**
      * Lance l'ajout des zombies dans les lieux du jeu et ferme si nécessaire les lieux
