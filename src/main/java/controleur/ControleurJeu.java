@@ -40,6 +40,7 @@ public class ControleurJeu {
     private int port;
     private int nextJoueurId;
     private Random rd;
+    private int numeroTour = 1;
 
     private List<Couleur> couleursRestante;
 
@@ -120,6 +121,7 @@ public class ControleurJeu {
             this.jeu.resultatChefVigile(jeu.getJoueurs().get(0));
             ArrayList<Integer> lieuZombie = arriveZombie();
             this.jeu.entreZombie(lieuZombie);
+            //TODO PIPZ lieuZombie
             out.println(jeu.afficheJeu());
             out.println("YES");
             this.start();
@@ -183,6 +185,7 @@ public class ControleurJeu {
      * Execute le déroulement d'une parite
      */
     public void start() {
+        //TODO IT
         fouilleCamion();
         electionChefVigi();
         ArrayList<Integer> lieuZombie = arriveZombie();
@@ -199,6 +202,7 @@ public class ControleurJeu {
             return;
 
         mortJoueur();
+        numeroTour++;
         start();
     }
 
