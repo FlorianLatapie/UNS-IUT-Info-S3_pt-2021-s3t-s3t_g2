@@ -145,7 +145,7 @@ public class AccueilPane extends StackPane {
 
 		// image fond
 		ImageView imgFond = new ImageView(
-				DataControl.PLATEAU);
+				DataControl.FOND);
 
 		// carre central qui contient tous les éléments (boutons et titre)
 		VBox centreMenu = new VBox();

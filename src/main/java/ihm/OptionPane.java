@@ -25,16 +25,16 @@ import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 
-public class PausePane extends StackPane {
+public class OptionPane extends StackPane {
 
 	private ScreenControl sControl = null;
 	private StackPane stackPane = new StackPane();
 	private GaussianBlur flou = new GaussianBlur(30);
 	private String styleBoutons = " -fx-background-color:#000000; -fx-background-radius: 15px; -fx-text-fill: #ffffff";
 	private String styleBoutonsSouris = "-fx-background-color:#ff0000;  -fx-text-fill:#000000; -fx-background-radius: 15px;";
-	private final ApplicationPane paneName = ApplicationPane.PAUSE;
+	private final ApplicationPane paneName = ApplicationPane.OPTION;
 
-	public PausePane(ScreenControl sc) {
+	public OptionPane(ScreenControl sc) {
 
 		sControl = sc;
 
@@ -54,87 +54,82 @@ public class PausePane extends StackPane {
 		vbFond.setSpacing(20);
 		vbFond.setEffect(flou);
 		
+		HBox hbBRetour = new HBox();
+		hbBRetour.setAlignment(Pos.BOTTOM_LEFT);
+		hbBRetour.setPrefSize(670, 60);
+		hbBRetour.setMinSize(670, 60);
+		hbBRetour.setMaxSize(670, 60);
+		
 
 		VBox vbCentral = new VBox();
 		vbCentral.setAlignment(Pos.CENTER);
 		vbCentral.setPrefSize(700, 600);
 		vbCentral.setMinSize(700, 600);
 		vbCentral.setMaxSize(700, 600);
+		vbCentral.setPadding(new Insets(10));
+		
 		
 		VBox vbTitre = new VBox();
-		vbTitre.setAlignment(Pos.CENTER);
+		vbTitre.setAlignment(Pos.TOP_CENTER);
+		
+		HBox hbLang = new HBox();
+		hbLang.setAlignment(Pos.CENTER);
+		hbLang.setSpacing(10);
+		
 
 		VBox vbBoutons = new VBox();
 		vbBoutons.setAlignment(Pos.CENTER);
-		Label titre = new Label("PAUSE");
+		vbBoutons.setSpacing(15);
+	
+		
+		Label titre = new Label("OPTIONS");
 		titre.setStyle("-fx-text-fill: #ff1c16");
 		titre.setFont(Font.font("Arial", FontWeight.BOLD, 75));
 		vbTitre.getChildren().add(titre);
-		vbTitre.setMargin(vbBoutons, new Insets(70));
 
-		Button bOption = new Button("Options");
-		bOption.setFont(Font.font("Arial", FontWeight.BOLD, 30));
-		bOption.setAlignment(Pos.CENTER);
-		bOption.setPrefSize(500, 60);
-		bOption.setStyle(styleBoutons);
-		bOption.setOnAction(EventHandler -> sc.setPaneOnTop(ApplicationPane.OPTION));
+		Button bFrancais = new Button("Français");
+		bFrancais.setFont(Font.font("Arial", FontWeight.BOLD, 30));
+		bFrancais.setAlignment(Pos.CENTER);
+		bFrancais.setPrefSize(245, 60);
+		bFrancais.setStyle(styleBoutons);
+		bFrancais.setOnAction(EventHandler -> sc.setPaneOnTop(ApplicationPane.OPTION));
 		
-		bOption.setOnMouseEntered(event -> {
-			bOption.setStyle(styleBoutonsSouris);
-		});
-		bOption.setOnMouseExited(event -> {
-			bOption.setStyle(styleBoutons);
-		});
-
-		Button bRegles = new Button("Règles du jeu");
-		bRegles.setFont(Font.font("Arial", FontWeight.BOLD, 30));
-		bRegles.setAlignment(Pos.CENTER);
-		bRegles.setPrefSize(500, 60);
-		bRegles.setStyle(styleBoutons);
-		bRegles.setOnMouseEntered(event -> {
-			bRegles.setStyle(styleBoutonsSouris);
-		});
-		bRegles.setOnMouseExited(event -> {
-			bRegles.setStyle(styleBoutons);
-		});
-
-		Button bRecommencer = new Button("Recommencer");
-		bRecommencer.setFont(Font.font("Arial", FontWeight.BOLD, 30));
-		bRecommencer.setAlignment(Pos.CENTER);
-		bRecommencer.setPrefSize(500, 60);
-		bRecommencer.setStyle(styleBoutons);
-		bRecommencer.setOnMouseEntered(event -> {
-			bRecommencer.setStyle(styleBoutonsSouris);
-		});
-		bRecommencer.setOnMouseExited(event -> {
-			bRecommencer.setStyle(styleBoutons);
-		});
-
-		Button bQuitter = new Button("Quitter");
-		bQuitter.setFont(Font.font("Arial", FontWeight.BOLD, 30));
-		bQuitter.setAlignment(Pos.CENTER);
-		bQuitter.setPrefSize(500, 60);
-		bQuitter.setStyle(styleBoutons);
-		bQuitter.setOnAction(actionEvent -> Platform.exit());
 		
-		bQuitter.setOnMouseEntered(event -> {
-			bQuitter.setStyle(styleBoutonsSouris);
+		bFrancais.setOnMouseEntered(event -> {
+			bFrancais.setStyle(styleBoutonsSouris);
 		});
-		bQuitter.setOnMouseExited(event -> {
-			bQuitter.setStyle(styleBoutons);
+		bFrancais.setOnMouseExited(event -> {
+			bFrancais.setStyle(styleBoutons);
 		});
-		
-		bQuitter.setOnAction(event -> {
-			boolean resultat = ConfirmationPane.afficher("Quitter le jeu",
-					"Êtes-vous sûr de vouloir quitter le jeu ? \nSi vous quittez, la partie en cours sera perdue.");
-			if (resultat)
-				Platform.exit();
+
+		Button bEnglish = new Button("English");
+		bEnglish.setFont(Font.font("Arial", FontWeight.BOLD, 30));
+		bEnglish.setAlignment(Pos.CENTER);
+		bEnglish.setPrefSize(245, 60);
+		bEnglish.setStyle(styleBoutons);
+		bEnglish.setOnMouseEntered(event -> {
+			bEnglish.setStyle(styleBoutonsSouris);
+		});
+		bEnglish.setOnMouseExited(event -> {
+			bEnglish.setStyle(styleBoutons);
+		});
+
+		Button bAcc = new Button("Accessibilité");
+		bAcc.setFont(Font.font("Arial", FontWeight.BOLD, 30));
+		bAcc.setAlignment(Pos.CENTER);
+		bAcc.setPrefSize(500, 60);
+		bAcc.setStyle(styleBoutons);
+		bAcc.setOnMouseEntered(event -> {
+			bAcc.setStyle(styleBoutonsSouris);
+		});
+		bAcc.setOnMouseExited(event -> {
+			bAcc.setStyle(styleBoutons);
 		});
 
 		Button bRetour = new Button("Retour");
 		bRetour.setFont(Font.font("Arial", FontWeight.BOLD, 30));
 		bRetour.setAlignment(Pos.CENTER);
-		bRetour.setPrefSize(500, 60);
+		bRetour.setPrefSize(150, 60);
 		bRetour.setStyle(styleBoutons);
 		bRetour.setOnAction(EventHandler -> sc.setPaneOnTop(ApplicationPane.PLATEAU));
 		bRetour.setOnMouseEntered(event -> {
@@ -144,16 +139,14 @@ public class PausePane extends StackPane {
 			bRetour.setStyle(styleBoutons);
 		});
 
-		vbBoutons.getChildren().add(bOption);
-		vbBoutons.getChildren().add(bRegles);
-		vbBoutons.getChildren().add(bRecommencer);
-		vbBoutons.getChildren().add(bRetour);
-		vbBoutons.getChildren().add(bQuitter);
-		vbBoutons.setMargin(bRegles, new Insets(10));
-		vbBoutons.setMargin(bRetour, new Insets(10));
+		hbBRetour.getChildren().add(bRetour);
+		hbLang.getChildren().add(bFrancais);
+		hbLang.getChildren().add(bEnglish);
+		vbBoutons.getChildren().addAll(hbLang, bAcc);
+		vbBoutons.setMargin(vbTitre, new Insets(140));
+		vbBoutons.setMargin(hbBRetour, new Insets(140));
 
-		vbCentral.getChildren().addAll(vbTitre, vbBoutons);
-
+		vbCentral.getChildren().addAll(vbTitre, vbBoutons, hbBRetour);
 		ImageView img = new ImageView(DataControl.FOND);
 		vbFond.getChildren().add(img);
 		

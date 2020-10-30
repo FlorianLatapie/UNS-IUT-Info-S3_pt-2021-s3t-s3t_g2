@@ -18,7 +18,8 @@ public class DataControl {
 	public final static Locale localeEN = new Locale("en", "UK");
 	public final static Locale localeFR = new Locale("fr", "FR");
 	public final static String localMsgURL = "Ressources.Textes.messages";
-	public static final String PLATEAU = "ihm/fond.png";
+	public static final String FOND = "ihm/fond.png";
+	public static final String PLATEAU = "ihm/plateau.png";
 
 	public static final ObservableList<String> couleursJoueur = FXCollections.observableArrayList("Noir", "Vert",
 			"Marron", "Rouge", "Bleu", "Jaune");

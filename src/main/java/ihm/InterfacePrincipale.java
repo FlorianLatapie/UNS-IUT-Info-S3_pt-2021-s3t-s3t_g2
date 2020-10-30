@@ -29,7 +29,7 @@ public class InterfacePrincipale extends Application {
 
 		root.getChildren().add(new PausePane(sControl));
 		root.getChildren().add(new PlateauPane(sControl));
-		//root.getChildren().add(new OptionPane(sControl));
+		root.getChildren().add(new OptionPane(sControl));
 		root.getChildren().add(new ConfigPartiePane(sControl));
 		root.getChildren().add(new AccueilPane(sControl));
 
