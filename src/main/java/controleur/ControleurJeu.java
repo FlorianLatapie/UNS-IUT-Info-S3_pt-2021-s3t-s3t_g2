@@ -1,6 +1,5 @@
 package controleur;
 
-import java.awt.Color;
 import java.io.IOException;
 import java.net.InetAddress;
 import java.net.SocketException;
@@ -97,7 +96,7 @@ public class ControleurJeu {
     }
 
     public boolean joueurConnect() {
-        return joueurs.size() == this.nbjtotal;
+        return joueurs.size() == this.nbjtotal && jeu != null;
     }
 
     public void setCouleurJoueur(ArrayList<Couleur> couleur) {
@@ -110,13 +109,16 @@ public class ControleurJeu {
         ThreadTool.asyncTask(() -> {
             // TODO UN OU PLUSIEURS LIEUX FERME
             // TODO 3 ou 4 PION
-            String m = nwm.getPacketsUdp().get("IP").build(getJoueursListe(), getCouleurJoueursListe(), 0, 3, partieId);
-            nwm.getUdpSocket().sendPacket(m);
+            out.println(jeu.afficheJeu());
+            //PASS ON UDP
+            //String m = nwm.getPacketsUdp().get("IP").build(getJoueursListe(), getCouleurJoueursListe(), 0, 3, partieId);
+            //nwm.getUdpSocket().sendPacket(m);
 
             // TODO ATTENDRE TOUS LES JOUEURS
             // TODO (COMPLETE ACP)
             this.placementPersonnage();
             out.println(jeu.afficheJeu());
+            out.println("YES");
             this.start();
         });
     }
@@ -156,13 +158,13 @@ public class ControleurJeu {
         return tmp;
     }
 
-    private List<Integer> getJoueursListe() {
+    private List<String> getJoueursListe() {
         // TODO BONNE ORDRE ? VIGILE
-        List<Integer> indexs = new ArrayList<>();
+        List<String> noms = new ArrayList<>();
         for (Joueur j : joueurs)
-            indexs.add(j.getJoueurIdint());
+            noms.add(j.getNom());
 
-        return indexs;
+        return noms;
     }
 
     private List<Couleur> getCouleurJoueursListe() {
@@ -535,9 +537,9 @@ public class ControleurJeu {
     }
 
     private void placementPersonnage() {
-        for (int i = 0; i < jeu.getJoueurs().size(); i++) {
-            for (int n = 0; n < jeu.getJoueurs().get(i).getPersonnages().size(); n++) {
-                // TODO PIIJ nbPionPlace que du joueur ?
+        for (int n = 0; n < jeu.getJoueurs().get(0).getPersonnages().size(); n++) {
+            for (int i = 0; i < jeu.getJoueurs().size(); i++) {
+
                 String message = nwm.getPacketsTcp().get("PIIJ").build(nbPlace(), persoPlace(jeu.getJoueurs().get(i)),
                         partieId);
                 ThreadTool.taskPacketTcp(jeu.getJoueurs().get(i).getIp(), jeu.getJoueurs().get(i).getPort(), message);
