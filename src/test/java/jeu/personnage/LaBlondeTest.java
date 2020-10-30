@@ -17,7 +17,7 @@ class LaBlondeTest {
 	void test() throws UnknownHostException {
 		Couleur c = Couleur.BLEU;
 		String nom = "Joueur1";
-		Joueur j1 = new Joueur(0, InetAddress.getByName("127.0.0.1"), c,1050, nom);
+		Joueur j1 = new Joueur(0, InetAddress.getByName("127.0.0.1"), 1050, nom);
 		LaBlonde p1 = new LaBlonde(j1);
 
 		assertEquals(7, p1.getPoint());

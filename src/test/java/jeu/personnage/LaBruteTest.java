@@ -15,7 +15,7 @@ class LaBruteTest {
 	void test() throws UnknownHostException {
 		Couleur c = Couleur.BLEU;
 		String nom = "Joueur1";
-		Joueur j1 = new Joueur(0, InetAddress.getByName("127.0.0.1"),  c,1030, nom);
+		Joueur j1 = new Joueur(0, InetAddress.getByName("127.0.0.1"),  1030, nom);
 		Personnage p1 = new LaBrute(j1);
 		assertEquals(5, p1.getPoint());
 		assertEquals(2, p1.getNbrZretenu());

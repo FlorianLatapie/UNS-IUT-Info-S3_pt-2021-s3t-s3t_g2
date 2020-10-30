@@ -17,6 +17,9 @@ public class MainConsole {
 		couleursRestante.add(Couleur.BLEU);
 		couleursRestante.add(Couleur.MARRON);
 		couleursRestante.add(Couleur.VERT);
+		while(!controleur.joueurConnect()) {
+			
+		}
 		for (int i =0; i<controleur.getJeu().getJoueurs().size(); i++) {
 			Couleur couleur = couleursRestante.get(rd.nextInt(couleursRestante.size()));
 			controleur.getJeu().getJoueurs().get(i).setCouleur(couleur);

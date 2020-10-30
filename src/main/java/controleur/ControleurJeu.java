@@ -92,13 +92,22 @@ public class ControleurJeu {
 				}
 			}
 			status = Status.COMPLETE;
-
+			jeu = new Jeu(joueurs);
 		});
+	}
+	
+	public boolean joueurConnect() {
+		return joueurs.size() == this.nbjtotal;
+	}
+	
+	public void setCouleurJoueur(ArrayList<Couleur> couleur) {
+		for (int i =0; i< jeu.getJoueurs().size(); i++) {
+			jeu.getJoueurs().get(i).setCouleur(couleur.get(i));
+		}
 	}
 
 	public void demarerJeu() {
-		jeu = new Jeu(joueurs);
-
+		ThreadTool.asyncTask(() -> {
 		// TODO UN OU PLUSIEURS LIEUX FERME
 		// TODO 3 ou 4 PION
 		String m = nwm.getPacketsUdp().get("IP").build(getJoueursListe(), getCouleurJoueursListe(), 0, 3, partieId);
@@ -109,6 +118,7 @@ public class ControleurJeu {
 		this.placementPersonnage();
 		out.println(jeu.afficheJeu());
 		this.start();
+		});
 	}
 
 	private void initReseau() throws SocketException {

@@ -56,11 +56,11 @@ class LieuTest {
         place.setOuvert(false);
         assertFalse(place.isOuvert());
         assertThrows(RuntimeException.class, () -> {
-            LaBlonde maBlonde = new LaBlonde(new Joueur(0, InetAddress.getByName("127.0.0.1"), Couleur.NOIR, 1024, "popol"));
-            LaBrute maBrute = new LaBrute(new Joueur(1, InetAddress.getByName("127.0.0.1"), Couleur.NOIR, 1025, "tata lili"));
-            LaFillette maFillette = new LaFillette(new Joueur(2, InetAddress.getByName("127.0.0.1"), Couleur.NOIR, 1026, "toutou"));
-            LaFillette maFillette1 = new LaFillette(new Joueur(3, InetAddress.getByName("127.0.0.1"), Couleur.NOIR, 1027, "toutou"));
-            LaBrute maBrute1 = new LaBrute(new Joueur(4, InetAddress.getByName("127.0.0.1"), Couleur.NOIR, 1028, "op"));
+            LaBlonde maBlonde = new LaBlonde(new Joueur(0, InetAddress.getByName("127.0.0.1"), 1024, "popol"));
+            LaBrute maBrute = new LaBrute(new Joueur(1, InetAddress.getByName("127.0.0.1"), 1025, "tata lili"));
+            LaFillette maFillette = new LaFillette(new Joueur(2, InetAddress.getByName("127.0.0.1"), 1026, "toutou"));
+            LaFillette maFillette1 = new LaFillette(new Joueur(3, InetAddress.getByName("127.0.0.1"), 1027, "toutou"));
+            LaBrute maBrute1 = new LaBrute(new Joueur(4, InetAddress.getByName("127.0.0.1"), 1028, "op"));
             place.addPersonnage(maFillette);
             place.addPersonnage(maBrute);
             place.addPersonnage(maBlonde);
@@ -73,7 +73,7 @@ class LieuTest {
     void test_getBlonde() throws UnknownHostException {
         int numTest = 4;
         Lieu place = new Lieu(numTest);
-        LaBlonde maBlonde = new LaBlonde(new Joueur(5, InetAddress.getByName("127.0.0.1"), Couleur.NOIR, 1029, "blonde"));
+        LaBlonde maBlonde = new LaBlonde(new Joueur(5, InetAddress.getByName("127.0.0.1"), 1029, "blonde"));
         place.addPersonnage(maBlonde);
         assertEquals(place.getBlonde().size(), 1);
 
@@ -83,7 +83,7 @@ class LieuTest {
     void test_getJoueurSurLieu() throws UnknownHostException {
         int numTest = 4;
         Lieu place = new Lieu(numTest);
-        Joueur Bob = new Joueur(6, InetAddress.getByName("127.0.0.1"), Couleur.NOIR,1030, "toto");
+        Joueur Bob = new Joueur(6, InetAddress.getByName("127.0.0.1"), 1030, "toto");
         LaBlonde maBlonde = new LaBlonde(Bob);
         place.addPersonnage(maBlonde);
         assertTrue(place.afficheJoueurSurLieu().add(Bob));
@@ -93,7 +93,7 @@ class LieuTest {
     void test_estAttaquable() throws UnknownHostException {
         int numTest = 1;
         Lieu place = new Lieu(numTest);
-        Joueur Bob = new Joueur(7, InetAddress.getByName("127.0.0.1"),  Couleur.NOIR, 1030,"titi");
+        Joueur Bob = new Joueur(7, InetAddress.getByName("127.0.0.1"),   1030,"titi");
         LaBlonde maBlonde = new LaBlonde(Bob);
         place.addPersonnage(maBlonde);
         assertFalse(place.estAttaquable());
@@ -132,10 +132,10 @@ class LieuTest {
     void test_isFull() throws UnknownHostException {
         int numTest = 3;
         Lieu place = new Lieu(numTest);
-        LaBlonde maBlonde = new LaBlonde(new Joueur(8, InetAddress.getByName("127.0.0.1"), Couleur.NOIR, 1030, "popol"));
-        LaBrute maBrute = new LaBrute(new Joueur(9, InetAddress.getByName("127.0.0.1"), Couleur.NOIR, 1031, "tata lili"));
-        LaFillette maFillette = new LaFillette(new Joueur(10, InetAddress.getByName("127.0.0.1"), Couleur.NOIR, 1032, "toutou"));
-        LaFillette maFillette1 = new LaFillette(new Joueur(11, InetAddress.getByName("127.0.0.1"), Couleur.NOIR, 1033, "toutou"));
+        LaBlonde maBlonde = new LaBlonde(new Joueur(8, InetAddress.getByName("127.0.0.1"), 1030, "popol"));
+        LaBrute maBrute = new LaBrute(new Joueur(9, InetAddress.getByName("127.0.0.1"), 1031, "tata lili"));
+        LaFillette maFillette = new LaFillette(new Joueur(10, InetAddress.getByName("127.0.0.1"), 1032, "toutou"));
+        LaFillette maFillette1 = new LaFillette(new Joueur(11, InetAddress.getByName("127.0.0.1"),1033, "toutou"));
         place.addPersonnage(maBlonde);
         place.addPersonnage(maBrute);
         place.addPersonnage(maFillette);
@@ -143,7 +143,7 @@ class LieuTest {
         place.addPersonnage(maFillette1);
         assertTrue(place.isFull());
         assertThrows(RuntimeException.class, () -> {
-            LaBlonde maBlondeError = new LaBlonde(new Joueur(12, InetAddress.getByName("127.0.0.1"), Couleur.NOIR, 1034, "yep"));
+            LaBlonde maBlondeError = new LaBlonde(new Joueur(12, InetAddress.getByName("127.0.0.1"), 1034, "yep"));
             place.addPersonnage(maBlondeError);
         });
 
