@@ -11,6 +11,9 @@ import javafx.stage.Stage;
 
 public class Pause {
 
+	double height;
+	double width;
+		
     @FXML
     private Button Options;
 
@@ -43,28 +46,18 @@ public class Pause {
         Parent root = null;
 
         if(event.getSource() == Quitter) {
-        	stage = (Stage) Quitter.getScene().getWindow();
-            root = FXMLLoader.load(getClass().getResource("/views/StartPage.fxml"));
+            System.exit(0);
         }
 
-        else if(event.getSource() == Re){
-            stage = (Stage) Re.getScene().getWindow();
-            root = FXMLLoader.load(getClass().getResource("/views/JoinGameView.fxml"));
-        }
-        
-        else if(event.getSource() == Regles_du_jeu){
-        }
-        
-        else if(event.getSource() == Retour){
-        }
-        
         else {
             stage = (Stage) Options.getScene().getWindow();
-            root = FXMLLoader.load(getClass().getResource("/views/OptionsView.fxml"));
+            root = FXMLLoader.load(getClass().getResource("/views/MenuView.fxml"));
         }
 
         Scene scene = new Scene(root);
         stage.setScene(scene);
+        stage.setHeight(height);
+        stage.setWidth(width);
         stage.show();
     }
 }

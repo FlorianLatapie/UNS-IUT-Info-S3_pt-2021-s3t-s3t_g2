@@ -15,6 +15,9 @@ import javafx.stage.Stage;
 
 public class TestController {
 
+		double height;
+		double width;
+	
 	    @FXML
 	    private Button quitButton;
 
@@ -51,7 +54,7 @@ public class TestController {
 	        if(event.getSource() == optionsButton) {
 		        System.out.println("Options!");
 		        stage = (Stage) optionsButton.getScene().getWindow();
-	            root = FXMLLoader.load(getClass().getResource("/views/NotYetImplementedView.fxml"));
+	            root = FXMLLoader.load(getClass().getResource("/views/OptionView.fxml"));
 	        }
 	        if(event.getSource() == regleButton) {
 		        System.out.println("Règle");
@@ -72,6 +75,8 @@ public class TestController {
 
 	        Scene scene = new Scene(root);
 	        stage.setScene(scene);
+	        stage.setHeight(height);
+	        stage.setWidth(width);
 	        stage.show();
 	    }
     

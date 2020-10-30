@@ -15,6 +15,9 @@ package controllers;
 
 public class JoinGameController {
 
+			double height;
+			double width;
+	
 		    @FXML
 		    private Button idGame1;
 
@@ -63,7 +66,7 @@ public class JoinGameController {
 			        
 		        }
 		        
-		        if(event.getSource() == idGame1) {
+		        /*if(event.getSource() == idGame1) {
 			        System.out.println("idGame1!");
 			        stage = (Stage) idGame1.getScene().getWindow();
 		            root = FXMLLoader.load(getClass().getResource("/views/NotYetImplementedView.fxml"));
@@ -84,21 +87,23 @@ public class JoinGameController {
 			        stage = (Stage) idGame3.getScene().getWindow();
 		            root = FXMLLoader.load(getClass().getResource("/views/NotYetImplementedView.fxml"));
 
-		        }
+		        }*/
 		     
-		        if(event.getSource() == joinButton) {
+		        else if(event.getSource() == joinButton) {
 			        System.out.println("Rejoindre");
 			        stage = (Stage) joinButton.getScene().getWindow();
-		            root = FXMLLoader.load(getClass().getResource("/views/ConfigurationView.fxml"));
+		            root = FXMLLoader.load(getClass().getResource("/views/NotYetImplementedView.fxml"));
 
 		        }
-		        /*else {
-		            stage = (Stage) optionsButton.getScene().getWindow();
-		            root = FXMLLoader.load(getClass().getResource("/views/MenuView.fxml"));
-		        }*/
+		        else {
+		            stage = (Stage) joinButton.getScene().getWindow();
+		            root = FXMLLoader.load(getClass().getResource("/views/JoinGameView.fxml"));
+		        }
 
 		        Scene scene = new Scene(root);
 		        stage.setScene(scene);
+		        stage.setHeight(height);
+		        stage.setWidth(width);
 		        stage.show();
 		    }
 	    

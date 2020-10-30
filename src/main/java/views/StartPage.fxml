@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.effect.*?>
 <?import javafx.geometry.*?>
 <?import java.lang.*?>
 <?import java.util.*?>
@@ -8,59 +9,64 @@
 <?import javafx.scene.paint.*?>
 <?import javafx.scene.text.*?>
 
-<VBox id="vbox1" minHeight="442.0" minWidth="876.0" prefHeight="400.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.TestController">
-  <children>
-    <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="-1.0" prefWidth="-1.0" VBox.vgrow="ALWAYS">
-      <children>
-            <HBox prefHeight="442.0" prefWidth="876.0">
+<BorderPane minHeight="442.0" minWidth="876.0" prefHeight="442.0" prefWidth="816.0" style="-fx-background-color: black;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.TestController">
+   <bottom>
+      <VBox prefHeight="97.0" prefWidth="816.0" BorderPane.alignment="CENTER" />
+   </bottom>
+   <left>
+      <VBox prefHeight="103.0" prefWidth="250.0" BorderPane.alignment="CENTER" />
+   </left>
+   <center>
+      <VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="278.0" prefWidth="316.0" BorderPane.alignment="CENTER">
+         <children>
+            <VBox alignment="CENTER" prefHeight="86.0" prefWidth="316.0">
                <children>
-                  <VBox minWidth="280.0" prefHeight="442.0" prefWidth="280.0" />
-                  <VBox prefHeight="442.0" prefWidth="315.0">
-                     <children>
-                        <VBox prefHeight="139.0" prefWidth="315.0">
-                           <children>
-                              <VBox alignment="BOTTOM_CENTER" prefHeight="57.0" prefWidth="315.0">
-                                 <children>
-                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="ZOMBIES">
-                                       <VBox.margin>
-                                          <Insets />
-                                       </VBox.margin>
-                                    </Text>
-                                 </children>
-                              </VBox>
-                              <VBox alignment="TOP_CENTER" prefHeight="116.0" prefWidth="347.0">
-                                 <children>
-                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="%texte.titre" />
-                                 </children>
-                              </VBox>
-                           </children>
-                        </VBox>
-                        <VBox prefHeight="200.0" prefWidth="100.0">
-                           <children>
-                              <GridPane prefHeight="130.0" prefWidth="315.0">
-                                <columnConstraints>
-                                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                                </columnConstraints>
-                                <rowConstraints>
-                                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                </rowConstraints>
-                                 <children>
-                                    <Button fx:id="playButton" mnemonicParsing="false" onAction="#clickedButton" prefHeight="50.0" prefWidth="133.0" text="%boutton.jouer" />
-                                    <Button fx:id="optionsButton" layoutX="30.0" mnemonicParsing="false" onAction="#clickedButton" prefHeight="52.0" prefWidth="127.0" text="%bouton.options" GridPane.columnIndex="1" />
-                                    <Button fx:id="regleButton" mnemonicParsing="false" onAction="#clickedButton" prefHeight="51.0" prefWidth="135.0" text="%bouton.aide" GridPane.rowIndex="1" />
-      							  <Button fx:id="quitButton" mnemonicParsing="false" onAction="#clickedButton" prefHeight="52.0" prefWidth="127.0" text="%bouton.quitter" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                                 </children>
-                              </GridPane>
-                           </children>
-                        </VBox>
-                     </children>
-                  </VBox>
-                  <VBox prefHeight="442.0" prefWidth="280.0" />
+                  <Text fill="RED" strokeType="OUTSIDE" strokeWidth="0.0" text="ZOMBIES">
+                     <VBox.margin>
+                        <Insets />
+                     </VBox.margin>
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font>
+                  </Text>
+                  <Text fill="RED" strokeType="OUTSIDE" strokeWidth="0.0" text="La Blonde La brute et le Truand" />
                </children>
-            </HBox>
-      </children>
-    </AnchorPane>
-  </children>
-</VBox>
+            </VBox>
+            <VBox alignment="CENTER" prefHeight="124.0" prefWidth="316.0">
+               <children>
+                  <Text fill="RED" strokeType="OUTSIDE" strokeWidth="0.0" text="Pseudo:" />
+                  <TextField />
+               </children>
+            </VBox>
+            <GridPane prefHeight="148.0" prefWidth="316.0">
+               <children>
+                  <Button fx:id="playButton" mnemonicParsing="false" onAction="#clickedButton" prefHeight="50.0" prefWidth="133.0" text="Jouer" textFill="RED">
+                     <GridPane.margin>
+                        <Insets />
+                     </GridPane.margin>
+                  </Button>
+                  <Button fx:id="optionsButton" layoutX="30.0" mnemonicParsing="false" onAction="#clickedButton" prefHeight="52.0" prefWidth="127.0" text="Options" textFill="RED" GridPane.columnIndex="1" />
+                  <Button fx:id="regleButton" mnemonicParsing="false" onAction="#clickedButton" prefHeight="51.0" prefWidth="135.0" text="Règles" textFill="RED" GridPane.rowIndex="1" />
+                  <Button fx:id="quitButton" mnemonicParsing="false" onAction="#clickedButton" prefHeight="52.0" prefWidth="127.0" text="Quitter" textFill="RED" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+               </children>
+               <columnConstraints>
+                  <ColumnConstraints fillWidth="false" halignment="CENTER" hgrow="SOMETIMES" maxWidth="1.7976931348623157E308" minWidth="100.0" prefWidth="100.0" />
+                  <ColumnConstraints fillWidth="false" halignment="CENTER" hgrow="SOMETIMES" maxWidth="1.7976931348623157E308" minWidth="10.0" prefWidth="100.0" />
+               </columnConstraints>
+               <rowConstraints>
+                  <RowConstraints maxHeight="1.7976931348623157E308" minHeight="10.0" prefHeight="30.0" valignment="CENTER" vgrow="SOMETIMES" />
+                  <RowConstraints maxHeight="1.7976931348623157E308" minHeight="10.0" prefHeight="30.0" valignment="CENTER" vgrow="SOMETIMES" />
+               </rowConstraints>
+               <effect>
+                  <InnerShadow />
+               </effect>
+            </GridPane>
+         </children></VBox>
+   </center>
+   <right>
+      <VBox prefHeight="200.0" prefWidth="250.0" BorderPane.alignment="CENTER" />
+   </right>
+   <top>
+      <VBox prefHeight="63.0" prefWidth="816.0" style="-: ;" BorderPane.alignment="CENTER" />
+   </top>
+</BorderPane>

@@ -10,6 +10,8 @@ import javafx.stage.Stage;
 
 public class NotYetController {
 	
+	double height;
+	double width;
     
     @FXML
     private Button backButton;
@@ -34,11 +36,16 @@ public class NotYetController {
         if(event.getSource() == backButton) {
         	System.out.println("retour");
 	        stage = (Stage) backButton.getScene().getWindow();
+	        height=stage.getHeight();
+	        width=stage.getWidth();
             root = FXMLLoader.load(getClass().getResource("/views/StartPage.fxml"));
+           
         }
         
         Scene scene = new Scene(root);
         stage.setScene(scene);
+        stage.setHeight(height);
+        stage.setWidth(width);
         stage.show();
     }
 

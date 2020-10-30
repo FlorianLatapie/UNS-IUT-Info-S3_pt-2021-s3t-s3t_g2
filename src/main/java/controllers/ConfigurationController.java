@@ -11,6 +11,8 @@ import javafx.stage.Stage;
 
 public class ConfigurationController {
 
+	double height;
+	double width;
     @FXML
     private Button playbutton;
     
@@ -45,6 +47,8 @@ public class ConfigurationController {
 
         Scene scene = new Scene(root);
         stage.setScene(scene);
+        stage.setHeight(height);
+        stage.setWidth(width);
         stage.show();
     }
 }

@@ -1,18 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.effect.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.text.*?>
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane id="AnchorPane" minHeight="442.0" minWidth="876.0" prefHeight="400.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.NotYetController">
-   <children>
-      <VBox alignment="CENTER" layoutX="14.0" layoutY="14.0" prefHeight="442.0" prefWidth="876.0">
+<BorderPane prefHeight="442.0" prefWidth="816.0" style="-fx-background-color: black;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.NotYetController">
+   <center>
+      <VBox alignment="CENTER" prefHeight="442.0" prefWidth="876.0" BorderPane.alignment="CENTER">
          <children>
-            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Not yet implemented" />
-            <Button fx:id="backButton" mnemonicParsing="false" onAction="#clickedButton" text="%bouton.retour" />
+            <Text fill="RED" strokeType="OUTSIDE" strokeWidth="0.0" text="Not yet implemented" />
+            <Button fx:id="backButton" mnemonicParsing="false" onAction="#clickedButton" text="Retour" textFill="RED">
+               <effect>
+                  <InnerShadow />
+               </effect></Button>
          </children>
       </VBox>
-   </children>
-</AnchorPane>
+   </center>
+</BorderPane>
