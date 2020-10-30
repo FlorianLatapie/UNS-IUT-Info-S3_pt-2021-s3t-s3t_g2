@@ -557,24 +557,41 @@ public class ControleurJeu {
                 des.add(x);
                 des.add(y);
 
-                message = nwm.getPacketsTcp().get("PIRD").build(des, placementDest(x, y, i), partieId);
+                message = nwm.getPacketsTcp().get("PIRD").build(des, placementDest(x, y), partieId);
                 String rep = ThreadTool.taskPacketTcp(jeu.getJoueurs().get(i).getIp(),
                         jeu.getJoueurs().get(i).getPort(), message);
                 // TODO
 
                 int destEntre = (int) nwm.getPacketsTcp().get("PICD").getValue(rep, 1);
-                int persEntre = placementPerso(i, destEntre);
-                jeu.placePerso(jeu.getJoueurs().get(i), persEntre, destEntre);
+                int persEntre = (int) nwm.getPacketsTcp().get("PICD").getValue(rep, 2);
+                jeu.placePerso(jeu.getJoueurs().get(i), valeurToIndex(persEntre), destEntre);
+
+                //TODO PIIG [1]DES [2]placementDest(x, y) destEntre persEntre
+
                 out.println(RETOUR_LIGNE);
             }
+        }
+    }
+
+    private int valeurToIndex(int valeur){
+        switch (valeur){
+            case 7:
+                return 0;
+            case 5:
+                return 1;
+            case 3:
+                return 2;
+            case 1:
+                return 3;
+            default:
+                throw new IllegalStateException("Unexpected value: " + valeur);
         }
     }
 
     private int nbPlace() {
         int tmp = 0;
         for (Lieu l : jeu.getLieux().values())
-            for (Personnage ignored : l.getPersonnage())
-                tmp++;
+            tmp += l.getPersonnage().size();
 
         return tmp;
     }
@@ -586,6 +603,7 @@ public class ControleurJeu {
                 tmp.add(b);
             }
         }
+
         return tmp;
     }
 
@@ -598,11 +616,12 @@ public class ControleurJeu {
         return false;
     }
 
-    private List<Integer> placementDest(int x, int y, int i) {
+    private List<Integer> placementDest(int x, int y) {
         List<Integer> posi = new ArrayList<>();
         if (jeu.getLieux().get(x).isFull() && jeu.getLieux().get(y).isFull()) {
             for (Lieu l : jeu.getLieux().values())
-                posi.add(l.getNum());
+                if (!l.isFull() && l.isOuvert())
+                    posi.add(l.getNum());
             // TODO CHOIX AU JOUEUR OU C PAS FULL SAUF 1 POSSOBILITE
 
             // TODO CHOIX DE LA POSITION
