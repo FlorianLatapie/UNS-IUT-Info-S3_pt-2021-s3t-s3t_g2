@@ -75,7 +75,7 @@ public class PacketHandlerUdp {
             String messageTcp = nwm.getPacketsTcp().get("DCP").build(nomdujoueur, core.getTypeJoueur(),
                     "P" + (int) packet.getValue(message, 1));
             TcpClientSocket.connect((String) packet.getValue(message, 2), (int) packet.getValue(message, 3),
-                    messageTcp);
+                    messageTcp, null, 0);
         }
         sc.close();
     }
