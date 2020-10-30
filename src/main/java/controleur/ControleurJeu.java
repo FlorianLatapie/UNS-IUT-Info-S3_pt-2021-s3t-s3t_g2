@@ -578,9 +578,11 @@ public class ControleurJeu {
 
     private List<Integer> persoPlace(Joueur joueur) {
         List<Integer> tmp = new ArrayList<>();
-        for (Personnage p : joueur.getPersonnages().values())
-            tmp.add(p.getPoint());
-
+        for (int b = 0; b < joueur.getPersonnages().size(); b++) {
+            if (joueur.getPersonnages().get(b).getMonLieu() == null) {
+                tmp.add(b);
+            }
+        }
         return tmp;
     }
 
