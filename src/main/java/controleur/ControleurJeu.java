@@ -117,6 +117,9 @@ public class ControleurJeu {
             // TODO ATTENDRE TOUS LES JOUEURS
             // TODO (COMPLETE ACP)
             this.placementPersonnage();
+            this.jeu.resultatChefVigile(jeu.getJoueurs().get(0));
+            ArrayList<Integer> lieuZombie = arriveZombie();
+            this.jeu.entreZombie(lieuZombie);
             out.println(jeu.afficheJeu());
             out.println("YES");
             this.start();
