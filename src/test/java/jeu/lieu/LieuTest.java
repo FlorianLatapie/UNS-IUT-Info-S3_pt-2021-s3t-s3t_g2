@@ -2,7 +2,6 @@ package jeu.lieu;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-import java.awt.Color;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
 
@@ -13,7 +12,6 @@ import jeu.LaBlonde;
 import jeu.LaBrute;
 import jeu.LaFillette;
 import jeu.Lieu;
-import reseau.type.Couleur;
 
 class LieuTest {
 

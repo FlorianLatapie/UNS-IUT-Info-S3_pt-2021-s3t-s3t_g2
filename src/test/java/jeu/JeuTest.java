@@ -10,7 +10,6 @@ import java.util.HashMap;
 import java.util.List;
 
 import org.junit.jupiter.api.Test;
-import reseau.type.Couleur;
 
 class JeuTest {
     Joueur j1 = new Joueur(0, InetAddress.getByName("127.0.0.1"), 1025, "Bob");

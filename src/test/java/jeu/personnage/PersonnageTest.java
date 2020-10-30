@@ -2,19 +2,16 @@ package jeu.personnage;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-import java.awt.Color;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
 
 import org.junit.jupiter.api.Test;
 
 import jeu.*;
-import reseau.type.Couleur;
 
 class PersonnageTest {
     @Test
     void test_test_Personnage() throws UnknownHostException {
-        Couleur c = Couleur.BLEU;
         String nom = "Joueur1";
         Joueur j1 = new Joueur(0, InetAddress.getByName("127.0.0.1"), 1030, nom);
         LaBlonde p1 = new LaBlonde(j1);
@@ -34,7 +31,6 @@ class PersonnageTest {
 
         assertEquals(p1.getMonLieu(), newLieu);
 
-        Joueur j2 = new Joueur(1, InetAddress.getByName("127.0.0.1"), 1030, nom);
         assertEquals(p1.getJoueur(), j1);
 
         assertEquals(TypePersonnage.BLONDE, p1.getType());
