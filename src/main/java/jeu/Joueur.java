@@ -46,10 +46,9 @@ public class Joueur {
      * @param port
      * @param nom         le nom du joueur
      */
-    public Joueur(int joueurIdint, InetAddress ip, Couleur couleur, int port, String nom) {
+    public Joueur(int joueurIdint, InetAddress ip, int port, String nom) {
         this.joueurIdint = joueurIdint;
         this.joueurId = "J" + joueurIdint;
-        this.couleur = couleur;
         this.ip = ip;
         this.port = port;
         enVie = true;
