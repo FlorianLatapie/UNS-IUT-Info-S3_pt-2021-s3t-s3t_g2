@@ -1,7 +1,6 @@
 package jeu.joueur;
 
 import static org.junit.jupiter.api.Assertions.*;
-import java.awt.Color;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
 import java.util.HashMap;
@@ -42,6 +41,7 @@ class JoueurTest {
 	 */
 	@Test
 	void testJoueurGettersAndSetters() {
+		j.setCouleur(c);
 		HashMap<Integer, Personnage> p = new HashMap<>();
 		p.put(0, b);
 
