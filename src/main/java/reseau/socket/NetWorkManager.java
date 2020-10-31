@@ -78,12 +78,15 @@ public class NetWorkManager {
         }
     }
 
-    public void startServerTCP() {
+    public void stopBind() {
         try {
             socketTCPSocket.close();
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    public void startServerTCP() {
         tcpServerSocket.start(address, tcpPort);
     }
 
