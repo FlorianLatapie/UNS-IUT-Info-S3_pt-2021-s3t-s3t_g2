@@ -114,9 +114,6 @@ public abstract class PtTool {
                 case "ReasonType":
                     ReasonType rt = ((ReasonType) value);
                     return rt.toString();
-                case "PionType":
-                    PionType pty = ((PionType) value);
-                    return pty.toString();
                 case "PionCouleur":
                     PionCouleur pc = ((PionCouleur) value);
                     return pc.toString();
@@ -137,7 +134,7 @@ public abstract class PtTool {
                     return sss.toString();
                 case "HashMap<PionType,List<Integer>>":
                     @SuppressWarnings("unchecked")
-                    HashMap<PionType, List<Integer>> pti = (HashMap<PionType, List<Integer>>) value;
+                    HashMap<Integer, List<Integer>> pti = (HashMap<Integer, List<Integer>>) value;
                     return PacketTool.subListToStr(pti);
                 case "List<CarteType>":
                 case "List<PionType>":
@@ -184,8 +181,6 @@ public abstract class PtTool {
                     return TypeJoueur.valueOf(param);
                 case "ReasonType":
                     return ReasonType.valueOf(param);
-                case "PionType":
-                    return PionType.valueOf(param);
                 case "PionCouleur":
                     return PionCouleur.valueOf(param);
                 case "Couleur":
@@ -202,8 +197,6 @@ public abstract class PtTool {
                     return PacketTool.strToSubList(param);
                 case "List<CarteType>":
                     return PacketTool.strToListEnum(param, CarteType.class);
-                case "List<PionType>":
-                    return PacketTool.strToListEnum(param, PionType.class);
                 case "List<Couleur>":
                     return PacketTool.strToListEnum(param, Couleur.class);
                 case "List<PionCouleur>":
