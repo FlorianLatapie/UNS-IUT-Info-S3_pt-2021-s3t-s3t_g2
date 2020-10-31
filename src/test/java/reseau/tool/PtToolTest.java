@@ -40,10 +40,6 @@ class PtToolTest {
         assertEquals("PION", PtTool.convertParamToString(ReasonType.PION, ReasonType.class.getSimpleName()));
         assertNotEquals("NUL", PtTool.convertParamToString(ReasonType.ZOMBIE, ReasonType.class.getSimpleName()));
 
-        assertEquals("BLONDE", PtTool.convertParamToString(PionType.BLONDE, PionType.class.getSimpleName()));
-        assertEquals("FILETTE", PtTool.convertParamToString(PionType.FILETTE, PionType.class.getSimpleName()));
-        assertNotEquals("azfdsf", PtTool.convertParamToString(PionType.BRUTE, PionType.class.getSimpleName()));
-
         assertEquals("B1", PtTool.convertParamToString(PionCouleur.B1, PionCouleur.class.getSimpleName()));
         assertEquals("J7", PtTool.convertParamToString(PionCouleur.J7, PionCouleur.class.getSimpleName()));
         assertNotEquals("HJ", PtTool.convertParamToString(PionCouleur.B3, PionCouleur.class.getSimpleName()));
@@ -68,20 +64,20 @@ class PtToolTest {
         assertEquals("ATTENTE", PtTool.convertParamToString(Status.ATTENTE, Status.class.getSimpleName()));
         assertNotEquals("Ah", PtTool.convertParamToString(Status.COMPLETE, Status.class.getSimpleName()));
 
-        HashMap<PionType, List<Integer>> actual = new HashMap<>();
+        HashMap<Integer, List<Integer>> actual = new HashMap<>();
         List<Integer> blonde = new ArrayList<>();
         blonde.add(5);
-        actual.put(PionType.BLONDE, blonde);
+        actual.put(7, blonde);
         List<Integer> brute = new ArrayList<>();
         brute.add(2);
-        actual.put(PionType.BRUTE, brute);
+        actual.put(5, brute);
         List<Integer> truand = new ArrayList<>();
         truand.add(3);
         truand.add(5);
-        actual.put(PionType.TRUAND, truand);
+        actual.put(3, truand);
         List<Integer> filette = new ArrayList<>();
         filette.add(-1);
-        actual.put(PionType.FILETTE, filette);
+        actual.put(1, filette);
         String expected = "BLONDE:5;BRUTE:2;FILETTE:-1;TRUAND:3,5";
         //Assertions.assertEquals(expected, PtTool.convertParamToString(actual, "HashMap<PionType,List<Integer>>"));
         assertNotEquals("az", PtTool.convertParamToString(actual, "HashMap<PionType,List<Integer>>"));
@@ -92,13 +88,6 @@ class PtToolTest {
         expected = "ABA,ACS";
         assertEquals(expected, PtTool.convertParamToString(carteTypes, "List<CarteType>"));
         assertNotEquals("az", PtTool.convertParamToString(carteTypes, "List<CarteType>"));
-
-        List<PionType> pionTypes = new ArrayList<>();
-        pionTypes.add(PionType.FILETTE);
-        pionTypes.add(PionType.TRUAND);
-        expected = "FILETTE,TRUAND";
-        assertEquals(expected, PtTool.convertParamToString(pionTypes, "List<PionType>"));
-        assertNotEquals("az", PtTool.convertParamToString(pionTypes, "List<PionType>"));
 
         List<Couleur> couleurs = new ArrayList<>();
         couleurs.add(Couleur.ROUGE);
@@ -167,11 +156,6 @@ class PtToolTest {
         assertNotEquals(ReasonType.PION, PtTool.convertStringToObject("ZOMBIE", ReasonType.class.getSimpleName()));
         assertNull(PtTool.convertStringToObject("MPZPM", ReasonType.class.getSimpleName()));
 
-        assertEquals(PionType.BLONDE, PtTool.convertStringToObject("BLONDE", PionType.class.getSimpleName()));
-        assertEquals(PionType.FILETTE, PtTool.convertStringToObject("FILETTE", PionType.class.getSimpleName()));
-        assertNotEquals(PionType.BLONDE, PtTool.convertStringToObject("BRUTE", PionType.class.getSimpleName()));
-        assertNull(PtTool.convertStringToObject("MPZPM", PionType.class.getSimpleName()));
-
         assertEquals(PionCouleur.B5, PtTool.convertStringToObject("B5", PionCouleur.class.getSimpleName()));
         assertEquals(PionCouleur.M5, PtTool.convertStringToObject("M5", PionCouleur.class.getSimpleName()));
         assertNotEquals(PionCouleur.B3, PtTool.convertStringToObject("BF", PionCouleur.class.getSimpleName()));
@@ -202,20 +186,20 @@ class PtToolTest {
         assertNotEquals(Status.ATTENTE, PtTool.convertStringToObject("COMPLETE", Status.class.getSimpleName()));
         assertNull(PtTool.convertStringToObject("MPZPM", Status.class.getSimpleName()));
 
-        HashMap<PionType, List<Integer>> actual = new HashMap<>();
+        HashMap<Integer, List<Integer>> actual = new HashMap<>();
         List<Integer> blonde = new ArrayList<>();
         blonde.add(5);
-        actual.put(PionType.BLONDE, blonde);
+        actual.put(7, blonde);
         List<Integer> brute = new ArrayList<>();
         brute.add(2);
-        actual.put(PionType.BRUTE, brute);
+        actual.put(5, brute);
         List<Integer> truand = new ArrayList<>();
         truand.add(3);
         truand.add(5);
-        actual.put(PionType.TRUAND, truand);
+        actual.put(3, truand);
         List<Integer> filette = new ArrayList<>();
         filette.add(-1);
-        actual.put(PionType.FILETTE, filette);
+        actual.put(1, filette);
         String expected = "BLONDE:5;BRUTE:2;FILETTE:-1;TRUAND:3,5";
         //Assertions.assertEquals(actual, PtTool.convertStringToObject(expected, "HashMap<PionType,List<Integer>>"));
         //assertNotEquals(actual, PtTool.convertStringToObject(expected, "HashMap<PionType,List<Integer>>"));
@@ -226,13 +210,6 @@ class PtToolTest {
         expected = "ABA,ACS";
         assertEquals(carteTypes, PtTool.convertStringToObject(expected, "List<CarteType>"));
         assertNotEquals(carteTypes, PtTool.convertStringToObject("az", "List<CarteType>"));
-
-        List<PionType> pionTypes = new ArrayList<>();
-        pionTypes.add(PionType.FILETTE);
-        pionTypes.add(PionType.TRUAND);
-        expected = "FILETTE,TRUAND";
-        assertEquals(pionTypes, PtTool.convertStringToObject(expected, "List<PionType>"));
-        assertNotEquals(pionTypes, PtTool.convertStringToObject("az", "List<PionType>"));
 
         List<Couleur> couleurs = new ArrayList<>();
         couleurs.add(Couleur.ROUGE);
