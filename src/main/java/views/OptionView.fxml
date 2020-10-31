@@ -14,7 +14,7 @@
    <center>
       <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
          <children>
-            <Button fx:id="frenchButton" mnemonicParsing="false" prefHeight="26.0" prefWidth="70.0" text="Francais" textFill="RED">
+            <Button fx:id="frenchButton" mnemonicParsing="false" prefHeight="26.0" prefWidth="70.0" style="-fx-background-color: A4A4A4;" text="Francais" textFill="#eb0000">
                <VBox.margin>
                   <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                </VBox.margin>
@@ -22,7 +22,7 @@
                   <InnerShadow />
                </effect>
             </Button>
-            <Button fx:id="englishButton" minWidth="70.0" mnemonicParsing="false" text="Anglais">
+            <Button fx:id="englishButton" minWidth="70.0" mnemonicParsing="false" style="-fx-background-color: A4A4A4;" text="Anglais" textFill="#900000">
                <VBox.margin>
                   <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                </VBox.margin>
@@ -30,7 +30,7 @@
                   <InnerShadow />
                </effect>
             </Button>
-            <Button fx:id="backButton" minWidth="70.0" mnemonicParsing="false" onAction="#clickedButton" text="Retour">
+            <Button fx:id="backButton" minWidth="70.0" mnemonicParsing="false" onAction="#clickedButton" style="-fx-background-color: A4A4A4;" text="Retour" textFill="#900000">
                <VBox.margin>
                   <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                </VBox.margin>

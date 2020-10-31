@@ -63,7 +63,7 @@ public class StartPageController {
 		        stage = (Stage) regleButton.getScene().getWindow();
 		        height=stage.getHeight();
 		        width=stage.getWidth();
-	            root = FXMLLoader.load(getClass().getResource("/views/NotYetImplementedView.fxml"));
+	            root = FXMLLoader.load(getClass().getResource("/views/RegleView.fxml"));
 	        }
 	        if(event.getSource() == playButton) {
 		        System.out.println("Jouer");

@@ -11,8 +11,8 @@
    <center>
       <VBox alignment="CENTER" prefHeight="442.0" prefWidth="876.0" BorderPane.alignment="CENTER">
          <children>
-            <Text fill="RED" strokeType="OUTSIDE" strokeWidth="0.0" text="Not yet implemented" />
-            <Button fx:id="backButton" mnemonicParsing="false" onAction="#clickedButton" text="Retour" textFill="RED">
+            <Text fill="#900000" strokeType="OUTSIDE" strokeWidth="0.0" text="Not yet implemented" />
+            <Button fx:id="backButton" mnemonicParsing="false" onAction="#clickedButton" style="-fx-background-color: A4A4A4;" text="Retour" textFill="#900000">
                <effect>
                   <InnerShadow />
                </effect></Button>

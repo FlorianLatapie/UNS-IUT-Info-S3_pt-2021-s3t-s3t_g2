@@ -20,7 +20,7 @@
    <bottom>
       <BorderPane prefHeight="63.0" prefWidth="200.0" BorderPane.alignment="CENTER">
          <right>
-            <Button fx:id="joinButton" minHeight="31.0" minWidth="88.0" onAction="#clickedButton" prefHeight="31.0" prefWidth="88.0" textFill="RED" BorderPane.alignment="CENTER">
+            <Button fx:id="joinButton" minHeight="31.0" minWidth="88.0" onAction="#clickedButton" prefHeight="31.0" prefWidth="88.0" style="-fx-background-color: A4A4A4;" textFill="#900000" BorderPane.alignment="CENTER">
                <BorderPane.margin>
                   <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
                </BorderPane.margin>
@@ -29,7 +29,7 @@
                </effect></Button>
          </right>
          <left>
-            <Button fx:id="backButton" minHeight="31.0" minWidth="88.0" onAction="#clickedButton" prefHeight="31.0" prefWidth="88.0" textFill="RED" BorderPane.alignment="CENTER">
+            <Button fx:id="backButton" minHeight="31.0" minWidth="88.0" onAction="#clickedButton" prefHeight="31.0" prefWidth="88.0" style="-fx-background-color: A4A4A4;" textFill="#900000" BorderPane.alignment="CENTER">
                <BorderPane.margin>
                   <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
                </BorderPane.margin>
@@ -42,27 +42,27 @@
    <center>
       <VBox alignment="CENTER" prefHeight="345.0" prefWidth="269.0" BorderPane.alignment="CENTER">
          <children>
-            <Text fill="RED" text="Jouer">
+            <Text fill="#900000" text="Jouer">
                <font>
                   <Font name="System Bold" size="12.0" />
                </font></Text>
-            <ScrollPane fitToWidth="true" prefHeight="218.0" prefWidth="513.0">
+            <ScrollPane fitToWidth="true" opacity="0.65" prefHeight="218.0" prefWidth="513.0" style="-fx-background-color: A4A4A4;">
                <content>
                   <GridPane alignment="CENTER" hgap="5" style="-fx-background-color: black;" vgap="5">
                      <children>
-                        <Button fx:id="idGame1" onAction="#clickedButton" prefHeight="31.0" prefWidth="255.0" textFill="RED" GridPane.columnIndex="0" GridPane.rowIndex="1">
+                        <Button fx:id="idGame1" onAction="#clickedButton" prefHeight="31.0" prefWidth="255.0" style="-fx-background-color: A4A4A4;" textFill="#900000" GridPane.columnIndex="0" GridPane.rowIndex="1">
                            <effect>
                               <InnerShadow />
                            </effect></Button>
-                        <Button fx:id="idGame2" onAction="#clickedButton" prefHeight="31.0" prefWidth="255.0" GridPane.columnIndex="0" GridPane.rowIndex="2">
+                        <Button fx:id="idGame2" onAction="#clickedButton" prefHeight="31.0" prefWidth="255.0" style="-fx-background-color: A4A4A4;" textFill="#900000" GridPane.columnIndex="0" GridPane.rowIndex="2">
                            <effect>
                               <InnerShadow />
                            </effect></Button>
-                        <Button fx:id="idGame3" onAction="#clickedButton" prefWidth="255.0" GridPane.rowIndex="5">
+                        <Button fx:id="idGame3" onAction="#clickedButton" prefWidth="255.0" style="-fx-background-color: A4A4A4;" textFill="#900000" GridPane.rowIndex="5">
                            <effect>
                               <InnerShadow />
                            </effect></Button>
-                        <Button fx:id="idGame4" onAction="#clickedButton" prefHeight="13.0" prefWidth="255.0" GridPane.columnIndex="0" GridPane.rowIndex="4">
+                        <Button fx:id="idGame4" onAction="#clickedButton" prefHeight="13.0" prefWidth="255.0" style="-fx-background-color: A4A4A4;" textFill="#900000" GridPane.columnIndex="0" GridPane.rowIndex="4">
                            <effect>
                               <InnerShadow />
                            </effect></Button>

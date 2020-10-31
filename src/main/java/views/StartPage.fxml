@@ -21,7 +21,7 @@
          <children>
             <VBox alignment="CENTER" prefHeight="86.0" prefWidth="316.0">
                <children>
-                  <Text fill="RED" strokeType="OUTSIDE" strokeWidth="0.0" text="ZOMBIES">
+                  <Text fill="#900000" strokeType="OUTSIDE" strokeWidth="0.0" text="ZOMBIES">
                      <VBox.margin>
                         <Insets />
                      </VBox.margin>
@@ -29,25 +29,25 @@
                         <Font name="System Bold" size="12.0" />
                      </font>
                   </Text>
-                  <Text fill="RED" strokeType="OUTSIDE" strokeWidth="0.0" text="La Blonde La brute et le Truand" />
+                  <Text fill="#900000" strokeType="OUTSIDE" strokeWidth="0.0" text="La Blonde La brute et le Truand" />
                </children>
             </VBox>
             <VBox alignment="CENTER" prefHeight="124.0" prefWidth="316.0">
                <children>
-                  <Text fill="RED" strokeType="OUTSIDE" strokeWidth="0.0" text="Pseudo:" />
-                  <TextField />
+                  <Text fill="#900000" strokeType="OUTSIDE" strokeWidth="0.0" text="Pseudo:" />
+                  <TextField style="-fx-background-color: A4A4A4;" />
                </children>
             </VBox>
             <GridPane prefHeight="148.0" prefWidth="316.0">
                <children>
-                  <Button fx:id="playButton" mnemonicParsing="false" onAction="#clickedButton" prefHeight="50.0" prefWidth="133.0" text="Jouer" textFill="RED">
+                  <Button fx:id="playButton" mnemonicParsing="false" onAction="#clickedButton" prefHeight="50.0" prefWidth="133.0" style="-fx-background-color: A4A4A4;" text="Jouer" textFill="#900000">
                      <GridPane.margin>
                         <Insets />
                      </GridPane.margin>
                   </Button>
-                  <Button fx:id="optionsButton" layoutX="30.0" mnemonicParsing="false" onAction="#clickedButton" prefHeight="52.0" prefWidth="127.0" text="Options" textFill="RED" GridPane.columnIndex="1" />
-                  <Button fx:id="regleButton" mnemonicParsing="false" onAction="#clickedButton" prefHeight="51.0" prefWidth="135.0" text="Règles" textFill="RED" GridPane.rowIndex="1" />
-                  <Button fx:id="quitButton" mnemonicParsing="false" onAction="#clickedButton" prefHeight="52.0" prefWidth="127.0" text="Quitter" textFill="RED" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                  <Button fx:id="optionsButton" layoutX="30.0" mnemonicParsing="false" onAction="#clickedButton" prefHeight="52.0" prefWidth="127.0" style="-fx-background-color: A4A4A4;" text="Options" textFill="#900000" GridPane.columnIndex="1" />
+                  <Button fx:id="regleButton" mnemonicParsing="false" onAction="#clickedButton" prefHeight="51.0" prefWidth="135.0" style="-fx-background-color: A4A4A4;" text="Règles" textFill="#900000" GridPane.rowIndex="1" />
+                  <Button fx:id="quitButton" mnemonicParsing="false" onAction="#clickedButton" prefHeight="52.0" prefWidth="127.0" style="-fx-background-color: A4A4A4;" text="Quitter" textFill="#900000" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                </children>
                <columnConstraints>
                   <ColumnConstraints fillWidth="false" halignment="CENTER" hgrow="SOMETIMES" maxWidth="1.7976931348623157E308" minWidth="100.0" prefWidth="100.0" />
