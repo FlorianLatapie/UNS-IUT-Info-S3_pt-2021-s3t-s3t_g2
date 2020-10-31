@@ -21,7 +21,7 @@ public class Jeu {
 	HashMap<Integer, Lieu> lieux;
 	HashMap<Integer, Joueur> joueurs;
 	ArrayList<CarteAction> cartes;
-	Boolean newChef;
+	boolean newChef;
 	private List<LieuxListener> listeners = new ArrayList<LieuxListener>();
 
 	public void addListener(LieuxListener toAdd) {
@@ -34,7 +34,7 @@ public class Jeu {
 			hl.lieuxChanged(lieux);
 	}
 
-	public Boolean getNewChef() {
+	public boolean getNewChef() {
 		return newChef;
 	}
 
@@ -49,6 +49,7 @@ public class Jeu {
 		lieux = new HashMap<>();
 		joueurs = new HashMap<>();
 		cartes = new ArrayList<>();
+		newChef = false;
 //		initCarte();
 		for (int i = 0; i < listeJoueursInitiale.size(); i++)
 			joueurs.put(i, listeJoueursInitiale.get(i));
