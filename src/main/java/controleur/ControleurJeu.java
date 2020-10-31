@@ -41,7 +41,7 @@ public class ControleurJeu {
     private int port;
     private int nextJoueurId;
     private Random rd;
-
+    private List<Joueur> jmort;
     public List<String> getTempPaquet() {
         return tempPaquet;
     }
@@ -245,6 +245,7 @@ public class ControleurJeu {
         String m = nwm.getPacketsTcp().get("IT").build(jeu.getChefVIgile().getCouleur(), getJoueursCouleurs(), partieId, numeroTour);
         for (Joueur j : jeu.getJoueurs().values())
             TcpClientSocket.connect(j.getIp(), j.getPort(), m, null, 0);
+        
         fouilleCamion();
         electionChefVigi();
         lieuZombie = arriveZombie();
@@ -258,7 +259,7 @@ public class ControleurJeu {
         jeu.fermerLieu();
         if (!attaqueZombie())
             return;
-
+        jmort.clear();
         mortJoueur();
         numeroTour++;
         start();
@@ -393,6 +394,14 @@ public class ControleurJeu {
         m = nwm.getPacketsTcp().get("CDFC").build(partieId, numeroTour);
         for (Joueur j : jeu.getJoueurs().values())
             TcpClientSocket.connect(j.getIp(), j.getPort(), m, null, 0);
+       for (Joueur j: this.jeu.getJoueurs().values()) {
+    	   if (jmort.contains(j)) {
+    		   //TODO CDZVI
+    		   //TODO traiter CDDZVJE
+    		   //this.jeu.getLieux().get(DZV).addZombie();
+    	   }
+       }
+    
     }
 
     private String getPaquetTemp(String key) {
@@ -759,31 +768,14 @@ public class ControleurJeu {
         for (int i = 0; i < this.jeu.getJoueurs().size(); i++) {
             if (this.jeu.getJoueurs().get(i).isEnVie() && this.jeu.getJoueurs().get(i).getPersonnages().size() == 0) {
                 this.jeu.getJoueurs().get(i).setEnVie(false);
+                jmort.add(this.jeu.getJoueurs().get(i));
                 out.println(this.jeu.getJoueurs().get(i) + " est mort!");
-                int dest;
-                ArrayList<Integer> num = new ArrayList<>();
-                out.println();
-                out.println(this.jeu.getJoueurs().get(i) + " choisis un lieu ou ajouter un Zombie:");
-                for (int j = 1; j < 7; j++) {
-                    if (this.jeu.getLieux().get(j).isOuvert()) {
-                        num.add(j);
-                        out.println(j + "\t" + this.jeu.getLieux().get(j));
-                    }
-                }
-                // TODO CDZVI this.jeu.getJoueurs().get(i)
-                // dest = sc.nextInt();
-                dest = new Random().nextInt(6) + 1; // temporaire //TODO GET DZV ON CDZVI WITH CDDZVJE
-                out.println(dest); // temporaire
-                if (!num.contains(dest)) {
-                    return;
-                }
-                // TODO CDZVDI
-                this.jeu.getLieux().get(dest).addZombie();
             }
         }
 
         out.println(RETOUR_LIGNE);
     }
+    
 
     /**
      * Detecte et affiche la fin du jeu
