@@ -89,6 +89,7 @@ public abstract class TcpClientSocket {
                     break;
                 logger.warning(MessageFormat.format("Cannot connect to the server : {0}", e.getMessage()));
                 logger.warning(MessageFormat.format("Retry # : {0}", retry));
+                logger.warning(MessageFormat.format("Error on {0}", message));
                 retry++;
                 try {
                     Thread.sleep(50);
