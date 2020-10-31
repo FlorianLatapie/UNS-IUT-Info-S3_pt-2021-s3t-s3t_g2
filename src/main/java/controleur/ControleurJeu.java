@@ -12,10 +12,7 @@ import reseau.socket.SideConnection;
 import reseau.socket.TcpClientSocket;
 import reseau.tool.NetworkTool;
 import reseau.tool.ThreadTool;
-import reseau.type.CarteType;
-import reseau.type.Couleur;
-import reseau.type.PionCouleur;
-import reseau.type.Status;
+import reseau.type.*;
 
 import static java.lang.System.out;
 
@@ -169,8 +166,12 @@ public class ControleurJeu {
         System.out.println(nwm.getTcpPort());
     }
 
-    public String ajouterJoueur(InetAddress ip, int port, String nom) {
+    public String ajouterJoueur(InetAddress ip, int port, String nom, TypeJoueur typeJoueur) {
         Joueur joueur = new Joueur(getNewJoueurId(), ip, port, nom);
+        if (typeJoueur == TypeJoueur.JOUEUR)
+            nbjractuel++;
+        else if (typeJoueur == TypeJoueur.BOT)
+            nbjvactuel++;
         joueurs.add(joueur);
         return joueur.getJoueurId();
     }
@@ -283,6 +284,7 @@ public class ControleurJeu {
         }
 
         out.println(RETOUR_LIGNE);
+        //TODO DEMANDER A AURELIEN RECV
         m = nwm.getPacketsTcp().get("RECV").build(jeu.getChefVIgile().getCouleur(), partieId, numeroTour);
         for (Joueur j : jeu.getJoueurs().values())
             TcpClientSocket.connect(j.getIp(), j.getPort(), m, null, 0);
@@ -294,7 +296,11 @@ public class ControleurJeu {
      * @return liste des numéro des lieux d'arrivé des zomibie
      */
     private ArrayList<Integer> arriveZombie() {
-        //TODO PAZ NE jeu.getNewChef()(si c'est true -> NE)
+        //TODO DEMANDER AURELIEN(si c'est true -> NE)
+        VigileEtat ve = jeu.getNewChef() ? VigileEtat.NE : VigileEtat.NUL;
+        String m = nwm.getPacketsTcp().get("PAZ").build(jeu.getChefVIgile().getCouleur(), ve, partieId, numeroTour);
+        for (Joueur j : jeu.getJoueurs().values())
+            TcpClientSocket.connect(j.getIp(), j.getPort(), m, null, 0);
         int z1 = new Random().nextInt(6) + 1;
         int z2 = new Random().nextInt(6) + 1;
         int z3 = new Random().nextInt(6) + 1;
@@ -618,7 +624,8 @@ public class ControleurJeu {
                 des.add(x);
                 des.add(y);
 
-                message = nwm.getPacketsTcp().get("PIRD").build(des, placementDest(x, y), partieId);
+                List<Integer> listePion = placementDest(x, y);
+                message = nwm.getPacketsTcp().get("PIRD").build(des, listePion, partieId);
                 String rep = ThreadTool.taskPacketTcp(jeu.getJoueurs().get(i).getIp(),
                         jeu.getJoueurs().get(i).getPort(), message);
                 // TODO
@@ -627,7 +634,11 @@ public class ControleurJeu {
                 int persEntre = (int) nwm.getPacketsTcp().get("PICD").getValue(rep, 2);
                 jeu.placePerso(jeu.getJoueurs().get(i), valeurToIndex(persEntre), destEntre);
 
-                //TODO PIIG [1]DES [2]placementDest(x, y) destEntre persEntre
+                message = nwm.getPacketsTcp().get("PIIG").build(jeu.getJoueurs().get(i).getCouleur(), des, listePion, destEntre, valeurToIndex(persEntre),partieId);
+                for (Joueur j : jeu.getJoueurs().values())
+                    if (j != jeu.getJoueurs().get(i))
+                        ThreadTool.taskPacketTcp(jeu.getJoueurs().get(i).getIp(),
+                                jeu.getJoueurs().get(i).getPort(), message);
 
                 out.println(RETOUR_LIGNE);
             }
