@@ -1,12 +1,11 @@
 package reseau.type;
 
 public enum PionCouleur {
-    NBL, NBR, NT, NF,
-    VBL, VBR, VT, VF,
-    BBL, BBR, BT, BF,
-    RBL, RBR, RT, RF,
-    JBL, JBR, JT, JF,
-    MBL, MBR, MT, MF,
-    NUL
+    N7, N5, N3, N1,
+    V7, V5, V3, V1,
+    B7, B5, B3, B1,
+    R7, R5, R3, R1,
+    J7, J5, J3, J1,
+    M7, M5, M3, M1,
 }
 
