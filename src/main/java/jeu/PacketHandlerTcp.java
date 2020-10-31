@@ -3,6 +3,7 @@ package jeu;
 import controleur.ControleurJeu;
 import reseau.packet.Packet;
 import reseau.socket.NetWorkManager;
+import reseau.type.TypeJoueur;
 
 import java.net.Socket;
 import java.text.MessageFormat;
@@ -50,8 +51,8 @@ public class PacketHandlerTcp {
 
         switch (core.getStatus()) {
             case ATTENTE:
-                System.out.println( socket.getLocalPort());
-                String id = core.ajouterJoueur(socket.getInetAddress(), socket.getPort(), (String) packet.getValue(message, 1));
+                System.out.println(socket.getLocalPort());
+                String id = core.ajouterJoueur(socket.getInetAddress(), socket.getPort(), (String) packet.getValue(message, 1), (TypeJoueur) packet.getValue(message, 2));
                 return nwm.getPacketsTcp().get("ACP").build(core.getPartieId(), id);
             case ANNULEE:
             case COMPLETE:
