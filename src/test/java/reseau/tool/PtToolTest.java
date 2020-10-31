@@ -32,7 +32,7 @@ class PtToolTest {
         assertEquals("NUL", PtTool.convertParamToString(VigileEtat.NUL, VigileEtat.class.getSimpleName()));
         assertNotEquals("NEA", PtTool.convertParamToString(VigileEtat.NUL, VigileEtat.class.getSimpleName()));
 
-        assertEquals("JOUEUR", PtTool.convertParamToString(TypeJoueur.JOUEUR, TypeJoueur.class.getSimpleName()));
+        assertEquals("JR", PtTool.convertParamToString(TypeJoueur.JR, TypeJoueur.class.getSimpleName()));
         assertEquals("BOT", PtTool.convertParamToString(TypeJoueur.BOT, TypeJoueur.class.getSimpleName()));
         assertNotEquals("NUL", PtTool.convertParamToString(TypeJoueur.BOT, TypeJoueur.class.getSimpleName()));
 
@@ -157,9 +157,9 @@ class PtToolTest {
         assertNotEquals(VigileEtat.NE, PtTool.convertStringToObject("NUL", VigileEtat.class.getSimpleName()));
         assertNull(PtTool.convertStringToObject("MPZPM", VigileEtat.class.getSimpleName()));
 
-        assertEquals(TypeJoueur.JOUEUR, PtTool.convertStringToObject("JOUEUR", TypeJoueur.class.getSimpleName()));
+        assertEquals(TypeJoueur.JR, PtTool.convertStringToObject("JR", TypeJoueur.class.getSimpleName()));
         assertEquals(TypeJoueur.BOT, PtTool.convertStringToObject("BOT", TypeJoueur.class.getSimpleName()));
-        assertNotEquals(TypeJoueur.JOUEUR, PtTool.convertStringToObject("BOT", TypeJoueur.class.getSimpleName()));
+        assertNotEquals(TypeJoueur.JR, PtTool.convertStringToObject("BOT", TypeJoueur.class.getSimpleName()));
         assertNull(PtTool.convertStringToObject("MPZPM", TypeJoueur.class.getSimpleName()));
 
         assertEquals(ReasonType.FORCE, PtTool.convertStringToObject("FORCE", ReasonType.class.getSimpleName()));
