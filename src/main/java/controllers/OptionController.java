@@ -29,12 +29,14 @@ public class OptionController {
 
 	        if(event.getSource() == backButton) {
 	        	stage = (Stage) backButton.getScene().getWindow();
+	        	height=stage.getHeight();
+		        width=stage.getWidth();
 	            root = FXMLLoader.load(getClass().getResource("/views/StartPage.fxml"));
 	        }
 	        Scene scene = new Scene(root);
-	        stage.setScene(scene);
 	        stage.setHeight(height);
 	        stage.setWidth(width);
+	        stage.setScene(scene);   
 	        stage.show();
 	    }
 }

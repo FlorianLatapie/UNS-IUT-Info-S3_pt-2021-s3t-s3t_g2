@@ -9,7 +9,7 @@
 <?import javafx.scene.paint.*?>
 <?import javafx.scene.text.*?>
 
-<BorderPane minHeight="442.0" minWidth="876.0" prefHeight="442.0" prefWidth="816.0" style="-fx-background-color: black;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.TestController">
+<BorderPane minHeight="442.0" minWidth="876.0" prefHeight="442.0" prefWidth="816.0" style="-fx-background-color: black;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.StartPageController">
    <bottom>
       <VBox prefHeight="97.0" prefWidth="816.0" BorderPane.alignment="CENTER" />
    </bottom>

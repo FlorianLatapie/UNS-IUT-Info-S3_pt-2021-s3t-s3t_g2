@@ -51,13 +51,15 @@ public class Pause {
 
         else {
             stage = (Stage) Options.getScene().getWindow();
+            height=stage.getHeight();
+	        width=stage.getWidth();
             root = FXMLLoader.load(getClass().getResource("/views/MenuView.fxml"));
         }
 
         Scene scene = new Scene(root);
-        stage.setScene(scene);
         stage.setHeight(height);
         stage.setWidth(width);
+        stage.setScene(scene);   
         stage.show();
     }
 }

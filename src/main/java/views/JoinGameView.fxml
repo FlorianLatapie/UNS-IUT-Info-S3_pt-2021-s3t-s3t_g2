@@ -50,7 +50,7 @@
                <content>
                   <GridPane alignment="CENTER" hgap="5" style="-fx-background-color: black;" vgap="5">
                      <children>
-                        <Button fx:id="idGame1" onAction="#clickedButton" prefHeight="31.0" prefWidth="255.0" GridPane.columnIndex="0" GridPane.rowIndex="1">
+                        <Button fx:id="idGame1" onAction="#clickedButton" prefHeight="31.0" prefWidth="255.0" textFill="RED" GridPane.columnIndex="0" GridPane.rowIndex="1">
                            <effect>
                               <InnerShadow />
                            </effect></Button>

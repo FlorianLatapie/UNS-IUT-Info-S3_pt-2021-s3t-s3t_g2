@@ -43,9 +43,9 @@ public class NotYetController {
         }
         
         Scene scene = new Scene(root);
-        stage.setScene(scene);
         stage.setHeight(height);
         stage.setWidth(width);
+        stage.setScene(scene);   
         stage.show();
     }
 

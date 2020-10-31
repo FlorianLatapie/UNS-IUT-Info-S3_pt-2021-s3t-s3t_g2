@@ -11,7 +11,9 @@ package controllers;
 	import javafx.scene.control.Button;
 	import javafx.scene.control.Label;
 	import javafx.scene.control.Labeled;
-	import javafx.stage.Stage;
+import javafx.scene.paint.Color;
+import javafx.scene.paint.Paint;
+import javafx.stage.Stage;
 
 public class JoinGameController {
 
@@ -62,48 +64,32 @@ public class JoinGameController {
 		        if(event.getSource() == backButton) {
 		        	System.out.println("retour");
 			        stage = (Stage) backButton.getScene().getWindow();
+			        height=stage.getHeight();
+			        width=stage.getWidth();
 		            root = FXMLLoader.load(getClass().getResource("/views/StartPage.fxml"));
 			        
 		        }
-		        
-		        /*if(event.getSource() == idGame1) {
-			        System.out.println("idGame1!");
-			        stage = (Stage) idGame1.getScene().getWindow();
-		            root = FXMLLoader.load(getClass().getResource("/views/NotYetImplementedView.fxml"));
-		        }
-		        if(event.getSource() == idGame2) {
-			        System.out.println("idGame2");
-			        stage = (Stage) idGame2.getScene().getWindow();
-		            root = FXMLLoader.load(getClass().getResource("/views/NotYetImplementedView.fxml"));
-		        }
-		        if(event.getSource() == idGame3) {
-			        System.out.println("idGame3");
-			        stage = (Stage) idGame3.getScene().getWindow();
-		            root = FXMLLoader.load(getClass().getResource("/views/NotYetImplementedView.fxml"));
-
-		        }
-		        if(event.getSource() == idGame4) {
-			        System.out.println("idGame4");
-			        stage = (Stage) idGame3.getScene().getWindow();
-		            root = FXMLLoader.load(getClass().getResource("/views/NotYetImplementedView.fxml"));
-
-		        }*/
-		     
+		      
+		      
 		        else if(event.getSource() == joinButton) {
 			        System.out.println("Rejoindre");
 			        stage = (Stage) joinButton.getScene().getWindow();
+			        height=stage.getHeight();
+			        width=stage.getWidth();
 		            root = FXMLLoader.load(getClass().getResource("/views/NotYetImplementedView.fxml"));
 
 		        }
 		        else {
 		            stage = (Stage) joinButton.getScene().getWindow();
+		            height=stage.getHeight();
+			        width=stage.getWidth();
 		            root = FXMLLoader.load(getClass().getResource("/views/JoinGameView.fxml"));
 		        }
 
 		        Scene scene = new Scene(root);
-		        stage.setScene(scene);
 		        stage.setHeight(height);
 		        stage.setWidth(width);
+		        stage.setScene(scene);   
 		        stage.show();
 		    }
 	    
