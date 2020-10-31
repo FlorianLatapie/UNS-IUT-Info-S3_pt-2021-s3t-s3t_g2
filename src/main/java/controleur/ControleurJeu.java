@@ -11,6 +11,7 @@ import reseau.socket.NetWorkManager;
 import reseau.socket.SideConnection;
 import reseau.socket.TcpClientSocket;
 import reseau.tool.NetworkTool;
+import reseau.tool.PacketTool;
 import reseau.tool.ThreadTool;
 import reseau.type.*;
 
@@ -40,6 +41,33 @@ public class ControleurJeu {
     private int port;
     private int nextJoueurId;
     private Random rd;
+
+    public List<String> getTempPaquet() {
+        return tempPaquet;
+    }
+
+    private List<String> tempPaquet;
+
+    public void setAzld(boolean azld) {
+        this.azld = azld;
+    }
+
+    public void setCddcv(boolean cddcv) {
+        this.cddcv = cddcv;
+    }
+
+    public void addCddj() {
+        this.cddj++;
+    }
+
+    private boolean azld = false;
+    private boolean cddcv = false;
+    private int cddj = 0;
+
+    public int getNumeroTour() {
+        return numeroTour;
+    }
+
     private int numeroTour = 1;
 
     private List<Couleur> couleursRestante;
@@ -54,16 +82,28 @@ public class ControleurJeu {
 
     ArrayList<Joueur> joueurs;
 
+    public void setLieuZombie(ArrayList<Integer> lieuZombie) {
+        this.lieuZombie = lieuZombie;
+    }
+
+    ArrayList<Integer> lieuZombie;
+
     // TODO INTERROMPRE PARTIE
+
+    public ArrayList<Integer> getLieuZombie() {
+        return lieuZombie;
+    }
 
     public ControleurJeu(String nom, int njr, int njv) throws IOException {
         if (njr + njv > 6 || njr + njv < 3)
             throw new IllegalArgumentException("Mauvais nombre de joueur");
+        this.tempPaquet = new ArrayList<>();
         this.nomPartie = nom;
         this.nbjv = njv;
         this.nbjr = njr;
         this.nbjtotal = nbjv + nbjr;
         couleursRestante = new ArrayList<>();
+        lieuZombie = new ArrayList<>();
         joueurs = new ArrayList<>();
         rd = new Random();
         couleursRestante.add(Couleur.NOIR);
@@ -120,10 +160,10 @@ public class ControleurJeu {
     public void demarerJeu() {
         ThreadTool.asyncTask(() -> {
             // TODO UN OU PLUSIEURS LIEUX FERME
-            // TODO 3 ou 4 PION
+            // TODO 3 ou 4 PION | UN OU PLUSIEURS LIEUX FERME
             out.println(jeu.afficheJeu());
 
-            String m = nwm.getPacketsTcp().get("IP").build(getJoueursListe(), getCouleurJoueursListe(), 0, 3, partieId);
+            String m = nwm.getPacketsTcp().get("IP").build(getJoueursListeNo(), getCouleurJoueursListeNo(), 0, 3, partieId);
             for (Joueur j : jeu.getJoueurs().values())
                 TcpClientSocket.connect(j.getIp(), j.getPort(), m, null, 0);
 
@@ -131,7 +171,7 @@ public class ControleurJeu {
             // TODO (COMPLETE ACP)
             this.placementPersonnage();
             this.jeu.resultatChefVigile(jeu.getJoueurs().get(0));
-            ArrayList<Integer> lieuZombie = arriveZombie();
+            lieuZombie = arriveZombie();
             this.jeu.entreZombie(lieuZombie);
             m = nwm.getPacketsTcp().get("PIPZ").build(lieuZombie, partieId);
             for (Joueur j : jeu.getJoueurs().values())
@@ -168,7 +208,7 @@ public class ControleurJeu {
 
     public String ajouterJoueur(InetAddress ip, int port, String nom, TypeJoueur typeJoueur) {
         Joueur joueur = new Joueur(getNewJoueurId(), ip, port, nom);
-        if (typeJoueur == TypeJoueur.JOUEUR)
+        if (typeJoueur == TypeJoueur.JR)
             nbjractuel++;
         else if (typeJoueur == TypeJoueur.BOT)
             nbjvactuel++;
@@ -182,8 +222,7 @@ public class ControleurJeu {
         return tmp;
     }
 
-    private List<String> getJoueursListe() {
-        // TODO BONNE ORDRE ? VIGILE
+    private List<String> getJoueursListeNo() {
         List<String> noms = new ArrayList<>();
         for (Joueur j : joueurs)
             noms.add(j.getNom());
@@ -191,8 +230,7 @@ public class ControleurJeu {
         return noms;
     }
 
-    private List<Couleur> getCouleurJoueursListe() {
-        // TODO BONNE ORDRE ? VIGILE
+    private List<Couleur> getCouleurJoueursListeNo() {
         List<Couleur> couleurs = new ArrayList<>();
         for (Joueur j : joueurs)
             couleurs.add(j.getCouleur());
@@ -207,14 +245,12 @@ public class ControleurJeu {
         String m = nwm.getPacketsTcp().get("IT").build(jeu.getChefVIgile().getCouleur(), getJoueursCouleurs(), partieId, numeroTour);
         for (Joueur j : jeu.getJoueurs().values())
             TcpClientSocket.connect(j.getIp(), j.getPort(), m, null, 0);
-
         fouilleCamion();
         electionChefVigi();
-        ArrayList<Integer> lieuZombie = arriveZombie();
+        lieuZombie = arriveZombie();
         ArrayList<Integer> destination = new ArrayList<>();
-        String s = "";
-        s = phasechoixDestination(destination);
-        phaseDeplacementPerso(destination, s, lieuZombie);
+        phasechoixDestination(destination);
+        phaseDeplacementPerso(destination, lieuZombie);
         jeu.entreZombie(lieuZombie);
         jeu.fermerLieu();
         if (this.finJeu())
@@ -290,8 +326,6 @@ public class ControleurJeu {
         }
 
         out.println(RETOUR_LIGNE);
-        //TODO DEMANDER A AURELIEN RECV
-
     }
 
     /**
@@ -300,112 +334,86 @@ public class ControleurJeu {
      * @return liste des numéro des lieux d'arrivé des zomibie
      */
     private ArrayList<Integer> arriveZombie() {
-        //TODO DEMANDER AURELIEN(si c'est true -> NE)
         VigileEtat ve = jeu.getNewChef() ? VigileEtat.NE : VigileEtat.NUL;
         String m = nwm.getPacketsTcp().get("PAZ").build(jeu.getChefVIgile().getCouleur(), ve, partieId, numeroTour);
         for (Joueur j : jeu.getJoueurs().values())
             TcpClientSocket.connect(j.getIp(), j.getPort(), m, null, 0);
-        int z1 = new Random().nextInt(6) + 1;
-        int z2 = new Random().nextInt(6) + 1;
-        int z3 = new Random().nextInt(6) + 1;
-        int z4 = new Random().nextInt(6) + 1;
-        ArrayList<Integer> lieuZombie = new ArrayList<>();
-        lieuZombie.add(z1);
-        lieuZombie.add(z2);
-        lieuZombie.add(z3);
-        lieuZombie.add(z4);
-        //TODO AZLAZ lieuZombie
-        out.println(
-                jeu.getChefVIgile() + " , chef des vigiles, regarde les résulats de l'arrivé des Zombies:");
-        for (Integer integer : lieuZombie) {
-            out.println(this.jeu.getLieux().get(integer) + "-> Zombie + 1");
-        }
-        // l'afficher sur l'ecran du CV s'il y en a un et s'il a un perso sur le lieu 5
-        // (PC)
-        // regarder si un joueur utilise une carte camSecu et si oui l'afficher sur son
-        // ecran et defausse la carte
-        out.println(RETOUR_LIGNE);
-        // TODO LE CHEF DES VIGILES CONAISSE LE LIEU D4ARRIVE DES ZOMBIES
+        while (!azld)
+            ;
+        azld = false;
         return lieuZombie;
     }
 
-    private String phasechoixDestination(ArrayList<Integer> destination) {
-        //TODO PCD
-        String s = "";
-        for (int i = 0; i < jeu.getJoueurs().size(); i++) {
-            if (jeu.getJoueurs().get(i).isChefDesVigiles() && jeu.getJoueurs().get(i).isEnVie()) {
-                System.out.println(jeu.afficheJeu());
-                int x = choixDestination(i);
-                destination.add(x);
-                s += "Destination " + jeu.getJoueurs().get(i) + " (CDV) : " + jeu.getLieux().get(x) + "\n";
-            }
-        }
+    private void phasechoixDestination(ArrayList<Integer> destination) {
+        VigileEtat ve = jeu.getNewChef() ? VigileEtat.NE : VigileEtat.NUL;
+        String m = nwm.getPacketsTcp().get("PCD").build(jeu.getChefVIgile().getCouleur(), ve, partieId, numeroTour);
+        for (Joueur j : jeu.getJoueurs().values())
+            TcpClientSocket.connect(j.getIp(), j.getPort(), m, null, 0);
         if (jeu.getNewChef() == true) {
-            out.println(s);
-            //TODO CDCDV dest -> x
-        }
-        for (int i = 0; i < jeu.getJoueurs().size(); i++) {
-            if (!jeu.getJoueurs().get(i).isChefDesVigiles() && jeu.getJoueurs().get(i).isEnVie()) {
-                System.out.println(jeu.afficheJeu());
-                int x = choixDestination(i);
-                destination.add(x);
-                s += "Destination " + jeu.getJoueurs().get(i) + " : " + jeu.getLieux().get(x) + "\n";
-                out.println();
-            }
+            while (!cddcv)
+                ;
+            cddcv = false;
+            m = getPaquetTemp("CDDCV");
+            int dest = (int) nwm.getPacketsTcp().get("CDDCV").getValue(m, 1);
+            destination.add(dest);
         }
 
-        /*
-        DOIT LE FAIRE AVEC AURELIEN
-        //TODO ATTENDRE LES CDDCV(si le vigile) CDDJ
+        int nb = nbjtotal - jeu.getNbMort();
+        nb += jeu.getNewChef() ? -1 : 0;
 
-        destination.clear();
-        //le premier soit la dest du chef des vigiles et apres l'odre normal
-        //TODO CDFC
-        */
-        return s;
+        while (!(cddj == nb))
+            ;
+        cddj = 0;
+
+        HashMap<String, Integer> idj = new HashMap<>();
+        while (true) {
+            String message = getPaquetTemp("CDDJ");
+            if (message == "")
+                break;
+            out.println("Lo " + message);
+            String id = (String) nwm.getPacketsTcp().get("CDDJ").getValue(message, 4);
+
+            int idJoueur = (int) nwm.getPacketsTcp().get("CDDJ").getValue(message, 1);
+            idj.put(id, idJoueur);
+        }
+
+        if (!jeu.getNewChef())
+            for (Map.Entry<String, Integer> d : idj.entrySet())
+                if (d.getKey().equals(jeu.getChefVIgile().getJoueurId()))
+                    destination.add(d.getValue());
+
+        for (Joueur j : jeu.getJoueurs().values())
+            if (!j.isChefDesVigiles() && j.isEnVie())
+                for (Map.Entry<String, Integer> d : idj.entrySet())
+                    if (d.getKey().equals(j.getJoueurId()))
+                        destination.add(d.getValue());
+
+        System.out.println("PtR5");
+
+        m = nwm.getPacketsTcp().get("CDFC").build(partieId, numeroTour);
+        for (Joueur j : jeu.getJoueurs().values())
+            TcpClientSocket.connect(j.getIp(), j.getPort(), m, null, 0);
     }
 
-    private int choixDestination(int joueur) {
-        int lieu = 0;
-        ArrayList<Integer> dest = new ArrayList<>();
-        out.println(jeu.getJoueurs().get(joueur) + " choisis une destination (un numéro):");
-        for (int a = 1; a < 7; a++) {
-            for (Integer j : this.jeu.getJoueurs().get(joueur).getPersonnages().keySet()) {
-                if (jeu.getJoueurs().get(joueur).getPersonnages().get(j).getMonLieu() != jeu.getLieux().get(a)
-                        && jeu.getLieux().get(a).isOuvert() && !dest.contains(a)) {
-                    dest.add(a);
-                    out.println(a + "\t" + jeu.getLieux().get(a));
-                }
+    private String getPaquetTemp(String key) {
+        for (String str : tempPaquet)
+            if (PacketTool.getKeyFromMessage(str).equals(key)) {
+                String tmp = str;
+                tempPaquet.remove(str);
+                return tmp;
             }
-        }
-        // TODO RECEVOIR ET ENVOYER DEST
-        // lieu = sc.nextInt();
-        lieu = new Random().nextInt(6) + 1; // temporaire
-        out.println(lieu); // temporaire
-        while (!dest.contains(lieu)) {
-            out.println(RETOUR_LIGNE);
-            System.out.println(jeu.afficheJeu());
-            out.println();
-            out.println("Numéro incorect !\n");
-            out.println(jeu.getJoueurs().get(joueur) + " choisis une destination (un numéro):");
-            for (Integer integer : dest) {
-                out.println(integer + "\t" + jeu.getLieux().get(integer));
-            }
-            // lieu = sc.nextInt();
-            lieu = new Random().nextInt(6) + 1; // temporaire
-            out.println(lieu); // temporaire
-        }
-        out.println(RETOUR_LIGNE);
-        return lieu;
+
+        return "";
     }
 
-    private void phaseDeplacementPerso(ArrayList<Integer> destination, String s, ArrayList<Integer> zombie) {
-        //TODO PDP (LISTED)destination (LISTEZ)zombie (LISTELF)Liste des lieux fermé
+    private void phaseDeplacementPerso(ArrayList<Integer> destination, ArrayList<Integer> zombie) {
+        String m = nwm.getPacketsTcp().get("PDP").build(jeu.getChefVIgile().getCouleur(), destination, zombie, jeu.getLieuxFermes(), partieId, numeroTour);
+        for (Joueur j : jeu.getJoueurs().values())
+            TcpClientSocket.connect(j.getIp(), j.getPort(), m, null, 0);
         int compteur = 0;
         for (int i = 0; i < jeu.getJoueurs().size(); i++) {
             if (jeu.getJoueurs().get(i).isChefDesVigiles() && jeu.getJoueurs().get(i).isEnVie()) {
                 out.println(jeu.afficheJeu());
-                out.println(s);
                 // TODO DPD DEST(destination.get(compteur)) + ajouter message deplacementPerso (DPR)
                 if (!deplacementPerso(jeu.getJoueurs().get(i), destination.get(compteur))) {
                     return;
@@ -417,7 +425,6 @@ public class ControleurJeu {
         for (int i = 0; i < jeu.getJoueurs().size(); i++) {
             if (!jeu.getJoueurs().get(i).isChefDesVigiles() && jeu.getJoueurs().get(i).isEnVie()) {
                 out.println(jeu.afficheJeu());
-                out.println(s);
                 // TODO DPD DEST(destination.get(compteur)) + ajouter message deplacementPerso (DPR)
                 if (!deplacementPerso(jeu.getJoueurs().get(i), destination.get(compteur))) {
                     return;
@@ -638,7 +645,7 @@ public class ControleurJeu {
                 int persEntre = (int) nwm.getPacketsTcp().get("PICD").getValue(rep, 2);
                 jeu.placePerso(jeu.getJoueurs().get(i), valeurToIndex(persEntre), destEntre);
 
-                message = nwm.getPacketsTcp().get("PIIG").build(jeu.getJoueurs().get(i).getCouleur(), des, listePion, destEntre, valeurToIndex(persEntre),partieId);
+                message = nwm.getPacketsTcp().get("PIIG").build(jeu.getJoueurs().get(i).getCouleur(), des, listePion, destEntre, valeurToIndex(persEntre), partieId);
                 for (Joueur j : jeu.getJoueurs().values())
                     if (j != jeu.getJoueurs().get(i))
                         ThreadTool.taskPacketTcp(jeu.getJoueurs().get(i).getIp(),
@@ -698,10 +705,6 @@ public class ControleurJeu {
             for (Lieu l : jeu.getLieux().values())
                 if (!l.isFull() && l.isOuvert())
                     posi.add(l.getNum());
-            // TODO CHOIX AU JOUEUR OU C PAS FULL SAUF 1 POSSOBILITE
-
-            // TODO CHOIX DE LA POSITION
-            // TODO POS = NB LIEUX POSSIBLE
         } else if (jeu.getLieux().get(x).isFull() && !jeu.getLieux().get(y).isFull()) {
             posi.add(y);
         } else if (!jeu.getLieux().get(x).isFull() && jeu.getLieux().get(y).isFull()) {
@@ -746,8 +749,6 @@ public class ControleurJeu {
             out.println(persEntre); // temporaire
         }
 
-        // TODO NUM liste des perso a cette endroit
-
         return persEntre;
     }
 
@@ -769,7 +770,7 @@ public class ControleurJeu {
                         out.println(j + "\t" + this.jeu.getLieux().get(j));
                     }
                 }
-                // TODO CDZVI
+                // TODO CDZVI this.jeu.getJoueurs().get(i)
                 // dest = sc.nextInt();
                 dest = new Random().nextInt(6) + 1; // temporaire //TODO GET DZV ON CDZVI WITH CDDZVJE
                 out.println(dest); // temporaire
