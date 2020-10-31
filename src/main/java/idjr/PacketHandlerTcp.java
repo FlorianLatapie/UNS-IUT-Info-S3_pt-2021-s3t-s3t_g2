@@ -2,6 +2,7 @@ package idjr;
 
 import java.net.Socket;
 import java.text.MessageFormat;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 import java.util.Scanner;
@@ -45,12 +46,15 @@ public class PacketHandlerTcp {
 	 */
 	public String traitement(Packet packet, String message, Socket socket) {
 		switch (packet.getKey()) {
-			case "DPD":
-				return deplacerPion(packet, message);
+		
+			case "IP":
+				return initialiserPartie(packet, message);
 			case "PIIJ":
 				return lancerDes(packet, message);// savoir comment return plusieur choses
 			case "PIRD":
 				return choisirDestPion(packet, message);
+			case "PIIG":
+				return joueurDeplacement(packet, message);
 			case "PAZ":
 				return lanceDesChefVigil(packet, message);
 			case "PCD":
@@ -58,11 +62,16 @@ public class PacketHandlerTcp {
 			case "CDCDV":
 				return choisirDest(packet, message);
 			case "CDZVI":
-				return DestZombieVengeur(packet, message);
+				return destZombieVengeur(packet, message);
+			case "PDP":
+				return debutDeplacemant(packet, message);
+			case "DPD":
+				return deplacerPion(packet, message);
+			case "DPI":
+				return tousDeplacment(packet, message);
 			case "RAZDS":
 				return choisirSacrifice(packet, message);
-			case "IP":
-				return initialiserPartie(packet, message);
+			
 
 			case "PIPZ":
 			case "IT":
@@ -70,7 +79,6 @@ public class PacketHandlerTcp {
 			case "RFC":
 			case "PECV":
 			case "RECV":
-			case "PIIG":
 			case "CDFC":
 				return "";
 
@@ -91,22 +99,12 @@ public class PacketHandlerTcp {
 			System.out.println(string);
 		System.out.println(core.getNom());
 		core.setCouleur(IdjrTools.getCouleurByName(core.getNom(), noms, couleurs));
+		ArrayList<Joueur> listeJoueursInitiale = new ArrayList();
+		for (int i = 0; i < noms.size(); i++) {
+			listeJoueursInitiale.add(new Joueur(noms.get(i), couleurs.get(i)));
+		}
+		core.getJeu().initJoueurs(listeJoueursInitiale);
 		return "";
-	}
-
-	public String deplacerPion(Packet packet, String message) {
-		Scanner sc = new Scanner(System.in);
-		System.out.println("Entrez une destination");
-		int dest = sc.nextInt();
-		System.out.println("Entrez un pion (Piontype)");
-		PionType pion = PionType.valueOf(sc.nextLine());
-		System.out.println("Entrez une carte Sprint(si disponible 'SPR' sinon 'NUL')");
-		String carteSprint = sc.nextLine();
-		sc.close();
-
-		return nwm.getPacketsTcp().get("DPR").build(dest, pion, carteSprint, packet.getValue(message, 3),
-				packet.getValue(message, 4), core.getJoueurId());
-
 	}
 
 	public String lancerDes(Packet packet, String message) {
@@ -117,19 +115,30 @@ public class PacketHandlerTcp {
 	}
 
 	public String choisirDestPion(Packet packet, String message) {
-		List<Integer> pionsRestant = (List<Integer>) packet.getValue(message, 2);
+		List<Integer> destRestant = (List<Integer>) packet.getValue(message, 2);
 
 		Scanner sc = new Scanner(System.in);
 		System.out.println("Entrez une destination");
 		// int dest = sc.nextInt();
-		int dest = core.getPionAPos().get(new Random().nextInt(core.getPionAPos().size()));
+		
+		int pion = core.getPionAPos().get(new Random().nextInt(core.getPionAPos().size()));
+		
 		System.out.println("Entrez un pion (Piontype)");
-		int pion = pionsRestant.get(new Random().nextInt(pionsRestant.size()));
+		int dest = destRestant.get(new Random().nextInt(destRestant.size()));
 		System.out.println(dest);
 		System.out.println(pion);
 		sc.close();
-		return nwm.getPacketsTcp().get("PICD").build(pion, dest, (String) packet.getValue(message, 3),
+		core.getJeu().placePerso(core.getMoi(), pion, dest);
+		return nwm.getPacketsTcp().get("PICD").build(dest, pion, (String) packet.getValue(message, 3),
 				(String) core.getJoueurId());
+	}
+	
+	public String joueurDeplacement(Packet packet, String message) {
+		Couleur c = (Couleur)packet.getValue(message, 1);
+		int dest = (int)packet.getValue(message, 4);
+		int pion = (int)packet.getValue(message, 5);
+		core.getJeu().placePerso(core.getJoueur(c), pion, dest);
+		return "";
 	}
 
 	public String lanceDesChefVigil(Packet packet, String message) {
@@ -148,32 +157,31 @@ public class PacketHandlerTcp {
 		if (core.getCouleur() == (Couleur) packet.getValue(message, 1)
 				&& (VigileEtat) packet.getValue(message, 2) == VigileEtat.NE) {
 			System.out.println("Entrez une destination");
-			int dest = new Random().nextInt(6) + 1;
-
+			int dest = core.getJeu().choixLieudispo(core.getMoi()).get(new Random().nextInt());
 			String messageTcp = nwm.getPacketsTcp().get("CDDCV").build(dest, (String)packet.getValue(message, 3),
 					(int)packet.getValue(message, 4), core.getJoueurId());
 			TcpClientSocket.connect(core.getIpPp(), core.getPortPp(), messageTcp, null, 0);
-
 		}
-		else {
+		else if (!(core.getCouleur() == (Couleur) packet.getValue(message, 1)) && (VigileEtat) packet.getValue(message, 2) == VigileEtat.NE) {
+			return "";
+		}else {
 			System.out.println("Entrez une destination");
-			int dest = new Random().nextInt(6) + 1;
+			int dest =  core.getJeu().choixLieudispo(core.getMoi()).get(new Random().nextInt());
 
 			String messageTcp = nwm.getPacketsTcp().get("CDDJ").build(dest, (String)packet.getValue(message, 3),
 					(int)packet.getValue(message, 4), core.getJoueurId());
 			TcpClientSocket.connect(core.getIpPp(), core.getPortPp(), messageTcp, null, 0);
 		}
-
 		return "";
 	}
 
 	public String choisirDest(Packet packet, String message) {
-		if (core.getCouleur() == packet.getValue(message, 1)) {
-			return null;
+		if (core.getCouleur() == (Couleur)packet.getValue(message, 1)) {
+			return "";
 		} else {
 			Scanner sc = new Scanner(System.in);
 			System.out.println("Entrez une destination");
-			int dest = sc.nextInt();
+			int dest =  core.getJeu().choixLieudispo(core.getMoi()).get(new Random().nextInt());
 			System.out.println("Entrez un pion (Piontype)");
 			PionType pion = PionType.valueOf(sc.nextLine());
 			sc.close();
@@ -182,16 +190,45 @@ public class PacketHandlerTcp {
 		}
 	}
 
-	public String DestZombieVengeur(Packet packet, String message) {
+	public String destZombieVengeur(Packet packet, String message) {
 		Scanner sc = new Scanner(System.in);
 		System.out.println("Entrez une destination pour le zombie vengeur");
-		int destZomb = sc.nextInt();
+		int destZomb =  core.getJeu().choixLieudispo().get(new Random().nextInt());
 		sc.close();
 		return nwm.getPacketsTcp().get("CDDZVJE").build(destZomb, packet.getValue(message, 1),
 				packet.getValue(message, 2), core.getJoueurId());
 
 	}
+	
+	public String debutDeplacemant(Packet packet, String message) {
+		core.getJeu().entreZombie((List<Integer>)packet.getValue(message, 3));
+		core.getJeu().fermerLieu((List<Integer>)packet.getValue(message, 4));
+		return "";
+	}
 
+
+	public String deplacerPion(Packet packet, String message) {
+		Scanner sc = new Scanner(System.in);
+		int dest = (int)packet.getValue(message, 1);
+		System.out.println("Entrez un pion (Piontype)");
+		int pion = core.getJeu().pionDispo(core.getMoi(), dest).get(new Random().nextInt());
+		System.out.println("Entrez une carte Sprint(si disponible 'SPR' sinon 'NUL')");
+		String carteSprint = sc.nextLine();
+		sc.close();
+		core.getJeu().deplacePerso(core.getMoi(), pion, dest);
+		return nwm.getPacketsTcp().get("DPR").build(dest, pion, carteSprint, packet.getValue(message, 3),
+				packet.getValue(message, 4), core.getJoueurId());
+
+	}
+	
+	public String tousDeplacment(Packet packet, String message) {
+		Couleur c = (Couleur)packet.getValue(message, 1);
+		int dest = (int)packet.getValue(message, 2);
+		int p = (int)packet.getValue(message, 3);
+		core.getJeu().deplacePerso(core.getJoueur(c), p, dest);
+		return "";
+	}
+	
 	public String choisirSacrifice(Packet packet, String message) {
 		Scanner sc = new Scanner(System.in);
 		System.out.println("Entrez un pion (PionCouleur)");

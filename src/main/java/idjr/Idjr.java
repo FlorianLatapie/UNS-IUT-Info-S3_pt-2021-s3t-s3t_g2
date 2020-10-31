@@ -24,6 +24,30 @@ public class Idjr {
 	private List<Integer> pionAPos;
 	private InetAddress ipPp;
 	private int portPp;
+	private Jeu jeu = new Jeu();
+
+	public Joueur getMoi() {
+		for (Joueur j: jeu.getJoueurs().values()) {
+			if (j.getCouleur() == couleur) {
+				return j;
+			}
+		}
+		return null;
+		
+	}
+	
+	public Joueur getJoueur (Couleur c) {
+		for (Joueur j: jeu.getJoueurs().values()) {
+			if (j.getCouleur() == c) {
+				return j;
+			}
+		}
+		return null;
+	}
+	
+	public Jeu getJeu() {
+		return jeu;
+	}
 
 	public List<Integer> getPionAPos() {
 		return pionAPos;
