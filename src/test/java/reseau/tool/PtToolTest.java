@@ -44,9 +44,9 @@ class PtToolTest {
         assertEquals("FILETTE", PtTool.convertParamToString(PionType.FILETTE, PionType.class.getSimpleName()));
         assertNotEquals("azfdsf", PtTool.convertParamToString(PionType.BRUTE, PionType.class.getSimpleName()));
 
-        assertEquals("BBR", PtTool.convertParamToString(PionCouleur.BBR, PionCouleur.class.getSimpleName()));
-        assertEquals("JBR", PtTool.convertParamToString(PionCouleur.JBR, PionCouleur.class.getSimpleName()));
-        assertNotEquals("HJ", PtTool.convertParamToString(PionCouleur.BF, PionCouleur.class.getSimpleName()));
+        assertEquals("B1", PtTool.convertParamToString(PionCouleur.B1, PionCouleur.class.getSimpleName()));
+        assertEquals("J7", PtTool.convertParamToString(PionCouleur.J7, PionCouleur.class.getSimpleName()));
+        assertNotEquals("HJ", PtTool.convertParamToString(PionCouleur.B3, PionCouleur.class.getSimpleName()));
 
         assertEquals("NOIR", PtTool.convertParamToString(Couleur.NOIR, Couleur.class.getSimpleName()));
         assertEquals("MARRON", PtTool.convertParamToString(Couleur.MARRON, Couleur.class.getSimpleName()));
@@ -108,9 +108,9 @@ class PtToolTest {
         assertNotEquals("az", PtTool.convertParamToString(couleurs, "List<Couleur>"));
 
         List<PionCouleur> pionCouleurs = new ArrayList<>();
-        pionCouleurs.add(PionCouleur.BBR);
-        pionCouleurs.add(PionCouleur.JT);
-        expected = "BBR,JT";
+        pionCouleurs.add(PionCouleur.B7);
+        pionCouleurs.add(PionCouleur.M3);
+        expected = "B7,M3";
         assertEquals(expected, PtTool.convertParamToString(pionCouleurs, "List<PionCouleur>"));
         assertNotEquals("az", PtTool.convertParamToString(pionCouleurs, "List<PionCouleur>"));
 
@@ -172,9 +172,9 @@ class PtToolTest {
         assertNotEquals(PionType.BLONDE, PtTool.convertStringToObject("BRUTE", PionType.class.getSimpleName()));
         assertNull(PtTool.convertStringToObject("MPZPM", PionType.class.getSimpleName()));
 
-        assertEquals(PionCouleur.BBR, PtTool.convertStringToObject("BBR", PionCouleur.class.getSimpleName()));
-        assertEquals(PionCouleur.JBR, PtTool.convertStringToObject("JBR", PionCouleur.class.getSimpleName()));
-        assertNotEquals(PionCouleur.BT, PtTool.convertStringToObject("BF", PionCouleur.class.getSimpleName()));
+        assertEquals(PionCouleur.B5, PtTool.convertStringToObject("B5", PionCouleur.class.getSimpleName()));
+        assertEquals(PionCouleur.M5, PtTool.convertStringToObject("M5", PionCouleur.class.getSimpleName()));
+        assertNotEquals(PionCouleur.B3, PtTool.convertStringToObject("BF", PionCouleur.class.getSimpleName()));
         assertNull(PtTool.convertStringToObject("MPZPM", PionCouleur.class.getSimpleName()));
 
         assertEquals(Couleur.NOIR, PtTool.convertStringToObject("NOIR", Couleur.class.getSimpleName()));
@@ -242,9 +242,9 @@ class PtToolTest {
         assertNotEquals(couleurs, PtTool.convertStringToObject("azza", "List<Couleur>"));
 
         List<PionCouleur> pionCouleurs = new ArrayList<>();
-        pionCouleurs.add(PionCouleur.BBR);
-        pionCouleurs.add(PionCouleur.JT);
-        expected = "BBR,JT";
+        pionCouleurs.add(PionCouleur.N5);
+        pionCouleurs.add(PionCouleur.J3);
+        expected = "N5,J3";
         assertEquals(pionCouleurs, PtTool.convertStringToObject(expected, "List<PionCouleur>"));
         assertNotEquals(pionCouleurs, PtTool.convertStringToObject("azza", "List<PionCouleur>"));
 
