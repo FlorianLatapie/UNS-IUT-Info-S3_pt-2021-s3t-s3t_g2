@@ -100,6 +100,10 @@ public class PausePane extends StackPane {
 		bRegles.setOnMouseExited(event -> {
 			bRegles.setStyle(styleBoutons);
 		});
+		bRegles.setOnAction(EventHandler -> {
+			core.setReglesDepuis(paneName);
+			sc.setPaneOnTop(ApplicationPane.REGLES);
+		});
 
 		Button bRecommencer = new Button("Recommencer");
 		bRecommencer.setFont(Font.font("Arial", FontWeight.BOLD, 30));

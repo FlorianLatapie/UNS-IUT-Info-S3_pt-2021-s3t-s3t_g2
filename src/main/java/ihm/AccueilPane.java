@@ -112,7 +112,10 @@ public class AccueilPane extends StackPane {
 		bRegles.setOnMouseExited(event -> {
 			bRegles.setStyle(styleBoutons);
 		});
-		// bRegles.setOnAction(EventHandler -> sc.setPaneOnTop(ApplicationPane.Regles));
+		bRegles.setOnAction(EventHandler -> {
+			core.setReglesDepuis(paneName);
+			sc.setPaneOnTop(ApplicationPane.REGLES);
+		});
 
 		Button bQuitter = new Button("QUITTER");
 		bQuitter.setPrefSize(lBouton, hBouton);

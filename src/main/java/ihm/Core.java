@@ -10,6 +10,15 @@ public class Core {
 	private String nomPartie = "partieParDéfaut";
 	
 	private ApplicationPane pauseDepuis = ApplicationPane.ACCUEIL;
+	private ApplicationPane reglesDepuis = ApplicationPane.ACCUEIL;
+
+	public ApplicationPane getReglesDepuis() {
+		return reglesDepuis;
+	}
+
+	public void setReglesDepuis(ApplicationPane reglesDepuis) {
+		this.reglesDepuis = reglesDepuis;
+	}
 
 	public ApplicationPane getPauseDepuis() {
 		return pauseDepuis;

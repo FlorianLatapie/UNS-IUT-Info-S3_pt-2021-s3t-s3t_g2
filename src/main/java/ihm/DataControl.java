@@ -8,7 +8,7 @@ import javafx.collections.ObservableList;
 public class DataControl {
 
 	public static enum ApplicationPane {
-		ACCUEIL, AIDE, CREATION, JEU, OPTION, PAUSE, PLATEAU, CONFIG
+		ACCUEIL, AIDE, CREATION, JEU, OPTION, PAUSE, PLATEAU, CONFIG, REGLES
 	}
 
 	public static enum ApplicationLangue {
