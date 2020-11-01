@@ -8,6 +8,7 @@ import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
@@ -240,7 +241,8 @@ public class PlateauPane extends StackPane implements LieuxListener{
 		hGauche.setRotate(90);*/
 		
 		/////////////////////////////////////////////////////
-		
+		aPlateau.setMinSize(taillePlateau, taillePlateau);
+		aPlateau.setPrefSize(taillePlateau, taillePlateau);
 		aPlateau.setMaxSize(taillePlateau, taillePlateau);
 		
 		Label estBarricade1 = new Label("Barricadé\n"+"Oui/Non");
@@ -288,9 +290,10 @@ public class PlateauPane extends StackPane implements LieuxListener{
 		g1.setMargin(joueursPresents1, margeLieu);
 		g1.setMargin(nbZombies1, margeLieu);
 		
+		g1.setRotate(134.0);
 		
-		aPlateau.setTopAnchor(g1, 10.0);
-		aPlateau.setLeftAnchor(g1, 50.0);
+		aPlateau.setTopAnchor(g1, 700.0);
+		aPlateau.setLeftAnchor(g1, 600.0);
 		
 			
 		////
@@ -340,9 +343,10 @@ public class PlateauPane extends StackPane implements LieuxListener{
 		g2.setMargin(joueursPresents2, margeLieu);
 		g2.setMargin(nbZombies2, margeLieu);
 		
+		g2.setRotate(226.0);
 		
-		aPlateau.setTopAnchor(g2, 10.0);
-		aPlateau.setLeftAnchor(g2, 500.0);
+		aPlateau.setTopAnchor(g2, 700.0);
+		aPlateau.setLeftAnchor(g2, 10.0);
 		
 		///
 		
@@ -391,10 +395,10 @@ public class PlateauPane extends StackPane implements LieuxListener{
 		g3.setMargin(joueursPresents3, margeLieu);
 		g3.setMargin(nbZombies3, margeLieu);
 		
-		g3.setRotate(-90.0);
+		g3.setRotate(293.0);
 		
-		aPlateau.setTopAnchor(g3, 350.0);
-		aPlateau.setLeftAnchor(g3, 50.0);
+		aPlateau.setTopAnchor(g3, 200.0);
+		aPlateau.setLeftAnchor(g3, 20.0);
 		
 		///
 		Label estBarricade4 = new Label("Barricadé\n"+"Oui/Non");
@@ -442,10 +446,10 @@ public class PlateauPane extends StackPane implements LieuxListener{
 		g4.setMargin(joueursPresents4, margeLieu);
 		g4.setMargin(nbZombies4, margeLieu);
 		
-		g4.setRotate(90.0);
+		g4.setRotate(0.0);
 		
-		aPlateau.setTopAnchor(g4, 350.0);
-		aPlateau.setLeftAnchor(g4, 500.0);
+		aPlateau.setTopAnchor(g4, 400.0);
+		aPlateau.setLeftAnchor(g4, 350.0);
 		
 		///
 		
@@ -494,10 +498,10 @@ public class PlateauPane extends StackPane implements LieuxListener{
 		g5.setMargin(joueursPresents5, margeLieu);
 		g5.setMargin(nbZombies5, margeLieu);
 		
-		g5.setRotate(180.0);
+		g5.setRotate(0.0);
 		
-		aPlateau.setTopAnchor(g5, 700.0);
-		aPlateau.setLeftAnchor(g5, 50.0);
+		aPlateau.setTopAnchor(g5, 50.0);
+		aPlateau.setLeftAnchor(g5, 350.0);
 		
 		///
 		
@@ -520,7 +524,7 @@ public class PlateauPane extends StackPane implements LieuxListener{
 		GridPane joueursPresents6 = new GridPane(); 
 		joueursPresents6.setPrefSize(200, 200);
 		joueursPresents6.setBackground(new Background(new BackgroundFill(Color.DARKGREY, CornerRadii.EMPTY, null)));
-		//todo 
+		//TODO 
 		
 		Label nbZombies6 = new Label("## de\nzombies");
 		nbZombies6.setFont(fontInfo);
@@ -546,10 +550,10 @@ public class PlateauPane extends StackPane implements LieuxListener{
 		g6.setMargin(joueursPresents6, margeLieu);
 		g6.setMargin(nbZombies6, margeLieu);
 		
-		g6.setRotate(180.0);
+		g6.setRotate(62.0);
 		
-		aPlateau.setTopAnchor(g6, 700.0);
-		aPlateau.setLeftAnchor(g6, 500.0);
+		aPlateau.setTopAnchor(g6, 300.0);
+		aPlateau.setLeftAnchor(g6, 700.0);
 		
 		aPlateau.getChildren().addAll(g1,g2,g3,g4,g5,g6);
 		
@@ -561,7 +565,17 @@ public class PlateauPane extends StackPane implements LieuxListener{
 		borderJoueurs.setLeft(hGauche);
 		borderJoueurs.setRight(hDroite);
 		
-		this.getChildren().addAll(borderJoueurs,aPlateau);
+		borderJoueurs.setMinSize(1920,1080);
+		borderJoueurs.setPrefSize(1920, 1080);
+		borderJoueurs.setMaxSize(1920,1080);
+		
+		ImageView imgFond = new ImageView(DataControl.PLATEAU);
+		imgFond.setScaleX(0.4362);
+		imgFond.setScaleY(0.4362);
+		
+		this.setBackground(new Background(new BackgroundFill(Color.BLACK, CornerRadii.EMPTY, null)));
+		
+		this.getChildren().addAll(imgFond,borderJoueurs,aPlateau);
 		
 		sControl.registerNode(paneName, this);
 		sControl.setPaneOnTop(paneName);

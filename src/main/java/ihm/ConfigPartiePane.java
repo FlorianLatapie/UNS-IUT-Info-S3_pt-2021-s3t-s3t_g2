@@ -238,7 +238,7 @@ public class ConfigPartiePane extends StackPane {
 		
 		
 		// image fond
-		ImageView imgFond = new ImageView(DataControl.PLATEAU);
+		ImageView imgFond = new ImageView(DataControl.FOND);
 		// carre central qui contient tous les éléments (boutons et titre)
 		BorderPane centreMenu = new BorderPane();
 		// centreMenu.setBackground(new Background(new
