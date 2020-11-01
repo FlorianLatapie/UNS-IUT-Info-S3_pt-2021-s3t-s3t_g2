@@ -124,11 +124,12 @@ public class OptionPane extends StackPane {
 		bAcc.setOnMouseExited(event -> {
 			bAcc.setStyle(styleBoutons);
 		});
+		bAcc.setOnAction(EventHandler -> sc.setPaneOnTop(ApplicationPane.ACCESSIBILITE));
 
 		Button bRetour = new Button("RETOUR");
 		bRetour.setFont(policeBouton);
 		bRetour.setAlignment(Pos.CENTER);
-		bRetour.setPrefSize(150, 60);
+		bRetour.setPrefSize(180, 60);
 		bRetour.setStyle(styleBoutons);
 		bRetour.setOnAction(EventHandler -> sc.setPaneOnTop(core.getPauseDepuis()));
 		bRetour.setOnMouseEntered(event -> {

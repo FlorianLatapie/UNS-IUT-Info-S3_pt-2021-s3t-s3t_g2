@@ -113,7 +113,7 @@ public class AccessibilitePane extends StackPane{
 		bRetour.setAlignment(Pos.CENTER);
 		bRetour.setPrefSize(120, 60);
 		bRetour.setPadding(new Insets(10));
-		//bRetour.setOnAction(EventHandler -> sc.setPaneOnTop(ApplicationPane.OPTIONS));
+		bRetour.setOnAction(EventHandler -> sc.setPaneOnTop(ApplicationPane.OPTION));
 
 		hbDaltonisme.getChildren().addAll(bDeuteranopie, bProtanopie, bTritanopie);
 		vbBoutons.getChildren().add(hbDaltonisme);
