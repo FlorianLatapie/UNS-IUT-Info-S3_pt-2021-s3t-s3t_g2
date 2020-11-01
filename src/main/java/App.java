@@ -1,6 +1,4 @@
-import controleur.ControleurJeu;
 import ihm.Core;
-import ihm.DataControl;
 import ihm.InterfacePrincipale;
 
 /**
