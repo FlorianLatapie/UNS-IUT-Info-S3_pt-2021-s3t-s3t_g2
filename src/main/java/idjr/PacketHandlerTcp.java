@@ -13,7 +13,6 @@ import reseau.socket.TcpClientSocket;
 import reseau.tool.ThreadTool;
 import reseau.type.Couleur;
 import reseau.type.PionCouleur;
-import reseau.type.PionType;
 import reseau.type.VigileEtat;
 
 /**
@@ -183,7 +182,6 @@ public class PacketHandlerTcp {
 			System.out.println("Entrez une destination");
 			int dest =  core.getJeu().choixLieudispo(core.getMoi()).get(new Random().nextInt());
 			System.out.println("Entrez un pion (Piontype)");
-			PionType pion = PionType.valueOf(sc.nextLine());
 			sc.close();
 			return nwm.getPacketsTcp().get("CDDJ").build(dest, packet.getValue(message, 3), packet.getValue(message, 4),
 					core.getJoueurId());
