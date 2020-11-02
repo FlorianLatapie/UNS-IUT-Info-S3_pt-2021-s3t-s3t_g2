@@ -567,45 +567,19 @@ public class ControleurJeu {
                         if (!jeu.getLieux().get(i).getPersonnage().isEmpty()) {
                             System.out.println(jeu.afficheJeu());
                             Joueur jou = this.voteJoueur(4);
-                            String s = "";
-                            ArrayList<Integer> num = new ArrayList<>();
-                            int persEntre;
-                            for (Integer b : jou.getPersonnages().keySet()) {
-                                if (jeu.getLieux().get(i).getPersonnage().contains(jou.getPersonnages().get(b))) {
-                                    num.add(b);
-                                    s += MessageFormat.format("{0}\t{1}\n", b, jou.getPersonnages().get(b));
-                                }
-                            }
-                            if (num.size() == 1) {
-                                out.println(jou + " personage sacrifier a " + jeu.getLieux().get(4) + ": "
-                                        + jou.getPersonnages().get(num.get(0)));
-                                persEntre = num.get(0);
-                            } else {
-                                out.println(MessageFormat.format("{0} choisis un numéro a sacrifier a {1}: ", jou,
-                                        jeu.getLieux().get(i)));
-                                out.println(s);
-                                // TODO ENVOYER LA LISTE DES PERSO QUI SOUHAITE SACRFIE (NUM)
-                                // persEntre = sc.nextInt();
-                                persEntre = new Random().nextInt(3); // temporaire
-                                out.println(persEntre); // temporaire
-                                while (!num.contains(persEntre)) {
-                                    out.println(RETOUR_LIGNE);
-                                    System.out.println(jeu.afficheJeu());
-                                    out.println();
-                                    out.println("Numéro incorect !\n");
-                                    out.println(MessageFormat.format("{0} choisis un numéro a sacrifier a {1}: ", jou,
-                                            jeu.getLieux().get(i)));
-                                    for (int b = 0; b < num.size(); b++) {
-                                        out.println(num.get(b) + "\t" + jou.getPersonnages().get(num.get(b)));
-                                    }
-                                    // persEntre = sc.nextInt();
-                                    persEntre = new Random().nextInt(3); // temporaire
-                                    out.println(persEntre); // temporaire
-                                }
-                            }
-                            jeu.sacrifie(jou, persEntre);
+                            String m = nwm.getPacketsTcp().get("RAZDS").build(i, partieId, numeroTour);
+
+                            String rep = TcpClientSocket.connect(jou.getIp(), jou.getPort(), m, null, 0);
+                            PionCouleur pionCou = (PionCouleur) nwm.getPacketsTcp().get("RAZCS").getValue(rep, 2);
+                            int pion = PpTools.getPionByValue(pionCou);
+
+                            jeu.sacrifie(jou, valeurToIndex(pion));
                             out.println(RETOUR_LIGNE);
                             jeu.getLieux().get(i).setNbZombies(jeu.getLieux().get(i).getNbZombies() - 1);
+
+                            m = nwm.getPacketsTcp().get("RAZIF").build(i, pionCou, jeu.getLieux().get(i).getNbZombies(), partieId, numeroTour);
+                            for (Joueur joueur : jeu.getJoueurs().values())
+                                TcpClientSocket.connect(joueur.getIp(), joueur.getPort(), m, null, 0);
                         }
                         if (this.finJeu()) {
                             return false;
@@ -615,45 +589,21 @@ public class ControleurJeu {
                     String s = "";
                     System.out.println(jeu.afficheJeu());
                     Joueur jou = this.voteJoueur(jeu.getLieux().get(i).getNum());
+                    String m = nwm.getPacketsTcp().get("RAZDS").build(i, partieId, numeroTour);
+                    String rep = TcpClientSocket.connect(jou.getIp(), jou.getPort(), m, null, 0);
 
-                    ArrayList<Integer> num = new ArrayList<>();
-                    int persEntre;
-                    for (Integer b : jou.getPersonnages().keySet()) {
-                        if (jeu.getLieux().get(i).getPersonnage().contains(jou.getPersonnages().get(b))) {
-                            num.add(b);
-                            s += b + "     " + jou.getPersonnages().get(b) + "\n";
-                            out.println();
-                        }
-                    }
-                    if (num.size() == 1) {
-                        out.println(jou + " personage sacrifier a " + jeu.getLieux().get(i) + ": "
-                                + jou.getPersonnages().get(num.get(0)));
-                        persEntre = num.get(0);
-                    } else {
-                        out.println(jou + " choisis un numéro a sacrifier a " + jeu.getLieux().get(i) + ": ");
-                        out.println(s);
-                        // TODO ENVOYER LA LISTE DES PETSO QUI PEUT SACRIFIE (NUM)
-                        // persEntre = sc.nextInt();
-                        persEntre = new Random().nextInt(3); // temporaire
-                        out.println(persEntre); // temporaire
-                        while (!num.contains(persEntre)) {
-                            out.println(RETOUR_LIGNE);
-                            System.out.println(jeu.afficheJeu());
-                            out.println();
-                            out.println("Numéro incorect !\n");
-                            out.println(jou + " choisis un numéro a sacrifier a " + jeu.getLieux().get(i) + ": ");
-                            for (int b = 0; b < num.size(); b++) {
-                                out.println(num.get(b) + "\t" + jou.getPersonnages().get(num.get(b)));
-                            }
-                            // persEntre = sc.nextInt();
-                            persEntre = new Random().nextInt(3); // temporaire
-                            out.println(persEntre); // temporaire
-                        }
-                    }
-                    jeu.sacrifie(jou, persEntre);
+                    PionCouleur pionCou = (PionCouleur) nwm.getPacketsTcp().get("RAZCS").getValue(rep, 2);
+                    int pion = PpTools.getPionByValue(pionCou);
+
+                    jeu.sacrifie(jou, valeurToIndex(pion));
                     out.println(RETOUR_LIGNE);
+                    jeu.getLieux().get(i).setNbZombies(0);
+
+                    m = nwm.getPacketsTcp().get("RAZIF").build(i, pionCou, jeu.getLieux().get(i).getNbZombies(), partieId, numeroTour);
+                    for (Joueur joueur : jeu.getJoueurs().values()) {
+                        TcpClientSocket.connect(joueur.getIp(), joueur.getPort(), m, null, 0);
+                    }
                 }
-                jeu.getLieux().get(i).setNbZombies(0);
                 if (this.finJeu()) {
                     return false;
                 }
