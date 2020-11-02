@@ -1,18 +1,13 @@
 package ihm;
 
-import ihm.ScreenControl;
-
 import java.io.IOException;
 
 import controleur.ControleurJeu;
 import ihm.DataControl.ApplicationPane;
-import javafx.application.Platform;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
-import javafx.scene.control.CheckBox;
 import javafx.scene.control.ComboBox;
-import javafx.scene.control.ContentDisplay;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.effect.GaussianBlur;
@@ -22,12 +17,10 @@ import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.CornerRadii;
-import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
-import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 
@@ -50,8 +43,8 @@ public class ConfigPartiePane extends StackPane {
 											// degrés
 	private int hBouton = 75;
 	private int lBouton = 150;
-	private int marge = tailleCarreCentral / 25;
-	private Insets margeBoutons = new Insets(marge, marge, marge, marge);
+	//private int marge = tailleCarreCentral / 25;
+	//private Insets margeBoutons = new Insets(marge, marge, marge, marge);
 	private Font policeBouton = Font.font("Segoe UI", FontWeight.BOLD, 27);
 	private CornerRadii coin = new CornerRadii(15.0);
 	private String styleBoutons = " -fx-background-color:#000000; -fx-background-radius: 15px; -fx-text-fill: #ffffff";
@@ -128,9 +121,9 @@ public class ConfigPartiePane extends StackPane {
 		nbjrTexte.setPadding(botPadding);
 		nbjrTexte.setMinWidth(largeurTexte);
 
-		TextField nbJr = new TextField();
-		nbJr.setText("5");
-		nbJr.setFont(policeNom);
+		ComboBox<Integer> nbJr = new ComboBox<Integer>();
+		nbJr.getItems().addAll(DataControl.nombreJoueur);
+		nbJr.setValue(5);
 		nbJr.setPrefSize(largeurTF, hauteurElemtents);
 		nbJr.setMinHeight(hauteurElemtents);
 
@@ -149,10 +142,10 @@ public class ConfigPartiePane extends StackPane {
 		nbBotTexte.setBackground(fondBlanc);
 		nbBotTexte.setPadding(botPadding);
 		nbBotTexte.setMinWidth(largeurTexte);
-
-		TextField nbBot = new TextField();
-		nbBot.setText("4");
-		nbBot.setFont(policeNom);
+		
+		ComboBox<Integer> nbBot = new ComboBox<Integer>();
+		nbBot.getItems().addAll(DataControl.nombreBot);
+		nbBot.setValue(5);
 		nbBot.setPrefSize(largeurTF, hauteurElemtents);
 		nbBot.setMinHeight(hauteurElemtents);
 
@@ -192,18 +185,18 @@ public class ConfigPartiePane extends StackPane {
 			
 			
 			//TODO
-			if (Integer.valueOf(nbJr.getText())>6 || Integer.valueOf(nbJr.getText())<3) {
+			if (Integer.valueOf(nbJr.getValue())>6 || Integer.valueOf(nbJr.getValue())<3) {
 				core.setNbJoueur(5);
 			}
 			else {
-				core.setNbJoueur(Integer.valueOf(nbJr.getText()));
+				core.setNbJoueur(Integer.valueOf(nbJr.getValue()));
 			}
 			
-			if (Integer.valueOf(nbBot.getText())>6 || Integer.valueOf(nbBot.getText())<0 || Integer.valueOf(nbBot.getText())>Integer.valueOf(nbJr.getText())) {
+			if (Integer.valueOf(nbBot.getValue())>6 || Integer.valueOf(nbBot.getValue())<0 || Integer.valueOf(nbBot.getValue())>Integer.valueOf(nbJr.getValue())) {
 				core.setNbJoueur(core.getNbJoueur());
 			}
 			else {
-				core.setNbJoueur(Integer.valueOf(nbJr.getText()));
+				core.setNbJoueur(Integer.valueOf(nbJr.getValue()));
 			}
 			core.setNomPartie(nomP.getText());
 			try {
