@@ -168,6 +168,9 @@ public class PacketHandlerTcp {
 	}
 
 	public String choixDestVigil(Packet packet, String message) {
+		if (!core.getMoi().isEnVie()) {
+			return "";
+		}
 		if (core.getCouleur() == (Couleur) packet.getValue(message, 1)
 				&& (VigileEtat) packet.getValue(message, 2) == VigileEtat.NE) {
 			System.out.println("Entrez une destination");
@@ -199,6 +202,9 @@ public class PacketHandlerTcp {
 	}
 
 	public String choisirDest(Packet packet, String message) {
+		if (!core.getMoi().isEnVie()) {
+			return "";
+		}
 		if (core.getCouleur() == (Couleur) packet.getValue(message, 1)) {
 			return "";
 		} else {
@@ -233,7 +239,6 @@ public class PacketHandlerTcp {
 	}
 
 	public String debutDeplacemant(Packet packet, String message) {
-		core.getJeu().entreZombie((List<Integer>) packet.getValue(message, 3));
 		core.getJeu().fermerLieu((List<Integer>) packet.getValue(message, 4));
 		return "";
 	}
@@ -256,7 +261,6 @@ public class PacketHandlerTcp {
 		System.out.println("Entrez une carte Sprint(si disponible 'SPR' sinon 'NUL')");
 		CarteType carte = CarteType.NUL;
 		core.getJeu().deplacePerso(core.getMoi(), pionAdep, dest);
-		core.getJeu().fermerLieu();
 		return nwm.getPacketsTcp().get("DPR").build(dest, pionAdep, carte, (String) packet.getValue(message, 3),
 				(int) packet.getValue(message, 4), core.getJoueurId());
 
@@ -267,7 +271,6 @@ public class PacketHandlerTcp {
 		int dest = (int) packet.getValue(message, 2);
 		int p = (int) packet.getValue(message, 3);
 		core.getJeu().deplacePerso(core.getJoueur(c), p, dest);
-		core.getJeu().fermerLieu();
 		return "";
 	}
 
@@ -276,7 +279,6 @@ public class PacketHandlerTcp {
 			core.getJeu().getLieux().get((int) packet.getValue(message, 1)).addZombie();
 		if ((int) packet.getValue(message, 2) != 0)
 			core.getJeu().getLieux().get((int) packet.getValue(message, 2)).addZombie();
-		core.getJeu().fermerLieu();
 		return "";
 	}
 
@@ -298,8 +300,6 @@ public class PacketHandlerTcp {
 		Couleur pionCouleur = IdjrTools.getCouleurByChar(pionTemp);
 		int pionInt = IdjrTools.getPionByValue(pionTemp);
 		core.getJeu().sacrifie(core.getJoueur(pionCouleur), pionInt);
-		core.getJeu().getLieux().get((int) packet.getValue(message, 1)).setNbZombies((int) packet.getValue(message, 3));
-		core.getJeu().fermerLieu();
 		return "";
 	}
 

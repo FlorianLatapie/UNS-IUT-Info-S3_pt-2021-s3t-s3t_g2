@@ -65,23 +65,6 @@ public class Lieu {
 		this.personnage.add(p);
 	}
 
-	// MÃ©thodes
-
-	/**
-	 * affiche les diffÃ©rents personnages qui se trouvent sur un lieu
-	 *
-	 * @return le joueur affichÃ©
-	 */
-	public List<Joueur> afficheJoueurSurLieu() {
-		ArrayList<Joueur> n = new ArrayList<Joueur>();
-		for (int i = 0; i < personnage.size(); i++) {
-			if (!(n.contains(personnage.get(i).getJoueur()))) {
-				n.add(personnage.get(i).getJoueur());
-			}
-		}
-		return n;
-	}
-
 	/**
 	 * ajoute un zombie dans le lieu
 	 */
@@ -106,25 +89,10 @@ public class Lieu {
 	}
 
 	/**
-	 * @param nbZombies nombre de zombies
-	 */
-	public void setNbZombies(int nbZombies) {
-		this.nbZombies = nbZombies;
-	}
-
-	/**
 	 * @return le numÃ©ro de partie
 	 */
 	public int getNum() {
 		return num;
-	}
-
-
-	/**
-	 * @return le nombre de zombies prÃ©sents dans un lieu
-	 */
-	public int getNbZombies() {
-		return nbZombies;
 	}
 
 	/**
