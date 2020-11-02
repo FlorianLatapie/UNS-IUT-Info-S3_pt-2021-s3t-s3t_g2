@@ -26,7 +26,7 @@ import jeu.Lieu;
 public class PlateauPane extends StackPane implements LieuxListener{
 	private ScreenControl sControl = null;
 	private Core core = null;
-	private final static ApplicationPane paneName = ApplicationPane.PLATEAU; // nom du pane
+	private final ApplicationPane paneName = ApplicationPane.PLATEAU; // nom du pane
 	
 	private int margeP = 24;
 	private Insets margeBoutonPause = new Insets(margeP, margeP, margeP, margeP);
@@ -45,7 +45,6 @@ public class PlateauPane extends StackPane implements LieuxListener{
 	private int margeL = 10;
 	private Insets margeLieu = new Insets(margeL,margeL,margeL,margeL);
 	private int tailleFont = 15;
-	private Font fontJoueur = Font.font("Segoe UI", 20);
 	private Font fontInfo = Font.font("Segoe UI", tailleFont);
 	private Font fontTitre = Font.font("Segoe UI", FontWeight.BOLD, tailleFont);
 	
@@ -80,13 +79,13 @@ public class PlateauPane extends StackPane implements LieuxListener{
 		
 		VBox j1 = new VBox();
 		Label nbPerso1 = new Label("## personnages");
-		nbPerso1.setFont(fontJoueur);
+		nbPerso1.setFont(Font.font("Segoe UI", 20));
 		nbPerso1.setTextFill(Color.BLACK);
 		Label nbCartes1 = new Label("## de cartes");
-		nbCartes1.setFont(fontJoueur);
+		nbCartes1.setFont(Font.font("Segoe UI", 20));
 		nbCartes1.setTextFill(Color.BLACK);
 		Label nomJoueur1 = new Label("nom Joueur1");
-		nomJoueur1.setFont(fontJoueur);
+		nomJoueur1.setFont(Font.font("Segoe UI", 20));
 		nomJoueur1.setTextFill(Color.BLACK);
 		
 		hBas.setMargin(j1, insetJGauche);
@@ -100,13 +99,13 @@ public class PlateauPane extends StackPane implements LieuxListener{
 		
 		VBox j2 = new VBox();
 		Label nbPerso2 = new Label("## personnages");
-		nbPerso2.setFont(fontJoueur);
+		nbPerso2.setFont(Font.font("Segoe UI", 20));
 		nbPerso2.setTextFill(Color.BLACK);
 		Label nbCartes2 = new Label("## de cartes");
-		nbCartes2.setFont(fontJoueur);
+		nbCartes2.setFont(Font.font("Segoe UI", 20));
 		nbCartes2.setTextFill(Color.BLACK);
 		Label nomJoueur2 = new Label("Nom Joueur 2");
-		nomJoueur2.setFont(fontJoueur);
+		nomJoueur2.setFont(Font.font("Segoe UI", 20));
 		nomJoueur2.setTextFill(Color.BLACK);
 		
 		hBas.setMargin(j2, insetJDroit);
@@ -142,13 +141,13 @@ public class PlateauPane extends StackPane implements LieuxListener{
 		
 		VBox j3 = new VBox();
 		Label nbPerso3 = new Label("## personnages");
-		nbPerso3.setFont(fontJoueur);
+		nbPerso3.setFont(Font.font("Segoe UI", 20));
 		nbPerso3.setTextFill(Color.BLACK);
 		Label nbCartes3 = new Label("## de cartes");
-		nbCartes3.setFont(fontJoueur);
+		nbCartes3.setFont(Font.font("Segoe UI", 20));
 		nbCartes3.setTextFill(Color.BLACK);
 		Label nomJoueur3 = new Label("Nom Joueur 3");
-		nomJoueur3.setFont(fontJoueur);
+		nomJoueur3.setFont(Font.font("Segoe UI", 20));
 		nomJoueur3.setTextFill(Color.BLACK);
 		
 		hHaut.setMargin(j3, insetJGauche);
@@ -162,13 +161,13 @@ public class PlateauPane extends StackPane implements LieuxListener{
 		
 		VBox j4 = new VBox();
 		Label nbPerso4 = new Label("## personnages");
-		nbPerso4.setFont(fontJoueur);
+		nbPerso4.setFont(Font.font("Segoe UI", 20));
 		nbPerso4.setTextFill(Color.BLACK);
 		Label nbCartes4 = new Label("## de cartes");
-		nbCartes4.setFont(fontJoueur);
+		nbCartes4.setFont(Font.font("Segoe UI", 20));
 		nbCartes4.setTextFill(Color.BLACK);
 		Label nomJoueur4 = new Label("Nom Joueur 4");
-		nomJoueur4.setFont(fontJoueur);
+		nomJoueur4.setFont(Font.font("Segoe UI", 20));
 		nomJoueur4.setTextFill(Color.BLACK);
 		
 		hHaut.setMargin(j4, insetJDroit);
@@ -189,13 +188,13 @@ public class PlateauPane extends StackPane implements LieuxListener{
 		
 		VBox j5 = new VBox();
 		Label nbPerso5 = new Label("## personnages");
-		nbPerso5.setFont(fontJoueur);
+		nbPerso5.setFont(Font.font("Segoe UI", 20));
 		nbPerso5.setTextFill(Color.BLACK);
 		Label nbCartes5 = new Label("## de cartes");
-		nbCartes5.setFont(fontJoueur);
+		nbCartes5.setFont(Font.font("Segoe UI", 20));
 		nbCartes5.setTextFill(Color.BLACK);
 		Label nomJoueur5 = new Label("Nom Joueur 5");
-		nomJoueur5.setFont(fontJoueur);
+		nomJoueur5.setFont(Font.font("Segoe UI", 20));
 		nomJoueur5.setTextFill(Color.BLACK);
 		
 		j5.setAlignment(Pos.CENTER);
@@ -219,13 +218,13 @@ public class PlateauPane extends StackPane implements LieuxListener{
 		// obsolete 
 		VBox j6 = new VBox();
 		Label nbPerso6 = new Label("## personnages");
-		nbPerso6.setFont(fontJoueur);
+		nbPerso6.setFont(Font.font("Segoe UI", 20));
 		nbPerso6.setTextFill(Color.BLACK);
 		Label nbCartes6 = new Label("## de cartes");
-		nbCartes6.setFont(fontJoueur);
+		nbCartes6.setFont(Font.font("Segoe UI", 20));
 		nbCartes6.setTextFill(Color.BLACK);
 		Label nomJoueur6 = new Label("Nom Joueur 1");
-		nomJoueur6.setFont(fontJoueur);
+		nomJoueur6.setFont(Font.font("Segoe UI", 20));
 		nomJoueur6.setTextFill(Color.BLACK);
 		
 		j6.setAlignment(Pos.CENTER);
