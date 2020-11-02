@@ -68,8 +68,12 @@ public class PacketHandlerTcp {
 				return deplacerPion(packet, message);
 			case "DPI":
 				return tousDeplacment(packet, message);
+			case "PRAZ":
+				return attaqueZombie(packet, message);
 			case "RAZDS":
 				return choisirSacrifice(packet, message);
+			case "RAZIF":
+				return tousSacrifice(packet, message);
 
 			case "PIPZ":
 			case "IT":
@@ -211,7 +215,7 @@ public class PacketHandlerTcp {
 		System.out.println("Entrez une destination pour le zombie vengeur");
 		int destZomb = 0;
 		if (!(core.getJeu().choixLieudispo().size() == 0))
-			destZomb = core.getJeu().choixLieudispo().get(new Random().nextInt());
+			destZomb = core.getJeu().choixLieudispo().get(new Random().nextInt(core.getJeu().choixLieudispo().size()));
 		sc.close();
 		return nwm.getPacketsTcp().get("CDDZVJE").build(destZomb, packet.getValue(message, 1),
 				packet.getValue(message, 2), core.getJoueurId());
@@ -229,12 +233,14 @@ public class PacketHandlerTcp {
 		int dest = (int) packet.getValue(message, 1);
 		System.out.println("Entrez un pion (Piontype)");
 		int pion = 0;
-		if (!(core.getJeu().pionDispo(core.getMoi(), dest).size() == 0))
-			pion = core.getJeu().pionDispo(core.getMoi(), dest).get(new Random().nextInt());
+		if (!(core.getJeu().pionChoixDispo(core.getMoi(), dest).size() == 0))
+			pion = core.getJeu().pionChoixDispo(core.getMoi(), dest)
+					.get(new Random().nextInt(core.getJeu().pionChoixDispo(core.getMoi(), dest).size()));
 		System.out.println("Entrez une carte Sprint(si disponible 'SPR' sinon 'NUL')");
 		String carteSprint = sc.nextLine();
 		sc.close();
 		core.getJeu().deplacePerso(core.getMoi(), pion, dest);
+		core.getJeu().fermerLieu();
 		return nwm.getPacketsTcp().get("DPR").build(dest, pion, carteSprint, packet.getValue(message, 3),
 				packet.getValue(message, 4), core.getJoueurId());
 
@@ -245,15 +251,38 @@ public class PacketHandlerTcp {
 		int dest = (int) packet.getValue(message, 2);
 		int p = (int) packet.getValue(message, 3);
 		core.getJeu().deplacePerso(core.getJoueur(c), p, dest);
+		core.getJeu().fermerLieu();
+		return "";
+	}
+
+	public String attaqueZombie(Packet packet, String message) {
+		if ((int) packet.getValue(message, 1) != 0)
+			core.getJeu().getLieux().get((int) packet.getValue(message, 1)).addZombie();
+		if ((int) packet.getValue(message, 2) != 0)
+			core.getJeu().getLieux().get((int) packet.getValue(message, 2)).addZombie();
+		core.getJeu().fermerLieu();
 		return "";
 	}
 
 	public String choisirSacrifice(Packet packet, String message) {
 		Scanner sc = new Scanner(System.in);
 		System.out.println("Entrez un pion (PionCouleur)");
-		PionCouleur pion = PionCouleur.valueOf(sc.nextLine());
+		int pionInt = core.getJeu().pionSacrDispo(core.getMoi(), (int) packet.getValue(message, 1)).get(new Random()
+				.nextInt(core.getJeu().pionChoixDispo(core.getMoi(), (int) packet.getValue(message, 1)).size()));
+		String pionTemp = core.getCouleur().name().charAt(0) + "" + pionInt;
+		PionCouleur pion = PionCouleur.valueOf(pionTemp);
 		return nwm.getPacketsTcp().get("RAZCS").build(packet.getValue(message, 1), pion, packet.getValue(message, 2),
 				packet.getValue(message, 3), core.getJoueurId());
+	}
+
+	public String tousSacrifice(Packet packet, String message) {
+		PionCouleur pionTemp = PionCouleur.valueOf((String) packet.getValue(message, 2));
+		Couleur pionCouleur = IdjrTools.getCouleurByChar(pionTemp);
+		int pionInt = IdjrTools.getPionByValue(pionTemp);
+		core.getJeu().sacrifie(core.getJoueur(pionCouleur), pionInt);
+		core.getJeu().getLieux().get((int)packet.getValue(message, 1)).setNbZombies((int)packet.getValue(message, 3));;
+		core.getJeu().fermerLieu();
+		return "";
 	}
 
 }
