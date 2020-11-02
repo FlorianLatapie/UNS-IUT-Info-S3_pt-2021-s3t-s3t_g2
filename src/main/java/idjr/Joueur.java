@@ -29,7 +29,7 @@ public class Joueur {
      * @param nom         le nom du joueur
      */
     public Joueur(String nom, Couleur c) {
-    	this.couleur = c;
+        this.couleur = c;
         enVie = true;
         personnages = new HashMap<>();
         this.nom = nom;
@@ -82,4 +82,7 @@ public class Joueur {
         return nom;
     }
 
+    public String toString() {
+        return nom;
+    }
 }

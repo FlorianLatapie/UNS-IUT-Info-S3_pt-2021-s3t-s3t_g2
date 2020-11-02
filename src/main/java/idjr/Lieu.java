@@ -20,10 +20,10 @@ public class Lieu {
 	private ArrayList<Personnage> personnage;
 
 	/**
-	 * Initialise les différents lieux possibles et donne le nombre de places
+	 * Initialise les diffÃ©rents lieux possibles et donne le nombre de places
 	 * disponibles en fonction du numero de partie
 	 *
-	 * @param num le numéro de partie
+	 * @param num le numÃ©ro de partie
 	 */
 	public Lieu(int num) {
 		HashMap<Integer, String> listeLieu = new HashMap<Integer, String>();
@@ -31,8 +31,8 @@ public class Lieu {
 		listeLieu.put(2, "Cachou");
 		listeLieu.put(3, "Megatoys");
 		listeLieu.put(4, "Parking");
-		listeLieu.put(5, "PC de sécurité");
-		listeLieu.put(6, "Supermarché");
+		listeLieu.put(5, "PC de sÃ©curitÃ©");
+		listeLieu.put(6, "SupermarchÃ©");
 
 		this.name = listeLieu.get(num);
 		this.num = num;
@@ -52,7 +52,7 @@ public class Lieu {
 		personnage = new ArrayList<>();
 	}
 
-	
+
 	/**
 	 * Ajoute un personnage dans un lieu
 	 *
@@ -60,17 +60,17 @@ public class Lieu {
 	 */
 	public void addPersonnage(Personnage p) {
 		if (this.isFull()) {
-			throw new RuntimeException(this.toString() + " est full!");
+			throw new RuntimeException(name + " est full!");
 		}
 		this.personnage.add(p);
 	}
 
-	// Méthodes
+	// MÃ©thodes
 
 	/**
-	 * affiche les différents personnages qui se trouvent sur un lieu
+	 * affiche les diffÃ©rents personnages qui se trouvent sur un lieu
 	 *
-	 * @return le joueur affiché
+	 * @return le joueur affichÃ©
 	 */
 	public List<Joueur> afficheJoueurSurLieu() {
 		ArrayList<Joueur> n = new ArrayList<Joueur>();
@@ -96,6 +96,7 @@ public class Lieu {
 	 * @return true ou false
 	 */
 	public boolean isFull() {
+		System.out.println(this.toString());
 		if (personnage != null) {
 			if (this.personnage.size() == this.nbPlaces) {
 				return true;
@@ -112,7 +113,7 @@ public class Lieu {
 	}
 
 	/**
-	 * @return le numéro de partie
+	 * @return le numÃ©ro de partie
 	 */
 	public int getNum() {
 		return num;
@@ -120,7 +121,7 @@ public class Lieu {
 
 
 	/**
-	 * @return le nombre de zombies présents dans un lieu
+	 * @return le nombre de zombies prÃ©sents dans un lieu
 	 */
 	public int getNbZombies() {
 		return nbZombies;
@@ -134,7 +135,7 @@ public class Lieu {
 	}
 
 	/**
-	 * @param open attribut qui définit si le lieu est ouvert ou non
+	 * @param open attribut qui dÃ©finit si le lieu est ouvert ou non
 	 */
 	public void setOuvert(boolean open) {
 		this.ouvert = open;
@@ -145,5 +146,14 @@ public class Lieu {
 	 */
 	public List<Personnage> getPersonnage() {
 		return personnage;
+	}
+
+
+	public int getNbPlaces() {
+		return nbPlaces;
+	}
+
+	public String toString() {
+		return name;
 	}
 }

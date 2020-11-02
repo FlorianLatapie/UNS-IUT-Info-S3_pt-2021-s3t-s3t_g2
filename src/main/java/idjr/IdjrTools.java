@@ -15,18 +15,18 @@ public abstract class IdjrTools {
 
         return Couleur.NUL;
     }
-    
+
     public static Couleur getCouleurByChar(PionCouleur pc) {
-    	for (Couleur c : Couleur.values()) 
-    		if (pc.name().charAt(0) == c.name().charAt(0)) 
-    			return c;
-    	
-    	return Couleur.NUL;
+        for (Couleur c : Couleur.values())
+            if (pc.name().charAt(0) == c.name().charAt(0))
+                return c;
+
+        return Couleur.NUL;
     }
-    
+
     public static int getPionByValue(PionCouleur pc) {
-    	String tmp = "" + pc.name().charAt(1);
-    	
-    	return Integer.parseInt(tmp);
+        String tmp = "" + pc.name().charAt(1);
+
+        return Integer.parseInt(tmp);
     }
 }

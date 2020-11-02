@@ -33,9 +33,9 @@ public class Idjr {
 			}
 		}
 		return null;
-		
+
 	}
-	
+
 	public Joueur getJoueur (Couleur c) {
 		for (Joueur j: jeu.getJoueurs().values()) {
 			if (j.getCouleur() == c) {
@@ -44,7 +44,7 @@ public class Idjr {
 		}
 		return null;
 	}
-	
+
 	public Jeu getJeu() {
 		return jeu;
 	}

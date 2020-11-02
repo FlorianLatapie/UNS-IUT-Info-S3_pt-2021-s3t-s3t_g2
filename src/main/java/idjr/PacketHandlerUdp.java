@@ -15,12 +15,10 @@ import java.text.MessageFormat;
 import java.util.Random;
 import java.util.Scanner;
 
-import com.sun.javafx.tk.DummyToolkit;
-
 /**
  * <h1>Permet de gerer les packets</h1>
  *
- * @author Sébastien Aglaé
+ * @author SÃ©bastien AglaÃ©
  * @version 1.0
  */
 public class PacketHandlerUdp {
@@ -28,7 +26,7 @@ public class PacketHandlerUdp {
     private final Idjr core;// TODO Add the game manager (core)
 
     /**
-     * @param netWorkManager le controleur réseau
+     * @param netWorkManager le controleur rÃ©seau
      * @param core           coeur du jeu
      */
     public PacketHandlerUdp(NetWorkManager netWorkManager, Object core) {
@@ -74,7 +72,7 @@ public class PacketHandlerUdp {
         core.setPortPp((int) packet.getValue(message, 3));
 
         System.out.println(
-                MessageFormat.format("Une nouvelle partie vient d''etre trouvé !\n{0}", packet.getValue(message, 1)));
+                MessageFormat.format("Une nouvelle partie vient d''etre trouvÃ© !\n{0}", packet.getValue(message, 1)));
         System.out.println("Voulez-vous rejoindre cette partie ? (K)");
         Scanner sc = new Scanner(System.in);
         // String rep = new Scanner(System.in).nextLine();

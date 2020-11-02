@@ -72,6 +72,7 @@ public class Jeu {
 				HashMap<Integer, Personnage> dp = new HashMap<>();
 				dp.put(7, new Personnage(joueurs.get(i)));
 				dp.put(5, new Personnage(joueurs.get(i)));
+				dp.put(3, new Personnage(joueurs.get(i)));
 				joueurs.get(i).setPersonnages(dp);
 			}
 	}
@@ -144,22 +145,22 @@ public class Jeu {
 	 * Ferme les lieux a envahie
 	 */
 	public void fermerLieu() {
-        for (int i = 1; i < 7; i++) {
-            if (i != 4 && this.lieux.get(i).getNbZombies() >= 8 && this.lieux.get(i).getPersonnage().isEmpty()) {
-                this.lieux.get(i).setOuvert(false);
-                this.lieux.get(i).setNbZombies(0);
-            }
-        }
-    }
+		for (int i = 1; i < 7; i++) {
+			if (i != 4 && this.lieux.get(i).getNbZombies() >= 8 && this.lieux.get(i).getPersonnage().isEmpty()) {
+				this.lieux.get(i).setOuvert(false);
+				this.lieux.get(i).setNbZombies(0);
+			}
+		}
+	}
 
 	public void fermerLieu(List<Integer> l) {
-        for (int i = 0; i < l.size(); i++) {
-            if (l.get(i) != 4 && this.lieux.get(l.get(i)).getNbZombies() >= 8 && this.lieux.get(l.get(i)).getPersonnage().isEmpty()){
-                this.lieux.get(l.get(i)).setOuvert(false);
-                this.lieux.get(l.get(i)).setNbZombies(0);
-            }
-        }
-    }
+		for (int i = 0; i < l.size(); i++) {
+			if (l.get(i) != 4 && this.lieux.get(l.get(i)).getNbZombies() >= 8 && this.lieux.get(l.get(i)).getPersonnage().isEmpty()){
+				this.lieux.get(l.get(i)).setOuvert(false);
+				this.lieux.get(l.get(i)).setNbZombies(0);
+			}
+		}
+	}
 
 	public List<Integer> pionChoixDispo(Joueur j, int dest){
 		List<Integer> l = new ArrayList<>();
@@ -170,7 +171,7 @@ public class Jeu {
 		}
 		return l;
 	}
-	
+
 	public List<Integer> pionSacrDispo(Joueur j, int dest){
 		List<Integer> l = new ArrayList<>();
 		for(Entry<Integer, Personnage> p: j.getPersonnages().entrySet()) {
@@ -180,8 +181,8 @@ public class Jeu {
 		}
 		return l;
 	}
-	
-	
+
+
 	private boolean toutPers(Joueur j, int a) {
 		for (Personnage i : j.getPersonnages().values()) {
 			if (i.getMonLieu().getNum() != a) {
@@ -214,7 +215,7 @@ public class Jeu {
 		}
 		return lieux;
 	}
-	
+
 	public List<Integer> getLieuxOuvert(){
 		List<Integer> l = new ArrayList<>();
 		for (Lieu lieu: this.lieux.values()) {
@@ -225,4 +226,23 @@ public class Jeu {
 		return l;
 	}
 
+	/**
+	 * Obtient l'etat du jeu
+	 *
+	 * @return le plateau de jeu
+	 */
+	public String afficheJeu() {
+		StringBuilder tmp = new StringBuilder();
+		for (int i = 1; i < 7; i++) {
+			tmp.append(this.lieux.get(i)).append(":\n");
+			for (int a = 0; a < this.lieux.get(i).getPersonnage().size(); a++) {
+				tmp.append("(").append(this.lieux.get(i).getPersonnage().get(a).getJoueur()).append(") ")
+						.append(this.lieux.get(i).getPersonnage().get(a)).append("\n");
+			}
+			tmp.append("Nombre de place-> ").append(this.lieux.get(i).getNbPlaces()).append("\n");
+			tmp.append("Nombre de Zombie-> ").append(this.lieux.get(i).getNbZombies()).append("\n\n");
+		}
+
+		return tmp.toString();
+	}
 }
