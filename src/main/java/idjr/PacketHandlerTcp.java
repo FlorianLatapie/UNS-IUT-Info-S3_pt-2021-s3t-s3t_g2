@@ -56,7 +56,9 @@ public class PacketHandlerTcp {
 			case "PIRD":
 				return choisirDestPion(packet, message);
 			case "PIIG":
-				return joueurDeplacement(packet, message);
+				return joueurPlacement(packet, message);
+			case "IT":
+				return debutTour(packet, message);
 			case "PAZ":
 				return lanceDesChefVigil(packet, message);
 			case "PCD":
@@ -79,7 +81,6 @@ public class PacketHandlerTcp {
 				return tousSacrifice(packet, message);
 
 			case "PIPZ":
-			case "IT":
 			case "PFC":
 			case "RFC":
 			case "PECV":
@@ -145,13 +146,23 @@ public class PacketHandlerTcp {
 				(String) core.getJoueurId());
 	}
 
-	public String joueurDeplacement(Packet packet, String message) {
+	public String joueurPlacement(Packet packet, String message) {
 		Couleur c = (Couleur) packet.getValue(message, 1);
 		int dest = (int) packet.getValue(message, 4);
 		int pion = (int) packet.getValue(message, 5);
 		System.out.println(dest);
 		System.out.println(pion);
 		core.getJeu().placePerso(core.getJoueur(c), pion, dest);
+		return "";
+	}
+	
+	public String debutTour(Packet packet, String message) {
+		List<Couleur> l = (List<Couleur>)packet.getValue(message, 2);
+		for (Joueur j: core.getJeu().getJoueurs().values()) {
+			if (!l.contains(j.getCouleur())) {
+				j.setEnVie(false);
+			}
+		}
 		return "";
 	}
 
