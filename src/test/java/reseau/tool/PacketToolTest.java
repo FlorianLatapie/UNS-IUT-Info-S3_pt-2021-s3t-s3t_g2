@@ -1,7 +1,6 @@
 package reseau.tool;
 
 import org.junit.jupiter.api.Test;
-import reseau.type.PionType;
 import reseau.type.Status;
 
 import java.util.ArrayList;
@@ -126,24 +125,24 @@ class PacketToolTest {
 
     @Test
     void subListToStr() {
-        HashMap<PionType, List<Integer>> actual = new HashMap<>();
+        HashMap<Integer, List<Integer>> actual = new HashMap<>();
         List<Integer> blonde = new ArrayList<>();
         blonde.add(5);
-        actual.put(PionType.BLONDE, blonde);
+        actual.put(7, blonde);
         List<Integer> brute = new ArrayList<>();
         brute.add(2);
-        actual.put(PionType.BRUTE, brute);
+        actual.put(5, brute);
         List<Integer> truand = new ArrayList<>();
         truand.add(3);
         truand.add(5);
-        actual.put(PionType.TRUAND, truand);
+        actual.put(3, truand);
         List<Integer> filette = new ArrayList<>();
-        filette.add(-1);
-        actual.put(PionType.FILETTE, filette);
+        filette.add(1);
+        actual.put(1, filette);
         String expected = "BLONDE:5;BRUTE:2;TRUAND:3,5;FILETTE:-1";
         //Assertions.assertEquals(expected, PacketTool.subListToStr(actual));
 
-        HashMap<PionType, List<Integer>> actual1 = new HashMap<>();
+        HashMap<Integer, List<Integer>> actual1 = new HashMap<>();
         String expected1 = " ";
         assertEquals(expected1, PacketTool.subListToStr(actual1));
 
@@ -156,24 +155,24 @@ class PacketToolTest {
 
     @Test
     void strToSubList() {
-        HashMap<PionType, List<Integer>> expected = new HashMap<>();
+        HashMap<Integer, List<Integer>> expected = new HashMap<>();
         List<Integer> blonde = new ArrayList<>();
         blonde.add(5);
-        expected.put(PionType.BLONDE, blonde);
+        expected.put(7, blonde);
         List<Integer> brute = new ArrayList<>();
         brute.add(2);
-        expected.put(PionType.BRUTE, brute);
+        expected.put(8, brute);
         List<Integer> truand = new ArrayList<>();
         truand.add(3);
         truand.add(5);
-        expected.put(PionType.TRUAND, truand);
+        expected.put(1, truand);
         List<Integer> filette = new ArrayList<>();
-        filette.add(-1);
-        expected.put(PionType.FILETTE, filette);
-        String message = "BLONDE:5;BRUTE:2;TRUAND:3,5;FILETTE:-1";
+        filette.add(1);
+        expected.put(1, filette);
+        String message = "7:5;5:2;3:3,5;1:1";
         assertEquals(expected, PacketTool.strToSubList(message));
 
-        HashMap<PionType, List<Integer>> expected1 = new HashMap<>();
+        HashMap<Integer, List<Integer>> expected1 = new HashMap<>();
         String message2 = " ";
         assertEquals(expected1, PacketTool.strToSubList(message2));
 

@@ -57,6 +57,7 @@ public class PacketHandlerTcp {
     }
 
     private String cddj(Packet packet, String message, Socket socket) {
+        out.println("I received a CDDJ");
         core.getTempPaquet().add(message);
         core.addCddj();
         return "";

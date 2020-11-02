@@ -42,6 +42,7 @@ public class ControleurJeu {
     private int nextJoueurId;
     private Random rd;
     private List<Joueur> jmort;
+
     public List<String> getTempPaquet() {
         return tempPaquet;
     }
@@ -97,6 +98,7 @@ public class ControleurJeu {
     public ControleurJeu(String nom, int njr, int njv) throws IOException {
         if (njr + njv > 6 || njr + njv < 3)
             throw new IllegalArgumentException("Mauvais nombre de joueur");
+        this.jmort = new ArrayList<>();
         this.tempPaquet = new ArrayList<>();
         this.nomPartie = nom;
         this.nbjv = njv;
@@ -245,7 +247,7 @@ public class ControleurJeu {
         String m = nwm.getPacketsTcp().get("IT").build(jeu.getChefVIgile().getCouleur(), getJoueursCouleurs(), partieId, numeroTour);
         for (Joueur j : jeu.getJoueurs().values())
             TcpClientSocket.connect(j.getIp(), j.getPort(), m, null, 0);
-        
+
         fouilleCamion();
         electionChefVigi();
         lieuZombie = arriveZombie();
@@ -351,21 +353,40 @@ public class ControleurJeu {
         for (Joueur j : jeu.getJoueurs().values())
             TcpClientSocket.connect(j.getIp(), j.getPort(), m, null, 0);
         if (jeu.getNewChef() == true) {
-            while (!cddcv)
-                ;
+            while (!cddcv) {
+                try {
+                    Thread.sleep(100);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
             cddcv = false;
             m = getPaquetTemp("CDDCV");
             int dest = (int) nwm.getPacketsTcp().get("CDDCV").getValue(m, 1);
             destination.add(dest);
+
+            m = nwm.getPacketsTcp().get("CDCDV").build(jeu.getChefVIgile().getCouleur(), dest, partieId, numeroTour);
+            for (Joueur j : jeu.getJoueurs().values())
+                if (!(j.isChefDesVigiles() && ve == VigileEtat.NE))
+                    TcpClientSocket.connect(j.getIp(), j.getPort(), m, null, 0);
         }
 
         int nb = nbjtotal - jeu.getNbMort();
         nb += jeu.getNewChef() ? -1 : 0;
 
-        while (!(cddj == nb))
-            ;
+        out.println("mes" + nb);
+        while (!(cddj == nb)) {
+            try {
+                Thread.sleep(100);
+                out.println(cddj);
+                out.println(tempPaquet.size());
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
         cddj = 0;
 
+        out.println("Yep 123 " + nb);
         HashMap<String, Integer> idj = new HashMap<>();
         while (true) {
             String message = getPaquetTemp("CDDJ");
@@ -394,14 +415,14 @@ public class ControleurJeu {
         m = nwm.getPacketsTcp().get("CDFC").build(partieId, numeroTour);
         for (Joueur j : jeu.getJoueurs().values())
             TcpClientSocket.connect(j.getIp(), j.getPort(), m, null, 0);
-       for (Joueur j: this.jeu.getJoueurs().values()) {
-    	   if (jmort.contains(j)) {
-    		   //TODO CDZVI
-    		   //TODO traiter CDDZVJE
-    		   //this.jeu.getLieux().get(DZV).addZombie();
-    	   }
-       }
-    
+        for (Joueur j : this.jeu.getJoueurs().values()) {
+            if (jmort.contains(j)) {
+                m = nwm.getPacketsTcp().get("CDZVI").build(partieId, numeroTour);
+                String rep = TcpClientSocket.connect(j.getIp(), j.getPort(), m, null, 0);
+                int dvz = (int) nwm.getPacketsTcp().get("CDDZVJE").getValue(rep, 1);
+                this.jeu.getLieux().get(dvz).addZombie();
+            }
+        }
     }
 
     private String getPaquetTemp(String key) {
@@ -423,24 +444,41 @@ public class ControleurJeu {
         for (int i = 0; i < jeu.getJoueurs().size(); i++) {
             if (jeu.getJoueurs().get(i).isChefDesVigiles() && jeu.getJoueurs().get(i).isEnVie()) {
                 out.println(jeu.afficheJeu());
-                // TODO DPD DEST(destination.get(compteur)) + ajouter message deplacementPerso (DPR)
-                if (!deplacementPerso(jeu.getJoueurs().get(i), destination.get(compteur))) {
-                    return;
-                }
+
+                m = nwm.getPacketsTcp().get("DPD").build(destination.get(compteur), jeu.allChoixPossible(jeu.getJoueurs().get(i)), partieId, numeroTour);
+                String message = TcpClientSocket.connect(jeu.getJoueurs().get(i).getIp(), jeu.getJoueurs().get(i).getPort(), m, null, 0);
+                int dest = (int) nwm.getPacketsTcp().get("DPR").getValue(message, 1);
+                int pion = (int) nwm.getPacketsTcp().get("DPR").getValue(message, 2);
+                this.jeu.deplacePerso(jeu.getJoueurs().get(i), valeurToIndex(pion), dest);
+                finJeu();
+                this.jeu.fermerLieu();
                 compteur += 1;
-                //TODO DPI
+
+                m = nwm.getPacketsTcp().get("DPI").build(jeu.getJoueurs().get(i).getCouleur(), dest, pion, CarteType.NUL, partieId, numeroTour);
+                for (Joueur j : jeu.getJoueurs().values()) {
+                    if (j != jeu.getJoueurs().get(i))
+                        TcpClientSocket.connect(j.getIp(), j.getPort(), m, null, 0);
+                }
             }
         }
         for (int i = 0; i < jeu.getJoueurs().size(); i++) {
             if (!jeu.getJoueurs().get(i).isChefDesVigiles() && jeu.getJoueurs().get(i).isEnVie()) {
                 out.println(jeu.afficheJeu());
-                // TODO DPD DEST(destination.get(compteur)) + ajouter message deplacementPerso (DPR)
-                if (!deplacementPerso(jeu.getJoueurs().get(i), destination.get(compteur))) {
-                    return;
-                }
+
+                m = nwm.getPacketsTcp().get("DPD").build(destination.get(compteur), jeu.allChoixPossible(jeu.getJoueurs().get(i)), partieId, numeroTour);
+                String message = TcpClientSocket.connect(jeu.getJoueurs().get(i).getIp(), jeu.getJoueurs().get(i).getPort(), m, null, 0);
+                int dest = (int) nwm.getPacketsTcp().get("DPR").getValue(message, 1);
+                int pion = (int) nwm.getPacketsTcp().get("DPR").getValue(message, 2);
+                this.jeu.deplacePerso(jeu.getJoueurs().get(i), valeurToIndex(pion), dest);
+                finJeu();
+                this.jeu.fermerLieu();
                 compteur += 1;
 
-                //TODO DPI
+                m = nwm.getPacketsTcp().get("DPI").build(jeu.getJoueurs().get(i).getCouleur(), dest, pion, CarteType.NUL, partieId, numeroTour);
+                for (Joueur j : jeu.getJoueurs().values()) {
+                    if (j != jeu.getJoueurs().get(i))
+                        TcpClientSocket.connect(j.getIp(), j.getPort(), m, null, 0);
+                }
             }
         }
     }
@@ -468,14 +506,13 @@ public class ControleurJeu {
             }
             choixPerso = pers.get(0);
         } else {
-            affichageConsoleDeplacment(joueur, destination);
+            //TODO affichageConsoleDeplacment(joueur, destination);
             out.println(s);
             // choixPerso = sc.nextInt();
-            choixPerso = new Random().nextInt(3); // temporaire
+            choixPerso = new Random().nextInt(4); // temporaire
+            System.out.println(jeu.afficheJeu());
             out.println(choixPerso); // temporaire
             while (!pers.contains(choixPerso)) {
-                out.println(RETOUR_LIGNE);
-                System.out.println(jeu.afficheJeu());
                 out.println();
                 out.println("Numéro Incorect!\n");
                 out.println(joueur + " choisit un personage a déplacer à " + jeu.getLieux().get(destination));
@@ -483,13 +520,20 @@ public class ControleurJeu {
                     out.println(per + "\t" + joueur.getPersonnages().get(per));
                 }
                 // choixPerso = sc.nextInt();
-                choixPerso = new Random().nextInt(3); // temporaire
+                choixPerso = new Random().nextInt(4); // temporaire
                 out.println(choixPerso); // temporaire
+                try {
+                    Thread.sleep(1000000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
             }
         }
         //TODO choixPerso = la réponse DPR de DPD (PION); -> message
-        if (!jeu.getLieux().get(destination).isFull() && jeu.getLieux().get(destination).isOuvert()) {
-            jeu.deplacePerso(joueur, choixPerso, destination);
+        out.println(destination);
+        if (!jeu.getLieux().get(destination).isFull()) {
+            if (jeu.getLieux().get(destination).isOuvert())
+                jeu.deplacePerso(joueur, choixPerso, destination);
         } else {
             jeu.deplacePerso(joueur, choixPerso, 4);
         }
@@ -498,7 +542,7 @@ public class ControleurJeu {
         return !this.finJeu();
     }
 
-    private void affichageConsoleDeplacment(Joueur joueur, int destination) {
+    private void affichageConsoleDeplacement(Joueur joueur, int destination) {
         if (!jeu.getLieux().get(destination).isFull() && jeu.getLieux().get(destination).isOuvert()) {
             out.println(MessageFormat.format("{0} choisit un personage a déplacer à {1}", joueur,
                     jeu.getLieux().get(destination)));
@@ -654,11 +698,11 @@ public class ControleurJeu {
                 int persEntre = (int) nwm.getPacketsTcp().get("PICD").getValue(rep, 2);
                 jeu.placePerso(jeu.getJoueurs().get(i), valeurToIndex(persEntre), destEntre);
 
-                message = nwm.getPacketsTcp().get("PIIG").build(jeu.getJoueurs().get(i).getCouleur(), des, listePion, destEntre, valeurToIndex(persEntre), partieId);
+                message = nwm.getPacketsTcp().get("PIIG").build(jeu.getJoueurs().get(i).getCouleur(), des, listePion, destEntre, persEntre, partieId);
                 for (Joueur j : jeu.getJoueurs().values())
                     if (j != jeu.getJoueurs().get(i))
-                        ThreadTool.taskPacketTcp(jeu.getJoueurs().get(i).getIp(),
-                                jeu.getJoueurs().get(i).getPort(), message);
+                        ThreadTool.taskPacketTcp(j.getIp(),
+                                j.getPort(), message);
 
                 out.println(RETOUR_LIGNE);
             }
@@ -775,7 +819,7 @@ public class ControleurJeu {
 
         out.println(RETOUR_LIGNE);
     }
-    
+
 
     /**
      * Detecte et affiche la fin du jeu

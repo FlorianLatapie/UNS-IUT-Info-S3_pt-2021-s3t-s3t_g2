@@ -1,7 +1,5 @@
 package reseau.tool;
 
-import reseau.type.PionType;
-
 import java.util.*;
 
 /**
@@ -146,12 +144,12 @@ public abstract class PacketTool {
      * @param list hashmap a convertir
      * @return un hashmap en chaine de caractere
      */
-    public static String subListToStr(Map<PionType, List<Integer>> list) {
+    public static String subListToStr(HashMap<Integer, List<Integer>> list) {
         if (list.isEmpty())
             return " ";
 
         StringBuilder tmp = new StringBuilder();
-        for (Map.Entry<PionType, List<Integer>> pion : list.entrySet()) {
+        for (Map.Entry<Integer, List<Integer>> pion : list.entrySet()) {
             if (pion.getValue().isEmpty())
                 continue;
             tmp.append(pion.getKey()).append(":");
@@ -171,11 +169,11 @@ public abstract class PacketTool {
      * @param message une chaine de caractere
      * @return une chaine de caractere en hashmap
      */
-    public static HashMap<PionType, List<Integer>> strToSubList(String message) {
+    public static HashMap<Integer, List<Integer>> strToSubList(String message) {
         if (message.equals(" "))
             return new HashMap<>();
 
-        HashMap<PionType, List<Integer>> sublist = new HashMap<>();
+        HashMap<Integer, List<Integer>> sublist = new HashMap<>();
         String[] sublist1 = message.split(";");
         for (String sl : sublist1) {
             String[] sublist2 = sl.split(":");
@@ -183,7 +181,7 @@ public abstract class PacketTool {
             List<Integer> dest = new ArrayList<>();
             for (String i : sublist3)
                 dest.add(Integer.parseInt(i));
-            sublist.put(PionType.valueOf(sublist2[0]), dest);
+            sublist.put(Integer.parseInt(sublist2[0]), dest);
         }
 
         return sublist;

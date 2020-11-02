@@ -66,6 +66,26 @@ public class Jeu {
         return i;
     }
 
+    public HashMap<Integer, List<Integer>> allChoixPossible(Joueur j) {
+        HashMap<Integer, List<Integer>> acp = new HashMap<>();
+        for (Personnage p :j.getPersonnages().values()) {
+            List<Integer> destTmp = persoChoixPossible(p);
+            if (!destTmp.isEmpty())
+                acp.put(p.getPoint(),destTmp);
+        }
+
+        return acp;
+    }
+
+    public List<Integer> persoChoixPossible(Personnage personnage){
+        List<Integer> dest = new ArrayList<>();
+        for (Lieu l:lieux.values())
+            if (personnage.getMonLieu() != l && l.isOuvert() && !l.isFull())
+                dest.add(l.getNum());
+
+        return dest;
+    }
+
     /**
      * Initialise les cartes du jeu
      */
