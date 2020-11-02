@@ -33,10 +33,14 @@ public class OptionPane extends StackPane {
 	private GaussianBlur flou = new GaussianBlur(30);
 	private String styleBoutons = " -fx-background-color:#000000; -fx-background-radius: 15px; -fx-text-fill: #ffffff";
 	private String styleBoutonsSouris = "-fx-background-color:#ff0000;  -fx-text-fill:#000000; -fx-background-radius: 15px;";
+	private String styleTitre ="-fx-text-fill: #ff1c16";
 	private final ApplicationPane paneName = ApplicationPane.OPTION;
 
 	private int tailleCarreCentral = 700;
+	private Font policeTitre = Font.font("Segoe UI", FontWeight.BOLD, 75);
 	private Font policeBouton = Font.font("Segoe UI", FontWeight.BOLD, 33);
+	
+	private int hauteurElement = 60;
 
 	public OptionPane(ScreenControl sc, Core c) {
 		core = c;
@@ -49,8 +53,6 @@ public class OptionPane extends StackPane {
 		rect.setStrokeWidth(2);
 		rect.setWidth(tailleCarreCentral);
 		rect.setHeight(tailleCarreCentral);
-		rect.setX(100);
-		rect.setY(100);
 		rect.setOpacity(.3);
 
 		VBox vbFond = new VBox();
@@ -60,9 +62,9 @@ public class OptionPane extends StackPane {
 
 		HBox hbBRetour = new HBox();
 		hbBRetour.setAlignment(Pos.BOTTOM_LEFT);
-		hbBRetour.setPrefSize(tailleCarreCentral, 60);
-		hbBRetour.setMinSize(tailleCarreCentral, 60);
-		hbBRetour.setMaxSize(tailleCarreCentral, 60);
+		hbBRetour.setPrefSize(tailleCarreCentral, hauteurElement);
+		hbBRetour.setMinSize(tailleCarreCentral, hauteurElement);
+		hbBRetour.setMaxSize(tailleCarreCentral, hauteurElement);
 
 		VBox vbCentral = new VBox();
 		vbCentral.setAlignment(Pos.CENTER);
@@ -83,14 +85,14 @@ public class OptionPane extends StackPane {
 		vbBoutons.setSpacing(15);
 
 		Label titre = new Label("OPTIONS");
-		titre.setStyle("-fx-text-fill: #ff1c16");
-		titre.setFont(Font.font("Arial", FontWeight.BOLD, 75));
+		titre.setStyle(styleTitre);
+		titre.setFont(policeTitre);
 		vbTitre.getChildren().add(titre);
 
 		Button bFrancais = new Button("Français");
 		bFrancais.setFont(policeBouton);
 		bFrancais.setAlignment(Pos.CENTER);
-		bFrancais.setPrefSize(245, 60);
+		bFrancais.setPrefSize(245, hauteurElement);
 		bFrancais.setStyle(styleBoutons);
 		bFrancais.setOnAction(EventHandler -> sc.setPaneOnTop(ApplicationPane.OPTION));
 
@@ -104,7 +106,7 @@ public class OptionPane extends StackPane {
 		Button bEnglish = new Button("English");
 		bEnglish.setFont(policeBouton);
 		bEnglish.setAlignment(Pos.CENTER);
-		bEnglish.setPrefSize(245, 60);
+		bEnglish.setPrefSize(245, hauteurElement);
 		bEnglish.setStyle(styleBoutons);
 		bEnglish.setOnMouseEntered(event -> {
 			bEnglish.setStyle(styleBoutonsSouris);
@@ -116,7 +118,7 @@ public class OptionPane extends StackPane {
 		Button bAcc = new Button("Accessibilité");
 		bAcc.setFont(policeBouton);
 		bAcc.setAlignment(Pos.CENTER);
-		bAcc.setPrefSize(500, 60);
+		bAcc.setPrefSize(500, hauteurElement);
 		bAcc.setStyle(styleBoutons);
 		bAcc.setOnMouseEntered(event -> {
 			bAcc.setStyle(styleBoutonsSouris);
@@ -129,7 +131,7 @@ public class OptionPane extends StackPane {
 		Button bRetour = new Button("RETOUR");
 		bRetour.setFont(policeBouton);
 		bRetour.setAlignment(Pos.CENTER);
-		bRetour.setPrefSize(180, 60);
+		bRetour.setPrefSize(180, hauteurElement);
 		bRetour.setStyle(styleBoutons);
 		bRetour.setOnAction(EventHandler -> sc.setPaneOnTop(core.getPauseDepuis()));
 		bRetour.setOnMouseEntered(event -> {

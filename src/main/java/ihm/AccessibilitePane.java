@@ -8,7 +8,6 @@ import javafx.scene.control.*;
 import javafx.scene.effect.GaussianBlur;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
-import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
@@ -20,6 +19,20 @@ public class AccessibilitePane extends StackPane{
 	private StackPane stackPane = new StackPane();
 	private GaussianBlur flou = new GaussianBlur(30);
 	private final ApplicationPane paneName = ApplicationPane.ACCESSIBILITE;
+	
+	private int tailleCarreCentral = 700;
+	
+	private String styleTitre ="-fx-text-fill: #ff1c16";
+	private String styleBoutons = " -fx-background-color:#000000; -fx-background-radius: 15px; -fx-text-fill: #ffffff";
+	private String styleTexte = " -fx-background-color:#000000; -fx-text-fill: #ffffff; -fx-background-radius: 5px;";
+	private String styleBoutonsSouris = "-fx-background-color:#ff0000;  -fx-text-fill:#000000; -fx-background-radius: 15px;";
+
+	private Font policeTitre = Font.font("Segoe UI", FontWeight.BOLD, 75);
+	private Font policeBouton = Font.font("Segoe UI", FontWeight.BOLD, 27);
+	private Font policeBoutonRetour = Font.font("Segoe UI", FontWeight.BOLD, 33);
+	
+	private int hauteurElement = 60;
+	private int largeurBouton = 220;
 
 	public AccessibilitePane(ScreenControl sc) {
 
@@ -28,24 +41,21 @@ public class AccessibilitePane extends StackPane{
 		stackPane.setAlignment(Pos.CENTER);
 		
 		Rectangle rect = new Rectangle();
-		rect.setStroke(Color.BLACK);
-		rect.setFill(Color.LIGHTGRAY);
-		rect.setWidth(700);
-		rect.setHeight(600);
-		rect.setX(100);
-		rect.setY(100);
-		rect.setOpacity(.8);
+		rect.setStroke(Color.RED);
+		rect.setStrokeWidth(2);
+		rect.setWidth(tailleCarreCentral);
+		rect.setHeight(tailleCarreCentral);
+		rect.setOpacity(.3);
 		
 		VBox vbFond = new VBox();
 		vbFond.setAlignment(Pos.CENTER);
 		vbFond.setSpacing(20);
 		vbFond.setEffect(flou);
 		
-		VBox vbCentral = new VBox();
-		vbCentral.setAlignment(Pos.CENTER);
-		vbCentral.setPrefSize(700, 600);
-		vbCentral.setMinSize(700, 600);
-		vbCentral.setMaxSize(700, 600);
+		BorderPane bpCentral = new BorderPane();
+		bpCentral.setPrefSize(tailleCarreCentral, tailleCarreCentral);
+		bpCentral.setMinSize(tailleCarreCentral, tailleCarreCentral);
+		bpCentral.setMaxSize(tailleCarreCentral,tailleCarreCentral);
 		
 		VBox vbTitre = new VBox();
 		vbTitre.setAlignment(Pos.CENTER);
@@ -61,71 +71,115 @@ public class AccessibilitePane extends StackPane{
 		vbRetour.setPadding(new Insets(10));
 		
 		HBox hbDaltonisme = new HBox();
+		hbDaltonisme.setSpacing(10);
 		hbDaltonisme.setAlignment(Pos.CENTER);
 
 		Label titre = new Label("Accessibilité");
-		titre.setFont(Font.font("Arial", FontWeight.BOLD, 75));
+		titre.setStyle(styleTitre);
+		titre.setFont(policeTitre);
 		vbTitre.getChildren().add(titre);
 		vbTitre.setMargin(vbBoutons, new Insets(10));
 		
 		
 		Label titreVbBoutons = new Label("Daltonisme");
-		titreVbBoutons.setFont(Font.font("Arial", 40));
+		titreVbBoutons.setFont(policeBouton);
+		titreVbBoutons.setStyle(styleTexte);
+		titreVbBoutons.setPadding(new Insets (10));
 		vbBoutons.getChildren().add(titreVbBoutons);
 		vbBoutons.setMargin(vbCheckBoutons, new Insets(20));
 
-		Label fr = new Label("Français");
-		Label en = new Label("English");
-
-		fr.setFont(Font.font("Arial", 20));
-		fr.setAlignment(Pos.CENTER);
-
-		en.setFont(Font.font("Arial", 20));
-		en.setAlignment(Pos.CENTER);
 
 		Button bDeuteranopie = new Button("Deutéranopie");
-		bDeuteranopie.setFont(Font.font("Arial", FontWeight.BOLD, 25));
+		bDeuteranopie.setFont(policeBouton);
 		bDeuteranopie.setAlignment(Pos.CENTER);
-		bDeuteranopie.setPrefSize(1500, 80);
+		bDeuteranopie.setStyle(styleBoutons);
+		bDeuteranopie.setPrefSize(largeurBouton, hauteurElement);
+		bDeuteranopie.setOnMouseEntered(event -> {
+			bDeuteranopie.setStyle(styleBoutonsSouris);
+		});
+		bDeuteranopie.setOnMouseExited(event -> {
+			bDeuteranopie.setStyle(styleBoutons);
+		});
+		
 		
 		Button bProtanopie = new Button("Protanopie");
-		bProtanopie.setFont(Font.font("Arial", FontWeight.BOLD, 25));
+		bProtanopie.setFont(policeBouton);
 		bProtanopie.setAlignment(Pos.CENTER);
-		bProtanopie.setPrefSize(1500, 80);
+		bProtanopie.setPrefSize(largeurBouton, hauteurElement);
+		bProtanopie.setStyle(styleBoutons);
+		bProtanopie.setOnMouseEntered(event -> {
+			bProtanopie.setStyle(styleBoutonsSouris);
+		});
+		bProtanopie.setOnMouseExited(event -> {
+			bProtanopie.setStyle(styleBoutons);
+		});
 
 		Button bTritanopie = new Button("Tritanopie");
-		bTritanopie.setFont(Font.font("Arial", FontWeight.BOLD, 25));
+		bTritanopie.setFont(policeBouton);
 		bTritanopie.setAlignment(Pos.CENTER);
-		bTritanopie.setPrefSize(1500, 80);
+		bTritanopie.setPrefSize(largeurBouton, hauteurElement);
+		bTritanopie.setStyle(styleBoutons);
+		bTritanopie.setOnMouseEntered(event -> {
+			bTritanopie.setStyle(styleBoutonsSouris);
+		});
+		bTritanopie.setOnMouseExited(event -> {
+			bTritanopie.setStyle(styleBoutons);
+		});
+		hbDaltonisme.getChildren().addAll(bDeuteranopie, bProtanopie, bTritanopie);
+		
+		vbBoutons.setSpacing(20);
+		vbBoutons.getChildren().add(hbDaltonisme);
+		
 		
 		CheckBox bHematophobie = new CheckBox("Hématophobie");
-		bHematophobie.setFont(Font.font("Arial", FontWeight.BOLD, 30));
+		bHematophobie.setStyle(styleTexte);
+		bHematophobie.setPadding(new Insets(10));
+		bHematophobie.setFont(policeBouton);
 		bHematophobie.setAlignment(Pos.CENTER_LEFT);
-		bHematophobie.setPrefSize(500, 60);
+		//bHematophobie.setPrefSize(500, 60);
+		
 		
 		CheckBox bAudio = new CheckBox("Audio description");
-		bAudio.setFont(Font.font("Arial", FontWeight.BOLD, 30));
+		bAudio.setStyle(styleTexte);
+		bAudio.setPadding(new Insets(10));
+		bAudio.setFont(policeBouton);
 		bAudio.setAlignment(Pos.CENTER_LEFT);
-		bAudio.setPrefSize(500, 60);
+		//bAudio.setPrefSize(500, 60);
+		
 
-		Button bRetour = new Button("Retour");
-		bRetour.setFont(Font.font("Arial", FontWeight.BOLD, 30));
+		Button bRetour = new Button("RETOUR");
+		bRetour.setFont(policeBoutonRetour);
 		bRetour.setAlignment(Pos.CENTER);
-		bRetour.setPrefSize(120, 60);
-		bRetour.setPadding(new Insets(10));
+		bRetour.setPrefSize(180, hauteurElement);
+		bRetour.setStyle(styleBoutons);
+		//bRetour.setPadding(new Insets(10));
 		bRetour.setOnAction(EventHandler -> sc.setPaneOnTop(ApplicationPane.OPTION));
+		bRetour.setOnMouseEntered(event -> {
+			bRetour.setStyle(styleBoutonsSouris);
+		});
+		bRetour.setOnMouseExited(event -> {
+			bRetour.setStyle(styleBoutons);
+		});
 
-		hbDaltonisme.getChildren().addAll(bDeuteranopie, bProtanopie, bTritanopie);
-		vbBoutons.getChildren().add(hbDaltonisme);
+		
 		vbRetour.getChildren().add(bRetour);
+		
+		vbCheckBoutons.setSpacing(20);
+		//vbCheckBoutons.setPadding(new Insets (20));
 		vbCheckBoutons.getChildren().addAll(bHematophobie, bAudio);
+		
+		VBox vbCentre = new VBox();
+		vbCentre.setSpacing(20);
+		vbCentre.setMargin(titre, new Insets(100,0,0,0));
+		vbCentre.getChildren().addAll(vbTitre, vbBoutons, vbCheckBoutons);
+		bpCentral.setCenter(vbCentre);
+		bpCentral.setBottom(vbRetour);
 
-		vbCentral.getChildren().addAll(vbTitre, vbBoutons, vbCheckBoutons, vbRetour);
-
-		ImageView img = new ImageView("http://tof.canardpc.com/view/3bd6756b-7865-4945-b524-426f6cd21e6c.jpg");
+		ImageView img = new ImageView(DataControl.FOND);
 		vbFond.getChildren().add(img);
 		
-		stackPane.getChildren().addAll(vbFond, rect, vbCentral);
+		stackPane.setBackground(new Background(new BackgroundFill(Color.BLACK, CornerRadii.EMPTY, null)));
+		stackPane.getChildren().addAll(vbFond, rect, bpCentral);
 
 		this.getChildren().add(stackPane);
 		sControl.registerNode(paneName, this);
