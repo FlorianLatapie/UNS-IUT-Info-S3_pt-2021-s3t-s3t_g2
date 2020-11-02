@@ -143,7 +143,7 @@ public class ControleurJeu {
         List<Couleur> lc = new ArrayList<>();
         lc.add(jeu.getChefVIgile().getCouleur());
         for (Joueur j : jeu.getJoueurs().values())
-            if (j != jeu.getChefVIgile())
+            if (j != jeu.getChefVIgile() && j.isEnVie())
                 lc.add(j.getCouleur());
 
         return lc;
