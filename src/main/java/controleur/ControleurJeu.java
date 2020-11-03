@@ -1,11 +1,6 @@
 package controleur;
 
-import java.io.IOException;
-import java.net.InetAddress;
-import java.net.SocketException;
-import java.text.MessageFormat;
-import java.util.*;
-
+import ihm.eventListener.Initializer;
 import jeu.*;
 import reseau.socket.NetWorkManager;
 import reseau.socket.SideConnection;
@@ -14,6 +9,12 @@ import reseau.tool.NetworkTool;
 import reseau.tool.PacketTool;
 import reseau.tool.ThreadTool;
 import reseau.type.*;
+
+import java.io.IOException;
+import java.net.InetAddress;
+import java.net.SocketException;
+import java.text.MessageFormat;
+import java.util.*;
 
 import static java.lang.System.out;
 
@@ -88,6 +89,7 @@ public class ControleurJeu {
     }
 
     ArrayList<Integer> lieuZombie;
+    Initializer initializer;
 
     // TODO INTERROMPRE PARTIE
 
@@ -95,9 +97,10 @@ public class ControleurJeu {
         return lieuZombie;
     }
 
-    public ControleurJeu(String nom, int njr, int njv) throws IOException {
+    public ControleurJeu(String nom, int njr, int njv, Initializer initializer) throws IOException {
         if (njr + njv > 6 || njr + njv < 3)
             throw new IllegalArgumentException("Mauvais nombre de joueur");
+        this.initializer = initializer;
         this.jmort = new ArrayList<>();
         this.tempPaquet = new ArrayList<>();
         this.nomPartie = nom;
@@ -121,6 +124,10 @@ public class ControleurJeu {
         this.intPartieId = new Random().nextInt(10000000);
         this.partieId = "P" + intPartieId;
         sc = new Scanner(System.in);
+        init();
+    }
+
+    private synchronized void init() {
         ThreadTool.asyncTask(() -> {
             String m = nwm.getPacketsUdp().get("ACP").build(intPartieId, nwm.getAddress().getHostAddress(), port,
                     nomPartie, nbjtotal, nbjr, nbjv, status);
@@ -134,8 +141,41 @@ public class ControleurJeu {
                 }
             }
             status = Status.COMPLETE;
+
             jeu = new Jeu(joueurs);
+            if (initializer != null) initializer.nomJoueurAll(new ArrayList<>(jeu.getJoueurs().values()));
+            if (initializer != null) initializer.nbZombiesLieuAll(new ArrayList<>(jeu.getLieux().values()));
+            if (initializer != null) initializer.lieuFermeAll(new ArrayList<>(jeu.getLieux().values()));
+            if (initializer != null) initializer.lieuOuvertAll(new ArrayList<>(jeu.getLieux().values()));
+            if (initializer != null) initializer.nbCarteJoueurAll(new ArrayList<>(jeu.getJoueurs().values()));
+            if (initializer != null) initializer.nbPersoJoueurAll(new ArrayList<>(jeu.getJoueurs().values()));
+            if (initializer != null) initializer.forceLieuAll(new ArrayList<>(jeu.getLieux().values()));
+            initJoueursCouleur();
+            demarerJeu();
         });
+    }
+
+    private void initJoueursCouleur() {
+        ArrayList<Couleur> couleursRestante = new ArrayList<>();
+        rd = new Random();
+        couleursRestante.add(Couleur.NOIR);
+        couleursRestante.add(Couleur.ROUGE);
+        couleursRestante.add(Couleur.JAUNE);
+        couleursRestante.add(Couleur.BLEU);
+        couleursRestante.add(Couleur.MARRON);
+        couleursRestante.add(Couleur.VERT);
+        while (!joueurConnect()) {
+            try {
+                Thread.sleep(100);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+        for (int i = 0; i < getJeu().getJoueurs().size(); i++) {
+            Couleur couleur = couleursRestante.get(rd.nextInt(couleursRestante.size()));
+            getJeu().getJoueurs().get(i).setCouleur(couleur);
+            couleursRestante.remove(couleur);
+        }
     }
 
     // TODO ENLEVER LES JOUEURS MORT ?? IT
@@ -159,30 +199,29 @@ public class ControleurJeu {
         }
     }
 
-    public void demarerJeu() {
-        ThreadTool.asyncTask(() -> {
-            // TODO UN OU PLUSIEURS LIEUX FERME
-            // TODO 3 ou 4 PION | UN OU PLUSIEURS LIEUX FERME
-            out.println(jeu.afficheJeu());
+    private void demarerJeu() {
+        // TODO UN OU PLUSIEURS LIEUX FERME
+        // TODO 3 ou 4 PION | UN OU PLUSIEURS LIEUX FERME
+        out.println(jeu.afficheJeu());
 
-            String m = nwm.getPacketsTcp().get("IP").build(getJoueursListeNo(), getCouleurJoueursListeNo(), 0, 3, partieId);
-            for (Joueur j : jeu.getJoueurs().values())
-                TcpClientSocket.connect(j.getIp(), j.getPort(), m, null, 0);
+        String m = nwm.getPacketsTcp().get("IP").build(getJoueursListeNo(), getCouleurJoueursListeNo(), 0, 3, partieId);
+        for (Joueur j : jeu.getJoueurs().values())
+            TcpClientSocket.connect(j.getIp(), j.getPort(), m, null, 0);
 
-            // TODO ATTENDRE TOUS LES JOUEURS
-            // TODO (COMPLETE ACP)
-            this.placementPersonnage();
-            this.jeu.resultatChefVigile(jeu.getJoueurs().get(0));
-            lieuZombie = arriveZombie();
-            this.jeu.entreZombie(lieuZombie);
-            m = nwm.getPacketsTcp().get("PIPZ").build(lieuZombie, partieId);
-            for (Joueur j : jeu.getJoueurs().values())
-                TcpClientSocket.connect(j.getIp(), j.getPort(), m, null, 0);
+        // TODO ATTENDRE TOUS LES JOUEURS
+        // TODO (COMPLETE ACP)
+        this.placementPersonnage();
+        this.jeu.resultatChefVigile(jeu.getJoueurs().get(0));
+        lieuZombie = arriveZombie();
+        this.jeu.entreZombie(lieuZombie);
+        if (initializer != null) initializer.nbZombiesLieuAll(new ArrayList<>(jeu.getLieux().values()));
+        m = nwm.getPacketsTcp().get("PIPZ").build(lieuZombie, partieId);
+        for (Joueur j : jeu.getJoueurs().values())
+            TcpClientSocket.connect(j.getIp(), j.getPort(), m, null, 0);
 
-            out.println(jeu.afficheJeu());
-            out.println("YES");
-            this.start();
-        });
+        out.println(jeu.afficheJeu());
+        out.println("YES");
+        this.start();
     }
 
     private void initReseau() throws SocketException {
@@ -452,6 +491,7 @@ public class ControleurJeu {
                 this.jeu.deplacePerso(jeu.getJoueurs().get(i), valeurToIndex(pion), dest);
                 finJeu();
                 this.jeu.fermerLieu();
+                if (initializer != null) initializer.lieuFermeAll(new ArrayList<>(jeu.getLieux().values()));
                 compteur += 1;
 
                 m = nwm.getPacketsTcp().get("DPI").build(jeu.getJoueurs().get(i).getCouleur(), dest, pion, CarteType.NUL, partieId, numeroTour);
@@ -559,7 +599,12 @@ public class ControleurJeu {
     }
 
     private boolean attaqueZombie() {
-        jeu.lastAttaqueZombie();
+        List<Integer> nb = jeu.lastAttaqueZombie();
+
+        String me = nwm.getPacketsTcp().get("PRAZ").build(nb.get(0), nb.get(1), jeu.getLieuxOuverts(), jeu.getNbZombieLieux(), jeu.getNbPionLieux(), partieId, numeroTour);
+        for (Joueur joueur : jeu.getJoueurs().values())
+            TcpClientSocket.connect(joueur.getIp(), joueur.getPort(), me, null, 0);
+
         for (int i = 1; i < 7; i++) {
             if (jeu.getLieux().get(i).isOuvert()) {
                 if (i == 4) {// si parking
@@ -580,6 +625,8 @@ public class ControleurJeu {
                             m = nwm.getPacketsTcp().get("RAZIF").build(i, pionCou, jeu.getLieux().get(i).getNbZombies(), partieId, numeroTour);
                             for (Joueur joueur : jeu.getJoueurs().values())
                                 TcpClientSocket.connect(joueur.getIp(), joueur.getPort(), m, null, 0);
+                            if (initializer != null)
+                                initializer.nbZombiesLieuAll(new ArrayList<>(jeu.getLieux().values()));
                         }
                         if (this.finJeu()) {
                             return false;
@@ -603,6 +650,7 @@ public class ControleurJeu {
                     for (Joueur joueur : jeu.getJoueurs().values()) {
                         TcpClientSocket.connect(joueur.getIp(), joueur.getPort(), m, null, 0);
                     }
+                    if (initializer != null) initializer.nbZombiesLieuAll(new ArrayList<>(jeu.getLieux().values()));
                 }
                 if (this.finJeu()) {
                     return false;
@@ -790,6 +838,12 @@ public class ControleurJeu {
             }
         }
         if ((lieu.size() < 2 && lieu.get(0) != this.jeu.getLieux().get(4)) || nbPerso <= 4) {
+            CondType cond;
+            if (lieu.size() < 2 && lieu.get(0) != this.jeu.getLieux().get(4))
+                cond = CondType.LIEUX;
+            else
+                cond = CondType.PION;
+
             for (int i = 0; i < this.jeu.getJoueurs().size(); i++) {
                 if (this.jeu.getJoueurs().get(i).isEnVie()
                         && this.jeu.getJoueurs().get(i).getPersonnages().size() == 0) {
@@ -829,6 +883,16 @@ public class ControleurJeu {
                 s.append(" sont vainqeurs à égalité! <<<<<");
                 out.println(s);
             }
+            Joueur gagnantNotFair = vainqueur.get(new Random().nextInt(vainqueur.size()));
+            String message = nwm.getPacketsTcp().get("FP").build(cond, gagnantNotFair.getCouleur(), partieId, numeroTour);
+            for (Joueur j : jeu.getJoueurs().values())
+                ThreadTool.taskPacketTcp(j.getIp(),
+                        j.getPort(), message);
+
+            if (initializer != null) initializer.finPartie();
+            nwm.getUdpSocket().stop();
+            nwm.getTcpServerSocket().stop();
+
             return true;
         }
         return false;
