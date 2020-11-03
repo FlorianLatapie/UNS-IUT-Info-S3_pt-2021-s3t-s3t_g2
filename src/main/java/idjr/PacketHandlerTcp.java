@@ -79,6 +79,8 @@ public class PacketHandlerTcp {
 				return choisirSacrifice(packet, message);
 			case "RAZIF":
 				return tousSacrifice(packet, message);
+			case "FP":
+				return finPartie(packet, message);
 
 			case "PIPZ":
 			case "PFC":
@@ -157,8 +159,8 @@ public class PacketHandlerTcp {
 	}
 
 	public String debutTour(Packet packet, String message) {
-		List<Couleur> l = (List<Couleur>)packet.getValue(message, 2);
-		for (Joueur j: core.getJeu().getJoueurs().values()) {
+		List<Couleur> l = (List<Couleur>) packet.getValue(message, 2);
+		for (Joueur j : core.getJeu().getJoueurs().values()) {
 			if (!l.contains(j.getCouleur())) {
 				j.setEnVie(false);
 			}
@@ -268,7 +270,11 @@ public class PacketHandlerTcp {
 				if (destPos == dest)
 					listeDest.add(dp.getKey());
 
-		int pionAdep = listeDest.get(new Random().nextInt(listeDest.size()));
+		Random rd = new Random();
+		List<Personnage> list = new ArrayList<Personnage>(core.getMoi().getPersonnages().values());
+		int pionAdep = list.get(new Random().nextInt(list.size())).getNum();
+		if (!listeDest.isEmpty())
+			pionAdep = listeDest.get(new Random().nextInt(listeDest.size()));
 
 		System.out.println("Entrez un pion (Piontype)");
 		System.out.println("Entrez une carte Sprint(si disponible 'SPR' sinon 'NUL')");
@@ -284,14 +290,17 @@ public class PacketHandlerTcp {
 		int dest = (int) packet.getValue(message, 2);
 		int p = (int) packet.getValue(message, 3);
 		core.getJeu().deplacePerso(core.getJoueur(c), p, dest);
+
 		return "";
 	}
 
 	public String attaqueZombie(Packet packet, String message) {
 		if ((int) packet.getValue(message, 1) != 0)
 			core.getJeu().getLieux().get((int) packet.getValue(message, 1)).addZombie();
+
 		if ((int) packet.getValue(message, 2) != 0)
 			core.getJeu().getLieux().get((int) packet.getValue(message, 2)).addZombie();
+
 		return "";
 	}
 
@@ -311,11 +320,19 @@ public class PacketHandlerTcp {
 	}
 
 	public String tousSacrifice(Packet packet, String message) {
-		PionCouleur pionTemp = (PionCouleur)packet.getValue(message, 2);
+		PionCouleur pionTemp = (PionCouleur) packet.getValue(message, 2);
 		Couleur pionCouleur = IdjrTools.getCouleurByChar(pionTemp);
 		int pionInt = IdjrTools.getPionByValue(pionTemp);
 		core.getJeu().sacrifie(core.getJoueur(pionCouleur), pionInt);
 		return "";
 	}
 
+	private String finPartie(Packet packet, String message) {
+		Couleur gagnant = (Couleur) packet.getValue(message, 2);
+		System.out.println("Le gagant est " + core.getJoueur(gagnant).getNom() + " !");
+		nwm.getTcpServerSocket().stop();
+		// TODO ATTENTION A LA FIN PROGRAMME
+		//System.exit(0);
+		return "";
+	}
 }
