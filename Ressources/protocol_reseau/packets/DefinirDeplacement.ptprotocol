@@ -10,11 +10,11 @@ type:int
 doc:Un entier représentant la destination choisie par le joueur courant
 value:
 name:pion
-type:PionType
+type:int
 doc:Un entier (7,5,3 ou 1) représentant le pion déplacé à la destination
 value:
 name:carteJoueur
-type:String
+type:CarteType
 doc:Réponse du joueur « NUL » s’il ne souhaite pas jouer de carte ou « SPR » s’il joue une carte sprint.
 value:
 name:partieId

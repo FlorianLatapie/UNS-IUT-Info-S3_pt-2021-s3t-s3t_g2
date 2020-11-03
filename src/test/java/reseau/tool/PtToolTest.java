@@ -79,8 +79,8 @@ class PtToolTest {
         filette.add(-1);
         actual.put(1, filette);
         String expected = "BLONDE:5;BRUTE:2;FILETTE:-1;TRUAND:3,5";
-        //Assertions.assertEquals(expected, PtTool.convertParamToString(actual, "HashMap<PionType,List<Integer>>"));
-        assertNotEquals("az", PtTool.convertParamToString(actual, "HashMap<PionType,List<Integer>>"));
+        //Assertions.assertEquals(expected, PtTool.convertParamToString(actual, "HashMap<Integer,List<Integer>>"));
+        assertNotEquals("az", PtTool.convertParamToString(actual, "HashMap<Integer,List<Integer>>"));
 
         List<CarteType> carteTypes = new ArrayList<>();
         carteTypes.add(CarteType.ABA);
@@ -201,8 +201,8 @@ class PtToolTest {
         filette.add(-1);
         actual.put(1, filette);
         String expected = "BLONDE:5;BRUTE:2;FILETTE:-1;TRUAND:3,5";
-        //Assertions.assertEquals(actual, PtTool.convertStringToObject(expected, "HashMap<PionType,List<Integer>>"));
-        //assertNotEquals(actual, PtTool.convertStringToObject(expected, "HashMap<PionType,List<Integer>>"));
+        //Assertions.assertEquals(actual, PtTool.convertStringToObject(expected, "HashMap<Integer,List<Integer>>"));
+        //assertNotEquals(actual, PtTool.convertStringToObject(expected, "HashMap<Integer,List<Integer>>"));
 
         List<CarteType> carteTypes = new ArrayList<>();
         carteTypes.add(CarteType.ABA);
