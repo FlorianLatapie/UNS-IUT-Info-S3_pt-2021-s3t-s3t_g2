@@ -10,7 +10,7 @@ type:List<CarteType>
 doc:La liste des cartes jouées par le joueur courant. Il peut s’agir de cartes matériel (sauf dans le lieu 4), arme ou cachette
 value:
 name:pions
-type:List<PionType>
+type:List<Integer>
 doc:Liste de pions (identifiés uniquement par leur valeur) qui sont cachés (nécessite une carte cachette par pion)
 value:
 name:partieId

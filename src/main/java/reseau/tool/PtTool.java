@@ -132,12 +132,11 @@ public abstract class PtTool {
                 case "Status":
                     Status sss = ((Status) value);
                     return sss.toString();
-                case "HashMap<PionType,List<Integer>>":
+                case "HashMap<Integer,List<Integer>>":
                     @SuppressWarnings("unchecked")
                     HashMap<Integer, List<Integer>> pti = (HashMap<Integer, List<Integer>>) value;
                     return PacketTool.subListToStr(pti);
                 case "List<CarteType>":
-                case "List<PionType>":
                 case "List<Couleur>":
                 case "List<PionCouleur>":
                     return PacketTool.listEnumToStr(value);
@@ -193,7 +192,7 @@ public abstract class PtTool {
                     return TypePartie.valueOf(param);
                 case "Status":
                     return Status.valueOf(param);
-                case "HashMap<PionType,List<Integer>>":
+                case "HashMap<Integer,List<Integer>>":
                     return PacketTool.strToSubList(param);
                 case "List<CarteType>":
                     return PacketTool.strToListEnum(param, CarteType.class);
