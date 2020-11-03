@@ -14,16 +14,16 @@ package idjr;
 public class Personnage {
 	protected Lieu monLieu;// position actuel du personnage
 	private Joueur joueur;
-
+	private int num;
 
 	/**
 	 * @param joueur le joueur possedant le personnage
 	 * @param type   le type du personnage
 	 */
-	public Personnage(Joueur joueur) {
+	public Personnage(Joueur joueur, int num) {
 		this.joueur = joueur;
+		this.num = num;
 	}
-
 
 	/**
 	 * Definis un nouveau lieu pour le personnage
@@ -46,5 +46,9 @@ public class Personnage {
 	 */
 	public Joueur getJoueur() {
 		return this.joueur;
+	}
+
+	public int getNum() {
+		return num;
 	}
 }
