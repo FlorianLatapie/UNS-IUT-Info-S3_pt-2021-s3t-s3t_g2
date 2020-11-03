@@ -7,8 +7,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import ihm.eventListener.LieuxListener;
-
 /**
  * <h1>Le plateau de jeu</h1>
  *
@@ -22,17 +20,6 @@ public class Jeu {
     HashMap<Integer, Joueur> joueurs;
     ArrayList<CarteAction> cartes;
     boolean newChef;
-    private List<LieuxListener> listeners = new ArrayList<LieuxListener>();
-
-    public void addListener(LieuxListener toAdd) {
-        listeners.add(toAdd);
-    }
-
-    public void lieuxChanged() {
-        // Notify everybody that may be interested
-        for (LieuxListener hl : listeners)
-            hl.lieuxChanged(lieux);
-    }
 
     public boolean getNewChef() {
         return newChef;
@@ -214,6 +201,15 @@ public class Jeu {
         return tmp;
     }
 
+    public List<Integer> getLieuxOuverts() {
+        List<Integer> tmp = new ArrayList<>();
+        for (Lieu l : lieux.values())
+            if (l.isOuvert())
+                tmp.add(l.getNum());
+
+        return tmp;
+    }
+
     /**
      * retourne le chef des vigiles
      */
@@ -236,14 +232,32 @@ public class Jeu {
         for (int i = 0; i < listeInt.size(); i++) {
             lieux.get(listeInt.get(i)).addZombie();
         }
-        lieuxChanged();
+    }
+
+    public List<Integer> getNbZombieLieux() {
+        List<Integer> tmp = new ArrayList<>();
+        for (Lieu l : lieux.values())
+            if (l.isOuvert())
+                tmp.add(l.getNbZombies());
+
+        return tmp;
+    }
+
+    public List<Integer> getNbPionLieux() {
+        List<Integer> tmp = new ArrayList<>();
+        for (Lieu l : lieux.values())
+            if (l.isOuvert())
+                tmp.add(l.getPersonnage().size());
+
+        return tmp;
     }
 
     /**
      * Applique la derniere attaque des zombies donc ajoute un zombie au lieu qui a
      * le plus de blondes et un zombie au lieu qui a le plus de personnages
      */
-    public void lastAttaqueZombie() {
+    public List<Integer> lastAttaqueZombie() {
+        List<Integer> nb = new ArrayList<>();
         int idLieuP = 1;
         int idLieuB = 1;
         boolean maxP = true;
@@ -261,12 +275,20 @@ public class Jeu {
             } else if (lieux.get(i).getBlonde().size() == lieux.get(idLieuB).getBlonde().size())
                 maxB = false;
         }
-        if (maxP)
+        if (maxP) {
             lieux.get(idLieuP).addZombie();
-        if (maxB)
-            lieux.get(idLieuB).addZombie();
+            nb.add(idLieuP);
+        } else
+            nb.add(0);
 
-        lieuxChanged();
+        if (maxB) {
+            lieux.get(idLieuB).addZombie();
+            nb.add(idLieuB);
+        } else
+            nb.add(0);
+
+
+        return nb;
     }
 
     /**
@@ -285,7 +307,6 @@ public class Jeu {
                 this.lieux.get(l).getPersonnage().remove(joueurs.get(i).getPersonnages().get(choixPerso));
             }
         }
-        lieuxChanged();
 
     }
 
@@ -303,8 +324,6 @@ public class Jeu {
                 this.lieux.get(dest).addPersonnage(joueurs.get(i).getPersonnages().get(choixPerso));
             }
         }
-        lieuxChanged();
-
     }
 
     /**
@@ -321,7 +340,6 @@ public class Jeu {
                 joueurs.get(i).getPersonnages().remove(choixPerso);
             }
         }
-        lieuxChanged();
     }
 
     /**
@@ -334,7 +352,6 @@ public class Jeu {
                 this.lieux.get(i).setNbZombies(0);
             }
         }
-        lieuxChanged();
     }
 
     /**
