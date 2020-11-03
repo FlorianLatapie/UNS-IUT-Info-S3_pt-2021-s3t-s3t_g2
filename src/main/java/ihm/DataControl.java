@@ -20,6 +20,7 @@ public class DataControl {
 	public final static String localMsgURL = "Ressources.Textes.messages";
 	public static final String FOND = "ihm/fond.png";
 	public static final String PLATEAU = "ihm/plateau.png";
+	public static final String ICONE = "ihm/desktop Icon.jpg";
 	
 	public static final ObservableList<Integer> nombreJoueur = FXCollections.observableArrayList(3,4,5,6);
 	public static final ObservableList<Integer> nombreBot = FXCollections.observableArrayList(1,2,3,4,5,6);

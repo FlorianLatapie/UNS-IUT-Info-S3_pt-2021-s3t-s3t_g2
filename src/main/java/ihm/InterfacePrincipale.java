@@ -3,6 +3,7 @@ package ihm;
 import javafx.application.Application;
 import javafx.scene.Node;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 
@@ -15,6 +16,7 @@ public class InterfacePrincipale extends Application {
 
 	@Override
 	public void start(Stage primaryStage) throws Exception {
+		primaryStage.getIcons().add(new Image(DataControl.ICONE));
 		sControl = new ScreenControl(this);
 		int largeur = 1920;
 		int hauteur = 1080;
