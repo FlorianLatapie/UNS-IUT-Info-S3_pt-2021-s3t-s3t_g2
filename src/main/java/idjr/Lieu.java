@@ -79,7 +79,7 @@ public class Lieu {
 	 * @return true ou false
 	 */
 	public boolean isFull() {
-		System.out.println(this.toString());
+		System.out.println("Size " + personnage.size());
 		if (personnage != null) {
 			if (this.personnage.size() == this.nbPlaces) {
 				return true;

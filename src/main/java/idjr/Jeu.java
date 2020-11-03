@@ -181,6 +181,9 @@ public class Jeu {
 	public List<Integer> choixLieudispo(Joueur j) {
 		List<Integer> lieux = new ArrayList<>();
 		for (int i = 1; i < 7; i++) {
+			System.out.println(!this.lieux.get(i).isFull());
+			System.out.println(this.lieux.get(i).isOuvert());
+			System.out.println(!toutPers(j, i));
 			if (!this.lieux.get(i).isFull() && this.lieux.get(i).isOuvert() && !toutPers(j, i)) {
 				lieux.add(i);
 			}

@@ -24,7 +24,7 @@ public class Personnage {
 		this.joueur = joueur;
 	}
 
-	
+
 	/**
 	 * Definis un nouveau lieu pour le personnage
 	 *
@@ -42,7 +42,7 @@ public class Personnage {
 	}
 
 	/**
-	 * @return Renvoie le joueur possédant le personnage
+	 * @return Renvoie le joueur possÃ©dant le personnage
 	 */
 	public Joueur getJoueur() {
 		return this.joueur;

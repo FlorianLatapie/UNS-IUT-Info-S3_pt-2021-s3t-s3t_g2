@@ -155,7 +155,7 @@ public class PacketHandlerTcp {
 		core.getJeu().placePerso(core.getJoueur(c), pion, dest);
 		return "";
 	}
-	
+
 	public String debutTour(Packet packet, String message) {
 		List<Couleur> l = (List<Couleur>)packet.getValue(message, 2);
 		for (Joueur j: core.getJeu().getJoueurs().values()) {
@@ -257,8 +257,10 @@ public class PacketHandlerTcp {
 	public String deplacerPion(Packet packet, String message) {
 		Scanner sc = new Scanner(System.in);
 		int dest = (int) packet.getValue(message, 1);
+		System.out.println("First dest " + dest);
 		if (core.getJeu().getLieux().get(dest).isFull())
 			dest = 4;
+		System.out.println("Second dest " + dest);
 		HashMap<Integer, List<Integer>> listedp = (HashMap<Integer, List<Integer>>) packet.getValue(message, 2);
 		List<Integer> listeDest = new ArrayList<>();
 		for (Map.Entry<Integer, List<Integer>> dp : listedp.entrySet())
@@ -297,9 +299,11 @@ public class PacketHandlerTcp {
 		Scanner sc = new Scanner(System.in);
 		System.out.println("Entrez un pion (PionCouleur)");
 		int pionInt = 0;
+
 		if (core.getJeu().pionSacrDispo(core.getMoi(), (int) packet.getValue(message, 1)).size() != 0)
 			pionInt = core.getJeu().pionSacrDispo(core.getMoi(), (int) packet.getValue(message, 1)).get(new Random()
-					.nextInt(core.getJeu().pionChoixDispo(core.getMoi(), (int) packet.getValue(message, 1)).size()));
+					.nextInt(core.getJeu().pionSacrDispo(core.getMoi(), (int) packet.getValue(message, 1)).size()));
+
 		String pionTemp = core.getCouleur().name().charAt(0) + "" + pionInt;
 		PionCouleur pion = PionCouleur.valueOf(pionTemp);
 		return nwm.getPacketsTcp().get("RAZCS").build(packet.getValue(message, 1), pion, packet.getValue(message, 2),
@@ -307,7 +311,7 @@ public class PacketHandlerTcp {
 	}
 
 	public String tousSacrifice(Packet packet, String message) {
-		PionCouleur pionTemp = PionCouleur.valueOf((String) packet.getValue(message, 2));
+		PionCouleur pionTemp = (PionCouleur)packet.getValue(message, 2);
 		Couleur pionCouleur = IdjrTools.getCouleurByChar(pionTemp);
 		int pionInt = IdjrTools.getPionByValue(pionTemp);
 		core.getJeu().sacrifie(core.getJoueur(pionCouleur), pionInt);
