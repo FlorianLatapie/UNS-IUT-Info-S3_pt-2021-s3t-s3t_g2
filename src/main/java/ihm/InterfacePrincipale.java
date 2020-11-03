@@ -8,57 +8,65 @@ import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 
 public class InterfacePrincipale extends Application {
-	private StackPane root = new StackPane();
-	private Node currentTopNode = null;
-	private ScreenControl sControl = null;
-	private Scene scene = new Scene(root);
-	private static Core core;
+    private StackPane root = new StackPane();
+    private Node currentTopNode = null;
+    private ScreenControl sControl = null;
+    private Scene scene = new Scene(root);
+    private static Core core;
 
-	@Override
-	public void start(Stage primaryStage) throws Exception {
-		primaryStage.getIcons().add(new Image(DataControl.ICONE));
-		sControl = new ScreenControl(this);
-		int largeur = 1920;
-		int hauteur = 1080;
-		primaryStage.setTitle("G2 - ZOMBIES la blonde la brute et le truand");
+    @Override
+    public void start(Stage primaryStage) throws Exception {
+        primaryStage.getIcons().add(new Image(DataControl.ICONE));
+        sControl = new ScreenControl(this, core);
+        int largeur = 1920;
+        int hauteur = 1080;
+        primaryStage.setTitle("G2 - ZOMBIES la blonde la brute et le truand");
 
-		primaryStage.setMaxWidth(largeur);
-		primaryStage.setMaxHeight(hauteur);
-		// primaryStage.setMinWidth(largeur-20);
-		// primaryStage.setMinHeight(hauteur-80);
+        primaryStage.setMaxWidth(largeur);
+        primaryStage.setMaxHeight(hauteur);
+        // primaryStage.setMinWidth(largeur-20);
+        // primaryStage.setMinHeight(hauteur-80);
 
-		// on passe en plein écran
-		primaryStage.setFullScreen(true);
+        // on passe en plein écran
+        primaryStage.setFullScreen(true);
 
-		root.getChildren().add(new PausePane(sControl, core));
-		root.getChildren().add(new ReglesPane(sControl,core));
-		root.getChildren().add(new PlateauPane(sControl,core));
-		root.getChildren().add(new OptionPane(sControl, core));
-		root.getChildren().add(new AccessibilitePane(sControl));
-		root.getChildren().add(new ConfigPartiePane(sControl,core));
+        PausePane pausePane = new PausePane(sControl, core);
+        ReglesPane reglesPane = new ReglesPane(sControl, core);
+        PlateauPane plateauPane = new PlateauPane(sControl, core);
+        OptionPane optionPane = new OptionPane(sControl, core);
+        AccessibilitePane accessibilitePane = new AccessibilitePane(sControl);
+        ConfigPartiePane configPartiePane = new ConfigPartiePane(sControl, core);
+        core.eventInit();
+        core.getInitializer().addListener(plateauPane);
+        root.getChildren().add(pausePane);
+        root.getChildren().add(reglesPane);
+        root.getChildren().add(plateauPane);
+        root.getChildren().add(optionPane);
+        root.getChildren().add(accessibilitePane);
+        root.getChildren().add(configPartiePane);
 
-		root.getChildren().add(new AccueilPane(sControl, core));
+        root.getChildren().add(new AccueilPane(sControl, core));
 
-		primaryStage.setScene(scene);
+        primaryStage.setScene(scene);
 
-		primaryStage.show();
+        primaryStage.show();
 
-	}
+    }
 
-	public static void lancement(String[] args,Core c) {
-		core = c;
-		InterfacePrincipale.launch(args);
-	}
+    public static void lancement(String[] args, Core c) {
+        core = c;
+        InterfacePrincipale.launch(args);
+    }
 
-	public void setOnTop(Node n) {
-		if (currentTopNode != null)
-			currentTopNode.setVisible(false);
-		n.setVisible(true);
-		currentTopNode = n;
-	}
+    public void setOnTop(Node n) {
+        if (currentTopNode != null)
+            currentTopNode.setVisible(false);
+        n.setVisible(true);
+        currentTopNode = n;
+    }
 
-	public Scene getScene() {
-		return scene;
-	}
+    public Scene getScene() {
+        return scene;
+    }
 
 }
