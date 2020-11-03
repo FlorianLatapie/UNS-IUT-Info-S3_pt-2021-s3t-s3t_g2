@@ -61,18 +61,18 @@ public class Jeu {
 		if (joueurs.size() < 4)
 			for (int i = 0; i < joueurs.size(); i++) {
 				HashMap<Integer, Personnage> dp = new HashMap<>();
-				dp.put(7, new Personnage(joueurs.get(i)));
-				dp.put(5, new Personnage(joueurs.get(i)));
-				dp.put(3, new Personnage(joueurs.get(i)));
-				dp.put(1, new Personnage(joueurs.get(i)));
+				dp.put(7, new Personnage(joueurs.get(i), 7));
+				dp.put(5, new Personnage(joueurs.get(i), 5));
+				dp.put(3, new Personnage(joueurs.get(i), 3));
+				dp.put(1, new Personnage(joueurs.get(i), 1));
 				joueurs.get(i).setPersonnages(dp);
 			}
 		else
 			for (int i = 0; i < joueurs.size(); i++) {
 				HashMap<Integer, Personnage> dp = new HashMap<>();
-				dp.put(7, new Personnage(joueurs.get(i)));
-				dp.put(5, new Personnage(joueurs.get(i)));
-				dp.put(3, new Personnage(joueurs.get(i)));
+				dp.put(7, new Personnage(joueurs.get(i), 7));
+				dp.put(5, new Personnage(joueurs.get(i), 5));
+				dp.put(3, new Personnage(joueurs.get(i), 3));
 				joueurs.get(i).setPersonnages(dp);
 			}
 	}
