@@ -161,11 +161,11 @@ class PacketToolTest {
         expected.put(7, blonde);
         List<Integer> brute = new ArrayList<>();
         brute.add(2);
-        expected.put(8, brute);
+        expected.put(5, brute);
         List<Integer> truand = new ArrayList<>();
         truand.add(3);
         truand.add(5);
-        expected.put(1, truand);
+        expected.put(3, truand);
         List<Integer> filette = new ArrayList<>();
         filette.add(1);
         expected.put(1, filette);
@@ -176,7 +176,7 @@ class PacketToolTest {
         String message2 = " ";
         assertEquals(expected1, PacketTool.strToSubList(message2));
 
-        message = "BLONDE:5;BRUTE:2;TRUAND:3,5";
+        message = "7:5;5:2;3:3,5";
         assertNotEquals(expected, PacketTool.strToSubList(message));
 
         String message1 = "Annule,az";

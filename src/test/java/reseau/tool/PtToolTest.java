@@ -79,8 +79,8 @@ class PtToolTest {
         filette.add(-1);
         actual.put(1, filette);
         String expected = "BLONDE:5;BRUTE:2;FILETTE:-1;TRUAND:3,5";
-        //Assertions.assertEquals(expected, PtTool.convertParamToString(actual, "HashMap<PionType,List<Integer>>"));
-        assertNotEquals("az", PtTool.convertParamToString(actual, "HashMap<PionType,List<Integer>>"));
+        //Assertions.assertEquals(expected, PtTool.convertParamToString(actual, "HashMap<Integer,List<Integer>>"));
+        assertNotEquals("az", PtTool.convertParamToString(actual, "HashMap<Integer,List<Integer>>"));
 
         List<CarteType> carteTypes = new ArrayList<>();
         carteTypes.add(CarteType.ABA);
@@ -88,13 +88,6 @@ class PtToolTest {
         expected = "ABA,ACS";
         assertEquals(expected, PtTool.convertParamToString(carteTypes, "List<CarteType>"));
         assertNotEquals("az", PtTool.convertParamToString(carteTypes, "List<CarteType>"));
-
-        List<Integer> pionTypes = new ArrayList<>();
-        pionTypes.add(1);
-        pionTypes.add(5);
-        expected = "FILETTE,TRUAND";
-        assertEquals(expected, PtTool.convertParamToString(pionTypes, "List<PionType>"));
-        assertNotEquals("az", PtTool.convertParamToString(pionTypes, "List<PionType>"));
 
         List<Couleur> couleurs = new ArrayList<>();
         couleurs.add(Couleur.ROUGE);
@@ -208,8 +201,8 @@ class PtToolTest {
         filette.add(1);
         actual.put(1, filette);
         String expected = "BLONDE:5;BRUTE:2;FILETTE:-1;TRUAND:3,5";
-        //Assertions.assertEquals(actual, PtTool.convertStringToObject(expected, "HashMap<PionType,List<Integer>>"));
-        //assertNotEquals(actual, PtTool.convertStringToObject(expected, "HashMap<PionType,List<Integer>>"));
+        //Assertions.assertEquals(actual, PtTool.convertStringToObject(expected, "HashMap<Integer,List<Integer>>"));
+        //assertNotEquals(actual, PtTool.convertStringToObject(expected, "HashMap<Integer,List<Integer>>"));
 
         List<CarteType> carteTypes = new ArrayList<>();
         carteTypes.add(CarteType.ABA);
@@ -217,13 +210,6 @@ class PtToolTest {
         expected = "ABA,ACS";
         assertEquals(carteTypes, PtTool.convertStringToObject(expected, "List<CarteType>"));
         assertNotEquals(carteTypes, PtTool.convertStringToObject("az", "List<CarteType>"));
-
-        List<Integer> pionTypes = new ArrayList<>();
-        pionTypes.add(1);
-        pionTypes.add(5);
-        expected = "FILETTE,TRUAND";
-        assertEquals(pionTypes, PtTool.convertStringToObject(expected, "List<PionType>"));
-        assertNotEquals(pionTypes, PtTool.convertStringToObject("az", "List<PionType>"));
 
         List<Couleur> couleurs = new ArrayList<>();
         couleurs.add(Couleur.ROUGE);
