@@ -1,12 +1,11 @@
-package idjr;
-
 import java.io.IOException;
 
+import idjr.Idjr;
 import reseau.socket.NetWorkManager;
 import reseau.socket.SideConnection;
 import reseau.tool.NetworkTool;
 
-public class Controleur {
+public class MainConsole {
 	static Idjr idjr;
 	public static void main(String[] args) throws IOException {
 		idjr = new Idjr();
