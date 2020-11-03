@@ -500,6 +500,9 @@ public class PlateauPane extends StackPane implements LieuxListener {
 		this.setBackground(new Background(new BackgroundFill(Color.BLACK, CornerRadii.EMPTY, null)));
 
 		this.getChildren().addAll(imgFond, borderJoueurs, aPlateau);
+		this.setMinSize(1920, 1080);
+		this.setPrefSize(1920, 1080);
+		this.setMaxSize(1920, 1080);
 
 		sControl.registerNode(paneName, this);
 		sControl.setPaneOnTop(paneName);
