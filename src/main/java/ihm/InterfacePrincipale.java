@@ -36,6 +36,9 @@ public class InterfacePrincipale extends Application {
         OptionPane optionPane = new OptionPane(sControl, core);
         AccessibilitePane accessibilitePane = new AccessibilitePane(sControl);
         ConfigPartiePane configPartiePane = new ConfigPartiePane(sControl, core);
+        AttenteJoueurPane attenteJoueurPane = new AttenteJoueurPane(sControl, core);
+        CouleurPane couleurPane = new CouleurPane(sControl, core);
+        
         core.eventInit();
         core.getInitializer().addListener(plateauPane);
         root.getChildren().add(pausePane);
@@ -44,6 +47,8 @@ public class InterfacePrincipale extends Application {
         root.getChildren().add(optionPane);
         root.getChildren().add(accessibilitePane);
         root.getChildren().add(configPartiePane);
+        root.getChildren().add(attenteJoueurPane);
+        root.getChildren().add(couleurPane);
 
         root.getChildren().add(new AccueilPane(sControl, core));
 

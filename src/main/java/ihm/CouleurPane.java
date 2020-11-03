@@ -1,21 +1,17 @@
 package ihm;
 
-import controleur.ControleurJeu;
 import ihm.DataControl.ApplicationPane;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
 import javafx.scene.effect.GaussianBlur;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
-
-import java.io.IOException;
 
 /**
  * The Class ConfigPartiePane.
@@ -24,13 +20,13 @@ import java.io.IOException;
  * @version 0.1
  * @since 26/10/2020
  */
-public class ConfigPartiePane extends StackPane {
+public class CouleurPane extends StackPane {
     // private ControleurJeu cj = new ControleurJeu(); // mettre ne paramètres les
     // joueurs
 
     private ScreenControl sControl = null;
     private Core core = null;
-    private final ApplicationPane paneName = ApplicationPane.CONFIG;
+    private final ApplicationPane paneName = ApplicationPane.COULEUR;
     // définition des variable pour la suite du pane
     private int tailleCarreCentral = 800; // l'interface est sur un stackPane qui peut tourner avec des crans de 90
     // degrés
@@ -48,19 +44,19 @@ public class ConfigPartiePane extends StackPane {
     private Font policeNom = Font.font("Segoe UI", 17);
     private int hauteurElemtents = 60;
     private int largeurTF = 100;
-    private int largeurTexte = 220;
+    private int largeurComboBox = 220;
     private int spacing = 30;
     private CornerRadii coinfb = new CornerRadii(5.0);
     private Background fondBlanc = new Background(new BackgroundFill(Color.WHITE, coinfb, null));
 
     private Insets botPadding = new Insets(0, 10, 0, 10);
 
-    public ConfigPartiePane(ScreenControl sc, Core c) {
+    public CouleurPane(ScreenControl sc, Core c) {
         core = c;
         sControl = sc;
         stackPane.setAlignment(Pos.CENTER);
         // titre
-        Label titre1 = new Label("Configuration de \n\tla partie");
+        Label titre1 = new Label("Choisissez vos \n\tcouleurs");
         titre1.setFont(Font.font("Segoe UI", FontWeight.BOLD, 80));
         titre1.setTextFill(Color.BLACK);
 
@@ -72,82 +68,142 @@ public class ConfigPartiePane extends StackPane {
 
         ////
 
-        Label desc = new Label("Choisissez un nombre de joueurs entre 3 et 6");
+        /*Label desc = new Label("Choisissez un nombre de joueurs entre 3 et 6");
         desc.setFont(policeNom);
         desc.setMinHeight(hauteurElemtents);
         desc.setBackground(fondBlanc);
         desc.setPadding(botPadding);
-
+*/
         VBox vJoueurs = new VBox();
 
-        HBox nomPartie = new HBox();
+        HBox j1 = new HBox();
 
-        Label nomPTexte = new Label("Nom de la partie");
-        nomPTexte.setFont(policeNom);
-        nomPTexte.setMinHeight(hauteurElemtents);
-        nomPTexte.setBackground(fondBlanc);
-        nomPTexte.setPadding(botPadding);
-        nomPTexte.setMinWidth(largeurTexte);
+		Label nom1 = new Label();
+		nom1.setBackground(fondBlanc);
+		nom1.setText("Joueur 1");
+		nom1.setFont(policeNom);
+		nom1.setPrefSize(largeurTF, hauteurElemtents);
+		nom1.setMinHeight(hauteurElemtents);
+		nom1.setAlignment(Pos.CENTER);
+		ComboBox<String> couleur1 = new ComboBox<String>();
+		couleur1.setMinHeight(hauteurElemtents);
+		couleur1.setPrefSize(largeurComboBox, hauteurElemtents);
+		couleur1.getItems().addAll(DataControl.couleursJoueur);
 
-        TextField nomP = new TextField();
-        nomP.setText("Partie" + (int) (100 * Math.random()));
-        nomP.setFont(policeNom);
-        nomP.setPrefSize(largeurTF, hauteurElemtents);
-        nomP.setMinHeight(hauteurElemtents);
+		j1.setAlignment(Pos.CENTER);
+		j1.setSpacing(spacing);
+		j1.getChildren().addAll(nom1, couleur1);
+		j1.setDisable(false);
 
-        nomPartie.setAlignment(Pos.CENTER);
-        nomPartie.setSpacing(spacing);
-        nomPartie.getChildren().addAll(nomPTexte, nomP);
-        nomPartie.setDisable(false);
+		///
 
+		HBox j2 = new HBox();
 
-        ///
+		Label nom2 = new Label();
+		nom2.setBackground(fondBlanc);
+		nom2.setText("Joueur 2");
+		nom2.setFont(policeNom);
+		nom2.setPrefSize(largeurTF, hauteurElemtents);
+		nom2.setMinHeight(hauteurElemtents);
+		nom2.setAlignment(Pos.CENTER);
+		ComboBox<String> couleur2 = new ComboBox<String>();
+		couleur2.setPrefSize(largeurComboBox, hauteurElemtents);
+		couleur2.setMinHeight(hauteurElemtents);
+		couleur2.getItems().addAll(DataControl.couleursJoueur);
 
+		j2.setAlignment(Pos.CENTER);
+		j2.setSpacing(spacing);
+		j2.getChildren().addAll(nom2, couleur2);
+		j2.setDisable(false);
 
-        HBox nbTotJr = new HBox();
+		///
 
-        Label nbjrTexte = new Label("Nombre de joueurs : ");
-        nbjrTexte.setFont(policeNom);
-        nbjrTexte.setMinHeight(hauteurElemtents);
-        nbjrTexte.setBackground(fondBlanc);
-        nbjrTexte.setPadding(botPadding);
-        nbjrTexte.setMinWidth(largeurTexte);
+		HBox j3 = new HBox();
 
-        ComboBox<Integer> nbJr = new ComboBox<Integer>();
-        nbJr.getItems().addAll(DataControl.nombreJoueur);
-        nbJr.setValue(5);
-        nbJr.setPrefSize(largeurTF, hauteurElemtents);
-        nbJr.setMinHeight(hauteurElemtents);
+		Label nom3 = new Label();
+		nom3.setBackground(fondBlanc);
+		nom3.setText("Joueur 3");
+		nom3.setFont(policeNom);
+		nom3.setPrefSize(largeurTF, hauteurElemtents);
+		nom3.setMinHeight(hauteurElemtents);
+		nom3.setAlignment(Pos.CENTER);
+		ComboBox<String> couleur3 = new ComboBox<String>();
+		couleur3.setMinHeight(hauteurElemtents);
+		couleur3.setPrefSize(largeurComboBox, hauteurElemtents);
+		couleur3.getItems().addAll(DataControl.couleursJoueur);
 
-        nbTotJr.setAlignment(Pos.CENTER);
-        nbTotJr.setSpacing(spacing);
-        nbTotJr.getChildren().addAll(nbjrTexte, nbJr);
-        nbTotJr.setDisable(false);
+		j3.setAlignment(Pos.CENTER);
+		j3.setSpacing(spacing);
+		j3.getChildren().addAll(nom3, couleur3);
+		j3.setDisable(false);
 
-        ///
+		///
 
-        HBox nbTotBot = new HBox();
+		HBox j4 = new HBox();
 
-        Label nbBotTexte = new Label("Nombre de Bots : ");
-        nbBotTexte.setFont(policeNom);
-        nbBotTexte.setMinHeight(hauteurElemtents);
-        nbBotTexte.setBackground(fondBlanc);
-        nbBotTexte.setPadding(botPadding);
-        nbBotTexte.setMinWidth(largeurTexte);
+		Label nom4 = new Label();
+		nom4.setBackground(fondBlanc);
+		nom4.setText("Joueur 4");
+		nom4.setFont(policeNom);
+		nom4.setPrefSize(largeurTF, hauteurElemtents);
+		nom4.setMinHeight(hauteurElemtents);
+		nom4.setAlignment(Pos.CENTER);
+		ComboBox<String> couleur4 = new ComboBox<String>();
+		couleur4.setMinHeight(hauteurElemtents);
+		couleur4.setPrefSize(largeurComboBox, hauteurElemtents);
+		couleur4.getItems().addAll(DataControl.couleursJoueur);
 
-        ComboBox<Integer> nbBot = new ComboBox<Integer>();
-        nbBot.getItems().addAll(DataControl.nombreBot);
-        nbBot.setValue(5);
-        nbBot.setPrefSize(largeurTF, hauteurElemtents);
-        nbBot.setMinHeight(hauteurElemtents);
+		j4.setAlignment(Pos.CENTER);
+		j4.setSpacing(spacing);
+		j4.getChildren().addAll(nom4, couleur4);
+		j4.setDisable(false);
 
-        nbTotBot.setAlignment(Pos.CENTER);
-        nbTotBot.setSpacing(spacing);
-        nbTotBot.getChildren().addAll(nbBotTexte, nbBot);
-        nbTotBot.setDisable(false);
+		///
 
-        vJoueurs.setSpacing(spacing / 2);
-        vJoueurs.getChildren().addAll(nomPartie, nbTotJr, nbTotBot);
+		HBox j5 = new HBox();
+
+		Label nom5 = new Label();
+		nom5.setBackground(fondBlanc);
+		nom5.setText("Joueur 5");
+		nom5.setFont(policeNom);
+		nom5.setPrefSize(largeurTF, hauteurElemtents);
+		nom5.setMinHeight(hauteurElemtents);
+		nom5.setAlignment(Pos.CENTER);
+		ComboBox<String> couleur5 = new ComboBox<String>();
+		couleur5.setMinHeight(hauteurElemtents);
+		couleur5.setPrefSize(largeurComboBox, hauteurElemtents);
+		couleur5.getItems().addAll(DataControl.couleursJoueur);
+
+		j5.setAlignment(Pos.CENTER);
+		j5.setSpacing(spacing);
+		j5.getChildren().addAll(nom5, couleur5);
+		j5.setDisable(false);
+
+		///
+
+		HBox j6 = new HBox();
+
+		Label nom6 = new Label();
+		nom6.setBackground(fondBlanc);
+		nom6.setText("Joueur 6");
+		nom6.setFont(policeNom);
+		nom6.setPrefSize(largeurTF, hauteurElemtents);
+		nom6.setMinHeight(hauteurElemtents);
+		nom6.setAlignment(Pos.CENTER);
+		ComboBox<String> couleur6 = new ComboBox<String>();
+		couleur6.setMinHeight(hauteurElemtents);
+		couleur6.setPrefSize(largeurComboBox, hauteurElemtents);
+		couleur6.getItems().addAll(DataControl.couleursJoueur);
+
+		j6.setAlignment(Pos.CENTER);
+		j6.setSpacing(spacing);
+		j6.getChildren().addAll(nom6, couleur6);
+		j6.setDisable(true);
+
+		///
+
+		vJoueurs.setSpacing(14);
+		vJoueurs.getChildren().addAll(j1, j2, j3, j4, j5, j6);
 
         // vJoueurs.setBackground(new Background(new
         // BackgroundFill(Color.BLUE,CornerRadii.EMPTY,null)));
@@ -156,7 +212,7 @@ public class ConfigPartiePane extends StackPane {
         vbCenter.setMargin(vJoueurs, new Insets(0, 0, 100, 0));
         vbCenter.setAlignment(Pos.CENTER);
         vbCenter.setSpacing(spacing);
-        vbCenter.getChildren().addAll(desc, vJoueurs);
+        vbCenter.getChildren().addAll(vJoueurs);
 
 
         // boutons
@@ -174,27 +230,8 @@ public class ConfigPartiePane extends StackPane {
             bJouer.setStyle(styleBoutons);
         });
         bJouer.setOnAction(EventHandler -> {
-
-
             //TODO
-            if (Integer.valueOf(nbJr.getValue()) > 6 || Integer.valueOf(nbJr.getValue()) < 3) {
-                core.setNbJoueur(5);
-            } else {
-                core.setNbJoueur(Integer.valueOf(nbJr.getValue()));
-            }
-
-            if (Integer.valueOf(nbBot.getValue()) > 6 || Integer.valueOf(nbBot.getValue()) < 0 || Integer.valueOf(nbBot.getValue()) > Integer.valueOf(nbJr.getValue())) {
-                core.setNbJoueur(core.getNbJoueur());
-            } else {
-                core.setNbJoueur(Integer.valueOf(nbJr.getValue()));
-            }
-            core.setNomPartie(nomP.getText());
-            try {
-                core.setCj(new ControleurJeu(core.getNomPartie(), core.getNbJoueurReel(), core.getNbBot(), core.getInitializer()));
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-            sc.setPaneOnTop(ApplicationPane.WAIT);
+            sc.setPaneOnTop(ApplicationPane.PLATEAU);
         });
 
         Button bRetour = new Button("RETOUR");
