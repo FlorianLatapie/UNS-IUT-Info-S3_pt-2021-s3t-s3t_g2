@@ -8,10 +8,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Initializer {
-    private List<PlateauListener> listeners = new ArrayList<>();
+    private List<PlateauListener> listenerspl = new ArrayList<>();
+    private List<AttenteListener> listenersal = new ArrayList<>();
 
-    public void addListener(PlateauListener toAdd) {
-        listeners.add(toAdd);
+    public void addListenerPlateau(PlateauListener toAdd) {
+        listenerspl.add(toAdd);
+    }
+
+    public void addListenerAttente(AttenteListener toAdd) {
+        listenersal.add(toAdd);
     }
 
     public void nbZombiesLieuAll(List<Lieu> lieux) {
@@ -20,8 +25,8 @@ public class Initializer {
     }
 
     private void nbZombiesLieu(int lieu, int val) {
-        for (PlateauListener hl : listeners)
-            hl.nbLieuZombie(lieu, val);
+        for (PlateauListener pl : listenerspl)
+            pl.nbLieuZombie(lieu, val);
     }
 
     public void nomJoueurAll(List<Joueur> joueurs) {
@@ -30,8 +35,8 @@ public class Initializer {
     }
 
     private void nomJoueur(int joueur, String val) {
-        for (PlateauListener hl : listeners)
-            hl.nomJoueur(joueur, val);
+        for (PlateauListener pl : listenerspl)
+            pl.nomJoueur(joueur, val);
     }
 
     public void lieuFermeAll(List<Lieu> lieux) {
@@ -40,8 +45,8 @@ public class Initializer {
     }
 
     private void lieuFerme(int lieu, boolean val) {
-        for (PlateauListener hl : listeners)
-            hl.lieuFerme(lieu, val);
+        for (PlateauListener pl : listenerspl)
+            pl.lieuFerme(lieu, val);
     }
 
     public void lieuOuvertAll(List<Lieu> lieux) {
@@ -50,8 +55,8 @@ public class Initializer {
     }
 
     private void lieuOuvert(int lieu, boolean val) {
-        for (PlateauListener hl : listeners)
-            hl.lieuOuvert(lieu, val);
+        for (PlateauListener pl : listenerspl)
+            pl.lieuOuvert(lieu, val);
     }
 
     public void nbPersoJoueurAll(List<Joueur> joueurs) {
@@ -60,8 +65,8 @@ public class Initializer {
     }
 
     private void nbPersoJoueur(int joueur, int persoNb) {
-        for (PlateauListener hl : listeners)
-            hl.nbPersoJoueur(joueur, persoNb);
+        for (PlateauListener pl : listenerspl)
+            pl.nbPersoJoueur(joueur, persoNb);
     }
 
     public void nbCarteJoueurAll(List<Joueur> joueurs) {
@@ -70,8 +75,8 @@ public class Initializer {
     }
 
     private void nbCarteJoueur(int joueur, int carteNb) {
-        for (PlateauListener hl : listeners)
-            hl.nbCarteJoueur(joueur, carteNb);
+        for (PlateauListener pl : listenerspl)
+            pl.nbCarteJoueur(joueur, carteNb);
     }
 
     public void forceLieuAll(List<Lieu> lieux) {
@@ -84,12 +89,17 @@ public class Initializer {
     }
 
     private void forceLieu(int lieu, int val) {
-        for (PlateauListener hl : listeners)
-            hl.forceLieu(lieu, val);
+        for (PlateauListener pl : listenerspl)
+            pl.forceLieu(lieu, val);
     }
 
     public void finPartie() {
-        for (PlateauListener hl : listeners)
-            hl.finPartie();
+        for (PlateauListener pl : listenerspl)
+            pl.finPartie();
+    }
+
+    public void joueurPret() {
+        for (AttenteListener al : listenersal)
+            al.joueurPret();
     }
 }
