@@ -65,7 +65,7 @@ public class InterfacePrincipale extends Application {
         
         root.getChildren().add(new OptionPane(sControl, core));
         root.getChildren().add(new ReglesPane(sControl, core));
-        
+        root.getChildren().add(new JeuPane(sControl, core));
         root.getChildren().add(new AccueilPane(sControl, core));
 
         primaryStage.setScene(scene);
