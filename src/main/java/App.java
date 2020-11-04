@@ -1,24 +1,17 @@
+import ihm.Core;
+import ihm.InterfacePrincipale;
 
-import javafx.application.Application;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Scene;
-import javafx.stage.Stage;
-
-public class App extends Application {
-
-	@Override
-	public void start(Stage primaryStage) throws Exception {
-		
-		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("views/StartPage.fxml"));
-		
-		 Scene scene = new Scene(fxmlLoader.load());
-		 
-		 primaryStage.setScene(scene);
-		
-		primaryStage.show();
+/**
+ * Lance l'application et son interface graphique 
+ * 
+ * @author Florian
+ * @version 0
+ * @since 10/10/2020
+ * @category (default package)
+ */
+public class App { 
+	public static void main(String[] args) {
+		Core c = new Core(); 
+		InterfacePrincipale.lancement(args,c);
 	}
-	
-   public static void main(String[] args) {
-       launch(args);
-   }
 }
