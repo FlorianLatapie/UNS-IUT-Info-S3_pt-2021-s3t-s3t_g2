@@ -100,7 +100,7 @@ public class ControleurJeu {
             if (initializer != null) initializer.joueurPret();
 
             status = Status.COMPLETE;
-
+            joueurs.get(0).setChefDesVigiles(true);
             jeu = new Jeu(joueurs);
             if (initializer != null) initializer.nomJoueurAll(new ArrayList<>(jeu.getJoueurs().values()));
             if (initializer != null) initializer.nbZombiesLieuAll(new ArrayList<>(jeu.getLieux().values()));
@@ -109,6 +109,7 @@ public class ControleurJeu {
             if (initializer != null) initializer.nbCarteJoueurAll(new ArrayList<>(jeu.getJoueurs().values()));
             if (initializer != null) initializer.nbPersoJoueurAll(new ArrayList<>(jeu.getJoueurs().values()));
             if (initializer != null) initializer.forceLieuAll(new ArrayList<>(jeu.getLieux().values()));
+            if (initializer != null) initializer.nomChefVigileAll(new ArrayList<>(jeu.getJoueurs().values()));
             //WaitForColor
             while (!couleurPret) {
                 try {
@@ -842,6 +843,7 @@ public class ControleurJeu {
                         j.getPort(), message);
 
             if (initializer != null) initializer.finPartie();
+            if (initializer != null) initializer.getGagnant(gagnantNotFair);
             nwm.getUdpSocket().stop();
             nwm.getTcpServerSocket().stop();
 
