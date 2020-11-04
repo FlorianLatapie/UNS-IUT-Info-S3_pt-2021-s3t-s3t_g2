@@ -1,6 +1,7 @@
 package ihm;
 
 import ihm.DataControl.ApplicationPane;
+import ihm.eventListener.AttenteListener;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
@@ -19,7 +20,7 @@ import javafx.scene.text.FontWeight;
  * @version 0.1
  * @since 26/10/2020
  */
-public class AttenteJoueurPane extends StackPane {
+public class AttenteJoueurPane extends StackPane implements AttenteListener {
     // private ControleurJeu cj = new ControleurJeu(); // mettre ne paramètres les
     // joueurs
 
@@ -71,31 +72,14 @@ public class AttenteJoueurPane extends StackPane {
         desc.setBackground(fondBlanc);
         desc.setPadding(botPadding);
 
-        
+
         VBox vbCenter = new VBox();
         vbCenter.setAlignment(Pos.CENTER);
         vbCenter.setSpacing(spacing);
         vbCenter.getChildren().addAll(desc);
-      
+
 
         // boutons
-        Button bJouer = new Button("ATTENDEZ");
-        bJouer.setPrefSize(lBouton, hBouton);
-        bJouer.setMinSize(lBouton, hBouton);
-        bJouer.setFont(policeBouton);
-        bJouer.setStyle(styleBoutons);
-
-        bJouer.setOnMouseEntered(event -> {
-
-            bJouer.setStyle(styleBoutonsSouris);
-        });
-        bJouer.setOnMouseExited(event -> {
-            bJouer.setStyle(styleBoutons);
-        });
-        bJouer.setOnAction(EventHandler -> {
-            sc.setPaneOnTop(ApplicationPane.COULEUR);
-        });
-        //TODO a dé-commenter : bJouer.setDisable(true);
 
         Button bRetour = new Button("RETOUR");
         bRetour.setPrefSize(lBouton, hBouton);
@@ -110,15 +94,14 @@ public class AttenteJoueurPane extends StackPane {
             bRetour.setStyle(styleBoutons);
         });
         bRetour.setOnAction(EventHandler -> {
-        	//TODO arreter la création de la partie 
-        	sc.setPaneOnTop(ApplicationPane.ACCUEIL);
+            //TODO arreter la création de la partie
+            sc.setPaneOnTop(ApplicationPane.ACCUEIL);
         });
 
         // grille contenant les boutons du bas
         AnchorPane boutonsPanneau = new AnchorPane();
         boutonsPanneau.setLeftAnchor(bRetour, 0.0);
-        boutonsPanneau.setRightAnchor(bJouer, 0.0);
-        boutonsPanneau.getChildren().addAll(bRetour, bJouer);
+        boutonsPanneau.getChildren().addAll(bRetour);
 
 
         // image fond
@@ -156,5 +139,10 @@ public class AttenteJoueurPane extends StackPane {
         sControl.registerNode(paneName, this);
         sControl.setPaneOnTop(paneName);
 
+    }
+
+    @Override
+    public void joueurPret() {
+        sControl.setPaneOnTop(ApplicationPane.COULEUR);
     }
 }
