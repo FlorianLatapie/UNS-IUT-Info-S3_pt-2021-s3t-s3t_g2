@@ -45,13 +45,14 @@ public class InterfacePrincipale extends Application {
         root.getChildren().add(new PausePane(sControl, core));
         root.getChildren().add(new ReglesPane(sControl, core));
         root.getChildren().add(plateauPane);
-        root.getChildren().add(new OptionPane(sControl, core));
+        
         root.getChildren().add(new AccessibilitePane(sControl));
         root.getChildren().add(configPartiePane);
         root.getChildren().add(attenteJoueurPane);
         root.getChildren().add(couleurPane);
         root.getChildren().add(finDePartiePane);*/
-
+        root.getChildren().add(new OptionPane(sControl, core));
+        
         root.getChildren().add(new AccueilPane(sControl, core));
 
         primaryStage.setScene(scene);
