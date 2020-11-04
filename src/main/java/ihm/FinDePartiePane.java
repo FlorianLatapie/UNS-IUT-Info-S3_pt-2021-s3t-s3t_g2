@@ -46,8 +46,8 @@ public class FinDePartiePane extends StackPane /*//TODO implements FinListener*/
 	private StackPane stackPane = new StackPane();
 	private GaussianBlur flou = new GaussianBlur(30);
 
-	private Font policeNom = Font.font("Segoe UI", 25);
-	private CornerRadii coinfb = new CornerRadii(5.0);
+	private Font policeNom = Font.font("Segoe UI", 35);
+	private CornerRadii coinfb = new CornerRadii(10.0);
 	private Background fondBlanc = new Background(new BackgroundFill(Color.WHITE, coinfb, null));
 
 
@@ -71,7 +71,7 @@ public class FinDePartiePane extends StackPane /*//TODO implements FinListener*/
 
 		Label desc = new Label("vous avez perdu, joueur "+"x"+" a gagné\n (ou) vous avez gagné");
 		desc.setFont(policeNom);
-		desc.setPadding(new Insets(10));
+		desc.setPadding(new Insets(20));
 		desc.setBackground(fondBlanc);
 		
 

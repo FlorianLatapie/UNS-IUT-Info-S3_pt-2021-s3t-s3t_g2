@@ -93,7 +93,7 @@ public class ConfigPartiePane extends StackPane {
         
         VBox vbCenter = new VBox();
         vbCenter.setAlignment(Pos.CENTER);
-        vbCenter.setSpacing(spacing);
+        //vbCenter.setSpacing(spacing);
         //vbCenter.setBackground(fondBlanc);
         vbCenter.getChildren().addAll(partie);
 
