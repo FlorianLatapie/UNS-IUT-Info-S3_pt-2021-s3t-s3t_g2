@@ -1,10 +1,12 @@
 package ihm;
 
 import ihm.DataControl.ApplicationPane;
+import javafx.animation.RotateTransition;
 import javafx.event.EventHandler;
 import javafx.scene.Node;
 import javafx.scene.control.Labeled;
 import javafx.scene.input.MouseEvent;
+import javafx.util.Duration;
 
 import java.util.HashMap;
 
@@ -73,33 +75,15 @@ public class ScreenControl implements EventHandler<MouseEvent> {
         //((OptionPane)listNode.get(ApplicationPane.OPTION)).setLangue(l);
         //I18N.setLocale(DataControl.getLocale(DataControl.getLangue(l.getText()))); //Phase 2 : à décommenter quand on travaillera sur l'internationalisation
     }
-
-    /**
-     * Informe le nf du volume des effets sonores et affiche l'information dans l'interface
-     *
-     * @param v : la valeur du volume en 0 et 100
-     */
-    public void setSonVolume(int v) {
-        //mg.setEffectVolume(v);
-        //((OptionPane)listNode.get(ApplicationPane.OPTION)).setSonVolume(v);
+    
+    public void rotatePane(Node n , double angle) {
+    	RotateTransition rotateTransition = new RotateTransition();
+    	rotateTransition.setDuration(Duration.millis(500));
+    	rotateTransition.setNode(n);
+    	rotateTransition.setByAngle(angle);
+    	rotateTransition.setAutoReverse(false);
+    	rotateTransition.play();
     }
-
-    /**
-     * Retourne la valeur du volume des effets sonores
-     * @return un entier entre 0 et 100
-     */
-	/*public int getSonVolume() {
-		return mg.getEffectVolume();	
-	}*/
-
-    /**
-     * Retourne le theme sélectionné
-     * @return le theme sélectionné appartenant à l'énumération ApplicationTheme
-     */
-	/*public ApplicationTheme getTheme() {
-		return mg.getTheme();
-	}*/
-
 
     /**
      * Consomme les évènement souris qui ont lieu durant une animation pour permettre à celle-ci d'avoir lieu sans problème.
