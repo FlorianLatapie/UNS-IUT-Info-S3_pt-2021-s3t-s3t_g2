@@ -22,17 +22,17 @@
             </VBox>
             <TextFlow prefHeight="75.0" prefWidth="716.0" textAlignment="CENTER">
                <children>
-                  <Text fill="#900000" strokeType="OUTSIDE" strokeWidth="0.0" text="Zombies est un jeu d'embrouilles pour 3 à 6 joueurs , à partir de 14 ans. Une partie dure environ 60 minutes" />
+                  <Text fill="#900000" strokeType="OUTSIDE" strokeWidth="0.0" text="%texte.pourQui" />
                </children>
             </TextFlow>
             <TextFlow prefHeight="75.0" prefWidth="716.0" textAlignment="CENTER">
                <children>
-                  <Text fill="#900000" strokeType="OUTSIDE" strokeWidth="0.0" text="Une mystérieuse expérience scientifique a permis aux morts de se relever pour dévorer les vivants. Peu à peu, tous les signes de la civilisation disparaissent alors que les principaux organismes d'état ferment leurs portes. La police et l'armée sont submergées et ne peuvent contenir les pillards et les criminels en maraude. La société est au bord du gouffre et les rares survivants se sont réfugiés dans un centre commercial afin de résister à l'augmentation constante de morts-vivants dévoreurs de chair humaine. Vous êtes l'un de ces derniers êtres humains vivants sur Terre et vous allez tout faire pour vous sortir de ce bien mauvais passage." textAlignment="CENTER" wrappingWidth="711.99609375" />
+                  <Text fill="#900000" strokeType="OUTSIDE" strokeWidth="0.0" text="%texte.histoire" textAlignment="CENTER" wrappingWidth="711.99609375" />
                </children>
             </TextFlow>
             <VBox alignment="BOTTOM_CENTER" prefHeight="171.0" prefWidth="716.0">
                <children>
-                  <Text fill="#900000" strokeType="OUTSIDE" strokeWidth="0.0" text="But du jeu:" wrappingWidth="69.095703125">
+                  <Text fill="#900000" strokeType="OUTSIDE" strokeWidth="0.0" text="%texte.but" wrappingWidth="69.095703125">
                      <font>
                         <Font name="System Bold" size="12.0" />
                      </font>
@@ -41,17 +41,17 @@
             </VBox>
             <TextFlow prefHeight="75.0" prefWidth="716.0" textAlignment="CENTER">
                <children>
-                  <Text fill="#900000" strokeType="OUTSIDE" strokeWidth="0.0" text="Chaque joueur contrôle 3 personnages (4 lors d'une partie à 3 joueurs) qu'il va tenter de maintenir en vie lors de l'attaque des zombies, en attendant l'arrivée des secours. Celui qui conserera le plus de ses personnages en vie tout au long de la partie l'emprotera. poiur cela il faudra monter vos adversaires les uns contre les autres et faire en sorte que ce soit leurs personnages qui soient dévorés, pendant que vous vous en sortirez tranquillement sans une morsure " />
+                  <Text fill="#900000" strokeType="OUTSIDE" strokeWidth="0.0" text="%texte.butExplication" />
                </children>
             </TextFlow>
             <TextFlow prefHeight="40.0" prefWidth="716.0" textAlignment="CENTER">
                <children>
-                  <Text fill="#900000" strokeType="OUTSIDE" strokeWidth="0.0" text="La partie s'arrete dès que les secours arrivent, c'est-à-dire bien trop tard pour sauver tout le monde. Ils arrivent dès que l'une des deux situations suivantes se présente :" textAlignment="CENTER" />
+                  <Text fill="#900000" strokeType="OUTSIDE" strokeWidth="0.0" text="%texte.finDePartie" textAlignment="CENTER" />
                </children>
             </TextFlow>
             <TextFlow prefHeight="75.0" prefWidth="716.0" textAlignment="CENTER">
                <children>
-                  <Text fill="#900000" strokeType="OUTSIDE" strokeWidth="0.0" text="--&gt;Tous les personnages encore en vie sont présents dans un seul et même lieu (sauf le parking (lieu numéro 4))." />
+                  <Text fill="#900000" strokeType="OUTSIDE" strokeWidth="0.0" text="%texte.FDPsit1" />
                </children>
             </TextFlow>
             <TextFlow prefHeight="75.0" prefWidth="716.0" textAlignment="CENTER">
@@ -61,7 +61,7 @@
             </TextFlow>
             <TextFlow prefHeight="200.0" prefWidth="200.0" textAlignment="CENTER">
                <children>
-                  <Text fill="#900000" strokeType="OUTSIDE" strokeWidth="0.0" text="Un hélicoptère de l'armée arrive alors pour sauver les survivants. Chaque personnage encore en vie remporte autant de points que sa valeur. Le joueur avec le plus de points gagne la partie. En cas d'égalité, le joueur possédant le plus de cartes en main est le vainqueur." textAlignment="CENTER" />
+                  <Text fill="#900000" strokeType="OUTSIDE" strokeWidth="0.0" text="%texte.FDPsit2" textAlignment="CENTER" />
                </children>
             </TextFlow>
          </children>
