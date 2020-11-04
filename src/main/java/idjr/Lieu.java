@@ -12,12 +12,12 @@ import java.util.List;
  * @since 04/10/2020
  */
 public class Lieu {
-	private int num;
+	private final int num;
 	private int nbPlaces;
 	private int nbZombies;
-	public String name;
+	private final String name;
 	private boolean ouvert;
-	private ArrayList<Personnage> personnage;
+	private final ArrayList<Personnage> personnage;
 
 	/**
 	 * Initialise les diffÃ©rents lieux possibles et donne le nombre de places
@@ -52,7 +52,6 @@ public class Lieu {
 		personnage = new ArrayList<>();
 	}
 
-
 	/**
 	 * Ajoute un personnage dans un lieu
 	 *
@@ -60,7 +59,7 @@ public class Lieu {
 	 */
 	public void addPersonnage(Personnage p) {
 		if (this.isFull()) {
-			throw new RuntimeException(name + " est full!");
+			throw new IllegalArgumentException(name + " est full!");
 		}
 		this.personnage.add(p);
 	}
@@ -81,9 +80,7 @@ public class Lieu {
 	public boolean isFull() {
 		System.out.println("Size " + personnage.size());
 		if (personnage != null) {
-			if (this.personnage.size() == this.nbPlaces) {
-				return true;
-			}
+			return this.personnage.size() == this.nbPlaces;
 		}
 		return false;
 	}
@@ -115,7 +112,6 @@ public class Lieu {
 	public List<Personnage> getPersonnage() {
 		return personnage;
 	}
-
 
 	public int getNbPlaces() {
 		return nbPlaces;

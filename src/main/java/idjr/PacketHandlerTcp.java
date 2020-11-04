@@ -26,7 +26,7 @@ import reseau.type.VigileEtat;
  */
 public class PacketHandlerTcp {
 	private final NetWorkManager nwm;
-	private final Idjr core; // TODO Add the game manager (core)
+	private final Idjr core;
 
 	/**
 	 * @param netWorkManager le controleur rÃ©seau
@@ -34,7 +34,7 @@ public class PacketHandlerTcp {
 	 */
 	public PacketHandlerTcp(NetWorkManager netWorkManager, Object core) {
 		this.nwm = netWorkManager;
-		this.core = (Idjr) core;// TODO Add the game manager (core)
+		this.core = (Idjr) core;
 	}
 
 	/**
@@ -48,7 +48,6 @@ public class PacketHandlerTcp {
 	 */
 	public String traitement(Packet packet, String message, Socket socket) {
 		switch (packet.getKey()) {
-
 			case "IP":
 				return initialiserPartie(packet, message);
 			case "PIIJ":
@@ -89,27 +88,24 @@ public class PacketHandlerTcp {
 			case "RECV":
 			case "CDFC":
 				return "";
-
-			// TODO voir CDDJ
 			default:
 				throw new IllegalStateException(
 						MessageFormat.format("[UDP] Il n''y a pas de traitement possible pour {0}", packet.getKey()));
 		}
 	}
 
-	@SuppressWarnings("unchecked")
 	public String initialiserPartie(Packet packet, String message) {
-		List<String> noms = (List<String>) packet.getValue(message, 1);
-		for (String string : noms)
-			System.out.println(string);
+		List<?> noms = (List<?>) packet.getValue(message, 1);
+		for (Object string : noms)
+			System.out.println((String)string);
 		List<Couleur> couleurs = (List<Couleur>) packet.getValue(message, 2);
 		for (Couleur string : couleurs)
 			System.out.println(string);
 		System.out.println(core.getNom());
-		core.setCouleur(IdjrTools.getCouleurByName(core.getNom(), noms, couleurs));
+		core.setCouleur(IdjrTools.getCouleurByName(core.getNom(), (List<String>) noms, couleurs));
 		ArrayList<Joueur> listeJoueursInitiale = new ArrayList();
 		for (int i = 0; i < noms.size(); i++) {
-			listeJoueursInitiale.add(new Joueur(noms.get(i), couleurs.get(i)));
+			listeJoueursInitiale.add(new Joueur((String)noms.get(i), couleurs.get(i)));
 		}
 		core.getJeu().initJoueurs(listeJoueursInitiale);
 		return "";

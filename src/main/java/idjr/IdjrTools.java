@@ -6,9 +6,12 @@ import reseau.type.Couleur;
 import reseau.type.PionCouleur;
 
 public abstract class IdjrTools {
+    private IdjrTools(){
+
+    }
+
     public static Couleur getCouleurByName(String n, List<String> noms, List<Couleur> couleurs) {
         for (int i = 0; i < noms.size(); i++) {
-            System.out.println(noms.get(i) + " =? " + n);
             if (noms.get(i).equals(n))
                 return couleurs.get(i);
         }

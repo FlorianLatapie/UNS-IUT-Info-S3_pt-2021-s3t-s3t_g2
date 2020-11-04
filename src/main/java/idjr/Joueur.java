@@ -15,17 +15,13 @@ import java.util.Map;
  * @since 05/10/2020
  */
 public class Joueur {
-
-
-    private Couleur couleur;
+    private final Couleur couleur;
     private boolean enVie;
-    private HashMap<Integer, Personnage> personnages;
     private final String nom;
 
+    private HashMap<Integer, Personnage> personnages;
+
     /**
-     * @param joueurIdint
-     * @param ip
-     * @param port
      * @param nom         le nom du joueur
      */
     public Joueur(String nom, Couleur c) {
@@ -34,14 +30,6 @@ public class Joueur {
         personnages = new HashMap<>();
         this.nom = nom;
     }
-
-    /**
-     * @return la couleur
-     */
-    public Couleur getCouleur() {
-        return couleur;
-    }
-
 
     /**
      * @return la liste de personnages
@@ -59,7 +47,6 @@ public class Joueur {
         this.personnages = personnages;
     }
 
-
     /**
      * @return si le joueur est en vie
      */
@@ -74,12 +61,18 @@ public class Joueur {
         this.enVie = enVie;
     }
 
-
     /**
      * @return nom du joueur
      */
     public String getNom() {
         return nom;
+    }
+
+    /**
+     * @return la couleur
+     */
+    public Couleur getCouleur() {
+        return couleur;
     }
 
     public String toString() {

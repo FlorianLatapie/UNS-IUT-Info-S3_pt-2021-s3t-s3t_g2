@@ -1,105 +1,110 @@
 package idjr;
 
+import reseau.type.Couleur;
+import reseau.type.TypeJoueur;
+
 import java.net.InetAddress;
 import java.util.ArrayList;
 import java.util.List;
 
-import reseau.type.Couleur;
-import reseau.type.TypeJoueur;
-
 public class Idjr {
-	private String nom;
-	public String getNom() {
-		return nom;
-	}
+    /* Parametre Idjr */
+    private String nom;
+    private String numPartie;
+    private String joueurId;
+    private Couleur couleur;
+    private final TypeJoueur typeJoueur;
+    private InetAddress ipPp;
+    private int portPp;
 
-	public void setNom(String nom) {
-		this.nom = nom;
-	}
+    /* Parametre Temporaire */
+    private List<Integer> pionAPos;
 
-	private String numPartie;
-	private String joueurId;
-	private Couleur couleur;
-	private TypeJoueur typeJoueur;
-	private List<Integer> pionAPos;
-	private InetAddress ipPp;
-	private int portPp;
-	private Jeu jeu = new Jeu();
+    /* Core */
+    private final Jeu jeu = new Jeu();
 
-	public Joueur getMoi() {
-		for (Joueur j: jeu.getJoueurs().values()) {
-			if (j.getCouleur() == couleur) {
-				return j;
-			}
-		}
-		return null;
+    public Idjr() {
+        this.typeJoueur = TypeJoueur.JR;
+        this.pionAPos = new ArrayList<>();
+    }
 
-	}
+    public Joueur getMoi() {
+        for (Joueur j : jeu.getJoueurs().values()) {
+            if (j.getCouleur() == couleur) {
+                return j;
+            }
+        }
 
-	public Joueur getJoueur (Couleur c) {
-		for (Joueur j: jeu.getJoueurs().values()) {
-			if (j.getCouleur() == c) {
-				return j;
-			}
-		}
-		return null;
-	}
+        return null;
+    }
 
-	public Jeu getJeu() {
-		return jeu;
-	}
+    public Joueur getJoueur(Couleur c) {
+        for (Joueur j : jeu.getJoueurs().values()) {
+            if (j.getCouleur() == c) {
+                return j;
+            }
+        }
 
-	public List<Integer> getPionAPos() {
-		return pionAPos;
-	}
+        return null;
+    }
 
-	public void setPionAPos(List<Integer> pionAPos) {
-		this.pionAPos = pionAPos;
-	}
+    public Jeu getJeu() {
+        return jeu;
+    }
 
-	public Idjr() {
-		this.typeJoueur = TypeJoueur.JR;
-		this.pionAPos = new ArrayList<>();
-	}
+    public List<Integer> getPionAPos() {
+        return pionAPos;
+    }
 
-	public void setJoueurId(String joueurId) {
-		this.joueurId = joueurId;
-	}
+    public void setPionAPos(List<Integer> pionAPos) {
+        this.pionAPos = pionAPos;
+    }
 
-	public TypeJoueur getTypeJoueur() {
-		return typeJoueur;
-	}
+    public void setJoueurId(String joueurId) {
+        this.joueurId = joueurId;
+    }
 
-	public Couleur getCouleur() {
-		return couleur;
-	}
+    public TypeJoueur getTypeJoueur() {
+        return typeJoueur;
+    }
 
-	public void setCouleur(Couleur couleur) {
-		this.couleur = couleur;
-	}
+    public Couleur getCouleur() {
+        return couleur;
+    }
 
-	public String getJoueurId() {
-		return joueurId;
-	}
+    public void setCouleur(Couleur couleur) {
+        this.couleur = couleur;
+    }
 
-	public String getNumPartie() {
-		return numPartie;
-	}
+    public String getJoueurId() {
+        return joueurId;
+    }
 
-	public InetAddress getIpPp() {
-		return ipPp;
-	}
+    public String getNumPartie() {
+        return numPartie;
+    }
 
-	public void setIpPp(InetAddress ipPp) {
-		this.ipPp = ipPp;
-	}
+    public InetAddress getIpPp() {
+        return ipPp;
+    }
 
-	public int getPortPp() {
-		return portPp;
-	}
+    public void setIpPp(InetAddress ipPp) {
+        this.ipPp = ipPp;
+    }
 
-	public void setPortPp(int portPp) {
-		this.portPp = portPp;
-	}
+    public int getPortPp() {
+        return portPp;
+    }
 
+    public void setPortPp(int portPp) {
+        this.portPp = portPp;
+    }
+
+    public String getNom() {
+        return nom;
+    }
+
+    public void setNom(String nom) {
+        this.nom = nom;
+    }
 }

@@ -5,6 +5,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map.Entry;
 
+import static java.lang.System.*;
+
 /**
  * <h1>Le plateau de jeu</h1>
  *
@@ -14,12 +16,9 @@ import java.util.Map.Entry;
  * @since 04/10/2020
  */
 public class Jeu {
-	private HashMap<Integer, Lieu> lieux;
-	private HashMap<Integer, Joueur> joueurs;
+	private final HashMap<Integer, Lieu> lieux;
+	private final HashMap<Integer, Joueur> joueurs;
 
-	/**
-	 * @param listeJoueursInitiale La liste des joueurs initiaux
-	 */
 	public Jeu() {
 		lieux = new HashMap<>();
 		joueurs = new HashMap<>();
@@ -46,10 +45,6 @@ public class Jeu {
 		lieux.put(4, parking);
 		lieux.put(5, pCsecu);
 		lieux.put(6, supermarche);
-	}
-
-	public HashMap<Integer, Joueur> getJoueurs() {
-		return joueurs;
 	}
 
 	/**
@@ -134,14 +129,14 @@ public class Jeu {
 		for (int i = 0; i < joueurs.size(); i++) {
 			if (joueurs.get(i).isEnVie() && joueurs.get(i).getPersonnages().size() == 0) {
 				joueurs.get(i).setEnVie(false);
-				System.out.println(joueurs.get(i) + " est mort!");
+				out.println(joueurs.get(i) + " est mort!");
 			}
 		}
 	}
 
 	public void fermerLieu(List<Integer> l) {
-		for (int i = 0; i < l.size(); i++) {
-			this.lieux.get(l.get(i)).setOuvert(false);
+		for (Integer integer : l) {
+			this.lieux.get(integer).setOuvert(false);
 		}
 	}
 
@@ -168,23 +163,19 @@ public class Jeu {
 	private boolean toutPers(Joueur j, int a) {
 		for (Personnage i : j.getPersonnages().values()) {
 			if (i.getMonLieu().getNum() != a) {
-				return false;
+				return true;
 			}
 		}
-		return true;
-	}
-
-	public HashMap<Integer, Lieu> getLieux() {
-		return lieux;
+		return false;
 	}
 
 	public List<Integer> choixLieudispo(Joueur j) {
 		List<Integer> lieux = new ArrayList<>();
 		for (int i = 1; i < 7; i++) {
-			System.out.println(!this.lieux.get(i).isFull());
-			System.out.println(this.lieux.get(i).isOuvert());
-			System.out.println(!toutPers(j, i));
-			if (!this.lieux.get(i).isFull() && this.lieux.get(i).isOuvert() && !toutPers(j, i)) {
+			out.println(!this.lieux.get(i).isFull());
+			out.println(this.lieux.get(i).isOuvert());
+			out.println(toutPers(j, i));
+			if (!this.lieux.get(i).isFull() && this.lieux.get(i).isOuvert() && toutPers(j, i)) {
 				lieux.add(i);
 			}
 		}
@@ -228,5 +219,13 @@ public class Jeu {
 		}
 
 		return tmp.toString();
+	}
+
+	public HashMap<Integer, Joueur> getJoueurs() {
+		return joueurs;
+	}
+
+	public HashMap<Integer, Lieu> getLieux() {
+		return lieux;
 	}
 }
