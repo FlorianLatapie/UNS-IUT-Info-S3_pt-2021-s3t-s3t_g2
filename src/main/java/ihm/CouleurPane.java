@@ -12,6 +12,10 @@ import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
+import reseau.type.Couleur;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * The Class ConfigPartiePane.
@@ -78,132 +82,132 @@ public class CouleurPane extends StackPane {
 
         HBox j1 = new HBox();
 
-		Label nom1 = new Label();
-		nom1.setBackground(fondBlanc);
-		nom1.setText("Joueur 1");
-		nom1.setFont(policeNom);
-		nom1.setPrefSize(largeurTF, hauteurElemtents);
-		nom1.setMinHeight(hauteurElemtents);
-		nom1.setAlignment(Pos.CENTER);
-		ComboBox<String> couleur1 = new ComboBox<String>();
-		couleur1.setMinHeight(hauteurElemtents);
-		couleur1.setPrefSize(largeurComboBox, hauteurElemtents);
-		couleur1.getItems().addAll(DataControl.couleursJoueur);
+        Label nom1 = new Label();
+        nom1.setBackground(fondBlanc);
+        nom1.setText("Joueur 1");
+        nom1.setFont(policeNom);
+        nom1.setPrefSize(largeurTF, hauteurElemtents);
+        nom1.setMinHeight(hauteurElemtents);
+        nom1.setAlignment(Pos.CENTER);
+        ComboBox<String> couleur1 = new ComboBox<String>();
+        couleur1.setMinHeight(hauteurElemtents);
+        couleur1.setPrefSize(largeurComboBox, hauteurElemtents);
+        couleur1.getItems().addAll(DataControl.couleursJoueur);
 
-		j1.setAlignment(Pos.CENTER);
-		j1.setSpacing(spacing);
-		j1.getChildren().addAll(nom1, couleur1);
-		j1.setDisable(false);
+        j1.setAlignment(Pos.CENTER);
+        j1.setSpacing(spacing);
+        j1.getChildren().addAll(nom1, couleur1);
+        j1.setDisable(false);
 
-		///
+        ///
 
-		HBox j2 = new HBox();
+        HBox j2 = new HBox();
 
-		Label nom2 = new Label();
-		nom2.setBackground(fondBlanc);
-		nom2.setText("Joueur 2");
-		nom2.setFont(policeNom);
-		nom2.setPrefSize(largeurTF, hauteurElemtents);
-		nom2.setMinHeight(hauteurElemtents);
-		nom2.setAlignment(Pos.CENTER);
-		ComboBox<String> couleur2 = new ComboBox<String>();
-		couleur2.setPrefSize(largeurComboBox, hauteurElemtents);
-		couleur2.setMinHeight(hauteurElemtents);
-		couleur2.getItems().addAll(DataControl.couleursJoueur);
+        Label nom2 = new Label();
+        nom2.setBackground(fondBlanc);
+        nom2.setText("Joueur 2");
+        nom2.setFont(policeNom);
+        nom2.setPrefSize(largeurTF, hauteurElemtents);
+        nom2.setMinHeight(hauteurElemtents);
+        nom2.setAlignment(Pos.CENTER);
+        ComboBox<String> couleur2 = new ComboBox<String>();
+        couleur2.setPrefSize(largeurComboBox, hauteurElemtents);
+        couleur2.setMinHeight(hauteurElemtents);
+        couleur2.getItems().addAll(DataControl.couleursJoueur);
 
-		j2.setAlignment(Pos.CENTER);
-		j2.setSpacing(spacing);
-		j2.getChildren().addAll(nom2, couleur2);
-		j2.setDisable(false);
+        j2.setAlignment(Pos.CENTER);
+        j2.setSpacing(spacing);
+        j2.getChildren().addAll(nom2, couleur2);
+        j2.setDisable(false);
 
-		///
+        ///
 
-		HBox j3 = new HBox();
+        HBox j3 = new HBox();
 
-		Label nom3 = new Label();
-		nom3.setBackground(fondBlanc);
-		nom3.setText("Joueur 3");
-		nom3.setFont(policeNom);
-		nom3.setPrefSize(largeurTF, hauteurElemtents);
-		nom3.setMinHeight(hauteurElemtents);
-		nom3.setAlignment(Pos.CENTER);
-		ComboBox<String> couleur3 = new ComboBox<String>();
-		couleur3.setMinHeight(hauteurElemtents);
-		couleur3.setPrefSize(largeurComboBox, hauteurElemtents);
-		couleur3.getItems().addAll(DataControl.couleursJoueur);
+        Label nom3 = new Label();
+        nom3.setBackground(fondBlanc);
+        nom3.setText("Joueur 3");
+        nom3.setFont(policeNom);
+        nom3.setPrefSize(largeurTF, hauteurElemtents);
+        nom3.setMinHeight(hauteurElemtents);
+        nom3.setAlignment(Pos.CENTER);
+        ComboBox<String> couleur3 = new ComboBox<String>();
+        couleur3.setMinHeight(hauteurElemtents);
+        couleur3.setPrefSize(largeurComboBox, hauteurElemtents);
+        couleur3.getItems().addAll(DataControl.couleursJoueur);
 
-		j3.setAlignment(Pos.CENTER);
-		j3.setSpacing(spacing);
-		j3.getChildren().addAll(nom3, couleur3);
-		j3.setDisable(false);
+        j3.setAlignment(Pos.CENTER);
+        j3.setSpacing(spacing);
+        j3.getChildren().addAll(nom3, couleur3);
+        j3.setDisable(false);
 
-		///
+        ///
 
-		HBox j4 = new HBox();
+        HBox j4 = new HBox();
 
-		Label nom4 = new Label();
-		nom4.setBackground(fondBlanc);
-		nom4.setText("Joueur 4");
-		nom4.setFont(policeNom);
-		nom4.setPrefSize(largeurTF, hauteurElemtents);
-		nom4.setMinHeight(hauteurElemtents);
-		nom4.setAlignment(Pos.CENTER);
-		ComboBox<String> couleur4 = new ComboBox<String>();
-		couleur4.setMinHeight(hauteurElemtents);
-		couleur4.setPrefSize(largeurComboBox, hauteurElemtents);
-		couleur4.getItems().addAll(DataControl.couleursJoueur);
+        Label nom4 = new Label();
+        nom4.setBackground(fondBlanc);
+        nom4.setText("Joueur 4");
+        nom4.setFont(policeNom);
+        nom4.setPrefSize(largeurTF, hauteurElemtents);
+        nom4.setMinHeight(hauteurElemtents);
+        nom4.setAlignment(Pos.CENTER);
+        ComboBox<String> couleur4 = new ComboBox<String>();
+        couleur4.setMinHeight(hauteurElemtents);
+        couleur4.setPrefSize(largeurComboBox, hauteurElemtents);
+        couleur4.getItems().addAll(DataControl.couleursJoueur);
 
-		j4.setAlignment(Pos.CENTER);
-		j4.setSpacing(spacing);
-		j4.getChildren().addAll(nom4, couleur4);
-		j4.setDisable(false);
+        j4.setAlignment(Pos.CENTER);
+        j4.setSpacing(spacing);
+        j4.getChildren().addAll(nom4, couleur4);
+        j4.setDisable(false);
 
-		///
+        ///
 
-		HBox j5 = new HBox();
+        HBox j5 = new HBox();
 
-		Label nom5 = new Label();
-		nom5.setBackground(fondBlanc);
-		nom5.setText("Joueur 5");
-		nom5.setFont(policeNom);
-		nom5.setPrefSize(largeurTF, hauteurElemtents);
-		nom5.setMinHeight(hauteurElemtents);
-		nom5.setAlignment(Pos.CENTER);
-		ComboBox<String> couleur5 = new ComboBox<String>();
-		couleur5.setMinHeight(hauteurElemtents);
-		couleur5.setPrefSize(largeurComboBox, hauteurElemtents);
-		couleur5.getItems().addAll(DataControl.couleursJoueur);
+        Label nom5 = new Label();
+        nom5.setBackground(fondBlanc);
+        nom5.setText("Joueur 5");
+        nom5.setFont(policeNom);
+        nom5.setPrefSize(largeurTF, hauteurElemtents);
+        nom5.setMinHeight(hauteurElemtents);
+        nom5.setAlignment(Pos.CENTER);
+        ComboBox<String> couleur5 = new ComboBox<String>();
+        couleur5.setMinHeight(hauteurElemtents);
+        couleur5.setPrefSize(largeurComboBox, hauteurElemtents);
+        couleur5.getItems().addAll(DataControl.couleursJoueur);
 
-		j5.setAlignment(Pos.CENTER);
-		j5.setSpacing(spacing);
-		j5.getChildren().addAll(nom5, couleur5);
-		j5.setDisable(false);
+        j5.setAlignment(Pos.CENTER);
+        j5.setSpacing(spacing);
+        j5.getChildren().addAll(nom5, couleur5);
+        j5.setDisable(false);
 
-		///
+        ///
 
-		HBox j6 = new HBox();
+        HBox j6 = new HBox();
 
-		Label nom6 = new Label();
-		nom6.setBackground(fondBlanc);
-		nom6.setText("Joueur 6");
-		nom6.setFont(policeNom);
-		nom6.setPrefSize(largeurTF, hauteurElemtents);
-		nom6.setMinHeight(hauteurElemtents);
-		nom6.setAlignment(Pos.CENTER);
-		ComboBox<String> couleur6 = new ComboBox<String>();
-		couleur6.setMinHeight(hauteurElemtents);
-		couleur6.setPrefSize(largeurComboBox, hauteurElemtents);
-		couleur6.getItems().addAll(DataControl.couleursJoueur);
+        Label nom6 = new Label();
+        nom6.setBackground(fondBlanc);
+        nom6.setText("Joueur 6");
+        nom6.setFont(policeNom);
+        nom6.setPrefSize(largeurTF, hauteurElemtents);
+        nom6.setMinHeight(hauteurElemtents);
+        nom6.setAlignment(Pos.CENTER);
+        ComboBox<String> couleur6 = new ComboBox<String>();
+        couleur6.setMinHeight(hauteurElemtents);
+        couleur6.setPrefSize(largeurComboBox, hauteurElemtents);
+        couleur6.getItems().addAll(DataControl.couleursJoueur);
 
-		j6.setAlignment(Pos.CENTER);
-		j6.setSpacing(spacing);
-		j6.getChildren().addAll(nom6, couleur6);
-		j6.setDisable(true);
+        j6.setAlignment(Pos.CENTER);
+        j6.setSpacing(spacing);
+        j6.getChildren().addAll(nom6, couleur6);
+        j6.setDisable(true);
 
-		///
+        ///
 
-		vJoueurs.setSpacing(14);
-		vJoueurs.getChildren().addAll(j1, j2, j3, j4, j5, j6);
+        vJoueurs.setSpacing(14);
+        vJoueurs.getChildren().addAll(j1, j2, j3, j4, j5, j6);
 
         // vJoueurs.setBackground(new Background(new
         // BackgroundFill(Color.BLUE,CornerRadii.EMPTY,null)));
@@ -230,8 +234,12 @@ public class CouleurPane extends StackPane {
             bJouer.setStyle(styleBoutons);
         });
         bJouer.setOnAction(EventHandler -> {
-            //TODO
-            sc.setPaneOnTop(ApplicationPane.PLATEAU);
+            boolean isOk = IhmTools.isAllUniqueColor(core.getNbJoueur(), couleur1, couleur2, couleur3, couleur4, couleur5, couleur6);
+            if (isOk) {
+                List<Couleur> cs = IhmTools.comboStringToColorList(core.getNbJoueur(), couleur1, couleur2, couleur3, couleur4, couleur5, couleur6);
+                core.getCj().setJoueurCouleur(cs);
+                sc.setPaneOnTop(ApplicationPane.PLATEAU);
+            }
         });
 
         Button bRetour = new Button("RETOUR");
