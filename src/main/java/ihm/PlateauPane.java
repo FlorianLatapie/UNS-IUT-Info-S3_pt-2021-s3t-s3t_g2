@@ -776,7 +776,6 @@ public class PlateauPane extends StackPane implements PlateauListener {
 
     @Override
     public void finPartie() {
-        out.println("FIN");
-        sControl.setPaneOnTop(ApplicationPane.ACCUEIL);
+        sControl.setPaneOnTop(ApplicationPane.ENDGAME);
     }
 }
