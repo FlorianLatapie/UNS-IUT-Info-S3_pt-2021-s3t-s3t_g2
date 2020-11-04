@@ -76,11 +76,31 @@ public class ScreenControl implements EventHandler<MouseEvent> {
         //I18N.setLocale(DataControl.getLocale(DataControl.getLangue(l.getText()))); //Phase 2 : à décommenter quand on travaillera sur l'internationalisation
     }
     
-    public void rotatePane(Node n , double angle) {
+    public void rotatePane(Node n , String sens) {
+    	double angle = n.getRotate();
+    	switch(sens) {
+    		case("haut"):
+    			if (angle != 180)
+    				angle = 180;
+    			break;
+    		case("bas"):
+    			if (angle != 0)
+    				angle = 0;
+    			break;
+    		case("gauche"):
+    			if (angle != 90)
+    				angle = 90;
+    			break;
+    		case("droite"):
+    			if (angle != -90)
+    				angle = -90;
+    			break;
+    	}
+		
     	RotateTransition rotateTransition = new RotateTransition();
     	rotateTransition.setDuration(Duration.millis(500));
     	rotateTransition.setNode(n);
-    	rotateTransition.setByAngle(angle);
+    	rotateTransition.setToAngle(angle);
     	rotateTransition.setAutoReverse(false);
     	rotateTransition.play();
     }
