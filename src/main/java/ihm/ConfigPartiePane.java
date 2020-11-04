@@ -44,22 +44,22 @@ public class ConfigPartiePane extends StackPane {
     private StackPane stackPane = new StackPane();
     private GaussianBlur flou = new GaussianBlur(30);
 
-    private Font policeNom = Font.font("Segoe UI", 17);
+    private Font policeNom = Font.font("Segoe UI", 25);
     private int hauteurElemtents = 60;
-    private int largeurTF = 100;
+    private int largeurTF = 200;
     private int largeurTexte = 220;
     private int spacing = 30;
     private CornerRadii coinfb = new CornerRadii(5.0);
     private Background fondBlanc = new Background(new BackgroundFill(Color.WHITE, coinfb, null));
 
-    private Insets botPadding = new Insets(0, 10, 0, 10);
+    private Insets botPadding = new Insets(10);
 
     public ConfigPartiePane(ScreenControl sc, Core c) {
         core = c;
         sControl = sc;
         stackPane.setAlignment(Pos.CENTER);
         // titre
-        Label titre1 = new Label("Configuration de \n\tla partie");
+        Label titre1 = new Label("Rejoindre\n\tune partie");
         titre1.setFont(Font.font("Segoe UI", FontWeight.BOLD, 80));
         titre1.setTextFill(Color.BLACK);
 
@@ -72,38 +72,30 @@ public class ConfigPartiePane extends StackPane {
         ////
 
         Label desc = new Label("Entrez le nom de la partie");
+        desc.setAlignment(Pos.CENTER);
         desc.setFont(policeNom);
         desc.setMinHeight(hauteurElemtents);
-        desc.setBackground(fondBlanc);
+        //desc.setBackground(fondBlanc);
         desc.setPadding(botPadding);
-
-        VBox vJoueurs = new VBox();
-
-        HBox nomPartie = new HBox();
 
         TextField nomP = new TextField();
         nomP.setText("Partie");
         nomP.setFont(policeNom);
         nomP.setPrefSize(largeurTF, hauteurElemtents);
         nomP.setMinHeight(hauteurElemtents);
-
-        nomPartie.setAlignment(Pos.CENTER);
-        nomPartie.setSpacing(spacing);
-        nomPartie.getChildren().addAll(nomP);
-        nomPartie.setDisable(false);
-
-
-        vJoueurs.setSpacing(spacing / 2);
-        vJoueurs.getChildren().addAll(nomPartie);
-
-        // vJoueurs.setBackground(new Background(new
-        // BackgroundFill(Color.BLUE,CornerRadii.EMPTY,null)));
-
+        
+        VBox partie = new VBox();
+        partie.getChildren().addAll(desc, nomP);
+        partie.setBackground(fondBlanc);
+        partie.setPadding(new Insets(10));
+        partie.setPrefWidth(220);
+        partie.setMaxWidth(400);
+        
         VBox vbCenter = new VBox();
-        vbCenter.setMargin(vJoueurs, new Insets(0, 0, 100, 0));
         vbCenter.setAlignment(Pos.CENTER);
         vbCenter.setSpacing(spacing);
-        vbCenter.getChildren().addAll(desc, vJoueurs);
+        //vbCenter.setBackground(fondBlanc);
+        vbCenter.getChildren().addAll(partie);
 
 
         // boutons

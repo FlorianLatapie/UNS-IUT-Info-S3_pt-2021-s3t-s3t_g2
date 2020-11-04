@@ -52,7 +52,10 @@ public class InterfacePrincipale extends Application {
         root.getChildren().add(couleurPane);
         root.getChildren().add(finDePartiePane);*/
         ConfigPartiePane configPartiePane = new ConfigPartiePane(sControl, core);
+        FinDePartiePane finDePartiePane = new FinDePartiePane(sControl, core);
         root.getChildren().add(configPartiePane);
+        root.getChildren().add(finDePartiePane);
+        
         root.getChildren().add(new OptionPane(sControl, core));
         root.getChildren().add(new ReglesPane(sControl, core));
         
