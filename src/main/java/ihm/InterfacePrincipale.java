@@ -30,22 +30,19 @@ public class InterfacePrincipale extends Application {
         // on passe en plein écran
         primaryStage.setFullScreen(true);
 
-        PausePane pausePane = new PausePane(sControl, core);
-        ReglesPane reglesPane = new ReglesPane(sControl, core);
         PlateauPane plateauPane = new PlateauPane(sControl, core);
-        OptionPane optionPane = new OptionPane(sControl, core);
-        AccessibilitePane accessibilitePane = new AccessibilitePane(sControl);
         ConfigPartiePane configPartiePane = new ConfigPartiePane(sControl, core);
         AttenteJoueurPane attenteJoueurPane = new AttenteJoueurPane(sControl, core);
         CouleurPane couleurPane = new CouleurPane(sControl, core);
         
         core.eventInit();
-        core.getInitializer().addListener(plateauPane);
-        root.getChildren().add(pausePane);
-        root.getChildren().add(reglesPane);
+        core.getInitializer().addListenerPlateau(plateauPane);
+        core.getInitializer().addListenerAttente(attenteJoueurPane);
+        root.getChildren().add(new PausePane(sControl, core));
+        root.getChildren().add(new ReglesPane(sControl, core));
         root.getChildren().add(plateauPane);
-        root.getChildren().add(optionPane);
-        root.getChildren().add(accessibilitePane);
+        root.getChildren().add(new OptionPane(sControl, core));
+        root.getChildren().add(new AccessibilitePane(sControl));
         root.getChildren().add(configPartiePane);
         root.getChildren().add(attenteJoueurPane);
         root.getChildren().add(couleurPane);
