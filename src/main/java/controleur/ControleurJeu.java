@@ -28,74 +28,39 @@ import static java.lang.System.out;
  */
 
 public class ControleurJeu {
+    /* Réglage de la partie */
     private final String partieId; // "P" + Numero de la partie Ex : P9458
     private final int intPartieId;
-    private String nomPartie; // Nom de la partie
-    private int nbjtotal; // Nombre de joueurs total
-    private int nbjr; // Nombre de joueurs réel max
-    private int nbjv; // Nombre de joueurs virtuel max
+    private final String nomPartie; // Nom de la partie
+    private final int nbjtotal; // Nombre de joueurs total
+    private final int nbjr; // Nombre de joueurs réel max
+    private final int nbjv; // Nombre de joueurs virtuel max
     private int nbjractuel; // Nombre de joueurs réel actuellement connecté
     private int nbjvactuel; // Nombre de joueurs virtuel actuellement connecté
-    private final Scanner sc;
-    private static final String RETOUR_LIGNE = "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n";
-    private Jeu jeu;
-    private int port;
+    private final int port;
     private int nextJoueurId;
-    private Random rd;
-    private List<Joueur> jmort;
 
-    public List<String> getTempPaquet() {
-        return tempPaquet;
-    }
+    private static final String RETOUR_LIGNE = "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n";
 
-    private List<String> tempPaquet;
-
-    public void setAzld(boolean azld) {
-        this.azld = azld;
-    }
-
-    public void setCddcv(boolean cddcv) {
-        this.cddcv = cddcv;
-    }
-
-    public void addCddj() {
-        this.cddj++;
-    }
+    private Jeu jeu;
+    private final List<Joueur> jmort;
 
     private boolean azld = false;
     private boolean cddcv = false;
     private int cddj = 0;
 
-    public int getNumeroTour() {
-        return numeroTour;
-    }
-
-    private int numeroTour = 1;
-
-    private List<Couleur> couleursRestante;
-
-    public Status getStatus() {
-        return status;
-    }
-
+    private final List<String> tempPaquet;
     private Status status;
 
     final NetWorkManager nwm;
 
     ArrayList<Joueur> joueurs;
 
-    public void setLieuZombie(ArrayList<Integer> lieuZombie) {
-        this.lieuZombie = lieuZombie;
-    }
-
     ArrayList<Integer> lieuZombie;
     Initializer initializer;
-
-    // TODO INTERROMPRE PARTIE
-
-    public ArrayList<Integer> getLieuZombie() {
-        return lieuZombie;
-    }
+    boolean couleurPret = false;
+    Random rd = new Random();
+    private int numeroTour = 1;
 
     public ControleurJeu(String nom, int njr, int njv, Initializer initializer) throws IOException {
         if (njr + njv > 6 || njr + njv < 3)
@@ -107,23 +72,14 @@ public class ControleurJeu {
         this.nbjv = njv;
         this.nbjr = njr;
         this.nbjtotal = nbjv + nbjr;
-        couleursRestante = new ArrayList<>();
         lieuZombie = new ArrayList<>();
         joueurs = new ArrayList<>();
-        rd = new Random();
-        couleursRestante.add(Couleur.NOIR);
-        couleursRestante.add(Couleur.ROUGE);
-        couleursRestante.add(Couleur.JAUNE);
-        couleursRestante.add(Couleur.BLEU);
-        couleursRestante.add(Couleur.MARRON);
-        couleursRestante.add(Couleur.VERT);
         nwm = new NetWorkManager(this);
         status = Status.ATTENTE;
         initReseau();
         this.port = nwm.getTcpPort();
         this.intPartieId = new Random().nextInt(10000000);
         this.partieId = "P" + intPartieId;
-        sc = new Scanner(System.in);
         init();
     }
 
@@ -140,6 +96,9 @@ public class ControleurJeu {
                     e.printStackTrace();
                 }
             }
+
+            if (initializer != null) initializer.joueurPret();
+
             status = Status.COMPLETE;
 
             jeu = new Jeu(joueurs);
@@ -150,32 +109,22 @@ public class ControleurJeu {
             if (initializer != null) initializer.nbCarteJoueurAll(new ArrayList<>(jeu.getJoueurs().values()));
             if (initializer != null) initializer.nbPersoJoueurAll(new ArrayList<>(jeu.getJoueurs().values()));
             if (initializer != null) initializer.forceLieuAll(new ArrayList<>(jeu.getLieux().values()));
-            initJoueursCouleur();
+            //WaitForColor
+            while (!couleurPret) {
+                try {
+                    Thread.sleep(50);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
             demarerJeu();
         });
     }
 
-    private void initJoueursCouleur() {
-        ArrayList<Couleur> couleursRestante = new ArrayList<>();
-        rd = new Random();
-        couleursRestante.add(Couleur.NOIR);
-        couleursRestante.add(Couleur.ROUGE);
-        couleursRestante.add(Couleur.JAUNE);
-        couleursRestante.add(Couleur.BLEU);
-        couleursRestante.add(Couleur.MARRON);
-        couleursRestante.add(Couleur.VERT);
-        while (!joueurConnect()) {
-            try {
-                Thread.sleep(100);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-        }
-        for (int i = 0; i < getJeu().getJoueurs().size(); i++) {
-            Couleur couleur = couleursRestante.get(rd.nextInt(couleursRestante.size()));
-            getJeu().getJoueurs().get(i).setCouleur(couleur);
-            couleursRestante.remove(couleur);
-        }
+    public void setJoueurCouleur(List<Couleur> couleurs) {
+        this.couleurPret = true;
+        for (int i = 0; i < joueurs.size(); i++)
+            joueurs.get(i).setCouleur(couleurs.get(i));
     }
 
     // TODO ENLEVER LES JOUEURS MORT ?? IT
@@ -193,12 +142,6 @@ public class ControleurJeu {
         return joueurs.size() == this.nbjtotal && jeu != null;
     }
 
-    public void setCouleurJoueur(ArrayList<Couleur> couleur) {
-        for (int i = 0; i < jeu.getJoueurs().size(); i++) {
-            jeu.getJoueurs().get(i).setCouleur(couleur.get(i));
-        }
-    }
-
     private void demarerJeu() {
         // TODO UN OU PLUSIEURS LIEUX FERME
         // TODO 3 ou 4 PION | UN OU PLUSIEURS LIEUX FERME
@@ -214,7 +157,6 @@ public class ControleurJeu {
         this.jeu.resultatChefVigile(jeu.getJoueurs().get(0));
         lieuZombie = arriveZombie();
         this.jeu.entreZombie(lieuZombie);
-        if (initializer != null) initializer.nbZombiesLieuAll(new ArrayList<>(jeu.getLieux().values()));
         m = nwm.getPacketsTcp().get("PIPZ").build(lieuZombie, partieId);
         for (Joueur j : jeu.getJoueurs().values())
             TcpClientSocket.connect(j.getIp(), j.getPort(), m, null, 0);
@@ -247,7 +189,21 @@ public class ControleurJeu {
         System.out.println(nwm.getTcpPort());
     }
 
+    public boolean estAccepte(TypeJoueur typeJoueur) {
+        if (typeJoueur == TypeJoueur.JR && nbjractuel == nbjr)
+            return false;
+        if (typeJoueur == TypeJoueur.BOT && nbjvactuel == nbjv)
+            return false;
+
+        return true;
+    }
+
     public String ajouterJoueur(InetAddress ip, int port, String nom, TypeJoueur typeJoueur) {
+        if (typeJoueur == TypeJoueur.JR && nbjractuel == nbjr)
+            return "";
+        if (typeJoueur == TypeJoueur.BOT && nbjvactuel == nbjv)
+            return "";
+
         Joueur joueur = new Joueur(getNewJoueurId(), ip, port, nom);
         if (typeJoueur == TypeJoueur.JR)
             nbjractuel++;
@@ -491,7 +447,6 @@ public class ControleurJeu {
                 this.jeu.deplacePerso(jeu.getJoueurs().get(i), valeurToIndex(pion), dest);
                 finJeu();
                 this.jeu.fermerLieu();
-                if (initializer != null) initializer.lieuFermeAll(new ArrayList<>(jeu.getLieux().values()));
                 compteur += 1;
 
                 m = nwm.getPacketsTcp().get("DPI").build(jeu.getJoueurs().get(i).getCouleur(), dest, pion, CarteType.NUL, partieId, numeroTour);
@@ -625,8 +580,6 @@ public class ControleurJeu {
                             m = nwm.getPacketsTcp().get("RAZIF").build(i, pionCou, jeu.getLieux().get(i).getNbZombies(), partieId, numeroTour);
                             for (Joueur joueur : jeu.getJoueurs().values())
                                 TcpClientSocket.connect(joueur.getIp(), joueur.getPort(), m, null, 0);
-                            if (initializer != null)
-                                initializer.nbZombiesLieuAll(new ArrayList<>(jeu.getLieux().values()));
                         }
                         if (this.finJeu()) {
                             return false;
@@ -650,7 +603,6 @@ public class ControleurJeu {
                     for (Joueur joueur : jeu.getJoueurs().values()) {
                         TcpClientSocket.connect(joueur.getIp(), joueur.getPort(), m, null, 0);
                     }
-                    if (initializer != null) initializer.nbZombiesLieuAll(new ArrayList<>(jeu.getLieux().values()));
                 }
                 if (this.finJeu()) {
                     return false;
@@ -896,15 +848,10 @@ public class ControleurJeu {
             return true;
         }
         return false;
-
     }
 
     public String getPartieId() {
         return partieId;
-    }
-
-    public int getIntPartieId() {
-        return intPartieId;
     }
 
     public String getNomPartie() {
@@ -929,5 +876,33 @@ public class ControleurJeu {
 
     public int getNbjvactuel() {
         return nbjvactuel;
+    }
+
+    public List<String> getTempPaquet() {
+        return tempPaquet;
+    }
+
+    public void setAzld(boolean azld) {
+        this.azld = azld;
+    }
+
+    public void setCddcv(boolean cddcv) {
+        this.cddcv = cddcv;
+    }
+
+    public void addCddj() {
+        this.cddj++;
+    }
+
+    public int getNumeroTour() {
+        return numeroTour;
+    }
+
+    public Status getStatus() {
+        return status;
+    }
+
+    public void setLieuZombie(ArrayList<Integer> lieuZombie) {
+        this.lieuZombie = lieuZombie;
     }
 }
