@@ -47,7 +47,8 @@ public class AttenteJoueurPane extends StackPane implements AttenteListener {
     private CornerRadii coinfb = new CornerRadii(5.0);
     private Background fondBlanc = new Background(new BackgroundFill(Color.WHITE, coinfb, null));
 
-    private Insets botPadding = new Insets(0, 10, 0, 10);
+    private Insets padding = new Insets(0, 10, 0, 10);
+    Label lIDPartie;
 
     public AttenteJoueurPane(ScreenControl sc, Core c) {
         core = c;
@@ -65,18 +66,28 @@ public class AttenteJoueurPane extends StackPane implements AttenteListener {
         titre.setMinWidth(730);
 
         ////
-
+        lIDPartie = new Label("todo");
+        lIDPartie.setFont(policeNom);
+        lIDPartie.setMinHeight(hauteurElemtents);
+        lIDPartie.setBackground(fondBlanc);
+        lIDPartie.setPadding(padding);
+        
         Label desc = new Label("Attente de la connexion\nde tous les joueurs ...");
         desc.setFont(policeNom);
         desc.setMinHeight(hauteurElemtents);
         desc.setBackground(fondBlanc);
-        desc.setPadding(botPadding);
-
+        desc.setPadding(padding);
+        
+        VBox vbIdDesk = new VBox();
+        vbIdDesk.setBackground(fondBlanc);
+        vbIdDesk.setPrefWidth(450);
+        vbIdDesk.setMaxWidth(450);
+        vbIdDesk.getChildren().addAll(lIDPartie,desc);
 
         VBox vbCenter = new VBox();
         vbCenter.setAlignment(Pos.CENTER);
         vbCenter.setSpacing(spacing);
-        vbCenter.getChildren().addAll(desc);
+        vbCenter.getChildren().addAll(vbIdDesk);
 
 
         // boutons
