@@ -71,18 +71,18 @@ public class AttenteJoueurPane extends StackPane implements AttenteListener {
         lIDPartie.setMinHeight(hauteurElemtents);
         lIDPartie.setBackground(fondBlanc);
         lIDPartie.setPadding(padding);
-        
+
         Label desc = new Label("Attente de la connexion\nde tous les joueurs ...");
         desc.setFont(policeNom);
         desc.setMinHeight(hauteurElemtents);
         desc.setBackground(fondBlanc);
         desc.setPadding(padding);
-        
+
         VBox vbIdDesk = new VBox();
         vbIdDesk.setBackground(fondBlanc);
         vbIdDesk.setPrefWidth(450);
         vbIdDesk.setMaxWidth(450);
-        vbIdDesk.getChildren().addAll(lIDPartie,desc);
+        vbIdDesk.getChildren().addAll(lIDPartie, desc);
 
         VBox vbCenter = new VBox();
         vbCenter.setAlignment(Pos.CENTER);
@@ -155,5 +155,10 @@ public class AttenteJoueurPane extends StackPane implements AttenteListener {
     @Override
     public void joueurPret() {
         sControl.setPaneOnTop(ApplicationPane.COULEUR);
+    }
+
+    @Override
+    public void nomPartie(String nom) {
+        lIDPartie.setText("Nom de la partie : " + nom);
     }
 }
