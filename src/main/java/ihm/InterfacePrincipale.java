@@ -48,6 +48,7 @@ public class InterfacePrincipale extends Application {
         root.getChildren().add(configPartiePane);
         root.getChildren().add(attenteJoueurPane);
         root.getChildren().add(couleurPane);
+        root.getChildren().add(finDePartiePane);
 
         root.getChildren().add(new AccueilPane(sControl, core));
 
