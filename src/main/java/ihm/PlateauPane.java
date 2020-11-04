@@ -738,6 +738,11 @@ public class PlateauPane extends StackPane implements PlateauListener {
     }
 
     @Override
+    public void nomChefVigile(String joueur) {
+        //TODO
+    }
+
+    @Override
     public void finPartie() {
         out.println("FIN");
         sControl.setPaneOnTop(ApplicationPane.ACCUEIL);
