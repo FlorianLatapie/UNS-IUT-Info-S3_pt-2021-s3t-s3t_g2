@@ -12,6 +12,7 @@ import javafx.scene.control.Labeled;
 import javafx.scene.control.Slider;
 import javafx.scene.control.TextArea;
 import javafx.scene.effect.GaussianBlur;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
@@ -33,13 +34,13 @@ public class OptionPane extends StackPane {
 	private GaussianBlur flou = new GaussianBlur(30);
 	private String styleBoutons = " -fx-background-color:#000000; -fx-background-radius: 15px; -fx-text-fill: #ffffff";
 	private String styleBoutonsSouris = "-fx-background-color:#ff0000;  -fx-text-fill:#000000; -fx-background-radius: 15px;";
-	private String styleTitre ="-fx-text-fill: #ff1c16";
+	private String styleTitre = "-fx-text-fill: #ff1c16";
 	private final ApplicationPane paneName = ApplicationPane.OPTION;
 
 	private int tailleCarreCentral = 700;
 	private Font policeTitre = Font.font("Segoe UI", FontWeight.BOLD, 75);
 	private Font policeBouton = Font.font("Segoe UI", FontWeight.BOLD, 33);
-	
+
 	private int hauteurElement = 60;
 
 	public OptionPane(ScreenControl sc, Core c) {
@@ -73,8 +74,57 @@ public class OptionPane extends StackPane {
 		vbCentral.setMaxSize(tailleCarreCentral, tailleCarreCentral);
 		vbCentral.setPadding(new Insets(10));
 
+		ImageView img1 = new ImageView(DataControl.SCREEN);
+		img1.setFitHeight(70);
+		img1.setPreserveRatio(true);
+		ImageView img2 = new ImageView(DataControl.SCREEN);
+		img2.setFitHeight(70);
+		img2.setPreserveRatio(true);
+		ImageView img3 = new ImageView(DataControl.SCREEN);
+		img3.setFitHeight(70);
+		img3.setPreserveRatio(true);
+		ImageView img4 = new ImageView(DataControl.SCREEN);
+		img4.setFitHeight(70);
+		img4.setPreserveRatio(true);
+
+		Button bEcranHaut = new Button();
+		bEcranHaut.setBackground(new Background(new BackgroundFill(null, CornerRadii.EMPTY, null)));
+		bEcranHaut.setAlignment(Pos.CENTER);
+		bEcranHaut.setTranslateY(-490);
+		bEcranHaut.setPrefSize(80, 80);
+		bEcranHaut.setRotate(180);
+		bEcranHaut.setGraphic(img1);
+		bEcranHaut.setOnAction(EventHandler -> sc.rotatePane(vbCentral, "haut"));
+
+		Button bEcranBas = new Button();
+		bEcranBas.setBackground(new Background(new BackgroundFill(null, CornerRadii.EMPTY, null)));
+		bEcranBas.setAlignment(Pos.CENTER);
+		bEcranBas.setTranslateY(490);
+		bEcranBas.setPrefSize(80, 80);
+		bEcranBas.setGraphic(img2);
+		bEcranBas.setOnAction(EventHandler -> sc.rotatePane(vbCentral, "bas"));
+
+		Button bEcranGauche = new Button();
+		bEcranGauche.setBackground(new Background(new BackgroundFill(null, CornerRadii.EMPTY, null)));
+		bEcranGauche.setAlignment(Pos.CENTER);
+		bEcranGauche.setTranslateX(-910);
+		bEcranGauche.setPrefSize(80, 80);
+		bEcranGauche.setRotate(90);
+		bEcranGauche.setGraphic(img3);
+		bEcranGauche.setOnAction(EventHandler -> sc.rotatePane(vbCentral, "gauche"));
+
+		Button bEcranDroite = new Button();
+		bEcranDroite.setBackground(new Background(new BackgroundFill(null, CornerRadii.EMPTY, null)));
+		bEcranDroite.setAlignment(Pos.CENTER);
+		bEcranDroite.setTranslateX(910);
+		bEcranDroite.setRotate(-90);
+		bEcranDroite.setPrefSize(80, 80);
+		bEcranDroite.setGraphic(img4);
+		bEcranDroite.setOnAction(EventHandler -> sc.rotatePane(vbCentral, "droite"));
+
 		VBox vbTitre = new VBox();
 		vbTitre.setAlignment(Pos.TOP_CENTER);
+		vbTitre.setTranslateY(-40);
 
 		HBox hbLang = new HBox();
 		hbLang.setAlignment(Pos.CENTER);
@@ -82,6 +132,7 @@ public class OptionPane extends StackPane {
 
 		VBox vbBoutons = new VBox();
 		vbBoutons.setAlignment(Pos.CENTER);
+		vbBoutons.setTranslateY(-40);
 		vbBoutons.setSpacing(15);
 
 		Label titre = new Label("OPTIONS");
@@ -133,7 +184,8 @@ public class OptionPane extends StackPane {
 		bRetour.setAlignment(Pos.CENTER);
 		bRetour.setPrefSize(180, hauteurElement);
 		bRetour.setStyle(styleBoutons);
-		bRetour.setOnAction(EventHandler -> sc.setPaneOnTop(core.getPauseDepuis()));
+		bRetour.setOnAction(
+				EventHandler ->  sc.setPaneOnTop(core.getPauseDepuis())); 
 		bRetour.setOnMouseEntered(event -> {
 			bRetour.setStyle(styleBoutonsSouris);
 		});
@@ -152,8 +204,7 @@ public class OptionPane extends StackPane {
 		ImageView img = new ImageView(DataControl.FOND);
 		vbFond.getChildren().add(img);
 
-		// vbCentral.setRotate(90);
-		stackPane.getChildren().addAll(vbFond, rect, vbCentral);
+		stackPane.getChildren().addAll(vbFond, bEcranHaut, bEcranBas, bEcranGauche, bEcranDroite, rect, vbCentral);
 		stackPane.setBackground(new Background(new BackgroundFill(Color.BLACK, CornerRadii.EMPTY, null)));
 
 		this.getChildren().add(stackPane);
