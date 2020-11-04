@@ -78,6 +78,9 @@ public class NetWorkManager {
     }
 
     public void stopBind() {
+        if (socketTCPSocket == null)
+            return;
+
         try {
             socketTCPSocket.close();
         } catch (IOException e) {
