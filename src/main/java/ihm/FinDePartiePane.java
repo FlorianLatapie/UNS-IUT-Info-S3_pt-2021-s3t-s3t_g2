@@ -1,6 +1,7 @@
 package ihm;
 
 import ihm.DataControl.ApplicationPane;
+import ihm.eventListener.FinListener;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
@@ -19,7 +20,7 @@ import javafx.scene.text.FontWeight;
  * @version 0.1
  * @since 26/10/2020
  */
-public class FinDePartiePane extends StackPane {
+public class FinDePartiePane extends StackPane implements FinListener {
     // private ControleurJeu cj = new ControleurJeu(); // mettre ne paramètres les
     // joueurs
 
@@ -221,5 +222,10 @@ public class FinDePartiePane extends StackPane {
         sControl.registerNode(paneName, this);
         sControl.setPaneOnTop(paneName);
 
+    }
+
+    @Override
+    public void getGagnant(String nom) {
+        System.out.println("VAINQ " + nom);
     }
 }

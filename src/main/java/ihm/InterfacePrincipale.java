@@ -34,10 +34,12 @@ public class InterfacePrincipale extends Application {
         ConfigPartiePane configPartiePane = new ConfigPartiePane(sControl, core);
         AttenteJoueurPane attenteJoueurPane = new AttenteJoueurPane(sControl, core);
         CouleurPane couleurPane = new CouleurPane(sControl, core);
-        
+        FinDePartiePane finDePartiePane = new FinDePartiePane(sControl, core);
+
         core.eventInit();
         core.getInitializer().addListenerPlateau(plateauPane);
         core.getInitializer().addListenerAttente(attenteJoueurPane);
+        core.getInitializer().addListenerFin(finDePartiePane);
         root.getChildren().add(new PausePane(sControl, core));
         root.getChildren().add(new ReglesPane(sControl, core));
         root.getChildren().add(plateauPane);

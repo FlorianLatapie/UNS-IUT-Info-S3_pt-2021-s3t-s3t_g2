@@ -10,6 +10,7 @@ import java.util.List;
 public class Initializer {
     private List<PlateauListener> listenerspl = new ArrayList<>();
     private List<AttenteListener> listenersal = new ArrayList<>();
+    private List<FinListener> listenersfl = new ArrayList<>();
 
     public void addListenerPlateau(PlateauListener toAdd) {
         listenerspl.add(toAdd);
@@ -17,6 +18,10 @@ public class Initializer {
 
     public void addListenerAttente(AttenteListener toAdd) {
         listenersal.add(toAdd);
+    }
+
+    public void addListenerFin(FinListener toAdd) {
+        listenersfl.add(toAdd);
     }
 
     public void nbZombiesLieuAll(List<Lieu> lieux) {
@@ -101,5 +106,21 @@ public class Initializer {
     public void joueurPret() {
         for (AttenteListener al : listenersal)
             al.joueurPret();
+    }
+
+    public void getGagnant(Joueur joueur) {
+        for (FinListener fl : listenersfl)
+            fl.getGagnant(joueur.getNom());
+    }
+
+    public void nomChefVigileAll(List<Joueur> joueurs) {
+        for (Joueur l : joueurs)
+            if (l.isChefDesVigiles())
+                nomChefVigile(l.getNom());
+    }
+
+    private void nomChefVigile(String joueur) {
+        for (PlateauListener pl : listenerspl)
+            pl.nomChefVigile(joueur);
     }
 }
