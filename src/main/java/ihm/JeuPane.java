@@ -24,6 +24,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
+import javafx.stage.Popup;
 
 public class JeuPane extends StackPane {
 
@@ -37,12 +38,17 @@ public class JeuPane extends StackPane {
 	private int marge = tailleCarreCentral / 25;
 	private Insets margeBoutons = new Insets(marge, marge, marge, marge);
 	private Font policeBouton = Font.font("Segoe UI", FontWeight.BOLD, 33);
+	private Font policeBoutonDe = Font.font("Segoe UI", FontWeight.BOLD, 40);
 	private CornerRadii coin = new CornerRadii(15.0);
 	private String styleBoutons = " -fx-background-color:#000000; -fx-background-radius: 15px; -fx-text-fill: #ffffff";
+	private String styleDe = " -fx-background-color:#FFFFFF; -fx-background-radius: 3px; -fx-text-fill: #ffffff";
 	private String styleBoutonsSouris = "-fx-background-color:#ff0000;  -fx-text-fill:#000000; -fx-background-radius: 15px;";
 	private StackPane stackPane = new StackPane();
 	private GaussianBlur flou = new GaussianBlur(30);
 	private String styleVBox = "-fx-border-color: black; -fx-border-insets: 5; -fx-border-width: 3;";
+	private CornerRadii coinfb = new CornerRadii(5.0);
+	private Background fondBlanc = new Background(new BackgroundFill(Color.WHITE, coinfb, null));
+	
 	
 	private int largBouton = 155;
 	private int hautBouton = 70;
@@ -64,7 +70,7 @@ public class JeuPane extends StackPane {
 		nomJoueur.setFont(Font.font("Segoe UI", FontWeight.BOLD, 50));
 		nomJoueur.setTextFill(Color.RED);
 		//////////////////////////////////////////
-		
+		//TODO afficher une image dedans 
 		Rectangle rectVigile = new Rectangle();
 		rectVigile.setTranslateX(793);
 		rectVigile.setTranslateY(150);
@@ -214,8 +220,10 @@ public class JeuPane extends StackPane {
 		labDeplPers.setTextFill(Color.BLACK);
 
 		VBox vbPersonnage = new VBox();
+		vbPersonnage.setMinWidth(350);
+		vbPersonnage.setMaxWidth(350);
 		vbPersonnage.setAlignment(Pos.TOP_CENTER);
-		vbPersonnage.setStyle(styleVBox);
+		//vbPersonnage.setStyle(styleVBox);
 
 		HBox hbHaut = new HBox();
 		hbHaut.setAlignment(Pos.TOP_CENTER);
@@ -304,8 +312,10 @@ public class JeuPane extends StackPane {
 		labDeplLieux.setTextFill(Color.BLACK);
 		
 		HBox hbLieux = new HBox();
+		hbLieux.setMinWidth(350);
+		hbLieux.setMaxWidth(350);
 		hbLieux.setAlignment(Pos.TOP_CENTER);
-		hbLieux.setStyle(styleVBox);
+		//hbLieux.setStyle(styleVBox);
 
 		VBox vbGauche = new VBox();
 		vbGauche.setAlignment(Pos.CENTER_LEFT);
@@ -403,8 +413,52 @@ public class JeuPane extends StackPane {
 		vbDeplLieux.getChildren().addAll(vbTitre2, hbLieux);
 		
 		vbDeplCentre.getChildren().addAll(vbDeplPers, vbDeplLieux);
+		
+		/////
+		
+		VBox des = new VBox();
+		des.setTranslateX(790);
+		des.setTranslateY(-100);
+		des.setAlignment(Pos.CENTER);
+		des.setStyle(styleVBox);
+		//des.setMaxSize(100,250);
+		//des.setMinSize(100,250);
+		des.setMaxSize(120,275);
+		Label de1 = new Label("6");
+		de1.setBackground(fondBlanc);
+		de1.setAlignment(Pos.CENTER);
+		de1.setMinSize(100,100);
+		//de1.setStyle(styleDe);
+		de1.setTextFill(Color.BLACK);
+		de1.setFont(policeBoutonDe);
+		Label de2 = new Label("6");
+		de2.setBackground(fondBlanc);
+		de2.setAlignment(Pos.CENTER);
+		de2.setMinSize(100,100);
+		//de2.setStyle(styleDe);
+		de2.setTextFill(Color.BLACK);
+		de2.setFont(policeBoutonDe);
+		
+		Button lancer = new Button("Lancer");
+		lancer.setStyle(styleBoutons);
+		lancer.setFont(Font.font("Segoe UI", FontWeight.BOLD, 20));
+		lancer.setMinSize(100,70);
+		lancer.setOnMouseEntered(event -> {
+			lancer.setStyle(styleBoutonsSouris);
+		});
+		lancer.setOnMouseExited(event -> {
+			lancer.setStyle(styleBoutons);
+		});
+		
+		des.setPadding(new Insets(10));
+		des.setSpacing(10);
+		des.getChildren().addAll(de1,de2,lancer);
+		des.setVisible(true); //TODO ne pas oublier de le retier 
+		
+		
+		/////
 
-		stackPane.getChildren().addAll(rectVigile, nomJoueur, vbCentral, vote, vbDeplCentre);
+		stackPane.getChildren().addAll(rectVigile, nomJoueur, vbCentral, vote, vbDeplCentre,des);
 		stackPane.setBackground(new Background(new BackgroundFill(Color.GREY, CornerRadii.EMPTY, null)));
 		stackPane.setOpacity(.8);
 
