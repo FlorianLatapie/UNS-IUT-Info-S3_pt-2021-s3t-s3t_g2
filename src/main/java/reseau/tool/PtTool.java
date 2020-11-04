@@ -7,13 +7,12 @@ import reseau.ptprotocol.PtValues;
 import reseau.socket.NetWorkManager;
 import reseau.type.*;
 
-import java.io.*;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.text.MessageFormat;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Objects;
+import java.util.*;
 
 /**
  * <h1> Outils pour le ptprotocol </h1>
@@ -133,21 +132,33 @@ public abstract class PtTool {
                     Status sss = ((Status) value);
                     return sss.toString();
                 case "HashMap<Integer,List<Integer>>":
-                    @SuppressWarnings("unchecked")
-                    HashMap<Integer, List<Integer>> pti = (HashMap<Integer, List<Integer>>) value;
-                    return PacketTool.subListToStr(pti);
+                    HashMap<?, ?> pti = (HashMap<?, ?>) value;
+                    HashMap<Integer, List<Integer>> ptiTemp = new HashMap<>();
+                    for (Map.Entry<?, ?> entry : pti.entrySet()) {
+                        List<?> illtmp = (List<?>) entry.getValue();
+                        List<Integer> ill = new ArrayList<>();
+                        for (Object o : illtmp)
+                            ill.add((int) o);
+
+                        ptiTemp.put((Integer) entry.getKey(), ill);
+                    }
+                    return PacketTool.subListToStr(ptiTemp);
                 case "List<CarteType>":
                 case "List<Couleur>":
                 case "List<PionCouleur>":
                     return PacketTool.listEnumToStr(value);
                 case "List<Integer>":
-                    @SuppressWarnings("unchecked")
-                    List<Integer> il = (List<Integer>) value;
+                    List<?> illtmp = (List<?>) value;
+                    List<Integer> il = new ArrayList<>();
+                    for (Object o : illtmp)
+                        il.add((int) o);
                     return PacketTool.listStrToInteger(il);
                 case "List<String>":
-                    @SuppressWarnings("unchecked")
-                    List<String> il1 = (List<String>) value;
-                    return PacketTool.listStrToStr(il1);
+                    List<?> alltmp = (List<?>) value;
+                    List<String> al = new ArrayList<>();
+                    for (Object o : alltmp)
+                        al.add((String) o);
+                    return PacketTool.listStrToStr(al);
                 default:
                     throw new IllegalStateException("Unexpected value: " + type);
             }
