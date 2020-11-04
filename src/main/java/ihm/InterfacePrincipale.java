@@ -20,7 +20,7 @@ public class InterfacePrincipale extends Application {
         sControl = new ScreenControl(this, core);
         int largeur = 1920;
         int hauteur = 1080;
-        primaryStage.setTitle("G2 - ZOMBIES la blonde la brute et le truand");
+        primaryStage.setTitle("PP - G2 - ZOMBIES la blonde la brute et le truand");
 
         primaryStage.setMaxWidth(largeur);
         primaryStage.setMaxHeight(hauteur);

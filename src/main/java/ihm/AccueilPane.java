@@ -57,7 +57,7 @@ public class AccueilPane extends StackPane {
 		titre1.setFont(Font.font("Segoe UI", FontWeight.BOLD, 160));
 		titre1.setTextFill(Color.BLACK);
 
-		Label titre2 = new Label("LA BLONDE LA BRUTE ET LE TRUAND");
+		Label titre2 = new Label("LA BLONDE LA BRUTE ET LE TRUAND  - PP");
 		titre2.setFont(Font.font("Segoe UI", 35));
 		titre2.setTextFill(Color.BLACK);
 		titre2.setPadding(new Insets(0, 0, 20, 0));
