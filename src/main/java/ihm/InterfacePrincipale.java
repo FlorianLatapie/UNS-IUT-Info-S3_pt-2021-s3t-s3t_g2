@@ -1,6 +1,7 @@
 package ihm;
 
 import javafx.application.Application;
+import javafx.application.Platform;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
@@ -17,6 +18,12 @@ public class InterfacePrincipale extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception {
         primaryStage.getIcons().add(new Image(DataControl.ICONE));
+        primaryStage.setOnCloseRequest((e) -> {
+        	boolean resultat = ConfirmationPane.afficher("Quitter le jeu",
+					"Êtes-vous sûr de vouloir quitter le jeu ? \nSi vous quittez, la partie en cours sera perdue.");
+			if (resultat)
+				Platform.exit();
+        });
         sControl = new ScreenControl(this, core);
         int largeur = 1920;
         int hauteur = 1080;
