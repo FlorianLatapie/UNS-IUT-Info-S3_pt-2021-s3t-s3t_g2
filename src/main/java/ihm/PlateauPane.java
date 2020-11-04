@@ -41,7 +41,7 @@ public class PlateauPane extends StackPane implements PlateauListener {
     private final Font fontTitre = Font.font("Segoe UI", FontWeight.BOLD, tailleFont);
     
     private CornerRadii coinfb = new CornerRadii(5.0);
-    private Background fondBlanc = new Background(new BackgroundFill(Color.BLUE, coinfb, null));
+    private Background fondBlanc = new Background(new BackgroundFill(Color.WHITE, coinfb, null));
 
     Label nbZombies1;
     Label nbZombies2;
@@ -91,6 +91,9 @@ public class PlateauPane extends StackPane implements PlateauListener {
     Label afficheJoueursLieu6;
     
     VBox info;
+    
+    Label lChefVigile;
+    Label lChefVigile2;
 
     public PlateauPane(ScreenControl sc, Core c) {
         core = c;
@@ -524,8 +527,25 @@ public class PlateauPane extends StackPane implements PlateauListener {
 
         AnchorPane.setTopAnchor(b6, 313.5);
         AnchorPane.setLeftAnchor(b6, 778.5);
+        
+        lChefVigile = new Label(); 
+        lChefVigile.setText("X"+" est le vigile" );
+        lChefVigile.setBackground(fondBlanc);
+        lChefVigile.setFont(fontInfo);
+        lChefVigile.setPadding(margeLieu);
+        AnchorPane.setTopAnchor(lChefVigile, 750.0);
+        AnchorPane.setLeftAnchor(lChefVigile, 500.0);
+        
+        lChefVigile2 = new Label(); 
+        lChefVigile2.setText("X"+" est le vigile");
+        lChefVigile2.setBackground(fondBlanc);
+        lChefVigile2.setFont(fontInfo);
+        lChefVigile2.setPadding(margeLieu);
+        lChefVigile2.setRotate(180);
+        AnchorPane.setTopAnchor(lChefVigile2, 350.0);
+        AnchorPane.setLeftAnchor(lChefVigile2, 500.0);
 
-        aPlateau.getChildren().addAll(b1, b2, b3, b4, b5, b6);
+        aPlateau.getChildren().addAll(b1, b2, b3, b4, b5, b6,lChefVigile,lChefVigile2);
 
         // aPlateau.setBackground(new Background(new BackgroundFill(Color.RED,
         // CornerRadii.EMPTY, null)));
