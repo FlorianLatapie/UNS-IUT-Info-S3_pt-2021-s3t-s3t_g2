@@ -39,6 +39,9 @@ public class PlateauPane extends StackPane implements PlateauListener {
     private final int tailleFont = 18;
     private final Font fontInfo = Font.font("Segoe UI", FontWeight.BOLD, tailleFont);
     private final Font fontTitre = Font.font("Segoe UI", FontWeight.BOLD, tailleFont);
+    
+    private CornerRadii coinfb = new CornerRadii(5.0);
+    private Background fondBlanc = new Background(new BackgroundFill(Color.BLUE, coinfb, null));
 
     Label nbZombies1;
     Label nbZombies2;
@@ -79,6 +82,15 @@ public class PlateauPane extends StackPane implements PlateauListener {
     Label nbCartes3;
     Label nbCartes4;
     Label nbCartes5;
+    
+    Label afficheJoueursLieu1;
+    Label afficheJoueursLieu2;
+    Label afficheJoueursLieu3;
+    Label afficheJoueursLieu4;
+    Label afficheJoueursLieu5;
+    Label afficheJoueursLieu6;
+    
+    VBox info;
 
     public PlateauPane(ScreenControl sc, Core c) {
         core = c;
@@ -267,6 +279,7 @@ public class PlateauPane extends StackPane implements PlateauListener {
         aPlateau.setMinSize(taillePlateau, taillePlateau);
         aPlateau.setPrefSize(taillePlateau, taillePlateau);
         aPlateau.setMaxSize(taillePlateau, taillePlateau);
+        
 
         VBox vbRight1 = new VBox();
         HBox hbBot1 = new HBox();
@@ -283,7 +296,8 @@ public class PlateauPane extends StackPane implements PlateauListener {
         force1.setFont(fontInfo);
         force1.setTextFill(Color.RED);
 
-        GridPane joueursPresents1 = new GridPane();
+        VBox joueursPresents1 = new VBox();
+        joueursPresents1.getChildren().addAll(afficheJoueursLieu1 = new Label());
         joueursPresents1.setPrefSize(170, 200);
 
         nbZombies1 = new Label("Nb zombies");
@@ -323,7 +337,8 @@ public class PlateauPane extends StackPane implements PlateauListener {
         force2.setFont(fontInfo);
         force2.setTextFill(Color.RED);
 
-        GridPane joueursPresents2 = new GridPane();
+        VBox joueursPresents2 = new VBox();
+        joueursPresents2.getChildren().addAll(afficheJoueursLieu2 = new Label());
         joueursPresents2.setPrefSize(170, 100);
 
         nbZombies2 = new Label("Nb zombies");
@@ -363,7 +378,8 @@ public class PlateauPane extends StackPane implements PlateauListener {
         force3.setFont(fontInfo);
         force3.setTextFill(Color.RED);
 
-        GridPane joueursPresents3 = new GridPane();
+        VBox joueursPresents3 = new VBox();
+        joueursPresents3.getChildren().addAll(afficheJoueursLieu3 = new Label());
         joueursPresents3.setPrefSize(170, 100);
 
         nbZombies3 = new Label("Nb zombies");
@@ -403,7 +419,8 @@ public class PlateauPane extends StackPane implements PlateauListener {
         force4.setFont(fontInfo);
         force4.setTextFill(Color.RED);
 
-        GridPane joueursPresents4 = new GridPane();
+        VBox joueursPresents4 = new VBox();
+        joueursPresents4.getChildren().addAll(afficheJoueursLieu4 = new Label());
         joueursPresents4.setPrefSize(170, 100);
 
         nbZombies4 = new Label("Nb zombies");
@@ -443,7 +460,8 @@ public class PlateauPane extends StackPane implements PlateauListener {
         force5.setFont(fontInfo);
         force5.setTextFill(Color.RED);
 
-        GridPane joueursPresents5 = new GridPane();
+        VBox joueursPresents5 = new VBox();
+        joueursPresents5.getChildren().addAll(afficheJoueursLieu5 = new Label());
         joueursPresents5.setPrefSize(170, 100);
 
         nbZombies5 = new Label("Nb zombies");
@@ -483,7 +501,8 @@ public class PlateauPane extends StackPane implements PlateauListener {
         force6.setFont(fontInfo);
         force6.setTextFill(Color.RED);
 
-        GridPane joueursPresents6 = new GridPane();
+        VBox joueursPresents6 = new VBox();
+        joueursPresents6.getChildren().addAll(afficheJoueursLieu6 = new Label());
         joueursPresents6.setPrefSize(170, 100);
 
         nbZombies6 = new Label("Nb zombies");
@@ -512,6 +531,19 @@ public class PlateauPane extends StackPane implements PlateauListener {
         // CornerRadii.EMPTY, null)));
 
         ////////////////////////////////////////////////////
+        info = new VBox();
+        info.setMinSize(500, 500);
+        info.setPrefSize(500, 500);
+        info.setMaxSize(500, 500);
+        info.setBackground(fondBlanc);
+        
+        Label titreInfo = new Label("info"); 
+        Label lInfo = new Label("information"); 
+        info.getChildren().addAll(titreInfo,lInfo);
+        info.setVisible(false);
+        //TODO
+        
+        ////////////////////////////////////////////////////
         borderJoueurs.setTop(hHaut);
         borderJoueurs.setBottom(hBas);
         borderJoueurs.setLeft(hGauche);
@@ -527,7 +559,7 @@ public class PlateauPane extends StackPane implements PlateauListener {
 
         this.setBackground(new Background(new BackgroundFill(Color.BLACK, CornerRadii.EMPTY, null)));
 
-        this.getChildren().addAll(imgFond, borderJoueurs, aPlateau);
+        this.getChildren().addAll(imgFond, borderJoueurs, aPlateau,info);
         this.setMinSize(1920, 1080);
         this.setPrefSize(1920, 1080);
         this.setMaxSize(1920, 1080);
