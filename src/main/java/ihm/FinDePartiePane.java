@@ -2,6 +2,7 @@ package ihm;
 
 import ihm.DataControl.ApplicationPane;
 import ihm.eventListener.FinListener;
+import javafx.application.Platform;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
@@ -47,6 +48,11 @@ public class FinDePartiePane extends StackPane implements FinListener {
     private int valPadding = 10;
     private Insets padding = new Insets(valPadding, valPadding * 2, valPadding, valPadding * 2);
 
+    Label gagnant1;
+    Label gagnant2;
+    Label gagnant3;
+    Label gagnant4;
+
     public FinDePartiePane(ScreenControl sc, Core c) {
         core = c;
         sControl = sc;
@@ -70,7 +76,7 @@ public class FinDePartiePane extends StackPane implements FinListener {
         BorderPane bBas = new BorderPane();
 
         HBox bBasCentre = new HBox();
-        Label gagnant1 = new Label("Le joueur " + "JOUEUR X" + " a gagné");
+        gagnant1 = new Label("Le joueur " + "JOUEUR X" + " a gagné");
         gagnant1.setFont(policeNom);
         gagnant1.setBackground(fondBlanc);
         gagnant1.setPadding(padding);
@@ -119,7 +125,7 @@ public class FinDePartiePane extends StackPane implements FinListener {
         BorderPane bHaut = new BorderPane();
 
         HBox bHautCentre = new HBox();
-        Label gagnant2 = new Label("Le joueur " + "JOUEUR X" + " a gagné");
+        gagnant2 = new Label("Le joueur " + "JOUEUR X" + " a gagné");
         gagnant2.setFont(policeNom);
         gagnant2.setBackground(fondBlanc);
         gagnant2.setPadding(padding);
@@ -163,7 +169,7 @@ public class FinDePartiePane extends StackPane implements FinListener {
 
         ///
         HBox hDroite = new HBox();
-        Label gagnant3 = new Label("Le joueur " + "JOUEUR X" + " a gagné");
+        gagnant3 = new Label("Le joueur " + "JOUEUR X" + " a gagné");
         gagnant3.setFont(policeNom);
         gagnant3.setBackground(fondBlanc);
         gagnant3.setPadding(padding);
@@ -176,7 +182,7 @@ public class FinDePartiePane extends StackPane implements FinListener {
 
 
         HBox hGauche = new HBox();
-        Label gagnant4 = new Label("Le joueur " + "JOUEUR X" + " a gagné");
+        gagnant4 = new Label("Le joueur " + "JOUEUR X" + " a gagné");
         gagnant4.setFont(policeNom);
         gagnant4.setBackground(fondBlanc);
         gagnant4.setPadding(padding);
@@ -226,6 +232,12 @@ public class FinDePartiePane extends StackPane implements FinListener {
 
     @Override
     public void getGagnant(String nom) {
-        System.out.println("VAINQ " + nom);
+        String tmp = "Le joueur " + nom + " a gagné";
+        Platform.runLater(() -> {
+            gagnant1.setText(tmp);
+            gagnant2.setText(tmp);
+            gagnant3.setText(tmp);
+            gagnant4.setText(tmp);
+        });
     }
 }

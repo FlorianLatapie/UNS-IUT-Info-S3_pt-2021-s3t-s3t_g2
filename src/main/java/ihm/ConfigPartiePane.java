@@ -174,8 +174,6 @@ public class ConfigPartiePane extends StackPane {
             bJouer.setStyle(styleBoutons);
         });
         bJouer.setOnAction(EventHandler -> {
-
-
             //TODO
             if (Integer.valueOf(nbJr.getValue()) > 6 || Integer.valueOf(nbJr.getValue()) < 3) {
                 core.setNbJoueur(5);
@@ -184,9 +182,9 @@ public class ConfigPartiePane extends StackPane {
             }
 
             if (Integer.valueOf(nbBot.getValue()) > 6 || Integer.valueOf(nbBot.getValue()) < 0 || Integer.valueOf(nbBot.getValue()) > Integer.valueOf(nbJr.getValue())) {
-                core.setNbJoueur(core.getNbJoueur());
+                core.setNbBot(core.getNbJoueur());
             } else {
-                core.setNbJoueur(Integer.valueOf(nbJr.getValue()));
+                core.setNbBot(Integer.valueOf(nbBot.getValue()));
             }
             core.setNomPartie(nomP.getText());
             try {
