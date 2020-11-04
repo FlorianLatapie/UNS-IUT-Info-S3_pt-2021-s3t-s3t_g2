@@ -74,16 +74,17 @@ public class AccessibilitePane extends StackPane{
 		hbDaltonisme.setSpacing(10);
 		hbDaltonisme.setAlignment(Pos.CENTER);
 
-		Label titre = new Label("Accessibilité");
+		Label titre = new Label("ACCÉSSIBILITÉ");
 		titre.setStyle(styleTitre);
 		titre.setFont(policeTitre);
+		titre.setTranslateY(-30);
 		vbTitre.getChildren().add(titre);
 		vbTitre.setMargin(vbBoutons, new Insets(10));
 		
 		
 		Label titreVbBoutons = new Label("Daltonisme");
 		titreVbBoutons.setFont(policeBouton);
-		titreVbBoutons.setStyle(styleTexte);
+		titreVbBoutons.setTextFill(Color.RED);
 		titreVbBoutons.setPadding(new Insets (10));
 		vbBoutons.getChildren().add(titreVbBoutons);
 		vbBoutons.setMargin(vbCheckBoutons, new Insets(20));

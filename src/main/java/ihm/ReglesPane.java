@@ -64,7 +64,7 @@ public class ReglesPane extends StackPane {
 		stackPane.setAlignment(Pos.CENTER);
 
 		// titre
-		Label titre1 = new Label("Règles du Jeu");
+		Label titre1 = new Label("REGLÈS DU JEU");
 		titre1.setFont(Font.font("Segoe UI", FontWeight.BOLD, 80));
 		titre1.setTextFill(Color.BLACK);
 
