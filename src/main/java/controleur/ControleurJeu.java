@@ -240,6 +240,14 @@ public class ControleurJeu {
      * Execute le déroulement d'une parite
      */
     public void start() {
+    	if (initializer != null) initializer.nbZombiesLieuAll(new ArrayList<>(jeu.getLieux().values()));
+    	if (initializer != null) initializer.lieuFermeAll(new ArrayList<>(jeu.getLieux().values()));
+    	if (initializer != null) initializer.lieuOuvertAll(new ArrayList<>(jeu.getLieux().values()));
+    	if (initializer != null) initializer.nbCarteJoueurAll(new ArrayList<>(jeu.getJoueurs().values()));
+    	if (initializer != null) initializer.nbPersoJoueurAll(new ArrayList<>(jeu.getJoueurs().values()));
+    	if (initializer != null) initializer.forceLieuAll(new ArrayList<>(jeu.getLieux().values()));
+    	if (initializer != null) initializer.nomChefVigileAll(new ArrayList<>(jeu.getJoueurs().values()));
+    	
         String m = nwm.getPacketsTcp().get("IT").build(jeu.getChefVIgile().getCouleur(), getJoueursCouleurs(), partieId, numeroTour);
         for (Joueur j : jeu.getJoueurs().values())
             TcpClientSocket.connect(j.getIp(), j.getPort(), m, null, 0);
@@ -250,11 +258,15 @@ public class ControleurJeu {
         ArrayList<Integer> destination = new ArrayList<>();
         phasechoixDestination(destination);
         phaseDeplacementPerso(destination, lieuZombie);
-        jeu.entreZombie(lieuZombie);
-        jeu.fermerLieu();
         if (this.finJeu())
             return;
+        jeu.entreZombie(lieuZombie);
+        if (initializer != null) initializer.nbZombiesLieuAll(new ArrayList<>(jeu.getLieux().values()));
         jeu.fermerLieu();
+    	if (initializer != null) initializer.lieuFermeAll(new ArrayList<>(jeu.getLieux().values()));
+    	if (initializer != null) initializer.lieuOuvertAll(new ArrayList<>(jeu.getLieux().values()));
+        if (this.finJeu())
+            return;
         if (!attaqueZombie())
             return;
         jmort.clear();
@@ -323,7 +335,7 @@ public class ControleurJeu {
             for (Joueur j : jeu.getJoueurs().values())
                 TcpClientSocket.connect(j.getIp(), j.getPort(), m, null, 0);
         }
-
+        if (initializer != null) initializer.nomChefVigileAll(new ArrayList<>(jeu.getJoueurs().values()));
         out.println(RETOUR_LIGNE);
     }
 
@@ -446,7 +458,10 @@ public class ControleurJeu {
                 int dest = (int) nwm.getPacketsTcp().get("DPR").getValue(message, 1);
                 int pion = (int) nwm.getPacketsTcp().get("DPR").getValue(message, 2);
                 this.jeu.deplacePerso(jeu.getJoueurs().get(i), valeurToIndex(pion), dest);
-                finJeu();
+                if (initializer != null) initializer.forceLieuAll(new ArrayList<>(jeu.getLieux().values()));
+                if (finJeu()) {
+                	return;
+                }
                 this.jeu.fermerLieu();
                 compteur += 1;
 
@@ -466,7 +481,10 @@ public class ControleurJeu {
                 int dest = (int) nwm.getPacketsTcp().get("DPR").getValue(message, 1);
                 int pion = (int) nwm.getPacketsTcp().get("DPR").getValue(message, 2);
                 this.jeu.deplacePerso(jeu.getJoueurs().get(i), valeurToIndex(pion), dest);
-                finJeu();
+                if (initializer != null) initializer.forceLieuAll(new ArrayList<>(jeu.getLieux().values()));
+                if (finJeu()) {
+                	return;
+                }
                 this.jeu.fermerLieu();
                 compteur += 1;
 
@@ -575,6 +593,7 @@ public class ControleurJeu {
                             int pion = PpTools.getPionByValue(pionCou);
 
                             jeu.sacrifie(jou, valeurToIndex(pion));
+                        	if (initializer != null) initializer.nbPersoJoueurAll(new ArrayList<>(jeu.getJoueurs().values()));
                             out.println(RETOUR_LIGNE);
                             jeu.getLieux().get(i).setNbZombies(jeu.getLieux().get(i).getNbZombies() - 1);
 
@@ -597,6 +616,7 @@ public class ControleurJeu {
                     int pion = PpTools.getPionByValue(pionCou);
 
                     jeu.sacrifie(jou, valeurToIndex(pion));
+                	if (initializer != null) initializer.nbPersoJoueurAll(new ArrayList<>(jeu.getJoueurs().values()));
                     out.println(RETOUR_LIGNE);
                     jeu.getLieux().get(i).setNbZombies(0);
 
