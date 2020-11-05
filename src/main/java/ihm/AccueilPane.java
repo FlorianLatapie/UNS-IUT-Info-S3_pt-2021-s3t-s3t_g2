@@ -46,7 +46,8 @@ public class AccueilPane extends StackPane {
 	private String styleBoutonsSouris = "-fx-background-color:#ff0000;  -fx-text-fill:#000000; -fx-background-radius: 15px;";
 	private StackPane stackPane = new StackPane();
 	private GaussianBlur flou = new GaussianBlur(30);
-
+	
+	VBox centreMenu;
 	public AccueilPane(ScreenControl sc, Core c) {
 		core = c;
 		sControl = sc;
@@ -153,7 +154,7 @@ public class AccueilPane extends StackPane {
 		ImageView imgFond = new ImageView(DataControl.FOND);
 
 		// carre central qui contient tous les éléments (boutons et titre)
-		VBox centreMenu = new VBox();
+		centreMenu = new VBox();
 		// centreMenu.setBackground(new Background(new
 		// BackgroundFill(Color.LIGHTGREY,CornerRadii.EMPTY,null)));
 		centreMenu.setMinSize(tailleCarreCentral, tailleCarreCentral);
@@ -165,7 +166,7 @@ public class AccueilPane extends StackPane {
 		centreMenu.getChildren().addAll(titre, grilleBoutons);
 
 		// rotation de l'interface
-		// centreMenu.setRotate(90);
+		centreMenu.setRotate(sc.getAngle());
 
 		// boite du fond qui contient tout
 		HBox fond = new HBox();
@@ -184,4 +185,7 @@ public class AccueilPane extends StackPane {
 
 	}
 
+	public void changerAngle(double angle) {
+		centreMenu.setRotate(angle);
+	}
 }

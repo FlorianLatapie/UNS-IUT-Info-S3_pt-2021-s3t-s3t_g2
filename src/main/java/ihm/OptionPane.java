@@ -184,8 +184,9 @@ public class OptionPane extends StackPane {
 		bRetour.setAlignment(Pos.CENTER);
 		bRetour.setPrefSize(180, hauteurElement);
 		bRetour.setStyle(styleBoutons);
-		bRetour.setOnAction(
-				EventHandler ->  sc.setPaneOnTop(core.getPauseDepuis())); 
+		bRetour.setOnAction(EventHandler -> {
+			sc.setPaneOnTop(core.getPauseDepuis());
+		});
 		bRetour.setOnMouseEntered(event -> {
 			bRetour.setStyle(styleBoutonsSouris);
 		});
