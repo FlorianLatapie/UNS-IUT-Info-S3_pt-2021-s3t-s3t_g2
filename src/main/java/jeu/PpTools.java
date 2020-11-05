@@ -9,4 +9,19 @@ public abstract class PpTools {
 
         return Integer.parseInt(tmp);
     }
+
+    public static int valeurToIndex(int valeur) {
+        switch (valeur) {
+            case 7:
+                return 0;
+            case 5:
+                return 1;
+            case 3:
+                return 2;
+            case 1:
+                return 3;
+            default:
+                throw new IllegalStateException("Unexpected value: " + valeur);
+        }
+    }
 }
