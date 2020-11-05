@@ -263,6 +263,7 @@ public class ControleurJeu {
      * Affiche le joueur qui fouille le camion
      */
     private void fouilleCamion() {
+    	String s = new String();
         //TODO TAILLE DE PIOCHE A 0
         String m = nwm.getPacketsTcp().get("PFC").build(getJoueursCouleurs(), 0, partieId, numeroTour);
         for (Joueur j : jeu.getJoueurs().values())
@@ -271,14 +272,17 @@ public class ControleurJeu {
         // TODO PREVENIR QUI FOUILLE LE CAMION=
         if (!jeu.getLieux().get(4).afficheJoueurSurLieu().isEmpty()) {
             Joueur j = jeu.voteJoueur(4);
-            out.println(j + " fouille le camion!");
-            out.println("Le camion est vide.");
+            s += j + " fouille le camion!\n";
+            s += "Le camion est vide.";
+        }else {
+        	s += "Personne ne fouille le camion.";
         }
 
         // TODO CARTE NUL
         m = nwm.getPacketsTcp().get("RFC").build(CarteType.NUL, CarteType.NUL, CarteType.NUL, partieId, numeroTour);
         for (Joueur j : jeu.getJoueurs().values())
             TcpClientSocket.connect(j.getIp(), j.getPort(), m, null, 0);
+        if (initializer != null) initializer.fouilleCamion(s);
     }
 
     private List<PionCouleur> getPersosLieu(int i) {
@@ -366,6 +370,7 @@ public class ControleurJeu {
             for (Joueur j : jeu.getJoueurs().values())
                 if (!(j.isChefDesVigiles() && ve == VigileEtat.NE))
                     TcpClientSocket.connect(j.getIp(), j.getPort(), m, null, 0);
+            if (initializer != null) initializer.prevenirDeplacementVigile("Le chef des vigile (" + jeu.getChefVIgile().getCouleur() + ") a choisi la detination :" + this.jeu.getLieux().get(dest));
         }
 
         int nb = nbjtotal - jeu.getNbMort();
@@ -456,6 +461,7 @@ public class ControleurJeu {
                 for (Joueur j : jeu.getJoueurs().values())
                     if (j != jeu.getJoueurs().get(i))
                         TcpClientSocket.connect(j.getIp(), j.getPort(), m, null, 0);
+                if (initializer != null) initializer.destionationPersoAll(new ArrayList<>(jeu.getLieux().values()));
 
             }
         }
@@ -480,6 +486,7 @@ public class ControleurJeu {
                 for (Joueur j : jeu.getJoueurs().values())
                     if (j != jeu.getJoueurs().get(i))
                         TcpClientSocket.connect(j.getIp(), j.getPort(), m, null, 0);
+                if (initializer != null) initializer.destionationPersoAll(new ArrayList<>(jeu.getLieux().values()));
 
             }
         }
@@ -487,7 +494,7 @@ public class ControleurJeu {
 
     private boolean attaqueZombie() {
         List<Integer> nb = jeu.lastAttaqueZombie();
-
+        if (initializer != null) initializer.nbZombiesLieuAll(new ArrayList<>(jeu.getLieux().values()));
         String me = nwm.getPacketsTcp().get("PRAZ").build(nb.get(0), nb.get(1), jeu.getLieuxOuverts(), jeu.getNbZombieLieux(), jeu.getNbPionLieux(), partieId, numeroTour);
         for (Joueur joueur : jeu.getJoueurs().values())
             TcpClientSocket.connect(joueur.getIp(), joueur.getPort(), me, null, 0);
@@ -513,6 +520,7 @@ public class ControleurJeu {
                             m = nwm.getPacketsTcp().get("RAZIF").build(i, pionCou, jeu.getLieux().get(i).getNbZombies(), partieId, numeroTour);
                             for (Joueur joueur : jeu.getJoueurs().values())
                                 TcpClientSocket.connect(joueur.getIp(), joueur.getPort(), m, null, 0);
+                            if (initializer != null) initializer.nbZombiesLieuAll(new ArrayList<>(jeu.getLieux().values()));
                         }
                         if (this.finJeu())
                             return false;
@@ -535,6 +543,7 @@ public class ControleurJeu {
                     m = nwm.getPacketsTcp().get("RAZIF").build(i, pionCou, jeu.getLieux().get(i).getNbZombies(), partieId, numeroTour);
                     for (Joueur joueur : jeu.getJoueurs().values())
                         TcpClientSocket.connect(joueur.getIp(), joueur.getPort(), m, null, 0);
+                    if (initializer != null) initializer.nbZombiesLieuAll(new ArrayList<>(jeu.getLieux().values()));
 
                 }
                 if (this.finJeu())
@@ -581,6 +590,7 @@ public class ControleurJeu {
                                 j.getPort(), message);
 
             }
+            if (initializer != null) initializer.destionationPersoAll(new ArrayList<>(jeu.getLieux().values()));
         }
     }
 
