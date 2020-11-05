@@ -1,6 +1,7 @@
 package ihm;
 
 import ihm.DataControl.ApplicationPane;
+import ihm.event.FinListener;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
@@ -26,7 +27,7 @@ import javafx.scene.text.FontWeight;
  * @version 0.1
  * @since 01/11/2020
  */
-public class FinDePartiePane extends StackPane /*//TODO implements FinListener*/{
+public class FinDePartiePane extends StackPane implements FinListener {
 
 	private ScreenControl sControl = null;
 	private Core core = null;

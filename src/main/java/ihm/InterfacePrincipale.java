@@ -19,10 +19,10 @@ public class InterfacePrincipale extends Application {
     public void start(Stage primaryStage) throws Exception {
         primaryStage.getIcons().add(new Image(DataControl.ICONE));
         primaryStage.setOnCloseRequest((e) -> {
-        	boolean resultat = ConfirmationPane.afficher("Quitter le jeu",
-					"Êtes-vous sûr de vouloir quitter le jeu ? \nSi vous quittez, la partie en cours sera perdue.");
-			if (resultat)
-				Platform.exit();
+            boolean resultat = ConfirmationPane.afficher("Quitter le jeu",
+                    "Êtes-vous sûr de vouloir quitter le jeu ? \nSi vous quittez, la partie en cours sera perdue.");
+            if (resultat)
+                Platform.exit();
         });
         sControl = new ScreenControl(this, core);
         int largeur = 1920;
@@ -31,8 +31,8 @@ public class InterfacePrincipale extends Application {
 
         primaryStage.setMaxWidth(largeur);
         primaryStage.setMaxHeight(hauteur);
-        primaryStage.setWidth(largeur-100);
-        primaryStage.setHeight(hauteur-100);
+        primaryStage.setWidth(largeur - 100);
+        primaryStage.setHeight(hauteur - 100);
         primaryStage.setMinWidth(1800);
         primaryStage.setMinHeight(960);
 
@@ -60,12 +60,17 @@ public class InterfacePrincipale extends Application {
         root.getChildren().add(finDePartiePane);*/
         ConfigPartiePane configPartiePane = new ConfigPartiePane(sControl, core);
         FinDePartiePane finDePartiePane = new FinDePartiePane(sControl, core);
+        JeuPane jeuPane = new JeuPane(sControl, core);
         root.getChildren().add(configPartiePane);
         root.getChildren().add(finDePartiePane);
-        
+        root.getChildren().add(jeuPane);
+
+        core.eventInit();
+        core.getInitializer().addListenerConfig(configPartiePane);
+        core.getInitializer().addListenerJeu(jeuPane);
+        core.getInitializer().addListenerFin(finDePartiePane);
         root.getChildren().add(new OptionPane(sControl, core));
         root.getChildren().add(new ReglesPane(sControl, core));
-        root.getChildren().add(new JeuPane(sControl, core));
         root.getChildren().add(new AccueilPane(sControl, core));
 
         primaryStage.setScene(scene);

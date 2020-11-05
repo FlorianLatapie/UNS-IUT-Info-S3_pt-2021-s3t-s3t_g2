@@ -2,6 +2,7 @@ package ihm;
 
 import ihm.DataControl.ApplicationPane;
 import ihm.ScreenControl;
+import ihm.event.JeuListener;
 import javafx.application.Platform;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -26,7 +27,7 @@ import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.stage.Popup;
 
-public class JeuPane extends StackPane {
+public class JeuPane extends StackPane implements JeuListener {
 
 	private ScreenControl sControl = null;
 	private Core core = null;

@@ -1,6 +1,7 @@
 package ihm;
 
 import ihm.DataControl.ApplicationPane;
+import ihm.event.ConfigListener;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
@@ -23,7 +24,7 @@ import java.io.IOException;
  * @version 0.1
  * @since 26/10/2020
  */
-public class ConfigPartiePane extends StackPane {
+public class ConfigPartiePane extends StackPane implements ConfigListener {
     // private ControleurJeu cj = new ControleurJeu(); // mettre ne paramètres les
     // joueurs
 
