@@ -77,6 +77,8 @@ public class ControleurJeu {
         this.port = nwm.getTcpPort();
         this.intPartieId = new Random().nextInt(10000000);
         this.partieId = "P" + intPartieId;
+        if (initializer != null)
+            initializer.nomPartie(nomPartie);
         initPartie();
     }
 
