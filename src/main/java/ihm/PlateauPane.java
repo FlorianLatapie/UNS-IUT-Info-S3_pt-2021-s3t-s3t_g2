@@ -23,6 +23,7 @@ public class PlateauPane extends StackPane implements PlateauListener {
     private final int lhBoutonPause = 80;
     private final String coinBoutons = " -fx-background-radius: 5px";
     private final Font policeBoutonPause = Font.font("Segoe UI", FontWeight.BOLD, 33);
+    private Font policeInfo = Font.font("Segoe UI", FontWeight.BOLD, 40);
 
     private final int margeJ = 20;
     private final Insets margeTexteJoueur = new Insets(margeJ, 10, margeJ, 10);
@@ -40,6 +41,7 @@ public class PlateauPane extends StackPane implements PlateauListener {
 
     private CornerRadii coinfb = new CornerRadii(5.0);
     private Background fondBlanc = new Background(new BackgroundFill(Color.WHITE, coinfb, null));
+    private Background fondNoir = new Background(new BackgroundFill(Color.BLACK, coinfb, null));
 
     Label nbZombies1;
     Label nbZombies2;
@@ -88,7 +90,7 @@ public class PlateauPane extends StackPane implements PlateauListener {
     Label afficheJoueursLieu5;
     Label afficheJoueursLieu6;
 
-    VBox info;
+    BorderPane info;
 
     Label lChefVigile;
     Label lChefVigile2;
@@ -552,16 +554,32 @@ public class PlateauPane extends StackPane implements PlateauListener {
         // CornerRadii.EMPTY, null)));
 
         ////////////////////////////////////////////////////
-        info = new VBox();
-        info.setMinSize(500, 500);
-        info.setPrefSize(500, 500);
-        info.setMaxSize(500, 500);
-        info.setBackground(fondBlanc);
-
-        titreInfo = new Label("info");
-        lInfo = new Label("information");
-        info.getChildren().addAll(titreInfo, lInfo);
-        info.setVisible(false);
+        info = new BorderPane();
+	     //info.setMinSize(500, 500);
+	     info.setPrefSize(500, 500);
+	     info.setMaxSize(500, 500);
+	     info.setBackground(fondNoir);
+	     
+	     VBox vTitreInfo = new VBox();
+	     vTitreInfo.setAlignment(Pos.CENTER);
+	     vTitreInfo.setPadding(new Insets(20));
+	     titreInfo = new Label("Titre info");
+	     titreInfo.setFont(policeInfo);
+	     titreInfo.setTextFill(Color.WHITE);
+	     vTitreInfo.getChildren().addAll(titreInfo);
+	     
+	     VBox vInfo = new VBox();
+	     vInfo.setAlignment(Pos.TOP_LEFT);
+	     lInfo = new Label("information");
+	     lInfo.setFont(policeInfo);
+	     lInfo.setTextFill(Color.WHITE);
+	     vInfo.getChildren().addAll(lInfo);
+	     
+	     info.setMargin(vInfo, new Insets (50,20,0,20));
+	     info.setTop(vTitreInfo);
+	     info.setCenter(vInfo);
+	     //info.getChildren().addAll(titreInfo, lInfo);
+	     info.setVisible(true);
         //TODO
 
         ////////////////////////////////////////////////////
