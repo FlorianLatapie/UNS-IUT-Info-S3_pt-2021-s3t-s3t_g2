@@ -22,6 +22,14 @@ public class DataControl {
 	public static final String PLATEAU = "ihm/plateau.png";
 	public static final String ICONE = "ihm/desktop Icon.jpg";
 	
+	public static final String NOIR = "ihm/noir.png";
+	public static final String VERT = "ihm/vert.png";
+	public static final String MARRON = "ihm/marron.png";
+	public static final String ROUGE = "ihm/rouge.png";
+	public static final String BLEU = "ihm/bleu.png";
+	public static final String JAUNE = "ihm/jaune.png";
+	
+		
 	public static final ObservableList<Integer> nombreJoueur = FXCollections.observableArrayList(3,4,5,6);
 	public static final ObservableList<Integer> nombreBot = FXCollections.observableArrayList(0,1,2,3,4,5,6);
 	

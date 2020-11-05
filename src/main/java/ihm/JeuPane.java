@@ -68,7 +68,7 @@ public class JeuPane extends StackPane {
 		nomJoueur.setAlignment(Pos.CENTER);
 		nomJoueur.setTranslateY(-400);
 		nomJoueur.setFont(Font.font("Segoe UI", FontWeight.BOLD, 50));
-		nomJoueur.setTextFill(Color.RED);
+		nomJoueur.setTextFill(Color.BLACK);
 		//////////////////////////////////////////
 		//TODO afficher une image dedans 
 		Rectangle rectVigile = new Rectangle();
@@ -179,7 +179,7 @@ public class JeuPane extends StackPane {
 
 		vbVoteCentre.getChildren().addAll(hbJoueurHaut, hbJoueurBas);
 
-		Label titre = new Label("\t\t    Vote\n Pour qui voulez vous voter ?");
+		Label titre = new Label("Vote\n Pour qui voulez vous voter ?");
 		titre.setAlignment(Pos.CENTER);
 		titre.setFont(Font.font("Segoe UI", FontWeight.BOLD, 25));
 		titre.setTextFill(Color.BLACK);
@@ -296,7 +296,7 @@ public class JeuPane extends StackPane {
 		/////////////////////////////////////////////////////////
 		
 		VBox vbDeplLieux = new VBox();
-		vbDeplLieux.setAlignment(Pos.CENTER_LEFT);
+		vbDeplLieux.setAlignment(Pos.CENTER);
 		vbDeplLieux.setPrefSize(300, 500);
 		vbDeplLieux.setMaxSize(300, 500);
 		vbDeplLieux.setStyle(styleVBox);
@@ -306,7 +306,7 @@ public class JeuPane extends StackPane {
 		vbTitre2.setPrefSize(300, 50);
 		vbTitre2.setMaxSize(300, 50);
 
-		Label labDeplLieux = new Label("Déplacement des personnages");
+		Label labDeplLieux = new Label("Destination");
 		labDeplLieux.setAlignment(Pos.TOP_CENTER);
 		labDeplLieux.setFont(Font.font("Segoe UI", FontWeight.BOLD, 20));
 		labDeplLieux.setTextFill(Color.BLACK);
@@ -455,12 +455,17 @@ public class JeuPane extends StackPane {
 		des.getChildren().addAll(de1,de2,lancer);
 		des.setVisible(true); //TODO ne pas oublier de le retier 
 		
-		
 		/////
-
-		stackPane.getChildren().addAll(rectVigile, nomJoueur, vbCentral, vote, vbDeplCentre,des);
-		stackPane.setBackground(new Background(new BackgroundFill(Color.GREY, CornerRadii.EMPTY, null)));
-		stackPane.setOpacity(.8);
+		ImageView imgFond = new ImageView(DataControl.JAUNE);
+		/////
+		HBox fond = new HBox();
+		fond.setAlignment(Pos.CENTER);
+		fond.setEffect(flou);
+		fond.getChildren().add(imgFond);
+		
+		stackPane.getChildren().addAll(fond,rectVigile, nomJoueur, vbCentral, vote, vbDeplCentre,des);
+		//stackPane.setBackground(new Background(new BackgroundFill(Color.GREY, CornerRadii.EMPTY, null)));
+		//stackPane.setOpacity(.8);
 
 		this.getChildren().add(stackPane);
 		sControl.registerNode(paneName, this);
