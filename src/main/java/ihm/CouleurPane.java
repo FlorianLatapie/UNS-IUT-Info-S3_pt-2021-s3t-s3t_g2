@@ -14,7 +14,6 @@ import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import reseau.type.Couleur;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -252,6 +251,7 @@ public class CouleurPane extends StackPane {
             bRetour.setStyle(styleBoutonsSouris);
         });
         bRetour.setOnMouseExited(event -> {
+            core.getCj().stopThreads();
             bRetour.setStyle(styleBoutons);
         });
         bRetour.setOnAction(EventHandler -> sc.setPaneOnTop(ApplicationPane.ACCUEIL));

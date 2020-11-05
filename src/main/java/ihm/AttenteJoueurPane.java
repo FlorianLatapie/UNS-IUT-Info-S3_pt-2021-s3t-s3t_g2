@@ -105,7 +105,7 @@ public class AttenteJoueurPane extends StackPane implements AttenteListener {
             bRetour.setStyle(styleBoutons);
         });
         bRetour.setOnAction(EventHandler -> {
-            //TODO arreter la création de la partie
+            core.getCj().stopThreads();
             sc.setPaneOnTop(ApplicationPane.ACCUEIL);
         });
 

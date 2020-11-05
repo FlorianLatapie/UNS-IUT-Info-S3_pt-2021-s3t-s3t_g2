@@ -1,11 +1,11 @@
 package jeu;
 
+import reseau.type.Couleur;
 import temp.CarteAction;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
+
+import static java.lang.System.out;
 
 /**
  * <h1>Le plateau de jeu</h1>
@@ -51,6 +51,77 @@ public class Jeu {
                 i++;
 
         return i;
+    }
+
+    public List<String> getJoueursListeNo() {
+        List<String> noms = new ArrayList<>();
+        for (Joueur j : joueurs.values())
+            noms.add(j.getNom());
+
+        return noms;
+    }
+
+    public List<Couleur> getCouleurJoueursListeNo() {
+        List<Couleur> couleurs = new ArrayList<>();
+        for (Joueur j : joueurs.values())
+            couleurs.add(j.getCouleur());
+
+        return couleurs;
+    }
+
+    public List<Joueur> mortJoueur(List<Joueur> jmort) {
+        for (int i = 0; i < joueurs.size(); i++) {
+            if (joueurs.get(i).isEnVie() && joueurs.get(i).getPersonnages().size() == 0) {
+                joueurs.get(i).setEnVie(false);
+                jmort.add(joueurs.get(i));
+                out.println(joueurs.get(i) + " est mort!");
+            }
+        }
+        return jmort;
+    }
+
+    public Joueur voteJoueur(int lieu) {
+        // gestion des cartes NOT TO DO
+        int rnd = new Random().nextInt(lieux.get(lieu).afficheJoueurSurLieu().size());
+
+        return lieux.get(lieu).afficheJoueurSurLieu().get(rnd);
+    }
+
+    public List<Integer> placementDest(int x, int y) {
+        List<Integer> posi = new ArrayList<>();
+        if (lieux.get(x).isFull() && lieux.get(y).isFull()) {
+            for (Lieu l : lieux.values())
+                if (!l.isFull() && l.isOuvert())
+                    posi.add(l.getNum());
+        } else if (lieux.get(x).isFull() && !lieux.get(y).isFull()) {
+            posi.add(y);
+        } else if (!lieux.get(x).isFull() && lieux.get(y).isFull()) {
+            posi.add(x);
+        } else {
+            posi.add(x);
+            posi.add(y);
+        }
+
+        return posi;
+    }
+
+    public int nbPlace() {
+        int tmp = 0;
+        for (Lieu l : lieux.values())
+            tmp += l.getPersonnage().size();
+
+        return tmp;
+    }
+
+    public List<Integer> persoPlace(Joueur joueur) {
+        List<Integer> tmp = new ArrayList<>();
+        for (int b = 0; b < joueur.getPersonnages().size(); b++) {
+            if (joueur.getPersonnages().get(b).getMonLieu() == null) {
+                tmp.add(joueur.getPersonnages().get(b).getPoint());
+            }
+        }
+
+        return tmp;
     }
 
     public HashMap<Integer, List<Integer>> allChoixPossible(Joueur j) {
