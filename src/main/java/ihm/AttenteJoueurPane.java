@@ -10,8 +10,10 @@ import javafx.scene.effect.GaussianBlur;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
+import javafx.scene.shape.Circle;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
+import javafx.scene.text.TextAlignment;
 
 /**
  * The Class AccueilPane.
@@ -40,12 +42,13 @@ public class AttenteJoueurPane extends StackPane implements AttenteListener {
     private String styleBoutonsSouris = "-fx-background-color:#ff0000;  -fx-text-fill:#000000; -fx-background-radius: 15px;";
     private StackPane stackPane = new StackPane();
     private GaussianBlur flou = new GaussianBlur(30);
-
-    private Font policeNom = Font.font("Segoe UI", 37);
+    private String styleVBox = "-fx-border-color: black; -fx-border-insets: -3; -fx-border-width: 3";
+    private Font policeNom = Font.font("Segoe UI", FontWeight.BOLD, 33);
     private int hauteurElemtents = 60;
     private int spacing = 30;
     private CornerRadii coinfb = new CornerRadii(5.0);
     private Background fondBlanc = new Background(new BackgroundFill(Color.WHITE, coinfb, null));
+    private int tailleCercle = 55;
 
     private Insets padding = new Insets(0, 10, 0, 10);
     Label lIDPartie;
@@ -55,40 +58,96 @@ public class AttenteJoueurPane extends StackPane implements AttenteListener {
         sControl = sc;
         stackPane.setAlignment(Pos.CENTER);
         // titre
-        Label titre1 = new Label("Connexion \n\ten cours");
+        Label titre1 = new Label("Connexion \nen cours");
+        titre1.setTextAlignment(TextAlignment.CENTER);
         titre1.setFont(Font.font("Segoe UI", FontWeight.BOLD, 80));
         titre1.setTextFill(Color.BLACK);
 
         VBox titre = new VBox(titre1);
         titre.setAlignment(Pos.CENTER);
         titre.setBackground(new Background(new BackgroundFill(Color.RED, coin, null)));
-        titre.setPrefWidth(730);
-        titre.setMinWidth(730);
+        titre.setPrefWidth(740);
+        titre.setMinWidth(740);
 
         ////
-        lIDPartie = new Label("todo");
+        
+        lIDPartie = new Label();
+        lIDPartie.setStyle("-fx-border-color: black; -fx-border-insets: -3; -fx-border-width: 3");
         lIDPartie.setFont(policeNom);
+        lIDPartie.setTextFill(Color.WHITE);
         lIDPartie.setMinHeight(hauteurElemtents);
-        lIDPartie.setBackground(fondBlanc);
         lIDPartie.setPadding(padding);
 
-        Label desc = new Label("Attente de la connexion\nde tous les joueurs ...");
-        desc.setFont(policeNom);
-        desc.setMinHeight(hauteurElemtents);
-        desc.setBackground(fondBlanc);
-        desc.setPadding(padding);
 
-        VBox vbIdDesk = new VBox();
-        vbIdDesk.setAlignment(Pos.CENTER);
-        vbIdDesk.setBackground(fondBlanc);
-        vbIdDesk.setPrefWidth(600);
-        vbIdDesk.setMaxWidth(600);
-        vbIdDesk.getChildren().addAll(lIDPartie, desc);
+        Label desc = new Label(" En attente des joueurs ...");
+        desc.setFont(policeNom);
+        desc.setTextFill(Color.WHITE);
+        desc.setPadding(new Insets(7));
+        
+        
+        VBox vbDescPartie = new VBox();
+        vbDescPartie.setAlignment(Pos.CENTER);
+        vbDescPartie.getChildren().addAll(lIDPartie, desc);
+        
+        
+        // les cercles passent en rouge quand le joueur à rejoint
+        Circle cercle1 = new Circle();
+        cercle1.setRadius(tailleCercle);
+        cercle1.setFill(null);
+        cercle1.setStroke(Color.WHITE);
+        cercle1.setStrokeWidth(7);
+        
+        Circle cercle2 = new Circle();
+        cercle2.setRadius(tailleCercle);
+        cercle2.setFill(null);
+        cercle2.setStroke(Color.WHITE);
+        cercle2.setStrokeWidth(7);
+        
+        Circle cercle3 = new Circle();
+        cercle3.setRadius(tailleCercle);
+        cercle3.setFill(null);
+        cercle3.setStroke(Color.WHITE);
+        cercle3.setStrokeWidth(7);
+        
+        Circle cercle4 = new Circle();
+        cercle4.setRadius(tailleCercle);
+        cercle4.setFill(null);
+        cercle4.setStroke(Color.WHITE);
+        cercle4.setStrokeWidth(7);
+        
+        Circle cercle5 = new Circle();
+        cercle5.setRadius(tailleCercle);
+        cercle5.setFill(null);
+        cercle5.setStroke(Color.WHITE);
+        cercle5.setStrokeWidth(7);
+        
+        Circle cercle6 = new Circle();
+        cercle6.setRadius(tailleCercle);
+        cercle6.setFill(null);
+        cercle6.setStroke(Color.WHITE);
+        cercle6.setStrokeWidth(7);
+        
+        
+        HBox hbJoueurPret = new HBox();
+        hbJoueurPret.setAlignment(Pos.CENTER);
+        hbJoueurPret.setStyle(styleVBox);
+        hbJoueurPret.setPadding(new Insets(20));
+        hbJoueurPret.setSpacing(12);
+        hbJoueurPret.getChildren().addAll(cercle1, cercle2, cercle3, cercle4, cercle5, cercle6);
+        
+        VBox vbWait = new VBox();
+        vbWait.setStyle(styleVBox);
+        vbWait.setAlignment(Pos.CENTER);
+        vbWait.setPrefSize(700, 200);
+        vbWait.setMaxSize(700, 200);
+        vbWait.setMargin(lIDPartie, new Insets(8));
+        vbWait.getChildren().addAll(vbDescPartie, hbJoueurPret);
+        
 
         VBox vbCenter = new VBox();
         vbCenter.setAlignment(Pos.CENTER);
         vbCenter.setSpacing(spacing);
-        vbCenter.getChildren().addAll(vbIdDesk);
+        vbCenter.getChildren().addAll(vbWait);
 
 
         // boutons
@@ -125,7 +184,7 @@ public class AttenteJoueurPane extends StackPane implements AttenteListener {
         centreMenu.setMinSize(tailleCarreCentral, tailleCarreCentral);
         centreMenu.setPrefSize(tailleCarreCentral, tailleCarreCentral);
         centreMenu.setMaxSize(tailleCarreCentral, tailleCarreCentral);
-        centreMenu.setMargin(titre, new Insets(0, 0, 100, 0));
+        //centreMenu.setMargin(titre, new Insets(0, 0, 100, 0));
 
         centreMenu.setAlignment(titre, Pos.CENTER);
 
@@ -160,6 +219,7 @@ public class AttenteJoueurPane extends StackPane implements AttenteListener {
 
     @Override
     public void nomPartie(String nom) {
-        lIDPartie.setText("Nom de la partie : " + nom);
+        lIDPartie.setText(nom);
     }
+    
 }

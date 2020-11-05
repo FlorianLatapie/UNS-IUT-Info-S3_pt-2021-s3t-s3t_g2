@@ -14,6 +14,7 @@ import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
+import javafx.scene.text.TextAlignment;
 
 import java.io.IOException;
 
@@ -60,7 +61,8 @@ public class ConfigPartiePane extends StackPane {
         sControl = sc;
         stackPane.setAlignment(Pos.CENTER);
         // titre
-        Label titre1 = new Label("Configuration de \n\tla partie");
+        Label titre1 = new Label("Configuration de \nla partie");
+        titre1.setTextAlignment(TextAlignment.CENTER);
         titre1.setFont(Font.font("Segoe UI", FontWeight.BOLD, 80));
         titre1.setTextFill(Color.BLACK);
 
@@ -79,7 +81,6 @@ public class ConfigPartiePane extends StackPane {
         desc.setPadding(botPadding);
 
         VBox vJoueurs = new VBox();
-
         HBox nomPartie = new HBox();
 
         Label nomPTexte = new Label("Nom de la partie");
