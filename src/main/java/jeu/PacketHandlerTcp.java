@@ -65,7 +65,7 @@ public class PacketHandlerTcp {
 
     private String cddcv(Packet packet, String message, Socket socket) {
         core.getTempPaquet().add(message);
-        core.setCddcv(true);
+        core.setChoixDestinationVigile(true);
         return "";
     }
 
@@ -90,7 +90,7 @@ public class PacketHandlerTcp {
         // (PC)
         // regarder si un joueur utilise une carte camSecu et si oui l'afficher sur son
         // ecran et defausse la carte
-        core.setAzld(true);
+        core.setArriveZombiePacket(true);
         return nwm.getPacketsTcp().get("AZLAZ").build(lieuZombie, core.getPartieId(), core.getNumeroTour());
     }
 
