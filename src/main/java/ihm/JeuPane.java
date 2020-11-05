@@ -25,6 +25,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
+import javafx.scene.text.TextAlignment;
 import javafx.stage.Popup;
 
 public class JeuPane extends StackPane implements JeuListener {
@@ -58,7 +59,15 @@ public class JeuPane extends StackPane implements JeuListener {
 	private int largeurTF = 100;
 	private int hauteurElemtents = 60;
 	private final ApplicationPane paneName = ApplicationPane.JEU;
-
+	
+	
+	//TODO 
+	Label phasePartie;
+	
+	BorderPane info;
+	Label titreInfo;
+    Label lInfo;
+    
 	public JeuPane(ScreenControl sc, Core c) {
 		core = c;
 		sControl = sc;
@@ -70,6 +79,14 @@ public class JeuPane extends StackPane implements JeuListener {
 		nomJoueur.setTranslateY(-400);
 		nomJoueur.setFont(Font.font("Segoe UI", FontWeight.BOLD, 50));
 		nomJoueur.setTextFill(Color.BLACK);
+		
+		phasePartie = new Label("Phase de la partie");
+		phasePartie.setAlignment(Pos.CENTER);
+		phasePartie.setTranslateY(-325);
+		phasePartie.setFont(Font.font("Segoe UI", 50));
+		phasePartie.setTextFill(Color.BLACK);
+		
+		
 		//////////////////////////////////////////
 		//TODO afficher une image dedans 
 		Rectangle rectVigile = new Rectangle();
@@ -474,6 +491,33 @@ public class JeuPane extends StackPane implements JeuListener {
 		des.setDisable(false); //TODO ne pas oublier de le retier 
 		
 		/////
+		 info = new BorderPane();
+	     //info.setMinSize(500, 500);
+	     info.setPrefSize(500, 500);
+	     info.setMaxSize(500, 500);
+	     info.setBackground(fondBlanc);
+	     
+	     VBox vTitreInfo = new VBox();
+	     vTitreInfo.setAlignment(Pos.CENTER);
+	     vTitreInfo.setPadding(new Insets(20));
+	     titreInfo = new Label("Titre info");
+	     titreInfo.setFont(policeBoutonDe);
+	     vTitreInfo.getChildren().addAll(titreInfo);
+	     
+	     VBox vInfo = new VBox();
+	     vInfo.setAlignment(Pos.TOP_LEFT);
+	     lInfo = new Label("information");
+	     lInfo.setFont(policeBoutonDe);
+	     vInfo.getChildren().addAll(lInfo);
+	     
+	     info.setMargin(vInfo, new Insets (50,20,0,20));
+	     info.setTop(vTitreInfo);
+	     info.setCenter(vInfo);
+	     //info.getChildren().addAll(titreInfo, lInfo);
+	     info.setVisible(false);
+	        //TODO
+		
+		/////
 		ImageView imgFond = new ImageView(DataControl.BLEU);
 		/////
 		HBox fond = new HBox();
@@ -481,7 +525,7 @@ public class JeuPane extends StackPane implements JeuListener {
 		fond.setEffect(flou);
 		fond.getChildren().add(imgFond);
 		
-		stackPane.getChildren().addAll(fond,rectVigile, nomJoueur, vbCentral, vote, vbDeplCentre,des);
+		stackPane.getChildren().addAll(fond,rectVigile, nomJoueur,phasePartie, vbCentral, vote, vbDeplCentre,des,info);
 		stackPane.setBackground(new Background(new BackgroundFill(Color.BLACK, CornerRadii.EMPTY, null)));
 		//stackPane.setOpacity(.8);
 
