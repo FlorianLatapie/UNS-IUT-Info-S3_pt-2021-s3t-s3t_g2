@@ -22,7 +22,7 @@ public class NetWorkManager {
     private final Map<String, Packet> udpPackets;
     private final Map<String, Packet> tcpPackets;
 
-    private static final String PATHTOPACKET = "Ressources\\protocol_reseau\\packets";
+    private static final String PATHTOPACKET = "src\\main\\java\\reseau\\socket\\definition";
 
     private UdpSocket udpSocket;
     private TcpServerSocket tcpServerSocket;
