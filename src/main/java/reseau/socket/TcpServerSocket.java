@@ -105,7 +105,7 @@ public class TcpServerSocket {
      * @return renvoie une reponse
      */
     private String process(Socket socket, String message) {
-        return netWorkManager.getPacketHandlerTcp().traitement(PtTool.strToPacketTcp(message, netWorkManager), message, socket);
+        return netWorkManager.getPacketHandlerTcp().traitement(PtTool.strToPacketTcp(message, netWorkManager), message);
     }
 
     /**
