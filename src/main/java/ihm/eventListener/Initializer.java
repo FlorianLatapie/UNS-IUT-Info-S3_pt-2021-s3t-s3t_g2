@@ -36,12 +36,12 @@ public class Initializer {
 
     public void nomJoueurAll(List<Joueur> joueurs) {
         for (Joueur l : joueurs)
-            nomJoueur(l.getJoueurIdint(), l.getNom());
+            nomJoueur(l.getJoueurIdint(), l.getCouleur().name(), l.getNom());
     }
 
-    private void nomJoueur(int joueur, String val) {
+    private void nomJoueur(int joueur, String couleur, String val) {
         for (PlateauListener pl : listenerspl)
-            pl.nomJoueur(joueur, val);
+            pl.nomJoueur(joueur, couleur, val);
     }
 
     public void lieuFermeAll(List<Lieu> lieux) {
@@ -122,5 +122,35 @@ public class Initializer {
     private void nomChefVigile(String joueur) {
         for (PlateauListener pl : listenerspl)
             pl.nomChefVigile(joueur);
+    }
+
+    public void destionationPersoAll(List<Lieu> lieux) {
+        for (Lieu l : lieux)
+            for (Personnage p : l.getPersonnage())
+                if (p.getMonLieu() != null)
+                    destionationPerso(p.getMonLieu());
+    }
+
+    private void destionationPerso(Lieu lieu) {
+        String np = "";
+        for (Personnage p : lieu.getPersonnage())
+            np += p.getType().name() + " " + p.getJoueur().getCouleur().name() + "\n";
+        for (PlateauListener pl : listenerspl)
+            pl.destionationPerso(lieu.getNum(), np);
+    }
+
+    public void fouilleCamion(String camion) {
+        for (PlateauListener pl : listenerspl)
+            pl.fouilleCamion(camion);
+    }
+
+    public void prevenirDeplacementVigile(String depvig) {
+        for (PlateauListener pl : listenerspl)
+            pl.prevenirDeplacementVigile(depvig);
+    }
+
+    public void nomPartie(String nom){
+        for (AttenteListener al : listenersal)
+            al.nomPartie(nom);
     }
 }

@@ -1,11 +1,11 @@
 package ihm.eventListener;
 
-import jeu.Joueur;
+import jeu.Personnage;
 
 public interface PlateauListener {
     void nbLieuZombie(int lieu, int val);
 
-    void nomJoueur(int joueur, String val);
+    void nomJoueur(int joueur, String Couleur, String val);
 
     void lieuFerme(int lieu, boolean val);
 
@@ -20,4 +20,10 @@ public interface PlateauListener {
     void nomChefVigile(String joueur);
 
     void finPartie();
+
+    void destionationPerso(int lieu, String destionationPerso);
+
+    void fouilleCamion(String camion);
+
+    void prevenirDeplacementVigile(String depvig);
 }
