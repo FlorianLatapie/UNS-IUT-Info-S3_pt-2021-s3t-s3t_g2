@@ -79,9 +79,10 @@ public class AttenteJoueurPane extends StackPane implements AttenteListener {
         desc.setPadding(padding);
 
         VBox vbIdDesk = new VBox();
+        vbIdDesk.setAlignment(Pos.CENTER);
         vbIdDesk.setBackground(fondBlanc);
-        vbIdDesk.setPrefWidth(450);
-        vbIdDesk.setMaxWidth(450);
+        vbIdDesk.setPrefWidth(600);
+        vbIdDesk.setMaxWidth(600);
         vbIdDesk.getChildren().addAll(lIDPartie, desc);
 
         VBox vbCenter = new VBox();
