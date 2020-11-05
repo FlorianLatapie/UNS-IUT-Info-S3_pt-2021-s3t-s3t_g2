@@ -80,8 +80,8 @@ public class AttenteJoueurPane extends StackPane /*implements AttenteListener */
         lIDPartie.setPadding(padding);
 
 
-        Label desc = new Label(" En attente des joueurs ...");
-        desc.setFont(policeNom);
+        Label desc = new Label("En attente des joueurs... Veuillez entrer la couleur dans le PP");
+        desc.setFont(Font.font("Segoe UI", FontWeight.BOLD, 27));
         desc.setTextFill(Color.WHITE);
         desc.setPadding(new Insets(7));
         
