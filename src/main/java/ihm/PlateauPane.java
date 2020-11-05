@@ -13,8 +13,6 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 
-import static java.lang.System.out;
-
 public class PlateauPane extends StackPane implements PlateauListener {
     private ScreenControl sControl = null;
     private Core core = null;
@@ -39,7 +37,7 @@ public class PlateauPane extends StackPane implements PlateauListener {
     private final int tailleFont = 18;
     private final Font fontInfo = Font.font("Segoe UI", FontWeight.BOLD, tailleFont);
     private final Font fontTitre = Font.font("Segoe UI", FontWeight.BOLD, tailleFont);
-    
+
     private CornerRadii coinfb = new CornerRadii(5.0);
     private Background fondBlanc = new Background(new BackgroundFill(Color.WHITE, coinfb, null));
 
@@ -82,18 +80,21 @@ public class PlateauPane extends StackPane implements PlateauListener {
     Label nbCartes3;
     Label nbCartes4;
     Label nbCartes5;
-    
+
     Label afficheJoueursLieu1;
     Label afficheJoueursLieu2;
     Label afficheJoueursLieu3;
     Label afficheJoueursLieu4;
     Label afficheJoueursLieu5;
     Label afficheJoueursLieu6;
-    
+
     VBox info;
-    
+
     Label lChefVigile;
     Label lChefVigile2;
+
+    Label titreInfo;
+    Label lInfo;
 
     public PlateauPane(ScreenControl sc, Core c) {
         core = c;
@@ -282,7 +283,7 @@ public class PlateauPane extends StackPane implements PlateauListener {
         aPlateau.setMinSize(taillePlateau, taillePlateau);
         aPlateau.setPrefSize(taillePlateau, taillePlateau);
         aPlateau.setMaxSize(taillePlateau, taillePlateau);
-        
+
 
         VBox vbRight1 = new VBox();
         HBox hbBot1 = new HBox();
@@ -527,17 +528,17 @@ public class PlateauPane extends StackPane implements PlateauListener {
 
         AnchorPane.setTopAnchor(b6, 313.5);
         AnchorPane.setLeftAnchor(b6, 778.5);
-        
-        lChefVigile = new Label(); 
-        lChefVigile.setText("X"+" est le vigile" );
+
+        lChefVigile = new Label();
+        lChefVigile.setText("X" + " est le vigile");
         lChefVigile.setBackground(fondBlanc);
         lChefVigile.setFont(fontInfo);
         lChefVigile.setPadding(margeLieu);
         AnchorPane.setTopAnchor(lChefVigile, 750.0);
         AnchorPane.setLeftAnchor(lChefVigile, 500.0);
-        
-        lChefVigile2 = new Label(); 
-        lChefVigile2.setText("X"+" est le vigile");
+
+        lChefVigile2 = new Label();
+        lChefVigile2.setText("X" + " est le vigile");
         lChefVigile2.setBackground(fondBlanc);
         lChefVigile2.setFont(fontInfo);
         lChefVigile2.setPadding(margeLieu);
@@ -545,7 +546,7 @@ public class PlateauPane extends StackPane implements PlateauListener {
         AnchorPane.setTopAnchor(lChefVigile2, 350.0);
         AnchorPane.setLeftAnchor(lChefVigile2, 500.0);
 
-        aPlateau.getChildren().addAll(b1, b2, b3, b4, b5, b6,lChefVigile,lChefVigile2);
+        aPlateau.getChildren().addAll(b1, b2, b3, b4, b5, b6, lChefVigile, lChefVigile2);
 
         // aPlateau.setBackground(new Background(new BackgroundFill(Color.RED,
         // CornerRadii.EMPTY, null)));
@@ -556,13 +557,13 @@ public class PlateauPane extends StackPane implements PlateauListener {
         info.setPrefSize(500, 500);
         info.setMaxSize(500, 500);
         info.setBackground(fondBlanc);
-        
-        Label titreInfo = new Label("info"); 
-        Label lInfo = new Label("information"); 
-        info.getChildren().addAll(titreInfo,lInfo);
+
+        titreInfo = new Label("info");
+        lInfo = new Label("information");
+        info.getChildren().addAll(titreInfo, lInfo);
         info.setVisible(false);
         //TODO
-        
+
         ////////////////////////////////////////////////////
         borderJoueurs.setTop(hHaut);
         borderJoueurs.setBottom(hBas);
@@ -579,7 +580,7 @@ public class PlateauPane extends StackPane implements PlateauListener {
 
         this.setBackground(new Background(new BackgroundFill(Color.BLACK, CornerRadii.EMPTY, null)));
 
-        this.getChildren().addAll(imgFond, borderJoueurs, aPlateau,info);
+        this.getChildren().addAll(imgFond, borderJoueurs, aPlateau, info);
         this.setMinSize(1920, 1080);
         this.setPrefSize(1920, 1080);
         this.setMaxSize(1920, 1080);
@@ -617,26 +618,27 @@ public class PlateauPane extends StackPane implements PlateauListener {
     }
 
     @Override
-    public void nomJoueur(int joueur, String val) {
+    public void nomJoueur(int joueur, String couleur, String val) {
+        String tmp = val + " " + couleur;
         Platform.runLater(() -> {
             switch (joueur) {
                 case 0:
-                    nomJoueur1.setText(val);
+                    nomJoueur1.setText(tmp);
                     break;
                 case 1:
-                    nomJoueur2.setText(val);
+                    nomJoueur2.setText(tmp);
                     break;
                 case 2:
-                    nomJoueur3.setText(val);
+                    nomJoueur3.setText(tmp);
                     break;
                 case 3:
-                    nomJoueur4.setText(val);
+                    nomJoueur4.setText(tmp);
                     break;
                 case 4:
-                    nomJoueur5.setText(val);
+                    nomJoueur5.setText(tmp);
                     break;
                 case 5:
-                    nomJoueur6.setText(val);
+                    nomJoueur6.setText(tmp);
                     break;
                 default:
                     throw new IllegalStateException("Unexpected value: " + joueur);
@@ -791,11 +793,73 @@ public class PlateauPane extends StackPane implements PlateauListener {
 
     @Override
     public void nomChefVigile(String joueur) {
-        //TODO
+        String tmp = joueur + " est le chef des vigiles";
+        Platform.runLater(() -> {
+            lChefVigile.setText(tmp);
+            lChefVigile2.setText(tmp);
+        });
     }
 
     @Override
     public void finPartie() {
         sControl.setPaneOnTop(ApplicationPane.ENDGAME);
+    }
+
+    @Override
+    public void destionationPerso(int lieu, String nomPersosCouleur) {
+        Platform.runLater(() -> {
+            switch (lieu) {
+                case 1:
+                    afficheJoueursLieu1.setText(nomPersosCouleur);
+                    break;
+                case 2:
+                    afficheJoueursLieu2.setText(nomPersosCouleur);
+                    break;
+                case 3:
+                    afficheJoueursLieu3.setText(nomPersosCouleur);
+                    break;
+                case 4:
+                    afficheJoueursLieu4.setText(nomPersosCouleur);
+                    break;
+                case 5:
+                    afficheJoueursLieu5.setText(nomPersosCouleur);
+                    break;
+                case 6:
+                    afficheJoueursLieu6.setText(nomPersosCouleur);
+                    break;
+                default:
+                    throw new IllegalStateException("Unexpected value: " + lieu);
+            }
+        });
+    }
+
+    @Override
+    public void fouilleCamion(String camion) {
+        Platform.runLater(() -> {
+            titreInfo.setText("Fouille du camion");
+            lInfo.setText(camion);
+            info.setVisible(true);
+            try {
+                Thread.sleep(5000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            info.setVisible(false);
+        });
+    }
+
+    @Override
+    public void prevenirDeplacementVigile(String depvig) {
+        Platform.runLater(() -> {
+            titreInfo.setText("Déplacement d'un pion du chef des vigiles");
+            lInfo.setText(depvig);
+            info.setVisible(true);
+            try {
+                Thread.sleep(5000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            info.setVisible(false);
+        });
     }
 }
