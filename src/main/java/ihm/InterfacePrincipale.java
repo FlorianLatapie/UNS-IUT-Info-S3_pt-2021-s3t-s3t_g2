@@ -60,9 +60,11 @@ public class InterfacePrincipale extends Application {
         root.getChildren().add(finDePartiePane);*/
         ConfigPartiePane configPartiePane = new ConfigPartiePane(sControl, core);
         FinDePartiePane finDePartiePane = new FinDePartiePane(sControl, core);
+        AttenteJoueurPane attenteJoueurPane = new AttenteJoueurPane(sControl, core);
         JeuPane jeuPane = new JeuPane(sControl, core);
         root.getChildren().add(configPartiePane);
         root.getChildren().add(finDePartiePane);
+        root.getChildren().add(attenteJoueurPane);
         root.getChildren().add(jeuPane);
 
         core.eventInit();
