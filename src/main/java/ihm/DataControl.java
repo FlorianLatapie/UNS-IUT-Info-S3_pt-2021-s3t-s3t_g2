@@ -18,10 +18,10 @@ public class DataControl {
 	public final static Locale localeEN = new Locale("en", "UK");
 	public final static Locale localeFR = new Locale("fr", "FR");
 	public final static String localMsgURL = "Ressources.Textes.messages";
-	public static final String FOND = "ihm/fond.png";
-	public static final String PLATEAU = "ihm/plateau.png";
-	public static final String ICONE = "ihm/desktop Icon.jpg";
-	public static final String SCREEN = "ihm/rotateScreen.png";
+	public static final String FOND = "ihm/images/fond.png";
+	public static final String PLATEAU = "ihm/images/plateau.png";
+	public static final String ICONE = "ihm/images/desktop Icon.jpg";
+	public static final String SCREEN = "ihm/images/rotateScreen.png";
 	
 	public static final ObservableList<Integer> nombreJoueur = FXCollections.observableArrayList(3,4,5,6);
 	public static final ObservableList<Integer> nombreBot = FXCollections.observableArrayList(0,1,2,3,4,5,6);

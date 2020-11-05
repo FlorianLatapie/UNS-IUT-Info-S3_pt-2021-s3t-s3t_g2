@@ -74,7 +74,7 @@ public class OptionPane extends StackPane {
 		vbCentral.setMaxSize(tailleCarreCentral, tailleCarreCentral);
 		vbCentral.setPadding(new Insets(10));
 
-		ImageView img1 = new ImageView(DataControl.SCREEN);
+		/*ImageView img1 = new ImageView(DataControl.SCREEN);
 		img1.setFitHeight(70);
 		img1.setPreserveRatio(true);
 		ImageView img2 = new ImageView(DataControl.SCREEN);
@@ -120,7 +120,7 @@ public class OptionPane extends StackPane {
 		bEcranDroite.setRotate(-90);
 		bEcranDroite.setPrefSize(80, 80);
 		bEcranDroite.setGraphic(img4);
-		bEcranDroite.setOnAction(EventHandler -> sc.rotatePane(vbCentral, "droite"));
+		bEcranDroite.setOnAction(EventHandler -> sc.rotatePane(vbCentral, "droite"));*/
 
 		VBox vbTitre = new VBox();
 		vbTitre.setAlignment(Pos.TOP_CENTER);
@@ -204,7 +204,7 @@ public class OptionPane extends StackPane {
 		ImageView img = new ImageView(DataControl.FOND);
 		vbFond.getChildren().add(img);
 
-		stackPane.getChildren().addAll(vbFond, bEcranHaut, bEcranBas, bEcranGauche, bEcranDroite, rect, vbCentral);
+		stackPane.getChildren().addAll(vbFond, /*bEcranHaut, bEcranBas, bEcranGauche, bEcranDroite,*/ rect, vbCentral);
 		stackPane.setBackground(new Background(new BackgroundFill(Color.BLACK, CornerRadii.EMPTY, null)));
 
 		this.getChildren().add(stackPane);
