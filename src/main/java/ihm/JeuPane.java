@@ -48,7 +48,7 @@ public class JeuPane extends StackPane {
 	private String styleVBox = "-fx-border-color: black; -fx-border-insets: 5; -fx-border-width: 3;";
 	private CornerRadii coinfb = new CornerRadii(5.0);
 	private Background fondBlanc = new Background(new BackgroundFill(Color.WHITE, coinfb, null));
-	
+	private Background fondNoir = new Background(new BackgroundFill(Color.BLACK, CornerRadii.EMPTY, null));
 	
 	private int largBouton = 155;
 	private int hautBouton = 70;
@@ -179,19 +179,28 @@ public class JeuPane extends StackPane {
 
 		vbVoteCentre.getChildren().addAll(hbJoueurHaut, hbJoueurBas);
 
-		Label titre = new Label("Vote\n Pour qui voulez vous voter ?");
-		titre.setAlignment(Pos.CENTER);
-		titre.setFont(Font.font("Segoe UI", FontWeight.BOLD, 25));
-		titre.setTextFill(Color.BLACK);
-
-		VBox vbTitre = new VBox();
-		vbTitre.setAlignment(Pos.CENTER);
-		vbTitre.setPrefSize(700, 80);
-		vbTitre.setMaxSize(700, 80);
-		vbTitre.getChildren().add(titre);
+		Label titreVote = new Label("Vote");
+        titreVote.setAlignment(Pos.CENTER);
+        titreVote.setFont(Font.font("Segoe UI", FontWeight.BOLD, 25));
+        titreVote.setTextFill(Color.WHITE);
+        
+        Label titreQuestion = new Label("Pour qui voulez vous voter ?");
+        titreQuestion.setAlignment(Pos.CENTER);
+        titreQuestion.setFont(Font.font("Segoe UI", FontWeight.BOLD, 25));
+        titreQuestion.setTextFill(Color.WHITE);
+        
+        
+        VBox vbTitre = new VBox();
+        vbTitre.setAlignment(Pos.CENTER);
+        vbTitre.setPrefHeight(80);
+        //vbTitre.setMaxSize(700, 80);
+        vbTitre.setBackground(fondNoir);
+        //vbTitre.setOpacity(.5);
+        vbTitre.getChildren().addAll(titreVote, titreQuestion);
 
 		vote.setTop(vbTitre);
 		vote.setCenter(vbVoteCentre);
+		vote.setDisable(false);
 
 		//////////////////////////////////////////////////////////
 
@@ -211,13 +220,15 @@ public class JeuPane extends StackPane {
 
 		VBox vbTitre1 = new VBox();
 		vbTitre1.setAlignment(Pos.CENTER);
-		vbTitre1.setPrefSize(300, 50);
-		vbTitre1.setMaxSize(300, 50);
+		vbTitre1.setPrefHeight(50);
+		vbTitre1.setMinHeight(50);
+		vbTitre1.setMaxHeight(50);
+		//vbTitre1.setMaxSize(300, 50);
 
 		Label labDeplPers = new Label("Déplacement des personnages");
 		labDeplPers.setAlignment(Pos.TOP_CENTER);
 		labDeplPers.setFont(Font.font("Segoe UI", FontWeight.BOLD, 20));
-		labDeplPers.setTextFill(Color.BLACK);
+		labDeplPers.setTextFill(Color.WHITE);
 
 		VBox vbPersonnage = new VBox();
 		vbPersonnage.setMinWidth(350);
@@ -290,6 +301,7 @@ public class JeuPane extends StackPane {
 		hbBas.getChildren().addAll(bTruand, bFillette);
 
 		vbTitre1.getChildren().add(labDeplPers);
+		vbTitre1.setBackground(fondNoir);
 		vbPersonnage.getChildren().addAll(hbHaut, hbBas);
 		vbDeplPers.getChildren().addAll(vbTitre1, vbPersonnage);
 		
@@ -303,13 +315,15 @@ public class JeuPane extends StackPane {
 
 		VBox vbTitre2 = new VBox();
 		vbTitre2.setAlignment(Pos.CENTER);
-		vbTitre2.setPrefSize(300, 50);
-		vbTitre2.setMaxSize(300, 50);
+		vbTitre2.setPrefHeight(50);
+		vbTitre2.setMinHeight(50);
+		vbTitre2.setMaxHeight(50);
+		//vbTitre2.setMaxSize(300, 50);
 
 		Label labDeplLieux = new Label("Destination");
 		labDeplLieux.setAlignment(Pos.TOP_CENTER);
 		labDeplLieux.setFont(Font.font("Segoe UI", FontWeight.BOLD, 20));
-		labDeplLieux.setTextFill(Color.BLACK);
+		labDeplLieux.setTextFill(Color.WHITE);
 		
 		HBox hbLieux = new HBox();
 		hbLieux.setMinWidth(350);
@@ -409,11 +423,14 @@ public class JeuPane extends StackPane {
 		vbDroite.getChildren().addAll(bCachou, bParking,bSuperMarche );
 
 		vbTitre2.getChildren().add(labDeplLieux);
+		vbTitre2.setBackground(fondNoir);
+		
+		
 		hbLieux.getChildren().addAll(vbGauche, vbDroite);
 		vbDeplLieux.getChildren().addAll(vbTitre2, hbLieux);
 		
 		vbDeplCentre.getChildren().addAll(vbDeplPers, vbDeplLieux);
-		
+		vbDeplCentre.setDisable(false);
 		/////
 		
 		VBox des = new VBox();
@@ -453,10 +470,10 @@ public class JeuPane extends StackPane {
 		des.setPadding(new Insets(10));
 		des.setSpacing(10);
 		des.getChildren().addAll(de1,de2,lancer);
-		des.setVisible(true); //TODO ne pas oublier de le retier 
+		des.setDisable(false); //TODO ne pas oublier de le retier 
 		
 		/////
-		ImageView imgFond = new ImageView(DataControl.JAUNE);
+		ImageView imgFond = new ImageView(DataControl.BLEU);
 		/////
 		HBox fond = new HBox();
 		fond.setAlignment(Pos.CENTER);
@@ -464,7 +481,7 @@ public class JeuPane extends StackPane {
 		fond.getChildren().add(imgFond);
 		
 		stackPane.getChildren().addAll(fond,rectVigile, nomJoueur, vbCentral, vote, vbDeplCentre,des);
-		//stackPane.setBackground(new Background(new BackgroundFill(Color.GREY, CornerRadii.EMPTY, null)));
+		stackPane.setBackground(new Background(new BackgroundFill(Color.BLACK, CornerRadii.EMPTY, null)));
 		//stackPane.setOpacity(.8);
 
 		this.getChildren().add(stackPane);
