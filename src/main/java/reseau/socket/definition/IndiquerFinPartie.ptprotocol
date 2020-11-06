@@ -1,0 +1,22 @@
+seq:31
+className:IndiquerFinPartie
+doc:Indiquer la fin de la partie
+keyword:FP
+protocol:TCP
+values:
+value:
+name:condType
+type:CondType
+doc:« LIEUX » si tous les personnages sont dans le même lieux, « PION » si le nombre minimal de pion a été atteint.
+value:
+name:couleurJoueurGagnant
+type:Couleur
+doc:La couleur du joueur gagnant
+value:
+name:partieId
+type:String
+doc:L’identifiant de la partie fournie à l’initialisation de la partie.
+value:
+name:nombreTour
+type:int
+doc:L’identifiant du tour courant.

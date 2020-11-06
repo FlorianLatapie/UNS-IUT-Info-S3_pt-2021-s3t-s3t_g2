@@ -1,0 +1,26 @@
+seq:28
+className:ChoisirPionSacrifice
+doc:Choisir son pion sacrifié
+keyword:RAZCS
+protocol:TCP
+values:
+value:
+name:numeroLieu
+type:int
+doc:Le numéro du lieu courant
+value:
+name:pion
+type:PionCouleur
+doc:Pion (identifiés par leur couleur/valeur) qui sera sacrifié aux zombies
+value:
+name:idPartie
+type:String
+doc:L’identifiant de la partie fournie à la création de la partie.
+value:
+name:numeroTour
+type:int
+doc:L’identifiant du tour courant.
+value:
+name:joueurId
+type:String
+doc:Un identifiant unique caractérisant le joueur

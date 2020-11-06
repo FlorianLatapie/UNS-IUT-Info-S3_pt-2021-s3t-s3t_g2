@@ -1,0 +1,14 @@
+seq:40
+className:DemanderCartes
+doc:Demander les cartes
+keyword:PVD
+protocol:TCP
+values:
+value:
+name:partieId
+type:String
+doc:L’identifiant de la partie fournie à la création de la partie.
+value:
+name:nombreTour
+type:int
+doc:L’identifiant du tour courant.

@@ -1,0 +1,46 @@
+seq:56
+className:AnnoncerMiseJourPartie
+doc:Annoncer la mise à jour d’une partie
+keyword:AMP
+protocol:UDP
+values:
+value:
+name:partieId
+type:String
+doc:Identifiant unique de partie. La lettre P suivie d’un entier entre 0 et 9 999 999.
+value:
+name:ip
+type:String
+doc:L’IP pour rejoindre la partie sous la forme xxx.xxx.xxx.xxx
+value:
+name:port
+type:int
+doc:Le port pour rejoindre la partie sous la forme d’un entier entre 1024 et 65535
+value:
+name:nom
+type:String
+doc:Le nom de la partie
+value:
+name:nbJoueurMaxPartie
+type:int
+doc:Nombre de joueurs maximum sur la partie
+value:
+name:nbJoueurReelMaxPartie
+type:int
+doc:Nombre de joueurs réels maximum sur la partie (ne peut pas être supérieur à NBJM)
+value:
+name:nbJoueurVirtuelMaxPartie
+type:int
+doc:Nombre de joueurs virtuels maximum sur la partie (ne peut pas être supérieur à NBJM)
+value:
+name:nbJoueurReelConnectePartie
+type:int
+doc:Nombre de joueurs réels connectés à la partie (ne peut pas être supérieur à NBJRM)
+value:
+name:nbJoueurVirtuelConnectePartie
+type:int
+doc:Nombre de joueurs virtuels connectés à la partie (ne peut pas être supérieur à NBJVM)
+value:
+name:status
+type:Status
+doc:Status de la partie

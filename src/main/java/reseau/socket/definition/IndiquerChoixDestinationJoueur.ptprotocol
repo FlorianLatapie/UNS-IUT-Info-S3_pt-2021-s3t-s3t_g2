@@ -1,0 +1,22 @@
+seq:12
+className:IndiquerChoixDestinationJoueur
+doc:Indiquer le choix d’une destination
+keyword:CDDJ
+protocol:TCP
+values:
+value:
+name:destination
+type:int
+doc:Un entier représentant la destination choisie par le joueur courant
+value:
+name:partieId
+type:String
+doc:L’identifiant de la partie fournie à l’initialisation de la partie.
+value:
+name:numeroTour
+type:int
+doc:L’identifiant du tour courant.
+value:
+name:joueurId
+type:String
+doc:Un identifiant unique caractérisant le joueur

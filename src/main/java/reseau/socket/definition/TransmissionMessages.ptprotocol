@@ -1,0 +1,18 @@
+seq:64
+className:TransmissionMessages
+doc:Transmission des messages un par un 
+keyword:TMRP
+protocol:TCP
+values:
+value:
+name:numeroMessage
+type:int
+doc:Numéro du message dans l’étape de restauration pour le joueur courant
+value:
+name:partieId
+type:String
+doc:L’identifiant de la partie.
+value:
+name:message
+type:String
+doc:Le message tel que défini dans ce protocole. Attention, les IDJ et les IDP doivent être mise à jour pour correspondre à la partie courante.
