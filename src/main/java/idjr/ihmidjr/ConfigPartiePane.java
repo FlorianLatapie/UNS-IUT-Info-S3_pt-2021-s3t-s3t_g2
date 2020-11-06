@@ -1,37 +1,34 @@
+package idjr.ihmidjr;
 
-package ihmidjr;
-
-import ihmidjr.DataControl.ApplicationPane;
-import ihmidjr.event.AttenteListener;
+import idjr.ihmidjr.DataControl.ApplicationPane;
+import idjr.ihmidjr.event.ConfigListener;
 import javafx.application.Platform;
-//TODO import ihm.eventListener.AttenteListener;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
 import javafx.scene.effect.GaussianBlur;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
-import javafx.scene.shape.Circle;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
-import javafx.scene.text.TextAlignment;
 
 /**
- * The Class AccueilPane.
+ * The Class ConfigPartiePane.
  *
  * @author Florian
  * @version 0.1
  * @since 26/10/2020
  */
-public class AttenteJoueurPane extends StackPane implements AttenteListener {
+public class ConfigPartiePane extends StackPane implements ConfigListener {
 	// private ControleurJeu cj = new ControleurJeu(); // mettre ne paramètres les
 	// joueurs
 
 	private ScreenControl sControl = null;
 	private Core core = null;
-	private final ApplicationPane paneName = ApplicationPane.WAIT;
+	private final ApplicationPane paneName = ApplicationPane.CONFIG;
 	// définition des variable pour la suite du pane
 	private int tailleCarreCentral = 800; // l'interface est sur un stackPane qui peut tourner avec des crans de 90
 	// degrés
@@ -45,109 +42,80 @@ public class AttenteJoueurPane extends StackPane implements AttenteListener {
 	private String styleBoutonsSouris = "-fx-background-color:#ff0000;  -fx-text-fill:#000000; -fx-background-radius: 15px;";
 	private StackPane stackPane = new StackPane();
 	private GaussianBlur flou = new GaussianBlur(30);
-	private String styleVBox = "-fx-border-color: black; -fx-border-insets: -3; -fx-border-width: 3";
-	private Font policeNom = Font.font("Segoe UI", FontWeight.BOLD, 33);
+
+	private Font policeNom = Font.font("Segoe UI", 25);
 	private int hauteurElemtents = 60;
+	private int largeurTF = 200;
+	private int largeurTexte = 220;
 	private int spacing = 30;
 	private CornerRadii coinfb = new CornerRadii(5.0);
 	private Background fondBlanc = new Background(new BackgroundFill(Color.WHITE, coinfb, null));
-	private int tailleCercle = 55;
 
-	private Insets padding = new Insets(0, 10, 0, 10);
-	Label lIDPartie;
+	private Insets botPadding = new Insets(10);
 
-	public AttenteJoueurPane(ScreenControl sc, Core c) {
+	public ConfigPartiePane(ScreenControl sc, Core c) {
 		core = c;
 		sControl = sc;
 		stackPane.setAlignment(Pos.CENTER);
 		// titre
-		Label titre1 = new Label("Connexion \nen cours");
-		titre1.setTextAlignment(TextAlignment.CENTER);
+		Label titre1 = new Label("Rejoindre\n\tune partie");
 		titre1.setFont(Font.font("Segoe UI", FontWeight.BOLD, 80));
 		titre1.setTextFill(Color.BLACK);
 
 		VBox titre = new VBox(titre1);
 		titre.setAlignment(Pos.CENTER);
 		titre.setBackground(new Background(new BackgroundFill(Color.RED, coin, null)));
-		titre.setPrefWidth(740);
-		titre.setMinWidth(740);
+		titre.setPrefWidth(730);
+		titre.setMinWidth(730);
 
 		////
 
-		lIDPartie = new Label();
-		lIDPartie.setStyle("-fx-border-color: black; -fx-border-insets: -3; -fx-border-width: 3");
-		lIDPartie.setFont(policeNom);
-		lIDPartie.setTextFill(Color.WHITE);
-		lIDPartie.setMinHeight(hauteurElemtents);
-		lIDPartie.setPadding(padding);
+		Label desc = new Label("Entrez l'identifiant de la partie");
+		desc.setAlignment(Pos.CENTER);
+		desc.setFont(policeNom);
+		desc.setMinHeight(hauteurElemtents);
+		// desc.setBackground(fondBlanc);
+		desc.setPadding(botPadding);
 
-		Label desc = new Label("En attente des joueurs... Veuillez entrer la couleur dans le PP");
-		desc.setFont(Font.font("Segoe UI", FontWeight.BOLD, 27));
-		desc.setTextFill(Color.WHITE);
-		desc.setPadding(new Insets(7));
+		TextField nomP = new TextField();
+		nomP.setText("Partie");
+		nomP.setFont(policeNom);
+		nomP.setPrefSize(largeurTF, hauteurElemtents);
+		nomP.setMinHeight(hauteurElemtents);
 
-		VBox vbDescPartie = new VBox();
-		vbDescPartie.setAlignment(Pos.CENTER);
-		vbDescPartie.getChildren().addAll(lIDPartie, desc);
-
-		// les cercles passent en rouge quand le joueur à rejoint
-		Circle cercle1 = new Circle();
-		cercle1.setRadius(tailleCercle);
-		cercle1.setFill(null);
-		cercle1.setStroke(Color.WHITE);
-		cercle1.setStrokeWidth(7);
-
-		Circle cercle2 = new Circle();
-		cercle2.setRadius(tailleCercle);
-		cercle2.setFill(null);
-		cercle2.setStroke(Color.WHITE);
-		cercle2.setStrokeWidth(7);
-
-		Circle cercle3 = new Circle();
-		cercle3.setRadius(tailleCercle);
-		cercle3.setFill(null);
-		cercle3.setStroke(Color.WHITE);
-		cercle3.setStrokeWidth(7);
-
-		Circle cercle4 = new Circle();
-		cercle4.setRadius(tailleCercle);
-		cercle4.setFill(null);
-		cercle4.setStroke(Color.WHITE);
-		cercle4.setStrokeWidth(7);
-
-		Circle cercle5 = new Circle();
-		cercle5.setRadius(tailleCercle);
-		cercle5.setFill(null);
-		cercle5.setStroke(Color.WHITE);
-		cercle5.setStrokeWidth(7);
-
-		Circle cercle6 = new Circle();
-		cercle6.setRadius(tailleCercle);
-		cercle6.setFill(null);
-		cercle6.setStroke(Color.WHITE);
-		cercle6.setStrokeWidth(7);
-
-		HBox hbJoueurPret = new HBox();
-		hbJoueurPret.setAlignment(Pos.CENTER);
-		hbJoueurPret.setStyle(styleVBox);
-		hbJoueurPret.setPadding(new Insets(20));
-		hbJoueurPret.setSpacing(12);
-		hbJoueurPret.getChildren().addAll(cercle1, cercle2, cercle3, cercle4, cercle5, cercle6);
-
-		VBox vbWait = new VBox();
-		vbWait.setStyle(styleVBox);
-		vbWait.setAlignment(Pos.CENTER);
-		vbWait.setPrefSize(700, 200);
-		vbWait.setMaxSize(700, 200);
-		vbWait.setMargin(lIDPartie, new Insets(8));
-		vbWait.getChildren().addAll(vbDescPartie, hbJoueurPret);
+		VBox partie = new VBox();
+		partie.getChildren().addAll(desc, nomP);
+		partie.setBackground(fondBlanc);
+		partie.setPadding(new Insets(10));
+		partie.setPrefWidth(220);
+		partie.setMaxWidth(400);
 
 		VBox vbCenter = new VBox();
 		vbCenter.setAlignment(Pos.CENTER);
-		vbCenter.setSpacing(spacing);
-		vbCenter.getChildren().addAll(vbWait);
+		// vbCenter.setSpacing(spacing);
+		// vbCenter.setBackground(fondBlanc);
+		vbCenter.getChildren().addAll(partie);
 
 		// boutons
+		Button bJouer = new Button("JOUER");
+		bJouer.setPrefSize(lBouton, hBouton);
+		bJouer.setMinSize(lBouton, hBouton);
+		bJouer.setFont(policeBouton);
+		bJouer.setStyle(styleBoutons);
+
+		bJouer.setOnMouseEntered(event -> {
+
+			bJouer.setStyle(styleBoutonsSouris);
+		});
+		bJouer.setOnMouseExited(event -> {
+			bJouer.setStyle(styleBoutons);
+		});
+		bJouer.setOnAction(EventHandler -> {
+			core.getIdjr().estPartieConnecte(nomP.getText());
+		});
+		nomP.textProperty().addListener((obs, oldText, newText) -> {
+			bJouer.setDisable(nomP.getText().isEmpty());
+		});
 
 		Button bRetour = new Button("RETOUR");
 		bRetour.setPrefSize(lBouton, hBouton);
@@ -161,15 +129,13 @@ public class AttenteJoueurPane extends StackPane implements AttenteListener {
 		bRetour.setOnMouseExited(event -> {
 			bRetour.setStyle(styleBoutons);
 		});
-		bRetour.setOnAction(EventHandler -> {
-			// TODO remove core.getCj().stopThreads();
-			sc.setPaneOnTop(ApplicationPane.ACCUEIL);
-		});
+		bRetour.setOnAction(EventHandler -> sc.setPaneOnTop(ApplicationPane.ACCUEIL));
 
 		// grille contenant les boutons du bas
 		AnchorPane boutonsPanneau = new AnchorPane();
 		boutonsPanneau.setLeftAnchor(bRetour, 0.0);
-		boutonsPanneau.getChildren().addAll(bRetour);
+		boutonsPanneau.setRightAnchor(bJouer, 0.0);
+		boutonsPanneau.getChildren().addAll(bRetour, bJouer);
 
 		// image fond
 		ImageView imgFond = new ImageView(DataControl.FOND);
@@ -180,7 +146,7 @@ public class AttenteJoueurPane extends StackPane implements AttenteListener {
 		centreMenu.setMinSize(tailleCarreCentral, tailleCarreCentral);
 		centreMenu.setPrefSize(tailleCarreCentral, tailleCarreCentral);
 		centreMenu.setMaxSize(tailleCarreCentral, tailleCarreCentral);
-		// centreMenu.setMargin(titre, new Insets(0, 0, 100, 0));
+		centreMenu.setMargin(titre, new Insets(0, 0, 100, 0));
 
 		centreMenu.setAlignment(titre, Pos.CENTER);
 
@@ -207,24 +173,12 @@ public class AttenteJoueurPane extends StackPane implements AttenteListener {
 		sControl.setPaneOnTop(paneName);
 
 	}
-	/*
-	 * @Override public void joueurPret() {
-	 * sControl.setPaneOnTop(ApplicationPane.COULEUR); }
-	 * 
-	 * @Override public void nomPartie(String nom) { lIDPartie.setText(nom); }
-	 */
 
 	@Override
-	public void stopWait() {
+	public void partieValide(String id) {
 		Platform.runLater(() -> {
-			sControl.setPaneOnTop(ApplicationPane.JEU);
-		});
-	}
-
-	@Override
-	public void nomPartie(String nom) {
-		Platform.runLater(() -> {
-			lIDPartie.setText(nom);
+			core.getIdjr().rejoindrePartie(id);
+			sControl.setPaneOnTop(ApplicationPane.WAIT);
 		});
 	}
 }

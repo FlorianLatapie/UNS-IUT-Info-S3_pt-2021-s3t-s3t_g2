@@ -1,11 +1,11 @@
-package ihmidjr;
+package idjr.ihmidjr;
 
 import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
 
-import ihmidjr.DataControl.ApplicationPane;
-import ihmidjr.event.JeuListener;
+import idjr.ihmidjr.DataControl.ApplicationPane;
+import idjr.ihmidjr.event.JeuListener;
 import javafx.application.Platform;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;

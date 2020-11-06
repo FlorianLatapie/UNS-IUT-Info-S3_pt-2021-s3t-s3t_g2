@@ -1,4 +1,4 @@
-package ihmidjr.event;
+package idjr.ihmidjr.event;
 
 public interface AttenteListener {
 	void stopWait();

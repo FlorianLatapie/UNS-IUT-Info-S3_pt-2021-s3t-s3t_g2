@@ -1,9 +1,9 @@
-package ihmidjr;
+package idjr.ihmidjr;
 
 
 import idjr.Idjr;
-import ihmidjr.DataControl.ApplicationPane;
-import ihmidjr.event.Initializer;
+import idjr.ihmidjr.DataControl.ApplicationPane;
+import idjr.ihmidjr.event.Initializer;
 
 public class Core {
     private int nbJoueur = 5;

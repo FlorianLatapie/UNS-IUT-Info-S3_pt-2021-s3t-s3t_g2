@@ -1,4 +1,4 @@
-package ihmidjr;
+package idjr.ihmidjr;
 
 import java.text.MessageFormat;
 import java.util.ArrayList;

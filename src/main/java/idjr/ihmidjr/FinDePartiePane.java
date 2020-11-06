@@ -1,6 +1,8 @@
-package ihmidjr;
+package idjr.ihmidjr;
 
-import ihmidjr.DataControl.ApplicationPane;
+import idjr.ihmidjr.DataControl.ApplicationPane;
+import idjr.ihmidjr.event.FinListener;
+import javafx.application.Platform;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
@@ -26,11 +28,11 @@ import javafx.scene.text.FontWeight;
  * @version 0.1
  * @since 01/11/2020
  */
-public class ReglesPane extends StackPane {
+public class FinDePartiePane extends StackPane implements FinListener {
 
 	private ScreenControl sControl = null;
 	private Core core = null;
-	private final ApplicationPane paneName = ApplicationPane.REGLES;
+	private final ApplicationPane paneName = ApplicationPane.ENDGAME;
 	// définition des variable pour la suite du pane
 
 	// définition des variable pour la suite du pane
@@ -46,18 +48,18 @@ public class ReglesPane extends StackPane {
 	private StackPane stackPane = new StackPane();
 	private GaussianBlur flou = new GaussianBlur(30);
 
-	private Font policeNom = Font.font("Segoe UI", 17);
-	private CornerRadii coinfb = new CornerRadii(5.0);
+	private Font policeNom = Font.font("Segoe UI", 35);
+	private CornerRadii coinfb = new CornerRadii(10.0);
 	private Background fondBlanc = new Background(new BackgroundFill(Color.WHITE, coinfb, null));
+	Label desc;
 
-
-	public ReglesPane(ScreenControl sc, Core c) {
+	public FinDePartiePane(ScreenControl sc, Core c) {
 		core = c;
 		sControl = sc;
 		stackPane.setAlignment(Pos.CENTER);
 
 		// titre
-		Label titre1 = new Label("REGLÈS DU JEU");
+		Label titre1 = new Label("Fin de Partie");
 		titre1.setFont(Font.font("Segoe UI", FontWeight.BOLD, 80));
 		titre1.setTextFill(Color.BLACK);
 
@@ -69,20 +71,19 @@ public class ReglesPane extends StackPane {
 
 		////
 
-		Label desc = new Label("//TODO afficher texte des règles ");
+		desc = new Label("vous avez perdu, joueur " + "x" + " a gagné\n (ou) vous avez gagné");
 		desc.setFont(policeNom);
+		desc.setPadding(new Insets(20));
 		desc.setBackground(fondBlanc);
-		
 
-		
-		// vJoueurs.setBackground(new Background(new// BackgroundFill(Color.BLUE,CornerRadii.EMPTY,null)));
+		// vJoueurs.setBackground(new Background(new//
+		// BackgroundFill(Color.BLUE,CornerRadii.EMPTY,null)));
 
 		VBox vbCenter = new VBox();
-		
+
 		vbCenter.setAlignment(Pos.CENTER);
 		vbCenter.getChildren().addAll(desc);
-		
-		
+
 		// bouton
 
 		Button bRetour = new Button("RETOUR");
@@ -103,9 +104,7 @@ public class ReglesPane extends StackPane {
 		AnchorPane boutonsPanneau = new AnchorPane();
 		boutonsPanneau.setLeftAnchor(bRetour, 0.0);
 		boutonsPanneau.getChildren().addAll(bRetour);
-		
-		
-		
+
 		// image fond
 		ImageView imgFond = new ImageView(DataControl.FOND);
 		// carre central qui contient tous les éléments (boutons et titre)
@@ -141,6 +140,16 @@ public class ReglesPane extends StackPane {
 		sControl.registerNode(paneName, this);
 		sControl.setPaneOnTop(paneName);
 
+	}
+
+	@Override
+	public void gagnant(String nom) {
+		Platform.runLater(() -> {
+			if (nom.equals(core.getIdjr().getNom()))
+				desc.setText("Vous avez gagné !");
+			else
+				desc.setText("Vous avez perdu !\nLe gagnant est " + nom);
+		});
 	}
 
 }

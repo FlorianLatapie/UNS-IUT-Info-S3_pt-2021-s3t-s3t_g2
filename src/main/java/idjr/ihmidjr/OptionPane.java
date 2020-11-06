@@ -1,6 +1,6 @@
-package ihmidjr;
+package idjr.ihmidjr;
 
-import ihmidjr.DataControl.ApplicationPane;
+import idjr.ihmidjr.DataControl.ApplicationPane;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;

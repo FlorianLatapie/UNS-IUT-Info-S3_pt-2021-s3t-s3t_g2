@@ -1,6 +1,6 @@
 package idjr;
 
-import ihmidjr.event.Initializer;
+import idjr.ihmidjr.event.Initializer;
 import reseau.socket.NetWorkManager;
 import reseau.socket.SideConnection;
 import reseau.socket.TcpClientSocket;

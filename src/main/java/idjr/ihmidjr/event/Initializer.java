@@ -1,4 +1,4 @@
-package ihmidjr.event;
+package idjr.ihmidjr.event;
 
 import java.util.ArrayList;
 import java.util.List;

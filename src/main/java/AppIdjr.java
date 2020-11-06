@@ -1,5 +1,5 @@
-import ihmidjr.Core;
-import ihmidjr.InterfacePrincipale;
+import idjr.ihmidjr.Core;
+import idjr.ihmidjr.InterfacePrincipale;
 
 /**
  * Lance l'application et son interface graphique 
