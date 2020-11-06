@@ -1,5 +1,7 @@
 package ihm;
 
+import java.util.List;
+
 import ihm.DataControl.ApplicationPane;
 import ihm.ScreenControl;
 import ihm.event.JeuListener;
@@ -34,7 +36,7 @@ public class JeuPane extends StackPane implements JeuListener {
 	private Core core = null;
 	// définition des variable pour la suite du pane
 	private int tailleCarreCentral = 600; // l'interface est sur un stackPane qui peut tourner avec des crans de 90
-											// degrés
+	// degrés
 	private int hBouton = 100;
 	private int lBouton = 200;
 	private int marge = tailleCarreCentral / 25;
@@ -51,7 +53,7 @@ public class JeuPane extends StackPane implements JeuListener {
 	private CornerRadii coinfb = new CornerRadii(5.0);
 	private Background fondBlanc = new Background(new BackgroundFill(Color.WHITE, coinfb, null));
 	private Background fondNoir = new Background(new BackgroundFill(Color.BLACK, CornerRadii.EMPTY, null));
-	
+
 	private int largBouton = 155;
 	private int hautBouton = 70;
 
@@ -59,36 +61,51 @@ public class JeuPane extends StackPane implements JeuListener {
 	private int largeurTF = 100;
 	private int hauteurElemtents = 60;
 	private final ApplicationPane paneName = ApplicationPane.JEU;
-	
-	
-	//TODO 
+
+	// TODO
 	Label phasePartie;
-	
+
 	BorderPane info;
 	Label titreInfo;
-    Label lInfo;
-    
+	Label lInfo;
+
+	Button bToilettes;
+	Button bCachou;
+	Button bMegatoys;
+	Button bParking;
+	Button bPCSecu;
+	Button bSuperMarche;
+
+	Button bBlonde;
+	Button bBrute;
+	Button bTruand;
+	Button bFillette;
+
+	Label de1;
+	Label de2;
+
+	Label nomJoueur;
+
 	public JeuPane(ScreenControl sc, Core c) {
 		core = c;
 		sControl = sc;
 
 		stackPane.setAlignment(Pos.CENTER);
-		
-		Label nomJoueur = new Label("Nom du joueur");
+
+		nomJoueur = new Label("Nom du joueur");
 		nomJoueur.setAlignment(Pos.CENTER);
 		nomJoueur.setTranslateY(-400);
 		nomJoueur.setFont(Font.font("Segoe UI", FontWeight.BOLD, 50));
 		nomJoueur.setTextFill(Color.BLACK);
-		
+
 		phasePartie = new Label("Phase de la partie");
 		phasePartie.setAlignment(Pos.CENTER);
 		phasePartie.setTranslateY(-325);
 		phasePartie.setFont(Font.font("Segoe UI", 50));
 		phasePartie.setTextFill(Color.BLACK);
-		
-		
+
 		//////////////////////////////////////////
-		//TODO afficher une image dedans 
+		// TODO afficher une image dedans
 		Rectangle rectVigile = new Rectangle();
 		rectVigile.setTranslateX(793);
 		rectVigile.setTranslateY(150);
@@ -97,7 +114,6 @@ public class JeuPane extends StackPane implements JeuListener {
 		rectVigile.setStrokeWidth(3);
 		rectVigile.setWidth(200);
 		rectVigile.setHeight(120);
-		
 
 		//////////////////////////////////////////
 		VBox vbCentral = new VBox();
@@ -198,23 +214,22 @@ public class JeuPane extends StackPane implements JeuListener {
 		vbVoteCentre.getChildren().addAll(hbJoueurHaut, hbJoueurBas);
 
 		Label titreVote = new Label("Vote");
-        titreVote.setAlignment(Pos.CENTER);
-        titreVote.setFont(Font.font("Segoe UI", FontWeight.BOLD, 25));
-        titreVote.setTextFill(Color.WHITE);
-        
-        Label titreQuestion = new Label("Pour qui voulez vous voter ?");
-        titreQuestion.setAlignment(Pos.CENTER);
-        titreQuestion.setFont(Font.font("Segoe UI", FontWeight.BOLD, 25));
-        titreQuestion.setTextFill(Color.WHITE);
-        
-        
-        VBox vbTitre = new VBox();
-        vbTitre.setAlignment(Pos.CENTER);
-        vbTitre.setPrefHeight(80);
-        //vbTitre.setMaxSize(700, 80);
-        vbTitre.setBackground(fondNoir);
-        //vbTitre.setOpacity(.5);
-        vbTitre.getChildren().addAll(titreVote, titreQuestion);
+		titreVote.setAlignment(Pos.CENTER);
+		titreVote.setFont(Font.font("Segoe UI", FontWeight.BOLD, 25));
+		titreVote.setTextFill(Color.WHITE);
+
+		Label titreQuestion = new Label("Pour qui voulez vous voter ?");
+		titreQuestion.setAlignment(Pos.CENTER);
+		titreQuestion.setFont(Font.font("Segoe UI", FontWeight.BOLD, 25));
+		titreQuestion.setTextFill(Color.WHITE);
+
+		VBox vbTitre = new VBox();
+		vbTitre.setAlignment(Pos.CENTER);
+		vbTitre.setPrefHeight(80);
+		// vbTitre.setMaxSize(700, 80);
+		vbTitre.setBackground(fondNoir);
+		// vbTitre.setOpacity(.5);
+		vbTitre.getChildren().addAll(titreVote, titreQuestion);
 
 		vote.setTop(vbTitre);
 		vote.setCenter(vbVoteCentre);
@@ -229,7 +244,7 @@ public class JeuPane extends StackPane implements JeuListener {
 		vbDeplCentre.setPrefSize(300, 500);
 		vbDeplCentre.setMaxSize(300, 500);
 		vbDeplCentre.setStyle(styleVBox);
-		
+
 		VBox vbDeplPers = new VBox();
 		vbDeplPers.setAlignment(Pos.CENTER);
 		vbDeplPers.setPrefSize(300, 500);
@@ -241,7 +256,7 @@ public class JeuPane extends StackPane implements JeuListener {
 		vbTitre1.setPrefHeight(50);
 		vbTitre1.setMinHeight(50);
 		vbTitre1.setMaxHeight(50);
-		//vbTitre1.setMaxSize(300, 50);
+		// vbTitre1.setMaxSize(300, 50);
 
 		Label labDeplPers = new Label("Déplacement des personnages");
 		labDeplPers.setAlignment(Pos.TOP_CENTER);
@@ -252,7 +267,7 @@ public class JeuPane extends StackPane implements JeuListener {
 		vbPersonnage.setMinWidth(350);
 		vbPersonnage.setMaxWidth(350);
 		vbPersonnage.setAlignment(Pos.TOP_CENTER);
-		//vbPersonnage.setStyle(styleVBox);
+		// vbPersonnage.setStyle(styleVBox);
 
 		HBox hbHaut = new HBox();
 		hbHaut.setAlignment(Pos.TOP_CENTER);
@@ -263,7 +278,7 @@ public class JeuPane extends StackPane implements JeuListener {
 		hbBas.setSpacing(5);
 		hbBas.setPadding(new Insets(5));
 
-		Button bBlonde = new Button("La Blonde");
+		bBlonde = new Button("La Blonde");
 		bBlonde.setAlignment(Pos.CENTER);
 		bBlonde.setStyle(styleBoutons);
 		bBlonde.setPrefSize(largBouton, hautBouton);
@@ -276,7 +291,7 @@ public class JeuPane extends StackPane implements JeuListener {
 			bBlonde.setStyle(styleBoutons);
 		});
 
-		Button bBrute = new Button("La Brute");
+		bBrute = new Button("La Brute");
 		bBrute.setAlignment(Pos.CENTER);
 		bBrute.setStyle(styleBoutons);
 		bBrute.setPrefSize(largBouton, hautBouton);
@@ -289,7 +304,7 @@ public class JeuPane extends StackPane implements JeuListener {
 			bBrute.setStyle(styleBoutons);
 		});
 
-		Button bTruand = new Button("Le Truand");
+		bTruand = new Button("Le Truand");
 		bTruand.setAlignment(Pos.CENTER);
 		bTruand.setStyle(styleBoutons);
 		bTruand.setPrefSize(largBouton, hautBouton);
@@ -302,7 +317,7 @@ public class JeuPane extends StackPane implements JeuListener {
 			bTruand.setStyle(styleBoutons);
 		});
 
-		Button bFillette = new Button("La Fillette");
+		bFillette = new Button("La Fillette");
 		bFillette.setAlignment(Pos.CENTER);
 		bFillette.setStyle(styleBoutons);
 		bFillette.setPrefSize(largBouton, hautBouton);
@@ -322,9 +337,9 @@ public class JeuPane extends StackPane implements JeuListener {
 		vbTitre1.setBackground(fondNoir);
 		vbPersonnage.getChildren().addAll(hbHaut, hbBas);
 		vbDeplPers.getChildren().addAll(vbTitre1, vbPersonnage);
-		
+
 		/////////////////////////////////////////////////////////
-		
+
 		VBox vbDeplLieux = new VBox();
 		vbDeplLieux.setAlignment(Pos.CENTER);
 		vbDeplLieux.setPrefSize(300, 500);
@@ -336,30 +351,30 @@ public class JeuPane extends StackPane implements JeuListener {
 		vbTitre2.setPrefHeight(50);
 		vbTitre2.setMinHeight(50);
 		vbTitre2.setMaxHeight(50);
-		//vbTitre2.setMaxSize(300, 50);
+		// vbTitre2.setMaxSize(300, 50);
 
 		Label labDeplLieux = new Label("Destination");
 		labDeplLieux.setAlignment(Pos.TOP_CENTER);
 		labDeplLieux.setFont(Font.font("Segoe UI", FontWeight.BOLD, 20));
 		labDeplLieux.setTextFill(Color.WHITE);
-		
+
 		HBox hbLieux = new HBox();
 		hbLieux.setMinWidth(350);
 		hbLieux.setMaxWidth(350);
 		hbLieux.setAlignment(Pos.TOP_CENTER);
-		//hbLieux.setStyle(styleVBox);
+		// hbLieux.setStyle(styleVBox);
 
 		VBox vbGauche = new VBox();
 		vbGauche.setAlignment(Pos.CENTER_LEFT);
 		vbGauche.setSpacing(5);
 		vbGauche.setPadding(new Insets(5));
-		
+
 		VBox vbDroite = new VBox();
 		vbDroite.setAlignment(Pos.CENTER_RIGHT);
 		vbDroite.setSpacing(5);
 		vbDroite.setPadding(new Insets(5));
 
-		Button bToilettes = new Button("Toilettes");
+		bToilettes = new Button("Toilettes");
 		bToilettes.setAlignment(Pos.CENTER);
 		bToilettes.setStyle(styleBoutons);
 		bToilettes.setPrefSize(largBouton, hautBouton);
@@ -372,7 +387,7 @@ public class JeuPane extends StackPane implements JeuListener {
 			bToilettes.setStyle(styleBoutons);
 		});
 
-		Button bCachou = new Button("Cachou");
+		bCachou = new Button("Cachou");
 		bCachou.setAlignment(Pos.CENTER);
 		bCachou.setStyle(styleBoutons);
 		bCachou.setPrefSize(largBouton, hautBouton);
@@ -385,7 +400,7 @@ public class JeuPane extends StackPane implements JeuListener {
 			bCachou.setStyle(styleBoutons);
 		});
 
-		Button bMegatoys = new Button("Megatoys");
+		bMegatoys = new Button("Megatoys");
 		bMegatoys.setAlignment(Pos.CENTER);
 		bMegatoys.setStyle(styleBoutons);
 		bMegatoys.setPrefSize(largBouton, hautBouton);
@@ -398,7 +413,7 @@ public class JeuPane extends StackPane implements JeuListener {
 			bMegatoys.setStyle(styleBoutons);
 		});
 
-		Button bParking = new Button("Parking");
+		bParking = new Button("Parking");
 		bParking.setAlignment(Pos.CENTER);
 		bParking.setStyle(styleBoutons);
 		bParking.setPrefSize(largBouton, hautBouton);
@@ -410,8 +425,8 @@ public class JeuPane extends StackPane implements JeuListener {
 		bParking.setOnMouseExited(event -> {
 			bParking.setStyle(styleBoutons);
 		});
-		
-		Button bPCSecu = new Button("PC\nSécurité");
+
+		bPCSecu = new Button("PC\nSécurité");
 		bPCSecu.setAlignment(Pos.CENTER);
 		bPCSecu.setStyle(styleBoutons);
 		bPCSecu.setPrefSize(largBouton, hautBouton);
@@ -423,8 +438,8 @@ public class JeuPane extends StackPane implements JeuListener {
 		bPCSecu.setOnMouseExited(event -> {
 			bPCSecu.setStyle(styleBoutons);
 		});
-		
-		Button bSuperMarche = new Button("Supermarché");
+
+		bSuperMarche = new Button("Supermarché");
 		bSuperMarche.setAlignment(Pos.CENTER);
 		bSuperMarche.setStyle(styleBoutons);
 		bSuperMarche.setPrefSize(largBouton, hautBouton);
@@ -438,85 +453,84 @@ public class JeuPane extends StackPane implements JeuListener {
 		});
 
 		vbGauche.getChildren().addAll(bToilettes, bMegatoys, bPCSecu);
-		vbDroite.getChildren().addAll(bCachou, bParking,bSuperMarche );
+		vbDroite.getChildren().addAll(bCachou, bParking, bSuperMarche);
 
 		vbTitre2.getChildren().add(labDeplLieux);
 		vbTitre2.setBackground(fondNoir);
-		
-		
+
 		hbLieux.getChildren().addAll(vbGauche, vbDroite);
 		vbDeplLieux.getChildren().addAll(vbTitre2, hbLieux);
-		
+
 		vbDeplCentre.getChildren().addAll(vbDeplPers, vbDeplLieux);
 		vbDeplCentre.setDisable(false);
 		/////
-		
+
 		VBox des = new VBox();
 		des.setTranslateX(790);
 		des.setTranslateY(-100);
 		des.setAlignment(Pos.CENTER);
 		des.setStyle(styleVBox);
-		//des.setMaxSize(100,250);
-		//des.setMinSize(100,250);
-		des.setMaxSize(120,275);
-		Label de1 = new Label("6");
+		// des.setMaxSize(100,250);
+		// des.setMinSize(100,250);
+		des.setMaxSize(120, 275);
+		de1 = new Label("0");
 		de1.setBackground(fondBlanc);
 		de1.setAlignment(Pos.CENTER);
-		de1.setMinSize(100,100);
-		//de1.setStyle(styleDe);
+		de1.setMinSize(100, 100);
+		// de1.setStyle(styleDe);
 		de1.setTextFill(Color.BLACK);
 		de1.setFont(policeBoutonDe);
-		Label de2 = new Label("6");
+		de2 = new Label("0");
 		de2.setBackground(fondBlanc);
 		de2.setAlignment(Pos.CENTER);
-		de2.setMinSize(100,100);
-		//de2.setStyle(styleDe);
+		de2.setMinSize(100, 100);
+		// de2.setStyle(styleDe);
 		de2.setTextFill(Color.BLACK);
 		de2.setFont(policeBoutonDe);
-		
+
 		Button lancer = new Button("Lancer");
 		lancer.setStyle(styleBoutons);
 		lancer.setFont(Font.font("Segoe UI", FontWeight.BOLD, 20));
-		lancer.setMinSize(100,70);
+		lancer.setMinSize(100, 70);
 		lancer.setOnMouseEntered(event -> {
 			lancer.setStyle(styleBoutonsSouris);
 		});
 		lancer.setOnMouseExited(event -> {
 			lancer.setStyle(styleBoutons);
 		});
-		
+
 		des.setPadding(new Insets(10));
 		des.setSpacing(10);
-		des.getChildren().addAll(de1,de2,lancer);
-		des.setDisable(false); //TODO ne pas oublier de le retier 
-		
+		des.getChildren().addAll(de1, de2, lancer);
+		des.setDisable(false); // TODO ne pas oublier de le retier
+
 		/////
-		 info = new BorderPane();
-	     //info.setMinSize(500, 500);
-	     info.setPrefSize(500, 500);
-	     info.setMaxSize(500, 500);
-	     info.setBackground(fondBlanc);
-	     
-	     VBox vTitreInfo = new VBox();
-	     vTitreInfo.setAlignment(Pos.CENTER);
-	     vTitreInfo.setPadding(new Insets(20));
-	     titreInfo = new Label("Titre info");
-	     titreInfo.setFont(policeBoutonDe);
-	     vTitreInfo.getChildren().addAll(titreInfo);
-	     
-	     VBox vInfo = new VBox();
-	     vInfo.setAlignment(Pos.TOP_LEFT);
-	     lInfo = new Label("information");
-	     lInfo.setFont(policeBoutonDe);
-	     vInfo.getChildren().addAll(lInfo);
-	     
-	     info.setMargin(vInfo, new Insets (50,20,0,20));
-	     info.setTop(vTitreInfo);
-	     info.setCenter(vInfo);
-	     //info.getChildren().addAll(titreInfo, lInfo);
-	     info.setVisible(false);
-	        //TODO
-		
+		info = new BorderPane();
+		// info.setMinSize(500, 500);
+		info.setPrefSize(500, 500);
+		info.setMaxSize(500, 500);
+		info.setBackground(fondBlanc);
+		info.setVisible(false);
+
+		VBox vTitreInfo = new VBox();
+		vTitreInfo.setAlignment(Pos.CENTER);
+		vTitreInfo.setPadding(new Insets(20));
+		titreInfo = new Label("Titre info");
+		titreInfo.setFont(policeBoutonDe);
+		vTitreInfo.getChildren().addAll(titreInfo);
+
+		VBox vInfo = new VBox();
+		vInfo.setAlignment(Pos.TOP_LEFT);
+		lInfo = new Label("information");
+		lInfo.setFont(policeBoutonDe);
+		vInfo.getChildren().addAll(lInfo);
+
+		info.setMargin(vInfo, new Insets(50, 20, 0, 20));
+		info.setTop(vTitreInfo);
+		info.setCenter(vInfo);
+		// info.getChildren().addAll(titreInfo, lInfo);
+		info.setVisible(true);
+
 		/////
 		ImageView imgFond = new ImageView(DataControl.BLEU);
 		/////
@@ -524,14 +538,218 @@ public class JeuPane extends StackPane implements JeuListener {
 		fond.setAlignment(Pos.CENTER);
 		fond.setEffect(flou);
 		fond.getChildren().add(imgFond);
-		
-		stackPane.getChildren().addAll(fond,rectVigile, nomJoueur,phasePartie, vbCentral, vote, vbDeplCentre,des,info);
+
+		stackPane.getChildren().addAll(fond, rectVigile, nomJoueur, phasePartie, vbCentral, vote, vbDeplCentre, des,
+				info);
 		stackPane.setBackground(new Background(new BackgroundFill(Color.BLACK, CornerRadii.EMPTY, null)));
-		//stackPane.setOpacity(.8);
+		// stackPane.setOpacity(.8);
 
 		this.getChildren().add(stackPane);
 		sControl.registerNode(paneName, this);
 		sControl.setPaneOnTop(paneName);
+
+		bBlonde.setOnAction(EventHandler -> {
+			core.getIdjr().setPionChoisi(7);
+			core.getIdjr().pionChoisi(true);
+			bBlonde.setDisable(true);
+			bBrute.setDisable(true);
+			bTruand.setDisable(true);
+			bFillette.setDisable(true);
+		});
+		bBrute.setOnAction(EventHandler -> {
+			core.getIdjr().setPionChoisi(5);
+			core.getIdjr().pionChoisi(true);
+			bBlonde.setDisable(true);
+			bBrute.setDisable(true);
+			bTruand.setDisable(true);
+			bFillette.setDisable(true);
+		});
+		bTruand.setOnAction(EventHandler -> {
+			core.getIdjr().setPionChoisi(3);
+			core.getIdjr().pionChoisi(true);
+			bBlonde.setDisable(true);
+			bBrute.setDisable(true);
+			bTruand.setDisable(true);
+			bFillette.setDisable(true);
+		});
+		bFillette.setOnAction(EventHandler -> {
+			core.getIdjr().setPionChoisi(1);
+			core.getIdjr().pionChoisi(true);
+			bBlonde.setDisable(true);
+			bBrute.setDisable(true);
+			bTruand.setDisable(true);
+			bFillette.setDisable(true);
+		});
+
+		bToilettes.setOnAction(EventHandler -> {
+			core.getIdjr().setLieuChoisi(1);
+			core.getIdjr().lieuChoisi(true);
+			bToilettes.setDisable(true);
+			bCachou.setDisable(true);
+			bMegatoys.setDisable(true);
+			bParking.setDisable(true);
+			bPCSecu.setDisable(true);
+			bSuperMarche.setDisable(true);
+		});
+		bCachou.setOnAction(EventHandler -> {
+			core.getIdjr().setLieuChoisi(2);
+			core.getIdjr().lieuChoisi(true);
+			bToilettes.setDisable(true);
+			bCachou.setDisable(true);
+			bMegatoys.setDisable(true);
+			bParking.setDisable(true);
+			bPCSecu.setDisable(true);
+			bSuperMarche.setDisable(true);
+		});
+		bMegatoys.setOnAction(EventHandler -> {
+			core.getIdjr().setLieuChoisi(3);
+			core.getIdjr().lieuChoisi(true);
+			bToilettes.setDisable(true);
+			bCachou.setDisable(true);
+			bMegatoys.setDisable(true);
+			bParking.setDisable(true);
+			bPCSecu.setDisable(true);
+			bSuperMarche.setDisable(true);
+		});
+		bParking.setOnAction(EventHandler -> {
+			core.getIdjr().setLieuChoisi(4);
+			core.getIdjr().lieuChoisi(true);
+			bToilettes.setDisable(true);
+			bCachou.setDisable(true);
+			bMegatoys.setDisable(true);
+			bParking.setDisable(true);
+			bPCSecu.setDisable(true);
+			bSuperMarche.setDisable(true);
+		});
+		bPCSecu.setOnAction(EventHandler -> {
+			core.getIdjr().setLieuChoisi(5);
+			core.getIdjr().lieuChoisi(true);
+			bToilettes.setDisable(true);
+			bCachou.setDisable(true);
+			bMegatoys.setDisable(true);
+			bParking.setDisable(true);
+			bPCSecu.setDisable(true);
+			bSuperMarche.setDisable(true);
+		});
+		bSuperMarche.setOnAction(EventHandler -> {
+			core.getIdjr().setLieuChoisi(6);
+			core.getIdjr().lieuChoisi(true);
+			bToilettes.setDisable(true);
+			bCachou.setDisable(true);
+			bMegatoys.setDisable(true);
+			bParking.setDisable(true);
+			bPCSecu.setDisable(true);
+			bSuperMarche.setDisable(true);
+		});
+
+		bBlonde.setDisable(true);
+		bBrute.setDisable(true);
+		bTruand.setDisable(true);
+		bFillette.setDisable(true);
+
+		bToilettes.setDisable(true);
+		bCachou.setDisable(true);
+		bMegatoys.setDisable(true);
+		bParking.setDisable(true);
+		bPCSecu.setDisable(true);
+		bSuperMarche.setDisable(true);
+		info.setVisible(false);
 	}
 
+	@Override
+	public void choisirPion(List<Integer> list) {
+		for (Integer integer : list) {
+			switch (integer) {
+				case 7:
+					bBlonde.setDisable(false);
+					break;
+				case 5:
+					bBrute.setDisable(false);
+					break;
+				case 3:
+					bTruand.setDisable(false);
+					break;
+				case 1:
+					bFillette.setDisable(false);
+					break;
+				default:
+					break;
+			}
+		}
+
+	}
+
+	@Override
+	public void choisirLieu(List<Integer> list) {
+		for (Integer integer : list) {
+			switch (integer) {
+				case 1:
+					bToilettes.setDisable(false);
+					break;
+				case 2:
+					bCachou.setDisable(false);
+					break;
+				case 3:
+					bMegatoys.setDisable(false);
+					break;
+				case 4:
+					bParking.setDisable(false);
+					break;
+				case 5:
+					bPCSecu.setDisable(false);
+					break;
+				case 6:
+					bSuperMarche.setDisable(false);
+					break;
+				default:
+					break;
+			}
+		}
+	}
+
+	@Override
+	public void desValeur(List<Integer> list) {
+		Platform.runLater(() -> {
+			String de1Int = list.get(0).toString();
+			String de2Int = list.get(1).toString();
+			de1.setText(de1Int);
+			de2.setText(de2Int);
+		});
+	}
+
+	@Override
+	public void nomJoueur(String nom) {
+		Platform.runLater(() -> {
+			nomJoueur.setText(nom);
+		});
+	}
+
+	@Override
+	public void nomPhase(String nom) {
+		Platform.runLater(() -> {
+			phasePartie.setText(nom);
+		});
+	}
+
+	@Override
+	public void desVigiles(List<String> list) {
+		new Thread(() -> {
+			titreInfo.setText("Zombies");
+			lInfo.setText("Des zombies ont été placé dans " + list.get(0) + ", " + list.get(1) + ", " + list.get(2)
+					+ " et " + list.get(3));
+			info.setVisible(true);
+			try {
+				Thread.sleep(5000);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			info.setVisible(false);
+		}).start();
+	}
+
+	@Override
+	public void fin() {
+		sControl.setPaneOnTop(ApplicationPane.ENDGAME);
+	}
 }
