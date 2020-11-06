@@ -143,6 +143,11 @@ public class Initializer {
         for (PlateauListener pl : listenerspl)
             pl.fouilleCamion(camion);
     }
+    
+    public void electionChef(String message) {
+        for (PlateauListener pl : listenerspl)
+            pl.electionChef(message);
+    }
 
     public void prevenirDeplacementVigile(String depvig) {
         for (PlateauListener pl : listenerspl)

@@ -26,4 +26,6 @@ public interface PlateauListener {
     void fouilleCamion(String camion);
 
     void prevenirDeplacementVigile(String depvig);
+    
+    void electionChef(String message);
 }
