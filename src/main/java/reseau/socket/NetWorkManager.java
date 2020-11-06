@@ -1,16 +1,20 @@
 package reseau.socket;
 
-import jeu.PacketHandlerTcp;
-import jeu.PacketHandlerUdp;
 import reseau.packet.Packet;
 import reseau.tool.NetworkTool;
 import reseau.tool.PtTool;
 
+import java.io.File;
 import java.io.IOException;
 import java.net.InetAddress;
 import java.net.InetSocketAddress;
 import java.net.Socket;
-import java.util.Map;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.Map
+
+import jeu.PacketHandlerTcp;
+import jeu.PacketHandlerUdp;
 
 /**
  * <h1> Permet de gerer la partie reseau </h1>
@@ -22,7 +26,7 @@ public class NetWorkManager {
     private final Map<String, Packet> udpPackets;
     private final Map<String, Packet> tcpPackets;
 
-    private static final String PATHTOPACKET = "src\\main\\java\\reseau\\socket\\definition";
+    private static final String PATHTOPACKET = "Ressources/protocol_reseau/packets";
 
     private UdpSocket udpSocket;
     private TcpServerSocket tcpServerSocket;
