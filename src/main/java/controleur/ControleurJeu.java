@@ -319,6 +319,7 @@ public class ControleurJeu {
             m = nwm.getPacketsTcp().get("RECV").build(jeu.getChefVIgile().getCouleur(), partieId, numeroTour);
             for (Joueur joueur : jeu.getJoueurs().values())
                 TcpClientSocket.connect(joueur.getIp(), joueur.getPort(), m, null, 0);
+            if (initializer != null) initializer.electionChef("Nouveau chef des vigiles : " + jeu.getChefVIgile());
         } else {
             out.println("Pas de nouveau chef des vigiles!");
             jeu.setNewChef(false);
@@ -326,9 +327,10 @@ public class ControleurJeu {
             m = nwm.getPacketsTcp().get("RECV").build(Couleur.NUL, partieId, numeroTour);
             for (Joueur j : jeu.getJoueurs().values())
                 TcpClientSocket.connect(j.getIp(), j.getPort(), m, null, 0);
+            if (initializer != null) initializer.electionChef("Il n'y a pas de nouveau chef des vigiles");
         }
 
-        if (initializer != null) initializer.nomChefVigileAll(new ArrayList<>(jeu.getJoueurs().values()));
+        
     }
 
     /**
