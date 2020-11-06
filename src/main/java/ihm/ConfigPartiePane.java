@@ -83,7 +83,7 @@ public class ConfigPartiePane extends StackPane {
         VBox vJoueurs = new VBox();
         HBox nomPartie = new HBox();
 
-        Label nomPTexte = new Label("Nom de la partie");
+        Label nomPTexte = new Label("Identifiant de la partie");
         nomPTexte.setFont(policeNom);
         nomPTexte.setMinHeight(hauteurElemtents);
         nomPTexte.setBackground(fondBlanc);
