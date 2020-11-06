@@ -22,7 +22,7 @@ import javafx.scene.text.FontWeight;
 
 /**
  * The Class AccueilPane.
- * 
+ *
  * @author Florian
  * @version 0.1
  * @since 01/11/2020
@@ -36,7 +36,7 @@ public class FinDePartiePane extends StackPane implements FinListener {
 
 	// définition des variable pour la suite du pane
 	private int tailleCarreCentral = 800; // l'interface est sur un stackPane qui peut tourner avec des crans de 90
-											// degrés
+	// degrés
 	private int hBouton = 75;
 	private int lBouton = 150;
 	private int marge = tailleCarreCentral / 25;
@@ -50,7 +50,7 @@ public class FinDePartiePane extends StackPane implements FinListener {
 	private Font policeNom = Font.font("Segoe UI", 35);
 	private CornerRadii coinfb = new CornerRadii(10.0);
 	private Background fondBlanc = new Background(new BackgroundFill(Color.WHITE, coinfb, null));
-
+	Label desc;
 
 	public FinDePartiePane (ScreenControl sc, Core c) {
 		core = c;
@@ -70,21 +70,21 @@ public class FinDePartiePane extends StackPane implements FinListener {
 
 		////
 
-		Label desc = new Label("vous avez perdu, joueur "+"x"+" a gagné\n (ou) vous avez gagné");
+		desc = new Label("vous avez perdu, joueur "+"x"+" a gagné\n (ou) vous avez gagné");
 		desc.setFont(policeNom);
 		desc.setPadding(new Insets(20));
 		desc.setBackground(fondBlanc);
-		
 
-		
+
+
 		// vJoueurs.setBackground(new Background(new// BackgroundFill(Color.BLUE,CornerRadii.EMPTY,null)));
 
 		VBox vbCenter = new VBox();
-		
+
 		vbCenter.setAlignment(Pos.CENTER);
 		vbCenter.getChildren().addAll(desc);
-		
-		
+
+
 		// bouton
 
 		Button bRetour = new Button("RETOUR");
@@ -105,9 +105,9 @@ public class FinDePartiePane extends StackPane implements FinListener {
 		AnchorPane boutonsPanneau = new AnchorPane();
 		boutonsPanneau.setLeftAnchor(bRetour, 0.0);
 		boutonsPanneau.getChildren().addAll(bRetour);
-		
-		
-		
+
+
+
 		// image fond
 		ImageView imgFond = new ImageView(DataControl.FOND);
 		// carre central qui contient tous les éléments (boutons et titre)
@@ -143,6 +143,14 @@ public class FinDePartiePane extends StackPane implements FinListener {
 		sControl.registerNode(paneName, this);
 		sControl.setPaneOnTop(paneName);
 
+	}
+
+	@Override
+	public void gagnant(String nom) {
+		if (nom.equals(core.getIdjr().getNom()))
+			desc.setText("Vous avez gagné !");
+		else
+			desc.setText("Vous avez perdu !");
 	}
 
 }

@@ -1,6 +1,7 @@
 package ihm;
 
 
+import idjr.Idjr;
 import ihm.DataControl.ApplicationPane;
 import ihm.event.Initializer;
 
@@ -9,6 +10,8 @@ public class Core {
     private int nbBot = 4;
     private String nomPartie = "partieParDéfaut";
     private Initializer initializer;
+    private Idjr idjr ;
+
 
     public void eventInit() {
         this.initializer = new Initializer();
@@ -63,5 +66,13 @@ public class Core {
 
     public Initializer getInitializer() {
         return initializer;
+    }
+
+    public void setIdjr(Idjr idjr){
+        this.idjr = idjr;
+    }
+
+    public Idjr getIdjr(){
+        return idjr;
     }
 }

@@ -1,5 +1,6 @@
 package ihm;
 
+import idjr.Idjr;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.scene.Node;
@@ -64,15 +65,17 @@ public class InterfacePrincipale extends Application {
         JeuPane jeuPane = new JeuPane(sControl, core);
         root.getChildren().add(configPartiePane);
         root.getChildren().add(finDePartiePane);
-        root.getChildren().add(attenteJoueurPane);
         root.getChildren().add(jeuPane);
 
         core.eventInit();
+        core.setIdjr(new Idjr(core.getInitializer()));
         core.getInitializer().addListenerConfig(configPartiePane);
         core.getInitializer().addListenerJeu(jeuPane);
         core.getInitializer().addListenerFin(finDePartiePane);
+        core.getInitializer().addListenerAttente(attenteJoueurPane);
         root.getChildren().add(new OptionPane(sControl, core));
         root.getChildren().add(new ReglesPane(sControl, core));
+        root.getChildren().add(attenteJoueurPane);
         root.getChildren().add(new AccueilPane(sControl, core));
 
         primaryStage.setScene(scene);

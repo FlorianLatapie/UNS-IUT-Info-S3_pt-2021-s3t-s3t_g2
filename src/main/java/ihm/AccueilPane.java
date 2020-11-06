@@ -1,5 +1,6 @@
 package ihm;
 
+import idjr.Idjr;
 import ihm.ScreenControl;
 import ihm.DataControl.ApplicationPane;
 import javafx.application.Platform;
@@ -24,7 +25,7 @@ import javafx.scene.text.FontWeight;
 
 /**
  * The Class AccueilPane.
- * 
+ *
  * @author Florian
  * @version 0.1
  * @since 04/10/2020
@@ -36,7 +37,7 @@ public class AccueilPane extends StackPane {
 	private final ApplicationPane paneName = ApplicationPane.ACCUEIL;
 	// définition des variable pour la suite du pane
 	private int tailleCarreCentral = 600; // l'interface est sur un stackPane qui peut tourner avec des crans de 90
-											// degrés
+	// degrés
 	private int hBouton = 100;
 	private int lBouton = 200;
 	private int marge = tailleCarreCentral / 25;
@@ -47,13 +48,13 @@ public class AccueilPane extends StackPane {
 	private String styleBoutonsSouris = "-fx-background-color:#ff0000;  -fx-text-fill:#000000; -fx-background-radius: 15px;";
 	private StackPane stackPane = new StackPane();
 	private GaussianBlur flou = new GaussianBlur(30);
-	
+
 	private Font policeNom = Font.font("Segoe UI", 17);
-    private int largeurTF = 100;
-    private int hauteurElemtents = 60;
-    
-	
-	
+	private int largeurTF = 100;
+	private int hauteurElemtents = 60;
+
+
+
 	TextField nomjoueur;
 	public AccueilPane(ScreenControl sc, Core c) {
 		core = c;
@@ -69,7 +70,7 @@ public class AccueilPane extends StackPane {
 		titre2.setFont(Font.font("Segoe UI", 35));
 		titre2.setTextFill(Color.BLACK);
 		titre2.setPadding(new Insets(0, 0, 20, 0));
-		
+
 		Label titre3 = new Label("IDJR");
 		titre3.setFont(Font.font("Segoe UI", 35));
 		titre3.setTextFill(Color.BLACK);
@@ -80,14 +81,14 @@ public class AccueilPane extends StackPane {
 		titre.setBackground(new Background(new BackgroundFill(Color.RED, coin, null)));
 		titre.setPrefWidth(800);
 		titre.setMinWidth(800);
-		
+
 		// nom du joueur 
 		nomjoueur = new TextField();
-		nomjoueur.setText("JoueurSansNom"+ (int) (100 * Math.random())); 
+		nomjoueur.setText("JoueurSansNom"+ (int) (100 * Math.random()));
 		nomjoueur.setFont(policeNom);
 		nomjoueur.setPrefSize(largeurTF, hauteurElemtents);
 		nomjoueur.setMinHeight(hauteurElemtents);
-		
+
 		// boutons
 		Button bJouer = new Button("JOUER");
 		bJouer.setPrefSize(lBouton, hBouton);
@@ -101,7 +102,16 @@ public class AccueilPane extends StackPane {
 		bJouer.setOnMouseExited(event -> {
 			bJouer.setStyle(styleBoutons);
 		});
-		bJouer.setOnAction(EventHandler -> sc.setPaneOnTop(ApplicationPane.CONFIG));
+		bJouer.setOnAction(EventHandler ->{
+			//TODO CARACTERE NON AUTORISE
+			if (nomjoueur.getText().length() < 24) {
+				core.getIdjr().setNom(nomjoueur.getText());
+				core.getIdjr().getInitializer().nomJoueur(core.getIdjr().getNom());
+				sc.setPaneOnTop(ApplicationPane.CONFIG);
+			}
+			else
+				nomjoueur.setText("INVALIDE");
+		});
 
 		Button bOptions = new Button("OPTIONS");
 		bOptions.setPrefSize(lBouton, hBouton);

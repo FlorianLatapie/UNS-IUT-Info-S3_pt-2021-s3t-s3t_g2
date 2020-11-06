@@ -36,8 +36,8 @@ public class ConfigPartiePane extends StackPane implements ConfigListener {
     // degrés
     private int hBouton = 75;
     private int lBouton = 150;
-    //private int marge = tailleCarreCentral / 25;
-    //private Insets margeBoutons = new Insets(marge, marge, marge, marge);
+    // private int marge = tailleCarreCentral / 25;
+    // private Insets margeBoutons = new Insets(marge, marge, marge, marge);
     private Font policeBouton = Font.font("Segoe UI", FontWeight.BOLD, 27);
     private CornerRadii coin = new CornerRadii(15.0);
     private String styleBoutons = " -fx-background-color:#000000; -fx-background-radius: 15px; -fx-text-fill: #ffffff";
@@ -76,7 +76,7 @@ public class ConfigPartiePane extends StackPane implements ConfigListener {
         desc.setAlignment(Pos.CENTER);
         desc.setFont(policeNom);
         desc.setMinHeight(hauteurElemtents);
-        //desc.setBackground(fondBlanc);
+        // desc.setBackground(fondBlanc);
         desc.setPadding(botPadding);
 
         TextField nomP = new TextField();
@@ -84,20 +84,19 @@ public class ConfigPartiePane extends StackPane implements ConfigListener {
         nomP.setFont(policeNom);
         nomP.setPrefSize(largeurTF, hauteurElemtents);
         nomP.setMinHeight(hauteurElemtents);
-        
+
         VBox partie = new VBox();
         partie.getChildren().addAll(desc, nomP);
         partie.setBackground(fondBlanc);
         partie.setPadding(new Insets(10));
         partie.setPrefWidth(220);
         partie.setMaxWidth(400);
-        
+
         VBox vbCenter = new VBox();
         vbCenter.setAlignment(Pos.CENTER);
-        //vbCenter.setSpacing(spacing);
-        //vbCenter.setBackground(fondBlanc);
+        // vbCenter.setSpacing(spacing);
+        // vbCenter.setBackground(fondBlanc);
         vbCenter.getChildren().addAll(partie);
-
 
         // boutons
         Button bJouer = new Button("JOUER");
@@ -114,7 +113,10 @@ public class ConfigPartiePane extends StackPane implements ConfigListener {
             bJouer.setStyle(styleBoutons);
         });
         bJouer.setOnAction(EventHandler -> {
-            sc.setPaneOnTop(ApplicationPane.WAIT);
+            core.getIdjr().estPartieConnecte(nomP.getText());
+        });
+        nomP.textProperty().addListener((obs, oldText, newText) -> {
+            bJouer.setDisable(nomP.getText().isEmpty());
         });
 
         Button bRetour = new Button("RETOUR");
@@ -136,7 +138,6 @@ public class ConfigPartiePane extends StackPane implements ConfigListener {
         boutonsPanneau.setLeftAnchor(bRetour, 0.0);
         boutonsPanneau.setRightAnchor(bJouer, 0.0);
         boutonsPanneau.getChildren().addAll(bRetour, bJouer);
-
 
         // image fond
         ImageView imgFond = new ImageView(DataControl.FOND);
@@ -173,5 +174,11 @@ public class ConfigPartiePane extends StackPane implements ConfigListener {
         sControl.registerNode(paneName, this);
         sControl.setPaneOnTop(paneName);
 
+    }
+
+    @Override
+    public void partieValide(String id) {
+        core.getIdjr().rejoindrePartie(id);
+        sControl.setPaneOnTop(ApplicationPane.WAIT);
     }
 }
