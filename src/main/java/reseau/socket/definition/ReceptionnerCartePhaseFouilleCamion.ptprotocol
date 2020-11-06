@@ -1,0 +1,22 @@
+seq:34
+className:ReceptionnerCartePhaseFouilleCamion
+doc:Réceptionner une carte lors phase de fouille du camion
+keyword:FCRC
+protocol:TCP
+values:
+value:
+name:carteOfferte
+type:CarteType
+doc:La carte offerte. La carte est identifiée comme précédemment.
+value:
+name:carteJoueurOffrant
+type:CarteType
+doc:La couleur du joueur offrant la carte offerte. La couleur est identifiée comme précédemment.
+value:
+name:partieId
+type:String
+doc:L’identifiant de la partie fournie à l’initialisation de la partie.
+value:
+name:numeroTour
+type:int
+doc:L’identifiant du tour courant.

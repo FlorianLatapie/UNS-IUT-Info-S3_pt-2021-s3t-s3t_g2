@@ -1,0 +1,14 @@
+seq:45
+className:CloreVote
+doc:Clore les votes
+keyword:PVVC
+protocol:TCP
+values:
+value:
+name:partieId
+type:String
+doc:L’identifiant de la partie fournie à l’initialisation de la partie.
+value:
+name:numeroTour
+type:int
+doc:L’identifiant du tour courant.

@@ -1,0 +1,14 @@
+seq:1
+className:RelancerPartieJoueurs
+doc:Relancer une partie avec les mêmes joueurs
+keyword:RNP
+protocol:TCP
+values:
+value:
+name:partieId
+type:String
+doc:L’identifiant de la partie qui vient de se finir
+value:
+name:partieIdNouveau
+type:String
+doc:L’identifiant de la nouvelle partie.

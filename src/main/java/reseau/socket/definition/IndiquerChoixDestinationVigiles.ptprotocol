@@ -1,0 +1,22 @@
+seq:10
+className:IndiquerChoixDestinationVigiles
+doc:Indiquer le choix d’une destination
+keyword:CDDCV
+protocol:TCP
+values:
+value:
+name:destination
+type:int
+doc:Un entier représentant la destination choisie par le chef des vigiles
+value:
+name:partieId
+type:String
+doc:L’identifiant de la partie fournie à l’initialisation de la partie.
+value:
+name:numeroTour
+type:int
+doc:L’identifiant du tour courant.
+value:
+name:joueurId
+type:String
+doc:Un identifiant unique caractérisant le joueur

@@ -1,0 +1,34 @@
+seq:39
+className:IndiquerDebutVote
+doc:Indiquer le début d’un vote
+keyword:IPV
+protocol:TCP
+values:
+value:
+name:voteType
+type:VoteType
+doc:Le type du vote, « FDC » pour la fouille du camion, « ECD » pour l’élection du chef des vigiles, « MPZ » pour désigner qui sera mangé par les zombies.
+value:
+name:voteEtape
+type:VoteEtape
+doc:« PRE » pour une première phase de vote, « SEC » pour une second phase de vote (si égalité en fin de première phase.
+value:
+name:joueursPion
+type:List<Couleur>
+doc:La liste des joueurs, ayant au moins un pion présent, identifiés par leur couleur et ordonnés selon le sens du tour. Les valeurs sont séparées par des « , ».
+value:
+name:joueursVotant
+type:List<Couleur>
+doc:la liste des joueurs votants identifiés par leur couleur et ordonnés selon le sens du tour. Identique à LISTEJP dans le cas que la première phase du vote. Les valeurs sont séparées par des « , ».
+value:
+name:joueursVoix
+type:List<Integer>
+doc:La liste du nombre de voix des joueurs concernés, c’est-à-dire un entier entre 1 et 5. Les valeurs sont séparées par des « , ».
+value:
+name:partieId
+type:String
+doc:L’identifiant de la partie fournie à l’initialisation de la partie.
+value:
+name:numeroTour
+type:int
+doc:L’identifiant du tour courant.

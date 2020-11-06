@@ -1,0 +1,34 @@
+seq:22
+className:DebuterPhaseResolutionAttaqueZombies
+doc:Débuter de la phase de résolution de l’attaque des zombies
+keyword:PRAZ
+protocol:TCP
+values:
+value:
+name:numeroLieuPerso
+type:int
+doc:Le numéro du lieu qui attire un zombie en fonction du nombre de personnage. 0 si aucun
+value:
+name:numeroLieuPin
+type:int
+doc:Le numéro du lieu qui attire un zombie en fonction du nombre de pin-ups. 0 si aucun
+value:
+name:lieuxOuverts
+type:List<Integer>
+doc:Liste des lieux ouverts représentés par des entiers entre 1 et 6.
+value:
+name:lieuxNbZombies
+type:List<Integer>
+doc:Liste du nombre de zombies pour chaque lieu ouvert dans le même ordre que la liste précédente. Cette liste inclue les zombies ajoutés lors de cette phase.
+value:
+name:nbPionsPerso
+type:List<Integer>
+doc:Liste du nombre de pions personnages pour chaque lieu ouvert dans le même ordre que la liste précédente.
+value:
+name:partieId
+type:String
+doc:L’identifiant de la partie fournie à l’initialisation de la partie.
+value:
+name:numeroTour
+type:int
+doc:L’identifiant du tour courant.

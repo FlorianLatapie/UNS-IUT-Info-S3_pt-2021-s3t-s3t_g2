@@ -1,0 +1,22 @@
+seq:16
+className:DebuterPhaseFouilleCamion
+doc:Débuter de la phase de fouille du camion
+keyword:PFC
+protocol:TCP
+values:
+value:
+name:pionPresent
+type:List<PionCouleur>
+doc:Liste des pions présents sur le lieu, identifiés par deux caractères Couleur/Valeur.
+value:
+name:taillePioche
+type:int
+doc:Taille de la pioche
+value:
+name:partieId
+type:String
+doc:L’identifiant de la partie fournie à l’initialisation de la partie.
+value:
+name:numeroTour
+type:int
+doc:L’identifiant du tour courant.

@@ -1,0 +1,30 @@
+seq:20
+className:InformerJoueursDeplacement
+doc:Informer les joueurs du déplacement
+keyword:DPI
+protocol:TCP
+values:
+value:
+name:couleurJoueurCourant
+type:Couleur
+doc:La couleur du joueur courant. La couleur est identifiée comme précédemment.
+value:
+name:destination
+type:int
+doc:Un entier représentant la destination choisie par le joueur courant
+value:
+name:pion
+type:int
+doc:Un entier (7,5,3 ou 1) représentant le pion déplacé à la destination
+value:
+name:carteJoueur
+type:CarteType
+doc:« NUL » si le joueur courant n’a pas joué de carte ou « SPR » s’il a joué une carte sprint.
+value:
+name:partieId
+type:String
+doc:L’identifiant de la partie fournie à la création de la partie.
+value:
+name:numeroTour
+type:int
+doc:L’identifiant du tour courant.

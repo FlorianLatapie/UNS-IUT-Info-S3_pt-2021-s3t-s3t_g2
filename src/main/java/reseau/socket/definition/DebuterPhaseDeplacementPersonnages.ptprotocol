@@ -1,0 +1,30 @@
+seq:18
+className:DebuterPhaseDeplacementPersonnages
+doc:Débuter de la phase de déplacement des personnages
+keyword:PDP
+protocol:TCP
+values:
+value:
+name:couleurChefVigile
+type:Couleur
+doc:La couleur du joueur étant chef des vigiles. La couleur est identifiée comme précédemment.
+value:
+name:destinations
+type:List<Integer>
+doc:Liste des destinations de chaque joueurs en commençant par le chef des vigiles. Les destination sont représentées par des entiers entre 1 et 6 représentant les lieux.
+value:
+name:zones
+type:List<Integer>
+doc:Une liste contenant 4 entiers entre 1 et 6 représentant les lieux où arrivent les 4 zombies du tour. Pas d’ordre particulier pour cette liste.
+value:
+name:lieuxfermes
+type:List<Integer>
+doc:Liste des lieux fermés incluant les lieux fermés avant le tour ou à la suite de l’arrivée des zombies de cette phase. Les lieux sont représentés par des entiers entre 1 et 6. Pas d’ordre particulier pour cette liste.
+value:
+name:partieId
+type:String
+doc:L’identifiant de la partie fournie à l’initialisation de la partie.
+value:
+name:numeroTour
+type:int
+doc:L’identifiant du tour courant.

@@ -1,0 +1,34 @@
+seq:33
+className:SelectionnerCartesPhaseFouilleCamion
+doc:Sélectionner les cartes lors phase de fouille du camion
+keyword:SCFC
+protocol:TCP
+values:
+value:
+name:carteGarde
+type:CarteType
+doc:La carte gardée par le joueur ou « NUL » si aucune carte n’est gardée (cas avec moins de 3 cartes piochées). La carte est identifiée comme précédemment.
+value:
+name:carteOfferte
+type:CarteType
+doc:La carte offerte à une autre joueur ou « NUL » si aucune carte n’est offerte (cas avec moins de 3 cartes piochées). La carte est identifiée comme précédemment.
+value:
+name:couleurCarteJoueurRecu
+type:Couleur
+doc:La couleur du joueur recevant la carte offerte ou « NUL » si aucune carte n’est offerte. La couleur est identifiée comme précédemment.
+value:
+name:carteDefausse
+type:CarteType
+doc:La carte défaussée (qui retourne sous la pioche) ou « NUL » si aucune carte n’est défaussée (cas avec moins de 3 cartes piochées). La carte est identifiée comme précédemment.
+value:
+name:partieId
+type:String
+doc:L’identifiant de la partie fournie à l’initialisation de la partie.
+value:
+name:numeroTour
+type:int
+doc:L’identifiant du tour courant.
+value:
+name:joueurId
+type:String
+doc:Un identifiant unique caractérisant le joueur

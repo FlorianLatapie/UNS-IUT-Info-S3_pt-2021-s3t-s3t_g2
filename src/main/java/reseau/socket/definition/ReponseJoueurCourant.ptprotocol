@@ -1,0 +1,22 @@
+seq:5
+className:ReponseJoueurCourant
+doc:Réponse du joueur courant
+keyword:AZRCS
+protocol:TCP
+values:
+value:
+name:reponseJoueur
+type:CarteType
+doc:Réponse du joueur « NUL » s’il ne souhaite pas jouer de carte ou « CDS » s’il joue une carte caméra de sécurité.
+value:
+name:partieId
+type:String
+doc:L’identifiant de la partie fournie à la création de la partie.
+value:
+name:numeroTour
+type:int
+doc:L’identifiant du tour courant.
+value:
+name:joueurId
+type:String
+doc:Un identifiant unique caractérisant le joueur

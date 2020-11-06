@@ -1,0 +1,22 @@
+seq:41
+className:IndiquerCarteJouees
+doc:Indiquer les cartes jouées
+keyword:PVC
+protocol:TCP
+values:
+value:
+name:nombreCarteMenace
+type:int
+doc:Nombre de cartes menace jouées lors du vote.
+value:
+name:partieId
+type:String
+doc:L’identifiant de la partie fournie à la création de la partie.
+value:
+name:numeroTour
+type:int
+doc:L’identifiant du tour courant.
+value:
+name:joueurId
+type:String
+doc:Un identifiant unique caractérisant le joueur

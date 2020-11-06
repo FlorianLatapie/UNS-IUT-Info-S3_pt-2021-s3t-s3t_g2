@@ -1,0 +1,30 @@
+seq:30
+className:InformerJoueursPasAttaque
+doc:Informer les joueurs qu’il n’y a pas d’attaque
+keyword:RAZPA
+protocol:TCP
+values:
+value:
+name:numeroLieu
+type:int
+doc:Le numéro du lieu courant
+value:
+name:pions
+type:List<PionCouleur>
+doc:Liste des pions personnages présents dans le lieux. Pas d’ordre particulier pour cette liste. Les lieux sont identifiés par deux caractères Couleur/Valeur séparés par des «,».
+value:
+name:reasonType
+type:ReasonType
+doc:« PION » s’il n’y a pas de pion personnage, « ZOMBIE » s’il n’y a pas de zombie ou « FORCE » si les zombies n’ont pas la force pour entrer
+value:
+name:nombreZombie
+type:int
+doc:Le nombre de zombies
+value:
+name:partieId
+type:String
+doc:L’identifiant de la partie fournie à la création de la partie.
+value:
+name:numeroTour
+type:int
+doc:L’identifiant du tour courant.
