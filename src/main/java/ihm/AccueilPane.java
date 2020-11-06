@@ -133,8 +133,10 @@ public class AccueilPane extends StackPane {
 		bQuitter.setOnAction(event -> {
 			boolean resultat = ConfirmationPane.afficher("Quitter le jeu",
 					"Êtes-vous sûr de vouloir quitter le jeu ? \nSi vous quittez, la partie en cours sera perdue.");
-			if (resultat)
+			if (resultat){
 				Platform.exit();
+				System.exit(0);
+			}
 		});
 
 		// grille contenant les 4 boutons
