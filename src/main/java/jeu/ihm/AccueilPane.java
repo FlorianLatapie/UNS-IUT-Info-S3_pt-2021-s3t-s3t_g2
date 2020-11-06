@@ -50,6 +50,8 @@ public class AccueilPane extends StackPane {
 		core = c;
 		sControl = sc;
 		stackPane.setAlignment(Pos.CENTER);
+		
+		
 
 		// titre
 		Label titre1 = new Label("ZOMBIES");
@@ -155,18 +157,62 @@ public class AccueilPane extends StackPane {
 
 		// carre central qui contient tous les éléments (boutons et titre)
 		centreMenu = new VBox();
-		// centreMenu.setBackground(new Background(new
-		// BackgroundFill(Color.LIGHTGREY,CornerRadii.EMPTY,null)));
+
 		centreMenu.setMinSize(tailleCarreCentral, tailleCarreCentral);
 		centreMenu.setPrefSize(tailleCarreCentral, tailleCarreCentral);
 		centreMenu.setMaxSize(tailleCarreCentral, tailleCarreCentral);
 		centreMenu.setAlignment(Pos.CENTER);
 		centreMenu.setMargin(titre, new Insets(0, 0, 100, 0));
-		// titre.setPadding(margeBoutons);
 		centreMenu.getChildren().addAll(titre, grilleBoutons);
+		
+		ImageView img1 = new ImageView(DataControl.SCREEN);
+		img1.setFitHeight(70);
+		img1.setPreserveRatio(true);
+		ImageView img2 = new ImageView(DataControl.SCREEN);
+		img2.setFitHeight(70);
+		img2.setPreserveRatio(true);
+		ImageView img3 = new ImageView(DataControl.SCREEN);
+		img3.setFitHeight(70);
+		img3.setPreserveRatio(true);
+		ImageView img4 = new ImageView(DataControl.SCREEN);
+		img4.setFitHeight(70);
+		img4.setPreserveRatio(true);
 
-		// rotation de l'interface
-		centreMenu.setRotate(sc.getAngle());
+		Button bEcranHaut = new Button();
+		bEcranHaut.setBackground(new Background(new BackgroundFill(null, CornerRadii.EMPTY, null)));
+		bEcranHaut.setAlignment(Pos.CENTER);
+		bEcranHaut.setTranslateY(-490);
+		bEcranHaut.setPrefSize(80, 80);
+		bEcranHaut.setRotate(180);
+		bEcranHaut.setGraphic(img1);
+		bEcranHaut.setOnAction(EventHandler -> sc.setRotatePane(centreMenu, "haut"));
+
+		Button bEcranBas = new Button();
+		bEcranBas.setBackground(new Background(new BackgroundFill(null, CornerRadii.EMPTY, null)));
+		bEcranBas.setAlignment(Pos.CENTER);
+		bEcranBas.setTranslateY(490);
+		bEcranBas.setPrefSize(80, 80);
+		bEcranBas.setGraphic(img2);
+		bEcranBas.setOnAction(EventHandler -> sc.setRotatePane(centreMenu, "bas"));
+
+		Button bEcranGauche = new Button();
+		bEcranGauche.setBackground(new Background(new BackgroundFill(null, CornerRadii.EMPTY, null)));
+		bEcranGauche.setAlignment(Pos.CENTER);
+		bEcranGauche.setTranslateX(-910);
+		bEcranGauche.setPrefSize(80, 80);
+		bEcranGauche.setRotate(90);
+		bEcranGauche.setGraphic(img3);
+		bEcranGauche.setOnAction(EventHandler -> sc.setRotatePane(centreMenu, "gauche"));
+
+		Button bEcranDroite = new Button();
+		bEcranDroite.setBackground(new Background(new BackgroundFill(null, CornerRadii.EMPTY, null)));
+		bEcranDroite.setAlignment(Pos.CENTER);
+		bEcranDroite.setTranslateX(910);
+		bEcranDroite.setRotate(-90);
+		bEcranDroite.setPrefSize(80, 80);
+		bEcranDroite.setGraphic(img4);
+		bEcranDroite.setOnAction(EventHandler -> sc.setRotatePane(centreMenu, "droite"));
+
 
 		// boite du fond qui contient tout
 		HBox fond = new HBox();
@@ -176,7 +222,7 @@ public class AccueilPane extends StackPane {
 		fond.setEffect(flou);
 		fond.getChildren().add(imgFond);
 
-		stackPane.getChildren().addAll(fond, centreMenu);
+		stackPane.getChildren().addAll(fond, centreMenu, bEcranHaut, bEcranBas, bEcranGauche, bEcranDroite);
 		stackPane.setBackground(new Background(new BackgroundFill(Color.BLACK, CornerRadii.EMPTY, null)));
 
 		this.getChildren().add(stackPane);

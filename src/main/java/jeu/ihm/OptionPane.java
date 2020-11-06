@@ -87,7 +87,7 @@ public class OptionPane extends StackPane {
 		bEcranHaut.setPrefSize(80, 80);
 		bEcranHaut.setRotate(180);
 		bEcranHaut.setGraphic(img1);
-		bEcranHaut.setOnAction(EventHandler -> sc.rotatePane(vbCentral, "haut"));
+		bEcranHaut.setOnAction(EventHandler -> sc.setRotatePane(vbCentral, "haut"));
 
 		Button bEcranBas = new Button();
 		bEcranBas.setBackground(new Background(new BackgroundFill(null, CornerRadii.EMPTY, null)));
@@ -95,7 +95,7 @@ public class OptionPane extends StackPane {
 		bEcranBas.setTranslateY(490);
 		bEcranBas.setPrefSize(80, 80);
 		bEcranBas.setGraphic(img2);
-		bEcranBas.setOnAction(EventHandler -> sc.rotatePane(vbCentral, "bas"));
+		bEcranBas.setOnAction(EventHandler -> sc.setRotatePane(vbCentral, "bas"));
 
 		Button bEcranGauche = new Button();
 		bEcranGauche.setBackground(new Background(new BackgroundFill(null, CornerRadii.EMPTY, null)));
@@ -104,7 +104,7 @@ public class OptionPane extends StackPane {
 		bEcranGauche.setPrefSize(80, 80);
 		bEcranGauche.setRotate(90);
 		bEcranGauche.setGraphic(img3);
-		bEcranGauche.setOnAction(EventHandler -> sc.rotatePane(vbCentral, "gauche"));
+		bEcranGauche.setOnAction(EventHandler -> sc.setRotatePane(vbCentral, "gauche"));
 
 		Button bEcranDroite = new Button();
 		bEcranDroite.setBackground(new Background(new BackgroundFill(null, CornerRadii.EMPTY, null)));
@@ -113,7 +113,7 @@ public class OptionPane extends StackPane {
 		bEcranDroite.setRotate(-90);
 		bEcranDroite.setPrefSize(80, 80);
 		bEcranDroite.setGraphic(img4);
-		bEcranDroite.setOnAction(EventHandler -> sc.rotatePane(vbCentral, "droite"));
+		bEcranDroite.setOnAction(EventHandler -> sc.setRotatePane(vbCentral, "droite"));
 
 		VBox vbTitre = new VBox();
 		vbTitre.setAlignment(Pos.TOP_CENTER);
@@ -170,7 +170,7 @@ public class OptionPane extends StackPane {
 		bAcc.setOnMouseExited(event -> {
 			bAcc.setStyle(styleBoutons);
 		});
-		bAcc.setOnAction(EventHandler -> sc.setPaneOnTop(ApplicationPane.ACCESSIBILITE));
+		bAcc.setOnAction(EventHandler -> sc.setPaneOnTop(ApplicationPane.ACCESSIBILITE));		
 
 		Button bRetour = new Button("RETOUR");
 		bRetour.setFont(policeBouton);
@@ -197,6 +197,7 @@ public class OptionPane extends StackPane {
 		vbCentral.getChildren().addAll(vbTitre, vbBoutons, hbBRetour);
 		ImageView img = new ImageView(DataControl.FOND);
 		vbFond.getChildren().add(img);
+		
 
 		stackPane.getChildren().addAll(vbFond, bEcranHaut, bEcranBas, bEcranGauche, bEcranDroite, rect, vbCentral);
 		stackPane.setBackground(new Background(new BackgroundFill(Color.BLACK, CornerRadii.EMPTY, null)));
