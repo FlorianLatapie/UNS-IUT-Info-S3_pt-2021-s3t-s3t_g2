@@ -1,6 +1,8 @@
 package ihm;
 
 import java.util.List;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import ihm.DataControl.ApplicationPane;
 import ihm.ScreenControl;
@@ -14,6 +16,7 @@ import javafx.scene.control.Labeled;
 import javafx.scene.control.Slider;
 import javafx.scene.control.TextArea;
 import javafx.scene.effect.GaussianBlur;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
@@ -29,6 +32,7 @@ import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.TextAlignment;
 import javafx.stage.Popup;
+import reseau.type.Couleur;
 
 public class JeuPane extends StackPane implements JeuListener {
 
@@ -36,7 +40,7 @@ public class JeuPane extends StackPane implements JeuListener {
 	private Core core = null;
 	// définition des variable pour la suite du pane
 	private int tailleCarreCentral = 600; // l'interface est sur un stackPane qui peut tourner avec des crans de 90
-	// degrés
+											// degrés
 	private int hBouton = 100;
 	private int lBouton = 200;
 	private int marge = tailleCarreCentral / 25;
@@ -85,6 +89,10 @@ public class JeuPane extends StackPane implements JeuListener {
 	Label de2;
 
 	Label nomJoueur;
+
+	ImageView imgFond;
+
+	Label labDeplPers;
 
 	public JeuPane(ScreenControl sc, Core c) {
 		core = c;
@@ -258,7 +266,7 @@ public class JeuPane extends StackPane implements JeuListener {
 		vbTitre1.setMaxHeight(50);
 		// vbTitre1.setMaxSize(300, 50);
 
-		Label labDeplPers = new Label("Déplacement des personnages");
+		labDeplPers = new Label("Déplacement des personnages");
 		labDeplPers.setAlignment(Pos.TOP_CENTER);
 		labDeplPers.setFont(Font.font("Segoe UI", FontWeight.BOLD, 20));
 		labDeplPers.setTextFill(Color.WHITE);
@@ -488,20 +496,9 @@ public class JeuPane extends StackPane implements JeuListener {
 		de2.setTextFill(Color.BLACK);
 		de2.setFont(policeBoutonDe);
 
-		Button lancer = new Button("Lancer");
-		lancer.setStyle(styleBoutons);
-		lancer.setFont(Font.font("Segoe UI", FontWeight.BOLD, 20));
-		lancer.setMinSize(100, 70);
-		lancer.setOnMouseEntered(event -> {
-			lancer.setStyle(styleBoutonsSouris);
-		});
-		lancer.setOnMouseExited(event -> {
-			lancer.setStyle(styleBoutons);
-		});
-
 		des.setPadding(new Insets(10));
 		des.setSpacing(10);
-		des.getChildren().addAll(de1, de2, lancer);
+		des.getChildren().addAll(de1, de2);
 		des.setDisable(false); // TODO ne pas oublier de le retier
 
 		/////
@@ -532,7 +529,7 @@ public class JeuPane extends StackPane implements JeuListener {
 		info.setVisible(true);
 
 		/////
-		ImageView imgFond = new ImageView(DataControl.BLEU);
+		imgFond = new ImageView(DataControl.BLEU);
 		/////
 		HBox fond = new HBox();
 		fond.setAlignment(Pos.CENTER);
@@ -653,13 +650,21 @@ public class JeuPane extends StackPane implements JeuListener {
 		bParking.setDisable(true);
 		bPCSecu.setDisable(true);
 		bSuperMarche.setDisable(true);
+
 		info.setVisible(false);
+
+		joueur1.setDisable(true);
+		joueur2.setDisable(true);
+		joueur3.setDisable(true);
+		joueur4.setDisable(true);
+		joueur5.setDisable(true);
 	}
 
 	@Override
 	public void choisirPion(List<Integer> list) {
-		for (Integer integer : list) {
-			switch (integer) {
+		Platform.runLater(() -> {
+			for (Integer integer : list) {
+				switch (integer) {
 				case 7:
 					bBlonde.setDisable(false);
 					break;
@@ -674,15 +679,17 @@ public class JeuPane extends StackPane implements JeuListener {
 					break;
 				default:
 					break;
+				}
 			}
-		}
+		});
 
 	}
 
 	@Override
 	public void choisirLieu(List<Integer> list) {
-		for (Integer integer : list) {
-			switch (integer) {
+		Platform.runLater(() -> {
+			for (Integer integer : list) {
+				switch (integer) {
 				case 1:
 					bToilettes.setDisable(false);
 					break;
@@ -703,8 +710,9 @@ public class JeuPane extends StackPane implements JeuListener {
 					break;
 				default:
 					break;
+				}
 			}
-		}
+		});
 	}
 
 	@Override
@@ -733,23 +741,69 @@ public class JeuPane extends StackPane implements JeuListener {
 
 	@Override
 	public void desVigiles(List<String> list) {
-		new Thread(() -> {
+		Platform.runLater(() -> {
 			titreInfo.setText("Zombies");
 			lInfo.setText("Des zombies ont été placé dans " + list.get(0) + ", " + list.get(1) + ", " + list.get(2)
 					+ " et " + list.get(3));
 			info.setVisible(true);
-			try {
-				Thread.sleep(5000);
-			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			info.setVisible(false);
-		}).start();
+
+			Timer myTimer = new Timer();
+			myTimer.schedule(new TimerTask() {
+
+				@Override
+				public void run() {
+					info.setVisible(false);
+				}
+			}, 5000);
+		});
 	}
 
 	@Override
 	public void fin() {
-		sControl.setPaneOnTop(ApplicationPane.ENDGAME);
+		Platform.runLater(() -> {
+			sControl.setPaneOnTop(ApplicationPane.ENDGAME);
+		});
+	}
+
+	@Override
+	public void couleurJoueur(Couleur couleur) {
+		Platform.runLater(() -> {
+			switch (couleur) {
+			case BLEU:
+				imgFond.setImage(new Image(DataControl.BLEU));
+				break;
+			case ROUGE:
+				imgFond.setImage(new Image(DataControl.ROUGE));
+				break;
+			case VERT:
+				imgFond.setImage(new Image(DataControl.VERT));
+				break;
+			case JAUNE:
+				imgFond.setImage(new Image(DataControl.JAUNE));
+				break;
+			case MARRON:
+				imgFond.setImage(new Image(DataControl.MARRON));
+				break;
+			case NOIR:
+				imgFond.setImage(new Image(DataControl.NOIR));
+				break;
+			default:
+				break;
+			}
+		});
+	}
+
+	@Override
+	public void sacrificeChange() {
+		Platform.runLater(() -> {
+			labDeplPers.setText("Sacrifice d'un personnage");
+		});
+	}
+
+	@Override
+	public void deplacementChange() {
+		Platform.runLater(() -> {
+			labDeplPers.setText("Déplacement des personnages");
+		});
 	}
 }

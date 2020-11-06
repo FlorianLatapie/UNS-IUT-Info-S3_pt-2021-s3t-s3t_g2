@@ -1,5 +1,5 @@
 package ihm.event;
 
 public interface FinListener {
-    void gagnant(String nom);
+	void gagnant(String nom);
 }
