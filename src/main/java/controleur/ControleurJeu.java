@@ -135,7 +135,7 @@ public class ControleurJeu {
         nwm.stopBind();
 
         if (nwm.getTcpServerSocket() != null)
-            nwm.getTcpServerSocket().stop();
+            nwm.getTcpServerSocket().stopUntilFinished();
 
         if (nwm.getUdpSocket() != null)
             nwm.getUdpSocket().stop();
@@ -677,7 +677,7 @@ public class ControleurJeu {
             status = Status.COMPLETE;
 
             nwm.getUdpSocket().stop();
-            nwm.getTcpServerSocket().stop();
+            nwm.getTcpServerSocket().stopUntilFinished();
 
 
             return true;
