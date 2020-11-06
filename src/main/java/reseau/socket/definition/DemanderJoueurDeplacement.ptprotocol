@@ -1,0 +1,22 @@
+seq:21
+className:DemanderJoueurDeplacement
+doc:Demander au joueur son déplacement 
+keyword:DPD
+protocol:TCP
+values:
+value:
+name:destination
+type:int
+doc:Un entier représentant la destination choisie par le joueur courant
+value:
+name:destiPossible
+type:HashMap<Integer,List<Integer>>
+doc:La liste des destinations possibles pour chaque pion personnage du joueur (s’il joue une carte sprint). La liste est constituée de 3 sous-listes séparées par des «;». Chaque sous-liste commence par la valeur du pion suivi de «:» puis des destinations possibles séparées par des «,». Exemple 7:2,4,6;3:2,4
+value:
+name:partieId
+type:String
+doc:L’identifiant de la partie fournie à la création de la partie.
+value:
+name:numeroTour
+type:int
+doc:L’identifiant du tour courant.

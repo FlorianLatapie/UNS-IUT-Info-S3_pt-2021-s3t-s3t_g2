@@ -1,0 +1,14 @@
+seq:61
+className:AnnoncerDeconnexion
+doc:Annoncer d’une déconnexion
+keyword:DJ
+protocol:TCP
+values:
+value:
+name:partieId
+type:String
+doc:L’identifiant de la partie fournie à la création de la partie.
+value:
+name:numeroTour
+type:int
+doc:L’identifiant du tour fourni à l’initialisation du tour.

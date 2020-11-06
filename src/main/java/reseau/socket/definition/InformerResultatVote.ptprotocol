@@ -1,0 +1,30 @@
+seq:46
+className:InformerResultatVote
+doc:Informer du résultat du vote
+keyword:PVR
+protocol:TCP
+values:
+value:
+name:joueurMaxVoix
+type:Couleur
+doc:La couleur du joueur ayant le plus de voix (gagnant/perdant du vote). La couleur est identifiée comme précédemment. « NUL » s’il y a égalité.
+value:
+name:couleursJoueurs
+type:List<Couleur>
+doc:La liste des joueurs votants identifiés par leur couleur et ordonnés selon le sens du tour. Les valeurs sont séparées par des « , ».
+value:
+name:couleursVote
+type:List<Couleur>
+doc:La liste des votes de chaque joueur identifiés par leur couleur et ordonnés selon la liste précédente. Les valeurs sont séparées par des « , ».
+value:
+name:voixJoueurs
+type:List<Integer>
+doc:La liste des voix reçues par chaque joueur (un entier positif ou nul) et ordonnées selon la liste précédente. Les valeurs sont séparées par des « , ».
+value:
+name:partieId
+type:String
+doc:L’identifiant de la partie fournie à l’initialisation de la partie.
+value:
+name:numeroTour
+type:int
+doc:L’identifiant du tour courant.

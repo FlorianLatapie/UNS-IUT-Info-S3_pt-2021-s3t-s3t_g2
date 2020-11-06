@@ -1,0 +1,14 @@
+seq:60
+className:AccepterConnexionPartie
+doc:Accepter la connexion à une partie
+keyword:ACP
+protocol:TCP
+values:
+value:
+name:partieId
+type:String
+doc:L’identifiant de la partie
+value:
+name:joueurId
+type:String
+doc:Un identifiant unique caractérisant le joueur. La lettre J suivie d’un entier entre 0 et 999 (exemple J258).

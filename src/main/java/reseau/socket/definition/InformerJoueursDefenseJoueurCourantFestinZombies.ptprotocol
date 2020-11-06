@@ -1,0 +1,26 @@
+seq:29
+className:InformerJoueursDefenseJoueurCourantFestinZombies
+doc:Informer les joueurs de la défense du joueur courant
+keyword:RAZIF
+protocol:TCP
+values:
+value:
+name:lieuCourant
+type:int
+doc:Le numéro du lieu courant
+value:
+name:pion
+type:PionCouleur
+doc:Pion (identifiés par leur couleur/valeur) qui a été mangé lors de l’attaque actuelle
+value:
+name:nombreZombie
+type:int
+doc:Le nombre de zombies restant sur le lieu (les zombies ayant mangés sont déjà décompté)
+value:
+name:partieId
+type:String
+doc:L’identifiant de la partie fournie à la création de la partie.
+value:
+name:nombreTour
+type:int
+doc:L’identifiant du tour courant.

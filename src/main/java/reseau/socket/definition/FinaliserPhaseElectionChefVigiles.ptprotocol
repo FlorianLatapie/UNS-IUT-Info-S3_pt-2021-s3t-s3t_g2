@@ -1,0 +1,18 @@
+seq:37
+className:FinaliserPhaseElectionChefVigiles
+doc:Finaliser la phase d’élection du chef des vigiles
+keyword:RECV
+protocol:TCP
+values:
+value:
+name:couleurEluVigile
+type:Couleur
+doc:La couleur du joueur ayant été élu nouveau chez des vigiles ou « NUL » si aucun joueur n’est élu durant le tour (dans ce cas le chef des vigiles ne change pas). La couleur est identifiée comme précédemment.
+value:
+name:partieId
+type:String
+doc:L’identifiant de la partie fournie à l’initialisation de la partie.
+value:
+name:numeroTour
+type:int
+doc:L’identifiant du tour courant.

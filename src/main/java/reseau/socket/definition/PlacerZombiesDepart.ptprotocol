@@ -1,0 +1,14 @@
+seq:54
+className:PlacerZombiesDepart
+doc:Placer les zombies de départ
+keyword:PIPZ
+protocol:TCP
+values:
+value:
+name:lieux
+type:List<Integer>
+doc:Une liste contenant 4 entier entre 1 et 6 représentant les lieux où se trouvent les 4 zombies initiaux. Pas d’ordre particulier pour cette liste. Les valeurs sont séparées par des «,».
+value:
+name:partieId
+type:String
+doc:L’identifiant de la partie fournie à la création de la partie.

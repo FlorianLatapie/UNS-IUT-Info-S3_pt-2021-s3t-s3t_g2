@@ -1,0 +1,26 @@
+seq:35
+className:FinaliserPhaseFouilleCamion
+doc:Finaliser la phase de fouille du camion
+keyword:RFC
+protocol:TCP
+values:
+value:
+name:carteJoueurGarde
+type:CarteType
+doc:La couleur du joueur ayant gardé une carte lors de la fouille ou « NUL » si aucune carte n’est gardée. La couleur est identifiée comme précédemment.
+value:
+name:carteJoueurOfferte
+type:CarteType
+doc:La couleur du joueur ayant reçu la carte offerte ou « NUL » si aucune carte n’est offerte. La couleur est identifiée comme précédemment.
+value:
+name:carteDefausse
+type:CarteType
+doc:« CD » si une carte a été défaussée ou « NUL » si aucune carte n’est défaussée.
+value:
+name:partieId
+type:String
+doc:L’identifiant de la partie fournie à l’initialisation de la partie.
+value:
+name:numeroTour
+type:int
+doc:L’identifiant du tour courant.
