@@ -78,7 +78,7 @@ public class ControleurJeu {
         this.intPartieId = new Random().nextInt(10000000);
         this.partieId = "P" + intPartieId;
         if (initializer != null)
-            initializer.nomPartie(nomPartie);
+            initializer.nomPartie(partieId);
         initPartie();
     }
 
