@@ -1,4 +1,4 @@
-package idjr;
+package botfaible;
 
 /**
  * <h1>Le personnage</h1>

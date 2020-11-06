@@ -1,7 +1,7 @@
 import java.io.IOException;
 import java.net.URISyntaxException;
 
-import idjr.Idjr;
+import botfaible.Idjr;
 import reseau.socket.NetWorkManager;
 import reseau.socket.SideConnection;
 import reseau.tool.NetworkTool;

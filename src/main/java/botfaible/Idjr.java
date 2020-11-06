@@ -1,4 +1,4 @@
-package idjr;
+package botfaible;
 
 import reseau.type.Couleur;
 import reseau.type.TypeJoueur;

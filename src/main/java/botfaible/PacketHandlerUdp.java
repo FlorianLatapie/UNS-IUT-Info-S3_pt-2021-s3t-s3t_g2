@@ -1,13 +1,10 @@
-package idjr;
+package botfaible;
 
 import reseau.packet.Packet;
 import reseau.socket.NetWorkManager;
 import reseau.socket.SideConnection;
 import reseau.socket.TcpClientSocket;
 import reseau.tool.ThreadTool;
-import reseau.type.Status;
-import reseau.type.TypeJoueur;
-import reseau.type.TypePartie;
 
 import java.net.InetAddress;
 import java.net.UnknownHostException;

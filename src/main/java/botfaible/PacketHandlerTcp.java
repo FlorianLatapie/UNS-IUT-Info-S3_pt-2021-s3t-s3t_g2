@@ -1,4 +1,4 @@
-package idjr;
+package botfaible;
 
 import reseau.packet.Packet;
 import reseau.socket.NetWorkManager;

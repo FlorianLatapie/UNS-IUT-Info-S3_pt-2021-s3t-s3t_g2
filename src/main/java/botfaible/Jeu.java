@@ -1,4 +1,4 @@
-package idjr;
+package botfaible;
 
 import java.util.ArrayList;
 import java.util.HashMap;
