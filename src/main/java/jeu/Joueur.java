@@ -1,7 +1,7 @@
 package jeu;
 
 import reseau.type.Couleur;
-import temp.CarteAction;
+import jeu.temp.CarteAction;
 
 import java.net.InetAddress;
 import java.util.ArrayList;
