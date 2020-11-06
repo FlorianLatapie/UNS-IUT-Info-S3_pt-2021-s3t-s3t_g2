@@ -70,12 +70,12 @@ public class PacketHandlerUdp {
             return;
         String partie = (String)packet.getValue(message,1);
         InetAddress ip = null;
-        try {
-            ip = InetAddress.getByName((String)packet.getValue(message,2));
-        } catch (UnknownHostException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
+		try {
+			ip = InetAddress.getByName((String)packet.getValue(message,2));
+		} catch (UnknownHostException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
         int port = (int)packet.getValue(message,3);
         PartieInfo partieInfo = new PartieInfo(ip, port, partie, core.getTypeJoueur());
         core.addPartie(partieInfo);

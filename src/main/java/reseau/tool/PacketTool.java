@@ -144,7 +144,7 @@ public abstract class PacketTool {
      * @param list hashmap a convertir
      * @return un hashmap en chaine de caractere
      */
-    public static String subListToStr(Map<Integer, List<Integer>> list) {
+    public static String subListToStr(HashMap<Integer, List<Integer>> list) {
         if (list.isEmpty())
             return " ";
 

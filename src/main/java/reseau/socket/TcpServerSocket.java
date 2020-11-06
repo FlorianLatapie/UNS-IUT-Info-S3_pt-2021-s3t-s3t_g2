@@ -100,16 +100,16 @@ public class TcpServerSocket {
 		}
 	}
 
-    /**
-     * Traitement du message
-     *
-     * @param socket  socket du message
-     * @param message message a traite
-     * @return renvoie une reponse
-     */
-    private String process(Socket socket, String message) {
-        return netWorkManager.getPacketHandlerTcp().traitement(PtTool.strToPacketTcp(message, netWorkManager), message);
-    }
+	/**
+	 * Traitement du message
+	 *
+	 * @param socket  socket du message
+	 * @param message message a traite
+	 * @return renvoie une reponse
+	 */
+	private String process(Socket socket, String message) {
+		return netWorkManager.getPacketHandlerTcp().traitement(PtTool.strToPacketTcp(message, netWorkManager), message);
+	}
 
 	/**
 	 * Stop le serveur

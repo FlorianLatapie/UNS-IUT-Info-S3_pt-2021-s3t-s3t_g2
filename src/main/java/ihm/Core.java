@@ -11,7 +11,7 @@ public class Core {
     private String nomPartie = "partieParDéfaut";
     private Initializer initializer;
     private Idjr idjr ;
-
+    
 
     public void eventInit() {
         this.initializer = new Initializer();
