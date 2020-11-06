@@ -1,5 +1,8 @@
 package ihm;
 
+import java.util.Timer;
+import java.util.TimerTask;
+
 import ihm.DataControl.ApplicationPane;
 import ihm.eventListener.PlateauListener;
 import javafx.application.Platform;
@@ -23,7 +26,7 @@ public class PlateauPane extends StackPane implements PlateauListener {
 	private final int lhBoutonPause = 80;
 	private final String coinBoutons = " -fx-background-radius: 5px";
 	private final Font policeBoutonPause = Font.font("Segoe UI", FontWeight.BOLD, 33);
-	private Font policeInfo = Font.font("Segoe UI", FontWeight.BOLD, 40);
+	private Font policeInfo = Font.font("Segoe UI", FontWeight.BOLD, 20);
 
 	private final int margeJ = 20;
 	private final Insets margeTexteJoueur = new Insets(margeJ, 10, margeJ, 10);
@@ -38,6 +41,7 @@ public class PlateauPane extends StackPane implements PlateauListener {
 	private final int tailleFont = 18;
 	private final Font fontInfo = Font.font("Segoe UI", FontWeight.BOLD, tailleFont);
 	private final Font fontTitre = Font.font("Segoe UI", FontWeight.BOLD, tailleFont);
+	private final Font fontPerso = Font.font("Segoe UI", FontWeight.BOLD, 12);
 
 	private CornerRadii coinfb = new CornerRadii(5.0);
 	private Background fondBlanc = new Background(new BackgroundFill(Color.WHITE, coinfb, null));
@@ -97,6 +101,8 @@ public class PlateauPane extends StackPane implements PlateauListener {
 
 	Label titreInfo;
 	Label lInfo;
+
+	Timer myTimer;
 
 	public PlateauPane(ScreenControl sc, Core c) {
 		core = c;
@@ -549,8 +555,8 @@ public class PlateauPane extends StackPane implements PlateauListener {
 		////////////////////////////////////////////////////
 		info = new BorderPane();
 		// info.setMinSize(500, 500);
-		info.setPrefSize(500, 500);
-		info.setMaxSize(500, 500);
+		info.setPrefSize(1000, 200);
+		info.setMaxSize(1000, 200);
 		info.setBackground(fondNoir);
 
 		VBox vTitreInfo = new VBox();
@@ -588,6 +594,19 @@ public class PlateauPane extends StackPane implements PlateauListener {
 		ImageView imgFond = new ImageView(DataControl.PLATEAU);
 		imgFond.setScaleX(0.4362);
 		imgFond.setScaleY(0.4362);
+
+		afficheJoueursLieu1.setTextFill(Color.WHITE);
+		afficheJoueursLieu2.setTextFill(Color.WHITE);
+		afficheJoueursLieu3.setTextFill(Color.WHITE);
+		afficheJoueursLieu4.setTextFill(Color.WHITE);
+		afficheJoueursLieu5.setTextFill(Color.WHITE);
+		afficheJoueursLieu6.setTextFill(Color.WHITE);
+		afficheJoueursLieu1.setFont(fontPerso);
+		afficheJoueursLieu2.setFont(fontPerso);
+		afficheJoueursLieu3.setFont(fontPerso);
+		afficheJoueursLieu4.setFont(fontPerso);
+		afficheJoueursLieu5.setFont(fontPerso);
+		afficheJoueursLieu6.setFont(fontPerso);
 
 		this.setBackground(new Background(new BackgroundFill(Color.BLACK, CornerRadii.EMPTY, null)));
 
@@ -846,33 +865,62 @@ public class PlateauPane extends StackPane implements PlateauListener {
 
 	@Override
 	public void fouilleCamion(String camion) {
-		new Thread(() -> {
+		Platform.runLater(() -> {
 			titreInfo.setText("Fouille du camion");
 			lInfo.setText(camion);
 			info.setVisible(true);
-			try {
-				Thread.sleep(5000);
-			} catch (InterruptedException e) {
-				e.printStackTrace();
+			if (myTimer != null) {
+				myTimer.cancel();
 			}
-			info.setVisible(false);
-			System.out.println("DFLSKFLK");
+			myTimer = new Timer();
+			myTimer.schedule(new TimerTask() {
+
+				@Override
+				public void run() {
+					info.setVisible(false);
+				}
+			}, 5000);
 		});
 	}
 
 	@Override
 	public void prevenirDeplacementVigile(String depvig) {
-		new Thread(() -> {
+		Platform.runLater(() -> {
 			titreInfo.setText("Déplacement d'un pion du chef des vigiles");
 			lInfo.setText(depvig);
 			info.setVisible(true);
-			try {
-				Thread.sleep(5000);
-			} catch (InterruptedException e) {
-				e.printStackTrace();
+			if (myTimer != null) {
+				myTimer.cancel();
 			}
-			info.setVisible(false);
-			System.out.println("FDSFSDFSDFLSKFLK");
+			myTimer = new Timer();
+			myTimer.schedule(new TimerTask() {
+
+				@Override
+				public void run() {
+					info.setVisible(false);
+				}
+			}, 5000);
+		});
+	}
+
+	@Override
+	public void electionChef(String message) {
+		Platform.runLater(() -> {
+			titreInfo.setText("Election du chef des vigiles");
+			lInfo.setText(message);
+			info.setVisible(true);
+			if (myTimer != null) {
+				myTimer.cancel();
+			}
+
+			myTimer = new Timer();
+			myTimer.schedule(new TimerTask() {
+
+				@Override
+				public void run() {
+					info.setVisible(false);
+				}
+			}, 5000);
 		});
 	}
 }
