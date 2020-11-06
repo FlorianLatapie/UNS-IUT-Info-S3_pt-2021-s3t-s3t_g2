@@ -153,6 +153,8 @@ public class UdpSocket {
      * Stop le serveur
      */
     public void stop() {
+    	if (udpThread == null)
+    		return;
         serverState = ServerState.STOPPED;
         enableLoop = false;
         try {
