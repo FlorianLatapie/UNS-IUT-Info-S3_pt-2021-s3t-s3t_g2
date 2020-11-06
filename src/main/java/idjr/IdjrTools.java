@@ -1,12 +1,14 @@
 package idjr;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import reseau.type.Couleur;
 import reseau.type.PionCouleur;
 
 public abstract class IdjrTools {
-    private IdjrTools(){
+    private IdjrTools() {
 
     }
 
@@ -31,5 +33,21 @@ public abstract class IdjrTools {
         String tmp = "" + pc.name().charAt(1);
 
         return Integer.parseInt(tmp);
+    }
+
+    public static List<String> getLieuByIndex(List<Integer> lieux) {
+        HashMap<Integer, String> listeLieu = new HashMap<Integer, String>();
+        listeLieu.put(1, "Toilettes");
+        listeLieu.put(2, "Cachou");
+        listeLieu.put(3, "Megatoys");
+        listeLieu.put(4, "Parking");
+        listeLieu.put(5, "PC de securite");
+        listeLieu.put(6, "Supermarche");
+
+        List<String> list = new ArrayList<>();
+        for (int i : lieux)
+            list.add(listeLieu.get(i));
+
+        return list;
     }
 }
