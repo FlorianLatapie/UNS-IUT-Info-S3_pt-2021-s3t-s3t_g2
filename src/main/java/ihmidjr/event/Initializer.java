@@ -1,6 +1,5 @@
-package ihm.event;
+package ihmidjr.event;
 
-import java.security.PublicKey;
 import java.util.ArrayList;
 import java.util.List;
 

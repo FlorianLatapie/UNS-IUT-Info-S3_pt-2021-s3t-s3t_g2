@@ -1,4 +1,4 @@
-package ihm;
+package ihmidjr;
 
 import idjr.Idjr;
 import javafx.application.Application;

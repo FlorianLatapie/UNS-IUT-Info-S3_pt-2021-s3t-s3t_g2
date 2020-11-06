@@ -1,6 +1,6 @@
-package ihm;
+package ihmidjr;
 
-import ihm.DataControl.ApplicationPane;
+import ihmidjr.DataControl.ApplicationPane;
 import javafx.animation.RotateTransition;
 import javafx.event.EventHandler;
 import javafx.scene.Node;

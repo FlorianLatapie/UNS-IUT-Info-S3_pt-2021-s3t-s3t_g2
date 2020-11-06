@@ -1,8 +1,6 @@
-package ihm;
+package ihmidjr;
 
-import idjr.Idjr;
-import ihm.ScreenControl;
-import ihm.DataControl.ApplicationPane;
+import ihmidjr.DataControl.ApplicationPane;
 import javafx.application.Platform;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -13,7 +11,6 @@ import javafx.scene.effect.GaussianBlur;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
-import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;

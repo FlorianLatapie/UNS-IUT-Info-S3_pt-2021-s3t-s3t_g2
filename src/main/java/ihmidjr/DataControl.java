@@ -1,4 +1,4 @@
-package ihm;
+package ihmidjr;
 
 import java.util.Locale;
 
@@ -18,16 +18,16 @@ public class DataControl {
 	public final static Locale localeEN = new Locale("en", "UK");
 	public final static Locale localeFR = new Locale("fr", "FR");
 	public final static String localMsgURL = "Ressources.Textes.messages";
-	public static final String FOND = "ihm/fond.png";
-	public static final String PLATEAU = "ihm/plateau.png";
-	public static final String ICONE = "ihm/desktop Icon.jpg";
+	public static final String FOND = "ihmidjr/fond.png";
+	public static final String PLATEAU = "ihmidjr/plateau.png";
+	public static final String ICONE = "ihmidjr/desktop Icon.jpg";
 	
-	public static final String NOIR = "ihm/noir.png";
-	public static final String VERT = "ihm/vert.png";
-	public static final String MARRON = "ihm/marron.png";
-	public static final String ROUGE = "ihm/rouge.png";
-	public static final String BLEU = "ihm/bleu.png";
-	public static final String JAUNE = "ihm/jaune.png";
+	public static final String NOIR = "ihmidjr/noir.png";
+	public static final String VERT = "ihmidjr/vert.png";
+	public static final String MARRON = "ihmidjr/marron.png";
+	public static final String ROUGE = "ihmidjr/rouge.png";
+	public static final String BLEU = "ihmidjr/bleu.png";
+	public static final String JAUNE = "ihmidjr/jaune.png";
 	
 		
 	public static final ObservableList<Integer> nombreJoueur = FXCollections.observableArrayList(3,4,5,6);

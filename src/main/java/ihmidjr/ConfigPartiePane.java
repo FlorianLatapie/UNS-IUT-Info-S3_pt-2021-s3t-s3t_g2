@@ -1,12 +1,11 @@
-package ihm;
+package ihmidjr;
 
-import ihm.DataControl.ApplicationPane;
-import ihm.event.ConfigListener;
+import ihmidjr.DataControl.ApplicationPane;
+import ihmidjr.event.ConfigListener;
 import javafx.application.Platform;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.effect.GaussianBlur;
@@ -15,8 +14,6 @@ import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
-
-import java.io.IOException;
 
 /**
  * The Class ConfigPartiePane.

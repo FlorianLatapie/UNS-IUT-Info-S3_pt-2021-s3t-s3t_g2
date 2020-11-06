@@ -1,7 +1,6 @@
 package idjr;
 
-import ihm.Core;
-import ihm.event.Initializer;
+import ihmidjr.event.Initializer;
 import reseau.socket.NetWorkManager;
 import reseau.socket.SideConnection;
 import reseau.socket.TcpClientSocket;
@@ -12,7 +11,6 @@ import reseau.type.TypeJoueur;
 import reseau.type.TypePartie;
 
 import java.io.IOException;
-import java.lang.invoke.StringConcatFactory;
 import java.net.InetAddress;
 import java.util.ArrayList;
 import java.util.List;

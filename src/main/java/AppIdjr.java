@@ -1,5 +1,5 @@
-import ihm.Core;
-import ihm.InterfacePrincipale;
+import ihmidjr.Core;
+import ihmidjr.InterfacePrincipale;
 
 /**
  * Lance l'application et son interface graphique 
@@ -9,7 +9,7 @@ import ihm.InterfacePrincipale;
  * @since 10/10/2020
  * @category (default package)
  */
-public class App { 
+public class AppIdjr {
 	public static void main(String[] args) {
 		Core c = new Core(); 
 		InterfacePrincipale.lancement(args,c);

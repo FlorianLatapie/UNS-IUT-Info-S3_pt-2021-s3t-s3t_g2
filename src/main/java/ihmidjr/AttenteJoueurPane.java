@@ -1,8 +1,8 @@
 
-package ihm;
+package ihmidjr;
 
-import ihm.DataControl.ApplicationPane;
-import ihm.event.AttenteListener;
+import ihmidjr.DataControl.ApplicationPane;
+import ihmidjr.event.AttenteListener;
 import javafx.application.Platform;
 //TODO import ihm.eventListener.AttenteListener;
 import javafx.geometry.Insets;

@@ -1,4 +1,4 @@
-package ihm;
+package ihmidjr;
 
 import java.text.MessageFormat;
 import java.util.ArrayList;

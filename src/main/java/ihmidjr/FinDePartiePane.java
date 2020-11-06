@@ -1,7 +1,7 @@
-package ihm;
+package ihmidjr;
 
-import ihm.DataControl.ApplicationPane;
-import ihm.event.FinListener;
+import ihmidjr.DataControl.ApplicationPane;
+import ihmidjr.event.FinListener;
 import javafx.application.Platform;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;

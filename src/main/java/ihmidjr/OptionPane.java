@@ -1,21 +1,14 @@
-package ihm;
+package ihmidjr;
 
-import ihm.DataControl.ApplicationPane;
-import ihm.ScreenControl;
-import javafx.application.Platform;
+import ihmidjr.DataControl.ApplicationPane;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.control.Labeled;
-import javafx.scene.control.Slider;
-import javafx.scene.control.TextArea;
 import javafx.scene.effect.GaussianBlur;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
-import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;

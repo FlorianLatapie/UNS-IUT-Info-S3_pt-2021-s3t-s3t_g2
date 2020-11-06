@@ -1,4 +1,4 @@
-package ihm.event;
+package ihmidjr.event;
 
 import java.util.List;
 

@@ -1,20 +1,16 @@
-package ihm;
+package ihmidjr;
 
 import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
 
-import ihm.DataControl.ApplicationPane;
-import ihm.ScreenControl;
-import ihm.event.JeuListener;
+import ihmidjr.DataControl.ApplicationPane;
+import ihmidjr.event.JeuListener;
 import javafx.application.Platform;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.control.Labeled;
-import javafx.scene.control.Slider;
-import javafx.scene.control.TextArea;
 import javafx.scene.effect.GaussianBlur;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -22,7 +18,6 @@ import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.CornerRadii;
-import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
@@ -30,8 +25,6 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
-import javafx.scene.text.TextAlignment;
-import javafx.stage.Popup;
 import reseau.type.Couleur;
 
 public class JeuPane extends StackPane implements JeuListener {
