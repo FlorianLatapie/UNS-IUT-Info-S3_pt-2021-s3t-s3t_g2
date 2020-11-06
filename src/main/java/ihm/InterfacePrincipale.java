@@ -8,6 +8,7 @@ import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
+import javafx.stage.WindowEvent;
 
 public class InterfacePrincipale extends Application {
     private StackPane root = new StackPane();
@@ -80,6 +81,7 @@ public class InterfacePrincipale extends Application {
 
         primaryStage.setScene(scene);
 
+        primaryStage.getScene().getWindow().addEventFilter(WindowEvent.WINDOW_CLOSE_REQUEST, this::onClose);
         primaryStage.show();
 
     }
@@ -98,6 +100,10 @@ public class InterfacePrincipale extends Application {
 
     public Scene getScene() {
         return scene;
+    }
+    
+    public void onClose(WindowEvent event) {
+    	core.getIdjr().stop();
     }
 
 }

@@ -25,7 +25,7 @@ import javafx.scene.text.FontWeight;
 
 /**
  * The Class AccueilPane.
- *
+ * 
  * @author Florian
  * @version 0.1
  * @since 04/10/2020
@@ -37,7 +37,7 @@ public class AccueilPane extends StackPane {
 	private final ApplicationPane paneName = ApplicationPane.ACCUEIL;
 	// définition des variable pour la suite du pane
 	private int tailleCarreCentral = 600; // l'interface est sur un stackPane qui peut tourner avec des crans de 90
-	// degrés
+											// degrés
 	private int hBouton = 100;
 	private int lBouton = 200;
 	private int marge = tailleCarreCentral / 25;
@@ -53,9 +53,8 @@ public class AccueilPane extends StackPane {
 	private int largeurTF = 100;
 	private int hauteurElemtents = 60;
 
-
-
 	TextField nomjoueur;
+
 	public AccueilPane(ScreenControl sc, Core c) {
 		core = c;
 		sControl = sc;
@@ -82,9 +81,9 @@ public class AccueilPane extends StackPane {
 		titre.setPrefWidth(800);
 		titre.setMinWidth(800);
 
-		// nom du joueur 
+		// nom du joueur
 		nomjoueur = new TextField();
-		nomjoueur.setText("JoueurSansNom"+ (int) (100 * Math.random()));
+		nomjoueur.setText("JoueurSansNom" + (int) (100 * Math.random()));
 		nomjoueur.setFont(policeNom);
 		nomjoueur.setPrefSize(largeurTF, hauteurElemtents);
 		nomjoueur.setMinHeight(hauteurElemtents);
@@ -102,14 +101,13 @@ public class AccueilPane extends StackPane {
 		bJouer.setOnMouseExited(event -> {
 			bJouer.setStyle(styleBoutons);
 		});
-		bJouer.setOnAction(EventHandler ->{
-			//TODO CARACTERE NON AUTORISE
+		bJouer.setOnAction(EventHandler -> {
+			// TODO CARACTERE NON AUTORISE
 			if (nomjoueur.getText().length() < 24) {
 				core.getIdjr().setNom(nomjoueur.getText());
 				core.getIdjr().getInitializer().nomJoueur(core.getIdjr().getNom());
 				sc.setPaneOnTop(ApplicationPane.CONFIG);
-			}
-			else
+			} else
 				nomjoueur.setText("INVALIDE");
 		});
 
@@ -162,8 +160,11 @@ public class AccueilPane extends StackPane {
 		bQuitter.setOnAction(event -> {
 			boolean resultat = ConfirmationPane.afficher("Quitter le jeu",
 					"Êtes-vous sûr de vouloir quitter le jeu ? \nSi vous quittez, la partie en cours sera perdue.");
-			if (resultat)
+			if (resultat) {
+				if (core.getIdjr() != null)
+					core.getIdjr().stop();
 				Platform.exit();
+			}
 		});
 
 		// grille contenant les 4 boutons
@@ -192,7 +193,7 @@ public class AccueilPane extends StackPane {
 		centreMenu.setAlignment(Pos.CENTER);
 		centreMenu.setMargin(titre, new Insets(0, 0, 100, 0));
 		// titre.setPadding(margeBoutons);
-		centreMenu.getChildren().addAll(titre, nomjoueur,grilleBoutons);
+		centreMenu.getChildren().addAll(titre, nomjoueur, grilleBoutons);
 
 		// rotation de l'interface
 		// centreMenu.setRotate(90);
