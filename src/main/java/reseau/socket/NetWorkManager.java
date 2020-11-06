@@ -13,8 +13,8 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Map;
 
-import jeu.PacketHandlerTcp;
-import jeu.PacketHandlerUdp;
+import idjr.PacketHandlerTcp;
+import idjr.PacketHandlerUdp;
 
 /**
  * <h1> Permet de gerer la partie reseau </h1>
