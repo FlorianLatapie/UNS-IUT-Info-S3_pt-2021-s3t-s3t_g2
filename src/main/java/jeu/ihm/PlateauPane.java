@@ -26,7 +26,6 @@ public class PlateauPane extends StackPane implements PlateauListener {
 	private final int lhBoutonPause = 80;
 	private final String coinBoutons = " -fx-background-radius: 5px";
 	private final Font policeBoutonPause = Font.font("Segoe UI", FontWeight.BOLD, 33);
-	private Font policeInfo = Font.font("Segoe UI", FontWeight.BOLD, 20);
 
 	private final int margeJ = 20;
 	private final Insets margeTexteJoueur = new Insets(margeJ, 10, margeJ, 10);
@@ -39,6 +38,7 @@ public class PlateauPane extends StackPane implements PlateauListener {
 	private final int margeL = 10;
 	private final Insets margeLieu = new Insets(margeL, margeL, margeL, margeL);
 	private final int tailleFont = 18;
+	
 	private final Font fontInfo = Font.font("Segoe UI", FontWeight.BOLD, tailleFont);
 	private final Font fontTitre = Font.font("Segoe UI", FontWeight.BOLD, tailleFont);
 	private final Font fontPerso = Font.font("Segoe UI", FontWeight.BOLD, 12);
@@ -563,14 +563,14 @@ public class PlateauPane extends StackPane implements PlateauListener {
 		vTitreInfo.setAlignment(Pos.CENTER);
 		vTitreInfo.setPadding(new Insets(20));
 		titreInfo = new Label("Titre info");
-		titreInfo.setFont(policeInfo);
+		titreInfo.setFont(Font.font("Segoe UI", FontWeight.BOLD, 20));
 		titreInfo.setTextFill(Color.WHITE);
 		vTitreInfo.getChildren().addAll(titreInfo);
 
 		VBox vInfo = new VBox();
 		vInfo.setAlignment(Pos.TOP_LEFT);
 		lInfo = new Label("information");
-		lInfo.setFont(policeInfo);
+		lInfo.setFont(Font.font("Segoe UI", FontWeight.BOLD, 10));
 		lInfo.setTextFill(Color.WHITE);
 		vInfo.getChildren().addAll(lInfo);
 
