@@ -32,17 +32,12 @@ public class JeuPane extends StackPane implements JeuListener {
 	private ScreenControl sControl = null;
 	private Core core = null;
 	// définition des variable pour la suite du pane
-	private int tailleCarreCentral = 600; // l'interface est sur un stackPane qui peut tourner avec des crans de 90
-											// degrés
 	private int hBouton = 100;
 	private int lBouton = 200;
-	private int marge = tailleCarreCentral / 25;
-	private Insets margeBoutons = new Insets(marge, marge, marge, marge);
 	private Font policeBouton = Font.font("Segoe UI", FontWeight.BOLD, 33);
 	private Font policeBoutonDe = Font.font("Segoe UI", FontWeight.BOLD, 40);
-	private CornerRadii coin = new CornerRadii(15.0);
 	private String styleBoutons = " -fx-background-color:#000000; -fx-background-radius: 15px; -fx-text-fill: #ffffff";
-	private String styleDe = " -fx-background-color:#FFFFFF; -fx-background-radius: 3px; -fx-text-fill: #ffffff";
+	//private String styleDe = " -fx-background-color:#FFFFFF; -fx-background-radius: 3px; -fx-text-fill: #ffffff";
 	private String styleBoutonsSouris = "-fx-background-color:#ff0000;  -fx-text-fill:#000000; -fx-background-radius: 15px;";
 	private StackPane stackPane = new StackPane();
 	private GaussianBlur flou = new GaussianBlur(30);
@@ -54,9 +49,7 @@ public class JeuPane extends StackPane implements JeuListener {
 	private int largBouton = 155;
 	private int hautBouton = 70;
 
-	private Font policeNom = Font.font("Segoe UI", 17);
-	private int largeurTF = 100;
-	private int hauteurElemtents = 60;
+
 	private final ApplicationPane paneName = ApplicationPane.JEU;
 
 	// TODO
@@ -497,8 +490,8 @@ public class JeuPane extends StackPane implements JeuListener {
 		/////
 		info = new BorderPane();
 		// info.setMinSize(500, 500);
-		info.setPrefSize(500, 500);
-		info.setMaxSize(500, 500);
+		info.setPrefSize(1000, 200);
+		info.setMaxSize(1000, 200);
 		info.setBackground(fondBlanc);
 		info.setVisible(false);
 
@@ -506,13 +499,13 @@ public class JeuPane extends StackPane implements JeuListener {
 		vTitreInfo.setAlignment(Pos.CENTER);
 		vTitreInfo.setPadding(new Insets(20));
 		titreInfo = new Label("Titre info");
-		titreInfo.setFont(policeBoutonDe);
+		titreInfo.setFont(Font.font("Segoe UI", FontWeight.BOLD, 20));
 		vTitreInfo.getChildren().addAll(titreInfo);
 
 		VBox vInfo = new VBox();
 		vInfo.setAlignment(Pos.TOP_LEFT);
 		lInfo = new Label("information");
-		lInfo.setFont(policeBoutonDe);
+		lInfo.setFont(Font.font("Segoe UI", FontWeight.BOLD, 10));
 		vInfo.getChildren().addAll(lInfo);
 
 		info.setMargin(vInfo, new Insets(50, 20, 0, 20));

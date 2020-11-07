@@ -15,7 +15,6 @@ public class ScreenControl implements EventHandler<MouseEvent> {
     private final Core core;
     private InterfacePrincipale primary = null;
     private HashMap<ApplicationPane, Node> listNode = new HashMap<>();
-    //private MemoryGame mg;
     private boolean lock = false;
 
 
@@ -27,7 +26,6 @@ public class ScreenControl implements EventHandler<MouseEvent> {
     public ScreenControl(InterfacePrincipale i, Core core) {
         this.core = core;
         primary = i;
-        //mg = new MemoryGame(this);
         primary.getScene().addEventFilter(MouseEvent.ANY, this);
     }
 
