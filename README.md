@@ -52,3 +52,19 @@ La branche **Production** sert à fusionner plusieurs branches de niveau supéri
 La branche **Master** est la branche qui contiendra notre projet fonctionnel.
 
 Seuls les chefs de section pourront push dans les branches Master et Production.
+
+**Comment lancer le jeu ?**
+
+
+
+|Pour le PP|Pour l’IDJR|
+|------|-----|
+|Si vous voulez utiliser le clavier tactile:|➔Lancez le IDJR.java||
+|➔lancez le runPP.bat ||
+|Sinon ➔lancez le PP.java ||
+|➔Si des bots(faciles) sont nécessaires: Il faut lancer le bon nombre de BOT.jar, ils se connecteront automatiquement.||
+|||
+|➔Jouer|➔saisir votre nom (optionnel)|
+|➔saisir le nom de la partie (optionnel), le nombre total de joueurs (requis) et le nombre de bots (requis)|➔saisir le nom de partie renseigné sur le PP |
+|➔Attendez que les IDJR et/ou bots se connectent||
+|➔choisir la couleur de chaque joueur||
