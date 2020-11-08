@@ -4,17 +4,14 @@ import reseau.packet.Packet;
 import reseau.tool.NetworkTool;
 import reseau.tool.PtTool;
 
-import java.io.File;
 import java.io.IOException;
 import java.net.InetAddress;
 import java.net.InetSocketAddress;
 import java.net.Socket;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.Map;
 
-import jeu.PacketHandlerTcp;
-import jeu.PacketHandlerUdp;
+import pp.PacketHandlerTcp;
+import pp.PacketHandlerUdp;
 
 /**
  * <h1> Permet de gerer la partie reseau </h1>

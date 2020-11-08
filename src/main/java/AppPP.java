@@ -1,5 +1,5 @@
-import jeu.ihm.Core;
-import jeu.ihm.InterfacePrincipale;
+import pp.ihm.Core;
+import pp.ihm.InterfacePrincipale;
 
 /**
  * Lance l'application et son interface graphique 
