@@ -68,3 +68,6 @@ Seuls les chefs de section pourront push dans les branches Master et Production.
 |➔saisir le nom de la partie (optionnel), le nombre total de joueurs (requis) et le nombre de bots (requis)|➔saisir le nom de partie renseigné sur le PP |
 |➔Attendez que les IDJR et/ou bots se connectent||
 |➔choisir la couleur de chaque joueur||
+
+**Gestion Gitignore**
+Notre fichier .gitignore contient les fichiers a exclure, ce sont donc les fichiers inutile pour l'ensemble des contributeurs du projet. Ils sont propre a l'utilisateur et donc ils ne doivent pas etre transmit. Les fichiers inutiles de nos IDE (Eclipse & Intellij) et Maven sont exclus.
