@@ -6,7 +6,7 @@ import reseau.socket.NetWorkManager;
 import reseau.socket.SideConnection;
 import reseau.tool.NetworkTool;
 
-public class MainConsole {
+public class ConsoleBot {
 	static Idjr idjr;
 	public static void main(String[] args) throws IOException, URISyntaxException {
 		idjr = new Idjr();
