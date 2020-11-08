@@ -98,6 +98,8 @@ public class PlateauPane extends StackPane implements PlateauListener {
 
 	Label lChefVigile;
 	Label lChefVigile2;
+	Label lChefVigile3;
+	Label lChefVigile4;
 
 	Label titreInfo;
 	Label lInfo;
@@ -529,25 +531,47 @@ public class PlateauPane extends StackPane implements PlateauListener {
 
 		AnchorPane.setTopAnchor(b6, 313.5);
 		AnchorPane.setLeftAnchor(b6, 778.5);
-
+		
+		/////
+		
 		lChefVigile = new Label();
-		lChefVigile.setText("X" + " est le vigile");
+		lChefVigile.setText("XXXXXXX" + " est le chef des vigiles");
 		lChefVigile.setBackground(fondBlanc);
 		lChefVigile.setFont(fontInfo);
 		lChefVigile.setPadding(margeLieu);
 		AnchorPane.setTopAnchor(lChefVigile, 750.0);
-		AnchorPane.setLeftAnchor(lChefVigile, 500.0);
+		AnchorPane.setLeftAnchor(lChefVigile, 375.0);
 
 		lChefVigile2 = new Label();
-		lChefVigile2.setText("X" + " est le vigile");
+		lChefVigile2.setText("XXXXXXX" + " est le chef des vigiles");
 		lChefVigile2.setBackground(fondBlanc);
 		lChefVigile2.setFont(fontInfo);
 		lChefVigile2.setPadding(margeLieu);
 		lChefVigile2.setRotate(180);
 		AnchorPane.setTopAnchor(lChefVigile2, 350.0);
-		AnchorPane.setLeftAnchor(lChefVigile2, 500.0);
-
-		aPlateau.getChildren().addAll(b1, b2, b3, b4, b5, b6, lChefVigile, lChefVigile2);
+		AnchorPane.setRightAnchor(lChefVigile2, 425.0);
+		
+		lChefVigile3 = new Label();
+		lChefVigile3.setText("XXXXXXX" + " est le chef des vigiles");
+		lChefVigile3.setBackground(fondBlanc);
+		lChefVigile3.setFont(fontInfo);
+		lChefVigile3.setPadding(margeLieu);
+		lChefVigile3.setRotate(90);
+		AnchorPane.setTopAnchor(lChefVigile3, 550.0);
+		AnchorPane.setLeftAnchor(lChefVigile3, 180.0);
+		
+		lChefVigile4 = new Label();
+		lChefVigile4.setText("XXXXXXX" + " est le chef des vigiles");
+		lChefVigile4.setBackground(fondBlanc);
+		lChefVigile4.setFont(fontInfo);
+		lChefVigile4.setPadding(margeLieu);
+		lChefVigile4.setRotate(-90);
+		AnchorPane.setTopAnchor(lChefVigile4, 550.0);
+		AnchorPane.setLeftAnchor(lChefVigile4, 575.0);
+		
+		////
+		
+		aPlateau.getChildren().addAll(b1, b2, b3, b4, b5, b6, lChefVigile, lChefVigile2,lChefVigile3,lChefVigile4);
 
 		// aPlateau.setBackground(new Background(new BackgroundFill(Color.RED,
 		// CornerRadii.EMPTY, null)));
@@ -827,6 +851,8 @@ public class PlateauPane extends StackPane implements PlateauListener {
 		Platform.runLater(() -> {
 			lChefVigile.setText(tmp);
 			lChefVigile2.setText(tmp);
+			lChefVigile3.setText(tmp);
+			lChefVigile4.setText(tmp);
 		});
 	}
 
