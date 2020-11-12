@@ -18,16 +18,16 @@ public class DataControl {
 	public final static Locale localeEN = new Locale("en", "UK");
 	public final static Locale localeFR = new Locale("fr", "FR");
 	public final static String localMsgURL = "Ressources.Textes.messages";
-	public static final String FOND = "idjr/ihmidjr/fond.png";
-	public static final String PLATEAU = "idjr/ihmidjr/plateau.png";
-	public static final String ICONE = "idjr/ihmidjr/desktop Icon.jpg";
+	public static final String FOND = "idjr/ihmidjr/images/fond.png";
+	public static final String PLATEAU = "idjr/ihmidjr/images/plateau.png";
+	public static final String ICONE = "idjr/ihmidjr/images/desktop Icon.jpg";
 	
-	public static final String NOIR = "idjr/ihmidjr/noir.png";
-	public static final String VERT = "idjr/ihmidjr/vert.png";
-	public static final String MARRON = "idjr/ihmidjr/marron.png";
-	public static final String ROUGE = "idjr/ihmidjr/rouge.png";
-	public static final String BLEU = "idjr/ihmidjr/bleu.png";
-	public static final String JAUNE = "idjr/ihmidjr/jaune.png";
+	public static final String NOIR = "idjr/ihmidjr/images/noir.png";
+	public static final String VERT = "idjr/ihmidjr/images/vert.png";
+	public static final String MARRON = "idjr/ihmidjr/images/marron.png";
+	public static final String ROUGE = "idjr/ihmidjr/images/rouge.png";
+	public static final String BLEU = "idjr/ihmidjr/images/bleu.png";
+	public static final String JAUNE = "idjr/ihmidjr/images/jaune.png";
 	
 		
 	public static final ObservableList<Integer> nombreJoueur = FXCollections.observableArrayList(3,4,5,6);
