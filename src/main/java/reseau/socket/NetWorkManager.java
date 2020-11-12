@@ -6,7 +6,6 @@ import reseau.tool.PtTool;
 
 import java.io.IOException;
 import java.net.InetAddress;
-import java.net.InetSocketAddress;
 import java.net.Socket;
 import java.util.Map;
 
@@ -26,7 +25,8 @@ public class NetWorkManager {
     private static final String PATHTOPACKET = "Ressources/protocol_reseau/packets";
 
     private UdpSocket udpSocket;
-    private TcpServerSocket tcpServerSocket;
+    private TcpServer tcpServerSocket;
+    private TcpClient tcpClientSocket;
     private InetAddress address;
 
     private int tcpPort;
@@ -64,33 +64,43 @@ public class NetWorkManager {
         if (sideConnection == SideConnection.SERVER) {
             this.address = address;
             udpSocket = new UdpSocket(this);
-            tcpServerSocket = new TcpServerSocket(this);
+            new Thread(tcpServerSocket = new TcpServer(this)).start();
             udpSocket.start(address);
-            tcpServerSocket.start(address, tcpPort);
         } else {
             this.address = address;
-            socketTCPSocket = new Socket();
-            socketTCPSocket.bind(new InetSocketAddress("localhost", tcpPort));
             udpSocket = new UdpSocket(this);
-            tcpServerSocket = new TcpServerSocket(this);
+            new Thread(() -> {
+                String ip = "127.0.0.1";
+                try {
+                    tcpClientSocket = new TcpClient(this);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                try {
+                    tcpClientSocket.start(true,ip, 5555);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }).start();
             udpSocket.start(address);
             //tcpServerSocket.start(address, tcpPort);
         }
     }
 
     public void stopBind() {
-        if (socketTCPSocket == null)
-            return;
+        if (tcpServerSocket != null)
+            try {
+                tcpServerSocket.stop();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
 
-        try {
-            socketTCPSocket.close();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
-    public void startServerTCP() {
-        tcpServerSocket.start(address, tcpPort);
+        if (tcpClientSocket != null)
+            try {
+                tcpClientSocket.stop();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
     }
 
     /**
@@ -107,8 +117,12 @@ public class NetWorkManager {
      *
      * @return le serveur TCP
      */
-    public TcpServerSocket getTcpServerSocket() {
+    public TcpServer getTcpServerSocket() {
         return tcpServerSocket;
+    }
+
+    public TcpClient getTcpClientSocket() {
+        return tcpClientSocket;
     }
 
     /**
