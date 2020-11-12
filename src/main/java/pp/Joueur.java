@@ -1,7 +1,8 @@
 package pp;
 
-import reseau.type.Couleur;
 import pp.temp.CarteAction;
+import reseau.socket.Connection;
+import reseau.type.Couleur;
 
 import java.net.InetAddress;
 import java.util.ArrayList;
@@ -39,14 +40,11 @@ public class Joueur {
     private final ArrayList<CarteAction> cartes;
     private boolean chefDesVigiles;
     private final String nom;
+    private final Connection connection;
 
-    /**
-     * @param joueurIdint
-     * @param ip
-     * @param port
-     * @param nom         le nom du joueur
-     */
-    public Joueur(int joueurIdint, InetAddress ip, int port, String nom) {
+
+    public Joueur(int joueurIdint, InetAddress ip, int port, String nom, Connection connection) {
+        this.connection = connection;
         this.joueurIdint = joueurIdint;
         this.joueurId = "J" + joueurIdint;
         this.ip = ip;
@@ -56,6 +54,19 @@ public class Joueur {
         cartes = new ArrayList<>();
         this.nom = nom;
     }
+
+    public Joueur(int joueurIdint, InetAddress ip, int port, String nom) {
+        this.connection = null;
+        this.joueurIdint = joueurIdint;
+        this.joueurId = "J" + joueurIdint;
+        this.ip = ip;
+        this.port = port;
+        enVie = true;
+        personnages = new HashMap<>();
+        cartes = new ArrayList<>();
+        this.nom = nom;
+    }
+
 
     /**
      * @return la couleur
@@ -145,5 +156,9 @@ public class Joueur {
 
     public int getPort() {
         return port;
+    }
+
+    public Connection getConnection() {
+        return connection;
     }
 }
