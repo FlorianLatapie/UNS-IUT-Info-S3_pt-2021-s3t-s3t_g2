@@ -21,14 +21,14 @@ public class InterfacePrincipale extends Application {
 		sControl = new ScreenControl(this, core);
 		int largeur = 1920;
 		int hauteur = 1080;
+		
 		primaryStage.setTitle("PP - G2 - ZOMBIES la blonde la brute et le truand");
 
 		primaryStage.setMaxWidth(largeur);
 		primaryStage.setMaxHeight(hauteur);
 		primaryStage.setMinWidth(largeur-20);
 		primaryStage.setMinHeight(hauteur-50);
-
-		// on passe en plein écran
+		
 		primaryStage.setFullScreen(true);
 
 		PlateauPane plateauPane = new PlateauPane(sControl, core);
@@ -38,23 +38,24 @@ public class InterfacePrincipale extends Application {
 		FinDePartiePane finDePartiePane = new FinDePartiePane(sControl, core);
 
 		core.eventInit();
-		core.getInitializer().addListenerPlateau(plateauPane);
 		core.getInitializer().addListenerAttente(attenteJoueurPane);
+		core.getInitializer().addListenerPlateau(plateauPane);
 		core.getInitializer().addListenerFin(finDePartiePane);
-		root.getChildren().add(new PausePane(sControl, core));
+
 		root.getChildren().add(new ReglesPane(sControl, core));
-		root.getChildren().add(plateauPane);
 		root.getChildren().add(new OptionPane(sControl, core));
+		root.getChildren().add(new PausePane(sControl, core));
 		root.getChildren().add(new AccessibilitePane(sControl));
-		root.getChildren().add(configPartiePane);
 		root.getChildren().add(attenteJoueurPane);
-		root.getChildren().add(couleurPane);
+		root.getChildren().add(configPartiePane);
 		root.getChildren().add(finDePartiePane);
+		root.getChildren().add(plateauPane);
+		root.getChildren().add(couleurPane);
+
 
 		root.getChildren().add(new AccueilPane(sControl, core));
 
 		primaryStage.setScene(scene);
-
 		primaryStage.getScene().getWindow().addEventFilter(WindowEvent.WINDOW_CLOSE_REQUEST, this::onClose);
 		primaryStage.show();
 

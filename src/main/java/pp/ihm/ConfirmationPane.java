@@ -28,20 +28,30 @@ public class ConfirmationPane {
 	static boolean reponse;
 	private static int tailleFenetreL = 450;
 	private static int tailleFenetreH = 150;
-
+	
+	/**
+	 * affiche une fenêtre de confirmation avec un titre et un message personnalisé
+	 * @param titre titre de la fenetre
+	 * @param message message affiché dans la fenetre 
+	 * @return
+	 */
 	public static boolean afficher(String titre, String message) {
+		
+		//nouvelle fenetre
 		Stage window = new Stage();
 		window.initModality(Modality.APPLICATION_MODAL);
 		window.setTitle(titre);
 		window.setMinWidth(tailleFenetreL);
 		window.setMinHeight(tailleFenetreH);
-
+		
+		//titre
 		Label label = new Label();
 		label.setText(message);
 		label.setStyle("-fx-text-fill: #DDDDDD");
 		label.setFont(Font.font("Arial", FontWeight.BOLD, 20));
 		label.setPadding(new Insets(10));
 
+		//boutons
 		Button boutonOui = new Button("QUITTER");
 		boutonOui.setPrefSize(200, 50);
 		boutonOui.setStyle("-fx-background-color: #ff0000; -fx-background-radius: 5px; -fx-text-fill: #ffffff");
@@ -54,9 +64,7 @@ public class ConfirmationPane {
 
 		boutonOui.setOnAction(e -> {
 			reponse = true;
-			
 			window.close();
-
 		});
 
 		boutonNon.setOnAction(e -> {
@@ -80,7 +88,5 @@ public class ConfirmationPane {
 		window.showAndWait();
 
 		return reponse;
-
 	}
-
 }

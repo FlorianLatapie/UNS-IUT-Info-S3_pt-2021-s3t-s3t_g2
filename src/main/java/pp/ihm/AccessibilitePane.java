@@ -16,11 +16,12 @@ public class AccessibilitePane extends StackPane{
 	
 	private ScreenControl sControl = null;
 	private StackPane stackPane = new StackPane();
-	private GaussianBlur flou = new GaussianBlur(30);
 	private final ApplicationPane paneName = ApplicationPane.ACCESSIBILITE;
 	
 	private int tailleCarreCentral = 700;
 	
+	private GaussianBlur flou = new GaussianBlur(30);
+
 	private String styleTitre ="-fx-text-fill: #ff1c16";
 	private String styleBoutons = " -fx-background-color:#000000; -fx-background-radius: 15px; -fx-text-fill: #ffffff";
 	private String styleTexte = " -fx-background-color:#000000; -fx-text-fill: #ffffff; -fx-background-radius: 5px;";
@@ -36,7 +37,6 @@ public class AccessibilitePane extends StackPane{
 	public AccessibilitePane(ScreenControl sc) {
 
 		sControl = sc;
-
 		stackPane.setAlignment(Pos.CENTER);
 		
 		Rectangle rect = new Rectangle();
@@ -69,10 +69,6 @@ public class AccessibilitePane extends StackPane{
 		vbBoutons.setAlignment(Pos.CENTER);
 		vbRetour.setPadding(new Insets(10));
 		
-		HBox hbDaltonisme = new HBox();
-		hbDaltonisme.setSpacing(10);
-		hbDaltonisme.setAlignment(Pos.CENTER);
-
 		Label titre = new Label("ACCÉSSIBILITÉ");
 		titre.setStyle(styleTitre);
 		titre.setFont(policeTitre);
@@ -80,6 +76,10 @@ public class AccessibilitePane extends StackPane{
 		vbTitre.getChildren().add(titre);
 		vbTitre.setMargin(vbBoutons, new Insets(10));
 		
+		//daltonisme 
+		HBox hbDaltonisme = new HBox();
+		hbDaltonisme.setSpacing(10);
+		hbDaltonisme.setAlignment(Pos.CENTER);
 		
 		Label titreVbBoutons = new Label("Daltonisme");
 		titreVbBoutons.setFont(policeBouton);
@@ -88,7 +88,7 @@ public class AccessibilitePane extends StackPane{
 		vbBoutons.getChildren().add(titreVbBoutons);
 		vbBoutons.setMargin(vbCheckBoutons, new Insets(20));
 
-
+		// boutons de différents daltonismes
 		Button bDeuteranopie = new Button("Deutéranopie");
 		bDeuteranopie.setFont(policeBouton);
 		bDeuteranopie.setAlignment(Pos.CENTER);
@@ -100,7 +100,6 @@ public class AccessibilitePane extends StackPane{
 		bDeuteranopie.setOnMouseExited(event -> {
 			bDeuteranopie.setStyle(styleBoutons);
 		});
-		
 		
 		Button bProtanopie = new Button("Protanopie");
 		bProtanopie.setFont(policeBouton);
@@ -130,6 +129,7 @@ public class AccessibilitePane extends StackPane{
 		vbBoutons.setSpacing(20);
 		vbBoutons.getChildren().add(hbDaltonisme);
 		
+		// checkboxes 
 		
 		CheckBox bHematophobie = new CheckBox("Hématophobie");
 		bHematophobie.setStyle(styleTexte);
@@ -155,12 +155,13 @@ public class AccessibilitePane extends StackPane{
 		bRetour.setOnMouseExited(event -> {
 			bRetour.setStyle(styleBoutons);
 		});
-
 		
 		vbRetour.getChildren().add(bRetour);
 		
 		vbCheckBoutons.setSpacing(20);
 		vbCheckBoutons.getChildren().addAll(bHematophobie, bAudio);
+		
+		// centre
 		
 		VBox vbCentre = new VBox();
 		vbCentre.setSpacing(20);
@@ -168,9 +169,9 @@ public class AccessibilitePane extends StackPane{
 		vbCentre.getChildren().addAll(vbTitre, vbBoutons, vbCheckBoutons);
 		bpCentral.setCenter(vbCentre);
 		bpCentral.setBottom(vbRetour);
-
-		ImageView img = new ImageView(DataControl.FOND);
-		vbFond.getChildren().add(img);
+		
+		
+		// Boutons de rotation d'écran 
 		
 		ImageView img1 = new ImageView(DataControl.SCREEN);
 		img1.setFitHeight(70);
@@ -220,7 +221,10 @@ public class AccessibilitePane extends StackPane{
 		bEcranDroite.setGraphic(img4);
 		bEcranDroite.setOnAction(EventHandler -> sc.setRotatePane(vbCentre, "droite"));
 		
-		//vbCentre.setRotate(ScreenControl.getAngle(ScreenControl.anglePane));
+		// boite du fond qui contient le fond et les autres boites 
+		ImageView img = new ImageView(DataControl.FOND);
+		vbFond.getChildren().add(img);
+		
 		stackPane.setBackground(new Background(new BackgroundFill(Color.BLACK, CornerRadii.EMPTY, null)));
 		stackPane.getChildren().addAll(vbFond, rect, bpCentral, bEcranHaut, bEcranGauche, bEcranBas, bEcranDroite);
 

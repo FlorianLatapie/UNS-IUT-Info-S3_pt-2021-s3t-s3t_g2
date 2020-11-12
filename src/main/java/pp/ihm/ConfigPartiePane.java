@@ -26,32 +26,29 @@ import java.io.IOException;
  * @since 26/10/2020
  */
 public class ConfigPartiePane extends StackPane {
-    // private ControleurJeu cj = new ControleurJeu(); // mettre ne paramètres les
-    // joueurs
-
+    
     private ScreenControl sControl = null;
     private Core core = null;
     private final ApplicationPane paneName = ApplicationPane.CONFIG;
-    // définition des variable pour la suite du pane
-    private int tailleCarreCentral = 800; // l'interface est sur un stackPane qui peut tourner avec des crans de 90
-    // degrés
+    
+    private int tailleCarreCentral = 800; 
     private int hBouton = 75;
     private int lBouton = 150;
-    //private int marge = tailleCarreCentral / 25;
-    //private Insets margeBoutons = new Insets(marge, marge, marge, marge);
-    private Font policeBouton = Font.font("Segoe UI", FontWeight.BOLD, 27);
-    private CornerRadii coin = new CornerRadii(15.0);
-    private String styleBoutons = " -fx-background-color:#000000; -fx-background-radius: 15px; -fx-text-fill: #ffffff";
-    private String styleBoutonsSouris = "-fx-background-color:#ff0000;  -fx-text-fill:#000000; -fx-background-radius: 15px;";
-    private StackPane stackPane = new StackPane();
-    private GaussianBlur flou = new GaussianBlur(30);
-
-    private Font policeNom = Font.font("Segoe UI", 17);
     private int hauteurElemtents = 60;
     private int largeurTF = 100;
     private int largeurTexte = 220;
     private int spacing = 30;
+
+    private Font policeBouton = Font.font("Segoe UI", FontWeight.BOLD, 27);
+    private Font policeNom = Font.font("Segoe UI", 17);
+    
+    private String styleBoutons = " -fx-background-color:#000000; -fx-background-radius: 15px; -fx-text-fill: #ffffff";
+    private String styleBoutonsSouris = "-fx-background-color:#ff0000;  -fx-text-fill:#000000; -fx-background-radius: 15px;";
+    
+    private GaussianBlur flou = new GaussianBlur(30);
+    private CornerRadii coin = new CornerRadii(15.0);
     private CornerRadii coinfb = new CornerRadii(5.0);
+    
     private Background fondBlanc = new Background(new BackgroundFill(Color.WHITE, coinfb, null));
 
     private Insets botPadding = new Insets(0, 10, 0, 10);
@@ -59,7 +56,7 @@ public class ConfigPartiePane extends StackPane {
     public ConfigPartiePane(ScreenControl sc, Core c) {
         core = c;
         sControl = sc;
-        stackPane.setAlignment(Pos.CENTER);
+        
         // titre
         Label titre1 = new Label("Configuration de \nla partie");
         titre1.setTextAlignment(TextAlignment.CENTER);
@@ -72,8 +69,7 @@ public class ConfigPartiePane extends StackPane {
         titre.setPrefWidth(730);
         titre.setMinWidth(730);
 
-        ////
-
+        //texte 
         Label desc = new Label("Choisissez un nombre de joueurs entre 3 et 6");
         desc.setFont(policeNom);
         desc.setMinHeight(hauteurElemtents);
@@ -102,9 +98,7 @@ public class ConfigPartiePane extends StackPane {
         nomPartie.setDisable(false);
 
 
-        ///
-
-
+        //
         HBox nbTotJr = new HBox();
 
         Label nbjrTexte = new Label("Nombre de joueurs : ");
@@ -150,9 +144,6 @@ public class ConfigPartiePane extends StackPane {
         vJoueurs.setSpacing(spacing / 2);
         vJoueurs.getChildren().addAll(nomPartie, nbTotJr, nbTotBot);
 
-        // vJoueurs.setBackground(new Background(new
-        // BackgroundFill(Color.BLUE,CornerRadii.EMPTY,null)));
-
         VBox vbCenter = new VBox();
         vbCenter.setMargin(vJoueurs, new Insets(0, 0, 100, 0));
         vbCenter.setAlignment(Pos.CENTER);
@@ -175,7 +166,7 @@ public class ConfigPartiePane extends StackPane {
             bJouer.setStyle(styleBoutons);
         });
         bJouer.setOnAction(EventHandler -> {
-            //TODO
+            //TODO je crois que c'est bon mais à vérifier
             if (Integer.valueOf(nbJr.getValue()) > 6 || Integer.valueOf(nbJr.getValue()) < 3) {
                 core.setNbJoueur(5);
             } else {
@@ -211,6 +202,7 @@ public class ConfigPartiePane extends StackPane {
         bRetour.setOnAction(EventHandler -> sc.setPaneOnTop(ApplicationPane.ACCUEIL));
 
         // grille contenant les boutons du bas
+        
         AnchorPane boutonsPanneau = new AnchorPane();
         boutonsPanneau.setLeftAnchor(bRetour, 0.0);
         boutonsPanneau.setRightAnchor(bJouer, 0.0);
@@ -219,6 +211,7 @@ public class ConfigPartiePane extends StackPane {
 
         // image fond
         ImageView imgFond = new ImageView(DataControl.FOND);
+        
         // carre central qui contient tous les éléments (boutons et titre)
         BorderPane centreMenu = new BorderPane();
         // centreMenu.setBackground(new Background(new
@@ -234,6 +227,7 @@ public class ConfigPartiePane extends StackPane {
         centreMenu.setCenter(vbCenter);
         centreMenu.setBottom(boutonsPanneau);
 
+        // Boutons de rotation d'écran 
         ImageView img1 = new ImageView(DataControl.SCREEN);
 		img1.setFitHeight(70);
 		img1.setPreserveRatio(true);
@@ -282,20 +276,19 @@ public class ConfigPartiePane extends StackPane {
 		bEcranDroite.setGraphic(img4);
 		bEcranDroite.setOnAction(EventHandler -> sc.setRotatePane(centreMenu, "droite"));
 
-        // boite du fond qui contient tout
+		// boite du fond qui contient le fond et les autres boites 
         HBox fond = new HBox();
         fond.setAlignment(Pos.CENTER);
         fond.setPrefWidth(100);
         fond.setPrefHeight(100);
         fond.setEffect(flou);
         fond.getChildren().add(imgFond);
+        
+        this.setAlignment(Pos.CENTER);
+        this.getChildren().addAll(fond, centreMenu, bEcranDroite, bEcranHaut, bEcranGauche, bEcranBas);
+        this.setBackground(new Background(new BackgroundFill(Color.BLACK, CornerRadii.EMPTY, null)));
 
-        stackPane.getChildren().addAll(fond, centreMenu, bEcranDroite, bEcranHaut, bEcranGauche, bEcranBas);
-        stackPane.setBackground(new Background(new BackgroundFill(Color.BLACK, CornerRadii.EMPTY, null)));
-
-        this.getChildren().add(stackPane);
         sControl.registerNode(paneName, this);
         sControl.setPaneOnTop(paneName);
-
     }
 }

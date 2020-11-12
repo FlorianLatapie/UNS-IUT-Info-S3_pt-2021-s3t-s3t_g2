@@ -40,7 +40,6 @@ public class PlateauPane extends StackPane implements PlateauListener {
 	private final int tailleFont = 18;
 	
 	private final Font fontInfo = Font.font("Segoe UI", FontWeight.BOLD, tailleFont);
-	private final Font fontTitre = Font.font("Segoe UI", FontWeight.BOLD, tailleFont);
 	private final Font fontPerso = Font.font("Segoe UI", FontWeight.BOLD, 12);
 
 	private CornerRadii coinfb = new CornerRadii(5.0);
@@ -96,14 +95,14 @@ public class PlateauPane extends StackPane implements PlateauListener {
 
 	BorderPane info;
 
+	Label titreInfo;
+	Label lInfo;
+	
 	Label lChefVigile;
 	Label lChefVigile2;
 	Label lChefVigile3;
 	Label lChefVigile4;
-
-	Label titreInfo;
-	Label lInfo;
-
+	
 	Timer myTimer;
 
 	public PlateauPane(ScreenControl sc, Core c) {
@@ -114,7 +113,6 @@ public class PlateauPane extends StackPane implements PlateauListener {
 		HBox hDroite = new HBox();
 		HBox hBas = new HBox();
 		HBox hGauche = new HBox();
-		// StackPane sBase = new StackPane();
 		BorderPane borderJoueurs = new BorderPane();
 		AnchorPane aPlateau = new AnchorPane();
 
@@ -178,7 +176,7 @@ public class PlateauPane extends StackPane implements PlateauListener {
 		hBas.getChildren().addAll(bPause1, j1, j2, bPause2);
 		hBas.setAlignment(Pos.BOTTOM_CENTER);
 
-/////////////////////////////////////////////////////
+		/////////////////////////////////////////////////////
 
 		Button bPause3 = new Button("| |");
 		bPause3.setPrefSize(lhBoutonPause, lhBoutonPause);
@@ -240,8 +238,6 @@ public class PlateauPane extends StackPane implements PlateauListener {
 		hHaut.setAlignment(Pos.BOTTOM_CENTER);
 		hHaut.setRotate(180);
 
-		////////////////////////////////////////////////
-
 		VBox j5 = new VBox();
 		nbPerso5 = new Label("## personnages");
 		nbPerso5.setFont(Font.font("Segoe UI", 20));
@@ -267,27 +263,6 @@ public class PlateauPane extends StackPane implements PlateauListener {
 		hDroite.getChildren().addAll(j5);
 		hDroite.setAlignment(Pos.CENTER_LEFT);
 
-		///////////////////////
-		/*
-		 * // obsolete VBox j6 = new VBox(); Label nbPerso6 = new
-		 * Label("## personnages"); nbPerso6.setFont(Font.font("Segoe UI", 20));
-		 * nbPerso6.setTextFill(Color.BLACK); Label nbCartes6 = new
-		 * Label("## de cartes"); nbCartes6.setFont(Font.font("Segoe UI", 20));
-		 * nbCartes6.setTextFill(Color.BLACK); Label nomJoueur6 = new
-		 * Label("Nom Joueur 1"); nomJoueur6.setFont(Font.font("Segoe UI", 20));
-		 * nomJoueur6.setTextFill(Color.BLACK);
-		 *
-		 * j6.setAlignment(Pos.CENTER); j6.setBackground(new Background(new
-		 * BackgroundFill(Color.LIGHTGREY, CornerRadii.EMPTY, null)));
-		 * j6.setMargin(nbPerso6, margeTexteJoueur); j6.setMargin(nbCartes6,
-		 * margeTexteJoueur); j6.setMargin(nomJoueur6, margeTexteJoueur);
-		 * j6.setMinSize(tailleVBoxJoueur, tailleVBoxJoueur);
-		 * j6.getChildren().addAll(nbPerso6,nbCartes6,nomJoueur6);
-		 *
-		 *
-		 * hGauche.getChildren().addAll(j6); hGauche.setAlignment(Pos.BOTTOM_CENTER);
-		 * hGauche.setRotate(90);
-		 */
 
 		/////////////////////////////////////////////////////
 		aPlateau.setMinSize(taillePlateau, taillePlateau);
@@ -573,12 +548,7 @@ public class PlateauPane extends StackPane implements PlateauListener {
 		
 		aPlateau.getChildren().addAll(b1, b2, b3, b4, b5, b6, lChefVigile, lChefVigile2,lChefVigile3,lChefVigile4);
 
-		// aPlateau.setBackground(new Background(new BackgroundFill(Color.RED,
-		// CornerRadii.EMPTY, null)));
-
-		////////////////////////////////////////////////////
 		info = new BorderPane();
-		// info.setMinSize(500, 500);
 		info.setPrefSize(1000, 200);
 		info.setMaxSize(1000, 200);
 		info.setBackground(fondNoir);
@@ -601,11 +571,10 @@ public class PlateauPane extends StackPane implements PlateauListener {
 		info.setMargin(vInfo, new Insets(50, 20, 0, 20));
 		info.setTop(vTitreInfo);
 		info.setCenter(vInfo);
-		// info.getChildren().addAll(titreInfo, lInfo);
 		info.setVisible(false);
-		// TODO
 
-		////////////////////////////////////////////////////
+		//
+		
 		borderJoueurs.setTop(hHaut);
 		borderJoueurs.setBottom(hBas);
 		borderJoueurs.setLeft(hGauche);

@@ -31,27 +31,29 @@ public class AccueilPane extends StackPane {
 	private ScreenControl sControl = null;
 	private Core core = null;
 	private final ApplicationPane paneName = ApplicationPane.ACCUEIL;
-	// définition des variable pour la suite du pane
-	private int tailleCarreCentral = 600; // l'interface est sur un stackPane qui peut tourner avec des crans de 90
-											// degrés
+	
+	private int tailleCarreCentral = 600; 
+
 	private int hBouton = 100;
 	private int lBouton = 200;
 	private int marge = tailleCarreCentral / 25;
 	private Insets margeBoutons = new Insets(marge, marge, marge, marge);
+	
 	private Font policeBouton = Font.font("Segoe UI", FontWeight.BOLD, 33);
+	
 	private CornerRadii coin = new CornerRadii(15.0);
+	
 	private String styleBoutons = " -fx-background-color:#000000; -fx-background-radius: 15px; -fx-text-fill: #ffffff";
 	private String styleBoutonsSouris = "-fx-background-color:#ff0000;  -fx-text-fill:#000000; -fx-background-radius: 15px;";
-	private StackPane stackPane = new StackPane();
+	
 	private GaussianBlur flou = new GaussianBlur(30);
 	
 	VBox centreMenu;
+	
 	public AccueilPane(ScreenControl sc, Core c) {
+		
 		core = c;
 		sControl = sc;
-		stackPane.setAlignment(Pos.CENTER);
-		
-		
 
 		// titre
 		Label titre1 = new Label("ZOMBIES");
@@ -165,6 +167,7 @@ public class AccueilPane extends StackPane {
 		centreMenu.setMargin(titre, new Insets(0, 0, 100, 0));
 		centreMenu.getChildren().addAll(titre, grilleBoutons);
 		
+		// Boutons de rotation d'écran 
 		ImageView img1 = new ImageView(DataControl.SCREEN);
 		img1.setFitHeight(70);
 		img1.setPreserveRatio(true);
@@ -213,8 +216,7 @@ public class AccueilPane extends StackPane {
 		bEcranDroite.setGraphic(img4);
 		bEcranDroite.setOnAction(EventHandler -> sc.setRotatePane(centreMenu, "droite"));
 
-
-		// boite du fond qui contient tout
+		// boite du fond qui contient l'image et les autres boites 
 		HBox fond = new HBox();
 		fond.setAlignment(Pos.CENTER);
 		fond.setPrefWidth(100);
@@ -222,16 +224,15 @@ public class AccueilPane extends StackPane {
 		fond.setEffect(flou);
 		fond.getChildren().add(imgFond);
 
-		stackPane.getChildren().addAll(fond, centreMenu, bEcranHaut, bEcranBas, bEcranGauche, bEcranDroite);
-		stackPane.setBackground(new Background(new BackgroundFill(Color.BLACK, CornerRadii.EMPTY, null)));
+		this.getChildren().addAll(fond, centreMenu, bEcranHaut, bEcranBas, bEcranGauche, bEcranDroite);
+		this.setBackground(new Background(new BackgroundFill(Color.BLACK, CornerRadii.EMPTY, null)));
 
-		this.getChildren().add(stackPane);
 		sControl.registerNode(paneName, this);
 		sControl.setPaneOnTop(paneName);
 
 	}
-
+/*
 	public void changerAngle(double angle) {
 		centreMenu.setRotate(angle);
-	}
+	}*/
 }

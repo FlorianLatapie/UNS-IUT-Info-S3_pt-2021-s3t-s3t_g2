@@ -13,13 +13,16 @@ public class Core {
 
     private Initializer initializer;
 
+    /*
+     * crée un nouvel Initializer
+     */
     public void eventInit() {
         this.initializer = new Initializer();
     }
 
     private ApplicationPane pauseDepuis = ApplicationPane.ACCUEIL;
     private ApplicationPane reglesDepuis = ApplicationPane.ACCUEIL;
-
+    
     public ApplicationPane getReglesDepuis() {
         return reglesDepuis;
     }

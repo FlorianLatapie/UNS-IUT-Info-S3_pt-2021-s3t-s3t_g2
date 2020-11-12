@@ -23,17 +23,17 @@ public class PausePane extends StackPane {
 
 	private ScreenControl sControl = null;
 	private Core core; 
-	private StackPane stackPane = new StackPane();
-	private GaussianBlur flou = new GaussianBlur(30);
+	private final ApplicationPane paneName = ApplicationPane.PAUSE;
+
 	private String styleBoutons = " -fx-background-color:#000000; -fx-background-radius: 15px; -fx-text-fill: #ffffff";
 	private String styleBoutonsSouris = "-fx-background-color:#ff0000;  -fx-text-fill:#000000; -fx-background-radius: 15px;";
-	private final ApplicationPane paneName = ApplicationPane.PAUSE;
+	
+	private GaussianBlur flou = new GaussianBlur(30);
+	
 
 	public PausePane(ScreenControl sc, Core c) {
 		core = c; 
 		sControl = sc;
-
-		stackPane.setAlignment(Pos.CENTER);
 
 		Rectangle rect = new Rectangle();
 		rect.setStroke(Color.RED);
@@ -55,6 +55,7 @@ public class PausePane extends StackPane {
 		vbCentral.setMinSize(700, 600);
 		vbCentral.setMaxSize(700, 600);
 		
+		// Boutons de rotation d'écran 
 		ImageView img1 = new ImageView(DataControl.SCREEN);
 		img1.setFitHeight(70);
 		img1.setPreserveRatio(true);
@@ -102,7 +103,9 @@ public class PausePane extends StackPane {
 		bEcranDroite.setPrefSize(80, 80);
 		bEcranDroite.setGraphic(img4);
 		bEcranDroite.setOnAction(EventHandler -> sc.setRotatePane(vbCentral, "droite"));
-
+		
+		///
+		
 		VBox vbTitre = new VBox();
 		vbTitre.setAlignment(Pos.CENTER);
 
@@ -193,11 +196,7 @@ public class PausePane extends StackPane {
 			bRetour.setStyle(styleBoutons);
 		});
 
-		vbBoutons.getChildren().add(bOption);
-		vbBoutons.getChildren().add(bRegles);
-		vbBoutons.getChildren().add(bRecommencer);
-		vbBoutons.getChildren().add(bRetour);
-		vbBoutons.getChildren().add(bQuitter);
+		vbBoutons.getChildren().addAll(bOption, bRegles, bRecommencer, bRetour, bQuitter);
 		vbBoutons.setMargin(bRegles, new Insets(10));
 		vbBoutons.setMargin(bRetour, new Insets(10));
 
@@ -205,11 +204,11 @@ public class PausePane extends StackPane {
 
 		ImageView img = new ImageView(DataControl.FOND);
 		vbFond.getChildren().add(img);
+		
+		this.setAlignment(Pos.CENTER);
+		this.getChildren().addAll(vbFond, bEcranHaut, bEcranGauche, bEcranDroite, bEcranBas, rect, vbCentral);
+		this.setBackground(new Background(new BackgroundFill(Color.BLACK, CornerRadii.EMPTY, null)));
 
-		stackPane.getChildren().addAll(vbFond, bEcranHaut, bEcranGauche, bEcranDroite, bEcranBas, rect, vbCentral);
-		stackPane.setBackground(new Background(new BackgroundFill(Color.BLACK, CornerRadii.EMPTY, null)));
-
-		this.getChildren().add(stackPane);
 		sControl.registerNode(paneName, this);
 		sControl.setPaneOnTop(paneName);
 	}

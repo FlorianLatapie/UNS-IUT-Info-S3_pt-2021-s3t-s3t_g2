@@ -23,40 +23,34 @@ import javafx.scene.text.TextAlignment;
  * @since 26/10/2020
  */
 public class AttenteJoueurPane extends StackPane implements AttenteListener {
-    // private ControleurJeu cj = new ControleurJeu(); // mettre ne paramètres les
-    // joueurs
-
     private ScreenControl sControl = null;
     private Core core = null;
     private final ApplicationPane paneName = ApplicationPane.WAIT;
-    // définition des variable pour la suite du pane
-    private int tailleCarreCentral = 800; // l'interface est sur un stackPane qui peut tourner avec des crans de 90
-    // degrés
+    
+    private int tailleCarreCentral = 800;
     private int hBouton = 75;
     private int lBouton = 150;
-    //private int marge = tailleCarreCentral / 25;
-    //private Insets margeBoutons = new Insets(marge, marge, marge, marge);
-    private Font policeBouton = Font.font("Segoe UI", FontWeight.BOLD, 27);
-    private CornerRadii coin = new CornerRadii(15.0);
-    private String styleBoutons = " -fx-background-color:#000000; -fx-background-radius: 15px; -fx-text-fill: #ffffff";
-    private String styleBoutonsSouris = "-fx-background-color:#ff0000;  -fx-text-fill:#000000; -fx-background-radius: 15px;";
-    private StackPane stackPane = new StackPane();
-    private GaussianBlur flou = new GaussianBlur(30);
-    private String styleVBox = "-fx-border-color: black; -fx-border-insets: -3; -fx-border-width: 3";
-    private Font policeNom = Font.font("Segoe UI", FontWeight.BOLD, 33);
     private int hauteurElemtents = 60;
     private int spacing = 30;
-    private CornerRadii coinfb = new CornerRadii(5.0);
-    private Background fondBlanc = new Background(new BackgroundFill(Color.WHITE, coinfb, null));
     private int tailleCercle = 55;
-
+    
+    private Font policeBouton = Font.font("Segoe UI", FontWeight.BOLD, 27);
+    private Font policeNom = Font.font("Segoe UI", FontWeight.BOLD, 33);
+    
+    private String styleBoutonsSouris = "-fx-background-color:#ff0000;  -fx-text-fill:#000000; -fx-background-radius: 15px;";
+    private String styleBoutons = " -fx-background-color:#000000; -fx-background-radius: 15px; -fx-text-fill: #ffffff";
+    private String styleVBox = "-fx-border-color: black; -fx-border-insets: -3; -fx-border-width: 3";
+    
+    private CornerRadii coin = new CornerRadii(15.0);
+    private GaussianBlur flou = new GaussianBlur(30);
     private Insets padding = new Insets(0, 10, 0, 10);
+    
     Label lIDPartie;
-
+    
     public AttenteJoueurPane(ScreenControl sc, Core c) {
         core = c;
         sControl = sc;
-        stackPane.setAlignment(Pos.CENTER);
+
         // titre
         Label titre1 = new Label("Connexion \nen cours");
         titre1.setTextAlignment(TextAlignment.CENTER);
@@ -69,8 +63,7 @@ public class AttenteJoueurPane extends StackPane implements AttenteListener {
         titre.setPrefWidth(740);
         titre.setMinWidth(740);
 
-        ////
-        
+        // identifiant de partie 
         lIDPartie = new Label();
         lIDPartie.setStyle("-fx-border-color: black; -fx-border-insets: -3; -fx-border-width: 3");
         lIDPartie.setFont(policeNom);
@@ -90,7 +83,7 @@ public class AttenteJoueurPane extends StackPane implements AttenteListener {
         vbDescPartie.getChildren().addAll(lIDPartie, desc);
         
         
-        // les cercles passent en rouge quand le joueur à rejoint
+        // les cercles passent en rouge quand le joueur à rejoint TODO 
         Circle cercle1 = new Circle();
         cercle1.setRadius(tailleCercle);
         cercle1.setFill(null);
@@ -151,7 +144,6 @@ public class AttenteJoueurPane extends StackPane implements AttenteListener {
 
 
         // boutons
-
         Button bRetour = new Button("RETOUR");
         bRetour.setPrefSize(lBouton, hBouton);
         bRetour.setMinSize(lBouton, hBouton);
@@ -177,14 +169,10 @@ public class AttenteJoueurPane extends StackPane implements AttenteListener {
 
         // image fond
         ImageView imgFond = new ImageView(DataControl.FOND);
-        // carre central qui contient tous les éléments (boutons et titre)
         BorderPane centreMenu = new BorderPane();
-        // centreMenu.setBackground(new Background(new
-        // BackgroundFill(Color.LIGHTGREY,CornerRadii.EMPTY,null)));
         centreMenu.setMinSize(tailleCarreCentral, tailleCarreCentral);
         centreMenu.setPrefSize(tailleCarreCentral, tailleCarreCentral);
         centreMenu.setMaxSize(tailleCarreCentral, tailleCarreCentral);
-        //centreMenu.setMargin(titre, new Insets(0, 0, 100, 0));
 
         centreMenu.setAlignment(titre, Pos.CENTER);
 
@@ -192,32 +180,37 @@ public class AttenteJoueurPane extends StackPane implements AttenteListener {
         centreMenu.setCenter(vbCenter);
         centreMenu.setBottom(boutonsPanneau);
 
-        // rotation de l'interface
-        // centreMenu.setRotate(90);
-
-        // boite du fond qui contient tout
+        // boite du fond qui contient le fond et les autres boites 
         HBox fond = new HBox();
         fond.setAlignment(Pos.CENTER);
         fond.setPrefWidth(100);
         fond.setPrefHeight(100);
         fond.setEffect(flou);
         fond.getChildren().add(imgFond);
+        
+        this.setAlignment(Pos.CENTER);
+        this.getChildren().addAll(fond, centreMenu);
+        this.setBackground(new Background(new BackgroundFill(Color.BLACK, CornerRadii.EMPTY, null)));
 
-        stackPane.getChildren().addAll(fond, centreMenu);
-        stackPane.setBackground(new Background(new BackgroundFill(Color.BLACK, CornerRadii.EMPTY, null)));
-
-        this.getChildren().add(stackPane);
         sControl.registerNode(paneName, this);
         sControl.setPaneOnTop(paneName);
 
     }
 
     @Override
+    /**
+     * Dès que les joueurs sont prets, le pane change vers le choix des couleurs de chaque joueur
+     */
     public void joueurPret() {
         sControl.setPaneOnTop(ApplicationPane.COULEUR);
     }
 
     @Override
+    /**
+     * applique le nom de la partie sur le label lIDPartie
+     * 
+     * @param nom le nom de la partie 
+     */
     public void nomPartie(String nom) {
         lIDPartie.setText(nom);
     }

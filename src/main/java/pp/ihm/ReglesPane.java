@@ -31,30 +31,28 @@ public class ReglesPane extends StackPane {
 	private ScreenControl sControl = null;
 	private Core core = null;
 	private final ApplicationPane paneName = ApplicationPane.REGLES;
-	// définition des variable pour la suite du pane
 
-	// définition des variable pour la suite du pane
-	private int tailleCarreCentral = 800; // l'interface est sur un stackPane qui peut tourner avec des crans de 90
-											// degrés
+	private int tailleCarreCentral = 800; 
 	private int hBouton = 75;
 	private int lBouton = 150;
-	private int marge = tailleCarreCentral / 25;
+	
 	private Font policeBouton = Font.font("Segoe UI", FontWeight.BOLD, 27);
-	private CornerRadii coin = new CornerRadii(15.0);
+	private Font policeNom = Font.font("Segoe UI", 17);
+	
+
 	private String styleBoutons = " -fx-background-color:#000000; -fx-background-radius: 15px; -fx-text-fill: #ffffff";
 	private String styleBoutonsSouris = "-fx-background-color:#ff0000;  -fx-text-fill:#000000; -fx-background-radius: 15px;";
-	private StackPane stackPane = new StackPane();
+	
 	private GaussianBlur flou = new GaussianBlur(30);
-
-	private Font policeNom = Font.font("Segoe UI", 17);
+	private CornerRadii coin = new CornerRadii(15.0);
 	private CornerRadii coinfb = new CornerRadii(5.0);
+	
 	private Background fondBlanc = new Background(new BackgroundFill(Color.WHITE, coinfb, null));
-
 
 	public ReglesPane(ScreenControl sc, Core c) {
 		core = c;
 		sControl = sc;
-		stackPane.setAlignment(Pos.CENTER);
+		
 
 		// titre
 		Label titre1 = new Label("REGLÈS DU JEU");
@@ -67,24 +65,18 @@ public class ReglesPane extends StackPane {
 		titre.setPrefWidth(730);
 		titre.setMinWidth(730);
 
-		////
+		//
 
 		Label desc = new Label("//TODO afficher texte des règles ");
 		desc.setFont(policeNom);
 		desc.setBackground(fondBlanc);
-		
-
-		
-		// vJoueurs.setBackground(new Background(new// BackgroundFill(Color.BLUE,CornerRadii.EMPTY,null)));
 
 		VBox vbCenter = new VBox();
 		
 		vbCenter.setAlignment(Pos.CENTER);
 		vbCenter.getChildren().addAll(desc);
 		
-		
 		// bouton
-
 		Button bRetour = new Button("RETOUR");
 		bRetour.setPrefSize(lBouton, hBouton);
 		bRetour.setMinSize(lBouton, hBouton);
@@ -104,14 +96,10 @@ public class ReglesPane extends StackPane {
 		boutonsPanneau.setLeftAnchor(bRetour, 0.0);
 		boutonsPanneau.getChildren().addAll(bRetour);
 		
-		
-		
 		// image fond
 		ImageView imgFond = new ImageView(DataControl.FOND);
 		// carre central qui contient tous les éléments (boutons et titre)
 		BorderPane centreMenu = new BorderPane();
-		// centreMenu.setBackground(new Background(new
-		// BackgroundFill(Color.LIGHTGREY,CornerRadii.EMPTY,null)));
 		centreMenu.setMinSize(tailleCarreCentral, tailleCarreCentral);
 		centreMenu.setPrefSize(tailleCarreCentral, tailleCarreCentral);
 		centreMenu.setMaxSize(tailleCarreCentral, tailleCarreCentral);
@@ -123,6 +111,7 @@ public class ReglesPane extends StackPane {
 		centreMenu.setCenter(vbCenter);
 		centreMenu.setBottom(boutonsPanneau);
 		
+		// Boutons de rotation d'écran 		
 		ImageView img1 = new ImageView(DataControl.SCREEN);
 		img1.setFitHeight(70);
 		img1.setPreserveRatio(true);
@@ -179,10 +168,10 @@ public class ReglesPane extends StackPane {
 		fond.setEffect(flou);
 		fond.getChildren().add(imgFond);
 
-		stackPane.getChildren().addAll(fond, centreMenu, bEcranDroite, bEcranHaut, bEcranGauche, bEcranBas);
-		stackPane.setBackground(new Background(new BackgroundFill(Color.BLACK, CornerRadii.EMPTY, null)));
+		this.setAlignment(Pos.CENTER);
+		this.getChildren().addAll(fond, centreMenu, bEcranDroite, bEcranHaut, bEcranGauche, bEcranBas);
+		this.setBackground(new Background(new BackgroundFill(Color.BLACK, CornerRadii.EMPTY, null)));
 
-		this.getChildren().add(stackPane);
 		sControl.registerNode(paneName, this);
 		sControl.setPaneOnTop(paneName);
 

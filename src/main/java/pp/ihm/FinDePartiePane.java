@@ -22,27 +22,25 @@ import javafx.scene.text.FontWeight;
  * @since 26/10/2020
  */
 public class FinDePartiePane extends StackPane implements FinListener {
-    // private ControleurJeu cj = new ControleurJeu(); // mettre ne paramètres les
-    // joueurs
-
     private ScreenControl sControl = null;
     private Core core = null;
     private final ApplicationPane paneName = ApplicationPane.ENDGAME;
-    // définition des variable pour la suite du pane
-    private int tailleCarreCentral = 800; // l'interface est sur un stackPane qui peut tourner avec des crans de 90
-    // degrés
+
+    private int tailleCarreCentral = 800; 
     private int hBouton = 75;
     private int lBouton = 150;
+    
     private Font policeBouton = Font.font("Segoe UI", FontWeight.BOLD, 27);
-    private CornerRadii coin = new CornerRadii(15.0);
+    private Font policeNom = Font.font("Segoe UI", 17);
+    
+    
     private String styleBoutons = " -fx-background-color:#000000; -fx-background-radius: 15px; -fx-text-fill: #ffffff";
     private String styleBoutonsSouris = "-fx-background-color:#ff0000;  -fx-text-fill:#000000; -fx-background-radius: 15px;";
-    private StackPane stackPane = new StackPane();
+    
     private GaussianBlur flou = new GaussianBlur(30);
-
-    private Font policeNom = Font.font("Segoe UI", 17);
-
+    private CornerRadii coin = new CornerRadii(15.0);
     private CornerRadii coinfb = new CornerRadii(5.0);
+    
     private Background fondBlanc = new Background(new BackgroundFill(Color.WHITE, coinfb, null));
 
     private int valPadding = 10;
@@ -56,7 +54,6 @@ public class FinDePartiePane extends StackPane implements FinListener {
     public FinDePartiePane(ScreenControl sc, Core c) {
         core = c;
         sControl = sc;
-        stackPane.setAlignment(Pos.CENTER);
 
         // titre
         Label titre1 = new Label("Fin de\nla partie");
@@ -72,7 +69,7 @@ public class FinDePartiePane extends StackPane implements FinListener {
         vbCenter.setAlignment(Pos.CENTER);
         vbCenter.getChildren().addAll(titre);
 
-        ///////////////////////////////////////////////////////////////////////////////////////
+        //
         BorderPane bBas = new BorderPane();
 
         HBox bBasCentre = new HBox();
@@ -197,14 +194,13 @@ public class FinDePartiePane extends StackPane implements FinListener {
         gagnant4.setRotate(90);
         hGauche.setAlignment(Pos.CENTER);
         hGauche.getChildren().addAll(gagnant4);
-        //////////////////////////////////////////////////////////////////////////////////////
+        //
 
         // image fond
         ImageView imgFond = new ImageView(DataControl.FOND);
         // carre central qui contient tous les éléments (boutons et titre)
         BorderPane centreMenu = new BorderPane();
-        // centreMenu.setBackground(new Background(new
-        // BackgroundFill(Color.LIGHTGREY,CornerRadii.EMPTY,null)));
+
         centreMenu.setMinSize(tailleCarreCentral, tailleCarreCentral);
         centreMenu.setPrefSize(tailleCarreCentral, tailleCarreCentral);
         centreMenu.setMaxSize(tailleCarreCentral, tailleCarreCentral);
@@ -218,6 +214,7 @@ public class FinDePartiePane extends StackPane implements FinListener {
         centreMenu.setRight(hDroite);
         centreMenu.setLeft(hGauche);
 
+        // Boutons de rotation d'écran 
         ImageView img1 = new ImageView(DataControl.SCREEN);
 		img1.setFitHeight(70);
 		img1.setPreserveRatio(true);
@@ -266,24 +263,24 @@ public class FinDePartiePane extends StackPane implements FinListener {
 		bEcranDroite.setGraphic(img4);
 		bEcranDroite.setOnAction(EventHandler -> sc.setRotatePane(centreMenu, "droite"));
 
-        // boite du fond qui contient tout
+		// boite du fond qui contient le fond et les autres boites 
         HBox fond = new HBox();
         fond.setAlignment(Pos.CENTER);
         fond.setEffect(flou);
         fond.getChildren().add(imgFond);
 
-        stackPane.getChildren().addAll(fond, centreMenu, bEcranDroite, bEcranHaut, bEcranGauche, bEcranBas);
+        this.setAlignment(Pos.CENTER);
+        this.getChildren().addAll(fond, centreMenu, bEcranDroite, bEcranHaut, bEcranGauche, bEcranBas);
+        this.setBackground(new Background(new BackgroundFill(Color.BLACK, CornerRadii.EMPTY, null)));
 
-        //centreMenu.setBackground(new Background(new BackgroundFill(Color.LIGHTGREY, CornerRadii.EMPTY, null)));
-
-        stackPane.setBackground(new Background(new BackgroundFill(Color.BLACK, CornerRadii.EMPTY, null)));
-
-        this.getChildren().add(stackPane);
         sControl.registerNode(paneName, this);
         sControl.setPaneOnTop(paneName);
 
     }
 
+    /*
+     * affiche le nom du joueur sur l'écran 
+     */
     @Override
     public void getGagnant(String nom) {
         String tmp = "Le joueur " + nom + " a gagné";
