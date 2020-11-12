@@ -24,8 +24,9 @@ public class PlateauPane extends StackPane implements PlateauListener {
 	private final int margeP = 24;
 	private final Insets margeBoutonPause = new Insets(margeP, margeP, margeP, margeP);
 	private final int lhBoutonPause = 80;
-	private final String coinBoutons = " -fx-background-radius: 5px";
-	private final Font policeBoutonPause = Font.font("Segoe UI", FontWeight.BOLD, 33);
+	private final Font policeBoutonPause = Font.font("Segoe UI", FontWeight.BOLD, 34);
+	private String styleBoutons = " -fx-background-color:#000000; -fx-background-radius: 50px; -fx-text-fill: #ffffff";
+	private String styleBoutonsSouris = "-fx-background-color:#ff0000;  -fx-text-fill:#000000; -fx-background-radius: 50px;";
 
 	private final int margeJ = 20;
 	private final Insets margeTexteJoueur = new Insets(margeJ, 10, margeJ, 10);
@@ -39,12 +40,22 @@ public class PlateauPane extends StackPane implements PlateauListener {
 	private final Insets margeLieu = new Insets(margeL, margeL, margeL, margeL);
 	private final int tailleFont = 18;
 	
+	
+	
 	private final Font fontInfo = Font.font("Segoe UI", FontWeight.BOLD, tailleFont);
 	private final Font fontPerso = Font.font("Segoe UI", FontWeight.BOLD, 12);
 
 	private CornerRadii coinfb = new CornerRadii(5.0);
 	private Background fondBlanc = new Background(new BackgroundFill(Color.WHITE, coinfb, null));
 	private Background fondNoir = new Background(new BackgroundFill(Color.BLACK, coinfb, null));
+	
+	private String tmpColor = " -fx-background-color:#000000; -fx-text-fill: #FF2626"; //TODO si cette couleur est affichée en partie, il y a une erreur dans l'event 
+	private String vert = " -fx-background-color:#5EB137; -fx-text-fill: #000000";
+	private String rouge = " -fx-background-color:#F30101; -fx-text-fill: #000000";
+	private String marron = " -fx-background-color:#6C3505; -fx-text-fill: #000000";
+	private String jaune = " -fx-background-color:#E9B902; -fx-text-fill: #000000";
+	private String bleu = " -fx-background-color:#008CDA; -fx-text-fill: #ffffff";
+	private String noir = " -fx-background-color:#000000; -fx-text-fill: #ffffff";
 
 	Label nbZombies1;
 	Label nbZombies2;
@@ -53,6 +64,13 @@ public class PlateauPane extends StackPane implements PlateauListener {
 	Label nbZombies5;
 	Label nbZombies6;
 
+	VBox j1;
+	VBox j2;
+	VBox j3;
+	VBox j4;
+	VBox j5;
+	VBox j6;
+	
 	Label nomJoueur1;
 	Label nomJoueur2;
 	Label nomJoueur3;
@@ -79,12 +97,14 @@ public class PlateauPane extends StackPane implements PlateauListener {
 	Label nbPerso3;
 	Label nbPerso4;
 	Label nbPerso5;
+	Label nbPerso6;
 
 	Label nbCartes1;
 	Label nbCartes2;
 	Label nbCartes3;
 	Label nbCartes4;
 	Label nbCartes5;
+	Label nbCartes6;
 
 	Label afficheJoueursLieu1;
 	Label afficheJoueursLieu2;
@@ -118,31 +138,48 @@ public class PlateauPane extends StackPane implements PlateauListener {
 
 		///////////////////////////////////////////
 		Button bPause1 = new Button("| |");
+		bPause1.setAlignment(Pos.CENTER);
 		bPause1.setPrefSize(lhBoutonPause, lhBoutonPause);
 		bPause1.setMinSize(lhBoutonPause, lhBoutonPause);
-		bPause1.setStyle(coinBoutons);
+		bPause1.setStyle(styleBoutons);
+		bPause1.setOnMouseEntered(event -> {
+			bPause1.setStyle(styleBoutonsSouris);
+		});
+		bPause1.setOnMouseExited(event -> {
+			bPause1.setStyle(styleBoutons);
+		});
 		bPause1.setOnAction(EventHandler -> sc.setPaneOnTop(ApplicationPane.PAUSE));
 		bPause1.setFont(policeBoutonPause);
 		HBox.setMargin(bPause1, margeBoutonPause);
 
 		Button bPause2 = new Button("| |");
+		bPause2.setAlignment(Pos.CENTER);
 		bPause2.setPrefSize(lhBoutonPause, lhBoutonPause);
 		bPause2.setMinSize(lhBoutonPause, lhBoutonPause);
-		bPause2.setStyle(coinBoutons);
+		bPause2.setStyle(styleBoutons);
+		bPause2.setOnMouseEntered(event -> {
+			bPause2.setStyle(styleBoutonsSouris);
+		});
+		bPause2.setOnMouseExited(event -> {
+			bPause2.setStyle(styleBoutons);
+		});
 		bPause2.setOnAction(EventHandler -> sc.setPaneOnTop(ApplicationPane.PAUSE));
 		bPause2.setFont(policeBoutonPause);
 		HBox.setMargin(bPause2, margeBoutonPause);
 
-		VBox j1 = new VBox();
+		j1 = new VBox(); //TODO j'ai ajouté les couleurs en ligne 53 à 58 il faut les appliquer avec des event sur j1,nbPerso1,nbCartes1,nomJoueur1 etc 
 		nbPerso1 = new Label("## personnages");
 		nbPerso1.setFont(Font.font("Segoe UI", 20));
 		nbPerso1.setTextFill(Color.BLACK);
+		nbPerso1.setStyle(tmpColor);
 		nbCartes1 = new Label("## de cartes");
 		nbCartes1.setFont(Font.font("Segoe UI", 20));
 		nbCartes1.setTextFill(Color.BLACK);
+		nbCartes1.setStyle(tmpColor);
 		nomJoueur1 = new Label("nom Joueur1");
 		nomJoueur1.setFont(Font.font("Segoe UI", 20));
 		nomJoueur1.setTextFill(Color.BLACK);
+		nomJoueur1.setStyle(tmpColor);
 
 		HBox.setMargin(j1, insetJGauche);
 		j1.setAlignment(Pos.CENTER);
@@ -151,18 +188,22 @@ public class PlateauPane extends StackPane implements PlateauListener {
 		VBox.setMargin(nbCartes1, margeTexteJoueur);
 		VBox.setMargin(nomJoueur1, margeTexteJoueur);
 		j1.setMinSize(tailleVBoxJoueur, tailleVBoxJoueur);
+		j1.setStyle(tmpColor);
 		j1.getChildren().addAll(nbPerso1, nbCartes1, nomJoueur1);
 
-		VBox j2 = new VBox();
+		j2 = new VBox();
 		nbPerso2 = new Label("## personnages");
 		nbPerso2.setFont(Font.font("Segoe UI", 20));
 		nbPerso2.setTextFill(Color.BLACK);
+		nbPerso2.setStyle(tmpColor);
 		nbCartes2 = new Label("## de cartes");
 		nbCartes2.setFont(Font.font("Segoe UI", 20));
 		nbCartes2.setTextFill(Color.BLACK);
+		nbCartes2.setStyle(tmpColor);
 		nomJoueur2 = new Label("Nom Joueur 2");
 		nomJoueur2.setFont(Font.font("Segoe UI", 20));
 		nomJoueur2.setTextFill(Color.BLACK);
+		nomJoueur2.setStyle(tmpColor);
 
 		HBox.setMargin(j2, insetJDroit);
 		j2.setAlignment(Pos.CENTER);
@@ -172,6 +213,7 @@ public class PlateauPane extends StackPane implements PlateauListener {
 		VBox.setMargin(nomJoueur2, margeTexteJoueur);
 		j2.setMinSize(tailleVBoxJoueur, tailleVBoxJoueur);
 		j2.getChildren().addAll(nbPerso2, nbCartes2, nomJoueur2);
+		j2.setStyle(tmpColor);
 
 		hBas.getChildren().addAll(bPause1, j1, j2, bPause2);
 		hBas.setAlignment(Pos.BOTTOM_CENTER);
@@ -179,31 +221,48 @@ public class PlateauPane extends StackPane implements PlateauListener {
 		/////////////////////////////////////////////////////
 
 		Button bPause3 = new Button("| |");
+		bPause3.setAlignment(Pos.CENTER);
 		bPause3.setPrefSize(lhBoutonPause, lhBoutonPause);
 		bPause3.setMinSize(lhBoutonPause, lhBoutonPause);
-		bPause3.setStyle(coinBoutons);
+		bPause3.setStyle(styleBoutons);
+		bPause3.setOnMouseEntered(event -> {
+			bPause3.setStyle(styleBoutonsSouris);
+		});
+		bPause3.setOnMouseExited(event -> {
+			bPause3.setStyle(styleBoutons);
+		});
 		bPause3.setOnAction(EventHandler -> sc.setPaneOnTop(ApplicationPane.PAUSE));
 		bPause3.setFont(policeBoutonPause);
 		HBox.setMargin(bPause3, margeBoutonPause);
 
 		Button bPause4 = new Button("| |");
+		bPause4.setAlignment(Pos.CENTER);
 		bPause4.setPrefSize(lhBoutonPause, lhBoutonPause);
 		bPause4.setMinSize(lhBoutonPause, lhBoutonPause);
-		bPause4.setStyle(coinBoutons);
+		bPause4.setStyle(styleBoutons);
+		bPause4.setOnMouseEntered(event -> {
+			bPause4.setStyle(styleBoutonsSouris);
+		});
+		bPause4.setOnMouseExited(event -> {
+			bPause4.setStyle(styleBoutons);
+		});
 		bPause4.setOnAction(EventHandler -> sc.setPaneOnTop(ApplicationPane.PAUSE));
 		bPause4.setFont(policeBoutonPause);
 		HBox.setMargin(bPause4, margeBoutonPause);
 
-		VBox j3 = new VBox();
+		j3 = new VBox();
 		nbPerso3 = new Label("## personnages");
 		nbPerso3.setFont(Font.font("Segoe UI", 20));
 		nbPerso3.setTextFill(Color.BLACK);
+		nbPerso3.setStyle(tmpColor);
 		nbCartes3 = new Label("## de cartes");
 		nbCartes3.setFont(Font.font("Segoe UI", 20));
 		nbCartes3.setTextFill(Color.BLACK);
+		nbCartes3.setStyle(tmpColor);
 		nomJoueur3 = new Label("Nom Joueur 3");
 		nomJoueur3.setFont(Font.font("Segoe UI", 20));
 		nomJoueur3.setTextFill(Color.BLACK);
+		nomJoueur3.setStyle(tmpColor);
 
 		HBox.setMargin(j3, insetJGauche);
 		j3.setAlignment(Pos.CENTER);
@@ -213,17 +272,21 @@ public class PlateauPane extends StackPane implements PlateauListener {
 		VBox.setMargin(nomJoueur3, margeTexteJoueur);
 		j3.setMinSize(tailleVBoxJoueur, tailleVBoxJoueur);
 		j3.getChildren().addAll(nbPerso3, nbCartes3, nomJoueur3);
+		j3.setStyle(tmpColor);
 
-		VBox j4 = new VBox();
+		j4 = new VBox();
 		nbPerso4 = new Label("## personnages");
 		nbPerso4.setFont(Font.font("Segoe UI", 20));
 		nbPerso4.setTextFill(Color.BLACK);
+		nbPerso4.setStyle(tmpColor);
 		nbCartes4 = new Label("## de cartes");
 		nbCartes4.setFont(Font.font("Segoe UI", 20));
 		nbCartes4.setTextFill(Color.BLACK);
+		nbCartes4.setStyle(tmpColor);
 		nomJoueur4 = new Label("Nom Joueur 4");
 		nomJoueur4.setFont(Font.font("Segoe UI", 20));
 		nomJoueur4.setTextFill(Color.BLACK);
+		nomJoueur4.setStyle(tmpColor);
 
 		HBox.setMargin(j4, insetJDroit);
 		j4.setAlignment(Pos.CENTER);
@@ -233,21 +296,25 @@ public class PlateauPane extends StackPane implements PlateauListener {
 		VBox.setMargin(nomJoueur4, margeTexteJoueur);
 		j4.setMinSize(tailleVBoxJoueur, tailleVBoxJoueur);
 		j4.getChildren().addAll(nbPerso4, nbCartes4, nomJoueur4);
+		j4.setStyle(tmpColor);
 
 		hHaut.getChildren().addAll(bPause3, j3, j4, bPause4);
 		hHaut.setAlignment(Pos.BOTTOM_CENTER);
 		hHaut.setRotate(180);
 
-		VBox j5 = new VBox();
+		j5 = new VBox();
 		nbPerso5 = new Label("## personnages");
 		nbPerso5.setFont(Font.font("Segoe UI", 20));
 		nbPerso5.setTextFill(Color.BLACK);
+		nbPerso5.setStyle(tmpColor);
 		nbCartes5 = new Label("## de cartes");
 		nbCartes5.setFont(Font.font("Segoe UI", 20));
 		nbCartes5.setTextFill(Color.BLACK);
+		nbCartes5.setStyle(tmpColor);
 		nomJoueur5 = new Label("Nom Joueur 5");
 		nomJoueur5.setFont(Font.font("Segoe UI", 20));
 		nomJoueur5.setTextFill(Color.BLACK);
+		nomJoueur5.setStyle(tmpColor);
 
 		j5.setAlignment(Pos.CENTER);
 		j5.setBackground(new Background(new BackgroundFill(Color.LIGHTGREY, CornerRadii.EMPTY, null)));
@@ -258,10 +325,40 @@ public class PlateauPane extends StackPane implements PlateauListener {
 		j5.setPrefSize(tailleVBoxJoueur, tailleVBoxJoueur);
 		j5.setMaxSize(tailleVBoxJoueur, tailleVBoxJoueur);
 		j5.getChildren().addAll(nbPerso5, nbCartes5, nomJoueur5);
+		j5.setStyle(tmpColor);
 		j5.setRotate(270);
 
 		hDroite.getChildren().addAll(j5);
 		hDroite.setAlignment(Pos.CENTER_LEFT);
+		
+		j6 = new VBox();
+		nbPerso6 = new Label("## personnages");
+		nbPerso6.setFont(Font.font("Segoe UI", 20));
+		nbPerso6.setTextFill(Color.BLACK);
+		nbPerso6.setStyle(tmpColor);
+		nbCartes6 = new Label("## de cartes");
+		nbCartes6.setFont(Font.font("Segoe UI", 20));
+		nbCartes6.setTextFill(Color.BLACK);
+		nbCartes6.setStyle(tmpColor);
+		nomJoueur6 = new Label("Nom Joueur 6");
+		nomJoueur6.setFont(Font.font("Segoe UI", 20));
+		nomJoueur6.setTextFill(Color.BLACK);
+		nomJoueur6.setStyle(tmpColor);
+
+		j6.setAlignment(Pos.CENTER);
+		j6.setBackground(new Background(new BackgroundFill(Color.LIGHTGREY, CornerRadii.EMPTY, null)));
+		VBox.setMargin(nbPerso6, margeTexteJoueur);
+		VBox.setMargin(nbCartes6, margeTexteJoueur);
+		VBox.setMargin(nomJoueur6, margeTexteJoueur);
+		j6.setMinSize(tailleVBoxJoueur, tailleVBoxJoueur);
+		j6.setPrefSize(tailleVBoxJoueur, tailleVBoxJoueur);
+		j6.setMaxSize(tailleVBoxJoueur, tailleVBoxJoueur);
+		j6.getChildren().addAll(nbPerso6, nbCartes6, nomJoueur6);
+		j6.setStyle(tmpColor);
+		j6.setRotate(90);
+
+		hGauche.getChildren().addAll(j6);
+		hGauche.setAlignment(Pos.CENTER_LEFT);
 
 
 		/////////////////////////////////////////////////////
@@ -564,7 +661,7 @@ public class PlateauPane extends StackPane implements PlateauListener {
 		VBox vInfo = new VBox();
 		vInfo.setAlignment(Pos.TOP_LEFT);
 		lInfo = new Label("information");
-		lInfo.setFont(Font.font("Segoe UI", FontWeight.BOLD, 10));
+		lInfo.setFont(Font.font("Segoe UI", FontWeight.BOLD, 15));
 		lInfo.setTextFill(Color.WHITE);
 		vInfo.getChildren().addAll(lInfo);
 
