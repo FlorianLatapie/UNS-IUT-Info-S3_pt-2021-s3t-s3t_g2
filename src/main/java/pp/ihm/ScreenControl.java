@@ -55,6 +55,10 @@ public class ScreenControl implements EventHandler<MouseEvent> {
 		if (listNode.containsKey(s)) {
 			primary.setOnTop(listNode.get(s));
 		}
+		else {
+			//TODO mettre une erreur au lieu d'un print 
+			System.out.println("pane "+s.toString()+" introuvable");
+		}
 
 	}
 	public void setRotatePane(Node n, String sens) {

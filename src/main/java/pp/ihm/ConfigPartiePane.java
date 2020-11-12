@@ -166,7 +166,7 @@ public class ConfigPartiePane extends StackPane {
             bJouer.setStyle(styleBoutons);
         });
         bJouer.setOnAction(EventHandler -> {
-            //TODO je crois que c'est bon mais à vérifier
+            //TODO on lance la partie ici ou au pane suivant (config bot) 
             if (Integer.valueOf(nbJr.getValue()) > 6 || Integer.valueOf(nbJr.getValue()) < 3) {
                 core.setNbJoueur(5);
             } else {
@@ -214,8 +214,6 @@ public class ConfigPartiePane extends StackPane {
         
         // carre central qui contient tous les éléments (boutons et titre)
         BorderPane centreMenu = new BorderPane();
-        // centreMenu.setBackground(new Background(new
-        // BackgroundFill(Color.LIGHTGREY,CornerRadii.EMPTY,null)));
         centreMenu.setMinSize(tailleCarreCentral, tailleCarreCentral);
         centreMenu.setPrefSize(tailleCarreCentral, tailleCarreCentral);
         centreMenu.setMaxSize(tailleCarreCentral, tailleCarreCentral);

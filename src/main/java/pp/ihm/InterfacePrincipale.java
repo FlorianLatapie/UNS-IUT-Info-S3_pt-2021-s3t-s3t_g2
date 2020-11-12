@@ -31,24 +31,27 @@ public class InterfacePrincipale extends Application {
 		
 		primaryStage.setFullScreen(true);
 
-		PlateauPane plateauPane = new PlateauPane(sControl, core);
-		ConfigPartiePane configPartiePane = new ConfigPartiePane(sControl, core);
+		
 		AttenteJoueurPane attenteJoueurPane = new AttenteJoueurPane(sControl, core);
-		CouleurPane couleurPane = new CouleurPane(sControl, core);
+		ConfigPartiePane configPartiePane = new ConfigPartiePane(sControl, core);
 		FinDePartiePane finDePartiePane = new FinDePartiePane(sControl, core);
+		ConfigBotPane configBotPane = new ConfigBotPane(sControl, core);
+		CouleurPane couleurPane = new CouleurPane(sControl, core);
+		PlateauPane plateauPane = new PlateauPane(sControl, core);
 
 		core.eventInit();
 		core.getInitializer().addListenerAttente(attenteJoueurPane);
 		core.getInitializer().addListenerPlateau(plateauPane);
 		core.getInitializer().addListenerFin(finDePartiePane);
-
+		
+		root.getChildren().add(new AccessibilitePane(sControl));
 		root.getChildren().add(new ReglesPane(sControl, core));
 		root.getChildren().add(new OptionPane(sControl, core));
 		root.getChildren().add(new PausePane(sControl, core));
-		root.getChildren().add(new AccessibilitePane(sControl));
 		root.getChildren().add(attenteJoueurPane);
 		root.getChildren().add(configPartiePane);
 		root.getChildren().add(finDePartiePane);
+		root.getChildren().add(configBotPane);
 		root.getChildren().add(plateauPane);
 		root.getChildren().add(couleurPane);
 

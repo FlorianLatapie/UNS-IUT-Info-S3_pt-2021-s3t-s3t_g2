@@ -8,7 +8,7 @@ import javafx.collections.ObservableList;
 public class DataControl {
 
 	public static enum ApplicationPane {
-		ACCUEIL, AIDE, CREATION, JEU, OPTION, PAUSE, PLATEAU, CONFIG, REGLES, ACCESSIBILITE, ENDGAME, WAIT, COULEUR
+		ACCUEIL, AIDE, CREATION, JEU, OPTION, PAUSE, PLATEAU, CONFIG, REGLES, ACCESSIBILITE, ENDGAME, WAIT, COULEUR, CONFIG_BOT
 	}
 
 	public static enum ApplicationLangue {
@@ -25,8 +25,8 @@ public class DataControl {
 	
 	public static final ObservableList<Integer> nombreJoueur = FXCollections.observableArrayList(3,4,5,6);
 	public static final ObservableList<Integer> nombreBot = FXCollections.observableArrayList(0,1,2,3,4,5,6);
-	
 	public static final ObservableList<String> couleursJoueur = FXCollections.observableArrayList("Noir", "Vert", "Marron", "Rouge", "Bleu", "Jaune");
+	public static final ObservableList<String> difficulteBot = FXCollections.observableArrayList("Faible","Moyen","Fort");
 
 
 	public static Locale getLocale(ApplicationLangue l) {
