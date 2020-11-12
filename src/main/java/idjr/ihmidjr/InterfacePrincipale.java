@@ -11,77 +11,76 @@ import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 
 public class InterfacePrincipale extends Application {
-    private StackPane root = new StackPane();
-    private Node currentTopNode = null;
-    private ScreenControl sControl = null;
-    private Scene scene = new Scene(root);
-    private static Core core;
+	private StackPane root = new StackPane();
+	private Node currentTopNode = null;
+	private ScreenControl sControl = null;
+	private Scene scene = new Scene(root);
+	private static Core core;
 
-    @Override
-    public void start(Stage primaryStage) throws Exception {
-        primaryStage.getIcons().add(new Image(DataControl.ICONE));
-        primaryStage.setOnCloseRequest((e) -> {
-            boolean resultat = ConfirmationPane.afficher("Quitter le jeu",
-                    "Êtes-vous sûr de vouloir quitter le jeu ? \nSi vous quittez, la partie en cours sera perdue.");
-            if (resultat)
-                Platform.exit();
-        });
-        sControl = new ScreenControl(this, core);
-        int largeur = 1920;
-        int hauteur = 1080;
-        primaryStage.setTitle("IDJR - G2 - ZOMBIES la blonde la brute et le truand");
+	@Override
+	public void start(Stage primaryStage) throws Exception {
+		primaryStage.getIcons().add(new Image(DataControl.ICONE));
+		primaryStage.setOnCloseRequest((e) -> {
+			boolean resultat = ConfirmationPane.afficher("Quitter le jeu",
+					"Êtes-vous sûr de vouloir quitter le jeu ? \nSi vous quittez, la partie en cours sera perdue.");
+			if (resultat)
+				Platform.exit();
+		});
+		sControl = new ScreenControl(this, core);
+		int largeur = 1920;
+		int hauteur = 1080;
+		primaryStage.setTitle("IDJR - G2 - ZOMBIES la blonde la brute et le truand");
+		primaryStage.setMaxWidth(largeur);
+		primaryStage.setMaxHeight(hauteur);
+		primaryStage.setWidth(largeur - 100);
+		primaryStage.setHeight(hauteur - 100);
+		primaryStage.setMinWidth(1800);
+		primaryStage.setMinHeight(960);
 
-        primaryStage.setMaxWidth(largeur);
-        primaryStage.setMaxHeight(hauteur);
-        primaryStage.setWidth(largeur - 100);
-        primaryStage.setHeight(hauteur - 100);
-        primaryStage.setMinWidth(1800);
-        primaryStage.setMinHeight(960);
+		ConfigPartiePane configPartiePane = new ConfigPartiePane(sControl, core);
+		FinDePartiePane finDePartiePane = new FinDePartiePane(sControl, core);
+		AttenteJoueurPane attenteJoueurPane = new AttenteJoueurPane(sControl, core);
+		JeuPane jeuPane = new JeuPane(sControl, core);
 
-        ConfigPartiePane configPartiePane = new ConfigPartiePane(sControl, core);
-        FinDePartiePane finDePartiePane = new FinDePartiePane(sControl, core);
-        AttenteJoueurPane attenteJoueurPane = new AttenteJoueurPane(sControl, core);
-        JeuPane jeuPane = new JeuPane(sControl, core);
-        root.getChildren().add(configPartiePane);
-        root.getChildren().add(finDePartiePane);
-        root.getChildren().add(jeuPane);
+		root.getChildren().add(configPartiePane);
+		root.getChildren().add(finDePartiePane);
+		root.getChildren().add(jeuPane);
 
-        core.eventInit();
-        core.setIdjr(new Idjr(core.getInitializer()));
-        core.getInitializer().addListenerConfig(configPartiePane);
-        core.getInitializer().addListenerJeu(jeuPane);
-        core.getInitializer().addListenerFin(finDePartiePane);
-        core.getInitializer().addListenerAttente(attenteJoueurPane);
-        root.getChildren().add(new OptionPane(sControl, core));
-        root.getChildren().add(new ReglesPane(sControl, core));
-        root.getChildren().add(attenteJoueurPane);
-        root.getChildren().add(new AccueilPane(sControl, core));
+		core.eventInit();
+		core.setIdjr(new Idjr(core.getInitializer()));
+		core.getInitializer().addListenerConfig(configPartiePane);
+		core.getInitializer().addListenerJeu(jeuPane);
+		core.getInitializer().addListenerFin(finDePartiePane);
+		core.getInitializer().addListenerAttente(attenteJoueurPane);
+		root.getChildren().add(new OptionPane(sControl, core));
+		root.getChildren().add(new ReglesPane(sControl, core));
+		root.getChildren().add(attenteJoueurPane);
+		root.getChildren().add(new AccueilPane(sControl, core));
 
-        primaryStage.setScene(scene);
+		primaryStage.setScene(scene);
+		primaryStage.getScene().getWindow().addEventFilter(WindowEvent.WINDOW_CLOSE_REQUEST, this::onClose);
+		primaryStage.show();
 
-        primaryStage.getScene().getWindow().addEventFilter(WindowEvent.WINDOW_CLOSE_REQUEST, this::onClose);
-        primaryStage.show();
+	}
 
-    }
+	public static void lancement(String[] args, Core c) {
+		core = c;
+		InterfacePrincipale.launch(args);
+	}
 
-    public static void lancement(String[] args, Core c) {
-        core = c;
-        InterfacePrincipale.launch(args);
-    }
+	public void setOnTop(Node n) {
+		if (currentTopNode != null)
+			currentTopNode.setVisible(false);
+		n.setVisible(true);
+		currentTopNode = n;
+	}
 
-    public void setOnTop(Node n) {
-        if (currentTopNode != null)
-            currentTopNode.setVisible(false);
-        n.setVisible(true);
-        currentTopNode = n;
-    }
+	public Scene getScene() {
+		return scene;
+	}
 
-    public Scene getScene() {
-        return scene;
-    }
-    
-    public void onClose(WindowEvent event) {
-    	core.getIdjr().stop();
-    }
+	public void onClose(WindowEvent event) {
+		core.getIdjr().stop();
+	}
 
 }

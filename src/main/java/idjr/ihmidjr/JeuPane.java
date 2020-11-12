@@ -31,13 +31,11 @@ public class JeuPane extends StackPane implements JeuListener {
 
 	private ScreenControl sControl = null;
 	private Core core = null;
-	// définition des variable pour la suite du pane
 	private int hBouton = 100;
 	private int lBouton = 200;
 	private Font policeBouton = Font.font("Segoe UI", FontWeight.BOLD, 33);
 	private Font policeBoutonDe = Font.font("Segoe UI", FontWeight.BOLD, 40);
 	private String styleBoutons = " -fx-background-color:#000000; -fx-background-radius: 15px; -fx-text-fill: #ffffff";
-	//private String styleDe = " -fx-background-color:#FFFFFF; -fx-background-radius: 3px; -fx-text-fill: #ffffff";
 	private String styleBoutonsSouris = "-fx-background-color:#ff0000;  -fx-text-fill:#000000; -fx-background-radius: 15px;";
 	private StackPane stackPane = new StackPane();
 	private GaussianBlur flou = new GaussianBlur(30);
@@ -45,14 +43,10 @@ public class JeuPane extends StackPane implements JeuListener {
 	private CornerRadii coinfb = new CornerRadii(5.0);
 	private Background fondBlanc = new Background(new BackgroundFill(Color.WHITE, coinfb, null));
 	private Background fondNoir = new Background(new BackgroundFill(Color.BLACK, CornerRadii.EMPTY, null));
-
 	private int largBouton = 155;
 	private int hautBouton = 70;
-
-
 	private final ApplicationPane paneName = ApplicationPane.JEU;
 
-	// TODO
 	Label phasePartie;
 
 	BorderPane info;
@@ -220,16 +214,12 @@ public class JeuPane extends StackPane implements JeuListener {
 		VBox vbTitre = new VBox();
 		vbTitre.setAlignment(Pos.CENTER);
 		vbTitre.setPrefHeight(80);
-		// vbTitre.setMaxSize(700, 80);
 		vbTitre.setBackground(fondNoir);
-		// vbTitre.setOpacity(.5);
 		vbTitre.getChildren().addAll(titreVote, titreQuestion);
 
 		vote.setTop(vbTitre);
 		vote.setCenter(vbVoteCentre);
 		vote.setDisable(false);
-
-		//////////////////////////////////////////////////////////
 
 		VBox vbDeplCentre = new VBox();
 		vbDeplCentre.setAlignment(Pos.CENTER_LEFT);
@@ -250,7 +240,6 @@ public class JeuPane extends StackPane implements JeuListener {
 		vbTitre1.setPrefHeight(50);
 		vbTitre1.setMinHeight(50);
 		vbTitre1.setMaxHeight(50);
-		// vbTitre1.setMaxSize(300, 50);
 
 		labDeplPers = new Label("Déplacement des personnages");
 		labDeplPers.setAlignment(Pos.TOP_CENTER);
@@ -261,7 +250,6 @@ public class JeuPane extends StackPane implements JeuListener {
 		vbPersonnage.setMinWidth(350);
 		vbPersonnage.setMaxWidth(350);
 		vbPersonnage.setAlignment(Pos.TOP_CENTER);
-		// vbPersonnage.setStyle(styleVBox);
 
 		HBox hbHaut = new HBox();
 		hbHaut.setAlignment(Pos.TOP_CENTER);
@@ -345,7 +333,6 @@ public class JeuPane extends StackPane implements JeuListener {
 		vbTitre2.setPrefHeight(50);
 		vbTitre2.setMinHeight(50);
 		vbTitre2.setMaxHeight(50);
-		// vbTitre2.setMaxSize(300, 50);
 
 		Label labDeplLieux = new Label("Destination");
 		labDeplLieux.setAlignment(Pos.TOP_CENTER);
@@ -356,7 +343,6 @@ public class JeuPane extends StackPane implements JeuListener {
 		hbLieux.setMinWidth(350);
 		hbLieux.setMaxWidth(350);
 		hbLieux.setAlignment(Pos.TOP_CENTER);
-		// hbLieux.setStyle(styleVBox);
 
 		VBox vbGauche = new VBox();
 		vbGauche.setAlignment(Pos.CENTER_LEFT);
@@ -457,28 +443,25 @@ public class JeuPane extends StackPane implements JeuListener {
 
 		vbDeplCentre.getChildren().addAll(vbDeplPers, vbDeplLieux);
 		vbDeplCentre.setDisable(false);
-		/////
 
 		VBox des = new VBox();
 		des.setTranslateX(790);
 		des.setTranslateY(-100);
 		des.setAlignment(Pos.CENTER);
 		des.setStyle(styleVBox);
-		// des.setMaxSize(100,250);
-		// des.setMinSize(100,250);
 		des.setMaxSize(120, 275);
+
 		de1 = new Label("0");
 		de1.setBackground(fondBlanc);
 		de1.setAlignment(Pos.CENTER);
 		de1.setMinSize(100, 100);
-		// de1.setStyle(styleDe);
 		de1.setTextFill(Color.BLACK);
 		de1.setFont(policeBoutonDe);
+
 		de2 = new Label("0");
 		de2.setBackground(fondBlanc);
 		de2.setAlignment(Pos.CENTER);
 		de2.setMinSize(100, 100);
-		// de2.setStyle(styleDe);
 		de2.setTextFill(Color.BLACK);
 		de2.setFont(policeBoutonDe);
 
@@ -487,9 +470,7 @@ public class JeuPane extends StackPane implements JeuListener {
 		des.getChildren().addAll(de1, de2);
 		des.setDisable(false); // TODO ne pas oublier de le retier
 
-		/////
 		info = new BorderPane();
-		// info.setMinSize(500, 500);
 		info.setPrefSize(1000, 200);
 		info.setMaxSize(1000, 200);
 		info.setBackground(fondBlanc);
@@ -511,12 +492,10 @@ public class JeuPane extends StackPane implements JeuListener {
 		info.setMargin(vInfo, new Insets(50, 20, 0, 20));
 		info.setTop(vTitreInfo);
 		info.setCenter(vInfo);
-		// info.getChildren().addAll(titreInfo, lInfo);
 		info.setVisible(true);
 
-		/////
 		imgFond = new ImageView(DataControl.BLEU);
-		/////
+
 		HBox fond = new HBox();
 		fond.setAlignment(Pos.CENTER);
 		fond.setEffect(flou);
@@ -525,7 +504,6 @@ public class JeuPane extends StackPane implements JeuListener {
 		stackPane.getChildren().addAll(fond, rectVigile, nomJoueur, phasePartie, vbCentral, vote, vbDeplCentre, des,
 				info);
 		stackPane.setBackground(new Background(new BackgroundFill(Color.BLACK, CornerRadii.EMPTY, null)));
-		// stackPane.setOpacity(.8);
 
 		this.getChildren().add(stackPane);
 		sControl.registerNode(paneName, this);

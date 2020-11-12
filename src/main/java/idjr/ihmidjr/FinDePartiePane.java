@@ -33,11 +33,7 @@ public class FinDePartiePane extends StackPane implements FinListener {
 	private ScreenControl sControl = null;
 	private Core core = null;
 	private final ApplicationPane paneName = ApplicationPane.ENDGAME;
-	// définition des variable pour la suite du pane
-
-	// définition des variable pour la suite du pane
-	private int tailleCarreCentral = 800; // l'interface est sur un stackPane qui peut tourner avec des crans de 90
-											// degrés
+	private int tailleCarreCentral = 800;
 	private int hBouton = 75;
 	private int lBouton = 150;
 	private int marge = tailleCarreCentral / 25;
@@ -47,7 +43,6 @@ public class FinDePartiePane extends StackPane implements FinListener {
 	private String styleBoutonsSouris = "-fx-background-color:#ff0000;  -fx-text-fill:#000000; -fx-background-radius: 15px;";
 	private StackPane stackPane = new StackPane();
 	private GaussianBlur flou = new GaussianBlur(30);
-
 	private Font policeNom = Font.font("Segoe UI", 35);
 	private CornerRadii coinfb = new CornerRadii(10.0);
 	private Background fondBlanc = new Background(new BackgroundFill(Color.WHITE, coinfb, null));
@@ -69,29 +64,21 @@ public class FinDePartiePane extends StackPane implements FinListener {
 		titre.setPrefWidth(730);
 		titre.setMinWidth(730);
 
-		////
-
 		desc = new Label("vous avez perdu, joueur " + "x" + " a gagné\n (ou) vous avez gagné");
 		desc.setFont(policeNom);
 		desc.setPadding(new Insets(20));
 		desc.setBackground(fondBlanc);
 
-		// vJoueurs.setBackground(new Background(new//
-		// BackgroundFill(Color.BLUE,CornerRadii.EMPTY,null)));
-
 		VBox vbCenter = new VBox();
-
 		vbCenter.setAlignment(Pos.CENTER);
 		vbCenter.getChildren().addAll(desc);
 
 		// bouton
-
 		Button bRetour = new Button("RETOUR");
 		bRetour.setPrefSize(lBouton, hBouton);
 		bRetour.setMinSize(lBouton, hBouton);
 		bRetour.setFont(policeBouton);
 		bRetour.setStyle(styleBoutons);
-
 		bRetour.setOnMouseEntered(event -> {
 			bRetour.setStyle(styleBoutonsSouris);
 		});
@@ -107,23 +94,17 @@ public class FinDePartiePane extends StackPane implements FinListener {
 
 		// image fond
 		ImageView imgFond = new ImageView(DataControl.FOND);
+
 		// carre central qui contient tous les éléments (boutons et titre)
 		BorderPane centreMenu = new BorderPane();
-		// centreMenu.setBackground(new Background(new
-		// BackgroundFill(Color.LIGHTGREY,CornerRadii.EMPTY,null)));
 		centreMenu.setMinSize(tailleCarreCentral, tailleCarreCentral);
 		centreMenu.setPrefSize(tailleCarreCentral, tailleCarreCentral);
 		centreMenu.setMaxSize(tailleCarreCentral, tailleCarreCentral);
 		centreMenu.setMargin(titre, new Insets(0, 0, 100, 0));
-
 		centreMenu.setAlignment(titre, Pos.CENTER);
-
 		centreMenu.setTop(titre);
 		centreMenu.setCenter(vbCenter);
 		centreMenu.setBottom(boutonsPanneau);
-
-		// rotation de l'interface
-		// centreMenu.setRotate(90);
 
 		// boite du fond qui contient tout
 		HBox fond = new HBox();

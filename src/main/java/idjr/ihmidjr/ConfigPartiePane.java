@@ -29,13 +29,9 @@ public class ConfigPartiePane extends StackPane implements ConfigListener {
 	private ScreenControl sControl = null;
 	private Core core = null;
 	private final ApplicationPane paneName = ApplicationPane.CONFIG;
-	// définition des variable pour la suite du pane
-	private int tailleCarreCentral = 800; // l'interface est sur un stackPane qui peut tourner avec des crans de 90
-	// degrés
+	private int tailleCarreCentral = 800; // l'interface est sur un stackPane
 	private int hBouton = 75;
 	private int lBouton = 150;
-	// private int marge = tailleCarreCentral / 25;
-	// private Insets margeBoutons = new Insets(marge, marge, marge, marge);
 	private Font policeBouton = Font.font("Segoe UI", FontWeight.BOLD, 27);
 	private CornerRadii coin = new CornerRadii(15.0);
 	private String styleBoutons = " -fx-background-color:#000000; -fx-background-radius: 15px; -fx-text-fill: #ffffff";
@@ -74,7 +70,6 @@ public class ConfigPartiePane extends StackPane implements ConfigListener {
 		desc.setAlignment(Pos.CENTER);
 		desc.setFont(policeNom);
 		desc.setMinHeight(hauteurElemtents);
-		// desc.setBackground(fondBlanc);
 		desc.setPadding(botPadding);
 
 		TextField nomP = new TextField();
@@ -92,8 +87,6 @@ public class ConfigPartiePane extends StackPane implements ConfigListener {
 
 		VBox vbCenter = new VBox();
 		vbCenter.setAlignment(Pos.CENTER);
-		// vbCenter.setSpacing(spacing);
-		// vbCenter.setBackground(fondBlanc);
 		vbCenter.getChildren().addAll(partie);
 
 		// boutons
@@ -141,8 +134,6 @@ public class ConfigPartiePane extends StackPane implements ConfigListener {
 		ImageView imgFond = new ImageView(DataControl.FOND);
 		// carre central qui contient tous les éléments (boutons et titre)
 		BorderPane centreMenu = new BorderPane();
-		// centreMenu.setBackground(new Background(new
-		// BackgroundFill(Color.LIGHTGREY,CornerRadii.EMPTY,null)));
 		centreMenu.setMinSize(tailleCarreCentral, tailleCarreCentral);
 		centreMenu.setPrefSize(tailleCarreCentral, tailleCarreCentral);
 		centreMenu.setMaxSize(tailleCarreCentral, tailleCarreCentral);
@@ -153,9 +144,6 @@ public class ConfigPartiePane extends StackPane implements ConfigListener {
 		centreMenu.setTop(titre);
 		centreMenu.setCenter(vbCenter);
 		centreMenu.setBottom(boutonsPanneau);
-
-		// rotation de l'interface
-		// centreMenu.setRotate(90);
 
 		// boite du fond qui contient tout
 		HBox fond = new HBox();
