@@ -13,20 +13,20 @@ public class PtValues {
     private final List<PtValue> values = new ArrayList<>();
 
     /**
-     * Permet d'ajouter des valeurs
+     * Permet d'ajouter des valeurs.
      *
-     * @param value valeur a rajouter
+     * @param value Valeur a rajouter
      */
-    public void addValue(PtValue value) {
+    public void ajouterValeur(PtValue value) {
         values.add(value);
     }
 
     /**
-     * Obtient les valeurs du paquet
+     * Obtient les valeurs du paquet.
      *
-     * @return les valeurs du paquet
+     * @return Les valeurs du paquet
      */
-    public List<PtValue> getValues() {
+    public List<PtValue> getValeurs() {
         return values;
     }
 

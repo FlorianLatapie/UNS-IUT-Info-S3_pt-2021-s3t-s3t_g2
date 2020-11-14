@@ -15,23 +15,23 @@ class PtValuesTest {
         ptValues = new PtValues();
         ptValue = new PtValue("nombreChocolat", "int", "C'est le nombre de chocolat !");
         ptValue1 = new PtValue("nomDuClub", "String", "Bah, c'est le nom du club !");
-        ptValues.addValue(ptValue);
-        ptValues.addValue(ptValue1);
+        ptValues.ajouterValeur(ptValue);
+        ptValues.ajouterValeur(ptValue1);
     }
 
     @Test
     void addValue() {
-        assertEquals(2, ptValues.getValues().size());
+        assertEquals(2, ptValues.getValeurs().size());
         PtValue ptValue = new PtValue("typeDuJoueur", "TypeJoueur", "Le type du joueur");
-        ptValues.addValue(ptValue);
-        assertEquals(3, ptValues.getValues().size());
+        ptValues.ajouterValeur(ptValue);
+        assertEquals(3, ptValues.getValeurs().size());
     }
 
     @Test
     void getValues() {
-        assertEquals(2, ptValues.getValues().size());
-        assertEquals(ptValue, ptValues.getValues().get(0));
-        assertEquals(ptValue1, ptValues.getValues().get(1));
+        assertEquals(2, ptValues.getValeurs().size());
+        assertEquals(ptValue, ptValues.getValeurs().get(0));
+        assertEquals(ptValue1, ptValues.getValeurs().get(1));
     }
 
     @Test

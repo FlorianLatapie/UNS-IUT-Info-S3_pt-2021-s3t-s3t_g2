@@ -15,12 +15,12 @@ public class PtProtocol {
     private final PtValues values;
 
     /**
-     * @param seq       numero unique du paquet
-     * @param className nom abrégé du packet
-     * @param doc       documentation globale du paquet
-     * @param keyword   mot-clé unique par le type de protocol
-     * @param protocol  nom du protocol
-     * @param values    les valeurs du paquet
+     * @param seq       Numero unique du paquet
+     * @param className Nom abrégé du packet
+     * @param doc       Documentation globale du paquet
+     * @param keyword   Mot-clé unique par le type de protocol
+     * @param protocol  Nom du protocol
+     * @param values    Les valeurs du paquet
      */
     public PtProtocol(String seq, String className, String doc, String keyword, String protocol, PtValues values) {
         this.seq = seq;
@@ -32,103 +32,103 @@ public class PtProtocol {
     }
 
     /**
-     * Permet d'obtenir le nombre de parametre
+     * Permet d'obtenir le nombre de parametre.
      *
-     * @return le nombre de parametre
+     * @return Le nombre de parametre
      */
-    public int valueCount() {
-        return values.getValues().size();
+    public int taille() {
+        return values.getValeurs().size();
     }
 
     /**
-     * Obtient le numero unique du paquet
+     * Obtient le numero unique du paquet.
      *
-     * @return le numero unique du paquet
+     * @return Le numero unique du paquet
      */
     public String getSeq() {
         return seq;
     }
 
     /**
-     * Obtient le nom abrégé du paquet
+     * Obtient le nom abrégé du paquet.
      *
-     * @return le nom abrégé du paquet
+     * @return Le nom abrégé du paquet
      */
-    public String getClassName() {
+    public String getNomClasse() {
         return className;
     }
 
     /**
-     * Obtient la documentation globale
+     * Obtient la documentation globale.
      *
-     * @return la documentation globale
+     * @return La documentation globale
      */
     public String getDoc() {
         return doc;
     }
 
     /**
-     * Obtient le mot-clé
+     * Obtient le mot-clé.
      *
-     * @return le mot-clé
+     * @return Le mot-clé
      */
-    public String getKeyword() {
+    public String getMotCle() {
         return keyword;
     }
 
     /**
-     * Obtient le type du protocol
+     * Obtient le type du protocol.
      *
-     * @return le type du protocol
+     * @return Le type du protocol
      */
-    public String getProtocol() {
+    public String getProtocole() {
         return protocol;
     }
 
     /**
-     * Obtient les valeurs du packet
+     * Obtient les valeurs du packet.
      *
-     * @return les valeurs du packet
+     * @return Les valeurs du packet
      */
-    public PtValues getValues() {
+    public PtValues getValeurs() {
         return values;
     }
 
     /**
-     * Obtient les noms des parametres
+     * Obtient les noms des parametres.
      *
-     * @return les noms des parametres
+     * @return Les noms des parametres
      */
     public String[] toNameArray() {
-        String[] tmp = new String[values.getValues().size()];
+        String[] tmp = new String[values.getValeurs().size()];
         for (int i = 0; i < tmp.length; i++)
-            tmp[i] = values.getValues().get(i).getName();
+            tmp[i] = values.getValeurs().get(i).getName();
 
         return tmp;
     }
 
     /**
-     * Obtient les types des parametres
+     * Obtient les types des parametres.
      *
-     * @return les types des parametres
+     * @return Les types des parametres
      */
     public String[] toTypeArray() {
-        String[] tmp = new String[values.getValues().size()];
+        String[] tmp = new String[values.getValeurs().size()];
         for (int i = 0; i < tmp.length; i++)
-            tmp[i] = values.getValues().get(i).getType();
+            tmp[i] = values.getValeurs().get(i).getType();
 
         return tmp;
     }
 
     /**
-     * Obtient les documentations des parametres
+     * Obtient les documentations des parametres.
      *
-     * @return les documentations des parametres
+     * @return Les documentations des parametres
      */
     public String[] toDocArray() {
-        String[] tmp = new String[values.getValues().size()];
+        String[] tmp = new String[values.getValeurs().size()];
         for (int i = 0; i < tmp.length; i++)
-            tmp[i] = values.getValues().get(i).getDoc();
+            tmp[i] = values.getValeurs().get(i).getDoc();
 
         return tmp;
     }
