@@ -12,29 +12,34 @@ import java.util.List;
  * @author Sébastien Aglaé
  * @version 1.0
  */
-public abstract class NetworkTool {
-    private NetworkTool() {
+public abstract class ReseauOutils {
+    private ReseauOutils() {
         throw new IllegalStateException("Utility class");
     }
 
     static final String URL_TEST = "1.1.1.1";
 
     /**
-     * Recupere l'adresse ip utilisée pour rejoindre le reseau
+     * Recupere l'adresse ip utilisée pour rejoindre le reseau.
      *
-     * @return l'adresse ip de la bonne interface
+     * @return L'adresse ip de la bonne interface
      */
-    public static InetAddress getAliveLocalIp() {
+    public static InetAddress getLocalIp() {
         try (Socket socket = new Socket()) {
             socket.connect(new InetSocketAddress(URL_TEST, 80));
-            InetAddress tmp = socket.getLocalAddress();
+            InetAddress ip = socket.getLocalAddress();
             socket.close();
-            return tmp;
+            return ip;
         } catch (IOException e) {
             return null;
         }
     }
 
+    /**
+     * Recupere toutes les interfaces du pc.
+     *
+     * @return La liste des interfaces
+     */
     public static List<InetAddress> getInterfaces() throws SocketException {
         List<InetAddress> inets = new ArrayList<>();
         Enumeration<NetworkInterface> gni = NetworkInterface.getNetworkInterfaces();
@@ -48,11 +53,11 @@ public abstract class NetworkTool {
     }
 
     /**
-     * Permet de savoir si le port est deja occupé
+     * Permet de savoir si le port est deja occupé.
      *
-     * @param port le port cible
-     * @return si le port est deja occupé
-     * @exception  IllegalArgumentException si le port se trouve en dehors [1, 65535]
+     * @param port Le port cible
+     * @return Si le port est deja occupé
+     * @exception  IllegalArgumentException Si le port se trouve en dehors [1, 65535]
      */
     public static boolean isBindSocket(int port) {
         if (port > 65535 || port < 1)
@@ -68,20 +73,20 @@ public abstract class NetworkTool {
     }
 
     /**
-     * Permet d'obtenir un port disponible
+     * Permet d'obtenir un port disponible.
      *
-     * @param startPort le port de départ (Inclus)
-     * @param range     l'intervalle de recherche
-     * @return un port disponible
-     * @exception  IllegalArgumentException si le port se trouve en dehors [1, 65535]
-     * @exception  IllegalArgumentException si pas de port disponible
+     * @param debutPort Le port de départ (Inclus)
+     * @param intervalle     L'intervalle de recherche
+     * @return Un port disponible
+     * @exception  IllegalArgumentException Si le port se trouve en dehors [1, 65535]
+     * @exception  IllegalArgumentException Si pas de port disponible
      */
-    public static int getPortSocket(int startPort, int range) {
-        int tmpMax = startPort + range;
+    public static int getPortSocket(int debutPort, int intervalle) {
+        int tmpMax = debutPort + intervalle;
         if (tmpMax > 65535 || tmpMax < 1)
             throw new IllegalArgumentException("Une erreur peut se produire (max 65535 & min 1) : " + tmpMax);
 
-        for (int i = startPort; i < tmpMax; i++)
+        for (int i = debutPort; i < tmpMax; i++)
             if (!isBindSocket(i))
                 return i;
 

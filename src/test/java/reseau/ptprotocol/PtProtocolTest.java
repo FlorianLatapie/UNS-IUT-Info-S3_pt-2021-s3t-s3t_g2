@@ -12,13 +12,13 @@ class PtProtocolTest {
     @BeforeAll
     static void setUp() {
         ptValues = new PtValues();
-        ptValues.addValue(new PtValue("Lol", "int", "La verite"));
+        ptValues.ajouterValeur(new PtValue("Lol", "int", "La verite"));
         ptProtocol = new PtProtocol("0", "LaFuite", "Ajoute la pluie", "PL", "UDP", ptValues);
     }
 
     @Test
     void valueCount() {
-        assertEquals(1, ptProtocol.valueCount());
+        assertEquals(1, ptProtocol.taille());
     }
 
     @Test
@@ -28,22 +28,22 @@ class PtProtocolTest {
 
     @Test
     void getClassName() {
-        assertEquals("LaFuite", ptProtocol.getClassName());
+        assertEquals("LaFuite", ptProtocol.getNomClasse());
     }
 
     @Test
     void getKeyword() {
-        assertEquals("PL", ptProtocol.getKeyword());
+        assertEquals("PL", ptProtocol.getMotCle());
     }
 
     @Test
     void getProtocol() {
-        assertEquals("UDP", ptProtocol.getProtocol());
+        assertEquals("UDP", ptProtocol.getProtocole());
     }
 
     @Test
     void getValues() {
-        assertEquals(ptValues, ptProtocol.getValues());
+        assertEquals(ptValues, ptProtocol.getValeurs());
     }
 
     @Test
