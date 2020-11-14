@@ -17,7 +17,7 @@ class PacketTest {
     static void setUp() {
         PtValues ptValues = new PtValues();
         PtValue ptValue1 = new PtValue("nombre", "int", "Salut a tous");
-        ptValues.addValue(ptValue1);
+        ptValues.ajouterValeur(ptValue1);
         ptProtocol = new PtProtocol("0", "TestClasse", "Dit bonjour", "DB", "UDP", ptValues);
 
         packet = new Packet(ptProtocol);

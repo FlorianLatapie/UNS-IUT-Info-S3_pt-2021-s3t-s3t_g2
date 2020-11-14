@@ -12,9 +12,9 @@ public class PtValue {
     private final String doc;
 
     /**
-     * @param name nom du parametre
-     * @param type type du parametre
-     * @param doc  doc du parametre
+     * @param name Nom du parametre
+     * @param type Type du parametre
+     * @param doc  Doc du parametre
      */
     public PtValue(String name, String type, String doc) {
         this.name = name;
@@ -23,27 +23,27 @@ public class PtValue {
     }
 
     /**
-     * Obtient le nom du parametre
+     * Obtient le nom du parametre.
      *
-     * @return le nom du parametre
+     * @return Le nom du parametre
      */
     public String getName() {
         return name;
     }
 
     /**
-     * Obtient le type du parametre
+     * Obtient le type du parametre.
      *
-     * @return le type du parametre
+     * @return Le type du parametre
      */
     public String getType() {
         return type;
     }
 
     /**
-     * Obtient la documentation du parametre
+     * Obtient la documentation du parametre.
      *
-     * @return la documentation du parametre
+     * @return La documentation du parametre
      */
     public String getDoc() {
         return doc;

@@ -9,18 +9,18 @@ import java.util.*;
  * @author Sébastien Aglaé
  * @version 1.0
  */
-public abstract class PacketTool {
-    private PacketTool() {
+public abstract class PaquetOutils {
+    private PaquetOutils() {
         throw new IllegalStateException("Utility class");
     }
 
     /**
-     * Transforme une chaine de caractere en liste
+     * Transforme une chaine de caractere en liste.
      *
-     * @param list     liste a convertir
-     * @param enumType le type l'énumeration de la liste
-     * @param <T>      le type
-     * @return une chaine de caractere en liste
+     * @param list     Liste a convertir
+     * @param enumType Le type l'énumeration de la liste
+     * @param <T>      Le type
+     * @return Une chaine de caractere en liste
      */
     public static <T extends Enum<T>> List<T> strToListEnum(String list, Class<T> enumType) {
         if (list.equals(" "))
@@ -35,11 +35,11 @@ public abstract class PacketTool {
     }
 
     /**
-     * Transforme une chaine de caractere en liste d'entier
+     * Transforme une chaine de caractere en liste d'entier.
      *
-     * @param list liste a convertir
-     * @return une chaine de caractere en liste d'entier
-     * @throws IllegalArgumentException si un entier est inferieur a 0
+     * @param list Liste a convertir
+     * @return Une chaine de caractere en liste d'entier
+     * @throws IllegalArgumentException Si un entier est inferieur a 0
      */
     public static List<Integer> strToListInteger(String list) {
         String[] tmp = list.split(",");
@@ -59,10 +59,10 @@ public abstract class PacketTool {
     }
 
     /**
-     * Transforme une chaine de caractere en liste de chaine de caractere
+     * Transforme une chaine de caractere en liste de chaine de caractere.
      *
-     * @param list liste a convertir
-     * @return une chaine de caractere en liste de chaine de caractere
+     * @param list Liste a convertir
+     * @return Une chaine de caractere en liste de chaine de caractere
      */
     public static List<String> strToListStr(String list) {
         String[] tmp = list.split(",");
@@ -78,11 +78,11 @@ public abstract class PacketTool {
     }
 
     /**
-     * Transforme une liste reseau.enum en chaine de caractere
+     * Transforme une liste reseau.enum en chaine de caractere.
      *
-     * @param l   list liste a convertir
-     * @param <T> le type
-     * @return une liste reseau.enum en chaine de caractere
+     * @param l   List liste a convertir
+     * @param <T> Le type
+     * @return Une liste reseau.enum en chaine de caractere
      */
     public static <T extends Enum<T>> String listEnumToStr(Object l) {
         StringBuilder tmp = new StringBuilder();
@@ -99,11 +99,11 @@ public abstract class PacketTool {
     }
 
     /**
-     * Transforme une liste d'entier en chaine de caractere
+     * Transforme une liste d'entier en chaine de caractere.
      *
-     * @param list list liste a convertir
-     * @return une liste d'entier en chaine de caractere
-     * @throws IllegalArgumentException si un entier est inferieur a 0
+     * @param list List liste a convertir
+     * @return Une liste d'entier en chaine de caractere
+     * @throws IllegalArgumentException Si un entier est inferieur a 0
      */
     public static String listStrToInteger(List<Integer> list) {
         if (list.isEmpty())
@@ -121,10 +121,10 @@ public abstract class PacketTool {
     }
 
     /**
-     * Transforme une liste de chaine de caractere en chaine de caractere
+     * Transforme une liste de chaine de caractere en chaine de caractere.
      *
-     * @param list list liste a convertir
-     * @return une liste de chaine de caractere en chaine de caractere
+     * @param list List liste a convertir
+     * @return Une liste de chaine de caractere en chaine de caractere
      */
     public static String listStrToStr(List<String> list) {
         if (list.isEmpty())
@@ -139,10 +139,10 @@ public abstract class PacketTool {
     }
 
     /**
-     * Transforme un hashmap en chaine de caractere
+     * Transforme un hashmap en chaine de caractere.
      *
-     * @param list hashmap a convertir
-     * @return un hashmap en chaine de caractere
+     * @param list Hashmap a convertir
+     * @return Un hashmap en chaine de caractere
      */
     public static String subListToStr(Map<Integer, List<Integer>> list) {
         if (list.isEmpty())
@@ -164,10 +164,10 @@ public abstract class PacketTool {
     }
 
     /**
-     * Transforme une chaine de caractere en hashmap
+     * Transforme une chaine de caractere en hashmap.
      *
-     * @param message une chaine de caractere
-     * @return une chaine de caractere en hashmap
+     * @param message Une chaine de caractere
+     * @return Une chaine de caractere en hashmap
      */
     public static HashMap<Integer, List<Integer>> strToSubList(String message) {
         if (message.equals(" "))
@@ -188,12 +188,12 @@ public abstract class PacketTool {
     }
 
     /**
-     * Permet d'obtenir le mot-clé du paquet avec un message
+     * Permet d'obtenir le mot-clé du paquet avec un message.
      *
-     * @param message le message recu
-     * @return le mot-clé du paquet
+     * @param message Le message recu
+     * @return Le mot-clé du paquet
      */
-    public static String getKeyFromMessage(String message) {
+    public static String getCleMessage(String message) {
         if (message.isEmpty())
             throw new IllegalArgumentException("Ne peut pas etre vide !");
 

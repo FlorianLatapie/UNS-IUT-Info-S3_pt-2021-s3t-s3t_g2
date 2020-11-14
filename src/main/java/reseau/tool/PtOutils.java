@@ -4,7 +4,7 @@ import reseau.packet.Packet;
 import reseau.ptprotocol.PtProtocol;
 import reseau.ptprotocol.PtValue;
 import reseau.ptprotocol.PtValues;
-import reseau.socket.NetWorkManager;
+import reseau.socket.ControleurReseau;
 import reseau.type.*;
 
 import java.io.File;
@@ -21,51 +21,51 @@ import java.util.*;
  * @author Sébastien Aglaé
  * @version 1.0
  */
-public abstract class PtTool {
+public abstract class PtOutils {
 	private static final String PATHTOPACKET = "src\\main\\java\\reseau\\socket\\definition";
 
-	private PtTool() {
+	private PtOutils() {
 		throw new IllegalStateException("Utility class");
 	}
 
 	/**
-	 * Permet de charger un paquet d'un protocol réseau
+	 * Permet de charger un paquet d'un protocol réseau.
 	 *
-	 * @param path le chemin du fichier
-	 * @return le fichier en PtProtocol
-	 * @throws IOException si le fichier n'est pas accessible
+	 * @param chemin Le chemin du fichier
+	 * @return Le fichier en PtProtocol
+	 * @throws IOException Si le fichier n'est pas accessible
 	 */
-	public static PtProtocol buildPtPa(String path) throws IOException {
-		File file = new File(path);
+	public static PtProtocol buildPtPa(String chemin) throws IOException {
+		File file = new File(chemin);
 		FileInputStream fileInputStream = new FileInputStream(file);
 		byte[] buffer = new byte[(int) file.length()];
 		int result = fileInputStream.read(buffer);
 		if (result == -1)
-			throw new IllegalArgumentException(MessageFormat.format("Le fichier {0} est vide !", path));
+			throw new IllegalArgumentException(MessageFormat.format("Le fichier {0} est vide !", chemin));
 		fileInputStream.close();
 		String[] str = new String(buffer, StandardCharsets.UTF_8).split("\n");
 
 		PtValues ptValues = new PtValues();
 		for (int i = 5; i < str.length; i++)
 			if (str[i].contains("value:")) {
-				String n = r(str[i + 1]);
-				String t = r(str[i + 2]);
-				String d = r(str[i + 3]);
-				ptValues.addValue(new PtValue(n, t, d));
+				String n = format(str[i + 1]);
+				String t = format(str[i + 2]);
+				String d = format(str[i + 3]);
+				ptValues.ajouterValeur(new PtValue(n, t, d));
 			}
 
-		return new PtProtocol(r(str[0]), r(str[1]), r(str[2]), r(str[3]), r(str[4]), ptValues);
+		return new PtProtocol(format(str[0]), format(str[1]), format(str[2]), format(str[3]), format(str[4]), ptValues);
 	}
 
 	/**
-	 * Charge l'intégralité des paquets du protocol réseau
+	 * Charge l'intégralité des paquets du protocol réseau.
 	 *
-	 * @param path     chemin du dossier
-	 * @param protocol le type du protocol
-	 * @return l'ensemble des paquets
-	 * @throws IOException si un fichier n'est pas accessible
+	 * @param chemin     Chemin du dossier
+	 * @param protocole Le type du protocol
+	 * @return L'ensemble des paquets
+	 * @throws IOException Si un fichier n'est pas accessible
 	 */
-	public static Map<String, Packet> loadPacket(String path, String protocol) throws IOException {
+	public static Map<String, Packet> loadPacket(String chemin, String protocole) throws IOException {
 		Map<String, Packet> packets = new HashMap<>();
 
 		File folder = new File(PATHTOPACKET);
@@ -75,87 +75,87 @@ public abstract class PtTool {
 				if (file.getName().endsWith(".ptprotocol")) {
 					PtProtocol pt = buildPtPa(file.getPath());
 
-					if (!pt.getProtocol().equals(protocol))
+					if (!pt.getProtocole().equals(protocole))
 						continue;
 					Packet packet = new Packet(pt);
-					packets.put(pt.getKeyword(), packet);
+					packets.put(pt.getMotCle(), packet);
 				}
 			}
 		} else
-			for (File file : getResourceFolderFiles(path)) {
+			for (File file : getResourceFolderFiles(chemin)) {
 				if (file.getName().endsWith(".ptprotocol")) {
 					PtProtocol pt = buildPtPa(file.getPath());
 
-					if (!pt.getProtocol().equals(protocol))
+					if (!pt.getProtocole().equals(protocole))
 						continue;
 					Packet packet = new Packet(pt);
-					packets.put(pt.getKeyword(), packet);
+					packets.put(pt.getMotCle(), packet);
 				}
 			}
 
 		return packets;
 	}
 
-	private static File[] getResourceFolderFiles(String folder) {
+	private static File[] getResourceFolderFiles(String dossier) {
 		ClassLoader loader = Thread.currentThread().getContextClassLoader();
-		URL url = loader.getResource(folder);
+		URL url = loader.getResource(dossier);
 		String path = url.getPath();
 
 		return new File(path).listFiles();
 	}
 
 	/**
-	 * Permet d'obtenir l'objet en chaine de caractere
+	 * Permet d'obtenir l'objet en chaine de caractere.
 	 *
-	 * @param value variable
-	 * @param type  type de la variable
-	 * @return l'objet en chaine de caractere
+	 * @param valeur Variable
+	 * @param type  Type de la variable
+	 * @return L'objet en chaine de caractere
 	 */
-	public static String convertParamToString(Object value, String type) {
+	public static String convertParamToString(Object valeur, String type) {
 		try {
 			switch (type) {
 			case "String":
-				return ((String) value);
+				return ((String) valeur);
 			case "int":
-				Integer i = ((Integer) value);
+				Integer i = ((Integer) valeur);
 				if (i < 0)
 					throw new IllegalArgumentException("La valeur a convertir est inferieur a 0");
 				return i.toString();
 			case "VoteType":
-				VoteType vt = ((VoteType) value);
+				VoteType vt = ((VoteType) valeur);
 				return vt.toString();
 			case "VoteEtape":
-				VoteEtape ve = ((VoteEtape) value);
+				VoteEtape ve = ((VoteEtape) valeur);
 				return ve.toString();
 			case "VigileEtat":
-				VigileEtat vie = ((VigileEtat) value);
+				VigileEtat vie = ((VigileEtat) valeur);
 				return vie.toString();
 			case "TypeJoueur":
-				TypeJoueur tj = ((TypeJoueur) value);
+				TypeJoueur tj = ((TypeJoueur) valeur);
 				return tj.toString();
 			case "ReasonType":
-				ReasonType rt = ((ReasonType) value);
+				ReasonType rt = ((ReasonType) valeur);
 				return rt.toString();
 			case "PionCouleur":
-				PionCouleur pc = ((PionCouleur) value);
+				PionCouleur pc = ((PionCouleur) valeur);
 				return pc.toString();
 			case "Couleur":
-				Couleur c = ((Couleur) value);
+				Couleur c = ((Couleur) valeur);
 				return c.toString();
 			case "CondType":
-				CondType ct = ((CondType) value);
+				CondType ct = ((CondType) valeur);
 				return ct.toString();
 			case "CarteType":
-				CarteType cat = ((CarteType) value);
+				CarteType cat = ((CarteType) valeur);
 				return cat.toString();
 			case "TypePartie":
-				TypePartie tp = ((TypePartie) value);
+				TypePartie tp = ((TypePartie) valeur);
 				return tp.toString();
 			case "Status":
-				Status sss = ((Status) value);
+				Status sss = ((Status) valeur);
 				return sss.toString();
 			case "HashMap<Integer,List<Integer>>":
-				HashMap<?, ?> pti = (HashMap<?, ?>) value;
+				HashMap<?, ?> pti = (HashMap<?, ?>) valeur;
 				HashMap<Integer, List<Integer>> ptiTemp = new HashMap<>();
 				for (Map.Entry<?, ?> entry : pti.entrySet()) {
 					List<?> illtmp = (List<?>) entry.getValue();
@@ -165,23 +165,23 @@ public abstract class PtTool {
 
 					ptiTemp.put((Integer) entry.getKey(), ill);
 				}
-				return PacketTool.subListToStr(ptiTemp);
+				return PaquetOutils.subListToStr(ptiTemp);
 			case "List<CarteType>":
 			case "List<Couleur>":
 			case "List<PionCouleur>":
-				return PacketTool.listEnumToStr(value);
+				return PaquetOutils.listEnumToStr(valeur);
 			case "List<Integer>":
-				List<?> illtmp = (List<?>) value;
+				List<?> illtmp = (List<?>) valeur;
 				List<Integer> il = new ArrayList<>();
 				for (Object o : illtmp)
 					il.add((int) o);
-				return PacketTool.listStrToInteger(il);
+				return PaquetOutils.listStrToInteger(il);
 			case "List<String>":
-				List<?> alltmp = (List<?>) value;
+				List<?> alltmp = (List<?>) valeur;
 				List<String> al = new ArrayList<>();
 				for (Object o : alltmp)
 					al.add((String) o);
-				return PacketTool.listStrToStr(al);
+				return PaquetOutils.listStrToStr(al);
 			default:
 				throw new IllegalStateException("Unexpected value: " + type);
 			}
@@ -191,11 +191,11 @@ public abstract class PtTool {
 	}
 
 	/**
-	 * Permet de convertir une chaine de caractere en objet
+	 * Permet de convertir une chaine de caractere en objet.
 	 *
-	 * @param param le parametre
-	 * @param type  le type du parametre a retourner
-	 * @return l'object correspondant
+	 * @param param Le parametre
+	 * @param type  Le type du parametre a retourner
+	 * @return L'object correspondant
 	 */
 	public static Object convertStringToObject(String param, String type) {
 		try {
@@ -227,17 +227,17 @@ public abstract class PtTool {
 			case "Status":
 				return Status.valueOf(param);
 			case "HashMap<Integer,List<Integer>>":
-				return PacketTool.strToSubList(param);
+				return PaquetOutils.strToSubList(param);
 			case "List<CarteType>":
-				return PacketTool.strToListEnum(param, CarteType.class);
+				return PaquetOutils.strToListEnum(param, CarteType.class);
 			case "List<Couleur>":
-				return PacketTool.strToListEnum(param, Couleur.class);
+				return PaquetOutils.strToListEnum(param, Couleur.class);
 			case "List<PionCouleur>":
-				return PacketTool.strToListEnum(param, PionCouleur.class);
+				return PaquetOutils.strToListEnum(param, PionCouleur.class);
 			case "List<Integer>":
-				return PacketTool.strToListInteger(param);
+				return PaquetOutils.strToListInteger(param);
 			case "List<String>":
-				return PacketTool.strToListStr(param);
+				return PaquetOutils.strToListStr(param);
 			default:
 				throw new IllegalStateException("Unexpected value: " + type);
 			}
@@ -247,40 +247,40 @@ public abstract class PtTool {
 	}
 
 	/**
-	 * Obtient le paquet via une chaine de caractere
+	 * Obtient le paquet via une chaine de caractere.
 	 *
-	 * @param message        le message a convertir
-	 * @param netWorkManager le NetworkManager associé
-	 * @return le paquet associé
+	 * @param message        Le message a convertir
+	 * @param controleurReseau Le NetworkManager associé
+	 * @return Le paquet associé
 	 */
-	public static Packet strToPacketUdp(String message, NetWorkManager netWorkManager) {
-		if (netWorkManager.getPacketsUdp().size() == 0)
+	public static Packet strToPacketUdp(String message, ControleurReseau controleurReseau) {
+		if (controleurReseau.getPacketsUdp().size() == 0)
 			throw new IllegalArgumentException("NetWorkManager n'a pas ete initialise au moins une fois !");
 
-		return netWorkManager.getPacketsUdp().get(PacketTool.getKeyFromMessage(message));
+		return controleurReseau.getPacketsUdp().get(PaquetOutils.getCleMessage(message));
 	}
 
 	/**
-	 * Obtient le paquet via une chaine de caractere
+	 * Obtient le paquet via une chaine de caractere.
 	 *
-	 * @param message        le message a convertir
-	 * @param netWorkManager le NetworkManager associé
-	 * @return le paquet associé
+	 * @param message        Le message a convertir
+	 * @param controleurReseau Le NetworkManager associé
+	 * @return Le paquet associé
 	 */
-	public static Packet strToPacketTcp(String message, NetWorkManager netWorkManager) {
-		if (netWorkManager.getPacketsTcp().size() == 0)
+	public static Packet strToPacketTcp(String message, ControleurReseau controleurReseau) {
+		if (controleurReseau.getPacketsTcp().size() == 0)
 			throw new IllegalArgumentException("NetWorkManager n'a pas ete initialise au moins une fois !");
 
-		return netWorkManager.getPacketsTcp().get(PacketTool.getKeyFromMessage(message));
+		return controleurReseau.getPacketsTcp().get(PaquetOutils.getCleMessage(message));
 	}
 
 	/**
-	 * Convertit une chaine de caractere
+	 * Convertit une chaine de caractere.
 	 *
-	 * @param v parametre
-	 * @return une chaine de caractere
+	 * @param valeur Parametre
+	 * @return Une chaine de caractere
 	 */
-	private static String r(String v) {
-		return v.split(":")[1].replace("\r", "");
+	private static String format(String valeur) {
+		return valeur.split(":")[1].replace("\r", "");
 	}
 }

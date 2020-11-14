@@ -1,5 +1,5 @@
 package reseau.socket;
 
-public enum SideConnection {
+public enum ConnexionType {
     SERVER, CLIENT
 }

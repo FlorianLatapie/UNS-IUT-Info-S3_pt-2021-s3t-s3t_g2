@@ -19,7 +19,7 @@ class ThreadToolTest {
                 this.asyncTask1 = !this.asyncTask1;
                 assertFalse(this.asyncTask1);
             };
-            ThreadTool.asyncTask(t1, t2);
+            ThreadOutils.asyncTask(t1, t2);
         });
     }
 }

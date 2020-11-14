@@ -1,99 +1,147 @@
 package reseau.socket;
 
+import reseau.tool.PaquetOutils;
+
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
+import java.net.InetAddress;
 import java.net.Socket;
 import java.net.UnknownHostException;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
-import reseau.tool.PacketTool;
-
 import static java.lang.System.out;
+import static java.util.Collections.synchronizedList;
 
-public class TcpClient {
-    private Socket socket = null;
-    private DataOutputStream streamOut = null;
-    private DataInputStream streamIn = null;
-    private boolean isRunning;
-    private NetWorkManager netWorkManager;
-    private final List<String> messages;
+/**
+ * <h1>Permet de gerer un serveur TCP du coté client</h1>
+ *
+ * @author Sébastien Aglaé
+ * @version 1.0
+ */
+public class TcpClient implements Runnable {
+    private final ControleurReseau controleurReseau;
+    private Socket socket;
+    private DataOutputStream fluxSortie;
+    private DataInputStream fluxEntre;
+    private InetAddress ip;
+    private int port;
 
-    public TcpClient(NetWorkManager netWorkManager) throws IOException {
-        this.messages = Collections.synchronizedList(new ArrayList());
-        ;
-        this.netWorkManager = netWorkManager;
-        this.isRunning = true;
+    private boolean estLancer;
+    private final List<String> messagesTampon;
+
+    /**
+     * @param controleurReseau Le controleur reseau du client
+     * @param ip   L'ip du serveur TCP cible
+     * @param port Le port du serveur TCP cible
+     */
+    public TcpClient(ControleurReseau controleurReseau, InetAddress ip, int port) {
+        this.messagesTampon = synchronizedList(new ArrayList<String>());
+        this.controleurReseau = controleurReseau;
+        this.estLancer = true;
+        this.ip = ip;
+        this.port = port;
     }
 
-    public boolean start(boolean canReceive, String serverName, int serverPort) throws IOException {
-
+    /**
+     * Permet d'ouvrir la connexion.
+     *
+     * @return Si la connexion a été ouverte corretement
+     * @throws IOException Si les flux de s'ouvre pas correctement
+     */
+    private boolean ouvrir(InetAddress ip, int port) throws IOException {
         out.println("Attente ...");
-        boolean wait = true;
-        while (wait)
+        boolean attendre = true;
+        while (attendre)
             try {
                 try {
                     Thread.sleep(1000);
                 } catch (InterruptedException e) {
-                    // TODO Auto-generated catch block
                     e.printStackTrace();
                 }
-                socket = new Socket(serverName, serverPort);
-                wait = false;
+                socket = new Socket(ip, port);
+                attendre = false;
                 out.println("Connected: " + socket);
             } catch (UnknownHostException uhe) {
-                out.println("UnknownHostException: " + uhe.getMessage());
+                out.println("Pas de connexion !");
             } catch (IOException ioe) {
-                out.println("IOException: " + ioe.getMessage());
+                out.println("Pas de connexion !");
             }
 
         if (socket == null)
             return false;
 
-        streamOut = new DataOutputStream(socket.getOutputStream());
-        streamIn = new DataInputStream(socket.getInputStream());
+        fluxSortie = new DataOutputStream(socket.getOutputStream());
+        fluxEntre = new DataInputStream(socket.getInputStream());
 
-        if (canReceive)
-            receive();
+        reception();
 
         return true;
     }
 
-    public void send(String message) throws IOException {
+    @Override
+    public void run() {
+        try {
+            ouvrir(ip, port);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        reception();
+    }
+
+    /**
+     * Permet d'envoyer un message au serveur.
+     *
+     * @param message Le message a a envoyer
+     */
+    public void envoyer(String message)  {
         if (socket == null)
             return;
 
-        streamOut.writeUTF(message);
-        streamOut.flush();
+        try {
+            fluxSortie.writeUTF(message);
+            fluxSortie.flush();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         out.println("Send : " + message);
     }
 
-    private void receive() throws IOException {
-        String message = "";
-        while (isRunning) {
+    /**
+     * Permet de recevoir des messages du client. Bloque l'execution de thread.
+     */
+    private void reception() {
+        String message;
+        while (estLancer) {
             try {
-                message = streamIn.readUTF();
+                message = fluxEntre.readUTF();
             } catch (Exception e) {
                 continue;
             }
 
-            netWorkManager.getPacketHandlerTcp()
-                    .traitement(netWorkManager.getPacketsTcp().get(PacketTool.getKeyFromMessage(message)), message);
-            messages.add(message);
+            String cle = PaquetOutils.getCleMessage(message);
+            controleurReseau.getTraitementPaquetTcp().traitement(
+                    controleurReseau.getPacketsTcp().get(cle), message, socket);
+            messagesTampon.add(message);
             out.println("Receive : " + message);
         }
     }
 
+    /**
+     * Arrete le serveur.
+     *
+     * @throws IOException Si les flux ou si le socket ne se ferme pas correctement
+     */
     public void stop() throws IOException {
-        isRunning = false;
+        estLancer = false;
 
-        if (streamOut != null)
-            streamOut.close();
+        if (fluxSortie != null)
+            fluxSortie.close();
 
-        if (streamIn != null)
-            streamIn.close();
+        if (fluxEntre != null)
+            fluxEntre.close();
 
         if (socket != null)
             socket.close();
@@ -101,36 +149,52 @@ public class TcpClient {
         out.println("Server stopped");
     }
 
-    // REVOIR
-    public boolean isReady() {
-        if (socket == null)
-            return false;
-        return isRunning && !socket.isClosed();
+    /**
+     * Permet d'ajouter un message dans la mémoire tampon.
+     *
+     * @param message Le message a ajouter
+     */
+    public void ajouterMessage(String message) {
+        messagesTampon.add(message);
     }
 
-    public void addMessage(String msg) {
-        messages.add(msg);
-    }
-
-    public String getMessage(String key) {
-        for (String m : messages) {
-            if (PacketTool.getKeyFromMessage(m).equals(key)) {
-                String tmp = m;
-                messages.remove(m);
-                return tmp;
+    /**
+     * Attend le message du mot-clé correspondant.
+     *
+     * @param cle La cle du message
+     * @return Le message du mot-clé correspondant
+     */
+    public String getMessage(String cle) {
+        for (String message : messagesTampon)
+            if (PaquetOutils.getCleMessage(message).equals(cle)) {
+                messagesTampon.remove(message);
+                return message;
             }
-        }
 
-        return "";
+        return null;
     }
 
-    public boolean isMessage(String key) {
-        for (String m : messages) {
-            if (PacketTool.getKeyFromMessage(m).equals(key)) {
+    /**
+     * Permet de savoir si le message est contenu dans la mémoire tampon.
+     *
+     * @param cle La clé du message cible
+     * @return Si le message est contenu
+     */
+    private boolean contient(String cle) {
+        for (String message : messagesTampon)
+            if (PaquetOutils.getCleMessage(message).equals(cle))
                 return true;
-            }
-        }
 
         return false;
+    }
+
+    /**
+     * Bloque l'execution du thread tant que le message n'a pas été recu.
+     *
+     * @param cle Mot-clé du message
+     */
+    public void attendreMessage(String cle) {
+        while (!contient(cle))
+            ;
     }
 }
