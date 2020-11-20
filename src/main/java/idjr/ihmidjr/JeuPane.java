@@ -406,7 +406,7 @@ public class JeuPane extends StackPane implements JeuListener {
 			bParking.setStyle(styleBoutons);
 		});
 
-		bPCSecu = new Button("PC\nSécurité");
+		bPCSecu = new Button("PC Sécurité");
 		bPCSecu.setAlignment(Pos.CENTER);
 		bPCSecu.setStyle(styleBoutons);
 		bPCSecu.setPrefSize(largBouton, hautBouton);
@@ -464,10 +464,18 @@ public class JeuPane extends StackPane implements JeuListener {
 		de2.setMinSize(100, 100);
 		de2.setTextFill(Color.BLACK);
 		de2.setFont(policeBoutonDe);
+		
+		Label titrede = new Label("DÉS");
+		titrede.setMinSize(100, 50);
+		titrede.setAlignment(Pos.CENTER);
+		titrede.setTextFill(Color.WHITE);
+		titrede.setFont(policeBouton);
+		titrede.setStyle("-fx-background-radius: 3px;-fx-background-color:#000000;");
+		
 
 		des.setPadding(new Insets(10));
 		des.setSpacing(10);
-		des.getChildren().addAll(de1, de2);
+		des.getChildren().addAll(de1, de2, titrede);
 		des.setDisable(false); // TODO ne pas oublier de le retier
 
 		info = new BorderPane();
