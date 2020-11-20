@@ -3,10 +3,16 @@ package idjr.ihmidjr;
 import idjr.ihmidjr.DataControl.ApplicationPane;
 import idjr.ihmidjr.event.ConfigListener;
 import javafx.application.Platform;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.ListView;
+import javafx.scene.control.SelectionMode;
 import javafx.scene.control.TextField;
 import javafx.scene.effect.GaussianBlur;
 import javafx.scene.image.ImageView;
@@ -85,9 +91,31 @@ public class ConfigPartiePane extends StackPane implements ConfigListener {
 		partie.setPrefWidth(220);
 		partie.setMaxWidth(400);
 
+		
+ 
+        Label label = new Label("Partie 1");
+        Label label2 = new Label("Partie 2");
+        Label label3 = new Label("Partie 3");
+        Label label4 = new Label("Partie 4");
+ 
+        // To Creating a Observable List
+        ObservableList<Label> liste = FXCollections.observableArrayList(label, label2,label3,label4); //SEB TODO remplir la liste avec un event 
+ 
+        // Create a ListView
+        ListView<Label> listView = new ListView<Label>(liste);
+ 
+        // Only allowed to select single row in the ListView.
+        listView.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
+        
+        listView.setMaxWidth(400);
+        listView.setMaxHeight(100);
+ 
+		
+		
 		VBox vbCenter = new VBox();
 		vbCenter.setAlignment(Pos.CENTER);
-		vbCenter.getChildren().addAll(partie);
+		vbCenter.setSpacing(20);
+		vbCenter.getChildren().addAll(partie,listView);
 
 		// boutons
 		Button bJouer = new Button("JOUER");
