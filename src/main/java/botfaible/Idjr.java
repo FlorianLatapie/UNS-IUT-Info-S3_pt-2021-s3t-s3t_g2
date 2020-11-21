@@ -1,6 +1,7 @@
 package botfaible;
 
 import reseau.type.Couleur;
+import reseau.type.PionCouleur;
 import reseau.type.TypeJoueur;
 
 import java.net.InetAddress;
@@ -16,41 +17,43 @@ public class Idjr {
     private final TypeJoueur typeJoueur;
     private InetAddress ipPp;
     private int portPp;
+    private List<PionCouleur> poinSacrDispo;
+    private Boolean envie;
+    private List<Integer> lieuOuvert;
 
-    /* Parametre Temporaire */
+    public List<Integer> getLieuOuvert() {
+		return lieuOuvert;
+	}
+
+	public void setLieuOuvert(List<Integer> lieuOuvert) {
+		this.lieuOuvert = lieuOuvert;
+	}
+
+	public Boolean getEnvie() {
+		return envie;
+	}
+
+	public void setEnvie(Boolean envie) {
+		this.envie = envie;
+	}
+
+	public List<PionCouleur> getPoinSacrDispo() {
+		return poinSacrDispo;
+	}
+
+	public void setPoinSacrDispo(List<PionCouleur> list) {
+		this.poinSacrDispo = list;
+	}
+
+	/* Parametre Temporaire */
     private List<Integer> pionAPos;
 
-    /* Core */
-    private final Jeu jeu = new Jeu();
 
     public Idjr() {
         this.typeJoueur = TypeJoueur.BOT;
         this.pionAPos = new ArrayList<>();
     }
 
-    public Joueur getMoi() {
-        for (Joueur j : jeu.getJoueurs().values()) {
-            if (j.getCouleur() == couleur) {
-                return j;
-            }
-        }
-
-        return null;
-    }
-
-    public Joueur getJoueur(Couleur c) {
-        for (Joueur j : jeu.getJoueurs().values()) {
-            if (j.getCouleur() == c) {
-                return j;
-            }
-        }
-
-        return null;
-    }
-
-    public Jeu getJeu() {
-        return jeu;
-    }
 
     public List<Integer> getPionAPos() {
         return pionAPos;
