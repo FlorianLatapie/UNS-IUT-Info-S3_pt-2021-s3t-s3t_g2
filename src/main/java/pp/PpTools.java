@@ -1,5 +1,8 @@
 package pp;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import reseau.type.PionCouleur;
 
 public abstract class PpTools {
@@ -23,5 +26,16 @@ public abstract class PpTools {
             default:
                 throw new IllegalStateException("Unexpected value: " + valeur);
         }
+    }
+    
+    public static List<PionCouleur> getPionsCouleurByPerso(List<Personnage> persos) {
+    	List<PionCouleur> pCouleurs = new ArrayList<>();
+    	for (Personnage p : persos) {
+			char couleur = p.getJoueur().getCouleur().name().charAt(0);
+			int pion = p.getPoint();
+			pCouleurs.add(PionCouleur.valueOf(String.valueOf(couleur) + pion + ""));
+		}
+    	
+    	return pCouleurs;
     }
 }
