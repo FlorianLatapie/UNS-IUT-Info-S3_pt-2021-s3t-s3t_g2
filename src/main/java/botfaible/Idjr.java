@@ -18,7 +18,7 @@ public class Idjr {
     private InetAddress ipPp;
     private int portPp;
     private List<PionCouleur> poinSacrDispo;
-    private Boolean envie;
+    private boolean envie;
     private List<Integer> lieuOuvert;
 
     public List<Integer> getLieuOuvert() {
@@ -29,7 +29,7 @@ public class Idjr {
 		this.lieuOuvert = lieuOuvert;
 	}
 
-	public Boolean getEnvie() {
+	public boolean getEnvie() {
 		return envie;
 	}
 
@@ -52,6 +52,8 @@ public class Idjr {
     public Idjr() {
         this.typeJoueur = TypeJoueur.BOT;
         this.pionAPos = new ArrayList<>();
+        this.lieuOuvert = new ArrayList<>();
+        this.envie = true;
     }
 
 

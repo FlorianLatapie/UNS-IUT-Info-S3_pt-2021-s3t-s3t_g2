@@ -90,7 +90,7 @@ public class TraitementPaquetTcp extends TraitementPaquet<Socket> {
 		case "PRAZ":
 			debutattaqueZombie(packet, message);
 			break;
-		case "RAZPA":
+		case "RAZA":
 			attaqueZombie(packet, message);
 		case "RAZDS":
 			choisirSacrifice(packet, message);
@@ -139,7 +139,7 @@ public class TraitementPaquetTcp extends TraitementPaquet<Socket> {
 
 		core.setCouleur(IdjrTools.getCouleurByName(core.getNom(), noms, couleurs));
 
-		if ((int) packet.getValue(message, 1) == 2) {
+		if ((int) packet.getValue(message, 3) == 2) {
 			core.getLieuOuvert().add(1);
 			core.getLieuOuvert().add(3);
 			core.getLieuOuvert().add(4);
@@ -193,7 +193,10 @@ public class TraitementPaquetTcp extends TraitementPaquet<Socket> {
 	}
 
 	public void debutTour(Packet packet, String message) {
-
+		List<Couleur> couleurs = (List<Couleur>)packet.getValue(message, 2);
+		if (!couleurs.contains(core.getCouleur())) {
+			core.setEnvie(false);
+		}
 	}
 
 	public void lanceDesChefVigil(Packet packet, String message) {
