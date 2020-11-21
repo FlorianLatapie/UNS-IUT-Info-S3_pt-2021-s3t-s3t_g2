@@ -193,7 +193,7 @@ public class TraitementPaquetTcp extends TraitementPaquet<Socket> {
 	}
 
 	public void debutTour(Packet packet, String message) {
-		List<Couleur> couleurs = (List<Couleur>)packet.getValue(message, 2);
+		List<Couleur> couleurs = (List<Couleur>) packet.getValue(message, 2);
 		if (!couleurs.contains(core.getCouleur())) {
 			core.setEnvie(false);
 		}
@@ -298,8 +298,8 @@ public class TraitementPaquetTcp extends TraitementPaquet<Socket> {
 			if (!listePion.isEmpty())
 				pionAdep = listePion.get(new Random().nextInt(listePion.size()));
 			else
-				pionAdep = new ArrayList<Integer>(listedp.keySet()).get(0); 
-		}else
+				pionAdep = new ArrayList<Integer>(listedp.keySet()).get(0);
+		} else
 			pionAdep = listePion.get(new Random().nextInt(listePion.size()));
 		CarteType carte = CarteType.NUL;
 		String messageTcp = getControleurReseau().getPacketsTcp().get("DPR").build(dest, pionAdep, carte,
@@ -319,7 +319,7 @@ public class TraitementPaquetTcp extends TraitementPaquet<Socket> {
 	public void attaqueZombie(Packet packet, String message) {
 		List<PionCouleur> l = (List<PionCouleur>) (packet.getValue(message, 2));
 		List<PionCouleur> ltemp = new ArrayList<>();
-		for(PionCouleur pc : l) {
+		for (PionCouleur pc : l) {
 			if (IdjrTools.getCouleurByChar(pc) == core.getCouleur()) {
 				ltemp.add(pc);
 			}
@@ -328,11 +328,14 @@ public class TraitementPaquetTcp extends TraitementPaquet<Socket> {
 	}
 
 	public void choisirSacrifice(Packet packet, String message) {
-		out.println("Entrez un pion (PionCouleur)");
-		PionCouleur pion = core.getPoinSacrDispo().get(new Random().nextInt(core.getPoinSacrDispo().size()));
+		out.println(getControleurReseau().getPacketsTcp().get("RAZDS").getDocs());
+		
+		List<Integer> listPion = (List<Integer>) packet.getValue(message, 2);
+		int pionTemp = listPion.get(new Random().nextInt(listPion.size()));
+		PionCouleur pion = PionCouleur.valueOf(String.valueOf(core.getCouleur().name().charAt(0)) + pionTemp);
 
-		String messageTcp = getControleurReseau().getPacketsTcp().get("RAZCS").build(packet.getValue(message, 1), pion,
-				packet.getValue(message, 2), packet.getValue(message, 3), core.getJoueurId());
+		String messageTcp = getControleurReseau().getPacketsTcp().get("RAZCS").build((int) packet.getValue(message, 1),
+				pion, (String) packet.getValue(message, 3), (String) packet.getValue(message, 4), core.getJoueurId());
 
 		getControleurReseau().getTcpClient().envoyer(messageTcp);
 	}
