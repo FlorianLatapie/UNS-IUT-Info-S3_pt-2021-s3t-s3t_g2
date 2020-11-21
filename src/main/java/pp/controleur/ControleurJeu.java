@@ -89,6 +89,7 @@ public class ControleurJeu {
 			initializer.nbPersoJoueurAll(new ArrayList<>(jeu.getJoueurs().values()));
 			initializer.forceLieuAll(new ArrayList<>(jeu.getLieux().values()));
 			initializer.nomChefVigileAll(new ArrayList<>(jeu.getJoueurs().values()));
+			initializer.nomJoueurs(new ArrayList<>(jeu.getJoueurs().values()));
 		}
 	}
 

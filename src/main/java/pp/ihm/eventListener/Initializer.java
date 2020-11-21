@@ -11,17 +11,22 @@ public class Initializer {
 	private List<PlateauListener> listenerspl = new ArrayList<>();
 	private List<AttenteListener> listenersal = new ArrayList<>();
 	private List<FinListener> listenersfl = new ArrayList<>();
+	private List<CouleurListener> listenerscl = new ArrayList<>();
 
-	public void addListenerPlateau(PlateauListener toAdd) {
+	public void addListener(PlateauListener toAdd) {
 		listenerspl.add(toAdd);
 	}
 
-	public void addListenerAttente(AttenteListener toAdd) {
+	public void addListener(AttenteListener toAdd) {
 		listenersal.add(toAdd);
 	}
 
-	public void addListenerFin(FinListener toAdd) {
+	public void addListener(FinListener toAdd) {
 		listenersfl.add(toAdd);
+	}
+	
+	public void addListener(CouleurListener toAdd) {
+		listenerscl.add(toAdd);
 	}
 
 	public void nbZombiesLieuAll(List<Lieu> lieux) {
@@ -155,5 +160,10 @@ public class Initializer {
 	public void nomPartie(String nom) {
 		for (AttenteListener al : listenersal)
 			al.nomPartie(nom);
+	}
+	
+	public void nomJoueurs(List<Joueur> joueurs) {
+		for (CouleurListener cl : listenerscl)
+			cl.joueurNoms(joueurs);
 	}
 }

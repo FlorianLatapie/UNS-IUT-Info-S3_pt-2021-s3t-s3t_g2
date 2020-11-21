@@ -40,9 +40,10 @@ public class InterfacePrincipale extends Application {
 		PlateauPane plateauPane = new PlateauPane(sControl, core);
 
 		core.eventInit();
-		core.getInitializer().addListenerAttente(attenteJoueurPane);
-		core.getInitializer().addListenerPlateau(plateauPane);
-		core.getInitializer().addListenerFin(finDePartiePane);
+		core.getInitializer().addListener(attenteJoueurPane);
+		core.getInitializer().addListener(plateauPane);
+		core.getInitializer().addListener(finDePartiePane);
+		core.getInitializer().addListener(couleurPane);
 		
 		root.getChildren().add(new AccessibilitePane(sControl));
 		root.getChildren().add(new ReglesPane(sControl, core));
