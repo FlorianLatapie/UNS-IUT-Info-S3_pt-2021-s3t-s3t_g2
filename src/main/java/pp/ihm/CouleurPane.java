@@ -3,6 +3,7 @@ package pp.ihm;
 import pp.Joueur;
 import pp.ihm.DataControl.ApplicationPane;
 import pp.ihm.eventListener.CouleurListener;
+import javafx.application.Platform;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
@@ -294,11 +295,13 @@ public class CouleurPane extends StackPane implements CouleurListener {
 
 	@Override
 	public void joueurNoms(List<Joueur> joueurs) {
-		nom1.setText(joueurs.size() >= 1 ? joueurs.get(0).getNom() : "");
-		nom2.setText(joueurs.size() >= 2 ? joueurs.get(1).getNom() : "");
-		nom3.setText(joueurs.size() >= 3 ? joueurs.get(2).getNom() : "");
-		nom4.setText(joueurs.size() >= 4 ? joueurs.get(3).getNom() : "");
-		nom5.setText(joueurs.size() >= 5 ? joueurs.get(4).getNom() : "");
-		nom6.setText(joueurs.size() >= 6 ? joueurs.get(5).getNom() : "");
+		Platform.runLater(() -> {
+			nom1.setText(joueurs.size() >= 1 ? joueurs.get(0).getNom() : "");
+			nom2.setText(joueurs.size() >= 2 ? joueurs.get(1).getNom() : "");
+			nom3.setText(joueurs.size() >= 3 ? joueurs.get(2).getNom() : "");
+			nom4.setText(joueurs.size() >= 4 ? joueurs.get(3).getNom() : "");
+			nom5.setText(joueurs.size() >= 5 ? joueurs.get(4).getNom() : "");
+			nom6.setText(joueurs.size() >= 6 ? joueurs.get(5).getNom() : "");
+        });
 	}
 }
