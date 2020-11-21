@@ -558,10 +558,24 @@ public class ControleurJeu {
 			if (jeu.getLieux().get(i).isOuvert()) {
 				if (i == 4) {// si parking
 					for (int j = 0; j < jeu.getLieux().get(i).getNbZombies(); j++) {
+						String message = nwm.getPacketsTcp().get("RAZA").build(4,
+								PpTools.getPionsCouleurByPerso(jeu.getLieux().get(i).getPersonnage()),
+								jeu.getLieux().get(i).getForce(), jeu.getLieux().get(i).getNbZombies(), partieId,
+								numeroTour);
+						for (Joueur joueur : jeu.getJoueurs().values())
+							joueur.getConnection().envoyer(message);
+
 						if (!jeu.getLieux().get(i).getPersonnage().isEmpty()) {
 							System.out.println(jeu.toString());
 							Joueur jou = jeu.voteJoueur(4);
-							String m = nwm.getPacketsTcp().get("RAZDS").build(i, partieId, numeroTour);
+							List<Integer> listePion = new ArrayList<>();
+							for (Personnage p : jou.getPersonnages().values()) {
+								if (p.getMonLieu() == jeu.getLieux().get(i)) {
+									listePion.add(p.getPoint());
+								}
+							}
+
+							String m = nwm.getPacketsTcp().get("RAZDS").build(i, listePion, partieId, numeroTour);
 
 							jou.getConnection().envoyer(m);
 
@@ -587,10 +601,24 @@ public class ControleurJeu {
 
 					}
 				} else if (jeu.getLieux().get(i).estAttaquable()) {
+					String message = nwm.getPacketsTcp().get("RAZA").build(4,
+							PpTools.getPionsCouleurByPerso(jeu.getLieux().get(i).getPersonnage()),
+							jeu.getLieux().get(i).getForce(), jeu.getLieux().get(i).getNbZombies(), partieId,
+							numeroTour);
+					for (Joueur joueur : jeu.getJoueurs().values())
+						joueur.getConnection().envoyer(message);
+
 					System.out.println(jeu.toString());
 					Joueur jou = jeu.voteJoueur(jeu.getLieux().get(i).getNum());
 
-					String m = nwm.getPacketsTcp().get("RAZDS").build(i, partieId, numeroTour);
+					List<Integer> listePion = new ArrayList<>();
+					for (Personnage p : jou.getPersonnages().values()) {
+						if (p.getMonLieu() == jeu.getLieux().get(i)) {
+							listePion.add(p.getPoint());
+						}
+					}
+
+					String m = nwm.getPacketsTcp().get("RAZDS").build(i, listePion, partieId, numeroTour);
 
 					jou.getConnection().envoyer(m);
 
