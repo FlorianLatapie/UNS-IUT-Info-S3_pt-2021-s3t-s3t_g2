@@ -298,7 +298,7 @@ public class CouleurPane extends StackPane implements CouleurListener {
 		nom2.setText(joueurs.size() >= 2 ? joueurs.get(1).getNom() : "");
 		nom3.setText(joueurs.size() >= 3 ? joueurs.get(2).getNom() : "");
 		nom4.setText(joueurs.size() >= 4 ? joueurs.get(3).getNom() : "");
-		nom4.setText(joueurs.size() >= 5 ? joueurs.get(4).getNom() : "");
+		nom5.setText(joueurs.size() >= 5 ? joueurs.get(4).getNom() : "");
 		nom6.setText(joueurs.size() >= 6 ? joueurs.get(5).getNom() : "");
 	}
 }
