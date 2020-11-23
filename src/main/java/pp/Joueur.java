@@ -1,7 +1,7 @@
 package pp;
 
-import pp.temp.CarteAction;
 import reseau.socket.Connexion;
+import reseau.type.CarteType;
 import reseau.type.Couleur;
 
 import java.net.InetAddress;
@@ -37,7 +37,7 @@ public class Joueur {
 	private Couleur couleur;
 	private boolean enVie;
 	private HashMap<Integer, Personnage> personnages;
-	private final ArrayList<CarteAction> cartes;
+	private final ArrayList<CarteType> cartes;
 	private boolean chefDesVigiles;
 	private final String nom;
 	private final Connexion connection;
@@ -101,7 +101,7 @@ public class Joueur {
 	/**
 	 * @return les cartes actions du joueur
 	 */
-	public List<CarteAction> getCartes() {
+	public List<CarteType> getCartes() {
 		return cartes;
 	}
 

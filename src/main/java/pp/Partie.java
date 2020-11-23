@@ -1,7 +1,7 @@
 package pp;
 
+import reseau.type.CarteType;
 import reseau.type.Couleur;
-import pp.temp.CarteAction;
 
 import java.util.*;
 
@@ -24,7 +24,7 @@ public class Partie {
 	HashMap<Integer, Joueur> joueurs;
 
 	/** Liste des cartes. */
-	ArrayList<CarteAction> cartes;
+	List<CarteType> cartes;
 
 	/** Boolean indiquant si un nouveauChef à été élu. */
 	boolean nouveauChef;
@@ -39,7 +39,7 @@ public class Partie {
 		joueurs = new HashMap<>();
 		cartes = new ArrayList<>();
 		nouveauChef = false;
-//		initCarte();//TODO
+		initCarte();
 		for (int i = 0; i < listeJoueursInitiale.size(); i++)
 			joueurs.put(i, listeJoueursInitiale.get(i));
 		initJoueurs();
@@ -50,29 +50,25 @@ public class Partie {
 	 * Initialise les cartes du jeu.
 	 */
 
-	/*
-	 * private void initCarte() {
-	 *
-	 * Materiel materiel1 = new Materiel(); Menace menace1 = new Menace(); Sprint
-	 * sprint1 = new Sprint(); CameraDeSecurite camSecu1 = new CameraDeSecurite();
-	 * Materiel materiel2 = new Materiel(); Menace menace2 = new Menace(); Sprint
-	 * sprint2 = new Sprint(); CameraDeSecurite camSecu2 = new CameraDeSecurite();
-	 * Materiel materiel3 = new Materiel(); Menace menace3 = new Menace(); Sprint
-	 * sprint3 = new Sprint(); CameraDeSecurite camSecu3 = new CameraDeSecurite();
-	 * Cachette cachette1 = new Cachette(); Cachette cachette2 = new Cachette();
-	 * Cachette cachette3 = new Cachette(); Arme bate = new Arme(); Arme grenade =
-	 * new Arme(); Arme tronconeuse = new Arme(); Arme fusil = new Arme(); Arme
-	 * revolver = new Arme(); Arme hache = new Arme(); cartes.add(hache);
-	 * cartes.add(revolver); cartes.add(tronconeuse); cartes.add(fusil);
-	 * cartes.add(grenade); cartes.add(bate); cartes.add(sprint1);
-	 * cartes.add(sprint2); cartes.add(sprint3); cartes.add(menace1);
-	 * cartes.add(menace2); cartes.add(menace3); cartes.add(materiel1);
-	 * cartes.add(materiel2); cartes.add(materiel3); cartes.add(cachette1);
-	 * cartes.add(cachette2); cartes.add(cachette3); cartes.add(camSecu1);
-	 * cartes.add(camSecu2); cartes.add(camSecu3);
-	 *
-	 * }
-	 */
+	private void initCarte() {
+
+		for (CarteType c : CarteType.values())
+			cartes.add(c);
+
+		cartes.add(CarteType.SPR);
+		cartes.add(CarteType.SPR);
+		cartes.add(CarteType.MEN);
+		cartes.add(CarteType.MEN);
+		cartes.add(CarteType.MAT);
+		cartes.add(CarteType.MAT);
+		cartes.add(CarteType.CAC);
+		cartes.add(CarteType.CAC);
+		cartes.add(CarteType.CDS);
+		cartes.add(CarteType.CDS);
+
+		Collections.shuffle(cartes);
+
+	}
 
 	/**
 	 * Initialise les lieux du jeu
@@ -140,8 +136,8 @@ public class Partie {
 	 * @param carteDefause  la carte que le piocheur n'a pas attribuer
 	 */
 	// TODO
-	public void fouilleCamion(Joueur piocheur, Joueur receveur, CarteAction cartePiocheur, CarteAction carteReceveur,
-			CarteAction carteDefause) {
+	public void fouilleCamion(Joueur piocheur, Joueur receveur, CarteType cartePiocheur, CarteType carteReceveur,
+			CarteType carteDefause) {
 		/*
 		 * for (int i = 0; i < joueurs.size(); i++) { if
 		 * (joueurs.get(i).equals(piocheur))
@@ -548,7 +544,7 @@ public class Partie {
 	 *
 	 * @return la liste des cartes
 	 */
-	public List<CarteAction> getCartes() {
+	public List<CarteType> getCartes() {
 		return cartes;
 	}
 
