@@ -255,12 +255,11 @@ public class ControleurJeu {
 		this.lieuZombie = arriveZombie();
 		ArrayList<Integer> destination = new ArrayList<>();
 		phasechoixDestination(destination);
+		jeu.entreZombie(lieuZombie);
 		phaseDeplacementPerso(destination, lieuZombie);
 
-		if (this.finJeu())
-			return;
+		this.finJeu();
 
-		jeu.entreZombie(lieuZombie);
 		if (initializer != null)
 			initializer.nbZombiesLieuAll(new ArrayList<>(jeu.getLieux().values()));
 		jeu.fermerLieu();
@@ -269,8 +268,7 @@ public class ControleurJeu {
 		if (initializer != null)
 			initializer.lieuOuvertAll(new ArrayList<>(jeu.getLieux().values()));
 
-		if (finJeu())
-			return;
+		finJeu();
 
 		if (!attaqueZombie())
 			return;
@@ -493,8 +491,7 @@ public class ControleurJeu {
 
 				if (initializer != null)
 					initializer.forceLieuAll(new ArrayList<>(jeu.getLieux().values()));
-				if (finJeu())
-					return;
+				finJeu();
 
 				this.jeu.fermerLieu();
 				compteur += 1;
@@ -527,8 +524,7 @@ public class ControleurJeu {
 
 				if (initializer != null)
 					initializer.forceLieuAll(new ArrayList<>(jeu.getLieux().values()));
-				if (finJeu())
-					return;
+				finJeu();
 
 				this.jeu.fermerLieu();
 				compteur += 1;
@@ -596,8 +592,7 @@ public class ControleurJeu {
 							if (initializer != null)
 								initializer.nbZombiesLieuAll(new ArrayList<>(jeu.getLieux().values()));
 						}
-						if (this.finJeu())
-							return false;
+						this.finJeu();
 
 					}
 				} else if (jeu.getLieux().get(i).estAttaquable()) {
@@ -641,8 +636,7 @@ public class ControleurJeu {
 						initializer.nbZombiesLieuAll(new ArrayList<>(jeu.getLieux().values()));
 
 				}
-				if (this.finJeu())
-					return false;
+				this.finJeu();
 			}
 		}
 
@@ -698,7 +692,13 @@ public class ControleurJeu {
 	 *
 	 * @return si c'est la fin du jeu
 	 */
-	public boolean finJeu() {
+	public void finJeu() {
+		for (int i = 0; i < this.jeu.getJoueurs().size(); i++) {
+			if (this.jeu.getJoueurs().get(i).isEnVie()
+					&& this.jeu.getJoueurs().get(i).getPersonnages().size() == 0) {
+				this.jeu.getJoueurs().get(i).setEnVie(false);
+			}
+		}
 		ArrayList<Lieu> lieu = new ArrayList<>();
 		int nbPerso = 0;
 		for (int i = 0; i < this.jeu.getJoueurs().size(); i++) {
@@ -718,12 +718,6 @@ public class ControleurJeu {
 			else
 				cond = CondType.PION;
 
-			for (int i = 0; i < this.jeu.getJoueurs().size(); i++) {
-				if (this.jeu.getJoueurs().get(i).isEnVie()
-						&& this.jeu.getJoueurs().get(i).getPersonnages().size() == 0) {
-					this.jeu.getJoueurs().get(i).setEnVie(false);
-				}
-			}
 			System.out.println(jeu.toString());
 			out.println();
 			int pointVainqueur = 0;
@@ -786,9 +780,7 @@ public class ControleurJeu {
 				e.printStackTrace();
 			}
 
-			return true;
 		}
-		return false;
 	}
 
 	public String getPartieId() {
