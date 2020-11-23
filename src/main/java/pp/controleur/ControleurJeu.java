@@ -32,10 +32,10 @@ public class ControleurJeu {
 	private final int intPartieId;
 	private final String nomPartie; // Nom de la partie
 	private final int nbjtotal; // Nombre de joueurs total
-	private final int nbjr; // Nombre de joueurs réel max
-	private final int nbjv; // Nombre de joueurs virtuel max
-	private int nbjractuel; // Nombre de joueurs réel actuellement connecté
-	private int nbjvactuel; // Nombre de joueurs virtuel actuellement connecté
+	private final int nbjr; // Nombre de joueurs réels max
+	private final int nbjv; // Nombre de joueurs virtuels max
+	private int nbjractuel; // Nombre de joueurs réels actuellement connectés
+	private int nbjvactuel; // Nombre de joueurs virtuels actuellement connectés
 	private final int port;
 	private int nextJoueurId;
 	private int numeroTour = 1;
@@ -240,7 +240,7 @@ public class ControleurJeu {
 	}
 
 	/**
-	 * Execute le déroulement d'une parite
+	 * Execute le déroulement d'une partie
 	 */
 	public void start() throws InterruptedException {
 		updateValues();
@@ -325,7 +325,7 @@ public class ControleurJeu {
 	}
 
 	/**
-	 * Affiche et met a jour le nouveau chef des vigiles
+	 * Affiche et met à jour le nouveau chef des vigiles
 	 */
 	private void electionChefVigi() {
 		// TODO PREVENIR QUI EST LE CHEF DES VIGILES
@@ -358,9 +358,9 @@ public class ControleurJeu {
 	}
 
 	/**
-	 * Definie l'arrivé des zombies et l'affiche pour le chef des vigiles
+	 * Definit l'arrivée des zombies et l'affiche pour le chef des vigiles
 	 *
-	 * @return liste des numéro des lieux d'arrivé des zomibie
+	 * @return liste des numéro des lieux d'arriveé des zombies
 	 */
 	private ArrayList<Integer> arriveZombie() {
 		VigileEtat ve = jeu.getNewChef() ? VigileEtat.NE : VigileEtat.NUL;
@@ -711,7 +711,7 @@ public class ControleurJeu {
 				}
 			}
 		}
-		if ((lieu.size() < 2 && lieu.get(0) != this.jeu.getLieux().get(4)) || nbPerso <= 4) {
+		if ((lieu.size() < 2 && lieu.get(0) != this.jeu.getLieux().get(4)) || (nbPerso <= 4 && jeu.getJoueurs().size() < 6) || (nbPerso <= 6 && jeu.getJoueurs().size() == 6)) {
 			CondType cond;
 			if (lieu.size() < 2 && lieu.get(0) != this.jeu.getLieux().get(4))
 				cond = CondType.LIEUX;
@@ -754,7 +754,7 @@ public class ControleurJeu {
 				for (Joueur joueur : vainqueur) {
 					s.append("  ").append(joueur);
 				}
-				s.append(" sont vainqeurs à égalité! <<<<<");
+				s.append(" sont vainqueurs à égalité! <<<<<");
 			}
 			Joueur gagnantNotFair = vainqueur.get(new Random().nextInt(vainqueur.size()));
 			String message = nwm.getPacketsTcp().get("FP").build(cond, gagnantNotFair.getCouleur(), partieId,
