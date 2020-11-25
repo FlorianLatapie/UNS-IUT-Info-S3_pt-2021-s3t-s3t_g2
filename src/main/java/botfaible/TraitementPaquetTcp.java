@@ -23,14 +23,14 @@ import java.net.Socket;
  * @version 1.0
  */
 public class TraitementPaquetTcp extends TraitementPaquet<Socket> {
-	private Idjr core;
+	private BotFaible core;
 
 	/**
 	 * @param netWorkManager le controleur rÃ©seau
 	 * @param core           coeur du jeu
 	 */
 	public TraitementPaquetTcp(Object core) {
-		this.core = (Idjr) core;
+		this.core = (BotFaible) core;
 	}
 
 	public void init(ControleurReseau netWorkManager) {
@@ -47,8 +47,9 @@ public class TraitementPaquetTcp extends TraitementPaquet<Socket> {
 	 */
 	public void traitement(Packet packet, String message, Socket socket) {
 		try {
-			Thread.sleep(100);
+			Thread.sleep(core.getDelay());
 		} catch (InterruptedException e) {
+
 		}
 		switch (packet.getKey()) {
 		case "IP":
@@ -92,6 +93,7 @@ public class TraitementPaquetTcp extends TraitementPaquet<Socket> {
 			break;
 		case "RAZA":
 			attaqueZombie(packet, message);
+			break;
 		case "RAZDS":
 			choisirSacrifice(packet, message);
 			break;
@@ -101,7 +103,6 @@ public class TraitementPaquetTcp extends TraitementPaquet<Socket> {
 		case "FP":
 			finPartie(packet, message);
 			break;
-
 		case "ACP":
 			accepter(packet, message);
 			break;
@@ -116,7 +117,7 @@ public class TraitementPaquetTcp extends TraitementPaquet<Socket> {
 			break;
 		default:
 			throw new IllegalStateException(
-					MessageFormat.format("[UDP] Il n''y a pas de traitement possible pour {0}", packet.getKey()));
+					MessageFormat.format("[TCP] Il n''y a pas de traitement possible pour {0}", packet.getKey()));
 		}
 	}
 
@@ -166,7 +167,7 @@ public class TraitementPaquetTcp extends TraitementPaquet<Socket> {
 
 		String m1 = (String) packet.getValue(message, 3);
 		getControleurReseau().getTcpClient()
-				.envoyer(getControleurReseau().getPacketsTcp().get("PILD").build(m1, core.getJoueurId()));
+				.envoyer(getControleurReseau().construirePaquetTcp("PILD",m1, core.getJoueurId()));
 	}
 
 	public void choisirDestPlacement(Packet packet, String message) {
@@ -185,7 +186,7 @@ public class TraitementPaquetTcp extends TraitementPaquet<Socket> {
 
 		String m1 = (String) packet.getValue(message, 3);
 		getControleurReseau().getTcpClient()
-				.envoyer(getControleurReseau().getPacketsTcp().get("PICD").build(dest, pion, m1, core.getJoueurId()));
+				.envoyer(getControleurReseau().construirePaquetTcp("PICD",dest, pion, m1, core.getJoueurId()));
 	}
 
 	public void joueurPlacement(Packet packet, String message) {
@@ -204,7 +205,7 @@ public class TraitementPaquetTcp extends TraitementPaquet<Socket> {
 		if (core.getCouleur() == c1) {
 			String m1 = (String) packet.getValue(message, 3);
 			int m2 = (int) packet.getValue(message, 4);
-			String messageTcp = getControleurReseau().getPacketsTcp().get("AZLD").build(m1, m2, core.getJoueurId());
+			String messageTcp = getControleurReseau().construirePaquetTcp("AZLD",m1, m2, core.getJoueurId());
 			getControleurReseau().getTcpClient().envoyer(messageTcp);
 		}
 	}
@@ -221,7 +222,7 @@ public class TraitementPaquetTcp extends TraitementPaquet<Socket> {
 
 			dest = core.getLieuOuvert().get(new Random().nextInt(core.getLieuOuvert().size()));
 
-			String messageTcp = getControleurReseau().getPacketsTcp().get("CDDCV").build(dest,
+			String messageTcp = getControleurReseau().construirePaquetTcp("CDDCV",dest,
 					(String) packet.getValue(message, 3), (int) packet.getValue(message, 4), core.getJoueurId());
 
 			getControleurReseau().getTcpClient().envoyer(messageTcp);
@@ -232,7 +233,7 @@ public class TraitementPaquetTcp extends TraitementPaquet<Socket> {
 			out.println("Entrez une destination");
 			int dest = core.getLieuOuvert().get(new Random().nextInt(core.getLieuOuvert().size()));
 
-			String messageTcp = getControleurReseau().getPacketsTcp().get("CDDJ").build(dest,
+			String messageTcp = getControleurReseau().construirePaquetTcp("CDDJ",dest,
 					(String) packet.getValue(message, 3), (int) packet.getValue(message, 4), core.getJoueurId());
 
 			getControleurReseau().getTcpClient().envoyer(messageTcp);
@@ -251,7 +252,7 @@ public class TraitementPaquetTcp extends TraitementPaquet<Socket> {
 			dest = core.getLieuOuvert().get(new Random().nextInt(core.getLieuOuvert().size()));
 			out.println("Entrez un pion (Piontype)");
 
-			String messageTcp = getControleurReseau().getPacketsTcp().get("CDDJ").build(dest,
+			String messageTcp = getControleurReseau().construirePaquetTcp("CDDJ",dest,
 					(String) packet.getValue(message, 3), (int) packet.getValue(message, 4), core.getJoueurId());
 
 			getControleurReseau().getTcpClient().envoyer(messageTcp);
@@ -263,7 +264,7 @@ public class TraitementPaquetTcp extends TraitementPaquet<Socket> {
 		int destZomb = 0;
 		destZomb = core.getLieuOuvert().get(new Random().nextInt(core.getLieuOuvert().size()));
 
-		String message1 = getControleurReseau().getPacketsTcp().get("CDDZVJE").build(destZomb,
+		String message1 = getControleurReseau().construirePaquetTcp("CDDZVJE", destZomb,
 				packet.getValue(message, 1), packet.getValue(message, 2), core.getJoueurId());
 		getControleurReseau().getTcpClient().envoyer(message1);
 	}
@@ -302,7 +303,7 @@ public class TraitementPaquetTcp extends TraitementPaquet<Socket> {
 		} else
 			pionAdep = listePion.get(new Random().nextInt(listePion.size()));
 		CarteType carte = CarteType.NUL;
-		String messageTcp = getControleurReseau().getPacketsTcp().get("DPR").build(dest, pionAdep, carte,
+		String messageTcp = getControleurReseau().construirePaquetTcp("DPR",dest, pionAdep, carte,
 				(String) packet.getValue(message, 3), (int) packet.getValue(message, 4), core.getJoueurId());
 
 		getControleurReseau().getTcpClient().envoyer(messageTcp);
@@ -328,14 +329,18 @@ public class TraitementPaquetTcp extends TraitementPaquet<Socket> {
 	}
 
 	public void choisirSacrifice(Packet packet, String message) {
-		out.println(getControleurReseau().getPacketsTcp().get("RAZDS").getDocs());
-		
-		List<Integer> listPion = (List<Integer>) packet.getValue(message, 2);
+		out.println(packet.getDocs());
+
+		List<?> listPionT = (List<?>) packet.getValue(message, 2);
+		List<Integer> listPion = new ArrayList<>();
+		for (Object o : listPionT)
+			listPion.add((Integer) o);
+
 		int pionTemp = listPion.get(new Random().nextInt(listPion.size()));
 		PionCouleur pion = PionCouleur.valueOf(String.valueOf(core.getCouleur().name().charAt(0)) + pionTemp);
 
-		String messageTcp = getControleurReseau().getPacketsTcp().get("RAZCS").build((int) packet.getValue(message, 1),
-				pion, (String) packet.getValue(message, 3), (String) packet.getValue(message, 4), core.getJoueurId());
+		String messageTcp = getControleurReseau().construirePaquetTcp("RAZCS", (int) packet.getValue(message, 1),
+				pion, (String) packet.getValue(message, 3), (int) packet.getValue(message, 4), core.getJoueurId());
 
 		getControleurReseau().getTcpClient().envoyer(messageTcp);
 	}
@@ -347,22 +352,12 @@ public class TraitementPaquetTcp extends TraitementPaquet<Socket> {
 	private void finPartie(Packet packet, String message) {
 		Couleur gagnant = (Couleur) packet.getValue(message, 2);
 		out.println("Le gagant est le joueur " + gagnant + " !");
-		try {
-			getControleurReseau().getTcpServeur().arreter();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		try {
-			getControleurReseau().getUdpConnexion().arreter();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		core.setEstFini(true);
+		//getControleurReseau().arreter();
 	}
 
 	@Override
 	public void set(Object core) {
-		this.core = (Idjr) core;
+		this.core = (BotFaible) core;
 	}
 }

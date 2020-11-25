@@ -1,20 +1,22 @@
 import java.io.IOException;
-import java.net.URISyntaxException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
-import botfaible.Idjr;
-import botfaible.TraitementPaquetTcp;
-import botfaible.TraitementPaquetUdp;
-import reseau.socket.ConnexionType;
-import reseau.socket.ControleurReseau;
-import reseau.tool.ReseauOutils;
+import botfaible.BotFaible;
+import reseau.tool.ThreadOutils;
 
 public class ConsoleBot {
-	static Idjr idjr;
-	public static void main(String[] args) throws IOException, URISyntaxException {
-		idjr = new Idjr();
-		TraitementPaquetTcp packetHandlerTcp = new TraitementPaquetTcp(idjr);
-		TraitementPaquetUdp packetHandlerUdp = new TraitementPaquetUdp(idjr);
-		ControleurReseau nwm = new ControleurReseau(packetHandlerTcp, packetHandlerUdp);
-		nwm.initConnexion(ConnexionType.CLIENT, ReseauOutils.getLocalIp());
+
+	public static void main(String[] args) {
+		Logger.getGlobal().setLevel(Level.FINEST);
+		ThreadOutils.asyncTaskRepeat(10,() -> {
+			BotFaible botFaible = new BotFaible(0);
+			try {
+				botFaible.start();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		});
 	}
 }

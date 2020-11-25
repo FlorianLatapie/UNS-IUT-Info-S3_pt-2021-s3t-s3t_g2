@@ -22,14 +22,13 @@ import java.util.Scanner;
  * @version 1.0
  */
 public class TraitementPaquetUdp extends TraitementPaquet<DatagramPacket> {
-	private Idjr core;// TODO Add the game manager (core)
+	private BotFaible core;// TODO Add the game manager (core)
 
 	/**
-	 * @param netWorkManager le controleur rÃ©seau
 	 * @param core           coeur du jeu
 	 */
 	public TraitementPaquetUdp(Object core) {
-		this.core = (Idjr) core;// TODO Add the game manager (core)
+		this.core = (BotFaible) core;// TODO Add the game manager (core)
 	}
 
 	public void init(ControleurReseau netWorkManager) {
@@ -45,6 +44,11 @@ public class TraitementPaquetUdp extends TraitementPaquet<DatagramPacket> {
 	 */
 	@Override
 	public void traitement(Packet packet, String message, DatagramPacket datagramPacket) {
+		try {
+			Thread.sleep(core.getDelay());
+		} catch (InterruptedException e) {
+			
+		}
 		switch (packet.getKey()) {
 		case "ACP":
 			acp(packet, message);
@@ -87,7 +91,7 @@ public class TraitementPaquetUdp extends TraitementPaquet<DatagramPacket> {
 			// String nomdujoueur = sc.nextLine();
 			String nomdujoueur = "BOT" + new Random().nextInt(9999);
 			core.setNom(nomdujoueur);
-			String messageTcp = getControleurReseau().getPacketsTcp().get("DCP").build(nomdujoueur,
+			String messageTcp = getControleurReseau().construirePaquetTcp("DCP",nomdujoueur,
 					core.getTypeJoueur(), "P" + (int) packet.getValue(message, 1));
 			ThreadOutils.asyncTask(() -> {
 				try {
@@ -120,6 +124,6 @@ public class TraitementPaquetUdp extends TraitementPaquet<DatagramPacket> {
 
 	@Override
 	public void set(Object core) {
-		this.core = (Idjr)core;
+		this.core = (BotFaible)core;
 	}
 }
