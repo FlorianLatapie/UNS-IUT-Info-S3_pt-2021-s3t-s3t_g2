@@ -10,7 +10,7 @@ import reseau.packet.Packet;
  */
 public abstract class TraitementPaquet<T> {
 	private ControleurReseau controleurReseau;
-	
+
 	public abstract void init(ControleurReseau netWorkManager);
 
 	public abstract void set(Object core);
