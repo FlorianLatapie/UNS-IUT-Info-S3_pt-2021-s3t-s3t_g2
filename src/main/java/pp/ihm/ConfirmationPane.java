@@ -81,7 +81,7 @@ public class ConfirmationPane {
 		layout.setAlignment(Pos.TOP_CENTER);
 		layout.getChildren().add(label);
 		layout.getChildren().add(boutonHbox);
-		layout.setBackground(new Background(new BackgroundFill(Color.DIMGRAY,CornerRadii.EMPTY,null)));
+		layout.setStyle(" -fx-background-color: #1F1F1F;");
 		Scene scene = new Scene(layout);
 
 		window.setScene(scene);

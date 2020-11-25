@@ -3,6 +3,9 @@ package pp.ihm;
 import java.util.Timer;
 import java.util.TimerTask;
 
+import com.jfoenix.controls.JFXDialog;
+import com.jfoenix.controls.JFXDialogLayout;
+
 import pp.ihm.DataControl.ApplicationPane;
 import pp.ihm.eventListener.PlateauListener;
 import javafx.application.Platform;
@@ -10,6 +13,8 @@ import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.effect.BoxBlur;
+import javafx.scene.effect.GaussianBlur;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
@@ -40,7 +45,7 @@ public class PlateauPane extends StackPane implements PlateauListener {
 	private final Insets margeLieu = new Insets(margeL, margeL, margeL, margeL);
 	private final int tailleFont = 18;
 	
-	
+	private GaussianBlur flou = new GaussianBlur(30);
 	
 	private final Font fontInfo = Font.font("Segoe UI", FontWeight.BOLD, tailleFont);
 	private final Font fontPerso = Font.font("Segoe UI", FontWeight.BOLD, 12);
@@ -48,7 +53,6 @@ public class PlateauPane extends StackPane implements PlateauListener {
 	private CornerRadii coinfb = new CornerRadii(5.0);
 	private Background fondBlanc = new Background(new BackgroundFill(Color.WHITE, coinfb, null));
 	private Background fondNoir = new Background(new BackgroundFill(Color.BLACK, coinfb, null));
-	
 	private String tmpColor = " -fx-background-color:#000000; -fx-text-fill: #FF2626"; //TODO si cette couleur est affichée en partie, il y a une erreur dans l'event 
 	private String vert = " -fx-background-color:#5EB137; -fx-text-fill: #000000";
 	private String rouge = " -fx-background-color:#F30101; -fx-text-fill: #000000";
@@ -123,6 +127,10 @@ public class PlateauPane extends StackPane implements PlateauListener {
 	Label lChefVigile3;
 	Label lChefVigile4;
 	
+	AnchorPane aPlateau;
+	ImageView imgFond;
+	BorderPane borderJoueurs;	
+	
 	Timer myTimer;
 
 	public PlateauPane(ScreenControl sc, Core c) {
@@ -133,8 +141,8 @@ public class PlateauPane extends StackPane implements PlateauListener {
 		HBox hDroite = new HBox();
 		HBox hBas = new HBox();
 		HBox hGauche = new HBox();
-		BorderPane borderJoueurs = new BorderPane();
-		AnchorPane aPlateau = new AnchorPane();
+		borderJoueurs = new BorderPane();
+		aPlateau = new AnchorPane();
 
 		///////////////////////////////////////////
 		Button bPause1 = new Button("| |");
@@ -390,6 +398,9 @@ public class PlateauPane extends StackPane implements PlateauListener {
 		nbZombies1.setTextFill(Color.RED);
 
 		BorderPane b1 = new BorderPane();
+		b1.setPadding(new Insets(5));
+		b1.setPrefSize(320,	210);
+		b1.setMaxSize(320,	210);
 		b1.setBackground(new Background(new BackgroundFill(Color.BLACK, CornerRadii.EMPTY, null)));
 
 		vbRight1.getChildren().addAll(estBarricade1, estFerme1, force1);
@@ -398,11 +409,12 @@ public class PlateauPane extends StackPane implements PlateauListener {
 		b1.setCenter(joueursPresents1);
 		b1.setRight(vbRight1);
 		b1.setBottom(hbBot1);
-
+		b1.setOpacity(.9);
+		
 		b1.setRotate(128);
 
-		AnchorPane.setTopAnchor(b1, 725.0);
-		AnchorPane.setLeftAnchor(b1, 670.0);
+		AnchorPane.setTopAnchor(b1, 755.0);
+		AnchorPane.setLeftAnchor(b1, 630.0);
 
 		////
 
@@ -430,6 +442,9 @@ public class PlateauPane extends StackPane implements PlateauListener {
 		nbZombies2.setTextFill(Color.RED);
 
 		BorderPane b2 = new BorderPane();
+		b2.setPadding(new Insets(5));
+		b2.setPrefSize(320,	215);
+		b2.setMaxSize(320,	215);
 		b2.setBackground(new Background(new BackgroundFill(Color.BLACK, CornerRadii.EMPTY, null)));
 
 		vbRight2.getChildren().addAll(estBarricade2, estFerme2, force2);
@@ -438,11 +453,12 @@ public class PlateauPane extends StackPane implements PlateauListener {
 		b2.setCenter(joueursPresents2);
 		b2.setRight(vbRight2);
 		b2.setBottom(hbBot2);
+		b2.setOpacity(.9);
 
 		b2.setRotate(-133);
 
-		AnchorPane.setTopAnchor(b2, 795.0);
-		AnchorPane.setLeftAnchor(b2, 95.0);
+		AnchorPane.setTopAnchor(b2, 725.0);
+		AnchorPane.setLeftAnchor(b2, 70.0);
 
 		///
 
@@ -470,6 +486,9 @@ public class PlateauPane extends StackPane implements PlateauListener {
 		nbZombies3.setTextFill(Color.RED);
 
 		BorderPane b3 = new BorderPane();
+		b3.setPadding(new Insets(5));
+		b3.setPrefSize(325,	210);
+		b3.setMaxSize(325,	210);
 		b3.setBackground(new Background(new BackgroundFill(Color.BLACK, CornerRadii.EMPTY, null)));
 
 		vbRight3.getChildren().addAll(estBarricade3, estFerme3, force3);
@@ -478,11 +497,13 @@ public class PlateauPane extends StackPane implements PlateauListener {
 		b3.setCenter(joueursPresents3);
 		b3.setRight(vbRight3);
 		b3.setBottom(hbBot3);
+		b3.setOpacity(.9);
+
 
 		b3.setRotate(-62);
 
-		AnchorPane.setTopAnchor(b3, 300.0);
-		AnchorPane.setLeftAnchor(b3, 15.0);
+		AnchorPane.setTopAnchor(b3, 260.0);
+		AnchorPane.setLeftAnchor(b3, 25.0);
 
 		///
 
@@ -510,6 +531,9 @@ public class PlateauPane extends StackPane implements PlateauListener {
 		nbZombies4.setTextFill(Color.RED);
 
 		BorderPane b4 = new BorderPane();
+		b4.setPadding(new Insets(5));
+		b4.setPrefSize(270,	210);
+		b4.setMaxSize(270,	210);
 		b4.setBackground(new Background(new BackgroundFill(Color.BLACK, CornerRadii.EMPTY, null)));
 
 		vbRight4.getChildren().addAll(estBarricade4, estFerme4, force4);
@@ -518,11 +542,12 @@ public class PlateauPane extends StackPane implements PlateauListener {
 		b4.setCenter(joueursPresents4);
 		b4.setRight(vbRight4);
 		b4.setBottom(hbBot4);
+		b4.setOpacity(.9);
 
-		b4.setRotate(10);
+		b4.setRotate(11);
 
-		AnchorPane.setTopAnchor(b4, 455.0);
-		AnchorPane.setLeftAnchor(b4, 395.0);
+		AnchorPane.setTopAnchor(b4, 450.0);
+		AnchorPane.setLeftAnchor(b4, 385.0);
 
 		///
 
@@ -550,6 +575,9 @@ public class PlateauPane extends StackPane implements PlateauListener {
 		nbZombies5.setTextFill(Color.RED);
 
 		BorderPane b5 = new BorderPane();
+		b5.setPadding(new Insets(5));
+		b5.setPrefSize(325,	215);
+		b5.setMaxSize(325,	215);
 		b5.setBackground(new Background(new BackgroundFill(Color.BLACK, CornerRadii.EMPTY, null)));
 
 		vbRight5.getChildren().addAll(estBarricade5, estFerme5, force5);
@@ -558,6 +586,7 @@ public class PlateauPane extends StackPane implements PlateauListener {
 		b5.setCenter(joueursPresents5);
 		b5.setRight(vbRight5);
 		b5.setBottom(hbBot5);
+		b5.setOpacity(.9);
 
 		b5.setRotate(4);
 
@@ -590,7 +619,11 @@ public class PlateauPane extends StackPane implements PlateauListener {
 		nbZombies6.setTextFill(Color.RED);
 
 		BorderPane b6 = new BorderPane();
+		b6.setPrefSize(310,	215);
+		b6.setMaxSize(310,	215);
+		b6.setPadding(new Insets(5));
 		b6.setBackground(new Background(new BackgroundFill(Color.BLACK, CornerRadii.EMPTY, null)));
+		b6.setOpacity(.9);
 
 		vbLeft6.getChildren().addAll(estBarricade6, estFerme6, force6);
 		hbBot6.getChildren().add(nbZombies6);
@@ -600,9 +633,9 @@ public class PlateauPane extends StackPane implements PlateauListener {
 		b6.setBottom(hbBot6);
 
 		b6.setRotate(53);
-
-		AnchorPane.setTopAnchor(b6, 313.5);
-		AnchorPane.setLeftAnchor(b6, 778.5);
+		
+		AnchorPane.setTopAnchor(b6, 320.0);
+		AnchorPane.setLeftAnchor(b6, 747.5);
 		
 		/////
 		
@@ -644,11 +677,10 @@ public class PlateauPane extends StackPane implements PlateauListener {
 		////
 		
 		aPlateau.getChildren().addAll(b1, b2, b3, b4, b5, b6, lChefVigile, lChefVigile2,lChefVigile3,lChefVigile4);
-
 		info = new BorderPane();
-		info.setPrefSize(1000, 200);
-		info.setMaxSize(1000, 200);
-		info.setBackground(fondNoir);
+		info.setPrefSize(450, 200);
+		info.setMaxSize(450, 200);
+		info.setStyle(" -fx-background-color:#1A1A1A; -fx-background-radius: 20px;");		
 
 		VBox vTitreInfo = new VBox();
 		vTitreInfo.setAlignment(Pos.CENTER);
@@ -669,8 +701,6 @@ public class PlateauPane extends StackPane implements PlateauListener {
 		info.setTop(vTitreInfo);
 		info.setCenter(vInfo);
 		info.setVisible(false);
-
-		//
 		
 		borderJoueurs.setTop(hHaut);
 		borderJoueurs.setBottom(hBas);
@@ -681,7 +711,7 @@ public class PlateauPane extends StackPane implements PlateauListener {
 		borderJoueurs.setPrefSize(1920, 1080);
 		borderJoueurs.setMaxSize(1920, 1080);
 
-		ImageView imgFond = new ImageView(DataControl.PLATEAU);
+		imgFond = new ImageView(DataControl.PLATEAU);
 		imgFond.setScaleX(0.4362);
 		imgFond.setScaleY(0.4362);
 
@@ -698,8 +728,8 @@ public class PlateauPane extends StackPane implements PlateauListener {
 		afficheJoueursLieu5.setFont(fontPerso);
 		afficheJoueursLieu6.setFont(fontPerso);
 
-		this.setBackground(new Background(new BackgroundFill(Color.BLACK, CornerRadii.EMPTY, null)));
-
+		this.setStyle(" -fx-background-color:#151515;");
+		
 		this.getChildren().addAll(imgFond, borderJoueurs, aPlateau, info);
 		this.setMinSize(1920, 1080);
 		this.setPrefSize(1920, 1080);
@@ -960,6 +990,9 @@ public class PlateauPane extends StackPane implements PlateauListener {
 		Platform.runLater(() -> {
 			titreInfo.setText("Fouille du camion");
 			lInfo.setText(camion);
+			imgFond.setEffect(flou);
+			borderJoueurs.setEffect(flou);
+			aPlateau.setEffect(flou);
 			info.setVisible(true);
 			if (myTimer != null) {
 				myTimer.cancel();
@@ -969,6 +1002,9 @@ public class PlateauPane extends StackPane implements PlateauListener {
 
 				@Override
 				public void run() {
+					imgFond.setEffect(null);
+					borderJoueurs.setEffect(null);
+					aPlateau.setEffect(null);
 					info.setVisible(false);
 				}
 			}, 5000);
@@ -980,6 +1016,9 @@ public class PlateauPane extends StackPane implements PlateauListener {
 		Platform.runLater(() -> {
 			titreInfo.setText("Déplacement d'un pion du chef des vigiles");
 			lInfo.setText(depvig);
+			imgFond.setEffect(flou);
+			borderJoueurs.setEffect(flou);
+			aPlateau.setEffect(flou);
 			info.setVisible(true);
 			if (myTimer != null) {
 				myTimer.cancel();
@@ -989,6 +1028,9 @@ public class PlateauPane extends StackPane implements PlateauListener {
 
 				@Override
 				public void run() {
+					imgFond.setEffect(null);
+					borderJoueurs.setEffect(null);
+					aPlateau.setEffect(null);
 					info.setVisible(false);
 				}
 			}, 5000);
@@ -1000,6 +1042,9 @@ public class PlateauPane extends StackPane implements PlateauListener {
 		Platform.runLater(() -> {
 			titreInfo.setText("Election du chef des vigiles");
 			lInfo.setText(message);
+			imgFond.setEffect(flou);
+			borderJoueurs.setEffect(flou);
+			aPlateau.setEffect(flou);
 			info.setVisible(true);
 			if (myTimer != null) {
 				myTimer.cancel();
@@ -1010,6 +1055,9 @@ public class PlateauPane extends StackPane implements PlateauListener {
 
 				@Override
 				public void run() {
+					imgFond.setEffect(null);
+					borderJoueurs.setEffect(null);
+					aPlateau.setEffect(null);
 					info.setVisible(false);
 				}
 			}, 5000);
