@@ -66,22 +66,22 @@ public class TraitementPaquetUdp extends TraitementPaquet<DatagramPacket> {
 
 		TypePartie typePartie = (TypePartie) packet.getValue(message, 1);
 
-		String m = getControleurReseau().getPacketsUdp().get("AMP").build(core.getPartieId(),
+		String m = getControleurReseau().construirePaquetUdp("AMP",core.getPartieId(),
 				getControleurReseau().getIp().getHostAddress(), getControleurReseau().getTcpPort(), core.getNomPartie(),
 				core.getNbjtotal(), core.getNbjr(), core.getNbjv(), core.getNbjractuel(), core.getNbjvactuel(),
 				core.getStatus());
 		switch (typePartie) {
 		case JRU:
 			if (core.getNbjr() == 6)
-				getControleurReseau().getUdpConnexion().envoyer(m);
+				getControleurReseau().envoyerUdp(m);
 			break;
 		case BOTU:
 			if (core.getNbjv() == 6)
-				getControleurReseau().getUdpConnexion().envoyer(m);
+				getControleurReseau().envoyerUdp(m);
 			break;
 		case MIXTE:
 		default:
-			getControleurReseau().getUdpConnexion().envoyer(m);
+			getControleurReseau().envoyerUdp(m);
 		}
 	}
 

@@ -26,7 +26,6 @@ public class TraitementPaquetTcp extends TraitementPaquet<Connexion> {
 	private ControleurJeu core;
 
 	/**
-	 * @param netWorkManager le jeu.controleur réseau
 	 * @param core           coeur du jeu
 	 */
 	public TraitementPaquetTcp(Object core) {
@@ -64,12 +63,12 @@ public class TraitementPaquetTcp extends TraitementPaquet<Connexion> {
 			} catch (UnknownHostException e) {
 				e.printStackTrace();
 			}
-			connection.envoyer(getControleurReseau().getPacketsTcp().get("ACP").build(core.getPartieId(), id));
+			connection.envoyer(getControleurReseau().construirePaquetTcp("ACP",core.getPartieId(), id));
 			break;
 		case ANNULEE:
 		case COMPLETE:
 		case TERMINE:
-			connection.envoyer(getControleurReseau().getPacketsTcp().get("RCP").build(core.getPartieId()));
+			connection.envoyer(getControleurReseau().construirePaquetTcp("RCP",core.getPartieId()));
 			break;
 		default:
 			throw new IllegalStateException("Unexpected value: " + core.getStatus());
