@@ -60,7 +60,7 @@ public abstract class PtOutils {
 	/**
 	 * Charge l'intégralité des paquets du protocol réseau.
 	 *
-	 * @param chemin     Chemin du dossier
+	 * @param chemin    Chemin du dossier
 	 * @param protocole Le type du protocol
 	 * @return L'ensemble des paquets
 	 * @throws IOException Si un fichier n'est pas accessible
@@ -108,7 +108,7 @@ public abstract class PtOutils {
 	 * Permet d'obtenir l'objet en chaine de caractere.
 	 *
 	 * @param valeur Variable
-	 * @param type  Type de la variable
+	 * @param type   Type de la variable
 	 * @return L'objet en chaine de caractere
 	 */
 	public static String convertParamToString(Object valeur, String type) {
@@ -249,29 +249,29 @@ public abstract class PtOutils {
 	/**
 	 * Obtient le paquet via une chaine de caractere.
 	 *
-	 * @param message        Le message a convertir
+	 * @param message          Le message a convertir
 	 * @param controleurReseau Le NetworkManager associé
 	 * @return Le paquet associé
 	 */
 	public static Packet strToPacketUdp(String message, ControleurReseau controleurReseau) {
-		if (controleurReseau.getPacketsUdp().size() == 0)
+		if (controleurReseau.getPaquetUdpCount() == 0)
 			throw new IllegalArgumentException("NetWorkManager n'a pas ete initialise au moins une fois !");
 
-		return controleurReseau.getPacketsUdp().get(PaquetOutils.getCleMessage(message));
+		return controleurReseau.getPaquetUdp(PaquetOutils.getCleMessage(message));
 	}
 
 	/**
 	 * Obtient le paquet via une chaine de caractere.
 	 *
-	 * @param message        Le message a convertir
+	 * @param message          Le message a convertir
 	 * @param controleurReseau Le NetworkManager associé
 	 * @return Le paquet associé
 	 */
 	public static Packet strToPacketTcp(String message, ControleurReseau controleurReseau) {
-		if (controleurReseau.getPacketsTcp().size() == 0)
+		if (controleurReseau.getPaquetUdpCount() == 0)
 			throw new IllegalArgumentException("NetWorkManager n'a pas ete initialise au moins une fois !");
 
-		return controleurReseau.getPacketsTcp().get(PaquetOutils.getCleMessage(message));
+		return controleurReseau.getPaquetTcp(PaquetOutils.getCleMessage(message));
 	}
 
 	/**
