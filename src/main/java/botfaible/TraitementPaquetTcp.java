@@ -106,6 +106,9 @@ public class TraitementPaquetTcp extends TraitementPaquet<Socket> {
 		case "RAZDD":
 			fournirActionsDefense(packet, message);
 			break;
+		case "PVDV":
+            ChoisirQuiVoter(packet, message);
+            break;
 
 		case "PIPZ":
 		case "PFC":
@@ -120,6 +123,15 @@ public class TraitementPaquetTcp extends TraitementPaquet<Socket> {
 					MessageFormat.format("[TCP] Il n''y a pas de traitement possible pour {0}", packet.getKey()));
 		}
 	}
+	
+	 public void ChoisirQuiVoter(Packet packet, String message)
+	    {
+	        out.println(packet.getDocs());
+	        String messageTcp =  getControleurReseau().construirePaquetTcp("PVCV", traitementB.getRandom(), // Méthode que Baptiste doit push
+	                (String) packet.getValue(message, 1),(int) packet.getValue(message, 2), core.getJoueurId());
+	        getControleurReseau().getTcpClient().envoyer(messageTcp);
+	        
+	    }
 	
 	private void fournirActionsDefense(Packet packet, String message) {
 		List<CarteType> listeCarteJouee = traitementB.listeCarteJouee(this.core, (int) packet.getValue(message, 1));
