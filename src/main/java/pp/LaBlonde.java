@@ -1,8 +1,8 @@
 package pp;
 
 /**
- * <h1>Le personnage "La blonde"</h1>
- *
+ * <h1>La classe La blonde</h1>. A pour rôle de définir un Personnage.
+ * 
  * @author Leo
  * @author Theo
  * @author Yanis
@@ -14,6 +14,8 @@ package pp;
 public class LaBlonde extends Personnage {
 
 	/**
+	 * Instantie un nouveau Personnage LaBlonde
+	 * 
 	 * @param joueur le joueur cible
 	 */
 	public LaBlonde(Joueur joueur) {

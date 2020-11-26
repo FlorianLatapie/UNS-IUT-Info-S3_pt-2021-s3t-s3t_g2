@@ -1,19 +1,21 @@
 package pp;
 
 /**
- * <h1>Le personnage "La fillette"</h1>
- *
- * @version 0.1
+ * <h1>La classe La fillette</h1>. A pour rôle de définir un Personnage.
+ * 
  * @author Leo
  * @author Theo
  * @author Yanis
  * @author Kevin
  * @author Vincent
+ * @version 0.1
  * @since 04/10/2020
  */
 public class LaFillette extends Personnage {
 
 	/**
+	 * Instantie un nouveau Personnage LaFillette
+	 * 
 	 * @param joueur le joueur cible
 	 */
 	public LaFillette(Joueur joueur) {

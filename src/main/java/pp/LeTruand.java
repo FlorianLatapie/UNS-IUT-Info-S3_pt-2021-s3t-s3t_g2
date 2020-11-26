@@ -1,19 +1,22 @@
 package pp;
 
 /**
- * <h1>Le personnage "Le truand"</h1>
- *
- * @version 0.1
+ * <h1>La classe Le truand</h1>. A pour rôle de définir un Personnage.
+ * 
+ * 
  * @author Leo
  * @author Theo
  * @author Yanis
  * @author Kevin
  * @author Vincent
+ * @version 0.1
  * @since 04/10/2020
  */
 public class LeTruand extends Personnage {
 
 	/**
+	 * Instantie un nouveau Personnage LeTruand
+	 * 
 	 * @param joueur le joueur cible
 	 */
 	public LeTruand(Joueur joueur) {
@@ -24,6 +27,8 @@ public class LeTruand extends Personnage {
 	}
 
 	/**
+	 * Retourne le nom "Le Truand"
+	 * 
 	 * @return le nom du personnage
 	 */
 	@Override

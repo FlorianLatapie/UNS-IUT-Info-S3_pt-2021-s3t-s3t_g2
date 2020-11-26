@@ -1,19 +1,21 @@
 package pp;
 
 /**
- * <h1>Le personnage "La brute"</h1>
+ * <h1>La classe La brute</h1>. A pour rôle de définir un Personnage.
  *
- * @version 0.1
  * @author Leo
  * @author Theo
  * @author Yanis
  * @author Kevin
  * @author Vincent
+ * @version 0.1
  * @since 04/10/2020
  */
 public class LaBrute extends Personnage {
 
 	/**
+	 * Instantie un nouveau Personnage LaBrute
+	 * 
 	 * @param joueur le joueur cible
 	 */
 	public LaBrute(Joueur joueur) {
@@ -24,7 +26,7 @@ public class LaBrute extends Personnage {
 	}
 
 	/**
-	 * @return le nom du personnage
+	 * @return le String La Brute
 	 */
 	@Override
 	public String toString() {
