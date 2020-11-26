@@ -4,6 +4,7 @@ import java.util.Timer;
 import java.util.TimerTask;
 import pp.ihm.DataControl.ApplicationPane;
 import pp.ihm.eventListener.PlateauListener;
+import javafx.animation.TranslateTransition;
 import javafx.application.Platform;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -15,6 +16,8 @@ import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
+import javafx.scene.text.TextAlignment;
+import javafx.util.Duration;
 
 public class PlateauPane extends StackPane implements PlateauListener {
 	private ScreenControl sControl = null;
@@ -39,16 +42,18 @@ public class PlateauPane extends StackPane implements PlateauListener {
 	private final int margeL = 10;
 	private final Insets margeLieu = new Insets(margeL, margeL, margeL, margeL);
 	private final int tailleFont = 18;
-	
-	private GaussianBlur flou = new GaussianBlur(30);
-	
+
+	private GaussianBlur flou = new GaussianBlur(20);
+
 	private final Font fontInfo = Font.font("Segoe UI", FontWeight.BOLD, tailleFont);
 	private final Font fontPerso = Font.font("Segoe UI", FontWeight.BOLD, 12);
 
 	private CornerRadii coinfb = new CornerRadii(5.0);
 	private Background fondBlanc = new Background(new BackgroundFill(Color.WHITE, coinfb, null));
 	private Background fondNoir = new Background(new BackgroundFill(Color.BLACK, coinfb, null));
-	private String tmpColor = " -fx-background-color:#000000; -fx-text-fill: #FF2626"; //TODO si cette couleur est affichée en partie, il y a une erreur dans l'event 
+	private String tmpColor = " -fx-background-color:#000000; -fx-text-fill: #FF2626"; // TODO si cette couleur est
+																						// affichée en partie, il y a
+																						// une erreur dans l'event
 	private String vert = " -fx-background-color:#5EB137; -fx-text-fill: #000000";
 	private String rouge = " -fx-background-color:#F30101; -fx-text-fill: #000000";
 	private String marron = " -fx-background-color:#6C3505; -fx-text-fill: #000000";
@@ -69,7 +74,7 @@ public class PlateauPane extends StackPane implements PlateauListener {
 	VBox j4;
 	VBox j5;
 	VBox j6;
-	
+
 	Label nomJoueur1;
 	Label nomJoueur2;
 	Label nomJoueur3;
@@ -116,16 +121,16 @@ public class PlateauPane extends StackPane implements PlateauListener {
 
 	Label titreInfo;
 	Label lInfo;
-	
+
 	Label lChefVigile;
 	Label lChefVigile2;
 	Label lChefVigile3;
 	Label lChefVigile4;
-	
+
 	AnchorPane aPlateau;
 	ImageView imgFond;
-	BorderPane borderJoueurs;	
-	
+	BorderPane borderJoueurs;
+
 	Timer myTimer;
 
 	public PlateauPane(ScreenControl sc, Core c) {
@@ -162,7 +167,8 @@ public class PlateauPane extends StackPane implements PlateauListener {
 		bPause2.setFont(policeBoutonPause);
 		HBox.setMargin(bPause2, margeBoutonPause);
 
-		j1 = new VBox(); //TODO j'ai ajouté les couleurs en ligne 53 à 58 il faut les appliquer avec des event sur j1,nbPerso1,nbCartes1,nomJoueur1 etc 
+		j1 = new VBox(); // TODO j'ai ajouté les couleurs en ligne 53 à 58 il faut les appliquer avec des
+							// event sur j1,nbPerso1,nbCartes1,nomJoueur1 etc
 		nbPerso1 = new Label("## personnages");
 		nbPerso1.setFont(Font.font("Segoe UI", 20));
 		nbPerso1.setTextFill(Color.BLACK);
@@ -317,7 +323,7 @@ public class PlateauPane extends StackPane implements PlateauListener {
 
 		hDroite.getChildren().addAll(j5);
 		hDroite.setAlignment(Pos.CENTER_LEFT);
-		
+
 		j6 = new VBox();
 		nbPerso6 = new Label("## personnages");
 		nbPerso6.setFont(Font.font("Segoe UI", 20));
@@ -346,7 +352,6 @@ public class PlateauPane extends StackPane implements PlateauListener {
 
 		hGauche.getChildren().addAll(j6);
 		hGauche.setAlignment(Pos.CENTER_LEFT);
-
 
 		/////////////////////////////////////////////////////
 		aPlateau.setMinSize(taillePlateau, taillePlateau);
@@ -378,8 +383,8 @@ public class PlateauPane extends StackPane implements PlateauListener {
 
 		BorderPane b1 = new BorderPane();
 		b1.setPadding(new Insets(5));
-		b1.setPrefSize(320,	210);
-		b1.setMaxSize(320,	210);
+		b1.setPrefSize(320, 210);
+		b1.setMaxSize(320, 210);
 		b1.setBackground(new Background(new BackgroundFill(Color.BLACK, CornerRadii.EMPTY, null)));
 
 		vbRight1.getChildren().addAll(estBarricade1, estFerme1, force1);
@@ -389,7 +394,7 @@ public class PlateauPane extends StackPane implements PlateauListener {
 		b1.setRight(vbRight1);
 		b1.setBottom(hbBot1);
 		b1.setOpacity(.9);
-		
+
 		b1.setRotate(128);
 
 		AnchorPane.setTopAnchor(b1, 755.0);
@@ -422,8 +427,8 @@ public class PlateauPane extends StackPane implements PlateauListener {
 
 		BorderPane b2 = new BorderPane();
 		b2.setPadding(new Insets(5));
-		b2.setPrefSize(320,	215);
-		b2.setMaxSize(320,	215);
+		b2.setPrefSize(320, 215);
+		b2.setMaxSize(320, 215);
 		b2.setBackground(new Background(new BackgroundFill(Color.BLACK, CornerRadii.EMPTY, null)));
 
 		vbRight2.getChildren().addAll(estBarricade2, estFerme2, force2);
@@ -466,8 +471,8 @@ public class PlateauPane extends StackPane implements PlateauListener {
 
 		BorderPane b3 = new BorderPane();
 		b3.setPadding(new Insets(5));
-		b3.setPrefSize(325,	210);
-		b3.setMaxSize(325,	210);
+		b3.setPrefSize(325, 210);
+		b3.setMaxSize(325, 210);
 		b3.setBackground(new Background(new BackgroundFill(Color.BLACK, CornerRadii.EMPTY, null)));
 
 		vbRight3.getChildren().addAll(estBarricade3, estFerme3, force3);
@@ -477,7 +482,6 @@ public class PlateauPane extends StackPane implements PlateauListener {
 		b3.setRight(vbRight3);
 		b3.setBottom(hbBot3);
 		b3.setOpacity(.9);
-
 
 		b3.setRotate(-62);
 
@@ -511,8 +515,8 @@ public class PlateauPane extends StackPane implements PlateauListener {
 
 		BorderPane b4 = new BorderPane();
 		b4.setPadding(new Insets(5));
-		b4.setPrefSize(270,	210);
-		b4.setMaxSize(270,	210);
+		b4.setPrefSize(270, 210);
+		b4.setMaxSize(270, 210);
 		b4.setBackground(new Background(new BackgroundFill(Color.BLACK, CornerRadii.EMPTY, null)));
 
 		vbRight4.getChildren().addAll(estBarricade4, estFerme4, force4);
@@ -555,8 +559,8 @@ public class PlateauPane extends StackPane implements PlateauListener {
 
 		BorderPane b5 = new BorderPane();
 		b5.setPadding(new Insets(5));
-		b5.setPrefSize(325,	215);
-		b5.setMaxSize(325,	215);
+		b5.setPrefSize(325, 215);
+		b5.setMaxSize(325, 215);
 		b5.setBackground(new Background(new BackgroundFill(Color.BLACK, CornerRadii.EMPTY, null)));
 
 		vbRight5.getChildren().addAll(estBarricade5, estFerme5, force5);
@@ -598,8 +602,8 @@ public class PlateauPane extends StackPane implements PlateauListener {
 		nbZombies6.setTextFill(Color.RED);
 
 		BorderPane b6 = new BorderPane();
-		b6.setPrefSize(310,	215);
-		b6.setMaxSize(310,	215);
+		b6.setPrefSize(310, 215);
+		b6.setMaxSize(310, 215);
 		b6.setPadding(new Insets(5));
 		b6.setBackground(new Background(new BackgroundFill(Color.BLACK, CornerRadii.EMPTY, null)));
 		b6.setOpacity(.9);
@@ -612,12 +616,12 @@ public class PlateauPane extends StackPane implements PlateauListener {
 		b6.setBottom(hbBot6);
 
 		b6.setRotate(53);
-		
+
 		AnchorPane.setTopAnchor(b6, 320.0);
 		AnchorPane.setLeftAnchor(b6, 747.5);
-		
+
 		/////
-		
+
 		lChefVigile = new Label();
 		lChefVigile.setText("XXXXXXX" + " est le chef des vigiles");
 		lChefVigile.setBackground(fondBlanc);
@@ -634,7 +638,7 @@ public class PlateauPane extends StackPane implements PlateauListener {
 		lChefVigile2.setRotate(180);
 		AnchorPane.setTopAnchor(lChefVigile2, 350.0);
 		AnchorPane.setRightAnchor(lChefVigile2, 425.0);
-		
+
 		lChefVigile3 = new Label();
 		lChefVigile3.setText("XXXXXXX" + " est le chef des vigiles");
 		lChefVigile3.setBackground(fondBlanc);
@@ -643,7 +647,7 @@ public class PlateauPane extends StackPane implements PlateauListener {
 		lChefVigile3.setRotate(90);
 		AnchorPane.setTopAnchor(lChefVigile3, 550.0);
 		AnchorPane.setLeftAnchor(lChefVigile3, 180.0);
-		
+
 		lChefVigile4 = new Label();
 		lChefVigile4.setText("XXXXXXX" + " est le chef des vigiles");
 		lChefVigile4.setBackground(fondBlanc);
@@ -652,35 +656,44 @@ public class PlateauPane extends StackPane implements PlateauListener {
 		lChefVigile4.setRotate(-90);
 		AnchorPane.setTopAnchor(lChefVigile4, 550.0);
 		AnchorPane.setLeftAnchor(lChefVigile4, 575.0);
-		
+
 		////
 		
-		aPlateau.getChildren().addAll(b1, b2, b3, b4, b5, b6, lChefVigile, lChefVigile2,lChefVigile3,lChefVigile4);
+		aPlateau.getChildren().addAll(b1, b2, b3, b4, b5, b6, lChefVigile, lChefVigile2, lChefVigile3, lChefVigile4);
 		info = new BorderPane();
 		info.setPrefSize(450, 200);
 		info.setMaxSize(450, 200);
-		info.setStyle(" -fx-background-color:#1A1A1A; -fx-background-radius: 20px;");		
+		info.setStyle(" -fx-background-color:#1A1A1A; -fx-background-radius: 20px; -fx-border-color: red; -fx-border-insets: -3; -fx-border-width: 3; -fx-border-radius: 20px;");
 
 		VBox vTitreInfo = new VBox();
 		vTitreInfo.setAlignment(Pos.CENTER);
 		vTitreInfo.setPadding(new Insets(20));
-		titreInfo = new Label("Titre info");
-		titreInfo.setFont(Font.font("Segoe UI", FontWeight.BOLD, 20));
+		titreInfo = new Label("Déplacement d'un pion du chef \ndes vigiles");
+		titreInfo.setTextAlignment(TextAlignment.CENTER);
+		titreInfo.setFont(Font.font("Segoe UI", FontWeight.BOLD, 25));
 		titreInfo.setTextFill(Color.WHITE);
 		vTitreInfo.getChildren().addAll(titreInfo);
 
 		VBox vInfo = new VBox();
-		vInfo.setAlignment(Pos.TOP_LEFT);
-		lInfo = new Label("information");
-		lInfo.setFont(Font.font("Segoe UI", FontWeight.BOLD, 15));
+		vInfo.setAlignment(Pos.CENTER);
+		lInfo = new Label("Voici l'information que vous voulez savoir");
+		lInfo.setTextAlignment(TextAlignment.CENTER);
+		lInfo.setFont(Font.font("Segoe UI", FontWeight.BOLD, 20));
 		lInfo.setTextFill(Color.WHITE);
 		vInfo.getChildren().addAll(lInfo);
+		
+		TranslateTransition transi = new TranslateTransition(Duration.millis(1400), info);
+		transi.setFromY(-1000f);
+	    transi.setToY(0f);
+	    transi.setCycleCount((int)2f);
+	    transi.setAutoReverse(false);
+	    transi.play();
 
-		info.setMargin(vInfo, new Insets(50, 20, 0, 20));
+		info.setMargin(vInfo, new Insets(-30, 0, 0, 0));
 		info.setTop(vTitreInfo);
 		info.setCenter(vInfo);
-		info.setVisible(false);
-		
+		info.setVisible(true);
+
 		borderJoueurs.setTop(hHaut);
 		borderJoueurs.setBottom(hBas);
 		borderJoueurs.setLeft(hGauche);
@@ -693,6 +706,10 @@ public class PlateauPane extends StackPane implements PlateauListener {
 		imgFond = new ImageView(DataControl.PLATEAU);
 		imgFond.setScaleX(0.4362);
 		imgFond.setScaleY(0.4362);
+		
+		imgFond.setEffect(flou);
+		borderJoueurs.setEffect(flou);
+		aPlateau.setEffect(flou);
 
 		afficheJoueursLieu1.setTextFill(Color.WHITE);
 		afficheJoueursLieu2.setTextFill(Color.WHITE);
@@ -708,7 +725,7 @@ public class PlateauPane extends StackPane implements PlateauListener {
 		afficheJoueursLieu6.setFont(fontPerso);
 
 		this.setStyle(" -fx-background-color:#151515;");
-		
+
 		this.getChildren().addAll(imgFond, borderJoueurs, aPlateau, info);
 		this.setMinSize(1920, 1080);
 		this.setPrefSize(1920, 1080);
@@ -972,6 +989,12 @@ public class PlateauPane extends StackPane implements PlateauListener {
 			imgFond.setEffect(flou);
 			borderJoueurs.setEffect(flou);
 			aPlateau.setEffect(flou);
+			TranslateTransition transi = new TranslateTransition(Duration.millis(1400), info);
+			transi.setFromY(-1000f);
+		    transi.setToY(0f);
+		    transi.setCycleCount((int)2f);
+		    transi.setAutoReverse(false);
+		    transi.play();
 			info.setVisible(true);
 			if (myTimer != null) {
 				myTimer.cancel();
@@ -998,6 +1021,12 @@ public class PlateauPane extends StackPane implements PlateauListener {
 			imgFond.setEffect(flou);
 			borderJoueurs.setEffect(flou);
 			aPlateau.setEffect(flou);
+			TranslateTransition transi = new TranslateTransition(Duration.millis(1400), info);
+			transi.setFromY(-1000f);
+		    transi.setToY(0f);
+		    transi.setCycleCount((int)2f);
+		    transi.setAutoReverse(false);
+		    transi.play();
 			info.setVisible(true);
 			if (myTimer != null) {
 				myTimer.cancel();
@@ -1024,6 +1053,12 @@ public class PlateauPane extends StackPane implements PlateauListener {
 			imgFond.setEffect(flou);
 			borderJoueurs.setEffect(flou);
 			aPlateau.setEffect(flou);
+			TranslateTransition transi = new TranslateTransition(Duration.millis(1400), info);
+			transi.setFromY(-1000f);
+		    transi.setToY(0f);
+		    transi.setCycleCount((int)2f);
+		    transi.setAutoReverse(false);
+		    transi.play();
 			info.setVisible(true);
 			if (myTimer != null) {
 				myTimer.cancel();
