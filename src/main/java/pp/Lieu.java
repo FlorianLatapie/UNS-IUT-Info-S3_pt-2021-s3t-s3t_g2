@@ -5,25 +5,37 @@ import java.util.HashMap;
 import java.util.List;
 
 /**
- * <h1>Definit un lieu</h1>
+ * <h1>La classe lieu</h1>. A pour rôle de définir un lieu.
  *
  * @author Alex
- * @version 0
+ * @version 1
  * @since 04/10/2020
  */
 public class Lieu {
+
+	/**  Numéro de la partie où se trouve le lieu. */
 	private int num;
+
+	/**  Entier correspondant au nombre de places d'un lieu. */
 	private int nbPlaces;
+
+	/**  Entier correspondant au nombre de zombie sur un lieu. */
 	private int nbZombies;
+
+	/**  Chaine de caractère correspondant au nom d'un lieu. */
 	public String name;
+
+	/**  Booléen indiquant si un lieu est ouvert ou non. */
 	private boolean ouvert;
+
+	/**  Collection des personnages présents sur un lieu. */
 	private ArrayList<Personnage> personnage;
 
 	/**
 	 * Initialise les différents lieux possibles et donne le nombre de places
-	 * disponibles en fonction du numero de partie
+	 * disponibles pour chaque lieu en fonction du numéro de partie.
 	 *
-	 * @param num le numéro de partie
+	 * @param num Le numéro de partie
 	 */
 	public Lieu(int num) {
 		HashMap<Integer, String> listeLieu = new HashMap<Integer, String>();
@@ -53,7 +65,9 @@ public class Lieu {
 	}
 
 	/**
-	 * @return la liste des personnages "la blonde"
+	 * Récupère les instances de "blonde" sur un lieu.
+	 *
+	 * @return La liste des personnages "la blonde"
 	 */
 	public List<Personnage> getBlonde() {
 		ArrayList<Personnage> retour = new ArrayList<Personnage>();
@@ -66,9 +80,9 @@ public class Lieu {
 	}
 
 	/**
-	 * Ajoute un personnage dans un lieu
+	 * Ajoute un personnage dans un lieu.
 	 *
-	 * @param p le personnage choisi
+	 * @param p Le personnage choisi
 	 */
 	public void addPersonnage(Personnage p) {
 		if (this.isFull()) {
@@ -77,12 +91,10 @@ public class Lieu {
 		this.personnage.add(p);
 	}
 
-	// Méthodes
-
 	/**
-	 * affiche les différents personnages qui se trouvent sur un lieu
+	 * Affiche les différents personnages qui se trouvent sur un lieu.
 	 *
-	 * @return le joueur affiché
+	 * @return n Le joueur affiché
 	 */
 	public List<Joueur> afficheJoueurSurLieu() {
 		ArrayList<Joueur> n = new ArrayList<Joueur>();
@@ -95,11 +107,10 @@ public class Lieu {
 	}
 
 	/**
-	 * Indique si le lieu peut etre attaquable ou non
-	 * <p>
-	 * le lieu doit contenir des personnages pour être attaqué
+	 * Indique si un lieu est attaquable ou non
+	 * Le lieu doit contenir des personnages pour être attaqué.
 	 *
-	 * @return true ou false
+	 * @return Si le lieu est attaquable
 	 */
 	public boolean estAttaquable() {
 		if (this.ouvert) {
@@ -123,9 +134,13 @@ public class Lieu {
 			return false;
 		}
 		return false;
-
 	}
 
+	/**
+	 * Calcule la force totale de tous les personnages présent sur un lieu.
+	 *
+	 * @return force
+	 */
 	public int getForce() {
 		int force = 0;
 		for (int a = 0; a < this.personnage.size(); a++) {
@@ -135,25 +150,30 @@ public class Lieu {
 				force += 1;
 			}
 		}
-		
+
 		return force;
 	}
 
 	/**
-	 * ajoute un zombie dans le lieu
+	 * Ajoute un zombie dans le lieu.
 	 */
 	public void addZombie() {
 		this.nbZombies += 1;
 	}
 
+	/**
+	 * Gère l'affichage du nom d'un lieu.
+	 *
+	 * @return name
+	 */
 	public String toString() {
 		return this.name;
 	}
 
 	/**
-	 * indique si le lieu est plein ou non
+	 * Indique si le lieu est plein ou non.
 	 *
-	 * @return true ou false
+	 * @return Si le lieu est plein
 	 */
 	public boolean isFull() {
 		if (personnage != null) {
@@ -165,49 +185,63 @@ public class Lieu {
 	}
 
 	/**
-	 * @param nbZombies nombre de zombies
+	 * Modifie le nombre de zombies présents sur un lieu.
+	 *
+	 * @param nbZombies the new nb zombies
 	 */
 	public void setNbZombies(int nbZombies) {
 		this.nbZombies = nbZombies;
 	}
 
 	/**
-	 * @return le numéro de partie
+	 * Récupère le numéro de partie associé à un lieu.
+	 *
+	 * @return num
 	 */
 	public int getNum() {
 		return num;
 	}
 
 	/**
-	 * @return le nombre de places disponibles
+	 * Récupère le nombre de places disponibles sur un lieu.
+	 *
+	 * @return nbPlaces
 	 */
 	public int getNbPlaces() {
 		return nbPlaces;
 	}
 
 	/**
-	 * @return le nombre de zombies présents dans un lieu
+	 * Récupère le nombre de zombies présents sur un lieu.
+	 *
+	 * @return nbZombies
 	 */
 	public int getNbZombies() {
 		return nbZombies;
 	}
 
 	/**
-	 * @return si le lieu est ouvert ou non
+	 * Récupère l'état ouvert ou fermé d'un lieu.
+	 *
+	 * @return ouvert
 	 */
 	public boolean isOuvert() {
 		return ouvert;
 	}
 
 	/**
-	 * @param open attribut qui définit si le lieu est ouvert ou non
+	 * Modifie l'état ouvert ou fermé.
+	 *
+	 * @param open Attribut qui définit si le lieu est ouvert ou non
 	 */
 	public void setOuvert(boolean open) {
 		this.ouvert = open;
 	}
 
 	/**
-	 * @return la liste des personnages
+	 * Récupère la liste des personnages sur un lieu.
+	 *
+	 * @return personnage
 	 */
 	public List<Personnage> getPersonnage() {
 		return personnage;

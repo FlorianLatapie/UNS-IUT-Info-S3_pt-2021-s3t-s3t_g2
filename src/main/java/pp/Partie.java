@@ -26,7 +26,7 @@ public class Partie {
 	/** Liste des cartes. */
 	List<CarteType> cartes;
 
-	/** Boolean indiquant si un nouveauChef à été élu. */
+	/** Booléen indiquant si un nouveauChef à été élu. */
 	boolean nouveauChef;
 
 	/**
@@ -49,7 +49,6 @@ public class Partie {
 	/**
 	 * Initialise les cartes du jeu.
 	 */
-
 	private void initCarte() {
 
 		for (CarteType c : CarteType.values())
