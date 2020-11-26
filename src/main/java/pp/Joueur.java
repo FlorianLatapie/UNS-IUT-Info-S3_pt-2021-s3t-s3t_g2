@@ -20,20 +20,10 @@ import java.util.Map;
  * @since 05/10/2020
  */
 public class Joueur {
-	public String getJoueurId() {
-		return joueurId;
-	}
-
 	private final String joueurId;
-
-	public int getJoueurIdint() {
-		return joueurIdint;
-	}
-
 	private final int joueurIdint;
 	private final InetAddress ip;
 	private final int port;
-
 	private Couleur couleur;
 	private boolean enVie;
 	private HashMap<Integer, Personnage> personnages;
@@ -65,6 +55,17 @@ public class Joueur {
 		cartes = new ArrayList<>();
 		this.nom = nom;
 	}
+	
+	public String getJoueurId() {
+		return joueurId;
+	}
+
+	public int getJoueurIdint() {
+		return joueurIdint;
+	}
+
+
+	
 
 	/**
 	 * @return la couleur

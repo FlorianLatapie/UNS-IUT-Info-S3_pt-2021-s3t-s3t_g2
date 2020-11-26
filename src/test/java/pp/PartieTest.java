@@ -58,7 +58,6 @@ class PartieTest {
 
 	@Test
 	void testPartie_FouilleCamion() {
-		j.fouilleCamion(null, null, null, null, null);
 		// assertEquals(j.getCartes().size(),27);
 		assertEquals(j.getCartes().size(), 0);
 	}

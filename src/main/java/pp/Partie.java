@@ -50,23 +50,35 @@ public class Partie {
 	 * Initialise les cartes du jeu.
 	 */
 	private void initCarte() {
+		cartes.add(CarteType.MEN);
+		cartes.add(CarteType.MEN);
+		cartes.add(CarteType.MEN);
 
-		for (CarteType c : CarteType.values())
-			cartes.add(c);
+		cartes.add(CarteType.CDS);
+		cartes.add(CarteType.CDS);
+		cartes.add(CarteType.CDS);
 
 		cartes.add(CarteType.SPR);
 		cartes.add(CarteType.SPR);
-		cartes.add(CarteType.MEN);
-		cartes.add(CarteType.MEN);
+		cartes.add(CarteType.SPR);
+		
 		cartes.add(CarteType.MAT);
 		cartes.add(CarteType.MAT);
+		cartes.add(CarteType.MAT);
+		
+		cartes.add(CarteType.ABA);
+		cartes.add(CarteType.ACS);
+		cartes.add(CarteType.AGR);
+		cartes.add(CarteType.AHI);
+		cartes.add(CarteType.ARE);
+		cartes.add(CarteType.ATR);
+		
 		cartes.add(CarteType.CAC);
 		cartes.add(CarteType.CAC);
-		cartes.add(CarteType.CDS);
-		cartes.add(CarteType.CDS);
+		cartes.add(CarteType.CAC);
+		
 
 		Collections.shuffle(cartes);
-
 	}
 
 	/**
@@ -124,29 +136,7 @@ public class Partie {
 		return lieux.get(lieu).afficheJoueurSurLieu().get(rnd);
 	}
 
-	/**
-	 * Applique les résultats de la fouille du camion : attribut la carte piocheur
-	 * au piocheur, la carte receveur au receveur et sort les 3 cartes du jeu.
-	 *
-	 * @param piocheur      le piocheur
-	 * @param receveur      le receveur
-	 * @param cartePiocheur la carte que le piocheur a choisi de garder
-	 * @param carteReceveur la carte que le piocheur a choisi de donner au receveur
-	 * @param carteDefause  la carte que le piocheur n'a pas attribuer
-	 */
-	// TODO
-	public void fouilleCamion(Joueur piocheur, Joueur receveur, CarteType cartePiocheur, CarteType carteReceveur,
-			CarteType carteDefause) {
-		/*
-		 * for (int i = 0; i < joueurs.size(); i++) { if
-		 * (joueurs.get(i).equals(piocheur))
-		 * joueurs.get(i).getCartes().add(cartePiocheur); if
-		 * (joueurs.get(i).equals(receveur))
-		 * joueurs.get(i).getCartes().add(carteReceveur); }
-		 * cartes.remove(cartePiocheur); cartes.remove(carteDefause);
-		 * cartes.remove(carteReceveur);
-		 */
-	}
+
 
 	/**
 	 * Retourne la liste des index des destinations valides. Une destination valide
@@ -501,6 +491,15 @@ public class Partie {
 			couleurs.add(joueur.getCouleur());
 		return couleurs;
 	}
+	
+	public Joueur getJoueurCouleur(Couleur c) {
+		for(Joueur j : joueurs.values()) {
+			if (j.getCouleur() == c) {
+				return j;
+			}
+		}
+		return null;
+	}
 
 	/**
 	 * Retourne le dictionnaire des joueurs.
@@ -563,6 +562,20 @@ public class Partie {
 	 */
 	public void setNewChef(Boolean nouveauChef) {
 		this.nouveauChef = nouveauChef;
+	}
+	
+	public List<CarteType> tirerCartes(Joueur j){
+		List<CarteType> l = new ArrayList();
+		int i = 0;
+		while (!cartes.isEmpty() && i < 3) {
+			l.add(cartes.get(0));
+			cartes.remove(0);
+			i++;
+		}
+		while (l.size() < 3) {
+			l.add(CarteType.NUL);
+		}
+		return l;
 	}
 
 }

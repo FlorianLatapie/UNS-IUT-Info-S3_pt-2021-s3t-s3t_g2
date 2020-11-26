@@ -292,24 +292,42 @@ public class ControleurJeu {
 	 */
 	private void fouilleCamion() {
 		String s = new String();
-		// TODO TAILLE DE PIOCHE A 0
-		String m = nwm.construirePaquetTcp("PFC", getJoueursCouleurs(), 0, partieId, numeroTour);
+		String m = nwm.construirePaquetTcp("PFC", getJoueursCouleurs(), jeu.getCartes().size(), partieId, numeroTour);
 		for (Joueur j : jeu.getJoueurs().values())
 			j.getConnection().envoyer(m);
 
-		// TODO PREVENIR QUI FOUILLE LE CAMION=
-		if (!jeu.getLieux().get(4).afficheJoueurSurLieu().isEmpty()) {
+		if (!jeu.getLieux().get(4).afficheJoueurSurLieu().isEmpty() || jeu.getCartes().isEmpty()) {
 			Joueur j = jeu.voteJoueur(4);
 			s += j + " fouille le camion!\n";
-			s += "Le camion est vide.";
+				j.getConnection().envoyer(nwm.construirePaquetTcp("FCLC", jeu.tirerCartes(j), partieId, numeroTour));
+			
+			// TODO traité carte recu d'IDJR
+			j.getConnection().attendreMessage("SCFC");
+			String mess = j.getConnection().getMessage("SCFC");
+			Couleur a1 = Couleur.NUL;
+			Couleur a2 = Couleur.NUL;
+			Couleur a3 = Couleur.NUL;
+			if (nwm.getPaquetTcp("SCFC").getValue(mess, 1) != CarteType.NUL) {
+				j.getCartes().add((CarteType) nwm.getPaquetTcp("SCFC").getValue(mess, 1));
+				a1 = j.getCouleur();
+			}
+			if (nwm.getPaquetTcp("SCFC").getValue(mess, 2) != CarteType.NUL) {
+				jeu.getJoueurCouleur((Couleur) nwm.getPaquetTcp("SCFC").getValue(mess, 3)).getCartes()
+						.add((CarteType) nwm.getPaquetTcp("SCFC").getValue(mess, 2));
+				a2 = (Couleur) nwm.getPaquetTcp("SCFC").getValue(mess, 3);
+			}
+			if (nwm.getPaquetTcp("SCFC").getValue(mess, 4) != CarteType.NUL) {
+				jeu.getCartes().add((CarteType) nwm.getPaquetTcp("SCFC").getValue(mess, 4));
+				// TODO a3 = NUL ou CD
+			}
+			
+			m = nwm.construirePaquetTcp("RFC", a1, a2, a3, partieId, numeroTour);
+			for (Joueur j2 : jeu.getJoueurs().values())
+				j2.getConnection().envoyer(m);
 		} else {
 			s += "Personne ne fouille le camion.";
 		}
 
-		// TODO CARTE NUL
-		m = nwm.construirePaquetTcp("RFC", CarteType.NUL, CarteType.NUL, CarteType.NUL, partieId, numeroTour);
-		for (Joueur j : jeu.getJoueurs().values())
-			j.getConnection().envoyer(m);
 		if (initializer != null)
 			initializer.fouilleCamion(s);
 	}
@@ -388,16 +406,42 @@ public class ControleurJeu {
 		lieuZombie.add(z3);
 		lieuZombie.add(z4);
 
-		// TODO AZLAZ lieuZombie
 		out.println(jeu.getChefVIgile() + " , chef des vigiles, regarde les résulats de l'arrivé des Zombies:");
 		for (Integer integer : lieuZombie) {
 			out.println(jeu.getLieux().get(integer) + "-> Zombie + 1");
 		}
-		// l'afficher sur l'ecran du CV s'il y en a un et s'il a un perso sur le lieu 5
-		// (PC)
-		// regarder si un joueur utilise une carte camSecu et si oui l'afficher sur son
-		// ecran et defausse la carte
+	
 		jeu.getChefVIgile().getConnection().envoyer(nwm.construirePaquetTcp("AZLAZ", lieuZombie, partieId, numeroTour));
+		
+
+		
+		for(Joueur j: jeu.getJoueurs().values()) {
+			if (j.getCartes().contains(CarteType.CDS)){
+				j.getConnection().envoyer(nwm.construirePaquetTcp("AZDCS", partieId, numeroTour));
+			}
+		}
+		
+		List<Joueur> joueurCDS = new ArrayList();
+		for(Joueur j: jeu.getJoueurs().values()) {
+			if (j.getCartes().contains(CarteType.CDS)){
+				 j.getConnection().attendreMessage("AZRCS");
+				 String mess = j.getConnection().getMessage("AZRCS");
+				 if ((CarteType) nwm.getPaquetTcp("AZRCS").getValue(mess, 1) != CarteType.NUL){
+					 joueurCDS.add(j);
+				 }
+			}
+		}
+
+		for (Joueur j : joueurCDS) {
+			j.getConnection().envoyer(nwm.construirePaquetTcp("AZUCS", lieuZombie, partieId, numeroTour));
+		}
+		
+		for (Joueur j : jeu.getJoueurs().values()) {
+			if (joueurCDS.contains(j)) 
+				j.getConnection().envoyer(nwm.construirePaquetTcp("AZICS", j.getCouleur(), CarteType.CDS, partieId, numeroTour));
+			else
+				j.getConnection().envoyer(nwm.construirePaquetTcp("AZICS", j.getCouleur(), CarteType.NUL, partieId, numeroTour));
+		}
 
 		return lieuZombie;
 	}
