@@ -112,9 +112,8 @@ public class TraitementPaquetTcp extends TraitementPaquet<Socket> {
 		case "AZDCS":
             ReponseJoueurCourant(packet, message);
             break;
-            
 		case "PVD":
-            CarteJouerVote(packet, message);
+			IndiquerCarteJouees(packet, message);
             break;
 
 		case "PIPZ":
