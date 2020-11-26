@@ -28,6 +28,7 @@ public class BotMoyen {
 	private int delay;
 	private ControleurReseau nwm;
 	private boolean estFini;
+	private int compteurTour;
 
 	/* Parametre Temporaire */
 	private List<Integer> pionAPos;
@@ -58,6 +59,7 @@ public class BotMoyen {
 		this.lieuOuvert = new ArrayList<>();
 		this.envie = true;
 		this.estFini = false;
+		this.compteurTour=0;
 	}
 
 	private void initReseau() throws IOException {
@@ -161,5 +163,13 @@ public class BotMoyen {
 
 	public boolean isEstFini() {
 		return estFini;
+	}
+
+	public int getCompteurTour() {
+		return compteurTour;
+	}
+
+	public void setCompteurTour(int compteurTour) {
+		this.compteurTour = compteurTour;
 	}
 }

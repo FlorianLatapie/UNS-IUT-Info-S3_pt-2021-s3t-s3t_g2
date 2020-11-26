@@ -62,6 +62,7 @@ public class TraitementBot {
 	}
 
 	public void debutTour(BotMoyen core, List<Couleur> couleurs) {
+		core.setCompteurTour(core.getCompteurTour()+1);
 		if (!couleurs.contains(core.getCouleur())) {
 			core.setEnvie(false);
 		}
