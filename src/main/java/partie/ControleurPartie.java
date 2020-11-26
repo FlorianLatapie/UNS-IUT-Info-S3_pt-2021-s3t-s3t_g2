@@ -32,7 +32,6 @@ public class ControleurPartie {
 	private Status status;
 	private final ArrayList<Joueur> joueurs;
 	private ArrayList<Integer> lieuZombie;
-	private boolean couleurPret = false;
 	private boolean isFinished = false;
 	private final Random rd = new Random();
 
@@ -45,31 +44,17 @@ public class ControleurPartie {
 	}
 
 	private void initPartie() {
-		while (joueurs.size() != this.nbjtotal)
-			try {
-				Thread.sleep(100);
-			} catch (InterruptedException e) {
-				return;
-			}
 		status = Status.COMPLETE;
 		joueurs.get(0).setChefDesVigiles(true);
 		jeu = new Partie(joueurs);
-		while (!couleurPret)
-			try {
-				Thread.sleep(50);
-			} catch (InterruptedException e) {
-				return;
-			}
 		try {
 			demarerJeu();
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
-
 	}
 
 	public void setJoueurCouleur(List<Couleur> couleurs) {
-		this.couleurPret = true;
 		for (int i = 0; i < joueurs.size(); i++)
 			joueurs.get(i).setCouleur(couleurs.get(i));
 	}
