@@ -171,8 +171,18 @@ public class BotFaible {
 		return listeCarte;
 	}
 	
+	public void setListeCarte(List<CarteType> listeCarte)
+	{
+		this.listeCarte = listeCarte;
+	}
+	
 	public List<PionCouleur> getListePion()
 	{
 		return listePion;
+	}
+	
+	public void setListePion(List<PionCouleur> listePion)
+	{
+		this.listePion = listePion;
 	}
 }
