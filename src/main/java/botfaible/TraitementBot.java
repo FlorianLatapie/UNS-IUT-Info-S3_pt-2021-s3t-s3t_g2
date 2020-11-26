@@ -216,5 +216,18 @@ public class TraitementBot {
 	        CarteType RJ = RJListe[rand];
 	        return RJ;
 	    }
+	  
+	  public int IndiquerCarteJouees(BotFaible core) {
+	          CarteType carteMenace= CarteType.MEN;
+	          Random r= new Random();
+	          int nbrCarteMen=0; 
+	          for(CarteType carte: core.getListeCarte()) {
+	              if(carte.name()==carteMenace.name()) {
+	                  nbrCarteMen++;
+	              }    
+	          }        
+	          int nbrCartemenaceReturn = r.nextInt(nbrCarteMen);
+	          return nbrCartemenaceReturn;      
+	      }
 
 }

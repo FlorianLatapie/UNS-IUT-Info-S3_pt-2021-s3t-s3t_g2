@@ -112,6 +112,10 @@ public class TraitementPaquetTcp extends TraitementPaquet<Socket> {
 		case "AZDCS":
             ReponseJoueurCourant(packet, message);
             break;
+            
+		case "PVD":
+            CarteJouerVote(packet, message);
+            break;
 
 		case "PIPZ":
 		case "PFC":
@@ -261,6 +265,13 @@ public class TraitementPaquetTcp extends TraitementPaquet<Socket> {
 	private void finPartie(Packet packet, String message) {
 		traitementB.finPartie(core, (Couleur) packet.getValue(message, 2));
 	}
+	
+	public void IndiquerCarteJouees(Packet packet, String message) {
+        out.println(packet.getDocs());
+        String messageTcp = getControleurReseau().construirePaquetTcp("PVC", (int)traitementB.IndiquerCarteJouees(core),
+                /*,*/ (String)packet.getValue(message, 1), (int)packet.getValue(message, 2), (String)core.getJoueurId());
+        getControleurReseau().getTcpClient().envoyer(messageTcp);
+    }
 
 	@Override
 	public void set(Object core) {
