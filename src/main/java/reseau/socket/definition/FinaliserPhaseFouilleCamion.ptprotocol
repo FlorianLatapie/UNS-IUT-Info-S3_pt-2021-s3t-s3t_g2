@@ -14,7 +14,7 @@ type:CarteType
 doc:La couleur du joueur ayant reçu la carte offerte ou « NUL » si aucune carte n’est offerte. La couleur est identifiée comme précédemment.
 value:
 name:carteDefausse
-type:CarteType
+type:CarteEtat
 doc:« CD » si une carte a été défaussée ou « NUL » si aucune carte n’est défaussée.
 value:
 name:partieId

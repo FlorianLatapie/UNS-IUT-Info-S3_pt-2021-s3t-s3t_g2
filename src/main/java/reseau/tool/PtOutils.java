@@ -154,6 +154,9 @@ public abstract class PtOutils {
 			case "Status":
 				Status sss = ((Status) valeur);
 				return sss.toString();
+			case "CarteEtat":
+				CarteEtat ssss = ((CarteEtat) valeur);
+				return ssss.toString();
 			case "HashMap<Integer,List<Integer>>":
 				HashMap<?, ?> pti = (HashMap<?, ?>) valeur;
 				HashMap<Integer, List<Integer>> ptiTemp = new HashMap<>();
@@ -226,6 +229,8 @@ public abstract class PtOutils {
 				return TypePartie.valueOf(param);
 			case "Status":
 				return Status.valueOf(param);
+			case "CarteEtat":
+				return CarteEtat.valueOf(param);
 			case "HashMap<Integer,List<Integer>>":
 				return PaquetOutils.strToSubList(param);
 			case "List<CarteType>":
