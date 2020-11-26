@@ -44,7 +44,7 @@ public class FinDePartiePane extends StackPane implements FinListener {
     private Background fondBlanc = new Background(new BackgroundFill(Color.WHITE, coinfb, null));
 
     private int valPadding = 10;
-    private Insets padding = new Insets(valPadding, valPadding * 2, valPadding, valPadding * 2);
+    private Insets padding = new Insets(valPadding, valPadding * 2.0, valPadding, valPadding * 2.0);
 
     Label gagnant1;
     Label gagnant2;
@@ -87,15 +87,9 @@ public class FinDePartiePane extends StackPane implements FinListener {
         bRetour1.setStyle(styleBoutons);
 
 
-        bRetour1.setOnMouseEntered(event -> {
-            bRetour1.setStyle(styleBoutonsSouris);
-        });
-        bRetour1.setOnMouseExited(event -> {
-            bRetour1.setStyle(styleBoutons);
-        });
-        bRetour1.setOnAction(EventHandler -> {
-            sc.setPaneOnTop(ApplicationPane.ACCUEIL);
-        });
+        bRetour1.setOnMouseEntered(event -> bRetour1.setStyle(styleBoutonsSouris));
+        bRetour1.setOnMouseExited(event -> bRetour1.setStyle(styleBoutons));
+        bRetour1.setOnAction(EventHandler -> sc.setPaneOnTop(ApplicationPane.ACCUEIL));
 
         Button bRetour2 = new Button("RETOUR");
         bRetour2.setPrefSize(lBouton, hBouton);
@@ -104,15 +98,9 @@ public class FinDePartiePane extends StackPane implements FinListener {
         bRetour2.setStyle(styleBoutons);
 
 
-        bRetour2.setOnMouseEntered(event -> {
-            bRetour2.setStyle(styleBoutonsSouris);
-        });
-        bRetour2.setOnMouseExited(event -> {
-            bRetour2.setStyle(styleBoutons);
-        });
-        bRetour2.setOnAction(EventHandler -> {
-            sc.setPaneOnTop(ApplicationPane.ACCUEIL);
-        });
+        bRetour2.setOnMouseEntered(event -> bRetour2.setStyle(styleBoutonsSouris));
+        bRetour2.setOnMouseExited(event -> bRetour2.setStyle(styleBoutons));
+        bRetour2.setOnAction(EventHandler -> sc.setPaneOnTop(ApplicationPane.ACCUEIL));
         bRetour2.setRotate(-90);
 
         bBas.setCenter(bBasCentre);
@@ -139,15 +127,9 @@ public class FinDePartiePane extends StackPane implements FinListener {
         bRetour3.setFont(policeBouton);
         bRetour3.setStyle(styleBoutons);
 
-        bRetour3.setOnMouseEntered(event -> {
-            bRetour3.setStyle(styleBoutonsSouris);
-        });
-        bRetour3.setOnMouseExited(event -> {
-            bRetour3.setStyle(styleBoutons);
-        });
-        bRetour3.setOnAction(EventHandler -> {
-            sc.setPaneOnTop(ApplicationPane.ACCUEIL);
-        });
+        bRetour3.setOnMouseEntered(event -> bRetour3.setStyle(styleBoutonsSouris));
+        bRetour3.setOnMouseExited(event -> bRetour3.setStyle(styleBoutons));
+        bRetour3.setOnAction(EventHandler -> sc.setPaneOnTop(ApplicationPane.ACCUEIL));
 
         Button bRetour4 = new Button("RETOUR");
         bRetour4.setPrefSize(lBouton, hBouton);
@@ -156,15 +138,9 @@ public class FinDePartiePane extends StackPane implements FinListener {
         bRetour4.setStyle(styleBoutons);
 
 
-        bRetour4.setOnMouseEntered(event -> {
-            bRetour4.setStyle(styleBoutonsSouris);
-        });
-        bRetour4.setOnMouseExited(event -> {
-            bRetour4.setStyle(styleBoutons);
-        });
-        bRetour4.setOnAction(EventHandler -> {
-            sc.setPaneOnTop(ApplicationPane.ACCUEIL);
-        });
+        bRetour4.setOnMouseEntered(event -> bRetour4.setStyle(styleBoutonsSouris));
+        bRetour4.setOnMouseExited(event -> bRetour4.setStyle(styleBoutons));
+        bRetour4.setOnAction(EventHandler -> sc.setPaneOnTop(ApplicationPane.ACCUEIL));
         bRetour4.setRotate(-90);
 
         bHaut.setRotate(180);

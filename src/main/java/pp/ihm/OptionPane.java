@@ -142,36 +142,24 @@ public class OptionPane extends StackPane {
 		bFrancais.setStyle(styleBoutons);
 		bFrancais.setOnAction(EventHandler -> sc.setPaneOnTop(ApplicationPane.OPTION));
 
-		bFrancais.setOnMouseEntered(event -> {
-			bFrancais.setStyle(styleBoutonsSouris);
-		});
-		bFrancais.setOnMouseExited(event -> {
-			bFrancais.setStyle(styleBoutons);
-		});
+		bFrancais.setOnMouseEntered(event -> bFrancais.setStyle(styleBoutonsSouris));
+		bFrancais.setOnMouseExited(event -> bFrancais.setStyle(styleBoutons));
 
 		Button bEnglish = new Button("English");
 		bEnglish.setFont(policeBouton);
 		bEnglish.setAlignment(Pos.CENTER);
 		bEnglish.setPrefSize(245, hauteurElement);
 		bEnglish.setStyle(styleBoutons);
-		bEnglish.setOnMouseEntered(event -> {
-			bEnglish.setStyle(styleBoutonsSouris);
-		});
-		bEnglish.setOnMouseExited(event -> {
-			bEnglish.setStyle(styleBoutons);
-		});
+		bEnglish.setOnMouseEntered(event -> bEnglish.setStyle(styleBoutonsSouris));
+		bEnglish.setOnMouseExited(event -> bEnglish.setStyle(styleBoutons));
 
 		Button bAcc = new Button("Accessibilité");
 		bAcc.setFont(policeBouton);
 		bAcc.setAlignment(Pos.CENTER);
 		bAcc.setPrefSize(500, hauteurElement);
 		bAcc.setStyle(styleBoutons);
-		bAcc.setOnMouseEntered(event -> {
-			bAcc.setStyle(styleBoutonsSouris);
-		});
-		bAcc.setOnMouseExited(event -> {
-			bAcc.setStyle(styleBoutons);
-		});
+		bAcc.setOnMouseEntered(event -> bAcc.setStyle(styleBoutonsSouris));
+		bAcc.setOnMouseExited(event -> bAcc.setStyle(styleBoutons));
 		bAcc.setOnAction(EventHandler -> sc.setPaneOnTop(ApplicationPane.ACCESSIBILITE));		
 
 		Button bRetour = new Button("RETOUR");
@@ -179,15 +167,9 @@ public class OptionPane extends StackPane {
 		bRetour.setAlignment(Pos.CENTER);
 		bRetour.setPrefSize(180, hauteurElement);
 		bRetour.setStyle(styleBoutons);
-		bRetour.setOnAction(EventHandler -> {
-			sc.setPaneOnTop(core.getPauseDepuis());
-		});
-		bRetour.setOnMouseEntered(event -> {
-			bRetour.setStyle(styleBoutonsSouris);
-		});
-		bRetour.setOnMouseExited(event -> {
-			bRetour.setStyle(styleBoutons);
-		});
+		bRetour.setOnAction(EventHandler -> sc.setPaneOnTop(core.getPauseDepuis()));
+		bRetour.setOnMouseEntered(event -> bRetour.setStyle(styleBoutonsSouris));
+		bRetour.setOnMouseExited(event -> bRetour.setStyle(styleBoutons));
 
 		hbBRetour.getChildren().add(bRetour);
 		hbLang.getChildren().add(bFrancais);

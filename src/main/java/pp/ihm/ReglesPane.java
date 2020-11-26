@@ -83,12 +83,8 @@ public class ReglesPane extends StackPane {
 		bRetour.setFont(policeBouton);
 		bRetour.setStyle(styleBoutons);
 
-		bRetour.setOnMouseEntered(event -> {
-			bRetour.setStyle(styleBoutonsSouris);
-		});
-		bRetour.setOnMouseExited(event -> {
-			bRetour.setStyle(styleBoutons);
-		});
+		bRetour.setOnMouseEntered(event -> bRetour.setStyle(styleBoutonsSouris));
+		bRetour.setOnMouseExited(event -> bRetour.setStyle(styleBoutons));
 		bRetour.setOnAction(EventHandler -> sc.setPaneOnTop(core.getReglesDepuis()));
 
 		// grille contenant les boutons du bas

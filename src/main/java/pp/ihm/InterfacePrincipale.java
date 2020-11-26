@@ -26,8 +26,8 @@ public class InterfacePrincipale extends Application {
 
 		primaryStage.setMaxWidth(largeur);
 		primaryStage.setMaxHeight(hauteur);
-		primaryStage.setMinWidth(largeur-20);
-		primaryStage.setMinHeight(hauteur-50);
+		primaryStage.setMinWidth(largeur-20.0);
+		primaryStage.setMinHeight(hauteur-50.0);
 		
 		primaryStage.setFullScreen(true);
 

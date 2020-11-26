@@ -9,7 +9,6 @@ import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.effect.BoxBlur;
 import javafx.scene.effect.GaussianBlur;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
@@ -146,12 +145,8 @@ public class PlateauPane extends StackPane implements PlateauListener {
 		bPause1.setPrefSize(lhBoutonPause, lhBoutonPause);
 		bPause1.setMinSize(lhBoutonPause, lhBoutonPause);
 		bPause1.setStyle(styleBoutons);
-		bPause1.setOnMouseEntered(event -> {
-			bPause1.setStyle(styleBoutonsSouris);
-		});
-		bPause1.setOnMouseExited(event -> {
-			bPause1.setStyle(styleBoutons);
-		});
+		bPause1.setOnMouseEntered(event -> bPause1.setStyle(styleBoutonsSouris));
+		bPause1.setOnMouseExited(event -> bPause1.setStyle(styleBoutons));
 		bPause1.setOnAction(EventHandler -> sc.setPaneOnTop(ApplicationPane.PAUSE));
 		bPause1.setFont(policeBoutonPause);
 		HBox.setMargin(bPause1, margeBoutonPause);
@@ -161,12 +156,8 @@ public class PlateauPane extends StackPane implements PlateauListener {
 		bPause2.setPrefSize(lhBoutonPause, lhBoutonPause);
 		bPause2.setMinSize(lhBoutonPause, lhBoutonPause);
 		bPause2.setStyle(styleBoutons);
-		bPause2.setOnMouseEntered(event -> {
-			bPause2.setStyle(styleBoutonsSouris);
-		});
-		bPause2.setOnMouseExited(event -> {
-			bPause2.setStyle(styleBoutons);
-		});
+		bPause2.setOnMouseEntered(event -> bPause2.setStyle(styleBoutonsSouris));
+		bPause2.setOnMouseExited(event -> bPause2.setStyle(styleBoutons));
 		bPause2.setOnAction(EventHandler -> sc.setPaneOnTop(ApplicationPane.PAUSE));
 		bPause2.setFont(policeBoutonPause);
 		HBox.setMargin(bPause2, margeBoutonPause);
@@ -229,12 +220,8 @@ public class PlateauPane extends StackPane implements PlateauListener {
 		bPause3.setPrefSize(lhBoutonPause, lhBoutonPause);
 		bPause3.setMinSize(lhBoutonPause, lhBoutonPause);
 		bPause3.setStyle(styleBoutons);
-		bPause3.setOnMouseEntered(event -> {
-			bPause3.setStyle(styleBoutonsSouris);
-		});
-		bPause3.setOnMouseExited(event -> {
-			bPause3.setStyle(styleBoutons);
-		});
+		bPause3.setOnMouseEntered(event -> bPause3.setStyle(styleBoutonsSouris));
+		bPause3.setOnMouseExited(event -> bPause3.setStyle(styleBoutons));
 		bPause3.setOnAction(EventHandler -> sc.setPaneOnTop(ApplicationPane.PAUSE));
 		bPause3.setFont(policeBoutonPause);
 		HBox.setMargin(bPause3, margeBoutonPause);
@@ -244,12 +231,8 @@ public class PlateauPane extends StackPane implements PlateauListener {
 		bPause4.setPrefSize(lhBoutonPause, lhBoutonPause);
 		bPause4.setMinSize(lhBoutonPause, lhBoutonPause);
 		bPause4.setStyle(styleBoutons);
-		bPause4.setOnMouseEntered(event -> {
-			bPause4.setStyle(styleBoutonsSouris);
-		});
-		bPause4.setOnMouseExited(event -> {
-			bPause4.setStyle(styleBoutons);
-		});
+		bPause4.setOnMouseEntered(event -> bPause4.setStyle(styleBoutonsSouris));
+		bPause4.setOnMouseExited(event -> bPause4.setStyle(styleBoutons));
 		bPause4.setOnAction(EventHandler -> sc.setPaneOnTop(ApplicationPane.PAUSE));
 		bPause4.setFont(policeBoutonPause);
 		HBox.setMargin(bPause4, margeBoutonPause);

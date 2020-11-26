@@ -150,12 +150,8 @@ public class AttenteJoueurPane extends StackPane implements AttenteListener {
         bRetour.setFont(policeBouton);
         bRetour.setStyle(styleBoutons);
 
-        bRetour.setOnMouseEntered(event -> {
-            bRetour.setStyle(styleBoutonsSouris);
-        });
-        bRetour.setOnMouseExited(event -> {
-            bRetour.setStyle(styleBoutons);
-        });
+        bRetour.setOnMouseEntered(event -> bRetour.setStyle(styleBoutonsSouris));
+        bRetour.setOnMouseExited(event -> bRetour.setStyle(styleBoutons));
         bRetour.setOnAction(EventHandler -> {
             core.getCj().stopThreads();
             sc.setPaneOnTop(ApplicationPane.ACCUEIL);

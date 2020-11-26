@@ -86,7 +86,7 @@ public class CouleurPane extends StackPane implements CouleurListener {
 		nom1.setPrefSize(largeurTF, hauteurElemtents);
 		nom1.setMinHeight(hauteurElemtents);
 		nom1.setAlignment(Pos.CENTER);
-		ComboBox<String> couleur1 = new ComboBox<String>();
+		ComboBox<String> couleur1 = new ComboBox<>();
 		couleur1.setMinHeight(hauteurElemtents);
 		couleur1.setPrefSize(largeurComboBox, hauteurElemtents);
 		couleur1.getItems().addAll(DataControl.couleursJoueur);
@@ -107,7 +107,7 @@ public class CouleurPane extends StackPane implements CouleurListener {
 		nom2.setPrefSize(largeurTF, hauteurElemtents);
 		nom2.setMinHeight(hauteurElemtents);
 		nom2.setAlignment(Pos.CENTER);
-		ComboBox<String> couleur2 = new ComboBox<String>();
+		ComboBox<String> couleur2 = new ComboBox<>();
 		couleur2.setPrefSize(largeurComboBox, hauteurElemtents);
 		couleur2.setMinHeight(hauteurElemtents);
 		couleur2.getItems().addAll(DataControl.couleursJoueur);
@@ -128,7 +128,7 @@ public class CouleurPane extends StackPane implements CouleurListener {
 		nom3.setPrefSize(largeurTF, hauteurElemtents);
 		nom3.setMinHeight(hauteurElemtents);
 		nom3.setAlignment(Pos.CENTER);
-		ComboBox<String> couleur3 = new ComboBox<String>();
+		ComboBox<String> couleur3 = new ComboBox<>();
 		couleur3.setMinHeight(hauteurElemtents);
 		couleur3.setPrefSize(largeurComboBox, hauteurElemtents);
 		couleur3.getItems().addAll(DataControl.couleursJoueur);
@@ -149,7 +149,7 @@ public class CouleurPane extends StackPane implements CouleurListener {
 		nom4.setPrefSize(largeurTF, hauteurElemtents);
 		nom4.setMinHeight(hauteurElemtents);
 		nom4.setAlignment(Pos.CENTER);
-		ComboBox<String> couleur4 = new ComboBox<String>();
+		ComboBox<String> couleur4 = new ComboBox<>();
 		couleur4.setMinHeight(hauteurElemtents);
 		couleur4.setPrefSize(largeurComboBox, hauteurElemtents);
 		couleur4.getItems().addAll(DataControl.couleursJoueur);
@@ -170,7 +170,7 @@ public class CouleurPane extends StackPane implements CouleurListener {
 		nom5.setPrefSize(largeurTF, hauteurElemtents);
 		nom5.setMinHeight(hauteurElemtents);
 		nom5.setAlignment(Pos.CENTER);
-		ComboBox<String> couleur5 = new ComboBox<String>();
+		ComboBox<String> couleur5 = new ComboBox<>();
 		couleur5.setMinHeight(hauteurElemtents);
 		couleur5.setPrefSize(largeurComboBox, hauteurElemtents);
 		couleur5.getItems().addAll(DataControl.couleursJoueur);
@@ -191,7 +191,7 @@ public class CouleurPane extends StackPane implements CouleurListener {
 		nom6.setPrefSize(largeurTF, hauteurElemtents);
 		nom6.setMinHeight(hauteurElemtents);
 		nom6.setAlignment(Pos.CENTER);
-		ComboBox<String> couleur6 = new ComboBox<String>();
+		ComboBox<String> couleur6 = new ComboBox<>();
 		couleur6.setMinHeight(hauteurElemtents);
 		couleur6.setPrefSize(largeurComboBox, hauteurElemtents);
 		couleur6.getItems().addAll(DataControl.couleursJoueur);
@@ -219,13 +219,8 @@ public class CouleurPane extends StackPane implements CouleurListener {
 		bJouer.setFont(policeBouton);
 		bJouer.setStyle(styleBoutons);
 
-		bJouer.setOnMouseEntered(event -> {
-
-			bJouer.setStyle(styleBoutonsSouris);
-		});
-		bJouer.setOnMouseExited(event -> {
-			bJouer.setStyle(styleBoutons);
-		});
+		bJouer.setOnMouseEntered(event -> bJouer.setStyle(styleBoutonsSouris));
+		bJouer.setOnMouseExited(event -> bJouer.setStyle(styleBoutons));
 		bJouer.setOnAction(EventHandler -> {
 			boolean isOk = IhmTools.isAllUniqueColor(core.getNbJoueur(), couleur1, couleur2, couleur3, couleur4,
 					couleur5, couleur6);
@@ -243,9 +238,7 @@ public class CouleurPane extends StackPane implements CouleurListener {
 		bRetour.setFont(policeBouton);
 		bRetour.setStyle(styleBoutons);
 
-		bRetour.setOnMouseEntered(event -> {
-			bRetour.setStyle(styleBoutonsSouris);
-		});
+		bRetour.setOnMouseEntered(event -> bRetour.setStyle(styleBoutonsSouris));
 		bRetour.setOnMouseExited(event -> {
 			core.getCj().stopThreads();
 			bRetour.setStyle(styleBoutons);

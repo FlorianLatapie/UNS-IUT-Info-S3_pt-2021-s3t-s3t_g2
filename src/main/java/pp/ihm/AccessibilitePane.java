@@ -94,36 +94,24 @@ public class AccessibilitePane extends StackPane{
 		bDeuteranopie.setAlignment(Pos.CENTER);
 		bDeuteranopie.setStyle(styleBoutons);
 		bDeuteranopie.setPrefSize(largeurBouton, hauteurElement);
-		bDeuteranopie.setOnMouseEntered(event -> {
-			bDeuteranopie.setStyle(styleBoutonsSouris);
-		});
-		bDeuteranopie.setOnMouseExited(event -> {
-			bDeuteranopie.setStyle(styleBoutons);
-		});
+		bDeuteranopie.setOnMouseEntered(event -> bDeuteranopie.setStyle(styleBoutonsSouris));
+		bDeuteranopie.setOnMouseExited(event -> bDeuteranopie.setStyle(styleBoutons));
 		
 		Button bProtanopie = new Button("Protanopie");
 		bProtanopie.setFont(policeBouton);
 		bProtanopie.setAlignment(Pos.CENTER);
 		bProtanopie.setPrefSize(largeurBouton, hauteurElement);
 		bProtanopie.setStyle(styleBoutons);
-		bProtanopie.setOnMouseEntered(event -> {
-			bProtanopie.setStyle(styleBoutonsSouris);
-		});
-		bProtanopie.setOnMouseExited(event -> {
-			bProtanopie.setStyle(styleBoutons);
-		});
+		bProtanopie.setOnMouseEntered(event -> bProtanopie.setStyle(styleBoutonsSouris));
+		bProtanopie.setOnMouseExited(event -> bProtanopie.setStyle(styleBoutons));
 
 		Button bTritanopie = new Button("Tritanopie");
 		bTritanopie.setFont(policeBouton);
 		bTritanopie.setAlignment(Pos.CENTER);
 		bTritanopie.setPrefSize(largeurBouton, hauteurElement);
 		bTritanopie.setStyle(styleBoutons);
-		bTritanopie.setOnMouseEntered(event -> {
-			bTritanopie.setStyle(styleBoutonsSouris);
-		});
-		bTritanopie.setOnMouseExited(event -> {
-			bTritanopie.setStyle(styleBoutons);
-		});
+		bTritanopie.setOnMouseEntered(event -> bTritanopie.setStyle(styleBoutonsSouris));
+		bTritanopie.setOnMouseExited(event -> bTritanopie.setStyle(styleBoutons));
 		hbDaltonisme.getChildren().addAll(bDeuteranopie, bProtanopie, bTritanopie);
 		
 		vbBoutons.setSpacing(20);
@@ -149,12 +137,8 @@ public class AccessibilitePane extends StackPane{
 		bRetour.setPrefSize(180, hauteurElement);
 		bRetour.setStyle(styleBoutons);
 		bRetour.setOnAction(EventHandler -> sc.setPaneOnTop(ApplicationPane.OPTION));
-		bRetour.setOnMouseEntered(event -> {
-			bRetour.setStyle(styleBoutonsSouris);
-		});
-		bRetour.setOnMouseExited(event -> {
-			bRetour.setStyle(styleBoutons);
-		});
+		bRetour.setOnMouseEntered(event -> bRetour.setStyle(styleBoutonsSouris));
+		bRetour.setOnMouseExited(event -> bRetour.setStyle(styleBoutons));
 		
 		vbRetour.getChildren().add(bRetour);
 		

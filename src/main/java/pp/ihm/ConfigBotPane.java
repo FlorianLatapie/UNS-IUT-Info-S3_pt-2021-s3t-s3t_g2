@@ -1,13 +1,11 @@
 package pp.ihm;
 
-import pp.controleur.ControleurJeu;
 import pp.ihm.DataControl.ApplicationPane;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
 import javafx.scene.effect.GaussianBlur;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
@@ -15,8 +13,6 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.TextAlignment;
-
-import java.io.IOException;
 
 /**
  * The Class ConfigPartiePane.
@@ -97,7 +93,7 @@ public class ConfigBotPane extends StackPane {
 		bot1Texte.setPadding(botPadding);
 		bot1Texte.setMinWidth(largeurTexte);
 
-		ComboBox<String> diffBot1 = new ComboBox<String>();
+		ComboBox<String> diffBot1 = new ComboBox<>();
 		diffBot1.getItems().addAll(DataControl.difficulteBot);
 		diffBot1.setValue("Faible");
 		diffBot1.setPrefSize(largeurTF, hauteurElemtents);
@@ -120,7 +116,7 @@ public class ConfigBotPane extends StackPane {
 		bot2Texte.setPadding(botPadding);
 		bot2Texte.setMinWidth(largeurTexte);
 
-		ComboBox<String> diffBot2 = new ComboBox<String>();
+		ComboBox<String> diffBot2 = new ComboBox<>();
 		diffBot2.getItems().addAll(DataControl.difficulteBot);
 		diffBot2.setValue("Faible");
 		diffBot2.setPrefSize(largeurTF, hauteurElemtents);
@@ -143,7 +139,7 @@ public class ConfigBotPane extends StackPane {
 		bot3Texte.setPadding(botPadding);
 		bot3Texte.setMinWidth(largeurTexte);
 
-		ComboBox<String> diffBot3 = new ComboBox<String>();
+		ComboBox<String> diffBot3 = new ComboBox<>();
 		diffBot3.getItems().addAll(DataControl.difficulteBot);
 		diffBot3.setValue("Faible");
 		diffBot3.setPrefSize(largeurTF, hauteurElemtents);
@@ -166,7 +162,7 @@ public class ConfigBotPane extends StackPane {
 		bot4Texte.setPadding(botPadding);
 		bot4Texte.setMinWidth(largeurTexte);
 
-		ComboBox<String> diffBot4 = new ComboBox<String>();
+		ComboBox<String> diffBot4 = new ComboBox<>();
 		diffBot4.getItems().addAll(DataControl.difficulteBot);
 		diffBot4.setValue("Faible");
 		diffBot4.setPrefSize(largeurTF, hauteurElemtents);
@@ -189,7 +185,7 @@ public class ConfigBotPane extends StackPane {
 		bot5Texte.setPadding(botPadding);
 		bot5Texte.setMinWidth(largeurTexte);
 
-		ComboBox<String> diffBot5 = new ComboBox<String>();
+		ComboBox<String> diffBot5 = new ComboBox<>();
 		diffBot5.getItems().addAll(DataControl.difficulteBot);
 		diffBot5.setValue("Faible");
 		diffBot5.setPrefSize(largeurTF, hauteurElemtents);
@@ -212,7 +208,7 @@ public class ConfigBotPane extends StackPane {
 		bot6Texte.setPadding(botPadding);
 		bot6Texte.setMinWidth(largeurTexte);
 
-		ComboBox<String> diffBot6 = new ComboBox<String>();
+		ComboBox<String> diffBot6 = new ComboBox<>();
 		diffBot6.getItems().addAll(DataControl.difficulteBot);
 		diffBot6.setValue("Faible");
 		diffBot6.setPrefSize(largeurTF, hauteurElemtents);
@@ -223,7 +219,7 @@ public class ConfigBotPane extends StackPane {
 		bot6.getChildren().addAll(bot6Texte, diffBot6);
 		bot6.setVisible(true);
 
-		vBots.setSpacing(spacing / 2);
+		vBots.setSpacing(spacing / 2.0);
 		vBots.getChildren().addAll(bot1, bot2, bot3, bot4, bot5, bot6);
 
 		VBox vbCenter = new VBox();
@@ -238,30 +234,9 @@ public class ConfigBotPane extends StackPane {
 		bJouer.setFont(policeBouton);
 		bJouer.setStyle(styleBoutons);
 
-		bJouer.setOnMouseEntered(event -> {
-
-			bJouer.setStyle(styleBoutonsSouris);
-		});
-		bJouer.setOnMouseExited(event -> {
-			bJouer.setStyle(styleBoutons);
-		});
-		bJouer.setOnAction(EventHandler -> {
-			// TODO on lance la partie ici ou au pane précédent (config partie) 
-			/*
-			 * if (Integer.valueOf(nbJr.getValue()) > 6 || Integer.valueOf(nbJr.getValue())
-			 * < 3) { core.setNbJoueur(5); } else {
-			 * core.setNbJoueur(Integer.valueOf(nbJr.getValue())); }
-			 * 
-			 * if (Integer.valueOf(nbBot.getValue()) > 6 ||
-			 * Integer.valueOf(nbBot.getValue()) < 0 || Integer.valueOf(nbBot.getValue()) >
-			 * Integer.valueOf(nbJr.getValue())) { core.setNbBot(core.getNbJoueur()); } else
-			 * { core.setNbBot(Integer.valueOf(nbBot.getValue())); }
-			 * core.setNomPartie(nomP.getText()); try { core.setCj(new
-			 * ControleurJeu(core.getNomPartie(), core.getNbJoueurReel(), core.getNbBot(),
-			 * core.getInitializer())); } catch (IOException e) { e.printStackTrace(); }
-			 */
-			sc.setPaneOnTop(ApplicationPane.WAIT);
-		});
+		bJouer.setOnMouseEntered(event -> bJouer.setStyle(styleBoutonsSouris));
+		bJouer.setOnMouseExited(event -> bJouer.setStyle(styleBoutons));
+		bJouer.setOnAction(EventHandler -> sc.setPaneOnTop(ApplicationPane.WAIT));
 
 		Button bRetour = new Button("RETOUR");
 		bRetour.setPrefSize(lBouton, hBouton);
@@ -269,12 +244,8 @@ public class ConfigBotPane extends StackPane {
 		bRetour.setFont(policeBouton);
 		bRetour.setStyle(styleBoutons);
 
-		bRetour.setOnMouseEntered(event -> {
-			bRetour.setStyle(styleBoutonsSouris);
-		});
-		bRetour.setOnMouseExited(event -> {
-			bRetour.setStyle(styleBoutons);
-		});
+		bRetour.setOnMouseEntered(event -> bRetour.setStyle(styleBoutonsSouris));
+		bRetour.setOnMouseExited(event -> bRetour.setStyle(styleBoutons));
 		bRetour.setOnAction(EventHandler -> sc.setPaneOnTop(ApplicationPane.ACCUEIL));
 
 		// grille contenant les boutons du bas

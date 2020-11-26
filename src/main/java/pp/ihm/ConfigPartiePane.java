@@ -130,7 +130,7 @@ public class ConfigPartiePane extends StackPane {
         nbBotTexte.setPadding(botPadding);
         nbBotTexte.setMinWidth(largeurTexte);
 
-        ComboBox<Integer> nbBot = new ComboBox<Integer>();
+        ComboBox<Integer> nbBot = new ComboBox<>();
         nbBot.getItems().addAll(DataControl.nombreBot);
         nbBot.setValue(5);
         nbBot.setPrefSize(largeurTF, hauteurElemtents);
@@ -141,7 +141,7 @@ public class ConfigPartiePane extends StackPane {
         nbTotBot.getChildren().addAll(nbBotTexte, nbBot);
         nbTotBot.setDisable(false);
 
-        vJoueurs.setSpacing(spacing / 2);
+        vJoueurs.setSpacing(spacing / 2.0);
         vJoueurs.getChildren().addAll(nomPartie, nbTotJr, nbTotBot);
 
         VBox vbCenter = new VBox();
@@ -158,25 +158,20 @@ public class ConfigPartiePane extends StackPane {
         bJouer.setFont(policeBouton);
         bJouer.setStyle(styleBoutons);
 
-        bJouer.setOnMouseEntered(event -> {
-
-            bJouer.setStyle(styleBoutonsSouris);
-        });
-        bJouer.setOnMouseExited(event -> {
-            bJouer.setStyle(styleBoutons);
-        });
+        bJouer.setOnMouseEntered(event -> bJouer.setStyle(styleBoutonsSouris));
+        bJouer.setOnMouseExited(event -> bJouer.setStyle(styleBoutons));
         bJouer.setOnAction(EventHandler -> {
             //TODO on lance la partie ici ou au pane suivant (config bot) 
-            if (Integer.valueOf(nbJr.getValue()) > 6 || Integer.valueOf(nbJr.getValue()) < 3) {
+            if (nbJr.getValue() > 6 || nbJr.getValue() < 3) {
                 core.setNbJoueur(5);
             } else {
-                core.setNbJoueur(Integer.valueOf(nbJr.getValue()));
+                core.setNbJoueur(nbJr.getValue());
             }
 
-            if (Integer.valueOf(nbBot.getValue()) > 6 || Integer.valueOf(nbBot.getValue()) < 0 || Integer.valueOf(nbBot.getValue()) > Integer.valueOf(nbJr.getValue())) {
+            if (nbBot.getValue() > 6 || nbBot.getValue() < 0 || nbBot.getValue() > nbJr.getValue()) {
                 core.setNbBot(core.getNbJoueur());
             } else {
-                core.setNbBot(Integer.valueOf(nbBot.getValue()));
+                core.setNbBot(nbBot.getValue());
             }
             core.setNomPartie(nomP.getText());
             try {
@@ -193,12 +188,8 @@ public class ConfigPartiePane extends StackPane {
         bRetour.setFont(policeBouton);
         bRetour.setStyle(styleBoutons);
 
-        bRetour.setOnMouseEntered(event -> {
-            bRetour.setStyle(styleBoutonsSouris);
-        });
-        bRetour.setOnMouseExited(event -> {
-            bRetour.setStyle(styleBoutons);
-        });
+        bRetour.setOnMouseEntered(event -> bRetour.setStyle(styleBoutonsSouris));
+        bRetour.setOnMouseExited(event -> bRetour.setStyle(styleBoutons));
         bRetour.setOnAction(EventHandler -> sc.setPaneOnTop(ApplicationPane.ACCUEIL));
 
         // grille contenant les boutons du bas

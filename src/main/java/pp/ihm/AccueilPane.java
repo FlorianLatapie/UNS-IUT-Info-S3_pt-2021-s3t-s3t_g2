@@ -78,12 +78,8 @@ public class AccueilPane extends StackPane {
 		bJouer.setFont(policeBouton);
 		bJouer.setStyle(styleBoutons);
 
-		bJouer.setOnMouseEntered(event -> {
-			bJouer.setStyle(styleBoutonsSouris);
-		});
-		bJouer.setOnMouseExited(event -> {
-			bJouer.setStyle(styleBoutons);
-		});
+		bJouer.setOnMouseEntered(event -> bJouer.setStyle(styleBoutonsSouris));
+		bJouer.setOnMouseExited(event -> bJouer.setStyle(styleBoutons));
 		bJouer.setOnAction(EventHandler -> sc.setPaneOnTop(ApplicationPane.CONFIG));
 
 		Button bOptions = new Button("OPTIONS");
@@ -92,12 +88,8 @@ public class AccueilPane extends StackPane {
 		bOptions.setFont(policeBouton);
 		bOptions.setStyle(styleBoutons);
 
-		bOptions.setOnMouseEntered(event -> {
-			bOptions.setStyle(styleBoutonsSouris);
-		});
-		bOptions.setOnMouseExited(event -> {
-			bOptions.setStyle(styleBoutons);
-		});
+		bOptions.setOnMouseEntered(event -> bOptions.setStyle(styleBoutonsSouris));
+		bOptions.setOnMouseExited(event -> bOptions.setStyle(styleBoutons));
 		bOptions.setOnAction(EventHandler -> {
 			core.setPauseDepuis(paneName);
 			sc.setPaneOnTop(ApplicationPane.OPTION);
@@ -109,12 +101,8 @@ public class AccueilPane extends StackPane {
 		bRegles.setFont(policeBouton);
 		bRegles.setStyle(styleBoutons);
 
-		bRegles.setOnMouseEntered(event -> {
-			bRegles.setStyle(styleBoutonsSouris);
-		});
-		bRegles.setOnMouseExited(event -> {
-			bRegles.setStyle(styleBoutons);
-		});
+		bRegles.setOnMouseEntered(event -> bRegles.setStyle(styleBoutonsSouris));
+		bRegles.setOnMouseExited(event -> bRegles.setStyle(styleBoutons));
 		bRegles.setOnAction(EventHandler -> {
 			core.setReglesDepuis(paneName);
 			sc.setPaneOnTop(ApplicationPane.REGLES);
@@ -126,12 +114,8 @@ public class AccueilPane extends StackPane {
 		bQuitter.setFont(policeBouton);
 		bQuitter.setStyle(styleBoutons);
 
-		bQuitter.setOnMouseEntered(event -> {
-			bQuitter.setStyle(styleBoutonsSouris);
-		});
-		bQuitter.setOnMouseExited(event -> {
-			bQuitter.setStyle(styleBoutons);
-		});
+		bQuitter.setOnMouseEntered(event -> bQuitter.setStyle(styleBoutonsSouris));
+		bQuitter.setOnMouseExited(event -> bQuitter.setStyle(styleBoutons));
 		bQuitter.setOnAction(event -> {
 			boolean resultat = ConfirmationPane.afficher("Quitter le jeu",
 					"Êtes-vous sûr de vouloir quitter le jeu ? \nSi vous quittez, la partie en cours sera perdue.");

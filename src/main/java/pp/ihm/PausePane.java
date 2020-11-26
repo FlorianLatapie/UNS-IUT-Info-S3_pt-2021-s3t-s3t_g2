@@ -127,24 +127,16 @@ public class PausePane extends StackPane {
 			sc.setPaneOnTop(ApplicationPane.OPTION);
 		});
 
-		bOption.setOnMouseEntered(event -> {
-			bOption.setStyle(styleBoutonsSouris);
-		});
-		bOption.setOnMouseExited(event -> {
-			bOption.setStyle(styleBoutons);
-		});
+		bOption.setOnMouseEntered(event -> bOption.setStyle(styleBoutonsSouris));
+		bOption.setOnMouseExited(event -> bOption.setStyle(styleBoutons));
 
 		Button bRegles = new Button("Règles du jeu");
 		bRegles.setFont(Font.font("Arial", FontWeight.BOLD, 30));
 		bRegles.setAlignment(Pos.CENTER);
 		bRegles.setPrefSize(500, 60);
 		bRegles.setStyle(styleBoutons);
-		bRegles.setOnMouseEntered(event -> {
-			bRegles.setStyle(styleBoutonsSouris);
-		});
-		bRegles.setOnMouseExited(event -> {
-			bRegles.setStyle(styleBoutons);
-		});
+		bRegles.setOnMouseEntered(event -> bRegles.setStyle(styleBoutonsSouris));
+		bRegles.setOnMouseExited(event -> bRegles.setStyle(styleBoutons));
 		bRegles.setOnAction(EventHandler -> {
 			core.setReglesDepuis(paneName);
 			sc.setPaneOnTop(ApplicationPane.REGLES);
@@ -155,12 +147,8 @@ public class PausePane extends StackPane {
 		bRecommencer.setAlignment(Pos.CENTER);
 		bRecommencer.setPrefSize(500, 60);
 		bRecommencer.setStyle(styleBoutons);
-		bRecommencer.setOnMouseEntered(event -> {
-			bRecommencer.setStyle(styleBoutonsSouris);
-		});
-		bRecommencer.setOnMouseExited(event -> {
-			bRecommencer.setStyle(styleBoutons);
-		});
+		bRecommencer.setOnMouseEntered(event -> bRecommencer.setStyle(styleBoutonsSouris));
+		bRecommencer.setOnMouseExited(event -> bRecommencer.setStyle(styleBoutons));
 
 		Button bQuitter = new Button("Quitter");
 		bQuitter.setFont(Font.font("Arial", FontWeight.BOLD, 30));
@@ -169,12 +157,8 @@ public class PausePane extends StackPane {
 		bQuitter.setStyle(styleBoutons);
 		bQuitter.setOnAction(actionEvent -> Platform.exit());
 
-		bQuitter.setOnMouseEntered(event -> {
-			bQuitter.setStyle(styleBoutonsSouris);
-		});
-		bQuitter.setOnMouseExited(event -> {
-			bQuitter.setStyle(styleBoutons);
-		});
+		bQuitter.setOnMouseEntered(event -> bQuitter.setStyle(styleBoutonsSouris));
+		bQuitter.setOnMouseExited(event -> bQuitter.setStyle(styleBoutons));
 
 		bQuitter.setOnAction(event -> {
 			boolean resultat = ConfirmationPane.afficher("Quitter le jeu",
@@ -189,12 +173,8 @@ public class PausePane extends StackPane {
 		bRetour.setPrefSize(500, 60);
 		bRetour.setStyle(styleBoutons);
 		bRetour.setOnAction(EventHandler -> sc.setPaneOnTop(ApplicationPane.PLATEAU));
-		bRetour.setOnMouseEntered(event -> {
-			bRetour.setStyle(styleBoutonsSouris);
-		});
-		bRetour.setOnMouseExited(event -> {
-			bRetour.setStyle(styleBoutons);
-		});
+		bRetour.setOnMouseEntered(event -> bRetour.setStyle(styleBoutonsSouris));
+		bRetour.setOnMouseExited(event -> bRetour.setStyle(styleBoutons));
 
 		vbBoutons.getChildren().addAll(bOption, bRegles, bRecommencer, bRetour, bQuitter);
 		vbBoutons.setMargin(bRegles, new Insets(10));
