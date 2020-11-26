@@ -2,10 +2,6 @@ package pp.ihm;
 
 import java.util.Timer;
 import java.util.TimerTask;
-
-import com.jfoenix.controls.JFXDialog;
-import com.jfoenix.controls.JFXDialogLayout;
-
 import pp.ihm.DataControl.ApplicationPane;
 import pp.ihm.eventListener.PlateauListener;
 import javafx.application.Platform;
