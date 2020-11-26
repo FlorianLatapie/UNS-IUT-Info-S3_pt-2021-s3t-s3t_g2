@@ -4,7 +4,7 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class ThreadToolTest {
+class ThreadOutilsTest {
     boolean asyncTask;
     boolean asyncTask1 = true;
 
