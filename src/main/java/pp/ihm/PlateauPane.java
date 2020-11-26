@@ -681,18 +681,11 @@ public class PlateauPane extends StackPane implements PlateauListener {
 		lInfo.setFont(Font.font("Segoe UI", FontWeight.BOLD, 20));
 		lInfo.setTextFill(Color.WHITE);
 		vInfo.getChildren().addAll(lInfo);
-		
-		TranslateTransition transi = new TranslateTransition(Duration.millis(1400), info);
-		transi.setFromY(-1000f);
-	    transi.setToY(0f);
-	    transi.setCycleCount((int)2f);
-	    transi.setAutoReverse(false);
-	    transi.play();
 
 		info.setMargin(vInfo, new Insets(-30, 0, 0, 0));
 		info.setTop(vTitreInfo);
 		info.setCenter(vInfo);
-		info.setVisible(true);
+		info.setVisible(false);
 
 		borderJoueurs.setTop(hHaut);
 		borderJoueurs.setBottom(hBas);
@@ -706,10 +699,6 @@ public class PlateauPane extends StackPane implements PlateauListener {
 		imgFond = new ImageView(DataControl.PLATEAU);
 		imgFond.setScaleX(0.4362);
 		imgFond.setScaleY(0.4362);
-		
-		imgFond.setEffect(flou);
-		borderJoueurs.setEffect(flou);
-		aPlateau.setEffect(flou);
 
 		afficheJoueursLieu1.setTextFill(Color.WHITE);
 		afficheJoueursLieu2.setTextFill(Color.WHITE);
