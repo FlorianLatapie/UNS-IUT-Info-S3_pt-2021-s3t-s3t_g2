@@ -1,4 +1,4 @@
-package botfaible;
+package botmoyen;
 
 import static java.lang.System.out;
 
@@ -13,7 +13,7 @@ import reseau.type.PionCouleur;
 
 public class TraitementBot {
 
-	public void initialiserPartie(BotFaible core, List<?> nomsT, List<?> couleursT, int lieuferme) {
+	public void initialiserPartie(BotMoyen core, List<?> nomsT, List<?> couleursT, int lieuferme) {
 		List<String> noms = new ArrayList<>();
 		List<Couleur> couleurs = new ArrayList<>();
 		for (Object o : nomsT)
@@ -37,7 +37,7 @@ public class TraitementBot {
 		}
 	}
 
-	public void lancerDes(BotFaible core, List<?> pionT) {
+	public void lancerDes(BotMoyen core, List<?> pionT) {
 		List<Integer> pion = new ArrayList<>();
 		for (Object o : pionT)
 			pion.add((Integer) o);
@@ -54,27 +54,27 @@ public class TraitementBot {
 		return dest;
 	}
 
-	public int choisirPionPlacement(BotFaible core) {
+	public int choisirPionPlacement(BotMoyen core) {
 		int pion = 0;
 		if (!core.getPionAPos().isEmpty())
 			pion = core.getPionAPos().get(new Random().nextInt(core.getPionAPos().size()));
 		return pion;
 	}
 
-	public void debutTour(BotFaible core, List<Couleur> couleurs) {
+	public void debutTour(BotMoyen core, List<Couleur> couleurs) {
 		if (!couleurs.contains(core.getCouleur())) {
 			core.setEnvie(false);
 		}
 	}
 
-	public int choixDest(BotFaible core){
+	public int choixDest(BotMoyen core){
 		out.println("Entrez une destination");
 		int dest = 0;
 		dest = core.getLieuOuvert().get(new Random().nextInt(core.getLieuOuvert().size()));
 		return dest;
 	}
 	
-	public void debutDeplacemant(BotFaible core, List<?> lieuxT){
+	public void debutDeplacemant(BotMoyen core, List<?> lieuxT){
 		List<Integer> lieux = new ArrayList<>();
 		for (Object o : lieuxT)
 			lieux.add((Integer) o);
@@ -109,7 +109,7 @@ public class TraitementBot {
 		return destEtPion;
 	}
 	
-	public void attaqueZombie(BotFaible core, List<PionCouleur> l, List<PionCouleur> ltemp) {
+	public void attaqueZombie(BotMoyen core, List<PionCouleur> l, List<PionCouleur> ltemp) {
 		for (PionCouleur pc : l) {
 			if (IdjrTools.getCouleurByChar(pc) == core.getCouleur()) {
 				ltemp.add(pc);
@@ -118,7 +118,7 @@ public class TraitementBot {
 		core.setPoinSacrDispo(ltemp);
 	}
 	
-	public PionCouleur choisirSacrifice(BotFaible core, List<?> listPionT) {
+	public PionCouleur choisirSacrifice(BotMoyen core, List<?> listPionT) {
 		List<Integer> listPion = new ArrayList<>();
 		for (Object o : listPionT)
 			listPion.add((Integer) o);
@@ -127,7 +127,7 @@ public class TraitementBot {
 		return pion;
 	}
 	
-	public void finPartie(BotFaible core, Couleur gagnant) {
+	public void finPartie(BotMoyen core, Couleur gagnant) {
 		out.println("Le gagant est le joueur " + gagnant + " !");
 		core.setEstFini(true);
 		// getControleurReseau().arreter();

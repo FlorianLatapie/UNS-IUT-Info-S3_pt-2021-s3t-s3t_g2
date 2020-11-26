@@ -1,4 +1,4 @@
-package botfaible;
+package botmoyen;
 
 import reseau.socket.ConnexionType;
 import reseau.socket.ControleurReseau;
@@ -12,7 +12,7 @@ import java.net.InetAddress;
 import java.util.ArrayList;
 import java.util.List;
 
-public class BotFaible {
+public class BotMoyen {
 	/* Parametre Idjr */
 	private String nom;
 	private String numPartie;
@@ -32,7 +32,7 @@ public class BotFaible {
 	/* Parametre Temporaire */
 	private List<Integer> pionAPos;
 
-	public BotFaible(int delay) {
+	public BotMoyen(int delay) {
 		this.delay = delay;
 	}
 	

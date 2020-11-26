@@ -1,4 +1,4 @@
-package botfaible;
+package botmoyen;
 
 import reseau.packet.Packet;
 import reseau.socket.ControleurReseau;
@@ -23,7 +23,7 @@ import java.net.Socket;
  * @version 1.0
  */
 public class TraitementPaquetTcp extends TraitementPaquet<Socket> {
-	private BotFaible core;
+	private BotMoyen core;
 	private TraitementBot traitementB;
 
 	/**
@@ -31,7 +31,7 @@ public class TraitementPaquetTcp extends TraitementPaquet<Socket> {
 	 * @param core           coeur du jeu
 	 */
 	public TraitementPaquetTcp(Object core) {
-		this.core = (BotFaible) core;
+		this.core = (BotMoyen) core;
 		this.traitementB = new TraitementBot();
 	}
 
@@ -228,6 +228,6 @@ public class TraitementPaquetTcp extends TraitementPaquet<Socket> {
 
 	@Override
 	public void set(Object core) {
-		this.core = (BotFaible) core;
+		this.core = (BotMoyen) core;
 	}
 }

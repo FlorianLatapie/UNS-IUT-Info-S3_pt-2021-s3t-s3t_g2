@@ -1,4 +1,4 @@
-package botfaible;
+package botmoyen;
 
 import reseau.packet.Packet;
 import reseau.socket.ConnexionType;
@@ -22,13 +22,13 @@ import java.util.Scanner;
  * @version 1.0
  */
 public class TraitementPaquetUdp extends TraitementPaquet<DatagramPacket> {
-	private BotFaible core;// TODO Add the game manager (core)
+	private BotMoyen core;// TODO Add the game manager (core)
 
 	/**
 	 * @param core           coeur du jeu
 	 */
 	public TraitementPaquetUdp(Object core) {
-		this.core = (BotFaible) core;// TODO Add the game manager (core)
+		this.core = (BotMoyen) core;// TODO Add the game manager (core)
 	}
 
 	public void init(ControleurReseau netWorkManager) {
@@ -124,6 +124,6 @@ public class TraitementPaquetUdp extends TraitementPaquet<DatagramPacket> {
 
 	@Override
 	public void set(Object core) {
-		this.core = (BotFaible)core;
+		this.core = (BotMoyen)core;
 	}
 }
