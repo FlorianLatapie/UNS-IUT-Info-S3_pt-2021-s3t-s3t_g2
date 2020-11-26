@@ -103,6 +103,9 @@ public class TraitementPaquetTcp extends TraitementPaquet<Socket> {
 		case "ACP":
 			accepter(packet, message);
 			break;
+		case "RAZDD":
+			fournirActionsDefense(packet, message);
+			break;
 
 		case "PIPZ":
 		case "PFC":
@@ -116,6 +119,16 @@ public class TraitementPaquetTcp extends TraitementPaquet<Socket> {
 			throw new IllegalStateException(
 					MessageFormat.format("[TCP] Il n''y a pas de traitement possible pour {0}", packet.getKey()));
 		}
+	}
+	
+	private void fournirActionsDefense(Packet packet, String message) {
+		List<CarteType> listeCarteJouee = traitementB.listeCarteJouee(this.core, (int) packet.getValue(message, 1));
+		List<PionCouleur> listePionCache = traitementB.listePionCache(this.core);
+		
+		String messageTCP = getControleurReseau().construirePaquetTcp("RAZRD", listeCarteJouee, 
+				listePionCache, (String) packet.getValue(message, 3),
+				(int) packet.getValue(message, 4), core.getJoueurId());
+		getControleurReseau().getTcpClient().envoyer(messageTCP);
 	}
 
 	public void accepter(Packet packet, String message) {

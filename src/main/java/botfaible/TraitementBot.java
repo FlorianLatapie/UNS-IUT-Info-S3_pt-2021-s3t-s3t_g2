@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Random;
 
+import reseau.type.CarteType;
 import reseau.type.Couleur;
 import reseau.type.PionCouleur;
 
@@ -132,5 +133,81 @@ public class TraitementBot {
 		core.setEstFini(true);
 		// getControleurReseau().arreter();
 	}
+    
+	public List<CarteType> listeCarteJouee(BotFaible core, int n)
+	{
+		List<CarteType> listeCarteJouee = new ArrayList<>();
+		List<CarteType> listeCarteUtilisable = new ArrayList<>();
+		Random r= new Random();
+		
+		for (CarteType carte : core.getListeCarte())
+		{
+			if(n!=4)
+			{
+				if(carte.name()=="MAT")
+				{
+					listeCarteUtilisable.add(carte);
+				}
+			}
+			switch (carte.name())
+			{
+			case "CAC":
+				listeCarteUtilisable.add(carte);
+				break;
+			case "ACS":
+				listeCarteUtilisable.add(carte);
+				break;
+			case "ATR":
+				listeCarteUtilisable.add(carte);
+				break;
+			case "AGR":
+				listeCarteUtilisable.add(carte);
+				break;
+			case "ARE":
+				listeCarteUtilisable.add(carte);
+				break;
+			case "AHI":
+				listeCarteUtilisable.add(carte);
+				break;
+			case "ABA":
+				listeCarteUtilisable.add(carte);
+				break;
+			}
+		}
+		for (int i = 0; i < r.nextInt(core.getListeCarte().size()); i++)
+		{
+			listeCarteJouee.add(listeCarteUtilisable.get(r.nextInt(core.getListeCarte().size())));
+		}
+		
+		return listeCarteJouee;
+	}
+	
+	public List<PionCouleur> listePionCache (BotFaible core) {
+        List<CarteType> listeCarteCachette=new ArrayList<>();
+        List<PionCouleur> listePionCache=new ArrayList<>();
+
+        for(CarteType carte: core.getListeCarte()) {
+            if(carte.name()=="CAC") {
+                listeCarteCachette.add(carte);
+            }
+        }
+        Random r = new Random();
+        int nbrCartePossibleDejouer=listeCarteCachette.size();
+        int nbrPion=core.getListePion().size();
+        int nbrCarteJouee;
+        if(nbrCartePossibleDejouer>nbrPion) {
+            nbrCarteJouee=r.nextInt(nbrPion);
+        }
+        else {
+            nbrCarteJouee=r.nextInt(nbrCartePossibleDejouer);
+
+        }
+        
+        for(int i=0;i<nbrCarteJouee;i++) {
+            listePionCache.add(core.getListePion().get(i));
+        }
+
+        return listePionCache;
+    }
 
 }

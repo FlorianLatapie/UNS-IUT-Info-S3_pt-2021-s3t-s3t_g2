@@ -3,6 +3,7 @@ package botfaible;
 import reseau.socket.ConnexionType;
 import reseau.socket.ControleurReseau;
 import reseau.tool.ReseauOutils;
+import reseau.type.CarteType;
 import reseau.type.Couleur;
 import reseau.type.PionCouleur;
 import reseau.type.TypeJoueur;
@@ -28,6 +29,8 @@ public class BotFaible {
 	private int delay;
 	private ControleurReseau nwm;
 	private boolean estFini;
+	private List<CarteType> listeCarte;
+	private List<PionCouleur> listePion;
 
 	/* Parametre Temporaire */
 	private List<Integer> pionAPos;
@@ -161,5 +164,15 @@ public class BotFaible {
 
 	public boolean isEstFini() {
 		return estFini;
+	}
+	
+	public List<CarteType> getListeCarte()
+	{
+		return listeCarte;
+	}
+	
+	public List<PionCouleur> getListePion()
+	{
+		return listePion;
 	}
 }
