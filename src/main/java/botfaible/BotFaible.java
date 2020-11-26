@@ -6,28 +6,24 @@ import reseau.tool.ReseauOutils;
 import reseau.type.Couleur;
 import reseau.type.PionCouleur;
 import reseau.type.TypeJoueur;
+import traitement.Controleur;
 
 import java.io.IOException;
 import java.net.InetAddress;
 import java.util.ArrayList;
 import java.util.List;
 
-public class BotFaible {
+public class BotFaible extends Controleur {
 	/* Parametre Idjr */
-	private String nom;
 	private String numPartie;
 	private String joueurId;
-	private Couleur couleur;
 	private TypeJoueur typeJoueur;
 	private ConnexionType connexionType;
 	private InetAddress ipPp;
 	private int portPp;
 	private List<PionCouleur> poinSacrDispo;
-	private boolean envie;
-	private List<Integer> lieuOuvert;
 	private int delay;
 	private ControleurReseau nwm;
-	private boolean estFini;
 
 	/* Parametre Temporaire */
 	private List<Integer> pionAPos;
@@ -55,9 +51,6 @@ public class BotFaible {
 		this.typeJoueur = TypeJoueur.BOT;
 		this.connexionType = ConnexionType.CLIENT;
 		this.pionAPos = new ArrayList<>();
-		this.lieuOuvert = new ArrayList<>();
-		this.envie = true;
-		this.estFini = false;
 	}
 
 	private void initReseau() throws IOException {
@@ -75,28 +68,12 @@ public class BotFaible {
 		return delay;
 	}
 
-	public List<Integer> getPionAPos() {
-		return pionAPos;
-	}
-
-	public void setPionAPos(List<Integer> pionAPos) {
-		this.pionAPos = pionAPos;
-	}
-
 	public void setJoueurId(String joueurId) {
 		this.joueurId = joueurId;
 	}
 
 	public TypeJoueur getTypeJoueur() {
 		return typeJoueur;
-	}
-
-	public Couleur getCouleur() {
-		return couleur;
-	}
-
-	public void setCouleur(Couleur couleur) {
-		this.couleur = couleur;
 	}
 
 	public String getJoueurId() {
@@ -123,43 +100,11 @@ public class BotFaible {
 		this.portPp = portPp;
 	}
 
-	public String getNom() {
-		return nom;
-	}
-
-	public void setNom(String nom) {
-		this.nom = nom;
-	}
-
-	public List<Integer> getLieuOuvert() {
-		return lieuOuvert;
-	}
-
-	public void setLieuOuvert(List<Integer> lieuOuvert) {
-		this.lieuOuvert = lieuOuvert;
-	}
-
-	public boolean getEnvie() {
-		return envie;
-	}
-
-	public void setEnvie(Boolean envie) {
-		this.envie = envie;
-	}
-
 	public List<PionCouleur> getPoinSacrDispo() {
 		return poinSacrDispo;
 	}
 
 	public void setPoinSacrDispo(List<PionCouleur> list) {
 		this.poinSacrDispo = list;
-	}
-
-	public void setEstFini(boolean estFini) {
-		this.estFini = estFini;
-	}
-
-	public boolean isEstFini() {
-		return estFini;
 	}
 }
