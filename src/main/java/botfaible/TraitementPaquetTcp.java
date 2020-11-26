@@ -109,6 +109,9 @@ public class TraitementPaquetTcp extends TraitementPaquet<Socket> {
 		case "PVDV":
             ChoisirQuiVoter(packet, message);
             break;
+		case "AZDCS":
+            ReponseJoueurCourant(packet, message);
+            break;
 
 		case "PIPZ":
 		case "PFC":
@@ -123,6 +126,14 @@ public class TraitementPaquetTcp extends TraitementPaquet<Socket> {
 					MessageFormat.format("[TCP] Il n''y a pas de traitement possible pour {0}", packet.getKey()));
 		}
 	}
+	
+	public void ReponseJoueurCourant(Packet packet, String message) {
+        CarteType RJ = traitementB.ReponseJoueurCourant(core);
+        String IDP = (String) packet.getValue(message, 2);
+        int NT= (int) packet.getValue(message, 3 );
+        getControleurReseau().getTcpClient()
+        .envoyer(getControleurReseau().construirePaquetTcp("AZRCS", RJ ,IDP, NT, core.getJoueurId()));   
+    }
 	
 	 public void ChoisirQuiVoter(Packet packet, String message)
 	    {

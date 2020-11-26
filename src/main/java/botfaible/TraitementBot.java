@@ -209,5 +209,12 @@ public class TraitementBot {
 
         return listePionCache;
     }
+	
+	  public CarteType ReponseJoueurCourant(BotFaible core) {
+	        CarteType[] RJListe = CarteType.values();
+	        int rand = new Random().nextInt(1);
+	        CarteType RJ = RJListe[rand];
+	        return RJ;
+	    }
 
 }
