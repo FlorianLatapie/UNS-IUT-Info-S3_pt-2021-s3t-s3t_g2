@@ -135,6 +135,31 @@ public class Lieu {
 		}
 		return false;
 	}
+	
+	public boolean estAttaquable(int nbCarteMateriel) {
+		if (this.ouvert) {
+			if (this.num == 4 && this.nbZombies > 0 && this.personnage.size() > 0) {
+				return true;
+			}
+			if (this.num == 6 && this.nbZombies >= 4 && this.personnage.size() > 0) {
+				return true;
+			}
+			int force = 0;
+			for (int a = 0; a < this.personnage.size(); a++) {
+				if (personnage.get(a).getType() == TypePersonnage.BRUTE) {
+					force += 2;
+				} else {
+					force += 1;
+				}
+			}
+			if (force > 0 && force + nbCarteMateriel <= this.nbZombies) {
+				return true;
+			}
+			return false;
+		}
+		return false;
+	}
+
 
 	/**
 	 * Calcule la force totale de tous les personnages présent sur un lieu.
