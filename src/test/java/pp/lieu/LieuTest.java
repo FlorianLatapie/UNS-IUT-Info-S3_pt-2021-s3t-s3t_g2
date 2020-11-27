@@ -84,7 +84,7 @@ class LieuTest {
         Joueur Bob = new Joueur(6, InetAddress.getByName("127.0.0.1"), 1030, "toto");
         LaBlonde maBlonde = new LaBlonde(Bob);
         place.addPersonnage(maBlonde);
-        assertTrue(place.afficheJoueurSurLieu().add(Bob));
+        assertTrue(place.getJoueurSurLieu().add(Bob));
     }
 
     @Test
