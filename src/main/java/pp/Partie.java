@@ -132,8 +132,8 @@ public class Partie {
 	// TODO
 	public Joueur voteJoueur(int lieu) {
 		// gestion des cartes
-		int rnd = new Random().nextInt(lieux.get(lieu).afficheJoueurSurLieu().size());
-		return lieux.get(lieu).afficheJoueurSurLieu().get(rnd);
+		int rnd = new Random().nextInt(lieux.get(lieu).getJoueurSurLieu().size());
+		return lieux.get(lieu).getJoueurSurLieu().get(rnd);
 	}
 
 

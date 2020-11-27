@@ -96,7 +96,7 @@ public class Lieu {
 	 *
 	 * @return n Le joueur affiché
 	 */
-	public List<Joueur> afficheJoueurSurLieu() {
+	public List<Joueur> getJoueurSurLieu() {
 		ArrayList<Joueur> n = new ArrayList<Joueur>();
 		for (int i = 0; i < personnage.size(); i++) {
 			if (!(n.contains(personnage.get(i).getJoueur()))) {
