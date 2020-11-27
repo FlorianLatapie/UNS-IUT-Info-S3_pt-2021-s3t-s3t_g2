@@ -140,7 +140,7 @@ public class TraitementBot {
 		List<CarteType> listeCarteUtilisable = new ArrayList<>();
 		Random r= new Random();
 		int nbCarteJouee = r.nextInt(core.getListeCarte().size());
-		int indexCarteJouee = r.nextInt(core.getListeCarte().size());
+		int indexCarteJouee;
 		
 		for (CarteType carte : core.getListeCarte())
 		{
@@ -178,6 +178,7 @@ public class TraitementBot {
 		}
 		for (int i = 0; i < nbCarteJouee; i++)
 		{
+			indexCarteJouee = r.nextInt(core.getListeCarte().size());
 			listeCarteJouee.add(listeCarteUtilisable.get(indexCarteJouee));
 			core.getListeCarte().remove(listeCarteUtilisable.get(indexCarteJouee));
 		}
