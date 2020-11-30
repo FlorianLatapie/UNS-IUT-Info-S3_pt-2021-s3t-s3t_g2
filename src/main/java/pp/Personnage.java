@@ -17,8 +17,6 @@ public abstract class Personnage {
 	private TypePersonnage type;
 	protected int point;
 	protected int nbrZretenu = 1;
-	protected int nbrVoixPourVoter = 1;
-	protected int nbrElection;
 	protected boolean estVivant;
 	protected boolean estCache;
 
@@ -59,13 +57,6 @@ public abstract class Personnage {
 	 */
 	public int getNbrZretenu() {
 		return nbrZretenu;
-	}
-
-	/**
-	 * @return le nombre de voix que le personnage peut utiliser durant un vote
-	 */
-	public int getNbrVoixPourVoter() {
-		return nbrVoixPourVoter;
 	}
 
 	/**

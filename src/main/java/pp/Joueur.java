@@ -64,7 +64,20 @@ public class Joueur {
 		return joueurIdint;
 	}
 
-
+	public int getNbVoix(Lieu l, int nbCarteMenace) {
+		int nbVoix = 0;
+		for(Personnage p : this.personnages.values()) {
+			if (p.getMonLieu() == l) {
+				if (p.getType() == TypePersonnage.TRUAND) {
+					nbVoix += 2;
+				}else {
+					nbVoix += 1;
+				}
+			}
+		}
+		nbVoix += nbCarteMenace;
+		return nbVoix;
+	}
 	
 
 	/**

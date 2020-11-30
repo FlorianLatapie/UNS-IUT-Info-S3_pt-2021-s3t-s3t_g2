@@ -22,7 +22,6 @@ public class LaFillette extends Personnage {
 		super(joueur, TypePersonnage.FILLETTE);
 		super.point = 1;
 		super.nbrZretenu = 1;
-		super.nbrVoixPourVoter = 1;
 	}
 
 	/**

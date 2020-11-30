@@ -92,21 +92,6 @@ public class Lieu {
 	}
 
 	/**
-	 * Affiche les différents personnages qui se trouvent sur un lieu.
-	 *
-	 * @return n Le joueur affiché
-	 */
-	public List<Joueur> getJoueurSurLieu() {
-		ArrayList<Joueur> n = new ArrayList<Joueur>();
-		for (int i = 0; i < personnage.size(); i++) {
-			if (!(n.contains(personnage.get(i).getJoueur()))) {
-				n.add(personnage.get(i).getJoueur());
-			}
-		}
-		return n;
-	}
-
-	/**
 	 * Indique si un lieu est attaquable ou non
 	 * Le lieu doit contenir des personnages pour être attaqué.
 	 *

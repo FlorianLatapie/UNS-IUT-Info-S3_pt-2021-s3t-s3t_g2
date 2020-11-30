@@ -23,7 +23,6 @@ public class LeTruand extends Personnage {
 		super(joueur, TypePersonnage.TRUAND);
 		super.point = 3;
 		super.nbrZretenu = 1;
-		super.nbrVoixPourVoter = 2;
 	}
 
 	/**

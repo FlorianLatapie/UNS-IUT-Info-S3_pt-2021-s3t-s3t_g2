@@ -22,7 +22,6 @@ public class LaBrute extends Personnage {
 		super(joueur, TypePersonnage.BRUTE);
 		super.point = 5;
 		super.nbrZretenu = 2;
-		super.nbrVoixPourVoter = 1;
 	}
 
 	/**

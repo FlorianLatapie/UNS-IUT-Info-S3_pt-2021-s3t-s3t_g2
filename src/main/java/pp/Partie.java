@@ -123,18 +123,6 @@ public class Partie {
 			}
 	}
 
-	/**
-	 * 
-	 * 
-	 * @param lieu the lieu
-	 * @return the joueur
-	 */
-	// TODO
-	public Joueur voteJoueur(int lieu) {
-		// gestion des cartes
-		int rnd = new Random().nextInt(lieux.get(lieu).getJoueurSurLieu().size());
-		return lieux.get(lieu).getJoueurSurLieu().get(rnd);
-	}
 
 
 
@@ -576,6 +564,42 @@ public class Partie {
 			l.add(CarteType.NUL);
 		}
 		return l;
+	}
+	
+	/**
+	 * Affiche les différents personnages qui se trouvent sur un lieu.
+	 *
+	 * @return n Le joueur affiché
+	 */
+	public List<Joueur> getJoueurSurLieu(Lieu l) {
+		ArrayList<Joueur> n = new ArrayList<Joueur>();
+		for (Joueur j : joueurs.values()) {
+			int a = 0;
+			if (j.isChefDesVigiles()) {
+				for(Personnage p : j.getPersonnages().values()) {
+					if (p.getMonLieu() == l) {
+						a=1;
+					}
+				}
+				if (a == 1) {
+					n.add(j);
+				}
+			}
+		}
+		for (Joueur j : joueurs.values()) {
+			int a = 0;
+			if (!j.isChefDesVigiles()) {
+				for(Personnage p : j.getPersonnages().values()) {
+					if (p.getMonLieu() == l) {
+						a=1;
+					}
+				}
+				if (a == 1) {
+					n.add(j);
+				}
+			}
+		}
+		return n;
 	}
 
 }
