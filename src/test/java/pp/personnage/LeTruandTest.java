@@ -17,6 +17,5 @@ class LeTruandTest {
 		LeTruand p1 = new LeTruand(j1);
 		assertEquals(3, p1.getPoint());
 		assertEquals(1, p1.getNbrZretenu());
-		assertEquals(2, p1.getNbrVoixPourVoter());
 	}
 }

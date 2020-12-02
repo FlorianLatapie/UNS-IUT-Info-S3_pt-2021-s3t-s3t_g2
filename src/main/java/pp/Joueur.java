@@ -64,7 +64,7 @@ public class Joueur {
 		return joueurIdint;
 	}
 
-	public int getNbVoix(Lieu l, int nbCarteMenace) {
+	public int getNbVoix(Lieu l, int numeroVote, int nbCarteMenace) {
 		int nbVoix = 0;
 		for(Personnage p : this.personnages.values()) {
 			if (p.getMonLieu() == l) {
@@ -75,6 +75,8 @@ public class Joueur {
 				}
 			}
 		}
+		if (nbVoix == 0 && numeroVote == 2)
+			nbVoix = 1;
 		nbVoix += nbCarteMenace;
 		return nbVoix;
 	}

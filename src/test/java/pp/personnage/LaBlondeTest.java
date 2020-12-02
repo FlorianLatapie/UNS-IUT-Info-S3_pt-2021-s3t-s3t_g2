@@ -19,6 +19,5 @@ class LaBlondeTest {
 
 		assertEquals(7, p1.getPoint());
 		assertEquals(1, p1.getNbrZretenu());
-		assertEquals(1, p1.getNbrVoixPourVoter());
 	}
 }

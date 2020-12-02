@@ -495,6 +495,18 @@ public class Partie {
 	 * @return le dictionnaire des joueurs.
 	 */
 	public Map<Integer, Joueur> getJoueurs() {
+		Map<Integer, Joueur> toutJoueur = new HashMap<>();
+		for (Integer i : joueurs.keySet()) {
+			if (joueurs.get(i).isChefDesVigiles()) {
+				toutJoueur.put(i, joueurs.get(i));
+			}
+		}
+		for (Integer i : joueurs.keySet()) {
+			if (!joueurs.get(i).isChefDesVigiles()) {
+				toutJoueur.put(i, joueurs.get(i));
+			}
+		}
+		
 		return joueurs;
 	}
 

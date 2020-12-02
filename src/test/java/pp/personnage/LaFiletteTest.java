@@ -17,6 +17,5 @@ class LaFiletteTest {
 		LaFillette p1 = new LaFillette(j1);
 		assertEquals(1, p1.getPoint());
 		assertEquals(1, p1.getNbrZretenu());
-		assertEquals(1, p1.getNbrVoixPourVoter());
 	}
 }

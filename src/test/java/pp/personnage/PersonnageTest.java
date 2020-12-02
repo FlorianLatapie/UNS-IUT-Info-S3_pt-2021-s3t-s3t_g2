@@ -24,8 +24,6 @@ class PersonnageTest {
 
         assertEquals(1, p1.getNbrZretenu());
 
-        assertEquals(1, p1.getNbrVoixPourVoter());
-
         Lieu newLieu = new Lieu(4);
         p1.changerDeLieux(newLieu);
 
