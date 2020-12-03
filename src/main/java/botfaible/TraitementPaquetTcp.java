@@ -280,28 +280,10 @@ public class TraitementPaquetTcp extends TraitementPaquet<Socket> {
 	
 	private void choixCarteFouille(Packet packet, String message) {
 		List<CarteType> listecartes = (List<CarteType>) packet.getValue(message, 1);
-		CarteType carteGarde = CarteType.NUL;
-		CarteType carteOfferte = CarteType.NUL;
-		CarteType carteDefausse = CarteType.NUL;
-		Couleur couleur = Couleur.NUL;
-		if (listecartes.size() == 3) {
-			carteGarde = listecartes.get(0);
-			carteOfferte = listecartes.get(1);
-			carteDefausse = listecartes.get(2);
-			couleur = traitementB.getRandom();
-		}
-		if (listecartes.size() == 2) {
-			carteGarde = listecartes.get(0);
-			carteOfferte = listecartes.get(1);
-			couleur = traitementB.getRandom();
-		}
-		if (listecartes.size() == 1) {
-			carteGarde = listecartes.get(0);
-		}
-
+		List<Object> li = traitementB.carteFouille(listecartes, core);
 		getControleurReseau().getTcpClient()
-				.envoyer(getControleurReseau().construirePaquetTcp("SCFC", carteGarde, carteOfferte, couleur,
-						carteDefausse, (String) packet.getValue(message, 2), packet.getValue(message, 3),
+				.envoyer(getControleurReseau().construirePaquetTcp("SCFC", li.get(0), li.get(1), li.get(3),
+						li.get(2), (String) packet.getValue(message, 2), packet.getValue(message, 3),
 						core.getJoueurId()));
 
 	}
