@@ -6,11 +6,11 @@ protocol:TCP
 values:
 value:
 name:carteJoueurGarde
-type:CarteType
+type:Couleur
 doc:La couleur du joueur ayant gardé une carte lors de la fouille ou « NUL » si aucune carte n’est gardée. La couleur est identifiée comme précédemment.
 value:
 name:carteJoueurOfferte
-type:CarteType
+type:Couleur
 doc:La couleur du joueur ayant reçu la carte offerte ou « NUL » si aucune carte n’est offerte. La couleur est identifiée comme précédemment.
 value:
 name:carteDefausse
