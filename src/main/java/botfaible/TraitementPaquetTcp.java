@@ -127,6 +127,7 @@ public class TraitementPaquetTcp extends TraitementPaquet<Socket> {
 		case "RECV":
 		case "CDFC":
 		case "AZLAZ":
+		case "AZICS":
 			break;
 		default:
 			throw new IllegalStateException(
