@@ -830,11 +830,11 @@ public class ControleurJeu {
 		for (Joueur j : jeu.getJoueurSurLieu(l)) {
 			j.getConnection().attendreMessage("PVC");
 			String m = j.getConnection().getMessage("PVC");
-			listeNbVoix.add(j.getNbVoix(l, 1, (int) nwm.getValueTcp("PVC", m, 2)));
+			listeNbVoix.add(j.getNbVoix(l, 1, (int) nwm.getValueTcp("PVC", m, 1)));
 			for (Joueur jou : jeu.getJoueurs().values()) {
 				jou.getConnection()
-						.envoyer(nwm.construirePaquetTcp("PVIC", j.getCouleur(), (int) nwm.getValueTcp("PVC", m, 2),
-								j.getNbVoix(l, 1, (int) nwm.getValueTcp("PVC", m, 2)), partieId, numeroTour));
+						.envoyer(nwm.construirePaquetTcp("PVIC", j.getCouleur(), (int) nwm.getValueTcp("PVC", m, 1),
+								j.getNbVoix(l, 1, (int) nwm.getValueTcp("PVC", m, 1)), partieId, numeroTour));
 			}
 		}
 		for (Joueur j : jeu.getJoueurSurLieu(l)) {
@@ -910,11 +910,11 @@ public class ControleurJeu {
 				if (jeu.getJoueurs().get(i) == j)
 					a = i;
 			nbVoix.remove(a);
-			nbVoix.add(a, j.getNbVoix(l, 2, (int) nwm.getValueTcp("PVC", m, 2)));
+			nbVoix.add(a, j.getNbVoix(l, 2, (int) nwm.getValueTcp("PVC", m, 1)));
 			for (Joueur jou : jeu.getJoueurs().values()) {
 				jou.getConnection()
-						.envoyer(nwm.construirePaquetTcp("PVIC", j.getCouleur(), (int) nwm.getValueTcp("PVC", m, 2),
-								j.getNbVoix(l, 2, (int) nwm.getValueTcp("PVC", m, 2)), partieId, numeroTour));
+						.envoyer(nwm.construirePaquetTcp("PVIC", j.getCouleur(), (int) nwm.getValueTcp("PVC", m, 1),
+								j.getNbVoix(l, 2, (int) nwm.getValueTcp("PVC", m, 1)), partieId, numeroTour));
 			}
 		}
 		for (Joueur j : jeu.getJoueurs().values()) {
