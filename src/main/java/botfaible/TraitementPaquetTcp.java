@@ -115,6 +115,10 @@ public class TraitementPaquetTcp extends TraitementPaquet<Socket> {
 		case "PVD":
 			IndiquerCarteJouees(packet, message);
             break;
+            
+		case "FCLC":
+			choixCarteFouille(packet, message);
+			break;
 
 		case "PIPZ":
 		case "PFC":
@@ -271,6 +275,34 @@ public class TraitementPaquetTcp extends TraitementPaquet<Socket> {
                 /*,*/ (String)packet.getValue(message, 1), (int)packet.getValue(message, 2), (String)core.getJoueurId());
         getControleurReseau().getTcpClient().envoyer(messageTcp);
     }
+	
+	private void choixCarteFouille(Packet packet, String message) {
+		List<CarteType> listecartes = (List<CarteType>) packet.getValue(message, 1);
+		CarteType carteGarde = CarteType.NUL;
+		CarteType carteOfferte = CarteType.NUL;
+		CarteType carteDefausse = CarteType.NUL;
+		Couleur couleur = Couleur.NUL;
+		if (listecartes.size() == 3) {
+			carteGarde = listecartes.get(0);
+			carteOfferte = listecartes.get(1);
+			carteDefausse = listecartes.get(2);
+			couleur = traitementB.getRandom();
+		}
+		if (listecartes.size() == 2) {
+			carteGarde = listecartes.get(0);
+			carteOfferte = listecartes.get(1);
+			couleur = traitementB.getRandom();
+		}
+		if (listecartes.size() == 1) {
+			carteGarde = listecartes.get(0);
+		}
+
+		getControleurReseau().getTcpClient()
+				.envoyer(getControleurReseau().construirePaquetTcp("SCFC", carteGarde, carteOfferte, couleur,
+						carteDefausse, (String) packet.getValue(message, 2), packet.getValue(message, 3),
+						core.getJoueurId()));
+
+	}
 
 	@Override
 	public void set(Object core) {
