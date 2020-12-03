@@ -282,7 +282,7 @@ public class ControleurJeu {
 				String mess = j.getConnection().getMessage("SCFC");
 				Couleur a1 = Couleur.NUL;
 				Couleur a2 = Couleur.NUL;
-				Couleur a3 = Couleur.NUL;
+				CarteEtat a3 = CarteEtat.NUL;
 				if (nwm.getPaquetTcp("SCFC").getValue(mess, 1) != CarteType.NUL) {
 					j.getCartes().add((CarteType) nwm.getPaquetTcp("SCFC").getValue(mess, 1));
 					a1 = j.getCouleur();
@@ -291,23 +291,24 @@ public class ControleurJeu {
 					jeu.getJoueurCouleur((Couleur) nwm.getPaquetTcp("SCFC").getValue(mess, 3)).getCartes()
 							.add((CarteType) nwm.getPaquetTcp("SCFC").getValue(mess, 2));
 					a2 = (Couleur) nwm.getPaquetTcp("SCFC").getValue(mess, 3);
+					jeu.getJoueurCouleur(a2).getConnection().envoyer(nwm.construirePaquetTcp("FCRC", nwm.getPaquetTcp("SCFC").getValue(mess, 2), j.getCouleur(), partieId, numeroTour));
 				}
 				if (nwm.getPaquetTcp("SCFC").getValue(mess, 4) != CarteType.NUL) {
 					jeu.getCartes().add((CarteType) nwm.getPaquetTcp("SCFC").getValue(mess, 4));
-					// TODO a3 = NUL ou CD
+					a3 = CarteEtat.CD;
 				}
 				m = nwm.construirePaquetTcp("RFC", a1, a2, a3, partieId, numeroTour);
 				for (Joueur j2 : jeu.getJoueurs().values())
 					j2.getConnection().envoyer(m);
 			} else {
 				s += "Personne ne fouille le camion.";
-				m = nwm.construirePaquetTcp("RFC", Couleur.NUL, Couleur.NUL, Couleur.NUL, partieId, numeroTour);
+				m = nwm.construirePaquetTcp("RFC", Couleur.NUL, Couleur.NUL, CarteEtat.NUL, partieId, numeroTour);
 				for (Joueur j2 : jeu.getJoueurs().values())
 					j2.getConnection().envoyer(m);
 			}
 		} else {
 			s += "Personne ne fouille le camion.";
-			m = nwm.construirePaquetTcp("RFC", Couleur.NUL, Couleur.NUL, Couleur.NUL, partieId, numeroTour);
+			m = nwm.construirePaquetTcp("RFC", Couleur.NUL, Couleur.NUL, CarteEtat.NUL, partieId, numeroTour);
 			for (Joueur j2 : jeu.getJoueurs().values())
 				j2.getConnection().envoyer(m);
 		}
