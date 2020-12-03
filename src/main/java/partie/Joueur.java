@@ -1,10 +1,7 @@
 package partie;
 
-import reseau.socket.Connexion;
 import reseau.type.CarteType;
 import reseau.type.Couleur;
-
-import java.net.InetAddress;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -13,59 +10,31 @@ import java.util.Map;
 /**
  * <h1>Les infos d'un joueur</h1>
  *
- * @author Maxime Lecerf
- * @author Emeric Maximil
- * @author Jehan Berthe
+ * @author Alex Devauchelle
  * @version 0.1
  * @since 05/10/2020
  */
 public class Joueur {
-	public String getJoueurId() {
-		return joueurId;
-	}
+
 
 	private final String joueurId;
-
-	public int getJoueurIdint() {
-		return joueurIdint;
-	}
-
-	private final int joueurIdint;
-	private final InetAddress ip;
-	private final int port;
-
 	private Couleur couleur;
 	private boolean enVie;
 	private HashMap<Integer, Personnage> personnages;
 	private final ArrayList<CarteType> cartes;
 	private boolean chefDesVigiles;
 	private final String nom;
-	private final Connexion connection;
+	
 
-	public Joueur(int joueurIdint, InetAddress ip, int port, String nom, Connexion connection) {
-		this.connection = connection;
-		this.joueurIdint = joueurIdint;
+	public Joueur(int joueurIdint, String nom) {	
 		this.joueurId = "J" + joueurIdint;
-		this.ip = ip;
-		this.port = port;
 		enVie = true;
 		personnages = new HashMap<>();
 		cartes = new ArrayList<>();
 		this.nom = nom;
 	}
 
-	public Joueur(int joueurIdint, InetAddress ip, int port, String nom) {
-		this.connection = null;
-		this.joueurIdint = joueurIdint;
-		this.joueurId = "J" + joueurIdint;
-		this.ip = ip;
-		this.port = port;
-		enVie = true;
-		personnages = new HashMap<>();
-		cartes = new ArrayList<>();
-		this.nom = nom;
-	}
-
+	
 	/**
 	 * @return la couleur
 	 */
@@ -147,16 +116,9 @@ public class Joueur {
 	public String toString() {
 		return this.nom;
 	}
-
-	public InetAddress getIp() {
-		return ip;
+	
+	public String getJoueurId() {
+		return joueurId;
 	}
 
-	public int getPort() {
-		return port;
-	}
-
-	public Connexion getConnection() {
-		return connection;
-	}
 }
