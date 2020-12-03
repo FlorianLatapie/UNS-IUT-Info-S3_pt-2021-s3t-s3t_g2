@@ -58,7 +58,7 @@ public class TraitementPaquetTcp extends TraitementPaquet<Socket> {
 			initialiserPartie(packet, message);
 			break;
 		case "PIIJ":
-			lancerDes(packet, message);// savoir comment return plusieur choses
+			lancerDes(packet, message);
 			break;
 		case "PIRD":
 			choisirDestPlacement(packet, message);
@@ -145,7 +145,7 @@ public class TraitementPaquetTcp extends TraitementPaquet<Socket> {
 	 public void ChoisirQuiVoter(Packet packet, String message)
 	    {
 	        out.println(packet.getDocs());
-	        String messageTcp =  getControleurReseau().construirePaquetTcp("PVCV", traitementB.getRandom(), // Méthode que Baptiste doit push
+	        String messageTcp =  getControleurReseau().construirePaquetTcp("PVCV", traitementB.getRandom(), 
 	                (String) packet.getValue(message, 1),(int) packet.getValue(message, 2), core.getJoueurId());
 	        getControleurReseau().getTcpClient().envoyer(messageTcp);
 	        
