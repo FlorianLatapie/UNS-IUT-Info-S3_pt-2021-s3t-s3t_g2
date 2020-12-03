@@ -9,7 +9,7 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class PtToolTest {
+class PtOutilsTest {
 
     @Test
     void convertParamToString() {
@@ -63,6 +63,10 @@ class PtToolTest {
         assertEquals("ANNULEE", PtOutils.convertParamToString(Status.ANNULEE, Status.class.getSimpleName()));
         assertEquals("ATTENTE", PtOutils.convertParamToString(Status.ATTENTE, Status.class.getSimpleName()));
         assertNotEquals("Ah", PtOutils.convertParamToString(Status.COMPLETE, Status.class.getSimpleName()));
+        
+        assertEquals("CD", PtOutils.convertParamToString(CarteEtat.CD, CarteEtat.class.getSimpleName()));
+        assertEquals("NUL", PtOutils.convertParamToString(CarteEtat.NUL, CarteEtat.class.getSimpleName()));
+        assertNotEquals("NUL", PtOutils.convertParamToString(CarteEtat.CD, CarteEtat.class.getSimpleName()));
 
         HashMap<Integer, List<Integer>> actual = new HashMap<>();
         List<Integer> blonde = new ArrayList<>();
@@ -185,6 +189,11 @@ class PtToolTest {
         assertEquals(Status.ATTENTE, PtOutils.convertStringToObject("ATTENTE", Status.class.getSimpleName()));
         assertNotEquals(Status.ATTENTE, PtOutils.convertStringToObject("COMPLETE", Status.class.getSimpleName()));
         assertNull(PtOutils.convertStringToObject("MPZPM", Status.class.getSimpleName()));
+        
+        assertEquals(CarteEtat.CD, PtOutils.convertStringToObject("CD", CarteEtat.class.getSimpleName()));
+        assertEquals(CarteEtat.NUL, PtOutils.convertStringToObject("NUL", CarteEtat.class.getSimpleName()));
+        assertNotEquals(CarteEtat.NUL, PtOutils.convertStringToObject("CD", CarteEtat.class.getSimpleName()));
+        assertNull(PtOutils.convertStringToObject("MPZPM", CarteEtat.class.getSimpleName()));
 
         HashMap<Integer, List<Integer>> actual = new HashMap<>();
         List<Integer> blonde = new ArrayList<>();
