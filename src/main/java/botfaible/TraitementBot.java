@@ -233,5 +233,17 @@ public class TraitementBot {
 	          int nbrCartemenaceReturn = r.nextInt(nbrCarteMen);
 	          return nbrCartemenaceReturn;      
 	      }
+	  
+	  public Couleur getRandom() {
+	    	List<Couleur> li = new ArrayList<Couleur>();
+	    	li.add(Couleur.NOIR);
+	    	li.add(Couleur.VERT);
+	    	li.add(Couleur.BLEU);
+	    	li.add(Couleur.ROUGE);
+	    	li.add(Couleur.JAUNE);
+	    	li.add(Couleur.MARRON);
+	    	int rand = new Random().nextInt(li.size());
+	    	return li.get(rand);
+	    }
 
 }
