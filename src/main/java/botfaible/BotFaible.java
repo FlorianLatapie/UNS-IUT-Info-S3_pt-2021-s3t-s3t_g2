@@ -171,6 +171,10 @@ public class BotFaible {
 		return listeCarte;
 	}
 	
+	public void addCarte(CarteType n) {
+		listeCarte.add(n);
+	}
+	
 	public void setListeCarte(List<CarteType> listeCarte)
 	{
 		this.listeCarte = listeCarte;
