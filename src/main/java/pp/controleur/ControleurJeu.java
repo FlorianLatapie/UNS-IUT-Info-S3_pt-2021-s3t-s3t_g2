@@ -942,7 +942,9 @@ public class ControleurJeu {
 		Couleur couleurVote = Couleur.NUL;
 		for (int a : voixRecu) {
 			if (a > nbVoteTemp) {
-				couleurVote = joueursPresent.get(i);
+				couleurVote = joueursVotant.get(i);
+				if (!joueursPresent.contains(couleurVote))
+					throw new IllegalArgumentException("Couleur joueur voté incorrect");
 				nbVoteTemp = a;
 			} else if (a == nbVoteTemp) {
 				couleurVote = Couleur.NUL;
