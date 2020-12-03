@@ -245,5 +245,36 @@ public class TraitementBot {
 	    	int rand = new Random().nextInt(li.size());
 	    	return li.get(rand);
 	    }
+	  
+	  public List<Object> carteFouille(List<CarteType> listeCarte, BotFaible bot){
+		  CarteType carteGarde = CarteType.NUL;
+			CarteType carteOfferte = CarteType.NUL;
+			CarteType carteDefausse = CarteType.NUL;
+			Couleur couleur = Couleur.NUL;
+			List<Object> carteChoisies = new ArrayList<Object>();
+			if (listeCarte.size() == 3) {
+				carteGarde = listeCarte.get(0);
+				bot.addCarte(carteGarde);
+				carteOfferte = listeCarte.get(1);
+				carteDefausse = listeCarte.get(2);
+				couleur = getRandom();
+			}
+			if (listeCarte.size() == 2) {
+				carteGarde = listeCarte.get(0);
+				bot.addCarte(carteGarde);
+				carteOfferte = listeCarte.get(1);
+				couleur = getRandom();
+			}
+			if (listeCarte.size() == 1) {
+				carteGarde = listeCarte.get(0);
+				bot.addCarte(carteGarde);
+			}
+			carteChoisies.add(carteGarde);
+			carteChoisies.add(carteOfferte);
+			carteChoisies.add(carteDefausse);
+			carteChoisies.add(couleur);
+			
+			return carteChoisies;
+	  }
 
 }
