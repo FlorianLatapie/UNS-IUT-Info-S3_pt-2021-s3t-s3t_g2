@@ -130,6 +130,7 @@ public class TraitementPaquetTcp extends TraitementPaquet<Socket> {
 		case "AZICS":
 		case "IPV" :
 		case "PVIC":
+		case "PVR":
 			break;
 		default:
 			throw new IllegalStateException(
