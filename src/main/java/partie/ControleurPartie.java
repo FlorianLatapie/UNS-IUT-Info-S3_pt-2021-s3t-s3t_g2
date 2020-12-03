@@ -1,18 +1,12 @@
 package partie;
 
-import reseau.socket.Connexion;
-import reseau.socket.ConnexionType;
-import reseau.socket.ControleurReseau;
-import reseau.tool.ReseauOutils;
-import reseau.tool.ThreadOutils;
+
+
+
+
+import java.util.*;
 import reseau.type.*;
 
-import java.io.IOException;
-import java.net.InetAddress;
-import java.sql.Connection;
-import java.util.*;
-
-import static java.lang.System.out;
 
 /**
  * <h1>La classe controleurJeu</h1>
@@ -29,7 +23,6 @@ public class ControleurPartie {
 	private int numeroTour = 1;
 	private Partie jeu;
 	private List<Joueur> jmort;
-	private Status status;
 	private final ArrayList<Joueur> joueurs;
 	private ArrayList<Integer> lieuZombie;
 	private boolean isFinished = false;
@@ -44,7 +37,6 @@ public class ControleurPartie {
 	}
 
 	private void initPartie() {
-		status = Status.COMPLETE;
 		joueurs.get(0).setChefDesVigiles(true);
 		jeu = new Partie(joueurs);
 		try {
@@ -336,23 +328,15 @@ public class ControleurPartie {
 			isFinished = true;
 			// Joueur gagnantNotFair = vainqueur.get(new
 			// Random().nextInt(vainqueur.size()));
-			status = Status.COMPLETE;
 		}
 	}
-
-
 
 	public int getNbjtotal() {
 		return nbjtotal;
 	}
 
-
 	public int getNumeroTour() {
 		return numeroTour;
-	}
-
-	public Status getStatus() {
-		return status;
 	}
 
 	public void setLieuZombie(ArrayList<Integer> lieuZombie) {
