@@ -3,9 +3,11 @@ package botmoyen;
 import reseau.socket.ConnexionType;
 import reseau.socket.ControleurReseau;
 import reseau.tool.ReseauOutils;
+import reseau.type.CarteType;
 import reseau.type.Couleur;
 import reseau.type.PionCouleur;
 import reseau.type.TypeJoueur;
+import reseau.type.VoteType;
 
 import java.io.IOException;
 import java.net.InetAddress;
@@ -29,6 +31,11 @@ public class BotMoyen {
 	private ControleurReseau nwm;
 	private boolean estFini;
 	private int compteurTour;
+	private List<CarteType> listeCarte;
+	private List<PionCouleur> listePion;
+	private List<Couleur> couleurJoueursPresent;
+	private List<Couleur> joueurEnVie;
+	private VoteType voteType;
 
 	/* Parametre Temporaire */
 	private List<Integer> pionAPos;
@@ -36,11 +43,11 @@ public class BotMoyen {
 	public BotMoyen(int delay) {
 		this.delay = delay;
 	}
-	
+
 	public void start() throws IOException {
 		initBot();
 		initReseau();
-		
+
 		while (!isEstFini()) {
 			try {
 				Thread.sleep(1000);
@@ -52,14 +59,21 @@ public class BotMoyen {
 		arreter();
 	}
 
+	public void setCouleurJoueurs(List<Couleur> couleurJoueurs) {
+		this.couleurJoueursPresent = couleurJoueurs;
+	}
+
 	private void initBot() {
 		this.typeJoueur = TypeJoueur.BOT;
 		this.connexionType = ConnexionType.CLIENT;
 		this.pionAPos = new ArrayList<>();
 		this.lieuOuvert = new ArrayList<>();
+		this.listeCarte = new ArrayList<>();
+		this.couleurJoueursPresent = new ArrayList<>();
+		this.listePion = new ArrayList<>();
 		this.envie = true;
 		this.estFini = false;
-		this.compteurTour=0;
+		this.joueurEnVie = new ArrayList<>();
 	}
 
 	private void initReseau() throws IOException {
@@ -68,9 +82,9 @@ public class BotMoyen {
 		nwm = new ControleurReseau(traitementPaquetTcp, traitementPaquetUdp);
 		nwm.initConnexion(connexionType, ReseauOutils.getLocalIp());
 	}
-	
+
 	public void arreter() {
-			nwm.arreter();
+		nwm.arreter();
 	}
 
 	public int getDelay() {
@@ -163,6 +177,46 @@ public class BotMoyen {
 
 	public boolean isEstFini() {
 		return estFini;
+	}
+
+	public List<CarteType> getListeCarte() {
+		return listeCarte;
+	}
+
+	public void addCarte(CarteType n) {
+		listeCarte.add(n);
+	}
+
+	public void setListeCarte(List<CarteType> listeCarte) {
+		this.listeCarte = listeCarte;
+	}
+
+	public List<PionCouleur> getListePion() {
+		return listePion;
+	}
+
+	public void setListePion(List<PionCouleur> listePion) {
+		this.listePion = listePion;
+	}
+
+	public List<Couleur> couleurJoueurPresent() {
+		return couleurJoueursPresent;
+	}
+
+	public VoteType getVoteType() {
+		return voteType;
+	}
+
+	public void setVoteType(VoteType voteType) {
+		this.voteType = voteType;
+	}
+
+	public List<Couleur> getJoueurEnVie() {
+		return joueurEnVie;
+	}
+
+	public void setJoueurEnVie(List<Couleur> joueurEnVie) {
+		this.joueurEnVie = joueurEnVie;
 	}
 
 	public int getCompteurTour() {
