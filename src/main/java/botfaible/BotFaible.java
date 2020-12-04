@@ -7,6 +7,7 @@ import reseau.type.CarteType;
 import reseau.type.Couleur;
 import reseau.type.PionCouleur;
 import reseau.type.TypeJoueur;
+import reseau.type.VoteType;
 
 import java.io.IOException;
 import java.net.InetAddress;
@@ -31,6 +32,8 @@ public class BotFaible {
 	private boolean estFini;
 	private List<CarteType> listeCarte;
 	private List<PionCouleur> listePion;
+	private List<Couleur> couleurJoueurs;
+	private VoteType voteType;
 
 	/* Parametre Temporaire */
 	private List<Integer> pionAPos;
@@ -38,11 +41,11 @@ public class BotFaible {
 	public BotFaible(int delay) {
 		this.delay = delay;
 	}
-	
+
 	public void start() throws IOException {
 		initBot();
 		initReseau();
-		
+
 		while (!isEstFini()) {
 			try {
 				Thread.sleep(1000);
@@ -54,11 +57,18 @@ public class BotFaible {
 		arreter();
 	}
 
+	public void setCouleurJoueurs(List<Couleur> couleurJoueurs) {
+		this.couleurJoueurs = couleurJoueurs;
+	}
+
 	private void initBot() {
 		this.typeJoueur = TypeJoueur.BOT;
 		this.connexionType = ConnexionType.CLIENT;
 		this.pionAPos = new ArrayList<>();
 		this.lieuOuvert = new ArrayList<>();
+		this.listeCarte = new ArrayList<>();
+		this.couleurJoueurs = new ArrayList<>();
+		this.listePion = new ArrayList<>();
 		this.envie = true;
 		this.estFini = false;
 	}
@@ -69,9 +79,9 @@ public class BotFaible {
 		nwm = new ControleurReseau(traitementPaquetTcp, traitementPaquetUdp);
 		nwm.initConnexion(connexionType, ReseauOutils.getLocalIp());
 	}
-	
+
 	public void arreter() {
-			nwm.arreter();
+		nwm.arreter();
 	}
 
 	public int getDelay() {
@@ -165,28 +175,36 @@ public class BotFaible {
 	public boolean isEstFini() {
 		return estFini;
 	}
-	
-	public List<CarteType> getListeCarte()
-	{
+
+	public List<CarteType> getListeCarte() {
 		return listeCarte;
 	}
-	
+
 	public void addCarte(CarteType n) {
 		listeCarte.add(n);
 	}
-	
-	public void setListeCarte(List<CarteType> listeCarte)
-	{
+
+	public void setListeCarte(List<CarteType> listeCarte) {
 		this.listeCarte = listeCarte;
 	}
-	
-	public List<PionCouleur> getListePion()
-	{
+
+	public List<PionCouleur> getListePion() {
 		return listePion;
 	}
-	
-	public void setListePion(List<PionCouleur> listePion)
-	{
+
+	public void setListePion(List<PionCouleur> listePion) {
 		this.listePion = listePion;
+	}
+
+	public List<Couleur> couleurJoueurPresent() {
+		return couleurJoueurs;
+	}
+
+	public VoteType getVoteType() {
+		return voteType;
+	}
+
+	public void setVoteType(VoteType voteType) {
+		this.voteType = voteType;
 	}
 }

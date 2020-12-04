@@ -11,6 +11,7 @@ import java.util.Random;
 import reseau.type.CarteType;
 import reseau.type.Couleur;
 import reseau.type.PionCouleur;
+import reseau.type.VoteType;
 
 public class TraitementBot {
 
@@ -68,14 +69,14 @@ public class TraitementBot {
 		}
 	}
 
-	public int choixDest(BotFaible core){
+	public int choixDest(BotFaible core) {
 		out.println("Entrez une destination");
 		int dest = 0;
 		dest = core.getLieuOuvert().get(new Random().nextInt(core.getLieuOuvert().size()));
 		return dest;
 	}
-	
-	public void debutDeplacemant(BotFaible core, List<?> lieuxT){
+
+	public void debutDeplacemant(BotFaible core, List<?> lieuxT) {
 		List<Integer> lieux = new ArrayList<>();
 		for (Object o : lieuxT)
 			lieux.add((Integer) o);
@@ -84,8 +85,7 @@ public class TraitementBot {
 				core.getLieuOuvert().remove(i);
 	}
 
-	
-	public List<Integer>  pionADeplacer(int dest, HashMap<Integer, List<Integer>> listedp) {
+	public List<Integer> pionADeplacer(int dest, HashMap<Integer, List<Integer>> listedp) {
 		List<Integer> destEtPion = new ArrayList<>();
 		List<Integer> listePion = new ArrayList<>();
 		for (Map.Entry<Integer, List<Integer>> dp : listedp.entrySet())
@@ -109,7 +109,7 @@ public class TraitementBot {
 		destEtPion.add(pionAdep);
 		return destEtPion;
 	}
-	
+
 	public void attaqueZombie(BotFaible core, List<PionCouleur> l, List<PionCouleur> ltemp) {
 		for (PionCouleur pc : l) {
 			if (IdjrTools.getCouleurByChar(pc) == core.getCouleur()) {
@@ -118,7 +118,7 @@ public class TraitementBot {
 		}
 		core.setPoinSacrDispo(ltemp);
 	}
-	
+
 	public PionCouleur choisirSacrifice(BotFaible core, List<?> listPionT) {
 		List<Integer> listPion = new ArrayList<>();
 		for (Object o : listPionT)
@@ -127,32 +127,26 @@ public class TraitementBot {
 		PionCouleur pion = PionCouleur.valueOf(String.valueOf(core.getCouleur().name().charAt(0)) + pionTemp);
 		return pion;
 	}
-	
+
 	public void finPartie(BotFaible core, Couleur gagnant) {
 		out.println("Le gagant est le joueur " + gagnant + " !");
 		core.setEstFini(true);
 		// getControleurReseau().arreter();
 	}
-    
-	public List<CarteType> listeCarteJouee(BotFaible core, int n)
-	{
+
+	public List<CarteType> listeCarteJouee(BotFaible core, int n) {
 		List<CarteType> listeCarteJouee = new ArrayList<>();
 		List<CarteType> listeCarteUtilisable = new ArrayList<>();
-		Random r= new Random();
-		int nbCarteJouee = r.nextInt(core.getListeCarte().size());
+		Random r = new Random();
 		int indexCarteJouee;
-		
-		for (CarteType carte : core.getListeCarte())
-		{
-			if(n!=4)
-			{
-				if(carte.name()=="MAT")
-				{
+
+		for (CarteType carte : core.getListeCarte()) {
+			if (n != 4) {
+				if (carte.name() == "MAT") {
 					listeCarteUtilisable.add(carte);
 				}
 			}
-			switch (carte.name())
-			{
+			switch (carte.name()) {
 			case "CAC":
 				listeCarteUtilisable.add(carte);
 				break;
@@ -176,105 +170,113 @@ public class TraitementBot {
 				break;
 			}
 		}
-		for (int i = 0; i < nbCarteJouee; i++)
-		{
-			indexCarteJouee = r.nextInt(core.getListeCarte().size());
+		if (listeCarteUtilisable.isEmpty())
+			return listeCarteJouee;
+		
+		int nbCarteJouee = r.nextInt(listeCarteUtilisable.size());
+		for (int i = 0; i < nbCarteJouee; i++) {
+			indexCarteJouee = r.nextInt(listeCarteJouee.size());
 			listeCarteJouee.add(listeCarteUtilisable.get(indexCarteJouee));
 			core.getListeCarte().remove(listeCarteUtilisable.get(indexCarteJouee));
 		}
-		
+
 		return listeCarteJouee;
 	}
-	
-	public List<PionCouleur> listePionCache (BotFaible core) {
-        List<CarteType> listeCarteCachette=new ArrayList<>();
-        List<PionCouleur> listePionCache=new ArrayList<>();
 
-        for(CarteType carte: core.getListeCarte()) {
-            if(carte.name()=="CAC") {
-                listeCarteCachette.add(carte);
-            }
-        }
-        Random r = new Random();
-        int nbrCartePossibleDejouer=listeCarteCachette.size();
-        int nbrPion=core.getListePion().size();
-        int nbrCarteJouee;
-        if(nbrCartePossibleDejouer>nbrPion) {
-            nbrCarteJouee=r.nextInt(nbrPion);
-        }
-        else {
-            nbrCarteJouee=r.nextInt(nbrCartePossibleDejouer);
+	public List<PionCouleur> listePionCache(BotFaible core) {
+		List<CarteType> listeCarteCachette = new ArrayList<>();
+		List<PionCouleur> listePionCache = new ArrayList<>();
 
-        }
-        
-        for(int i=0;i<nbrCarteJouee;i++) {
-            listePionCache.add(core.getListePion().get(i));
-        }
+		for (CarteType carte : core.getListeCarte()) {
+			if (carte.name() == "CAC") {
+				listeCarteCachette.add(carte);
+			}
+		}
 
-        return listePionCache;
-    }
-	
-	  public CarteType ReponseJoueurCourant(BotFaible core) {
-	        CarteType[] RJListe = CarteType.values();
-	        int rand = new Random().nextInt(1);
-	        CarteType RJ = RJListe[rand];
-	        return RJ;
-	    }
-	  
-	  public int IndiquerCarteJouees(BotFaible core) {
-	          CarteType carteMenace= CarteType.MEN;
-	          Random r= new Random();
-	          int nbrCarteMen=0; 
-	          for(CarteType carte: core.getListeCarte()) {
-	              if(carte.name()==carteMenace.name()) {
-	                  nbrCarteMen++;
-	              }    
-	          }        
-	          int nbrCartemenaceReturn = r.nextInt(nbrCarteMen);
-	          return nbrCartemenaceReturn;      
-	      }
-	  
-	  public Couleur getRandom() {
-	    	List<Couleur> li = new ArrayList<Couleur>();
-	    	li.add(Couleur.NOIR);
-	    	li.add(Couleur.VERT);
-	    	li.add(Couleur.BLEU);
-	    	li.add(Couleur.ROUGE);
-	    	li.add(Couleur.JAUNE);
-	    	li.add(Couleur.MARRON);
-	    	int rand = new Random().nextInt(li.size());
-	    	return li.get(rand);
-	    }
-	  
-	  public List<Object> carteFouille(List<CarteType> listeCarte, BotFaible bot){
-		  CarteType carteGarde = CarteType.NUL;
-			CarteType carteOfferte = CarteType.NUL;
-			CarteType carteDefausse = CarteType.NUL;
-			Couleur couleur = Couleur.NUL;
-			List<Object> carteChoisies = new ArrayList<Object>();
-			if (listeCarte.size() == 3) {
-				carteGarde = listeCarte.get(0);
-				bot.addCarte(carteGarde);
-				carteOfferte = listeCarte.get(1);
-				carteDefausse = listeCarte.get(2);
-				couleur = getRandom();
+		if (listeCarteCachette.isEmpty())
+			return listePionCache;
+
+		Random r = new Random();
+		int nbrCartePossibleDejouer = listeCarteCachette.size();
+		int nbrPion = core.getListePion().size();
+		int nbrCarteJouee;
+		if (nbrCartePossibleDejouer > nbrPion) {
+			nbrCarteJouee = r.nextInt(nbrPion);
+		} else {
+			nbrCarteJouee = r.nextInt(nbrCartePossibleDejouer);
+		}
+
+		for (int i = 0; i < nbrCarteJouee; i++) {
+			listePionCache.add(core.getListePion().get(i));
+		}
+
+		return listePionCache;
+	}
+
+	public CarteType ReponseJoueurCourant(BotFaible core) {
+		CarteType[] RJListe = CarteType.values();
+		int rand = new Random().nextInt(1);
+		CarteType RJ = RJListe[rand];
+		return RJ;
+	}
+
+	public int IndiquerCarteJouees(BotFaible core) {
+		if (core.getListeCarte().isEmpty())
+			return 0;
+
+		CarteType carteMenace = CarteType.MEN;
+		Random r = new Random();
+		int nbrCarteMen = 0;
+		for (CarteType carte : core.getListeCarte()) {
+			if (carte.name() == carteMenace.name()) {
+				nbrCarteMen++;
 			}
-			if (listeCarte.size() == 2) {
-				carteGarde = listeCarte.get(0);
-				bot.addCarte(carteGarde);
-				carteOfferte = listeCarte.get(1);
-				couleur = getRandom();
-			}
-			if (listeCarte.size() == 1) {
-				carteGarde = listeCarte.get(0);
-				bot.addCarte(carteGarde);
-			}
-			carteChoisies.add(carteGarde);
-			carteChoisies.add(carteOfferte);
-			carteChoisies.add(carteDefausse);
-			carteChoisies.add(couleur);
-			
-			return carteChoisies;
-	  }
+		}
+		if (nbrCarteMen == 0)
+			return 0;
+
+		int nbrCartemenaceReturn = r.nextInt(nbrCarteMen);
+		return nbrCartemenaceReturn;
+	}
+
+	public Couleur getRandom(BotFaible core) {
+		if (core.getVoteType() == VoteType.MPZ)
+			core.couleurJoueurPresent().remove(core.getCouleur());
+
+		int rand = new Random().nextInt(core.couleurJoueurPresent().size());
+
+		return core.couleurJoueurPresent().get(rand);
+	}
+
+	public List<Object> carteFouille(List<CarteType> listeCarte, BotFaible bot) {
+		CarteType carteGarde = CarteType.NUL;
+		CarteType carteOfferte = CarteType.NUL;
+		CarteType carteDefausse = CarteType.NUL;
+		Couleur couleur = Couleur.NUL;
+		List<Object> carteChoisies = new ArrayList<Object>();
+		if (listeCarte.size() == 3) {
+			carteGarde = listeCarte.get(0);
+			bot.addCarte(carteGarde);
+			carteOfferte = listeCarte.get(1);
+			carteDefausse = listeCarte.get(2);
+			couleur = getRandom(bot);
+		}
+		if (listeCarte.size() == 2) {
+			carteGarde = listeCarte.get(0);
+			bot.addCarte(carteGarde);
+			carteOfferte = listeCarte.get(1);
+			couleur = getRandom(bot);
+		}
+		if (listeCarte.size() == 1) {
+			carteGarde = listeCarte.get(0);
+			bot.addCarte(carteGarde);
+		}
+		carteChoisies.add(carteGarde);
+		carteChoisies.add(carteOfferte);
+		carteChoisies.add(carteDefausse);
+		carteChoisies.add(couleur);
+
+		return carteChoisies;
+	}
 
 }
