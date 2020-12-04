@@ -6,7 +6,7 @@ import reseau.type.Couleur;
 import reseau.type.PionCouleur;
 
 public abstract class IdjrTools {
-    private IdjrTools(){
+	private IdjrTools(){
 
     }
 
