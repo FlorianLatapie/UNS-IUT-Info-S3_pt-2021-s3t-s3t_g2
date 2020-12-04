@@ -10,7 +10,7 @@ type:CarteType
 doc:La carte offerte. La carte est identifiée comme précédemment.
 value:
 name:carteJoueurOffrant
-type:CarteType
+type:Couleur
 doc:La couleur du joueur offrant la carte offerte. La couleur est identifiée comme précédemment.
 value:
 name:partieId
