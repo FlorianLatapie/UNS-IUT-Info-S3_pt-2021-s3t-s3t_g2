@@ -131,6 +131,9 @@ public class Lieu {
 			if (this.num == 6 && this.nbZombies >= 4 && this.personnage.size() > 0) {
 				return true;
 			}
+			if (this.personnage.size() == 0) {
+				return false;
+			}
 			int force = 0;
 			for (int a = 0; a < this.personnage.size(); a++) {
 				if (personnage.get(a).getType() == TypePersonnage.BRUTE) {
@@ -202,7 +205,10 @@ public class Lieu {
 	 * @param nbZombies the new nb zombies
 	 */
 	public void setNbZombies(int nbZombies) {
-		this.nbZombies = nbZombies;
+		if (nbZombies < 0)
+			this.nbZombies = 0;
+		else 
+			this.nbZombies = nbZombies;
 	}
 
 	/**
