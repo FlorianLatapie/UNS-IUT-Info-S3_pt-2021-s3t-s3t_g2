@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+import reseau.type.TypePersonnage;
+
 /**
  * <h1>La classe lieu</h1>. A pour rôle de définir un lieu.
  *

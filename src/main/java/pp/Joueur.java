@@ -3,6 +3,7 @@ package pp;
 import reseau.socket.Connexion;
 import reseau.type.CarteType;
 import reseau.type.Couleur;
+import reseau.type.TypePersonnage;
 
 import java.net.InetAddress;
 import java.util.ArrayList;

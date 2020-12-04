@@ -1,5 +1,7 @@
 package pp;
 
+import reseau.type.TypePersonnage;
+
 /**
  * <h1>La classe Le truand</h1>. A pour rôle de définir un Personnage.
  * 

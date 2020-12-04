@@ -1,5 +1,7 @@
 package pp;
 
+import reseau.type.TypePersonnage;
+
 /**
  * <h1>Le personnage</h1>
  *

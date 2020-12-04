@@ -1,5 +1,7 @@
 package pp;
 
+import reseau.type.TypePersonnage;
+
 /**
  * <h1>La classe La fillette</h1>. A pour rôle de définir un Personnage.
  * 
