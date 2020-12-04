@@ -9,7 +9,7 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class PacketToolTest {
+class PaquetOutilsTest {
 
     @Test
     void strToListEnum() {
@@ -18,16 +18,16 @@ class PacketToolTest {
         expected.add(Status.COMPLETE);
         expected.add(Status.TERMINE);
         String message = "ANNULEE,COMPLETE,TERMINE";
-        assertEquals(expected, PacketTool.strToListEnum(message, Status.class));
+        assertEquals(expected, PaquetOutils.strToListEnum(message, Status.class));
         expected = new ArrayList<>();
-        assertNotEquals(expected, PacketTool.strToListEnum(message, Status.class));
+        assertNotEquals(expected, PaquetOutils.strToListEnum(message, Status.class));
 
         List<Status> expected1 = new ArrayList<>();
         message = " ";
-        assertEquals(expected1, PacketTool.strToListEnum(message, Status.class));
+        assertEquals(expected1, PaquetOutils.strToListEnum(message, Status.class));
 
         String message1 = "Annule,az";
-        assertThrows(IllegalArgumentException.class, () -> PacketTool.strToListEnum(message1, Status.class));
+        assertThrows(IllegalArgumentException.class, () -> PaquetOutils.strToListEnum(message1, Status.class));
     }
 
     @Test
@@ -38,20 +38,20 @@ class PacketToolTest {
         expected.add(2);
         expected.add(3);
         String message = "0,1,2,3";
-        assertEquals(expected, PacketTool.strToListInteger(message));
+        assertEquals(expected, PaquetOutils.strToListInteger(message));
         expected = new ArrayList<>();
-        assertNotEquals(expected, PacketTool.strToListInteger(message));
+        assertNotEquals(expected, PaquetOutils.strToListInteger(message));
 
         List<Integer> expected1 = new ArrayList<>();
          message = " ";
-        assertEquals(expected1, PacketTool.strToListInteger(message));
+        assertEquals(expected1, PaquetOutils.strToListInteger(message));
 
         String message1 = "Annule,az";
-        assertThrows(IllegalArgumentException.class, () -> PacketTool.strToListInteger(message1));
+        assertThrows(IllegalArgumentException.class, () -> PaquetOutils.strToListInteger(message1));
 
-        assertThrows(IllegalArgumentException.class, () -> PacketTool.strToListInteger("-1,-2"));
-        assertThrows(IllegalArgumentException.class, () -> PacketTool.strToListInteger("-1,0"));
-        assertThrows(IllegalArgumentException.class, () -> PacketTool.strToListInteger("0,-1"));
+        assertThrows(IllegalArgumentException.class, () -> PaquetOutils.strToListInteger("-1,-2"));
+        assertThrows(IllegalArgumentException.class, () -> PaquetOutils.strToListInteger("-1,0"));
+        assertThrows(IllegalArgumentException.class, () -> PaquetOutils.strToListInteger("0,-1"));
     }
 
     @Test
@@ -62,13 +62,13 @@ class PacketToolTest {
         expected.add("Po");
         expected.add("pm");
         String message = "Yo,123,Po,pm";
-        assertEquals(expected, PacketTool.strToListStr(message));
+        assertEquals(expected, PaquetOutils.strToListStr(message));
         expected = new ArrayList<>();
-        assertNotEquals(expected, PacketTool.strToListStr(message));
+        assertNotEquals(expected, PaquetOutils.strToListStr(message));
 
         List<String> expected1 = new ArrayList<>();
         message = " ";
-        assertEquals(expected1, PacketTool.strToListStr(message));
+        assertEquals(expected1, PaquetOutils.strToListStr(message));
     }
 
     @Test
@@ -78,13 +78,13 @@ class PacketToolTest {
         actual.add(Status.COMPLETE);
         actual.add(Status.TERMINE);
         String expected = "ANNULEE,COMPLETE,TERMINE";
-        assertEquals(expected, PacketTool.listEnumToStr(actual));
+        assertEquals(expected, PaquetOutils.listEnumToStr(actual));
         expected = "";
-        assertNotEquals(expected, PacketTool.listEnumToStr(actual));
+        assertNotEquals(expected, PaquetOutils.listEnumToStr(actual));
 
         List<Status> actual1 = new ArrayList<>();
         String expected1 = " ";
-        assertEquals(expected1, PacketTool.listEnumToStr(actual1));
+        assertEquals(expected1, PaquetOutils.listEnumToStr(actual1));
     }
 
     @Test
@@ -94,17 +94,17 @@ class PacketToolTest {
         actual.add(5);
         actual.add(1);
         String expected = "9,5,1";
-        assertEquals(expected, PacketTool.listStrToInteger(actual));
+        assertEquals(expected, PaquetOutils.listStrToInteger(actual));
         expected = "";
-        assertNotEquals(expected, PacketTool.listStrToInteger(actual));
+        assertNotEquals(expected, PaquetOutils.listStrToInteger(actual));
 
         List<Integer> actual1 = new ArrayList<>();
         String expected1 = " ";
-        assertEquals(expected1, PacketTool.listStrToInteger(actual1));
+        assertEquals(expected1, PaquetOutils.listStrToInteger(actual1));
 
         List<Integer> actual2 = new ArrayList<>();
         actual2.add(-9);
-        assertThrows(IllegalArgumentException.class, () -> PacketTool.listStrToInteger(actual2));
+        assertThrows(IllegalArgumentException.class, () -> PaquetOutils.listStrToInteger(actual2));
     }
 
     @Test
@@ -114,13 +114,13 @@ class PacketToolTest {
         actual.add("5");
         actual.add("Bof");
         String expected = "Oui,5,Bof";
-        assertEquals(expected, PacketTool.listStrToStr(actual));
+        assertEquals(expected, PaquetOutils.listStrToStr(actual));
         expected = "";
-        assertNotEquals(expected, PacketTool.listStrToStr(actual));
+        assertNotEquals(expected, PaquetOutils.listStrToStr(actual));
 
         List<String> actual1 = new ArrayList<>();
         String expected1 = " ";
-        assertEquals(expected1, PacketTool.listStrToStr(actual1));
+        assertEquals(expected1, PaquetOutils.listStrToStr(actual1));
     }
 
     @Test
@@ -144,13 +144,13 @@ class PacketToolTest {
 
         HashMap<Integer, List<Integer>> actual1 = new HashMap<>();
         String expected1 = " ";
-        assertEquals(expected1, PacketTool.subListToStr(actual1));
+        assertEquals(expected1, PaquetOutils.subListToStr(actual1));
 
         expected = "BLONDE:5;BRUTE:2;TRUAND:3,5";
-        assertNotEquals(expected, PacketTool.subListToStr(actual));
+        assertNotEquals(expected, PaquetOutils.subListToStr(actual));
 
         String message1 = "Annule,az";
-        assertThrows(ArrayIndexOutOfBoundsException.class, () -> PacketTool.strToSubList(message1));
+        assertThrows(ArrayIndexOutOfBoundsException.class, () -> PaquetOutils.strToSubList(message1));
     }
 
     @Test
@@ -170,29 +170,29 @@ class PacketToolTest {
         filette.add(1);
         expected.put(1, filette);
         String message = "7:5;5:2;3:3,5;1:1";
-        assertEquals(expected, PacketTool.strToSubList(message));
+        assertEquals(expected, PaquetOutils.strToSubList(message));
 
         HashMap<Integer, List<Integer>> expected1 = new HashMap<>();
         String message2 = " ";
-        assertEquals(expected1, PacketTool.strToSubList(message2));
+        assertEquals(expected1, PaquetOutils.strToSubList(message2));
 
         message = "7:5;5:2;3:3,5";
-        assertNotEquals(expected, PacketTool.strToSubList(message));
+        assertNotEquals(expected, PaquetOutils.strToSubList(message));
 
         String message1 = "Annule,az";
-        assertThrows(ArrayIndexOutOfBoundsException.class, () -> PacketTool.strToSubList(message1));
+        assertThrows(ArrayIndexOutOfBoundsException.class, () -> PaquetOutils.strToSubList(message1));
     }
 
     @Test
     void getKeyFromMessage() {
         String expected = "ACP";
-        assertEquals(expected, PacketTool.getKeyFromMessage("ACP-op-456"));
-        assertEquals(expected, PacketTool.getKeyFromMessage("ACP"));
-        assertNotEquals(expected, PacketTool.getKeyFromMessage("ACPa"));
-        assertNotEquals(expected, PacketTool.getKeyFromMessage("ECP"));
+        assertEquals(expected, PaquetOutils.getCleMessage("ACP-op-456"));
+        assertEquals(expected, PaquetOutils.getCleMessage("ACP"));
+        assertNotEquals(expected, PaquetOutils.getCleMessage("ACPa"));
+        assertNotEquals(expected, PaquetOutils.getCleMessage("ECP"));
 
-        assertThrows(IllegalArgumentException.class, () -> PacketTool.getKeyFromMessage(""));
+        assertThrows(IllegalArgumentException.class, () -> PaquetOutils.getCleMessage(""));
 
-        assertThrows(IllegalArgumentException.class, () -> PacketTool.getKeyFromMessage("-"));
+        assertThrows(IllegalArgumentException.class, () -> PaquetOutils.getCleMessage("-"));
     }
 }
