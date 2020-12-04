@@ -15,12 +15,13 @@ import reseau.type.VoteType;
 
 public class TraitementBot {
 
-	public void initialiserPartie(BotFaible core, List<?> nomsT, List<?> couleursT, int lieuferme) {
+	public void initialiserPartie(BotFaible core, List<?> nomsT, List<Couleur> couleursT, int lieuferme) {
 		List<String> noms = new ArrayList<>();
 		List<Couleur> couleurs = new ArrayList<>();
+		core.setJoueurEnVie((couleursT));
 		for (Object o : nomsT)
 			noms.add((String) o);
-		for (Object o : couleursT)
+		for (Couleur o : couleursT)
 			couleurs.add((Couleur) o);
 		core.setCouleur(IdjrTools.getCouleurByName(core.getNom(), noms, couleurs));
 		if (lieuferme == 2) {
@@ -64,6 +65,7 @@ public class TraitementBot {
 	}
 
 	public void debutTour(BotFaible core, List<Couleur> couleurs) {
+		core.setJoueurEnVie(couleurs);
 		if (!couleurs.contains(core.getCouleur())) {
 			core.setEnvie(false);
 		}
@@ -175,9 +177,10 @@ public class TraitementBot {
 		
 		int nbCarteJouee = r.nextInt(listeCarteUtilisable.size());
 		for (int i = 0; i < nbCarteJouee; i++) {
-			indexCarteJouee = r.nextInt(listeCarteJouee.size());
+			indexCarteJouee = r.nextInt(listeCarteUtilisable.size());
 			listeCarteJouee.add(listeCarteUtilisable.get(indexCarteJouee));
 			core.getListeCarte().remove(listeCarteUtilisable.get(indexCarteJouee));
+			listeCarteUtilisable.remove(indexCarteJouee);
 		}
 
 		return listeCarteJouee;
@@ -198,7 +201,7 @@ public class TraitementBot {
 
 		Random r = new Random();
 		int nbrCartePossibleDejouer = listeCarteCachette.size();
-		int nbrPion = core.getListePion().size();
+		int nbrPion = core.getPoinSacrDispo().size();
 		int nbrCarteJouee;
 		if (nbrCartePossibleDejouer > nbrPion) {
 			nbrCarteJouee = r.nextInt(nbrPion);
@@ -239,13 +242,25 @@ public class TraitementBot {
 		return nbrCartemenaceReturn;
 	}
 
-	public Couleur getRandom(BotFaible core) {
-		if (core.getVoteType() == VoteType.MPZ)
+	public Couleur getRandom(BotFaible core, VoteType vt) {
+		int rand;
+		if (vt == VoteType.MPZ) {
+			System.out.println("Joueur Présent:" + core.couleurJoueurPresent().size());
 			core.couleurJoueurPresent().remove(core.getCouleur());
-
-		int rand = new Random().nextInt(core.couleurJoueurPresent().size());
-
+			rand = new Random().nextInt(core.couleurJoueurPresent().size());
+			return core.couleurJoueurPresent().get(rand);
+		}
+		rand = new Random().nextInt(core.couleurJoueurPresent().size());
 		return core.couleurJoueurPresent().get(rand);
+				
+		
+	}
+	
+	public Couleur getRandom2(BotFaible core, VoteType vt) {
+		int rand = new Random().nextInt(core.getJoueurEnVie().size());
+		return core.getJoueurEnVie().get(rand);
+				
+		
 	}
 
 	public List<Object> carteFouille(List<CarteType> listeCarte, BotFaible bot) {
@@ -259,13 +274,15 @@ public class TraitementBot {
 			bot.addCarte(carteGarde);
 			carteOfferte = listeCarte.get(1);
 			carteDefausse = listeCarte.get(2);
-			couleur = getRandom(bot);
+			System.out.print("carte fouille");
+			couleur = getRandom2(bot, VoteType.FDC);
 		}
 		if (listeCarte.size() == 2) {
 			carteGarde = listeCarte.get(0);
 			bot.addCarte(carteGarde);
-			carteOfferte = listeCarte.get(1);
-			couleur = getRandom(bot);
+			System.out.print("carte fouille");
+			System.out.print("4" + bot.couleurJoueurPresent().size());
+			couleur = getRandom2(bot, VoteType.FDC);
 		}
 		if (listeCarte.size() == 1) {
 			carteGarde = listeCarte.get(0);

@@ -166,7 +166,8 @@ public class TraitementPaquetTcp extends TraitementPaquet<Socket> {
 
 	public void ChoisirQuiVoter(Packet packet, String message) {
 		out.println(packet.getDocs());
-		String messageTcp = getControleurReseau().construirePaquetTcp("PVCV", traitementB.getRandom(core),
+		System.out.print("ChoisirQuiVoter");
+		String messageTcp = getControleurReseau().construirePaquetTcp("PVCV", traitementB.getRandom(core, core.getVoteType()),
 				(String) packet.getValue(message, 1), (int) packet.getValue(message, 2), core.getJoueurId());
 		getControleurReseau().getTcpClient().envoyer(messageTcp);
 
@@ -189,7 +190,7 @@ public class TraitementPaquetTcp extends TraitementPaquet<Socket> {
 
 	public void initialiserPartie(Packet packet, String message) {
 		traitementB.initialiserPartie(this.core, (List<?>) packet.getValue(message, 1),
-				(List<?>) packet.getValue(message, 2), (int) packet.getValue(message, 3));
+				(List<Couleur>) packet.getValue(message, 2), (int) packet.getValue(message, 3));
 
 	}
 
@@ -298,21 +299,10 @@ public class TraitementPaquetTcp extends TraitementPaquet<Socket> {
 	}
 
 	private void choixCarteFouille(Packet packet, String message) {
-		List<CarteType> listecartes = (List<CarteType>) packet.getValue(message, 1);
-		CarteType carteGarde = CarteType.NUL;
-		CarteType carteOfferte = CarteType.NUL;
-		CarteType carteDefausse = CarteType.NUL;
-		Couleur couleur = Couleur.NUL;
-		if (listecartes.size() == 3) {
-			carteGarde = listecartes.get(0);
-			carteOfferte = listecartes.get(1);
-			carteDefausse = listecartes.get(2);
-			couleur = traitementB.getRandom(core);
-		}
-
+		List<Object> listeResultat = traitementB.carteFouille((List<CarteType>) packet.getValue(message, 1), core);
 		getControleurReseau().getTcpClient()
-				.envoyer(getControleurReseau().construirePaquetTcp("SCFC", carteGarde, carteOfferte, couleur,
-						carteDefausse, (String) packet.getValue(message, 2), packet.getValue(message, 3),
+				.envoyer(getControleurReseau().construirePaquetTcp("SCFC", (CarteType)listeResultat.get(0), (CarteType)listeResultat.get(1), (Couleur)listeResultat.get(3),
+						(CarteType)listeResultat.get(2), (String) packet.getValue(message, 2), packet.getValue(message, 3),
 						core.getJoueurId()));
 
 	}

@@ -32,7 +32,8 @@ public class BotFaible {
 	private boolean estFini;
 	private List<CarteType> listeCarte;
 	private List<PionCouleur> listePion;
-	private List<Couleur> couleurJoueurs;
+	private List<Couleur> couleurJoueursPresent;
+	private List<Couleur> joueurEnVie;
 	private VoteType voteType;
 
 	/* Parametre Temporaire */
@@ -58,7 +59,7 @@ public class BotFaible {
 	}
 
 	public void setCouleurJoueurs(List<Couleur> couleurJoueurs) {
-		this.couleurJoueurs = couleurJoueurs;
+		this.couleurJoueursPresent = couleurJoueurs;
 	}
 
 	private void initBot() {
@@ -67,10 +68,11 @@ public class BotFaible {
 		this.pionAPos = new ArrayList<>();
 		this.lieuOuvert = new ArrayList<>();
 		this.listeCarte = new ArrayList<>();
-		this.couleurJoueurs = new ArrayList<>();
+		this.couleurJoueursPresent = new ArrayList<>();
 		this.listePion = new ArrayList<>();
 		this.envie = true;
 		this.estFini = false;
+		this.joueurEnVie = new ArrayList<>();
 	}
 
 	private void initReseau() throws IOException {
@@ -197,7 +199,7 @@ public class BotFaible {
 	}
 
 	public List<Couleur> couleurJoueurPresent() {
-		return couleurJoueurs;
+		return couleurJoueursPresent;
 	}
 
 	public VoteType getVoteType() {
@@ -207,4 +209,14 @@ public class BotFaible {
 	public void setVoteType(VoteType voteType) {
 		this.voteType = voteType;
 	}
+
+	public List<Couleur> getJoueurEnVie() {
+		return joueurEnVie;
+	}
+
+	public void setJoueurEnVie(List<Couleur> joueurEnVie) {
+		this.joueurEnVie = joueurEnVie;
+	}
+	
+	
 }
