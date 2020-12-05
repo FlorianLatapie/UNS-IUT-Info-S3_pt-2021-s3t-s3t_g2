@@ -1,11 +1,10 @@
 package idjr;
 
 import idjr.ihmidjr.event.Initializer;
-import reseau.socket.NetWorkManager;
-import reseau.socket.SideConnection;
-import reseau.socket.TcpClientSocket;
-import reseau.tool.NetworkTool;
-import reseau.tool.ThreadTool;
+import reseau.socket.ConnexionType;
+import reseau.socket.ControleurReseau;
+import reseau.tool.ReseauOutils;
+import reseau.tool.ThreadOutils;
 import reseau.type.Couleur;
 import reseau.type.TypeJoueur;
 import reseau.type.TypePartie;
@@ -24,7 +23,7 @@ public class Idjr {
 	private final TypeJoueur typeJoueur;
 	private InetAddress ipPp;
 	private int portPp;
-	NetWorkManager nwm;
+	ControleurReseau nwm;
 	Initializer initializer;
 	/* Parametre Temporaire */
 	private List<Integer> pionAPos;
@@ -94,8 +93,10 @@ public class Idjr {
 	}
 
 	private void initReseau() throws IOException {
-		nwm = new NetWorkManager(this);
-		nwm.initConnection(SideConnection.CLIENT, NetworkTool.getAliveLocalIp());
+		TraitementPaquetTcp traitementPaquetTcp = new TraitementPaquetTcp(this);
+		TraitementPaquetUdp traitementPaquetUdp = new TraitementPaquetUdp(this);
+		nwm = new ControleurReseau(traitementPaquetTcp, traitementPaquetUdp);
+		nwm.initConnexion(ConnexionType.CLIENT, ReseauOutils.getLocalIp());
 	}
 
 	public Joueur getMoi() {
@@ -199,8 +200,8 @@ public class Idjr {
 
 		// TODO QUE MIXTE
 		// QUE 6
-		String message = nwm.getPacketsUdp().get("RP").build(TypePartie.MIXTE, 5);
-		nwm.getUdpSocket().sendPacket(message);
+		String message = nwm.construirePaquetUdp("RP", TypePartie.MIXTE, 5);
+		nwm.envoyerUdp(message);
 
 		try {
 			Thread.sleep(1000);
@@ -218,30 +219,17 @@ public class Idjr {
 		setPortPp(current.getPort());
 		if (initializer != null)
 			initializer.nomPartie(current.getIdPartie());
-		String messageTcp = nwm.getPacketsTcp().get("DCP").build(nom, typeJoueur, current.getIdPartie());
-		ThreadTool.asyncTask(() -> {
-			String message1 = TcpClientSocket.connect(ipPp, portPp, messageTcp, nwm.getAddress(), nwm.getTcpPort());
-			setJoueurId((String) nwm.getPacketsTcp().get("ACP").getValue(message1, 2));
-		}, () -> {
-			try {
-				Thread.sleep(100);
-			} catch (InterruptedException e) {
-			}
-			nwm.stopBind();
-			try {
-				Thread.sleep(100);
-			} catch (InterruptedException e) {
-			}
-			nwm.startServerTCP();
+		String messageTcp = nwm.construirePaquetTcp("DCP",nom, typeJoueur, current.getIdPartie());
+		ThreadOutils.asyncTask(() -> {
+			nwm.getTcpClient().envoyer(messageTcp);
+
+			nwm.getTcpClient().attendreMessage("ACP");
+			String message1 = nwm.getTcpClient().getMessage("ACP");
+			setJoueurId((String) nwm.getPaquetTcp("ACP").getValue(message1, 2));
 		});
 	}
-	
+
 	public synchronized void stop() {
-		if (nwm != null) {
-			if (nwm.getTcpServerSocket() != null)
-				nwm.getTcpServerSocket().stop();
-			if (nwm.getUdpSocket() != null)
-				nwm.getUdpSocket().stop();
-		}
+		nwm.arreter();
 	}
 }

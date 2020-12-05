@@ -1,8 +1,9 @@
 package idjr;
 
 import reseau.packet.Packet;
-import reseau.socket.NetWorkManager;
-import reseau.socket.TcpClientSocket;
+import reseau.socket.ControleurReseau;
+import reseau.socket.TcpClient;
+import reseau.socket.TraitementPaquet;
 import reseau.type.CarteType;
 import reseau.type.Couleur;
 import reseau.type.PionCouleur;
@@ -13,23 +14,28 @@ import java.util.*;
 
 import static java.lang.System.out;
 
+import java.net.Socket;
+
 /**
  * <h1>Permet de gerer les packets</h1>
  *
  * @author SÃ©bastien AglaÃ©
  * @version 1.0
  */
-public class PacketHandlerTcp {
-	private final NetWorkManager nwm;
-	private final Idjr core;
+public class TraitementPaquetTcp extends TraitementPaquet<Socket> {
+	private Idjr core;
 
 	/**
 	 * @param netWorkManager le controleur rÃ©seau
 	 * @param core           coeur du jeu
 	 */
-	public PacketHandlerTcp(NetWorkManager netWorkManager, Object core) {
-		this.nwm = netWorkManager;
+	public TraitementPaquetTcp(Object core) {
 		this.core = (Idjr) core;
+	}
+
+	@Override
+	public void init(ControleurReseau netWorkManager) {
+		super.setControleurReseau(netWorkManager);
 	}
 
 	/**
@@ -40,57 +46,79 @@ public class PacketHandlerTcp {
 	 * @return reponse au paquet
 	 * @throws IllegalStateException si il n'y a pas de traitement pour ce paquet
 	 */
-	public String traitement(Packet packet, String message) {
+	@Override
+	public void traitement(Packet packet, String message, Socket extra) {
 		switch (packet.getKey()) {
 		case "IP":
-			return initialiserPartie(packet, message);
+			initialiserPartie(packet, message);
+			break;
 		case "PIIJ":
-			return lancerDes(packet, message);// savoir comment return plusieur choses
+			lancerDes(packet, message);// savoir comment return plusieur choses
+			break;
 		case "PIRD":
-			return choisirDestPion(packet, message);
+			choisirDestPion(packet, message);
+			break;
 		case "PIIG":
-			return joueurPlacement(packet, message);
+			joueurPlacement(packet, message);
+			break;
 		case "IT":
-			return debutTour(packet, message);
+			debutTour(packet, message);
+			break;
 		case "PAZ":
-			return lanceDesChefVigil(packet, message);
+			lanceDesChefVigil(packet, message);
+			break;
 		case "PCD":
-			return choixDestVigil(packet, message);
+			choixDestVigil(packet, message);
+			break;
 		case "CDCDV":
-			return choisirDest(packet, message);
+			choisirDest(packet, message);
+			break;
 		case "CDZVI":
-			return destZombieVengeur(packet, message);
+			destZombieVengeur(packet, message);
+			break;
 		case "PDP":
-			return debutDeplacemant(packet, message);
+			debutDeplacemant(packet, message);
+			break;
 		case "DPD":
-			return deplacerPion(packet, message);
+			deplacerPion(packet, message);
+			break;
 		case "DPI":
-			return tousDeplacment(packet, message);
+			tousDeplacment(packet, message);
+			break;
 		case "PRAZ":
-			return attaqueZombie(packet, message);
+			attaqueZombie(packet, message);
+			break;
 		case "RAZDS":
-			return choisirSacrifice(packet, message);
+			choisirSacrifice(packet, message);
+			break;
 		case "RAZIF":
-			return tousSacrifice(packet, message);
+			tousSacrifice(packet, message);
+			break;
 		case "FP":
-			return finPartie(packet, message);
+			finPartie(packet, message);
+			break;
 
 		case "PIPZ":
+			break;
 		case "PFC":
-			return phaseFouilleCamion();
+			phaseFouilleCamion();
+			break;
 		case "RFC":
+			break;
 		case "PECV":
-			return phaseElectionChefVigile();
+			phaseElectionChefVigile();
+			break;
 		case "RECV":
+			break;
 		case "CDFC":
-			return "";
+			break;
 		default:
 			throw new IllegalStateException(
 					MessageFormat.format("[UDP] Il n''y a pas de traitement possible pour {0}", packet.getKey()));
 		}
 	}
 
-	public String lancerDes(Packet packet, String message) {
+	public void lancerDes(Packet packet, String message) {
 		List<?> pionT = (List<?>) packet.getValue(message, 2);
 		List<Integer> pion = new ArrayList<>();
 		for (Object o : pionT)
@@ -99,10 +127,11 @@ public class PacketHandlerTcp {
 		core.setPionAPos(pion);
 		String m1 = (String) packet.getValue(message, 3);
 
-		return nwm.getPacketsTcp().get("PILD").build(m1, core.getJoueurId());
+		String messageTcp = getControleurReseau().construirePaquetTcp("PILD", m1, core.getJoueurId());
+		getControleurReseau().getTcpClient().envoyer(messageTcp);
 	}
 
-	public String choisirDestPion(Packet packet, String message) {
+	public void choisirDestPion(Packet packet, String message) {
 		List<?> destRestantT = (List<?>) packet.getValue(message, 2);
 		List<?> desT = (List<?>) packet.getValue(message, 1);
 		List<Integer> des = new ArrayList<>();
@@ -140,19 +169,20 @@ public class PacketHandlerTcp {
 
 		core.getJeu().placePerso(core.getMoi(), pion, dest);
 		String m1 = (String) packet.getValue(message, 3);
-		return nwm.getPacketsTcp().get("PICD").build(dest, pion, m1, core.getJoueurId());
+
+		String messageTcp = getControleurReseau().construirePaquetTcp("PICD", dest, pion, m1, core.getJoueurId());
+		getControleurReseau().getTcpClient().envoyer(messageTcp);
 	}
 
-	public String joueurPlacement(Packet packet, String message) {
+	public void joueurPlacement(Packet packet, String message) {
 		Couleur c = (Couleur) packet.getValue(message, 1);
 		int dest = (int) packet.getValue(message, 4);
 		int pion = (int) packet.getValue(message, 5);
 
 		core.getJeu().placePerso(core.getJoueur(c), pion, dest);
-		return "";
 	}
 
-	public String debutTour(Packet packet, String message) {
+	public void debutTour(Packet packet, String message) {
 		List<?> lT = (List<?>) packet.getValue(message, 2);
 		List<Couleur> l = new ArrayList<>();
 		for (Object o : lT)
@@ -161,11 +191,9 @@ public class PacketHandlerTcp {
 		for (Joueur j : core.getJeu().getJoueurs().values())
 			if (!l.contains(j.getCouleur()))
 				j.setEnVie(false);
-
-		return "";
 	}
 
-	public String lanceDesChefVigil(Packet packet, String message) {
+	public void lanceDesChefVigil(Packet packet, String message) {
 		if (core.getInitializer() != null)
 			core.getInitializer().nomPhase("Phase d’arrivée des zombies");
 
@@ -173,9 +201,11 @@ public class PacketHandlerTcp {
 		if (core.getCouleur() == c1) {
 			String m1 = (String) packet.getValue(message, 3);
 			int m2 = (int) packet.getValue(message, 4);
-			String messageTcp = nwm.getPacketsTcp().get("AZLD").build(m1, m2, core.getJoueurId());
-			String rep = TcpClientSocket.connect(core.getIpPp(), core.getPortPp(), messageTcp, null, 0);
-			List<?> lT = (List<?>) nwm.getPacketsTcp().get("AZLAZ").getValue(rep, 1);
+			String messageTcp = getControleurReseau().construirePaquetTcp("AZLD", m1, m2, core.getJoueurId());
+			getControleurReseau().getTcpClient().envoyer(messageTcp);
+			getControleurReseau().getTcpClient().attendreMessage("AZLAZ");
+			String rep = getControleurReseau().getTcpClient().getMessage("AZLAZ");
+			List<?> lT = (List<?>) getControleurReseau().getPaquetTcp("AZLAZ").getValue(rep, 1);
 			List<Integer> l = new ArrayList<>();
 			for (Object o : lT)
 				l.add((Integer) o);
@@ -183,16 +213,14 @@ public class PacketHandlerTcp {
 			if (core.getInitializer() != null)
 				core.getInitializer().desVigiles(IdjrTools.getLieuByIndex(l));
 		}
-
-		return "";
 	}
 
-	public String choixDestVigil(Packet packet, String message) {
+	public void choixDestVigil(Packet packet, String message) {
 		if (core.getInitializer() != null)
 			core.getInitializer().nomPhase("Phase de choix d’une destination");
 
 		if (!core.getMoi().isEnVie())
-			return "";
+			return;
 
 		if (core.getCouleur() == (Couleur) packet.getValue(message, 1)
 				&& (VigileEtat) packet.getValue(message, 2) == VigileEtat.NE) {
@@ -211,13 +239,13 @@ public class PacketHandlerTcp {
 			int dest = core.getLieuChoisi();
 			core.lieuChoisi(false);
 
-			String messageTcp = nwm.getPacketsTcp().get("CDDCV").build(dest, (String) packet.getValue(message, 3),
-					(int) packet.getValue(message, 4), core.getJoueurId());
-			TcpClientSocket.connect(core.getIpPp(), core.getPortPp(), messageTcp, null, 0);
+			String messageTcp = getControleurReseau().construirePaquetTcp("CDDCV", dest,
+					(String) packet.getValue(message, 3), (int) packet.getValue(message, 4), core.getJoueurId());
+			getControleurReseau().getTcpClient().envoyer(messageTcp);
 
 		} else if (core.getCouleur() != (Couleur) packet.getValue(message, 1)
 				&& (VigileEtat) packet.getValue(message, 2) == VigileEtat.NE) {
-			return "";
+			return;
 		} else {
 			out.println("Entrez une destination");
 
@@ -233,21 +261,19 @@ public class PacketHandlerTcp {
 			int dest = core.getLieuChoisi();
 			core.lieuChoisi(false);
 
-			String messageTcp = nwm.getPacketsTcp().get("CDDJ").build(dest, (String) packet.getValue(message, 3),
-					(int) packet.getValue(message, 4), core.getJoueurId());
+			String messageTcp = getControleurReseau().construirePaquetTcp("CDDJ", dest,
+					(String) packet.getValue(message, 3), (int) packet.getValue(message, 4), core.getJoueurId());
 
-			TcpClientSocket.connect(core.getIpPp(), core.getPortPp(), messageTcp, null, 0);
+			getControleurReseau().getTcpClient().envoyer(messageTcp);
 		}
-
-		return "";
 	}
 
-	public String choisirDest(Packet packet, String message) {
+	public void choisirDest(Packet packet, String message) {
 		if (!core.getMoi().isEnVie())
-			return "";
+			return;
 
 		if (core.getCouleur() == (Couleur) packet.getValue(message, 1)) {
-			return "";
+			return;
 		} else {
 			out.println("Entrez une destination");
 
@@ -263,16 +289,14 @@ public class PacketHandlerTcp {
 			int dest = core.getLieuChoisi();
 			core.lieuChoisi(false);
 
-			String messageTcp = nwm.getPacketsTcp().get("CDDJ").build(dest, (String) packet.getValue(message, 3),
-					(int) packet.getValue(message, 4), core.getJoueurId());
+			String messageTcp = getControleurReseau().construirePaquetTcp("CDDJ", dest,
+					(String) packet.getValue(message, 3), (int) packet.getValue(message, 4), core.getJoueurId());
 
-			TcpClientSocket.connect(core.getIpPp(), core.getPortPp(), messageTcp, null, 0);
+			getControleurReseau().getTcpClient().envoyer(messageTcp);
 		}
-
-		return "";
 	}
 
-	public String destZombieVengeur(Packet packet, String message) {
+	public void destZombieVengeur(Packet packet, String message) {
 		out.println("Entrez une destination pour le zombie vengeur");
 
 		core.getInitializer().choisirLieu(core.getJeu().choixLieudispo());
@@ -287,11 +311,13 @@ public class PacketHandlerTcp {
 		int destZomb = core.getLieuChoisi();
 		core.lieuChoisi(false);
 
-		return nwm.getPacketsTcp().get("CDDZVJE").build(destZomb, packet.getValue(message, 1),
+		String messageTcp = getControleurReseau().construirePaquetTcp("CDDZVJE", destZomb, packet.getValue(message, 1),
 				packet.getValue(message, 2), core.getJoueurId());
+
+		getControleurReseau().getTcpClient().envoyer(messageTcp);
 	}
 
-	public String debutDeplacemant(Packet packet, String message) {
+	public void debutDeplacemant(Packet packet, String message) {
 		if (core.getInitializer() != null)
 			core.getInitializer().nomPhase("Phase de déplacement des personnages");
 
@@ -300,11 +326,9 @@ public class PacketHandlerTcp {
 		for (Object o : lieuxT)
 			lieux.add((Integer) o);
 		core.getJeu().fermerLieu(lieux);
-
-		return "";
 	}
 
-	public String deplacerPion(Packet packet, String message) {
+	public void deplacerPion(Packet packet, String message) {
 		int dest = (int) packet.getValue(message, 1);
 		out.println("First dest " + dest);
 		if (core.getJeu().getLieux().get(dest).isFull())
@@ -339,21 +363,21 @@ public class PacketHandlerTcp {
 		out.println("Entrez une carte Sprint(si disponible 'SPR' sinon 'NUL')");
 		CarteType carte = CarteType.NUL;
 		core.getJeu().deplacePerso(core.getMoi(), pionAdep, dest);
-		return nwm.getPacketsTcp().get("DPR").build(dest, pionAdep, carte, (String) packet.getValue(message, 3),
-				(int) packet.getValue(message, 4), core.getJoueurId());
 
+		String messageTcp = getControleurReseau().construirePaquetTcp("DPR", dest, pionAdep, carte,
+				(String) packet.getValue(message, 3), (int) packet.getValue(message, 4), core.getJoueurId());
+
+		getControleurReseau().getTcpClient().envoyer(messageTcp);
 	}
 
-	public String tousDeplacment(Packet packet, String message) {
+	public void tousDeplacment(Packet packet, String message) {
 		Couleur c = (Couleur) packet.getValue(message, 1);
 		int dest = (int) packet.getValue(message, 2);
 		int p = (int) packet.getValue(message, 3);
 		core.getJeu().deplacePerso(core.getJoueur(c), p, dest);
-
-		return "";
 	}
 
-	public String attaqueZombie(Packet packet, String message) {
+	public void attaqueZombie(Packet packet, String message) {
 		if (core.getInitializer() != null)
 			core.getInitializer().nomPhase("Phase de résolution de l’attaque des zombies");
 
@@ -362,11 +386,9 @@ public class PacketHandlerTcp {
 
 		if ((int) packet.getValue(message, 2) != 0)
 			core.getJeu().getLieux().get((int) packet.getValue(message, 2)).addZombie();
-
-		return "";
 	}
 
-	public String choisirSacrifice(Packet packet, String message) {
+	public void choisirSacrifice(Packet packet, String message) {
 		out.println("Entrez un pion (PionCouleur)");
 		core.getInitializer().sacrificeChange();
 		core.getInitializer()
@@ -386,19 +408,21 @@ public class PacketHandlerTcp {
 
 		String pionTemp = core.getCouleur().name().charAt(0) + "" + pionInt;
 		PionCouleur pion = PionCouleur.valueOf(pionTemp);
-		return nwm.getPacketsTcp().get("RAZCS").build(packet.getValue(message, 1), pion, packet.getValue(message, 2),
-				packet.getValue(message, 3), core.getJoueurId());
+
+		String messageTcp = getControleurReseau().construirePaquetTcp("RAZCS", packet.getValue(message, 1), pion,
+				packet.getValue(message, 2), packet.getValue(message, 3), core.getJoueurId());
+
+		getControleurReseau().getTcpClient().envoyer(messageTcp);
 	}
 
-	public String tousSacrifice(Packet packet, String message) {
+	public void tousSacrifice(Packet packet, String message) {
 		PionCouleur pionTemp = (PionCouleur) packet.getValue(message, 2);
 		Couleur pionCouleur = IdjrTools.getCouleurByChar(pionTemp);
 		int pionInt = IdjrTools.getPionByValue(pionTemp);
 		core.getJeu().sacrifie(core.getJoueur(pionCouleur), pionInt);
-		return "";
 	}
 
-	private String finPartie(Packet packet, String message) {
+	private void finPartie(Packet packet, String message) {
 		Couleur gagnant = (Couleur) packet.getValue(message, 2);
 		out.println("Le gagant est " + core.getJoueur(gagnant).getNom() + " !");
 		if (core.getInitializer() != null) {
@@ -407,22 +431,19 @@ public class PacketHandlerTcp {
 		}
 
 		// TODO ATTENTION A LA FIN PROGRAMME
-		return "";
 	}
 
-	public String phaseFouilleCamion() {
+	public void phaseFouilleCamion() {
 		if (core.getInitializer() != null)
 			core.getInitializer().nomPhase("Phase de fouille du camion");
-		return "";
 	}
 
-	public String phaseElectionChefVigile() {
+	public void phaseElectionChefVigile() {
 		if (core.getInitializer() != null)
 			core.getInitializer().nomPhase("Phase d’élection du chef des vigiles");
-		return "";
 	}
 
-	public String initialiserPartie(Packet packet, String message) {
+	public void initialiserPartie(Packet packet, String message) {
 		if (core.getInitializer() != null) {
 			core.getInitializer().stopWait();
 			core.getInitializer().nomPhase("Placement des personnages");
@@ -441,14 +462,17 @@ public class PacketHandlerTcp {
 		core.setCouleur(IdjrTools.getCouleurByName(core.getNom(), noms, couleurs));
 		if (core.getInitializer() != null)
 			core.getInitializer().couleurJoueur(core.getCouleur());
-		
+
 		ArrayList<Joueur> listeJoueursInitiale = new ArrayList<>();
 
 		for (int i = 0; i < noms.size(); i++)
 			listeJoueursInitiale.add(new Joueur(noms.get(i), couleurs.get(i)));
 
 		core.getJeu().initJoueurs(listeJoueursInitiale);
+	}
 
-		return "";
+	@Override
+	public void set(Object core) {
+		this.core = (Idjr) core;
 	}
 }
