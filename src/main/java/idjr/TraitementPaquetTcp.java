@@ -55,6 +55,9 @@ public class TraitementPaquetTcp extends TraitementPaquet<Socket> {
 		case "IP":
 			initialiserPartie(packet, message);
 			break;
+		case "DC":
+			recupCarte(packet, message);
+			break;
 		case "PIIJ":
 			lancerDes(packet, message);// savoir comment return plusieur choses
 			break;
@@ -185,9 +188,8 @@ public class TraitementPaquetTcp extends TraitementPaquet<Socket> {
 	}
 	
 	private void fournirActionsDefense(Packet packet, String message) {
-		List<CarteType> listeCarteJouee = traitementI.listeCarteJouee(this.core, (int) packet.getValue(message, 1));
-		List<PionCouleur> listePionCache = traitementI.listePionCache(this.core);
-		String messageTCP = getControleurReseau().construirePaquetTcp("RAZRD", listeCarteJouee, listePionCache,
+		List<Object> listerenvoye = traitementI.listeCarteJouee(this.core, (int) packet.getValue(message, 1));
+		String messageTCP = getControleurReseau().construirePaquetTcp("RAZRD", listerenvoye.get(0), listerenvoye.get(1),
 				(String) packet.getValue(message, 2), (int) packet.getValue(message, 3), core.getJoueurId());
 		getControleurReseau().getTcpClient().envoyer(messageTCP);
 	}
@@ -277,12 +279,11 @@ public class TraitementPaquetTcp extends TraitementPaquet<Socket> {
 	}
 
 	public void deplacerPion(Packet packet, String message) {
-		// TODO carte sprint
-		List<Integer> destEtPion = traitementI.pionADeplacer(core, (int) packet.getValue(message, 1),
+		List<Object> listRenvoye = traitementI.pionADeplacer(core, (int) packet.getValue(message, 1),
 				(HashMap<Integer, List<Integer>>) packet.getValue(message, 2));
-		CarteType carte = CarteType.NUL;
-		String messageTcp = getControleurReseau().construirePaquetTcp("DPR", destEtPion.get(0), destEtPion.get(1),
-				carte, (String) packet.getValue(message, 3), (int) packet.getValue(message, 4), core.getJoueurId());
+		String messageTcp = getControleurReseau().construirePaquetTcp("DPR", (Integer) listRenvoye.get(0),
+				listRenvoye.get(1), listRenvoye.get(2), (String) packet.getValue(message, 3),
+				(int) packet.getValue(message, 4), core.getJoueurId());
 		getControleurReseau().getTcpClient().envoyer(messageTcp);
 	}
 
