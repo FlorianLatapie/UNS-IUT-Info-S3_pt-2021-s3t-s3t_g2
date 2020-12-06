@@ -2,6 +2,7 @@ package pp.ihm;
 
 import pp.controleur.ControleurJeu;
 import pp.ihm.DataControl.ApplicationPane;
+import pp.ihm.langues.International;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
@@ -58,7 +59,7 @@ public class ConfigPartiePane extends StackPane {
 		sControl = sc;
 
 		// titre
-		Label titre1 = new Label("Configuration de \nla partie");
+		Label titre1 = new Label("Configuration de \nla partie");//TODO
 		titre1.setTextAlignment(TextAlignment.CENTER);
 		titre1.setFont(Font.font("Segoe UI", FontWeight.BOLD, 80));
 		titre1.setTextFill(Color.BLACK);
@@ -70,7 +71,7 @@ public class ConfigPartiePane extends StackPane {
 		titre.setMinWidth(730);
 
 		// texte
-		Label desc = new Label("Choisissez un nombre de joueurs entre 3 et 6");
+		Label desc = new Label(International.trad("texte.descriptionConfigPartie"));
 		desc.setFont(Font.font("Segoe UI", 30));
 		desc.setMinHeight(hauteurElemtents);
 		desc.setBackground(new Background(new BackgroundFill(Color.WHITE, coin, null)));
@@ -79,7 +80,7 @@ public class ConfigPartiePane extends StackPane {
 		VBox vJoueurs = new VBox();
 		HBox nomPartie = new HBox();
 
-		Label nomPTexte = new Label("Identifiant de la partie");
+		Label nomPTexte = new Label(International.trad("texte.idPartie"));
 		nomPTexte.setFont(policeNom);
 		nomPTexte.setMinHeight(hauteurElemtents);
 		nomPTexte.setBackground(fondBlanc);
@@ -100,7 +101,7 @@ public class ConfigPartiePane extends StackPane {
 		//
 		HBox nbTotJr = new HBox();
 
-		Label nbjrTexte = new Label("Nombre de joueurs : ");
+		Label nbjrTexte = new Label(International.trad("texte.nbdeJr"));
 		nbjrTexte.setFont(policeNom);
 		nbjrTexte.setMinHeight(hauteurElemtents);
 		nbjrTexte.setBackground(fondBlanc);
@@ -122,7 +123,7 @@ public class ConfigPartiePane extends StackPane {
 
 		HBox nbTotBot = new HBox();
 
-		Label nbBotTexte = new Label("Nombre de Bots : ");
+		Label nbBotTexte = new Label(International.trad("texte.nbdeBot"));
 		nbBotTexte.setFont(policeNom);
 		nbBotTexte.setMinHeight(hauteurElemtents);
 		nbBotTexte.setBackground(fondBlanc);
@@ -150,7 +151,7 @@ public class ConfigPartiePane extends StackPane {
 		vbCenter.getChildren().addAll(desc, vJoueurs);
 
 		// boutons
-		Button bJouer = new Button("JOUER");
+		Button bJouer = new Button(International.trad("bouton.jouer"));
 		bJouer.setPrefSize(lBouton, hBouton);
 		bJouer.setMinSize(lBouton, hBouton);
 		bJouer.setFont(policeBouton);
@@ -181,7 +182,7 @@ public class ConfigPartiePane extends StackPane {
 			sc.setPaneOnTop(ApplicationPane.WAIT);
 		});
 
-		Button bRetour = new Button("RETOUR");
+		Button bRetour = new Button(International.trad("bouton.retour"));
 		bRetour.setPrefSize(lBouton, hBouton);
 		bRetour.setMinSize(lBouton, hBouton);
 		bRetour.setFont(policeBouton);
