@@ -1,6 +1,10 @@
 package pp.ihm;
 
 import pp.ihm.DataControl.ApplicationPane;
+import pp.ihm.langues.International;
+
+import java.awt.event.TextEvent;
+
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.*;
@@ -69,7 +73,7 @@ public class AccessibilitePane extends StackPane{
 		vbBoutons.setAlignment(Pos.CENTER);
 		vbRetour.setPadding(new Insets(10));
 		
-		Label titre = new Label("ACCÉSSIBILITÉ");
+		Label titre = new Label(International.trad("texte.titreAcc"));
 		titre.setStyle(styleTitre);
 		titre.setFont(policeTitre);
 		titre.setTranslateY(-30);
@@ -81,7 +85,7 @@ public class AccessibilitePane extends StackPane{
 		hbDaltonisme.setSpacing(10);
 		hbDaltonisme.setAlignment(Pos.CENTER);
 		
-		Label titreVbBoutons = new Label("Daltonisme");
+		Label titreVbBoutons = new Label(International.trad("texte.dalto"));
 		titreVbBoutons.setFont(policeBouton);
 		titreVbBoutons.setTextFill(Color.RED);
 		titreVbBoutons.setPadding(new Insets (10));
@@ -89,7 +93,7 @@ public class AccessibilitePane extends StackPane{
 		vbBoutons.setMargin(vbCheckBoutons, new Insets(20));
 
 		// boutons de différents daltonismes
-		Button bDeuteranopie = new Button("Deutéranopie");
+		Button bDeuteranopie = new Button(International.trad("texte.deuteranopie"));
 		bDeuteranopie.setFont(policeBouton);
 		bDeuteranopie.setAlignment(Pos.CENTER);
 		bDeuteranopie.setStyle(styleBoutons);
@@ -97,7 +101,7 @@ public class AccessibilitePane extends StackPane{
 		bDeuteranopie.setOnMouseEntered(event -> bDeuteranopie.setStyle(styleBoutonsSouris));
 		bDeuteranopie.setOnMouseExited(event -> bDeuteranopie.setStyle(styleBoutons));
 		
-		Button bProtanopie = new Button("Protanopie");
+		Button bProtanopie = new Button(International.trad("texte.protanopie"));
 		bProtanopie.setFont(policeBouton);
 		bProtanopie.setAlignment(Pos.CENTER);
 		bProtanopie.setPrefSize(largeurBouton, hauteurElement);
@@ -105,7 +109,7 @@ public class AccessibilitePane extends StackPane{
 		bProtanopie.setOnMouseEntered(event -> bProtanopie.setStyle(styleBoutonsSouris));
 		bProtanopie.setOnMouseExited(event -> bProtanopie.setStyle(styleBoutons));
 
-		Button bTritanopie = new Button("Tritanopie");
+		Button bTritanopie = new Button(International.trad("texte.tritanopie"));
 		bTritanopie.setFont(policeBouton);
 		bTritanopie.setAlignment(Pos.CENTER);
 		bTritanopie.setPrefSize(largeurBouton, hauteurElement);
@@ -119,19 +123,19 @@ public class AccessibilitePane extends StackPane{
 		
 		// checkboxes 
 		
-		CheckBox bHematophobie = new CheckBox("Hématophobie");
+		CheckBox bHematophobie = new CheckBox(International.trad("texte.hematophobie"));
 		bHematophobie.setStyle(styleTexte);
 		bHematophobie.setPadding(new Insets(10));
 		bHematophobie.setFont(policeBouton);
 		bHematophobie.setAlignment(Pos.CENTER_LEFT);		
 		
-		CheckBox bAudio = new CheckBox("Audio description");
+		CheckBox bAudio = new CheckBox(International.trad("texte.audioDesc"));
 		bAudio.setStyle(styleTexte);
 		bAudio.setPadding(new Insets(10));
 		bAudio.setFont(policeBouton);
 		bAudio.setAlignment(Pos.CENTER_LEFT);
 
-		Button bRetour = new Button("RETOUR");
+		Button bRetour = new Button(International.trad("bouton.retour"));
 		bRetour.setFont(policeBoutonRetour);
 		bRetour.setAlignment(Pos.CENTER);
 		bRetour.setPrefSize(180, hauteurElement);
