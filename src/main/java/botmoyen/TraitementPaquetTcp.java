@@ -173,6 +173,7 @@ public class TraitementPaquetTcp extends TraitementPaquet<Socket> {
 	private void recupCarte(Packet packet, String message) {
 		core.getListeCarte().add((CarteType) packet.getValue(message, 1));
 		core.initCarte((CarteType) packet.getValue(message, 1));
+		core.recupCarte((CarteType) packet.getValue(message, 1));
 	}
 
 	private void recupInfoVote(Packet packet, String message) {
