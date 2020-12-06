@@ -3,6 +3,7 @@ package botmoyen;
 import reseau.socket.ConnexionType;
 import reseau.socket.ControleurReseau;
 import reseau.tool.ReseauOutils;
+import reseau.type.CarteEtat;
 import reseau.type.CarteType;
 import reseau.type.Couleur;
 import reseau.type.PionCouleur;
@@ -288,6 +289,19 @@ public class BotMoyen {
 			partie.getCartes().remove(c3);
 		}
 		else {
+			partie.getCartes().remove(partie.getCartes().get(new Random().nextInt(partie.getCartes().size())));
+		}
+		
+	}
+
+	public void resFouille(Couleur cjg, Couleur cjo, CarteEtat cd) {
+		if (!cjg.equals(couleur)) {
+			partie.givecarte(cjg, partie.getCartes().get(new Random().nextInt(partie.getCartes().size())));
+		}
+		if (!cjo.equals(couleur)) {
+			partie.givecarte(cjo, partie.getCartes().get(new Random().nextInt(partie.getCartes().size())));
+		}
+		if (cd.equals(CarteEtat.CD)) {
 			partie.getCartes().remove(partie.getCartes().get(new Random().nextInt(partie.getCartes().size())));
 		}
 		
