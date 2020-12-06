@@ -326,6 +326,14 @@ public class BotMoyen {
 			partie.setNewChef(false);
 		
 	}
+
+	public void arriveZombie(String value) {
+		List<Integer> arr = new ArrayList<Integer>();
+		for (String s : value.split(","))
+			arr.add(Integer.parseInt(s));
+		partie.entreZombie(arr);
+		
+	}
 	
 	
 	
