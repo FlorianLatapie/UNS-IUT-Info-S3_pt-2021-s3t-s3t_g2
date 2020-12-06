@@ -379,6 +379,22 @@ public class BotMoyen {
 		partie.deplacePerso(value, pion, dest);
 		
 	}
+
+	public void setZombie(String listeL, String listeZ) {
+		String[] s = listeL.split(",");
+		String[] z = listeZ.split(",");
+		List<Integer> li = new ArrayList<Integer>();
+		for (int i =0 ;i<s.length;i++) {
+			partie.getLieux().get(Integer.parseInt(s[i])).setNbZombies(Integer.parseInt(z[i]));
+			li.add(Integer.parseInt(z[i]));
+		}
+		for (Lieu l : partie.getLieux().values()) {
+			if (!li.contains(l.getNum())) {
+				l.setOuvert(false);
+			}
+		}
+		
+	}
 	
 	
 	
