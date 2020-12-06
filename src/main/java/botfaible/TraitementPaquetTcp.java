@@ -58,6 +58,9 @@ public class TraitementPaquetTcp extends TraitementPaquet<Socket> {
 		case "IP":
 			initialiserPartie(packet, message);
 			break;
+		case "DC":
+			recupCarte(packet, message);
+			break;
 		case "PIIJ":
 			lancerDes(packet, message);
 			break;
@@ -147,7 +150,7 @@ public class TraitementPaquetTcp extends TraitementPaquet<Socket> {
 	}
 
 	private void recupCarte(Packet packet, String message) {
-		core.getListeCarte().add((CarteType)packet.getValue(message, 1));
+		core.getListeCarte().add((CarteType) packet.getValue(message, 1));
 	}
 
 	private void recupInfoVote(Packet packet, String message) {
@@ -167,17 +170,15 @@ public class TraitementPaquetTcp extends TraitementPaquet<Socket> {
 	public void ChoisirQuiVoter(Packet packet, String message) {
 		out.println(packet.getDocs());
 		System.out.print("ChoisirQuiVoter");
-		String messageTcp = getControleurReseau().construirePaquetTcp("PVCV", traitementB.getRandom(core, core.getVoteType()),
-				(String) packet.getValue(message, 1), (int) packet.getValue(message, 2), core.getJoueurId());
+		String messageTcp = getControleurReseau().construirePaquetTcp("PVCV",
+				traitementB.getRandom(core, core.getVoteType()), (String) packet.getValue(message, 1),
+				(int) packet.getValue(message, 2), core.getJoueurId());
 		getControleurReseau().getTcpClient().envoyer(messageTcp);
-
 	}
 
 	private void fournirActionsDefense(Packet packet, String message) {
-		List<CarteType> listeCarteJouee = traitementB.listeCarteJouee(this.core, (int) packet.getValue(message, 1));
-		List<PionCouleur> listePionCache = traitementB.listePionCache(this.core);
-
-		String messageTCP = getControleurReseau().construirePaquetTcp("RAZRD", listeCarteJouee, listePionCache,
+		List<Object> listerenvoye = traitementB.listeCarteJouee(this.core, (int) packet.getValue(message, 1));
+		String messageTCP = getControleurReseau().construirePaquetTcp("RAZRD", listerenvoye.get(0), listerenvoye.get(1),
 				(String) packet.getValue(message, 2), (int) packet.getValue(message, 3), core.getJoueurId());
 		getControleurReseau().getTcpClient().envoyer(messageTCP);
 	}
@@ -266,11 +267,11 @@ public class TraitementPaquetTcp extends TraitementPaquet<Socket> {
 	}
 
 	public void deplacerPion(Packet packet, String message) {
-		List<Integer> destEtPion = traitementB.pionADeplacer((int) packet.getValue(message, 1),
+		List<Object> listRenvoye = traitementB.pionADeplacer(core, (int) packet.getValue(message, 1),
 				(HashMap<Integer, List<Integer>>) packet.getValue(message, 2));
-		CarteType carte = CarteType.NUL;
-		String messageTcp = getControleurReseau().construirePaquetTcp("DPR", destEtPion.get(0), destEtPion.get(1),
-				carte, (String) packet.getValue(message, 3), (int) packet.getValue(message, 4), core.getJoueurId());
+		String messageTcp = getControleurReseau().construirePaquetTcp("DPR", (Integer) listRenvoye.get(0),
+				listRenvoye.get(1), listRenvoye.get(2), (String) packet.getValue(message, 3),
+				(int) packet.getValue(message, 4), core.getJoueurId());
 		getControleurReseau().getTcpClient().envoyer(messageTcp);
 	}
 
@@ -301,9 +302,10 @@ public class TraitementPaquetTcp extends TraitementPaquet<Socket> {
 	private void choixCarteFouille(Packet packet, String message) {
 		List<Object> listeResultat = traitementB.carteFouille((List<CarteType>) packet.getValue(message, 1), core);
 		getControleurReseau().getTcpClient()
-				.envoyer(getControleurReseau().construirePaquetTcp("SCFC", (CarteType)listeResultat.get(0), (CarteType)listeResultat.get(1), (Couleur)listeResultat.get(3),
-						(CarteType)listeResultat.get(2), (String) packet.getValue(message, 2), packet.getValue(message, 3),
-						core.getJoueurId()));
+				.envoyer(getControleurReseau().construirePaquetTcp("SCFC", (CarteType) listeResultat.get(0),
+						(CarteType) listeResultat.get(1), (Couleur) listeResultat.get(3),
+						(CarteType) listeResultat.get(2), (String) packet.getValue(message, 2),
+						packet.getValue(message, 3), core.getJoueurId()));
 
 	}
 
