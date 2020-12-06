@@ -2,6 +2,7 @@ package pp.ihm;
 
 import pp.ihm.DataControl.ApplicationPane;
 import pp.ihm.eventListener.AttenteListener;
+import pp.ihm.langues.International;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
@@ -52,7 +53,7 @@ public class AttenteJoueurPane extends StackPane implements AttenteListener {
         sControl = sc;
 
         // titre
-        Label titre1 = new Label("Connexion \nen cours");
+        Label titre1 = new Label("Connexion \nen cours");//TODO
         titre1.setTextAlignment(TextAlignment.CENTER);
         titre1.setFont(Font.font("Segoe UI", FontWeight.BOLD, 80));
         titre1.setTextFill(Color.BLACK);
@@ -72,7 +73,7 @@ public class AttenteJoueurPane extends StackPane implements AttenteListener {
         lIDPartie.setPadding(padding);
 
 
-        Label desc = new Label(" En attente des joueurs ...");
+        Label desc = new Label(International.trad("texte.attenteJoueur"));
         desc.setFont(policeNom);
         desc.setTextFill(Color.WHITE);
         desc.setPadding(new Insets(7));
@@ -144,7 +145,7 @@ public class AttenteJoueurPane extends StackPane implements AttenteListener {
 
 
         // boutons
-        Button bRetour = new Button("RETOUR");
+        Button bRetour = new Button(International.trad("bouton.retour"));
         bRetour.setPrefSize(lBouton, hBouton);
         bRetour.setMinSize(lBouton, hBouton);
         bRetour.setFont(policeBouton);
