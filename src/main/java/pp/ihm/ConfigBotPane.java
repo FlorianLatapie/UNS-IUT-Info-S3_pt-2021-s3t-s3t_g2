@@ -1,6 +1,7 @@
 package pp.ihm;
 
 import pp.ihm.DataControl.ApplicationPane;
+import pp.ihm.langues.International;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
@@ -61,7 +62,7 @@ public class ConfigBotPane extends StackPane {
 		sControl = sc;
 
 		// titre
-		Label titre1 = new Label("Configuration\ndes bots");
+		Label titre1 = new Label("Configuration\ndes bots");// TODO
 		titre1.setTextAlignment(TextAlignment.CENTER);
 		titre1.setFont(Font.font("Segoe UI", FontWeight.BOLD, 80));
 		titre1.setTextFill(Color.BLACK);
@@ -95,7 +96,7 @@ public class ConfigBotPane extends StackPane {
 
 		ComboBox<String> diffBot1 = new ComboBox<>();
 		diffBot1.getItems().addAll(DataControl.difficulteBot);
-		diffBot1.setValue("Faible");
+		diffBot1.setValue(International.trad("texte.valueFaible"));
 		diffBot1.setPrefSize(largeurTF, hauteurElemtents);
 		diffBot1.setMinHeight(hauteurElemtents);
 
@@ -103,9 +104,9 @@ public class ConfigBotPane extends StackPane {
 		bot1.setSpacing(spacing);
 		bot1.getChildren().addAll(bot1Texte, diffBot1);
 		bot1.setVisible(true);
-		
+
 		///
-		
+
 		bot2 = new HBox();
 
 		Label bot2Texte = new Label("Bot2");
@@ -118,7 +119,7 @@ public class ConfigBotPane extends StackPane {
 
 		ComboBox<String> diffBot2 = new ComboBox<>();
 		diffBot2.getItems().addAll(DataControl.difficulteBot);
-		diffBot2.setValue("Faible");
+		diffBot2.setValue(International.trad("texte.valueFaible"));
 		diffBot2.setPrefSize(largeurTF, hauteurElemtents);
 		diffBot2.setMinHeight(hauteurElemtents);
 
@@ -126,9 +127,9 @@ public class ConfigBotPane extends StackPane {
 		bot2.setSpacing(spacing);
 		bot2.getChildren().addAll(bot2Texte, diffBot2);
 		bot2.setVisible(true);
-		
+
 		///
-		
+
 		bot3 = new HBox();
 
 		Label bot3Texte = new Label("Bot3");
@@ -141,7 +142,7 @@ public class ConfigBotPane extends StackPane {
 
 		ComboBox<String> diffBot3 = new ComboBox<>();
 		diffBot3.getItems().addAll(DataControl.difficulteBot);
-		diffBot3.setValue("Faible");
+		diffBot3.setValue(International.trad("texte.valueFaible"));
 		diffBot3.setPrefSize(largeurTF, hauteurElemtents);
 		diffBot3.setMinHeight(hauteurElemtents);
 
@@ -149,7 +150,7 @@ public class ConfigBotPane extends StackPane {
 		bot3.setSpacing(spacing);
 		bot3.getChildren().addAll(bot3Texte, diffBot3);
 		bot3.setVisible(true);
-		
+
 		///
 
 		bot4 = new HBox();
@@ -164,7 +165,7 @@ public class ConfigBotPane extends StackPane {
 
 		ComboBox<String> diffBot4 = new ComboBox<>();
 		diffBot4.getItems().addAll(DataControl.difficulteBot);
-		diffBot4.setValue("Faible");
+		diffBot4.setValue(International.trad("texte.valueFaible"));
 		diffBot4.setPrefSize(largeurTF, hauteurElemtents);
 		diffBot4.setMinHeight(hauteurElemtents);
 
@@ -172,9 +173,9 @@ public class ConfigBotPane extends StackPane {
 		bot4.setSpacing(spacing);
 		bot4.getChildren().addAll(bot4Texte, diffBot4);
 		bot4.setVisible(true);
-		
+
 		///
-		
+
 		bot5 = new HBox();
 
 		Label bot5Texte = new Label("Bot5");
@@ -187,7 +188,7 @@ public class ConfigBotPane extends StackPane {
 
 		ComboBox<String> diffBot5 = new ComboBox<>();
 		diffBot5.getItems().addAll(DataControl.difficulteBot);
-		diffBot5.setValue("Faible");
+		diffBot5.setValue(International.trad("texte.valueFaible"));
 		diffBot5.setPrefSize(largeurTF, hauteurElemtents);
 		diffBot5.setMinHeight(hauteurElemtents);
 
@@ -195,9 +196,9 @@ public class ConfigBotPane extends StackPane {
 		bot5.setSpacing(spacing);
 		bot5.getChildren().addAll(bot5Texte, diffBot5);
 		bot5.setVisible(true);
-		
+
 		///
-		
+
 		bot6 = new HBox();
 
 		Label bot6Texte = new Label("Bot6");
@@ -210,7 +211,7 @@ public class ConfigBotPane extends StackPane {
 
 		ComboBox<String> diffBot6 = new ComboBox<>();
 		diffBot6.getItems().addAll(DataControl.difficulteBot);
-		diffBot6.setValue("Faible");
+		diffBot6.setValue(International.trad("texte.valueFaible"));
 		diffBot6.setPrefSize(largeurTF, hauteurElemtents);
 		diffBot6.setMinHeight(hauteurElemtents);
 
@@ -228,7 +229,7 @@ public class ConfigBotPane extends StackPane {
 		vbCenter.setSpacing(spacing);
 		vbCenter.getChildren().addAll(vBots);
 		// boutons
-		Button bJouer = new Button("JOUER");
+		Button bJouer = new Button(International.trad("bouton.jouer"));
 		bJouer.setPrefSize(lBouton, hBouton);
 		bJouer.setMinSize(lBouton, hBouton);
 		bJouer.setFont(policeBouton);
@@ -238,7 +239,7 @@ public class ConfigBotPane extends StackPane {
 		bJouer.setOnMouseExited(event -> bJouer.setStyle(styleBoutons));
 		bJouer.setOnAction(EventHandler -> sc.setPaneOnTop(ApplicationPane.WAIT));
 
-		Button bRetour = new Button("RETOUR");
+		Button bRetour = new Button(International.trad("bouton.retour"));
 		bRetour.setPrefSize(lBouton, hBouton);
 		bRetour.setMinSize(lBouton, hBouton);
 		bRetour.setFont(policeBouton);
