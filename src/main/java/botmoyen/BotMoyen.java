@@ -13,6 +13,11 @@ import java.io.IOException;
 import java.net.InetAddress;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
+
+import partie.ControleurPartie;
+import partie.Joueur;
+import partie.Partie;
 
 public class BotMoyen {
 	/* Parametre Idjr */
@@ -36,6 +41,7 @@ public class BotMoyen {
 	private List<Couleur> couleurJoueursPresent;
 	private List<Couleur> joueurEnVie;
 	private VoteType voteType;
+	private Partie partie;
 
 	/* Parametre Temporaire */
 	private List<Integer> pionAPos;
@@ -74,6 +80,7 @@ public class BotMoyen {
 		this.envie = true;
 		this.estFini = false;
 		this.joueurEnVie = new ArrayList<>();
+		
 	}
 
 	private void initReseau() throws IOException {
@@ -226,4 +233,66 @@ public class BotMoyen {
 	public void setCompteurTour(int compteurTour) {
 		this.compteurTour = compteurTour;
 	}
+	
+	public void initPartie(List<Couleur> couleurs) {
+		partie = new Partie(couleurs);
+	}
+
+	public void initCarte(CarteType value) {
+		partie.getJoueurs().get(couleur).getCartes().add(value);
+		partie.getCartes().remove(value);
+		for ( Joueur j : partie.getJoueurs().values()) {
+			if (!j.getCouleur().equals(couleur)) {
+				CarteType c =partie.getCartes().get(new Random().nextInt(partie.getCartes().size()));
+				partie.getCartes().remove(c);
+				partie.getJoueurs().get(j.getCouleur()).getCartes().add(c);
+			}
+		}
+	}
+
+	public void deplPion(int dest, int pion) {
+		partie.deplacePerso(couleur, pion, dest);
+	}
+	
+	public void placPion(Couleur c,int dest, int pion) {
+		partie.deplacePerso(c, pion, dest);
+	}
+	
+	public void initZombie(String s) {
+		List<Integer> listeIndexLieux = new ArrayList<Integer>();
+		for (String a : s.split(",")) {
+			listeIndexLieux.add(Integer.parseInt(a));
+		}
+		partie.entreZombie(listeIndexLieux);
+	}
+
+	public void carteCamion(List<Object> carteChoisies) {
+		CarteType c1=(CarteType)carteChoisies.get(0);
+		CarteType c2=(CarteType)carteChoisies.get(2);
+		CarteType c3=(CarteType)carteChoisies.get(3);
+		Couleur couleurJC=(Couleur)carteChoisies.get(4);
+		if (partie.getCartes().contains(c1)) {
+			partie.givecarte(couleur, c1);
+		}
+		else {
+			partie.givecarte(couleur, partie.getCartes().get(new Random().nextInt(partie.getCartes().size())));
+		}
+
+		if (partie.getCartes().contains(c2)) {
+			partie.givecarte(couleurJC, c2);
+		}
+		else {
+			partie.givecarte(couleurJC, partie.getCartes().get(new Random().nextInt(partie.getCartes().size())));
+		}
+		if (partie.getCartes().contains(c3)) {
+			partie.getCartes().remove(c3);
+		}
+		else {
+			partie.getCartes().remove(partie.getCartes().get(new Random().nextInt(partie.getCartes().size())));
+		}
+		
+	}
+	
+	
+	
 }
