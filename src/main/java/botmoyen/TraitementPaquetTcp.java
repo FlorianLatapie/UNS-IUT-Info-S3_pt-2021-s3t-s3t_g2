@@ -135,8 +135,11 @@ public class TraitementPaquetTcp extends TraitementPaquet<Socket> {
 		case "PFC":
 		case "RFC":
 			resFouille(packet, message);
+			break;
 		case "PECV":
 		case "RECV":
+			resVigile(packet, message);
+			break;
 		case "CDFC":
 		case "AZLAZ":
 		case "AZICS":
@@ -153,6 +156,11 @@ public class TraitementPaquetTcp extends TraitementPaquet<Socket> {
 			throw new IllegalStateException(
 					MessageFormat.format("[TCP] Il n''y a pas de traitement possible pour {0}", packet.getKey()));
 		}
+	}
+
+	private void resVigile(Packet packet, String message) {
+		core.resVigile((Couleur) packet.getValue(message, 1));
+		
 	}
 
 	private void resFouille(Packet packet, String message) {
@@ -245,6 +253,7 @@ public class TraitementPaquetTcp extends TraitementPaquet<Socket> {
 			String messageTcp = getControleurReseau().construirePaquetTcp("AZLD", m1, m2, core.getJoueurId());
 			getControleurReseau().getTcpClient().envoyer(messageTcp);
 		}
+		core.NewChef((VigileEtat)packet.getValue(message, 2));
 	}
 
 	public void choixDestVigil(Packet packet, String message) {
