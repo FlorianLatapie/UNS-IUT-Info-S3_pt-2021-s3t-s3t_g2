@@ -4,20 +4,16 @@ package reseau.tool;
  * <h1>Outils pour les threads</h1>
  *
  * @author Sébastien Aglaé
- * @version 1.0
+ * @version 2.0
  */
-public abstract class ThreadOutils {
-	private ThreadOutils() {
-		throw new IllegalStateException("Utility class");
-	}
-
+public interface ThreadOutils {
 	/**
 	 * Permet d'effectuer plusieurs taches de facon asynchrone.
 	 *
 	 * @param task Les taches a effectuer
 	 * @return Le thread crée
 	 */
-	public static Thread asyncTask(Runnable... task) {
+	 static Thread asyncTask(Runnable... task) {
 		Thread t = new Thread(() -> {
 			for (Runnable runnable : task)
 				runnable.run();
@@ -27,7 +23,7 @@ public abstract class ThreadOutils {
 		return t;
 	}
 
-	public static Thread asyncTaskRepeat(int repeat, Runnable task) {
+	 static Thread asyncTaskRepeat(int repeat, Runnable task) {
 		Thread t = new Thread(() -> {
 			for (int i = 0; i < repeat; i++)
 				task.run();

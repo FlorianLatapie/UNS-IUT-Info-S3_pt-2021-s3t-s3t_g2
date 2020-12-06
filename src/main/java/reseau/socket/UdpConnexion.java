@@ -16,20 +16,20 @@ import java.util.logging.Logger;
  * <h1>Permet de gerer un serveur UDP</h1>
  *
  * @author Sébastien Aglaé
- * @version 1.0
+ * @version 2.0
  */
-public class UdpConnexion implements Runnable {
+public class UdpConnexion implements Runnable, IEchangeSocket, IControleSocket {
 	private static final int MULTICAST_PORT = 7777;
 	private static final String MULTICAST_IP = "224.7.7.7";
 	private static final int BUFFER_TAILLE = 496;
 	private static final Charset ENCODAGE = StandardCharsets.UTF_8;
-	private static final Logger logger = Logger.getLogger(UdpConnexion.class.getName());
+	private final Logger logger;
+
+	private final InetAddress groupe;
+	private final ControleurReseau controleurReseau;
+	private final InetAddress monip;
 
 	private MulticastSocket multicastSocket;
-	private InetAddress groupe;
-	private final ControleurReseau controleurReseau;
-	private InetAddress monip;
-
 	private boolean estLancer;
 
 	/**
@@ -45,6 +45,7 @@ public class UdpConnexion implements Runnable {
 		this.multicastSocket = null;
 		this.groupe = InetAddress.getByName(MULTICAST_IP);
 		this.estLancer = false;
+		this.logger = Logger.getLogger(getClass().getName());
 	}
 
 	/**
@@ -54,12 +55,14 @@ public class UdpConnexion implements Runnable {
 	 *                        impossible
 	 */
 	private void ouvrir() throws IOException {
+		logger.log(Level.FINEST, "Ouverture multicast UDP");
+
 		multicastSocket = new MulticastSocket(MULTICAST_PORT);
 		multicastSocket.setInterface(monip);
-		logger.finest("Multicast on port " + MULTICAST_PORT);
 		multicastSocket.joinGroup(groupe);
-		logger.finest("Multicast on ip " + MULTICAST_IP);
 		estLancer = true;
+
+		logger.log(Level.FINEST, "Multicast UDP ouvert");
 	}
 
 	/**
@@ -67,14 +70,16 @@ public class UdpConnexion implements Runnable {
 	 */
 	@Override
 	public void run() {
-		logger.info("Server started ! ");
+		logger.finest("Démarrage du serveur TCP");
+		logger.log(Level.FINEST, "Serveur TCP sur l'ip {0}", MULTICAST_IP);
+		logger.log(Level.FINEST, "Serveur TCP sur le port {0}", MULTICAST_PORT);
 
 		try {
 			ouvrir();
 		} catch (IOException e1) {
-			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
+
 		while (estLancer) {
 			byte[] buffer = new byte[BUFFER_TAILLE];
 			DatagramPacket message = new DatagramPacket(buffer, buffer.length);
@@ -87,11 +92,11 @@ public class UdpConnexion implements Runnable {
 			received = new String(message.getData(), 0, message.getLength(), ENCODAGE);
 			reception(message, received);
 		}
+
 		if (estLancer)
 			try {
 				arreter();
 			} catch (IOException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 	}
@@ -103,26 +108,25 @@ public class UdpConnexion implements Runnable {
 	 * @param message        Message a traiter
 	 */
 	private void reception(DatagramPacket datagramPacket, String message) {
-		logger.log(Level.INFO, "Packet received {0}", message);
-		controleurReseau.getTraitementPaquetUdp().traitement(PtOutils.strToPacketUdp(message, controleurReseau),
-				message, datagramPacket);
+		logger.log(Level.INFO, "Message recu : {0}", message);
+		controleurReseau.traitementPaquetUdp(PtOutils.strToPacketUdp(message, controleurReseau), message,
+				datagramPacket);
 	}
 
 	/**
 	 * Permet d'envoyer un paquet.
 	 *
 	 * @param message Le message a envoyer
-	 * @exception IOException Si un message de peut pas etre envoyé
 	 */
 	public void envoyer(String message) {
-		logger.log(Level.FINEST, "Message sent {0}", message);
+		logger.log(Level.FINEST, "Message envoyé : {0}", message);
 		String uftMessage = new String(message.getBytes(), ENCODAGE);
 		byte[] buffer = uftMessage.getBytes();
 		DatagramPacket packet = new DatagramPacket(buffer, buffer.length, groupe, MULTICAST_PORT);
+
 		try {
 			multicastSocket.send(packet);
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
@@ -133,11 +137,14 @@ public class UdpConnexion implements Runnable {
 	 * @throws IOException Si le socket multicast n'arrive pas a se terminer
 	 */
 	public void arreter() throws IOException {
+		logger.log(Level.INFO, "Arret du socket UDP");
 		estLancer = false;
+
 		if (multicastSocket != null) {
 			multicastSocket.leaveGroup(groupe);
 			multicastSocket.close();
-			System.out.println("UDP SERVEUR §§§§§§");
 		}
+
+		logger.log(Level.INFO, "Socket UDP arreté");
 	}
 }

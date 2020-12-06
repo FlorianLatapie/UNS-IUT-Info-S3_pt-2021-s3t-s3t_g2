@@ -1,25 +1,26 @@
 package reseau.socket;
 
-import reseau.packet.Packet;
+import reseau.paquet.Paquet;
 import reseau.tool.PtOutils;
 import reseau.tool.ReseauOutils;
+import reseau.type.*;
 
 import java.io.IOException;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
-import java.text.MessageFormat;
 import java.util.Map;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
  * <h1>Permet de gerer la partie reseau</h1>
  *
  * @author Sébastien Aglaé
- * @version 1.0
+ * @version 2.0
  */
-public class ControleurReseau {
-	private final Map<String, Packet> udpPaquets;
-	private final Map<String, Packet> tcpPaquets;
+public class ControleurReseau implements IControleSocket {
+	private final Map<String, Paquet> udpPaquets;
+	private final Map<String, Paquet> tcpPaquets;
 
 	private static final String CHEMIN_PACKET = "Ressources/protocol_reseau/packets";
 
@@ -29,7 +30,7 @@ public class ControleurReseau {
 	private InetAddress ip;
 
 	private int tcpPort;
-	private final TraitementPaquet traitementPaquetUdp;
+	private final TraitementPaquet<Object> traitementPaquetUdp;
 	private final TraitementPaquet traitementPaquetTcp;
 	private ConnexionType connexionType;
 
@@ -41,7 +42,7 @@ public class ControleurReseau {
 	 * @throws IOException si les fichiers pour le chargement des paquets sont
 	 *                     inaccessible
 	 */
-	public ControleurReseau(TraitementPaquet traitementPaquetTcp, TraitementPaquet traitementPaquetUdp)
+	public ControleurReseau(TraitementPaquet traitementPaquetTcp, TraitementPaquet<Object> traitementPaquetUdp)
 			throws IOException {
 		this.udpPaquets = PtOutils.loadPacket(CHEMIN_PACKET, "UDP");
 		this.tcpPaquets = PtOutils.loadPacket(CHEMIN_PACKET, "TCP");
@@ -60,24 +61,27 @@ public class ControleurReseau {
 	 * @throws UnknownHostException     Si le cast de l'ip provoque une erreur
 	 */
 	public void initConnexion(ConnexionType connexionType, InetAddress ip) throws UnknownHostException {
-		logger.finest("Initialisation");
+		logger.finest("Initialisation du controleur réseau");
 		this.traitementPaquetUdp.init(this);
 		this.traitementPaquetTcp.init(this);
 		this.connexionType = connexionType;
 		this.ip = ip;
-		this.tcpPort = ReseauOutils.getPortSocket(1024, 64000);
+		this.tcpPort = ReseauOutils.getPortSocket(1024, 65535);
 
 		if (udpPaquets.isEmpty() || tcpPaquets.isEmpty())
 			throw new IllegalArgumentException("Il n'y a pas de définitions pour les paquets TCP/UDP");
-		logger.info(MessageFormat.format("Mon port est {0}", tcpPort));
+		logger.log(Level.INFO, "Mon port est {0}", tcpPort);
+		udpConnexion = new UdpConnexion(this, ip);
+		new Thread(udpConnexion, "udpConnexion").start();
 
-		new Thread(udpConnexion = new UdpConnexion(this, ip), "udpConnexion").start();
-
-		if (connexionType == ConnexionType.SERVER) {
-			new Thread(tcpServeur = new TcpServeur(this, tcpPort), "tcpServeur").start();
+		if (connexionType == ConnexionType.SERVEUR) {
+			tcpServeur = new TcpServeur(this, tcpPort);
+			new Thread(tcpServeur, "tcpServeur").start();
 		} else {
-			new Thread(tcpClient = new TcpClient(this, ip, tcpPort), "tcpClient").start();
+			tcpClient = new TcpClient(this, ip, tcpPort);
+			new Thread(tcpClient, "tcpClient").start();
 		}
+		logger.info("Controleur initialisé");
 	}
 
 	/**
@@ -89,22 +93,24 @@ public class ControleurReseau {
 			try {
 				tcpServeur.arreter();
 			} catch (IOException e) {
-				logger.severe(MessageFormat.format("Impossible d'arreter le serveur TCP\n{0}", e));
+				e.printStackTrace();
 			}
 
 		if (tcpClient != null)
 			try {
 				tcpClient.arreter();
 			} catch (IOException e) {
-				logger.severe(MessageFormat.format("Impossible d'arreter le client TCP\n{0}", e));
+				e.printStackTrace();
 			}
 
 		if (udpConnexion != null)
 			try {
 				udpConnexion.arreter();
 			} catch (IOException e) {
-				logger.severe(MessageFormat.format("Impossible d'arreter le serveur UDP\n{0}", e));
+				e.printStackTrace();
 			}
+
+		logger.log(Level.INFO, "Serveur UDP et TCP arreté");
 	}
 
 	/**
@@ -114,6 +120,15 @@ public class ControleurReseau {
 	 */
 	public void envoyerUdp(String message) {
 		udpConnexion.envoyer(message);
+	}
+
+	/**
+	 * Envoyer un message TCP
+	 *
+	 * @param message Le message a envoyer
+	 */
+	public void envoyerTcp(String message) {
+		tcpClient.envoyer(message);
 	}
 
 	/**
@@ -129,26 +144,23 @@ public class ControleurReseau {
 	}
 
 	/**
-	 * Permet de savoir si la clé Tcp existe.
+	 * Arreter le serveur TCP
 	 *
-	 * @return Si la clé existe
+	 * @throws IOException Si le serveur ne peut pas etre arreté
 	 */
-	public boolean isCleExisteTcp(String cle) {
-		try {
-			tcpPaquets.get(cle);
-		} catch (NullPointerException ignored) {
-			return false;
-		}
+	public void arreterTcp() throws IOException {
+		if (tcpClient == null)
+			return;
 
-		return true;
+		tcpClient.arreter();
 	}
 
 	/**
-	 * Permet de savoir si la clé Udp existe.
+	 * Permet de savoir si la clé existe.
 	 *
 	 * @return Si la clé existe
 	 */
-	public boolean isCleExisteUdp(String cle) {
+	public boolean isCleExiste(String cle) {
 		try {
 			udpPaquets.get(cle);
 		} catch (NullPointerException ignored) {
@@ -159,15 +171,39 @@ public class ControleurReseau {
 	}
 
 	/**
+	 * Permet d'obtenir l'ensemble des paquets UDP.
+	 *
+	 * @return L'ensemble des paquets UDP
+	 */
+	public String construirePaquetUdp(String cle, Object... args) {
+		if (!isCleExiste(cle))
+			throw new IllegalArgumentException("Ce n'est pas une clé UDP !");
+
+		return udpPaquets.get(cle).construire(args);
+	}
+
+	/**
 	 * Permet d'obtenir l'ensemble des paquets TCP.
 	 *
 	 * @return L'ensemble des paquets TCP
 	 */
 	public String construirePaquetTcp(String cle, Object... args) {
-		if (!isCleExisteTcp(cle))
+		if (!isCleExiste(cle))
 			throw new IllegalArgumentException("Ce n'est pas une clé TCP !");
 
-		return tcpPaquets.get(cle).build(args);
+		return tcpPaquets.get(cle).construire(args);
+	}
+
+	/**
+	 * Permet d'obtenir l'ensemble des paquets UDP.
+	 *
+	 * @return L'ensemble des paquets UDP
+	 */
+	public Object getValueUdp(String cle, String message, int val) {
+		if (!isCleExiste(cle))
+			throw new IllegalArgumentException("Ce n'est pas une clé UDP !");
+
+		return udpPaquets.get(cle).getValeur(message, val);
 	}
 
 	/**
@@ -176,10 +212,23 @@ public class ControleurReseau {
 	 * @return L'ensemble des paquets TCP
 	 */
 	public Object getValueTcp(String cle, String message, int val) {
-		if (!isCleExisteTcp(cle))
+		if (!isCleExiste(cle))
 			throw new IllegalArgumentException("Ce n'est pas une clé TCP !");
 
-		return tcpPaquets.get(cle).getValue(message, val);
+		return tcpPaquets.get(cle).getValeur(message, val);
+	}
+
+	/**
+	 * Permet d'obtenir le paquet UDP.
+	 *
+	 * @param cle La clé du paquet cible
+	 * @return Le paquet UDP cible
+	 */
+	public Paquet getPaquetUdp(String cle) {
+		if (!isCleExiste(cle))
+			throw new IllegalArgumentException("Ce n'est pas une clé UDP !");
+
+		return udpPaquets.get(cle);
 	}
 
 	/**
@@ -188,8 +237,8 @@ public class ControleurReseau {
 	 * @param cle La clé du paquet cible
 	 * @return Le paquet TCP cible
 	 */
-	public Packet getPaquetTcp(String cle) {
-		if (!isCleExisteTcp(cle))
+	public Paquet getPaquetTcp(String cle) {
+		if (!isCleExiste(cle))
 			throw new IllegalArgumentException("Ce n'est pas une clé TCP !");
 
 		return tcpPaquets.get(cle);
@@ -205,40 +254,12 @@ public class ControleurReseau {
 	}
 
 	/**
-	 * Permet d'obtenir l'ensemble des paquets UDP.
+	 * Permet le nombre de paquet charger.
 	 *
-	 * @return L'ensemble des paquets UDP
+	 * @return Le nombre de paquet charger
 	 */
-	public String construirePaquetUdp(String cle, Object... args) {
-		if (!isCleExisteUdp(cle))
-			throw new IllegalArgumentException("Ce n'est pas une clé UDP !");
-
-		return udpPaquets.get(cle).build(args);
-	}
-
-	/**
-	 * Permet d'obtenir l'ensemble des paquets UDP.
-	 *
-	 * @return L'ensemble des paquets UDP
-	 */
-	public Object getValueUdp(String cle, String message, int val) {
-		if (!isCleExisteUdp(cle))
-			throw new IllegalArgumentException("Ce n'est pas une clé UDP !");
-
-		return udpPaquets.get(cle).getValue(message, val);
-	}
-
-	/**
-	 * Permet d'obtenir le paquet UDP.
-	 *
-	 * @param cle La clé du paquet cible
-	 * @return Le paquet UDP cible
-	 */
-	public Packet getPaquetUdp(String cle) {
-		if (!isCleExisteUdp(cle))
-			throw new IllegalArgumentException("Ce n'est pas une clé UDP !");
-
-		return udpPaquets.get(cle);
+	public int getPaquetTcpCount() {
+		return tcpPaquets.size();
 	}
 
 	/**
@@ -248,15 +269,6 @@ public class ControleurReseau {
 	 */
 	public TcpServeur getTcpServeur() {
 		return tcpServeur;
-	}
-
-	/**
-	 * Obtient le client TCP.
-	 *
-	 * @return Le client TCP
-	 */
-	public TcpClient getTcpClient() {
-		return tcpClient;
 	}
 
 	/**
@@ -278,21 +290,25 @@ public class ControleurReseau {
 	}
 
 	/**
-	 * Obtient le packet handler udp.
+	 * Permet de traiter un paquet UDP.
 	 *
-	 * @return Le packet handler udp
+	 * @param packet  Le paquet recu encapsulé
+	 * @param message Le paquet brute
+	 * @param extra   Le datagram du paquet
 	 */
-	public TraitementPaquet getTraitementPaquetUdp() {
-		return traitementPaquetUdp;
+	public void traitementPaquetUdp(Paquet packet, String message, java.net.DatagramPacket extra) {
+		traitementPaquetUdp.traitement(packet, message, extra);
 	}
 
 	/**
-	 * Obtient le packet handler udp.
+	 * Permet de traiter un paquet TCP.
 	 *
-	 * @return Le packet handler udp
+	 * @param packet  Le paquet recu encapsulé
+	 * @param message Le paquet brute
+	 * @param extra   Le socket du paquet
 	 */
-	public TraitementPaquet getTraitementPaquetTcp() {
-		return traitementPaquetTcp;
+	public void traitementPaquetTcp(Paquet packet, String message, Object extra) {
+		traitementPaquetUdp.traitement(packet, message, extra);
 	}
 
 	/**

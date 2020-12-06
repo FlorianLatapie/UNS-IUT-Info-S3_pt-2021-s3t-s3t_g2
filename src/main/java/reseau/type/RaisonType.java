@@ -1,5 +1,5 @@
 package reseau.type;
 
-public enum ReasonType {
+public enum RaisonType {
     PION, ZOMBIE, FORCE
 }
