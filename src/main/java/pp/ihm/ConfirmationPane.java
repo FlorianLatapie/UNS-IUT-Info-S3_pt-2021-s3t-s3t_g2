@@ -14,6 +14,7 @@ import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import pp.ihm.langues.International;
 
 /**
  * @author Remy
@@ -48,12 +49,12 @@ public class ConfirmationPane {
 		label.setPadding(new Insets(10));
 
 		//boutons
-		Button boutonOui = new Button("QUITTER");
+		Button boutonOui = new Button(International.trad("bouton.quitter"));
 		boutonOui.setPrefSize(200, 50);
 		boutonOui.setStyle("-fx-background-color: #ff0000; -fx-background-radius: 5px; -fx-text-fill: #ffffff");
 		boutonOui.setFont(Font.font("Arial", FontWeight.BOLD, 20));
 
-		Button boutonNon = new Button("ANNULER");
+		Button boutonNon = new Button(International.trad("bouton.annuler"));
 		boutonNon.setPrefSize(200, 50);
 		boutonNon.setStyle("-fx-background-color: #A9A9A9; -fx-background-radius: 5px; -fx-text-fill: #ffffff");
 		boutonNon.setFont(Font.font("Arial", FontWeight.BOLD, 20));
