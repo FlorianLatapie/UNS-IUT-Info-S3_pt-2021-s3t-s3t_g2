@@ -12,6 +12,8 @@ import reseau.type.VoteType;
 import java.text.MessageFormat;
 import java.util.*;
 
+import partie.Joueur;
+
 import static java.lang.System.out;
 
 import java.net.Socket;
@@ -67,6 +69,7 @@ public class TraitementPaquetTcp extends TraitementPaquet<Socket> {
 			choisirDestPlacement(packet, message);
 			break;
 		case "PIIG":
+			placementPerso(packet, message);
 			break;
 		case "IT":
 			debutTour(packet, message);
@@ -126,6 +129,8 @@ public class TraitementPaquetTcp extends TraitementPaquet<Socket> {
 			break;
 
 		case "PIPZ":
+			placeZombie(packet, message);
+			break;
 		case "PFC":
 		case "RFC":
 		case "PECV":
@@ -148,8 +153,19 @@ public class TraitementPaquetTcp extends TraitementPaquet<Socket> {
 		}
 	}
 
+	private void placeZombie(Packet packet, String message) {
+		core.initZombie((String) packet.getValue(message, 1) );
+		
+	}
+
+	private void placementPerso(Packet packet, String message) {
+		core.placPion((Couleur) packet.getValue(message, 1),(int) packet.getValue(message, 4),(int)packet.getValue(message, 5) );
+		
+	}
+
 	private void recupCarte(Packet packet, String message) {
 		core.getListeCarte().add((CarteType) packet.getValue(message, 1));
+		core.initCarte((CarteType) packet.getValue(message, 1));
 	}
 
 	private void recupInfoVote(Packet packet, String message) {
@@ -191,7 +207,6 @@ public class TraitementPaquetTcp extends TraitementPaquet<Socket> {
 	public void initialiserPartie(Packet packet, String message) {
 		traitementB.initialiserPartie(this.core, (List<?>) packet.getValue(message, 1),
 				(List<Couleur>) packet.getValue(message, 2), (int) packet.getValue(message, 3));
-
 	}
 
 	public void lancerDes(Packet packet, String message) {
@@ -203,14 +218,15 @@ public class TraitementPaquetTcp extends TraitementPaquet<Socket> {
 
 	public void choisirDestPlacement(Packet packet, String message) {
 		String m1 = (String) packet.getValue(message, 3);
-		getControleurReseau().getTcpClient()
-				.envoyer(getControleurReseau().construirePaquetTcp("PICD",
-						traitementB.choisirDestPlacement((List<?>) packet.getValue(message, 2)),
-						traitementB.choisirPionPlacement(core), m1, core.getJoueurId()));
+		int dest = traitementB.choisirDestPlacement((List<?>) packet.getValue(message, 2));
+		int pion = traitementB.choisirPionPlacement(core);
+		core.deplPion(dest, pion);
+		getControleurReseau().getTcpClient().envoyer(getControleurReseau().construirePaquetTcp("PICD", dest,pion, m1, core.getJoueurId()));
 	}
 
 	public void debutTour(Packet packet, String message) {
 		traitementB.debutTour(core, (List<Couleur>) packet.getValue(message, 2));
+		
 	}
 
 	public void lanceDesChefVigil(Packet packet, String message) {
