@@ -19,6 +19,7 @@ import java.util.Random;
 
 import partie.ControleurPartie;
 import partie.Joueur;
+import partie.Lieu;
 import partie.Partie;
 
 public class BotMoyen {
@@ -364,6 +365,13 @@ public class BotMoyen {
 		List<Integer> arr = new ArrayList<Integer>();
 		arr.add(value);
 		partie.entreZombie(arr);
+		
+	}
+
+	public void setLieuxFerme(List<Integer> lieux) {
+		for (Integer i : lieux) {
+			partie.getLieux().get(i).setOuvert(false);
+		}
 		
 	}
 	
