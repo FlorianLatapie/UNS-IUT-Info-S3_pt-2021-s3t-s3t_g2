@@ -145,8 +145,13 @@ public class TraitementPaquetTcp extends TraitementPaquet<Socket> {
 			arriveZombie(packet, message);
 			break;
 		case "AZUCS":
+			arriveZombie(packet, message);
+			break;
 			
 		case "AZICS":
+			joueCarteCDS(packet, message);
+			break;
+			
 		case "PVIC":
 		case "PVR":
 		case "PVVC":
@@ -160,6 +165,13 @@ public class TraitementPaquetTcp extends TraitementPaquet<Socket> {
 			throw new IllegalStateException(
 					MessageFormat.format("[TCP] Il n''y a pas de traitement possible pour {0}", packet.getKey()));
 		}
+	}
+
+	private void joueCarteCDS(Packet packet, String message) {
+		if ((((CarteType)packet.getValue(message, 2)).equals(CarteType.CDS)  )&&(!((Couleur)packet.getValue(message, 1)).equals(core.getCouleur()))) {
+			 core.joueCarteCDS((Couleur)packet.getValue(message, 1));
+		}
+		
 	}
 
 	private void arriveZombie(Packet packet, String message) {
