@@ -94,6 +94,8 @@ public class TraitementPaquetTcp extends TraitementPaquet<Socket> {
 			deplacerPion(packet, message);
 			break;
 		case "DPI":
+			deplacerPionJoueurCourant(packet, message);
+			break;
 		case "PRAZ":
 			break;
 		case "RAZA":
@@ -170,6 +172,13 @@ public class TraitementPaquetTcp extends TraitementPaquet<Socket> {
 		}
 	}
 
+	private void deplacerPionJoueurCourant(Packet packet, String message) {
+		core.deplPionJoueurCourant((Couleur)packet.getValue(message, 1),(Integer)packet.getValue(message, 2), (Integer)packet.getValue(message, 3));
+		if (((CarteType)packet.getValue(message, 2)).equals(CarteType.SPR))
+			core.joueCarte((Couleur)packet.getValue(message, 1),CarteType.SPR);
+		
+	}
+
 	private void arriveSoloZombie(Packet packet, String message) {
 		core.arriveSoloZombie((Integer) packet.getValue(message, 2));
 		
@@ -177,7 +186,7 @@ public class TraitementPaquetTcp extends TraitementPaquet<Socket> {
 
 	private void joueCarteCDS(Packet packet, String message) {
 		if ((((CarteType)packet.getValue(message, 2)).equals(CarteType.CDS)  )&&(!((Couleur)packet.getValue(message, 1)).equals(core.getCouleur()))) {
-			 core.joueCarteCDS((Couleur)packet.getValue(message, 1));
+			 core.joueCarte((Couleur)packet.getValue(message, 1),CarteType.CDS);
 		}
 		
 	}
