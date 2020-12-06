@@ -899,7 +899,7 @@ public class PlateauPane extends StackPane implements PlateauListener {
 
 	@Override
 	public void forceLieu(int lieu, int force) {
-		String tmp = "    Force\nde l'équipe\n" + "\n\t" + force;
+		String tmp = "    Force\nde l'équipe\n" + "\n\t" + force; //TODO traduction
 		Platform.runLater(() -> {
 			switch (lieu) {
 			case 1:
