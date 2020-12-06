@@ -126,6 +126,7 @@ public class TraitementPaquetTcp extends TraitementPaquet<Socket> {
 			recupCarte(packet, message);
 			break;
 
+		case "AZUCS":
 		case "PIPZ":
 		case "PFC":
 		case "RFC":
