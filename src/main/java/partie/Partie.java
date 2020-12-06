@@ -547,12 +547,28 @@ public class Partie {
 	}
 
 	/**
+	 * Definie Chef des vigiles.
+	 *
+	 * @param c la couleur du nouceau chef.
+	 */
+	public void setChef(Couleur c) {
+		for ( Joueur j : joueurs.values()) {
+			if (j.getCouleur().equals(c)) {
+				j.setChefDesVigiles(true);
+			}
+			else {
+				j.setChefDesVigiles(false);
+			}
+		}
+	}
+	
+	/**
 	 * Definie nouveauChef.
 	 *
 	 * @param nouveauChef l'état de nouveauChef à appliqué.
 	 */
-	public void setNewChef(Boolean nouveauChef) {
-		this.nouveauChef = nouveauChef;
+	public void setNewChef(boolean nouveauChef) {
+		this.nouveauChef=nouveauChef;
 	}
 	
 	public void givecarte(Couleur c , CarteType carte) {
