@@ -28,22 +28,16 @@ public class ControleurPartie {
 	private boolean isFinished = false;
 	private final Random rd = new Random();
 
-	public ControleurPartie(int nbjt) {
+	public ControleurPartie(List<Couleur> couleurs) {
 		jmort = new ArrayList<>();
-		nbjtotal = nbjt;
+		nbjtotal = couleurs.size();
 		lieuZombie = new ArrayList<>();
 		joueurs = new ArrayList<>();
-		initPartie();
+		initPartie(couleurs);
 	}
 
-	private void initPartie() {
-		joueurs.get(0).setChefDesVigiles(true);
-		jeu = new Partie(joueurs);
-		try {
-			demarerJeu();
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-		}
+	private void initPartie(List<Couleur> couleurs) {
+		jeu = new Partie(couleurs);
 	}
 
 	public void setJoueurCouleur(List<Couleur> couleurs) {
@@ -60,40 +54,8 @@ public class ControleurPartie {
 		return lc;
 	}
 
-	private void demarerJeu() throws InterruptedException {
-		// TODO 3 ou 4 PION | UN OU PLUSIEURS LIEUX FERME
-		placementPersonnage();
-		jeu.resultatChefVigile(jeu.getJoueurs().get(0));
-		lieuZombie = arriveZombie();
-		jeu.entreZombie(lieuZombie);
-		start();
-	}
 
-	/**
-	 * Execute le déroulement d'une partie
-	 */
-	public void start() throws InterruptedException {
-		fouilleCamion();
-		electionChefVigi();
-		this.lieuZombie = arriveZombie();
-		ArrayList<Integer> destination = new ArrayList<>();
-		phasechoixDestination(destination);
-		jeu.entreZombie(lieuZombie);
-		phaseDeplacementPerso(destination, lieuZombie);
-		if (isFinished)
-			return;
-		finJeu();
-		jeu.fermerLieu();
-		if (isFinished)
-			return;
-		attaqueZombie();
-		if (isFinished)
-			return;
-		jmort.clear();
-		jmort = jeu.getJoueursMort();
-		numeroTour++;
-		start();
-	}
+	
 
 	/**
 	 * Affiche le joueur qui fouille le camion
@@ -153,7 +115,7 @@ public class ControleurPartie {
 		lieuZombie.add(z4);
 		return lieuZombie;
 	}
-
+/*
 	private void phasechoixDestination(ArrayList<Integer> destination) throws InterruptedException {
 
 		if (jeu.getNewChef()) {
@@ -196,7 +158,7 @@ public class ControleurPartie {
 			}
 		}
 
-	}
+	}*/
 
 	private void phaseDeplacementPerso(ArrayList<Integer> destination, ArrayList<Integer> zombie) {
 
