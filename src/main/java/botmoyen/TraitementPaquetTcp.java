@@ -97,6 +97,7 @@ public class TraitementPaquetTcp extends TraitementPaquet<Socket> {
 			deplacerPionJoueurCourant(packet, message);
 			break;
 		case "PRAZ":
+			resoAttaqueZombie(packet, message);
 			break;
 		case "RAZA":
 			attaqueZombie(packet, message);
@@ -170,6 +171,11 @@ public class TraitementPaquetTcp extends TraitementPaquet<Socket> {
 			throw new IllegalStateException(
 					MessageFormat.format("[TCP] Il n''y a pas de traitement possible pour {0}", packet.getKey()));
 		}
+	}
+
+	private void resoAttaqueZombie(Packet packet, String message) {
+		core.setZombie((String)packet.getValue(message, 3),(String)packet.getValue(message, 4));
+		
 	}
 
 	private void deplacerPionJoueurCourant(Packet packet, String message) {
