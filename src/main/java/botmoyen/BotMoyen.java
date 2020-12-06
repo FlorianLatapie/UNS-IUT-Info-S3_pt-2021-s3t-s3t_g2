@@ -306,6 +306,11 @@ public class BotMoyen {
 		}
 		
 	}
+
+	public void recupCarte(CarteType value) {
+		partie.givecarte(couleur, value);
+		
+	}
 	
 	
 	
