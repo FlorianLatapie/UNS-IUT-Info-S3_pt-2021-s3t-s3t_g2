@@ -318,6 +318,7 @@ public class BotMoyen {
 		
 	}
 
+	
 	public void NewChef(VigileEtat value) {
 		if (value.equals(VigileEtat.NE))
 			partie.setNewChef(true);
