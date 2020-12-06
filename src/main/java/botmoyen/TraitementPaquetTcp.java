@@ -3,6 +3,7 @@ package botmoyen;
 import reseau.packet.Packet;
 import reseau.socket.ControleurReseau;
 import reseau.socket.TraitementPaquet;
+import reseau.type.CarteEtat;
 import reseau.type.CarteType;
 import reseau.type.Couleur;
 import reseau.type.PionCouleur;
@@ -133,6 +134,7 @@ public class TraitementPaquetTcp extends TraitementPaquet<Socket> {
 			break;
 		case "PFC":
 		case "RFC":
+			resFouille(packet, message);
 		case "PECV":
 		case "RECV":
 		case "CDFC":
@@ -151,6 +153,11 @@ public class TraitementPaquetTcp extends TraitementPaquet<Socket> {
 			throw new IllegalStateException(
 					MessageFormat.format("[TCP] Il n''y a pas de traitement possible pour {0}", packet.getKey()));
 		}
+	}
+
+	private void resFouille(Packet packet, String message) {
+		core.resFouille((Couleur) packet.getValue(message, 1),(Couleur) packet.getValue(message, 2),(CarteEtat) packet.getValue(message, 3));
+		
 	}
 
 	private void placeZombie(Packet packet, String message) {
