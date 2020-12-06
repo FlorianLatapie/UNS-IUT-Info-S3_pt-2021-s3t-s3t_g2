@@ -142,6 +142,8 @@ public class TraitementPaquetTcp extends TraitementPaquet<Socket> {
 			break;
 		case "CDFC":
 		case "AZLAZ":
+			arriveZombie(packet, message);
+			break;
 		case "AZICS":
 		case "PVIC":
 		case "PVR":
@@ -156,6 +158,11 @@ public class TraitementPaquetTcp extends TraitementPaquet<Socket> {
 			throw new IllegalStateException(
 					MessageFormat.format("[TCP] Il n''y a pas de traitement possible pour {0}", packet.getKey()));
 		}
+	}
+
+	private void arriveZombie(Packet packet, String message) {
+		core.arriveZombie((String) packet.getValue(message, 1));
+		
 	}
 
 	private void resVigile(Packet packet, String message) {
