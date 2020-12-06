@@ -95,18 +95,18 @@ public class Partie {
 		if (joueurs.size() < 4)
 			for (int i = 0; i < joueurs.size(); i++) {
 				HashMap<Integer, Personnage> dp = new HashMap<>();
-				dp.put(0, new LaBlonde(joueurs.get(i)));
-				dp.put(1, new LaBrute(joueurs.get(i)));
-				dp.put(2, new LeTruand(joueurs.get(i)));
-				dp.put(3, new LaFillette(joueurs.get(i)));
+				dp.put(7, new LaBlonde(joueurs.get(i)));
+				dp.put(5, new LaBrute(joueurs.get(i)));
+				dp.put(3, new LeTruand(joueurs.get(i)));
+				dp.put(1, new LaFillette(joueurs.get(i)));
 				joueurs.get(i).setPersonnages(dp);
 			}
 		else
 			for (int i = 0; i < joueurs.size(); i++) {
 				HashMap<Integer, Personnage> dp = new HashMap<>();
-				dp.put(0, new LaBlonde(joueurs.get(i)));
-				dp.put(1, new LaBrute(joueurs.get(i)));
-				dp.put(2, new LeTruand(joueurs.get(i)));
+				dp.put(7, new LaBlonde(joueurs.get(i)));
+				dp.put(5, new LaBrute(joueurs.get(i)));
+				dp.put(3, new LeTruand(joueurs.get(i)));
 				joueurs.get(i).setPersonnages(dp);
 			}
 	}
