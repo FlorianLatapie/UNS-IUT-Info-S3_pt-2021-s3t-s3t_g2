@@ -1,17 +1,21 @@
 package botmoyen;
 
 import static java.lang.System.out;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Random;
+
+import partie.Partie;
 import reseau.type.CarteType;
 import reseau.type.Couleur;
 import reseau.type.PionCouleur;
 import reseau.type.VoteType;
 
 public class TraitementBot {
+	
 
 	public void initialiserPartie(BotMoyen core, List<?> nomsT, List<Couleur> couleursT, int lieuferme) {
 		List<String> noms = new ArrayList<>();
@@ -85,9 +89,21 @@ public class TraitementBot {
 				core.getLieuOuvert().remove(i);
 	}
 
-	public List<Integer> pionADeplacer(int dest, HashMap<Integer, List<Integer>> listedp) {
-		List<Integer> destEtPion = new ArrayList<>();
+	public List<Object> pionADeplacer(BotMoyen core, int dest, HashMap<Integer, List<Integer>> listedp) {
+		List<Object> listRenvoye = new ArrayList<>();
 		List<Integer> listePion = new ArrayList<>();
+		List<Integer> destPossible = new ArrayList<>();
+		CarteType sprintJoue = CarteType.NUL;
+		for (Map.Entry<Integer, List<Integer>> dp : listedp.entrySet())
+			for (int destPos : dp.getValue())
+				destPossible.add(destPos);
+		if (core.getListeCarte().contains(CarteType.SPR)) {
+			int i = new Random().nextInt(2);
+			if (i == 1) {
+				sprintJoue = CarteType.SPR;
+				dest = destPossible.get(new Random().nextInt(destPossible.size()));
+			}
+		}
 		for (Map.Entry<Integer, List<Integer>> dp : listedp.entrySet())
 			for (int destPos : dp.getValue())
 				if (destPos == dest)
@@ -105,9 +121,10 @@ public class TraitementBot {
 				pionAdep = new ArrayList<Integer>(listedp.keySet()).get(0);
 		} else
 			pionAdep = listePion.get(new Random().nextInt(listePion.size()));
-		destEtPion.add(dest);
-		destEtPion.add(pionAdep);
-		return destEtPion;
+		listRenvoye.add(dest);
+		listRenvoye.add(pionAdep);
+		listRenvoye.add(sprintJoue);
+		return listRenvoye;
 	}
 
 	public void attaqueZombie(BotMoyen core, List<PionCouleur> l, List<PionCouleur> ltemp) {
@@ -134,12 +151,12 @@ public class TraitementBot {
 		// getControleurReseau().arreter();
 	}
 
-	public List<CarteType> listeCarteJouee(BotMoyen core, int n) {
+	public List<Object> listeCarteJouee(BotMoyen core, int n) {
+		List<Object> listRenvoye = new ArrayList<>();
 		List<CarteType> listeCarteJouee = new ArrayList<>();
 		List<CarteType> listeCarteUtilisable = new ArrayList<>();
 		Random r = new Random();
 		int indexCarteJouee;
-
 		for (CarteType carte : core.getListeCarte()) {
 			if (n != 4) {
 				if (carte.name() == "MAT") {
@@ -147,9 +164,6 @@ public class TraitementBot {
 				}
 			}
 			switch (carte.name()) {
-			case "CAC":
-				listeCarteUtilisable.add(carte);
-				break;
 			case "ACS":
 				listeCarteUtilisable.add(carte);
 				break;
@@ -170,47 +184,46 @@ public class TraitementBot {
 				break;
 			}
 		}
-		if (listeCarteUtilisable.isEmpty())
-			return listeCarteJouee;
-
-		int nbCarteJouee = r.nextInt(listeCarteUtilisable.size());
-		for (int i = 0; i < nbCarteJouee; i++) {
-			indexCarteJouee = r.nextInt(listeCarteUtilisable.size());
-			listeCarteJouee.add(listeCarteUtilisable.get(indexCarteJouee));
-			core.getListeCarte().remove(listeCarteUtilisable.get(indexCarteJouee));
-			listeCarteUtilisable.remove(indexCarteJouee);
+		int nbCarteJouee = 0;
+		if (!listeCarteUtilisable.isEmpty()) {
+			nbCarteJouee = r.nextInt(listeCarteUtilisable.size());
+			for (int i = 0; i < nbCarteJouee; i++) {
+				indexCarteJouee = r.nextInt(listeCarteUtilisable.size());
+				listeCarteJouee.add(listeCarteUtilisable.get(indexCarteJouee));
+				core.getListeCarte().remove(listeCarteUtilisable.get(indexCarteJouee));
+				listeCarteUtilisable.remove(indexCarteJouee);
+			}
 		}
-
-		return listeCarteJouee;
+		List<PionCouleur> listePionCache = listePionCache(core);
+		int i = 0;
+		while (i < listePionCache.size()) {
+			listeCarteJouee.add(CarteType.CAC);
+			core.getListeCarte().remove(CarteType.CAC);
+			i++;
+		}
+		listRenvoye.add(listeCarteJouee);
+		listRenvoye.add(listePionCache);
+		return listRenvoye;
 	}
 
 	public List<PionCouleur> listePionCache(BotMoyen core) {
 		List<CarteType> listeCarteCachette = new ArrayList<>();
 		List<PionCouleur> listePionCache = new ArrayList<>();
-
-		for (CarteType carte : core.getListeCarte()) {
-			if (carte.name() == "CAC") {
+		for (CarteType carte : core.getListeCarte())
+			if (carte.name() == "CAC")
 				listeCarteCachette.add(carte);
-			}
-		}
-
 		if (listeCarteCachette.isEmpty())
 			return listePionCache;
-
 		Random r = new Random();
 		int nbrCartePossibleDejouer = listeCarteCachette.size();
 		int nbrPion = core.getPoinSacrDispo().size();
 		int nbrCarteJouee;
-		if (nbrCartePossibleDejouer > nbrPion) {
+		if (nbrCartePossibleDejouer > nbrPion)
 			nbrCarteJouee = r.nextInt(nbrPion);
-		} else {
+		else
 			nbrCarteJouee = r.nextInt(nbrCartePossibleDejouer);
-		}
-
-		for (int i = 0; i < nbrCarteJouee; i++) {
+		for (int i = 0; i < nbrCarteJouee; i++)
 			listePionCache.add(core.getListePion().get(i));
-		}
-
 		return listePionCache;
 	}
 
