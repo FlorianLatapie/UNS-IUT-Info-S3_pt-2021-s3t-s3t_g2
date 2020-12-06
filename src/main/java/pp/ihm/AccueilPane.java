@@ -1,6 +1,7 @@
 package pp.ihm;
 
 import pp.ihm.DataControl.ApplicationPane;
+import pp.ihm.langues.International;
 import javafx.application.Platform;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -31,36 +32,36 @@ public class AccueilPane extends StackPane {
 	private ScreenControl sControl = null;
 	private Core core = null;
 	private final ApplicationPane paneName = ApplicationPane.ACCUEIL;
-	
-	private int tailleCarreCentral = 600; 
+
+	private int tailleCarreCentral = 600;
 
 	private int hBouton = 100;
 	private int lBouton = 200;
 	private int marge = tailleCarreCentral / 25;
 	private Insets margeBoutons = new Insets(marge, marge, marge, marge);
-	
+
 	private Font policeBouton = Font.font("Segoe UI", FontWeight.BOLD, 33);
-	
+
 	private CornerRadii coin = new CornerRadii(15.0);
-	
+
 	private String styleBoutons = " -fx-background-color:#000000; -fx-background-radius: 15px; -fx-text-fill: #ffffff";
 	private String styleBoutonsSouris = "-fx-background-color:#ff0000;  -fx-text-fill:#000000; -fx-background-radius: 15px;";
-	
+
 	private GaussianBlur flou = new GaussianBlur(30);
-	
+
 	VBox centreMenu;
-	
+
 	public AccueilPane(ScreenControl sc, Core c) {
-		
+
 		core = c;
 		sControl = sc;
 
 		// titre
-		Label titre1 = new Label("ZOMBIES");
+		Label titre1 = new Label(International.trad("texte.preTitre"));
 		titre1.setFont(Font.font("Segoe UI", FontWeight.BOLD, 160));
 		titre1.setTextFill(Color.BLACK);
 
-		Label titre2 = new Label("LA BLONDE LA BRUTE ET LE TRUAND  - PP");
+		Label titre2 = new Label(International.trad("texte.titrePP"));
 		titre2.setFont(Font.font("Segoe UI", 35));
 		titre2.setTextFill(Color.BLACK);
 		titre2.setPadding(new Insets(0, 0, 20, 0));
@@ -72,7 +73,7 @@ public class AccueilPane extends StackPane {
 		titre.setMinWidth(800);
 
 		// boutons
-		Button bJouer = new Button("JOUER");
+		Button bJouer = new Button(International.trad("bouton.jouer"));
 		bJouer.setPrefSize(lBouton, hBouton);
 		bJouer.setMinSize(lBouton, hBouton);
 		bJouer.setFont(policeBouton);
@@ -82,7 +83,7 @@ public class AccueilPane extends StackPane {
 		bJouer.setOnMouseExited(event -> bJouer.setStyle(styleBoutons));
 		bJouer.setOnAction(EventHandler -> sc.setPaneOnTop(ApplicationPane.CONFIG));
 
-		Button bOptions = new Button("OPTIONS");
+		Button bOptions = new Button(International.trad("bouton.options"));
 		bOptions.setPrefSize(lBouton, hBouton);
 		bOptions.setMinSize(lBouton, hBouton);
 		bOptions.setFont(policeBouton);
@@ -95,7 +96,7 @@ public class AccueilPane extends StackPane {
 			sc.setPaneOnTop(ApplicationPane.OPTION);
 		});
 
-		Button bRegles = new Button("REGLES");
+		Button bRegles = new Button(International.trad("bouton.regles"));
 		bRegles.setPrefSize(lBouton, hBouton);
 		bRegles.setMinSize(lBouton, hBouton);
 		bRegles.setFont(policeBouton);
@@ -108,7 +109,7 @@ public class AccueilPane extends StackPane {
 			sc.setPaneOnTop(ApplicationPane.REGLES);
 		});
 
-		Button bQuitter = new Button("QUITTER");
+		Button bQuitter = new Button(International.trad("bouton.quitter"));
 		bQuitter.setPrefSize(lBouton, hBouton);
 		bQuitter.setMinSize(lBouton, hBouton);
 		bQuitter.setFont(policeBouton);
@@ -118,8 +119,8 @@ public class AccueilPane extends StackPane {
 		bQuitter.setOnMouseExited(event -> bQuitter.setStyle(styleBoutons));
 		bQuitter.setOnAction(event -> {
 			boolean resultat = ConfirmationPane.afficher("Quitter le jeu",
-					"Êtes-vous sûr de vouloir quitter le jeu ? \nSi vous quittez, la partie en cours sera perdue.");
-			if (resultat){
+					"Êtes-vous sûr de vouloir quitter le jeu ? \nSi vous quittez, la partie en cours sera perdue."); // TODO
+			if (resultat) {
 				Platform.exit();
 				System.exit(0);
 			}
@@ -150,8 +151,8 @@ public class AccueilPane extends StackPane {
 		centreMenu.setAlignment(Pos.CENTER);
 		centreMenu.setMargin(titre, new Insets(0, 0, 100, 0));
 		centreMenu.getChildren().addAll(titre, grilleBoutons);
-		
-		// Boutons de rotation d'écran 
+
+		// Boutons de rotation d'écran
 		ImageView img1 = new ImageView(DataControl.SCREEN);
 		img1.setFitHeight(70);
 		img1.setPreserveRatio(true);
@@ -200,7 +201,7 @@ public class AccueilPane extends StackPane {
 		bEcranDroite.setGraphic(img4);
 		bEcranDroite.setOnAction(EventHandler -> sc.setRotatePane(centreMenu, "droite"));
 
-		// boite du fond qui contient l'image et les autres boites 
+		// boite du fond qui contient l'image et les autres boites
 		HBox fond = new HBox();
 		fond.setAlignment(Pos.CENTER);
 		fond.setPrefWidth(100);
@@ -215,8 +216,7 @@ public class AccueilPane extends StackPane {
 		sControl.setPaneOnTop(paneName);
 
 	}
-/*
-	public void changerAngle(double angle) {
-		centreMenu.setRotate(angle);
-	}*/
+	/*
+	 * public void changerAngle(double angle) { centreMenu.setRotate(angle); }
+	 */
 }
