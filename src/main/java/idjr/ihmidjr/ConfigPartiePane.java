@@ -20,6 +20,7 @@ import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
+import javafx.scene.text.TextAlignment;
 
 /**
  * The Class ConfigPartiePane.
@@ -60,7 +61,8 @@ public class ConfigPartiePane extends StackPane implements ConfigListener {
 		sControl = sc;
 		stackPane.setAlignment(Pos.CENTER);
 		// titre
-		Label titre1 = new Label("Rejoindre\n\tune partie");
+		Label titre1 = new Label("Rejoindre\nune partie");
+		titre1.setTextAlignment(TextAlignment.CENTER);
 		titre1.setFont(Font.font("Segoe UI", FontWeight.BOLD, 80));
 		titre1.setTextFill(Color.BLACK);
 
