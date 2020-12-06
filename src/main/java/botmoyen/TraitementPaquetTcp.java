@@ -144,6 +144,8 @@ public class TraitementPaquetTcp extends TraitementPaquet<Socket> {
 		case "AZLAZ":
 			arriveZombie(packet, message);
 			break;
+		case "AZUCS":
+			
 		case "AZICS":
 		case "PVIC":
 		case "PVR":
