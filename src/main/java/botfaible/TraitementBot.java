@@ -8,7 +8,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Random;
 
-import botmoyen.BotMoyen;
 import reseau.type.CarteType;
 import reseau.type.Couleur;
 import reseau.type.PionCouleur;
@@ -226,7 +225,7 @@ public class TraitementBot {
 		return listePionCache;
 	}
 
-	public CarteType ReponseJoueurCourant(BotMoyen core) {
+	public CarteType ReponseJoueurCourant(BotFaible core) {
 		CarteType RJ = CarteType.NUL;
 		if (core.getListeCarte().contains(CarteType.CDS))
 			if ( new Random().nextInt(1) == 1 ) {
