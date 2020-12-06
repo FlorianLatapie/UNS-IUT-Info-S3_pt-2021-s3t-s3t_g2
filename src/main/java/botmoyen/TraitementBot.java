@@ -228,9 +228,12 @@ public class TraitementBot {
 	}
 
 	public CarteType ReponseJoueurCourant(BotMoyen core) {
-		CarteType[] RJListe = CarteType.values();
-		int rand = new Random().nextInt(1);
-		CarteType RJ = RJListe[rand];
+		CarteType RJ = CarteType.NUL;
+		if (core.getListeCarte().contains(CarteType.CDS))
+			if ( new Random().nextInt(1) == 1 ) {
+				RJ = CarteType.CDS;
+				core.getListeCarte().remove(CarteType.CDS);
+			}	
 		return RJ;
 	}
 
