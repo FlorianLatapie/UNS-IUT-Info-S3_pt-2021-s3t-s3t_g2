@@ -334,6 +334,31 @@ public class BotMoyen {
 		partie.entreZombie(arr);
 		
 	}
+
+	public void joueCarteCDS(Couleur value) {
+		if (partie.getJoueurs().get(value).getCartes().contains(CarteType.CDS)) {
+			partie.getJoueurs().get(value).getCartes().remove( CarteType.CDS);
+		}
+		else if (partie.getCartes().contains(CarteType.CDS)) {
+				partie.getCartes().remove(CarteType.CDS);
+				CarteType c = partie.getJoueurs().get(value).getCartes().get(new Random().nextInt(partie.getJoueurs().get(value).getCartes().size()));
+				partie.getCartes().add(c);
+				partie.getJoueurs().get(value).getCartes().remove(c);		
+			
+		}
+		else {
+			for (Couleur c : partie.getJoueursCouleurs()) {
+				if (partie.getJoueurs().get(c).getCartes().contains(CarteType.CDS)) {
+					partie.getJoueurs().get(c).getCartes().remove(CarteType.CDS);
+					CarteType ca = partie.getJoueurs().get(value).getCartes().get(new Random().nextInt(partie.getJoueurs().get(value).getCartes().size()));
+					partie.getJoueurs().get(c).getCartes().add(ca);
+					partie.getJoueurs().get(value).getCartes().remove(ca);
+					break;
+				}
+			}
+		}
+		
+	}
 	
 	
 	
