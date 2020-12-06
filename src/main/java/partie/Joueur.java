@@ -16,22 +16,18 @@ import java.util.Map;
  */
 public class Joueur {
 
-
-	private final String joueurId;
 	private Couleur couleur;
 	private boolean enVie;
 	private HashMap<Integer, Personnage> personnages;
 	private final ArrayList<CarteType> cartes;
 	private boolean chefDesVigiles;
-	private final String nom;
 	
 
-	public Joueur(int joueurIdint, String nom) {	
-		this.joueurId = "J" + joueurIdint;
+	public Joueur(Couleur c) {	
+		couleur =c;
 		enVie = true;
 		personnages = new HashMap<>();
 		cartes = new ArrayList<>();
-		this.nom = nom;
 	}
 
 	
@@ -102,23 +98,5 @@ public class Joueur {
 		this.chefDesVigiles = chefDesVigiles;
 	}
 
-	/**
-	 * @return nom du joueur
-	 */
-	public String getNom() {
-		return nom;
-	}
-
-	/**
-	 * @return le nom du joueur
-	 */
-	@Override
-	public String toString() {
-		return this.nom;
-	}
-	
-	public String getJoueurId() {
-		return joueurId;
-	}
 
 }
