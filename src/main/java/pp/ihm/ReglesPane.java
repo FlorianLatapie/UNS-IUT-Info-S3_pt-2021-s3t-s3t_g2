@@ -1,6 +1,7 @@
 package pp.ihm;
 
 import pp.ihm.DataControl.ApplicationPane;
+import pp.ihm.langues.International;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
@@ -32,30 +33,28 @@ public class ReglesPane extends StackPane {
 	private Core core = null;
 	private final ApplicationPane paneName = ApplicationPane.REGLES;
 
-	private int tailleCarreCentral = 800; 
+	private int tailleCarreCentral = 800;
 	private int hBouton = 75;
 	private int lBouton = 150;
-	
+
 	private Font policeBouton = Font.font("Segoe UI", FontWeight.BOLD, 27);
 	private Font policeNom = Font.font("Segoe UI", 17);
-	
 
 	private String styleBoutons = " -fx-background-color:#000000; -fx-background-radius: 15px; -fx-text-fill: #ffffff";
 	private String styleBoutonsSouris = "-fx-background-color:#ff0000;  -fx-text-fill:#000000; -fx-background-radius: 15px;";
-	
+
 	private GaussianBlur flou = new GaussianBlur(30);
 	private CornerRadii coin = new CornerRadii(15.0);
 	private CornerRadii coinfb = new CornerRadii(5.0);
-	
+
 	private Background fondBlanc = new Background(new BackgroundFill(Color.WHITE, coinfb, null));
 
 	public ReglesPane(ScreenControl sc, Core c) {
 		core = c;
 		sControl = sc;
-		
 
 		// titre
-		Label titre1 = new Label("REGLÈS DU JEU");
+		Label titre1 = new Label(International.trad("text.titreRegle"));
 		titre1.setFont(Font.font("Segoe UI", FontWeight.BOLD, 80));
 		titre1.setTextFill(Color.BLACK);
 
@@ -72,12 +71,12 @@ public class ReglesPane extends StackPane {
 		desc.setBackground(fondBlanc);
 
 		VBox vbCenter = new VBox();
-		
+
 		vbCenter.setAlignment(Pos.CENTER);
 		vbCenter.getChildren().addAll(desc);
-		
+
 		// bouton
-		Button bRetour = new Button("RETOUR");
+		Button bRetour = new Button(International.trad("bouton.retour"));
 		bRetour.setPrefSize(lBouton, hBouton);
 		bRetour.setMinSize(lBouton, hBouton);
 		bRetour.setFont(policeBouton);
@@ -91,7 +90,7 @@ public class ReglesPane extends StackPane {
 		AnchorPane boutonsPanneau = new AnchorPane();
 		boutonsPanneau.setLeftAnchor(bRetour, 0.0);
 		boutonsPanneau.getChildren().addAll(bRetour);
-		
+
 		// image fond
 		ImageView imgFond = new ImageView(DataControl.FOND);
 		// carre central qui contient tous les éléments (boutons et titre)
@@ -106,8 +105,8 @@ public class ReglesPane extends StackPane {
 		centreMenu.setTop(titre);
 		centreMenu.setCenter(vbCenter);
 		centreMenu.setBottom(boutonsPanneau);
-		
-		// Boutons de rotation d'écran 		
+
+		// Boutons de rotation d'écran
 		ImageView img1 = new ImageView(DataControl.SCREEN);
 		img1.setFitHeight(70);
 		img1.setPreserveRatio(true);
