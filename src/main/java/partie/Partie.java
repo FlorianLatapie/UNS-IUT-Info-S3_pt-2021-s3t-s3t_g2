@@ -93,21 +93,21 @@ public class Partie {
 	 */
 	private void initJoueurs() {
 		if (joueurs.size() < 4)
-			for (int i = 0; i < joueurs.size(); i++) {
+			for (Joueur j : joueurs.values()) {
 				HashMap<Integer, Personnage> dp = new HashMap<>();
-				dp.put(7, new LaBlonde(joueurs.get(i)));
-				dp.put(5, new LaBrute(joueurs.get(i)));
-				dp.put(3, new LeTruand(joueurs.get(i)));
-				dp.put(1, new LaFillette(joueurs.get(i)));
-				joueurs.get(i).setPersonnages(dp);
+				dp.put(7, new LaBlonde(j));
+				dp.put(5, new LaBrute(j));
+				dp.put(3, new LeTruand(j));
+				dp.put(1, new LaFillette(j));
+				j.setPersonnages(dp);
 			}
 		else
-			for (int i = 0; i < joueurs.size(); i++) {
+			for (Joueur j : joueurs.values()) {
 				HashMap<Integer, Personnage> dp = new HashMap<>();
-				dp.put(7, new LaBlonde(joueurs.get(i)));
-				dp.put(5, new LaBrute(joueurs.get(i)));
-				dp.put(3, new LeTruand(joueurs.get(i)));
-				joueurs.get(i).setPersonnages(dp);
+				dp.put(7, new LaBlonde(j));
+				dp.put(5, new LaBrute(j));
+				dp.put(3, new LeTruand(j));
+				j.setPersonnages(dp);
 			}
 	}
 
@@ -509,11 +509,11 @@ public class Partie {
 	 */
 	public List<Joueur> getJoueursMort() {
 		List<Joueur> joueursMort = new ArrayList<Joueur>();
-		for (int index = 0; index < joueurs.size(); index++) {
-			if (joueurs.get(index).isEnVie() && joueurs.get(index).getPersonnages().size() == 0) {
-				joueurs.get(index).setEnVie(false);
-				joueursMort.add(joueurs.get(index));
-				out.println(joueurs.get(index) + " est mort!");
+		for (Joueur j : joueurs.values()) {
+			if (j.isEnVie() && j.getPersonnages().size() == 0) {
+				j.setEnVie(false);
+				joueursMort.add(j);
+				out.println(j + " est mort!");
 			}
 		}
 		return joueursMort;
