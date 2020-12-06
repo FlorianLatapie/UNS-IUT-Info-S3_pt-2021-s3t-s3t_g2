@@ -2,6 +2,7 @@ package pp.ihm;
 
 import pp.ihm.DataControl.ApplicationPane;
 import pp.ihm.eventListener.FinListener;
+import pp.ihm.langues.International;
 import javafx.application.Platform;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -56,7 +57,7 @@ public class FinDePartiePane extends StackPane implements FinListener {
         sControl = sc;
 
         // titre
-        Label titre1 = new Label("Fin de\nla partie");
+        Label titre1 = new Label("Fin de\nla partie");//TODO
         titre1.setFont(Font.font("Segoe UI", FontWeight.BOLD, 80));
         titre1.setTextFill(Color.BLACK);
 
@@ -73,14 +74,14 @@ public class FinDePartiePane extends StackPane implements FinListener {
         BorderPane bBas = new BorderPane();
 
         HBox bBasCentre = new HBox();
-        gagnant1 = new Label("Le joueur " + "JOUEUR X" + " a gagné");
+        gagnant1 = new Label("Le joueur " + "JOUEUR X" + " a gagné");//TODO
         gagnant1.setFont(policeNom);
         gagnant1.setBackground(fondBlanc);
         gagnant1.setPadding(padding);
         bBasCentre.setAlignment(Pos.CENTER);
         bBasCentre.getChildren().addAll(gagnant1);
 
-        Button bRetour1 = new Button("RETOUR");
+        Button bRetour1 = new Button(International.trad("bouton.retour"));
         bRetour1.setPrefSize(lBouton, hBouton);
         bRetour1.setMinSize(lBouton, hBouton);
         bRetour1.setFont(policeBouton);
@@ -91,7 +92,7 @@ public class FinDePartiePane extends StackPane implements FinListener {
         bRetour1.setOnMouseExited(event -> bRetour1.setStyle(styleBoutons));
         bRetour1.setOnAction(EventHandler -> sc.setPaneOnTop(ApplicationPane.ACCUEIL));
 
-        Button bRetour2 = new Button("RETOUR");
+        Button bRetour2 = new Button(International.trad("bouton.retour"));
         bRetour2.setPrefSize(lBouton, hBouton);
         bRetour2.setMinSize(lBouton, hBouton);
         bRetour2.setFont(policeBouton);
@@ -114,14 +115,14 @@ public class FinDePartiePane extends StackPane implements FinListener {
         BorderPane bHaut = new BorderPane();
 
         HBox bHautCentre = new HBox();
-        gagnant2 = new Label("Le joueur " + "JOUEUR X" + " a gagné");
+        gagnant2 = new Label("Le joueur " + "JOUEUR X" + " a gagné");//TODO
         gagnant2.setFont(policeNom);
         gagnant2.setBackground(fondBlanc);
         gagnant2.setPadding(padding);
         bHautCentre.setAlignment(Pos.CENTER);
         bHautCentre.getChildren().addAll(gagnant2);
 
-        Button bRetour3 = new Button("RETOUR");
+        Button bRetour3 = new Button(International.trad("bouton.retour"));
         bRetour3.setPrefSize(lBouton, hBouton);
         bRetour3.setMinSize(lBouton, hBouton);
         bRetour3.setFont(policeBouton);
@@ -131,7 +132,7 @@ public class FinDePartiePane extends StackPane implements FinListener {
         bRetour3.setOnMouseExited(event -> bRetour3.setStyle(styleBoutons));
         bRetour3.setOnAction(EventHandler -> sc.setPaneOnTop(ApplicationPane.ACCUEIL));
 
-        Button bRetour4 = new Button("RETOUR");
+        Button bRetour4 = new Button(International.trad("bouton.retour"));
         bRetour4.setPrefSize(lBouton, hBouton);
         bRetour4.setMinSize(lBouton, hBouton);
         bRetour4.setFont(policeBouton);
@@ -150,7 +151,7 @@ public class FinDePartiePane extends StackPane implements FinListener {
 
         ///
         HBox hDroite = new HBox();
-        gagnant3 = new Label("Le joueur " + "JOUEUR X" + " a gagné");
+        gagnant3 = new Label("Le joueur " + "JOUEUR X" + " a gagné");//TODO
         gagnant3.setFont(policeNom);
         gagnant3.setBackground(fondBlanc);
         gagnant3.setPadding(padding);
@@ -163,7 +164,7 @@ public class FinDePartiePane extends StackPane implements FinListener {
 
 
         HBox hGauche = new HBox();
-        gagnant4 = new Label("Le joueur " + "JOUEUR X" + " a gagné");
+        gagnant4 = new Label("Le joueur " + "JOUEUR X" + " a gagné");//TODO
         gagnant4.setFont(policeNom);
         gagnant4.setBackground(fondBlanc);
         gagnant4.setPadding(padding);
@@ -259,7 +260,7 @@ public class FinDePartiePane extends StackPane implements FinListener {
      */
     @Override
     public void getGagnant(String nom) {
-        String tmp = "Le joueur " + nom + " a gagné";
+        String tmp = "Le joueur " + nom + " a gagné";//TODO
         Platform.runLater(() -> {
             gagnant1.setText(tmp);
             gagnant2.setText(tmp);
