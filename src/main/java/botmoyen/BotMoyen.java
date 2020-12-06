@@ -359,6 +359,13 @@ public class BotMoyen {
 		}
 		
 	}
+
+	public void arriveSoloZombie(Integer value) {
+		List<Integer> arr = new ArrayList<Integer>();
+		arr.add(value);
+		partie.entreZombie(arr);
+		
+	}
 	
 	
 	
