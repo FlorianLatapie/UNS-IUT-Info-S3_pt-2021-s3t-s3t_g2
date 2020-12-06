@@ -8,8 +8,10 @@ import reseau.type.Couleur;
 import reseau.type.PionCouleur;
 import reseau.type.VigileEtat;
 import reseau.type.VoteType;
+
 import java.text.MessageFormat;
 import java.util.*;
+
 import static java.lang.System.out;
 
 import java.net.Socket;
@@ -54,6 +56,9 @@ public class TraitementPaquetTcp extends TraitementPaquet<Socket> {
 		switch (packet.getKey()) {
 		case "IP":
 			initialiserPartie(packet, message);
+			break;
+		case "DC":
+			recupCarte(packet, message);
 			break;
 		case "PIIJ":
 			lancerDes(packet, message);
@@ -168,14 +173,11 @@ public class TraitementPaquetTcp extends TraitementPaquet<Socket> {
 				traitementB.getRandom(core, core.getVoteType()), (String) packet.getValue(message, 1),
 				(int) packet.getValue(message, 2), core.getJoueurId());
 		getControleurReseau().getTcpClient().envoyer(messageTcp);
-
 	}
 
 	private void fournirActionsDefense(Packet packet, String message) {
-		List<CarteType> listeCarteJouee = traitementB.listeCarteJouee(this.core, (int) packet.getValue(message, 1));
-		List<PionCouleur> listePionCache = traitementB.listePionCache(this.core);
-
-		String messageTCP = getControleurReseau().construirePaquetTcp("RAZRD", listeCarteJouee, listePionCache,
+		List<Object> listerenvoye = traitementB.listeCarteJouee(this.core, (int) packet.getValue(message, 1));
+		String messageTCP = getControleurReseau().construirePaquetTcp("RAZRD", listerenvoye.get(0), listerenvoye.get(1),
 				(String) packet.getValue(message, 2), (int) packet.getValue(message, 3), core.getJoueurId());
 		getControleurReseau().getTcpClient().envoyer(messageTCP);
 	}
@@ -264,11 +266,11 @@ public class TraitementPaquetTcp extends TraitementPaquet<Socket> {
 	}
 
 	public void deplacerPion(Packet packet, String message) {
-		List<Integer> destEtPion = traitementB.pionADeplacer((int) packet.getValue(message, 1),
+		List<Object> listRenvoye = traitementB.pionADeplacer(core, (int) packet.getValue(message, 1),
 				(HashMap<Integer, List<Integer>>) packet.getValue(message, 2));
-		CarteType carte = CarteType.NUL;
-		String messageTcp = getControleurReseau().construirePaquetTcp("DPR", destEtPion.get(0), destEtPion.get(1),
-				carte, (String) packet.getValue(message, 3), (int) packet.getValue(message, 4), core.getJoueurId());
+		String messageTcp = getControleurReseau().construirePaquetTcp("DPR", (Integer) listRenvoye.get(0),
+				listRenvoye.get(1), listRenvoye.get(2), (String) packet.getValue(message, 3),
+				(int) packet.getValue(message, 4), core.getJoueurId());
 		getControleurReseau().getTcpClient().envoyer(messageTcp);
 	}
 
