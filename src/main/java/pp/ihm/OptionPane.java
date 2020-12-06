@@ -2,6 +2,7 @@
 package pp.ihm;
 
 import pp.ihm.DataControl.ApplicationPane;
+import pp.ihm.langues.International;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
@@ -130,12 +131,12 @@ public class OptionPane extends StackPane {
 		vbBoutons.setTranslateY(-40);
 		vbBoutons.setSpacing(15);
 
-		Label titre = new Label("OPTIONS");
+		Label titre = new Label(International.trad("boutons.options"));
 		titre.setStyle(styleTitre);
 		titre.setFont(policeTitre);
 		vbTitre.getChildren().add(titre);
 
-		Button bFrancais = new Button("Français");
+		Button bFrancais = new Button(International.trad("boutons.langue1"));
 		bFrancais.setFont(policeBouton);
 		bFrancais.setAlignment(Pos.CENTER);
 		bFrancais.setPrefSize(245, hauteurElement);
@@ -145,7 +146,7 @@ public class OptionPane extends StackPane {
 		bFrancais.setOnMouseEntered(event -> bFrancais.setStyle(styleBoutonsSouris));
 		bFrancais.setOnMouseExited(event -> bFrancais.setStyle(styleBoutons));
 
-		Button bEnglish = new Button("English");
+		Button bEnglish = new Button(International.trad("boutons.langue2"));
 		bEnglish.setFont(policeBouton);
 		bEnglish.setAlignment(Pos.CENTER);
 		bEnglish.setPrefSize(245, hauteurElement);
@@ -153,7 +154,7 @@ public class OptionPane extends StackPane {
 		bEnglish.setOnMouseEntered(event -> bEnglish.setStyle(styleBoutonsSouris));
 		bEnglish.setOnMouseExited(event -> bEnglish.setStyle(styleBoutons));
 
-		Button bAcc = new Button("Accessibilité");
+		Button bAcc = new Button("Accessibilité");//TODO
 		bAcc.setFont(policeBouton);
 		bAcc.setAlignment(Pos.CENTER);
 		bAcc.setPrefSize(500, hauteurElement);
@@ -162,7 +163,7 @@ public class OptionPane extends StackPane {
 		bAcc.setOnMouseExited(event -> bAcc.setStyle(styleBoutons));
 		bAcc.setOnAction(EventHandler -> sc.setPaneOnTop(ApplicationPane.ACCESSIBILITE));		
 
-		Button bRetour = new Button("RETOUR");
+		Button bRetour = new Button(International.trad("boutons.retour"));
 		bRetour.setFont(policeBouton);
 		bRetour.setAlignment(Pos.CENTER);
 		bRetour.setPrefSize(180, hauteurElement);
