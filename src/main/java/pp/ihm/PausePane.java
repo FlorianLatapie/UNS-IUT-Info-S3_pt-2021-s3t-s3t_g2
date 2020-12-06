@@ -2,6 +2,7 @@
 package pp.ihm;
 
 import pp.ihm.DataControl.ApplicationPane;
+import pp.ihm.langues.International;
 import javafx.application.Platform;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -111,13 +112,13 @@ public class PausePane extends StackPane {
 
 		VBox vbBoutons = new VBox();
 		vbBoutons.setAlignment(Pos.CENTER);
-		Label titre = new Label("PAUSE");
+		Label titre = new Label(International.trad("text.titerPause"));
 		titre.setStyle("-fx-text-fill: #ff1c16");
 		titre.setFont(Font.font("Arial", FontWeight.BOLD, 75));
 		vbTitre.getChildren().add(titre);
 		vbTitre.setMargin(vbBoutons, new Insets(70));
 
-		Button bOption = new Button("Options");
+		Button bOption = new Button(International.trad("bouton.options"));
 		bOption.setFont(Font.font("Arial", FontWeight.BOLD, 30));
 		bOption.setAlignment(Pos.CENTER);
 		bOption.setPrefSize(500, 60);
@@ -130,7 +131,7 @@ public class PausePane extends StackPane {
 		bOption.setOnMouseEntered(event -> bOption.setStyle(styleBoutonsSouris));
 		bOption.setOnMouseExited(event -> bOption.setStyle(styleBoutons));
 
-		Button bRegles = new Button("Règles du jeu");
+		Button bRegles = new Button(International.trad("text.titreRegle"));
 		bRegles.setFont(Font.font("Arial", FontWeight.BOLD, 30));
 		bRegles.setAlignment(Pos.CENTER);
 		bRegles.setPrefSize(500, 60);
@@ -142,7 +143,7 @@ public class PausePane extends StackPane {
 			sc.setPaneOnTop(ApplicationPane.REGLES);
 		});
 
-		Button bRecommencer = new Button("Recommencer");
+		Button bRecommencer = new Button(International.trad("text.recommencer"));
 		bRecommencer.setFont(Font.font("Arial", FontWeight.BOLD, 30));
 		bRecommencer.setAlignment(Pos.CENTER);
 		bRecommencer.setPrefSize(500, 60);
@@ -150,7 +151,7 @@ public class PausePane extends StackPane {
 		bRecommencer.setOnMouseEntered(event -> bRecommencer.setStyle(styleBoutonsSouris));
 		bRecommencer.setOnMouseExited(event -> bRecommencer.setStyle(styleBoutons));
 
-		Button bQuitter = new Button("Quitter");
+		Button bQuitter = new Button(International.trad("bouton.quitter"));
 		bQuitter.setFont(Font.font("Arial", FontWeight.BOLD, 30));
 		bQuitter.setAlignment(Pos.CENTER);
 		bQuitter.setPrefSize(500, 60);
@@ -162,12 +163,12 @@ public class PausePane extends StackPane {
 
 		bQuitter.setOnAction(event -> {
 			boolean resultat = ConfirmationPane.afficher("Quitter le jeu",
-					"Êtes-vous sûr de vouloir quitter le jeu ? \nSi vous quittez, la partie en cours sera perdue.");
+					"Êtes-vous sûr de vouloir quitter le jeu ? \nSi vous quittez, la partie en cours sera perdue.");//TODO
 			if (resultat)
 				Platform.exit();
 		});
 
-		Button bRetour = new Button("Retour");
+		Button bRetour = new Button(International.trad("bouton.retour"));
 		bRetour.setFont(Font.font("Arial", FontWeight.BOLD, 30));
 		bRetour.setAlignment(Pos.CENTER);
 		bRetour.setPrefSize(500, 60);
