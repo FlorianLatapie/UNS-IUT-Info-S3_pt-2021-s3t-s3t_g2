@@ -8,14 +8,13 @@ import java.util.List;
 import java.util.Map;
 import java.util.Random;
 
-import partie.Partie;
+import partie.*;
 import reseau.type.CarteType;
 import reseau.type.Couleur;
 import reseau.type.PionCouleur;
 import reseau.type.VoteType;
 
 public class TraitementBot {
-	
 
 	public void initialiserPartie(BotMoyen core, List<?> nomsT, List<Couleur> couleursT, int lieuferme) {
 		List<String> noms = new ArrayList<>();
@@ -40,6 +39,7 @@ public class TraitementBot {
 			core.getLieuOuvert().add(5);
 			core.getLieuOuvert().add(6);
 		}
+		core.initPartie(couleurs);
 	}
 
 	public void lancerDes(BotMoyen core, List<?> pionT) {
@@ -301,6 +301,7 @@ public class TraitementBot {
 		carteChoisies.add(carteOfferte);
 		carteChoisies.add(carteDefausse);
 		carteChoisies.add(couleur);
+		bot.carteCamion(carteChoisies);
 
 		return carteChoisies;
 	}
