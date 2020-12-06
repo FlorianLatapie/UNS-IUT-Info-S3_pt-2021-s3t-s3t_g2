@@ -21,7 +21,7 @@ public class Partie {
 	HashMap<Integer, Lieu> lieux;
 
 	/** Dictionnaire des joueurs identifiés par un entier. */
-	HashMap<Integer, Joueur> joueurs;
+	HashMap<Couleur, Joueur> joueurs;
 
 	/** Liste des cartes. */
 	List<CarteType> cartes;
@@ -34,14 +34,14 @@ public class Partie {
 	 *
 	 * @param listeJoueursInitiale La liste des joueurs initiaux
 	 */
-	public Partie(List<Joueur> listeJoueursInitiale) {
+	public Partie(List<Couleur> couleurs) {
 		lieux = new HashMap<>();
 		joueurs = new HashMap<>();
 		cartes = new ArrayList<>();
 		nouveauChef = false;
 		initCarte();
-		for (int i = 0; i < listeJoueursInitiale.size(); i++)
-			joueurs.put(i, listeJoueursInitiale.get(i));
+		for (int i = 0; i < couleurs.size(); i++)
+			joueurs.put(couleurs.get(i), new Joueur( couleurs.get(i)));
 		initJoueurs();
 		initLieu();
 	}
@@ -386,9 +386,9 @@ public class Partie {
 	 * @param choixPerso le personnage qui est déplacé
 	 * @param dest       le lieu de destination du personnage
 	 */
-	public void deplacePerso(Joueur joueur, Integer choixPerso, Integer dest) {
+	public void deplacePerso(Couleur couleur, Integer choixPerso, Integer dest) {
 		for (Joueur j : joueurs.values()) {
-			if (j.equals(joueur)) {
+			if (j.getCouleur().equals(couleur)) {
 				int l = j.getPersonnages().get(choixPerso).getMonLieu().getNum();
 				j.getPersonnages().get(choixPerso).changerDeLieux(lieux.get(dest));
 				lieux.get(dest).addPersonnage(j.getPersonnages().get(choixPerso));
@@ -478,17 +478,7 @@ public class Partie {
 		return nbJoueurMort;
 	}
 
-	/**
-	 * Retourne la liste des noms des joueurs.
-	 *
-	 * @return la liste des noms des joueurs.
-	 */
-	public List<String> getJoueursNoms() {
-		List<String> noms = new ArrayList<>();
-		for (Joueur joueur : joueurs.values())
-			noms.add(joueur.getNom());
-		return noms;
-	}
+
 
 	/**
 	 * Retourne la liste des couleurs des joueurs.
@@ -507,7 +497,7 @@ public class Partie {
 	 *
 	 * @return le dictionnaire des joueurs.
 	 */
-	public Map<Integer, Joueur> getJoueurs() {
+	public Map<Couleur, Joueur> getJoueurs() {
 		return joueurs;
 	}
 
@@ -563,6 +553,11 @@ public class Partie {
 	 */
 	public void setNewChef(Boolean nouveauChef) {
 		this.nouveauChef = nouveauChef;
+	}
+	
+	public void givecarte(Couleur c , CarteType carte) {
+		joueurs.get(c).getCartes().add(carte);
+		cartes.remove(carte);
 	}
 
 }
