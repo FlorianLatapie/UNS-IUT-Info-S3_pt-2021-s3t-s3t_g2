@@ -53,12 +53,13 @@ public class Idjr {
 	private List<Integer> pionAPos;
 	
 	public Idjr(Initializer initializer) throws IOException {
+		this.initializer = initializer;
 		initBot();
 		initReseau();
 	}
 	
 	private void initBot(){
-		this.initializer = initializer;
+		listeJoueursInitiale = new HashMap<>();
 		this.typeJoueur = TypeJoueur.JR;
 		this.connexionType = ConnexionType.CLIENT;
 		this.listOfServer = new ArrayList<>();

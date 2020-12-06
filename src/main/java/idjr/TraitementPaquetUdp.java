@@ -5,6 +5,7 @@ import reseau.socket.ConnexionType;
 import reseau.socket.ControleurReseau;
 import reseau.socket.TraitementPaquet;
 
+import java.net.DatagramPacket;
 import java.net.InetAddress;
 import java.net.Socket;
 import java.net.UnknownHostException;
@@ -16,7 +17,7 @@ import java.text.MessageFormat;
  * @author SÃ©bastien AglaÃ©
  * @version 1.0
  */
-public class TraitementPaquetUdp extends TraitementPaquet<Socket> {
+public class TraitementPaquetUdp extends TraitementPaquet<DatagramPacket> {
 	private Idjr core;// TODO Add the game manager (core)
 
 	/**
@@ -40,7 +41,7 @@ public class TraitementPaquetUdp extends TraitementPaquet<Socket> {
 	 * @throws IllegalStateException si il n'y a pas de traitement pour ce paquet
 	 */
 	@Override
-	public void traitement(Packet packet, String message, Socket extra) {
+	public void traitement(Packet packet, String message, DatagramPacket extra) {
 		switch (packet.getKey()) {
 		case "ACP":
 			acp(packet, message);

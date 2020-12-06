@@ -8,6 +8,7 @@ import reseau.type.CarteType;
 import reseau.type.Couleur;
 import reseau.type.PionCouleur;
 import reseau.type.VigileEtat;
+import reseau.type.VoteType;
 
 import java.text.MessageFormat;
 import java.util.*;
@@ -135,6 +136,19 @@ public class TraitementPaquetTcp extends TraitementPaquet<Socket> {
 			break;
 		case "CDFC":
 			break;
+			
+		case "AZLAZ":
+		case "AZICS":
+		case "PVIC":
+		case "PVR":
+		case "PVVC":
+		case "RAZPA":
+		case "RAZID":
+		case "ACP":
+			break;
+		case "IPV":
+			recupInfoVote(packet, message);
+			break;
 		default:
 			throw new IllegalStateException(
 					MessageFormat.format("[UDP] Il n''y a pas de traitement possible pour {0}", packet.getKey()));
@@ -143,6 +157,12 @@ public class TraitementPaquetTcp extends TraitementPaquet<Socket> {
 
 	private void debutPhaseAttaque(Packet packet, String message) {
 		traitementI.debutPhaseAttaque(core);
+	}
+
+	private void recupInfoVote(Packet packet, String message) {
+		List<Couleur> couleursJoueurs = (List<Couleur>) packet.getValue(message, 3);
+		core.setCouleurJoueurs(couleursJoueurs);
+		core.setVoteType((VoteType) packet.getValue(message, 1));
 	}
 
 	public void lancerDes(Packet packet, String message) {
