@@ -228,52 +228,73 @@ public class JeuPane extends StackPane implements JeuListener {
 		
 		///
 		BorderPane fouilleCamion = new BorderPane();
-		fouilleCamion.setPrefSize(756, 600);
-		fouilleCamion.setMinSize(756, 600);
-		fouilleCamion.setMaxSize(756, 600);
-		fouilleCamion.setStyle(styleVBox);
+		fouilleCamion.setPrefSize(850, 700);
+		fouilleCamion.setMinSize(850, 700);
+		fouilleCamion.setMaxSize(850, 700);
+		fouilleCamion.setStyle("-fx-border-color: black; -fx-border-insets: 5; -fx-border-width: 3;");
+	
 
 		VBox vbChoixCarteCentre = new VBox();
 		vbChoixCarteCentre.setAlignment(Pos.CENTER);
+		vbChoixCarteCentre.setPrefSize(850, 700);
+		vbChoixCarteCentre.setMinSize(850, 700);
+		vbChoixCarteCentre.setMaxSize(850, 700);
 		//vbChoixCarteCentre.setStyle(styleVBox);
+		
+		VBox vbCarte = new VBox();
+		vbCarte.setAlignment(Pos.CENTER);
+		vbCarte.setPrefSize(780, 300);
+		vbCarte.setMinSize(780, 300);
+		vbCarte.setMaxSize(780, 300);
+		//vbCarte.setStyle("-fx-border-color: green; -fx-border-insets: 5; -fx-border-width: 3;");
+		
+		VBox vbChoix = new VBox();
+		vbChoix.setAlignment(Pos.CENTER);
+		vbChoix.setStyle(styleVBox);
 
-		HBox hboxCarte = new HBox();
-		hboxCarte.setAlignment(Pos.TOP_CENTER);
-		hboxCarte.setSpacing(50);
-		hboxCarte.setPadding(new Insets(20));
+		HBox hboxImgCarte = new HBox();
+		hboxImgCarte.setAlignment(Pos.CENTER);
+		hboxImgCarte.setPrefSize(780, 255);
+		hboxImgCarte.setMinSize(780, 255);
+		hboxImgCarte.setMaxSize(780, 255);
+		hboxImgCarte.setSpacing(-385);
+		//hboxImgCarte.setStyle("-fx-border-color: red; -fx-border-insets: 5; -fx-border-width: 3;");
 
 		HBox hboxBoutonCarte = new HBox();
 		hboxBoutonCarte.setAlignment(Pos.TOP_CENTER);
-		hboxBoutonCarte.setSpacing(50);
-		hboxBoutonCarte.setPadding(new Insets(20));
+		hboxBoutonCarte.setSpacing(20);
+		hboxBoutonCarte.setPrefHeight(90);
+		hboxBoutonCarte.setPadding(new Insets(10));
 		
 		HBox hboxBoutonChoix = new HBox();
 		hboxBoutonChoix.setAlignment(Pos.TOP_CENTER);
-		hboxBoutonChoix.setSpacing(50);
+		hboxBoutonChoix.setSpacing(70);
 		hboxBoutonChoix.setPadding(new Insets(20));
 		
 		HBox hboxBoutonJoueur = new HBox();
-		hboxBoutonChoix.setAlignment(Pos.TOP_CENTER);
-		hboxBoutonChoix.setSpacing(50);
-		hboxBoutonChoix.setPadding(new Insets(20));
+		hboxBoutonJoueur.setAlignment(Pos.TOP_CENTER);
+		hboxBoutonJoueur.setSpacing(10);
+		hboxBoutonJoueur.setPadding(new Insets(20));
+		hboxBoutonJoueur.setVisible(false);
 		//
 		ImageView imgCarte1 = new ImageView(DataControl.CARTE_BATTE);
-		imgCarte1.setScaleX(0.35);
-		imgCarte1.setScaleY(0.35);
+		imgCarte1.setScaleX(0.4);
+		imgCarte1.setScaleY(0.4);
 		ImageView imgCarte2 = new ImageView(DataControl.CARTE_BATTE);
-		imgCarte2.setScaleX(0.35);
-		imgCarte2.setScaleY(0.35);
+		imgCarte2.setScaleX(0.4);
+		imgCarte2.setScaleY(0.4);
 		ImageView imgCarte3 = new ImageView(DataControl.CARTE_BATTE);
-		imgCarte3.setScaleX(0.35);
-		imgCarte3.setScaleY(0.35);
+		imgCarte3.setScaleX(0.4);
+		imgCarte3.setScaleY(0.4);
 		
-		hboxCarte.getChildren().addAll(imgCarte1, imgCarte2, imgCarte3);
+		hboxImgCarte.getChildren().addAll(imgCarte1, imgCarte2, imgCarte3);
+		
 		//
-		Button bCarte1 = new Button("carte1");
+		Button bCarte1 = new Button("Carte 1");
 		bCarte1.setAlignment(Pos.CENTER);
 		bCarte1.setStyle(styleBoutons);
-		bCarte1.setPrefSize(lBoutonCamion, hBoutonCamion);
-		bCarte1.setMinSize(lBoutonCamion, hBoutonCamion);
+		bCarte1.setPrefSize(250, 60);
+		bCarte1.setMinSize(250, 60);
 		bCarte1.setFont(policeBouton);
 		bCarte1.setOnMouseEntered(event -> {
 			bCarte1.setStyle(styleBoutonsSouris);
@@ -282,11 +303,11 @@ public class JeuPane extends StackPane implements JeuListener {
 			bCarte1.setStyle(styleBoutons);
 		});
 
-		Button bCarte2 = new Button("carte2");
+		Button bCarte2 = new Button("Carte 2");
 		bCarte2.setAlignment(Pos.CENTER);
 		bCarte2.setStyle(styleBoutons);
-		bCarte2.setPrefSize(lBoutonCamion, hBoutonCamion);
-		bCarte2.setMinSize(lBoutonCamion, hBoutonCamion);
+		bCarte2.setPrefSize(250, 60);
+		bCarte2.setMinSize(250, 60);
 		bCarte2.setFont(policeBouton);
 		bCarte2.setOnMouseEntered(event -> {
 			bCarte2.setStyle(styleBoutonsSouris);
@@ -295,11 +316,11 @@ public class JeuPane extends StackPane implements JeuListener {
 			bCarte2.setStyle(styleBoutons);
 		});
 
-		Button bCarte3 = new Button("carte3");
+		Button bCarte3 = new Button("Carte 3");
 		bCarte3.setAlignment(Pos.CENTER);
 		bCarte3.setStyle(styleBoutons);
-		bCarte3.setPrefSize(lBoutonCamion, hBoutonCamion);
-		bCarte3.setMinSize(lBoutonCamion, hBoutonCamion);
+		bCarte3.setPrefSize(250, 60);
+		bCarte3.setMinSize(250, 60);
 		bCarte3.setFont(policeBouton);
 		bCarte3.setOnMouseEntered(event -> {
 			bCarte3.setStyle(styleBoutonsSouris);
@@ -309,9 +330,10 @@ public class JeuPane extends StackPane implements JeuListener {
 		});
 		
 		hboxBoutonCarte.getChildren().addAll(bCarte1, bCarte2, bCarte3);
-		//
+		vbCarte.getChildren().addAll(hboxImgCarte, hboxBoutonCarte);
+		vbCarte.setMargin(vbChoix, new Insets(10));
 		
-		Button bChoixGarder = new Button("garder");
+		Button bChoixGarder = new Button("Garder");
 		bChoixGarder.setAlignment(Pos.CENTER);
 		bChoixGarder.setStyle(styleBoutons);
 		bChoixGarder.setPrefSize(lBoutonCamion, hBoutonCamion);
@@ -324,7 +346,7 @@ public class JeuPane extends StackPane implements JeuListener {
 			bChoixGarder.setStyle(styleBoutons);
 		});
 
-		Button bChoixDonner = new Button("donner");
+		Button bChoixDonner = new Button("Donner");
 		bChoixDonner.setAlignment(Pos.CENTER);
 		bChoixDonner.setStyle(styleBoutons);
 		bChoixDonner.setPrefSize(lBoutonCamion, hBoutonCamion);
@@ -336,8 +358,11 @@ public class JeuPane extends StackPane implements JeuListener {
 		bChoixDonner.setOnMouseExited(event -> {
 			bChoixDonner.setStyle(styleBoutons);
 		});
+		bChoixDonner.setOnAction(EventHandler -> {
+			hboxBoutonJoueur.setVisible(true);
+		});
 
-		Button bChoixDefausser = new Button("défausser");
+		Button bChoixDefausser = new Button("Défausser");
 		bChoixDefausser.setAlignment(Pos.CENTER);
 		bChoixDefausser.setStyle(styleBoutons);
 		bChoixDefausser.setPrefSize(lBoutonCamion, hBoutonCamion);
@@ -417,15 +442,15 @@ public class JeuPane extends StackPane implements JeuListener {
 			joueur5c.setStyle(styleBoutons);
 		});
 		hboxBoutonJoueur.getChildren().addAll(joueur1c, joueur2c, joueur3c, joueur4c, joueur5c);
-
-		vbChoixCarteCentre.getChildren().addAll(hboxCarte, hboxBoutonCarte, hboxBoutonChoix,hboxBoutonJoueur);
+		vbChoix.getChildren().addAll(hboxBoutonChoix,hboxBoutonJoueur);
+		vbChoixCarteCentre.getChildren().addAll(vbCarte, vbChoix);
 
 		Label titreFouille = new Label("Fouille du camion");
 		titreFouille.setAlignment(Pos.CENTER);
 		titreFouille.setFont(Font.font("Segoe UI", FontWeight.BOLD, 25));
 		titreFouille.setTextFill(Color.WHITE);
 
-		Label titreQuestionCarte = new Label("Choisissez quelles cartes voulez vous garder et donner"); //TODO ajouter ca dans le fichier de langues
+		Label titreQuestionCarte = new Label("Sélectionnez les cartes et faite vos choix"); //TODO ajouter ca dans le fichier de langues
 		titreQuestionCarte.setAlignment(Pos.CENTER);
 		titreQuestionCarte.setFont(Font.font("Segoe UI", FontWeight.BOLD, 25));
 		titreQuestionCarte.setTextFill(Color.WHITE);
@@ -435,11 +460,19 @@ public class JeuPane extends StackPane implements JeuListener {
 		vbTitreCamion.setPrefHeight(80);
 		vbTitreCamion.setBackground(fondNoir);
 		vbTitreCamion.getChildren().addAll(titreFouille, titreQuestionCarte);
-
+		//vbTitreCamion.setStyle("-fx-border-color: yellow; -fx-border-insets: 5; -fx-border-width: 3;");
+		
 		fouilleCamion.setTop(vbTitreCamion);
 		fouilleCamion.setCenter(vbChoixCarteCentre);
 		fouilleCamion.setDisable(false);
 		fouilleCamion.setVisible(true);
+		
+		/*fond.setEffect(flou); TODO A mettre quand le popup fouille camion est activé
+		rectVigile.setEffect(flou);
+		nomJoueur.setEffect(flou);
+		vbCentral.setEffect(flou);
+		vbDeplCentre.setEffect(flou);
+		des.setEffect(flou);*/
 		
 		///
 		
@@ -730,7 +763,7 @@ public class JeuPane extends StackPane implements JeuListener {
 		fond.setAlignment(Pos.CENTER);
 		fond.setEffect(flou);
 		fond.getChildren().add(imgFond);
-
+		
 		stackPane.getChildren().addAll(fond, rectVigile, nomJoueur, phasePartie, vbCentral, /*vote,*/ vbDeplCentre, des, fouilleCamion,
 				info);
 		stackPane.setBackground(new Background(new BackgroundFill(Color.BLACK, CornerRadii.EMPTY, null)));
