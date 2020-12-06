@@ -336,12 +336,12 @@ public class BotMoyen {
 		
 	}
 
-	public void joueCarteCDS(Couleur value) {
-		if (partie.getJoueurs().get(value).getCartes().contains(CarteType.CDS)) {
-			partie.getJoueurs().get(value).getCartes().remove( CarteType.CDS);
+	public void joueCarte(Couleur value,CarteType carte) {
+		if (partie.getJoueurs().get(value).getCartes().contains(carte)) {
+			partie.getJoueurs().get(value).getCartes().remove( carte);
 		}
-		else if (partie.getCartes().contains(CarteType.CDS)) {
-				partie.getCartes().remove(CarteType.CDS);
+		else if (partie.getCartes().contains(carte)) {
+				partie.getCartes().remove(carte);
 				CarteType c = partie.getJoueurs().get(value).getCartes().get(new Random().nextInt(partie.getJoueurs().get(value).getCartes().size()));
 				partie.getCartes().add(c);
 				partie.getJoueurs().get(value).getCartes().remove(c);		
@@ -349,8 +349,8 @@ public class BotMoyen {
 		}
 		else {
 			for (Couleur c : partie.getJoueursCouleurs()) {
-				if (partie.getJoueurs().get(c).getCartes().contains(CarteType.CDS)) {
-					partie.getJoueurs().get(c).getCartes().remove(CarteType.CDS);
+				if (partie.getJoueurs().get(c).getCartes().contains(carte)) {
+					partie.getJoueurs().get(c).getCartes().remove(carte);
 					CarteType ca = partie.getJoueurs().get(value).getCartes().get(new Random().nextInt(partie.getJoueurs().get(value).getCartes().size()));
 					partie.getJoueurs().get(c).getCartes().add(ca);
 					partie.getJoueurs().get(value).getCartes().remove(ca);
@@ -372,6 +372,11 @@ public class BotMoyen {
 		for (Integer i : lieux) {
 			partie.getLieux().get(i).setOuvert(false);
 		}
+		
+	}
+
+	public void deplPionJoueurCourant(Couleur value, Integer dest, Integer pion) {
+		partie.deplacePerso(value, pion, dest);
 		
 	}
 	
