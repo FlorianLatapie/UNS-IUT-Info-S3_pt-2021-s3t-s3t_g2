@@ -87,6 +87,7 @@ public class TraitementBot {
 		for (Integer i : lieux)
 			if (core.getLieuOuvert().contains(i))
 				core.getLieuOuvert().remove(i);
+		core.setLieuxFerme(lieux);
 	}
 
 	public List<Object> pionADeplacer(BotMoyen core, int dest, HashMap<Integer, List<Integer>> listedp) {
