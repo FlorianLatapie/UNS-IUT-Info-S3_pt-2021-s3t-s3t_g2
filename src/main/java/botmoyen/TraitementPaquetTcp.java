@@ -253,6 +253,7 @@ public class TraitementPaquetTcp extends TraitementPaquet<Socket> {
 			String messageTcp = getControleurReseau().construirePaquetTcp("AZLD", m1, m2, core.getJoueurId());
 			getControleurReseau().getTcpClient().envoyer(messageTcp);
 		}
+		
 		core.NewChef((VigileEtat)packet.getValue(message, 2));
 	}
 
