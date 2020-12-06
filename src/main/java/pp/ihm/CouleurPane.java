@@ -3,6 +3,7 @@ package pp.ihm;
 import pp.Joueur;
 import pp.ihm.DataControl.ApplicationPane;
 import pp.ihm.eventListener.CouleurListener;
+import pp.ihm.langues.International;
 import javafx.application.Platform;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -63,7 +64,7 @@ public class CouleurPane extends StackPane implements CouleurListener {
 		sControl = sc;
 
 		// titre
-		Label titre1 = new Label("Choisissez vos \n\tcouleurs");
+		Label titre1 = new Label("Choisissez vos \n\tcouleurs");// TODO
 		titre1.setFont(Font.font("Segoe UI", FontWeight.BOLD, 80));
 		titre1.setTextFill(Color.BLACK);
 
@@ -81,7 +82,7 @@ public class CouleurPane extends StackPane implements CouleurListener {
 
 		nom1 = new Label();
 		nom1.setBackground(fondBlanc);
-		nom1.setText("Joueur 1");
+		nom1.setText(International.trad("texte.j1"));
 		nom1.setFont(policeNom);
 		nom1.setPrefSize(largeurTF, hauteurElemtents);
 		nom1.setMinHeight(hauteurElemtents);
@@ -102,7 +103,7 @@ public class CouleurPane extends StackPane implements CouleurListener {
 
 		nom2 = new Label();
 		nom2.setBackground(fondBlanc);
-		nom2.setText("Joueur 2");
+		nom2.setText(International.trad("texte.j2"));
 		nom2.setFont(policeNom);
 		nom2.setPrefSize(largeurTF, hauteurElemtents);
 		nom2.setMinHeight(hauteurElemtents);
@@ -123,7 +124,7 @@ public class CouleurPane extends StackPane implements CouleurListener {
 
 		nom3 = new Label();
 		nom3.setBackground(fondBlanc);
-		nom3.setText("Joueur 3");
+		nom3.setText(International.trad("texte.j3"));
 		nom3.setFont(policeNom);
 		nom3.setPrefSize(largeurTF, hauteurElemtents);
 		nom3.setMinHeight(hauteurElemtents);
@@ -144,7 +145,7 @@ public class CouleurPane extends StackPane implements CouleurListener {
 
 		nom4 = new Label();
 		nom4.setBackground(fondBlanc);
-		nom4.setText("Joueur 4");
+		nom4.setText(International.trad("texte.j4"));
 		nom4.setFont(policeNom);
 		nom4.setPrefSize(largeurTF, hauteurElemtents);
 		nom4.setMinHeight(hauteurElemtents);
@@ -165,7 +166,7 @@ public class CouleurPane extends StackPane implements CouleurListener {
 
 		nom5 = new Label();
 		nom5.setBackground(fondBlanc);
-		nom5.setText("Joueur 5");
+		nom5.setText(International.trad("texte.j5"));
 		nom5.setFont(policeNom);
 		nom5.setPrefSize(largeurTF, hauteurElemtents);
 		nom5.setMinHeight(hauteurElemtents);
@@ -186,7 +187,7 @@ public class CouleurPane extends StackPane implements CouleurListener {
 
 		nom6 = new Label();
 		nom6.setBackground(fondBlanc);
-		nom6.setText("Joueur 6");
+		nom6.setText(International.trad("texte.j6"));
 		nom6.setFont(policeNom);
 		nom6.setPrefSize(largeurTF, hauteurElemtents);
 		nom6.setMinHeight(hauteurElemtents);
@@ -213,7 +214,7 @@ public class CouleurPane extends StackPane implements CouleurListener {
 		vbCenter.getChildren().addAll(vJoueurs);
 
 		// boutons
-		Button bJouer = new Button("JOUER");
+		Button bJouer = new Button(International.trad("bouton.jouer"));
 		bJouer.setPrefSize(lBouton, hBouton);
 		bJouer.setMinSize(lBouton, hBouton);
 		bJouer.setFont(policeBouton);
@@ -232,7 +233,7 @@ public class CouleurPane extends StackPane implements CouleurListener {
 			}
 		});
 
-		Button bRetour = new Button("RETOUR");
+		Button bRetour = new Button(International.trad("bouton.retour"));
 		bRetour.setPrefSize(lBouton, hBouton);
 		bRetour.setMinSize(lBouton, hBouton);
 		bRetour.setFont(policeBouton);
@@ -295,6 +296,6 @@ public class CouleurPane extends StackPane implements CouleurListener {
 			nom4.setText(joueurs.size() >= 4 ? joueurs.get(3).getNom() : "");
 			nom5.setText(joueurs.size() >= 5 ? joueurs.get(4).getNom() : "");
 			nom6.setText(joueurs.size() >= 6 ? joueurs.get(5).getNom() : "");
-        });
+		});
 	}
 }
