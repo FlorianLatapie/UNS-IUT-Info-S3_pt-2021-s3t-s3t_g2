@@ -8,6 +8,7 @@ import reseau.type.CarteType;
 import reseau.type.Couleur;
 import reseau.type.PionCouleur;
 import reseau.type.TypeJoueur;
+import reseau.type.VigileEtat;
 import reseau.type.VoteType;
 
 import java.io.IOException;
@@ -309,6 +310,19 @@ public class BotMoyen {
 
 	public void recupCarte(CarteType value) {
 		partie.givecarte(couleur, value);
+		
+	}
+
+	public void resVigile(Couleur value) {
+		partie.setChef(value);
+		
+	}
+
+	public void NewChef(VigileEtat value) {
+		if (value.equals(VigileEtat.NE))
+			partie.setNewChef(true);
+		else
+			partie.setNewChef(false);
 		
 	}
 	
