@@ -1,4 +1,4 @@
-package partie;
+package botmoyen.partie;
 
 import java.util.ArrayList;
 import java.util.HashMap;

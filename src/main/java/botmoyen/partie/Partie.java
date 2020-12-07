@@ -1,4 +1,4 @@
-package partie;
+package botmoyen.partie;
 
 import reseau.type.CarteType;
 import reseau.type.Couleur;
@@ -400,13 +400,13 @@ public class Partie {
 	/**
 	 * Place le personnage du joueur au lieu choisi.
 	 *
-	 * @param joueur     le joueur dont le personnage est placé
+	 * @param couleur     le joueur dont le personnage est placé
 	 * @param choixPerso le personnage qui est déplacé
 	 * @param dest       le lieu de destination du personnage
 	 */
-	public void placePerso(Joueur joueur, Integer choixPerso, Integer dest) {
+	public void placePerso(Couleur couleur, Integer choixPerso, Integer dest) {
 		for (Joueur j : joueurs.values()) {
-			if (j.equals(joueur)) {
+			if (j.getCouleur().equals(couleur)) {
 				j.getPersonnages().get(choixPerso).changerDeLieux(lieux.get(dest));
 				this.lieux.get(dest).addPersonnage(j.getPersonnages().get(choixPerso));
 			}

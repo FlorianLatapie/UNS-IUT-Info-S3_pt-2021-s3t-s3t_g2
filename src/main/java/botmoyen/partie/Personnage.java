@@ -1,4 +1,4 @@
-package partie;
+package botmoyen.partie;
 
 /**
  * <h1>Le personnage</h1>

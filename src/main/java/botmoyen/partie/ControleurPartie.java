@@ -1,10 +1,11 @@
-package partie;
+package botmoyen.partie;
 
 
 
 
 
 import java.util.*;
+
 import reseau.type.*;
 
 

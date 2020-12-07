@@ -1,4 +1,4 @@
-package partie;
+package botmoyen.partie;
 
 /**
  * <h1>La classe La brute</h1>. A pour rôle de définir un Personnage.

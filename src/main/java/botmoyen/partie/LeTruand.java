@@ -1,4 +1,4 @@
-package partie;
+package botmoyen.partie;
 
 /**
  * <h1>La classe Le truand</h1>. A pour rôle de définir un Personnage.

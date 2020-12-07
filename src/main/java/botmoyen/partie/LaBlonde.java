@@ -1,7 +1,7 @@
-package partie;
+package botmoyen.partie;
 
 /**
- * <h1>La classe La fillette</h1>. A pour rôle de définir un Personnage.
+ * <h1>La classe La blonde</h1>. A pour rôle de définir un Personnage.
  * 
  * @author Leo
  * @author Theo
@@ -11,16 +11,16 @@ package partie;
  * @version 0.1
  * @since 04/10/2020
  */
-public class LaFillette extends Personnage {
+public class LaBlonde extends Personnage {
 
 	/**
-	 * Instantie un nouveau Personnage LaFillette
+	 * Instantie un nouveau Personnage LaBlonde
 	 * 
 	 * @param joueur le joueur cible
 	 */
-	public LaFillette(Joueur joueur) {
-		super(joueur, TypePersonnage.FILLETTE);
-		super.point = 1;
+	public LaBlonde(Joueur joueur) {
+		super(joueur, TypePersonnage.BLONDE);
+		super.point = 7;
 		super.nbrZretenu = 1;
 		super.nbrVoixPourVoter = 1;
 	}
@@ -30,7 +30,6 @@ public class LaFillette extends Personnage {
 	 */
 	@Override
 	public String toString() {
-		return "La Fillette";
+		return "La Blonde";
 	}
-
 }
