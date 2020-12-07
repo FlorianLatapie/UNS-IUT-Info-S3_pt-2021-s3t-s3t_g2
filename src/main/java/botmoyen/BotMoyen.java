@@ -275,9 +275,9 @@ public class BotMoyen {
 
 	public void carteCamion(List<Object> carteChoisies) {
 		CarteType c1=(CarteType)carteChoisies.get(0);
-		CarteType c2=(CarteType)carteChoisies.get(2);
-		CarteType c3=(CarteType)carteChoisies.get(3);
-		Couleur couleurJC=(Couleur)carteChoisies.get(4);
+		CarteType c2=(CarteType)carteChoisies.get(1);
+		CarteType c3=(CarteType)carteChoisies.get(2);
+		Couleur couleurJC=(Couleur)carteChoisies.get(3);
 		if (partie.getCartes().contains(c1)) {
 			partie.givecarte(couleur, c1);
 		}
