@@ -513,6 +513,10 @@ public class BotMoyen {
 		
 	}
 
+	public String getEtatPartie() {
+		return partie.getEtatPartie();
+	}
+
 	
 	
 	

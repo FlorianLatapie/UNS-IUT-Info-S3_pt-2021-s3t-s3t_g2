@@ -99,4 +99,13 @@ public class Joueur {
 	}
 
 
+	@Override
+	public String toString() {
+		return "Joueur [couleur=" + couleur + ", enVie=" + enVie + ", personnages=" + personnages + ", cartes=" + cartes
+				+ "]";
+	}
+	
+	
+
+
 }

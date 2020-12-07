@@ -309,6 +309,7 @@ public class TraitementPaquetTcp extends TraitementPaquet<Socket> {
 	public void debutTour(Packet packet, String message) {
 		traitementB.debutTour(core, (List<Couleur>) packet.getValue(message, 2));
 		core.resetPersoCache();
+		System.out.println(core.getEtatPartie());
 		
 	}
 
