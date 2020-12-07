@@ -30,6 +30,9 @@ public class Lieu {
 
 	/**  Collection des personnages présents sur un lieu. */
 	private ArrayList<Personnage> personnage;
+	
+	/**  Nombre de personnage caché sur un lieu. */
+	private Integer nbPersoCache;
 
 	/**
 	 * Initialise les différents lieux possibles et donne le nombre de places
@@ -48,6 +51,7 @@ public class Lieu {
 
 		this.name = listeLieu.get(num);
 		this.num = num;
+		this.nbPersoCache = 0;
 		if (this.num == 1 || this.num == 5) {
 			this.nbPlaces = 3;
 		}
@@ -245,5 +249,13 @@ public class Lieu {
 	 */
 	public List<Personnage> getPersonnage() {
 		return personnage;
+	}
+
+	public Integer getNbPersoCache() {
+		return nbPersoCache;
+	}
+
+	public void setNbPersoCache(Integer nbPersoCache) {
+		this.nbPersoCache = nbPersoCache;
 	}
 }
