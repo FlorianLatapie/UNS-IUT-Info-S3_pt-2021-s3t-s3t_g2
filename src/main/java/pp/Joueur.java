@@ -68,7 +68,7 @@ public class Joueur {
 	public int getNbVoix(Lieu l, int numeroVote, int nbCarteMenace) {
 		int nbVoix = 0;
 		for(Personnage p : this.personnages.values()) {
-			if (p.getMonLieu() == l) {
+			if (l.getPersonnage().contains(p) && !p.estCache) {
 				if (p.getType() == TypePersonnage.TRUAND) {
 					nbVoix += 2;
 				}else {
