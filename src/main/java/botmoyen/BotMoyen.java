@@ -13,6 +13,7 @@ import reseau.type.VoteType;
 
 import java.io.IOException;
 import java.net.InetAddress;
+import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -407,6 +408,112 @@ public class BotMoyen {
 		}
 		
 	}
+
+	public void corectionZombie(Integer lieu, Integer nbz) {
+		partie.setZombieSurLieu(lieu,nbz);
+		
+	}
+
+	public void joueCartes(Couleur value, List<CarteType> value2) {
+		for (CarteType c : value2) {
+			joueCarte(value, c);
+		}
+		
+	}
+
+	public void setPersoCache(Integer lieu, List<Integer> lp) {
+		partie.setPersoCache(lieu,lp.size());
+		
+	}
+
+	public void resetPersoCache() {
+		partie.resetPersoCache();
+		
+	}
+
+	public void sacrifice(PionCouleur value) {
+		switch (value) {    
+			case N7:
+				partie.sacrifie(Couleur.NOIR, 7);
+				break;
+			case N5:   
+				partie.sacrifie(Couleur.NOIR, 5);
+				break;
+			case N3:
+				partie.sacrifie(Couleur.NOIR, 3);
+				break;
+			case N1:
+				partie.sacrifie(Couleur.NOIR, 1);
+				break;
+			case V7:
+				partie.sacrifie(Couleur.VERT, 7);
+				break;
+			case V5:
+				partie.sacrifie(Couleur.VERT, 5);
+				break;
+			case V3:
+				partie.sacrifie(Couleur.VERT, 3);
+				break;
+			case V1:
+				partie.sacrifie(Couleur.VERT, 1);
+				break;
+			case B7:
+				partie.sacrifie(Couleur.BLEU, 7);
+				break;
+			case B5:
+				partie.sacrifie(Couleur.BLEU, 5);
+				break;
+			case B3: 
+				partie.sacrifie(Couleur.BLEU, 3);
+				break;
+			case B1:
+				partie.sacrifie(Couleur.BLEU, 1);
+				break;
+			case R7:  
+				partie.sacrifie(Couleur.ROUGE, 7);
+				break;
+			case R5: 
+				partie.sacrifie(Couleur.ROUGE, 5);
+				break;
+			case R3: 
+				partie.sacrifie(Couleur.ROUGE, 3);
+				break;
+			case R1:
+				partie.sacrifie(Couleur.ROUGE, 1);
+				break;
+			case J7: 
+				partie.sacrifie(Couleur.JAUNE, 7);
+				break;
+			case J5:
+				partie.sacrifie(Couleur.JAUNE, 5);
+				break;
+			case J3:  
+				partie.sacrifie(Couleur.JAUNE, 3);
+				break;
+			case J1:
+				partie.sacrifie(Couleur.JAUNE, 1);
+				break;
+			case M7:
+				partie.sacrifie(Couleur.MARRON, 7);
+				break;
+			case M5:
+				partie.sacrifie(Couleur.MARRON, 5);
+				break;
+			case M3:  
+				partie.sacrifie(Couleur.MARRON, 3);
+				break;
+			case M1:
+				partie.sacrifie(Couleur.MARRON, 1);
+				break;
+			default:
+				break;
+				
+		}
+			
+		
+	}
+
+	
 	
 	
 	
