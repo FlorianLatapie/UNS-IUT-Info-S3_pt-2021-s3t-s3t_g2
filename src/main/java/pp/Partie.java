@@ -589,7 +589,7 @@ public class Partie {
 			int a = 0;
 			if (j.isChefDesVigiles()) {
 				for(Personnage p : j.getPersonnages().values()) {
-					if (l.getPersonnage().contains(p)) {
+					if (l.getPersonnage().contains(p) && !p.estCache) {
 						a=1;
 					}
 				}
@@ -602,7 +602,7 @@ public class Partie {
 			int a = 0;
 			if (!j.isChefDesVigiles()) {
 				for(Personnage p : j.getPersonnages().values()) {
-					if (l.getPersonnage().contains(p)) {
+					if (l.getPersonnage().contains(p) && !p.estCache) {
 						a=1;
 					}
 				}
