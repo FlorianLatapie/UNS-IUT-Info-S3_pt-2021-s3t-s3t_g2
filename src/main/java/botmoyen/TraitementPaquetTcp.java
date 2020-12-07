@@ -138,14 +138,17 @@ public class TraitementPaquetTcp extends TraitementPaquet<Socket> {
 			placeZombie(packet, message);
 			break;
 		case "PFC":
+			break;
 		case "RFC":
 			resFouille(packet, message);
 			break;
 		case "PECV":
+			break;
 		case "RECV":
 			resVigile(packet, message);
 			break;
 		case "CDFC":
+			break;
 		case "AZLAZ":
 			arriveZombie(packet, message);
 			break;
@@ -160,8 +163,11 @@ public class TraitementPaquetTcp extends TraitementPaquet<Socket> {
 			arriveSoloZombie(packet, message);
 			break;
 		case "PVIC":
+			break;
 		case "PVR":
+			break;
 		case "PVVC":
+			break;
 		case "RAZPA":
 			recupInfoPerso(packet, message);
 			break;
@@ -196,7 +202,7 @@ public class TraitementPaquetTcp extends TraitementPaquet<Socket> {
 	}
 
 	private void resoAttaqueZombie(Packet packet, String message) {
-		core.setZombie((String)packet.getValue(message, 3),(String)packet.getValue(message, 4));
+		core.setZombie((List<Integer>)packet.getValue(message, 3),(List<Integer>)packet.getValue(message, 4));
 		
 	}
 
@@ -220,7 +226,7 @@ public class TraitementPaquetTcp extends TraitementPaquet<Socket> {
 	}
 
 	private void arriveZombie(Packet packet, String message) {
-		core.arriveZombie((String) packet.getValue(message, 1));
+		core.arriveZombie((List<Integer>) packet.getValue(message, 1));
 		
 	}
 
@@ -235,7 +241,7 @@ public class TraitementPaquetTcp extends TraitementPaquet<Socket> {
 	}
 
 	private void placeZombie(Packet packet, String message) {
-		core.initZombie((String) packet.getValue(message, 1) );
+		core.initZombie((List<Integer>) packet.getValue(message, 1) );
 		
 	}
 
