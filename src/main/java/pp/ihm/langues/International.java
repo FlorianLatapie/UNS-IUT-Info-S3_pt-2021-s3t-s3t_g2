@@ -12,11 +12,11 @@ import java.util.ResourceBundle;
 public abstract class International {
 	private static Locale langue;
 	private static ResourceBundle resourceBundle;
-	private static String CHEMIN_LANGUE = "messages_";
+	private static String CHEMIN_LANGUE = "langues.messages";
 
 	static {
 		langue = Locale.FRENCH;
-		resourceBundle = ResourceBundle.getBundle(langue.getDisplayLanguage(), langue);
+		resourceBundle = ResourceBundle.getBundle(CHEMIN_LANGUE, langue);
 	}
 
 	/**
