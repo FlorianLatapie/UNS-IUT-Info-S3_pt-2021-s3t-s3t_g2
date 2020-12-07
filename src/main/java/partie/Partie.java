@@ -419,9 +419,9 @@ public class Partie {
 	 * @param joueur     le joueur possedant le personnage sacrifié
 	 * @param choixPerso le personnage qui va être sacrifié
 	 */
-	public void sacrifie(Joueur joueur, Integer choixPerso) {
+	public void sacrifie(Couleur couleur, Integer choixPerso) {
 		for (Joueur j : joueurs.values()) {
-			if (j.equals(joueur)) {
+			if (j.getCouleur().equals(couleur)) {
 				lieux.get(j.getPersonnages().get(choixPerso).getMonLieu().getNum()).getPersonnage()
 						.remove(j.getPersonnages().get(choixPerso));
 				j.getPersonnages().remove(choixPerso);
@@ -574,6 +574,20 @@ public class Partie {
 	public void givecarte(Couleur c , CarteType carte) {
 		joueurs.get(c).getCartes().add(carte);
 		cartes.remove(carte);
+	}
+
+	public void setZombieSurLieu(Integer lieu, Integer nbz) {
+		lieux.get(lieu).setNbZombies(nbz);		
+	}
+
+	public void setPersoCache(Integer lieu, int size) {
+		lieux.get(lieu).setNbPersoCache(size);	
+	}
+
+	public void resetPersoCache() {
+		for (Lieu l : lieux.values())
+			l.setNbPersoCache(0);
+		
 	}
 
 }
