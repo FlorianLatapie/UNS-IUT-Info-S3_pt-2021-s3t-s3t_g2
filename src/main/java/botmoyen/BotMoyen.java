@@ -393,12 +393,12 @@ public class BotMoyen {
 		
 	}
 
-	public void recupInfoPerso(Integer value, List<Object> value2,Integer lieu) {
+	public void recupInfoPerso(List<Object> listelp,Integer lieu) {
 		List<Couleur> lc = new ArrayList<Couleur>();
 		List<Integer> li = new ArrayList<Integer>();
-		for (int i =0;i<value2.size();i=i+2) {
-			lc.add((Couleur)value2.get(i));
-			li.add((Integer)value2.get(i+1));
+		for (int i =0;i<listelp.size();i=i+2) {
+			lc.add((Couleur)listelp.get(i));
+			li.add((Integer)listelp.get(i+1));
 		}
 		for (int i = 0 ; i<lc.size();i++) {
 			partie.deplacePerso(lc.get(i), li.get(i), lieu);
