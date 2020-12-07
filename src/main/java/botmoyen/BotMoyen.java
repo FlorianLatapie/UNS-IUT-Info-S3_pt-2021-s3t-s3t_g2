@@ -268,11 +268,8 @@ public class BotMoyen {
 		partie.deplacePerso(c, pion, dest);
 	}
 	
-	public void initZombie(String s) {
-		List<Integer> listeIndexLieux = new ArrayList<Integer>();
-		for (String a : s.split(",")) {
-			listeIndexLieux.add(Integer.parseInt(a));
-		}
+	public void initZombie(List<Integer> listeIndexLieux) {
+		
 		partie.entreZombie(listeIndexLieux);
 	}
 
@@ -335,10 +332,7 @@ public class BotMoyen {
 		
 	}
 
-	public void arriveZombie(String value) {
-		List<Integer> arr = new ArrayList<Integer>();
-		for (String s : value.split(","))
-			arr.add(Integer.parseInt(s));
+	public void arriveZombie(List<Integer> arr) {
 		partie.entreZombie(arr);
 		
 	}
@@ -387,13 +381,9 @@ public class BotMoyen {
 		
 	}
 
-	public void setZombie(String listeL, String listeZ) {
-		String[] s = listeL.split(",");
-		String[] z = listeZ.split(",");
-		List<Integer> li = new ArrayList<Integer>();
-		for (int i =0 ;i<s.length;i++) {
-			partie.getLieux().get(Integer.parseInt(s[i])).setNbZombies(Integer.parseInt(z[i]));
-			li.add(Integer.parseInt(z[i]));
+	public void setZombie(List<Integer> li, List<Integer> lz) {
+		for (int i = 0; i<li.size();i++) {
+			partie.getLieux().get(li.get(i)).setNbZombies(lz.get(i));
 		}
 		for (Lieu l : partie.getLieux().values()) {
 			if (!li.contains(l.getNum())) {
