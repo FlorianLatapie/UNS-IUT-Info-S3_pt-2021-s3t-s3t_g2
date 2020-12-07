@@ -184,7 +184,7 @@ public class TraitementPaquetTcp extends TraitementPaquet<Socket> {
 	}
 
 	private void resSacrifice(Packet packet, String message) {
-		core.sacrifice((PionCouleur)packet.getValue(message, 1));
+		core.sacrifice((PionCouleur)packet.getValue(message, 2));
 		core.corectionZombie((Integer)packet.getValue(message, 1), (Integer)packet.getValue(message, 3));
 		
 	}
