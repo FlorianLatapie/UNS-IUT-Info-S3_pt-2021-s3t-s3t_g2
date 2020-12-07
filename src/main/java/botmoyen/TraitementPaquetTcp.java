@@ -13,7 +13,7 @@ import reseau.type.VoteType;
 import java.text.MessageFormat;
 import java.util.*;
 
-import partie.Joueur;
+import botmoyen.partie.Joueur;
 
 import static java.lang.System.out;
 
@@ -240,7 +240,7 @@ public class TraitementPaquetTcp extends TraitementPaquet<Socket> {
 	}
 
 	private void placementPerso(Packet packet, String message) {
-		core.placPion((Couleur) packet.getValue(message, 1),(int) packet.getValue(message, 4),(int)packet.getValue(message, 5) );
+		core.deplacePionCouleur((Couleur) packet.getValue(message, 1),(int) packet.getValue(message, 4),(int)packet.getValue(message, 5) );
 		
 	}
 
@@ -302,7 +302,7 @@ public class TraitementPaquetTcp extends TraitementPaquet<Socket> {
 		String m1 = (String) packet.getValue(message, 3);
 		int dest = traitementB.choisirDestPlacement((List<?>) packet.getValue(message, 2));
 		int pion = traitementB.choisirPionPlacement(core);
-		core.deplPion(dest, pion);
+		core.placePion(dest, pion);
 		getControleurReseau().getTcpClient().envoyer(getControleurReseau().construirePaquetTcp("PICD", dest,pion, m1, core.getJoueurId()));
 	}
 

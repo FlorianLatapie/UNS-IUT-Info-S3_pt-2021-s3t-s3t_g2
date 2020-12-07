@@ -18,10 +18,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-import partie.ControleurPartie;
-import partie.Joueur;
-import partie.Lieu;
-import partie.Partie;
+import botmoyen.partie.ControleurPartie;
+import botmoyen.partie.Joueur;
+import botmoyen.partie.Lieu;
+import botmoyen.partie.Partie;
 
 public class BotMoyen {
 	/* Parametre Idjr */
@@ -253,11 +253,14 @@ public class BotMoyen {
 		}
 	}
 
-	public void deplPion(int dest, int pion) {
+	public void placePion(int dest, int pion) {
+		partie.placePerso(couleur, pion, dest);
+	}
+	public void deplacePion(int dest, int pion) {
 		partie.deplacePerso(couleur, pion, dest);
 	}
 	
-	public void placPion(Couleur c,int dest, int pion) {
+	public void deplacePionCouleur(Couleur c,int dest, int pion) {
 		partie.deplacePerso(c, pion, dest);
 	}
 	
