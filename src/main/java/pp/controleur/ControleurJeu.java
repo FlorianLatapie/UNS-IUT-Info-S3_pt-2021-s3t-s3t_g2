@@ -176,6 +176,7 @@ public class ControleurJeu {
 		String m = nwm.construirePaquetTcp("IP", jeu.getJoueursNoms(), jeu.getJoueursCouleurs(), 0, 3, partieId);
 		for (Joueur j : jeu.getJoueurs().values())
 			j.getConnection().envoyer(m);
+		distribuerCarte();
 		this.placementPersonnage();
 		this.jeu.resultatChefVigile(jeu.getJoueurs().get(0));
 		this.lieuZombie = arriveZombie();
@@ -223,7 +224,15 @@ public class ControleurJeu {
 		nextJoueurId++;
 		return tmp;
 	}
-
+	
+	public void distribuerCarte() {
+		for (Joueur j: jeu.getJoueurs().values()) {
+			CarteType a = jeu.getCartes().get(0);
+			j.getCartes().add(a);
+			jeu.getCartes().remove(0);
+			j.getConnection().envoyer(nwm.construirePaquetTcp("DC", a, partieId));
+		}
+	}
 	/**
 	 * Execute le déroulement d'une partie
 	 */
@@ -504,6 +513,9 @@ public class ControleurJeu {
 				String rep = j.getConnection().getMessage("CDDZVJE");
 				int dvz = (int) nwm.getValueTcp("CDDZVJE", rep, 1);
 				jeu.getLieux().get(dvz).addZombie();
+				for (Joueur j2 : this.jeu.getJoueurs().values()) {
+					j.getConnection().envoyer(nwm.construirePaquetTcp("CDZVDI", j.getCouleur(), dvz, partieId, numeroTour));
+				}
 			}
 		}
 	}
@@ -577,6 +589,15 @@ public class ControleurJeu {
 				}
 			}
 		}
+		reinitJoueurCache();
+	}
+	
+	private void reinitJoueurCache() {
+		for (Joueur j: jeu.getJoueurs().values()) {
+			for(Personnage p: j.getPersonnages().values()) {
+				p.setEstCache(false);
+			}
+		}
 	}
 
 	private List<Object> défenseAttaqueZombie(int i) {
@@ -605,6 +626,7 @@ public class ControleurJeu {
 			for (int num : (List<Integer>) nwm.getValueTcp("RAZRD", m, 2)) {
 				persoCacheTemp.add(num);
 				persoCache.add(j.getPersonnages().get(PpTools.valeurToIndex(num)));
+				j.getPersonnages().get(PpTools.valeurToIndex(num)).setEstCache(true);
 			}
 			for (Joueur jou : jeu.getJoueurs().values()) {
 				jou.getConnection()
