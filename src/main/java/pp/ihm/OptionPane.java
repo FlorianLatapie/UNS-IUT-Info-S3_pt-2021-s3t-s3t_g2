@@ -136,7 +136,7 @@ public class OptionPane extends StackPane {
 		titre.setFont(policeTitre);
 		vbTitre.getChildren().add(titre);
 
-		Button bFrancais = new Button(International.trad("bouton.langue1"));
+		Button bFrancais = new Button(International.trad("texte.langue1"));
 		bFrancais.setFont(policeBouton);
 		bFrancais.setAlignment(Pos.CENTER);
 		bFrancais.setPrefSize(245, hauteurElement);
@@ -146,7 +146,7 @@ public class OptionPane extends StackPane {
 		bFrancais.setOnMouseEntered(event -> bFrancais.setStyle(styleBoutonsSouris));
 		bFrancais.setOnMouseExited(event -> bFrancais.setStyle(styleBoutons));
 
-		Button bEnglish = new Button(International.trad("bouton.langue2"));
+		Button bEnglish = new Button(International.trad("texte.langue2"));
 		bEnglish.setFont(policeBouton);
 		bEnglish.setAlignment(Pos.CENTER);
 		bEnglish.setPrefSize(245, hauteurElement);
