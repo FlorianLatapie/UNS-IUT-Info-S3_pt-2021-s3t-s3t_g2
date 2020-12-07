@@ -197,7 +197,7 @@ public class TraitementPaquetTcp extends TraitementPaquet<Socket> {
 	}
 
 	private void recupInfoPerso(Packet packet, String message) {
-		core.recupInfoPerso((Integer)packet.getValue(message, 2),(List<Object>)packet.getValue(message, 3),(Integer)packet.getValue(message, 1)); 
+		core.recupInfoPerso((List<Object>)packet.getValue(message, 2),(Integer)packet.getValue(message, 1)); 
 		core.corectionZombie((Integer)packet.getValue(message, 1),(Integer)packet.getValue(message, 4));
 	}
 
