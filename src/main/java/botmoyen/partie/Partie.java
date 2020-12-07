@@ -391,8 +391,8 @@ public class Partie {
 			if (j.getCouleur().equals(couleur)) {
 				int l = j.getPersonnages().get(choixPerso).getMonLieu().getNum();
 				j.getPersonnages().get(choixPerso).changerDeLieux(lieux.get(dest));
-				lieux.get(dest).addPersonnage(j.getPersonnages().get(choixPerso));
 				lieux.get(l).getPersonnage().remove(j.getPersonnages().get(choixPerso));
+				lieux.get(dest).addPersonnage(j.getPersonnages().get(choixPerso));
 			}
 		}
 	}
