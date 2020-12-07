@@ -256,6 +256,10 @@ public class BotMoyen {
 	public void placePion(int dest, int pion) {
 		partie.placePerso(couleur, pion, dest);
 	}
+	public void placePionCouleur(Couleur value, int pion, int dest) {
+		partie.placePerso(value, pion, dest);
+		
+	}
 	public void deplacePion(int dest, int pion) {
 		partie.deplacePerso(couleur, pion, dest);
 	}
@@ -519,6 +523,8 @@ public class BotMoyen {
 	public String getEtatPartie() {
 		return partie.getEtatPartie();
 	}
+
+	
 
 	
 	

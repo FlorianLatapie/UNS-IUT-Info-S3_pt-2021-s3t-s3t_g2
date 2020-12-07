@@ -240,7 +240,7 @@ public class TraitementPaquetTcp extends TraitementPaquet<Socket> {
 	}
 
 	private void placementPerso(Packet packet, String message) {
-		core.deplacePionCouleur((Couleur) packet.getValue(message, 1),(int) packet.getValue(message, 4),(int)packet.getValue(message, 5) );
+		core.placePionCouleur((Couleur) packet.getValue(message, 1),(int) packet.getValue(message, 4),(int)packet.getValue(message, 5) );
 		
 	}
 
