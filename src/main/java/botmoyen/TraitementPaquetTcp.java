@@ -100,12 +100,14 @@ public class TraitementPaquetTcp extends TraitementPaquet<Socket> {
 			resoAttaqueZombie(packet, message);
 			break;
 		case "RAZA":
+			recupInfoPerso(packet, message);
 			attaqueZombie(packet, message);
 			break;
 		case "RAZDS":
 			choisirSacrifice(packet, message);
 			break;
 		case "RAZIF":
+			resSacrifice(packet, message);
 			break;
 		case "FP":
 			finPartie(packet, message);
@@ -164,6 +166,7 @@ public class TraitementPaquetTcp extends TraitementPaquet<Socket> {
 			recupInfoPerso(packet, message);
 			break;
 		case "RAZID":
+			joueCarteDEF(packet, message);
 			break;
 		case "IPV":
 			recupInfoVote(packet, message);
@@ -174,8 +177,22 @@ public class TraitementPaquetTcp extends TraitementPaquet<Socket> {
 		}
 	}
 
+	private void resSacrifice(Packet packet, String message) {
+		core.sacrifice((PionCouleur)packet.getValue(message, 1));
+		core.corectionZombie((Integer)packet.getValue(message, 1), (Integer)packet.getValue(message, 3));
+		
+	}
+
+	private void joueCarteDEF(Packet packet, String message) {
+		core.joueCartes((Couleur)packet.getValue(message, 2),(List<CarteType>)packet.getValue(message, 3) );
+		core.corectionZombie((Integer)packet.getValue(message, 1), (Integer)packet.getValue(message, 6));
+		core.setPersoCache((Integer)packet.getValue(message, 1),(List<Integer>)packet.getValue(message, 3));
+		
+	}
+
 	private void recupInfoPerso(Packet packet, String message) {
-		core.recupInfoPerso((Integer)packet.getValue(message, 2),(List<Object>)packet.getValue(message, 3),(Integer)packet.getValue(message, 1)); 		
+		core.recupInfoPerso((Integer)packet.getValue(message, 2),(List<Object>)packet.getValue(message, 3),(Integer)packet.getValue(message, 1)); 
+		core.corectionZombie((Integer)packet.getValue(message, 1),(Integer)packet.getValue(message, 4));
 	}
 
 	private void resoAttaqueZombie(Packet packet, String message) {
@@ -291,6 +308,7 @@ public class TraitementPaquetTcp extends TraitementPaquet<Socket> {
 
 	public void debutTour(Packet packet, String message) {
 		traitementB.debutTour(core, (List<Couleur>) packet.getValue(message, 2));
+		core.resetPersoCache();
 		
 	}
 
