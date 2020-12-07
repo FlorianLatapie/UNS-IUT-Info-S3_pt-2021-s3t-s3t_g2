@@ -161,7 +161,8 @@ public class TraitementPaquetTcp extends TraitementPaquet<Socket> {
 		case "PVR":
 		case "PVVC":
 		case "RAZPA":
-			
+			recupInfoPerso(packet, message);
+			break;
 		case "RAZID":
 			break;
 		case "IPV":
@@ -171,6 +172,10 @@ public class TraitementPaquetTcp extends TraitementPaquet<Socket> {
 			throw new IllegalStateException(
 					MessageFormat.format("[TCP] Il n''y a pas de traitement possible pour {0}", packet.getKey()));
 		}
+	}
+
+	private void recupInfoPerso(Packet packet, String message) {
+		core.recupInfoPerso((Integer)packet.getValue(message, 2),(List<Object>)packet.getValue(message, 3),(Integer)packet.getValue(message, 1)); 		
 	}
 
 	private void resoAttaqueZombie(Packet packet, String message) {
