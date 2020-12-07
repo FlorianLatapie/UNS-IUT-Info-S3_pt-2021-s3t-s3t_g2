@@ -208,7 +208,7 @@ public class TraitementPaquetTcp extends TraitementPaquet<Socket> {
 
 	private void deplacerPionJoueurCourant(Packet packet, String message) {
 		core.deplPionJoueurCourant((Couleur)packet.getValue(message, 1),(Integer)packet.getValue(message, 2), (Integer)packet.getValue(message, 3));
-		if (((CarteType)packet.getValue(message, 2)).equals(CarteType.SPR))
+		if (((CarteType)packet.getValue(message, 4)).equals(CarteType.SPR))
 			core.joueCarte((Couleur)packet.getValue(message, 1),CarteType.SPR);
 		
 	}
