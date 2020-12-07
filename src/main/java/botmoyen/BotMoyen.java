@@ -393,15 +393,10 @@ public class BotMoyen {
 		
 	}
 
-	public void recupInfoPerso(List<Object> listelp,Integer lieu) {
-		List<Couleur> lc = new ArrayList<Couleur>();
-		List<Integer> li = new ArrayList<Integer>();
-		for (int i =0;i<listelp.size();i=i+2) {
-			lc.add((Couleur)listelp.get(i));
-			li.add((Integer)listelp.get(i+1));
-		}
-		for (int i = 0 ; i<lc.size();i++) {
-			partie.deplacePerso(lc.get(i), li.get(i), lieu);
+	public void recupInfoPerso(List<PionCouleur> listelp,Integer lieu) {
+		
+		for (PionCouleur p : listelp) {
+			partie.deplacePerso(IdjrTools.getCouleurByChar(p), IdjrTools.getPionByValue(p), lieu);
 		}
 		
 	}
@@ -428,86 +423,8 @@ public class BotMoyen {
 		
 	}
 
-	public void sacrifice(PionCouleur value) {
-		switch (value) {    
-			case N7:
-				partie.sacrifie(Couleur.NOIR, 7);
-				break;
-			case N5:   
-				partie.sacrifie(Couleur.NOIR, 5);
-				break;
-			case N3:
-				partie.sacrifie(Couleur.NOIR, 3);
-				break;
-			case N1:
-				partie.sacrifie(Couleur.NOIR, 1);
-				break;
-			case V7:
-				partie.sacrifie(Couleur.VERT, 7);
-				break;
-			case V5:
-				partie.sacrifie(Couleur.VERT, 5);
-				break;
-			case V3:
-				partie.sacrifie(Couleur.VERT, 3);
-				break;
-			case V1:
-				partie.sacrifie(Couleur.VERT, 1);
-				break;
-			case B7:
-				partie.sacrifie(Couleur.BLEU, 7);
-				break;
-			case B5:
-				partie.sacrifie(Couleur.BLEU, 5);
-				break;
-			case B3: 
-				partie.sacrifie(Couleur.BLEU, 3);
-				break;
-			case B1:
-				partie.sacrifie(Couleur.BLEU, 1);
-				break;
-			case R7:  
-				partie.sacrifie(Couleur.ROUGE, 7);
-				break;
-			case R5: 
-				partie.sacrifie(Couleur.ROUGE, 5);
-				break;
-			case R3: 
-				partie.sacrifie(Couleur.ROUGE, 3);
-				break;
-			case R1:
-				partie.sacrifie(Couleur.ROUGE, 1);
-				break;
-			case J7: 
-				partie.sacrifie(Couleur.JAUNE, 7);
-				break;
-			case J5:
-				partie.sacrifie(Couleur.JAUNE, 5);
-				break;
-			case J3:  
-				partie.sacrifie(Couleur.JAUNE, 3);
-				break;
-			case J1:
-				partie.sacrifie(Couleur.JAUNE, 1);
-				break;
-			case M7:
-				partie.sacrifie(Couleur.MARRON, 7);
-				break;
-			case M5:
-				partie.sacrifie(Couleur.MARRON, 5);
-				break;
-			case M3:  
-				partie.sacrifie(Couleur.MARRON, 3);
-				break;
-			case M1:
-				partie.sacrifie(Couleur.MARRON, 1);
-				break;
-			default:
-				break;
-				
-		}
-			
-		
+	public void sacrifice(PionCouleur pc) {
+				partie.sacrifie(IdjrTools.getCouleurByChar(pc), IdjrTools.getPionByValue(pc));		
 	}
 
 	public String getEtatPartie() {
