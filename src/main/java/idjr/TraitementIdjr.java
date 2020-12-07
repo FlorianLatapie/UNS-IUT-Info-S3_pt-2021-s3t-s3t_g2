@@ -310,12 +310,16 @@ public class TraitementIdjr {
 	}
 
 	public CarteType ReponseJoueurCourant(Idjr core) {
-		// TODO Choix utiliser carte caméra de sécurité
-		CarteType[] RJListe = CarteType.values();
-		int rand = new Random().nextInt(1);
-		CarteType RJ = RJListe[rand];
+		//TODO choisir utilisé carte caméra sécuré
+		CarteType RJ = CarteType.NUL;
+		if (core.getListeCarte().contains(CarteType.CDS))
+			if ( new Random().nextInt(1) == 1 ) {
+				RJ = CarteType.CDS;
+				core.getListeCarte().remove(CarteType.CDS);
+			}	
 		return RJ;
 	}
+
 
 	public int IndiquerCarteJouees(Idjr core) {
 		// TODO choix carte vote

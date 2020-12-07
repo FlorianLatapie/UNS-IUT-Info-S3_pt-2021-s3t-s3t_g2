@@ -22,7 +22,6 @@ import java.util.Map;
 public class Idjr {
 	/* Parametre Idjr */
 	private boolean estLieuChoisi = false;
-	private final Jeu jeu = new Jeu();
 	private List<PartieInfo> listOfServer;
 	private PartieInfo current;
 	private String nom;

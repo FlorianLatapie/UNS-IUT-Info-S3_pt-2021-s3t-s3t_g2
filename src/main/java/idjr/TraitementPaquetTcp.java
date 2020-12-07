@@ -136,7 +136,9 @@ public class TraitementPaquetTcp extends TraitementPaquet<Socket> {
 			break;
 		case "CDFC":
 			break;
-			
+		
+		case "CDZVDI":
+		case "AZUCS":
 		case "AZLAZ":
 		case "AZICS":
 		case "PVIC":
