@@ -124,18 +124,24 @@ public class Lieu {
 	}
 	
 	public boolean estAttaquable(int nbCarteMateriel) {
+		List<Personnage> personnagePresent = new ArrayList<>();
+		for (Personnage personnage: this.personnage) {
+			if (!personnage.isEstCache()) {
+				personnagePresent.add(personnage);
+			}
+		}
 		if (this.ouvert) {
-			if (this.num == 4 && this.nbZombies > 0 && this.personnage.size() > 0) {
+			if (this.num == 4 && this.nbZombies > 0 && personnagePresent.size() > 0) {
 				return true;
 			}
-			if (this.num == 6 && this.nbZombies >= 4 && this.personnage.size() > 0) {
+			if (this.num == 6 && this.nbZombies >= 4 && personnagePresent.size() > 0) {
 				return true;
 			}
-			if (this.personnage.size() == 0) {
+			if (personnagePresent.size() == 0) {
 				return false;
 			}
 			int force = 0;
-			for (int a = 0; a < this.personnage.size(); a++) {
+			for (int a = 0; a < personnage.size(); a++) {
 				if (personnage.get(a).getType() == TypePersonnage.BRUTE) {
 					force += 2;
 				} else {
