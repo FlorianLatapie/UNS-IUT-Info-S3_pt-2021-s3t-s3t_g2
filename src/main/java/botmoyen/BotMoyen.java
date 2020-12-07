@@ -246,7 +246,10 @@ public class BotMoyen {
 		partie.getCartes().remove(value);
 		for ( Joueur j : partie.getJoueurs().values()) {
 			if (!j.getCouleur().equals(couleur)) {
-				CarteType c =partie.getCartes().get(new Random().nextInt(partie.getCartes().size()));
+				int rand = new Random().nextInt(partie.getCartes().size());
+				if (rand==0)
+					rand=0;
+				CarteType c =partie.getCartes().get(rand);
 				partie.getCartes().remove(c);
 				partie.getJoueurs().get(j.getCouleur()).getCartes().add(c);
 			}
@@ -282,33 +285,46 @@ public class BotMoyen {
 			partie.givecarte(couleur, c1);
 		}
 		else {
-			partie.givecarte(couleur, partie.getCartes().get(new Random().nextInt(partie.getCartes().size())));
+			int rand = new Random().nextInt(partie.getCartes().size());
+			if (rand==0)
+				rand=0;
+			partie.givecarte(couleur, partie.getCartes().get(rand));
 		}
 
 		if (partie.getCartes().contains(c2)) {
 			partie.givecarte(couleurJC, c2);
 		}
 		else {
-			partie.givecarte(couleurJC, partie.getCartes().get(new Random().nextInt(partie.getCartes().size())));
+			int rand = new Random().nextInt(partie.getCartes().size());
+			if (rand==0)
+				rand=0;
+			partie.givecarte(couleurJC, partie.getCartes().get(rand));
 		}
 		if (partie.getCartes().contains(c3)) {
 			partie.getCartes().remove(c3);
 		}
 		else {
-			partie.getCartes().remove(partie.getCartes().get(new Random().nextInt(partie.getCartes().size())));
+			int rand = new Random().nextInt(partie.getCartes().size());
+			if (rand==0)
+				rand=0;
+			partie.getCartes().remove(partie.getCartes().get(rand));
 		}
 		
 	}
 
 	public void resFouille(Couleur cjg, Couleur cjo, CarteEtat cd) {
+		int rand = new Random().nextInt(partie.getCartes().size());
+		if (rand==0)
+			rand=0;
+		
 		if (!cjg.equals(couleur)) {
-			partie.givecarte(cjg, partie.getCartes().get(new Random().nextInt(partie.getCartes().size())));
+			partie.givecarte(cjg, partie.getCartes().get(rand));
 		}
 		if (!cjo.equals(couleur)) {
-			partie.givecarte(cjo, partie.getCartes().get(new Random().nextInt(partie.getCartes().size())));
+			partie.givecarte(cjo, partie.getCartes().get(rand));
 		}
 		if (cd.equals(CarteEtat.CD)) {
-			partie.getCartes().remove(partie.getCartes().get(new Random().nextInt(partie.getCartes().size())));
+			partie.getCartes().remove(partie.getCartes().get(rand));
 		}
 		
 	}
@@ -343,7 +359,10 @@ public class BotMoyen {
 		}
 		else if (partie.getCartes().contains(carte)) {
 				partie.getCartes().remove(carte);
-				CarteType c = partie.getJoueurs().get(value).getCartes().get(new Random().nextInt(partie.getJoueurs().get(value).getCartes().size()));
+				int rand = new Random().nextInt(partie.getJoueurs().get(value).getCartes().size());
+				if (rand==0)
+					rand=0;
+				CarteType c = partie.getJoueurs().get(value).getCartes().get(rand);
 				partie.getCartes().add(c);
 				partie.getJoueurs().get(value).getCartes().remove(c);		
 			
@@ -352,7 +371,10 @@ public class BotMoyen {
 			for (Couleur c : partie.getJoueursCouleurs()) {
 				if (partie.getJoueurs().get(c).getCartes().contains(carte)) {
 					partie.getJoueurs().get(c).getCartes().remove(carte);
-					CarteType ca = partie.getJoueurs().get(value).getCartes().get(new Random().nextInt(partie.getJoueurs().get(value).getCartes().size()));
+					int rand = new Random().nextInt(partie.getJoueurs().get(value).getCartes().size());
+					if (rand==0)
+						rand=0;
+					CarteType ca = partie.getJoueurs().get(value).getCartes().get(rand);
 					partie.getJoueurs().get(c).getCartes().add(ca);
 					partie.getJoueurs().get(value).getCartes().remove(ca);
 					break;
