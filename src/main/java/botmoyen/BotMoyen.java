@@ -256,7 +256,7 @@ public class BotMoyen {
 	public void placePion(int dest, int pion) {
 		partie.placePerso(couleur, pion, dest);
 	}
-	public void placePionCouleur(Couleur value, int pion, int dest) {
+	public void placePionCouleur(Couleur value, int dest, int pion) {
 		partie.placePerso(value, pion, dest);
 		
 	}
