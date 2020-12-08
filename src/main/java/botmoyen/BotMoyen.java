@@ -83,7 +83,7 @@ public class BotMoyen {
 		this.envie = true;
 		this.estFini = false;
 		this.joueurEnVie = new ArrayList<>();
-		
+
 	}
 
 	private void initReseau() throws IOException {
@@ -236,7 +236,7 @@ public class BotMoyen {
 	public void setCompteurTour(int compteurTour) {
 		this.compteurTour = compteurTour;
 	}
-	
+
 	public void initPartie(List<Couleur> couleurs) {
 		partie = new Partie(couleurs);
 	}
@@ -244,12 +244,12 @@ public class BotMoyen {
 	public void initCarte(CarteType value) {
 		partie.getJoueurs().get(couleur).getCartes().add(value);
 		partie.getCartes().remove(value);
-		for ( Joueur j : partie.getJoueurs().values()) {
-			if (!j.getCouleur().equals(couleur)) {
+		for (Joueur j : partie.getJoueurs().values()) {
+			if ((partie.getCartes().size() > 0) && (!j.getCouleur().equals(couleur))) {
 				int rand = new Random().nextInt(partie.getCartes().size());
-				if (rand==0)
-					rand=0;
-				CarteType c =partie.getCartes().get(rand);
+				if (rand == 0)
+					rand = 0;
+				CarteType c = partie.getCartes().get(rand);
 				partie.getCartes().remove(c);
 				partie.getJoueurs().get(j.getCouleur()).getCartes().add(c);
 			}
@@ -259,127 +259,125 @@ public class BotMoyen {
 	public void placePion(int dest, int pion) {
 		partie.placePerso(couleur, pion, dest);
 	}
+
 	public void placePionCouleur(Couleur value, int dest, int pion) {
 		partie.placePerso(value, pion, dest);
-		
+
 	}
+
 	public void deplacePion(int dest, int pion) {
 		partie.deplacePerso(couleur, pion, dest);
 	}
-	
-	public void deplacePionCouleur(Couleur c,int dest, int pion) {
+
+	public void deplacePionCouleur(Couleur c, int dest, int pion) {
 		partie.deplacePerso(c, pion, dest);
 	}
-	
+
 	public void initZombie(List<Integer> listeIndexLieux) {
-		
+
 		partie.entreZombie(listeIndexLieux);
 	}
 
 	public void carteCamion(List<Object> carteChoisies) {
-		CarteType c1=(CarteType)carteChoisies.get(0);
-		CarteType c2=(CarteType)carteChoisies.get(1);
-		CarteType c3=(CarteType)carteChoisies.get(2);
-		Couleur couleurJC=(Couleur)carteChoisies.get(3);
+		CarteType c1 = (CarteType) carteChoisies.get(0);
+		CarteType c2 = (CarteType) carteChoisies.get(1);
+		CarteType c3 = (CarteType) carteChoisies.get(2);
+		Couleur couleurJC = (Couleur) carteChoisies.get(3);
 		if (partie.getCartes().contains(c1)) {
 			partie.givecarte(couleur, c1);
-		}
-		else {
+		} else if (partie.getCartes().size() > 0) {
 			int rand = new Random().nextInt(partie.getCartes().size());
-			if (rand==0)
-				rand=0;
+			if (rand == 0)
+				rand = 0;
 			partie.givecarte(couleur, partie.getCartes().get(rand));
 		}
 
 		if (partie.getCartes().contains(c2)) {
 			partie.givecarte(couleurJC, c2);
-		}
-		else {
+		} else if (partie.getCartes().size() > 0) {
 			int rand = new Random().nextInt(partie.getCartes().size());
-			if (rand==0)
-				rand=0;
+			if (rand == 0)
+				rand = 0;
 			partie.givecarte(couleurJC, partie.getCartes().get(rand));
 		}
 		if (partie.getCartes().contains(c3)) {
 			partie.getCartes().remove(c3);
-		}
-		else {
+		} else if (partie.getCartes().size() > 0) {
 			int rand = new Random().nextInt(partie.getCartes().size());
-			if (rand==0)
-				rand=0;
+			if (rand == 0)
+				rand = 0;
 			partie.getCartes().remove(partie.getCartes().get(rand));
 		}
-		
+
 	}
 
 	public void resFouille(Couleur cjg, Couleur cjo, CarteEtat cd) {
-		int rand = new Random().nextInt(partie.getCartes().size());
-		if (rand==0)
-			rand=0;
-		
-		if (!(cjg.equals(Couleur.NUL))&&(!cjg.equals(couleur))) {
-			partie.givecarte(cjg, partie.getCartes().get(rand));
+		if (partie.getCartes().size() > 0) {
+			int rand = new Random().nextInt(partie.getCartes().size());
+			if (rand == 0)
+				rand = 0;
+
+			if (!(cjg.equals(Couleur.NUL)) && (!cjg.equals(couleur))) {
+				partie.givecarte(cjg, partie.getCartes().get(rand));
+			}
+			int rand2 = new Random().nextInt(partie.getCartes().size());
+			if (rand2 == 0)
+				rand2 = 0;
+			if (!(cjg.equals(Couleur.NUL)) && (!cjo.equals(couleur))) {
+				partie.givecarte(cjo, partie.getCartes().get(rand2));
+			}
+			int rand3 = new Random().nextInt(partie.getCartes().size());
+			if (rand3 == 0)
+				rand3 = 0;
+			if (cd.equals(CarteEtat.CD)) {
+				partie.getCartes().remove(partie.getCartes().get(rand3));
+			}
 		}
-		int rand2 = new Random().nextInt(partie.getCartes().size());
-		if (rand2==0)
-			rand2=0;
-		if (!(cjg.equals(Couleur.NUL))&&(!cjo.equals(couleur))) {
-			partie.givecarte(cjo, partie.getCartes().get(rand2));
-		}
-		int rand3 = new Random().nextInt(partie.getCartes().size());
-		if (rand3==0)
-			rand3=0;
-		if (cd.equals(CarteEtat.CD)) {
-			partie.getCartes().remove(partie.getCartes().get(rand3));
-		}
-		
+
 	}
 
 	public void recupCarte(CarteType value) {
 		partie.givecarte(couleur, value);
-		
+
 	}
 
 	public void resVigile(Couleur value) {
 		partie.setChef(value);
-		
+
 	}
 
-	
 	public void NewChef(VigileEtat value) {
 		if (value.equals(VigileEtat.NE))
 			partie.setNewChef(true);
 		else
 			partie.setNewChef(false);
-		
+
 	}
 
 	public void arriveZombie(List<Integer> arr) {
 		partie.entreZombie(arr);
-		
+
 	}
 
-	public void joueCarte(Couleur value,CarteType carte) {
+	public void joueCarte(Couleur value, CarteType carte) {
 		if (partie.getJoueurs().get(value).getCartes().contains(carte)) {
-			partie.getJoueurs().get(value).getCartes().remove( carte);
-		}
-		else if (partie.getCartes().contains(carte)) {
-				partie.getCartes().remove(carte);
-				int rand = new Random().nextInt(partie.getJoueurs().get(value).getCartes().size());
-				if (rand==0)
-					rand=0;
-				CarteType c = partie.getJoueurs().get(value).getCartes().get(rand);
-				partie.getCartes().add(c);
-				partie.getJoueurs().get(value).getCartes().remove(c);		
-			
-		}
-		else {
+			partie.getJoueurs().get(value).getCartes().remove(carte);
+		} else if (partie.getCartes().contains(carte)) {
+			partie.getCartes().remove(carte);
+			int rand = new Random().nextInt(partie.getJoueurs().get(value).getCartes().size());
+			if (rand == 0)
+				rand = 0;
+			CarteType c = partie.getJoueurs().get(value).getCartes().get(rand);
+			partie.getCartes().add(c);
+			partie.getJoueurs().get(value).getCartes().remove(c);
+
+		} else {
 			for (Couleur c : partie.getJoueursCouleurs()) {
 				if (partie.getJoueurs().get(c).getCartes().contains(carte)) {
 					partie.getJoueurs().get(c).getCartes().remove(carte);
 					int rand = new Random().nextInt(partie.getJoueurs().get(value).getCartes().size());
-					if (rand==0)
-						rand=0;
+					if (rand == 0)
+						rand = 0;
 					CarteType ca = partie.getJoueurs().get(value).getCartes().get(rand);
 					partie.getJoueurs().get(c).getCartes().add(ca);
 					partie.getJoueurs().get(value).getCartes().remove(ca);
@@ -387,30 +385,30 @@ public class BotMoyen {
 				}
 			}
 		}
-		
+
 	}
 
 	public void arriveSoloZombie(Integer value) {
 		List<Integer> arr = new ArrayList<Integer>();
 		arr.add(value);
 		partie.entreZombie(arr);
-		
+
 	}
 
 	public void setLieuxFerme(List<Integer> lieux) {
 		for (Integer i : lieux) {
 			partie.getLieux().get(i).setOuvert(false);
 		}
-		
+
 	}
 
 	public void deplPionJoueurCourant(Couleur couleur, Integer dest, Integer pion) {
 		partie.deplacePerso(couleur, pion, dest);
-		
+
 	}
 
 	public void setZombie(List<Integer> li, List<Integer> lz) {
-		for (int i = 0; i<li.size();i++) {
+		for (int i = 0; i < li.size(); i++) {
 			partie.getLieux().get(li.get(i)).setNbZombies(lz.get(i));
 		}
 		for (Lieu l : partie.getLieux().values()) {
@@ -418,51 +416,45 @@ public class BotMoyen {
 				l.setOuvert(false);
 			}
 		}
-		
+
 	}
 
-	public void recupInfoPerso(List<PionCouleur> listelp,Integer lieu) {
-		
+	public void recupInfoPerso(List<PionCouleur> listelp, Integer lieu) {
+
 		for (PionCouleur p : listelp) {
 			partie.deplacePerso(IdjrTools.getCouleurByChar(p), IdjrTools.getPionByValue(p), lieu);
 		}
-		
+
 	}
 
 	public void corectionZombie(Integer lieu, Integer nbz) {
-		partie.setZombieSurLieu(lieu,nbz);
-		
+		partie.setZombieSurLieu(lieu, nbz);
+
 	}
 
 	public void joueCartes(Couleur value, List<CarteType> value2) {
 		for (CarteType c : value2) {
 			joueCarte(value, c);
 		}
-		
+
 	}
 
 	public void setPersoCache(Integer lieu, List<Integer> lp) {
-		partie.setPersoCache(lieu,lp.size());
-		
+		partie.setPersoCache(lieu, lp.size());
+
 	}
 
 	public void resetPersoCache() {
 		partie.resetPersoCache();
-		
+
 	}
 
 	public void sacrifice(PionCouleur pc) {
-				partie.sacrifie(IdjrTools.getCouleurByChar(pc), IdjrTools.getPionByValue(pc));		
+		partie.sacrifie(IdjrTools.getCouleurByChar(pc), IdjrTools.getPionByValue(pc));
 	}
 
 	public String getEtatPartie() {
 		return partie.getEtatPartie();
 	}
 
-	
-
-	
-	
-	
-	
 }
