@@ -376,7 +376,7 @@ public class BotMoyen {
 	public void joueCarte(Couleur value, CarteType carte) {
 		if (partie.getJoueurs().get(value).getCartes().contains(carte)) {
 			partie.getJoueurs().get(value).getCartes().remove(carte);
-		} else if ((partie.getCartes().contains(carte))&& (partie.getCartes().size() > 0))  {
+		} else if ((partie.getCartes().contains(carte))&& (partie.getJoueurs().get(value).getCartes().size() > 0))  {
 			partie.getCartes().remove(carte);
 			int rand = new Random().nextInt(partie.getJoueurs().get(value).getCartes().size());
 			if (rand == 0)
@@ -385,7 +385,7 @@ public class BotMoyen {
 			partie.getCartes().add(c);
 			partie.getJoueurs().get(value).getCartes().remove(c);
 
-		} else if (partie.getCartes().size() > 0) {
+		} else if (partie.getJoueurs().get(value).getCartes().size() > 0) {
 			for (Couleur c : partie.getJoueursCouleurs()) {
 				if (partie.getJoueurs().get(c).getCartes().contains(carte)) {
 					partie.getJoueurs().get(c).getCartes().remove(carte);
