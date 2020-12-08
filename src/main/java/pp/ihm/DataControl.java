@@ -24,6 +24,8 @@ public class DataControl {
 	public static final String SCREEN = "pp/ihm/images/rotationEcran.png";
 	public static final String JOUEUR_ATTENDU = "pp/ihm/images/joueurAttente.png";
 	public static final String JOUEUR_CONNECTE = "pp/ihm/images/joueurConnecté.png";
+	public static final String BADGE_VIGILE = "pp/ihm/images/badge vigile.png";
+	public static final String BADGE_VIGILE_VIDE = "pp/ihm/images/badge vigile vide.png";
 	
 	public static final ObservableList<Integer> nombreJoueur = FXCollections.observableArrayList(3,4,5,6);
 	public static final ObservableList<Integer> nombreBot = FXCollections.observableArrayList(0,1,2,3,4,5,6);
