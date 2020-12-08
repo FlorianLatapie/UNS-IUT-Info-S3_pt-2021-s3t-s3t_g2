@@ -137,12 +137,18 @@ public class TraitementBot {
 	}
 
 	public PionCouleur choisirSacrifice(BotMoyen core, List<?> listPionT) {
+		if (listPionT.size()>0) {
 		List<Integer> listPion = new ArrayList<>();
 		for (Object o : listPionT)
 			listPion.add((Integer) o);
-		int pionTemp = listPion.get(new Random().nextInt(listPion.size()));
+		int rand =new Random().nextInt(listPion.size());
+		if (rand == 0 )
+				rand = 0 ;
+		int pionTemp = listPion.get(rand);
 		PionCouleur pion = PionCouleur.valueOf(String.valueOf(core.getCouleur().name().charAt(0)) + pionTemp);
 		return pion;
+		}
+		else return null;
 	}
 
 	public void finPartie(BotMoyen core, Couleur gagnant) {
