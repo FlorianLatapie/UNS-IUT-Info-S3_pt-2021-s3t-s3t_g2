@@ -47,6 +47,8 @@ public class BotMoyen {
 	private VoteType voteType;
 	private Partie partie;
 
+	
+
 	/* Parametre Temporaire */
 	private List<Integer> pionAPos;
 
@@ -235,6 +237,14 @@ public class BotMoyen {
 
 	public void setCompteurTour(int compteurTour) {
 		this.compteurTour = compteurTour;
+	}
+	
+	public Partie getPartie() {
+		return partie;
+	}
+
+	public void setPartie(Partie partie) {
+		this.partie = partie;
 	}
 
 	public void initPartie(List<Couleur> couleurs) {
