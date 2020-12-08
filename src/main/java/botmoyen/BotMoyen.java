@@ -398,8 +398,8 @@ public class BotMoyen {
 		
 	}
 
-	public void deplPionJoueurCourant(Couleur value, Integer dest, Integer pion) {
-		partie.deplacePerso(value, pion, dest);
+	public void deplPionJoueurCourant(Couleur couleur, Integer dest, Integer pion) {
+		partie.deplacePerso(couleur, pion, dest);
 		
 	}
 
