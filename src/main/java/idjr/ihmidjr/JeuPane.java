@@ -46,7 +46,7 @@ public class JeuPane extends StackPane implements JeuListener {
 	private Background fondNoir = new Background(new BackgroundFill(Color.BLACK, CornerRadii.EMPTY, null));
 	private int largBouton = 155;
 	private int hautBouton = 70;
-	private int lBoutonCamion = 200;
+	private int lBoutonCamion = 180;
 	private int hBoutonCamion = 70;
 	private int lBoutonCamion2 = 145;
 	private final ApplicationPane paneName = ApplicationPane.JEU;
@@ -228,9 +228,9 @@ public class JeuPane extends StackPane implements JeuListener {
 		
 		///
 		BorderPane fouilleCamion = new BorderPane();
-		fouilleCamion.setPrefSize(850, 700);
-		fouilleCamion.setMinSize(850, 700);
-		fouilleCamion.setMaxSize(850, 700);
+		fouilleCamion.setPrefSize(850, 720);
+		fouilleCamion.setMinSize(850, 720);
+		fouilleCamion.setMaxSize(850, 720);
 		fouilleCamion.setStyle("-fx-border-color: black; -fx-border-insets: 5; -fx-border-width: 3;");
 	
 
@@ -268,7 +268,7 @@ public class JeuPane extends StackPane implements JeuListener {
 		
 		HBox hboxBoutonChoix = new HBox();
 		hboxBoutonChoix.setAlignment(Pos.TOP_CENTER);
-		hboxBoutonChoix.setSpacing(70);
+		hboxBoutonChoix.setSpacing(20);
 		hboxBoutonChoix.setPadding(new Insets(20));
 		
 		HBox hboxBoutonJoueur = new HBox();
@@ -333,12 +333,25 @@ public class JeuPane extends StackPane implements JeuListener {
 		vbCarte.getChildren().addAll(hboxImgCarte, hboxBoutonCarte);
 		vbCarte.setMargin(vbChoix, new Insets(10));
 		
+		Button bChoixUtiliser = new Button("Utiliser");
+		bChoixUtiliser.setAlignment(Pos.CENTER);
+		bChoixUtiliser.setStyle(styleBoutons);
+		bChoixUtiliser.setPrefSize(lBoutonCamion, hBoutonCamion);
+		bChoixUtiliser.setMinSize(lBoutonCamion, hBoutonCamion);
+		bChoixUtiliser.setFont(policeBoutonC);
+		bChoixUtiliser.setOnMouseEntered(event -> {
+			bChoixUtiliser.setStyle(styleBoutonsSouris);
+		});
+		bChoixUtiliser.setOnMouseExited(event -> {
+			bChoixUtiliser.setStyle(styleBoutons);
+		});
+		
 		Button bChoixGarder = new Button("Garder");
 		bChoixGarder.setAlignment(Pos.CENTER);
 		bChoixGarder.setStyle(styleBoutons);
 		bChoixGarder.setPrefSize(lBoutonCamion, hBoutonCamion);
 		bChoixGarder.setMinSize(lBoutonCamion, hBoutonCamion);
-		bChoixGarder.setFont(policeBouton);
+		bChoixGarder.setFont(policeBoutonC);
 		bChoixGarder.setOnMouseEntered(event -> {
 			bChoixGarder.setStyle(styleBoutonsSouris);
 		});
@@ -351,7 +364,7 @@ public class JeuPane extends StackPane implements JeuListener {
 		bChoixDonner.setStyle(styleBoutons);
 		bChoixDonner.setPrefSize(lBoutonCamion, hBoutonCamion);
 		bChoixDonner.setMinSize(lBoutonCamion, hBoutonCamion);
-		bChoixDonner.setFont(policeBouton);
+		bChoixDonner.setFont(policeBoutonC);
 		bChoixDonner.setOnMouseEntered(event -> {
 			bChoixDonner.setStyle(styleBoutonsSouris);
 		});
@@ -367,7 +380,7 @@ public class JeuPane extends StackPane implements JeuListener {
 		bChoixDefausser.setStyle(styleBoutons);
 		bChoixDefausser.setPrefSize(lBoutonCamion, hBoutonCamion);
 		bChoixDefausser.setMinSize(lBoutonCamion, hBoutonCamion);
-		bChoixDefausser.setFont(policeBouton);
+		bChoixDefausser.setFont(policeBoutonC);
 		bChoixDefausser.setOnMouseEntered(event -> {
 			bChoixDefausser.setStyle(styleBoutonsSouris);
 		});
@@ -375,7 +388,7 @@ public class JeuPane extends StackPane implements JeuListener {
 			bChoixDefausser.setStyle(styleBoutons);
 		});
 		
-		hboxBoutonChoix.getChildren().addAll(bChoixGarder, bChoixDonner, bChoixDefausser);
+		hboxBoutonChoix.getChildren().addAll(bChoixUtiliser, bChoixGarder, bChoixDonner, bChoixDefausser);
 		
 		Button joueur1c = new Button("Joueur1");
 		joueur1c.setAlignment(Pos.CENTER);
