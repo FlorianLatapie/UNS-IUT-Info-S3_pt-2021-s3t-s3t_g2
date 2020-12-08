@@ -221,7 +221,7 @@ public class TraitementBot {
 		else
 			nbrCarteJouee = r.nextInt(nbrCartePossibleDejouer);
 		for (int i = 0; i < nbrCarteJouee; i++)
-			listePionCache.add(core.getListePion().get(i));
+			listePionCache.add(core.getPoinSacrDispo().get(i));
 		return listePionCache;
 	}
 
