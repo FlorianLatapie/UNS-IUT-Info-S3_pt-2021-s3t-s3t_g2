@@ -78,6 +78,18 @@ public class TraitementBot {
 		dest = core.getLieuOuvert().get(new Random().nextInt(core.getLieuOuvert().size()));
 		return dest;
 	}
+	
+	public int choixBestDest (BotMoyen core) {
+		out.println("Entrez une destination");
+		int dest = 0;
+		int lieuMin =20;
+		for(int i =0;i<core.getLieuOuvert().size();i++) {
+			if(core.getPartie().getLieux().get(i).getPersonnage().size()<lieuMin)
+				dest = core.getPartie().getLieux().get(i).getNum();
+		
+		}
+		return dest;
+	}
 
 	public void debutDeplacemant(BotMoyen core, List<?> lieuxT) {
 		List<Integer> lieux = new ArrayList<>();
@@ -274,6 +286,8 @@ public class TraitementBot {
 		return core.couleurJoueurPresent().get(rand);
 
 	}
+	
+	
 
 	public Couleur getRandom2(BotMoyen core, VoteType vt) {
 		int rand = new Random().nextInt(core.getJoueurEnVie().size());
@@ -314,5 +328,6 @@ public class TraitementBot {
 
 		return carteChoisies;
 	}
+	
 
 }

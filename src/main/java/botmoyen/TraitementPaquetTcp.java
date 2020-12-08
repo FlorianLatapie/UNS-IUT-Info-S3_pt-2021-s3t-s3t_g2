@@ -408,7 +408,7 @@ public class TraitementPaquetTcp extends TraitementPaquet<Socket> {
 	}
 
 	public void destZombieVengeur(Packet packet, String message) {
-		String message1 = getControleurReseau().construirePaquetTcp("CDDZVJE", traitementB.choixDest(core),
+		String message1 = getControleurReseau().construirePaquetTcp("CDDZVJE", traitementB.choixBestDest(core),
 				packet.getValue(message, 1), packet.getValue(message, 2), core.getJoueurId());
 		getControleurReseau().getTcpClient().envoyer(message1);
 		System.out.println("destZombieVengeur : \n");
