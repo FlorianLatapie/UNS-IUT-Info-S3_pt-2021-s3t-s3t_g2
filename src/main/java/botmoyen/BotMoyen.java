@@ -320,12 +320,16 @@ public class BotMoyen {
 			if (!(cjg.equals(Couleur.NUL)) && (!cjg.equals(couleur))) {
 				partie.givecarte(cjg, partie.getCartes().get(rand));
 			}
+		}
+		if (partie.getCartes().size() > 0) {
 			int rand2 = new Random().nextInt(partie.getCartes().size());
 			if (rand2 == 0)
 				rand2 = 0;
 			if (!(cjg.equals(Couleur.NUL)) && (!cjo.equals(couleur))) {
 				partie.givecarte(cjo, partie.getCartes().get(rand2));
 			}
+		}
+		if (partie.getCartes().size() > 0) {
 			int rand3 = new Random().nextInt(partie.getCartes().size());
 			if (rand3 == 0)
 				rand3 = 0;
