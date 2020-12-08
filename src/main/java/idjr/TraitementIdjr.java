@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Random;
 
+import pp.ihm.Core;
 import reseau.type.CarteType;
 import reseau.type.Couleur;
 import reseau.type.PionCouleur;
@@ -121,7 +122,6 @@ public class TraitementIdjr {
 	}
 
 	public List<Object> pionADeplacer(Idjr core, int dest, HashMap<Integer, List<Integer>> listedp) {
-		// TODO gérer carte sprint
 		List<Object> listRenvoye = new ArrayList<>();
 		List<Integer> listePion = new ArrayList<>();
 		List<Integer> destPossible = new ArrayList<>();
@@ -131,11 +131,22 @@ public class TraitementIdjr {
 				destPossible.add(destPos);
 		if (core.getListeCarte().contains(CarteType.SPR)) {
 			// TODO choisir si utiliser carte sprint
-			int i = new Random().nextInt(2);
-			if (i == 1) {
+			// TODO CARTE NUL par le joueur ?
+
+			core.getInitializer().choisirCarte(CarteType.SPR, null, false, false, false, true);
+			while (!core.carteDisponible())
+				try {
+					Thread.sleep(500);
+				} catch (Exception e) {
+					// TODO: handle exception
+				}
+
+			core.carteChoisi(false);
+
+			if (core.getCarteChoisi() == CarteType.SPR) {
 				sprintJoue = CarteType.SPR;
 				// TODO choisir destination carte sprint parmis destPossible;
-				dest = destPossible.get(new Random().nextInt(destPossible.size()));
+				dest = destPossible.get(new Random().nextInt(destPossible.size())); // TODO RE DESTINATION
 			}
 		}
 		for (Map.Entry<Integer, List<Integer>> dp : listedp.entrySet())
@@ -305,21 +316,20 @@ public class TraitementIdjr {
 		else
 			nbrCarteJouee = r.nextInt(nbrCartePossibleDejouer);
 		for (int i = 0; i < nbrCarteJouee; i++)
-			listePionCache.add(core.getPoinSacrDispo().get(i));
+			listePionCache.add(core.getListePion().get(i));
 		return listePionCache;
 	}
 
 	public CarteType ReponseJoueurCourant(Idjr core) {
-		//TODO choisir utilisé carte caméra sécuré
+		// TODO choisir utilisé carte caméra sécuré
 		CarteType RJ = CarteType.NUL;
 		if (core.getListeCarte().contains(CarteType.CDS))
-			if ( new Random().nextInt(1) == 1 ) {
+			if (new Random().nextInt(1) == 1) {
 				RJ = CarteType.CDS;
 				core.getListeCarte().remove(CarteType.CDS);
-			}	
+			}
 		return RJ;
 	}
-
 
 	public int IndiquerCarteJouees(Idjr core) {
 		// TODO choix carte vote
@@ -367,13 +377,44 @@ public class TraitementIdjr {
 		Couleur couleur = Couleur.NUL;
 		List<Object> carteChoisies = new ArrayList<Object>();
 		if (listeCarte.size() == 3) {
-			carteGarde = listeCarte.get(0);
+
+			idjr.getInitializer().choisirCarte(listeCarte, idjr.getJoueurEnVie(), true, false, false, true);
+			while (!idjr.carteDisponible())
+				try {
+					Thread.sleep(500);
+				} catch (Exception e) {
+					// TODO: handle exception
+				}
+
+			idjr.carteChoisi(false);
+			carteGarde = idjr.getCarteChoisi();
 			idjr.addCarte(carteGarde);
-			// TODO mettre a jour liste carte
-			carteOfferte = listeCarte.get(1);
-			carteDefausse = listeCarte.get(2);
+
+			idjr.getInitializer().choisirCarte(listeCarte, idjr.getJoueurEnVie(), false, true, false, true);
+			while (!idjr.carteDisponible())
+				try {
+					Thread.sleep(500);
+				} catch (Exception e) {
+					// TODO: handle exception
+				}
+
+			idjr.carteChoisi(false);
+
+			carteOfferte = idjr.getCarteChoisi();
+
+			idjr.getInitializer().choisirCarte(listeCarte, idjr.getJoueurEnVie(), false, false, true, true);
+			while (!idjr.carteDisponible())
+				try {
+					Thread.sleep(500);
+				} catch (Exception e) {
+					// TODO: handle exception
+				}
+
+			idjr.carteChoisi(false);
+
+			carteDefausse = idjr.getCarteChoisi();
 			System.out.print("carte fouille");
-			couleur = getRandom2(idjr, VoteType.FDC);
+			couleur = idjr.getCouleurChoisi();
 		}
 		if (listeCarte.size() == 2) {
 			carteGarde = listeCarte.get(0);

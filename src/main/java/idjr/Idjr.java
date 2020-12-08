@@ -46,18 +46,21 @@ public class Idjr {
 	private VoteType voteType;
 	private int pionChoisi;
 	private int lieuChoisi;
+	private CarteType carteChoisi;
+	private Couleur couleurChoisi;
+	private String etat;
 	Initializer initializer;
-	
+
 	/* Parametre Temporaire */
 	private List<Integer> pionAPos;
-	
+
 	public Idjr(Initializer initializer) throws IOException {
 		this.initializer = initializer;
 		initBot();
 		initReseau();
 	}
-	
-	private void initBot(){
+
+	private void initBot() {
 		listeJoueursInitiale = new HashMap<>();
 		this.typeJoueur = TypeJoueur.JR;
 		this.connexionType = ConnexionType.CLIENT;
@@ -78,7 +81,7 @@ public class Idjr {
 		nwm = new ControleurReseau(traitementPaquetTcp, traitementPaquetUdp);
 		nwm.initConnexion(connexionType, ReseauOutils.getLocalIp());
 	}
-	
+
 	public void estPartieConnecte(String nom) {
 		Thread thread = new Thread(() -> {
 			listOfServers();
@@ -108,13 +111,13 @@ public class Idjr {
 			e.printStackTrace();
 		}
 	}
-	
+
 	public void rejoindrePartie(String nomp) {
 		setIpPp(current.getIp());
 		setPortPp(current.getPort());
 		if (initializer != null)
 			initializer.nomPartie(current.getIdPartie());
-		String messageTcp = nwm.construirePaquetTcp("DCP",nom, typeJoueur, current.getIdPartie());
+		String messageTcp = nwm.construirePaquetTcp("DCP", nom, typeJoueur, current.getIdPartie());
 		ThreadOutils.asyncTask(() -> {
 			nwm.getTcpClient().envoyer(messageTcp);
 
@@ -124,11 +127,9 @@ public class Idjr {
 		});
 	}
 
-	
 	public Initializer getInitializer() {
 		return initializer;
 	}
-
 
 	public int getPionChoisi() {
 		return pionChoisi;
@@ -142,12 +143,37 @@ public class Idjr {
 		estPionChoisi = t;
 	}
 
+	public void setEtatChoisi(String etat) {
+		this.etat = etat;
+	}
+
+	public String getEtatChoisi() {
+		return etat;
+	}
+
 	public boolean pionDisponible() {
 		return estPionChoisi;
 	}
 
 	private boolean estPionChoisi = false;
 
+	public CarteType getCarteChoisi() {
+		return carteChoisi;
+	}
+
+	public void setCarteChoisi(CarteType carte) {
+		this.carteChoisi = carte;
+	}
+
+	public void carteChoisi(boolean t) {
+		estCarteChoisi = t;
+	}
+
+	public boolean carteDisponible() {
+		return estCarteChoisi;
+	}
+
+	private boolean estCarteChoisi = false;
 
 	public int getLieuChoisi() {
 		return lieuChoisi;
@@ -165,7 +191,6 @@ public class Idjr {
 		return estLieuChoisi;
 	}
 
-
 	public void addPartie(PartieInfo p) {
 		listOfServer.add(p);
 	}
@@ -173,7 +198,7 @@ public class Idjr {
 	public synchronized void stop() {
 		nwm.arreter();
 	}
-	
+
 	public void setCouleurJoueurs(List<Couleur> couleurJoueurs) {
 		this.couleurJoueursPresent = couleurJoueurs;
 	}
@@ -321,6 +346,12 @@ public class Idjr {
 	public void putListeJoueursInitiale(Couleur c, String nom) {
 		this.listeJoueursInitiale.put(c, nom);
 	}
-	
-	
+
+	public void setCouleurChoisi(Couleur selectedCouleur) {
+		this.couleurChoisi = selectedCouleur;
+	}
+
+	public Couleur getCouleurChoisi() {
+		return couleurChoisi;
+	}
 }

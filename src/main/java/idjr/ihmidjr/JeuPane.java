@@ -25,6 +25,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
+import reseau.type.CarteType;
 import reseau.type.Couleur;
 
 public class JeuPane extends StackPane implements JeuListener {
@@ -69,6 +70,27 @@ public class JeuPane extends StackPane implements JeuListener {
 	Button bTruand;
 	Button bFillette;
 
+	Button joueur1;
+	Button joueur2;
+	Button joueur3;
+	Button joueur4;
+	Button joueur5;
+
+	Button joueur1c;
+	Button joueur2c;
+	Button joueur3c;
+	Button joueur4c;
+	Button joueur5c;
+
+	Button bCarte1;
+	Button bCarte2;
+	Button bCarte3;
+
+	Button bChoixGarder;
+	Button bChoixDonner;
+	Button bChoixDefausser;
+	Button bChoixUtiliser;
+
 	Label de1;
 	Label de2;
 
@@ -77,6 +99,16 @@ public class JeuPane extends StackPane implements JeuListener {
 	ImageView imgFond;
 
 	Label labDeplPers;
+
+	ImageView imgCarte1;
+	ImageView imgCarte2;
+	ImageView imgCarte3;
+
+	BorderPane fouilleCamion;
+
+	CarteType selectedCarte;
+	Couleur selectedCouleur;
+	HBox hboxBoutonJoueur;
 
 	public JeuPane(ScreenControl sc, Core c) {
 		core = c;
@@ -136,7 +168,7 @@ public class JeuPane extends StackPane implements JeuListener {
 		hbJoueurBas.setSpacing(50);
 		hbJoueurBas.setPadding(new Insets(20));
 
-		Button joueur1 = new Button("Joueur1");
+		joueur1 = new Button("Joueur1");
 		joueur1.setAlignment(Pos.CENTER);
 		joueur1.setStyle(styleBoutons);
 		joueur1.setPrefSize(lBouton, hBouton);
@@ -149,7 +181,7 @@ public class JeuPane extends StackPane implements JeuListener {
 			joueur1.setStyle(styleBoutons);
 		});
 
-		Button joueur2 = new Button("Joueur2");
+		joueur2 = new Button("Joueur2");
 		joueur2.setAlignment(Pos.CENTER);
 		joueur2.setStyle(styleBoutons);
 		joueur2.setPrefSize(lBouton, hBouton);
@@ -162,7 +194,7 @@ public class JeuPane extends StackPane implements JeuListener {
 			joueur2.setStyle(styleBoutons);
 		});
 
-		Button joueur3 = new Button("Joueur3");
+		joueur3 = new Button("Joueur3");
 		joueur3.setAlignment(Pos.CENTER);
 		joueur3.setStyle(styleBoutons);
 		joueur3.setPrefSize(lBouton, hBouton);
@@ -175,7 +207,7 @@ public class JeuPane extends StackPane implements JeuListener {
 			joueur3.setStyle(styleBoutons);
 		});
 
-		Button joueur4 = new Button("Joueur4");
+		joueur4 = new Button("Joueur4");
 		joueur4.setAlignment(Pos.CENTER);
 		joueur4.setStyle(styleBoutons);
 		joueur4.setPrefSize(lBouton, hBouton);
@@ -188,7 +220,7 @@ public class JeuPane extends StackPane implements JeuListener {
 			joueur4.setStyle(styleBoutons);
 		});
 
-		Button joueur5 = new Button("Joueur5");
+		joueur5 = new Button("Joueur5");
 		joueur5.setAlignment(Pos.CENTER);
 		joueur5.setStyle(styleBoutons);
 		joueur5.setPrefSize(lBouton, hBouton);
@@ -225,29 +257,29 @@ public class JeuPane extends StackPane implements JeuListener {
 		vote.setCenter(vbVoteCentre);
 		vote.setDisable(false);
 		vote.setVisible(false);
-		
+
 		///
-		BorderPane fouilleCamion = new BorderPane();
+		fouilleCamion = new BorderPane();
 		fouilleCamion.setPrefSize(850, 720);
 		fouilleCamion.setMinSize(850, 720);
 		fouilleCamion.setMaxSize(850, 720);
 		fouilleCamion.setStyle("-fx-border-color: black; -fx-border-insets: 5; -fx-border-width: 3;");
-	
 
 		VBox vbChoixCarteCentre = new VBox();
 		vbChoixCarteCentre.setAlignment(Pos.CENTER);
 		vbChoixCarteCentre.setPrefSize(850, 700);
 		vbChoixCarteCentre.setMinSize(850, 700);
 		vbChoixCarteCentre.setMaxSize(850, 700);
-		//vbChoixCarteCentre.setStyle(styleVBox);
-		
+		// vbChoixCarteCentre.setStyle(styleVBox);
+
 		VBox vbCarte = new VBox();
 		vbCarte.setAlignment(Pos.CENTER);
 		vbCarte.setPrefSize(780, 300);
 		vbCarte.setMinSize(780, 300);
 		vbCarte.setMaxSize(780, 300);
-		//vbCarte.setStyle("-fx-border-color: green; -fx-border-insets: 5; -fx-border-width: 3;");
-		
+		// vbCarte.setStyle("-fx-border-color: green; -fx-border-insets: 5;
+		// -fx-border-width: 3;");
+
 		VBox vbChoix = new VBox();
 		vbChoix.setAlignment(Pos.CENTER);
 		vbChoix.setStyle(styleVBox);
@@ -258,44 +290,45 @@ public class JeuPane extends StackPane implements JeuListener {
 		hboxImgCarte.setMinSize(780, 255);
 		hboxImgCarte.setMaxSize(780, 255);
 		hboxImgCarte.setSpacing(-385);
-		//hboxImgCarte.setStyle("-fx-border-color: red; -fx-border-insets: 5; -fx-border-width: 3;");
+		// hboxImgCarte.setStyle("-fx-border-color: red; -fx-border-insets: 5;
+		// -fx-border-width: 3;");
 
 		HBox hboxBoutonCarte = new HBox();
 		hboxBoutonCarte.setAlignment(Pos.TOP_CENTER);
 		hboxBoutonCarte.setSpacing(20);
 		hboxBoutonCarte.setPrefHeight(90);
 		hboxBoutonCarte.setPadding(new Insets(10));
-		
+
 		HBox hboxBoutonChoix = new HBox();
 		hboxBoutonChoix.setAlignment(Pos.TOP_CENTER);
 		hboxBoutonChoix.setSpacing(20);
 		hboxBoutonChoix.setPadding(new Insets(20));
-		
-		HBox hboxBoutonJoueur = new HBox();
+
+		hboxBoutonJoueur = new HBox();
 		hboxBoutonJoueur.setAlignment(Pos.TOP_CENTER);
 		hboxBoutonJoueur.setSpacing(10);
 		hboxBoutonJoueur.setPadding(new Insets(20));
 		hboxBoutonJoueur.setVisible(false);
 		//
-		ImageView imgCarte1 = new ImageView(DataControl.CARTE_BATTE);
+		imgCarte1 = new ImageView(DataControl.CARTE_BATTE);
 		imgCarte1.setScaleX(0.4);
 		imgCarte1.setScaleY(0.4);
-		ImageView imgCarte2 = new ImageView(DataControl.CARTE_BATTE);
+		imgCarte2 = new ImageView(DataControl.CARTE_BATTE);
 		imgCarte2.setScaleX(0.4);
 		imgCarte2.setScaleY(0.4);
-		ImageView imgCarte3 = new ImageView(DataControl.CARTE_BATTE);
+		imgCarte3 = new ImageView(DataControl.CARTE_BATTE);
 		imgCarte3.setScaleX(0.4);
 		imgCarte3.setScaleY(0.4);
-		
+
 		hboxImgCarte.getChildren().addAll(imgCarte1, imgCarte2, imgCarte3);
-		
+
 		//
-		Button bCarte1 = new Button("Carte 1");
+		bCarte1 = new Button("Carte 1");
 		bCarte1.setAlignment(Pos.CENTER);
 		bCarte1.setStyle(styleBoutons);
 		bCarte1.setPrefSize(250, 60);
 		bCarte1.setMinSize(250, 60);
-		bCarte1.setFont(policeBouton);
+		bCarte1.setFont(policeBoutonC);
 		bCarte1.setOnMouseEntered(event -> {
 			bCarte1.setStyle(styleBoutonsSouris);
 		});
@@ -303,12 +336,12 @@ public class JeuPane extends StackPane implements JeuListener {
 			bCarte1.setStyle(styleBoutons);
 		});
 
-		Button bCarte2 = new Button("Carte 2");
+		bCarte2 = new Button("Carte 2");
 		bCarte2.setAlignment(Pos.CENTER);
 		bCarte2.setStyle(styleBoutons);
 		bCarte2.setPrefSize(250, 60);
 		bCarte2.setMinSize(250, 60);
-		bCarte2.setFont(policeBouton);
+		bCarte2.setFont(policeBoutonC);
 		bCarte2.setOnMouseEntered(event -> {
 			bCarte2.setStyle(styleBoutonsSouris);
 		});
@@ -316,24 +349,24 @@ public class JeuPane extends StackPane implements JeuListener {
 			bCarte2.setStyle(styleBoutons);
 		});
 
-		Button bCarte3 = new Button("Carte 3");
+		bCarte3 = new Button("Carte 3");
 		bCarte3.setAlignment(Pos.CENTER);
 		bCarte3.setStyle(styleBoutons);
 		bCarte3.setPrefSize(250, 60);
 		bCarte3.setMinSize(250, 60);
-		bCarte3.setFont(policeBouton);
+		bCarte3.setFont(policeBoutonC);
 		bCarte3.setOnMouseEntered(event -> {
 			bCarte3.setStyle(styleBoutonsSouris);
 		});
 		bCarte3.setOnMouseExited(event -> {
 			bCarte3.setStyle(styleBoutons);
 		});
-		
+
 		hboxBoutonCarte.getChildren().addAll(bCarte1, bCarte2, bCarte3);
 		vbCarte.getChildren().addAll(hboxImgCarte, hboxBoutonCarte);
 		vbCarte.setMargin(vbChoix, new Insets(10));
-		
-		Button bChoixUtiliser = new Button("Utiliser");
+
+		bChoixUtiliser = new Button("Utiliser");
 		bChoixUtiliser.setAlignment(Pos.CENTER);
 		bChoixUtiliser.setStyle(styleBoutons);
 		bChoixUtiliser.setPrefSize(lBoutonCamion, hBoutonCamion);
@@ -345,8 +378,17 @@ public class JeuPane extends StackPane implements JeuListener {
 		bChoixUtiliser.setOnMouseExited(event -> {
 			bChoixUtiliser.setStyle(styleBoutons);
 		});
-		
-		Button bChoixGarder = new Button("Garder");
+		bChoixUtiliser.setOnAction(EventHandler -> {
+			if (selectedCarte != null) {
+				core.getIdjr().setCarteChoisi(selectedCarte);
+				core.getIdjr().carteChoisi(true);
+				core.getIdjr().setEtatChoisi("Utiliser");
+				cartePanelReset();
+			}
+		});
+
+		bChoixGarder = new Button("Garder");
+		bChoixGarder.setDisable(true);
 		bChoixGarder.setAlignment(Pos.CENTER);
 		bChoixGarder.setStyle(styleBoutons);
 		bChoixGarder.setPrefSize(lBoutonCamion, hBoutonCamion);
@@ -358,8 +400,17 @@ public class JeuPane extends StackPane implements JeuListener {
 		bChoixGarder.setOnMouseExited(event -> {
 			bChoixGarder.setStyle(styleBoutons);
 		});
+		bChoixGarder.setOnAction(EventHandler -> {
+			if (selectedCarte != null) {
+				core.getIdjr().setCarteChoisi(selectedCarte);
+				core.getIdjr().carteChoisi(true);
+				core.getIdjr().setEtatChoisi("Garder");
+				cartePanelReset();
+			}
+		});
 
-		Button bChoixDonner = new Button("Donner");
+		bChoixDonner = new Button("Donner");
+		bChoixDonner.setDisable(true);
 		bChoixDonner.setAlignment(Pos.CENTER);
 		bChoixDonner.setStyle(styleBoutons);
 		bChoixDonner.setPrefSize(lBoutonCamion, hBoutonCamion);
@@ -375,22 +426,31 @@ public class JeuPane extends StackPane implements JeuListener {
 			hboxBoutonJoueur.setVisible(true);
 		});
 
-		Button bChoixDefausser = new Button("Défausser");
+		bChoixDefausser = new Button("Défausser");
+		bChoixDefausser.setDisable(true);
 		bChoixDefausser.setAlignment(Pos.CENTER);
 		bChoixDefausser.setStyle(styleBoutons);
 		bChoixDefausser.setPrefSize(lBoutonCamion, hBoutonCamion);
 		bChoixDefausser.setMinSize(lBoutonCamion, hBoutonCamion);
-		bChoixDefausser.setFont(policeBoutonC);
+		bChoixDefausser.setFont(policeBouton);
 		bChoixDefausser.setOnMouseEntered(event -> {
 			bChoixDefausser.setStyle(styleBoutonsSouris);
 		});
 		bChoixDefausser.setOnMouseExited(event -> {
 			bChoixDefausser.setStyle(styleBoutons);
 		});
-		
+		bChoixDefausser.setOnAction(EventHandler -> {
+			if (selectedCarte != null) {
+				core.getIdjr().setCarteChoisi(selectedCarte);
+				core.getIdjr().carteChoisi(true);
+				core.getIdjr().setEtatChoisi("Defausser");
+				cartePanelReset();
+			}
+		});
+
 		hboxBoutonChoix.getChildren().addAll(bChoixUtiliser, bChoixGarder, bChoixDonner, bChoixDefausser);
-		
-		Button joueur1c = new Button("Joueur1");
+
+		joueur1c = new Button("Joueur1");
 		joueur1c.setAlignment(Pos.CENTER);
 		joueur1c.setStyle(styleBoutons);
 		joueur1c.setPrefSize(lBoutonCamion2, hBoutonCamion);
@@ -403,7 +463,7 @@ public class JeuPane extends StackPane implements JeuListener {
 			joueur1c.setStyle(styleBoutons);
 		});
 
-		Button joueur2c = new Button("Joueur2");
+		joueur2c = new Button("Joueur2");
 		joueur2c.setAlignment(Pos.CENTER);
 		joueur2c.setStyle(styleBoutons);
 		joueur2c.setPrefSize(lBoutonCamion2, hBoutonCamion);
@@ -416,7 +476,7 @@ public class JeuPane extends StackPane implements JeuListener {
 			joueur2c.setStyle(styleBoutons);
 		});
 
-		Button joueur3c = new Button("Joueur3");
+		joueur3c = new Button("Joueur3");
 		joueur3c.setAlignment(Pos.CENTER);
 		joueur3c.setStyle(styleBoutons);
 		joueur3c.setPrefSize(lBoutonCamion2, hBoutonCamion);
@@ -429,7 +489,7 @@ public class JeuPane extends StackPane implements JeuListener {
 			joueur3c.setStyle(styleBoutons);
 		});
 
-		Button joueur4c = new Button("Joueur4");
+		joueur4c = new Button("Joueur4");
 		joueur4c.setAlignment(Pos.CENTER);
 		joueur4c.setStyle(styleBoutons);
 		joueur4c.setPrefSize(lBoutonCamion2, hBoutonCamion);
@@ -442,7 +502,7 @@ public class JeuPane extends StackPane implements JeuListener {
 			joueur4c.setStyle(styleBoutons);
 		});
 
-		Button joueur5c = new Button("Joueur5");
+		joueur5c = new Button("Joueur5");
 		joueur5c.setAlignment(Pos.CENTER);
 		joueur5c.setStyle(styleBoutons);
 		joueur5c.setPrefSize(lBoutonCamion2, hBoutonCamion);
@@ -455,7 +515,7 @@ public class JeuPane extends StackPane implements JeuListener {
 			joueur5c.setStyle(styleBoutons);
 		});
 		hboxBoutonJoueur.getChildren().addAll(joueur1c, joueur2c, joueur3c, joueur4c, joueur5c);
-		vbChoix.getChildren().addAll(hboxBoutonChoix,hboxBoutonJoueur);
+		vbChoix.getChildren().addAll(hboxBoutonChoix, hboxBoutonJoueur);
 		vbChoixCarteCentre.getChildren().addAll(vbCarte, vbChoix);
 
 		Label titreFouille = new Label("Fouille du camion");
@@ -463,7 +523,8 @@ public class JeuPane extends StackPane implements JeuListener {
 		titreFouille.setFont(Font.font("Segoe UI", FontWeight.BOLD, 25));
 		titreFouille.setTextFill(Color.WHITE);
 
-		Label titreQuestionCarte = new Label("Sélectionnez les cartes et faite vos choix"); //TODO ajouter ca dans le fichier de langues
+		Label titreQuestionCarte = new Label("Sélectionnez les cartes et faite vos choix"); // TODO ajouter ca dans le
+																							// fichier de langues
 		titreQuestionCarte.setAlignment(Pos.CENTER);
 		titreQuestionCarte.setFont(Font.font("Segoe UI", FontWeight.BOLD, 25));
 		titreQuestionCarte.setTextFill(Color.WHITE);
@@ -473,22 +534,22 @@ public class JeuPane extends StackPane implements JeuListener {
 		vbTitreCamion.setPrefHeight(80);
 		vbTitreCamion.setBackground(fondNoir);
 		vbTitreCamion.getChildren().addAll(titreFouille, titreQuestionCarte);
-		//vbTitreCamion.setStyle("-fx-border-color: yellow; -fx-border-insets: 5; -fx-border-width: 3;");
-		
+		// vbTitreCamion.setStyle("-fx-border-color: yellow; -fx-border-insets: 5;
+		// -fx-border-width: 3;");
+
 		fouilleCamion.setTop(vbTitreCamion);
 		fouilleCamion.setCenter(vbChoixCarteCentre);
 		fouilleCamion.setDisable(false);
 		fouilleCamion.setVisible(true);
-		
-		/*fond.setEffect(flou); TODO A mettre quand le popup fouille camion est activé
-		rectVigile.setEffect(flou);
-		nomJoueur.setEffect(flou);
-		vbCentral.setEffect(flou);
-		vbDeplCentre.setEffect(flou);
-		des.setEffect(flou);*/
-		
+
+		/*
+		 * fond.setEffect(flou); TODO A mettre quand le popup fouille camion est activé
+		 * rectVigile.setEffect(flou); nomJoueur.setEffect(flou);
+		 * vbCentral.setEffect(flou); vbDeplCentre.setEffect(flou); des.setEffect(flou);
+		 */
+
 		///
-		
+
 		VBox vbDeplCentre = new VBox();
 		vbDeplCentre.setAlignment(Pos.CENTER_LEFT);
 		vbDeplCentre.setTranslateX(-700);
@@ -732,14 +793,13 @@ public class JeuPane extends StackPane implements JeuListener {
 		de2.setMinSize(100, 100);
 		de2.setTextFill(Color.BLACK);
 		de2.setFont(policeBoutonDe);
-		
+
 		Label titrede = new Label("DÉS");
 		titrede.setMinSize(100, 50);
 		titrede.setAlignment(Pos.CENTER);
 		titrede.setTextFill(Color.WHITE);
 		titrede.setFont(policeBouton);
 		titrede.setStyle("-fx-background-radius: 3px;-fx-background-color:#000000;");
-		
 
 		des.setPadding(new Insets(10));
 		des.setSpacing(10);
@@ -776,9 +836,9 @@ public class JeuPane extends StackPane implements JeuListener {
 		fond.setAlignment(Pos.CENTER);
 		fond.setEffect(flou);
 		fond.getChildren().add(imgFond);
-		
-		stackPane.getChildren().addAll(fond, rectVigile, nomJoueur, phasePartie, vbCentral, /*vote,*/ vbDeplCentre, des, fouilleCamion,
-				info);
+
+		stackPane.getChildren().addAll(fond, rectVigile, nomJoueur, phasePartie, vbCentral, /* vote, */ vbDeplCentre,
+				des, fouilleCamion, info);
 		stackPane.setBackground(new Background(new BackgroundFill(Color.BLACK, CornerRadii.EMPTY, null)));
 
 		this.getChildren().add(stackPane);
@@ -898,6 +958,8 @@ public class JeuPane extends StackPane implements JeuListener {
 		joueur3.setDisable(true);
 		joueur4.setDisable(true);
 		joueur5.setDisable(true);
+		cartePanelReset();
+		fouilleCamion.setVisible(false);
 	}
 
 	@Override
@@ -1045,5 +1107,171 @@ public class JeuPane extends StackPane implements JeuListener {
 		Platform.runLater(() -> {
 			labDeplPers.setText("Déplacement des personnages");
 		});
+	}
+
+	@Override
+	public void choisirCarte(CarteType carte, List<Couleur> listeCouleurJoueurVivant, boolean garder, boolean donner,
+			boolean defausser, boolean utiliser) {
+		Platform.runLater(() -> {
+			fouilleCamion.setVisible(true);
+			imgCarte1.setImage(new Image(convertCarte(carte)));
+			fouilleCamion.setVisible(true);
+			bCarte1.setDisable(false);
+			bCarte1.setOnAction(EventHandler -> {
+				selectedCarte = carte;
+				bChoixUtiliser.setDisable(!utiliser);
+				bChoixGarder.setDisable(!garder);
+				bChoixDonner.setDisable(!donner);
+				bChoixDefausser.setDisable(!defausser);
+			});
+		});
+	}
+
+	public String convertCarte(CarteType carteType) {
+		switch (carteType) {
+		case ABA:
+			return DataControl.CARTE_BATTE;
+		case CAC:
+			return DataControl.CARTE_CACHETTE;
+		case CDS:
+			return DataControl.CARTE_CAMERA;
+		case ACS:
+			return DataControl.CARTE_CS;
+		case AGR:
+			return DataControl.CARTE_GRENADE;
+		case AHI:
+			return DataControl.CARTE_HACHE;
+		case MAT:
+			return DataControl.CARTE_MATERIEL;
+		case MEN:
+			return DataControl.CARTE_MENACE;
+		case ARE:
+			return DataControl.CARTE_REVOLVER;
+		case SPR:
+			return DataControl.CARTE_SPRINT;
+		case ATR:
+			return DataControl.CARTE_TRONCENNEUSE;
+		}
+
+		return null;
+	}
+
+	public CarteType convertCarte(String dataControl) {
+		switch (dataControl) {
+		case DataControl.CARTE_BATTE:
+			return CarteType.ABA;
+		case DataControl.CARTE_CACHETTE:
+			return CarteType.CAC;
+		case DataControl.CARTE_CAMERA:
+			return CarteType.CDS;
+		case DataControl.CARTE_CS:
+			return CarteType.ACS;
+		case DataControl.CARTE_GRENADE:
+			return CarteType.AGR;
+		case DataControl.CARTE_HACHE:
+			return CarteType.AHI;
+		case DataControl.CARTE_MATERIEL:
+			return CarteType.MAT;
+		case DataControl.CARTE_MENACE:
+			return CarteType.MEN;
+		case DataControl.CARTE_REVOLVER:
+			return CarteType.ARE;
+		case DataControl.CARTE_SPRINT:
+			return CarteType.SPR;
+		case DataControl.CARTE_TRONCENNEUSE:
+			return CarteType.ATR;
+		}
+
+		return CarteType.NUL;
+	}
+
+	public void setCarteOfferte(List<Couleur> listeCouleurJoueurVivant) {
+		Button[] joueursButton = { joueur1c, joueur2c, joueur3c, joueur4c, joueur5c };
+		for (int i = 0; i < listeCouleurJoueurVivant.size(); i++) {
+			joueursButton[i].setDisable(false);
+			Couleur tmpCouleur = listeCouleurJoueurVivant.get(i);
+			joueursButton[i].setOnAction(EventHandler -> {
+				selectedCouleur = tmpCouleur;
+				if (selectedCouleur != null && selectedCarte != null) {
+					core.getIdjr().setCarteChoisi(selectedCarte);
+					core.getIdjr().setCouleurChoisi(selectedCouleur);
+					core.getIdjr().setEtatChoisi("Donner");
+					core.getIdjr().carteChoisi(true);
+					cartePanelReset();
+				}
+			});
+		}
+	}
+
+	@Override
+	public void choisirCarte(List<CarteType> listeCartes, List<Couleur> listeCouleurJoueurVivant, boolean garder,
+			boolean donner, boolean defausser, boolean utiliser) {
+		Platform.runLater(() -> {
+			fouilleCamion.setVisible(true);
+			if (listeCartes.size() <= 1) {
+				imgCarte1.setImage(new Image(convertCarte(listeCartes.get(0))));
+				bCarte1.setDisable(false);
+				bCarte1.setOnAction(EventHandler -> {
+					selectedCarte = listeCartes.get(0);
+					bChoixUtiliser.setDisable(!utiliser);
+					bChoixGarder.setDisable(!garder);
+					bChoixDonner.setDisable(!donner);
+					bChoixDefausser.setDisable(!defausser);
+				});
+			}
+			if (listeCartes.size() <= 2) {
+				imgCarte2.setImage(new Image(convertCarte(listeCartes.get(1))));
+				bCarte2.setDisable(false);
+				bCarte2.setOnAction(EventHandler -> {
+					selectedCarte = listeCartes.get(1);
+					bChoixUtiliser.setDisable(!utiliser);
+					bChoixGarder.setDisable(!garder);
+					bChoixDonner.setDisable(!donner);
+					bChoixDefausser.setDisable(!defausser);
+				});
+			}
+			if (listeCartes.size() <= 3) {
+				imgCarte3.setImage(new Image(convertCarte(listeCartes.get(2))));
+				bCarte3.setDisable(false);
+				bCarte3.setOnAction(EventHandler -> {
+					selectedCarte = listeCartes.get(2);
+					bChoixUtiliser.setDisable(!utiliser);
+					bChoixGarder.setDisable(!garder);
+					bChoixDonner.setDisable(!donner);
+					bChoixDefausser.setDisable(!defausser);
+				});
+			}
+			if (listeCouleurJoueurVivant != null)
+				setCarteOfferte(listeCouleurJoueurVivant);
+		});
+
+	}
+
+	@Override
+	public void nomJoueurs(List<String> listeNomJoueur) {
+		Platform.runLater(() -> {
+			Button[] joueursButton = { joueur1, joueur2, joueur3, joueur4, joueur5 };
+			for (int i = 0; i < listeNomJoueur.size(); i++)
+				joueursButton[i].setText(listeNomJoueur.get(i));
+		});
+	}
+
+	public void cartePanelReset() {
+		fouilleCamion.setVisible(false);
+		hboxBoutonJoueur.setVisible(false);
+		joueur1c.setDisable(true);
+		joueur2c.setDisable(true);
+		joueur3c.setDisable(true);
+		joueur4c.setDisable(true);
+		joueur5c.setDisable(true);
+		bCarte1.setDisable(true);
+		bCarte2.setDisable(true);
+		bCarte3.setDisable(true);
+		bChoixGarder.setDisable(true);
+		bChoixDonner.setDisable(true);
+		bChoixDefausser.setDisable(true);
+		bChoixUtiliser.setDisable(true);
+		selectedCarte = null;
+		selectedCouleur = null;
 	}
 }
