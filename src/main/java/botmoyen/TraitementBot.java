@@ -216,7 +216,7 @@ public class TraitementBot {
 		List<CarteType> listeCarteCachette = new ArrayList<>();
 		List<PionCouleur> listePionCache = new ArrayList<>();
 		for (CarteType carte : core.getListeCarte())
-			if (carte.name() == "CAC")
+			if (carte.equals(CarteType.CAC))
 				listeCarteCachette.add(carte);
 		if (listeCarteCachette.isEmpty())
 			return listePionCache;
@@ -229,7 +229,7 @@ public class TraitementBot {
 		else
 			nbrCarteJouee = r.nextInt(nbrCartePossibleDejouer);
 		for (int i = 0; i < nbrCarteJouee; i++)
-			listePionCache.add(core.getListePion().get(i));
+			listePionCache.add(core.getPoinSacrDispo().get(i));
 		return listePionCache;
 	}
 
