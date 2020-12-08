@@ -426,6 +426,9 @@ public class TraitementPaquetTcp extends TraitementPaquet<Socket> {
 				listRenvoye.get(1), listRenvoye.get(2), (String) packet.getValue(message, 3),
 				(int) packet.getValue(message, 4), core.getJoueurId());
 		getControleurReseau().getTcpClient().envoyer(messageTcp);
+		core.deplPionJoueurCourant(core.getCouleur(),(Integer) listRenvoye.get(0), (Integer)listRenvoye.get(1));
+		if (((CarteType) listRenvoye.get(2)).equals(CarteType.SPR))
+			core.joueCarte(core.getCouleur(),CarteType.SPR);
 		System.out.println("deplacerPion : \n");
 		System.out.println(core.getEtatPartie());
 	}
