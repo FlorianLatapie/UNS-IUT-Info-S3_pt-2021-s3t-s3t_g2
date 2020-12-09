@@ -2,6 +2,7 @@ package idjr;
 
 import idjr.ihmidjr.event.Initializer;
 import idjr.ihmidjr.event.JeuListener;
+import pp.ihm.Core;
 import reseau.socket.ControleurReseau;
 import reseau.tool.ReseauOutils;
 import reseau.tool.ThreadOutils;
@@ -51,6 +52,7 @@ public class Idjr {
 	private Couleur couleurChoisi;
 	private CarteType carteUtiliser;
 	private Couleur voteChoisi;
+	private boolean isContinue;
 	private String etat;
 	Initializer initializer;
 
@@ -393,5 +395,13 @@ public class Idjr {
 
 	public Couleur getCouleurChoisi() {
 		return couleurChoisi;
+	}
+
+	public boolean isContinue() {
+		return isContinue;
+	}
+
+	public void setContinue(boolean isContinue) {
+		this.isContinue = isContinue;
 	}
 }

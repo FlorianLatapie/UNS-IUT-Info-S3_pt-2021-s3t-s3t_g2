@@ -52,7 +52,7 @@ public class TraitementPaquetTcp extends TraitementPaquet<TcpClient> {
 	@Override
 	public void traitement(Paquet Paquet, String message, TcpClient extra) {
 		switch (Paquet.getCle()) {
-		//TODO gérer paquet DC
+		// TODO gérer paquet DC
 		case "IP":
 			initialiserPartie(Paquet, message);
 			break;
@@ -136,7 +136,7 @@ public class TraitementPaquetTcp extends TraitementPaquet<TcpClient> {
 			break;
 		case "CDFC":
 			break;
-		
+
 		case "CDZVDI":
 		case "AZUCS":
 		case "AZLAZ":
@@ -176,24 +176,25 @@ public class TraitementPaquetTcp extends TraitementPaquet<TcpClient> {
 	public void choisirDestPion(Paquet Paquet, String message) {
 		String m1 = (String) Paquet.getValeur(message, 3);
 		getControleurReseau().envoyerTcp(getControleurReseau().construirePaquetTcp("PICD",
-						traitementI.choisirDestPlacement(core, (List<?>) Paquet.getValeur(message, 1),
-								(List<?>) Paquet.getValeur(message, 2)),
-						traitementI.choisirPionPlacement(core), m1, core.getJoueurId()));
+				traitementI.choisirDestPlacement(core, (List<?>) Paquet.getValeur(message, 1),
+						(List<?>) Paquet.getValeur(message, 2)),
+				traitementI.choisirPionPlacement(core), m1, core.getJoueurId()));
 	}
 
 	public void ChoisirQuiVoter(Paquet Paquet, String message) {
 		out.println(Paquet.getDocs());
 		System.out.print("ChoisirQuiVoter");
-		String messageTcp = getControleurReseau().construirePaquetTcp("PVCV", traitementI.getRandom(core, core.getVoteType()),
-				(String) Paquet.getValeur(message, 1), (int) Paquet.getValeur(message, 2), core.getJoueurId());
+		String messageTcp = getControleurReseau().construirePaquetTcp("PVCV",
+				traitementI.getRandom(core, core.getVoteType()), (String) Paquet.getValeur(message, 1),
+				(int) Paquet.getValeur(message, 2), core.getJoueurId());
 		getControleurReseau().envoyerTcp(messageTcp);
 	}
-	
+
 	private void recupCarte(Paquet Paquet, String message) {
-		core.getListeCarte().add((CarteType)Paquet.getValeur(message, 1));
-		//TODO déplacer (isoler réseaux) et mettre a jour liste carte
+		core.addCarte((CarteType) Paquet.getValeur(message, 1));
+		// TODO déplacer (isoler réseaux) et mettre a jour liste carte
 	}
-	
+
 	public void IndiquerCarteJouees(Paquet Paquet, String message) {
 		out.println(Paquet.getDocs());
 		String messageTcp = getControleurReseau().construirePaquetTcp("PVC", traitementI.IndiquerCarteJouees(core),
@@ -202,11 +203,10 @@ public class TraitementPaquetTcp extends TraitementPaquet<TcpClient> {
 		getControleurReseau().envoyerTcp(messageTcp);
 	}
 
-
 	public void debutTour(Paquet Paquet, String message) {
 		traitementI.debutTour(core, (List<Couleur>) Paquet.getValeur(message, 2));
 	}
-	
+
 	private void fournirActionsDefense(Paquet Paquet, String message) {
 		List<Object> listerenvoye = traitementI.listeCarteJouee(this.core, (int) Paquet.getValeur(message, 1));
 		String messageTCP = getControleurReseau().construirePaquetTcp("RAZRD", listerenvoye.get(0), listerenvoye.get(1),
@@ -224,15 +224,16 @@ public class TraitementPaquetTcp extends TraitementPaquet<TcpClient> {
 			int m2 = (int) packet.getValeur(message, 4);
 			String messageTcp = getControleurReseau().construirePaquetTcp("AZLD", m1, m2, core.getJoueurId());
 			getControleurReseau().envoyerTcp(messageTcp);
-			
+
 		}
 	}
-	
+
 	private void choixCarteFouille(Paquet Paquet, String message) {
 		List<Object> listeResultat = traitementI.carteFouille((List<CarteType>) Paquet.getValeur(message, 1), core);
-		getControleurReseau().envoyerTcp(getControleurReseau().construirePaquetTcp("SCFC", (CarteType)listeResultat.get(0), (CarteType)listeResultat.get(1), (Couleur)listeResultat.get(3),
-						(CarteType)listeResultat.get(2), (String) Paquet.getValeur(message, 2), Paquet.getValeur(message, 3),
-						core.getJoueurId()));
+		getControleurReseau().envoyerTcp(getControleurReseau().construirePaquetTcp("SCFC",
+				(CarteType) listeResultat.get(0), (CarteType) listeResultat.get(1), (Couleur) listeResultat.get(3),
+				(CarteType) listeResultat.get(2), (String) Paquet.getValeur(message, 2), Paquet.getValeur(message, 3),
+				core.getJoueurId()));
 
 	}
 
@@ -257,12 +258,13 @@ public class TraitementPaquetTcp extends TraitementPaquet<TcpClient> {
 			getControleurReseau().envoyerTcp(messageTcp);
 		}
 	}
-	
+
 	public void ReponseJoueurCourant(Paquet Paquet, String message) {
 		CarteType RJ = traitementI.ReponseJoueurCourant(core);
 		String IDP = (String) Paquet.getValeur(message, 1);
 		int NT = (int) Paquet.getValeur(message, 2);
-		getControleurReseau().envoyerTcp(getControleurReseau().construirePaquetTcp("AZRCS", RJ, IDP, NT, core.getJoueurId()));
+		getControleurReseau()
+				.envoyerTcp(getControleurReseau().construirePaquetTcp("AZRCS", RJ, IDP, NT, core.getJoueurId()));
 	}
 
 	public void choisirDest(Paquet Paquet, String message) {

@@ -33,6 +33,10 @@ public interface JeuListener {
 
 	void choisirUtiliserCarte();
 	
+	void choisirUtiliserCarte(CarteType carteType);
+	
+	void choisirUtiliserCarte(List<CarteType> carteTypes);
+	
 	void updateCarte();
 
 	void setVote(List<Couleur> listeCouleurJoueur);

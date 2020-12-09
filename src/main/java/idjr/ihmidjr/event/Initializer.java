@@ -108,17 +108,27 @@ public class Initializer {
 		for (JeuListener jl : listenersjl)
 			jl.nomJoueurs(listeNomJoueur);
 	}
-	
+
 	public void choisirUtiliserCarte() {
 		for (JeuListener jl : listenersjl)
 			jl.choisirUtiliserCarte();
 	}
-	
+
+	public void choisirUtiliserCarte(CarteType carteType) {
+		for (JeuListener jl : listenersjl)
+			jl.choisirUtiliserCarte(carteType);
+	}
+
+	public void choisirUtiliserCarte(List<CarteType> carteTypes) {
+		for (JeuListener jl : listenersjl)
+			jl.choisirUtiliserCarte(carteTypes);
+	}
+
 	public void updateCarte() {
 		for (JeuListener jl : listenersjl)
 			jl.updateCarte();
 	}
-	
+
 	public void setVote(List<Couleur> joueur) {
 		for (JeuListener jl : listenersjl)
 			jl.setVote(joueur);
