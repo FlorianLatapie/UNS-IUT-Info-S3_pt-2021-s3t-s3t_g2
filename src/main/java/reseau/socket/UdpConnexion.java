@@ -140,10 +140,8 @@ public class UdpConnexion implements Runnable, IEchangeSocket, IControleSocket {
 		logger.log(Level.INFO, "Arret du socket UDP");
 		estLancer = false;
 
-		if (multicastSocket != null) {
-			multicastSocket.leaveGroup(groupe);
+		if (multicastSocket != null)
 			multicastSocket.close();
-		}
 
 		logger.log(Level.INFO, "Socket UDP arreté");
 	}

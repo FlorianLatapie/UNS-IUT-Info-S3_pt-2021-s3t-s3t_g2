@@ -4,11 +4,15 @@ import reseau.tool.PaquetOutils;
 
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
+import java.io.EOFException;
 import java.io.IOException;
 import java.net.InetAddress;
 import java.net.Socket;
+import java.net.UnknownHostException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
+import java.util.concurrent.ExecutionException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -20,7 +24,7 @@ import static java.util.Collections.synchronizedList;
  * @author Sébastien Aglaé
  * @version 2.0
  */
-public class TcpClient implements Runnable, IEchangeSocket, IControleSocket, IMessagePaquet {
+public class TcpClient implements Runnable, IEchangeSocket, IMessagePaquet {
 	private final ControleurReseau controleurReseau;
 	private Socket socket;
 	private DataOutputStream fluxSortie;
@@ -40,7 +44,7 @@ public class TcpClient implements Runnable, IEchangeSocket, IControleSocket, IMe
 	 * @param port             Le port du serveur TCP cible
 	 */
 	public TcpClient(ControleurReseau controleurReseau, InetAddress ip, int port) {
-		this.messagesTampon = synchronizedList(new ArrayList<String>());
+		this.messagesTampon = Collections.synchronizedList(new ArrayList<String>());
 		this.controleurReseau = controleurReseau;
 		this.estLancer = true;
 		this.ip = ip;
@@ -59,8 +63,8 @@ public class TcpClient implements Runnable, IEchangeSocket, IControleSocket, IMe
 		this.socket = socket;
 	}
 
-	public TcpClient(Socket socket, ControleurReseau TcpClient, String cleFin) {
-		this(socket, TcpClient);
+	public TcpClient(Socket socket, ControleurReseau controleurReseau, String cleFin) {
+		this(socket, controleurReseau);
 		this.cleFin = cleFin;
 	}
 
@@ -71,13 +75,26 @@ public class TcpClient implements Runnable, IEchangeSocket, IControleSocket, IMe
 	 * @throws IOException Si les flux de s'ouvre pas correctement
 	 */
 	private boolean ouvrir(InetAddress ip, int port) throws IOException {
+		logger.log(Level.INFO, "Client TCP ouvert");
 		boolean attendre = true;
-		while (attendre) {
-			if (socket == null)
+		while (attendre)
+			try {
 				socket = new Socket(ip, port);
-			attendre = false;
-			Thread.yield();
-		}
+				attendre = false;
+			} catch (Exception ignored) {
+				Thread.yield();
+			}
+
+		fluxSortie = new DataOutputStream(socket.getOutputStream());
+		fluxEntre = new DataInputStream(socket.getInputStream());
+
+		reception();
+
+		return true;
+	}
+
+	private boolean ouvrir() throws IOException {
+		logger.log(Level.INFO, "Serveur TCP ouvert");
 
 		fluxSortie = new DataOutputStream(socket.getOutputStream());
 		fluxEntre = new DataInputStream(socket.getInputStream());
@@ -93,12 +110,21 @@ public class TcpClient implements Runnable, IEchangeSocket, IControleSocket, IMe
 		logger.log(Level.FINEST, "Client TCP sur l'ip {0}", ip);
 		logger.log(Level.FINEST, "Client TCP sur le port {1}", port);
 		try {
-			ouvrir(ip, port);
+			if (socket == null)
+				ouvrir(ip, port);
+			else
+				ouvrir();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 
 		reception();
+		try {
+			arreter();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 	/**
@@ -107,9 +133,7 @@ public class TcpClient implements Runnable, IEchangeSocket, IControleSocket, IMe
 	 * @param message Le message a a envoyer
 	 */
 	public void envoyer(String message) {
-		logger.log(Level.INFO, "Envoie d'un message : {0}", message);
-		if (socket == null)
-			return;
+		logger.log(Level.INFO, "Envoie d'un message : " + message);
 
 		try {
 			fluxSortie.writeUTF(message);
@@ -133,9 +157,11 @@ public class TcpClient implements Runnable, IEchangeSocket, IControleSocket, IMe
 			}
 
 			String cle = PaquetOutils.getCleMessage(message);
-			if (cleFin.equals(cle))
-				break;
-			controleurReseau.traitementPaquetTcp(controleurReseau.getPaquetTcp(cle), message, socket);
+			if (cleFin != null)
+				if (cleFin.equals(cle))
+					break;
+
+			controleurReseau.traitementPaquetTcp(controleurReseau.getPaquetTcp(cle), message, this);
 			messagesTampon.add(message);
 		}
 	}
@@ -145,13 +171,11 @@ public class TcpClient implements Runnable, IEchangeSocket, IControleSocket, IMe
 	 *
 	 * @throws IOException Si les flux ou si le socket ne se ferme pas correctement
 	 */
-	public void arreter() throws IOException {
+	private void arreter() throws IOException {
 		logger.log(Level.INFO, "Arret du client TCP");
 		estLancer = false;
 
 		if (socket != null) {
-			socket.shutdownInput();
-			socket.shutdownOutput();
 			socket.close();
 		}
 		logger.log(Level.INFO, "Client TCP fermé");
@@ -190,9 +214,14 @@ public class TcpClient implements Runnable, IEchangeSocket, IControleSocket, IMe
 	 * @return Si le message est contenu
 	 */
 	private boolean contient(String cle) {
-		for (String message : messagesTampon)
-			if (PaquetOutils.getCleMessage(message).equals(cle))
-				return true;
+		synchronized (messagesTampon) {
+			java.util.Iterator<String> i = messagesTampon.iterator(); // Must be in synchronized block
+			while (i.hasNext()) {
+				String tmp = i.next();
+				if (PaquetOutils.getCleMessage(tmp).equals(cle))
+					return true;
+			}
+		}
 
 		return false;
 	}

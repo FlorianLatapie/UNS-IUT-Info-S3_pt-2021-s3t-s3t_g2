@@ -59,8 +59,8 @@ public class TcpServeur implements Runnable, IControleSocket {
 			} catch (IOException e) {
 				break;
 			}
-			TcpClient connection = new TcpClient(sock, controleurReseau);
-			new Thread(connection).start();
+			TcpClient connection;
+			new Thread(connection = new TcpClient(sock, controleurReseau)).start();
 			connexions.add(connection);
 		}
 		if (estLancer)
@@ -79,8 +79,6 @@ public class TcpServeur implements Runnable, IControleSocket {
 	public void arreter() throws IOException {
 		logger.log(Level.INFO, "Arret du serveur TCP");
 		estLancer = false;
-		for (TcpClient connexion : connexions)
-			connexion.arreter();
 
 		if (serveurSocket != null) {
 			serveurSocket.close();

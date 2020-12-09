@@ -7,6 +7,7 @@ import reseau.type.*;
 
 import java.io.IOException;
 import java.net.InetAddress;
+import java.net.Socket;
 import java.net.UnknownHostException;
 import java.util.Map;
 import java.util.logging.Level;
@@ -30,7 +31,7 @@ public class ControleurReseau implements IControleSocket {
 	private InetAddress ip;
 
 	private int tcpPort;
-	private final TraitementPaquet<Object> traitementPaquetUdp;
+	private final TraitementPaquet traitementPaquetUdp;
 	private final TraitementPaquet traitementPaquetTcp;
 	private ConnexionType connexionType;
 
@@ -42,7 +43,7 @@ public class ControleurReseau implements IControleSocket {
 	 * @throws IOException si les fichiers pour le chargement des paquets sont
 	 *                     inaccessible
 	 */
-	public ControleurReseau(TraitementPaquet traitementPaquetTcp, TraitementPaquet<Object> traitementPaquetUdp)
+	public ControleurReseau(TraitementPaquet traitementPaquetTcp, TraitementPaquet traitementPaquetUdp)
 			throws IOException {
 		this.udpPaquets = PtOutils.loadPacket(CHEMIN_PACKET, "UDP");
 		this.tcpPaquets = PtOutils.loadPacket(CHEMIN_PACKET, "TCP");
@@ -71,15 +72,12 @@ public class ControleurReseau implements IControleSocket {
 		if (udpPaquets.isEmpty() || tcpPaquets.isEmpty())
 			throw new IllegalArgumentException("Il n'y a pas de définitions pour les paquets TCP/UDP");
 		logger.log(Level.INFO, "Mon port est {0}", tcpPort);
-		udpConnexion = new UdpConnexion(this, ip);
-		new Thread(udpConnexion, "udpConnexion").start();
+		new Thread(udpConnexion = new UdpConnexion(this, ip), "udpConnexion").start();
 
 		if (connexionType == ConnexionType.SERVEUR) {
-			tcpServeur = new TcpServeur(this, tcpPort);
-			new Thread(tcpServeur, "tcpServeur").start();
+			new Thread(tcpServeur = new TcpServeur(this, tcpPort), "tcpServeur").start();
 		} else {
-			tcpClient = new TcpClient(this, ip, tcpPort);
-			new Thread(tcpClient, "tcpClient").start();
+			new Thread(tcpClient = new TcpClient(this, ip, tcpPort), "tcpClient").start();
 		}
 		logger.info("Controleur initialisé");
 	}
@@ -92,13 +90,6 @@ public class ControleurReseau implements IControleSocket {
 		if (tcpServeur != null)
 			try {
 				tcpServeur.arreter();
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-
-		if (tcpClient != null)
-			try {
-				tcpClient.arreter();
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
@@ -141,18 +132,6 @@ public class ControleurReseau implements IControleSocket {
 			return;
 
 		udpConnexion.arreter();
-	}
-
-	/**
-	 * Arreter le serveur TCP
-	 *
-	 * @throws IOException Si le serveur ne peut pas etre arreté
-	 */
-	public void arreterTcp() throws IOException {
-		if (tcpClient == null)
-			return;
-
-		tcpClient.arreter();
 	}
 
 	/**
@@ -245,6 +224,31 @@ public class ControleurReseau implements IControleSocket {
 	}
 
 	/**
+	 * Permet d'attendre un paquet TCP.
+	 *
+	 * @param cle La clé du paquet cible
+	 */
+	public void attendreTcp(String cle) {
+		if (!isCleExiste(cle))
+			throw new IllegalArgumentException("Ce n'est pas une clé TCP !");
+
+		tcpClient.attendreMessage(cle);
+	}
+	
+	/**
+	 * Permet de recevoir un paquet TCP.
+	 *
+	 * @param cle La clé du paquet cible
+	 * @return le message du paquet
+	 */
+	public String getMessageTcp(String cle) {
+		if (!isCleExiste(cle))
+			throw new IllegalArgumentException("Ce n'est pas une clé TCP !");
+
+		return tcpClient.getMessage(cle);
+	}
+
+	/**
 	 * Permet le nombre de paquet charger.
 	 *
 	 * @return Le nombre de paquet charger
@@ -307,8 +311,8 @@ public class ControleurReseau implements IControleSocket {
 	 * @param message Le paquet brute
 	 * @param extra   Le socket du paquet
 	 */
-	public void traitementPaquetTcp(Paquet packet, String message, Object extra) {
-		traitementPaquetUdp.traitement(packet, message, extra);
+	public void traitementPaquetTcp(Paquet packet, String message, 	TcpClient extra) {
+		traitementPaquetTcp.traitement(packet, message, extra);
 	}
 
 	/**
