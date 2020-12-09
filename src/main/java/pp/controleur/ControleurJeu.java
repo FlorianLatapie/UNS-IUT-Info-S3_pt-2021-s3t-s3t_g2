@@ -92,6 +92,7 @@ public class ControleurJeu {
 			initializer.forceLieuAll(new ArrayList<>(jeu.getLieux().values()));
 			initializer.nomChefVigileAll(new ArrayList<>(jeu.getJoueurs().values()));
 			initializer.nomJoueurs(new ArrayList<>(jeu.getJoueurs().values()));
+			initializer.destionationPersoAll(new ArrayList<>(jeu.getLieux().values()));
 		}
 	}
 
@@ -307,8 +308,8 @@ public class ControleurJeu {
 					jeu.getJoueurCouleur(a2).getConnection().envoyer(nwm.construirePaquetTcp("FCRC",
 							nwm.getValueTcp("SCFC", mess, 2), j.getCouleur(), partieId, numeroTour));
 				}
-				if (nwm.getValueTcp("SCFC",mess, 4) != CarteType.NUL) {
-					jeu.getCartes().add((CarteType) nwm.getValueTcp("SCFC",mess, 4));
+				if (nwm.getValueTcp("SCFC", mess, 4) != CarteType.NUL) {
+					jeu.getCartes().add((CarteType) nwm.getValueTcp("SCFC", mess, 4));
 					a3 = CarteEtat.CD;
 				}
 				m = nwm.construirePaquetTcp("RFC", a1, a2, a3, partieId, numeroTour);
@@ -426,7 +427,7 @@ public class ControleurJeu {
 			if (j.getCartes().contains(CarteType.CDS)) {
 				j.getConnection().attendreMessage("AZRCS");
 				String mess = j.getConnection().getMessage("AZRCS");
-				if ((CarteType) nwm.getValueTcp("AZRCS",mess, 1) != CarteType.NUL) {
+				if ((CarteType) nwm.getValueTcp("AZRCS", mess, 1) != CarteType.NUL) {
 					joueurCDS.add(j);
 				}
 			}
@@ -699,8 +700,10 @@ public class ControleurJeu {
 		PionCouleur pionCou = (PionCouleur) nwm.getValueTcp("RAZCS", rep, 2);
 		int pion = PpTools.getPionByValue(pionCou);
 		jeu.sacrifie(jou, PpTools.valeurToIndex(pion));
-		if (initializer != null)
+		if (initializer != null) {
 			initializer.nbPersoJoueurAll(new ArrayList<>(jeu.getJoueurs().values()));
+			initializer.destionationPersoAll(new ArrayList<>(jeu.getLieux().values()));
+		}
 		m = nwm.construirePaquetTcp("RAZIF", i, pionCou, jeu.getLieux().get(i).getNbZombies(), partieId, numeroTour);
 		for (Joueur joueur : jeu.getJoueurs().values())
 			joueur.getConnection().envoyer(m);
