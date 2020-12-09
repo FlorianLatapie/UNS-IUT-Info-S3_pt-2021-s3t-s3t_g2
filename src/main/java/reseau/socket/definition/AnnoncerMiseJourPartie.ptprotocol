@@ -41,6 +41,6 @@ name:nbJoueurVirtuelConnectePartie
 type:int
 doc:Nombre de joueurs virtuels connectés à la partie (ne peut pas être supérieur à NBJVM)
 value:
-name:status
-type:Status
+name:statut
+type:Statut
 doc:Status de la partie

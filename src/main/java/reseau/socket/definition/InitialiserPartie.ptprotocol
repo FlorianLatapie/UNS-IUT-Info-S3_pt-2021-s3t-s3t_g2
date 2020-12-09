@@ -14,7 +14,7 @@ type:List<Couleur>
 doc:la liste des couleurs de chaque joueur dans le même ordre que la liste précédente. Chaque couleur est identifiée par un lettre [N(oir), V(ert), B(leu), R(ouge), J(aune), M(arron)].
 value:
 name:lieuFerme
-type:int
+type:String
 doc:Le nombre 2 ou un espace « » si aucun lieu n’est fermé.
 value:
 name:nombrePion
