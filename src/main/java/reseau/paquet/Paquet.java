@@ -49,17 +49,14 @@ public class Paquet {
 		if (param.length != nbArg)
 			throw new IllegalArgumentException(
 					"[" + cle + "] Le nombre de parametre n'est pas correcte !\n" + getDocs());
-
 		StringBuilder tmp = new StringBuilder(cle + "-");
 		for (int i = 0; i < param.length; i++) {
 			String res = PtOutils.convertParamToString(param[i], types[i]);
 			if (res == null)
 				throw new IllegalArgumentException(MessageFormat.format("[{0}] {1} {2} n''est pas un type {3} !\n{4}",
 						cle, i + 1, param[i], types[i], getDocs()));
-
 			tmp.append(res).append("-");
 		}
-
 		return tmp.substring(0, tmp.length() - 1);
 	}
 

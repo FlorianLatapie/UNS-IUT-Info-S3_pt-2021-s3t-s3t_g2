@@ -6,11 +6,14 @@ import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.EOFException;
 import java.io.IOException;
+import java.lang.reflect.Array;
 import java.net.InetAddress;
 import java.net.Socket;
 import java.net.UnknownHostException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
+import java.util.Iterator;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
 import java.util.logging.Level;
@@ -44,7 +47,7 @@ public class TcpClient implements Runnable, IEchangeSocket, IMessagePaquet {
 	 * @param port             Le port du serveur TCP cible
 	 */
 	public TcpClient(ControleurReseau controleurReseau, InetAddress ip, int port) {
-		this.messagesTampon = Collections.synchronizedList(new ArrayList<String>());
+		this.messagesTampon = synchronizedList(new ArrayList<String>());
 		this.controleurReseau = controleurReseau;
 		this.estLancer = true;
 		this.ip = ip;
@@ -156,6 +159,7 @@ public class TcpClient implements Runnable, IEchangeSocket, IMessagePaquet {
 				break;
 			}
 
+			logger.log(Level.INFO, "Reception de " + message);
 			String cle = PaquetOutils.getCleMessage(message);
 			if (cleFin != null)
 				if (cleFin.equals(cle))
@@ -163,6 +167,13 @@ public class TcpClient implements Runnable, IEchangeSocket, IMessagePaquet {
 
 			controleurReseau.traitementPaquetTcp(controleurReseau.getPaquetTcp(cle), message, this);
 			messagesTampon.add(message);
+		}
+
+		try {
+			arreter();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 	}
 
@@ -214,14 +225,10 @@ public class TcpClient implements Runnable, IEchangeSocket, IMessagePaquet {
 	 * @return Si le message est contenu
 	 */
 	private boolean contient(String cle) {
-		synchronized (messagesTampon) {
-			java.util.Iterator<String> i = messagesTampon.iterator(); // Must be in synchronized block
-			while (i.hasNext()) {
-				String tmp = i.next();
-				if (PaquetOutils.getCleMessage(tmp).equals(cle))
-					return true;
-			}
-		}
+		List<String> tmpList = new ArrayList<>(messagesTampon);
+		for (String message : tmpList)
+			if (PaquetOutils.getCleMessage(message).equals(cle))
+				return true;
 
 		return false;
 	}
@@ -232,8 +239,12 @@ public class TcpClient implements Runnable, IEchangeSocket, IMessagePaquet {
 	 * @param cle Mot-clé du message
 	 */
 	public void attendreMessage(String cle) {
-		logger.log(Level.INFO, "Attente d'un message");
 		while (!contient(cle))
-			Thread.yield();
+			try {
+				Thread.sleep(100);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 	}
 }
