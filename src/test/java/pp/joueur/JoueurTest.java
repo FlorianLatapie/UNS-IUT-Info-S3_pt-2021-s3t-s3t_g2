@@ -20,7 +20,7 @@ import reseau.type.Couleur;
  */
 
 class JoueurTest {
-	Couleur c = Couleur.BLEU;
+	Couleur c = Couleur.B;
 	String nom = "Joueur1";
 	Joueur j = new Joueur(0, InetAddress.getByName("127.0.0.1"),1024, nom);
 	LaBlonde b = new LaBlonde(j);
@@ -58,9 +58,9 @@ class JoueurTest {
 		 * Modifications de la couleur
 		 */
 		assertSame(j.getCouleur(), c);
-		j.setCouleur(Couleur.ROUGE);
+		j.setCouleur(Couleur.R);
 		assertNotSame(j.getCouleur(), c);
-			assertSame(j.getCouleur(), Couleur.ROUGE);
+			assertSame(j.getCouleur(), Couleur.R);
 
 		/**
 		 * Modification du statut enVie
