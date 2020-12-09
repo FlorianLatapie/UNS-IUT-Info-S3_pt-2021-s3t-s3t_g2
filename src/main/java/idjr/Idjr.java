@@ -1,11 +1,13 @@
 package idjr;
 
 import idjr.ihmidjr.event.Initializer;
-import reseau.socket.ConnexionType;
+import idjr.ihmidjr.event.JeuListener;
+import pp.ihm.Core;
 import reseau.socket.ControleurReseau;
 import reseau.tool.ReseauOutils;
 import reseau.tool.ThreadOutils;
 import reseau.type.CarteType;
+import reseau.type.ConnexionType;
 import reseau.type.Couleur;
 import reseau.type.PionCouleur;
 import reseau.type.TypeJoueur;
@@ -48,6 +50,8 @@ public class Idjr {
 	private int lieuChoisi;
 	private CarteType carteChoisi;
 	private Couleur couleurChoisi;
+	private CarteType carteUtiliser;
+	private Couleur voteChoisi;
 	private String etat;
 	Initializer initializer;
 
@@ -119,16 +123,52 @@ public class Idjr {
 			initializer.nomPartie(current.getIdPartie());
 		String messageTcp = nwm.construirePaquetTcp("DCP", nom, typeJoueur, current.getIdPartie());
 		ThreadOutils.asyncTask(() -> {
-			nwm.getTcpClient().envoyer(messageTcp);
+			nwm.envoyerTcp(messageTcp);
 
-			nwm.getTcpClient().attendreMessage("ACP");
-			String message1 = nwm.getTcpClient().getMessage("ACP");
-			setJoueurId((String) nwm.getPaquetTcp("ACP").getValue(message1, 2));
+			nwm.attendreTcp("ACP");
+			String message1 = nwm.getMessageTcp("ACP");
+			setJoueurId((String) nwm.getValueTcp("ACP", message1, 2));
 		});
 	}
 
 	public Initializer getInitializer() {
 		return initializer;
+	}
+
+	private boolean voteChoisiBool = false;
+
+	public boolean voteDisponible() {
+		return voteChoisiBool;
+	}
+
+	public Couleur getVoteChoisi() {
+		return voteChoisi;
+	}
+
+	public void voteChoisi(boolean etat) {
+		voteChoisiBool = etat;
+	}
+
+	public void setVoteChoisi(Couleur voteChoisi) {
+		this.voteChoisi = voteChoisi;
+	}
+
+	private boolean estUtiliserCarteChoisi = false;
+
+	public void choisirUtiliserCarte(CarteType carteUtiliser) {
+		this.carteUtiliser = carteUtiliser;
+	}
+
+	public boolean utiliserCarteDisponible() {
+		return estUtiliserCarteChoisi;
+	}
+
+	public CarteType getUtiliserCarteChosi() {
+		return carteUtiliser;
+	}
+
+	public void utiliserCarteChoisi(boolean etat) {
+		estUtiliserCarteChoisi = etat;
 	}
 
 	public int getPionChoisi() {
@@ -305,6 +345,7 @@ public class Idjr {
 
 	public void addCarte(CarteType n) {
 		listeCarte.add(n);
+		initializer.updateCarte();
 	}
 
 	public void setListeCarte(List<CarteType> listeCarte) {

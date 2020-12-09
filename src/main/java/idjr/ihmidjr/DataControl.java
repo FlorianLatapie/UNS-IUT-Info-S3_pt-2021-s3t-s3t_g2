@@ -28,11 +28,8 @@ public class DataControl {
 	public static final String ROUGE = "idjr/ihmidjr/images/rouge.png";
 	public static final String BLEU = "idjr/ihmidjr/images/bleu.png";
 	public static final String JAUNE = "idjr/ihmidjr/images/jaune.png";
-	
 
 	//Cartes
-	public static final String CARTE_VIDE = "idjr/ihmidjr/images/carte_vide.png";
-	
 	public static final String CARTE_BATTE = "idjr/ihmidjr/images/Cartes/Cartes_Armes/batte.png";
 	public static final String CARTE_CS = "idjr/ihmidjr/images/Cartes/Cartes_Armes/Canon Scié.png";
 	public static final String CARTE_GRENADE = "idjr/ihmidjr/images/Cartes/Cartes_Armes/grenade.png";
@@ -46,6 +43,8 @@ public class DataControl {
 	public static final String CARTE_MATERIEL = "idjr/ihmidjr/images/Cartes/Cartes_Autres/matériel.png";
 	public static final String CARTE_MENACE = "idjr/ihmidjr/images/Cartes/Cartes_Autres/menace.png";
 	public static final String CARTE_SPRINT = "idjr/ihmidjr/images/Cartes/Cartes_Autres/sprint.png";
+	
+	public static final String CARTE_VIDE = "idjr/ihmidjr/images/carte_vide.png";
 	
 	
 	public static final ObservableList<Integer> nombreJoueur = FXCollections.observableArrayList(3, 4, 5, 6);

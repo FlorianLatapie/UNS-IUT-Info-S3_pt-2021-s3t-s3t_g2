@@ -103,7 +103,7 @@ public class JeuPane extends StackPane implements JeuListener {
 	ImageView imgCarte1;
 	ImageView imgCarte2;
 	ImageView imgCarte3;
-	
+
 	ImageView imgDeCarte1;
 	ImageView imgDeCarte2;
 	ImageView imgDeCarte3;
@@ -114,7 +114,7 @@ public class JeuPane extends StackPane implements JeuListener {
 	ImageView imgDeCarte8;
 	ImageView imgDeCarte9;
 	ImageView imgDeCarte10;
-	
+
 	Button bDeCarte1;
 	Button bDeCarte2;
 	Button bDeCarte3;
@@ -125,7 +125,7 @@ public class JeuPane extends StackPane implements JeuListener {
 	Button bDeCarte8;
 	Button bDeCarte9;
 	Button bDeCarte10;
-	
+
 	VBox carte1;
 	VBox carte2;
 	VBox carte3;
@@ -181,18 +181,18 @@ public class JeuPane extends StackPane implements JeuListener {
 		hbCartes.setMinSize(1800, 250);
 		hbCartes.setMaxSize(1800, 250);
 		hbCartes.setStyle(styleVBox);
-		//hbCartes.setPadding(new Insets(0,10,0,10));
+		// hbCartes.setPadding(new Insets(0,10,0,10));
 		hbCartes.setSpacing(20);
-		
-		carte1 = new VBox(); 
+
+		carte1 = new VBox();
 		carte1.setAlignment(Pos.CENTER);
 		carte1.setSpacing(10);
-		
+
 		imgDeCarte1 = new ImageView(DataControl.CARTE_CS);
 		imgDeCarte1.setFitHeight(150);
 		imgDeCarte1.setFitWidth(150);
-		
-		bDeCarte1 = new Button("Utiliser"); //TODO Event
+
+		bDeCarte1 = new Button("Utiliser"); // TODO Event
 		bDeCarte1.setAlignment(Pos.CENTER);
 		bDeCarte1.setStyle(styleBoutons);
 		bDeCarte1.setPrefSize(largBouton, hBoutonDeck);
@@ -204,18 +204,18 @@ public class JeuPane extends StackPane implements JeuListener {
 		bDeCarte1.setOnMouseExited(event -> {
 			bDeCarte1.setStyle(styleBoutons);
 		});
-		
-		carte1.getChildren().addAll(imgDeCarte1,bDeCarte1);
-		
-		carte2 = new VBox(); 
+
+		carte1.getChildren().addAll(imgDeCarte1, bDeCarte1);
+
+		carte2 = new VBox();
 		carte2.setAlignment(Pos.CENTER);
 		carte2.setSpacing(10);
-		
+
 		imgDeCarte2 = new ImageView(DataControl.CARTE_CS);
 		imgDeCarte2.setFitHeight(150);
 		imgDeCarte2.setFitWidth(150);
-		
-		bDeCarte2 = new Button("Utiliser"); //TODO Event
+
+		bDeCarte2 = new Button("Utiliser"); // TODO Event
 		bDeCarte2.setAlignment(Pos.CENTER);
 		bDeCarte2.setStyle(styleBoutons);
 		bDeCarte2.setPrefSize(largBouton, hBoutonDeck);
@@ -227,18 +227,18 @@ public class JeuPane extends StackPane implements JeuListener {
 		bDeCarte2.setOnMouseExited(event -> {
 			bDeCarte2.setStyle(styleBoutons);
 		});
-		
-		carte2.getChildren().addAll(imgDeCarte2,bDeCarte2);
-		
-		carte3 = new VBox(); 
+
+		carte2.getChildren().addAll(imgDeCarte2, bDeCarte2);
+
+		carte3 = new VBox();
 		carte3.setAlignment(Pos.CENTER);
 		carte3.setSpacing(10);
-		
+
 		imgDeCarte3 = new ImageView(DataControl.CARTE_CS);
 		imgDeCarte3.setFitHeight(150);
 		imgDeCarte3.setFitWidth(150);
-		
-		bDeCarte3 = new Button("Utiliser"); //TODO Event
+
+		bDeCarte3 = new Button("Utiliser"); // TODO Event
 		bDeCarte3.setAlignment(Pos.CENTER);
 		bDeCarte3.setStyle(styleBoutons);
 		bDeCarte3.setPrefSize(largBouton, hBoutonDeck);
@@ -250,18 +250,18 @@ public class JeuPane extends StackPane implements JeuListener {
 		bDeCarte3.setOnMouseExited(event -> {
 			bDeCarte3.setStyle(styleBoutons);
 		});
-		
-		carte3.getChildren().addAll(imgDeCarte3,bDeCarte3);
-		
-		carte4 = new VBox(); 
+
+		carte3.getChildren().addAll(imgDeCarte3, bDeCarte3);
+
+		carte4 = new VBox();
 		carte4.setAlignment(Pos.CENTER);
 		carte4.setSpacing(10);
-		
+
 		imgDeCarte4 = new ImageView(DataControl.CARTE_CS);
 		imgDeCarte4.setFitHeight(150);
 		imgDeCarte4.setFitWidth(150);
-		
-		bDeCarte4 = new Button("Utiliser"); //TODO Event
+
+		bDeCarte4 = new Button("Utiliser"); // TODO Event
 		bDeCarte4.setAlignment(Pos.CENTER);
 		bDeCarte4.setStyle(styleBoutons);
 		bDeCarte4.setPrefSize(largBouton, hBoutonDeck);
@@ -273,18 +273,18 @@ public class JeuPane extends StackPane implements JeuListener {
 		bDeCarte4.setOnMouseExited(event -> {
 			bDeCarte4.setStyle(styleBoutons);
 		});
-		
-		carte4.getChildren().addAll(imgDeCarte4,bDeCarte4);
-		
-		carte5 = new VBox(); 
+
+		carte4.getChildren().addAll(imgDeCarte4, bDeCarte4);
+
+		carte5 = new VBox();
 		carte5.setAlignment(Pos.CENTER);
 		carte5.setSpacing(10);
-		
+
 		imgDeCarte5 = new ImageView(DataControl.CARTE_CS);
 		imgDeCarte5.setFitHeight(150);
 		imgDeCarte5.setFitWidth(150);
-		
-		bDeCarte5 = new Button("Utiliser"); //TODO Event
+
+		bDeCarte5 = new Button("Utiliser"); // TODO Event
 		bDeCarte5.setAlignment(Pos.CENTER);
 		bDeCarte5.setStyle(styleBoutons);
 		bDeCarte5.setPrefSize(largBouton, hBoutonDeck);
@@ -296,18 +296,18 @@ public class JeuPane extends StackPane implements JeuListener {
 		bDeCarte5.setOnMouseExited(event -> {
 			bDeCarte5.setStyle(styleBoutons);
 		});
-		
-		carte5.getChildren().addAll(imgDeCarte5,bDeCarte5);	
-		
-		carte6 = new VBox(); 
+
+		carte5.getChildren().addAll(imgDeCarte5, bDeCarte5);
+
+		carte6 = new VBox();
 		carte6.setAlignment(Pos.CENTER);
 		carte6.setSpacing(10);
-		
+
 		imgDeCarte6 = new ImageView(DataControl.CARTE_CS);
 		imgDeCarte6.setFitHeight(150);
 		imgDeCarte6.setFitWidth(150);
-		
-		bDeCarte6 = new Button("Utiliser"); //TODO Event
+
+		bDeCarte6 = new Button("Utiliser"); // TODO Event
 		bDeCarte6.setAlignment(Pos.CENTER);
 		bDeCarte6.setStyle(styleBoutons);
 		bDeCarte6.setPrefSize(largBouton, hBoutonDeck);
@@ -319,18 +319,18 @@ public class JeuPane extends StackPane implements JeuListener {
 		bDeCarte6.setOnMouseExited(event -> {
 			bDeCarte6.setStyle(styleBoutons);
 		});
-		
-		carte6.getChildren().addAll(imgDeCarte6,bDeCarte6);
-		
-		carte7 = new VBox(); 
+
+		carte6.getChildren().addAll(imgDeCarte6, bDeCarte6);
+
+		carte7 = new VBox();
 		carte7.setAlignment(Pos.CENTER);
 		carte7.setSpacing(10);
-		
+
 		imgDeCarte7 = new ImageView(DataControl.CARTE_CS);
 		imgDeCarte7.setFitHeight(150);
 		imgDeCarte7.setFitWidth(150);
-		
-		bDeCarte7 = new Button("Utiliser"); //TODO Event
+
+		bDeCarte7 = new Button("Utiliser"); // TODO Event
 		bDeCarte7.setAlignment(Pos.CENTER);
 		bDeCarte7.setStyle(styleBoutons);
 		bDeCarte7.setPrefSize(largBouton, hBoutonDeck);
@@ -342,18 +342,18 @@ public class JeuPane extends StackPane implements JeuListener {
 		bDeCarte7.setOnMouseExited(event -> {
 			bDeCarte7.setStyle(styleBoutons);
 		});
-		
-		carte7.getChildren().addAll(imgDeCarte7,bDeCarte7);
-		
-		carte8 = new VBox(); 
+
+		carte7.getChildren().addAll(imgDeCarte7, bDeCarte7);
+
+		carte8 = new VBox();
 		carte8.setAlignment(Pos.CENTER);
 		carte8.setSpacing(10);
-		
+
 		imgDeCarte8 = new ImageView(DataControl.CARTE_CS);
 		imgDeCarte8.setFitHeight(150);
 		imgDeCarte8.setFitWidth(150);
-		
-		bDeCarte8 = new Button("Utiliser"); //TODO Event
+
+		bDeCarte8 = new Button("Utiliser"); // TODO Event
 		bDeCarte8.setAlignment(Pos.CENTER);
 		bDeCarte8.setStyle(styleBoutons);
 		bDeCarte8.setPrefSize(largBouton, hBoutonDeck);
@@ -365,18 +365,18 @@ public class JeuPane extends StackPane implements JeuListener {
 		bDeCarte8.setOnMouseExited(event -> {
 			bDeCarte8.setStyle(styleBoutons);
 		});
-		
-		carte8.getChildren().addAll(imgDeCarte8,bDeCarte8);
-		
-		carte9 = new VBox(); 
+
+		carte8.getChildren().addAll(imgDeCarte8, bDeCarte8);
+
+		carte9 = new VBox();
 		carte9.setAlignment(Pos.CENTER);
 		carte9.setSpacing(10);
-		
+
 		imgDeCarte9 = new ImageView(DataControl.CARTE_CS);
 		imgDeCarte9.setFitHeight(150);
 		imgDeCarte9.setFitWidth(150);
-		
-		bDeCarte9 = new Button("Utiliser"); //TODO Event
+
+		bDeCarte9 = new Button("Utiliser"); // TODO Event
 		bDeCarte9.setAlignment(Pos.CENTER);
 		bDeCarte9.setStyle(styleBoutons);
 		bDeCarte9.setPrefSize(largBouton, hBoutonDeck);
@@ -388,18 +388,18 @@ public class JeuPane extends StackPane implements JeuListener {
 		bDeCarte9.setOnMouseExited(event -> {
 			bDeCarte9.setStyle(styleBoutons);
 		});
-		
-		carte9.getChildren().addAll(imgDeCarte9,bDeCarte9);
-		
-		carte10 = new VBox(); 
+
+		carte9.getChildren().addAll(imgDeCarte9, bDeCarte9);
+
+		carte10 = new VBox();
 		carte10.setAlignment(Pos.CENTER);
 		carte10.setSpacing(10);
-		
+
 		imgDeCarte10 = new ImageView(DataControl.CARTE_CS);
 		imgDeCarte10.setFitHeight(150);
 		imgDeCarte10.setFitWidth(150);
-		
-		bDeCarte10 = new Button("Utiliser"); //TODO Event
+
+		bDeCarte10 = new Button("Utiliser"); // TODO Event
 		bDeCarte10.setAlignment(Pos.CENTER);
 		bDeCarte10.setStyle(styleBoutons);
 		bDeCarte10.setPrefSize(largBouton, hBoutonDeck);
@@ -411,11 +411,11 @@ public class JeuPane extends StackPane implements JeuListener {
 		bDeCarte10.setOnMouseExited(event -> {
 			bDeCarte10.setStyle(styleBoutons);
 		});
-		
-		carte10.getChildren().addAll(imgDeCarte10,bDeCarte10);
-		
-		hbCartes.getChildren().addAll(carte1,carte2,carte3,carte4,carte5,carte6,carte7,carte8,carte9,carte10);
-		
+
+		carte10.getChildren().addAll(imgDeCarte10, bDeCarte10);
+
+		hbCartes.getChildren().addAll(carte1, carte2, carte3, carte4, carte5, carte6, carte7, carte8, carte9, carte10);
+
 		//////////////////////////////////////////
 
 		vote = new BorderPane();
@@ -525,8 +525,8 @@ public class JeuPane extends StackPane implements JeuListener {
 
 		vote.setTop(vbTitre);
 		vote.setCenter(vbVoteCentre);
-		//vote.setDisable(false);
-		//vote.setVisible(false);
+		// vote.setDisable(false);
+		// vote.setVisible(false);
 
 		///
 		fouilleCamion = new BorderPane();
@@ -583,7 +583,6 @@ public class JeuPane extends StackPane implements JeuListener {
 		imgCarte1 = new ImageView(DataControl.CARTE_BATTE);
 		imgCarte2 = new ImageView(DataControl.CARTE_BATTE);
 		imgCarte3 = new ImageView(DataControl.CARTE_BATTE);
-
 
 		hboxImgCarte.getChildren().addAll(imgCarte1, imgCarte2, imgCarte3);
 
@@ -1100,8 +1099,8 @@ public class JeuPane extends StackPane implements JeuListener {
 		fond.setEffect(flou);
 		fond.getChildren().add(imgFond);
 
-		stackPane.getChildren().addAll(fond, rectVigile, nomJoueur, phasePartie, hbCartes, vote, vbDeplCentre,
-				des, fouilleCamion, info);
+		stackPane.getChildren().addAll(fond, rectVigile, nomJoueur, phasePartie, hbCartes, vote, vbDeplCentre, des,
+				fouilleCamion, info);
 		stackPane.setBackground(new Background(new BackgroundFill(Color.BLACK, CornerRadii.EMPTY, null)));
 
 		this.getChildren().add(stackPane);
@@ -1222,7 +1221,20 @@ public class JeuPane extends StackPane implements JeuListener {
 		joueur4.setDisable(true);
 		joueur5.setDisable(true);
 		cartePanelReset();
-		
+		fouilleCamion.setVisible(false);
+
+		ImageView[] imgViews = { imgDeCarte1, imgDeCarte2, imgDeCarte3, imgDeCarte4, imgDeCarte5, imgDeCarte6,
+				imgDeCarte7, imgDeCarte8, imgDeCarte9, imgDeCarte10 };
+		Button[] buttons = { bDeCarte1, bDeCarte2, bDeCarte3, bDeCarte4, bDeCarte5, bDeCarte6, bDeCarte7, bDeCarte8,
+				bDeCarte9, bDeCarte10 };
+		VBox[] carteVbox = { carte1, carte2, carte3, carte4, carte5, carte6, carte7, carte8, carte9, carte10 };
+
+		for (VBox vBox : carteVbox)
+			vBox.setVisible(false);
+		for (ImageView imageView : imgViews)
+			imageView.setDisable(true);
+		for (Button button : buttons)
+			button.setDisable(true);
 	}
 
 	@Override
@@ -1334,22 +1346,22 @@ public class JeuPane extends StackPane implements JeuListener {
 	public void couleurJoueur(Couleur couleur) {
 		Platform.runLater(() -> {
 			switch (couleur) {
-			case BLEU:
+			case B:
 				imgFond.setImage(new Image(DataControl.BLEU));
 				break;
-			case ROUGE:
+			case R:
 				imgFond.setImage(new Image(DataControl.ROUGE));
 				break;
-			case VERT:
+			case V:
 				imgFond.setImage(new Image(DataControl.VERT));
 				break;
-			case JAUNE:
+			case J:
 				imgFond.setImage(new Image(DataControl.JAUNE));
 				break;
-			case MARRON:
+			case M:
 				imgFond.setImage(new Image(DataControl.MARRON));
 				break;
-			case NOIR:
+			case N:
 				imgFond.setImage(new Image(DataControl.NOIR));
 				break;
 			default:
@@ -1369,24 +1381,6 @@ public class JeuPane extends StackPane implements JeuListener {
 	public void deplacementChange() {
 		Platform.runLater(() -> {
 			labDeplPers.setText("Déplacement des personnages");
-		});
-	}
-
-	@Override
-	public void choisirCarte(CarteType carte, List<Couleur> listeCouleurJoueurVivant, boolean garder, boolean donner,
-			boolean defausser, boolean utiliser) {
-		Platform.runLater(() -> {
-			fouilleCamion.setVisible(true);
-			imgCarte1.setImage(new Image(convertCarte(carte)));
-			fouilleCamion.setVisible(true);
-			bCarte1.setDisable(false);
-			bCarte1.setOnAction(EventHandler -> {
-				selectedCarte = carte;
-				bChoixUtiliser.setDisable(!utiliser);
-				bChoixGarder.setDisable(!garder);
-				bChoixDonner.setDisable(!donner);
-				bChoixDefausser.setDisable(!defausser);
-			});
 		});
 	}
 
@@ -1452,6 +1446,7 @@ public class JeuPane extends StackPane implements JeuListener {
 		Button[] joueursButton = { joueur1c, joueur2c, joueur3c, joueur4c, joueur5c };
 		for (int i = 0; i < listeCouleurJoueurVivant.size(); i++) {
 			joueursButton[i].setDisable(false);
+			joueursButton[i].setText(listeCouleurJoueurVivant.get(i).nomEntier());
 			Couleur tmpCouleur = listeCouleurJoueurVivant.get(i);
 			joueursButton[i].setOnAction(EventHandler -> {
 				selectedCouleur = tmpCouleur;
@@ -1470,39 +1465,51 @@ public class JeuPane extends StackPane implements JeuListener {
 	public void choisirCarte(List<CarteType> listeCartes, List<Couleur> listeCouleurJoueurVivant, boolean garder,
 			boolean donner, boolean defausser, boolean utiliser) {
 		Platform.runLater(() -> {
+			vote.setVisible(false);
+			System.out.println(listeCartes.size());
+			System.out.println(listeCouleurJoueurVivant.size());
 			fouilleCamion.setVisible(true);
-			if (listeCartes.size() <= 1) {
+			if (listeCartes.size() >= 1) {
 				imgCarte1.setImage(new Image(convertCarte(listeCartes.get(0))));
 				bCarte1.setDisable(false);
+				bCarte1.setText(listeCartes.get(0).nomEntier());
 				bCarte1.setOnAction(EventHandler -> {
 					selectedCarte = listeCartes.get(0);
-					bChoixUtiliser.setDisable(!utiliser);
 					bChoixGarder.setDisable(!garder);
 					bChoixDonner.setDisable(!donner);
 					bChoixDefausser.setDisable(!defausser);
 				});
+			} else {
+				imgCarte1.setDisable(true);
+				imgCarte1.setImage(new Image(DataControl.CARTE_VIDE));
 			}
-			if (listeCartes.size() <= 2) {
+			if (listeCartes.size() >= 2) {
 				imgCarte2.setImage(new Image(convertCarte(listeCartes.get(1))));
 				bCarte2.setDisable(false);
+				bCarte2.setText(listeCartes.get(1).nomEntier());
 				bCarte2.setOnAction(EventHandler -> {
 					selectedCarte = listeCartes.get(1);
-					bChoixUtiliser.setDisable(!utiliser);
 					bChoixGarder.setDisable(!garder);
 					bChoixDonner.setDisable(!donner);
 					bChoixDefausser.setDisable(!defausser);
 				});
+			} else {
+				imgCarte2.setDisable(true);
+				imgCarte2.setImage(new Image(DataControl.CARTE_VIDE));
 			}
-			if (listeCartes.size() <= 3) {
+			if (listeCartes.size() >= 3) {
 				imgCarte3.setImage(new Image(convertCarte(listeCartes.get(2))));
 				bCarte3.setDisable(false);
+				bCarte3.setText(listeCartes.get(2).nomEntier());
 				bCarte3.setOnAction(EventHandler -> {
 					selectedCarte = listeCartes.get(2);
-					bChoixUtiliser.setDisable(!utiliser);
 					bChoixGarder.setDisable(!garder);
 					bChoixDonner.setDisable(!donner);
 					bChoixDefausser.setDisable(!defausser);
 				});
+			} else {
+				imgCarte3.setDisable(true);
+				imgCarte3.setImage(new Image(DataControl.CARTE_VIDE));
 			}
 			if (listeCouleurJoueurVivant != null)
 				setCarteOfferte(listeCouleurJoueurVivant);
@@ -1521,7 +1528,7 @@ public class JeuPane extends StackPane implements JeuListener {
 
 	public void cartePanelReset() {
 		fouilleCamion.setVisible(false);
-		//vote.setVisible(false);
+		// vote.setVisible(false);
 		hboxBoutonJoueur.setVisible(false);
 		joueur1c.setDisable(true);
 		joueur2c.setDisable(true);
@@ -1537,5 +1544,82 @@ public class JeuPane extends StackPane implements JeuListener {
 		bChoixUtiliser.setDisable(true);
 		selectedCarte = null;
 		selectedCouleur = null;
+	}
+
+	@Override
+	public void updateCarte() {
+		Platform.runLater(() -> {
+			ImageView[] imgViews = { imgDeCarte1, imgDeCarte2, imgDeCarte3, imgDeCarte4, imgDeCarte5, imgDeCarte6,
+					imgDeCarte7, imgDeCarte8, imgDeCarte9, imgDeCarte10 };
+			Button[] buttons = { bDeCarte1, bDeCarte2, bDeCarte3, bDeCarte4, bDeCarte5, bDeCarte6, bDeCarte7, bDeCarte8,
+					bDeCarte9, bDeCarte10 };
+			VBox[] carteVbox = { carte1, carte2, carte3, carte4, carte5, carte6, carte7, carte8, carte9, carte10 };
+			for (int i = 0; i < 10; i++) {
+				if (i < core.getIdjr().getListeCarte().size()) {
+					imgViews[i].setImage(new Image(convertCarte(core.getIdjr().getListeCarte().get(i))));
+					carteVbox[i].setVisible(true);
+					imgViews[i].setDisable(false);
+					CarteType type = core.getIdjr().getListeCarte().get(i);
+					buttons[i].setOnAction(EventHandler -> {
+						selectedCarte = type;
+						core.getIdjr().utiliserCarteChoisi(true);
+						resetUtiliserCarte();
+					});
+				} else {
+					imgViews[i].setImage(new Image(DataControl.CARTE_VIDE));
+					carteVbox[i].setVisible(false);
+					imgViews[i].setDisable(true);
+				}
+			}
+		});
+	}
+
+	@Override
+	public void choisirUtiliserCarte() {
+		Platform.runLater(() -> {
+			Button[] buttons = { bDeCarte1, bDeCarte2, bDeCarte3, bDeCarte4, bDeCarte5, bDeCarte6, bDeCarte7, bDeCarte8,
+					bDeCarte9, bDeCarte10 };
+			for (int i = 0; i < 10; i++) {
+				if (i < core.getIdjr().getListeCarte().size()) {
+					buttons[i].setDisable(false);
+				}
+			}
+		});
+	}
+
+	public void resetUtiliserCarte() {
+		Button[] buttons = { bDeCarte1, bDeCarte2, bDeCarte3, bDeCarte4, bDeCarte5, bDeCarte6, bDeCarte7, bDeCarte8,
+				bDeCarte9, bDeCarte10 };
+		for (int i = 0; i < 10; i++) {
+			if (i < core.getIdjr().getListeCarte().size()) {
+				buttons[i].setDisable(true);
+			}
+		}
+	}
+	
+	public void resetVoteCarte() {
+		vote.setVisible(false);
+		Button[] buttons = { joueur1, joueur2, joueur3, joueur4, joueur5 };
+		for (int i = 0; i < buttons.length; i++) {
+			buttons[i].setDisable(true);
+		}
+	}
+
+	@Override
+	public void setVote(List<Couleur> listeCouleurJoueur) {
+		Platform.runLater(() -> {
+			vote.setVisible(true);
+			fouilleCamion.setVisible(false);
+			Button[] buttons = { joueur1, joueur2, joueur3, joueur4, joueur5 };
+			for (int i = 0; i < listeCouleurJoueur.size(); i++) {
+				buttons[i].setDisable(false);
+				Couleur cible = listeCouleurJoueur.get(i);
+				buttons[i].setOnAction(EventHandler -> {
+					core.getIdjr().setVoteChoisi(cible);
+					core.getIdjr().voteChoisi(true);
+					resetVoteCarte();
+				});
+			}
+		});
 	}
 }

@@ -1,13 +1,12 @@
 package idjr;
 
-import reseau.packet.Packet;
-import reseau.socket.ConnexionType;
+import reseau.paquet.Paquet;
 import reseau.socket.ControleurReseau;
 import reseau.socket.TraitementPaquet;
+import reseau.type.ConnexionType;
 
 import java.net.DatagramPacket;
 import java.net.InetAddress;
-import java.net.Socket;
 import java.net.UnknownHostException;
 import java.text.MessageFormat;
 
@@ -41,8 +40,8 @@ public class TraitementPaquetUdp extends TraitementPaquet<DatagramPacket> {
 	 * @throws IllegalStateException si il n'y a pas de traitement pour ce paquet
 	 */
 	@Override
-	public void traitement(Packet packet, String message, DatagramPacket extra) {
-		switch (packet.getKey()) {
+	public void traitement(Paquet packet, String message, DatagramPacket extra) {
+		switch (packet.getCle()) {
 		case "ACP":
 			acp(packet, message);
 			break;
@@ -54,36 +53,36 @@ public class TraitementPaquetUdp extends TraitementPaquet<DatagramPacket> {
 			break;
 		default:
 			throw new IllegalStateException(
-					MessageFormat.format("[UDP] Il n''y a pas de traitement possible pour {0}", packet.getKey()));
+					MessageFormat.format("[UDP] Il n''y a pas de traitement possible pour {0}", packet.getCle()));
 		}
 	}
 
-	private void rp(Packet packet, String message) {
-		if (ConnexionType.SERVER != getControleurReseau().getConnexionType())
+	private void rp(Paquet packet, String message) {
+		if (ConnexionType.SERVEUR != getControleurReseau().getConnexionType())
 			return;
 	}
 
-	public void acp(Packet packet, String message) {
+	public void acp(Paquet packet, String message) {
 		if (ConnexionType.CLIENT != getControleurReseau().getConnexionType())
 			return;
 	}
 
-	public void amp(Packet packet, String message) {
+	public void amp(Paquet packet, String message) {
 		if (ConnexionType.CLIENT != getControleurReseau().getConnexionType())
 			return;
-		String partie = (String) packet.getValue(message, 1);
+		String partie = (String) packet.getValeur(message, 1);
 		InetAddress ip = null;
 		try {
-			ip = InetAddress.getByName((String) packet.getValue(message, 2));
+			ip = InetAddress.getByName((String) packet.getValeur(message, 2));
 		} catch (UnknownHostException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		int port = (int) packet.getValue(message, 3);
+		int port = (int) packet.getValeur(message, 3);
 		PartieInfo partieInfo = new PartieInfo(ip, port, partie, core.getTypeJoueur());
 		core.addPartie(partieInfo);
 
-		System.out.println(MessageFormat.format("Mise a jour d''une partie !\n{0}", packet.getValue(message, 1)));
+		System.out.println(MessageFormat.format("Mise a jour d''une partie !\n{0}", packet.getValeur(message, 1)));
 	}
 
 	@Override

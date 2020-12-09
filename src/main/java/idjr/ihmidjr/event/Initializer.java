@@ -104,14 +104,23 @@ public class Initializer {
 			jl.choisirCarte(listeCartes, listeCouleurJoueurVivant, garder, donner, defausser, utiliser);
 	}
 
-	public void choisirCarte(CarteType carte, List<Couleur> listeCouleurJoueurVivant, boolean garder, boolean donner,
-			boolean defausser, boolean utiliser) {
-		for (JeuListener jl : listenersjl)
-			jl.choisirCarte(carte, listeCouleurJoueurVivant, garder, donner, defausser, utiliser);
-	}
-
 	public void nomJoueurs(List<String> listeNomJoueur) {
 		for (JeuListener jl : listenersjl)
 			jl.nomJoueurs(listeNomJoueur);
+	}
+	
+	public void choisirUtiliserCarte() {
+		for (JeuListener jl : listenersjl)
+			jl.choisirUtiliserCarte();
+	}
+	
+	public void updateCarte() {
+		for (JeuListener jl : listenersjl)
+			jl.updateCarte();
+	}
+	
+	public void setVote(List<Couleur> joueur) {
+		for (JeuListener jl : listenersjl)
+			jl.setVote(joueur);
 	}
 }
