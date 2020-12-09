@@ -2,7 +2,6 @@ package idjr;
 
 import idjr.ihmidjr.event.Initializer;
 import idjr.ihmidjr.event.JeuListener;
-import pp.ihm.Core;
 import reseau.socket.ControleurReseau;
 import reseau.tool.ReseauOutils;
 import reseau.tool.ThreadOutils;

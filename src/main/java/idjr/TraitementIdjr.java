@@ -9,7 +9,6 @@ import java.util.Map;
 import java.util.Random;
 
 import idjr.ihmidjr.event.JeuListener;
-import pp.ihm.Core;
 import reseau.type.CarteType;
 import reseau.type.Couleur;
 import reseau.type.PionCouleur;
