@@ -1,12 +1,12 @@
 package reseau.socket;
 
-import reseau.packet.Packet;
+import reseau.paquet.Paquet;
 
 /**
  * <h1>Patron pour un traitement de paquet les paquet</h1>
  *
  * @author Sébastien Aglaé
- * @version 1.0
+ * @version 2.0
  */
 public abstract class TraitementPaquet<T> {
 	private ControleurReseau controleurReseau;
@@ -15,7 +15,7 @@ public abstract class TraitementPaquet<T> {
 
 	public abstract void set(Object core);
 
-	public abstract void traitement(Packet packet, String message, T extra);
+	public abstract void traitement(Paquet packet, String message, T extra);
 
 	public ControleurReseau getControleurReseau() {
 		return controleurReseau;

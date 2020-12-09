@@ -10,13 +10,9 @@ import java.util.List;
  * <h1> Outils pour le réseau </h1>
  *
  * @author Sébastien Aglaé
- * @version 1.0
+ * @version 2.0
  */
-public abstract class ReseauOutils {
-    private ReseauOutils() {
-        throw new IllegalStateException("Utility class");
-    }
-
+public interface ReseauOutils {
     static final String URL_TEST = "1.1.1.1";
 
     /**
@@ -24,12 +20,10 @@ public abstract class ReseauOutils {
      *
      * @return L'adresse ip de la bonne interface
      */
-    public static InetAddress getLocalIp() {
+     static InetAddress getLocalIp() {
         try (Socket socket = new Socket()) {
             socket.connect(new InetSocketAddress(URL_TEST, 80));
-            InetAddress ip = socket.getLocalAddress();
-            socket.close();
-            return ip;
+            return socket.getLocalAddress();
         } catch (IOException e) {
             return null;
         }
@@ -40,7 +34,7 @@ public abstract class ReseauOutils {
      *
      * @return La liste des interfaces
      */
-    public static List<InetAddress> getInterfaces() throws SocketException {
+     static List<InetAddress> getInterfaces() throws SocketException {
         List<InetAddress> inets = new ArrayList<>();
         Enumeration<NetworkInterface> gni = NetworkInterface.getNetworkInterfaces();
         while (gni.hasMoreElements()) {
@@ -59,7 +53,7 @@ public abstract class ReseauOutils {
      * @return Si le port est deja occupé
      * @exception  IllegalArgumentException Si le port se trouve en dehors [1, 65535]
      */
-    public static boolean isBindSocket(int port) {
+     static boolean isBindSocket(int port) {
         if (port > 65535 || port < 1)
             throw new IllegalArgumentException("Une erreur peut se produire (max 65535 & min 1) : " + port);
 
@@ -76,17 +70,22 @@ public abstract class ReseauOutils {
      * Permet d'obtenir un port disponible.
      *
      * @param debutPort Le port de départ (Inclus)
-     * @param intervalle     L'intervalle de recherche
+     * @param finPort     Le port de fin (Inclus)
      * @return Un port disponible
      * @exception  IllegalArgumentException Si le port se trouve en dehors [1, 65535]
      * @exception  IllegalArgumentException Si pas de port disponible
      */
-    public static int getPortSocket(int debutPort, int intervalle) {
-        int tmpMax = debutPort + intervalle;
-        if (tmpMax > 65535 || tmpMax < 1)
-            throw new IllegalArgumentException("Une erreur peut se produire (max 65535 & min 1) : " + tmpMax);
+     static int getPortSocket(int debutPort, int finPort) {
+        if (debutPort >= finPort)
+            throw new IllegalArgumentException("Le port de fin doit etre entre 1 et 65535 : " + finPort);
 
-        for (int i = debutPort; i < tmpMax; i++)
+        if (debutPort > 65535 || debutPort < 1)
+            throw new IllegalArgumentException("Le port de début doit etre entre 1 et 65535 : " + debutPort);
+
+        if (finPort > 65535)
+            throw new IllegalArgumentException("Le port de fin doit etre entre 1 et 65535 : " + finPort);
+
+        for (int i = debutPort; i < finPort; i++)
             if (!isBindSocket(i))
                 return i;
 

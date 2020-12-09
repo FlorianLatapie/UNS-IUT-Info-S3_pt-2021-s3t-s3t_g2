@@ -4,12 +4,18 @@ import reseau.tool.PaquetOutils;
 
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
+import java.io.EOFException;
 import java.io.IOException;
+import java.lang.reflect.Array;
 import java.net.InetAddress;
 import java.net.Socket;
 import java.net.UnknownHostException;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.Iterator;
 import java.util.List;
+import java.util.concurrent.ExecutionException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -19,20 +25,21 @@ import static java.util.Collections.synchronizedList;
  * <h1>Permet de gerer un serveur TCP du coté client</h1>
  *
  * @author Sébastien Aglaé
- * @version 1.0
+ * @version 2.0
  */
-public class TcpClient implements Runnable {
+public class TcpClient implements Runnable, IEchangeSocket, IMessagePaquet {
 	private final ControleurReseau controleurReseau;
 	private Socket socket;
 	private DataOutputStream fluxSortie;
 	private DataInputStream fluxEntre;
-	private InetAddress ip;
-	private int port;
+	private final InetAddress ip;
+	private final int port;
+	private String cleFin;
 
 	private boolean estLancer;
 	private final List<String> messagesTampon;
 
-	private Logger logger;
+	private final Logger logger;
 
 	/**
 	 * @param controleurReseau Le controleur reseau du client
@@ -48,6 +55,22 @@ public class TcpClient implements Runnable {
 		this.logger = Logger.getLogger(getClass().getName());
 	}
 
+	// TODO Temporaire ?
+	public TcpClient(Socket socket, ControleurReseau controleurReseau) {
+		this.messagesTampon = synchronizedList(new ArrayList<String>());
+		this.controleurReseau = controleurReseau;
+		this.estLancer = true;
+		this.ip = controleurReseau.getIp();
+		this.port = controleurReseau.getTcpPort();
+		this.logger = Logger.getLogger(getClass().getName());
+		this.socket = socket;
+	}
+
+	public TcpClient(Socket socket, ControleurReseau controleurReseau, String cleFin) {
+		this(socket, controleurReseau);
+		this.cleFin = cleFin;
+	}
+
 	/**
 	 * Permet d'ouvrir la connexion.
 	 *
@@ -55,23 +78,26 @@ public class TcpClient implements Runnable {
 	 * @throws IOException Si les flux de s'ouvre pas correctement
 	 */
 	private boolean ouvrir(InetAddress ip, int port) throws IOException {
-		logger.log(Level.INFO, "Serveur TCP ouvert");
+		logger.log(Level.INFO, "Client TCP ouvert");
 		boolean attendre = true;
 		while (attendre)
 			try {
-				try {
-					Thread.sleep(1000);
-				} catch (InterruptedException e) {
-					e.printStackTrace();
-				}
 				socket = new Socket(ip, port);
 				attendre = false;
-			} catch (UnknownHostException uhe) {
-			} catch (IOException ioe) {
+			} catch (Exception ignored) {
+				Thread.yield();
 			}
 
-		if (socket == null)
-			return false;
+		fluxSortie = new DataOutputStream(socket.getOutputStream());
+		fluxEntre = new DataInputStream(socket.getInputStream());
+
+		reception();
+
+		return true;
+	}
+
+	private boolean ouvrir() throws IOException {
+		logger.log(Level.INFO, "Serveur TCP ouvert");
 
 		fluxSortie = new DataOutputStream(socket.getOutputStream());
 		fluxEntre = new DataInputStream(socket.getInputStream());
@@ -83,13 +109,25 @@ public class TcpClient implements Runnable {
 
 	@Override
 	public void run() {
+		logger.finest("Démarrage du client TCP");
+		logger.log(Level.FINEST, "Client TCP sur l'ip {0}", ip);
+		logger.log(Level.FINEST, "Client TCP sur le port {1}", port);
 		try {
-			ouvrir(ip, port);
+			if (socket == null)
+				ouvrir(ip, port);
+			else
+				ouvrir();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 
 		reception();
+		try {
+			arreter();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 	/**
@@ -98,8 +136,7 @@ public class TcpClient implements Runnable {
 	 * @param message Le message a a envoyer
 	 */
 	public void envoyer(String message) {
-		if (socket == null)
-			return;
+		logger.log(Level.INFO, "Envoie d'un message : " + message);
 
 		try {
 			fluxSortie.writeUTF(message);
@@ -113,6 +150,7 @@ public class TcpClient implements Runnable {
 	 * Permet de recevoir des messages du client. Bloque l'execution de thread.
 	 */
 	private void reception() {
+		logger.log(Level.INFO, "La reception des messages est actif");
 		String message;
 		while (estLancer) {
 			try {
@@ -121,9 +159,21 @@ public class TcpClient implements Runnable {
 				break;
 			}
 
+			logger.log(Level.INFO, "Reception de " + message);
 			String cle = PaquetOutils.getCleMessage(message);
-			controleurReseau.getTraitementPaquetTcp().traitement(controleurReseau.getPaquetTcp(cle), message, socket);
+			if (cleFin != null)
+				if (cleFin.equals(cle))
+					break;
+
+			controleurReseau.traitementPaquetTcp(controleurReseau.getPaquetTcp(cle), message, this);
 			messagesTampon.add(message);
+		}
+
+		try {
+			arreter();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 	}
 
@@ -132,16 +182,14 @@ public class TcpClient implements Runnable {
 	 *
 	 * @throws IOException Si les flux ou si le socket ne se ferme pas correctement
 	 */
-	public void arreter() throws IOException {
-		;
+	private void arreter() throws IOException {
+		logger.log(Level.INFO, "Arret du client TCP");
 		estLancer = false;
 
 		if (socket != null) {
-			System.out.println("TCP CLIENT §§§§§§");
-			socket.shutdownInput();
-			socket.shutdownOutput();
 			socket.close();
 		}
+		logger.log(Level.INFO, "Client TCP fermé");
 	}
 
 	/**
@@ -150,11 +198,12 @@ public class TcpClient implements Runnable {
 	 * @param message Le message a ajouter
 	 */
 	public void ajouterMessage(String message) {
+		logger.log(Level.INFO, "Ajout d'un message dans la mémoire tampon");
 		messagesTampon.add(message);
 	}
 
 	/**
-	 * Attend le message du mot-clé correspondant.
+	 * Permet d'obtenir un message depuis la mémoire tampon
 	 *
 	 * @param cle La cle du message
 	 * @return Le message du mot-clé correspondant
@@ -176,7 +225,8 @@ public class TcpClient implements Runnable {
 	 * @return Si le message est contenu
 	 */
 	private boolean contient(String cle) {
-		for (String message : messagesTampon)
+		List<String> tmpList = new ArrayList<>(messagesTampon);
+		for (String message : tmpList)
 			if (PaquetOutils.getCleMessage(message).equals(cle))
 				return true;
 
@@ -190,6 +240,11 @@ public class TcpClient implements Runnable {
 	 */
 	public void attendreMessage(String cle) {
 		while (!contient(cle))
-			;
+			try {
+				Thread.sleep(100);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 	}
 }
