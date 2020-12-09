@@ -1,10 +1,10 @@
 package botfaible;
 
-import reseau.packet.Packet;
-import reseau.socket.ConnexionType;
+import reseau.paquet.Paquet;
 import reseau.socket.ControleurReseau;
 import reseau.socket.TraitementPaquet;
 import reseau.tool.ThreadOutils;
+import reseau.type.ConnexionType;
 
 import java.io.IOException;
 import java.net.DatagramPacket;
@@ -25,7 +25,7 @@ public class TraitementPaquetUdp extends TraitementPaquet<DatagramPacket> {
 	private BotFaible core;// TODO Add the game manager (core)
 
 	/**
-	 * @param core           coeur du jeu
+	 * @param core coeur du jeu
 	 */
 	public TraitementPaquetUdp(Object core) {
 		this.core = (BotFaible) core;// TODO Add the game manager (core)
@@ -43,13 +43,13 @@ public class TraitementPaquetUdp extends TraitementPaquet<DatagramPacket> {
 	 * @throws IllegalStateException si il n'y a pas de traitement pour ce paquet
 	 */
 	@Override
-	public void traitement(Packet packet, String message, DatagramPacket datagramPacket) {
+	public void traitement(Paquet packet, String message, DatagramPacket datagramPacket) {
 		try {
 			Thread.sleep(core.getDelay());
 		} catch (InterruptedException e) {
-			
+
 		}
-		switch (packet.getKey()) {
+		switch (packet.getCle()) {
 		case "ACP":
 			acp(packet, message);
 			break;
@@ -63,59 +63,47 @@ public class TraitementPaquetUdp extends TraitementPaquet<DatagramPacket> {
 			break;
 		default:
 			throw new IllegalStateException(
-					MessageFormat.format("[UDP] Il n''y a pas de traitement possible pour {0}", packet.getKey()));
+					MessageFormat.format("[UDP] Il n''y a pas de traitement possible pour {0}", packet.getCle()));
 		}
 	}
 
-	public void acp(Packet packet, String message) {
+	public void acp(Paquet packet, String message) {
 		if (ConnexionType.CLIENT != getControleurReseau().getConnexionType())
 			return;
 		InetAddress address = null;
 		try {
-			address = InetAddress.getByName((String) packet.getValue(message, 2));
+			address = InetAddress.getByName((String) packet.getValeur(message, 2));
 		} catch (UnknownHostException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
 		core.setIpPp(address);
-		core.setPortPp((int) packet.getValue(message, 3));
+		core.setPortPp((int) packet.getValeur(message, 3));
 
 		System.out.println(
-				MessageFormat.format("Une nouvelle partie vient d''etre trouvÃ© !\n{0}", packet.getValue(message, 1)));
+				MessageFormat.format("Une nouvelle partie vient d''etre trouvÃ© !\n{0}", packet.getValeur(message, 1)));
 		System.out.println("Voulez-vous rejoindre cette partie ? (K)");
-		Scanner sc = new Scanner(System.in);
-		// String rep = new Scanner(System.in).nextLine();
-		String rep = "K";
-		if (rep.equals("K")) {
-			System.out.println("Entrez votre nom !");
-			// String nomdujoueur = sc.nextLine();
-			String nomdujoueur = "BOT" + new Random().nextInt(9999);
-			core.setNom(nomdujoueur);
-			String messageTcp = getControleurReseau().construirePaquetTcp("DCP",nomdujoueur,
-					core.getTypeJoueur(), "P" + (int) packet.getValue(message, 1));
-			ThreadOutils.asyncTask(() -> {
-				try {
-					Thread.sleep(3000);
-				} catch (InterruptedException e) {
-				}
+		
+		String nomdujoueur = "BOT" + new Random().nextInt(9999);
+		core.setNom(nomdujoueur);
+		String messageTcp = getControleurReseau().construirePaquetTcp("DCP", nomdujoueur, core.getTypeJoueur(),
+				"P" + (int) packet.getValeur(message, 1));
+		ThreadOutils.asyncTask(() -> {
 
-					getControleurReseau().getTcpClient().envoyer(messageTcp);
+			getControleurReseau().envoyerTcp(messageTcp);
 
-				getControleurReseau().getTcpClient().attendreMessage("ACP");
-			});
-
-		}
-		sc.close();
+			getControleurReseau().attendreTcp("ACP");
+		});
 	}
 
-	public void amp(Packet packet, String message) {
+	public void amp(Paquet packet, String message) {
 		if (ConnexionType.CLIENT != getControleurReseau().getConnexionType())
 			return;
 
-		System.out.println(MessageFormat.format("Mise a jour d''une partie !\n{0}", packet.getValue(message, 1)));
+		System.out.println(MessageFormat.format("Mise a jour d''une partie !\n{0}", packet.getValeur(message, 1)));
 	}
 
-	public void ip(Packet packet, String message) {
+	public void ip(Paquet packet, String message) {
 		if (ConnexionType.CLIENT != getControleurReseau().getConnexionType())
 			return;
 
@@ -124,6 +112,6 @@ public class TraitementPaquetUdp extends TraitementPaquet<DatagramPacket> {
 
 	@Override
 	public void set(Object core) {
-		this.core = (BotFaible)core;
+		this.core = (BotFaible) core;
 	}
 }

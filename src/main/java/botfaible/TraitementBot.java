@@ -15,7 +15,7 @@ import reseau.type.VoteType;
 
 public class TraitementBot {
 
-	public void initialiserPartie(BotFaible core, List<?> nomsT, List<Couleur> couleursT, int lieuferme) {
+	public void initialiserPartie(BotFaible core, List<?> nomsT, List<Couleur> couleursT, String lieuferme) {
 		List<String> noms = new ArrayList<>();
 		List<Couleur> couleurs = new ArrayList<>();
 		core.setJoueurEnVie((couleursT));
@@ -24,7 +24,7 @@ public class TraitementBot {
 		for (Couleur o : couleursT)
 			couleurs.add((Couleur) o);
 		core.setCouleur(IdjrTools.getCouleurByName(core.getNom(), noms, couleurs));
-		if (lieuferme == 2) {
+		if (lieuferme == "2") {
 			core.getLieuOuvert().add(1);
 			core.getLieuOuvert().add(3);
 			core.getLieuOuvert().add(4);
@@ -221,7 +221,7 @@ public class TraitementBot {
 		else
 			nbrCarteJouee = r.nextInt(nbrCartePossibleDejouer);
 		for (int i = 0; i < nbrCarteJouee; i++)
-			listePionCache.add(core.getPoinSacrDispo().get(i));
+			listePionCache.add(core.getListePion().get(i));
 		return listePionCache;
 	}
 
@@ -290,6 +290,7 @@ public class TraitementBot {
 		if (listeCarte.size() == 2) {
 			carteGarde = listeCarte.get(0);
 			bot.addCarte(carteGarde);
+			carteOfferte = listeCarte.get(1);
 			System.out.print("carte fouille");
 			System.out.print("4" + bot.couleurJoueurPresent().size());
 			couleur = getRandom2(bot, VoteType.FDC);

@@ -1,9 +1,9 @@
 package botfaible;
 
-import reseau.socket.ConnexionType;
 import reseau.socket.ControleurReseau;
 import reseau.tool.ReseauOutils;
 import reseau.type.CarteType;
+import reseau.type.ConnexionType;
 import reseau.type.Couleur;
 import reseau.type.PionCouleur;
 import reseau.type.TypeJoueur;
