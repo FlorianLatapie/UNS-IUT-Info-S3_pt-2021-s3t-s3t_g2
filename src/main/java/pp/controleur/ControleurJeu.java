@@ -2,9 +2,8 @@ package pp.controleur;
 
 import pp.ihm.eventListener.Initializer;
 import pp.*;
-import reseau.socket.Connexion;
-import reseau.socket.ConnexionType;
 import reseau.socket.ControleurReseau;
+import reseau.socket.TcpClient;
 import reseau.tool.ReseauOutils;
 import reseau.tool.ThreadOutils;
 import reseau.type.*;
@@ -48,7 +47,7 @@ public class ControleurJeu {
 	private final Initializer initializer;
 	private Thread coreThread;
 	private List<Joueur> jmort;
-	private Status status;
+	private Statut statut;
 	private final List<String> tempPaquet;
 
 	private final ArrayList<Joueur> joueurs;
@@ -73,7 +72,7 @@ public class ControleurJeu {
 		TraitementPaquetTcp tcp = new TraitementPaquetTcp(this);
 		TraitementPaquetUdp udp = new TraitementPaquetUdp(this);
 		this.nwm = new ControleurReseau(tcp, udp);
-		this.status = Status.ATTENTE;
+		this.statut = Statut.ATTENTE;
 		initReseau();
 		this.port = nwm.getTcpPort();
 		this.intPartieId = new Random().nextInt(10000000);
@@ -105,7 +104,7 @@ public class ControleurJeu {
 				e1.printStackTrace();
 			}
 			String m = nwm.construirePaquetUdp("ACP", intPartieId, nwm.getIp().getHostAddress(), port, nomPartie,
-					nbjtotal, nbjr, nbjv, status);
+					nbjtotal, nbjr, nbjv, statut);
 			nwm.envoyerUdp(m);
 			while (joueurs.size() != this.nbjtotal)
 				try {
@@ -115,7 +114,7 @@ public class ControleurJeu {
 				}
 			if (initializer != null)
 				initializer.joueurPret();
-			status = Status.COMPLETE;
+			statut = Statut.COMPLETE;
 			joueurs.get(0).setChefDesVigiles(true);
 			jeu = new Partie(joueurs);
 			updateValues();
@@ -173,7 +172,7 @@ public class ControleurJeu {
 	private void demarerJeu() throws InterruptedException {
 		// TODO 3 ou 4 PION | UN OU PLUSIEURS LIEUX FERME
 		out.println(jeu.toString());
-		String m = nwm.construirePaquetTcp("IP", jeu.getJoueursNoms(), jeu.getJoueursCouleurs(), 0, 3, partieId);
+		String m = nwm.construirePaquetTcp("IP", jeu.getJoueursNoms(), jeu.getJoueursCouleurs(), " ", 3, partieId);
 		for (Joueur j : jeu.getJoueurs().values())
 			j.getConnection().envoyer(m);
 		distribuerCarte();
@@ -200,10 +199,10 @@ public class ControleurJeu {
 			int val = new Scanner(System.in).nextInt();
 			ip = ips.get(val);
 		}
-		nwm.initConnexion(ConnexionType.SERVER, ip);
+		nwm.initConnexion(ConnexionType.SERVEUR, ip);
 	}
 
-	public String ajouterJoueur(InetAddress ip, int port, String nom, TypeJoueur typeJoueur, Connexion connection) {
+	public String ajouterJoueur(InetAddress ip, int port, String nom, TypeJoueur typeJoueur, TcpClient connection) {
 		if (typeJoueur == TypeJoueur.JR && nbjractuel == nbjr)
 			return null;
 		if (typeJoueur == TypeJoueur.BOT && nbjvactuel == nbjv)
@@ -224,15 +223,16 @@ public class ControleurJeu {
 		nextJoueurId++;
 		return tmp;
 	}
-	
+
 	public void distribuerCarte() {
-		for (Joueur j: jeu.getJoueurs().values()) {
+		for (Joueur j : jeu.getJoueurs().values()) {
 			CarteType a = jeu.getCartes().get(0);
 			j.getCartes().add(a);
 			jeu.getCartes().remove(0);
 			j.getConnection().envoyer(nwm.construirePaquetTcp("DC", a, partieId));
 		}
 	}
+
 	/**
 	 * Execute le déroulement d'une partie
 	 */
@@ -283,7 +283,7 @@ public class ControleurJeu {
 			j.getConnection().envoyer(m);
 		Joueur j;
 		if (!jeu.getJoueurSurLieu(jeu.getLieux().get(4)).isEmpty() && !jeu.getCartes().isEmpty()) {
-			if(jeu.getJoueurSurLieu(jeu.getLieux().get(4)).size() == 1)
+			if (jeu.getJoueurSurLieu(jeu.getLieux().get(4)).size() == 1)
 				j = jeu.getJoueurSurLieu(jeu.getLieux().get(4)).get(0);
 			else
 				j = phaseVote(jeu.getLieux().get(4), VoteType.FDC);
@@ -296,18 +296,19 @@ public class ControleurJeu {
 				Couleur a1 = Couleur.NUL;
 				Couleur a2 = Couleur.NUL;
 				CarteEtat a3 = CarteEtat.NUL;
-				if (nwm.getPaquetTcp("SCFC").getValue(mess, 1) != CarteType.NUL) {
-					j.getCartes().add((CarteType) nwm.getPaquetTcp("SCFC").getValue(mess, 1));
+				if (nwm.getValueTcp("SCFC", mess, 1) != CarteType.NUL) {
+					j.getCartes().add((CarteType) nwm.getValueTcp("SCFC", mess, 1));
 					a1 = j.getCouleur();
 				}
-				if (nwm.getPaquetTcp("SCFC").getValue(mess, 2) != CarteType.NUL) {
-					jeu.getJoueurCouleur((Couleur) nwm.getPaquetTcp("SCFC").getValue(mess, 3)).getCartes()
-							.add((CarteType) nwm.getPaquetTcp("SCFC").getValue(mess, 2));
-					a2 = (Couleur) nwm.getPaquetTcp("SCFC").getValue(mess, 3);
-					jeu.getJoueurCouleur(a2).getConnection().envoyer(nwm.construirePaquetTcp("FCRC", nwm.getPaquetTcp("SCFC").getValue(mess, 2), j.getCouleur(), partieId, numeroTour));
+				if (nwm.getValueTcp("SCFC", mess, 2) != CarteType.NUL) {
+					jeu.getJoueurCouleur((Couleur) nwm.getValueTcp("SCFC", mess, 3)).getCartes()
+							.add((CarteType) nwm.getValueTcp("SCFC", mess, 2));
+					a2 = (Couleur) nwm.getValueTcp("SCFC", mess, 3);
+					jeu.getJoueurCouleur(a2).getConnection().envoyer(nwm.construirePaquetTcp("FCRC",
+							nwm.getValueTcp("SCFC", mess, 2), j.getCouleur(), partieId, numeroTour));
 				}
-				if (nwm.getPaquetTcp("SCFC").getValue(mess, 4) != CarteType.NUL) {
-					jeu.getCartes().add((CarteType) nwm.getPaquetTcp("SCFC").getValue(mess, 4));
+				if (nwm.getValueTcp("SCFC",mess, 4) != CarteType.NUL) {
+					jeu.getCartes().add((CarteType) nwm.getValueTcp("SCFC",mess, 4));
 					a3 = CarteEtat.CD;
 				}
 				m = nwm.construirePaquetTcp("RFC", a1, a2, a3, partieId, numeroTour);
@@ -425,7 +426,7 @@ public class ControleurJeu {
 			if (j.getCartes().contains(CarteType.CDS)) {
 				j.getConnection().attendreMessage("AZRCS");
 				String mess = j.getConnection().getMessage("AZRCS");
-				if ((CarteType) nwm.getPaquetTcp("AZRCS").getValue(mess, 1) != CarteType.NUL) {
+				if ((CarteType) nwm.getValueTcp("AZRCS",mess, 1) != CarteType.NUL) {
 					joueurCDS.add(j);
 				}
 			}
@@ -514,7 +515,8 @@ public class ControleurJeu {
 				int dvz = (int) nwm.getValueTcp("CDDZVJE", rep, 1);
 				jeu.getLieux().get(dvz).addZombie();
 				for (Joueur j2 : this.jeu.getJoueurs().values()) {
-					j.getConnection().envoyer(nwm.construirePaquetTcp("CDZVDI", j.getCouleur(), dvz, partieId, numeroTour));
+					j.getConnection()
+							.envoyer(nwm.construirePaquetTcp("CDZVDI", j.getCouleur(), dvz, partieId, numeroTour));
 				}
 			}
 		}
@@ -591,10 +593,10 @@ public class ControleurJeu {
 		}
 		reinitJoueurCache();
 	}
-	
+
 	private void reinitJoueurCache() {
-		for (Joueur j: jeu.getJoueurs().values()) {
-			for(Personnage p: j.getPersonnages().values()) {
+		for (Joueur j : jeu.getJoueurs().values()) {
+			for (Personnage p : j.getPersonnages().values()) {
 				p.setEstCache(false);
 			}
 		}
@@ -655,21 +657,21 @@ public class ControleurJeu {
 					return true;
 				} else {
 					String message = nwm.construirePaquetTcp("RAZPA", 4,
-							PpTools.getPionsCouleurByPerso(jeu.getLieux().get(i).getPersonnage()), ReasonType.FORCE,
+							PpTools.getPionsCouleurByPerso(jeu.getLieux().get(i).getPersonnage()), RaisonType.FORCE,
 							jeu.getLieux().get(i).getNbZombies(), partieId, numeroTour);
 					for (Joueur joueur : jeu.getJoueurs().values())
 						joueur.getConnection().envoyer(message);
 				}
 			} else {
 				String message = nwm.construirePaquetTcp("RAZPA", 4,
-						PpTools.getPionsCouleurByPerso(jeu.getLieux().get(i).getPersonnage()), ReasonType.ZOMBIE,
+						PpTools.getPionsCouleurByPerso(jeu.getLieux().get(i).getPersonnage()), RaisonType.ZOMBIE,
 						jeu.getLieux().get(i).getNbZombies(), partieId, numeroTour);
 				for (Joueur joueur : jeu.getJoueurs().values())
 					joueur.getConnection().envoyer(message);
 			}
 		} else {
 			String message = nwm.construirePaquetTcp("RAZPA", 4,
-					PpTools.getPionsCouleurByPerso(jeu.getLieux().get(i).getPersonnage()), ReasonType.PION,
+					PpTools.getPionsCouleurByPerso(jeu.getLieux().get(i).getPersonnage()), RaisonType.PION,
 					jeu.getLieux().get(i).getNbZombies(), partieId, numeroTour);
 			for (Joueur joueur : jeu.getJoueurs().values())
 				joueur.getConnection().envoyer(message);
@@ -811,7 +813,7 @@ public class ControleurJeu {
 				initializer.finPartie();
 			if (initializer != null)
 				initializer.getGagnant(gagnantNotFair);
-			status = Status.COMPLETE;
+			statut = Statut.COMPLETE;
 			try {
 				nwm.getTcpServeur().arreter();
 				nwm.arreterUdp();
@@ -1034,8 +1036,8 @@ public class ControleurJeu {
 		return numeroTour;
 	}
 
-	public Status getStatus() {
-		return status;
+	public Statut getStatus() {
+		return statut;
 	}
 
 	public void setLieuZombie(ArrayList<Integer> lieuZombie) {

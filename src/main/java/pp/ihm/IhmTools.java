@@ -32,7 +32,7 @@ public abstract class IhmTools {
     public static List<Couleur> comboStringToColorList(int max, ComboBox<String>... couleurs) {
         List<Couleur> cs = new ArrayList<>();
         for (int i = 0; i < max; i++)
-            cs.add(Couleur.valueOf(couleurs[i].getValue().toUpperCase()));
+            cs.add(Couleur.valueOf(String.valueOf(couleurs[i].getValue().charAt(0)).toUpperCase()));
 
         return cs;
     }

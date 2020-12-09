@@ -1,6 +1,6 @@
 package pp;
 
-import reseau.socket.Connexion;
+import reseau.socket.TcpClient;
 import reseau.type.CarteType;
 import reseau.type.Couleur;
 import reseau.type.TypePersonnage;
@@ -31,9 +31,9 @@ public class Joueur {
 	private final ArrayList<CarteType> cartes;
 	private boolean chefDesVigiles;
 	private final String nom;
-	private final Connexion connection;
+	private final TcpClient connection;
 
-	public Joueur(int joueurIdint, InetAddress ip, int port, String nom, Connexion connection) {
+	public Joueur(int joueurIdint, InetAddress ip, int port, String nom, TcpClient connection) {
 		this.connection = connection;
 		this.joueurIdint = joueurIdint;
 		this.joueurId = "J" + joueurIdint;
@@ -173,7 +173,7 @@ public class Joueur {
 		return port;
 	}
 
-	public Connexion getConnection() {
+	public TcpClient getConnection() {
 		return connection;
 	}
 }

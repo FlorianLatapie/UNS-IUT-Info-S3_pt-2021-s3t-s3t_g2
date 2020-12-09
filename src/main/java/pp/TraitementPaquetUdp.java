@@ -1,10 +1,10 @@
 package pp;
 
 import pp.controleur.ControleurJeu;
-import reseau.packet.Packet;
-import reseau.socket.ConnexionType;
+import reseau.paquet.Paquet;
 import reseau.socket.ControleurReseau;
 import reseau.socket.TraitementPaquet;
+import reseau.type.ConnexionType;
 import reseau.type.TypePartie;
 
 import java.net.DatagramPacket;
@@ -35,8 +35,8 @@ public class TraitementPaquetUdp extends TraitementPaquet<DatagramPacket> {
 	 * @throws IllegalStateException si il n'y a pas de traitement pour ce paquet
 	 */
 	@Override
-	public void traitement(Packet packet, String message, DatagramPacket datagram) {
-		switch (packet.getKey()) {
+	public void traitement(Paquet packet, String message, DatagramPacket datagram) {
+		switch (packet.getCle()) {
 		case "RP":
 			rp(packet, message);
 			break;
@@ -51,7 +51,7 @@ public class TraitementPaquetUdp extends TraitementPaquet<DatagramPacket> {
 			break;
 		default:
 			throw new IllegalStateException(
-					MessageFormat.format("[UDP] Il n''y a pas de traitement possible pour {0}", packet.getKey()));
+					MessageFormat.format("[UDP] Il n''y a pas de traitement possible pour {0}", packet.getCle()));
 		}
 	}
 
@@ -60,11 +60,11 @@ public class TraitementPaquetUdp extends TraitementPaquet<DatagramPacket> {
 		this.setControleurReseau(controleurReseau);
 	}
 
-	public void rp(Packet packet, String message) {
-		if (ConnexionType.SERVER != getControleurReseau().getConnexionType())
+	public void rp(Paquet packet, String message) {
+		if (ConnexionType.SERVEUR != getControleurReseau().getConnexionType())
 			return;
 
-		TypePartie typePartie = (TypePartie) packet.getValue(message, 1);
+		TypePartie typePartie = (TypePartie) packet.getValeur(message, 1);
 
 		String m = getControleurReseau().construirePaquetUdp("AMP",core.getPartieId(),
 				getControleurReseau().getIp().getHostAddress(), getControleurReseau().getTcpPort(), core.getNomPartie(),
@@ -85,17 +85,17 @@ public class TraitementPaquetUdp extends TraitementPaquet<DatagramPacket> {
 		}
 	}
 
-	public void acp(Packet packet, String message) {
+	public void acp(Paquet packet, String message) {
 		if (ConnexionType.CLIENT != getControleurReseau().getConnexionType())
 			return;
 	}
 
-	public void amp(Packet packet, String message) {
+	public void amp(Paquet packet, String message) {
 		if (ConnexionType.CLIENT != getControleurReseau().getConnexionType())
 			return;
 	}
 
-	public void ip(Packet packet, String message) {
+	public void ip(Paquet packet, String message) {
 		if (ConnexionType.CLIENT != getControleurReseau().getConnexionType())
 			return;
 	}

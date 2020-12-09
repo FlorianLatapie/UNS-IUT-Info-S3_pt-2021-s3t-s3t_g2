@@ -1,9 +1,9 @@
 package pp;
 
 import pp.controleur.ControleurJeu;
-import reseau.packet.Packet;
-import reseau.socket.Connexion;
+import reseau.paquet.Paquet;
 import reseau.socket.ControleurReseau;
+import reseau.socket.TcpClient;
 import reseau.socket.TraitementPaquet;
 import reseau.type.TypeJoueur;
 
@@ -22,7 +22,7 @@ import static java.lang.System.out;
  * @author Sébastien Aglaé
  * @version 1.0
  */
-public class TraitementPaquetTcp extends TraitementPaquet<Connexion> {
+public class TraitementPaquetTcp extends TraitementPaquet<TcpClient> {
 	private ControleurJeu core;
 
 	/**
@@ -31,7 +31,8 @@ public class TraitementPaquetTcp extends TraitementPaquet<Connexion> {
 	public TraitementPaquetTcp(Object core) {
 		this.core = (ControleurJeu) core;
 	}
-
+	
+	@Override
 	public void init(ControleurReseau controleurReseau) {
 		setControleurReseau(controleurReseau);
 	}
@@ -45,21 +46,22 @@ public class TraitementPaquetTcp extends TraitementPaquet<Connexion> {
 	 * @return reponse au paquet
 	 * @throws IllegalStateException si il n'y a pas de traitement pour ce paquet
 	 */
-	public void traitement(Packet packet, String message, Connexion connection) {
-		switch (packet.getKey()) {
+	@Override
+	public void traitement(Paquet packet, String message, TcpClient connection) {
+		switch (packet.getCle()) {
 		case "DCP":
 			dcp(packet, message, connection);
 			break;
 		}
 	}
 
-	private void dcp(Packet packet, String message, Connexion connection) {
+	private void dcp(Paquet packet, String message, TcpClient connection) {
 		switch (core.getStatus()) {
 		case ATTENTE:
 			String id = null;
 			try {
-				id = core.ajouterJoueur(InetAddress.getLocalHost(), 5555, (String) packet.getValue(message, 1),
-						(TypeJoueur) packet.getValue(message, 2), connection);
+				id = core.ajouterJoueur(InetAddress.getLocalHost(), 5555, (String) packet.getValeur(message, 1),
+						(TypeJoueur) packet.getValeur(message, 2), connection);
 			} catch (UnknownHostException e) {
 				e.printStackTrace();
 			}
@@ -67,7 +69,7 @@ public class TraitementPaquetTcp extends TraitementPaquet<Connexion> {
 			break;
 		case ANNULEE:
 		case COMPLETE:
-		case TERMINE:
+		case TERMINEE:
 			connection.envoyer(getControleurReseau().construirePaquetTcp("RCP",core.getPartieId()));
 			break;
 		default:
