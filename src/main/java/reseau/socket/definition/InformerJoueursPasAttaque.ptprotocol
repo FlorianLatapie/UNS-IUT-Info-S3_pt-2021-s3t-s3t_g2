@@ -14,7 +14,7 @@ type:List<PionCouleur>
 doc:Liste des pions personnages présents dans le lieux. Pas d’ordre particulier pour cette liste. Les lieux sont identifiés par deux caractères Couleur/Valeur séparés par des «,».
 value:
 name:reasonType
-type:ReasonType
+type:RaisonType
 doc:« PION » s’il n’y a pas de pion personnage, « ZOMBIE » s’il n’y a pas de zombie ou « FORCE » si les zombies n’ont pas la force pour entrer
 value:
 name:nombreZombie
