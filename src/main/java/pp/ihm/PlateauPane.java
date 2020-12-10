@@ -1043,9 +1043,6 @@ public class PlateauPane extends StackPane implements PlateauListener {
 		Platform.runLater(() -> {
 			titreInfo.setText("Fouille du camion");
 			lInfo.setText(camion);
-			imgFond.setEffect(flou);
-			borderJoueurs.setEffect(flou);
-			aPlateau.setEffect(flou);
 			TranslateTransition transi = new TranslateTransition(Duration.millis(1400), info);
 			transi.setFromY(-1000f);
 			transi.setToY(0f);
@@ -1061,9 +1058,6 @@ public class PlateauPane extends StackPane implements PlateauListener {
 
 				@Override
 				public void run() {
-					imgFond.setEffect(null);
-					borderJoueurs.setEffect(null);
-					aPlateau.setEffect(null);
 					info.setVisible(false);
 				}
 			}, 5000);
@@ -1075,9 +1069,6 @@ public class PlateauPane extends StackPane implements PlateauListener {
 		Platform.runLater(() -> {
 			titreInfo.setText("Déplacement d'un pion du chef des vigiles");
 			lInfo.setText(depvig);
-			imgFond.setEffect(flou);
-			borderJoueurs.setEffect(flou);
-			aPlateau.setEffect(flou);
 			TranslateTransition transi = new TranslateTransition(Duration.millis(1400), info);
 			transi.setFromY(-1000f);
 			transi.setToY(0f);
@@ -1093,9 +1084,6 @@ public class PlateauPane extends StackPane implements PlateauListener {
 
 				@Override
 				public void run() {
-					imgFond.setEffect(null);
-					borderJoueurs.setEffect(null);
-					aPlateau.setEffect(null);
 					info.setVisible(false);
 				}
 			}, 5000);
@@ -1107,9 +1095,6 @@ public class PlateauPane extends StackPane implements PlateauListener {
 		Platform.runLater(() -> {
 			titreInfo.setText("Election du chef des vigiles");
 			lInfo.setText(message);
-			imgFond.setEffect(flou);
-			borderJoueurs.setEffect(flou);
-			aPlateau.setEffect(flou);
 			TranslateTransition transi = new TranslateTransition(Duration.millis(1400), info);
 			transi.setFromY(-1000f);
 			transi.setToY(0f);
@@ -1126,9 +1111,6 @@ public class PlateauPane extends StackPane implements PlateauListener {
 
 				@Override
 				public void run() {
-					imgFond.setEffect(null);
-					borderJoueurs.setEffect(null);
-					aPlateau.setEffect(null);
 					info.setVisible(false);
 				}
 			}, 5000);
