@@ -36,7 +36,6 @@ public class PlateauPane extends StackPane implements PlateauListener {
 	private final Insets margeTexteJoueur = new Insets(margeJ, 10, margeJ, 10);
 	private final Insets insetJGauche = new Insets(0, 500, 0, 115);
 	private final Insets insetJDroit = new Insets(0, 115, 0, 500);
-	private final Insets insetBadge = new Insets (20,0,0,0);
 	private final int tailleVBoxJoueur = 210;
 
 	private final int taillePlateau = 1080;
@@ -83,13 +82,6 @@ public class PlateauPane extends StackPane implements PlateauListener {
 	Label nomJoueur4;
 	Label nomJoueur5;
 	Label nomJoueur6;
-	
-	ImageView badgeJ1;
-	ImageView badgeJ2;
-	ImageView badgeJ3;
-	ImageView badgeJ4;
-	ImageView badgeJ5;
-	ImageView badgeJ6;
 
 	Label estFerme1;
 	Label estFerme2;
@@ -126,22 +118,10 @@ public class PlateauPane extends StackPane implements PlateauListener {
 	Label afficheJoueursLieu5;
 	Label afficheJoueursLieu6;
 
-	BorderPane info1;
-	Label titreInfo1;
-	Label lInfo1;
-	
-	BorderPane info2;
-	Label titreInfo2;
-	Label lInfo2;
-	
-	BorderPane info3;
-	Label titreInfo3;
-	Label lInfo3;
-	
-	BorderPane info4;
-	Label titreInfo4;
-	Label lInfo4;
-	
+	BorderPane info;
+
+	Label titreInfo;
+	Label lInfo;
 
 	Label lChefVigile;
 	Label lChefVigile2;
@@ -153,8 +133,6 @@ public class PlateauPane extends StackPane implements PlateauListener {
 	BorderPane borderJoueurs;
 
 	Timer myTimer;
-	
-	AnchorPane notifInfo;
 
 	public PlateauPane(ScreenControl sc, Core c) {
 		core = c;
@@ -213,9 +191,7 @@ public class PlateauPane extends StackPane implements PlateauListener {
 		VBox.setMargin(nomJoueur1, margeTexteJoueur);
 		j1.setMinSize(tailleVBoxJoueur, tailleVBoxJoueur);
 		j1.setStyle(tmpColor);
-		badgeJ1 = new ImageView(DataControl.BADGE_VIGILE_VIDE);
-		j1.setPadding(insetBadge);
-		j1.getChildren().addAll(badgeJ1,nbPerso1, nbCartes1, nomJoueur1);
+		j1.getChildren().addAll(nbPerso1, nbCartes1, nomJoueur1);
 
 		j2 = new VBox();
 		nbPerso2 = new Label("## personnages");
@@ -238,9 +214,7 @@ public class PlateauPane extends StackPane implements PlateauListener {
 		VBox.setMargin(nbCartes2, margeTexteJoueur);
 		VBox.setMargin(nomJoueur2, margeTexteJoueur);
 		j2.setMinSize(tailleVBoxJoueur, tailleVBoxJoueur);
-		badgeJ2 = new ImageView(DataControl.BADGE_VIGILE_VIDE);
-		j2.setPadding(insetBadge);
-		j2.getChildren().addAll(badgeJ2, nbPerso2, nbCartes2, nomJoueur2);
+		j2.getChildren().addAll(nbPerso2, nbCartes2, nomJoueur2);
 		j2.setStyle(tmpColor);
 
 		hBas.getChildren().addAll(bPause1, j1, j2, bPause2);
@@ -291,9 +265,7 @@ public class PlateauPane extends StackPane implements PlateauListener {
 		VBox.setMargin(nbCartes3, margeTexteJoueur);
 		VBox.setMargin(nomJoueur3, margeTexteJoueur);
 		j3.setMinSize(tailleVBoxJoueur, tailleVBoxJoueur);
-		badgeJ3 = new ImageView(DataControl.BADGE_VIGILE_VIDE);
-		j3.setPadding(insetBadge);
-		j3.getChildren().addAll(badgeJ3, nbPerso3, nbCartes3, nomJoueur3);
+		j3.getChildren().addAll(nbPerso3, nbCartes3, nomJoueur3);
 		j3.setStyle(tmpColor);
 
 		j4 = new VBox();
@@ -317,9 +289,7 @@ public class PlateauPane extends StackPane implements PlateauListener {
 		VBox.setMargin(nbCartes4, margeTexteJoueur);
 		VBox.setMargin(nomJoueur4, margeTexteJoueur);
 		j4.setMinSize(tailleVBoxJoueur, tailleVBoxJoueur);
-		badgeJ4 = new ImageView(DataControl.BADGE_VIGILE_VIDE);
-		j4.setPadding(insetBadge);
-		j4.getChildren().addAll(badgeJ4, nbPerso4, nbCartes4, nomJoueur4);
+		j4.getChildren().addAll(nbPerso4, nbCartes4, nomJoueur4);
 		j4.setStyle(tmpColor);
 
 		hHaut.getChildren().addAll(bPause3, j3, j4, bPause4);
@@ -348,9 +318,7 @@ public class PlateauPane extends StackPane implements PlateauListener {
 		j5.setMinSize(tailleVBoxJoueur, tailleVBoxJoueur);
 		j5.setPrefSize(tailleVBoxJoueur, tailleVBoxJoueur);
 		j5.setMaxSize(tailleVBoxJoueur, tailleVBoxJoueur);
-		badgeJ5 = new ImageView(DataControl.BADGE_VIGILE_VIDE);
-		j5.setPadding(insetBadge);
-		j5.getChildren().addAll(badgeJ5, nbPerso5, nbCartes5, nomJoueur5);
+		j5.getChildren().addAll(nbPerso5, nbCartes5, nomJoueur5);
 		j5.setStyle(tmpColor);
 		j5.setRotate(270);
 
@@ -379,9 +347,7 @@ public class PlateauPane extends StackPane implements PlateauListener {
 		j6.setMinSize(tailleVBoxJoueur, tailleVBoxJoueur);
 		j6.setPrefSize(tailleVBoxJoueur, tailleVBoxJoueur);
 		j6.setMaxSize(tailleVBoxJoueur, tailleVBoxJoueur);
-		badgeJ6 = new ImageView(DataControl.BADGE_VIGILE_VIDE);
-		j6.setPadding(insetBadge);
-		j6.getChildren().addAll(badgeJ6, nbPerso6, nbCartes6, nomJoueur6);
+		j6.getChildren().addAll(nbPerso6, nbCartes6, nomJoueur6);
 		j6.setStyle(tmpColor);
 		j6.setRotate(90);
 
@@ -695,129 +661,33 @@ public class PlateauPane extends StackPane implements PlateauListener {
 		////
 
 		aPlateau.getChildren().addAll(b1, b2, b3, b4, b5, b6, lChefVigile, lChefVigile2, lChefVigile3, lChefVigile4);
-		
-		notifInfo = new AnchorPane();
-		notifInfo.setMinSize(1920, 1080);
-		
-		info1 = new BorderPane();
-		info1.setPrefSize(700, 200);
-		info1.setMaxSize(700, 200);
-		info1.setStyle(" -fx-background-color:#1A1A1A; -fx-background-radius: 20px; -fx-border-color: red; -fx-border-insets: -3; -fx-border-width: 3; -fx-border-radius: 20px;");
+		info = new BorderPane();
+		info.setPrefSize(450, 200);
+		info.setMaxSize(450, 200);
+		info.setStyle(
+				" -fx-background-color:#1A1A1A; -fx-background-radius: 20px; -fx-border-color: red; -fx-border-insets: -3; -fx-border-width: 3; -fx-border-radius: 20px;");
 
-		VBox vTitreInfo1 = new VBox();
-		vTitreInfo1.setAlignment(Pos.CENTER);
-		vTitreInfo1.setPadding(new Insets(20));
-		titreInfo1 = new Label("Déplacement d'un pion du chef \ndes vigiles");
-		titreInfo1.setTextAlignment(TextAlignment.CENTER);
-		titreInfo1.setFont(Font.font("Segoe UI", FontWeight.BOLD, 25));
-		titreInfo1.setTextFill(Color.WHITE);
-		vTitreInfo1.getChildren().addAll(titreInfo1);
+		VBox vTitreInfo = new VBox();
+		vTitreInfo.setAlignment(Pos.CENTER);
+		vTitreInfo.setPadding(new Insets(20));
+		titreInfo = new Label("Déplacement d'un pion du chef \ndes vigiles");
+		titreInfo.setTextAlignment(TextAlignment.CENTER);
+		titreInfo.setFont(Font.font("Segoe UI", FontWeight.BOLD, 25));
+		titreInfo.setTextFill(Color.WHITE);
+		vTitreInfo.getChildren().addAll(titreInfo);
 
-		VBox vInfo1 = new VBox();
-		vInfo1.setAlignment(Pos.CENTER);
-		lInfo1 = new Label("Voici l'information que vous voulez savoir");
-		lInfo1.setTextAlignment(TextAlignment.CENTER);
-		lInfo1.setFont(Font.font("Segoe UI", FontWeight.BOLD, 20));
-		lInfo1.setTextFill(Color.WHITE);
-		vInfo1.getChildren().addAll(lInfo1);
+		VBox vInfo = new VBox();
+		vInfo.setAlignment(Pos.CENTER);
+		lInfo = new Label("Voici l'information que vous voulez savoir");
+		lInfo.setTextAlignment(TextAlignment.CENTER);
+		lInfo.setFont(Font.font("Segoe UI", FontWeight.BOLD, 20));
+		lInfo.setTextFill(Color.WHITE);
+		vInfo.getChildren().addAll(lInfo);
 
-		info1.setMargin(vInfo1, new Insets(-30, 0, 0, 0));
-		info1.setTop(vTitreInfo1);
-		info1.setCenter(vInfo1);
-		info1.setVisible(true);
-		notifInfo.setBottomAnchor(info1, 206.0);
-		notifInfo.setLeftAnchor(info1, 605.0);
-		
-		info2 = new BorderPane();
-		info2.setPrefSize(700, 200);
-		info2.setMaxSize(700, 200);
-		info2.setStyle(" -fx-background-color:#1A1A1A; -fx-background-radius: 20px; -fx-border-color: red; -fx-border-insets: -3; -fx-border-width: 3; -fx-border-radius: 20px;");
-		
-		VBox vTitreInfo2 = new VBox();
-		vTitreInfo2.setAlignment(Pos.CENTER);
-		vTitreInfo2.setPadding(new Insets(20));
-		titreInfo2 = new Label("Déplacement d'un pion du chef \ndes vigiles");
-		titreInfo2.setTextAlignment(TextAlignment.CENTER);
-		titreInfo2.setFont(Font.font("Segoe UI", FontWeight.BOLD, 25));
-		titreInfo2.setTextFill(Color.WHITE);
-		vTitreInfo2.getChildren().addAll(titreInfo2);
-
-		VBox vInfo2 = new VBox();
-		vInfo2.setAlignment(Pos.CENTER);
-		lInfo2 = new Label("Voici l'information que vous voulez savoir");
-		lInfo2.setTextAlignment(TextAlignment.CENTER);
-		lInfo2.setFont(Font.font("Segoe UI", FontWeight.BOLD, 20));
-		lInfo2.setTextFill(Color.WHITE);
-		vInfo2.getChildren().addAll(lInfo2);
-		
-		info2.setMargin(vInfo2, new Insets(-30, 0, 0, 0));
-		info2.setRotate(90);
-		info2.setTop(vTitreInfo2);
-		info2.setCenter(vInfo2);
-		notifInfo.setTopAnchor(info2, 436.0);
-		
-		
-		info3 = new BorderPane();
-		info3.setPrefSize(700, 200);
-		info3.setMaxSize(700, 200);
-		info3.setStyle(" -fx-background-color:#1A1A1A; -fx-background-radius: 20px; -fx-border-color: red; -fx-border-insets: -3; -fx-border-width: 3; -fx-border-radius: 20px;");
-		
-		VBox vTitreInfo3 = new VBox();
-		vTitreInfo3.setAlignment(Pos.CENTER);
-		vTitreInfo3.setPadding(new Insets(20));
-		titreInfo3 = new Label("Déplacement d'un pion du chef \ndes vigiles");
-		titreInfo3.setTextAlignment(TextAlignment.CENTER);
-		titreInfo3.setFont(Font.font("Segoe UI", FontWeight.BOLD, 25));
-		titreInfo3.setTextFill(Color.WHITE);
-		vTitreInfo3.getChildren().addAll(titreInfo3);
-
-		VBox vInfo3 = new VBox();
-		vInfo3.setAlignment(Pos.CENTER);
-		lInfo3 = new Label("Voici l'information que vous voulez savoir");
-		lInfo3.setTextAlignment(TextAlignment.CENTER);
-		lInfo3.setFont(Font.font("Segoe UI", FontWeight.BOLD, 20));
-		lInfo3.setTextFill(Color.WHITE);
-		vInfo3.getChildren().addAll(lInfo3);
-
-		
-		info3.setMargin(vInfo3, new Insets(-30, 0, 0, 0));
-		info3.setRotate(180);
-		info3.setTop(vTitreInfo3);
-		info3.setCenter(vInfo3);
-		notifInfo.setTopAnchor(info3, 206.0);
-		notifInfo.setLeftAnchor(info3, 605.0);
-		
-		info4 = new BorderPane();
-		info4.setPrefSize(700, 200);
-		info4.setMaxSize(700, 200);
-		info4.setStyle(" -fx-background-color:#1A1A1A; -fx-background-radius: 20px; -fx-border-color: red; -fx-border-insets: -3; -fx-border-width: 3; -fx-border-radius: 20px;");
-		
-		VBox vTitreInfo4 = new VBox();
-		vTitreInfo4.setAlignment(Pos.CENTER);
-		vTitreInfo4.setPadding(new Insets(20));
-		titreInfo4 = new Label("Déplacement d'un pion du chef \ndes vigiles");
-		titreInfo4.setTextAlignment(TextAlignment.CENTER);
-		titreInfo4.setFont(Font.font("Segoe UI", FontWeight.BOLD, 25));
-		titreInfo4.setTextFill(Color.WHITE);
-		vTitreInfo4.getChildren().addAll(titreInfo4);
-
-		VBox vInfo4 = new VBox();
-		vInfo4.setAlignment(Pos.CENTER);
-		lInfo4 = new Label("Voici l'information que vous voulez savoir");
-		lInfo4.setTextAlignment(TextAlignment.CENTER);
-		lInfo4.setFont(Font.font("Segoe UI", FontWeight.BOLD, 20));
-		lInfo4.setTextFill(Color.WHITE);
-		vInfo4.getChildren().addAll(lInfo4);
-
-		info4.setMargin(vInfo4, new Insets(-30, 0, 0, 0));
-		info4.setRotate(270);
-		info4.setTop(vTitreInfo4);
-		info4.setCenter(vInfo4);
-		notifInfo.setTopAnchor(info4, 436.0);
-		notifInfo.setRightAnchor(info4, 0.0);
-		
-		notifInfo.getChildren().addAll(info1,info2, info3, info4);
-		notifInfo.setVisible(false);
+		info.setMargin(vInfo, new Insets(-30, 0, 0, 0));
+		info.setTop(vTitreInfo);
+		info.setCenter(vInfo);
+		info.setVisible(false);
 
 		borderJoueurs.setTop(hHaut);
 		borderJoueurs.setBottom(hBas);
@@ -854,7 +724,7 @@ public class PlateauPane extends StackPane implements PlateauListener {
 		j5.setVisible(false);
 		j6.setVisible(false);
 
-		this.getChildren().addAll(imgFond, borderJoueurs, aPlateau, notifInfo);
+		this.getChildren().addAll(imgFond, borderJoueurs, aPlateau, info);
 		this.setMinSize(1920, 1080);
 		this.setPrefSize(1920, 1080);
 		this.setMaxSize(1920, 1080);
@@ -1151,22 +1021,18 @@ public class PlateauPane extends StackPane implements PlateauListener {
 	@Override
 	public void fouilleCamion(String camion) {
 		Platform.runLater(() -> {
-			titreInfo1.setText("Fouille du camion");
-			titreInfo2.setText("Fouille du camion");
-			titreInfo3.setText("Fouille du camion");
-			titreInfo4.setText("Fouille du camion");
-			
-			lInfo1.setText(camion);
-			lInfo2.setText(camion);
-			lInfo3.setText(camion);
-			lInfo4.setText(camion);
-			TranslateTransition transi = new TranslateTransition(Duration.millis(1400), notifInfo);
+			titreInfo.setText("Fouille du camion");
+			lInfo.setText(camion);
+			imgFond.setEffect(flou);
+			borderJoueurs.setEffect(flou);
+			aPlateau.setEffect(flou);
+			TranslateTransition transi = new TranslateTransition(Duration.millis(1400), info);
 			transi.setFromY(-1000f);
 			transi.setToY(0f);
 			transi.setCycleCount((int) 2f);
 			transi.setAutoReverse(false);
 			transi.play();
-			info1.setVisible(true);
+			info.setVisible(true);
 			if (myTimer != null) {
 				myTimer.cancel();
 			}
@@ -1175,7 +1041,10 @@ public class PlateauPane extends StackPane implements PlateauListener {
 
 				@Override
 				public void run() {
-					info1.setVisible(false);
+					imgFond.setEffect(null);
+					borderJoueurs.setEffect(null);
+					aPlateau.setEffect(null);
+					info.setVisible(false);
 				}
 			}, 5000);
 		});
@@ -1184,21 +1053,18 @@ public class PlateauPane extends StackPane implements PlateauListener {
 	@Override
 	public void prevenirDeplacementVigile(String depvig) {
 		Platform.runLater(() -> {
-			titreInfo1.setText("Déplacement d'un pion du chef des vigiles");
-			titreInfo2.setText("Déplacement d'un pion du chef des vigiles");
-			titreInfo3.setText("Déplacement d'un pion du chef des vigiles");
-			titreInfo4.setText("Déplacement d'un pion du chef des vigiles");
-			lInfo1.setText(depvig);
-			lInfo2.setText(depvig);
-			lInfo3.setText(depvig);
-			lInfo4.setText(depvig);
-			TranslateTransition transi = new TranslateTransition(Duration.millis(1400), notifInfo);
+			titreInfo.setText("Déplacement d'un pion du chef des vigiles");
+			lInfo.setText(depvig);
+			imgFond.setEffect(flou);
+			borderJoueurs.setEffect(flou);
+			aPlateau.setEffect(flou);
+			TranslateTransition transi = new TranslateTransition(Duration.millis(1400), info);
 			transi.setFromY(-1000f);
 			transi.setToY(0f);
 			transi.setCycleCount((int) 2f);
 			transi.setAutoReverse(false);
 			transi.play();
-			info1.setVisible(true);
+			info.setVisible(true);
 			if (myTimer != null) {
 				myTimer.cancel();
 			}
@@ -1207,7 +1073,10 @@ public class PlateauPane extends StackPane implements PlateauListener {
 
 				@Override
 				public void run() {
-					info1.setVisible(false);
+					imgFond.setEffect(null);
+					borderJoueurs.setEffect(null);
+					aPlateau.setEffect(null);
+					info.setVisible(false);
 				}
 			}, 5000);
 		});
@@ -1216,21 +1085,18 @@ public class PlateauPane extends StackPane implements PlateauListener {
 	@Override
 	public void electionChef(String message) {
 		Platform.runLater(() -> {
-			titreInfo1.setText("Election du chef des vigiles");
-			titreInfo2.setText("Election du chef des vigiles");
-			titreInfo3.setText("Election du chef des vigiles");
-			titreInfo4.setText("Election du chef des vigiles");
-			lInfo1.setText(message);
-			lInfo2.setText(message);
-			lInfo3.setText(message);
-			lInfo4.setText(message);
-			TranslateTransition transi = new TranslateTransition(Duration.millis(1400), info1);
+			titreInfo.setText("Election du chef des vigiles");
+			lInfo.setText(message);
+			imgFond.setEffect(flou);
+			borderJoueurs.setEffect(flou);
+			aPlateau.setEffect(flou);
+			TranslateTransition transi = new TranslateTransition(Duration.millis(1400), info);
 			transi.setFromY(-1000f);
 			transi.setToY(0f);
 			transi.setCycleCount((int) 2f);
 			transi.setAutoReverse(false);
 			transi.play();
-			info1.setVisible(true);
+			info.setVisible(true);
 			if (myTimer != null) {
 				myTimer.cancel();
 			}
@@ -1240,7 +1106,10 @@ public class PlateauPane extends StackPane implements PlateauListener {
 
 				@Override
 				public void run() {
-					info1.setVisible(false);
+					imgFond.setEffect(null);
+					borderJoueurs.setEffect(null);
+					aPlateau.setEffect(null);
+					info.setVisible(false);
 				}
 			}, 5000);
 		});
