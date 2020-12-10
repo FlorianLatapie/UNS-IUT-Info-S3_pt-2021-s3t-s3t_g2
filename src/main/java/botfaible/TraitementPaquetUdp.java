@@ -2,6 +2,7 @@ package botfaible;
 
 import reseau.paquet.Paquet;
 import reseau.socket.ControleurReseau;
+import reseau.socket.TcpClient;
 import reseau.socket.TraitementPaquet;
 import reseau.tool.ThreadOutils;
 import reseau.type.ConnexionType;
@@ -72,6 +73,7 @@ public class TraitementPaquetUdp extends TraitementPaquet<DatagramPacket> {
 			return;
 		InetAddress address = null;
 		try {
+			System.out.println((String) packet.getValeur(message, 2));
 			address = InetAddress.getByName((String) packet.getValeur(message, 2));
 		} catch (UnknownHostException e1) {
 			// TODO Auto-generated catch block
@@ -79,6 +81,8 @@ public class TraitementPaquetUdp extends TraitementPaquet<DatagramPacket> {
 		}
 		core.setIpPp(address);
 		core.setPortPp((int) packet.getValeur(message, 3));
+		System.out.println(core.getIpPp());
+		core.setPortPp(core.getPortPp());
 
 		System.out.println(
 				MessageFormat.format("Une nouvelle partie vient d''etre trouvÃ© !\n{0}", packet.getValeur(message, 1)));
@@ -86,10 +90,22 @@ public class TraitementPaquetUdp extends TraitementPaquet<DatagramPacket> {
 		
 		String nomdujoueur = "BOT" + new Random().nextInt(9999);
 		core.setNom(nomdujoueur);
-		String messageTcp = getControleurReseau().construirePaquetTcp("DCP", nomdujoueur, core.getTypeJoueur(),
-				"P" + (int) packet.getValeur(message, 1));
+		getControleurReseau().tcp(core.getIpPp());
 		ThreadOutils.asyncTask(() -> {
-
+			try {
+				Thread.sleep(1000);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			String messageTcp = getControleurReseau().construirePaquetTcp("DCP", nomdujoueur, core.getTypeJoueur(),
+					"P" + (int) packet.getValeur(message, 1));
+			try {
+				Thread.sleep(1000);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 			getControleurReseau().envoyerTcp(messageTcp);
 
 			getControleurReseau().attendreTcp("ACP");
