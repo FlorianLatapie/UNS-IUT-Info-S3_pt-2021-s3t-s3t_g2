@@ -36,6 +36,7 @@ public class PlateauPane extends StackPane implements PlateauListener {
 	private final Insets margeTexteJoueur = new Insets(margeJ, 10, margeJ, 10);
 	private final Insets insetJGauche = new Insets(0, 500, 0, 115);
 	private final Insets insetJDroit = new Insets(0, 115, 0, 500);
+	private final Insets insetBadge = new Insets (20,0,0,0);
 	private final int tailleVBoxJoueur = 210;
 
 	private final int taillePlateau = 1080;
@@ -82,6 +83,13 @@ public class PlateauPane extends StackPane implements PlateauListener {
 	Label nomJoueur4;
 	Label nomJoueur5;
 	Label nomJoueur6;
+	
+	ImageView badgeJ1;
+	ImageView badgeJ2;
+	ImageView badgeJ3;
+	ImageView badgeJ4;
+	ImageView badgeJ5;
+	ImageView badgeJ6;
 
 	Label estFerme1;
 	Label estFerme2;
@@ -191,7 +199,9 @@ public class PlateauPane extends StackPane implements PlateauListener {
 		VBox.setMargin(nomJoueur1, margeTexteJoueur);
 		j1.setMinSize(tailleVBoxJoueur, tailleVBoxJoueur);
 		j1.setStyle(tmpColor);
-		j1.getChildren().addAll(nbPerso1, nbCartes1, nomJoueur1);
+		badgeJ1 = new ImageView(DataControl.BADGE_VIGILE_VIDE);
+		j1.setPadding(insetBadge);
+		j1.getChildren().addAll(badgeJ1,nbPerso1, nbCartes1, nomJoueur1);
 
 		j2 = new VBox();
 		nbPerso2 = new Label("## personnages");
@@ -214,7 +224,9 @@ public class PlateauPane extends StackPane implements PlateauListener {
 		VBox.setMargin(nbCartes2, margeTexteJoueur);
 		VBox.setMargin(nomJoueur2, margeTexteJoueur);
 		j2.setMinSize(tailleVBoxJoueur, tailleVBoxJoueur);
-		j2.getChildren().addAll(nbPerso2, nbCartes2, nomJoueur2);
+		badgeJ2 = new ImageView(DataControl.BADGE_VIGILE_VIDE);
+		j2.setPadding(insetBadge);
+		j2.getChildren().addAll(badgeJ2, nbPerso2, nbCartes2, nomJoueur2);
 		j2.setStyle(tmpColor);
 
 		hBas.getChildren().addAll(bPause1, j1, j2, bPause2);
@@ -265,7 +277,9 @@ public class PlateauPane extends StackPane implements PlateauListener {
 		VBox.setMargin(nbCartes3, margeTexteJoueur);
 		VBox.setMargin(nomJoueur3, margeTexteJoueur);
 		j3.setMinSize(tailleVBoxJoueur, tailleVBoxJoueur);
-		j3.getChildren().addAll(nbPerso3, nbCartes3, nomJoueur3);
+		badgeJ3 = new ImageView(DataControl.BADGE_VIGILE_VIDE);
+		j3.setPadding(insetBadge);
+		j3.getChildren().addAll(badgeJ3, nbPerso3, nbCartes3, nomJoueur3);
 		j3.setStyle(tmpColor);
 
 		j4 = new VBox();
@@ -289,7 +303,9 @@ public class PlateauPane extends StackPane implements PlateauListener {
 		VBox.setMargin(nbCartes4, margeTexteJoueur);
 		VBox.setMargin(nomJoueur4, margeTexteJoueur);
 		j4.setMinSize(tailleVBoxJoueur, tailleVBoxJoueur);
-		j4.getChildren().addAll(nbPerso4, nbCartes4, nomJoueur4);
+		badgeJ4 = new ImageView(DataControl.BADGE_VIGILE_VIDE);
+		j4.setPadding(insetBadge);
+		j4.getChildren().addAll(badgeJ4, nbPerso4, nbCartes4, nomJoueur4);
 		j4.setStyle(tmpColor);
 
 		hHaut.getChildren().addAll(bPause3, j3, j4, bPause4);
@@ -318,7 +334,9 @@ public class PlateauPane extends StackPane implements PlateauListener {
 		j5.setMinSize(tailleVBoxJoueur, tailleVBoxJoueur);
 		j5.setPrefSize(tailleVBoxJoueur, tailleVBoxJoueur);
 		j5.setMaxSize(tailleVBoxJoueur, tailleVBoxJoueur);
-		j5.getChildren().addAll(nbPerso5, nbCartes5, nomJoueur5);
+		badgeJ5 = new ImageView(DataControl.BADGE_VIGILE_VIDE);
+		j5.setPadding(insetBadge);
+		j5.getChildren().addAll(badgeJ5, nbPerso5, nbCartes5, nomJoueur5);
 		j5.setStyle(tmpColor);
 		j5.setRotate(270);
 
@@ -347,7 +365,9 @@ public class PlateauPane extends StackPane implements PlateauListener {
 		j6.setMinSize(tailleVBoxJoueur, tailleVBoxJoueur);
 		j6.setPrefSize(tailleVBoxJoueur, tailleVBoxJoueur);
 		j6.setMaxSize(tailleVBoxJoueur, tailleVBoxJoueur);
-		j6.getChildren().addAll(nbPerso6, nbCartes6, nomJoueur6);
+		badgeJ6 = new ImageView(DataControl.BADGE_VIGILE_VIDE);
+		j6.setPadding(insetBadge);
+		j6.getChildren().addAll(badgeJ6, nbPerso6, nbCartes6, nomJoueur6);
 		j6.setStyle(tmpColor);
 		j6.setRotate(90);
 
@@ -716,13 +736,13 @@ public class PlateauPane extends StackPane implements PlateauListener {
 		afficheJoueursLieu6.setFont(fontPerso);
 
 		this.setStyle(" -fx-background-color:#151515;");
-
+/*
 		j1.setVisible(false);
 		j2.setVisible(false);
 		j3.setVisible(false);
 		j4.setVisible(false);
 		j5.setVisible(false);
-		j6.setVisible(false);
+		j6.setVisible(false);*/
 
 		this.getChildren().addAll(imgFond, borderJoueurs, aPlateau, info);
 		this.setMinSize(1920, 1080);
