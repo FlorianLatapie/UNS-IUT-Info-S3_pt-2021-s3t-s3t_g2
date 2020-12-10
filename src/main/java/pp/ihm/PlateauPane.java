@@ -682,8 +682,8 @@ public class PlateauPane extends StackPane implements PlateauListener {
 
 		aPlateau.getChildren().addAll(b1, b2, b3, b4, b5, b6, lChefVigile, lChefVigile2, lChefVigile3, lChefVigile4);
 		info = new BorderPane();
-		info.setPrefSize(450, 200);
-		info.setMaxSize(450, 200);
+		info.setPrefSize(900, 200);
+		info.setMaxSize(900, 200);
 		info.setStyle(
 				" -fx-background-color:#1A1A1A; -fx-background-radius: 20px; -fx-border-color: red; -fx-border-insets: -3; -fx-border-width: 3; -fx-border-radius: 20px;");
 
@@ -736,13 +736,13 @@ public class PlateauPane extends StackPane implements PlateauListener {
 		afficheJoueursLieu6.setFont(fontPerso);
 
 		this.setStyle(" -fx-background-color:#151515;");
-/*
+
 		j1.setVisible(false);
 		j2.setVisible(false);
 		j3.setVisible(false);
 		j4.setVisible(false);
 		j5.setVisible(false);
-		j6.setVisible(false);*/
+		j6.setVisible(false);
 
 		this.getChildren().addAll(imgFond, borderJoueurs, aPlateau, info);
 		this.setMinSize(1920, 1080);
