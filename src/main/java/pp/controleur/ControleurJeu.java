@@ -713,8 +713,8 @@ public class ControleurJeu {
 				out.println(jeu.toString());
 				out.println();
 				out.println("Lancement des dés.");
-				int x = rd.nextInt(6) + 1;
-				int y = rd.nextInt(6) + 1;
+				int x = jeu.getLieuxOuverts().get(rd.nextInt(jeu.getLieuxOuverts().size()));
+				int y = jeu.getLieuxOuverts().get(rd.nextInt(jeu.getLieuxOuverts().size()));
 				out.println("Résultat du lancement :");
 				List<Integer> des = new ArrayList<>();
 				des.add(x);
