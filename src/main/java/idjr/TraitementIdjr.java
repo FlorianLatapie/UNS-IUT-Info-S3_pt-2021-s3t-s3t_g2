@@ -8,8 +8,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Random;
 
-import idjr.ihmidjr.event.JeuListener;
-import pp.ihm.Core;
 import reseau.type.CarteType;
 import reseau.type.Couleur;
 import reseau.type.PionCouleur;
@@ -260,6 +258,8 @@ public class TraitementIdjr {
 				core.utiliserCarteChoisi(false);
 
 				CarteType tmpCarteType = core.getUtiliserCarteChosi();
+				if (tmpCarteType == null)
+					tmpCarteType = tmpCarteType.NUL;
 				listeCarteJouee.add(tmpCarteType);
 				core.getListeCarte().remove(tmpCarteType);
 				core.initializer.updateCarte();
@@ -276,7 +276,7 @@ public class TraitementIdjr {
 			i++;
 		}
 		listRenvoye.add(listeCarteJouee);
-		listRenvoye.add(listePionCache);
+		listRenvoye.add(IdjrTools.getPionsByValues(listePionCache));
 		return listRenvoye;
 	}
 

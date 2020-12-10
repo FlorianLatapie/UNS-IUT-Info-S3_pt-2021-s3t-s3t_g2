@@ -199,12 +199,12 @@ public class ConfigPartiePane extends StackPane implements ConfigListener {
 	@Override
 	public void partie(List<PartieInfo> partieInfo) {
 		Platform.runLater(() -> {
-			int i = 0;
-			for (PartieInfo partieInfo2 : partieInfo) {
-				Label label = new Label(partieInfo2.getIdPartie());
-				liste.set(0, label);
-				i++;
-			}
+			//int i = 0;
+			//for (PartieInfo partieInfo2 : partieInfo) {
+			//Label label = new Label(partieInfo2.getIdPartie());
+			//liste.set(0, label);
+			//i++;
+			//}
 		});
 	}
 }

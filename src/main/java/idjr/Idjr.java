@@ -94,6 +94,7 @@ public class Idjr {
 				if (partieInfo.getIdPartie().equals(nom)) {
 					System.out.println("OK");
 					current = partieInfo;
+					nwm.tcp(partieInfo.getIp());
 					initializer.partieValide(nom);
 					return;
 				}
