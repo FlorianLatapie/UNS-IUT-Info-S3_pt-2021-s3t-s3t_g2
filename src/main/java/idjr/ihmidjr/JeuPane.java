@@ -137,6 +137,12 @@ public class JeuPane extends StackPane implements JeuListener {
 
 	BorderPane fouilleCamion;
 	BorderPane vote;
+	
+	HBox fond;
+	Rectangle rectVigile;
+	VBox des;
+	HBox hbCartes;
+	VBox vbDeplCentre;
 
 	CarteType selectedCarte;
 	Couleur selectedCouleur;
@@ -162,7 +168,7 @@ public class JeuPane extends StackPane implements JeuListener {
 
 		//////////////////////////////////////////
 		// TODO afficher une image dedans
-		Rectangle rectVigile = new Rectangle();
+		rectVigile = new Rectangle();
 		rectVigile.setTranslateX(793);
 		rectVigile.setTranslateY(150);
 		rectVigile.setFill(null);
@@ -172,7 +178,7 @@ public class JeuPane extends StackPane implements JeuListener {
 		rectVigile.setHeight(120);
 
 		//////////////////////////////////////////
-		HBox hbCartes = new HBox();
+		hbCartes = new HBox();
 		hbCartes.setAlignment(Pos.CENTER);
 		hbCartes.setTranslateY(340);
 		hbCartes.setPrefSize(1800, 250);
@@ -535,15 +541,14 @@ public class JeuPane extends StackPane implements JeuListener {
 		vbChoixCarteCentre.setPrefSize(850, 700);
 		vbChoixCarteCentre.setMinSize(850, 700);
 		vbChoixCarteCentre.setMaxSize(850, 700);
-		// vbChoixCarteCentre.setStyle(styleVBox);
+		
 
 		VBox vbCarte = new VBox();
 		vbCarte.setAlignment(Pos.CENTER);
 		vbCarte.setPrefSize(780, 300);
 		vbCarte.setMinSize(780, 300);
 		vbCarte.setMaxSize(780, 300);
-		// vbCarte.setStyle("-fx-border-color: green; -fx-border-insets: 5;
-		// -fx-border-width: 3;");
+		
 
 		VBox vbChoix = new VBox();
 		vbChoix.setAlignment(Pos.CENTER);
@@ -555,8 +560,7 @@ public class JeuPane extends StackPane implements JeuListener {
 		hboxImgCarte.setMinSize(780, 255);
 		hboxImgCarte.setMaxSize(780, 255);
 		hboxImgCarte.setSpacing(10);
-		// hboxImgCarte.setStyle("-fx-border-color: red; -fx-border-insets: 5;
-		// -fx-border-width: 3;");
+		
 
 		HBox hboxBoutonCarte = new HBox();
 		hboxBoutonCarte.setAlignment(Pos.CENTER);
@@ -777,16 +781,10 @@ public class JeuPane extends StackPane implements JeuListener {
 
 		fouilleCamion.setTop(vbTitreCamion);
 		fouilleCamion.setCenter(vbChoixCarteCentre);
-
-		/*
-		 * fond.setEffect(flou); TODO A mettre quand le popup fouille camion est activé
-		 * rectVigile.setEffect(flou); nomJoueur.setEffect(flou);
-		 * hbCartes.setEffect(flou); vbDeplCentre.setEffect(flou); des.setEffect(flou);
-		 */
-
+ 
 		///
 
-		VBox vbDeplCentre = new VBox();
+		vbDeplCentre = new VBox();
 		vbDeplCentre.setAlignment(Pos.CENTER_LEFT);
 		vbDeplCentre.setTranslateX(-700);
 		vbDeplCentre.setTranslateY(-70);
@@ -863,7 +861,6 @@ public class JeuPane extends StackPane implements JeuListener {
 		bTruand.setOnMouseExited(event -> {
 			bTruand.setStyle(styleBoutons);
 		});
-
 		bFillette = new Button("La Fillette");
 		bFillette.setAlignment(Pos.CENTER);
 		bFillette.setStyle(styleBoutons);
@@ -1009,7 +1006,7 @@ public class JeuPane extends StackPane implements JeuListener {
 		vbDeplCentre.getChildren().addAll(vbDeplPers, vbDeplLieux);
 		vbDeplCentre.setDisable(false);
 
-		VBox des = new VBox();
+		des = new VBox();
 		des.setTranslateX(790);
 		des.setTranslateY(-100);
 		des.setAlignment(Pos.CENTER);
@@ -1066,7 +1063,7 @@ public class JeuPane extends StackPane implements JeuListener {
 
 		imgFond = new ImageView(DataControl.BLEU);
 
-		HBox fond = new HBox();
+		fond = new HBox();
 		fond.setAlignment(Pos.CENTER);
 		fond.setEffect(flou);
 		fond.getChildren().add(imgFond);
@@ -1193,6 +1190,12 @@ public class JeuPane extends StackPane implements JeuListener {
 		joueur4.setDisable(true);
 		joueur5.setDisable(true);
 		cartePanelReset();
+		fond.setEffect(null); 
+		rectVigile.setEffect(null); 
+		nomJoueur.setEffect(null);
+		hbCartes.setEffect(null); 
+		vbDeplCentre.setEffect(null); 
+		des.setEffect(null);
 		fouilleCamion.setVisible(false);
 
 		ImageView[] imgViews = { imgDeCarte1, imgDeCarte2, imgDeCarte3, imgDeCarte4, imgDeCarte5, imgDeCarte6,
@@ -1448,6 +1451,12 @@ public class JeuPane extends StackPane implements JeuListener {
 			vote.setVisible(false);
 			System.out.println(listeCartes.size());
 			System.out.println(listeCouleurJoueurVivant.size());
+			fond.setEffect(flou); 
+			rectVigile.setEffect(flou); 
+			nomJoueur.setEffect(flou);
+			hbCartes.setEffect(flou); 
+			vbDeplCentre.setEffect(flou); 
+			des.setEffect(flou);
 			fouilleCamion.setVisible(true);
 			if (listeCartes.size() >= 1) {
 				imgCarte1.setImage(new Image(convertCarte(listeCartes.get(0))));
@@ -1516,6 +1525,12 @@ public class JeuPane extends StackPane implements JeuListener {
 	}
 
 	public void cartePanelReset() {
+		fond.setEffect(null); 
+		rectVigile.setEffect(null); 
+		nomJoueur.setEffect(null);
+		hbCartes.setEffect(null); 
+		vbDeplCentre.setEffect(null); 
+		des.setEffect(null);
 		fouilleCamion.setVisible(false);
 		hboxBoutonJoueur.setVisible(false);
 		joueur1c.setDisable(true);
@@ -1586,6 +1601,12 @@ public class JeuPane extends StackPane implements JeuListener {
 	public void setVote(List<Couleur> listeCouleurJoueur) {
 		Platform.runLater(() -> {
 			vote.setVisible(true);
+			fond.setEffect(null); 
+			rectVigile.setEffect(null); 
+			nomJoueur.setEffect(null);
+			hbCartes.setEffect(null); 
+			vbDeplCentre.setEffect(null); 
+			des.setEffect(null);
 			fouilleCamion.setVisible(false);
 			Button[] buttons = { joueur1, joueur2, joueur3, joueur4, joueur5 };
 			for (int i = 0; i < buttons.length; i++) {
