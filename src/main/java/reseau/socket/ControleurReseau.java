@@ -23,7 +23,7 @@ public class ControleurReseau implements IControleSocket {
 	private final Map<String, Paquet> udpPaquets;
 	private final Map<String, Paquet> tcpPaquets;
 
-	private static final String CHEMIN_PACKET = "Ressources/protocol_reseau/packets";
+	private static final String CHEMIN_PACKET = "Ressources/reseau";
 
 	private UdpConnexion udpConnexion;
 	private TcpServeur tcpServeur;

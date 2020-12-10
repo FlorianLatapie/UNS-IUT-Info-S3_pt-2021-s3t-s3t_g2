@@ -240,11 +240,6 @@ public class TcpClient implements Runnable, IEchangeSocket, IMessagePaquet {
 	 */
 	public void attendreMessage(String cle) {
 		while (!contient(cle))
-			try {
-				Thread.sleep(100);
-			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+			Thread.yield();
 	}
 }
