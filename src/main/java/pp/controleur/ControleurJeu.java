@@ -108,11 +108,7 @@ public class ControleurJeu {
 					nbjtotal, nbjr, nbjv, statut);
 			nwm.envoyerUdp(m);
 			while (joueurs.size() != this.nbjtotal)
-				try {
-					Thread.sleep(100);
-				} catch (InterruptedException e) {
-					return;
-				}
+				Thread.yield();
 			if (initializer != null)
 				initializer.joueurPret();
 			statut = Statut.COMPLETE;
@@ -120,11 +116,7 @@ public class ControleurJeu {
 			jeu = new Partie(joueurs);
 			updateValues();
 			while (!couleurPret)
-				try {
-					Thread.sleep(50);
-				} catch (InterruptedException e) {
-					return;
-				}
+				Thread.yield();
 			if (initializer != null)
 				initializer.nomJoueurAll(new ArrayList<>(jeu.getJoueurs().values()));
 			try {
@@ -173,7 +165,8 @@ public class ControleurJeu {
 	private void demarerJeu() throws InterruptedException {
 		// TODO 3 ou 4 PION | UN OU PLUSIEURS LIEUX FERME
 		out.println(jeu.toString());
-		String m = nwm.construirePaquetTcp("IP", jeu.getJoueursNoms(), jeu.getJoueursCouleurs(), " ", 3, partieId);
+		String m = nwm.construirePaquetTcp("IP", jeu.getJoueursNoms(), jeu.getJoueursCouleurs(),
+				jeu.getLieux().get(2).isOuvert() ? " " : "2", 3, partieId);
 		for (Joueur j : jeu.getJoueurs().values())
 			j.getConnection().envoyer(m);
 		distribuerCarte();

@@ -1,9 +1,9 @@
 package pp.ihm.eventListener;
 
+import reseau.type.Couleur;
+
 public interface PlateauListener {
     void nbLieuZombie(int lieu, int val);
-
-    void nomJoueur(int joueur, String Couleur, String val);
 
     void lieuFerme(int lieu, boolean val);
 
@@ -26,4 +26,6 @@ public interface PlateauListener {
     void prevenirDeplacementVigile(String depvig);
     
     void electionChef(String message);
+
+	void nomJoueur(int joueur, Couleur couleur, String val);
 }

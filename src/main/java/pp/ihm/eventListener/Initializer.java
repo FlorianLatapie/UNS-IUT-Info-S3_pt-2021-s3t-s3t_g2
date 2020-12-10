@@ -3,6 +3,7 @@ package pp.ihm.eventListener;
 import pp.Joueur;
 import pp.Lieu;
 import pp.Personnage;
+import reseau.type.Couleur;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -41,10 +42,10 @@ public class Initializer {
 
 	public void nomJoueurAll(List<Joueur> joueurs) {
 		for (Joueur l : joueurs)
-			nomJoueur(l.getJoueurIdint(), l.getCouleur().name(), l.getNom());
+			nomJoueur(l.getJoueurIdint(), l.getCouleur(), l.getNom());
 	}
 
-	private void nomJoueur(int joueur, String couleur, String val) {
+	private void nomJoueur(int joueur, Couleur couleur, String val) {
 		for (PlateauListener pl : listenerspl)
 			pl.nomJoueur(joueur, couleur, val);
 	}
@@ -137,7 +138,7 @@ public class Initializer {
 	private void destionationPerso(Lieu lieu) {
 		String np = "";
 		for (Personnage p : lieu.getPersonnage())
-			np += p.getType().name() + " " + p.getJoueur().getCouleur().name() + "\n";
+			np += p.getType().name() + " " + p.getJoueur().getCouleur().nomEntier() + "\n";
 		for (PlateauListener pl : listenerspl)
 			pl.destionationPerso(lieu.getNum(), np);
 	}

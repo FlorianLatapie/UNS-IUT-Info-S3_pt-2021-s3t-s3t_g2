@@ -59,6 +59,13 @@ public class CouleurPane extends StackPane implements CouleurListener {
 	Label nom5;
 	Label nom6;
 
+	HBox j1;
+	HBox j2;
+	HBox j3;
+	HBox j4;
+	HBox j5;
+	HBox j6;
+
 	public CouleurPane(ScreenControl sc, Core c) {
 		core = c;
 		sControl = sc;
@@ -78,7 +85,7 @@ public class CouleurPane extends StackPane implements CouleurListener {
 
 		VBox vJoueurs = new VBox();
 
-		HBox j1 = new HBox();
+		j1 = new HBox();
 
 		nom1 = new Label();
 		nom1.setBackground(fondBlanc);
@@ -99,7 +106,7 @@ public class CouleurPane extends StackPane implements CouleurListener {
 
 		///
 
-		HBox j2 = new HBox();
+		j2 = new HBox();
 
 		nom2 = new Label();
 		nom2.setBackground(fondBlanc);
@@ -120,7 +127,7 @@ public class CouleurPane extends StackPane implements CouleurListener {
 
 		///
 
-		HBox j3 = new HBox();
+		j3 = new HBox();
 
 		nom3 = new Label();
 		nom3.setBackground(fondBlanc);
@@ -141,7 +148,7 @@ public class CouleurPane extends StackPane implements CouleurListener {
 
 		///
 
-		HBox j4 = new HBox();
+		j4 = new HBox();
 
 		nom4 = new Label();
 		nom4.setBackground(fondBlanc);
@@ -162,7 +169,7 @@ public class CouleurPane extends StackPane implements CouleurListener {
 
 		///
 
-		HBox j5 = new HBox();
+		j5 = new HBox();
 
 		nom5 = new Label();
 		nom5.setBackground(fondBlanc);
@@ -183,7 +190,7 @@ public class CouleurPane extends StackPane implements CouleurListener {
 
 		///
 
-		HBox j6 = new HBox();
+		j6 = new HBox();
 
 		nom6 = new Label();
 		nom6.setBackground(fondBlanc);
@@ -296,6 +303,39 @@ public class CouleurPane extends StackPane implements CouleurListener {
 			nom4.setText(joueurs.size() >= 4 ? joueurs.get(3).getNom() : "");
 			nom5.setText(joueurs.size() >= 5 ? joueurs.get(4).getNom() : "");
 			nom6.setText(joueurs.size() >= 6 ? joueurs.get(5).getNom() : "");
+			setJoueurConfig(core.getNbJoueur());
 		});
+	}
+
+	private void setJoueurConfig(int maxJr) {
+		if (maxJr == 3) {
+			j1.setDisable(false);
+			j2.setDisable(false);
+			j3.setDisable(false);
+			j4.setDisable(true);
+			j5.setDisable(true);
+			j6.setDisable(true);
+		} else if (maxJr == 4) {
+			j1.setDisable(false);
+			j2.setDisable(false);
+			j3.setDisable(false);
+			j4.setDisable(false);
+			j5.setDisable(true);
+			j6.setDisable(true);
+		} else if (maxJr == 5) {
+			j1.setDisable(false);
+			j2.setDisable(false);
+			j3.setDisable(false);
+			j4.setDisable(false);
+			j5.setDisable(false);
+			j6.setDisable(true);
+		} else {
+			j1.setDisable(false);
+			j2.setDisable(false);
+			j3.setDisable(false);
+			j4.setDisable(false);
+			j5.setDisable(false);
+			j6.setDisable(false);
+		}
 	}
 }

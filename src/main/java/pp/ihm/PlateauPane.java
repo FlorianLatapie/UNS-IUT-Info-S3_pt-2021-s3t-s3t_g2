@@ -4,6 +4,7 @@ import java.util.Timer;
 import java.util.TimerTask;
 import pp.ihm.DataControl.ApplicationPane;
 import pp.ihm.eventListener.PlateauListener;
+import reseau.type.Couleur;
 import javafx.animation.TranslateTransition;
 import javafx.application.Platform;
 import javafx.geometry.Insets;
@@ -658,12 +659,13 @@ public class PlateauPane extends StackPane implements PlateauListener {
 		AnchorPane.setLeftAnchor(lChefVigile4, 575.0);
 
 		////
-		
+
 		aPlateau.getChildren().addAll(b1, b2, b3, b4, b5, b6, lChefVigile, lChefVigile2, lChefVigile3, lChefVigile4);
 		info = new BorderPane();
 		info.setPrefSize(450, 200);
 		info.setMaxSize(450, 200);
-		info.setStyle(" -fx-background-color:#1A1A1A; -fx-background-radius: 20px; -fx-border-color: red; -fx-border-insets: -3; -fx-border-width: 3; -fx-border-radius: 20px;");
+		info.setStyle(
+				" -fx-background-color:#1A1A1A; -fx-background-radius: 20px; -fx-border-color: red; -fx-border-insets: -3; -fx-border-width: 3; -fx-border-radius: 20px;");
 
 		VBox vTitreInfo = new VBox();
 		vTitreInfo.setAlignment(Pos.CENTER);
@@ -715,6 +717,13 @@ public class PlateauPane extends StackPane implements PlateauListener {
 
 		this.setStyle(" -fx-background-color:#151515;");
 
+		j1.setVisible(false);
+		j2.setVisible(false);
+		j3.setVisible(false);
+		j4.setVisible(false);
+		j5.setVisible(false);
+		j6.setVisible(false);
+
 		this.getChildren().addAll(imgFond, borderJoueurs, aPlateau, info);
 		this.setMinSize(1920, 1080);
 		this.setPrefSize(1920, 1080);
@@ -753,32 +762,65 @@ public class PlateauPane extends StackPane implements PlateauListener {
 	}
 
 	@Override
-	public void nomJoueur(int joueur, String couleur, String val) {
-		String tmp = val + " " + couleur;
+	public void nomJoueur(int joueur, Couleur couleur, String val) {
+		String tmp = val;
 		Platform.runLater(() -> {
 			switch (joueur) {
 			case 0:
 				nomJoueur1.setText(tmp);
+				nomJoueur1.setTextFill(color(couleur));
+				j1.setVisible(true);
 				break;
 			case 1:
 				nomJoueur2.setText(tmp);
+				nomJoueur2.setTextFill(color(couleur));
+				j2.setVisible(true);
 				break;
 			case 2:
 				nomJoueur3.setText(tmp);
+				nomJoueur3.setTextFill(color(couleur));
+				j3.setVisible(true);
 				break;
 			case 3:
 				nomJoueur4.setText(tmp);
+				nomJoueur4.setTextFill(color(couleur));
+				j4.setVisible(true);
 				break;
 			case 4:
 				nomJoueur5.setText(tmp);
+				nomJoueur5.setTextFill(color(couleur));
+				j5.setVisible(true);
 				break;
 			case 5:
 				nomJoueur6.setText(tmp);
+				nomJoueur6.setTextFill(color(couleur));
+				j6.setVisible(true);
 				break;
 			default:
 				throw new IllegalStateException("Unexpected value: " + joueur);
 			}
 		});
+	}
+
+	public Color color(Couleur couleur) {
+		switch (couleur) {
+		case B:
+			return Color.ALICEBLUE;
+		case R:
+			return Color.RED;
+		case V:
+			return Color.GREEN;
+		case N:
+			return Color.GREY;
+		case J:
+			return Color.YELLOW;
+		case M:
+			return Color.BROWN;
+		default:
+			break;
+		}
+
+		return null;
 	}
 
 	@Override
@@ -865,6 +907,9 @@ public class PlateauPane extends StackPane implements PlateauListener {
 			case 4:
 				nbPerso5.setText(tmp);
 				break;
+			case 5:
+				nbPerso6.setText(tmp);
+				break;
 			default:
 				throw new IllegalStateException("Unexpected value: " + joueur);
 			}
@@ -891,6 +936,9 @@ public class PlateauPane extends StackPane implements PlateauListener {
 			case 4:
 				nbCartes5.setText(tmp);
 				break;
+			case 5:
+				nbCartes6.setText(tmp);
+				break;
 			default:
 				throw new IllegalStateException("Unexpected value: " + joueur);
 			}
@@ -899,7 +947,7 @@ public class PlateauPane extends StackPane implements PlateauListener {
 
 	@Override
 	public void forceLieu(int lieu, int force) {
-		String tmp = "    Force\nde l'équipe\n" + "\n\t" + force; //TODO traduction
+		String tmp = "    Force\nde l'équipe\n" + "\n\t" + force; // TODO traduction
 		Platform.runLater(() -> {
 			switch (lieu) {
 			case 1:
@@ -980,10 +1028,10 @@ public class PlateauPane extends StackPane implements PlateauListener {
 			aPlateau.setEffect(flou);
 			TranslateTransition transi = new TranslateTransition(Duration.millis(1400), info);
 			transi.setFromY(-1000f);
-		    transi.setToY(0f);
-		    transi.setCycleCount((int)2f);
-		    transi.setAutoReverse(false);
-		    transi.play();
+			transi.setToY(0f);
+			transi.setCycleCount((int) 2f);
+			transi.setAutoReverse(false);
+			transi.play();
 			info.setVisible(true);
 			if (myTimer != null) {
 				myTimer.cancel();
@@ -1012,10 +1060,10 @@ public class PlateauPane extends StackPane implements PlateauListener {
 			aPlateau.setEffect(flou);
 			TranslateTransition transi = new TranslateTransition(Duration.millis(1400), info);
 			transi.setFromY(-1000f);
-		    transi.setToY(0f);
-		    transi.setCycleCount((int)2f);
-		    transi.setAutoReverse(false);
-		    transi.play();
+			transi.setToY(0f);
+			transi.setCycleCount((int) 2f);
+			transi.setAutoReverse(false);
+			transi.play();
 			info.setVisible(true);
 			if (myTimer != null) {
 				myTimer.cancel();
@@ -1044,10 +1092,10 @@ public class PlateauPane extends StackPane implements PlateauListener {
 			aPlateau.setEffect(flou);
 			TranslateTransition transi = new TranslateTransition(Duration.millis(1400), info);
 			transi.setFromY(-1000f);
-		    transi.setToY(0f);
-		    transi.setCycleCount((int)2f);
-		    transi.setAutoReverse(false);
-		    transi.play();
+			transi.setToY(0f);
+			transi.setCycleCount((int) 2f);
+			transi.setAutoReverse(false);
+			transi.play();
 			info.setVisible(true);
 			if (myTimer != null) {
 				myTimer.cancel();

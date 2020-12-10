@@ -160,9 +160,9 @@ public class ConfigPartiePane extends StackPane {
 		bJouer.setOnMouseEntered(event -> bJouer.setStyle(styleBoutonsSouris));
 		bJouer.setOnMouseExited(event -> bJouer.setStyle(styleBoutons));
 		bJouer.setOnAction(EventHandler -> {
-			// TODO on lance la partie ici ou au pane suivant (config bot)
+			
 			if (nbJr.getValue() > 6 || nbJr.getValue() < 3) {
-				core.setNbJoueur(5);
+				core.setNbJoueur(nbJr.getValue());
 			} else {
 				core.setNbJoueur(nbJr.getValue());
 			}
