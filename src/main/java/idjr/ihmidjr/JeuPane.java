@@ -1046,25 +1046,23 @@ public class JeuPane extends StackPane implements JeuListener {
 		info.setPrefSize(1000, 200);
 		info.setMaxSize(1000, 200);
 		info.setBackground(fondBlanc);
-		info.setVisible(false);
 
 		VBox vTitreInfo = new VBox();
 		vTitreInfo.setAlignment(Pos.CENTER);
 		vTitreInfo.setPadding(new Insets(20));
 		titreInfo = new Label("Titre info");
-		titreInfo.setFont(Font.font("Segoe UI", FontWeight.BOLD, 20));
+		titreInfo.setFont(Font.font("Segoe UI", FontWeight.BOLD, 40));
 		vTitreInfo.getChildren().addAll(titreInfo);
 
 		VBox vInfo = new VBox();
 		vInfo.setAlignment(Pos.TOP_LEFT);
-		lInfo = new Label("information");
-		lInfo.setFont(Font.font("Segoe UI", FontWeight.BOLD, 10));
+		lInfo = new Label("Texte d'exemple d'information");
+		lInfo.setFont(Font.font("Segoe UI", FontWeight.BOLD, 20));
 		vInfo.getChildren().addAll(lInfo);
 
 		info.setMargin(vInfo, new Insets(50, 20, 0, 20));
 		info.setTop(vTitreInfo);
 		info.setCenter(vInfo);
-		info.setVisible(true);
 
 		imgFond = new ImageView(DataControl.BLEU);
 
