@@ -115,6 +115,8 @@ public class Idjr {
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
+
+		initializer.partie(listOfServer);
 	}
 
 	public void rejoindrePartie(String nomp) {
@@ -125,7 +127,6 @@ public class Idjr {
 		String messageTcp = nwm.construirePaquetTcp("DCP", nom, typeJoueur, current.getIdPartie());
 		ThreadOutils.asyncTask(() -> {
 			nwm.envoyerTcp(messageTcp);
-
 			nwm.attendreTcp("ACP");
 			String message1 = nwm.getMessageTcp("ACP");
 			setJoueurId((String) nwm.getValueTcp("ACP", message1, 2));

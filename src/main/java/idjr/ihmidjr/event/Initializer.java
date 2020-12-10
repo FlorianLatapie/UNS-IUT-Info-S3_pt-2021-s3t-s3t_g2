@@ -3,6 +3,7 @@ package idjr.ihmidjr.event;
 import java.util.ArrayList;
 import java.util.List;
 
+import idjr.PartieInfo;
 import reseau.type.CarteType;
 import reseau.type.Couleur;
 
@@ -132,5 +133,10 @@ public class Initializer {
 	public void setVote(List<Couleur> joueur) {
 		for (JeuListener jl : listenersjl)
 			jl.setVote(joueur);
+	}
+
+	public void partie(List<PartieInfo> partieInfo) {
+		for (ConfigListener cl : listenerscl)
+			cl.partie(partieInfo);
 	}
 }

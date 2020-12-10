@@ -1,5 +1,8 @@
 package idjr.ihmidjr;
 
+import java.util.List;
+
+import idjr.PartieInfo;
 import idjr.ihmidjr.DataControl.ApplicationPane;
 import idjr.ihmidjr.event.ConfigListener;
 import javafx.application.Platform;
@@ -56,6 +59,8 @@ public class ConfigPartiePane extends StackPane implements ConfigListener {
 
 	private Insets botPadding = new Insets(10);
 
+	ObservableList<Label> liste = FXCollections.observableArrayList();
+
 	public ConfigPartiePane(ScreenControl sc, Core c) {
 		core = c;
 		sControl = sc;
@@ -93,31 +98,22 @@ public class ConfigPartiePane extends StackPane implements ConfigListener {
 		partie.setPrefWidth(220);
 		partie.setMaxWidth(400);
 
-		
- 
-        Label label = new Label("Partie 1");
-        Label label2 = new Label("Partie 2");
-        Label label3 = new Label("Partie 3");
-        Label label4 = new Label("Partie 4");
- 
-        // To Creating a Observable List
-        ObservableList<Label> liste = FXCollections.observableArrayList(label, label2,label3,label4); //SEB TODO remplir la liste avec un event 
- 
-        // Create a ListView
-        ListView<Label> listView = new ListView<Label>(liste);
- 
-        // Only allowed to select single row in the ListView.
-        listView.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
-        
-        listView.setMaxWidth(400);
-        listView.setMaxHeight(100);
- 
-		
-		
+		// To Creating a Observable List
+		ObservableList<Label> liste = FXCollections.observableArrayList();
+
+		// Create a ListView
+		ListView<Label> listView = new ListView<Label>(liste);
+
+		// Only allowed to select single row in the ListView.
+		listView.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
+
+		listView.setMaxWidth(400);
+		listView.setMaxHeight(100);
+
 		VBox vbCenter = new VBox();
 		vbCenter.setAlignment(Pos.CENTER);
 		vbCenter.setSpacing(20);
-		vbCenter.getChildren().addAll(partie,listView);
+		vbCenter.getChildren().addAll(partie, listView);
 
 		// boutons
 		Button bJouer = new Button("JOUER");
@@ -197,6 +193,18 @@ public class ConfigPartiePane extends StackPane implements ConfigListener {
 		Platform.runLater(() -> {
 			core.getIdjr().rejoindrePartie(id);
 			sControl.setPaneOnTop(ApplicationPane.WAIT);
+		});
+	}
+
+	@Override
+	public void partie(List<PartieInfo> partieInfo) {
+		Platform.runLater(() -> {
+			int i = 0;
+			for (PartieInfo partieInfo2 : partieInfo) {
+				Label label = new Label(partieInfo2.getIdPartie());
+				liste.set(0, label);
+				i++;
+			}
 		});
 	}
 }

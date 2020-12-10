@@ -32,7 +32,7 @@ public class TraitementIdjr {
 		core.setCouleur(IdjrTools.getCouleurByName(core.getNom(), noms, couleurs));
 		if (core.getInitializer() != null)
 			core.getInitializer().couleurJoueur(core.getCouleur());
-		if (lieuferme == "2") {
+		if (lieuferme.equals("2")) {
 			core.getLieuOuvert().add(1);
 			core.getLieuOuvert().add(3);
 			core.getLieuOuvert().add(4);
@@ -67,11 +67,7 @@ public class TraitementIdjr {
 			destRestant.add((Integer) o);
 		core.getInitializer().choisirLieu(destRestant);
 		while (!core.lieuDisponible())
-			try {
-				Thread.sleep(500);
-			} catch (Exception e) {
-				// TODO: handle exception
-			}
+			Thread.yield();
 		int dest = core.getLieuChoisi();
 		core.lieuChoisi(false);
 		return dest;
@@ -80,11 +76,7 @@ public class TraitementIdjr {
 	public int choisirPionPlacement(Idjr core) {
 		core.getInitializer().choisirPion(core.getPionAPos());
 		while (!core.pionDisponible())
-			try {
-				Thread.sleep(500);
-			} catch (Exception e) {
-				// TODO: handle exception
-			}
+			Thread.yield();
 		int pion = core.getPionChoisi();
 		core.pionChoisi(false);
 		return pion;
@@ -101,11 +93,7 @@ public class TraitementIdjr {
 		out.println("Entrez une destination");
 		core.getInitializer().choisirLieu(core.getLieuOuvert());
 		while (!core.lieuDisponible())
-			try {
-				Thread.sleep(500);
-			} catch (Exception e) {
-				// TODO: handle exception
-			}
+			Thread.yield();
 		int dest = core.getLieuChoisi();
 		core.lieuChoisi(false);
 		return dest;
@@ -136,11 +124,7 @@ public class TraitementIdjr {
 
 			core.getInitializer().choisirUtiliserCarte(CarteType.SPR);
 			while (!core.utiliserCarteDisponible())
-				try {
-					Thread.sleep(500);
-				} catch (Exception e) {
-					// TODO: handle exception
-				}
+				Thread.yield();
 			sprintJoue = core.getUtiliserCarteChosi();
 			if (sprintJoue == CarteType.SPR) {
 				core.getListeCarte().remove(sprintJoue);
@@ -148,11 +132,7 @@ public class TraitementIdjr {
 				// TODO choisir destination carte sprint parmis destPossible;
 				core.getInitializer().choisirLieu(core.getLieuOuvert());
 				while (!core.lieuDisponible())
-					try {
-						Thread.sleep(500);
-					} catch (Exception e) {
-						// TODO: handle exception
-					}
+					Thread.yield();
 				dest = core.getLieuChoisi();
 				core.lieuChoisi(false);
 			}
@@ -171,11 +151,7 @@ public class TraitementIdjr {
 			if (!listePion.isEmpty()) {
 				core.getInitializer().choisirPion(listePion);
 				while (!core.pionDisponible())
-					try {
-						Thread.sleep(500);
-					} catch (Exception e) {
-						// TODO: handle exception
-					}
+					Thread.yield();
 				pionAdep = core.getPionChoisi();
 				core.pionChoisi(false);
 			} else {
@@ -185,11 +161,7 @@ public class TraitementIdjr {
 		} else {
 			core.getInitializer().choisirPion(listePion);
 			while (!core.pionDisponible())
-				try {
-					Thread.sleep(500);
-				} catch (Exception e) {
-					// TODO: handle exception
-				}
+				Thread.yield();
 			pionAdep = core.getPionChoisi();
 			core.pionChoisi(false);
 		}
@@ -221,11 +193,7 @@ public class TraitementIdjr {
 		core.getInitializer().sacrificeChange();
 		core.getInitializer().choisirPion(listPion);
 		while (!core.pionDisponible())
-			try {
-				Thread.sleep(500);
-			} catch (Exception e) {
-				// TODO: handle exception
-			}
+			Thread.yield();
 		int pionInt = core.getPionChoisi();
 		core.pionChoisi(false);
 		core.getInitializer().deplacementChange();
@@ -288,11 +256,7 @@ public class TraitementIdjr {
 
 				core.getInitializer().choisirUtiliserCarte(listeCarteUtilisable);
 				while (!core.utiliserCarteDisponible())
-					try {
-						Thread.sleep(500);
-					} catch (Exception e) {
-						// TODO: handle exception
-					}
+					Thread.yield();
 				core.utiliserCarteChoisi(false);
 
 				CarteType tmpCarteType = core.getUtiliserCarteChosi();
@@ -337,27 +301,24 @@ public class TraitementIdjr {
 		while (core.isContinue() && nbrCartePossibleDejouer > 0 && nbrPion > 0) {
 			core.getInitializer().choisirUtiliserCarte(CarteType.CAC);
 			while (!core.utiliserCarteDisponible())
-				try {
-					Thread.sleep(500);
-				} catch (Exception e) {
-					// TODO: handle exception
-				}
+				Thread.yield();
 			core.utiliserCarteChoisi(false);
 
 			carteJouees.add(core.getUtiliserCarteChosi());
 			nbrCartePossibleDejouer--;
 			nbrPion--;
+			try {
+				Thread.sleep(500);
+			} catch (Exception e) {
+				// TODO: handle exception
+			}
 		}
 		core.setContinue(true);
 
 		for (int i = 0; i < carteJouees.size(); i++) {
 			core.getInitializer().choisirPion(IdjrTools.getPionsByValues(personnagesCachable));
 			while (!core.pionDisponible())
-				try {
-					Thread.sleep(500);
-				} catch (Exception e) {
-					// TODO: handle exception
-				}
+				Thread.yield();
 
 			core.pionChoisi(false);
 			PionCouleur tmp = PionCouleur.valueOf(core.getCouleur().name() + core.getPionChoisi());
@@ -373,13 +334,11 @@ public class TraitementIdjr {
 		if (core.getListeCarte().contains(CarteType.CDS)) {
 			core.getInitializer().choisirUtiliserCarte(CarteType.CDS);
 			while (!core.utiliserCarteDisponible())
-				try {
-					Thread.sleep(500);
-				} catch (Exception e) {
-					// TODO: handle exception
-				}
+				Thread.yield();
 
 			RJ = core.getUtiliserCarteChosi();
+			if (RJ == null)
+				RJ = CarteType.NUL;
 			core.utiliserCarteChoisi(false);
 
 			if (RJ == CarteType.CDS)
@@ -392,34 +351,44 @@ public class TraitementIdjr {
 
 	public int IndiquerCarteJouees(Idjr core) {
 		// TODO choix carte vote
+		List<CarteType> carteMenJouees = new ArrayList<>();
+
 		if (core.getListeCarte().isEmpty())
 			return 0;
-		CarteType carteMenace = CarteType.MEN;
-		Random r = new Random();
-		int nbrCarteMen = 0;
-		for (CarteType carte : core.getListeCarte()) {
-			if (carte.name() == carteMenace.name()) {
-				nbrCarteMen++;
+		CarteType carteSelec = CarteType.NUL;
+
+		while (core.isContinue() && core.getListeCarte().contains(CarteType.MEN)) {
+			core.getInitializer().choisirUtiliserCarte(CarteType.MEN);
+			while (!core.utiliserCarteDisponible())
+				Thread.yield();
+
+			core.utiliserCarteChoisi(false);
+			carteSelec = core.getUtiliserCarteChosi();
+			if (carteSelec == CarteType.MEN) {
+				carteMenJouees.add(carteSelec);
+				core.getListeCarte().remove(carteSelec);
+				core.getInitializer().updateCarte();
 			}
-		}
-		if (nbrCarteMen == 0)
-			return 0;
-		int nbrCartemenaceReturn = r.nextInt(nbrCarteMen);
-		return nbrCartemenaceReturn;
-	}
-
-	public Couleur getRandom(Idjr core, VoteType vt) {
-		// TODO choisir couleur qu'on souhaite voter en fonction du VoteType
-		System.out.println("Joueur Présent:" + core.couleurJoueurPresent().size());
-		core.couleurJoueurPresent().remove(core.getCouleur());
-
-		core.getInitializer().setVote(core.couleurJoueurPresent());
-		while (!core.voteDisponible())
 			try {
 				Thread.sleep(500);
 			} catch (Exception e) {
 				// TODO: handle exception
 			}
+		}
+		core.setContinue(true);
+
+		return carteMenJouees.size();
+	}
+
+	public Couleur getRandom(Idjr core, VoteType vt) {
+		// TODO choisir couleur qu'on souhaite voter en fonction du VoteType
+		System.out.println("Joueur Présent:" + core.couleurJoueurPresent().size());
+		if (vt == VoteType.MPZ)
+			core.couleurJoueurPresent().remove(core.getCouleur());
+
+		core.getInitializer().setVote(core.couleurJoueurPresent());
+		while (!core.voteDisponible())
+			Thread.yield();
 
 		core.voteChoisi(false);
 
@@ -430,11 +399,7 @@ public class TraitementIdjr {
 		// TODO choisir couleur a qui on veut donner une carte.
 		core.getInitializer().setVote(core.couleurJoueurPresent());
 		while (!core.voteDisponible())
-			try {
-				Thread.sleep(500);
-			} catch (Exception e) {
-				// TODO: handle exception
-			}
+			Thread.yield();
 
 		core.voteChoisi(false);
 

@@ -1209,6 +1209,8 @@ public class JeuPane extends StackPane implements JeuListener {
 			imageView.setDisable(true);
 		for (Button button : buttons)
 			button.setDisable(true);
+
+		vote.setVisible(false);
 	}
 
 	@Override
@@ -1418,20 +1420,24 @@ public class JeuPane extends StackPane implements JeuListener {
 
 	public void setCarteOfferte(List<Couleur> listeCouleurJoueurVivant) {
 		Button[] joueursButton = { joueur1c, joueur2c, joueur3c, joueur4c, joueur5c };
-		for (int i = 0; i < listeCouleurJoueurVivant.size(); i++) {
-			joueursButton[i].setDisable(false);
-			joueursButton[i].setText(listeCouleurJoueurVivant.get(i).nomEntier());
-			Couleur tmpCouleur = listeCouleurJoueurVivant.get(i);
-			joueursButton[i].setOnAction(EventHandler -> {
-				selectedCouleur = tmpCouleur;
-				if (selectedCouleur != null && selectedCarte != null) {
-					core.getIdjr().setCarteChoisi(selectedCarte);
-					core.getIdjr().setCouleurChoisi(selectedCouleur);
-					core.getIdjr().setEtatChoisi("Donner");
-					core.getIdjr().carteChoisi(true);
-					cartePanelReset();
-				}
-			});
+		for (int i = 0; i < joueursButton.length; i++) {
+			if (listeCouleurJoueurVivant.size() > i) {
+				joueursButton[i].setDisable(false);
+				joueursButton[i].setText(listeCouleurJoueurVivant.get(i).nomEntier());
+				Couleur tmpCouleur = listeCouleurJoueurVivant.get(i);
+				joueursButton[i].setOnAction(EventHandler -> {
+					selectedCouleur = tmpCouleur;
+					if (selectedCouleur != null && selectedCarte != null) {
+						core.getIdjr().setCarteChoisi(selectedCarte);
+						core.getIdjr().setCouleurChoisi(selectedCouleur);
+						core.getIdjr().setEtatChoisi("Donner");
+						core.getIdjr().carteChoisi(true);
+						cartePanelReset();
+					}
+				});
+			} else {
+				joueursButton[i].setText("");
+			}
 		}
 	}
 
@@ -1439,6 +1445,8 @@ public class JeuPane extends StackPane implements JeuListener {
 	public void choisirCarte(List<CarteType> listeCartes, List<Couleur> listeCouleurJoueurVivant, boolean garder,
 			boolean donner, boolean defausser, boolean utiliser) {
 		Platform.runLater(() -> {
+			Background selecBackground = new Background(new BackgroundFill(Color.GREEN, CornerRadii.EMPTY, null));
+			Background deselecBackground = fondNoir;
 			vote.setVisible(false);
 			System.out.println(listeCartes.size());
 			System.out.println(listeCouleurJoueurVivant.size());
@@ -1446,12 +1454,15 @@ public class JeuPane extends StackPane implements JeuListener {
 			if (listeCartes.size() >= 1) {
 				imgCarte1.setImage(new Image(convertCarte(listeCartes.get(0))));
 				bCarte1.setDisable(false);
-				bCarte1.setText(listeCartes.get(0).nomEntier());
+				bCarte1.setText("Selectionner");
 				bCarte1.setOnAction(EventHandler -> {
 					selectedCarte = listeCartes.get(0);
 					bChoixGarder.setDisable(!garder);
 					bChoixDonner.setDisable(!donner);
 					bChoixDefausser.setDisable(!defausser);
+					bCarte1.setBackground(selecBackground);
+					bCarte2.setBackground(fondNoir);
+					bCarte3.setBackground(fondNoir);
 				});
 			} else {
 				imgCarte1.setDisable(true);
@@ -1460,12 +1471,15 @@ public class JeuPane extends StackPane implements JeuListener {
 			if (listeCartes.size() >= 2) {
 				imgCarte2.setImage(new Image(convertCarte(listeCartes.get(1))));
 				bCarte2.setDisable(false);
-				bCarte2.setText(listeCartes.get(1).nomEntier());
+				bCarte2.setText("Selectionner");
 				bCarte2.setOnAction(EventHandler -> {
 					selectedCarte = listeCartes.get(1);
 					bChoixGarder.setDisable(!garder);
 					bChoixDonner.setDisable(!donner);
 					bChoixDefausser.setDisable(!defausser);
+					bCarte1.setBackground(fondNoir);
+					bCarte2.setBackground(selecBackground);
+					bCarte3.setBackground(fondNoir);
 				});
 			} else {
 				imgCarte2.setDisable(true);
@@ -1474,12 +1488,15 @@ public class JeuPane extends StackPane implements JeuListener {
 			if (listeCartes.size() >= 3) {
 				imgCarte3.setImage(new Image(convertCarte(listeCartes.get(2))));
 				bCarte3.setDisable(false);
-				bCarte3.setText(listeCartes.get(2).nomEntier());
+				bCarte3.setText("Selectionner");
 				bCarte3.setOnAction(EventHandler -> {
 					selectedCarte = listeCartes.get(2);
 					bChoixGarder.setDisable(!garder);
 					bChoixDonner.setDisable(!donner);
 					bChoixDefausser.setDisable(!defausser);
+					bCarte1.setBackground(fondNoir);
+					bCarte2.setBackground(fondNoir);
+					bCarte3.setBackground(selecBackground);
 				});
 			} else {
 				imgCarte3.setDisable(true);
@@ -1573,14 +1590,20 @@ public class JeuPane extends StackPane implements JeuListener {
 			vote.setVisible(true);
 			fouilleCamion.setVisible(false);
 			Button[] buttons = { joueur1, joueur2, joueur3, joueur4, joueur5 };
-			for (int i = 0; i < listeCouleurJoueur.size(); i++) {
-				buttons[i].setDisable(false);
-				Couleur cible = listeCouleurJoueur.get(i);
-				buttons[i].setOnAction(EventHandler -> {
-					core.getIdjr().setVoteChoisi(cible);
-					core.getIdjr().voteChoisi(true);
-					resetVoteCarte();
-				});
+			for (int i = 0; i < buttons.length; i++) {
+				if (listeCouleurJoueur.size() > i){
+					buttons[i].setDisable(false);
+					buttons[i].setText(listeCouleurJoueur.get(i).nomEntier());
+					Couleur cible = listeCouleurJoueur.get(i);
+					buttons[i].setOnAction(EventHandler -> {
+						core.getIdjr().setVoteChoisi(cible);
+						core.getIdjr().voteChoisi(true);
+						resetVoteCarte();
+					});
+				}
+				else {
+					buttons[i].setText("");
+				}
 			}
 		});
 	}
