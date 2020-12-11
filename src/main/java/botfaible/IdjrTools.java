@@ -1,5 +1,6 @@
 package botfaible;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import reseau.type.Couleur;
@@ -32,4 +33,12 @@ public abstract class IdjrTools {
 
         return Integer.parseInt(tmp);
     }
+    
+    public static List<Integer> getPionsByValues(List<PionCouleur> pc) {
+		List<Integer> tmp = new ArrayList<Integer>();
+		for (PionCouleur p : pc)
+			tmp.add(getPionByValue(p));
+
+		return tmp;
+	}
 }
