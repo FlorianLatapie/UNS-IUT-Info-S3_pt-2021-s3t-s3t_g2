@@ -27,7 +27,6 @@ Projet Tutoré 2020 en S3T Groupe 2
 - Gestion GitHub : Aurélien Arnault 
 - Classes réseau : Sébastien Aglaé 
 - Programmation algorithmes des bots : Alex Devauchelle
-- Gestion des votes : N/D
  
 **Politique de branches:**
  
@@ -55,19 +54,24 @@ Seuls les chefs de section pourront push dans les branches Master et Production.
 
 **Comment lancer le jeu ?**
 
+Attention à ne pas séparer les fichiers, ils doivent tous garder le même dossier. 
 
+Ordre à respecter : 
+➔ 1.Lancer le PP en premier (Instruction ci-dessous) 
+➔ 2.Puis l’IDJR et/ou les bots (Instruction ci-dessous)
 
-|Pour le PP|Pour l’IDJR|
-|------|-----|
-|Si vous voulez utiliser le clavier tactile:|➔Lancez le IDJR.java||
-|➔lancez le runPP.bat ||
-|Sinon ➔lancez le PP.java ||
-|➔Si des bots(faciles) sont nécessaires: Il faut lancer le bon nombre de BOT.jar, ils se connecteront automatiquement.||
-|||
-|➔Jouer|➔saisir votre nom (optionnel)|
-|➔saisir le nom de la partie (optionnel), le nombre total de joueurs (requis) et le nombre de bots (requis)|➔saisir le nom de partie renseigné sur le PP |
-|➔Attendez que les IDJR et/ou bots se connectent||
-|➔choisir la couleur de chaque joueur||
+|Pour le PP|Pour l’IDJR|Pour le BOT|
+|------|------|------|
+|➔Lancez le PP.bat|➔Lancez le IDJR.bat|➔Lancez le BOT.bat|
+||||
+|➔Jouer|➔Saisir votre nom (optionnel)|➔La connexion se fait automatique au PP|
+|➔Saisir le nom de la partie (optionnel), le nombre total de joueurs (requis) et le nombre de bots (requis) |➔Saisir votre nom (optionnel)||
+|➔Attendez que les IDJR et/ou bots se connectent|||
+|➔Choisir la couleur de chaque joueur|||
+|➔Lancer la partie |||
+||➔Selon la phase du jeu, choisissez de déplacer vos personnages ||
+|➔Affichage du gagnant|➔Affichage du gagnant|➔Affichage du gagnant|
+|➔Vous pouvez à présent relancer une partie|➔Vous ne pouvez pas à relancer une partie. Il est nécessaire de redémarré |➔Vous pouvez à présent relancer une partie (Parfois cela n’est pas possible)|
 
 **Gestion Gitignore**
 Notre fichier .gitignore contient les fichiers a exclure, ce sont donc les fichiers inutile pour l'ensemble des contributeurs du projet. Ils sont propre a l'utilisateur et donc ils ne doivent pas etre transmit. Les fichiers inutiles de nos IDE (Eclipse & Intellij) et Maven sont exclus.
