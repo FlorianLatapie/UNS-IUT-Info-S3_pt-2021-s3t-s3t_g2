@@ -47,7 +47,7 @@ public class TcpServeur implements Runnable, IControleSocket {
 		logger.log(Level.FINEST, "Serveur TCP sur l'ip {0}", controleurReseau.getIp().getHostAddress());
 		logger.log(Level.FINEST, "Serveur TCP sur le port {1}", port);
 		try {
-			serveurSocket = new ServerSocket(port);
+			serveurSocket = new ServerSocket(port, 50, controleurReseau.getIp());
 		} catch (IOException e1) {
 			return;
 		}
