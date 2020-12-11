@@ -18,24 +18,39 @@ public class DataControl {
 	public final static Locale localeEN = new Locale("en", "UK");
 	public final static Locale localeFR = new Locale("fr", "FR");
 	public final static String localMsgURL = "Ressources.Textes.messages";
-	public static final String FOND = "idjr/ihmidjr/fond.png";
-	public static final String PLATEAU = "idjr/ihmidjr/plateau.png";
-	public static final String ICONE = "idjr/ihmidjr/desktop Icon.jpg";
 	
-	public static final String NOIR = "idjr/ihmidjr/noir.png";
-	public static final String VERT = "idjr/ihmidjr/vert.png";
-	public static final String MARRON = "idjr/ihmidjr/marron.png";
-	public static final String ROUGE = "idjr/ihmidjr/rouge.png";
-	public static final String BLEU = "idjr/ihmidjr/bleu.png";
-	public static final String JAUNE = "idjr/ihmidjr/jaune.png";
+	public static final String FOND = "idjr/ihmidjr/images/fond.png";
+	public static final String PLATEAU = "idjr/ihmidjr/images/plateau.png";
+	public static final String ICONE = "idjr/ihmidjr/images/desktop Icon.jpg";
+	public static final String NOIR = "idjr/ihmidjr/images/noir.png";
+	public static final String VERT = "idjr/ihmidjr/images/vert.png";
+	public static final String MARRON = "idjr/ihmidjr/images/marron.png";
+	public static final String ROUGE = "idjr/ihmidjr/images/rouge.png";
+	public static final String BLEU = "idjr/ihmidjr/images/bleu.png";
+	public static final String JAUNE = "idjr/ihmidjr/images/jaune.png";
+
+	//Cartes
+	public static final String CARTE_BATTE = "idjr/ihmidjr/images/Cartes/Cartes_Armes/batte.png";
+	public static final String CARTE_CS = "idjr/ihmidjr/images/Cartes/Cartes_Armes/Canon Scié.png";
+	public static final String CARTE_GRENADE = "idjr/ihmidjr/images/Cartes/Cartes_Armes/grenade.png";
+	public static final String CARTE_HACHE = "idjr/ihmidjr/images/Cartes/Cartes_Armes/hache.png";
+	public static final String CARTE_REVOLVER = "idjr/ihmidjr/images/Cartes/Cartes_Armes/revolver.png";
+	public static final String CARTE_TRONCENNEUSE = "idjr/ihmidjr/images/Cartes/Cartes_Armes/tronconneuse.png";
 	
-		
-	public static final ObservableList<Integer> nombreJoueur = FXCollections.observableArrayList(3,4,5,6);
-	public static final ObservableList<Integer> nombreBot = FXCollections.observableArrayList(0,1,2,3,4,5,6);
+	//Autres artes
+	public static final String CARTE_CACHETTE = "idjr/ihmidjr/images/Cartes/Cartes_Autres/cachette.png";
+	public static final String CARTE_CAMERA = "idjr/ihmidjr/images/Cartes/Cartes_Autres/camera.png";
+	public static final String CARTE_MATERIEL = "idjr/ihmidjr/images/Cartes/Cartes_Autres/matériel.png";
+	public static final String CARTE_MENACE = "idjr/ihmidjr/images/Cartes/Cartes_Autres/menace.png";
+	public static final String CARTE_SPRINT = "idjr/ihmidjr/images/Cartes/Cartes_Autres/sprint.png";
 	
+	public static final String CARTE_VIDE = "idjr/ihmidjr/images/carte_vide.png";
+	
+	
+	public static final ObservableList<Integer> nombreJoueur = FXCollections.observableArrayList(3, 4, 5, 6);
+	public static final ObservableList<Integer> nombreBot = FXCollections.observableArrayList(0, 1, 2, 3, 4, 5, 6);
 	public static final ObservableList<String> couleursJoueur = FXCollections.observableArrayList("Noir", "Vert",
 			"Marron", "Rouge", "Bleu", "Jaune");
-
 
 	public static Locale getLocale(ApplicationLangue l) {
 		switch (l) {

@@ -28,11 +28,9 @@ public class OptionPane extends StackPane {
 	private String styleBoutonsSouris = "-fx-background-color:#ff0000;  -fx-text-fill:#000000; -fx-background-radius: 15px;";
 	private String styleTitre = "-fx-text-fill: #ff1c16";
 	private final ApplicationPane paneName = ApplicationPane.OPTION;
-
 	private int tailleCarreCentral = 700;
 	private Font policeTitre = Font.font("Segoe UI", FontWeight.BOLD, 75);
 	private Font policeBouton = Font.font("Segoe UI", FontWeight.BOLD, 33);
-
 	private int hauteurElement = 60;
 
 	public OptionPane(ScreenControl sc, Core c) {
@@ -115,8 +113,7 @@ public class OptionPane extends StackPane {
 		bRetour.setAlignment(Pos.CENTER);
 		bRetour.setPrefSize(180, hauteurElement);
 		bRetour.setStyle(styleBoutons);
-		bRetour.setOnAction(
-				EventHandler ->  sc.setPaneOnTop(core.getPauseDepuis())); 
+		bRetour.setOnAction(EventHandler -> sc.setPaneOnTop(core.getPauseDepuis()));
 		bRetour.setOnMouseEntered(event -> {
 			bRetour.setStyle(styleBoutonsSouris);
 		});

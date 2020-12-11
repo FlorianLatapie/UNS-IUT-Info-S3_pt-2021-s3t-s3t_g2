@@ -1,12 +1,21 @@
 package idjr.ihmidjr;
 
+import java.util.List;
+
+import idjr.PartieInfo;
 import idjr.ihmidjr.DataControl.ApplicationPane;
 import idjr.ihmidjr.event.ConfigListener;
 import javafx.application.Platform;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.ListView;
+import javafx.scene.control.SelectionMode;
 import javafx.scene.control.TextField;
 import javafx.scene.effect.GaussianBlur;
 import javafx.scene.image.ImageView;
@@ -14,6 +23,7 @@ import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
+import javafx.scene.text.TextAlignment;
 
 /**
  * The Class ConfigPartiePane.
@@ -29,13 +39,9 @@ public class ConfigPartiePane extends StackPane implements ConfigListener {
 	private ScreenControl sControl = null;
 	private Core core = null;
 	private final ApplicationPane paneName = ApplicationPane.CONFIG;
-	// définition des variable pour la suite du pane
-	private int tailleCarreCentral = 800; // l'interface est sur un stackPane qui peut tourner avec des crans de 90
-	// degrés
+	private int tailleCarreCentral = 800; // l'interface est sur un stackPane
 	private int hBouton = 75;
 	private int lBouton = 150;
-	// private int marge = tailleCarreCentral / 25;
-	// private Insets margeBoutons = new Insets(marge, marge, marge, marge);
 	private Font policeBouton = Font.font("Segoe UI", FontWeight.BOLD, 27);
 	private CornerRadii coin = new CornerRadii(15.0);
 	private String styleBoutons = " -fx-background-color:#000000; -fx-background-radius: 15px; -fx-text-fill: #ffffff";
@@ -53,12 +59,15 @@ public class ConfigPartiePane extends StackPane implements ConfigListener {
 
 	private Insets botPadding = new Insets(10);
 
+	ObservableList<Label> liste = FXCollections.observableArrayList();
+
 	public ConfigPartiePane(ScreenControl sc, Core c) {
 		core = c;
 		sControl = sc;
 		stackPane.setAlignment(Pos.CENTER);
 		// titre
-		Label titre1 = new Label("Rejoindre\n\tune partie");
+		Label titre1 = new Label("Rejoindre\nune partie");
+		titre1.setTextAlignment(TextAlignment.CENTER);
 		titre1.setFont(Font.font("Segoe UI", FontWeight.BOLD, 80));
 		titre1.setTextFill(Color.BLACK);
 
@@ -74,7 +83,6 @@ public class ConfigPartiePane extends StackPane implements ConfigListener {
 		desc.setAlignment(Pos.CENTER);
 		desc.setFont(policeNom);
 		desc.setMinHeight(hauteurElemtents);
-		// desc.setBackground(fondBlanc);
 		desc.setPadding(botPadding);
 
 		TextField nomP = new TextField();
@@ -90,11 +98,22 @@ public class ConfigPartiePane extends StackPane implements ConfigListener {
 		partie.setPrefWidth(220);
 		partie.setMaxWidth(400);
 
+		// To Creating a Observable List
+		ObservableList<Label> liste = FXCollections.observableArrayList();
+
+		// Create a ListView
+		ListView<Label> listView = new ListView<Label>(liste);
+
+		// Only allowed to select single row in the ListView.
+		listView.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
+
+		listView.setMaxWidth(400);
+		listView.setMaxHeight(100);
+
 		VBox vbCenter = new VBox();
 		vbCenter.setAlignment(Pos.CENTER);
-		// vbCenter.setSpacing(spacing);
-		// vbCenter.setBackground(fondBlanc);
-		vbCenter.getChildren().addAll(partie);
+		vbCenter.setSpacing(20);
+		vbCenter.getChildren().addAll(partie, listView);
 
 		// boutons
 		Button bJouer = new Button("JOUER");
@@ -141,8 +160,6 @@ public class ConfigPartiePane extends StackPane implements ConfigListener {
 		ImageView imgFond = new ImageView(DataControl.FOND);
 		// carre central qui contient tous les éléments (boutons et titre)
 		BorderPane centreMenu = new BorderPane();
-		// centreMenu.setBackground(new Background(new
-		// BackgroundFill(Color.LIGHTGREY,CornerRadii.EMPTY,null)));
 		centreMenu.setMinSize(tailleCarreCentral, tailleCarreCentral);
 		centreMenu.setPrefSize(tailleCarreCentral, tailleCarreCentral);
 		centreMenu.setMaxSize(tailleCarreCentral, tailleCarreCentral);
@@ -153,9 +170,6 @@ public class ConfigPartiePane extends StackPane implements ConfigListener {
 		centreMenu.setTop(titre);
 		centreMenu.setCenter(vbCenter);
 		centreMenu.setBottom(boutonsPanneau);
-
-		// rotation de l'interface
-		// centreMenu.setRotate(90);
 
 		// boite du fond qui contient tout
 		HBox fond = new HBox();
@@ -179,6 +193,18 @@ public class ConfigPartiePane extends StackPane implements ConfigListener {
 		Platform.runLater(() -> {
 			core.getIdjr().rejoindrePartie(id);
 			sControl.setPaneOnTop(ApplicationPane.WAIT);
+		});
+	}
+
+	@Override
+	public void partie(List<PartieInfo> partieInfo) {
+		Platform.runLater(() -> {
+			//int i = 0;
+			//for (PartieInfo partieInfo2 : partieInfo) {
+			//Label label = new Label(partieInfo2.getIdPartie());
+			//liste.set(0, label);
+			//i++;
+			//}
 		});
 	}
 }

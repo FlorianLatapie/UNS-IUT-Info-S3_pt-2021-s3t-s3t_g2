@@ -32,13 +32,9 @@ public class AttenteJoueurPane extends StackPane implements AttenteListener {
 	private ScreenControl sControl = null;
 	private Core core = null;
 	private final ApplicationPane paneName = ApplicationPane.WAIT;
-	// définition des variable pour la suite du pane
-	private int tailleCarreCentral = 800; // l'interface est sur un stackPane qui peut tourner avec des crans de 90
-	// degrés
+	private int tailleCarreCentral = 800;
 	private int hBouton = 75;
 	private int lBouton = 150;
-	// private int marge = tailleCarreCentral / 25;
-	// private Insets margeBoutons = new Insets(marge, marge, marge, marge);
 	private Font policeBouton = Font.font("Segoe UI", FontWeight.BOLD, 27);
 	private CornerRadii coin = new CornerRadii(15.0);
 	private String styleBoutons = " -fx-background-color:#000000; -fx-background-radius: 15px; -fx-text-fill: #ffffff";
@@ -52,7 +48,6 @@ public class AttenteJoueurPane extends StackPane implements AttenteListener {
 	private CornerRadii coinfb = new CornerRadii(5.0);
 	private Background fondBlanc = new Background(new BackgroundFill(Color.WHITE, coinfb, null));
 	private int tailleCercle = 55;
-
 	private Insets padding = new Insets(0, 10, 0, 10);
 	Label lIDPartie;
 
@@ -60,6 +55,7 @@ public class AttenteJoueurPane extends StackPane implements AttenteListener {
 		core = c;
 		sControl = sc;
 		stackPane.setAlignment(Pos.CENTER);
+
 		// titre
 		Label titre1 = new Label("Connexion \nen cours");
 		titre1.setTextAlignment(TextAlignment.CENTER);
@@ -71,8 +67,6 @@ public class AttenteJoueurPane extends StackPane implements AttenteListener {
 		titre.setBackground(new Background(new BackgroundFill(Color.RED, coin, null)));
 		titre.setPrefWidth(740);
 		titre.setMinWidth(740);
-
-		////
 
 		lIDPartie = new Label();
 		lIDPartie.setStyle("-fx-border-color: black; -fx-border-insets: -3; -fx-border-width: 3");
@@ -148,7 +142,6 @@ public class AttenteJoueurPane extends StackPane implements AttenteListener {
 		vbCenter.getChildren().addAll(vbWait);
 
 		// boutons
-
 		Button bRetour = new Button("RETOUR");
 		bRetour.setPrefSize(lBouton, hBouton);
 		bRetour.setMinSize(lBouton, hBouton);
@@ -173,23 +166,16 @@ public class AttenteJoueurPane extends StackPane implements AttenteListener {
 
 		// image fond
 		ImageView imgFond = new ImageView(DataControl.FOND);
+
 		// carre central qui contient tous les éléments (boutons et titre)
 		BorderPane centreMenu = new BorderPane();
-		// centreMenu.setBackground(new Background(new
-		// BackgroundFill(Color.LIGHTGREY,CornerRadii.EMPTY,null)));
 		centreMenu.setMinSize(tailleCarreCentral, tailleCarreCentral);
 		centreMenu.setPrefSize(tailleCarreCentral, tailleCarreCentral);
 		centreMenu.setMaxSize(tailleCarreCentral, tailleCarreCentral);
-		// centreMenu.setMargin(titre, new Insets(0, 0, 100, 0));
-
 		centreMenu.setAlignment(titre, Pos.CENTER);
-
 		centreMenu.setTop(titre);
 		centreMenu.setCenter(vbCenter);
 		centreMenu.setBottom(boutonsPanneau);
-
-		// rotation de l'interface
-		// centreMenu.setRotate(90);
 
 		// boite du fond qui contient tout
 		HBox fond = new HBox();

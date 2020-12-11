@@ -1,43 +1,178 @@
 package idjr;
 
 import idjr.ihmidjr.event.Initializer;
-import reseau.socket.NetWorkManager;
-import reseau.socket.SideConnection;
-import reseau.socket.TcpClientSocket;
-import reseau.tool.NetworkTool;
-import reseau.tool.ThreadTool;
+import idjr.ihmidjr.event.JeuListener;
+import pp.ihm.Core;
+import reseau.socket.ControleurReseau;
+import reseau.tool.ReseauOutils;
+import reseau.tool.ThreadOutils;
+import reseau.type.CarteType;
+import reseau.type.ConnexionType;
 import reseau.type.Couleur;
+import reseau.type.PionCouleur;
 import reseau.type.TypeJoueur;
 import reseau.type.TypePartie;
+import reseau.type.VoteType;
 
 import java.io.IOException;
 import java.net.InetAddress;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class Idjr {
 	/* Parametre Idjr */
+	private boolean estLieuChoisi = false;
+	private List<PartieInfo> listOfServer;
+	private PartieInfo current;
 	private String nom;
 	private String numPartie;
 	private String joueurId;
 	private Couleur couleur;
-	private final TypeJoueur typeJoueur;
+	private TypeJoueur typeJoueur;
+	private ConnexionType connexionType;
 	private InetAddress ipPp;
 	private int portPp;
-	NetWorkManager nwm;
+	private List<PionCouleur> poinSacrDispo;
+	private boolean envie;
+	private List<Integer> lieuOuvert;
+	private int delay;
+	private ControleurReseau nwm;
+	private boolean estFini;
+	private List<CarteType> listeCarte;
+	private List<PionCouleur> listePion;
+	private HashMap<Couleur, String> listeJoueursInitiale;
+	private List<Couleur> couleurJoueursPresent;
+	private List<Couleur> joueurEnVie;
+	private VoteType voteType;
+	private int pionChoisi;
+	private int lieuChoisi;
+	private CarteType carteChoisi;
+	private Couleur couleurChoisi;
+	private CarteType carteUtiliser;
+	private Couleur voteChoisi;
+	private boolean isContinue;
+	private String etat;
 	Initializer initializer;
+
 	/* Parametre Temporaire */
 	private List<Integer> pionAPos;
+
+	public Idjr(Initializer initializer) throws IOException {
+		this.initializer = initializer;
+		initBot();
+		initReseau();
+	}
+
+	private void initBot() {
+		listeJoueursInitiale = new HashMap<>();
+		this.typeJoueur = TypeJoueur.JR;
+		this.connexionType = ConnexionType.CLIENT;
+		this.listOfServer = new ArrayList<>();
+		this.pionAPos = new ArrayList<>();
+		this.lieuOuvert = new ArrayList<>();
+		this.listeCarte = new ArrayList<>();
+		this.couleurJoueursPresent = new ArrayList<>();
+		this.listePion = new ArrayList<>();
+		this.envie = true;
+		this.estFini = false;
+		this.joueurEnVie = new ArrayList<>();
+	}
+
+	private void initReseau() throws IOException {
+		TraitementPaquetTcp traitementPaquetTcp = new TraitementPaquetTcp(this);
+		TraitementPaquetUdp traitementPaquetUdp = new TraitementPaquetUdp(this);
+		nwm = new ControleurReseau(traitementPaquetTcp, traitementPaquetUdp);
+		nwm.initConnexion(connexionType, ReseauOutils.getLocalIp());
+	}
+
+	public void estPartieConnecte(String nom) {
+		Thread thread = new Thread(() -> {
+			listOfServers();
+			for (PartieInfo partieInfo : listOfServer) {
+				if (partieInfo.getIdPartie().equals(nom)) {
+					System.out.println("OK");
+					current = partieInfo;
+					nwm.tcp(partieInfo.getIp());
+					initializer.partieValide(nom);
+					return;
+				}
+			}
+		});
+		thread.start();
+	}
+
+	private void listOfServers() {
+		listOfServer.clear();
+
+		// TODO QUE MIXTE
+		// QUE 6
+		String message = nwm.construirePaquetUdp("RP", TypePartie.MIXTE, 5);
+		nwm.envoyerUdp(message);
+
+		try {
+			Thread.sleep(1000);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+
+		initializer.partie(listOfServer);
+	}
+
+	public void rejoindrePartie(String nomp) {
+		setIpPp(current.getIp());
+		setPortPp(current.getPort());
+		if (initializer != null)
+			initializer.nomPartie(current.getIdPartie());
+		String messageTcp = nwm.construirePaquetTcp("DCP", nom, typeJoueur, current.getIdPartie());
+		ThreadOutils.asyncTask(() -> {
+			nwm.envoyerTcp(messageTcp);
+			nwm.attendreTcp("ACP");
+			String message1 = nwm.getMessageTcp("ACP");
+			setJoueurId((String) nwm.getValueTcp("ACP", message1, 2));
+		});
+	}
 
 	public Initializer getInitializer() {
 		return initializer;
 	}
 
-	private List<PartieInfo> listOfServer;
-	private PartieInfo current;
+	private boolean voteChoisiBool = false;
 
-	/*                       */
-	private int pionChoisi;
+	public boolean voteDisponible() {
+		return voteChoisiBool;
+	}
+
+	public Couleur getVoteChoisi() {
+		return voteChoisi;
+	}
+
+	public void voteChoisi(boolean etat) {
+		voteChoisiBool = etat;
+	}
+
+	public void setVoteChoisi(Couleur voteChoisi) {
+		this.voteChoisi = voteChoisi;
+	}
+
+	private boolean estUtiliserCarteChoisi = false;
+
+	public void choisirUtiliserCarte(CarteType carteUtiliser) {
+		this.carteUtiliser = carteUtiliser;
+	}
+
+	public boolean utiliserCarteDisponible() {
+		return estUtiliserCarteChoisi;
+	}
+
+	public CarteType getUtiliserCarteChosi() {
+		return carteUtiliser;
+	}
+
+	public void utiliserCarteChoisi(boolean etat) {
+		estUtiliserCarteChoisi = etat;
+	}
 
 	public int getPionChoisi() {
 		return pionChoisi;
@@ -51,16 +186,37 @@ public class Idjr {
 		estPionChoisi = t;
 	}
 
+	public void setEtatChoisi(String etat) {
+		this.etat = etat;
+	}
+
+	public String getEtatChoisi() {
+		return etat;
+	}
+
 	public boolean pionDisponible() {
 		return estPionChoisi;
 	}
 
 	private boolean estPionChoisi = false;
 
-	/*                       */
+	public CarteType getCarteChoisi() {
+		return carteChoisi;
+	}
 
-	/*                       */
-	private int lieuChoisi;
+	public void setCarteChoisi(CarteType carte) {
+		this.carteChoisi = carte;
+	}
+
+	public void carteChoisi(boolean t) {
+		estCarteChoisi = t;
+	}
+
+	public boolean carteDisponible() {
+		return estCarteChoisi;
+	}
+
+	private boolean estCarteChoisi = false;
 
 	public int getLieuChoisi() {
 		return lieuChoisi;
@@ -78,48 +234,24 @@ public class Idjr {
 		return estLieuChoisi;
 	}
 
-	private boolean estLieuChoisi = false;
-
-	/*                       */
-
-	/* Core */
-	private final Jeu jeu = new Jeu();
-
-	public Idjr(Initializer initializer) throws IOException {
-		this.initializer = initializer;
-		this.typeJoueur = TypeJoueur.JR;
-		this.pionAPos = new ArrayList<>();
-		this.listOfServer = new ArrayList<>();
-		initReseau();
+	public void addPartie(PartieInfo p) {
+		listOfServer.add(p);
 	}
 
-	private void initReseau() throws IOException {
-		nwm = new NetWorkManager(this);
-		nwm.initConnection(SideConnection.CLIENT, NetworkTool.getAliveLocalIp());
+	public synchronized void stop() {
+		nwm.arreter();
 	}
 
-	public Joueur getMoi() {
-		for (Joueur j : jeu.getJoueurs().values()) {
-			if (j.getCouleur() == couleur) {
-				return j;
-			}
-		}
-
-		return null;
+	public void setCouleurJoueurs(List<Couleur> couleurJoueurs) {
+		this.couleurJoueursPresent = couleurJoueurs;
 	}
 
-	public Joueur getJoueur(Couleur c) {
-		for (Joueur j : jeu.getJoueurs().values()) {
-			if (j.getCouleur() == c) {
-				return j;
-			}
-		}
-
-		return null;
+	public void arreter() {
+		nwm.arreter();
 	}
 
-	public Jeu getJeu() {
-		return jeu;
+	public int getDelay() {
+		return delay;
 	}
 
 	public List<Integer> getPionAPos() {
@@ -178,70 +310,100 @@ public class Idjr {
 		this.nom = nom;
 	}
 
-	public void estPartieConnecte(String nom) {
-		Thread thread = new Thread(() -> {
-			listOfServers();
-			for (PartieInfo partieInfo : listOfServer) {
-				if (partieInfo.getIdPartie().equals(nom)) {
-					System.out.println("OK");
-					current = partieInfo;
-					initializer.partieValide(nom);
-					return;
-				}
-			}
-		});
-
-		thread.start();
+	public List<Integer> getLieuOuvert() {
+		return lieuOuvert;
 	}
 
-	private void listOfServers() {
-		listOfServer.clear();
-
-		// TODO QUE MIXTE
-		// QUE 6
-		String message = nwm.getPacketsUdp().get("RP").build(TypePartie.MIXTE, 5);
-		nwm.getUdpSocket().sendPacket(message);
-
-		try {
-			Thread.sleep(1000);
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-		}
+	public void setLieuOuvert(List<Integer> lieuOuvert) {
+		this.lieuOuvert = lieuOuvert;
 	}
 
-	public void addPartie(PartieInfo p) {
-		listOfServer.add(p);
+	public boolean getEnvie() {
+		return envie;
 	}
 
-	public void rejoindrePartie(String nomp) {
-		setIpPp(current.getIp());
-		setPortPp(current.getPort());
-		if (initializer != null)
-			initializer.nomPartie(current.getIdPartie());
-		String messageTcp = nwm.getPacketsTcp().get("DCP").build(nom, typeJoueur, current.getIdPartie());
-		ThreadTool.asyncTask(() -> {
-			String message1 = TcpClientSocket.connect(ipPp, portPp, messageTcp, nwm.getAddress(), nwm.getTcpPort());
-			setJoueurId((String) nwm.getPacketsTcp().get("ACP").getValue(message1, 2));
-		}, () -> {
-			try {
-				Thread.sleep(100);
-			} catch (InterruptedException e) {
-			}
-			nwm.stopBind();
-			try {
-				Thread.sleep(100);
-			} catch (InterruptedException e) {
-			}
-			nwm.startServerTCP();
-		});
+	public void setEnvie(Boolean envie) {
+		this.envie = envie;
 	}
-	
-	public synchronized void stop() {
-		if (nwm != null) {
-			if (nwm.getTcpServerSocket() != null)
-				nwm.getTcpServerSocket().stop();
-			if (nwm.getUdpSocket() != null)
-				nwm.getUdpSocket().stop();
-		}
+
+	public List<PionCouleur> getPoinSacrDispo() {
+		return poinSacrDispo;
+	}
+
+	public void setPoinSacrDispo(List<PionCouleur> list) {
+		this.poinSacrDispo = list;
+	}
+
+	public void setEstFini(boolean estFini) {
+		this.estFini = estFini;
+	}
+
+	public boolean isEstFini() {
+		return estFini;
+	}
+
+	public List<CarteType> getListeCarte() {
+		return listeCarte;
+	}
+
+	public void addCarte(CarteType n) {
+		listeCarte.add(n);
+		initializer.updateCarte();
+	}
+
+	public void setListeCarte(List<CarteType> listeCarte) {
+		this.listeCarte = listeCarte;
+	}
+
+	public List<PionCouleur> getListePion() {
+		return listePion;
+	}
+
+	public void setListePion(List<PionCouleur> listePion) {
+		this.listePion = listePion;
+	}
+
+	public List<Couleur> couleurJoueurPresent() {
+		return couleurJoueursPresent;
+	}
+
+	public VoteType getVoteType() {
+		return voteType;
+	}
+
+	public void setVoteType(VoteType voteType) {
+		this.voteType = voteType;
+	}
+
+	public List<Couleur> getJoueurEnVie() {
+		return joueurEnVie;
+	}
+
+	public void setJoueurEnVie(List<Couleur> joueurEnVie) {
+		this.joueurEnVie = joueurEnVie;
+	}
+
+	public Map<Couleur, String> getListeJoueursInitiale() {
+		return listeJoueursInitiale;
+	}
+
+	public void putListeJoueursInitiale(Couleur c, String nom) {
+		this.listeJoueursInitiale.put(c, nom);
+	}
+
+	public void setCouleurChoisi(Couleur selectedCouleur) {
+		this.couleurChoisi = selectedCouleur;
+	}
+
+	public Couleur getCouleurChoisi() {
+		return couleurChoisi;
+	}
+
+	public boolean isContinue() {
+		return isContinue;
+	}
+
+	public void setContinue(boolean isContinue) {
+		this.isContinue = isContinue;
 	}
 }

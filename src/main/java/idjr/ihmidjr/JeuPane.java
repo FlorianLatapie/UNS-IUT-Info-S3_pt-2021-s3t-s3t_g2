@@ -25,24 +25,19 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
+import reseau.type.CarteType;
 import reseau.type.Couleur;
 
 public class JeuPane extends StackPane implements JeuListener {
 
 	private ScreenControl sControl = null;
 	private Core core = null;
-	// définition des variable pour la suite du pane
-	private int tailleCarreCentral = 600; // l'interface est sur un stackPane qui peut tourner avec des crans de 90
-											// degrés
 	private int hBouton = 100;
 	private int lBouton = 200;
-	private int marge = tailleCarreCentral / 25;
-	private Insets margeBoutons = new Insets(marge, marge, marge, marge);
 	private Font policeBouton = Font.font("Segoe UI", FontWeight.BOLD, 33);
+	private Font policeBoutonC = Font.font("Segoe UI", FontWeight.BOLD, 28);
 	private Font policeBoutonDe = Font.font("Segoe UI", FontWeight.BOLD, 40);
-	private CornerRadii coin = new CornerRadii(15.0);
 	private String styleBoutons = " -fx-background-color:#000000; -fx-background-radius: 15px; -fx-text-fill: #ffffff";
-	private String styleDe = " -fx-background-color:#FFFFFF; -fx-background-radius: 3px; -fx-text-fill: #ffffff";
 	private String styleBoutonsSouris = "-fx-background-color:#ff0000;  -fx-text-fill:#000000; -fx-background-radius: 15px;";
 	private StackPane stackPane = new StackPane();
 	private GaussianBlur flou = new GaussianBlur(30);
@@ -50,16 +45,13 @@ public class JeuPane extends StackPane implements JeuListener {
 	private CornerRadii coinfb = new CornerRadii(5.0);
 	private Background fondBlanc = new Background(new BackgroundFill(Color.WHITE, coinfb, null));
 	private Background fondNoir = new Background(new BackgroundFill(Color.BLACK, CornerRadii.EMPTY, null));
-
 	private int largBouton = 155;
 	private int hautBouton = 70;
-
-	private Font policeNom = Font.font("Segoe UI", 17);
-	private int largeurTF = 100;
-	private int hauteurElemtents = 60;
+	private int lBoutonCamion = 180;
+	private int hBoutonDeck = 60;
+	private int lBoutonCamion2 = 145;
 	private final ApplicationPane paneName = ApplicationPane.JEU;
 
-	// TODO
 	Label phasePartie;
 
 	BorderPane info;
@@ -78,6 +70,26 @@ public class JeuPane extends StackPane implements JeuListener {
 	Button bTruand;
 	Button bFillette;
 
+	Button joueur1;
+	Button joueur2;
+	Button joueur3;
+	Button joueur4;
+	Button joueur5;
+
+	Button joueur1c;
+	Button joueur2c;
+	Button joueur3c;
+	Button joueur4c;
+	Button joueur5c;
+
+	Button bCarte1;
+	Button bCarte2;
+	Button bCarte3;
+
+	Button bChoixGarder;
+	Button bChoixDonner;
+	Button bChoixDefausser;
+
 	Label de1;
 	Label de2;
 
@@ -86,6 +98,49 @@ public class JeuPane extends StackPane implements JeuListener {
 	ImageView imgFond;
 
 	Label labDeplPers;
+
+	ImageView imgCarte1;
+	ImageView imgCarte2;
+	ImageView imgCarte3;
+
+	ImageView imgDeCarte1;
+	ImageView imgDeCarte2;
+	ImageView imgDeCarte3;
+	ImageView imgDeCarte4;
+	ImageView imgDeCarte5;
+	ImageView imgDeCarte6;
+	ImageView imgDeCarte7;
+	ImageView imgDeCarte8;
+	ImageView imgDeCarte9;
+
+	Button bDeCarte1;
+	Button bDeCarte2;
+	Button bDeCarte3;
+	Button bDeCarte4;
+	Button bDeCarte5;
+	Button bDeCarte6;
+	Button bDeCarte7;
+	Button bDeCarte8;
+	Button bDeCarte9;
+	Button bPasserCarte;
+
+	VBox carte1;
+	VBox carte2;
+	VBox carte3;
+	VBox carte4;
+	VBox carte5;
+	VBox carte6;
+	VBox carte7;
+	VBox carte8;
+	VBox carte9;
+	VBox passerCarte;
+
+	BorderPane fouilleCamion;
+	BorderPane vote;
+
+	CarteType selectedCarte;
+	Couleur selectedCouleur;
+	HBox hboxBoutonJoueur;
 
 	public JeuPane(ScreenControl sc, Core c) {
 		core = c;
@@ -117,15 +172,248 @@ public class JeuPane extends StackPane implements JeuListener {
 		rectVigile.setHeight(120);
 
 		//////////////////////////////////////////
-		VBox vbCentral = new VBox();
-		vbCentral.setAlignment(Pos.BOTTOM_CENTER);
-		vbCentral.setTranslateY(340);
-		vbCentral.setPrefSize(1800, 250);
-		vbCentral.setMinSize(1800, 250);
-		vbCentral.setMaxSize(1800, 250);
-		vbCentral.setStyle(styleVBox);
+		HBox hbCartes = new HBox();
+		hbCartes.setAlignment(Pos.CENTER);
+		hbCartes.setTranslateY(340);
+		hbCartes.setPrefSize(1800, 250);
+		hbCartes.setMinSize(1800, 250);
+		hbCartes.setMaxSize(1800, 250);
+		hbCartes.setStyle(styleVBox);
+		// hbCartes.setPadding(new Insets(0,10,0,10));
+		hbCartes.setSpacing(20);
 
-		BorderPane vote = new BorderPane();
+		carte1 = new VBox();
+		carte1.setAlignment(Pos.CENTER);
+		carte1.setSpacing(10);
+
+		imgDeCarte1 = new ImageView(DataControl.CARTE_CS);
+		imgDeCarte1.setFitHeight(150);
+		imgDeCarte1.setFitWidth(150);
+
+		bDeCarte1 = new Button("Utiliser"); // TODO Event
+		bDeCarte1.setAlignment(Pos.CENTER);
+		bDeCarte1.setStyle(styleBoutons);
+		bDeCarte1.setPrefSize(largBouton, hBoutonDeck);
+		bDeCarte1.setMinSize(largBouton, hBoutonDeck);
+		bDeCarte1.setFont(policeBoutonC);
+		bDeCarte1.setOnMouseEntered(event -> {
+			bDeCarte1.setStyle(styleBoutonsSouris);
+		});
+		bDeCarte1.setOnMouseExited(event -> {
+			bDeCarte1.setStyle(styleBoutons);
+		});
+
+		carte1.getChildren().addAll(imgDeCarte1, bDeCarte1);
+
+		carte2 = new VBox();
+		carte2.setAlignment(Pos.CENTER);
+		carte2.setSpacing(10);
+
+		imgDeCarte2 = new ImageView(DataControl.CARTE_CS);
+		imgDeCarte2.setFitHeight(150);
+		imgDeCarte2.setFitWidth(150);
+
+		bDeCarte2 = new Button("Utiliser"); // TODO Event
+		bDeCarte2.setAlignment(Pos.CENTER);
+		bDeCarte2.setStyle(styleBoutons);
+		bDeCarte2.setPrefSize(largBouton, hBoutonDeck);
+		bDeCarte2.setMinSize(largBouton, hBoutonDeck);
+		bDeCarte2.setFont(policeBoutonC);
+		bDeCarte2.setOnMouseEntered(event -> {
+			bDeCarte2.setStyle(styleBoutonsSouris);
+		});
+		bDeCarte2.setOnMouseExited(event -> {
+			bDeCarte2.setStyle(styleBoutons);
+		});
+
+		carte2.getChildren().addAll(imgDeCarte2, bDeCarte2);
+
+		carte3 = new VBox();
+		carte3.setAlignment(Pos.CENTER);
+		carte3.setSpacing(10);
+
+		imgDeCarte3 = new ImageView(DataControl.CARTE_CS);
+		imgDeCarte3.setFitHeight(150);
+		imgDeCarte3.setFitWidth(150);
+
+		bDeCarte3 = new Button("Utiliser"); // TODO Event
+		bDeCarte3.setAlignment(Pos.CENTER);
+		bDeCarte3.setStyle(styleBoutons);
+		bDeCarte3.setPrefSize(largBouton, hBoutonDeck);
+		bDeCarte3.setMinSize(largBouton, hBoutonDeck);
+		bDeCarte3.setFont(policeBoutonC);
+		bDeCarte3.setOnMouseEntered(event -> {
+			bDeCarte3.setStyle(styleBoutonsSouris);
+		});
+		bDeCarte3.setOnMouseExited(event -> {
+			bDeCarte3.setStyle(styleBoutons);
+		});
+
+		carte3.getChildren().addAll(imgDeCarte3, bDeCarte3);
+
+		carte4 = new VBox();
+		carte4.setAlignment(Pos.CENTER);
+		carte4.setSpacing(10);
+
+		imgDeCarte4 = new ImageView(DataControl.CARTE_CS);
+		imgDeCarte4.setFitHeight(150);
+		imgDeCarte4.setFitWidth(150);
+
+		bDeCarte4 = new Button("Utiliser"); // TODO Event
+		bDeCarte4.setAlignment(Pos.CENTER);
+		bDeCarte4.setStyle(styleBoutons);
+		bDeCarte4.setPrefSize(largBouton, hBoutonDeck);
+		bDeCarte4.setMinSize(largBouton, hBoutonDeck);
+		bDeCarte4.setFont(policeBoutonC);
+		bDeCarte4.setOnMouseEntered(event -> {
+			bDeCarte4.setStyle(styleBoutonsSouris);
+		});
+		bDeCarte4.setOnMouseExited(event -> {
+			bDeCarte4.setStyle(styleBoutons);
+		});
+
+		carte4.getChildren().addAll(imgDeCarte4, bDeCarte4);
+
+		carte5 = new VBox();
+		carte5.setAlignment(Pos.CENTER);
+		carte5.setSpacing(10);
+
+		imgDeCarte5 = new ImageView(DataControl.CARTE_CS);
+		imgDeCarte5.setFitHeight(150);
+		imgDeCarte5.setFitWidth(150);
+
+		bDeCarte5 = new Button("Utiliser"); // TODO Event
+		bDeCarte5.setAlignment(Pos.CENTER);
+		bDeCarte5.setStyle(styleBoutons);
+		bDeCarte5.setPrefSize(largBouton, hBoutonDeck);
+		bDeCarte5.setMinSize(largBouton, hBoutonDeck);
+		bDeCarte5.setFont(policeBoutonC);
+		bDeCarte5.setOnMouseEntered(event -> {
+			bDeCarte5.setStyle(styleBoutonsSouris);
+		});
+		bDeCarte5.setOnMouseExited(event -> {
+			bDeCarte5.setStyle(styleBoutons);
+		});
+
+		carte5.getChildren().addAll(imgDeCarte5, bDeCarte5);
+
+		carte6 = new VBox();
+		carte6.setAlignment(Pos.CENTER);
+		carte6.setSpacing(10);
+
+		imgDeCarte6 = new ImageView(DataControl.CARTE_CS);
+		imgDeCarte6.setFitHeight(150);
+		imgDeCarte6.setFitWidth(150);
+
+		bDeCarte6 = new Button("Utiliser"); // TODO Event
+		bDeCarte6.setAlignment(Pos.CENTER);
+		bDeCarte6.setStyle(styleBoutons);
+		bDeCarte6.setPrefSize(largBouton, hBoutonDeck);
+		bDeCarte6.setMinSize(largBouton, hBoutonDeck);
+		bDeCarte6.setFont(policeBoutonC);
+		bDeCarte6.setOnMouseEntered(event -> {
+			bDeCarte6.setStyle(styleBoutonsSouris);
+		});
+		bDeCarte6.setOnMouseExited(event -> {
+			bDeCarte6.setStyle(styleBoutons);
+		});
+
+		carte6.getChildren().addAll(imgDeCarte6, bDeCarte6);
+
+		carte7 = new VBox();
+		carte7.setAlignment(Pos.CENTER);
+		carte7.setSpacing(10);
+
+		imgDeCarte7 = new ImageView(DataControl.CARTE_CS);
+		imgDeCarte7.setFitHeight(150);
+		imgDeCarte7.setFitWidth(150);
+
+		bDeCarte7 = new Button("Utiliser"); // TODO Event
+		bDeCarte7.setAlignment(Pos.CENTER);
+		bDeCarte7.setStyle(styleBoutons);
+		bDeCarte7.setPrefSize(largBouton, hBoutonDeck);
+		bDeCarte7.setMinSize(largBouton, hBoutonDeck);
+		bDeCarte7.setFont(policeBoutonC);
+		bDeCarte7.setOnMouseEntered(event -> {
+			bDeCarte7.setStyle(styleBoutonsSouris);
+		});
+		bDeCarte7.setOnMouseExited(event -> {
+			bDeCarte7.setStyle(styleBoutons);
+		});
+
+		carte7.getChildren().addAll(imgDeCarte7, bDeCarte7);
+
+		carte8 = new VBox();
+		carte8.setAlignment(Pos.CENTER);
+		carte8.setSpacing(10);
+
+		imgDeCarte8 = new ImageView(DataControl.CARTE_CS);
+		imgDeCarte8.setFitHeight(150);
+		imgDeCarte8.setFitWidth(150);
+
+		bDeCarte8 = new Button("Utiliser"); // TODO Event
+		bDeCarte8.setAlignment(Pos.CENTER);
+		bDeCarte8.setStyle(styleBoutons);
+		bDeCarte8.setPrefSize(largBouton, hBoutonDeck);
+		bDeCarte8.setMinSize(largBouton, hBoutonDeck);
+		bDeCarte8.setFont(policeBoutonC);
+		bDeCarte8.setOnMouseEntered(event -> {
+			bDeCarte8.setStyle(styleBoutonsSouris);
+		});
+		bDeCarte8.setOnMouseExited(event -> {
+			bDeCarte8.setStyle(styleBoutons);
+		});
+
+		carte8.getChildren().addAll(imgDeCarte8, bDeCarte8);
+
+		carte9 = new VBox();
+		carte9.setAlignment(Pos.CENTER);
+		carte9.setSpacing(10);
+
+		imgDeCarte9 = new ImageView(DataControl.CARTE_CS);
+		imgDeCarte9.setFitHeight(150);
+		imgDeCarte9.setFitWidth(150);
+
+		bDeCarte9 = new Button("Utiliser"); // TODO Event
+		bDeCarte9.setAlignment(Pos.CENTER);
+		bDeCarte9.setStyle(styleBoutons);
+		bDeCarte9.setPrefSize(largBouton, hBoutonDeck);
+		bDeCarte9.setMinSize(largBouton, hBoutonDeck);
+		bDeCarte9.setFont(policeBoutonC);
+		bDeCarte9.setOnMouseEntered(event -> {
+			bDeCarte9.setStyle(styleBoutonsSouris);
+		});
+		bDeCarte9.setOnMouseExited(event -> {
+			bDeCarte9.setStyle(styleBoutons);
+		});
+
+		carte9.getChildren().addAll(imgDeCarte9, bDeCarte9);
+
+		passerCarte = new VBox();
+		passerCarte.setAlignment(Pos.CENTER);
+		passerCarte.setSpacing(10);
+
+		bPasserCarte = new Button("Passer\n\n Skip"); // TODO Event && rename field
+		bPasserCarte.setAlignment(Pos.CENTER);
+		bPasserCarte.setStyle(styleBoutons);
+		bPasserCarte.setPrefSize(largBouton, largBouton);
+		bPasserCarte.setMinSize(largBouton, largBouton);
+		bPasserCarte.setFont(policeBoutonC);
+		bPasserCarte.setOnMouseEntered(event -> {
+			bPasserCarte.setStyle(styleBoutonsSouris);
+		});
+		bPasserCarte.setOnMouseExited(event -> {
+			bPasserCarte.setStyle(styleBoutons);
+		});
+
+		passerCarte.getChildren().addAll(bPasserCarte);
+
+		hbCartes.getChildren().addAll(carte1, carte2, carte3, carte4, carte5, carte6, carte7, carte8, carte9,
+				passerCarte);
+
+		//////////////////////////////////////////
+
+		vote = new BorderPane();
 		vote.setPrefSize(756, 376);
 		vote.setMinSize(756, 376);
 		vote.setMaxSize(756, 376);
@@ -145,7 +433,7 @@ public class JeuPane extends StackPane implements JeuListener {
 		hbJoueurBas.setSpacing(50);
 		hbJoueurBas.setPadding(new Insets(20));
 
-		Button joueur1 = new Button("Joueur1");
+		joueur1 = new Button("Joueur1");
 		joueur1.setAlignment(Pos.CENTER);
 		joueur1.setStyle(styleBoutons);
 		joueur1.setPrefSize(lBouton, hBouton);
@@ -158,7 +446,7 @@ public class JeuPane extends StackPane implements JeuListener {
 			joueur1.setStyle(styleBoutons);
 		});
 
-		Button joueur2 = new Button("Joueur2");
+		joueur2 = new Button("Joueur2");
 		joueur2.setAlignment(Pos.CENTER);
 		joueur2.setStyle(styleBoutons);
 		joueur2.setPrefSize(lBouton, hBouton);
@@ -171,7 +459,7 @@ public class JeuPane extends StackPane implements JeuListener {
 			joueur2.setStyle(styleBoutons);
 		});
 
-		Button joueur3 = new Button("Joueur3");
+		joueur3 = new Button("Joueur3");
 		joueur3.setAlignment(Pos.CENTER);
 		joueur3.setStyle(styleBoutons);
 		joueur3.setPrefSize(lBouton, hBouton);
@@ -184,7 +472,7 @@ public class JeuPane extends StackPane implements JeuListener {
 			joueur3.setStyle(styleBoutons);
 		});
 
-		Button joueur4 = new Button("Joueur4");
+		joueur4 = new Button("Joueur4");
 		joueur4.setAlignment(Pos.CENTER);
 		joueur4.setStyle(styleBoutons);
 		joueur4.setPrefSize(lBouton, hBouton);
@@ -197,7 +485,7 @@ public class JeuPane extends StackPane implements JeuListener {
 			joueur4.setStyle(styleBoutons);
 		});
 
-		Button joueur5 = new Button("Joueur5");
+		joueur5 = new Button("Joueur5");
 		joueur5.setAlignment(Pos.CENTER);
 		joueur5.setStyle(styleBoutons);
 		joueur5.setPrefSize(lBouton, hBouton);
@@ -227,16 +515,276 @@ public class JeuPane extends StackPane implements JeuListener {
 		VBox vbTitre = new VBox();
 		vbTitre.setAlignment(Pos.CENTER);
 		vbTitre.setPrefHeight(80);
-		// vbTitre.setMaxSize(700, 80);
 		vbTitre.setBackground(fondNoir);
-		// vbTitre.setOpacity(.5);
 		vbTitre.getChildren().addAll(titreVote, titreQuestion);
 
 		vote.setTop(vbTitre);
 		vote.setCenter(vbVoteCentre);
-		vote.setDisable(false);
+		// vote.setDisable(false);
+		// vote.setVisible(false);
 
-		//////////////////////////////////////////////////////////
+		///
+		fouilleCamion = new BorderPane();
+		fouilleCamion.setPrefSize(850, 720);
+		fouilleCamion.setMinSize(850, 720);
+		fouilleCamion.setMaxSize(850, 720);
+		fouilleCamion.setStyle("-fx-border-color: black; -fx-border-insets: 5; -fx-border-width: 3;");
+
+		VBox vbChoixCarteCentre = new VBox();
+		vbChoixCarteCentre.setAlignment(Pos.CENTER);
+		vbChoixCarteCentre.setPrefSize(850, 700);
+		vbChoixCarteCentre.setMinSize(850, 700);
+		vbChoixCarteCentre.setMaxSize(850, 700);
+		// vbChoixCarteCentre.setStyle(styleVBox);
+
+		VBox vbCarte = new VBox();
+		vbCarte.setAlignment(Pos.CENTER);
+		vbCarte.setPrefSize(780, 300);
+		vbCarte.setMinSize(780, 300);
+		vbCarte.setMaxSize(780, 300);
+		// vbCarte.setStyle("-fx-border-color: green; -fx-border-insets: 5;
+		// -fx-border-width: 3;");
+
+		VBox vbChoix = new VBox();
+		vbChoix.setAlignment(Pos.CENTER);
+		vbChoix.setStyle(styleVBox);
+
+		HBox hboxImgCarte = new HBox();
+		hboxImgCarte.setAlignment(Pos.CENTER);
+		hboxImgCarte.setPrefSize(780, 255);
+		hboxImgCarte.setMinSize(780, 255);
+		hboxImgCarte.setMaxSize(780, 255);
+		hboxImgCarte.setSpacing(10);
+		// hboxImgCarte.setStyle("-fx-border-color: red; -fx-border-insets: 5;
+		// -fx-border-width: 3;");
+
+		HBox hboxBoutonCarte = new HBox();
+		hboxBoutonCarte.setAlignment(Pos.CENTER);
+		hboxBoutonCarte.setSpacing(20);
+		hboxBoutonCarte.setPrefHeight(90);
+		hboxBoutonCarte.setPadding(new Insets(10));
+
+		HBox hboxBoutonChoix = new HBox();
+		hboxBoutonChoix.setAlignment(Pos.CENTER);
+		hboxBoutonChoix.setSpacing(20);
+		hboxBoutonChoix.setPadding(new Insets(20));
+
+		hboxBoutonJoueur = new HBox();
+		hboxBoutonJoueur.setAlignment(Pos.CENTER);
+		hboxBoutonJoueur.setSpacing(10);
+		hboxBoutonJoueur.setPadding(new Insets(20));
+		hboxBoutonJoueur.setVisible(false);
+		//
+		imgCarte1 = new ImageView(DataControl.CARTE_BATTE);
+		imgCarte2 = new ImageView(DataControl.CARTE_BATTE);
+		imgCarte3 = new ImageView(DataControl.CARTE_BATTE);
+
+		hboxImgCarte.getChildren().addAll(imgCarte1, imgCarte2, imgCarte3);
+
+		//
+		bCarte1 = new Button("Carte 1");
+		bCarte1.setAlignment(Pos.CENTER);
+		bCarte1.setStyle(styleBoutons);
+		bCarte1.setPrefSize(250, 60);
+		bCarte1.setMinSize(250, 60);
+		bCarte1.setFont(policeBoutonC);
+		bCarte1.setOnMouseEntered(event -> {
+			bCarte1.setStyle(styleBoutonsSouris);
+		});
+		bCarte1.setOnMouseExited(event -> {
+			bCarte1.setStyle(styleBoutons);
+		});
+
+		bCarte2 = new Button("Carte 2");
+		bCarte2.setAlignment(Pos.CENTER);
+		bCarte2.setStyle(styleBoutons);
+		bCarte2.setPrefSize(250, 60);
+		bCarte2.setMinSize(250, 60);
+		bCarte2.setFont(policeBoutonC);
+		bCarte2.setOnMouseEntered(event -> {
+			bCarte2.setStyle(styleBoutonsSouris);
+		});
+		bCarte2.setOnMouseExited(event -> {
+			bCarte2.setStyle(styleBoutons);
+		});
+
+		bCarte3 = new Button("Carte 3");
+		bCarte3.setAlignment(Pos.CENTER);
+		bCarte3.setStyle(styleBoutons);
+		bCarte3.setPrefSize(250, 60);
+		bCarte3.setMinSize(250, 60);
+		bCarte3.setFont(policeBoutonC);
+		bCarte3.setOnMouseEntered(event -> {
+			bCarte3.setStyle(styleBoutonsSouris);
+		});
+		bCarte3.setOnMouseExited(event -> {
+			bCarte3.setStyle(styleBoutons);
+		});
+
+		hboxBoutonCarte.getChildren().addAll(bCarte1, bCarte2, bCarte3);
+		vbCarte.getChildren().addAll(hboxImgCarte, hboxBoutonCarte);
+		vbCarte.setMargin(vbChoix, new Insets(10));
+
+		bChoixGarder = new Button("Garder");
+		bChoixGarder.setDisable(true);
+		bChoixGarder.setAlignment(Pos.CENTER);
+		bChoixGarder.setStyle(styleBoutons);
+		bChoixGarder.setPrefSize(lBoutonCamion, hautBouton);
+		bChoixGarder.setMinSize(lBoutonCamion, hautBouton);
+		bChoixGarder.setFont(policeBoutonC);
+		bChoixGarder.setOnMouseEntered(event -> {
+			bChoixGarder.setStyle(styleBoutonsSouris);
+		});
+		bChoixGarder.setOnMouseExited(event -> {
+			bChoixGarder.setStyle(styleBoutons);
+		});
+		bChoixGarder.setOnAction(EventHandler -> {
+			if (selectedCarte != null) {
+				core.getIdjr().setCarteChoisi(selectedCarte);
+				core.getIdjr().carteChoisi(true);
+				core.getIdjr().setEtatChoisi("Garder");
+				cartePanelReset();
+			}
+		});
+
+		bChoixDonner = new Button("Donner");
+		bChoixDonner.setDisable(true);
+		bChoixDonner.setAlignment(Pos.CENTER);
+		bChoixDonner.setStyle(styleBoutons);
+		bChoixDonner.setPrefSize(lBoutonCamion, hautBouton);
+		bChoixDonner.setMinSize(lBoutonCamion, hautBouton);
+		bChoixDonner.setFont(policeBoutonC);
+		bChoixDonner.setOnMouseEntered(event -> {
+			bChoixDonner.setStyle(styleBoutonsSouris);
+		});
+		bChoixDonner.setOnMouseExited(event -> {
+			bChoixDonner.setStyle(styleBoutons);
+		});
+		bChoixDonner.setOnAction(EventHandler -> {
+			hboxBoutonJoueur.setVisible(true);
+		});
+
+		bChoixDefausser = new Button("Défausser");
+		bChoixDefausser.setDisable(true);
+		bChoixDefausser.setAlignment(Pos.CENTER);
+		bChoixDefausser.setStyle(styleBoutons);
+		bChoixDefausser.setPrefSize(lBoutonCamion, hautBouton);
+		bChoixDefausser.setMinSize(lBoutonCamion, hautBouton);
+		bChoixDefausser.setFont(policeBoutonC);
+		bChoixDefausser.setOnMouseEntered(event -> {
+			bChoixDefausser.setStyle(styleBoutonsSouris);
+		});
+		bChoixDefausser.setOnMouseExited(event -> {
+			bChoixDefausser.setStyle(styleBoutons);
+		});
+		bChoixDefausser.setOnAction(EventHandler -> {
+			if (selectedCarte != null) {
+				core.getIdjr().setCarteChoisi(selectedCarte);
+				core.getIdjr().carteChoisi(true);
+				core.getIdjr().setEtatChoisi("Defausser");
+				cartePanelReset();
+			}
+		});
+
+		hboxBoutonChoix.getChildren().addAll(bChoixGarder, bChoixDonner, bChoixDefausser);
+
+		joueur1c = new Button("Joueur1");
+		joueur1c.setAlignment(Pos.CENTER);
+		joueur1c.setStyle(styleBoutons);
+		joueur1c.setPrefSize(lBoutonCamion2, hautBouton);
+		joueur1c.setMinSize(lBoutonCamion2, hautBouton);
+		joueur1c.setFont(policeBoutonC);
+		joueur1c.setOnMouseEntered(event -> {
+			joueur1c.setStyle(styleBoutonsSouris);
+		});
+		joueur1c.setOnMouseExited(event -> {
+			joueur1c.setStyle(styleBoutons);
+		});
+
+		joueur2c = new Button("Joueur2");
+		joueur2c.setAlignment(Pos.CENTER);
+		joueur2c.setStyle(styleBoutons);
+		joueur2c.setPrefSize(lBoutonCamion2, hautBouton);
+		joueur2c.setMinSize(lBoutonCamion2, hautBouton);
+		joueur2c.setFont(policeBoutonC);
+		joueur2c.setOnMouseEntered(event -> {
+			joueur2c.setStyle(styleBoutonsSouris);
+		});
+		joueur2c.setOnMouseExited(event -> {
+			joueur2c.setStyle(styleBoutons);
+		});
+
+		joueur3c = new Button("Joueur3");
+		joueur3c.setAlignment(Pos.CENTER);
+		joueur3c.setStyle(styleBoutons);
+		joueur3c.setPrefSize(lBoutonCamion2, hautBouton);
+		joueur3c.setMinSize(lBoutonCamion2, hautBouton);
+		joueur3c.setFont(policeBoutonC);
+		joueur3c.setOnMouseEntered(event -> {
+			joueur3c.setStyle(styleBoutonsSouris);
+		});
+		joueur3c.setOnMouseExited(event -> {
+			joueur3c.setStyle(styleBoutons);
+		});
+
+		joueur4c = new Button("Joueur4");
+		joueur4c.setAlignment(Pos.CENTER);
+		joueur4c.setStyle(styleBoutons);
+		joueur4c.setPrefSize(lBoutonCamion2, hautBouton);
+		joueur4c.setMinSize(lBoutonCamion2, hautBouton);
+		joueur4c.setFont(policeBoutonC);
+		joueur4c.setOnMouseEntered(event -> {
+			joueur4c.setStyle(styleBoutonsSouris);
+		});
+		joueur4c.setOnMouseExited(event -> {
+			joueur4c.setStyle(styleBoutons);
+		});
+
+		joueur5c = new Button("Joueur5");
+		joueur5c.setAlignment(Pos.CENTER);
+		joueur5c.setStyle(styleBoutons);
+		joueur5c.setPrefSize(lBoutonCamion2, hautBouton);
+		joueur5c.setMinSize(lBoutonCamion2, hautBouton);
+		joueur5c.setFont(policeBoutonC);
+		joueur5c.setOnMouseEntered(event -> {
+			joueur5c.setStyle(styleBoutonsSouris);
+		});
+		joueur5c.setOnMouseExited(event -> {
+			joueur5c.setStyle(styleBoutons);
+		});
+		hboxBoutonJoueur.getChildren().addAll(joueur1c, joueur2c, joueur3c, joueur4c, joueur5c);
+		vbChoix.getChildren().addAll(hboxBoutonChoix, hboxBoutonJoueur);
+		vbChoixCarteCentre.getChildren().addAll(vbCarte, vbChoix);
+
+		Label titreFouille = new Label("Fouille du camion");
+		titreFouille.setAlignment(Pos.CENTER);
+		titreFouille.setFont(Font.font("Segoe UI", FontWeight.BOLD, 25));
+		titreFouille.setTextFill(Color.WHITE);
+
+		Label titreQuestionCarte = new Label("Sélectionnez les cartes et faite vos choix"); // TODO ajouter ca dans le
+																							// fichier de langues
+		titreQuestionCarte.setAlignment(Pos.CENTER);
+		titreQuestionCarte.setFont(Font.font("Segoe UI", FontWeight.BOLD, 25));
+		titreQuestionCarte.setTextFill(Color.WHITE);
+
+		VBox vbTitreCamion = new VBox();
+		vbTitreCamion.setAlignment(Pos.CENTER);
+		vbTitreCamion.setPrefHeight(80);
+		vbTitreCamion.setBackground(fondNoir);
+		vbTitreCamion.getChildren().addAll(titreFouille, titreQuestionCarte);
+		// vbTitreCamion.setStyle("-fx-border-color: yellow; -fx-border-insets: 5;
+		// -fx-border-width: 3;");
+
+		fouilleCamion.setTop(vbTitreCamion);
+		fouilleCamion.setCenter(vbChoixCarteCentre);
+
+		/*
+		 * fond.setEffect(flou); TODO A mettre quand le popup fouille camion est activé
+		 * rectVigile.setEffect(flou); nomJoueur.setEffect(flou);
+		 * hbCartes.setEffect(flou); vbDeplCentre.setEffect(flou); des.setEffect(flou);
+		 */
+
+		///
 
 		VBox vbDeplCentre = new VBox();
 		vbDeplCentre.setAlignment(Pos.CENTER_LEFT);
@@ -257,7 +805,6 @@ public class JeuPane extends StackPane implements JeuListener {
 		vbTitre1.setPrefHeight(50);
 		vbTitre1.setMinHeight(50);
 		vbTitre1.setMaxHeight(50);
-		// vbTitre1.setMaxSize(300, 50);
 
 		labDeplPers = new Label("Déplacement des personnages");
 		labDeplPers.setAlignment(Pos.TOP_CENTER);
@@ -268,7 +815,6 @@ public class JeuPane extends StackPane implements JeuListener {
 		vbPersonnage.setMinWidth(350);
 		vbPersonnage.setMaxWidth(350);
 		vbPersonnage.setAlignment(Pos.TOP_CENTER);
-		// vbPersonnage.setStyle(styleVBox);
 
 		HBox hbHaut = new HBox();
 		hbHaut.setAlignment(Pos.TOP_CENTER);
@@ -352,7 +898,6 @@ public class JeuPane extends StackPane implements JeuListener {
 		vbTitre2.setPrefHeight(50);
 		vbTitre2.setMinHeight(50);
 		vbTitre2.setMaxHeight(50);
-		// vbTitre2.setMaxSize(300, 50);
 
 		Label labDeplLieux = new Label("Destination");
 		labDeplLieux.setAlignment(Pos.TOP_CENTER);
@@ -363,7 +908,6 @@ public class JeuPane extends StackPane implements JeuListener {
 		hbLieux.setMinWidth(350);
 		hbLieux.setMaxWidth(350);
 		hbLieux.setAlignment(Pos.TOP_CENTER);
-		// hbLieux.setStyle(styleVBox);
 
 		VBox vbGauche = new VBox();
 		vbGauche.setAlignment(Pos.CENTER_LEFT);
@@ -427,7 +971,7 @@ public class JeuPane extends StackPane implements JeuListener {
 			bParking.setStyle(styleBoutons);
 		});
 
-		bPCSecu = new Button("PC\nSécurité");
+		bPCSecu = new Button("PC Sécurité");
 		bPCSecu.setAlignment(Pos.CENTER);
 		bPCSecu.setStyle(styleBoutons);
 		bPCSecu.setPrefSize(largBouton, hautBouton);
@@ -464,41 +1008,43 @@ public class JeuPane extends StackPane implements JeuListener {
 
 		vbDeplCentre.getChildren().addAll(vbDeplPers, vbDeplLieux);
 		vbDeplCentre.setDisable(false);
-		/////
 
 		VBox des = new VBox();
 		des.setTranslateX(790);
 		des.setTranslateY(-100);
 		des.setAlignment(Pos.CENTER);
 		des.setStyle(styleVBox);
-		// des.setMaxSize(100,250);
-		// des.setMinSize(100,250);
 		des.setMaxSize(120, 275);
+
 		de1 = new Label("0");
 		de1.setBackground(fondBlanc);
 		de1.setAlignment(Pos.CENTER);
 		de1.setMinSize(100, 100);
-		// de1.setStyle(styleDe);
 		de1.setTextFill(Color.BLACK);
 		de1.setFont(policeBoutonDe);
+
 		de2 = new Label("0");
 		de2.setBackground(fondBlanc);
 		de2.setAlignment(Pos.CENTER);
 		de2.setMinSize(100, 100);
-		// de2.setStyle(styleDe);
 		de2.setTextFill(Color.BLACK);
 		de2.setFont(policeBoutonDe);
 
+		Label titrede = new Label("DÉS");
+		titrede.setMinSize(100, 50);
+		titrede.setAlignment(Pos.CENTER);
+		titrede.setTextFill(Color.WHITE);
+		titrede.setFont(policeBouton);
+		titrede.setStyle("-fx-background-radius: 3px;-fx-background-color:#000000;");
+
 		des.setPadding(new Insets(10));
 		des.setSpacing(10);
-		des.getChildren().addAll(de1, de2);
+		des.getChildren().addAll(de1, de2, titrede);
 		des.setDisable(false); // TODO ne pas oublier de le retier
 
-		/////
 		info = new BorderPane();
-		// info.setMinSize(500, 500);
-		info.setPrefSize(500, 500);
-		info.setMaxSize(500, 500);
+		info.setPrefSize(1000, 200);
+		info.setMaxSize(1000, 200);
 		info.setBackground(fondBlanc);
 		info.setVisible(false);
 
@@ -506,33 +1052,30 @@ public class JeuPane extends StackPane implements JeuListener {
 		vTitreInfo.setAlignment(Pos.CENTER);
 		vTitreInfo.setPadding(new Insets(20));
 		titreInfo = new Label("Titre info");
-		titreInfo.setFont(policeBoutonDe);
+		titreInfo.setFont(Font.font("Segoe UI", FontWeight.BOLD, 20));
 		vTitreInfo.getChildren().addAll(titreInfo);
 
 		VBox vInfo = new VBox();
 		vInfo.setAlignment(Pos.TOP_LEFT);
 		lInfo = new Label("information");
-		lInfo.setFont(policeBoutonDe);
+		lInfo.setFont(Font.font("Segoe UI", FontWeight.BOLD, 10));
 		vInfo.getChildren().addAll(lInfo);
 
 		info.setMargin(vInfo, new Insets(50, 20, 0, 20));
 		info.setTop(vTitreInfo);
 		info.setCenter(vInfo);
-		// info.getChildren().addAll(titreInfo, lInfo);
 		info.setVisible(true);
 
-		/////
 		imgFond = new ImageView(DataControl.BLEU);
-		/////
+
 		HBox fond = new HBox();
 		fond.setAlignment(Pos.CENTER);
 		fond.setEffect(flou);
 		fond.getChildren().add(imgFond);
 
-		stackPane.getChildren().addAll(fond, rectVigile, nomJoueur, phasePartie, vbCentral, vote, vbDeplCentre, des,
-				info);
+		stackPane.getChildren().addAll(fond, rectVigile, nomJoueur, phasePartie, hbCartes, vote, vbDeplCentre, des,
+				fouilleCamion, info);
 		stackPane.setBackground(new Background(new BackgroundFill(Color.BLACK, CornerRadii.EMPTY, null)));
-		// stackPane.setOpacity(.8);
 
 		this.getChildren().add(stackPane);
 		sControl.registerNode(paneName, this);
@@ -651,6 +1194,23 @@ public class JeuPane extends StackPane implements JeuListener {
 		joueur3.setDisable(true);
 		joueur4.setDisable(true);
 		joueur5.setDisable(true);
+		cartePanelReset();
+		fouilleCamion.setVisible(false);
+
+		ImageView[] imgViews = { imgDeCarte1, imgDeCarte2, imgDeCarte3, imgDeCarte4, imgDeCarte5, imgDeCarte6,
+				imgDeCarte7, imgDeCarte8, imgDeCarte9 };
+		Button[] buttons = { bDeCarte1, bDeCarte2, bDeCarte3, bDeCarte4, bDeCarte5, bDeCarte6, bDeCarte7, bDeCarte8,
+				bDeCarte9, bPasserCarte };
+		VBox[] carteVbox = { carte1, carte2, carte3, carte4, carte5, carte6, carte7, carte8, carte9, passerCarte };
+
+		for (VBox vBox : carteVbox)
+			vBox.setVisible(false);
+		for (ImageView imageView : imgViews)
+			imageView.setDisable(true);
+		for (Button button : buttons)
+			button.setDisable(true);
+
+		vote.setVisible(false);
 	}
 
 	@Override
@@ -762,22 +1322,22 @@ public class JeuPane extends StackPane implements JeuListener {
 	public void couleurJoueur(Couleur couleur) {
 		Platform.runLater(() -> {
 			switch (couleur) {
-			case BLEU:
+			case B:
 				imgFond.setImage(new Image(DataControl.BLEU));
 				break;
-			case ROUGE:
+			case R:
 				imgFond.setImage(new Image(DataControl.ROUGE));
 				break;
-			case VERT:
+			case V:
 				imgFond.setImage(new Image(DataControl.VERT));
 				break;
-			case JAUNE:
+			case J:
 				imgFond.setImage(new Image(DataControl.JAUNE));
 				break;
-			case MARRON:
+			case M:
 				imgFond.setImage(new Image(DataControl.MARRON));
 				break;
-			case NOIR:
+			case N:
 				imgFond.setImage(new Image(DataControl.NOIR));
 				break;
 			default:
@@ -797,6 +1357,323 @@ public class JeuPane extends StackPane implements JeuListener {
 	public void deplacementChange() {
 		Platform.runLater(() -> {
 			labDeplPers.setText("Déplacement des personnages");
+		});
+	}
+
+	public String convertCarte(CarteType carteType) {
+		switch (carteType) {
+		case ABA:
+			return DataControl.CARTE_BATTE;
+		case CAC:
+			return DataControl.CARTE_CACHETTE;
+		case CDS:
+			return DataControl.CARTE_CAMERA;
+		case ACS:
+			return DataControl.CARTE_CS;
+		case AGR:
+			return DataControl.CARTE_GRENADE;
+		case AHI:
+			return DataControl.CARTE_HACHE;
+		case MAT:
+			return DataControl.CARTE_MATERIEL;
+		case MEN:
+			return DataControl.CARTE_MENACE;
+		case ARE:
+			return DataControl.CARTE_REVOLVER;
+		case SPR:
+			return DataControl.CARTE_SPRINT;
+		case ATR:
+			return DataControl.CARTE_TRONCENNEUSE;
+		}
+
+		return null;
+	}
+
+	public CarteType convertCarte(String dataControl) {
+		switch (dataControl) {
+		case DataControl.CARTE_BATTE:
+			return CarteType.ABA;
+		case DataControl.CARTE_CACHETTE:
+			return CarteType.CAC;
+		case DataControl.CARTE_CAMERA:
+			return CarteType.CDS;
+		case DataControl.CARTE_CS:
+			return CarteType.ACS;
+		case DataControl.CARTE_GRENADE:
+			return CarteType.AGR;
+		case DataControl.CARTE_HACHE:
+			return CarteType.AHI;
+		case DataControl.CARTE_MATERIEL:
+			return CarteType.MAT;
+		case DataControl.CARTE_MENACE:
+			return CarteType.MEN;
+		case DataControl.CARTE_REVOLVER:
+			return CarteType.ARE;
+		case DataControl.CARTE_SPRINT:
+			return CarteType.SPR;
+		case DataControl.CARTE_TRONCENNEUSE:
+			return CarteType.ATR;
+		}
+
+		return CarteType.NUL;
+	}
+
+	public void setCarteOfferte(List<Couleur> listeCouleurJoueurVivant) {
+		Button[] joueursButton = { joueur1c, joueur2c, joueur3c, joueur4c, joueur5c };
+		for (int i = 0; i < joueursButton.length; i++) {
+			if (listeCouleurJoueurVivant.size() > i) {
+				joueursButton[i].setDisable(false);
+				joueursButton[i].setText(listeCouleurJoueurVivant.get(i).nomEntier());
+				Couleur tmpCouleur = listeCouleurJoueurVivant.get(i);
+				joueursButton[i].setOnAction(EventHandler -> {
+					selectedCouleur = tmpCouleur;
+					if (selectedCouleur != null && selectedCarte != null) {
+						core.getIdjr().setCarteChoisi(selectedCarte);
+						core.getIdjr().setCouleurChoisi(selectedCouleur);
+						core.getIdjr().setEtatChoisi("Donner");
+						core.getIdjr().carteChoisi(true);
+						cartePanelReset();
+					}
+				});
+			} else {
+				joueursButton[i].setText("");
+			}
+		}
+	}
+
+	@Override
+	public void choisirCarte(List<CarteType> listeCartes, List<Couleur> listeCouleurJoueurVivant, boolean garder,
+			boolean donner, boolean defausser, boolean utiliser) {
+		Platform.runLater(() -> {
+			Background selecBackground = new Background(new BackgroundFill(Color.GREEN, CornerRadii.EMPTY, null));
+			Background deselecBackground = fondNoir;
+			vote.setVisible(false);
+			System.out.println(listeCartes.size());
+			System.out.println(listeCouleurJoueurVivant.size());
+			fouilleCamion.setVisible(true);
+			if (listeCartes.size() >= 1) {
+				imgCarte1.setImage(new Image(convertCarte(listeCartes.get(0))));
+				bCarte1.setDisable(false);
+				bCarte1.setText("Selectionner");
+				bCarte1.setOnAction(EventHandler -> {
+					selectedCarte = listeCartes.get(0);
+					bChoixGarder.setDisable(!garder);
+					bChoixDonner.setDisable(!donner);
+					bChoixDefausser.setDisable(!defausser);
+					bCarte1.setBackground(selecBackground);
+					bCarte2.setBackground(fondNoir);
+					bCarte3.setBackground(fondNoir);
+				});
+			} else {
+				imgCarte1.setDisable(true);
+				imgCarte1.setImage(new Image(DataControl.CARTE_VIDE));
+			}
+			if (listeCartes.size() >= 2) {
+				imgCarte2.setImage(new Image(convertCarte(listeCartes.get(1))));
+				bCarte2.setDisable(false);
+				bCarte2.setText("Selectionner");
+				bCarte2.setOnAction(EventHandler -> {
+					selectedCarte = listeCartes.get(1);
+					bChoixGarder.setDisable(!garder);
+					bChoixDonner.setDisable(!donner);
+					bChoixDefausser.setDisable(!defausser);
+					bCarte1.setBackground(fondNoir);
+					bCarte2.setBackground(selecBackground);
+					bCarte3.setBackground(fondNoir);
+				});
+			} else {
+				imgCarte2.setDisable(true);
+				imgCarte2.setImage(new Image(DataControl.CARTE_VIDE));
+			}
+			if (listeCartes.size() >= 3) {
+				imgCarte3.setImage(new Image(convertCarte(listeCartes.get(2))));
+				bCarte3.setDisable(false);
+				bCarte3.setText("Selectionner");
+				bCarte3.setOnAction(EventHandler -> {
+					selectedCarte = listeCartes.get(2);
+					bChoixGarder.setDisable(!garder);
+					bChoixDonner.setDisable(!donner);
+					bChoixDefausser.setDisable(!defausser);
+					bCarte1.setBackground(fondNoir);
+					bCarte2.setBackground(fondNoir);
+					bCarte3.setBackground(selecBackground);
+				});
+			} else {
+				imgCarte3.setDisable(true);
+				imgCarte3.setImage(new Image(DataControl.CARTE_VIDE));
+			}
+			if (listeCouleurJoueurVivant != null)
+				setCarteOfferte(listeCouleurJoueurVivant);
+		});
+
+	}
+
+	@Override
+	public void nomJoueurs(List<String> listeNomJoueur) {
+		Platform.runLater(() -> {
+			Button[] joueursButton = { joueur1, joueur2, joueur3, joueur4, joueur5 };
+			for (int i = 0; i < listeNomJoueur.size(); i++)
+				joueursButton[i].setText(listeNomJoueur.get(i));
+		});
+	}
+
+	public void cartePanelReset() {
+		fouilleCamion.setVisible(false);
+		hboxBoutonJoueur.setVisible(false);
+		joueur1c.setDisable(true);
+		joueur2c.setDisable(true);
+		joueur3c.setDisable(true);
+		joueur4c.setDisable(true);
+		joueur5c.setDisable(true);
+		bCarte1.setDisable(true);
+		bCarte2.setDisable(true);
+		bCarte3.setDisable(true);
+		bChoixGarder.setDisable(true);
+		bChoixDonner.setDisable(true);
+		bChoixDefausser.setDisable(true);
+		selectedCarte = null;
+		selectedCouleur = null;
+	}
+
+	@Override
+	public void updateCarte() {
+		Platform.runLater(() -> {
+			ImageView[] imgViews = { imgDeCarte1, imgDeCarte2, imgDeCarte3, imgDeCarte4, imgDeCarte5, imgDeCarte6,
+					imgDeCarte7, imgDeCarte8, imgDeCarte9 };
+			Button[] buttons = { bDeCarte1, bDeCarte2, bDeCarte3, bDeCarte4, bDeCarte5, bDeCarte6, bDeCarte7, bDeCarte8,
+					bDeCarte9 };
+			VBox[] carteVbox = { carte1, carte2, carte3, carte4, carte5, carte6, carte7, carte8, carte9 };
+			for (int i = 0; i < 9; i++) {
+				if (i < core.getIdjr().getListeCarte().size()) {
+					imgViews[i].setImage(new Image(convertCarte(core.getIdjr().getListeCarte().get(i))));
+					carteVbox[i].setVisible(true);
+					imgViews[i].setDisable(false);
+					CarteType type = core.getIdjr().getListeCarte().get(i);
+					buttons[i].setOnAction(EventHandler -> {
+						core.getIdjr().choisirUtiliserCarte(type);
+						core.getIdjr().utiliserCarteChoisi(true);
+						resetUtiliserCarte();
+					});
+				} else {
+					imgViews[i].setImage(new Image(DataControl.CARTE_VIDE));
+					carteVbox[i].setVisible(false);
+					imgViews[i].setDisable(true);
+				}
+			}
+		});
+	}
+
+	public void resetUtiliserCarte() {
+		Button[] buttons = { bDeCarte1, bDeCarte2, bDeCarte3, bDeCarte4, bDeCarte5, bDeCarte6, bDeCarte7, bDeCarte8,
+				bDeCarte9, bPasserCarte };
+		for (int i = 0; i < 10; i++) {
+			if (i < core.getIdjr().getListeCarte().size()) {
+				buttons[i].setDisable(true);
+			}
+		}
+		passerCarte.setVisible(false);
+		passerCarte.setDisable(true);
+		bPasserCarte.setDisable(true);
+	}
+
+	public void resetVoteCarte() {
+		vote.setVisible(false);
+		Button[] buttons = { joueur1, joueur2, joueur3, joueur4, joueur5 };
+		for (int i = 0; i < buttons.length; i++) {
+			buttons[i].setDisable(true);
+		}
+	}
+
+	@Override
+	public void setVote(List<Couleur> listeCouleurJoueur) {
+		Platform.runLater(() -> {
+			vote.setVisible(true);
+			fouilleCamion.setVisible(false);
+			Button[] buttons = { joueur1, joueur2, joueur3, joueur4, joueur5 };
+			for (int i = 0; i < buttons.length; i++) {
+				if (listeCouleurJoueur.size() > i){
+					buttons[i].setDisable(false);
+					buttons[i].setText(listeCouleurJoueur.get(i).nomEntier());
+					Couleur cible = listeCouleurJoueur.get(i);
+					buttons[i].setOnAction(EventHandler -> {
+						core.getIdjr().setVoteChoisi(cible);
+						core.getIdjr().voteChoisi(true);
+						resetVoteCarte();
+					});
+				}
+				else {
+					buttons[i].setText("");
+				}
+			}
+		});
+	}
+
+	@Override
+	public void choisirUtiliserCarte() {
+		Platform.runLater(() -> {
+			Button[] buttons = { bDeCarte1, bDeCarte2, bDeCarte3, bDeCarte4, bDeCarte5, bDeCarte6, bDeCarte7, bDeCarte8,
+					bDeCarte9 };
+			for (int i = 0; i < 9; i++) {
+				if (i < core.getIdjr().getListeCarte().size()) {
+					buttons[i].setDisable(false);
+				}
+			}
+
+			passerCarte.setVisible(true);
+			passerCarte.setDisable(false);
+			bPasserCarte.setDisable(false);
+			bPasserCarte.setOnAction(EventHandler -> {
+				core.getIdjr().setContinue(false);
+				core.getIdjr().utiliserCarteChoisi(true);
+				resetUtiliserCarte();
+			});
+		});
+	}
+
+	@Override
+	public void choisirUtiliserCarte(CarteType carteType) {
+		Platform.runLater(() -> {
+			Button[] buttons = { bDeCarte1, bDeCarte2, bDeCarte3, bDeCarte4, bDeCarte5, bDeCarte6, bDeCarte7, bDeCarte8,
+					bDeCarte9 };
+			for (int i = 0; i < 9; i++) {
+				if (i < core.getIdjr().getListeCarte().size()) {
+					if (carteType == core.getIdjr().getListeCarte().get(i))
+						buttons[i].setDisable(false);
+				}
+			}
+
+			passerCarte.setVisible(true);
+			passerCarte.setDisable(false);
+			bPasserCarte.setDisable(false);
+			bPasserCarte.setOnAction(EventHandler -> {
+				core.getIdjr().setContinue(false);
+				core.getIdjr().utiliserCarteChoisi(true);
+				resetUtiliserCarte();
+			});
+		});
+	}
+
+	@Override
+	public void choisirUtiliserCarte(List<CarteType> carteTypes) {
+		Platform.runLater(() -> {
+			Button[] buttons = { bDeCarte1, bDeCarte2, bDeCarte3, bDeCarte4, bDeCarte5, bDeCarte6, bDeCarte7, bDeCarte8,
+					bDeCarte9 };
+			for (int i = 0; i < 9; i++) {
+				if (i < core.getIdjr().getListeCarte().size()) {
+					for (CarteType carteType2 : carteTypes) {
+						if (carteType2 == core.getIdjr().getListeCarte().get(i))
+							buttons[i].setDisable(false);
+					}
+				}
+			}
+			passerCarte.setVisible(true);
+			passerCarte.setDisable(false);
+			bPasserCarte.setDisable(false);
+			bPasserCarte.setOnAction(EventHandler -> {
+				core.getIdjr().setContinue(false);
+				core.getIdjr().utiliserCarteChoisi(true);
+				resetUtiliserCarte();
+			});
 		});
 	}
 }

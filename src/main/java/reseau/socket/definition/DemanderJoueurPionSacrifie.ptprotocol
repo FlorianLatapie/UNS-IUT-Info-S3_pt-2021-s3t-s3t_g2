@@ -9,6 +9,10 @@ name:lieuCourant
 type:int
 doc:Le numéro du lieu courant
 value:
+name:listetep
+type:List<Integer>
+doc:Pion par valeur présent dans le lieu pour le joueur courant
+value:
 name:partieId
 type:String
 doc:L’identifiant de la partie fournie à la création de la partie.

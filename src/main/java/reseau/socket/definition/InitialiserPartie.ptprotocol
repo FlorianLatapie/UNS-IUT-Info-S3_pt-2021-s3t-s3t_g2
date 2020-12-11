@@ -7,14 +7,14 @@ values:
 value:
 name:joueurs
 type:List<String>
-doc:La liste est ordonnée en commençant par le joueur 1 jusqu’au joueur n (3≤n≤6). Ici le joueur 1 désigne le premier joueur de la partie (chef des vigiles). Et donc les joueurs sont déjà organisés dans l’ordre de jeu (« sens des aiguilles d’une montre »).
+doc:La liste est ordonnée en commençant par le joueur 1 jusqu’au joueur n (3≤n≤6). Ici le joueur 1 désigne le premier joueur de la partie (chef des vigiles). Et donc les joueurs sont déjà organisés dans l’ordre de pp (« sens des aiguilles d’une montre »).
 value:
 name:couleurJoueurs
 type:List<Couleur>
 doc:la liste des couleurs de chaque joueur dans le même ordre que la liste précédente. Chaque couleur est identifiée par un lettre [N(oir), V(ert), B(leu), R(ouge), J(aune), M(arron)].
 value:
 name:lieuFerme
-type:int
+type:String
 doc:Le nombre 2 ou un espace « » si aucun lieu n’est fermé.
 value:
 name:nombrePion
