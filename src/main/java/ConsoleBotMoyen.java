@@ -5,7 +5,7 @@ import java.util.logging.Logger;
 import botmoyen.BotMoyen;
 import reseau.tool.ThreadOutils;
 
-public class ConsoleBot {
+public class ConsoleBotMoyen {
 
 	public static void main(String[] args) {
 		Logger.getGlobal().setLevel(Level.FINEST);
