@@ -124,6 +124,8 @@ public class TraitementIdjr {
 			while (!core.utiliserCarteDisponible())
 				Thread.yield();
 			sprintJoue = core.getUtiliserCarteChosi();
+			if (sprintJoue == null)
+				sprintJoue = CarteType.NUL;
 			if (sprintJoue == CarteType.SPR) {
 				core.getListeCarte().remove(sprintJoue);
 				core.utiliserCarteChoisi(false);
