@@ -48,14 +48,11 @@ public class ConfirmationPane {
 		boutonNon.setPrefSize(200, 50);
 		boutonNon.setStyle("-fx-background-color: #A9A9A9; -fx-background-radius: 5px; -fx-text-fill: #ffffff");
 		boutonNon.setFont(Font.font("Arial", FontWeight.BOLD, 20));
-
 		boutonOui.setOnAction(e -> {
 			reponse = true;
-			
 			window.close();
 
 		});
-
 		boutonNon.setOnAction(e -> {
 			reponse = false;
 			window.close();
@@ -70,7 +67,7 @@ public class ConfirmationPane {
 		layout.setAlignment(Pos.TOP_CENTER);
 		layout.getChildren().add(label);
 		layout.getChildren().add(boutonHbox);
-		layout.setBackground(new Background(new BackgroundFill(Color.DIMGRAY,CornerRadii.EMPTY,null)));
+		layout.setBackground(new Background(new BackgroundFill(Color.DIMGRAY, CornerRadii.EMPTY, null)));
 		Scene scene = new Scene(layout);
 
 		window.setScene(scene);

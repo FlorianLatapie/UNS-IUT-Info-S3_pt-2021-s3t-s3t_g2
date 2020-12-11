@@ -29,12 +29,11 @@ import javafx.scene.text.FontWeight;
  */
 public class AccueilPane extends StackPane {
 
+	// définition des variable pour la suite du pane
 	private ScreenControl sControl = null;
 	private Core core = null;
 	private final ApplicationPane paneName = ApplicationPane.ACCUEIL;
-	// définition des variable pour la suite du pane
-	private int tailleCarreCentral = 600; // l'interface est sur un stackPane qui peut tourner avec des crans de 90
-											// degrés
+	private int tailleCarreCentral = 600;
 	private int hBouton = 100;
 	private int lBouton = 200;
 	private int marge = tailleCarreCentral / 25;
@@ -45,7 +44,6 @@ public class AccueilPane extends StackPane {
 	private String styleBoutonsSouris = "-fx-background-color:#ff0000;  -fx-text-fill:#000000; -fx-background-radius: 15px;";
 	private StackPane stackPane = new StackPane();
 	private GaussianBlur flou = new GaussianBlur(30);
-
 	private Font policeNom = Font.font("Segoe UI", 17);
 	private int largeurTF = 100;
 	private int hauteurElemtents = 60;
@@ -182,18 +180,12 @@ public class AccueilPane extends StackPane {
 
 		// carre central qui contient tous les éléments (boutons et titre)
 		VBox centreMenu = new VBox();
-		// centreMenu.setBackground(new Background(new
-		// BackgroundFill(Color.LIGHTGREY,CornerRadii.EMPTY,null)));
 		centreMenu.setMinSize(tailleCarreCentral, tailleCarreCentral);
 		centreMenu.setPrefSize(tailleCarreCentral, tailleCarreCentral);
 		centreMenu.setMaxSize(tailleCarreCentral, tailleCarreCentral);
 		centreMenu.setAlignment(Pos.CENTER);
 		centreMenu.setMargin(titre, new Insets(0, 0, 100, 0));
-		// titre.setPadding(margeBoutons);
 		centreMenu.getChildren().addAll(titre, nomjoueur, grilleBoutons);
-
-		// rotation de l'interface
-		// centreMenu.setRotate(90);
 
 		// boite du fond qui contient tout
 		HBox fond = new HBox();
