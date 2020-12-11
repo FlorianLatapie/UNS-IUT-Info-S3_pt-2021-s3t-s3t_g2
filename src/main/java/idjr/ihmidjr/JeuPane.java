@@ -75,6 +75,7 @@ public class JeuPane extends StackPane implements JeuListener {
 	Button joueur3;
 	Button joueur4;
 	Button joueur5;
+	Button joueur6;
 
 	Button joueur1c;
 	Button joueur2c;
@@ -503,8 +504,21 @@ public class JeuPane extends StackPane implements JeuListener {
 		joueur5.setOnMouseExited(event -> {
 			joueur5.setStyle(styleBoutons);
 		});
+		
+		joueur6 = new Button("Joueur6");
+		joueur6.setAlignment(Pos.CENTER);
+		joueur6.setStyle(styleBoutons);
+		joueur6.setPrefSize(lBouton, hBouton);
+		joueur6.setMinSize(lBouton, hBouton);
+		joueur6.setFont(policeBouton);
+		joueur6.setOnMouseEntered(event -> {
+			joueur6.setStyle(styleBoutonsSouris);
+		});
+		joueur6.setOnMouseExited(event -> {
+			joueur6.setStyle(styleBoutons);
+		});
 		hbJoueurHaut.getChildren().addAll(joueur1, joueur2, joueur3);
-		hbJoueurBas.getChildren().addAll(joueur4, joueur5);
+		hbJoueurBas.getChildren().addAll(joueur4, joueur5, joueur6);
 
 		vbVoteCentre.getChildren().addAll(hbJoueurHaut, hbJoueurBas);
 
@@ -1189,6 +1203,7 @@ public class JeuPane extends StackPane implements JeuListener {
 		joueur3.setDisable(true);
 		joueur4.setDisable(true);
 		joueur5.setDisable(true);
+		joueur6.setDisable(true);
 		cartePanelReset();
 		fond.setEffect(null); 
 		rectVigile.setEffect(null); 
@@ -1518,7 +1533,7 @@ public class JeuPane extends StackPane implements JeuListener {
 	@Override
 	public void nomJoueurs(List<String> listeNomJoueur) {
 		Platform.runLater(() -> {
-			Button[] joueursButton = { joueur1, joueur2, joueur3, joueur4, joueur5 };
+			Button[] joueursButton = { joueur1, joueur2, joueur3, joueur4, joueur5, joueur6 };
 			for (int i = 0; i < listeNomJoueur.size(); i++)
 				joueursButton[i].setText(listeNomJoueur.get(i));
 		});
@@ -1591,7 +1606,7 @@ public class JeuPane extends StackPane implements JeuListener {
 
 	public void resetVoteCarte() {
 		vote.setVisible(false);
-		Button[] buttons = { joueur1, joueur2, joueur3, joueur4, joueur5 };
+		Button[] buttons = { joueur1, joueur2, joueur3, joueur4, joueur5, joueur6 };
 		for (int i = 0; i < buttons.length; i++) {
 			buttons[i].setDisable(true);
 		}
@@ -1608,7 +1623,7 @@ public class JeuPane extends StackPane implements JeuListener {
 			vbDeplCentre.setEffect(null); 
 			des.setEffect(null);
 			fouilleCamion.setVisible(false);
-			Button[] buttons = { joueur1, joueur2, joueur3, joueur4, joueur5 };
+			Button[] buttons = { joueur1, joueur2, joueur3, joueur4, joueur5, joueur6 };
 			for (int i = 0; i < buttons.length; i++) {
 				if (listeCouleurJoueur.size() > i){
 					buttons[i].setDisable(false);
