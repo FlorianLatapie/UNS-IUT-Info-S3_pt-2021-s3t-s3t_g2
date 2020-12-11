@@ -7,7 +7,6 @@ import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
-import javafx.scene.effect.BlendMode;
 import javafx.scene.effect.GaussianBlur;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
@@ -42,14 +41,13 @@ public class ConfigBotPane extends StackPane {
 
 	private String styleBoutons = " -fx-background-color:#000000; -fx-background-radius: 15px; -fx-text-fill: #ffffff";
 	private String styleBoutonsSouris = "-fx-background-color:#ff0000;  -fx-text-fill:#000000; -fx-background-radius: 15px;";
-	private String styleLabelBot = "-fx-background-color: #4C4C4C; -fx-background-radius: 5px;";
 
 	private GaussianBlur flou = new GaussianBlur(30);
 	private CornerRadii coin = new CornerRadii(15.0);
 	private CornerRadii coinfb = new CornerRadii(5.0);
 
 	private Background fondBlanc = new Background(new BackgroundFill(Color.WHITE, coinfb, null));
-	private String styleVBox = "-fx-border-color: black; -fx-border-insets: 5; -fx-border-width: 3;";
+
 	private Insets botPadding = new Insets(0, 10, 0, 10);
 
 	HBox bot1 = new HBox();
@@ -90,20 +88,17 @@ public class ConfigBotPane extends StackPane {
 
 		Label bot1Texte = new Label("Bot1");
 		bot1Texte.setAlignment(Pos.CENTER);
-		bot1Texte.setFont(Font.font("Segoe UI", FontWeight.BOLD, 23));
-		bot1Texte.setTextFill(Color.WHITE);
+		bot1Texte.setFont(policeNom);
 		bot1Texte.setMinHeight(hauteurElemtents);
-		bot1Texte.setStyle(styleLabelBot);
+		bot1Texte.setBackground(fondBlanc);
 		bot1Texte.setPadding(botPadding);
 		bot1Texte.setMinWidth(largeurTexte);
 
 		ComboBox<String> diffBot1 = new ComboBox<>();
-		diffBot1.setPadding(new Insets(7));
-		diffBot1.setBlendMode(BlendMode.HARD_LIGHT);
-		diffBot1.setItems(DataControl.difficulteBot);
+		diffBot1.getItems().addAll(DataControl.difficulteBot);
 		diffBot1.setValue(International.trad("texte.valueFaible"));
 		diffBot1.setPrefSize(largeurTF, hauteurElemtents);
-		diffBot1.setMinHeight(hauteurElemtents);		
+		diffBot1.setMinHeight(hauteurElemtents);
 
 		bot1.setAlignment(Pos.CENTER);
 		bot1.setSpacing(spacing);
@@ -116,17 +111,14 @@ public class ConfigBotPane extends StackPane {
 
 		Label bot2Texte = new Label("Bot2");
 		bot2Texte.setAlignment(Pos.CENTER);
-		bot2Texte.setFont(Font.font("Segoe UI", FontWeight.BOLD, 23));
-		bot2Texte.setTextFill(Color.WHITE);
-		bot2Texte.setMinHeight(hauteurElemtents);		
+		bot2Texte.setFont(policeNom);
+		bot2Texte.setMinHeight(hauteurElemtents);
+		bot2Texte.setBackground(fondBlanc);
 		bot2Texte.setPadding(botPadding);
-		bot2Texte.setStyle(styleLabelBot);
 		bot2Texte.setMinWidth(largeurTexte);
 
 		ComboBox<String> diffBot2 = new ComboBox<>();
 		diffBot2.getItems().addAll(DataControl.difficulteBot);
-		diffBot2.setBlendMode(BlendMode.HARD_LIGHT);
-		diffBot2.setPadding(new Insets(7));
 		diffBot2.setValue(International.trad("texte.valueFaible"));
 		diffBot2.setPrefSize(largeurTF, hauteurElemtents);
 		diffBot2.setMinHeight(hauteurElemtents);
@@ -142,17 +134,14 @@ public class ConfigBotPane extends StackPane {
 
 		Label bot3Texte = new Label("Bot3");
 		bot3Texte.setAlignment(Pos.CENTER);
-		bot3Texte.setFont(Font.font("Segoe UI", FontWeight.BOLD, 23));
-		bot3Texte.setTextFill(Color.WHITE);
-		bot3Texte.setMinHeight(hauteurElemtents);		
+		bot3Texte.setFont(policeNom);
+		bot3Texte.setMinHeight(hauteurElemtents);
+		bot3Texte.setBackground(fondBlanc);
 		bot3Texte.setPadding(botPadding);
-		bot3Texte.setStyle(styleLabelBot);
 		bot3Texte.setMinWidth(largeurTexte);
 
 		ComboBox<String> diffBot3 = new ComboBox<>();
 		diffBot3.getItems().addAll(DataControl.difficulteBot);
-		diffBot3.setBlendMode(BlendMode.HARD_LIGHT);
-		diffBot3.setPadding(new Insets(7));
 		diffBot3.setValue(International.trad("texte.valueFaible"));
 		diffBot3.setPrefSize(largeurTF, hauteurElemtents);
 		diffBot3.setMinHeight(hauteurElemtents);
@@ -168,17 +157,14 @@ public class ConfigBotPane extends StackPane {
 
 		Label bot4Texte = new Label("Bot4");
 		bot4Texte.setAlignment(Pos.CENTER);
-		bot4Texte.setFont(Font.font("Segoe UI", FontWeight.BOLD, 23));
-		bot4Texte.setTextFill(Color.WHITE);
+		bot4Texte.setFont(policeNom);
 		bot4Texte.setMinHeight(hauteurElemtents);
-		bot4Texte.setStyle(styleLabelBot);
+		bot4Texte.setBackground(fondBlanc);
 		bot4Texte.setPadding(botPadding);
 		bot4Texte.setMinWidth(largeurTexte);
 
 		ComboBox<String> diffBot4 = new ComboBox<>();
 		diffBot4.getItems().addAll(DataControl.difficulteBot);
-		diffBot4.setBlendMode(BlendMode.HARD_LIGHT);
-		diffBot4.setPadding(new Insets(7));
 		diffBot4.setValue(International.trad("texte.valueFaible"));
 		diffBot4.setPrefSize(largeurTF, hauteurElemtents);
 		diffBot4.setMinHeight(hauteurElemtents);
@@ -194,17 +180,14 @@ public class ConfigBotPane extends StackPane {
 
 		Label bot5Texte = new Label("Bot5");
 		bot5Texte.setAlignment(Pos.CENTER);
-		bot5Texte.setFont(Font.font("Segoe UI", FontWeight.BOLD, 23));
-		bot5Texte.setTextFill(Color.WHITE);
+		bot5Texte.setFont(policeNom);
 		bot5Texte.setMinHeight(hauteurElemtents);
-		bot5Texte.setStyle(styleLabelBot);
+		bot5Texte.setBackground(fondBlanc);
 		bot5Texte.setPadding(botPadding);
 		bot5Texte.setMinWidth(largeurTexte);
 
 		ComboBox<String> diffBot5 = new ComboBox<>();
 		diffBot5.getItems().addAll(DataControl.difficulteBot);
-		diffBot5.setBlendMode(BlendMode.HARD_LIGHT);
-		diffBot5.setPadding(new Insets(7));
 		diffBot5.setValue(International.trad("texte.valueFaible"));
 		diffBot5.setPrefSize(largeurTF, hauteurElemtents);
 		diffBot5.setMinHeight(hauteurElemtents);
@@ -220,17 +203,14 @@ public class ConfigBotPane extends StackPane {
 
 		Label bot6Texte = new Label("Bot6");
 		bot6Texte.setAlignment(Pos.CENTER);
-		bot6Texte.setFont(Font.font("Segoe UI", FontWeight.BOLD, 23));
-		bot6Texte.setTextFill(Color.WHITE);
+		bot6Texte.setFont(policeNom);
 		bot6Texte.setMinHeight(hauteurElemtents);
-		bot6Texte.setStyle(styleLabelBot);
+		bot6Texte.setBackground(fondBlanc);
 		bot6Texte.setPadding(botPadding);
 		bot6Texte.setMinWidth(largeurTexte);
 
 		ComboBox<String> diffBot6 = new ComboBox<>();
 		diffBot6.getItems().addAll(DataControl.difficulteBot);
-		diffBot6.setBlendMode(BlendMode.HARD_LIGHT);
-		diffBot6.setPadding(new Insets(7));
 		diffBot6.setValue(International.trad("texte.valueFaible"));
 		diffBot6.setPrefSize(largeurTF, hauteurElemtents);
 		diffBot6.setMinHeight(hauteurElemtents);
