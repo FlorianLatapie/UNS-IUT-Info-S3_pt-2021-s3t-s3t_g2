@@ -66,7 +66,6 @@ public interface PtOutils {
 
 		File folder = new File(PATHTOPACKET);
 		if (folder.exists()) {
-			folder = new File(PATHTOPACKET);
 			for (File file : Objects.requireNonNull(folder.listFiles())) {
 				if (file.getName().endsWith(".ptprotocol")) {
 					PtProtocole pt = buildPtPa(file.getPath());
@@ -77,8 +76,9 @@ public interface PtOutils {
 					packets.put(pt.getMotCle(), packet);
 				}
 			}
-		} else
-			for (File file : getResourceFolderFiles(chemin)) {
+		} else {
+			File f = new File(chemin);
+			for (File file : Objects.requireNonNull(f .listFiles())) {
 				if (file.getName().endsWith(".ptprotocol")) {
 					PtProtocole pt = buildPtPa(file.getPath());
 
@@ -88,6 +88,7 @@ public interface PtOutils {
 					packets.put(pt.getMotCle(), packet);
 				}
 			}
+		}
 
 		return packets;
 	}
