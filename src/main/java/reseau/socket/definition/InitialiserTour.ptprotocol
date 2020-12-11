@@ -11,7 +11,7 @@ doc:Indique le chef des vigiles actuel à l’aide de la couleur de celui-ci. La
 value:
 name:couleursJoueurs
 type:List<Couleur>
-doc:La liste des couleurs de chaque joueur dans l’ordre du tour en commençant par le chef des vigile. Cette liste ne contient que les joueurs encore en jeu. Chaque couleur est identifiée par un lettre [N(oir), V(ert), B(leu), R(ouge), J(aune), M(arron)] et les couleurs sont séparées par des « , ».
+doc:La liste des couleurs de chaque joueur dans l’ordre du tour en commençant par le chef des vigile. Cette liste ne contient que les joueurs encore en pp. Chaque couleur est identifiée par un lettre [N(oir), V(ert), B(leu), R(ouge), J(aune), M(arron)] et les couleurs sont séparées par des « , ».
 value:
 name:partieId
 type:String

@@ -7,7 +7,7 @@ values:
 value:
 name:joueurs
 type:List<String>
-doc:La liste est ordonnée en commençant par le joueur 1 jusqu’au joueur n (3≤n≤6). Ici le joueur 1 désigne le premier joueur de la partie (chef des vigiles). Et donc les joueurs sont déjà organisés dans l’ordre de jeu (« sens des aiguilles d’une montre »).
+doc:La liste est ordonnée en commençant par le joueur 1 jusqu’au joueur n (3≤n≤6). Ici le joueur 1 désigne le premier joueur de la partie (chef des vigiles). Et donc les joueurs sont déjà organisés dans l’ordre de pp (« sens des aiguilles d’une montre »).
 value:
 name:couleurJoueurs
 type:List<Couleur>
