@@ -5,7 +5,7 @@ import java.util.logging.Logger;
 import botfaible.BotFaible;
 import reseau.tool.ThreadOutils;
 
-public class ConsoleBot {
+public class ConsoleBotFaible {
 
 	public static void main(String[] args) {
 		Logger.getGlobal().setLevel(Level.FINEST);
