@@ -1,4 +1,4 @@
-package botmoyen;
+package botfaible;
 
 import java.net.InetAddress;
 

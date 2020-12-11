@@ -1,4 +1,4 @@
-package botmoyen;
+package botfaible;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -7,7 +7,7 @@ import reseau.type.Couleur;
 import reseau.type.PionCouleur;
 
 public abstract class IdjrTools {
-	private IdjrTools(){
+    private IdjrTools(){
 
     }
 
