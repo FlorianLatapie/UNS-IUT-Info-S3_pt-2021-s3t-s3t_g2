@@ -32,7 +32,8 @@ public class TcpClient implements Runnable, IEchangeSocket, IMessagePaquet {
 	private Socket socket;
 	private DataOutputStream fluxSortie;
 	private DataInputStream fluxEntre;
-	private final InetAddress ip;
+	private InetAddress ip;
+
 	private final int port;
 	private String cleFin;
 
@@ -47,10 +48,10 @@ public class TcpClient implements Runnable, IEchangeSocket, IMessagePaquet {
 	 * @param port             Le port du serveur TCP cible
 	 */
 	public TcpClient(ControleurReseau controleurReseau, InetAddress ip, int port) {
+		this.ip = ip;
 		this.messagesTampon = synchronizedList(new ArrayList<String>());
 		this.controleurReseau = controleurReseau;
 		this.estLancer = true;
-		this.ip = ip;
 		this.port = port;
 		this.logger = Logger.getLogger(getClass().getName());
 	}
@@ -78,16 +79,20 @@ public class TcpClient implements Runnable, IEchangeSocket, IMessagePaquet {
 	 * @throws IOException Si les flux de s'ouvre pas correctement
 	 */
 	private boolean ouvrir(InetAddress ip, int port) throws IOException {
-		logger.log(Level.INFO, "Client TCP ouvert");
+		logger.log(Level.INFO, "Client TCP ouvert - EZ4E");
 		boolean attendre = true;
 		while (attendre)
 			try {
 				socket = new Socket(ip, port);
 				attendre = false;
-			} catch (Exception ignored) {
+			} catch (Exception ignoreda) {
+				ignoreda.printStackTrace();
 				Thread.yield();
 			}
-
+		System.out.println(socket == null);
+		System.out.println(socket.getLocalPort());
+		System.out.println(socket.getPort());
+		System.out.println(socket.getInetAddress().getHostAddress());
 		fluxSortie = new DataOutputStream(socket.getOutputStream());
 		fluxEntre = new DataInputStream(socket.getInputStream());
 
@@ -138,6 +143,7 @@ public class TcpClient implements Runnable, IEchangeSocket, IMessagePaquet {
 	public void envoyer(String message) {
 		logger.log(Level.INFO, "Envoie d'un message : " + message);
 
+		System.out.println(socket.getInetAddress().getHostAddress());
 		try {
 			fluxSortie.writeUTF(message);
 			fluxSortie.flush();

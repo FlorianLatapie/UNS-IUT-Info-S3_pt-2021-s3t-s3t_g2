@@ -5,6 +5,7 @@ import reseau.tool.PtOutils;
 import reseau.tool.ReseauOutils;
 import reseau.type.*;
 
+import java.io.File;
 import java.io.IOException;
 import java.net.InetAddress;
 import java.net.Socket;
@@ -23,11 +24,15 @@ public class ControleurReseau implements IControleSocket {
 	private final Map<String, Paquet> udpPaquets;
 	private final Map<String, Paquet> tcpPaquets;
 
-	private static final String CHEMIN_PACKET = "Ressources/reseau";
+	private static final String CHEMIN_PACKET = "Ressources\\reseau";
 
 	private UdpConnexion udpConnexion;
 	private TcpServeur tcpServeur;
 	private TcpClient tcpClient;
+	public TcpClient getTcpClient() {
+		return tcpClient;
+	}
+
 	private InetAddress ip;
 
 	private int tcpPort;
@@ -66,7 +71,7 @@ public class ControleurReseau implements IControleSocket {
 		this.traitementPaquetUdp.init(this);
 		this.traitementPaquetTcp.init(this);
 		this.connexionType = connexionType;
-		this.ip = ip;
+		this.ip = ReseauOutils.getLocalIp();
 		this.tcpPort = ReseauOutils.getPortSocket(1024, 65535);
 
 		if (udpPaquets.isEmpty() || tcpPaquets.isEmpty())
@@ -77,7 +82,7 @@ public class ControleurReseau implements IControleSocket {
 		if (connexionType == ConnexionType.SERVEUR) {
 			new Thread(tcpServeur = new TcpServeur(this, tcpPort), "tcpServeur").start();
 		} else {
-			new Thread(tcpClient = new TcpClient(this, ip, tcpPort), "tcpClient").start();
+			//new Thread(tcpClient = new TcpClient(this, ip, tcpPort), "tcpClient").start();
 		}
 		logger.info("Controleur initialisé");
 	}
@@ -322,5 +327,9 @@ public class ControleurReseau implements IControleSocket {
 	 */
 	public ConnexionType getConnexionType() {
 		return connexionType;
+	}
+
+	public void tcp(InetAddress ipPp) {
+		new Thread(tcpClient = new TcpClient(this, ipPp, tcpPort), "tcpClient").start();
 	}
 }
