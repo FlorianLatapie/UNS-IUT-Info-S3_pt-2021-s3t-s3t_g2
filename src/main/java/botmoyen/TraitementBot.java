@@ -15,7 +15,7 @@ import reseau.type.VoteType;
 
 public class TraitementBot {
 
-	public void initialiserPartie(BotMoyen core, List<?> nomsT, List<Couleur> couleursT, int lieuferme) {
+	public void initialiserPartie(BotMoyen core, List<?> nomsT, List<Couleur> couleursT, String lieuferme) {
 		List<String> noms = new ArrayList<>();
 		List<Couleur> couleurs = new ArrayList<>();
 		core.setJoueurEnVie((couleursT));
@@ -24,7 +24,7 @@ public class TraitementBot {
 		for (Couleur o : couleursT)
 			couleurs.add((Couleur) o);
 		core.setCouleur(IdjrTools.getCouleurByName(core.getNom(), noms, couleurs));
-		if (lieuferme == 2) {
+		if (lieuferme == "2") {
 			core.getLieuOuvert().add(1);
 			core.getLieuOuvert().add(3);
 			core.getLieuOuvert().add(4);
@@ -78,15 +78,15 @@ public class TraitementBot {
 		dest = core.getLieuOuvert().get(new Random().nextInt(core.getLieuOuvert().size()));
 		return dest;
 	}
-	
-	public int choixBestDest (BotMoyen core) {
+
+	public int choixBestDest(BotMoyen core) {
 		out.println("Entrez une destination");
 		int dest = 0;
-		int lieuMin =20;
-		for(int i =0;i<core.getLieuOuvert().size();i++) {
-			if(core.getPartie().getLieux().get(i).getPersonnage().size()<lieuMin)
+		int lieuMin = 20;
+		for (int i = 0; i < core.getLieuOuvert().size(); i++) {
+			if (core.getPartie().getLieux().get(i).getPersonnage().size() < lieuMin)
 				dest = core.getPartie().getLieux().get(i).getNum();
-		
+
 		}
 		return dest;
 	}
@@ -149,18 +149,18 @@ public class TraitementBot {
 	}
 
 	public PionCouleur choisirSacrifice(BotMoyen core, List<?> listPionT) {
-		if (listPionT.size()>0) {
-		List<Integer> listPion = new ArrayList<>();
-		for (Object o : listPionT)
-			listPion.add((Integer) o);
-		int rand =new Random().nextInt(listPion.size());
-		if (rand == 0 )
-				rand = 0 ;
-		int pionTemp = listPion.get(rand);
-		PionCouleur pion = PionCouleur.valueOf(String.valueOf(core.getCouleur().name().charAt(0)) + pionTemp);
-		return pion;
-		}
-		else return null;
+		if (listPionT.size() > 0) {
+			List<Integer> listPion = new ArrayList<>();
+			for (Object o : listPionT)
+				listPion.add((Integer) o);
+			int rand = new Random().nextInt(listPion.size());
+			if (rand == 0)
+				rand = 0;
+			int pionTemp = listPion.get(rand);
+			PionCouleur pion = PionCouleur.valueOf(String.valueOf(core.getCouleur().name().charAt(0)) + pionTemp);
+			return pion;
+		} else
+			return null;
 	}
 
 	public void finPartie(BotMoyen core, Couleur gagnant) {
@@ -246,13 +246,11 @@ public class TraitementBot {
 	}
 
 	public CarteType ReponseJoueurCourant(BotMoyen core) {
-		CarteType RJ = CarteType.NUL;
-		if (core.getListeCarte().contains(CarteType.CDS))
-			if ( new Random().nextInt(1) == 1 ) {
-				RJ = CarteType.CDS;
-				core.getListeCarte().remove(CarteType.CDS);
-			}	
-		return RJ;
+		if ((core.getListeCarte().contains(CarteType.CDS)) && (new Random().nextInt(1) == 1)) {
+			core.getListeCarte().remove(CarteType.CDS);
+			return CarteType.CDS;
+		}
+		return CarteType.NUL;
 	}
 
 	public int IndiquerCarteJouees(BotMoyen core) {
@@ -260,39 +258,26 @@ public class TraitementBot {
 			return 0;
 
 		CarteType carteMenace = CarteType.MEN;
-		Random r = new Random();
 		int nbrCarteMen = 0;
-		for (CarteType carte : core.getListeCarte()) {
-			if (carte.name() == carteMenace.name()) {
+		for (CarteType carte : core.getListeCarte())
+			if (carte.name() == carteMenace.name())
 				nbrCarteMen++;
-			}
-		}
 		if (nbrCarteMen == 0)
 			return 0;
-
-		int nbrCartemenaceReturn = r.nextInt(nbrCarteMen);
-		return nbrCartemenaceReturn;
+		return new Random().nextInt(nbrCarteMen);
 	}
 
 	public Couleur getRandom(BotMoyen core, VoteType vt) {
-		int rand;
 		if (vt == VoteType.MPZ) {
 			System.out.println("Joueur Présent:" + core.couleurJoueurPresent().size());
 			core.couleurJoueurPresent().remove(core.getCouleur());
-			rand = new Random().nextInt(core.couleurJoueurPresent().size());
-			return core.couleurJoueurPresent().get(rand);
+			return core.couleurJoueurPresent().get(new Random().nextInt(core.couleurJoueurPresent().size()));
 		}
-		rand = new Random().nextInt(core.couleurJoueurPresent().size());
-		return core.couleurJoueurPresent().get(rand);
-
+		return core.couleurJoueurPresent().get(new Random().nextInt(core.couleurJoueurPresent().size()));
 	}
-	
-	
 
 	public Couleur getRandom2(BotMoyen core, VoteType vt) {
-		int rand = new Random().nextInt(core.getJoueurEnVie().size());
-		return core.getJoueurEnVie().get(rand);
-
+		return core.getJoueurEnVie().get(new Random().nextInt(core.getJoueurEnVie().size()));
 	}
 
 	public List<Object> carteFouille(List<CarteType> listeCarte, BotMoyen bot) {
@@ -328,6 +313,5 @@ public class TraitementBot {
 
 		return carteChoisies;
 	}
-	
 
 }

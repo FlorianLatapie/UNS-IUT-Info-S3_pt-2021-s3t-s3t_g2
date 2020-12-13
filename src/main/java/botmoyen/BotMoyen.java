@@ -1,6 +1,5 @@
 package botmoyen;
 
-
 import reseau.socket.ControleurReseau;
 import reseau.tool.ReseauOutils;
 import reseau.type.CarteEtat;
@@ -14,12 +13,10 @@ import reseau.type.VoteType;
 
 import java.io.IOException;
 import java.net.InetAddress;
-import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-import botmoyen.partie.ControleurPartie;
 import botmoyen.partie.Joueur;
 import botmoyen.partie.Lieu;
 import botmoyen.partie.Partie;
@@ -62,11 +59,7 @@ public class BotMoyen {
 		initReseau();
 
 		while (!isEstFini()) {
-			try {
-				Thread.sleep(1000);
-			} catch (InterruptedException e) {
-				e.printStackTrace();
-			}
+			Thread.yield();
 		}
 		arreter();
 	}
