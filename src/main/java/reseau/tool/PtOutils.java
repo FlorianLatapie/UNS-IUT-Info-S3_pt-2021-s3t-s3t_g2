@@ -1,9 +1,9 @@
 package reseau.tool;
 
-import reseau.packet.Packet;
-import reseau.ptprotocol.PtProtocol;
-import reseau.ptprotocol.PtValue;
-import reseau.ptprotocol.PtValues;
+import reseau.paquet.Paquet;
+import reseau.ptprotocole.PtProtocole;
+import reseau.ptprotocole.PtValeur;
+import reseau.ptprotocole.PtValeurs;
 import reseau.socket.ControleurReseau;
 import reseau.type.*;
 
@@ -19,14 +19,10 @@ import java.util.*;
  * <h1>Outils pour le ptprotocol</h1>
  *
  * @author Sébastien Aglaé
- * @version 1.0
+ * @version 2.0
  */
-public abstract class PtOutils {
-	private static final String PATHTOPACKET = "src\\main\\java\\reseau\\socket\\definition";
-
-	private PtOutils() {
-		throw new IllegalStateException("Utility class");
-	}
+public interface PtOutils {
+	String PATHTOPACKET = "src\\main\\java\\reseau\\socket\\definition";
 
 	/**
 	 * Permet de charger un paquet d'un protocol réseau.
@@ -35,7 +31,7 @@ public abstract class PtOutils {
 	 * @return Le fichier en PtProtocol
 	 * @throws IOException Si le fichier n'est pas accessible
 	 */
-	public static PtProtocol buildPtPa(String chemin) throws IOException {
+	 static PtProtocole buildPtPa(String chemin) throws IOException {
 		File file = new File(chemin);
 		FileInputStream fileInputStream = new FileInputStream(file);
 		byte[] buffer = new byte[(int) file.length()];
@@ -45,16 +41,16 @@ public abstract class PtOutils {
 		fileInputStream.close();
 		String[] str = new String(buffer, StandardCharsets.UTF_8).split("\n");
 
-		PtValues ptValues = new PtValues();
+		PtValeurs ptValues = new PtValeurs();
 		for (int i = 5; i < str.length; i++)
 			if (str[i].contains("value:")) {
 				String n = format(str[i + 1]);
 				String t = format(str[i + 2]);
 				String d = format(str[i + 3]);
-				ptValues.ajouterValeur(new PtValue(n, t, d));
+				ptValues.ajouterValeur(new PtValeur(n, t, d));
 			}
 
-		return new PtProtocol(format(str[0]), format(str[1]), format(str[2]), format(str[3]), format(str[4]), ptValues);
+		return new PtProtocole(format(str[0]), format(str[1]), format(str[2]), format(str[3]), format(str[4]), ptValues);
 	}
 
 	/**
@@ -65,38 +61,39 @@ public abstract class PtOutils {
 	 * @return L'ensemble des paquets
 	 * @throws IOException Si un fichier n'est pas accessible
 	 */
-	public static Map<String, Packet> loadPacket(String chemin, String protocole) throws IOException {
-		Map<String, Packet> packets = new HashMap<>();
+	 static Map<String, Paquet> loadPacket(String chemin, String protocole) throws IOException {
+		Map<String, Paquet> packets = new HashMap<>();
 
 		File folder = new File(PATHTOPACKET);
 		if (folder.exists()) {
-			folder = new File(PATHTOPACKET);
 			for (File file : Objects.requireNonNull(folder.listFiles())) {
 				if (file.getName().endsWith(".ptprotocol")) {
-					PtProtocol pt = buildPtPa(file.getPath());
+					PtProtocole pt = buildPtPa(file.getPath());
 
 					if (!pt.getProtocole().equals(protocole))
 						continue;
-					Packet packet = new Packet(pt);
+					Paquet packet = new Paquet(pt);
 					packets.put(pt.getMotCle(), packet);
 				}
 			}
-		} else
-			for (File file : getResourceFolderFiles(chemin)) {
+		} else {
+			File f = new File(chemin);
+			for (File file : Objects.requireNonNull(f .listFiles())) {
 				if (file.getName().endsWith(".ptprotocol")) {
-					PtProtocol pt = buildPtPa(file.getPath());
+					PtProtocole pt = buildPtPa(file.getPath());
 
 					if (!pt.getProtocole().equals(protocole))
 						continue;
-					Packet packet = new Packet(pt);
+					Paquet packet = new Paquet(pt);
 					packets.put(pt.getMotCle(), packet);
 				}
 			}
+		}
 
 		return packets;
 	}
 
-	private static File[] getResourceFolderFiles(String dossier) {
+	 static File[] getResourceFolderFiles(String dossier) {
 		ClassLoader loader = Thread.currentThread().getContextClassLoader();
 		URL url = loader.getResource(dossier);
 		String path = url.getPath();
@@ -123,40 +120,40 @@ public abstract class PtOutils {
 				return i.toString();
 			case "VoteType":
 				VoteType vt = ((VoteType) valeur);
-				return vt.toString();
+				return vt.name();
 			case "VoteEtape":
 				VoteEtape ve = ((VoteEtape) valeur);
-				return ve.toString();
+				return ve.name();
 			case "VigileEtat":
 				VigileEtat vie = ((VigileEtat) valeur);
-				return vie.toString();
+				return vie.name();
 			case "TypeJoueur":
 				TypeJoueur tj = ((TypeJoueur) valeur);
-				return tj.toString();
-			case "ReasonType":
-				ReasonType rt = ((ReasonType) valeur);
-				return rt.toString();
+				return tj.name();
+			case "RaisonType":
+				RaisonType rt = ((RaisonType) valeur);
+				return rt.name();
 			case "PionCouleur":
 				PionCouleur pc = ((PionCouleur) valeur);
-				return pc.toString();
+				return pc.name();
 			case "Couleur":
 				Couleur c = ((Couleur) valeur);
-				return c.toString();
+				return c.name();
 			case "CondType":
 				CondType ct = ((CondType) valeur);
-				return ct.toString();
+				return ct.name();
 			case "CarteType":
 				CarteType cat = ((CarteType) valeur);
-				return cat.toString();
+				return cat.name();
 			case "TypePartie":
 				TypePartie tp = ((TypePartie) valeur);
-				return tp.toString();
-			case "Status":
-				Status sss = ((Status) valeur);
-				return sss.toString();
+				return tp.name();
+			case "Statut":
+				Statut sss = ((Statut) valeur);
+				return sss.name();
 			case "CarteEtat":
 				CarteEtat ssss = ((CarteEtat) valeur);
-				return ssss.toString();
+				return ssss.name();
 			case "HashMap<Integer,List<Integer>>":
 				HashMap<?, ?> pti = (HashMap<?, ?>) valeur;
 				HashMap<Integer, List<Integer>> ptiTemp = new HashMap<>();
@@ -215,8 +212,8 @@ public abstract class PtOutils {
 				return VigileEtat.valueOf(param);
 			case "TypeJoueur":
 				return TypeJoueur.valueOf(param);
-			case "ReasonType":
-				return ReasonType.valueOf(param);
+			case "RaisonType":
+				return RaisonType.valueOf(param);
 			case "PionCouleur":
 				return PionCouleur.valueOf(param);
 			case "Couleur":
@@ -227,8 +224,8 @@ public abstract class PtOutils {
 				return CarteType.valueOf(param);
 			case "TypePartie":
 				return TypePartie.valueOf(param);
-			case "Status":
-				return Status.valueOf(param);
+			case "Statut":
+				return Statut.valueOf(param);
 			case "CarteEtat":
 				return CarteEtat.valueOf(param);
 			case "HashMap<Integer,List<Integer>>":
@@ -258,7 +255,7 @@ public abstract class PtOutils {
 	 * @param controleurReseau Le NetworkManager associé
 	 * @return Le paquet associé
 	 */
-	public static Packet strToPacketUdp(String message, ControleurReseau controleurReseau) {
+	public static Paquet strToPacketUdp(String message, ControleurReseau controleurReseau) {
 		if (controleurReseau.getPaquetUdpCount() == 0)
 			throw new IllegalArgumentException("NetWorkManager n'a pas ete initialise au moins une fois !");
 
@@ -272,7 +269,7 @@ public abstract class PtOutils {
 	 * @param controleurReseau Le NetworkManager associé
 	 * @return Le paquet associé
 	 */
-	public static Packet strToPacketTcp(String message, ControleurReseau controleurReseau) {
+	public static Paquet strToPacketTcp(String message, ControleurReseau controleurReseau) {
 		if (controleurReseau.getPaquetUdpCount() == 0)
 			throw new IllegalArgumentException("NetWorkManager n'a pas ete initialise au moins une fois !");
 
@@ -285,7 +282,7 @@ public abstract class PtOutils {
 	 * @param valeur Parametre
 	 * @return Une chaine de caractere
 	 */
-	private static String format(String valeur) {
+	 static String format(String valeur) {
 		return valeur.split(":")[1].replace("\r", "");
 	}
 }

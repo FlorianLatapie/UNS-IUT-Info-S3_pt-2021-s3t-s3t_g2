@@ -12,17 +12,17 @@ import java.util.logging.Logger;
  * <h1>Permet de gerer un serveur TCP du coté Serveur</h1>
  *
  * @author Sébastien Aglaé
- * @version 1.0
+ * @version 2.0
  */
-public class TcpServeur implements Runnable {
-	private ControleurReseau netWorkManager;
+public class TcpServeur implements Runnable, IControleSocket {
+	private final ControleurReseau controleurReseau;
 	private ServerSocket serveurSocket;
 
-	private final List<Connexion> connexions;
+	private final List<TcpClient> connexions;
 	private boolean estLancer;
-	private int port;
+	private final int port;
 
-	private Logger logger;
+	private final Logger logger;
 
 	/**
 	 * @param controleurReseau Le controleur reseau associé
@@ -32,8 +32,10 @@ public class TcpServeur implements Runnable {
 		this.port = port;
 		this.connexions = new ArrayList<>();
 		this.estLancer = true;
-		this.netWorkManager = controleurReseau;
+		this.controleurReseau = controleurReseau;
 		this.logger = Logger.getLogger(getClass().getName());
+		logger.log(Level.INFO, "Le serveur TCP démarre sur : {0}",
+				controleurReseau.getIp().getHostAddress() + " " + port);
 	}
 
 	/**
@@ -41,8 +43,11 @@ public class TcpServeur implements Runnable {
 	 */
 	@Override
 	public void run() {
+		logger.finest("Démarrage du serveur TCP");
+		logger.log(Level.FINEST, "Serveur TCP sur l'ip {0}", controleurReseau.getIp().getHostAddress());
+		logger.log(Level.FINEST, "Serveur TCP sur le port {1}", port);
 		try {
-			serveurSocket = new ServerSocket(port);
+			serveurSocket = new ServerSocket(port, 50, controleurReseau.getIp());
 		} catch (IOException e1) {
 			return;
 		}
@@ -54,11 +59,10 @@ public class TcpServeur implements Runnable {
 			} catch (IOException e) {
 				break;
 			}
-			Connexion connection = new Connexion(sock, netWorkManager);
-			new Thread(connection).start();
+			TcpClient connection;
+			new Thread(connection = new TcpClient(sock, controleurReseau)).start();
 			connexions.add(connection);
 		}
-		System.out.println("Ended TCP Serveur");
 		if (estLancer)
 			try {
 				arreter();
@@ -73,14 +77,13 @@ public class TcpServeur implements Runnable {
 	 * @throws IOException Si le serveur ne s'arrete pas correctement @throws
 	 */
 	public void arreter() throws IOException {
+		logger.log(Level.INFO, "Arret du serveur TCP");
 		estLancer = false;
-		for (Connexion connexion : connexions)
-			connexion.arreter();
 
 		if (serveurSocket != null) {
-			System.out.println("TCP SERVEUR CLIENT §§§§§§");
 			serveurSocket.close();
 		}
+		logger.log(Level.INFO, "Serveur TCP arreter");
 	}
 
 	/**
@@ -88,7 +91,7 @@ public class TcpServeur implements Runnable {
 	 *
 	 * @return Les connexions ouvertes
 	 */
-	public List<Connexion> getConnexions() {
+	public List<TcpClient> getConnexions() {
 		return connexions;
 	}
 }
