@@ -39,4 +39,3 @@ jobs:
         target_branch: Production
         # Template to generate the commit message, see README.md for more info
         commit_message_template: Merge automatique de {source_ref} a {target_branch} par ${{ github.actor }}
-		
