@@ -1,6 +1,7 @@
 package idjr.ihmidjr;
 
 import idjr.ihmidjr.DataControl.ApplicationPane;
+import idjr.ihmidjr.langues.International;
 import javafx.application.Platform;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -56,11 +57,11 @@ public class AccueilPane extends StackPane {
 		stackPane.setAlignment(Pos.CENTER);
 
 		// titre
-		Label titre1 = new Label("ZOMBIES");
+		Label titre1 = new Label(International.trad("texte.zombies"));
 		titre1.setFont(Font.font("Segoe UI", FontWeight.BOLD, 160));
 		titre1.setTextFill(Color.BLACK);
 
-		Label titre2 = new Label("LA BLONDE LA BRUTE ET LE TRUAND");
+		Label titre2 = new Label(International.trad("texte.titre"));
 		titre2.setFont(Font.font("Segoe UI", 35));
 		titre2.setTextFill(Color.BLACK);
 		titre2.setPadding(new Insets(0, 0, 20, 0));
@@ -84,7 +85,7 @@ public class AccueilPane extends StackPane {
 		nomjoueur.setMinHeight(hauteurElemtents);
 
 		// boutons
-		Button bJouer = new Button("JOUER");
+		Button bJouer = new Button(International.trad("boutton.jouer"));
 		bJouer.setPrefSize(lBouton, hBouton);
 		bJouer.setMinSize(lBouton, hBouton);
 		bJouer.setFont(policeBouton);
@@ -103,10 +104,10 @@ public class AccueilPane extends StackPane {
 				core.getIdjr().getInitializer().nomJoueur(core.getIdjr().getNom());
 				sc.setPaneOnTop(ApplicationPane.CONFIG);
 			} else
-				nomjoueur.setText("INVALIDE");
+				nomjoueur.setText("INVALIDE");//TODO
 		});
 
-		Button bOptions = new Button("OPTIONS");
+		Button bOptions = new Button(International.trad("bouton.options"));
 		bOptions.setPrefSize(lBouton, hBouton);
 		bOptions.setMinSize(lBouton, hBouton);
 		bOptions.setFont(policeBouton);
@@ -123,7 +124,7 @@ public class AccueilPane extends StackPane {
 			sc.setPaneOnTop(ApplicationPane.OPTION);
 		});
 
-		Button bRegles = new Button("REGLES");
+		Button bRegles = new Button(International.trad("bouton.regles"));
 		bRegles.setPrefSize(lBouton, hBouton);
 		bRegles.setMinSize(lBouton, hBouton);
 		bRegles.setFont(policeBouton);
@@ -140,7 +141,7 @@ public class AccueilPane extends StackPane {
 			sc.setPaneOnTop(ApplicationPane.REGLES);
 		});
 
-		Button bQuitter = new Button("QUITTER");
+		Button bQuitter = new Button(International.trad("bouton.quitter"));
 		bQuitter.setPrefSize(lBouton, hBouton);
 		bQuitter.setMinSize(lBouton, hBouton);
 		bQuitter.setFont(policeBouton);
@@ -154,7 +155,7 @@ public class AccueilPane extends StackPane {
 		});
 		bQuitter.setOnAction(event -> {
 			boolean resultat = ConfirmationPane.afficher("Quitter le jeu",
-					"Êtes-vous sûr de vouloir quitter le jeu ? \nSi vous quittez, la partie en cours sera perdue.");
+					"Êtes-vous sûr de vouloir quitter le jeu ? \nSi vous quittez, la partie en cours sera perdue.");//TODO
 			if (resultat) {
 				if (core.getIdjr() != null)
 					core.getIdjr().stop();
