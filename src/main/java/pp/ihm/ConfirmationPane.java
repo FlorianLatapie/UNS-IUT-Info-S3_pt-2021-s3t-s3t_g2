@@ -8,6 +8,7 @@ import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
@@ -33,21 +34,27 @@ public class ConfirmationPane {
 	 * @param message message affiché dans la fenetre 
 	 * @return
 	 */
-	public static boolean afficher(String titre, String message) {
+	public static boolean afficher(String titre, String messageL1, String messageL2) {
 		
 		//nouvelle fenetre
 		Stage window = new Stage();
+		window.getIcons().add(new Image(DataControl.ICONE));
 		window.initModality(Modality.APPLICATION_MODAL);
 		window.setTitle(titre);
 		window.setMinWidth(tailleFenetreL);
 		window.setMinHeight(tailleFenetreH);
 		
 		//titre
-		Label label = new Label();
-		label.setText(message);
-		label.setStyle("-fx-text-fill: #DDDDDD");
-		label.setFont(Font.font(nomPolice, FontWeight.BOLD, 20));
-		label.setPadding(new Insets(10));
+		Label labelL1 = new Label();
+		labelL1.setText(messageL1);
+		labelL1.setStyle("-fx-text-fill: #DDDDDD");
+		labelL1.setFont(Font.font(nomPolice, FontWeight.BOLD, 20));
+		labelL1.setPadding(new Insets(10,10,0,10));
+		Label labelL2 = new Label();
+		labelL2.setText(messageL2);
+		labelL2.setStyle("-fx-text-fill: #DDDDDD");
+		labelL2.setFont(Font.font(nomPolice, FontWeight.BOLD, 20));
+		labelL2.setPadding(new Insets(0,10,10,10));
 
 		//boutons
 		Button boutonOui = new Button(International.trad("bouton.quitter"));
@@ -77,8 +84,7 @@ public class ConfirmationPane {
 
 		VBox layout = new VBox(10);
 		layout.setAlignment(Pos.TOP_CENTER);
-		layout.getChildren().add(label);
-		layout.getChildren().add(boutonHbox);
+		layout.getChildren().addAll(labelL1, labelL2,boutonHbox);
 		layout.setStyle(" -fx-background-color: #1F1F1F;");
 		Scene scene = new Scene(layout);
 

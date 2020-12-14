@@ -119,8 +119,8 @@ public class AccueilPane extends StackPane {
 		bQuitter.setOnMouseEntered(event -> bQuitter.setStyle(styleBoutonsSouris));
 		bQuitter.setOnMouseExited(event -> bQuitter.setStyle(styleBoutons));
 		bQuitter.setOnAction(event -> {
-			boolean resultat = ConfirmationPane.afficher("Quitter le jeu",
-					"Êtes-vous sûr de vouloir quitter le jeu ? \nSi vous quittez, la partie en cours sera perdue."); // TODO
+			boolean resultat = ConfirmationPane.afficher(International.trad("texte.confirmationTitre"),
+					International.trad("texte.confirmationL1"),International.trad("texte.confirmationL2"));
 			if (resultat) {
 				Platform.exit();
 				System.exit(0);

@@ -670,7 +670,7 @@ public class PlateauPane extends StackPane implements PlateauListener {
 		VBox vTitreInfo = new VBox();
 		vTitreInfo.setAlignment(Pos.CENTER);
 		vTitreInfo.setPadding(new Insets(20));
-		titreInfo = new Label("Déplacement d'un pion du chef \ndes vigiles");
+		titreInfo = new Label("Déplacement d'un pion du chef des vigiles");
 		titreInfo.setTextAlignment(TextAlignment.CENTER);
 		titreInfo.setFont(Font.font("Segoe UI", FontWeight.BOLD, 25));
 		titreInfo.setTextFill(Color.WHITE);
