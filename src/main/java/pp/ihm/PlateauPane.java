@@ -84,13 +84,6 @@ public class PlateauPane extends StackPane implements PlateauListener {
 	Label nomJoueur5;
 	Label nomJoueur6;
 
-	Label estFerme1;
-	Label estFerme2;
-	Label estFerme3;
-	Label estFerme4;
-	Label estFerme5;
-	Label estFerme6;
-
 	Label force1a;
 	Label force1b;
 	Label force1c;
@@ -145,6 +138,11 @@ public class PlateauPane extends StackPane implements PlateauListener {
 	ImageView imgFond;
 	BorderPane borderJoueurs;
 
+	ImageView imgCarteFerme1;
+	ImageView imgCarteFerme2;
+	ImageView imgCarteFerme3;
+	ImageView imgCarteFerme5;
+	ImageView imgCarteFerme6;
 	Timer myTimer;
 
 	public PlateauPane(ScreenControl sc, Core c) {
@@ -376,16 +374,11 @@ public class PlateauPane extends StackPane implements PlateauListener {
 		vbRight1.setAlignment(Pos.CENTER);
 		HBox hbBot1 = new HBox();
 
-		estFerme1 = new Label(International.trad("text.fermé"));
-		estFerme1.setFont(fontInfo);
-		estFerme1.setTextFill(Color.LIGHTGREY);
-		estFerme1.setPadding(new Insets(0,0,30,0));
-
 		force1a = new Label(International.trad("text.forceEquipeA"));
 		force1a.setFont(fontInfo);
 		force1a.setTextFill(Color.RED);
 		force1a.setTextAlignment(TextAlignment.CENTER);
-		force1b = new Label(International.trad("text.forceEquipeB")+"\n");
+		force1b = new Label(International.trad("text.forceEquipeB") + "\n");
 		force1b.setFont(fontInfo);
 		force1b.setTextFill(Color.RED);
 		force1b.setTextAlignment(TextAlignment.CENTER);
@@ -408,7 +401,7 @@ public class PlateauPane extends StackPane implements PlateauListener {
 		b1.setMaxSize(320, 210);
 		b1.setBackground(new Background(new BackgroundFill(Color.BLACK, CornerRadii.EMPTY, null)));
 
-		vbRight1.getChildren().addAll(estFerme1, force1a, force1b, force1c);
+		vbRight1.getChildren().addAll(force1a, force1b, force1c);
 		hbBot1.getChildren().add(nbZombies1);
 
 		b1.setCenter(joueursPresents1);
@@ -427,16 +420,11 @@ public class PlateauPane extends StackPane implements PlateauListener {
 		vbRight2.setAlignment(Pos.CENTER);
 		HBox hbBot2 = new HBox();
 
-		estFerme2 = new Label(International.trad("text.fermé"));
-		estFerme2.setFont(fontInfo);
-		estFerme2.setTextFill(Color.LIGHTGREY);
-		estFerme2.setPadding(new Insets(0,0,30,0));
-
 		force2a = new Label(International.trad("text.forceEquipeA"));
 		force2a.setFont(fontInfo);
 		force2a.setTextFill(Color.RED);
 		force2a.setTextAlignment(TextAlignment.CENTER);
-		force2b = new Label(International.trad("text.forceEquipeB")+"\n");
+		force2b = new Label(International.trad("text.forceEquipeB") + "\n");
 		force2b.setFont(fontInfo);
 		force2b.setTextFill(Color.RED);
 		force2b.setTextAlignment(TextAlignment.CENTER);
@@ -459,7 +447,7 @@ public class PlateauPane extends StackPane implements PlateauListener {
 		b2.setMaxSize(320, 215);
 		b2.setBackground(new Background(new BackgroundFill(Color.BLACK, CornerRadii.EMPTY, null)));
 
-		vbRight2.getChildren().addAll(estFerme2, force2a, force2b, force2c);
+		vbRight2.getChildren().addAll(force2a, force2b, force2c);
 		hbBot2.getChildren().add(nbZombies2);
 
 		b2.setCenter(joueursPresents2);
@@ -478,16 +466,11 @@ public class PlateauPane extends StackPane implements PlateauListener {
 		vbRight3.setAlignment(Pos.CENTER);
 		HBox hbBot3 = new HBox();
 
-		estFerme3 = new Label(International.trad("text.fermé"));
-		estFerme3.setFont(fontInfo);
-		estFerme3.setTextFill(Color.LIGHTGREY);
-		estFerme3.setPadding(new Insets(0,0,30,0));
-
 		force3a = new Label(International.trad("text.forceEquipeA"));
 		force3a.setFont(fontInfo);
 		force3a.setTextFill(Color.RED);
 		force3a.setTextAlignment(TextAlignment.CENTER);
-		force3b = new Label(International.trad("text.forceEquipeB")+"\n");
+		force3b = new Label(International.trad("text.forceEquipeB") + "\n");
 		force3b.setFont(fontInfo);
 		force3b.setTextFill(Color.RED);
 		force3b.setTextAlignment(TextAlignment.CENTER);
@@ -510,7 +493,7 @@ public class PlateauPane extends StackPane implements PlateauListener {
 		b3.setMaxSize(325, 210);
 		b3.setBackground(new Background(new BackgroundFill(Color.BLACK, CornerRadii.EMPTY, null)));
 
-		vbRight3.getChildren().addAll(estFerme3, force3a, force3b, force3c);
+		vbRight3.getChildren().addAll(force3a, force3b, force3c);
 		hbBot3.getChildren().add(nbZombies3);
 
 		b3.setCenter(joueursPresents3);
@@ -529,16 +512,11 @@ public class PlateauPane extends StackPane implements PlateauListener {
 		vbRight4.setAlignment(Pos.CENTER);
 		HBox hbBot4 = new HBox();
 
-		estFerme4 = new Label(International.trad("text.fermé"));
-		estFerme4.setFont(fontInfo);
-		estFerme4.setTextFill(Color.LIGHTGREY);
-		estFerme4.setPadding(new Insets(0,0,30,0));
-
 		force4a = new Label(International.trad("text.forceEquipeA"));
 		force4a.setFont(fontInfo);
 		force4a.setTextFill(Color.RED);
 		force4a.setTextAlignment(TextAlignment.CENTER);
-		force4b = new Label(International.trad("text.forceEquipeB")+"\n");
+		force4b = new Label(International.trad("text.forceEquipeB") + "\n");
 		force4b.setFont(fontInfo);
 		force4b.setTextFill(Color.RED);
 		force4b.setTextAlignment(TextAlignment.CENTER);
@@ -561,7 +539,7 @@ public class PlateauPane extends StackPane implements PlateauListener {
 		b4.setMaxSize(270, 210);
 		b4.setBackground(new Background(new BackgroundFill(Color.BLACK, CornerRadii.EMPTY, null)));
 
-		vbRight4.getChildren().addAll(estFerme4, force4a, force4b, force4c);
+		vbRight4.getChildren().addAll(force4a, force4b, force4c);
 		hbBot4.getChildren().add(nbZombies4);
 
 		b4.setCenter(joueursPresents4);
@@ -580,16 +558,11 @@ public class PlateauPane extends StackPane implements PlateauListener {
 		vbRight5.setAlignment(Pos.CENTER);
 		HBox hbBot5 = new HBox();
 
-		estFerme5 = new Label(International.trad("text.fermé"));
-		estFerme5.setFont(fontInfo);
-		estFerme5.setTextFill(Color.LIGHTGREY);
-		estFerme5.setPadding(new Insets(0,0,30,0));
-
 		force5a = new Label(International.trad("text.forceEquipeA"));
 		force5a.setFont(fontInfo);
 		force5a.setTextFill(Color.RED);
 		force5a.setTextAlignment(TextAlignment.CENTER);
-		force5b = new Label(International.trad("text.forceEquipeB")+"\n");
+		force5b = new Label(International.trad("text.forceEquipeB") + "\n");
 		force5b.setFont(fontInfo);
 		force5b.setTextFill(Color.RED);
 		force5b.setTextAlignment(TextAlignment.CENTER);
@@ -612,7 +585,7 @@ public class PlateauPane extends StackPane implements PlateauListener {
 		b5.setMaxSize(325, 215);
 		b5.setBackground(new Background(new BackgroundFill(Color.BLACK, CornerRadii.EMPTY, null)));
 
-		vbRight5.getChildren().addAll(estFerme5, force5a, force5b, force5c);
+		vbRight5.getChildren().addAll(force5a, force5b, force5c);
 		hbBot5.getChildren().add(nbZombies5);
 
 		b5.setCenter(joueursPresents5);
@@ -631,16 +604,11 @@ public class PlateauPane extends StackPane implements PlateauListener {
 		vbLeft6.setAlignment(Pos.CENTER);
 		HBox hbBot6 = new HBox();
 
-		estFerme6 = new Label(International.trad("text.fermé"));
-		estFerme6.setFont(fontInfo);
-		estFerme6.setTextFill(Color.LIGHTGREY);
-		estFerme6.setPadding(new Insets(0,0,30,0));
-
 		force6a = new Label(International.trad("text.forceEquipeA"));
 		force6a.setFont(fontInfo);
 		force6a.setTextFill(Color.RED);
 		force6a.setTextAlignment(TextAlignment.CENTER);
-		force6b = new Label(International.trad("text.forceEquipeB")+"\n");
+		force6b = new Label(International.trad("text.forceEquipeB") + "\n");
 		force6b.setFont(fontInfo);
 		force6b.setTextFill(Color.RED);
 		force6b.setTextAlignment(TextAlignment.CENTER);
@@ -664,7 +632,7 @@ public class PlateauPane extends StackPane implements PlateauListener {
 		b6.setBackground(new Background(new BackgroundFill(Color.BLACK, CornerRadii.EMPTY, null)));
 		b6.setOpacity(.9);
 
-		vbLeft6.getChildren().addAll(estFerme6, force6a, force6b, force6c);
+		vbLeft6.getChildren().addAll(force6a, force6b, force6c);
 		hbBot6.getChildren().add(nbZombies6);
 
 		b6.setCenter(joueursPresents6);
@@ -679,7 +647,7 @@ public class PlateauPane extends StackPane implements PlateauListener {
 		/////
 
 		lChefVigile = new Label();
-		lChefVigile.setText("XXXXXXX" + " est le chef des vigiles"); //TODO
+		lChefVigile.setText("XXXXXXX" + " est le chef des vigiles"); // TODO
 		lChefVigile.setBackground(fondBlanc);
 		lChefVigile.setFont(fontInfo);
 		lChefVigile.setPadding(margeLieu);
@@ -687,7 +655,7 @@ public class PlateauPane extends StackPane implements PlateauListener {
 		AnchorPane.setLeftAnchor(lChefVigile, 375.0);
 
 		lChefVigile2 = new Label();
-		lChefVigile2.setText("XXXXXXX" + " est le chef des vigiles");//TODO
+		lChefVigile2.setText("XXXXXXX" + " est le chef des vigiles");// TODO
 		lChefVigile2.setBackground(fondBlanc);
 		lChefVigile2.setFont(fontInfo);
 		lChefVigile2.setPadding(margeLieu);
@@ -696,7 +664,7 @@ public class PlateauPane extends StackPane implements PlateauListener {
 		AnchorPane.setRightAnchor(lChefVigile2, 425.0);
 
 		lChefVigile3 = new Label();
-		lChefVigile3.setText("XXXXXXX" + " est le chef des vigiles"); //TODO
+		lChefVigile3.setText("XXXXXXX" + " est le chef des vigiles"); // TODO
 		lChefVigile3.setBackground(fondBlanc);
 		lChefVigile3.setFont(fontInfo);
 		lChefVigile3.setPadding(margeLieu);
@@ -705,7 +673,7 @@ public class PlateauPane extends StackPane implements PlateauListener {
 		AnchorPane.setLeftAnchor(lChefVigile3, 180.0);
 
 		lChefVigile4 = new Label();
-		lChefVigile4.setText("XXXXXXX" + " est le chef des vigiles");//TODO
+		lChefVigile4.setText("XXXXXXX" + " est le chef des vigiles");// TODO
 		lChefVigile4.setBackground(fondBlanc);
 		lChefVigile4.setFont(fontInfo);
 		lChefVigile4.setPadding(margeLieu);
@@ -733,7 +701,7 @@ public class PlateauPane extends StackPane implements PlateauListener {
 
 		VBox vInfo = new VBox();
 		vInfo.setAlignment(Pos.CENTER);
-		lInfo = new Label("Voici l'information que vous voulez savoir");//TODO
+		lInfo = new Label("Voici l'information que vous voulez savoir");// TODO
 		lInfo.setTextAlignment(TextAlignment.CENTER);
 		lInfo.setFont(Font.font("Segoe UI", FontWeight.BOLD, 20));
 		lInfo.setTextFill(Color.WHITE);
@@ -770,6 +738,37 @@ public class PlateauPane extends StackPane implements PlateauListener {
 		afficheJoueursLieu5.setFont(fontPerso);
 		afficheJoueursLieu6.setFont(fontPerso);
 
+		imgCarteFerme1 = new ImageView(DataControl.FERME1);
+		imgCarteFerme1.setRotate(128);
+		imgCarteFerme1.setTranslateX(250);
+		imgCarteFerme1.setTranslateY(320);
+
+		imgCarteFerme2 = new ImageView(DataControl.FERME2);
+		imgCarteFerme2.setRotate(-133);
+		imgCarteFerme2.setTranslateX(-310);
+		imgCarteFerme2.setTranslateY(295);
+
+		imgCarteFerme3 = new ImageView(DataControl.FERME3);
+		imgCarteFerme3.setRotate(-62);
+		imgCarteFerme3.setTranslateX(-350);
+		imgCarteFerme3.setTranslateY(-180);
+
+		imgCarteFerme5 = new ImageView(DataControl.FERME5);
+		imgCarteFerme5.setRotate(4);
+		imgCarteFerme5.setTranslateX(30);
+		imgCarteFerme5.setTranslateY(-350);
+
+		imgCarteFerme6 = new ImageView(DataControl.FERME6);
+		imgCarteFerme6.setRotate(53);
+		imgCarteFerme6.setTranslateX(360);
+		imgCarteFerme6.setTranslateY(-110);
+
+		imgCarteFerme1.setVisible(false);
+		imgCarteFerme2.setVisible(false);
+		imgCarteFerme3.setVisible(false);
+		imgCarteFerme5.setVisible(false);
+		imgCarteFerme6.setVisible(false);
+
 		this.setStyle(" -fx-background-color:#151515;");
 
 		j1.setVisible(false);
@@ -779,7 +778,8 @@ public class PlateauPane extends StackPane implements PlateauListener {
 		j5.setVisible(false);
 		j6.setVisible(false);
 
-		this.getChildren().addAll(imgFond, borderJoueurs, aPlateau, info);
+		this.getChildren().addAll(imgFond, borderJoueurs, aPlateau, info, imgCarteFerme1, imgCarteFerme2,
+				imgCarteFerme3, imgCarteFerme5, imgCarteFerme6);
 		this.setMinSize(1920, 1080);
 		this.setPrefSize(1920, 1080);
 		this.setMaxSize(1920, 1080);
@@ -882,27 +882,24 @@ public class PlateauPane extends StackPane implements PlateauListener {
 	public void lieuFerme(int lieu, boolean val) {
 		if (!val)
 			return;
-
-		String tmp = "Fermé";
 		Platform.runLater(() -> {
 			switch (lieu) {
 			case 1:
-				estFerme1.setText(tmp);
+				imgCarteFerme1.setVisible(true);
 				break;
 			case 2:
-				estFerme2.setText(tmp);
+				imgCarteFerme2.setVisible(true);
+
 				break;
 			case 3:
-				estFerme3.setText(tmp);
-				break;
-			case 4:
-				estFerme4.setText(tmp);
+				imgCarteFerme3.setVisible(true);
+
 				break;
 			case 5:
-				estFerme5.setText(tmp);
+				imgCarteFerme5.setVisible(true);
 				break;
 			case 6:
-				estFerme6.setText(tmp);
+				imgCarteFerme6.setVisible(true);
 				break;
 			default:
 				throw new IllegalStateException("Unexpected value: " + lieu);
@@ -914,27 +911,22 @@ public class PlateauPane extends StackPane implements PlateauListener {
 	public void lieuOuvert(int lieu, boolean val) {
 		if (!val)
 			return;
-
-		String tmp = "Ouvert";
 		Platform.runLater(() -> {
 			switch (lieu) {
 			case 1:
-				estFerme1.setText(tmp);
+				imgCarteFerme1.setVisible(false);
 				break;
 			case 2:
-				estFerme2.setText(tmp);
+				imgCarteFerme2.setVisible(false);
 				break;
 			case 3:
-				estFerme3.setText(tmp);
-				break;
-			case 4:
-				estFerme4.setText(tmp);
+				imgCarteFerme3.setVisible(false);
 				break;
 			case 5:
-				estFerme5.setText(tmp);
+				imgCarteFerme5.setVisible(false);
 				break;
 			case 6:
-				estFerme6.setText(tmp);
+				imgCarteFerme6.setVisible(false);
 				break;
 			default:
 				throw new IllegalStateException("Unexpected value: " + lieu);
@@ -1004,7 +996,7 @@ public class PlateauPane extends StackPane implements PlateauListener {
 	public void forceLieu(int lieu, int force) {
 		String tmpa = International.trad("text.forceEquipeA");
 		String tmpb = International.trad("text.forceEquipeB");
-		String tmpc = "\n" + force; 
+		String tmpc = "\n" + force;
 		Platform.runLater(() -> {
 			switch (lieu) {
 			case 1:
