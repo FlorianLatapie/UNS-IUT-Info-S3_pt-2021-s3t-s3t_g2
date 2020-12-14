@@ -1,6 +1,7 @@
 package botmoyen.partie;
 
 import reseau.type.CarteType;
+import reseau.type.CondType;
 import reseau.type.Couleur;
 
 import java.util.*;
@@ -29,6 +30,16 @@ public class Partie {
 	/** Booléen indiquant si un nouveauChef à été élu. */
 	boolean nouveauChef;
 
+	/** Couleur indiquant le gagnant */
+	Couleur gagnant;
+	
+	/** Booléen indiquant si il y a eu une egalite. */
+	boolean egalite;
+
+
+
+
+
 	/**
 	 * Instantie une nouvelle partie.
 	 *
@@ -41,13 +52,13 @@ public class Partie {
 		nouveauChef = false;
 		initCarte();
 		for (int i = 0; i < couleurs.size(); i++)
-			joueurs.put(couleurs.get(i), new Joueur( couleurs.get(i)));
+			joueurs.put(couleurs.get(i), new Joueur(couleurs.get(i)));
 		initJoueurs();
 		initLieu();
 	}
 
 	/**
-	 * Initialise les cartes du jeu.
+	 * Initialise les cartes du
 	 */
 	private void initCarte() {
 
@@ -89,7 +100,7 @@ public class Partie {
 	}
 
 	/**
-	 * Initialise les joueurs du jeu.
+	 * Initialise les joueurs du
 	 */
 	private void initJoueurs() {
 		if (joueurs.size() < 4)
@@ -126,7 +137,7 @@ public class Partie {
 
 	/**
 	 * Applique les résultats de la fouille du camion : attribut la carte piocheur
-	 * au piocheur, la carte receveur au receveur et sort les 3 cartes du jeu.
+	 * au piocheur, la carte receveur au receveur et sort les 3 cartes du
 	 *
 	 * @param piocheur      le piocheur
 	 * @param receveur      le receveur
@@ -400,7 +411,7 @@ public class Partie {
 	/**
 	 * Place le personnage du joueur au lieu choisi.
 	 *
-	 * @param couleur     le joueur dont le personnage est placé
+	 * @param couleur    le joueur dont le personnage est placé
 	 * @param choixPerso le personnage qui est déplacé
 	 * @param dest       le lieu de destination du personnage
 	 */
@@ -478,8 +489,6 @@ public class Partie {
 		return nbJoueurMort;
 	}
 
-
-
 	/**
 	 * Retourne la liste des couleurs des joueurs.
 	 *
@@ -552,42 +561,85 @@ public class Partie {
 	 * @param c la couleur du nouceau chef.
 	 */
 	public void setChef(Couleur c) {
-		for ( Joueur j : joueurs.values()) {
+		for (Joueur j : joueurs.values()) {
 			if (j.getCouleur().equals(c)) {
 				j.setChefDesVigiles(true);
-			}
-			else {
+			} else {
 				j.setChefDesVigiles(false);
 			}
 		}
 	}
-	
+
 	/**
 	 * Definie nouveauChef.
 	 *
 	 * @param nouveauChef l'état de nouveauChef à appliqué.
 	 */
 	public void setNewChef(boolean nouveauChef) {
-		this.nouveauChef=nouveauChef;
+		this.nouveauChef = nouveauChef;
 	}
-	
-	public void givecarte(Couleur c , CarteType carte) {
+
+	public void givecarte(Couleur c, CarteType carte) {
 		joueurs.get(c).getCartes().add(carte);
 		cartes.remove(carte);
 	}
 
 	public void setZombieSurLieu(Integer lieu, Integer nbz) {
-		lieux.get(lieu).setNbZombies(nbz);		
+		lieux.get(lieu).setNbZombies(nbz);
 	}
 
 	public void setPersoCache(Integer lieu, int size) {
-		lieux.get(lieu).setNbPersoCache(size);	
+		lieux.get(lieu).setNbPersoCache(size);
 	}
 
 	public void resetPersoCache() {
 		for (Lieu l : lieux.values())
 			l.setNbPersoCache(0);
-		
+
 	}
 
+	public boolean estFini() {
+		boolean isFinished = false;
+		for (Couleur i : getJoueursCouleurs())
+			if (getJoueurs().get(i).isEnVie() && getJoueurs().get(i).getPersonnages().size() == 0)
+				getJoueurs().get(i).setEnVie(false);
+		ArrayList<Lieu> lieu = new ArrayList<>();
+		int nbPerso = 0;
+		for (Couleur i : getJoueursCouleurs())
+			if (getJoueurs().get(i).isEnVie()) {
+				nbPerso += getJoueurs().get(i).getPersonnages().size();
+				for (Integer j : getJoueurs().get(i).getPersonnages().keySet())
+					if (!lieu.contains(getJoueurs().get(i).getPersonnages().get(j).getMonLieu()))
+						lieu.add(getJoueurs().get(i).getPersonnages().get(j).getMonLieu());
+			}
+		if ((lieu.size() < 2 && lieu.get(0) != getLieux().get(4)) || (nbPerso <= 4 && getJoueurs().size() < 6)
+				|| (nbPerso <= 6 && getJoueurs().size() == 6)) {
+			int pointVainqueur = 0;
+			ArrayList<Joueur> vainqueur = new ArrayList<>();
+			for (Couleur i : getJoueursCouleurs()) {
+				int point = 0;
+				if (getJoueurs().get(i).isEnVie()) {
+					for (Integer j : getJoueurs().get(i).getPersonnages().keySet())
+						point += getJoueurs().get(i).getPersonnages().get(j).getPoint();
+					if (point > pointVainqueur) {
+						pointVainqueur = point;
+						vainqueur.clear();
+						vainqueur.add(getJoueurs().get(i));
+					} else if (point == pointVainqueur)
+						vainqueur.add(getJoueurs().get(i));
+				}
+			}
+			isFinished = true;
+			gagnant = vainqueur.get(new Random().nextInt(vainqueur.size())).getCouleur();
+		}
+		return isFinished;
+	}
+	
+	public Couleur getGagnant() {
+		return gagnant;
+	}
+	
+	public boolean isEgalite() {
+		return egalite;
+	}
 }

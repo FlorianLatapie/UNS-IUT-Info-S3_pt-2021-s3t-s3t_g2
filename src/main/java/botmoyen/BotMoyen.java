@@ -233,6 +233,10 @@ public class BotMoyen {
 		this.compteurTour = compteurTour;
 	}
 	
+	public void newTour() {
+		this.compteurTour ++;
+	}
+	
 	public Partie getPartie() {
 		return partie;
 	}
