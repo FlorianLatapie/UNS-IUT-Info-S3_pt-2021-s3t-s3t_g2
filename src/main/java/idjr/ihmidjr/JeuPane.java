@@ -1056,7 +1056,7 @@ public class JeuPane extends StackPane implements JeuListener {
 		info.setStyle(" -fx-background-color:#1A1A1A; -fx-background-radius: 20px; -fx-border-color: red; -fx-border-insets: -3; -fx-border-width: 3; -fx-border-radius: 20px;");
 		info.setVisible(false);
 		
-		Button bQuitterInfo = new Button("QUITTER");
+		bQuitterInfo = new Button("QUITTER");
 		bQuitterInfo.setAlignment(Pos.CENTER);
 		bQuitterInfo.setStyle(styleBoutons);
 		bQuitterInfo.setPrefSize(largBouton*.7, hautBouton*.7);
