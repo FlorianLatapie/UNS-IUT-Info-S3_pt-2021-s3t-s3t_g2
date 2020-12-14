@@ -4,11 +4,13 @@ import java.util.Locale;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import pp.ihm.langues.International;
 
 public class DataControl {
 
 	public static enum ApplicationPane {
-		ACCUEIL, AIDE, CREATION, JEU, OPTION, PAUSE, PLATEAU, CONFIG, REGLES, ACCESSIBILITE, ENDGAME, WAIT, COULEUR, CONFIG_BOT
+		ACCUEIL, AIDE, CREATION, JEU, OPTION, PAUSE, PLATEAU, CONFIG, REGLES, ACCESSIBILITE, ENDGAME, WAIT, COULEUR,
+		CONFIG_BOT
 	}
 
 	public static enum ApplicationLangue {
@@ -24,12 +26,15 @@ public class DataControl {
 	public static final String SCREEN = "pp/ihm/images/rotationEcran.png";
 	public static final String JOUEUR_ATTENDU = "pp/ihm/images/joueurAttente.png";
 	public static final String JOUEUR_CONNECTE = "pp/ihm/images/joueurConnecté.png";
-	
-	public static final ObservableList<Integer> nombreJoueur = FXCollections.observableArrayList(3,4,5,6);
-	public static final ObservableList<Integer> nombreBot = FXCollections.observableArrayList(0,1,2,3,4,5,6);
-	public static final ObservableList<String> couleursJoueur = FXCollections.observableArrayList("Noir", "Vert", "Marron", "Rouge", "Bleu", "Jaune");
-	public static final ObservableList<String> difficulteBot = FXCollections.observableArrayList("Faible","Moyen","Fort");
 
+	public static final ObservableList<Integer> nombreJoueur = FXCollections.observableArrayList(3, 4, 5, 6);
+	public static final ObservableList<Integer> nombreBot = FXCollections.observableArrayList(0, 1, 2, 3, 4, 5, 6);
+	public static final ObservableList<String> couleursJoueur = FXCollections.observableArrayList(
+			International.trad("text.noir"), International.trad("text.vert"), International.trad("text.marron"),
+			International.trad("text.rouge"), International.trad("text.bleu"), International.trad("text.jaune"));
+	public static final ObservableList<String> difficulteBot = FXCollections.observableArrayList(
+			International.trad("texte.valueFaible"), International.trad("texte.valueMoyen"),
+			International.trad("texte.valueFort"));
 
 	public static Locale getLocale(ApplicationLangue l) {
 		switch (l) {
