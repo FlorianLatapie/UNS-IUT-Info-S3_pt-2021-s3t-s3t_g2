@@ -4,6 +4,7 @@ import java.util.Timer;
 import java.util.TimerTask;
 import pp.ihm.DataControl.ApplicationPane;
 import pp.ihm.eventListener.PlateauListener;
+import pp.ihm.langues.International;
 import reseau.type.Couleur;
 import javafx.animation.TranslateTransition;
 import javafx.application.Platform;
@@ -90,12 +91,24 @@ public class PlateauPane extends StackPane implements PlateauListener {
 	Label estFerme5;
 	Label estFerme6;
 
-	Label force1;
-	Label force2;
-	Label force3;
-	Label force4;
-	Label force5;
-	Label force6;
+	Label force1a;
+	Label force1b;
+	Label force1c;
+	Label force2a;
+	Label force2b;
+	Label force2c;
+	Label force3a;
+	Label force3b;
+	Label force3c;
+	Label force4a;
+	Label force4b;
+	Label force4c;
+	Label force5a;
+	Label force5b;
+	Label force5c;
+	Label force6a;
+	Label force6b;
+	Label force6c;
 
 	Label nbPerso1;
 	Label nbPerso2;
@@ -360,6 +373,7 @@ public class PlateauPane extends StackPane implements PlateauListener {
 		aPlateau.setMaxSize(taillePlateau, taillePlateau);
 
 		VBox vbRight1 = new VBox();
+		vbRight1.setAlignment(Pos.CENTER);
 		HBox hbBot1 = new HBox();
 
 		Label estBarricade1 = new Label("Barricadé");
@@ -369,10 +383,20 @@ public class PlateauPane extends StackPane implements PlateauListener {
 		estFerme1 = new Label("Fermé");
 		estFerme1.setFont(fontInfo);
 		estFerme1.setTextFill(Color.LIGHTGREY);
+		estFerme1.setPadding(new Insets(0,0,30,0));
 
-		force1 = new Label("    Force\nde l'équipe\n" + "\n\t##");
-		force1.setFont(fontInfo);
-		force1.setTextFill(Color.RED);
+		force1a = new Label("Force");
+		force1a.setFont(fontInfo);
+		force1a.setTextFill(Color.RED);
+		force1a.setTextAlignment(TextAlignment.CENTER);
+		force1b = new Label("de l'équipe\n");
+		force1b.setFont(fontInfo);
+		force1b.setTextFill(Color.RED);
+		force1b.setTextAlignment(TextAlignment.CENTER);
+		force1c = new Label("##");
+		force1c.setFont(fontInfo);
+		force1c.setTextFill(Color.RED);
+		force1c.setTextAlignment(TextAlignment.CENTER);
 
 		VBox joueursPresents1 = new VBox();
 		joueursPresents1.getChildren().addAll(afficheJoueursLieu1 = new Label());
@@ -388,7 +412,7 @@ public class PlateauPane extends StackPane implements PlateauListener {
 		b1.setMaxSize(320, 210);
 		b1.setBackground(new Background(new BackgroundFill(Color.BLACK, CornerRadii.EMPTY, null)));
 
-		vbRight1.getChildren().addAll(estBarricade1, estFerme1, force1);
+		vbRight1.getChildren().addAll(estBarricade1, estFerme1, force1a, force1b, force1c);
 		hbBot1.getChildren().add(nbZombies1);
 
 		b1.setCenter(joueursPresents1);
@@ -404,6 +428,7 @@ public class PlateauPane extends StackPane implements PlateauListener {
 		////
 
 		VBox vbRight2 = new VBox();
+		vbRight2.setAlignment(Pos.CENTER);
 		HBox hbBot2 = new HBox();
 
 		Label estBarricade2 = new Label("Barricadé");
@@ -413,10 +438,20 @@ public class PlateauPane extends StackPane implements PlateauListener {
 		estFerme2 = new Label("Fermé");
 		estFerme2.setFont(fontInfo);
 		estFerme2.setTextFill(Color.LIGHTGREY);
+		estFerme2.setPadding(new Insets(0,0,30,0));
 
-		force2 = new Label("    Force\nde l'équipe\n" + "\n\t##");
-		force2.setFont(fontInfo);
-		force2.setTextFill(Color.RED);
+		force2a = new Label("Force");
+		force2a.setFont(fontInfo);
+		force2a.setTextFill(Color.RED);
+		force2a.setTextAlignment(TextAlignment.CENTER);
+		force2b = new Label("de l'équipe\n");
+		force2b.setFont(fontInfo);
+		force2b.setTextFill(Color.RED);
+		force2b.setTextAlignment(TextAlignment.CENTER);
+		force2c = new Label("##");
+		force2c.setFont(fontInfo);
+		force2c.setTextFill(Color.RED);
+		force2c.setTextAlignment(TextAlignment.CENTER);
 
 		VBox joueursPresents2 = new VBox();
 		joueursPresents2.getChildren().addAll(afficheJoueursLieu2 = new Label());
@@ -432,7 +467,7 @@ public class PlateauPane extends StackPane implements PlateauListener {
 		b2.setMaxSize(320, 215);
 		b2.setBackground(new Background(new BackgroundFill(Color.BLACK, CornerRadii.EMPTY, null)));
 
-		vbRight2.getChildren().addAll(estBarricade2, estFerme2, force2);
+		vbRight2.getChildren().addAll(estBarricade2, estFerme2, force2a, force2b, force2c);
 		hbBot2.getChildren().add(nbZombies2);
 
 		b2.setCenter(joueursPresents2);
@@ -448,6 +483,7 @@ public class PlateauPane extends StackPane implements PlateauListener {
 		///
 
 		VBox vbRight3 = new VBox();
+		vbRight3.setAlignment(Pos.CENTER);
 		HBox hbBot3 = new HBox();
 
 		Label estBarricade3 = new Label("Barricadé");
@@ -457,10 +493,20 @@ public class PlateauPane extends StackPane implements PlateauListener {
 		estFerme3 = new Label("Fermé");
 		estFerme3.setFont(fontInfo);
 		estFerme3.setTextFill(Color.LIGHTGREY);
+		estFerme3.setPadding(new Insets(0,0,30,0));
 
-		force3 = new Label("    Force\nde l'équipe\n" + "\n\t##");
-		force3.setFont(fontInfo);
-		force3.setTextFill(Color.RED);
+		force3a = new Label("Force");
+		force3a.setFont(fontInfo);
+		force3a.setTextFill(Color.RED);
+		force3a.setTextAlignment(TextAlignment.CENTER);
+		force3b = new Label("de l'équipe\n");
+		force3b.setFont(fontInfo);
+		force3b.setTextFill(Color.RED);
+		force3b.setTextAlignment(TextAlignment.CENTER);
+		force3c = new Label("##");
+		force3c.setFont(fontInfo);
+		force3c.setTextFill(Color.RED);
+		force3c.setTextAlignment(TextAlignment.CENTER);
 
 		VBox joueursPresents3 = new VBox();
 		joueursPresents3.getChildren().addAll(afficheJoueursLieu3 = new Label());
@@ -476,7 +522,7 @@ public class PlateauPane extends StackPane implements PlateauListener {
 		b3.setMaxSize(325, 210);
 		b3.setBackground(new Background(new BackgroundFill(Color.BLACK, CornerRadii.EMPTY, null)));
 
-		vbRight3.getChildren().addAll(estBarricade3, estFerme3, force3);
+		vbRight3.getChildren().addAll(estBarricade3, estFerme3, force3a, force3b, force3c);
 		hbBot3.getChildren().add(nbZombies3);
 
 		b3.setCenter(joueursPresents3);
@@ -492,6 +538,7 @@ public class PlateauPane extends StackPane implements PlateauListener {
 		///
 
 		VBox vbRight4 = new VBox();
+		vbRight4.setAlignment(Pos.CENTER);
 		HBox hbBot4 = new HBox();
 
 		Label estBarricade4 = new Label("Barricadé");
@@ -501,10 +548,20 @@ public class PlateauPane extends StackPane implements PlateauListener {
 		estFerme4 = new Label("Fermé");
 		estFerme4.setFont(fontInfo);
 		estFerme4.setTextFill(Color.LIGHTGREY);
+		estFerme4.setPadding(new Insets(0,0,30,0));
 
-		force4 = new Label("    Force\nde l'équipe\n" + "\n\t##");
-		force4.setFont(fontInfo);
-		force4.setTextFill(Color.RED);
+		force4a = new Label("Force");
+		force4a.setFont(fontInfo);
+		force4a.setTextFill(Color.RED);
+		force4a.setTextAlignment(TextAlignment.CENTER);
+		force4b = new Label("de l'équipe\n");
+		force4b.setFont(fontInfo);
+		force4b.setTextFill(Color.RED);
+		force4b.setTextAlignment(TextAlignment.CENTER);
+		force4c = new Label("##");
+		force4c.setFont(fontInfo);
+		force4c.setTextFill(Color.RED);
+		force4c.setTextAlignment(TextAlignment.CENTER);
 
 		VBox joueursPresents4 = new VBox();
 		joueursPresents4.getChildren().addAll(afficheJoueursLieu4 = new Label());
@@ -520,7 +577,7 @@ public class PlateauPane extends StackPane implements PlateauListener {
 		b4.setMaxSize(270, 210);
 		b4.setBackground(new Background(new BackgroundFill(Color.BLACK, CornerRadii.EMPTY, null)));
 
-		vbRight4.getChildren().addAll(estBarricade4, estFerme4, force4);
+		vbRight4.getChildren().addAll(estBarricade4, estFerme4, force4a, force4b, force4c);
 		hbBot4.getChildren().add(nbZombies4);
 
 		b4.setCenter(joueursPresents4);
@@ -536,6 +593,7 @@ public class PlateauPane extends StackPane implements PlateauListener {
 		///
 
 		VBox vbRight5 = new VBox();
+		vbRight5.setAlignment(Pos.CENTER);
 		HBox hbBot5 = new HBox();
 
 		Label estBarricade5 = new Label("Barricadé");
@@ -545,10 +603,20 @@ public class PlateauPane extends StackPane implements PlateauListener {
 		estFerme5 = new Label("Fermé");
 		estFerme5.setFont(fontInfo);
 		estFerme5.setTextFill(Color.LIGHTGREY);
+		estFerme5.setPadding(new Insets(0,0,30,0));
 
-		force5 = new Label("    Force\nde l'équipe\n" + "\n\t##");
-		force5.setFont(fontInfo);
-		force5.setTextFill(Color.RED);
+		force5a = new Label("Force");
+		force5a.setFont(fontInfo);
+		force5a.setTextFill(Color.RED);
+		force5a.setTextAlignment(TextAlignment.CENTER);
+		force5b = new Label("de l'équipe\n");
+		force5b.setFont(fontInfo);
+		force5b.setTextFill(Color.RED);
+		force5b.setTextAlignment(TextAlignment.CENTER);
+		force5c = new Label("##");
+		force5c.setFont(fontInfo);
+		force5c.setTextFill(Color.RED);
+		force5c.setTextAlignment(TextAlignment.CENTER);
 
 		VBox joueursPresents5 = new VBox();
 		joueursPresents5.getChildren().addAll(afficheJoueursLieu5 = new Label());
@@ -564,7 +632,7 @@ public class PlateauPane extends StackPane implements PlateauListener {
 		b5.setMaxSize(325, 215);
 		b5.setBackground(new Background(new BackgroundFill(Color.BLACK, CornerRadii.EMPTY, null)));
 
-		vbRight5.getChildren().addAll(estBarricade5, estFerme5, force5);
+		vbRight5.getChildren().addAll(estBarricade5, estFerme5, force5a, force5b, force5c);
 		hbBot5.getChildren().add(nbZombies5);
 
 		b5.setCenter(joueursPresents5);
@@ -580,6 +648,7 @@ public class PlateauPane extends StackPane implements PlateauListener {
 		///
 
 		VBox vbLeft6 = new VBox();
+		vbLeft6.setAlignment(Pos.CENTER);
 		HBox hbBot6 = new HBox();
 
 		Label estBarricade6 = new Label("Barricadé");
@@ -589,10 +658,20 @@ public class PlateauPane extends StackPane implements PlateauListener {
 		estFerme6 = new Label("Fermé");
 		estFerme6.setFont(fontInfo);
 		estFerme6.setTextFill(Color.LIGHTGREY);
+		estFerme6.setPadding(new Insets(0,0,30,0));
 
-		force6 = new Label("    Force\nde l'équipe\n" + "\n\t##");
-		force6.setFont(fontInfo);
-		force6.setTextFill(Color.RED);
+		force6a = new Label("Force");
+		force6a.setFont(fontInfo);
+		force6a.setTextFill(Color.RED);
+		force6a.setTextAlignment(TextAlignment.CENTER);
+		force6b = new Label("de l'équipe\n");
+		force6b.setFont(fontInfo);
+		force6b.setTextFill(Color.RED);
+		force6b.setTextAlignment(TextAlignment.CENTER);
+		force6c = new Label("##");
+		force6c.setFont(fontInfo);
+		force6c.setTextFill(Color.RED);
+		force6c.setTextAlignment(TextAlignment.CENTER);
 
 		VBox joueursPresents6 = new VBox();
 		joueursPresents6.getChildren().addAll(afficheJoueursLieu6 = new Label());
@@ -609,7 +688,7 @@ public class PlateauPane extends StackPane implements PlateauListener {
 		b6.setBackground(new Background(new BackgroundFill(Color.BLACK, CornerRadii.EMPTY, null)));
 		b6.setOpacity(.9);
 
-		vbLeft6.getChildren().addAll(estBarricade6, estFerme6, force6);
+		vbLeft6.getChildren().addAll(estBarricade6, estFerme6, force6a, force6b, force6c);
 		hbBot6.getChildren().add(nbZombies6);
 
 		b6.setCenter(joueursPresents6);
@@ -947,26 +1026,40 @@ public class PlateauPane extends StackPane implements PlateauListener {
 
 	@Override
 	public void forceLieu(int lieu, int force) {
-		String tmp = "    Force\nde l'équipe\n" + "\n\t" + force; // TODO traduction
+		String tmpa = International.trad("text.forceEquipeA");
+		String tmpb = International.trad("text.forceEquipeB");
+		String tmpc = "\n" + force; 
 		Platform.runLater(() -> {
 			switch (lieu) {
 			case 1:
-				force1.setText(tmp);
+				force1a.setText(tmpa);
+				force1b.setText(tmpb);
+				force1c.setText(tmpc);
 				break;
 			case 2:
-				force2.setText(tmp);
+				force2a.setText(tmpa);
+				force2b.setText(tmpb);
+				force2c.setText(tmpc);
 				break;
 			case 3:
-				force3.setText(tmp);
+				force3a.setText(tmpa);
+				force3b.setText(tmpb);
+				force3c.setText(tmpc);
 				break;
 			case 4:
-				force4.setText(tmp);
+				force4a.setText(tmpa);
+				force4b.setText(tmpb);
+				force4c.setText(tmpc);
 				break;
 			case 5:
-				force5.setText(tmp);
+				force5a.setText(tmpa);
+				force5b.setText(tmpb);
+				force5c.setText(tmpc);
 				break;
 			case 6:
-				force6.setText(tmp);
+				force6a.setText(tmpa);
+				force6b.setText(tmpb);
+				force6c.setText(tmpc);
 				break;
 			default:
 				throw new IllegalStateException("Unexpected value: " + lieu);
