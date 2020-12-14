@@ -823,50 +823,50 @@ public class PlateauPane extends StackPane implements PlateauListener {
 			switch (joueur) {
 			case 0:
 				nomJoueur1.setText(val);
-				nbPerso1.setStyle(tmpColor);
-				nbCartes1.setStyle(tmpColor);
-				nomJoueur1.setStyle(tmpColor);
-				j1.setStyle(tmpColor);
+				nbPerso1.setStyle(color(couleur));
+				nbCartes1.setStyle(color(couleur));
+				nomJoueur1.setStyle(color(couleur));
+				j1.setStyle(color(couleur));
 				j1.setVisible(true);
 				break;
 			case 1:
 				nomJoueur2.setText(val);
-				nbPerso2.setStyle(tmpColor);
-				nbCartes2.setStyle(tmpColor);
-				nomJoueur2.setStyle(tmpColor);
-				j2.setStyle(tmpColor);
+				nbPerso2.setStyle(color(couleur));
+				nbCartes2.setStyle(color(couleur));
+				nomJoueur2.setStyle(color(couleur));
+				j2.setStyle(color(couleur));
 				j2.setVisible(true);
 				break;
 			case 2:
 				nomJoueur3.setText(val);
-				nbPerso3.setStyle(tmpColor);
-				nbCartes3.setStyle(tmpColor);
-				nomJoueur3.setStyle(tmpColor);
-				j3.setStyle(tmpColor);
+				nbPerso3.setStyle(color(couleur));
+				nbCartes3.setStyle(color(couleur));
+				nomJoueur3.setStyle(color(couleur));
+				j3.setStyle(color(couleur));
 				j3.setVisible(true);
 				break;
 			case 3:
 				nomJoueur4.setText(val);
-				nbPerso4.setStyle(tmpColor);
-				nbCartes4.setStyle(tmpColor);
-				nomJoueur4.setStyle(tmpColor);
-				j4.setStyle(tmpColor);
+				nbPerso4.setStyle(color(couleur));
+				nbCartes4.setStyle(color(couleur));
+				nomJoueur4.setStyle(color(couleur));
+				j4.setStyle(color(couleur));
 				j4.setVisible(true);
 				break;
 			case 4:
 				nomJoueur5.setText(val);
-				nbPerso5.setStyle(tmpColor);
-				nbCartes5.setStyle(tmpColor);
-				nomJoueur5.setStyle(tmpColor);
-				j5.setStyle(tmpColor);
+				nbPerso5.setStyle(color(couleur));
+				nbCartes5.setStyle(color(couleur));
+				nomJoueur5.setStyle(color(couleur));
+				j5.setStyle(color(couleur));
 				j5.setVisible(true);
 				break;
 			case 5:
 				nomJoueur6.setText(val);
-				nbPerso6.setStyle(tmpColor);
-				nbCartes6.setStyle(tmpColor);
-				nomJoueur6.setStyle(tmpColor);
-				j6.setStyle(tmpColor);
+				nbPerso6.setStyle(color(couleur));
+				nbCartes6.setStyle(color(couleur));
+				nomJoueur6.setStyle(color(couleur));
+				j6.setStyle(color(couleur));
 				j6.setVisible(true);
 				break;
 			default:
@@ -940,6 +940,9 @@ public class PlateauPane extends StackPane implements PlateauListener {
 				break;
 			case 3:
 				imgCarteFerme3.setVisible(false);
+				break;
+			case 4: 
+				//c'est le parking il est forcément ouvert 
 				break;
 			case 5:
 				imgCarteFerme5.setVisible(false);
