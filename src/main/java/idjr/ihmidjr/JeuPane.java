@@ -1233,7 +1233,7 @@ public class JeuPane extends StackPane implements JeuListener {
 		joueur4.setDisable(true);
 		joueur5.setDisable(true);
 		cartePanelReset();
-		fouilleCamion.setVisible(true);
+		fouilleCamion.setVisible(false);
 
 		ImageView[] imgViews = { imgDeCarte1, imgDeCarte2, imgDeCarte3, imgDeCarte4, imgDeCarte5, imgDeCarte6,
 				imgDeCarte7, imgDeCarte8, imgDeCarte9 };
