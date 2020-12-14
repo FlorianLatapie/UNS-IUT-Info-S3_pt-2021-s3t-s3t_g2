@@ -531,29 +531,26 @@ public class JeuPane extends StackPane implements JeuListener {
 
 		///
 		fouilleCamion = new BorderPane();
-		fouilleCamion.setPrefSize(850, 720);
-		fouilleCamion.setMinSize(850, 720);
-		fouilleCamion.setMaxSize(850, 720);
+		fouilleCamion.setPrefSize(850, 550);
+		fouilleCamion.setMinSize(850, 550);
+		fouilleCamion.setMaxSize(850, 550);
 		fouilleCamion.setStyle("-fx-border-color: black; -fx-border-insets: 5; -fx-border-width: 3;");
 
 		VBox vbChoixCarteCentre = new VBox();
 		vbChoixCarteCentre.setAlignment(Pos.CENTER);
-		vbChoixCarteCentre.setPrefSize(850, 700);
-		vbChoixCarteCentre.setMinSize(850, 700);
-		vbChoixCarteCentre.setMaxSize(850, 700);
-		// vbChoixCarteCentre.setStyle(styleVBox);
+		vbChoixCarteCentre.setPrefSize(850, 600);
+		vbChoixCarteCentre.setMinSize(850, 600);
+		vbChoixCarteCentre.setMaxSize(850, 600);
 
 		VBox vbCarte = new VBox();
 		vbCarte.setAlignment(Pos.CENTER);
 		vbCarte.setPrefSize(780, 300);
 		vbCarte.setMinSize(780, 300);
 		vbCarte.setMaxSize(780, 300);
-		// vbCarte.setStyle("-fx-border-color: green; -fx-border-insets: 5;
-		// -fx-border-width: 3;");
 
 		VBox vbChoix = new VBox();
 		vbChoix.setAlignment(Pos.CENTER);
-		vbChoix.setStyle(styleVBox);
+		fouilleCamion.setAlignment(vbChoixCarteCentre, Pos.TOP_CENTER);
 
 		HBox hboxImgCarte = new HBox();
 		hboxImgCarte.setAlignment(Pos.CENTER);
@@ -578,7 +575,7 @@ public class JeuPane extends StackPane implements JeuListener {
 		hboxBoutonJoueur = new HBox();
 		hboxBoutonJoueur.setAlignment(Pos.CENTER);
 		hboxBoutonJoueur.setSpacing(10);
-		hboxBoutonJoueur.setPadding(new Insets(20));
+		hboxBoutonJoueur.setPadding(new Insets(10));
 		hboxBoutonJoueur.setVisible(false);
 		//
 		imgCarte1 = new ImageView(DataControl.CARTE_BATTE);
@@ -652,7 +649,6 @@ public class JeuPane extends StackPane implements JeuListener {
 				cartePanelReset();
 			}
 		});
-
 		bChoixDonner = new Button("Donner");
 		bChoixDonner.setDisable(true);
 		bChoixDonner.setAlignment(Pos.CENTER);
@@ -667,6 +663,9 @@ public class JeuPane extends StackPane implements JeuListener {
 			bChoixDonner.setStyle(styleBoutons);
 		});
 		bChoixDonner.setOnAction(EventHandler -> {
+			fouilleCamion.setPrefSize(850, 650);
+			fouilleCamion.setMinSize(850, 650);
+			fouilleCamion.setMaxSize(850, 650);
 			hboxBoutonJoueur.setVisible(true);
 		});
 
@@ -1234,7 +1233,7 @@ public class JeuPane extends StackPane implements JeuListener {
 		joueur4.setDisable(true);
 		joueur5.setDisable(true);
 		cartePanelReset();
-		fouilleCamion.setVisible(false);
+		fouilleCamion.setVisible(true);
 
 		ImageView[] imgViews = { imgDeCarte1, imgDeCarte2, imgDeCarte3, imgDeCarte4, imgDeCarte5, imgDeCarte6,
 				imgDeCarte7, imgDeCarte8, imgDeCarte9 };
