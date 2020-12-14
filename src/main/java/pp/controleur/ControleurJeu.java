@@ -478,7 +478,7 @@ public class ControleurJeu {
 			for (Joueur j : jeu.getJoueurs().values())
 				if (j.isEnVie())
 					j.getConnection().attendreMessage("CDDJ");
-
+			
 			for (Joueur j : jeu.getJoueurs().values())
 				if (j.isEnVie()) {
 					String rep = j.getConnection().getMessage("CDDJ");
@@ -523,7 +523,7 @@ public class ControleurJeu {
 			j.getConnection().envoyer(m);
 		int compteur = 0;
 		for (Joueur j : jeu.getJoueurs().values()) {
-			if (j.isEnVie()) {
+			if (j.isEnVie() && j.isChefDesVigiles()) {
 				out.println(jeu.toString());
 				m = nwm.construirePaquetTcp("DPD", destination.get(compteur), jeu.getAllPersoPossible(j), partieId,
 						numeroTour);
@@ -552,6 +552,37 @@ public class ControleurJeu {
 					initializer.destionationPersoAll(new ArrayList<>(jeu.getLieux().values()));
 			}
 		}
+		for (Joueur j : jeu.getJoueurs().values()) {
+			if (j.isEnVie() && !(j.isChefDesVigiles())) {
+				out.println(jeu.toString());
+				m = nwm.construirePaquetTcp("DPD", destination.get(compteur), jeu.getAllPersoPossible(j), partieId,
+						numeroTour);
+				j.getConnection().envoyer(m);
+				j.getConnection().attendreMessage("DPR");
+				String message = j.getConnection().getMessage("DPR");
+				if (nwm.getValueTcp("DPR", message, 3) == CarteType.SPR) {
+					j.getCartes().remove(CarteType.SPR);
+				}
+				int dest = (int) nwm.getValueTcp("DPR", message, 1);
+				int pion = (int) nwm.getValueTcp("DPR", message, 2);
+				jeu.deplacePerso(j, PpTools.valeurToIndex(pion), dest);
+				if (initializer != null)
+					initializer.forceLieuAll(new ArrayList<>(jeu.getLieux().values()));
+				finJeu();
+				if (isFinished)
+					return;
+				this.jeu.fermerLieu();
+				compteur += 1;
+				m = nwm.construirePaquetTcp("DPI", j.getCouleur(), dest, pion, nwm.getValueTcp("DPR", message, 3),
+						partieId, numeroTour);
+				for (Joueur j2 : jeu.getJoueurs().values())
+					if (j2 != j)
+						j2.getConnection().envoyer(m);
+				if (initializer != null)
+					initializer.destionationPersoAll(new ArrayList<>(jeu.getLieux().values()));
+			}
+		}
+
 	}
 
 	private void phaseAttaqueZombie() {
