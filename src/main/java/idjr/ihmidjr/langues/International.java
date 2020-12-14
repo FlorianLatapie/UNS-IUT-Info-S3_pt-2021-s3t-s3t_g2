@@ -1,4 +1,4 @@
-package idjr.langues;
+package idjr.ihmidjr.langues;
 
 import java.util.Locale;
 import java.util.ResourceBundle;
