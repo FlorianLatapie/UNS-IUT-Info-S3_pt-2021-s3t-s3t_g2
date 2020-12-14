@@ -24,6 +24,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
+import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
@@ -177,10 +178,16 @@ public class JeuPane extends StackPane implements JeuListener {
 		rectVigile.setTranslateX(793);
 		rectVigile.setTranslateY(150);
 		rectVigile.setFill(null);
-		rectVigile.setStroke(Color.BLACK);
+		//rectVigile.setStroke(Color.BLACK);
 		rectVigile.setStrokeWidth(3);
-		rectVigile.setWidth(200);
-		rectVigile.setHeight(120);
+		rectVigile.setWidth(100);
+		rectVigile.setHeight(80);
+		
+		rectVigile.setFill(new ImagePattern(new Image(DataControl.BADGE_VIGILE)));
+		
+		rectVigile.setVisible(false);//TODO event pour l'afficher au bon moment 
+		
+		
 
 		//////////////////////////////////////////
 		HBox hbCartes = new HBox();

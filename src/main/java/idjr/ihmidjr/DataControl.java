@@ -28,6 +28,8 @@ public class DataControl {
 	public static final String ROUGE = "idjr/ihmidjr/images/rouge.png";
 	public static final String BLEU = "idjr/ihmidjr/images/bleu.png";
 	public static final String JAUNE = "idjr/ihmidjr/images/jaune.png";
+	
+	public static final String BADGE_VIGILE = "idjr/ihmidjr/images/badge vigile.png";
 
 	//Cartes
 	public static final String CARTE_BATTE = "idjr/ihmidjr/images/Cartes/Cartes_Armes/batte.png";
