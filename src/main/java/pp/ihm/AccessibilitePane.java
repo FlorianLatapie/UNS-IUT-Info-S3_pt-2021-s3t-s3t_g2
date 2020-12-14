@@ -3,8 +3,6 @@ package pp.ihm;
 import pp.ihm.DataControl.ApplicationPane;
 import pp.ihm.langues.International;
 
-import java.awt.event.TextEvent;
-
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.*;
@@ -30,10 +28,11 @@ public class AccessibilitePane extends StackPane{
 	private String styleBoutons = " -fx-background-color:#000000; -fx-background-radius: 15px; -fx-text-fill: #ffffff";
 	private String styleTexte = " -fx-background-color:#000000; -fx-text-fill: #ffffff; -fx-background-radius: 5px;";
 	private String styleBoutonsSouris = "-fx-background-color:#ff0000;  -fx-text-fill:#000000; -fx-background-radius: 15px;";
-
-	private Font policeTitre = Font.font("Segoe UI", FontWeight.BOLD, 75);
-	private Font policeBouton = Font.font("Segoe UI", FontWeight.BOLD, 27);
-	private Font policeBoutonRetour = Font.font("Segoe UI", FontWeight.BOLD, 33);
+	
+	private String nomPolice = "Segoe UI";
+	private Font policeTitre = Font.font(nomPolice, FontWeight.BOLD, 75);
+	private Font policeBouton = Font.font(nomPolice, FontWeight.BOLD, 27);
+	private Font policeBoutonRetour = Font.font(nomPolice, FontWeight.BOLD, 33);
 	
 	private int hauteurElement = 60;
 	private int largeurBouton = 220;

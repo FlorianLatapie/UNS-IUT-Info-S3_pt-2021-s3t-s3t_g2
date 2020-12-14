@@ -39,8 +39,9 @@ public class AccueilPane extends StackPane {
 	private int lBouton = 200;
 	private int marge = tailleCarreCentral / 25;
 	private Insets margeBoutons = new Insets(marge, marge, marge, marge);
-
-	private Font policeBouton = Font.font("Segoe UI", FontWeight.BOLD, 33);
+	
+	private String nomPolice = "Segoe UI";
+	private Font policeBouton = Font.font(nomPolice, FontWeight.BOLD, 33);
 
 	private CornerRadii coin = new CornerRadii(15.0);
 
@@ -58,11 +59,11 @@ public class AccueilPane extends StackPane {
 
 		// titre
 		Label titre1 = new Label(International.trad("texte.preTitre"));
-		titre1.setFont(Font.font("Segoe UI", FontWeight.BOLD, 160));
+		titre1.setFont(Font.font(nomPolice, FontWeight.BOLD, 160));
 		titre1.setTextFill(Color.BLACK);
 
 		Label titre2 = new Label(International.trad("texte.titrePP"));
-		titre2.setFont(Font.font("Segoe UI", 35));
+		titre2.setFont(Font.font(nomPolice, 35));
 		titre2.setTextFill(Color.BLACK);
 		titre2.setPadding(new Insets(0, 0, 20, 0));
 

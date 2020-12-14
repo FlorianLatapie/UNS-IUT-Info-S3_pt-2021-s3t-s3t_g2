@@ -25,7 +25,7 @@ import javafx.scene.text.TextAlignment;
 public class ConfigBotPane extends StackPane {
 
 	private ScreenControl sControl = null;
-	private Core core = null;
+	private Core core;
 	private final ApplicationPane paneName = ApplicationPane.CONFIG_BOT;
 
 	private int tailleCarreCentral = 800;
@@ -36,8 +36,9 @@ public class ConfigBotPane extends StackPane {
 	private int largeurTexte = 100;
 	private int spacing = 30;
 
-	private Font policeBouton = Font.font("Segoe UI", FontWeight.BOLD, 27);
-	private Font policeNom = Font.font("Segoe UI", 17);
+	private String nomPolice = "Segoe UI";
+	private Font policeBouton = Font.font(nomPolice, FontWeight.BOLD, 27);
+	private Font policeNom = Font.font(nomPolice, 17);
 
 	private String styleBoutons = " -fx-background-color:#000000; -fx-background-radius: 15px; -fx-text-fill: #ffffff";
 	private String styleBoutonsSouris = "-fx-background-color:#ff0000;  -fx-text-fill:#000000; -fx-background-radius: 15px;";
@@ -64,7 +65,7 @@ public class ConfigBotPane extends StackPane {
 		// titre
 		Label titre1 = new Label("Configuration\ndes bots");// TODO
 		titre1.setTextAlignment(TextAlignment.CENTER);
-		titre1.setFont(Font.font("Segoe UI", FontWeight.BOLD, 80));
+		titre1.setFont(Font.font(nomPolice, FontWeight.BOLD, 80));
 		titre1.setTextFill(Color.BLACK);
 
 		VBox titre = new VBox(titre1);
@@ -72,13 +73,6 @@ public class ConfigBotPane extends StackPane {
 		titre.setBackground(new Background(new BackgroundFill(Color.RED, coin, null)));
 		titre.setPrefWidth(730);
 		titre.setMinWidth(730);
-
-		// texte
-		/*
-		 * Label desc = new Label("Choisissez un nombre de joueurs entre 3 et 6");
-		 * desc.setFont(policeNom); desc.setMinHeight(hauteurElemtents);
-		 * desc.setBackground(fondBlanc); desc.setPadding(botPadding);
-		 */
 
 		VBox vBots = new VBox();
 

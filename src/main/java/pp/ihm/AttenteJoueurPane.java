@@ -35,8 +35,9 @@ public class AttenteJoueurPane extends StackPane implements AttenteListener {
     private int spacing = 30;
     private int tailleCercle = 55;
     
-    private Font policeBouton = Font.font("Segoe UI", FontWeight.BOLD, 27);
-    private Font policeNom = Font.font("Segoe UI", FontWeight.BOLD, 33);
+    private String nomPolice = "Segoe UI";
+    private Font policeBouton = Font.font(nomPolice, FontWeight.BOLD, 27);
+    private Font policeNom = Font.font(nomPolice, FontWeight.BOLD, 33);
     
     private String styleBoutonsSouris = "-fx-background-color:#ff0000;  -fx-text-fill:#000000; -fx-background-radius: 15px;";
     private String styleBoutons = " -fx-background-color:#000000; -fx-background-radius: 15px; -fx-text-fill: #ffffff";
@@ -55,7 +56,7 @@ public class AttenteJoueurPane extends StackPane implements AttenteListener {
         // titre
         Label titre1 = new Label("Connexion \nen cours");//TODO
         titre1.setTextAlignment(TextAlignment.CENTER);
-        titre1.setFont(Font.font("Segoe UI", FontWeight.BOLD, 80));
+        titre1.setFont(Font.font(nomPolice, FontWeight.BOLD, 80));
         titre1.setTextFill(Color.BLACK);
 
         VBox titre = new VBox(titre1);

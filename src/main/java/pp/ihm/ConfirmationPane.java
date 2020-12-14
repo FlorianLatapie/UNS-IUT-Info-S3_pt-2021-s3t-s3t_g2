@@ -25,6 +25,7 @@ public class ConfirmationPane {
 	static boolean reponse;
 	private static int tailleFenetreL = 450;
 	private static int tailleFenetreH = 150;
+	private static String nomPolice = "Segoe UI";
 	
 	/**
 	 * affiche une fenêtre de confirmation avec un titre et un message personnalisé
@@ -45,19 +46,19 @@ public class ConfirmationPane {
 		Label label = new Label();
 		label.setText(message);
 		label.setStyle("-fx-text-fill: #DDDDDD");
-		label.setFont(Font.font("Arial", FontWeight.BOLD, 20));
+		label.setFont(Font.font(nomPolice, FontWeight.BOLD, 20));
 		label.setPadding(new Insets(10));
 
 		//boutons
 		Button boutonOui = new Button(International.trad("bouton.quitter"));
 		boutonOui.setPrefSize(200, 50);
 		boutonOui.setStyle("-fx-background-color: #ff0000; -fx-background-radius: 5px; -fx-text-fill: #ffffff");
-		boutonOui.setFont(Font.font("Arial", FontWeight.BOLD, 20));
+		boutonOui.setFont(Font.font(nomPolice, FontWeight.BOLD, 27));
 
 		Button boutonNon = new Button(International.trad("bouton.annuler"));
 		boutonNon.setPrefSize(200, 50);
 		boutonNon.setStyle("-fx-background-color: #A9A9A9; -fx-background-radius: 5px; -fx-text-fill: #ffffff");
-		boutonNon.setFont(Font.font("Arial", FontWeight.BOLD, 20));
+		boutonNon.setFont(Font.font(nomPolice, FontWeight.BOLD, 27));
 
 		boutonOui.setOnAction(e -> {
 			reponse = true;
