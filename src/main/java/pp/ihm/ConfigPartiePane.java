@@ -40,8 +40,9 @@ public class ConfigPartiePane extends StackPane {
 	private int largeurTexte = 220;
 	private int spacing = 30;
 
-	private Font policeBouton = Font.font("Segoe UI", FontWeight.BOLD, 27);
-	private Font policeNom = Font.font("Segoe UI", 17);
+	private String nomPolice = "Segoe UI";
+	private Font policeBouton = Font.font(nomPolice, FontWeight.BOLD, 27);
+	private Font policeNom = Font.font(nomPolice, 17);
 
 	private String styleBoutons = " -fx-background-color:#000000; -fx-background-radius: 15px; -fx-text-fill: #ffffff";
 	private String styleBoutonsSouris = "-fx-background-color:#ff0000;  -fx-text-fill:#000000; -fx-background-radius: 15px;";
@@ -59,10 +60,11 @@ public class ConfigPartiePane extends StackPane {
 		sControl = sc;
 
 		// titre
-		Label titre1 = new Label("Configuration de \nla partie");//TODO
+		Label titre1 = new Label(International.trad("texte.titreConfigPartieA")+"\n"+International.trad("texte.titreConfigPartieB"));
 		titre1.setTextAlignment(TextAlignment.CENTER);
-		titre1.setFont(Font.font("Segoe UI", FontWeight.BOLD, 80));
+		titre1.setFont(Font.font(nomPolice, FontWeight.BOLD, 80));
 		titre1.setTextFill(Color.BLACK);
+
 
 		VBox titre = new VBox(titre1);
 		titre.setAlignment(Pos.CENTER);
@@ -72,7 +74,7 @@ public class ConfigPartiePane extends StackPane {
 
 		// texte
 		Label desc = new Label(International.trad("texte.descriptionConfigPartie"));
-		desc.setFont(Font.font("Segoe UI", 30));
+		desc.setFont(Font.font(nomPolice, 30));
 		desc.setMinHeight(hauteurElemtents);
 		desc.setBackground(new Background(new BackgroundFill(Color.WHITE, coin, null)));
 		desc.setPadding(new Insets(0, 20, 0, 20));

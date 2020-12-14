@@ -16,6 +16,7 @@ import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
+import javafx.scene.text.TextAlignment;
 import reseau.type.Couleur;
 
 import java.util.List;
@@ -71,9 +72,7 @@ public class CouleurPane extends StackPane implements CouleurListener {
 		sControl = sc;
 
 		// titre
-		Label titre1 = new Label("Choisissez vos \n\tcouleurs");// TODO
-		titre1.setFont(Font.font("Segoe UI", FontWeight.BOLD, 80));
-		titre1.setTextFill(Color.BLACK);
+		Label titre1 = new Label(International.trad("texte.titreCouleurPaneA")+"\n"+International.trad("texte.titreCouleurPaneB"));
 
 		VBox titre = new VBox(titre1);
 		titre.setAlignment(Pos.CENTER);
