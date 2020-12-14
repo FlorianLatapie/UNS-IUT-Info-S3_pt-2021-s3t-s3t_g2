@@ -5,7 +5,9 @@ name: Maven Package
 
 on:
   push:
-    branches: [master]
+    branches: [IDJR]
+    paths-ignore:
+    - ".github/**"
 
 jobs:
   build:
@@ -24,7 +26,7 @@ jobs:
     - name: Build with Maven
       run: mvn compile --file pom.xml
       
-    - name: Merge branche PP
+    - name: Merge branche Production
       # You may pin to the exact commit or the version.
       # uses: everlytic/branch-merge@43400784008f811a3400f7e165ca9de0a8998a0b
       uses: everlytic/branch-merge@1.1.0
@@ -34,62 +36,7 @@ jobs:
         # Branch name or Ref that you wish to merge into the target_branch.
         source_ref: ${{ github.ref }}
         # Branch you are merging the source ref into.
-        target_branch: PP
+        target_branch: Production
         # Template to generate the commit message, see README.md for more info
         commit_message_template: Merge automatique de {source_ref} a {target_branch} par ${{ github.actor }}
-    
-    - name: Merge branche IDJR
-      # You may pin to the exact commit or the version.
-      # uses: everlytic/branch-merge@43400784008f811a3400f7e165ca9de0a8998a0b
-      uses: everlytic/branch-merge@1.1.0
-      with:
-        # Token used to authenticate with GitHub when performing the merge command.
-        github_token: ${{ github.token }}
-        # Branch name or Ref that you wish to merge into the target_branch.
-        source_ref: ${{ github.ref }}
-        # Branch you are merging the source ref into.
-        target_branch: IDJR
-        # Template to generate the commit message, see README.md for more info
-        commit_message_template: Merge automatique de {source_ref} a {target_branch} par ${{ github.actor }}
-
-    - name: Merge branche BotFaible
-      # You may pin to the exact commit or the version.
-      # uses: everlytic/branch-merge@43400784008f811a3400f7e165ca9de0a8998a0b
-      uses: everlytic/branch-merge@1.1.0
-      with:
-        # Token used to authenticate with GitHub when performing the merge command.
-        github_token: ${{ github.token }}
-        # Branch name or Ref that you wish to merge into the target_branch.
-        source_ref: ${{ github.ref }}
-        # Branch you are merging the source ref into.
-        target_branch: BotFaible
-        # Template to generate the commit message, see README.md for more info
-        commit_message_template: Merge automatique de {source_ref} a {target_branch} par ${{ github.actor }}
-
-    - name: Merge branche BotMoyen
-      # You may pin to the exact commit or the version.
-      # uses: everlytic/branch-merge@43400784008f811a3400f7e165ca9de0a8998a0b
-      uses: everlytic/branch-merge@1.1.0
-      with:
-        # Token used to authenticate with GitHub when performing the merge command.
-        github_token: ${{ github.token }}
-        # Branch name or Ref that you wish to merge into the target_branch.
-        source_ref: ${{ github.ref }}
-        # Branch you are merging the source ref into.
-        target_branch: BotMoyen
-        # Template to generate the commit message, see README.md for more info
-        commit_message_template: Merge automatique de {source_ref} a {target_branch} par ${{ github.actor }}
-        
-    - name: Merge branche BotFort
-      # You may pin to the exact commit or the version.
-      # uses: everlytic/branch-merge@43400784008f811a3400f7e165ca9de0a8998a0b
-      uses: everlytic/branch-merge@1.1.0
-      with:
-        # Token used to authenticate with GitHub when performing the merge command.
-        github_token: ${{ github.token }}
-        # Branch name or Ref that you wish to merge into the target_branch.
-        source_ref: ${{ github.ref }}
-        # Branch you are merging the source ref into.
-        target_branch: BotFort
-        # Template to generate the commit message, see README.md for more info
-        commit_message_template: Merge automatique de {source_ref} a {target_branch} par ${{ github.actor }}
+		
