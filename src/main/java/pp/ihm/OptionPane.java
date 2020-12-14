@@ -154,7 +154,7 @@ public class OptionPane extends StackPane {
 		bEnglish.setOnMouseEntered(event -> bEnglish.setStyle(styleBoutonsSouris));
 		bEnglish.setOnMouseExited(event -> bEnglish.setStyle(styleBoutons));
 
-		Button bAcc = new Button("Accessibilité");//TODO
+		Button bAcc = new Button(International.trad("texte.titreAcc"));
 		bAcc.setFont(policeBouton);
 		bAcc.setAlignment(Pos.CENTER);
 		bAcc.setPrefSize(500, hauteurElement);
