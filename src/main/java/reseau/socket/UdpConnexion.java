@@ -119,6 +119,7 @@ public class UdpConnexion implements Runnable, IEchangeSocket, IControleSocket {
 	 * @param message Le message a envoyer
 	 */
 	public void envoyer(String message) {
+		attendreConnexion();
 		logger.log(Level.FINEST, "Message envoyé : {0}", message);
 		String uftMessage = new String(message.getBytes(), ENCODAGE);
 		byte[] buffer = uftMessage.getBytes();
@@ -129,6 +130,27 @@ public class UdpConnexion implements Runnable, IEchangeSocket, IControleSocket {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+	}
+
+	/**
+	 * Permet d'envoyer un paquet.
+	 *
+	 * @param message Le message a envoyer
+	 */
+	public InetAddress envoyerEtIp(String message) {
+		attendreConnexion();
+		logger.log(Level.FINEST, "Message envoyé : {0}", message);
+		String uftMessage = new String(message.getBytes(), ENCODAGE);
+		byte[] buffer = uftMessage.getBytes();
+		DatagramPacket packet = new DatagramPacket(buffer, buffer.length, groupe, MULTICAST_PORT);
+
+		try {
+			multicastSocket.send(packet);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+
+		return multicastSocket.getInetAddress();
 	}
 
 	/**
@@ -144,5 +166,31 @@ public class UdpConnexion implements Runnable, IEchangeSocket, IControleSocket {
 			multicastSocket.close();
 
 		logger.log(Level.INFO, "Socket UDP arreté");
+	}
+
+	/**
+	 * Bloque l'execution du thread tant que le client n'est pas pret a recevoir.
+	 */
+	private void attendreConnexion() {
+		while (multicastSocket == null) {
+			Thread.yield();
+			System.out.println("Erreur P4598");
+		}
+		while (!isPret())
+			Thread.yield();
+	}
+
+	/**
+	 * Permet de savoir le multicast udp est pret.
+	 */
+	private boolean isPret() {
+		return !multicastSocket.isConnected();
+	}
+
+	/**
+	 * Permet de savoir le multicast udp est arreter.
+	 */
+	private boolean isArreter() {
+		return !multicastSocket.isClosed();
 	}
 }

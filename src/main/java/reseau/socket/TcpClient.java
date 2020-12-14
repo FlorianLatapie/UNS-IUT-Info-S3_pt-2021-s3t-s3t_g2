@@ -4,18 +4,11 @@ import reseau.tool.PaquetOutils;
 
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
-import java.io.EOFException;
 import java.io.IOException;
-import java.lang.reflect.Array;
 import java.net.InetAddress;
 import java.net.Socket;
-import java.net.UnknownHostException;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.Iterator;
 import java.util.List;
-import java.util.concurrent.ExecutionException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -56,8 +49,12 @@ public class TcpClient implements Runnable, IEchangeSocket, IMessagePaquet {
 		this.logger = Logger.getLogger(getClass().getName());
 	}
 
-	// TODO Temporaire ?
-	public TcpClient(Socket socket, ControleurReseau controleurReseau) {
+	/**
+	 * @param socket           Le socket a utiliser
+	 * @param controleurReseau Le controleur reseau du client
+	 * @param cleFin           La cle qui permet de mettre fin a la partie
+	 */
+	public TcpClient(Socket socket, ControleurReseau controleurReseau, String cleFin) {
 		this.messagesTampon = synchronizedList(new ArrayList<String>());
 		this.controleurReseau = controleurReseau;
 		this.estLancer = true;
@@ -65,10 +62,6 @@ public class TcpClient implements Runnable, IEchangeSocket, IMessagePaquet {
 		this.port = controleurReseau.getTcpPort();
 		this.logger = Logger.getLogger(getClass().getName());
 		this.socket = socket;
-	}
-
-	public TcpClient(Socket socket, ControleurReseau controleurReseau, String cleFin) {
-		this(socket, controleurReseau);
 		this.cleFin = cleFin;
 	}
 
@@ -79,7 +72,7 @@ public class TcpClient implements Runnable, IEchangeSocket, IMessagePaquet {
 	 * @throws IOException Si les flux de s'ouvre pas correctement
 	 */
 	private boolean ouvrir(InetAddress ip, int port) throws IOException {
-		logger.log(Level.INFO, "Client TCP ouvert - EZ4E");
+		logger.log(Level.INFO, "Client TCP ouvert");
 		boolean attendre = true;
 		while (attendre)
 			try {
@@ -89,10 +82,6 @@ public class TcpClient implements Runnable, IEchangeSocket, IMessagePaquet {
 				ignoreda.printStackTrace();
 				Thread.yield();
 			}
-		System.out.println(socket == null);
-		System.out.println(socket.getLocalPort());
-		System.out.println(socket.getPort());
-		System.out.println(socket.getInetAddress().getHostAddress());
 		fluxSortie = new DataOutputStream(socket.getOutputStream());
 		fluxEntre = new DataInputStream(socket.getInputStream());
 
@@ -141,6 +130,7 @@ public class TcpClient implements Runnable, IEchangeSocket, IMessagePaquet {
 	 * @param message Le message a a envoyer
 	 */
 	public void envoyer(String message) {
+		attendreConnexion();
 		logger.log(Level.INFO, "Envoie d'un message : " + message);
 
 		System.out.println(socket.getInetAddress().getHostAddress());
@@ -247,5 +237,31 @@ public class TcpClient implements Runnable, IEchangeSocket, IMessagePaquet {
 	public void attendreMessage(String cle) {
 		while (!contient(cle))
 			Thread.yield();
+	}
+
+	/**
+	 * Bloque l'execution du thread tant que le client n'est pas pret a recevoir.
+	 */
+	public void attendreConnexion() {
+		while (socket == null){
+			Thread.yield();
+			System.out.println("Erreur P4598");
+		}
+		while (!isPret())
+			Thread.yield();
+	}
+
+	/**
+	 * Permet de savoir le client tcp est pret.
+	 */
+	private boolean isPret() {
+		return !socket.isConnected();
+	}
+
+	/**
+	 * Permet de savoir le client tcp est arreter.
+	 */
+	private boolean isArreter() {
+		return !socket.isClosed();
 	}
 }

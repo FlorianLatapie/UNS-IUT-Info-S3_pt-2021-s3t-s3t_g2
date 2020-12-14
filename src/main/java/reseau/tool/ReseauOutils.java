@@ -13,22 +13,6 @@ import java.util.List;
  * @version 2.0
  */
 public interface ReseauOutils {
-    static final String URL_TEST = "1.1.1.1";
-
-    /**
-     * Recupere l'adresse ip utilisée pour rejoindre le reseau.
-     *
-     * @return L'adresse ip de la bonne interface
-     */
-     static InetAddress getLocalIp() {
-        try (Socket socket = new Socket()) {
-            socket.connect(new InetSocketAddress(URL_TEST, 80));
-            return socket.getLocalAddress();
-        } catch (IOException e) {
-            return null;
-        }
-    }
-
     /**
      * Recupere toutes les interfaces du pc.
      *
