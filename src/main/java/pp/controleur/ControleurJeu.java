@@ -828,7 +828,7 @@ public class ControleurJeu {
 		if (joueur != null)
 			return joueur;
 		if (tv == VoteType.MPZ)
-			return jeu.getJoueurs().get(new Random().nextInt(jeu.getJoueurSurLieu(l).size()));
+			return jeu.getJoueurSurLieu(l).get(new Random().nextInt(jeu.getJoueurSurLieu(l).size()));
 		return null;
 	}
 
