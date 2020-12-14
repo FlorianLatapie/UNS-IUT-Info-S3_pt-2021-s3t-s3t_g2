@@ -149,6 +149,9 @@ public class JeuPane extends StackPane implements JeuListener {
 	CarteType selectedCarte;
 	Couleur selectedCouleur;
 	HBox hboxBoutonJoueur;
+	
+	HBox infoZombie;
+	Label linfoZombie;	
 
 	public JeuPane(ScreenControl sc, Core c) {
 		core = c;
@@ -1132,8 +1135,20 @@ public class JeuPane extends StackPane implements JeuListener {
 		Label lo = new Label("Personnage couleur s'est déplacé dans le lieu");
 		lo.setFont(policeLog);
 		updateLog(log, lo);
+		
+		infoZombie = new HBox(); //TODO .setVisible() aux bons moments
+		infoZombie.setTranslateX(-675);
+		infoZombie.setTranslateY(-400);
+		infoZombie.setAlignment(Pos.CENTER);
+		
+		linfoZombie = new Label ("Des zombies arriveront dans les lieux X, X, X, X"); //TODO afficher ca dans un event 
+		linfoZombie.setFont(Font.font("Segoe UI", 20));
+		linfoZombie.setTextFill(Color.BLACK);
+		
+		infoZombie.getChildren().addAll(linfoZombie);
+		
 
-		stackPane.getChildren().addAll(fond, rectVigile, nomJoueur, phasePartie, hbCartes, vote, vbDeplCentre, des,
+		stackPane.getChildren().addAll(fond, rectVigile, nomJoueur, phasePartie, hbCartes, vote, vbDeplCentre,infoZombie, des,
 				fouilleCamion, info, log, bLog);
 		stackPane.setBackground(new Background(new BackgroundFill(Color.BLACK, CornerRadii.EMPTY, null)));
 
