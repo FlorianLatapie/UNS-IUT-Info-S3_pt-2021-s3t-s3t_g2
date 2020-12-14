@@ -125,6 +125,15 @@ public class ControleurReseau implements IControleSocket {
 	}
 
 	/**
+	 * Envoyer un message UDP et obtiens l'ip
+	 *
+	 * @param message Le message a envoyer
+	 */
+	public InetAddress envoyerUdpIp(String message) {
+		return udpConnexion.envoyerEtIp(message);
+	}
+
+	/**
 	 * Envoyer un message TCP
 	 *
 	 * @param message Le message a envoyer
