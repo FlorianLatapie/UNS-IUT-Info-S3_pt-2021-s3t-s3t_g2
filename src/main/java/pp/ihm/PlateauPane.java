@@ -32,7 +32,8 @@ public class PlateauPane extends StackPane implements PlateauListener {
 	private final Font policeBoutonPause = Font.font("Segoe UI", FontWeight.BOLD, 34);
 	private String styleBoutons = " -fx-background-color:#000000; -fx-background-radius: 50px; -fx-text-fill: #ffffff";
 	private String styleBoutonsSouris = "-fx-background-color:#ff0000;  -fx-text-fill:#000000; -fx-background-radius: 50px;";
-
+	private String styleBoutonInfo = " -fx-background-color:#000000; -fx-background-radius: 15px; -fx-text-fill: #ffffff;";
+	private String styleBoutonInfoSouris = "-fx-background-color:#ff0000;  -fx-text-fill:#000000; -fx-background-radius: 15px;";
 	private final int margeJ = 20;
 	private final Insets margeTexteJoueur = new Insets(margeJ, 10, margeJ, 10);
 	private final Insets insetJGauche = new Insets(0, 500, 0, 115);
@@ -62,6 +63,9 @@ public class PlateauPane extends StackPane implements PlateauListener {
 	private String jaune = " -fx-background-color:#E9B902; -fx-text-fill: #000000";
 	private String bleu = " -fx-background-color:#008CDA; -fx-text-fill: #ffffff";
 	private String noir = " -fx-background-color:#000000; -fx-text-fill: #ffffff";
+	
+	private int largBouton = 155;
+	private int hautBouton = 70;
 
 	Label nbZombies1;
 	Label nbZombies2;
@@ -124,16 +128,33 @@ public class PlateauPane extends StackPane implements PlateauListener {
 	Label afficheJoueursLieu5;
 	Label afficheJoueursLieu6;
 
-	BorderPane info;
-
-	Label titreInfo;
-	Label lInfo;
+	BorderPane info1;
+	Label titreInfo1;
+	Label lInfo1;
+	
+	BorderPane info2;
+	Label titreInfo2;
+	Label lInfo2;
+	
+	BorderPane info3;
+	Label titreInfo3;
+	Label lInfo3;
+	
+	BorderPane info4;
+	Label titreInfo4;
+	Label lInfo4;
 
 	Label lChefVigile;
 	Label lChefVigile2;
 	Label lChefVigile3;
 	Label lChefVigile4;
-
+	
+	Button bQuitterInfo1;
+	Button bQuitterInfo2;
+	Button bQuitterInfo3;
+	Button bQuitterInfo4;
+	
+	AnchorPane notifInfo;
 	AnchorPane aPlateau;
 	ImageView imgFond;
 	BorderPane borderJoueurs;
@@ -684,33 +705,202 @@ public class PlateauPane extends StackPane implements PlateauListener {
 		////
 
 		aPlateau.getChildren().addAll(b1, b2, b3, b4, b5, b6, lChefVigile, lChefVigile2, lChefVigile3, lChefVigile4);
-		info = new BorderPane();
-		info.setPrefSize(450, 200);
-		info.setMaxSize(450, 200);
-		info.setStyle(
-				" -fx-background-color:#1A1A1A; -fx-background-radius: 20px; -fx-border-color: red; -fx-border-insets: -3; -fx-border-width: 3; -fx-border-radius: 20px;");
+		
 
-		VBox vTitreInfo = new VBox();
-		vTitreInfo.setAlignment(Pos.CENTER);
-		vTitreInfo.setPadding(new Insets(20));
-		titreInfo = new Label(International.trad("text.deplChefVigile"));
-		titreInfo.setTextAlignment(TextAlignment.CENTER);
-		titreInfo.setFont(Font.font("Segoe UI", FontWeight.BOLD, 25));
-		titreInfo.setTextFill(Color.WHITE);
-		vTitreInfo.getChildren().addAll(titreInfo);
+		notifInfo = new AnchorPane();
+		notifInfo.setMinSize(1920, 1080);
+		
+		info1 = new BorderPane();
+		info1.setPrefSize(700, 200);
+		info1.setMaxSize(700, 200);
+		info1.setPadding(new Insets(10));
+		info1.setStyle(" -fx-background-color:#1A1A1A; -fx-background-radius: 20px; -fx-border-color: red; -fx-border-insets: -3; -fx-border-width: 3; -fx-border-radius: 20px;");
+		
+		bQuitterInfo1 = new Button("QUITTER");
+		bQuitterInfo1.setAlignment(Pos.CENTER);
+		bQuitterInfo1.setStyle(styleBoutonInfo);
+		bQuitterInfo1.setPrefSize(largBouton*.7, hautBouton*.7);
+		bQuitterInfo1.setMinSize(largBouton*.7, hautBouton*.7);
+		bQuitterInfo1.setFont(Font.font("Segoe UI", FontWeight.BOLD, 18));
+		bQuitterInfo1.setOnAction(event -> {
+			notifInfo.setVisible(false);
+		});
+		bQuitterInfo1.setOnMouseEntered(event -> {
+			bQuitterInfo1.setStyle(styleBoutonInfoSouris);
+		});
+		bQuitterInfo1.setOnMouseExited(event -> {
+			bQuitterInfo1.setStyle(styleBoutonInfo);
+		});
 
-		VBox vInfo = new VBox();
-		vInfo.setAlignment(Pos.CENTER);
-		lInfo = new Label("Voici l'information que vous voulez savoir");// TODO
-		lInfo.setTextAlignment(TextAlignment.CENTER);
-		lInfo.setFont(Font.font("Segoe UI", FontWeight.BOLD, 20));
-		lInfo.setTextFill(Color.WHITE);
-		vInfo.getChildren().addAll(lInfo);
+		VBox vTitreInfo1 = new VBox();
+		vTitreInfo1.setAlignment(Pos.CENTER);
+		vTitreInfo1.setPadding(new Insets(20));
+		titreInfo1 = new Label("Déplacement d'un pion du chef \ndes vigiles");
+		titreInfo1.setTextAlignment(TextAlignment.CENTER);
+		titreInfo1.setFont(Font.font("Segoe UI", FontWeight.BOLD, 25));
+		titreInfo1.setTextFill(Color.WHITE);
+		vTitreInfo1.getChildren().addAll(titreInfo1);
 
-		info.setMargin(vInfo, new Insets(-30, 0, 0, 0));
-		info.setTop(vTitreInfo);
-		info.setCenter(vInfo);
-		info.setVisible(false);
+		VBox vInfo1 = new VBox();
+		vInfo1.setAlignment(Pos.CENTER);
+		lInfo1 = new Label("Voici l'information que vous voulez savoir");
+		lInfo1.setTextAlignment(TextAlignment.CENTER);
+		lInfo1.setFont(Font.font("Segoe UI", FontWeight.BOLD, 20));
+		lInfo1.setTextFill(Color.WHITE);
+		vInfo1.getChildren().addAll(lInfo1);
+
+		info1.setMargin(vInfo1, new Insets(-30, 0, 0, 0));
+		info1.setTop(vTitreInfo1);
+		info1.setCenter(vInfo1);
+		info1.setBottom(bQuitterInfo1);
+		info1.setVisible(true);
+		notifInfo.setBottomAnchor(info1, 206.0);
+		notifInfo.setLeftAnchor(info1, 605.0);
+		
+		info2 = new BorderPane();
+		info2.setPrefSize(700, 200);
+		info2.setMaxSize(700, 200);
+		info2.setPadding(new Insets(10));
+		info2.setStyle(" -fx-background-color:#1A1A1A; -fx-background-radius: 20px; -fx-border-color: red; -fx-border-insets: -3; -fx-border-width: 3; -fx-border-radius: 20px;");
+		
+		bQuitterInfo2 = new Button("QUITTER");
+		bQuitterInfo2.setAlignment(Pos.CENTER);
+		bQuitterInfo2.setStyle(styleBoutonInfo);
+		bQuitterInfo2.setPrefSize(largBouton*.7, hautBouton*.7);
+		bQuitterInfo2.setMinSize(largBouton*.7, hautBouton*.7);
+		bQuitterInfo2.setFont(Font.font("Segoe UI", FontWeight.BOLD, 18));
+		bQuitterInfo2.setOnAction(event -> {
+			notifInfo.setVisible(false);
+		});
+		bQuitterInfo2.setOnMouseEntered(event -> {
+			bQuitterInfo2.setStyle(styleBoutonInfoSouris);
+		});
+		bQuitterInfo2.setOnMouseExited(event -> {
+			bQuitterInfo2.setStyle(styleBoutonInfo);
+		});
+		
+		VBox vTitreInfo2 = new VBox();
+		vTitreInfo2.setAlignment(Pos.CENTER);
+		vTitreInfo2.setPadding(new Insets(20));
+		titreInfo2 = new Label("Déplacement d'un pion du chef \ndes vigiles");
+		titreInfo2.setTextAlignment(TextAlignment.CENTER);
+		titreInfo2.setFont(Font.font("Segoe UI", FontWeight.BOLD, 25));
+		titreInfo2.setTextFill(Color.WHITE);
+		vTitreInfo2.getChildren().addAll(titreInfo2);
+
+		VBox vInfo2 = new VBox();
+		vInfo2.setAlignment(Pos.CENTER);
+		lInfo2 = new Label("Voici l'information que vous voulez savoir");
+		lInfo2.setTextAlignment(TextAlignment.CENTER);
+		lInfo2.setFont(Font.font("Segoe UI", FontWeight.BOLD, 20));
+		lInfo2.setTextFill(Color.WHITE);
+		vInfo2.getChildren().addAll(lInfo2);
+		
+		info2.setMargin(vInfo2, new Insets(-30, 0, 0, 0));
+		info2.setRotate(90);
+		info2.setTop(vTitreInfo2);
+		info2.setCenter(vInfo2);
+		info2.setBottom(bQuitterInfo2);
+		notifInfo.setTopAnchor(info2, 436.0);
+		
+		
+		info3 = new BorderPane();
+		info3.setPrefSize(700, 200);
+		info3.setMaxSize(700, 200);
+		info3.setPadding(new Insets(10));
+		info3.setStyle(" -fx-background-color:#1A1A1A; -fx-background-radius: 20px; -fx-border-color: red; -fx-border-insets: -3; -fx-border-width: 3; -fx-border-radius: 20px;");
+		
+		bQuitterInfo3 = new Button("QUITTER");
+		bQuitterInfo3.setAlignment(Pos.CENTER);
+		bQuitterInfo3.setStyle(styleBoutonInfo);
+		bQuitterInfo3.setPrefSize(largBouton*.7, hautBouton*.7);
+		bQuitterInfo3.setMinSize(largBouton*.7, hautBouton*.7);
+		bQuitterInfo3.setFont(Font.font("Segoe UI", FontWeight.BOLD, 18));
+		bQuitterInfo3.setOnAction(event -> {
+			notifInfo.setVisible(false);
+		});
+		bQuitterInfo3.setOnMouseEntered(event -> {
+			bQuitterInfo3.setStyle(styleBoutonInfoSouris);
+		});
+		bQuitterInfo3.setOnMouseExited(event -> {
+			bQuitterInfo3.setStyle(styleBoutonInfo);
+		});
+		
+		VBox vTitreInfo3 = new VBox();
+		vTitreInfo3.setAlignment(Pos.CENTER);
+		vTitreInfo3.setPadding(new Insets(20));
+		titreInfo3 = new Label("Déplacement d'un pion du chef \ndes vigiles");
+		titreInfo3.setTextAlignment(TextAlignment.CENTER);
+		titreInfo3.setFont(Font.font("Segoe UI", FontWeight.BOLD, 25));
+		titreInfo3.setTextFill(Color.WHITE);
+		vTitreInfo3.getChildren().addAll(titreInfo3);
+
+		VBox vInfo3 = new VBox();
+		vInfo3.setAlignment(Pos.CENTER);
+		lInfo3 = new Label("Voici l'information que vous voulez savoir");
+		lInfo3.setTextAlignment(TextAlignment.CENTER);
+		lInfo3.setFont(Font.font("Segoe UI", FontWeight.BOLD, 20));
+		lInfo3.setTextFill(Color.WHITE);
+		vInfo3.getChildren().addAll(lInfo3);
+
+		
+		info3.setMargin(vInfo3, new Insets(-30, 0, 0, 0));
+		info3.setRotate(180);
+		info3.setTop(vTitreInfo3);
+		info3.setCenter(vInfo3);
+		info3.setBottom(bQuitterInfo3);
+		notifInfo.setTopAnchor(info3, 206.0);
+		notifInfo.setLeftAnchor(info3, 605.0);
+		
+		info4 = new BorderPane();
+		info4.setPrefSize(700, 200);
+		info4.setMaxSize(700, 200);
+		info4.setPadding(new Insets(10));
+		info4.setStyle(" -fx-background-color:#1A1A1A; -fx-background-radius: 20px; -fx-border-color: red; -fx-border-insets: -3; -fx-border-width: 3; -fx-border-radius: 20px;");
+		
+		bQuitterInfo4 = new Button("QUITTER");
+		bQuitterInfo4.setAlignment(Pos.CENTER);
+		bQuitterInfo4.setStyle(styleBoutonInfo);
+		bQuitterInfo4.setPrefSize(largBouton*.7, hautBouton*.7);
+		bQuitterInfo4.setMinSize(largBouton*.7, hautBouton*.7);
+		bQuitterInfo4.setFont(Font.font("Segoe UI", FontWeight.BOLD, 18));
+		bQuitterInfo4.setOnAction(event -> {
+			notifInfo.setVisible(false);
+		});
+		bQuitterInfo4.setOnMouseEntered(event -> {
+			bQuitterInfo4.setStyle(styleBoutonInfoSouris);
+		});
+		bQuitterInfo4.setOnMouseExited(event -> {
+			bQuitterInfo4.setStyle(styleBoutonInfo);
+		});
+		
+		VBox vTitreInfo4 = new VBox();
+		vTitreInfo4.setAlignment(Pos.CENTER);
+		vTitreInfo4.setPadding(new Insets(20));
+		titreInfo4 = new Label("Déplacement d'un pion du chef \ndes vigiles");
+		titreInfo4.setTextAlignment(TextAlignment.CENTER);
+		titreInfo4.setFont(Font.font("Segoe UI", FontWeight.BOLD, 25));
+		titreInfo4.setTextFill(Color.WHITE);
+		vTitreInfo4.getChildren().addAll(titreInfo4);
+
+		VBox vInfo4 = new VBox();
+		vInfo4.setAlignment(Pos.CENTER);
+		lInfo4 = new Label("Voici l'information que vous voulez savoir");
+		lInfo4.setTextAlignment(TextAlignment.CENTER);
+		lInfo4.setFont(Font.font("Segoe UI", FontWeight.BOLD, 20));
+		lInfo4.setTextFill(Color.WHITE);
+		vInfo4.getChildren().addAll(lInfo4);
+
+		info4.setMargin(vInfo4, new Insets(-30, 0, 0, 0));
+		info4.setRotate(270);
+		info4.setTop(vTitreInfo4);
+		info4.setCenter(vInfo4);
+		info4.setBottom(bQuitterInfo4);
+		notifInfo.setTopAnchor(info4, 436.0);
+		notifInfo.setRightAnchor(info4, 0.0);
+		
+		notifInfo.getChildren().addAll(info1,info2, info3, info4);
+		notifInfo.setVisible(false);
 
 		borderJoueurs.setTop(hHaut);
 		borderJoueurs.setBottom(hBas);
@@ -778,7 +968,7 @@ public class PlateauPane extends StackPane implements PlateauListener {
 		j5.setVisible(false);
 		j6.setVisible(false);
 
-		this.getChildren().addAll(imgFond, borderJoueurs, aPlateau, info, imgCarteFerme1, imgCarteFerme2,
+		this.getChildren().addAll(imgFond, borderJoueurs, aPlateau, notifInfo, imgCarteFerme1, imgCarteFerme2,
 				imgCarteFerme3, imgCarteFerme5, imgCarteFerme6);
 		this.setMinSize(1920, 1080);
 		this.setPrefSize(1920, 1080);
@@ -1104,18 +1294,25 @@ public class PlateauPane extends StackPane implements PlateauListener {
 	@Override
 	public void fouilleCamion(String camion) {
 		Platform.runLater(() -> {
-			titreInfo.setText(International.trad("text.fouilleCamion"));
-			lInfo.setText(camion);
+			titreInfo1.setText("Fouille du camion");
+			titreInfo2.setText("Fouille du camion");
+			titreInfo3.setText("Fouille du camion");
+			titreInfo4.setText("Fouille du camion");
+			
+			lInfo1.setText(camion);
+			lInfo2.setText(camion);
+			lInfo3.setText(camion);
+			lInfo4.setText(camion);
 			imgFond.setEffect(flou);
 			borderJoueurs.setEffect(flou);
 			aPlateau.setEffect(flou);
-			TranslateTransition transi = new TranslateTransition(Duration.millis(1400), info);
+			TranslateTransition transi = new TranslateTransition(Duration.millis(1400), notifInfo);
 			transi.setFromY(-1000f);
 			transi.setToY(0f);
 			transi.setCycleCount((int) 2f);
 			transi.setAutoReverse(false);
 			transi.play();
-			info.setVisible(true);
+			notifInfo.setVisible(true);
 			if (myTimer != null) {
 				myTimer.cancel();
 			}
@@ -1127,7 +1324,7 @@ public class PlateauPane extends StackPane implements PlateauListener {
 					imgFond.setEffect(null);
 					borderJoueurs.setEffect(null);
 					aPlateau.setEffect(null);
-					info.setVisible(false);
+					notifInfo.setVisible(false);
 				}
 			}, 5000);
 		});
@@ -1136,18 +1333,24 @@ public class PlateauPane extends StackPane implements PlateauListener {
 	@Override
 	public void prevenirDeplacementVigile(String depvig) {
 		Platform.runLater(() -> {
-			titreInfo.setText(International.trad("text.deplChefVigile"));
-			lInfo.setText(depvig);
+			titreInfo1.setText("Déplacement d'un pion du chef des vigiles");
+			titreInfo2.setText("Déplacement d'un pion du chef des vigiles");
+			titreInfo3.setText("Déplacement d'un pion du chef des vigiles");
+			titreInfo4.setText("Déplacement d'un pion du chef des vigiles");
+			lInfo1.setText(depvig);
+			lInfo2.setText(depvig);
+			lInfo3.setText(depvig);
+			lInfo4.setText(depvig);
 			imgFond.setEffect(flou);
 			borderJoueurs.setEffect(flou);
 			aPlateau.setEffect(flou);
-			TranslateTransition transi = new TranslateTransition(Duration.millis(1400), info);
+			TranslateTransition transi = new TranslateTransition(Duration.millis(1400), notifInfo);
 			transi.setFromY(-1000f);
 			transi.setToY(0f);
 			transi.setCycleCount((int) 2f);
 			transi.setAutoReverse(false);
 			transi.play();
-			info.setVisible(true);
+			notifInfo.setVisible(true);
 			if (myTimer != null) {
 				myTimer.cancel();
 			}
@@ -1159,7 +1362,7 @@ public class PlateauPane extends StackPane implements PlateauListener {
 					imgFond.setEffect(null);
 					borderJoueurs.setEffect(null);
 					aPlateau.setEffect(null);
-					info.setVisible(false);
+					notifInfo.setVisible(false);
 				}
 			}, 5000);
 		});
@@ -1168,18 +1371,24 @@ public class PlateauPane extends StackPane implements PlateauListener {
 	@Override
 	public void electionChef(String message) {
 		Platform.runLater(() -> {
-			titreInfo.setText(International.trad("text.elecChefVigile"));
-			lInfo.setText(message);
+			titreInfo1.setText("Election du chef des vigiles");
+			titreInfo2.setText("Election du chef des vigiles");
+			titreInfo3.setText("Election du chef des vigiles");
+			titreInfo4.setText("Election du chef des vigiles");
+			lInfo1.setText(message);
+			lInfo2.setText(message);
+			lInfo3.setText(message);
+			lInfo4.setText(message);
 			imgFond.setEffect(flou);
 			borderJoueurs.setEffect(flou);
 			aPlateau.setEffect(flou);
-			TranslateTransition transi = new TranslateTransition(Duration.millis(1400), info);
+			TranslateTransition transi = new TranslateTransition(Duration.millis(1400), notifInfo);
 			transi.setFromY(-1000f);
 			transi.setToY(0f);
 			transi.setCycleCount((int) 2f);
 			transi.setAutoReverse(false);
 			transi.play();
-			info.setVisible(true);
+			notifInfo.setVisible(true);
 			if (myTimer != null) {
 				myTimer.cancel();
 			}
@@ -1192,7 +1401,7 @@ public class PlateauPane extends StackPane implements PlateauListener {
 					imgFond.setEffect(null);
 					borderJoueurs.setEffect(null);
 					aPlateau.setEffect(null);
-					info.setVisible(false);
+					notifInfo.setVisible(false);
 				}
 			}, 5000);
 		});
