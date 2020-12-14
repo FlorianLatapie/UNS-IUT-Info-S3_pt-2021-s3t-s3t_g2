@@ -54,16 +54,12 @@ public class AttenteJoueurPane extends StackPane implements AttenteListener {
         sControl = sc;
 
         // titre
-        Label titre1 = new Label("Connexion ");
-        Label titre2 = new Label("en cours");
+        Label titre1 = new Label(International.trad("texte.titreAttenteA")+"\n"+International.trad("texte.titreAttenteB"));
         titre1.setTextAlignment(TextAlignment.CENTER);
-        titre1.setFont(Font.font(nomPolice, FontWeight.BOLD, 80));
-        titre1.setTextFill(Color.BLACK);
-        titre2.setTextAlignment(TextAlignment.CENTER);
-        titre2.setFont(Font.font(nomPolice, FontWeight.BOLD, 80));
-        titre2.setTextFill(Color.BLACK);
+		titre1.setFont(Font.font(nomPolice, FontWeight.BOLD, 80));
+		titre1.setTextFill(Color.BLACK);
 
-        VBox titre = new VBox(titre1, titre2);
+        VBox titre = new VBox(titre1);
         titre.setAlignment(Pos.CENTER);
         titre.setBackground(new Background(new BackgroundFill(Color.RED, coin, null)));
         titre.setPrefWidth(740);

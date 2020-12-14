@@ -14,6 +14,7 @@ import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
+import javafx.scene.text.TextAlignment;
 
 /**
  * The Class AccueilPane.
@@ -57,14 +58,12 @@ public class FinDePartiePane extends StackPane implements FinListener {
         sControl = sc;
 
         // titre
-        Label titre1 = new Label("Fin de ");
-        Label titre2 = new Label("la partie");
+        Label titre1 = new Label(International.trad("text.titreFinDePartieA")+"\n"+International.trad("text.titreFinDePartieB"));
         titre1.setFont(Font.font("Segoe UI", FontWeight.BOLD, 80));
         titre1.setTextFill(Color.BLACK);
-        titre2.setFont(Font.font("Segoe UI", FontWeight.BOLD, 80));
-        titre2.setTextFill(Color.BLACK);
+        titre1.setTextAlignment(TextAlignment.CENTER);
 
-        VBox titre = new VBox(titre1, titre2);
+        VBox titre = new VBox(titre1);
         titre.setAlignment(Pos.CENTER);
         titre.setMinWidth(400);
         titre.setBackground(new Background(new BackgroundFill(Color.RED, coin, null)));
