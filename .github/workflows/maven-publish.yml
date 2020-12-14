@@ -5,7 +5,9 @@ name: Maven Package
 
 on:
   push:
-    branches: [PP]
+    branches: [Production]
+    paths-ignore:
+    - ".github/**"
 
 jobs:
   build:
