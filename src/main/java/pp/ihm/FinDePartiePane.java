@@ -57,11 +57,14 @@ public class FinDePartiePane extends StackPane implements FinListener {
         sControl = sc;
 
         // titre
-        Label titre1 = new Label("Fin de\nla partie");//TODO
+        Label titre1 = new Label("Fin de ");
+        Label titre2 = new Label("la partie");
         titre1.setFont(Font.font("Segoe UI", FontWeight.BOLD, 80));
         titre1.setTextFill(Color.BLACK);
+        titre2.setFont(Font.font("Segoe UI", FontWeight.BOLD, 80));
+        titre2.setTextFill(Color.BLACK);
 
-        VBox titre = new VBox(titre1);
+        VBox titre = new VBox(titre1, titre2);
         titre.setAlignment(Pos.CENTER);
         titre.setMinWidth(400);
         titre.setBackground(new Background(new BackgroundFill(Color.RED, coin, null)));
