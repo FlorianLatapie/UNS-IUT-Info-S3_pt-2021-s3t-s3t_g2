@@ -415,6 +415,8 @@ public class TraitementIdjr {
 		CarteType carteDefausse = CarteType.NUL;
 		Couleur couleur = Couleur.NUL;
 		List<Object> carteChoisies = new ArrayList<Object>();
+		List<Couleur> listJoueurDispo = idjr.getJoueurEnVie();
+		listJoueurDispo.remove(idjr.getCouleur());
 		if (listeCarte.size() == 3) {
 
 			idjr.getInitializer().choisirCarte(listeCarte, idjr.getJoueurEnVie(), true, false, false, true);
@@ -426,7 +428,7 @@ public class TraitementIdjr {
 			listeCarte.remove(carteGarde);
 			idjr.addCarte(carteGarde);
 
-			idjr.getInitializer().choisirCarte(listeCarte, idjr.getJoueurEnVie(), false, true, false, true);
+			idjr.getInitializer().choisirCarte(listeCarte, listJoueurDispo, false, true, false, true);
 			while (!idjr.carteDisponible())
 				Thread.yield();
 
@@ -454,7 +456,7 @@ public class TraitementIdjr {
 			idjr.addCarte(carteGarde);
 			listeCarte.remove(carteGarde);
 
-			idjr.getInitializer().choisirCarte(listeCarte, idjr.getJoueurEnVie(), false, true, false, true);
+			idjr.getInitializer().choisirCarte(listeCarte, listJoueurDispo, false, true, false, true);
 			while (!idjr.carteDisponible())
 				Thread.yield();
 

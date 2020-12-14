@@ -11,9 +11,11 @@ import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.ListView;
 import javafx.scene.effect.GaussianBlur;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.BorderPane;
@@ -35,6 +37,7 @@ public class JeuPane extends StackPane implements JeuListener {
 	private int hBouton = 100;
 	private int lBouton = 200;
 	private Font policeBouton = Font.font("Segoe UI", FontWeight.BOLD, 33);
+	private Font policeLog = Font.font("Segoe UI", FontWeight.BOLD, 15);
 	private Font policeBoutonC = Font.font("Segoe UI", FontWeight.BOLD, 28);
 	private Font policeBoutonDe = Font.font("Segoe UI", FontWeight.BOLD, 40);
 	private String styleBoutons = " -fx-background-color:#000000; -fx-background-radius: 15px; -fx-text-fill: #ffffff";
@@ -137,6 +140,9 @@ public class JeuPane extends StackPane implements JeuListener {
 
 	BorderPane fouilleCamion;
 	BorderPane vote;
+	
+	Button bLog;
+	ListView<Label> log;
 
 	CarteType selectedCarte;
 	Couleur selectedCouleur;
@@ -525,29 +531,26 @@ public class JeuPane extends StackPane implements JeuListener {
 
 		///
 		fouilleCamion = new BorderPane();
-		fouilleCamion.setPrefSize(850, 720);
-		fouilleCamion.setMinSize(850, 720);
-		fouilleCamion.setMaxSize(850, 720);
+		fouilleCamion.setPrefSize(850, 550);
+		fouilleCamion.setMinSize(850, 550);
+		fouilleCamion.setMaxSize(850, 550);
 		fouilleCamion.setStyle("-fx-border-color: black; -fx-border-insets: 5; -fx-border-width: 3;");
 
 		VBox vbChoixCarteCentre = new VBox();
 		vbChoixCarteCentre.setAlignment(Pos.CENTER);
-		vbChoixCarteCentre.setPrefSize(850, 700);
-		vbChoixCarteCentre.setMinSize(850, 700);
-		vbChoixCarteCentre.setMaxSize(850, 700);
-		// vbChoixCarteCentre.setStyle(styleVBox);
+		vbChoixCarteCentre.setPrefSize(850, 600);
+		vbChoixCarteCentre.setMinSize(850, 600);
+		vbChoixCarteCentre.setMaxSize(850, 600);
 
 		VBox vbCarte = new VBox();
 		vbCarte.setAlignment(Pos.CENTER);
 		vbCarte.setPrefSize(780, 300);
 		vbCarte.setMinSize(780, 300);
 		vbCarte.setMaxSize(780, 300);
-		// vbCarte.setStyle("-fx-border-color: green; -fx-border-insets: 5;
-		// -fx-border-width: 3;");
 
 		VBox vbChoix = new VBox();
 		vbChoix.setAlignment(Pos.CENTER);
-		vbChoix.setStyle(styleVBox);
+		fouilleCamion.setAlignment(vbChoixCarteCentre, Pos.TOP_CENTER);
 
 		HBox hboxImgCarte = new HBox();
 		hboxImgCarte.setAlignment(Pos.CENTER);
@@ -572,7 +575,7 @@ public class JeuPane extends StackPane implements JeuListener {
 		hboxBoutonJoueur = new HBox();
 		hboxBoutonJoueur.setAlignment(Pos.CENTER);
 		hboxBoutonJoueur.setSpacing(10);
-		hboxBoutonJoueur.setPadding(new Insets(20));
+		hboxBoutonJoueur.setPadding(new Insets(10));
 		hboxBoutonJoueur.setVisible(false);
 		//
 		imgCarte1 = new ImageView(DataControl.CARTE_BATTE);
@@ -646,7 +649,6 @@ public class JeuPane extends StackPane implements JeuListener {
 				cartePanelReset();
 			}
 		});
-
 		bChoixDonner = new Button("Donner");
 		bChoixDonner.setDisable(true);
 		bChoixDonner.setAlignment(Pos.CENTER);
@@ -661,6 +663,9 @@ public class JeuPane extends StackPane implements JeuListener {
 			bChoixDonner.setStyle(styleBoutons);
 		});
 		bChoixDonner.setOnAction(EventHandler -> {
+			fouilleCamion.setPrefSize(850, 650);
+			fouilleCamion.setMinSize(850, 650);
+			fouilleCamion.setMaxSize(850, 650);
 			hboxBoutonJoueur.setVisible(true);
 		});
 
@@ -1072,9 +1077,42 @@ public class JeuPane extends StackPane implements JeuListener {
 		fond.setAlignment(Pos.CENTER);
 		fond.setEffect(flou);
 		fond.getChildren().add(imgFond);
+		
+		log = new ListView<>();
+		log.setStyle("-fx-background-color: red; -fx-control-inner-background: #1A1A1A ; -fx-control-inner-background-alt: derive(-fx-control-inner-background, 15%);");
+		log.setEditable(true);
+		log.setMinSize(600, 800);
+		log.setMaxSize(600, 800);
+		log.setPrefSize(600,800);
+		log.setVisible(false);
+		
+		bLog = new Button("LOG");
+		bLog.setFont(Font.font("Segoe UI", FontWeight.BOLD, 40));
+		bLog.setStyle(styleBoutons);
+		bLog.setPrefSize(largBouton, hautBouton);
+		bLog.setMinSize(largBouton, hautBouton);
+		bLog.setFont(Font.font("Segoe UI", FontWeight.BOLD, 20));
+		bLog.setOnAction(event -> {
+			if(!log.isVisible())
+				log.setVisible(true);
+			else
+				log.setVisible(false);
+		});
+		bLog.setOnMouseEntered(event -> {
+			bLog.setStyle(styleBoutonsSouris);
+		});
+		bLog.setOnMouseExited(event -> {
+			bLog.setStyle(styleBoutons);
+		});
+		bLog.setTranslateX(790);
+		bLog.setTranslateY(-350);
+
+		Label lo = new Label("Personnage couleur s'est déplacé dans le lieu");
+		lo.setFont(policeLog);
+		updateLog(log, lo);
 
 		stackPane.getChildren().addAll(fond, rectVigile, nomJoueur, phasePartie, hbCartes, vote, vbDeplCentre, des,
-				fouilleCamion, info);
+				fouilleCamion, info, log, bLog);
 		stackPane.setBackground(new Background(new BackgroundFill(Color.BLACK, CornerRadii.EMPTY, null)));
 
 		this.getChildren().add(stackPane);
@@ -1211,6 +1249,12 @@ public class JeuPane extends StackPane implements JeuListener {
 			button.setDisable(true);
 
 		vote.setVisible(false);
+	}
+	
+	public ListView<Label> updateLog(ListView<Label> list,Label l){
+		list.getItems().add(list.getItems().size(), l);
+		list.scrollTo(list.getItems().size()-1);
+		return list;
 	}
 
 	@Override
