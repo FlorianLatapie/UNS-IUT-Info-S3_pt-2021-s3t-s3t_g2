@@ -32,6 +32,7 @@ public class DataControl {
 	public static final String FERME3 = "pp/ihm/images/3Fermé.png";
 	public static final String FERME5 = "pp/ihm/images/5Fermé.png";
 	public static final String FERME6 = "pp/ihm/images/6Fermé.png";
+	public static final String NON_FERME = "pp/ihm/images/nonFermé.png";
 
 	public static final ObservableList<Integer> nombreJoueur = FXCollections.observableArrayList(3, 4, 5, 6);
 	public static final ObservableList<Integer> nombreBot = FXCollections.observableArrayList(0, 1, 2, 3, 4, 5, 6);
