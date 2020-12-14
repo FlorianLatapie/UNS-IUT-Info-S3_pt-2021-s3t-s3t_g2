@@ -385,7 +385,7 @@ public class PlateauPane extends StackPane implements PlateauListener {
 		force1a.setFont(fontInfo);
 		force1a.setTextFill(Color.RED);
 		force1a.setTextAlignment(TextAlignment.CENTER);
-		force1b = new Label("de l'équipe\n");//TODO
+		force1b = new Label(International.trad("text.forceEquipeB")+"\n");
 		force1b.setFont(fontInfo);
 		force1b.setTextFill(Color.RED);
 		force1b.setTextAlignment(TextAlignment.CENTER);
@@ -436,7 +436,7 @@ public class PlateauPane extends StackPane implements PlateauListener {
 		force2a.setFont(fontInfo);
 		force2a.setTextFill(Color.RED);
 		force2a.setTextAlignment(TextAlignment.CENTER);
-		force2b = new Label("de l'équipe\n");//TODO
+		force2b = new Label(International.trad("text.forceEquipeB")+"\n");
 		force2b.setFont(fontInfo);
 		force2b.setTextFill(Color.RED);
 		force2b.setTextAlignment(TextAlignment.CENTER);
@@ -487,7 +487,7 @@ public class PlateauPane extends StackPane implements PlateauListener {
 		force3a.setFont(fontInfo);
 		force3a.setTextFill(Color.RED);
 		force3a.setTextAlignment(TextAlignment.CENTER);
-		force3b = new Label("de l'équipe\n");//TODO
+		force3b = new Label(International.trad("text.forceEquipeB")+"\n");
 		force3b.setFont(fontInfo);
 		force3b.setTextFill(Color.RED);
 		force3b.setTextAlignment(TextAlignment.CENTER);
@@ -538,7 +538,7 @@ public class PlateauPane extends StackPane implements PlateauListener {
 		force4a.setFont(fontInfo);
 		force4a.setTextFill(Color.RED);
 		force4a.setTextAlignment(TextAlignment.CENTER);
-		force4b = new Label("de l'équipe\n");//TODO
+		force4b = new Label(International.trad("text.forceEquipeB")+"\n");
 		force4b.setFont(fontInfo);
 		force4b.setTextFill(Color.RED);
 		force4b.setTextAlignment(TextAlignment.CENTER);
@@ -589,7 +589,7 @@ public class PlateauPane extends StackPane implements PlateauListener {
 		force5a.setFont(fontInfo);
 		force5a.setTextFill(Color.RED);
 		force5a.setTextAlignment(TextAlignment.CENTER);
-		force5b = new Label("de l'équipe\n");//TODO
+		force5b = new Label(International.trad("text.forceEquipeB")+"\n");
 		force5b.setFont(fontInfo);
 		force5b.setTextFill(Color.RED);
 		force5b.setTextAlignment(TextAlignment.CENTER);
@@ -640,7 +640,7 @@ public class PlateauPane extends StackPane implements PlateauListener {
 		force6a.setFont(fontInfo);
 		force6a.setTextFill(Color.RED);
 		force6a.setTextAlignment(TextAlignment.CENTER);
-		force6b = new Label("de l'équipe\n");//TODO
+		force6b = new Label(International.trad("text.forceEquipeB")+"\n");
 		force6b.setFont(fontInfo);
 		force6b.setTextFill(Color.RED);
 		force6b.setTextAlignment(TextAlignment.CENTER);
