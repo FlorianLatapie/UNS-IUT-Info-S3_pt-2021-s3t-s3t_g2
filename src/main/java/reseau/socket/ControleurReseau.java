@@ -72,6 +72,7 @@ public class ControleurReseau implements IControleSocket {
 			throw new IllegalArgumentException("Il n'y a pas de définitions pour les paquets TCP/UDP");
 
 		new Thread(udpConnexion = new UdpConnexion(this, ip), "udpConnexion").start();
+		udpConnexion.attendreConnexion();
 
 		logger.info("Controleur initialisé");
 	}

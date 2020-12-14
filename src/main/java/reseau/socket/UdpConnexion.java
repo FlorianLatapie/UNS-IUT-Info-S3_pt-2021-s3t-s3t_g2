@@ -171,7 +171,7 @@ public class UdpConnexion implements Runnable, IEchangeSocket, IControleSocket {
 	/**
 	 * Bloque l'execution du thread tant que le client n'est pas pret a recevoir.
 	 */
-	private void attendreConnexion() {
+	public void attendreConnexion() {
 		while (multicastSocket == null) {
 			Thread.yield();
 			System.out.println("Erreur P4598");
