@@ -89,7 +89,7 @@ public class ConfigPartiePane extends StackPane {
 		nomPTexte.setTextFill(Color.WHITE);
 		nomPTexte.setStyle(styleVBox);
 		nomPTexte.setMinHeight(hauteurElemtents);
-		nomPTexte.setPadding(botPadding);
+		nomPTexte.setPadding(new Insets(10, 50, 10, 10));
 		nomPTexte.setMinWidth(largeurTexte);
 
 		TextField nomP = new TextField();
