@@ -76,10 +76,10 @@ public class CouleurPane extends StackPane implements CouleurListener {
 		Label titre2 = new Label("couleurs");
 		titre1.setFont(Font.font("Segoe UI", FontWeight.BOLD, 80));
 		titre1.setTextFill(Color.BLACK);
-		titre1.setAlignment(Pos.CENTER);
+		titre1.setTextAlignment(TextAlignment.CENTER);
 		titre2.setFont(Font.font("Segoe UI", FontWeight.BOLD, 80));
 		titre2.setTextFill(Color.BLACK);
-		titre2.setAlignment(Pos.CENTER);
+		titre2.setTextAlignment(TextAlignment.CENTER);
 
 		VBox titre = new VBox(titre1, titre2);
 		titre.setAlignment(Pos.CENTER);
