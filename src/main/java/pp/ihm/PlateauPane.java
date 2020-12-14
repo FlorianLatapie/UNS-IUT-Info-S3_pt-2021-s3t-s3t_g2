@@ -818,37 +818,55 @@ public class PlateauPane extends StackPane implements PlateauListener {
 
 	@Override
 	public void nomJoueur(int joueur, Couleur couleur, String val) {
-		String tmp = val;
+		//String tmp = val;
 		Platform.runLater(() -> {
 			switch (joueur) {
 			case 0:
-				nomJoueur1.setText(tmp);
-				nomJoueur1.setTextFill(color(couleur));
+				nomJoueur1.setText(val);
+				nbPerso1.setStyle(tmpColor);
+				nbCartes1.setStyle(tmpColor);
+				nomJoueur1.setStyle(tmpColor);
+				j1.setStyle(tmpColor);
 				j1.setVisible(true);
 				break;
 			case 1:
-				nomJoueur2.setText(tmp);
-				nomJoueur2.setTextFill(color(couleur));
+				nomJoueur2.setText(val);
+				nbPerso2.setStyle(tmpColor);
+				nbCartes2.setStyle(tmpColor);
+				nomJoueur2.setStyle(tmpColor);
+				j2.setStyle(tmpColor);
 				j2.setVisible(true);
 				break;
 			case 2:
-				nomJoueur3.setText(tmp);
-				nomJoueur3.setTextFill(color(couleur));
+				nomJoueur3.setText(val);
+				nbPerso3.setStyle(tmpColor);
+				nbCartes3.setStyle(tmpColor);
+				nomJoueur3.setStyle(tmpColor);
+				j3.setStyle(tmpColor);
 				j3.setVisible(true);
 				break;
 			case 3:
-				nomJoueur4.setText(tmp);
-				nomJoueur4.setTextFill(color(couleur));
+				nomJoueur4.setText(val);
+				nbPerso4.setStyle(tmpColor);
+				nbCartes4.setStyle(tmpColor);
+				nomJoueur4.setStyle(tmpColor);
+				j4.setStyle(tmpColor);
 				j4.setVisible(true);
 				break;
 			case 4:
-				nomJoueur5.setText(tmp);
-				nomJoueur5.setTextFill(color(couleur));
+				nomJoueur5.setText(val);
+				nbPerso5.setStyle(tmpColor);
+				nbCartes5.setStyle(tmpColor);
+				nomJoueur5.setStyle(tmpColor);
+				j5.setStyle(tmpColor);
 				j5.setVisible(true);
 				break;
 			case 5:
-				nomJoueur6.setText(tmp);
-				nomJoueur6.setTextFill(color(couleur));
+				nomJoueur6.setText(val);
+				nbPerso6.setStyle(tmpColor);
+				nbCartes6.setStyle(tmpColor);
+				nomJoueur6.setStyle(tmpColor);
+				j6.setStyle(tmpColor);
 				j6.setVisible(true);
 				break;
 			default:
@@ -857,21 +875,22 @@ public class PlateauPane extends StackPane implements PlateauListener {
 		});
 	}
 
-	public Color color(Couleur couleur) {
+	public String color(Couleur couleur) {
 		switch (couleur) {
 		case B:
-			return Color.ALICEBLUE;
+			return bleu;
 		case R:
-			return Color.RED;
+			return rouge;
 		case V:
-			return Color.GREEN;
+			return vert;
 		case N:
-			return Color.GREY;
+			return noir;
 		case J:
-			return Color.YELLOW;
+			return jaune;
 		case M:
-			return Color.BROWN;
+			return marron;
 		default:
+			System.err.println("couleur "+couleur+"inconnue"); //TODO en faire une exception 
 			break;
 		}
 
@@ -1037,7 +1056,7 @@ public class PlateauPane extends StackPane implements PlateauListener {
 
 	@Override
 	public void nomChefVigile(String joueur) {
-		String tmp = joueur + " est le chef des vigiles";
+		String tmp = joueur + International.trad("text.chefVigile");
 		Platform.runLater(() -> {
 			lChefVigile.setText(tmp);
 			lChefVigile2.setText(tmp);
