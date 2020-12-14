@@ -33,11 +33,6 @@ public class DataControl {
 	public static final String FERME5 = "pp/ihm/images/5Fermé.png";
 	public static final String FERME6 = "pp/ihm/images/6Fermé.png";
 
-	public static final ObservableList<Integer> nombreJoueur = FXCollections.observableArrayList(3,4,5,6);
-	public static final ObservableList<Integer> nombreBot = FXCollections.observableArrayList(0,1,2,3,4,5,6);
-	public static final ObservableList<String> couleursJoueur = FXCollections.observableArrayList("Noir", "Vert", "Marron", "Rouge", "Bleu", "Jaune");
-	public static final ObservableList<String> difficulteBot = FXCollections.observableArrayList("Faible","Moyen","Fort");
-
 	public static final ObservableList<Integer> nombreJoueur = FXCollections.observableArrayList(3, 4, 5, 6);
 	public static final ObservableList<Integer> nombreBot = FXCollections.observableArrayList(0, 1, 2, 3, 4, 5, 6);
 	public static final ObservableList<String> couleursJoueur = FXCollections.observableArrayList(
