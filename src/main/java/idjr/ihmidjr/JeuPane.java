@@ -143,6 +143,8 @@ public class JeuPane extends StackPane implements JeuListener {
 	
 	Button bLog;
 	ListView<Label> log;
+	
+	Button bQuitterInfo;
 
 	CarteType selectedCarte;
 	Couleur selectedCouleur;
@@ -1050,26 +1052,46 @@ public class JeuPane extends StackPane implements JeuListener {
 		info = new BorderPane();
 		info.setPrefSize(1000, 200);
 		info.setMaxSize(1000, 200);
-		info.setBackground(fondBlanc);
+		info.setPadding(new Insets(10));
+		info.setStyle(" -fx-background-color:#1A1A1A; -fx-background-radius: 20px; -fx-border-color: red; -fx-border-insets: -3; -fx-border-width: 3; -fx-border-radius: 20px;");
 		info.setVisible(false);
+		
+		Button bQuitterInfo = new Button("QUITTER");
+		bQuitterInfo.setAlignment(Pos.CENTER);
+		bQuitterInfo.setStyle(styleBoutons);
+		bQuitterInfo.setPrefSize(largBouton*.7, hautBouton*.7);
+		bQuitterInfo.setMinSize(largBouton*.7, hautBouton*.7);
+		bQuitterInfo.setFont(Font.font("Segoe UI", FontWeight.BOLD, 18));
+		bQuitterInfo.setOnAction(event -> {
+			info.setVisible(false);
+		});
+		bQuitterInfo.setOnMouseEntered(event -> {
+			bQuitterInfo.setStyle(styleBoutonsSouris);
+		});
+		bQuitterInfo.setOnMouseExited(event -> {
+			bQuitterInfo.setStyle(styleBoutons);
+		});
 
 		VBox vTitreInfo = new VBox();
 		vTitreInfo.setAlignment(Pos.CENTER);
 		vTitreInfo.setPadding(new Insets(20));
-		titreInfo = new Label("Titre info");
-		titreInfo.setFont(Font.font("Segoe UI", FontWeight.BOLD, 20));
+		titreInfo = new Label("Information");
+		titreInfo.setFont(Font.font("Segoe UI", FontWeight.BOLD, 25));
+		titreInfo.setTextFill(Color.WHITE);
 		vTitreInfo.getChildren().addAll(titreInfo);
 
 		VBox vInfo = new VBox();
-		vInfo.setAlignment(Pos.TOP_LEFT);
-		lInfo = new Label("information");
-		lInfo.setFont(Font.font("Segoe UI", FontWeight.BOLD, 10));
+		vInfo.setAlignment(Pos.CENTER);
+		lInfo = new Label("Voici l'information que vous voulez savoir");
+		lInfo.setFont(Font.font("Segoe UI", FontWeight.BOLD, 20));
+		lInfo.setTextFill(Color.WHITE);
 		vInfo.getChildren().addAll(lInfo);
 
-		info.setMargin(vInfo, new Insets(50, 20, 0, 20));
+		info.setMargin(vInfo, new Insets(-30, 0, 0, 0));
 		info.setTop(vTitreInfo);
 		info.setCenter(vInfo);
-		info.setVisible(true);
+		info.setBottom(bQuitterInfo);
+		info.setVisible(false);
 
 		imgFond = new ImageView(DataControl.BLEU);
 
@@ -1087,11 +1109,11 @@ public class JeuPane extends StackPane implements JeuListener {
 		log.setVisible(false);
 		
 		bLog = new Button("LOG");
-		bLog.setFont(Font.font("Segoe UI", FontWeight.BOLD, 40));
+		bLog.setAlignment(Pos.CENTER);
+		bLog.setFont(Font.font("Segoe UI", FontWeight.BOLD, 30));
 		bLog.setStyle(styleBoutons);
 		bLog.setPrefSize(largBouton, hautBouton);
 		bLog.setMinSize(largBouton, hautBouton);
-		bLog.setFont(Font.font("Segoe UI", FontWeight.BOLD, 20));
 		bLog.setOnAction(event -> {
 			if(!log.isVisible())
 				log.setVisible(true);
