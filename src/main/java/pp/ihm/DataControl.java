@@ -32,7 +32,41 @@ public class DataControl {
 	public static final String FERME3 = "pp/ihm/images/3Fermé.png";
 	public static final String FERME5 = "pp/ihm/images/5Fermé.png";
 	public static final String FERME6 = "pp/ihm/images/6Fermé.png";
-	public static final String NON_FERME = "pp/ihm/images/nonFermé.png";
+	
+	// Pions
+	//public static final String NOM_COULEUR = "pp/ihm/images/Pions/SamplePion.png";
+	
+	public static final String TRUAND_B = "pp/ihm/images/Pions/bleu1.png";
+	public static final String BRUTE_B = "pp/ihm/images/Pions/bleu2.png";
+	public static final String BLONDE_B = "pp/ihm/images/Pions/bleu3.png";
+	public static final String FILLETTE_B = "pp/ihm/images/Pions/bleu4.png";
+	
+	public static final String TRUAND_J = "pp/ihm/images/Pions/jaune1.png";
+	public static final String BRUTE_J = "pp/ihm/images/Pions/jaune2.png";
+	public static final String BLONDE_J= "pp/ihm/images/Pions/jaune3.png";
+	public static final String FILLETTE_J = "pp/ihm/images/Pions/jaune4.png";
+	
+	public static final String TRUAND_M = "pp/ihm/images/Pions/marron1.png";
+	public static final String BRUTE_M = "pp/ihm/images/Pions/marron2.png";
+	public static final String BLONDE_M = "pp/ihm/images/Pions/marron3.png";
+
+	public static final String TRUAND_N = "pp/ihm/images/Pions/noir1.png";
+	public static final String BRUTE_N = "pp/ihm/images/Pions/noir2.png";
+	public static final String BLONDE_N = "pp/ihm/images/Pions/noir3.png";
+
+	public static final String TRUAND_R = "pp/ihm/images/Pions/rouge1.png";
+	public static final String BRUTE_R = "pp/ihm/images/Pions/rouge2.png";
+	public static final String BLONDE_R = "pp/ihm/images/Pions/rouge3.png";
+	public static final String FILLETTE_R = "pp/ihm/images/Pions/rouge4.png";
+	
+	public static final String TRUAND_V = "pp/ihm/images/Pions/vert1.png";
+	public static final String BRUTE_V = "pp/ihm/images/Pions/vert2.png";
+	public static final String BLONDE_V = "pp/ihm/images/Pions/vert3.png";
+	
+
+	// for testing purpose
+	public static final String NOM_COULEUR = TRUAND_V;
+
 
 	public static final ObservableList<Integer> nombreJoueur = FXCollections.observableArrayList(3, 4, 5, 6);
 	public static final ObservableList<Integer> nombreBot = FXCollections.observableArrayList(0, 1, 2, 3, 4, 5, 6);
