@@ -123,7 +123,7 @@ public class ConfigPartiePane extends StackPane implements ConfigListener {
 		listView.setEditable(false);
 		listView.setStyle("-fx-background-color: white;-fx-control-inner-background: #1A1A1A ; -fx-control-inner-background-alt: derive(-fx-control-inner-background, 15%);");
 
-		Button bRefresh = new Button("Raffraichir");
+		Button bRefresh = new Button("Rafraichir");
 		bRefresh.setPrefSize(lBouton+30, hBouton);
 		bRefresh.setMinSize(lBouton+30, hBouton);
 		bRefresh.setFont(policeBouton);
