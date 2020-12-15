@@ -56,8 +56,12 @@ public class TcpClient implements Runnable, IEchangeSocket, IMessagePaquet {
 		this.logger = Logger.getLogger(getClass().getName());
 	}
 
-	// TODO Temporaire ?
-	public TcpClient(Socket socket, ControleurReseau controleurReseau) {
+	/**
+	 * @param socket           L'ip du serveur TCP cible
+	 * @param controleurReseau Le controleur reseau du client
+	 * @param cleFin           Mot cle pour arreter le client
+	 */
+	public TcpClient(Socket socket, ControleurReseau controleurReseau, String cleFin) {
 		this.messagesTampon = synchronizedList(new ArrayList<String>());
 		this.controleurReseau = controleurReseau;
 		this.estLancer = true;
@@ -65,10 +69,6 @@ public class TcpClient implements Runnable, IEchangeSocket, IMessagePaquet {
 		this.port = controleurReseau.getTcpPort();
 		this.logger = Logger.getLogger(getClass().getName());
 		this.socket = socket;
-	}
-
-	public TcpClient(Socket socket, ControleurReseau controleurReseau, String cleFin) {
-		this(socket, controleurReseau);
 		this.cleFin = cleFin;
 	}
 
@@ -79,7 +79,7 @@ public class TcpClient implements Runnable, IEchangeSocket, IMessagePaquet {
 	 * @throws IOException Si les flux de s'ouvre pas correctement
 	 */
 	private boolean ouvrir(InetAddress ip, int port) throws IOException {
-		logger.log(Level.INFO, "Client TCP ouvert - EZ4E");
+		logger.log(Level.INFO, "Client TCP ouvert");
 		boolean attendre = true;
 		while (attendre)
 			try {
@@ -247,5 +247,29 @@ public class TcpClient implements Runnable, IEchangeSocket, IMessagePaquet {
 	public void attendreMessage(String cle) {
 		while (!contient(cle))
 			Thread.yield();
+	}
+
+	/**
+	 * Bloque l'execution du thread tant que le client n'est pas pret a recevoir.
+	 */
+	public void attendreConnexion() {
+		while (socket == null)
+			Thread.yield();
+		while (!isPret())
+			Thread.yield();
+	}
+
+	/**
+	 * Permet de savoir le client tcp est pret.
+	 */
+	public boolean isPret() {
+		return socket.isConnected();
+	}
+
+	/**
+	 * Permet de savoir le client tcp est arreter.
+	 */
+	public boolean isArreter() {
+		return !socket.isClosed();
 	}
 }
