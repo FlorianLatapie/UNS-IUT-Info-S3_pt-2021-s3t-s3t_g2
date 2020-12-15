@@ -41,6 +41,29 @@ public abstract class International {
 	}
 
 	/**
+	 * Permet de traduire la phrase cible avec des arguments
+	 *
+	 * @param phrase     la phrase à traduire
+	 * @param argStrings la liste des arguments custom
+	 * @return la traduction de la phrase
+	 */
+
+	public static String trad(String phrase, String... argStrings) {
+		if (!resourceBundle.containsKey(phrase))
+			throw new IllegalArgumentException("La traduction " + phrase + " n'existe pas");
+
+		int i = 0;
+		while (phrase.contains("{" + i + "}")) {
+			if (argStrings.length == i)
+				throw new ArrayIndexOutOfBoundsException();
+
+			phrase = phrase.replaceFirst("{" + i + "}", argStrings[i]);
+		}
+
+		return resourceBundle.getString(phrase);
+	}
+
+	/**
 	 * Permet d'obtenir la langue actuelle
 	 *
 	 * @return la langue actuelle
