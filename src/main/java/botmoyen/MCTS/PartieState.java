@@ -32,7 +32,7 @@ public class PartieState extends State {
 		for (Integer idLieu : partie.getLieuxOuverts()) {
 			boolean destValide = false;
 			for (Personnage perso : partie.getJoueurs().get(couleur).getPersonnages().values())
-				if (perso.getMonLieu().getNum() != idLieu)
+				if (perso.getMonLieu() != idLieu)
 					destValide = true;
 			if (destValide)
 				possibleActions.add(new PartieAction(idLieu));
@@ -42,6 +42,9 @@ public class PartieState extends State {
 
 	@Override
 	public boolean isTerminal() {
+		if (partie.getJoueurs().get(couleur).getPersonnages().isEmpty())
+			return true;
+		
 		return partie.estFini();
 	}
 
@@ -88,7 +91,9 @@ public class PartieState extends State {
 
 	@Override
 	public double getReward(Player arg0) {
-		if (partie.isEgalite())
+		if (partie.getJoueurs().get(couleur).getPersonnages().isEmpty())
+			return -2;
+		else if (partie.isEgalite())
 			return 0;
 		else if (partie.getGagnant().equals(couleur))
 			return 1;
