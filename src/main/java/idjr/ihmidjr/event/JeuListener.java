@@ -16,7 +16,7 @@ public interface JeuListener {
 
 	void nomPhase(String nom);
 
-	void desVigiles(List<String> list);
+	void desVigiles(List<Integer> list);
 
 	void fin();
 

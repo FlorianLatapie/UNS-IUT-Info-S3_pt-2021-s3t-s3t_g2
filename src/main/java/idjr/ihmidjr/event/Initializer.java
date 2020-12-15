@@ -69,7 +69,7 @@ public class Initializer {
 			al.nomPartie(nom);
 	}
 
-	public void desVigiles(List<String> list) {
+	public void desVigiles(List<Integer> list) {
 		for (JeuListener jl : listenersjl)
 			jl.desVigiles(list);
 	}
