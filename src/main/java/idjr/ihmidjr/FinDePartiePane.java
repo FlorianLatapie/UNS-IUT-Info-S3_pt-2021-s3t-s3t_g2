@@ -2,6 +2,7 @@ package idjr.ihmidjr;
 
 import idjr.ihmidjr.DataControl.ApplicationPane;
 import idjr.ihmidjr.event.FinListener;
+import idjr.ihmidjr.langues.International;
 import javafx.application.Platform;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -54,7 +55,8 @@ public class FinDePartiePane extends StackPane implements FinListener {
 		stackPane.setAlignment(Pos.CENTER);
 
 		// titre
-		Label titre1 = new Label("Fin de Partie");
+		Label titre1 = new Label(
+				International.trad("text.titreFinDePartieA") + " " + International.trad("text.titreFinDePartieB"));
 		titre1.setFont(Font.font("Segoe UI", FontWeight.BOLD, 80));
 		titre1.setTextFill(Color.BLACK);
 
@@ -64,7 +66,7 @@ public class FinDePartiePane extends StackPane implements FinListener {
 		titre.setPrefWidth(730);
 		titre.setMinWidth(730);
 
-		desc = new Label("vous avez perdu, joueur " + "x" + " a gagné\n (ou) vous avez gagné");
+		desc = new Label("vous avez perdu, joueur " + "x" + " a gagné\n (ou) vous avez gagné");//TODO
 		desc.setFont(policeNom);
 		desc.setPadding(new Insets(20));
 		desc.setBackground(fondBlanc);
@@ -74,7 +76,7 @@ public class FinDePartiePane extends StackPane implements FinListener {
 		vbCenter.getChildren().addAll(desc);
 
 		// bouton
-		Button bRetour = new Button("RETOUR");
+		Button bRetour = new Button(International.trad("bouton.retour"));
 		bRetour.setPrefSize(lBouton, hBouton);
 		bRetour.setMinSize(lBouton, hBouton);
 		bRetour.setFont(policeBouton);
