@@ -11,7 +11,7 @@ import java.net.DatagramPacket;
 import java.text.MessageFormat;
 
 /**
- * <h1>Permet de gerer les packets</h1>
+ * <h1>Permet de gérer les packets UDP</h1>
  *
  * @author Sébastien Aglaé
  * @version 1.0

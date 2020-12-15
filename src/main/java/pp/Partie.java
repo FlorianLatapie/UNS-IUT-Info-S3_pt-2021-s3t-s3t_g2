@@ -61,22 +61,21 @@ public class Partie {
 		cartes.add(CarteType.SPR);
 		cartes.add(CarteType.SPR);
 		cartes.add(CarteType.SPR);
-		
+
 		cartes.add(CarteType.MAT);
 		cartes.add(CarteType.MAT);
 		cartes.add(CarteType.MAT);
-		
+
 		cartes.add(CarteType.ABA);
 		cartes.add(CarteType.ACS);
 		cartes.add(CarteType.AGR);
 		cartes.add(CarteType.AHI);
 		cartes.add(CarteType.ARE);
 		cartes.add(CarteType.ATR);
-		
+
 		cartes.add(CarteType.CAC);
 		cartes.add(CarteType.CAC);
 		cartes.add(CarteType.CAC);
-		
 
 		Collections.shuffle(cartes);
 	}
@@ -122,9 +121,6 @@ public class Partie {
 				joueurs.get(i).setPersonnages(dp);
 			}
 	}
-
-
-
 
 	/**
 	 * Retourne la liste des index des destinations valides. Une destination valide
@@ -479,9 +475,9 @@ public class Partie {
 			couleurs.add(joueur.getCouleur());
 		return couleurs;
 	}
-	
+
 	public Joueur getJoueurCouleur(Couleur c) {
-		for(Joueur j : joueurs.values()) {
+		for (Joueur j : joueurs.values()) {
 			if (j.getCouleur() == c) {
 				return j;
 			}
@@ -506,7 +502,7 @@ public class Partie {
 				toutJoueur.put(i, joueurs.get(i));
 			}
 		}
-		
+
 		return joueurs;
 	}
 
@@ -563,8 +559,8 @@ public class Partie {
 	public void setNewChef(Boolean nouveauChef) {
 		this.nouveauChef = nouveauChef;
 	}
-	
-	public List<CarteType> tirerCartes(Joueur j){
+
+	public List<CarteType> tirerCartes(Joueur j) {
 		List<CarteType> l = new ArrayList();
 		int i = 0;
 		while (!cartes.isEmpty() && i < 3) {
@@ -577,7 +573,7 @@ public class Partie {
 		}
 		return l;
 	}
-	
+
 	/**
 	 * Affiche les différents personnages qui se trouvent sur un lieu.
 	 *
@@ -588,9 +584,9 @@ public class Partie {
 		for (Joueur j : joueurs.values()) {
 			int a = 0;
 			if (j.isChefDesVigiles()) {
-				for(Personnage p : j.getPersonnages().values()) {
+				for (Personnage p : j.getPersonnages().values()) {
 					if (l.getPersonnage().contains(p) && !p.estCache) {
-						a=1;
+						a = 1;
 					}
 				}
 				if (a == 1) {
@@ -601,9 +597,9 @@ public class Partie {
 		for (Joueur j : joueurs.values()) {
 			int a = 0;
 			if (!j.isChefDesVigiles()) {
-				for(Personnage p : j.getPersonnages().values()) {
+				for (Personnage p : j.getPersonnages().values()) {
 					if (l.getPersonnage().contains(p) && !p.estCache) {
-						a=1;
+						a = 1;
 					}
 				}
 				if (a == 1) {
