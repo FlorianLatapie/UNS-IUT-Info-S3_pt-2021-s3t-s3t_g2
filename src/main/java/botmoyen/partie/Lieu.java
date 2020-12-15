@@ -1,8 +1,11 @@
 package botmoyen.partie;
 
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+
+import reseau.type.Couleur;
 
 /**
  * <h1>La classe lieu</h1>. A pour rôle de définir un lieu.
@@ -11,7 +14,8 @@ import java.util.List;
  * @version 1
  * @since 04/10/2020
  */
-public class Lieu {
+public class Lieu  {
+
 
 	/** Numéro de la partie où se trouve le lieu. */
 	private int num;
@@ -32,7 +36,7 @@ public class Lieu {
 	private ArrayList<Personnage> personnage;
 
 	/** Nombre de personnage caché sur un lieu. */
-	private Integer nbPersoCache;
+	private int nbPersoCache;
 
 	/**
 	 * Initialise les différents lieux possibles et donne le nombre de places
@@ -67,6 +71,17 @@ public class Lieu {
 		this.ouvert = true;
 		personnage = new ArrayList<>();
 	}
+	
+	public Lieu(int num, int nbPlaces, int nbZombies, String name, boolean ouvert,
+			int nbPersoCache) {
+		this.num = num;
+		this.nbPlaces = nbPlaces;
+		this.nbZombies = nbZombies;
+		this.name = name;
+		this.ouvert = ouvert;
+		this.personnage = new ArrayList<Personnage>();
+		this.nbPersoCache = nbPersoCache;
+	}
 
 	/**
 	 * Récupère les instances de "blonde" sur un lieu.
@@ -76,7 +91,7 @@ public class Lieu {
 	public List<Personnage> getBlonde() {
 		ArrayList<Personnage> retour = new ArrayList<Personnage>();
 		for (int i = 0; i < this.personnage.size(); i++) {
-			if (this.personnage.get(i) instanceof LaBlonde) {
+			if (this.personnage.get(i).getPoint()==7) {
 				retour.add(this.personnage.get(i));
 			}
 		}
@@ -100,11 +115,11 @@ public class Lieu {
 	 *
 	 * @return n Le joueur affiché
 	 */
-	public List<Joueur> afficheJoueurSurLieu() {
-		ArrayList<Joueur> n = new ArrayList<Joueur>();
+	public List<Couleur> afficheJoueurSurLieu() {
+		ArrayList<Couleur> n = new ArrayList<Couleur>();
 		for (int i = 0; i < personnage.size(); i++) {
-			if (!(n.contains(personnage.get(i).getJoueur()))) {
-				n.add(personnage.get(i).getJoueur());
+			if (!(n.contains(personnage.get(i).getCouleur()))) {
+				n.add(personnage.get(i).getCouleur());
 			}
 		}
 		return n;
@@ -126,7 +141,7 @@ public class Lieu {
 			}
 			int force = 0;
 			for (int a = 0; a < this.personnage.size(); a++) {
-				if (personnage.get(a).getType() == TypePersonnage.BRUTE) {
+				if (personnage.get(a).getPoint()==5) {
 					force += 2;
 				} else {
 					force += 1;
@@ -148,7 +163,7 @@ public class Lieu {
 	public int getForce() {
 		int force = 0;
 		for (int a = 0; a < this.personnage.size(); a++) {
-			if (personnage.get(a).getType() == TypePersonnage.BRUTE) {
+			if (personnage.get(a).getPoint()==5) {
 				force += 2;
 			} else {
 				force += 1;
@@ -259,11 +274,17 @@ public class Lieu {
 		this.nbPersoCache = nbPersoCache;
 	}
 
-	public List<Joueur> getJoueurs() {
-		List<Joueur> joueurs = new ArrayList<>();
+	public List<Couleur> getJoueursCouleurs() {
+		List<Couleur> joueurs = new ArrayList<>();
 		for (Personnage p : personnage)
-			if (!joueurs.contains(p.getJoueur()))
-				joueurs.add(p.getJoueur());
+			if (!joueurs.contains(p.getCouleur()))
+				joueurs.add(p.getCouleur());
 		return joueurs;
 	}
+
+	public Lieu copyOf() {
+		return new Lieu(num, nbPlaces, nbZombies, name, ouvert, nbPersoCache);
+	}
+
+	
 }
