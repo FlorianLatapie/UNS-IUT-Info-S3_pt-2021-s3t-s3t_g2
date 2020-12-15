@@ -60,6 +60,7 @@ public class UdpConnexion implements Runnable, IEchangeSocket, IControleSocket {
 		multicastSocket = new MulticastSocket(MULTICAST_PORT);
 		multicastSocket.setInterface(monip);
 		multicastSocket.joinGroup(groupe);
+		System.out.println("[OK] " + InetAddress.getLocalHost());
 		estLancer = true;
 
 		logger.log(Level.FINEST, "Multicast UDP ouvert");
@@ -144,5 +145,29 @@ public class UdpConnexion implements Runnable, IEchangeSocket, IControleSocket {
 			multicastSocket.close();
 
 		logger.log(Level.INFO, "Socket UDP arreté");
+	}
+
+	/**
+	 * Bloque l'execution du thread tant que le client n'est pas pret a recevoir.
+	 */
+	public void attendreConnexion() {
+		while (multicastSocket == null)
+			Thread.yield();
+		while (!isPret())
+			Thread.yield();
+	}
+
+	/**
+	 * Permet de savoir le multicast udp est pret.
+	 */
+	public boolean isPret() {
+		return multicastSocket.isConnected();
+	}
+
+	/**
+	 * Permet de savoir le multicast udp est arreter.
+	 */
+	public boolean isArreter() {
+		return !multicastSocket.isClosed();
 	}
 }
