@@ -1419,9 +1419,6 @@ public class PlateauPane extends StackPane implements PlateauListener {
 			lInfo2.setText(camion);
 			lInfo3.setText(camion);
 			lInfo4.setText(camion);
-			imgFond.setEffect(flou);
-			borderJoueurs.setEffect(flou);
-			aPlateau.setEffect(flou);
 			TranslateTransition transi = new TranslateTransition(Duration.millis(1400), notifInfo);
 			transi.setFromY(-1000f);
 			transi.setToY(0f);
@@ -1457,9 +1454,6 @@ public class PlateauPane extends StackPane implements PlateauListener {
 			lInfo2.setText(depvig);
 			lInfo3.setText(depvig);
 			lInfo4.setText(depvig);
-			imgFond.setEffect(flou);
-			borderJoueurs.setEffect(flou);
-			aPlateau.setEffect(flou);
 			TranslateTransition transi = new TranslateTransition(Duration.millis(1400), notifInfo);
 			transi.setFromY(-1000f);
 			transi.setToY(0f);
@@ -1495,9 +1489,6 @@ public class PlateauPane extends StackPane implements PlateauListener {
 			lInfo2.setText(message);
 			lInfo3.setText(message);
 			lInfo4.setText(message);
-			imgFond.setEffect(flou);
-			borderJoueurs.setEffect(flou);
-			aPlateau.setEffect(flou);
 			TranslateTransition transi = new TranslateTransition(Duration.millis(1400), notifInfo);
 			transi.setFromY(-1000f);
 			transi.setToY(0f);
