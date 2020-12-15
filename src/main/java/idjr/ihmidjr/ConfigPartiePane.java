@@ -88,21 +88,14 @@ public class ConfigPartiePane extends StackPane implements ConfigListener {
 		desc.setMinHeight(hauteurElemtents);
 		desc.setPadding(botPadding);
 
-		TextField nomP = new TextField();
-		nomP.setText("Partie");
-		nomP.setFont(Font.font("Segoe UI", FontWeight.BOLD, 27));
-		nomP.setStyle("-fx-background-color: #1A1A1A; -fx-border-color: white; -fx-border-width: 1; -fx-text-fill: white;");
-		nomP.setPrefSize(400, hauteurElemtents);
-		nomP.setMinSize(400, hauteurElemtents);
-		nomP.setMaxSize(400, hauteurElemtents);
 		
 		VBox partie = new VBox();
 		partie.setAlignment(Pos.CENTER);
-		partie.getChildren().addAll(desc, nomP);
+		partie.getChildren().addAll(desc);
 		partie.setPadding(new Insets(10));
 		partie.setSpacing(17);
 		partie.setPrefWidth(220);
-		partie.setMaxWidth(400);
+		partie.setMaxWidth(600);
 
 		// To Creating a Observable List
 		ObservableList<Label> liste = FXCollections.observableArrayList();
@@ -112,9 +105,8 @@ public class ConfigPartiePane extends StackPane implements ConfigListener {
 
 		// Only allowed to select single row in the ListView.	
 		listView.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
-
-		listView.setMaxWidth(400);
-		listView.setMaxHeight(100);
+		listView.setPrefSize(400, 800);
+		listView.setMaxSize(400, 800);
 		listView.setEditable(false);
 		listView.setStyle("-fx-control-inner-background: #1A1A1A ; -fx-control-inner-background-alt: derive(-fx-control-inner-background, 15%);");
 
@@ -138,11 +130,11 @@ public class ConfigPartiePane extends StackPane implements ConfigListener {
 			bJouer.setStyle(styleBoutons);
 		});
 		bJouer.setOnAction(EventHandler -> {
-			core.getIdjr().estPartieConnecte(nomP.getText());
+		//	core.getIdjr().estPartieConnecte(nomP.getText());
 		});
-		nomP.textProperty().addListener((obs, oldText, newText) -> {
-			bJouer.setDisable(nomP.getText().isEmpty());
-		});
+		//nomP.textProperty().addListener((obs, oldText, newText) -> {
+		//	bJouer.setDisable(nomP.getText().isEmpty());
+		//});
 
 		Button bRetour = new Button(International.trad("bouton.retour"));
 		bRetour.setPrefSize(lBouton, hBouton);
