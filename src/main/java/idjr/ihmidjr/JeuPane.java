@@ -1304,7 +1304,7 @@ public class JeuPane extends StackPane implements JeuListener {
 		vote.setVisible(false);
 	}
 
-	//TODO
+	// TODO
 
 	public ListView<Label> updateLog(ListView<Label> list, Label l) {
 		list.getItems().add(list.getItems().size(), l);
@@ -1394,8 +1394,8 @@ public class JeuPane extends StackPane implements JeuListener {
 	@Override
 	public void desVigiles(List<Integer> list) {
 		Platform.runLater(() -> {
-			linfoZombie.setText("Des zombies ont été placé dans les lieu numero" + list.get(0) + ", " + list.get(1) + ", " + list.get(2)
-					+ " et " + list.get(3));
+			linfoZombie.setText("Des zombies arriveront dans les lieux " + list.get(0) + ", " + list.get(1) + ", "
+					+ list.get(2) + ", " + list.get(3));
 		});
 	}
 
@@ -1429,7 +1429,7 @@ public class JeuPane extends StackPane implements JeuListener {
 				imgFond.setImage(new Image(DataControl.NOIR));
 				break;
 			default:
-				break;
+				throw new IllegalArgumentException("Pas la bonne couleur (NUL)");
 			}
 		});
 	}

@@ -97,9 +97,12 @@ public class AccueilPane extends StackPane {
 		bJouer.setOnMouseExited(event -> {
 			bJouer.setStyle(styleBoutons);
 		});
+		nomjoueur.textProperty().addListener((obs, oldText, newText) -> {
+			bJouer.setDisable(!IhmTools.nomEstValide(nomjoueur.getText()));
+		});
 		bJouer.setOnAction(EventHandler -> {
 			// TODO CARACTERE NON AUTORISE
-			if (nomjoueur.getText().length() < 24) {
+			if (nomjoueur.getText().length() < 32 && IhmTools.nomEstValide(nomjoueur.getText())) {
 				core.getIdjr().setNom(nomjoueur.getText());
 				core.getIdjr().getInitializer().nomJoueur(core.getIdjr().getNom());
 				core.getIdjr().listOfServers();
@@ -203,7 +206,8 @@ public class AccueilPane extends StackPane {
 		this.getChildren().add(stackPane);
 		sControl.registerNode(paneName, this);
 		sControl.setPaneOnTop(paneName);
-
 	}
+	
+	
 
 }
