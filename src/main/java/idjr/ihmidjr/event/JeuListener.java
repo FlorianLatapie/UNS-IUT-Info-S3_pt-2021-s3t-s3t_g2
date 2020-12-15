@@ -40,4 +40,8 @@ public interface JeuListener {
 	void updateCarte();
 
 	void setVote(List<Couleur> listeCouleurJoueur);
+	
+	void log(String action);
+	
+	void enleverDes();
 }
