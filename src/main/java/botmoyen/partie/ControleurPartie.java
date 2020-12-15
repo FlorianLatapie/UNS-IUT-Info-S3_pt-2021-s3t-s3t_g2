@@ -176,6 +176,10 @@ public class ControleurPartie {
 					}
 				Collections.shuffle(pions);
 				Collections.shuffle(perso);
+				System.out.println("Joueur "+ j.getCouleur()+ "allperso = " +j.getPersonnages());
+				System.out.println("Joueur "+ j.getCouleur()+ "perso = " +perso);
+				System.out.println("Joueur "+ j.getCouleur()+ "perso = " +pions);
+				
 				if (pions.isEmpty())
 					partie.deplacePerso(j.getCouleur(), perso.get(0), 4);
 				else
