@@ -13,6 +13,38 @@ import java.util.List;
  * @version 2.0
  */
 public interface ReseauOutils {
+    String URL_TEST = "1.1.1.1";
+
+    /**
+     * Recupere l'adresse ip utilisée pour rejoindre le reseau.
+     *
+     * @return L'adresse ip de la bonne interface
+     */
+     static InetAddress getLocalIp() {
+        try (Socket socket = new Socket()) {
+            socket.connect(new InetSocketAddress(URL_TEST, 80));
+            return socket.getLocalAddress();
+        } catch (IOException e) {
+            try {
+                return getWindowsIp();
+            } catch (IOException ioException) {
+                return null;
+            }
+        }
+    }
+
+    /**
+     * Recupere l'adresse ip utilisée pour rejoindre le reseau (WINDOWS).
+     *
+     * @return L'adresse ip de la bonne interface
+     */
+    static InetAddress getWindowsIp() throws IOException {
+        if (OsOutils.isWindows()){
+            return InetAddress.getByName(OsOutils.execCommande("powershell.exe","/c", "(Get-WmiObject -Class Win32_NetworkAdapterConfiguration | where {$_.DefaultIPGateway -ne $null}).IPAddress | select-object -first 1"));
+        }
+            return null;
+    }
+
     /**
      * Recupere toutes les interfaces du pc.
      *

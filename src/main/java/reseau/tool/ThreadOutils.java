@@ -10,14 +10,15 @@ public interface ThreadOutils {
 	/**
 	 * Permet d'effectuer plusieurs taches de facon asynchrone.
 	 *
+	 * @param nom Le nom a attribuer
 	 * @param task Les taches a effectuer
 	 * @return Le thread crée
 	 */
-	 static Thread asyncTask(Runnable... task) {
+	 static Thread asyncTask(String nom ,Runnable... task) {
 		Thread t = new Thread(() -> {
 			for (Runnable runnable : task)
 				runnable.run();
-		});
+		},nom);
 		t.start();
 
 		return t;

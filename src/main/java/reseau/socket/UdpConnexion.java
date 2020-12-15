@@ -60,6 +60,7 @@ public class UdpConnexion implements Runnable, IEchangeSocket, IControleSocket {
 		multicastSocket = new MulticastSocket(MULTICAST_PORT);
 		multicastSocket.setInterface(monip);
 		multicastSocket.joinGroup(groupe);
+		System.out.println("[OK] " + InetAddress.getLocalHost());
 		estLancer = true;
 
 		logger.log(Level.FINEST, "Multicast UDP ouvert");
@@ -119,7 +120,6 @@ public class UdpConnexion implements Runnable, IEchangeSocket, IControleSocket {
 	 * @param message Le message a envoyer
 	 */
 	public void envoyer(String message) {
-		attendreConnexion();
 		logger.log(Level.FINEST, "Message envoyé : {0}", message);
 		String uftMessage = new String(message.getBytes(), ENCODAGE);
 		byte[] buffer = uftMessage.getBytes();
@@ -130,27 +130,6 @@ public class UdpConnexion implements Runnable, IEchangeSocket, IControleSocket {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-	}
-
-	/**
-	 * Permet d'envoyer un paquet.
-	 *
-	 * @param message Le message a envoyer
-	 */
-	public InetAddress envoyerEtIp(String message) {
-		attendreConnexion();
-		logger.log(Level.FINEST, "Message envoyé : {0}", message);
-		String uftMessage = new String(message.getBytes(), ENCODAGE);
-		byte[] buffer = uftMessage.getBytes();
-		DatagramPacket packet = new DatagramPacket(buffer, buffer.length, groupe, MULTICAST_PORT);
-
-		try {
-			multicastSocket.send(packet);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-
-		return multicastSocket.getInetAddress();
 	}
 
 	/**
@@ -172,10 +151,8 @@ public class UdpConnexion implements Runnable, IEchangeSocket, IControleSocket {
 	 * Bloque l'execution du thread tant que le client n'est pas pret a recevoir.
 	 */
 	public void attendreConnexion() {
-		while (multicastSocket == null) {
+		while (multicastSocket == null)
 			Thread.yield();
-			System.out.println("Erreur P4598");
-		}
 		while (!isPret())
 			Thread.yield();
 	}
@@ -183,14 +160,14 @@ public class UdpConnexion implements Runnable, IEchangeSocket, IControleSocket {
 	/**
 	 * Permet de savoir le multicast udp est pret.
 	 */
-	private boolean isPret() {
-		return !multicastSocket.isConnected();
+	public boolean isPret() {
+		return multicastSocket.isConnected();
 	}
 
 	/**
 	 * Permet de savoir le multicast udp est arreter.
 	 */
-	private boolean isArreter() {
+	public boolean isArreter() {
 		return !multicastSocket.isClosed();
 	}
 }
