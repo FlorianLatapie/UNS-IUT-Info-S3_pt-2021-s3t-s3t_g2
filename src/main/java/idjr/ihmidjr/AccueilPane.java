@@ -102,6 +102,7 @@ public class AccueilPane extends StackPane {
 			if (nomjoueur.getText().length() < 24) {
 				core.getIdjr().setNom(nomjoueur.getText());
 				core.getIdjr().getInitializer().nomJoueur(core.getIdjr().getNom());
+				core.getIdjr().listOfServers();
 				sc.setPaneOnTop(ApplicationPane.CONFIG);
 			} else
 				nomjoueur.setText("INVALIDE");//TODO

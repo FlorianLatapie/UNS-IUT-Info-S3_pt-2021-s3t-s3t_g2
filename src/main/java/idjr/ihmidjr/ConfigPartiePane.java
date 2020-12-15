@@ -1,5 +1,6 @@
 package idjr.ihmidjr;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import idjr.PartieInfo;
@@ -58,6 +59,10 @@ public class ConfigPartiePane extends StackPane implements ConfigListener {
 	private CornerRadii coinfb = new CornerRadii(5.0);
 	private Background fondBlanc = new Background(new BackgroundFill(Color.WHITE, coinfb, null));
 
+	ListView<Label> listView;
+
+	List<PartieInfo> partieActuelle = new ArrayList<>();
+
 	private Insets botPadding = new Insets(10);
 
 	ObservableList<Label> liste = FXCollections.observableArrayList();
@@ -88,7 +93,15 @@ public class ConfigPartiePane extends StackPane implements ConfigListener {
 		desc.setMinHeight(hauteurElemtents);
 		desc.setPadding(botPadding);
 
-		
+		TextField nomP = new TextField();
+		nomP.setText("Partie");
+		nomP.setFont(Font.font("Segoe UI", FontWeight.BOLD, 27));
+		nomP.setStyle(
+				"-fx-background-color: #1A1A1A; -fx-border-color: white; -fx-border-width: 1; -fx-text-fill: white;");
+		nomP.setPrefSize(400, hauteurElemtents);
+		nomP.setMinSize(400, hauteurElemtents);
+		nomP.setMaxSize(400, hauteurElemtents);
+
 		VBox partie = new VBox();
 		partie.setAlignment(Pos.CENTER);
 		partie.getChildren().addAll(desc);
@@ -101,15 +114,15 @@ public class ConfigPartiePane extends StackPane implements ConfigListener {
 		ObservableList<Label> liste = FXCollections.observableArrayList();
 
 		// Create a ListView
-		ListView<Label> listView = new ListView<Label>(liste);
-				
-		// Only allowed to select single row in the ListView.	
+		listView = new ListView<Label>(liste);
+
+		// Only allowed to select single row in the ListView.
 		listView.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
 		listView.setPrefWidth(400);
 		listView.setMaxWidth(400);
 		listView.setEditable(false);
 		listView.setStyle("-fx-background-color: white;-fx-control-inner-background: #1A1A1A ; -fx-control-inner-background-alt: derive(-fx-control-inner-background, 15%);");
-		
+
 		Button bRefresh = new Button("Raffraichir");
 		bRefresh.setPrefSize(lBouton+30, hBouton);
 		bRefresh.setMinSize(lBouton+30, hBouton);
@@ -131,9 +144,9 @@ public class ConfigPartiePane extends StackPane implements ConfigListener {
 		vbCenter.setMinHeight(587);
 		vbCenter.setMaxHeight(587);
 		vbCenter.getChildren().addAll(partie, listView, bRefresh);
-		
-		
-		
+
+
+
 
 		// boutons
 		Button bJouer = new Button(International.trad("bouton.jouer"));
@@ -150,7 +163,16 @@ public class ConfigPartiePane extends StackPane implements ConfigListener {
 			bJouer.setStyle(styleBoutons);
 		});
 		bJouer.setOnAction(EventHandler -> {
-		//	core.getIdjr().estPartieConnecte(nomP.getText());
+			int index = listView.getSelectionModel().getSelectedIndex();
+			if (index == -1)
+				return;
+			PartieInfo partieInfo = partieActuelle.get(index);
+			if (partieInfo == null)
+				return;
+			core.getIdjr().estPartieConnecte(partieInfo.getIdPartie());
+		});
+		nomP.textProperty().addListener((obs, oldText, newText) -> {
+			bJouer.setDisable(nomP.getText().isEmpty());
 		});
 		//nomP.textProperty().addListener((obs, oldText, newText) -> {
 		//	bJouer.setDisable(nomP.getText().isEmpty());
@@ -219,12 +241,11 @@ public class ConfigPartiePane extends StackPane implements ConfigListener {
 	@Override
 	public void partie(List<PartieInfo> partieInfo) {
 		Platform.runLater(() -> {
-			// int i = 0;
-			// for (PartieInfo partieInfo2 : partieInfo) {
-			// Label label = new Label(partieInfo2.getIdPartie());
-			// liste.set(0, label);
-			// i++;
-			// }
+			listView.getItems().clear();
+			partieActuelle = partieInfo;
+			for (PartieInfo partieInfo2 : partieInfo) {
+				listView.getItems().add(new Label(partieInfo2.toString()));
+			}
 		});
 	}
 }
