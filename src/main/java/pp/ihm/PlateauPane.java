@@ -427,13 +427,18 @@ public class PlateauPane extends StackPane implements PlateauListener {
 		VBox joueursPresents1 = new VBox();
 		joueursPresents1.setAlignment(Pos.CENTER);
 		HBox joueursPresents1L1 = new HBox();
+		joueursPresents1L1.setAlignment(Pos.CENTER);
+		joueursPresents1L1.setSpacing(10);
+		HBox joueursPresents1L2 = new HBox();
+		joueursPresents1L2.setAlignment(Pos.CENTER);
+		joueursPresents1L2.setSpacing(10);
 		l1p1 = new ImageView(DataControl.NOM_COULEUR);
 		l1p2 = new ImageView(DataControl.NOM_COULEUR);
 		l1p3 = new ImageView(DataControl.NOM_COULEUR);
 
-		joueursPresents1L1.getChildren().addAll(l1p1, l1p2, l1p3);
-
-		joueursPresents1.getChildren().addAll(/*afficheJoueursLieu1 = new Label(),*/ joueursPresents1L1);
+		joueursPresents1L1.getChildren().addAll(l1p1, l1p2);
+		joueursPresents1L2.getChildren().addAll(l1p3);
+		joueursPresents1.getChildren().addAll(joueursPresents1L1, joueursPresents1L2);
 		joueursPresents1.setPrefSize(170, 200);
 
 		nbZombies1 = new Label(International.trad("text.nbZombie"));
@@ -474,14 +479,18 @@ public class PlateauPane extends StackPane implements PlateauListener {
 		VBox joueursPresents2 = new VBox();
 		joueursPresents2.setAlignment(Pos.CENTER);
 		HBox joueursPresents2L1 = new HBox();
+		joueursPresents2L1.setAlignment(Pos.CENTER);
+		joueursPresents2L1.setSpacing(10);
 		HBox joueursPresents2L2 = new HBox();
+		joueursPresents2L2.setAlignment(Pos.CENTER);
+		joueursPresents2L2.setSpacing(10);
 		l2p1 = new ImageView(DataControl.NOM_COULEUR);
 		l2p2 = new ImageView(DataControl.NOM_COULEUR);
 		l2p3 = new ImageView(DataControl.NOM_COULEUR);
 		l2p4 = new ImageView(DataControl.NOM_COULEUR);
 
-		joueursPresents2L1.getChildren().addAll(l2p1, l2p2, l2p3);
-		joueursPresents2L2.getChildren().addAll(l2p4);
+		joueursPresents2L1.getChildren().addAll(l2p1, l2p2);
+		joueursPresents2L2.getChildren().addAll(l2p3, l2p4);
 		joueursPresents2.getChildren().addAll(/*afficheJoueursLieu2 = new Label(),*/ joueursPresents2L1,
 				joueursPresents2L2);
 		joueursPresents2.setSpacing(5);
@@ -504,7 +513,6 @@ public class PlateauPane extends StackPane implements PlateauListener {
 		b2.setRight(vbRight2);
 		b2.setBottom(hbBot2);
 		b2.setOpacity(.9);
-
 		b2.setRotate(-133);
 
 		AnchorPane.setTopAnchor(b2, 725.0);
@@ -525,15 +533,19 @@ public class PlateauPane extends StackPane implements PlateauListener {
 
 		VBox joueursPresents3 = new VBox();
 		joueursPresents3.setAlignment(Pos.CENTER);
-		HBox joueursPresents3L1 = new HBox();
+		HBox joueursPresents3L1 = new HBox();	
+		joueursPresents3L1.setAlignment(Pos.CENTER);
+		joueursPresents3L1.setSpacing(10);
 		HBox joueursPresents3L2 = new HBox();
+		joueursPresents3L2.setAlignment(Pos.CENTER);
+		joueursPresents3L2.setSpacing(10);
 		l3p1 = new ImageView(DataControl.NOM_COULEUR);
 		l3p2 = new ImageView(DataControl.NOM_COULEUR);
 		l3p3 = new ImageView(DataControl.NOM_COULEUR);
 		l3p4 = new ImageView(DataControl.NOM_COULEUR);
 
-		joueursPresents3L1.getChildren().addAll(l3p1, l3p2, l3p3);
-		joueursPresents3L2.getChildren().addAll(l3p4);
+		joueursPresents3L1.getChildren().addAll(l3p1, l3p2);
+		joueursPresents3L2.getChildren().addAll(l3p3, l3p4);
 		joueursPresents3.getChildren().addAll(/*afficheJoueursLieu3 = new Label(), */joueursPresents3L1,
 				joueursPresents3L2);
 		joueursPresents3.setSpacing(5);
@@ -634,13 +646,18 @@ public class PlateauPane extends StackPane implements PlateauListener {
 		VBox joueursPresents5 = new VBox();
 		joueursPresents5.setAlignment(Pos.CENTER);
 		HBox joueursPresents5L1 = new HBox();
-		
+		joueursPresents5L1.setAlignment(Pos.CENTER);
+		joueursPresents5L1.setSpacing(10);
+		HBox joueursPresents5L2 = new HBox();
+		joueursPresents5L2.setAlignment(Pos.CENTER);
+		joueursPresents5L2.setSpacing(10);
 		l5p1 = new ImageView(DataControl.NOM_COULEUR);
 		l5p2 = new ImageView(DataControl.NOM_COULEUR);
 		l5p3 = new ImageView(DataControl.NOM_COULEUR);
 
-		joueursPresents5L1.getChildren().addAll(l5p1,l5p2,l5p3);
-		joueursPresents5.getChildren().addAll(/*afficheJoueursLieu6 = new Label(), */joueursPresents5L1);
+		joueursPresents5L1.getChildren().addAll(l5p1,l5p2);
+		joueursPresents5L2.getChildren().add(l5p3);
+		joueursPresents5.getChildren().addAll(joueursPresents5L1, joueursPresents5L2 );
 		joueursPresents5.setPrefSize(170, 100);
 
 
@@ -1307,7 +1324,7 @@ public class PlateauPane extends StackPane implements PlateauListener {
 
 	@Override
 	public void destionationPerso(int lieu, String nomPersosCouleur) {
-		//TODO prendre le string le déouper et trouver quel perso il faut afficher et non afficher glhf
+		//TODO prendre le string le déouper et trouver quel perso il faut afficher et non afficher 
 		Platform.runLater(() -> {
 			switch (lieu) {
 			case 1:
