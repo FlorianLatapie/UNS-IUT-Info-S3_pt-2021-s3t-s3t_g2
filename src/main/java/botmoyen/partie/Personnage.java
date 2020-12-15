@@ -1,5 +1,8 @@
 package botmoyen.partie;
 
+
+import reseau.type.Couleur;
+
 /**
  * <h1>Le personnage</h1>
  *
@@ -11,10 +14,10 @@ package botmoyen.partie;
  * @version 0.1
  * @since 04/10/2020
  */
-public abstract class Personnage {
-	protected Lieu monLieu;// position actuel du personnage
-	private Joueur joueur;
-	private TypePersonnage type;
+public class Personnage{
+
+	protected int monidLieu;// position actuel du personnage
+	protected Couleur couleur;
 	protected int point;
 	protected int nbrZretenu = 1;
 	protected int nbrVoixPourVoter = 1;
@@ -26,10 +29,27 @@ public abstract class Personnage {
 	 * @param joueur le joueur possedant le personnage
 	 * @param type   le type du personnage
 	 */
-	public Personnage(Joueur joueur, TypePersonnage type) {
-		this.type = type;
-		this.joueur = joueur;
+	public Personnage(Joueur joueur,int point,int nbZretenu, int nbrVoixPourVoter) {
+		this.point=point;
+		this.nbrZretenu = nbZretenu;
+		this.nbrVoixPourVoter = nbrVoixPourVoter;
+		this.couleur = joueur.getCouleur();
 	}
+	
+
+	public Personnage(int monidLieu, Couleur couleur, int point, int nbrZretenu,
+			int nbrVoixPourVoter, int nbrElection, boolean estVivant, boolean estCache) {
+		super();
+		this.monidLieu = monidLieu;
+		this.couleur = couleur;
+		this.point = point;
+		this.nbrZretenu = nbrZretenu;
+		this.nbrVoixPourVoter = nbrVoixPourVoter;
+		this.nbrElection = nbrElection;
+		this.estVivant = estVivant;
+		this.estCache = estCache;
+	}
+	
 
 	/**
 	 * @return si le personnage est caché, sinon false
@@ -73,30 +93,43 @@ public abstract class Personnage {
 	 *
 	 * @param newLieu nouveau lieu
 	 */
-	public void changerDeLieux(Lieu newLieu) {
-		monLieu = newLieu;
+	public void changerDeLieux(int newidLieu) {
+		monidLieu = newidLieu;
 	}
 
 	/**
 	 * @return le lieu dans lequel se trouve actuellement le joueur
 	 */
-	public Lieu getMonLieu() {
-		return monLieu;
+	public int getMonLieu() {
+		return monidLieu;
 	}
 
 	/**
 	 * @return Renvoie le joueur possédant le personnage
 	 */
-	public Joueur getJoueur() {
-		return this.joueur;
+	public Couleur getCouleur() {
+		return this.couleur;
 	}
 
-	/**
-	 * @return le type du personnage
-	 */
-	public TypePersonnage getType() {
-		return type;
-	}
 
-	public abstract String toString();
+
+	public String toString() {
+		if (point==7)
+			return "La Blonde";
+		if (point==5)
+			return "La Brute";
+		if (point==3)
+			return "La Fillette";
+		if (point==1)
+			return "Le Truand";
+		return "Inconnu";
+		
+	}
+	
+	public Personnage copyOf() {
+		return new Personnage( monidLieu,  couleur,  point,  nbrZretenu, nbrVoixPourVoter,  nbrElection,  estVivant,  estCache);
+	}
+	
+
+
 }

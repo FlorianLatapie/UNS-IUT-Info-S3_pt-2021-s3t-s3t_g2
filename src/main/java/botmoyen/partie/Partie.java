@@ -1,12 +1,13 @@
 package botmoyen.partie;
 
 import reseau.type.CarteType;
-import reseau.type.CondType;
 import reseau.type.Couleur;
 
 import java.util.*;
 
 import static java.lang.System.out;
+
+
 
 /**
  * <h1>La classe partie</h1>.
@@ -18,6 +19,8 @@ import static java.lang.System.out;
  */
 public class Partie {
 
+
+
 	/** Dictionnaire des lieux identifiés par un entier. */
 	HashMap<Integer, Lieu> lieux;
 
@@ -26,19 +29,15 @@ public class Partie {
 
 	/** Liste des cartes. */
 	List<CarteType> cartes;
-
+	
 	/** Booléen indiquant si un nouveauChef à été élu. */
 	boolean nouveauChef;
 
 	/** Couleur indiquant le gagnant */
 	Couleur gagnant;
-	
+
 	/** Booléen indiquant si il y a eu une egalite. */
 	boolean egalite;
-
-
-
-
 
 	/**
 	 * Instantie une nouvelle partie.
@@ -56,6 +55,19 @@ public class Partie {
 		initJoueurs();
 		initLieu();
 	}
+	
+	
+
+	public Partie(HashMap<Integer, Lieu> lieux, HashMap<Couleur, Joueur> joueurs,
+			boolean nouveauChef, Couleur gagnant, boolean egalite) {
+		super();
+		this.lieux = lieux;
+		this.joueurs = joueurs;
+		this.nouveauChef = nouveauChef;
+		this.gagnant = gagnant;
+		this.egalite = egalite;
+	}
+
 
 	/**
 	 * Initialise les cartes du
@@ -64,7 +76,6 @@ public class Partie {
 
 		for (CarteType c : CarteType.values())
 			cartes.add(c);
-
 		cartes.add(CarteType.SPR);
 		cartes.add(CarteType.SPR);
 		cartes.add(CarteType.MEN);
@@ -79,6 +90,7 @@ public class Partie {
 		Collections.shuffle(cartes);
 
 	}
+	
 
 	/**
 	 * Initialise les lieux du jeu
@@ -106,18 +118,18 @@ public class Partie {
 		if (joueurs.size() < 4)
 			for (Joueur j : joueurs.values()) {
 				HashMap<Integer, Personnage> dp = new HashMap<>();
-				dp.put(7, new LaBlonde(j));
-				dp.put(5, new LaBrute(j));
-				dp.put(3, new LeTruand(j));
-				dp.put(1, new LaFillette(j));
+				dp.put(7, new Personnage(j,7,1,1));
+				dp.put(5, new Personnage(j,5,2,1));
+				dp.put(3, new Personnage(j,3,1,2));
+				dp.put(1, new Personnage(j,1,1,1));
 				j.setPersonnages(dp);
 			}
 		else
 			for (Joueur j : joueurs.values()) {
 				HashMap<Integer, Personnage> dp = new HashMap<>();
-				dp.put(7, new LaBlonde(j));
-				dp.put(5, new LaBrute(j));
-				dp.put(3, new LeTruand(j));
+				dp.put(7, new Personnage(j,7,1,1));
+				dp.put(5, new Personnage(j,5,2,1));
+				dp.put(3, new Personnage(j,3,1,2));
 				j.setPersonnages(dp);
 			}
 	}
@@ -131,8 +143,14 @@ public class Partie {
 	// TODO
 	public Joueur voteJoueur(int lieu) {
 		// gestion des cartes
-		int rnd = new Random().nextInt(lieux.get(lieu).afficheJoueurSurLieu().size());
-		return lieux.get(lieu).afficheJoueurSurLieu().get(rnd);
+		List<Couleur> couleurs = lieux.get(lieu).afficheJoueurSurLieu();
+		ArrayList<Joueur> joueurList = new ArrayList<>();
+		for(Couleur c : couleurs)
+			for (Joueur j : joueurs.values())
+				if (j.getCouleur().equals(c))
+					joueurList.add(j);
+		int rnd = new Random().nextInt(joueurList.size());
+		return joueurList.get(rnd);
 	}
 
 	/**
@@ -211,7 +229,7 @@ public class Partie {
 	public List<Integer> getPersonnageAPlace(Joueur joueur) {
 		List<Integer> persoNonPlace = new ArrayList<>();
 		for (Personnage personnage : joueur.getPersonnages().values()) {
-			if (personnage.getMonLieu() == null) {
+			if (personnage.getMonLieu() == 0) {
 				persoNonPlace.add(personnage.getPoint());
 			}
 		}
@@ -249,7 +267,7 @@ public class Partie {
 	public List<Integer> getPersoDestPossible(Personnage personnage) {
 		List<Integer> destinations = new ArrayList<>();
 		for (Lieu l : lieux.values())
-			if (personnage.getMonLieu() != l && l.isOuvert() && !l.isFull())
+			if (personnage.getMonLieu() != l.getNum() && l.isOuvert() && !l.isFull())
 				destinations.add(l.getNum());
 		return destinations;
 	}
@@ -397,13 +415,21 @@ public class Partie {
 	 * @param choixPerso le personnage qui est déplacé
 	 * @param dest       le lieu de destination du personnage
 	 */
-	public void deplacePerso(Couleur couleur, Integer choixPerso, Integer dest) {
-		for (Joueur j : joueurs.values()) {
-			if (j.getCouleur().equals(couleur)) {
-				int l = j.getPersonnages().get(choixPerso).getMonLieu().getNum();
-				j.getPersonnages().get(choixPerso).changerDeLieux(lieux.get(dest));
-				lieux.get(l).getPersonnage().remove(j.getPersonnages().get(choixPerso));
-				lieux.get(dest).addPersonnage(j.getPersonnages().get(choixPerso));
+	public void deplacePerso(Couleur couleur, Integer choixPerso, Integer destination) {
+		for (Joueur joueur : joueurs.values()) {
+			if (joueur.getCouleur().equals(couleur)) {
+				int dest=destination;
+				if (lieux.get(dest).isFull()) 
+					dest=4;
+				System.out.println(joueur);
+				System.out.println(joueur.getPersonnages());
+				System.out.println(joueur.getPersonnages().get(choixPerso));
+				System.out.println(joueur.getPersonnages().get(choixPerso).getMonLieu());
+				int idPosActuel = joueur.getPersonnages().get(choixPerso).getMonLieu();
+				joueur.getPersonnages().get(choixPerso).changerDeLieux(dest);
+				lieux.get(idPosActuel).getPersonnage().remove(joueur.getPersonnages().get(choixPerso));
+				lieux.get(dest).addPersonnage(joueur.getPersonnages().get(choixPerso));
+				
 			}
 		}
 	}
@@ -418,7 +444,7 @@ public class Partie {
 	public void placePerso(Couleur couleur, Integer choixPerso, Integer dest) {
 		for (Joueur j : joueurs.values()) {
 			if (j.getCouleur().equals(couleur)) {
-				j.getPersonnages().get(choixPerso).changerDeLieux(lieux.get(dest));
+				j.getPersonnages().get(choixPerso).changerDeLieux(dest);
 				this.lieux.get(dest).addPersonnage(j.getPersonnages().get(choixPerso));
 			}
 		}
@@ -431,13 +457,9 @@ public class Partie {
 	 * @param choixPerso le personnage qui va être sacrifié
 	 */
 	public void sacrifie(Couleur couleur, Integer choixPerso) {
-		for (Joueur j : joueurs.values()) {
-			if (j.getCouleur().equals(couleur)) {
-				lieux.get(j.getPersonnages().get(choixPerso).getMonLieu().getNum()).getPersonnage()
-						.remove(j.getPersonnages().get(choixPerso));
-				j.getPersonnages().remove(choixPerso);
-			}
-		}
+		lieux.get(joueurs.get(couleur).getPersonnages().get(choixPerso).getMonLieu()).getPersonnage()
+				.remove(joueurs.get(couleur).getPersonnages().get(choixPerso));
+		joueurs.get(couleur).getPersonnages().remove(choixPerso);
 	}
 
 	/**
@@ -468,7 +490,7 @@ public class Partie {
 		for (Lieu lieu : lieux.values()) {
 			etatPartie.append(lieu).append(":\n");
 			for (Personnage personnage : lieu.getPersonnage()) {
-				etatPartie.append("(").append(personnage.getJoueur()).append(") ").append(personnage).append("\n");
+				etatPartie.append("(").append(joueurs.get(personnage.getCouleur())).append(") ").append(personnage).append("\n");
 			}
 			etatPartie.append("Nombre de place-> ").append(lieu.getNbPlaces()).append("\n");
 			etatPartie.append("Nombre de Zombie-> ").append(lieu.getNbZombies()).append("\n\n");
@@ -537,14 +559,7 @@ public class Partie {
 		return lieux;
 	}
 
-	/*
-	 * Retourne la liste des cartes
-	 *
-	 * @return la liste des cartes
-	 */
-	public List<CarteType> getCartes() {
-		return cartes;
-	}
+
 
 	/**
 	 * Retourne nouveauChef.
@@ -579,10 +594,7 @@ public class Partie {
 		this.nouveauChef = nouveauChef;
 	}
 
-	public void givecarte(Couleur c, CarteType carte) {
-		joueurs.get(c).getCartes().add(carte);
-		cartes.remove(carte);
-	}
+
 
 	public void setZombieSurLieu(Integer lieu, Integer nbz) {
 		lieux.get(lieu).setNbZombies(nbz);
@@ -603,7 +615,7 @@ public class Partie {
 		for (Couleur i : getJoueursCouleurs())
 			if (getJoueurs().get(i).isEnVie() && getJoueurs().get(i).getPersonnages().size() == 0)
 				getJoueurs().get(i).setEnVie(false);
-		ArrayList<Lieu> lieu = new ArrayList<>();
+		ArrayList<Integer> lieu = new ArrayList<>();
 		int nbPerso = 0;
 		for (Couleur i : getJoueursCouleurs())
 			if (getJoueurs().get(i).isEnVie()) {
@@ -612,7 +624,7 @@ public class Partie {
 					if (!lieu.contains(getJoueurs().get(i).getPersonnages().get(j).getMonLieu()))
 						lieu.add(getJoueurs().get(i).getPersonnages().get(j).getMonLieu());
 			}
-		if ((lieu.size() < 2 && lieu.get(0) != getLieux().get(4)) || (nbPerso <= 4 && getJoueurs().size() < 6)
+		if ((lieu.size() < 2 && lieu.get(0) != 4) || (nbPerso <= 4 && getJoueurs().size() < 6)
 				|| (nbPerso <= 6 && getJoueurs().size() == 6)) {
 			int pointVainqueur = 0;
 			ArrayList<Joueur> vainqueur = new ArrayList<>();
@@ -634,12 +646,63 @@ public class Partie {
 		}
 		return isFinished;
 	}
-	
+
 	public Couleur getGagnant() {
 		return gagnant;
 	}
-	
+
 	public boolean isEgalite() {
 		return egalite;
 	}
+
+	public Partie copyOf() {
+		HashMap<Integer, Lieu> lieuxCopy = new HashMap<Integer, Lieu>();
+		HashMap<Couleur, Joueur> joueursCopy = new HashMap<Couleur, Joueur>();
+		for (Lieu lieu : lieux.values()) {
+			lieuxCopy.put(lieu.getNum(), lieu.copyOf());
+			
+		}
+
+		for (Joueur joueur : joueurs.values()) {
+			joueursCopy.put(joueur.getCouleur(), joueur.copyOf());
+			
+		}
+		Partie partieCopy = new Partie(lieuxCopy, joueursCopy,
+				nouveauChef, gagnant,egalite);
+		for (Joueur joueur : partieCopy.getJoueurs().values())
+			for ( Personnage personnage : joueur.getPersonnages().values())
+				partieCopy.placePerso(joueur.getCouleur(), personnage.getPoint(), personnage.getMonLieu());
+		
+		return partieCopy;
+		
+	}
+
+
+	
+	
+	public ArrayList<Joueur> getJoueursSurLieu(Integer numlieu){
+		List<Couleur> couleurs = lieux.get(numlieu).afficheJoueurSurLieu();
+		ArrayList<Joueur> joueurList = new ArrayList<>();
+		for(Couleur c : couleurs)
+			for (Joueur j : joueurs.values())
+				if (j.getCouleur().equals(c))
+					joueurList.add(j);
+		return joueurList;
+	}
+
+	
+	/*
+	 * Retourne la liste des cartes
+	 *
+	 * @return la liste des cartes
+	 */
+	public List<CarteType> getCartes() {
+		return cartes;
+	}
+	
+	public void givecarte(Couleur c, CarteType carte) {
+		joueurs.get(c).getCartes().add(carte);
+		cartes.remove(carte);
+	}
+
 }

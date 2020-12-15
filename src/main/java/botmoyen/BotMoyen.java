@@ -169,7 +169,7 @@ public class BotMoyen {
 		this.envie = envie;
 	}
 
-	public List<PionCouleur> getPoinSacrDispo() {
+	public List<PionCouleur> getPionSacrDispo() {
 		return poinSacrDispo;
 	}
 
@@ -431,13 +431,7 @@ public class BotMoyen {
 
 	}
 
-	public void recupInfoPerso(List<PionCouleur> listelp, Integer lieu) {
 
-		for (PionCouleur p : listelp) {
-			partie.deplacePerso(IdjrTools.getCouleurByChar(p), IdjrTools.getPionByValue(p), lieu);
-		}
-
-	}
 
 	public void corectionZombie(Integer lieu, Integer nbz) {
 		partie.setZombieSurLieu(lieu, nbz);

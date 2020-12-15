@@ -42,20 +42,27 @@ public class ControleurPartie {
 	 */
 	public void iterate(Integer dest) throws InterruptedException {
 		HashMap<Couleur, Integer> destination = new HashMap<>();
+		System.out.println("phasechoixDestination : " + destination + dest);
 		phasechoixDestination(destination, dest);
+		System.out.println("entreZombie : " + lieuZombie);
 		partie.entreZombie(lieuZombie);
+		System.out.println("phaseDeplacementPerso : " + destination + lieuZombie);
 		phaseDeplacementPerso(destination, lieuZombie);
 		if (partie.estFini())
 			return;
+		System.out.println("fermerLieu");
 		partie.fermerLieu();
 		if (partie.estFini())
 			return;
+		System.out.println("phaseAttaqueZombie");
 		phaseAttaqueZombie();
 		if (partie.estFini())
 			return;
 		jmort.clear();
 		jmort = partie.getJoueursMort();
-		electionChefVigi();
+		//System.out.println("electionChefVigi");
+		//electionChefVigi();
+		System.out.println("arriveZombie");
 		this.lieuZombie = arriveZombie();
 	}
 
@@ -70,15 +77,14 @@ public class ControleurPartie {
 	 * Affiche et met à jour le nouveau chef des vigiles
 	 */
 	private void electionChefVigi() {
-
 		Joueur j;
-		if (!partie.getLieux().get(5).getJoueurs().isEmpty()) {
-			if (partie.getLieux().get(5).getJoueurs().size() == 1)
-				j = partie.getLieux().get(5).getJoueurs().get(0);
+		if (!partie.getJoueursSurLieu(5).isEmpty()) {
+			if (partie.getJoueursSurLieu(5).size() == 1)
+				j = partie.getJoueursSurLieu(5).get(0);
 			else
 				j = phaseVote(partie.getLieux().get(5), VoteType.ECD);
 			if (j != null) {
-				partie.resultatChefVigile(j);
+				partie.setChef(j.getCouleur());
 				partie.setNewChef(true);
 			} else
 				partie.setNewChef(false);
@@ -101,63 +107,27 @@ public class ControleurPartie {
 	}
 
 	private void phasechoixDestination(HashMap<Couleur, Integer> destination, Integer destinationBot) {
-		int dest;
-		if (partie.getNewChef()) {
-			if (partie.getChefVIgile().isEnVie()) {
-				if (partie.getChefVIgile().getCouleur().equals(couleurBotCourant))
-					dest = destinationBot;
-				else {
+
+		for (Joueur j : partie.getJoueurs().values()) {
+			if (j.isEnVie()) {
+				if (j.getCouleur().equals(couleurBotCourant)) {
+					destination.put(couleurBotCourant, destinationBot);
+				} else {
 					List<Integer> possibleActions = new ArrayList<Integer>();
 					for (Integer idLieu : partie.getLieuxOuverts()) {
 						boolean destValide = false;
-						for (Personnage perso : partie.getChefVIgile().getPersonnages().values())
-							if (perso.getMonLieu().getNum() != idLieu)
+						for (Personnage perso : j.getPersonnages().values())
+							if (perso.getMonLieu() != idLieu)
 								destValide = true;
 						if (destValide)
 							possibleActions.add(idLieu);
 					}
 					Collections.shuffle(possibleActions);
-					dest = possibleActions.get(0);
-				}
-				destination.put(partie.getChefVIgile().getCouleur(), dest);
-
-				for (Joueur j : partie.getJoueurs().values()) {
-					if (j.isEnVie()) {
-						List<Integer> possibleActions = new ArrayList<Integer>();
-						for (Integer idLieu : partie.getLieuxOuverts()) {
-							boolean destValide = false;
-							for (Personnage perso : j.getPersonnages().values())
-								if (perso.getMonLieu().getNum() != idLieu)
-									destValide = true;
-							if (destValide)
-								possibleActions.add(idLieu);
-						}
-						Collections.shuffle(possibleActions);
-						destination.put(j.getCouleur(), possibleActions.get(0));
-					}
-				}
-			}
-		} else {
-			for (Joueur j : partie.getJoueurs().values()) {
-				if (j.isEnVie()) {
-					if (j.getCouleur().equals(couleurBotCourant)) {
-						destination.put(couleurBotCourant, destinationBot);
-					} else {
-						List<Integer> possibleActions = new ArrayList<Integer>();
-						for (Integer idLieu : partie.getLieuxOuverts()) {
-							boolean destValide = false;
-							for (Personnage perso : j.getPersonnages().values())
-								if (perso.getMonLieu().getNum() != idLieu)
-									destValide = true;
-							if (destValide)
-								possibleActions.add(idLieu);
-						}
-						Collections.shuffle(possibleActions);
-						destination.put(j.getCouleur(), possibleActions.get(0));
-					}
+					destination.put(j.getCouleur(), possibleActions.get(0));
 				}
 			}
 		}
+
 		partie.getLieux().get(partie.getLieuxOuverts().get(new Random().nextInt(partie.getLieuxOuverts().size())))
 				.addZombie();
 	}
@@ -168,18 +138,12 @@ public class ControleurPartie {
 				List<Integer> pions = new ArrayList<>();
 				List<Integer> perso = new ArrayList<>();
 				for (Personnage p : j.getPersonnages().values())
-					if (p.estVivant) {
-						if (p.getMonLieu().getNum() != destination.get(j.getCouleur()))
-							pions.add(p.getPoint());
-						else
-							perso.add(p.getPoint());
-					}
+					if (p.getMonLieu() != destination.get(j.getCouleur()))
+						pions.add(p.getPoint());
+					else
+						perso.add(p.getPoint());
 				Collections.shuffle(pions);
 				Collections.shuffle(perso);
-				System.out.println("Joueur "+ j.getCouleur()+ "allperso = " +j.getPersonnages());
-				System.out.println("Joueur "+ j.getCouleur()+ "perso = " +perso);
-				System.out.println("Joueur "+ j.getCouleur()+ "perso = " +pions);
-				
 				if (pions.isEmpty())
 					partie.deplacePerso(j.getCouleur(), perso.get(0), 4);
 				else
@@ -214,30 +178,31 @@ public class ControleurPartie {
 	}
 
 	private void attaqueZombie(int i) {
-		Joueur jou;
-		if (partie.getLieux().get(i).getJoueurs().size() == 1)
-			jou = partie.getLieux().get(i).getJoueurs().get(0);
+		Couleur couleur;
+		if (partie.getJoueursSurLieu(i).size() == 1)
+			couleur = partie.getJoueursSurLieu(i).get(0).getCouleur();
 		else
-			jou = phaseVote(partie.getLieux().get(i), VoteType.MPZ);
+			couleur = phaseVote(partie.getLieux().get(i), VoteType.MPZ).getCouleur();
 		List<Integer> listePion = new ArrayList<>();
-		for (Personnage p : jou.getPersonnages().values()) {
+		for (Personnage p : partie.getJoueurs().get(couleur).getPersonnages().values()) {
 			if (partie.getLieux().get(i).getPersonnage().contains(p)) {
 				listePion.add(p.getPoint());
 			}
 		}
 		Collections.shuffle(listePion);
-		partie.sacrifie(jou.getCouleur(), listePion.get(0));
+		partie.sacrifie(couleur, listePion.get(0));
 	}
 
 	public Joueur phaseVote(Lieu l, VoteType tv) {
 		if (tv.equals(VoteType.ECD)) {
-			int res = new Random().nextInt(l.getJoueurs().size() + 1);
-			if (res == l.getJoueurs().size())
+			int res = new Random().nextInt(partie.getJoueursSurLieu(l.getNum()).size() + 1);
+			if (res == partie.getJoueursSurLieu(l.getNum()).size())
 				return null;
-			return l.getJoueurs().get(res);
+			return partie.getJoueursSurLieu(l.getNum()).get(res);
 		}
 
-		return l.getJoueurs().get(new Random().nextInt(l.getJoueurs().size()));
+		return partie.getJoueursSurLieu(l.getNum())
+				.get(new Random().nextInt(partie.getJoueursSurLieu(l.getNum()).size()));
 	}
 
 	public void setLieuZombie(ArrayList<Integer> lieuZombie) {
