@@ -141,18 +141,20 @@ public class JeuPane extends StackPane implements JeuListener {
 
 	BorderPane fouilleCamion;
 	BorderPane vote;
-	
+
 	Button bLog;
 	ListView<Label> log;
-	
+
 	Button bQuitterInfo;
 
 	CarteType selectedCarte;
 	Couleur selectedCouleur;
 	HBox hboxBoutonJoueur;
-	
+
 	HBox infoZombie;
-	Label linfoZombie;	
+	Label linfoZombie;
+	
+	VBox des;
 
 	public JeuPane(ScreenControl sc, Core c) {
 		core = c;
@@ -178,16 +180,14 @@ public class JeuPane extends StackPane implements JeuListener {
 		rectVigile.setTranslateX(793);
 		rectVigile.setTranslateY(150);
 		rectVigile.setFill(null);
-		//rectVigile.setStroke(Color.BLACK);
+		// rectVigile.setStroke(Color.BLACK);
 		rectVigile.setStrokeWidth(3);
 		rectVigile.setWidth(100);
 		rectVigile.setHeight(80);
-		
+
 		rectVigile.setFill(new ImagePattern(new Image(DataControl.BADGE_VIGILE)));
-		
-		rectVigile.setVisible(false);//TODO event pour l'afficher au bon moment 
-		
-		
+
+		rectVigile.setVisible(false);// TODO event pour l'afficher au bon moment
 
 		//////////////////////////////////////////
 		HBox hbCartes = new HBox();
@@ -1026,7 +1026,7 @@ public class JeuPane extends StackPane implements JeuListener {
 		vbDeplCentre.getChildren().addAll(vbDeplPers, vbDeplLieux);
 		vbDeplCentre.setDisable(false);
 
-		VBox des = new VBox();
+		des = new VBox();
 		des.setTranslateX(790);
 		des.setTranslateY(-100);
 		des.setAlignment(Pos.CENTER);
@@ -1063,14 +1063,15 @@ public class JeuPane extends StackPane implements JeuListener {
 		info.setPrefSize(1000, 200);
 		info.setMaxSize(1000, 200);
 		info.setPadding(new Insets(10));
-		info.setStyle(" -fx-background-color:#1A1A1A; -fx-background-radius: 20px; -fx-border-color: red; -fx-border-insets: -3; -fx-border-width: 3; -fx-border-radius: 20px;");
+		info.setStyle(
+				" -fx-background-color:#1A1A1A; -fx-background-radius: 20px; -fx-border-color: red; -fx-border-insets: -3; -fx-border-width: 3; -fx-border-radius: 20px;");
 		info.setVisible(false);
-		
+
 		bQuitterInfo = new Button("QUITTER");
 		bQuitterInfo.setAlignment(Pos.CENTER);
 		bQuitterInfo.setStyle(styleBoutons);
-		bQuitterInfo.setPrefSize(largBouton*.7, hautBouton*.7);
-		bQuitterInfo.setMinSize(largBouton*.7, hautBouton*.7);
+		bQuitterInfo.setPrefSize(largBouton * .7, hautBouton * .7);
+		bQuitterInfo.setMinSize(largBouton * .7, hautBouton * .7);
 		bQuitterInfo.setFont(Font.font("Segoe UI", FontWeight.BOLD, 18));
 		bQuitterInfo.setOnAction(event -> {
 			info.setVisible(false);
@@ -1109,15 +1110,16 @@ public class JeuPane extends StackPane implements JeuListener {
 		fond.setAlignment(Pos.CENTER);
 		fond.setEffect(flou);
 		fond.getChildren().add(imgFond);
-		
+
 		log = new ListView<>();
-		log.setStyle("-fx-background-color: red; -fx-control-inner-background: #1A1A1A ; -fx-control-inner-background-alt: derive(-fx-control-inner-background, 15%);");
+		log.setStyle(
+				"-fx-background-color: red; -fx-control-inner-background: #1A1A1A ; -fx-control-inner-background-alt: derive(-fx-control-inner-background, 15%);");
 		log.setEditable(true);
 		log.setMinSize(600, 800);
 		log.setMaxSize(600, 800);
-		log.setPrefSize(600,800);
+		log.setPrefSize(600, 800);
 		log.setVisible(false);
-		
+
 		bLog = new Button("LOG");
 		bLog.setAlignment(Pos.CENTER);
 		bLog.setFont(Font.font("Segoe UI", FontWeight.BOLD, 30));
@@ -1125,7 +1127,7 @@ public class JeuPane extends StackPane implements JeuListener {
 		bLog.setPrefSize(largBouton, hautBouton);
 		bLog.setMinSize(largBouton, hautBouton);
 		bLog.setOnAction(event -> {
-			if(!log.isVisible())
+			if (!log.isVisible())
 				log.setVisible(true);
 			else
 				log.setVisible(false);
@@ -1142,8 +1144,8 @@ public class JeuPane extends StackPane implements JeuListener {
 		Label lo = new Label("Personnage couleur s'est déplacé dans le lieu");
 		lo.setFont(policeLog);
 		updateLog(log, lo);
-		
-		infoZombie = new HBox(); //TODO .setVisible() aux bons moments
+
+		infoZombie = new HBox(); // TODO .setVisible() aux bons moments
 		infoZombie.setPrefSize(450, 70);
 		infoZombie.setMinSize(450, 70);
 		infoZombie.setMaxSize(450, 70);
@@ -1151,16 +1153,15 @@ public class JeuPane extends StackPane implements JeuListener {
 		infoZombie.setTranslateY(-400);
 		infoZombie.setAlignment(Pos.CENTER);
 		infoZombie.setStyle(styleVBox);
-		
-		linfoZombie = new Label ("Des zombies arriveront dans les lieux X, X, X, X"); //TODO afficher ca dans un event 
+
+		linfoZombie = new Label("Des zombies arriveront dans les lieux X, X, X, X"); // TODO afficher ca dans un event
 		linfoZombie.setFont(Font.font("Segoe UI", 20));
 		linfoZombie.setTextFill(Color.BLACK);
-		
-		infoZombie.getChildren().addAll(linfoZombie);
-		
 
-		stackPane.getChildren().addAll(fond, rectVigile, nomJoueur, phasePartie, hbCartes, vote, vbDeplCentre, des, infoZombie,
-				fouilleCamion, info, log, bLog);
+		infoZombie.getChildren().addAll(linfoZombie);
+
+		stackPane.getChildren().addAll(fond, rectVigile, nomJoueur, phasePartie, hbCartes, vote, vbDeplCentre, des,
+				infoZombie, fouilleCamion, info, log, bLog);
 		stackPane.setBackground(new Background(new BackgroundFill(Color.BLACK, CornerRadii.EMPTY, null)));
 
 		this.getChildren().add(stackPane);
@@ -1298,10 +1299,10 @@ public class JeuPane extends StackPane implements JeuListener {
 
 		vote.setVisible(false);
 	}
-	
-	public ListView<Label> updateLog(ListView<Label> list,Label l){
+
+	public ListView<Label> updateLog(ListView<Label> list, Label l) {
 		list.getItems().add(list.getItems().size(), l);
-		list.scrollTo(list.getItems().size()-1);
+		list.scrollTo(list.getItems().size() - 1);
 		return list;
 	}
 
@@ -1387,19 +1388,8 @@ public class JeuPane extends StackPane implements JeuListener {
 	@Override
 	public void desVigiles(List<String> list) {
 		Platform.runLater(() -> {
-			titreInfo.setText("Zombies");
-			lInfo.setText("Des zombies ont été placé dans " + list.get(0) + ", " + list.get(1) + ", " + list.get(2)
+			linfoZombie.setText("Des zombies ont été placé dans " + list.get(0) + ", " + list.get(1) + ", " + list.get(2)
 					+ " et " + list.get(3));
-			info.setVisible(true);
-
-			Timer myTimer = new Timer();
-			myTimer.schedule(new TimerTask() {
-
-				@Override
-				public void run() {
-					info.setVisible(false);
-				}
-			}, 5000);
 		});
 	}
 
@@ -1683,7 +1673,7 @@ public class JeuPane extends StackPane implements JeuListener {
 			fouilleCamion.setVisible(false);
 			Button[] buttons = { joueur1, joueur2, joueur3, joueur4, joueur5 };
 			for (int i = 0; i < buttons.length; i++) {
-				if (listeCouleurJoueur.size() > i){
+				if (listeCouleurJoueur.size() > i) {
 					buttons[i].setDisable(false);
 					buttons[i].setText(listeCouleurJoueur.get(i).nomEntier());
 					Couleur cible = listeCouleurJoueur.get(i);
@@ -1692,8 +1682,7 @@ public class JeuPane extends StackPane implements JeuListener {
 						core.getIdjr().voteChoisi(true);
 						resetVoteCarte();
 					});
-				}
-				else {
+				} else {
 					buttons[i].setText("");
 				}
 			}
@@ -1767,5 +1756,15 @@ public class JeuPane extends StackPane implements JeuListener {
 				resetUtiliserCarte();
 			});
 		});
+	}
+
+	@Override
+	public void log(String action) {
+		updateLog(log, new Label(action));
+	}
+
+	@Override
+	public void enleverDes() {
+		des.setVisible(false);
 	}
 }
