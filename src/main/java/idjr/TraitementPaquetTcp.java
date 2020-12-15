@@ -13,6 +13,8 @@ import reseau.type.VoteType;
 import java.text.MessageFormat;
 import java.util.*;
 
+import org.graalvm.compiler.core.aarch64.AArch64ReadReplacementPhase;
+
 import static java.lang.System.out;
 
 import java.net.Socket;
@@ -120,6 +122,7 @@ public class TraitementPaquetTcp extends TraitementPaquet<TcpClient> {
 			recupCarte(Paquet, message);
 			break;
 		case "PIPZ":
+			placementzombie(Paquet, message);
 			break;
 		case "PFC":
 			phaseFouilleCamion();
@@ -130,7 +133,7 @@ public class TraitementPaquetTcp extends TraitementPaquet<TcpClient> {
 		case "RFC":
 			break;
 		case "PECV":
-			phaseElectionChefVigile();
+			phaseElectionChefVigile(Paquet, message);
 			break;
 		case "RECV":
 			break;
@@ -140,6 +143,7 @@ public class TraitementPaquetTcp extends TraitementPaquet<TcpClient> {
 		case "CDZVDI":
 		case "AZUCS":
 		case "AZLAZ":
+			arrivezombies(Paquet, message);
 		case "AZICS":
 		case "PVIC":
 		case "PVR":
@@ -155,6 +159,14 @@ public class TraitementPaquetTcp extends TraitementPaquet<TcpClient> {
 			throw new IllegalStateException(
 					MessageFormat.format("[TCP] Il n''y a pas de traitement possible pour {0}", Paquet.getCle()));
 		}
+	}
+
+	private void arrivezombies(Paquet paquet, String message) {
+		core.getInitializer().desVigiles((List<Integer>) paquet.getValeur(message, 1));
+	}
+
+	private void placementzombie(Paquet paquet, String message) {
+		core.getInitializer().enleverDes();
 	}
 
 	private void debutPhaseAttaque(Paquet Paquet, String message) {
@@ -300,7 +312,7 @@ public class TraitementPaquetTcp extends TraitementPaquet<TcpClient> {
 	}
 
 	public void attaqueZombie(Paquet Paquet, String message) {
-		traitementI.attaqueZombie(core, (List<PionCouleur>) (Paquet.getValeur(message, 2)));
+		traitementI.attaqueZombie(core, (List<PionCouleur>)(Paquet.getValeur(message, 2)), (int)(Paquet.getValeur(message, 1)));
 	}
 
 	public void choisirSacrifice(Paquet Paquet, String message) {
@@ -322,7 +334,7 @@ public class TraitementPaquetTcp extends TraitementPaquet<TcpClient> {
 
 	}
 
-	public void phaseElectionChefVigile() {
+	public void phaseElectionChefVigile(Paquet paquet, String message) {
 		// TODO réorganiser
 		if (core.getInitializer() != null)
 			core.getInitializer().nomPhase("Phase d’élection du chef des vigiles");
