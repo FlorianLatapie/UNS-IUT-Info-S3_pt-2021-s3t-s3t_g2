@@ -6,6 +6,7 @@ import pp.ihm.langues.International;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
+import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
 import javafx.scene.effect.GaussianBlur;
 import javafx.scene.image.ImageView;
@@ -25,17 +26,18 @@ public class OptionPane extends StackPane {
 	private ScreenControl sControl = null;
 	private Core core = null;
 	private final ApplicationPane paneName = ApplicationPane.OPTION;
-	
+
 	private int tailleCarreCentral = 700;
 	private int hauteurElement = 60;
-	
+
 	private Font policeTitre = Font.font("Segoe UI", FontWeight.BOLD, 75);
 	private Font policeBouton = Font.font("Segoe UI", FontWeight.BOLD, 33);
 
+	private String styleTexte = " -fx-background-color:#000000; -fx-text-fill: #ffffff; -fx-background-radius: 5px;";
 	private String styleBoutons = " -fx-background-color:#000000; -fx-background-radius: 15px; -fx-text-fill: #ffffff";
 	private String styleBoutonsSouris = "-fx-background-color:#ff0000;  -fx-text-fill:#000000; -fx-background-radius: 15px;";
 	private String styleTitre = "-fx-text-fill: #ff1c16";
-	
+
 	private GaussianBlur flou = new GaussianBlur(30);
 
 	public OptionPane(ScreenControl sc, Core c) {
@@ -66,8 +68,8 @@ public class OptionPane extends StackPane {
 		vbCentral.setMinSize(tailleCarreCentral, tailleCarreCentral);
 		vbCentral.setMaxSize(tailleCarreCentral, tailleCarreCentral);
 		vbCentral.setPadding(new Insets(10));
-		
-		// Boutons de rotation d'écran 
+
+		// Boutons de rotation d'écran
 		ImageView img1 = new ImageView(DataControl.SCREEN);
 		img1.setFitHeight(70);
 		img1.setPreserveRatio(true);
@@ -117,7 +119,7 @@ public class OptionPane extends StackPane {
 		bEcranDroite.setOnAction(EventHandler -> sc.setRotatePane(vbCentral, "droite"));
 
 		///
-		
+
 		VBox vbTitre = new VBox();
 		vbTitre.setAlignment(Pos.TOP_CENTER);
 		vbTitre.setTranslateY(-40);
@@ -155,13 +157,26 @@ public class OptionPane extends StackPane {
 		bEnglish.setOnMouseExited(event -> bEnglish.setStyle(styleBoutons));
 
 		Button bAcc = new Button(International.trad("texte.titreAcc"));
+
+		CheckBox cbPleinEcran = new CheckBox("fullscreen"); // TODO
+		cbPleinEcran.setStyle(styleTexte);
+		cbPleinEcran.setPadding(new Insets(10));
+		cbPleinEcran.setFont(policeBouton);
+		cbPleinEcran.setAlignment(Pos.CENTER_LEFT);
+		/*if (fs) {
+			cbPleinEcran.setSelected(true);
+		}
+		else {
+			cbPleinEcran.setSelected(false);
+		}*/
+
 		bAcc.setFont(policeBouton);
 		bAcc.setAlignment(Pos.CENTER);
 		bAcc.setPrefSize(500, hauteurElement);
 		bAcc.setStyle(styleBoutons);
 		bAcc.setOnMouseEntered(event -> bAcc.setStyle(styleBoutonsSouris));
 		bAcc.setOnMouseExited(event -> bAcc.setStyle(styleBoutons));
-		bAcc.setOnAction(EventHandler -> sc.setPaneOnTop(ApplicationPane.ACCESSIBILITE));		
+		bAcc.setOnAction(EventHandler -> sc.setPaneOnTop(ApplicationPane.ACCESSIBILITE));
 
 		Button bRetour = new Button(International.trad("bouton.retour"));
 		bRetour.setFont(policeBouton);
@@ -175,18 +190,18 @@ public class OptionPane extends StackPane {
 		hbBRetour.getChildren().add(bRetour);
 		hbLang.getChildren().add(bFrancais);
 		hbLang.getChildren().add(bEnglish);
-		vbBoutons.getChildren().addAll(hbLang, bAcc);
+		vbBoutons.getChildren().addAll(hbLang, cbPleinEcran, bAcc);
 		vbBoutons.setMargin(vbTitre, new Insets(140));
-		vbBoutons.setMargin(hbBRetour, new Insets(140, 0, 30, 15));
+		vbBoutons.setMargin(hbBRetour, new Insets(57, 0, 30, 19));
 
 		vbCentral.getChildren().addAll(vbTitre, vbBoutons, hbBRetour);
 		ImageView img = new ImageView(DataControl.FOND);
 		vbFond.getChildren().add(img);
-		
+
 		this.setAlignment(Pos.CENTER);
 		this.getChildren().addAll(vbFond, bEcranHaut, bEcranBas, bEcranGauche, bEcranDroite, rect, vbCentral);
 		this.setBackground(new Background(new BackgroundFill(Color.BLACK, CornerRadii.EMPTY, null)));
-		
+
 		sControl.registerNode(paneName, this);
 		sControl.setPaneOnTop(paneName);
 	}
