@@ -1390,9 +1390,9 @@ public class JeuPane extends StackPane implements JeuListener {
 	}
 
 	@Override
-	public void desVigiles(List<String> list) {
+	public void desVigiles(List<Integer> list) {
 		Platform.runLater(() -> {
-			linfoZombie.setText("Des zombies ont été placé dans " + list.get(0) + ", " + list.get(1) + ", " + list.get(2)
+			linfoZombie.setText("Des zombies ont été placé dans les lieu numero" + list.get(0) + ", " + list.get(1) + ", " + list.get(2)
 					+ " et " + list.get(3));
 		});
 	}
