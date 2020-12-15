@@ -83,20 +83,24 @@ public class ConfigPartiePane extends StackPane implements ConfigListener {
 
 		Label desc = new Label(International.trad("texte.idPartie"));
 		desc.setAlignment(Pos.CENTER);
-		desc.setFont(policeNom);
+		desc.setFont(Font.font("Segoe UI", FontWeight.BOLD, 27));
+		desc.setTextFill(Color.WHITE);
 		desc.setMinHeight(hauteurElemtents);
 		desc.setPadding(botPadding);
 
 		TextField nomP = new TextField();
 		nomP.setText("Partie");
-		nomP.setFont(policeNom);
-		nomP.setPrefSize(largeurTF, hauteurElemtents);
-		nomP.setMinHeight(hauteurElemtents);
-
+		nomP.setFont(Font.font("Segoe UI", FontWeight.BOLD, 27));
+		nomP.setStyle("-fx-background-color: #1A1A1A; -fx-border-color: white; -fx-border-width: 1; -fx-text-fill: white;");
+		nomP.setPrefSize(400, hauteurElemtents);
+		nomP.setMinSize(400, hauteurElemtents);
+		nomP.setMaxSize(400, hauteurElemtents);
+		
 		VBox partie = new VBox();
+		partie.setAlignment(Pos.CENTER);
 		partie.getChildren().addAll(desc, nomP);
-		partie.setBackground(fondBlanc);
 		partie.setPadding(new Insets(10));
+		partie.setSpacing(17);
 		partie.setPrefWidth(220);
 		partie.setMaxWidth(400);
 
@@ -106,11 +110,13 @@ public class ConfigPartiePane extends StackPane implements ConfigListener {
 		// Create a ListView
 		ListView<Label> listView = new ListView<Label>(liste);
 
-		// Only allowed to select single row in the ListView.
+		// Only allowed to select single row in the ListView.	
 		listView.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
 
 		listView.setMaxWidth(400);
 		listView.setMaxHeight(100);
+		listView.setEditable(false);
+		listView.setStyle("-fx-control-inner-background: #1A1A1A ; -fx-control-inner-background-alt: derive(-fx-control-inner-background, 15%);");
 
 		VBox vbCenter = new VBox();
 		vbCenter.setAlignment(Pos.CENTER);
