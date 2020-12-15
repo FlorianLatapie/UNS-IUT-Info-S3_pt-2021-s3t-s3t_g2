@@ -399,7 +399,7 @@ public class TraitementPaquetTcp extends TraitementPaquet<TcpClient> {
 			return;
 
 		} else {
-			String messageTcp = getControleurReseau().construirePaquetTcp("CDDJ", traitementB.choixBestDest(core),
+			String messageTcp = getControleurReseau().construirePaquetTcp("CDDJ", traitementB.choixDest(core),
 					(String) paquet.getValeur(message, 3), (int) paquet.getValeur(message, 4), core.getJoueurId());
 			getControleurReseau().envoyerTcp(messageTcp);
 		}
