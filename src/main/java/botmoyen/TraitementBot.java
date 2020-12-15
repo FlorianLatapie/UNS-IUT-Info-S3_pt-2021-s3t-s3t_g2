@@ -16,7 +16,12 @@ import reseau.type.PionCouleur;
 import reseau.type.VoteType;
 
 public class TraitementBot {
-
+	/**
+	 * <h1>Permet de gerer les traitements tcp</h1>
+	 *
+	 * @author Baptiste chatelain
+	 * @version 1.0
+	 */
 	public void initialiserPartie(BotMoyen core, List<?> nomsT, List<Couleur> couleursT, String lieuferme) {
 		List<String> noms = new ArrayList<>();
 		List<Couleur> couleurs = new ArrayList<>();
@@ -42,13 +47,25 @@ public class TraitementBot {
 		}
 		core.initPartie(couleurs);
 	}
-
+	/**
+	 * Lancement des dés
+	 *
+	 * @param BotMoyen pour lequel le traitement s'effectue
+	 * @param Une liste d'integer correspondant aux pions
+	 */
 	public void lancerDes(BotMoyen core, List<?> pionT) {
 		List<Integer> pion = new ArrayList<>();
 		for (Object o : pionT)
 			pion.add((Integer) o);
 		core.setPionAPos(pion);
 	}
+	
+	/**
+	 * Choix du placement des personnage
+	 * 
+	 * @param Une liste d'integer correspondant destinations possibles
+	 * @return la destination choisie
+	 */
 
 	public int choisirDestPlacement(List<?> destRestantT) {
 		List<Integer> destRestant = new ArrayList<>();
@@ -59,6 +76,13 @@ public class TraitementBot {
 			dest = destRestant.get(new Random().nextInt(destRestant.size()));
 		return dest;
 	}
+	
+	/**
+	 * Choix du pion a deplacer
+	 *
+	 * @param BotMoyen pour lequel le traitement s'effectue
+	 * @return le pion a deplacer
+	 */
 
 	public int choisirPionPlacement(BotMoyen core) {
 		int pion = 0;
@@ -66,6 +90,13 @@ public class TraitementBot {
 			pion = core.getPionAPos().get(new Random().nextInt(core.getPionAPos().size()));
 		return pion;
 	}
+	
+	/**
+	 * Debut du tour
+	 *
+	 * @param BotMoyen pour lequel le traitement s'effectue
+	 * @param Une liste de couleur correspondant aux joueurs
+	 */
 
 	public void debutTour(BotMoyen core, List<Couleur> couleurs) {
 		core.newTour();
@@ -74,6 +105,13 @@ public class TraitementBot {
 			core.setEnvie(false);
 		}
 	}
+	
+	/**
+	 * Choix de destination random
+	 *
+	 * @param BotMoyen pour lequel le traitement s'effectue
+	 * @return La destination choisie
+	 */
 
 	public int choixDest(BotMoyen core) {
 		out.println(core.getEtatPartie());
@@ -85,6 +123,13 @@ public class TraitementBot {
 			dest = MCTSBotMoyen.getChoisDest(core.getPartie(),core.getCouleur());
 		return dest;
 	}
+	
+	/**
+	 * Choix de destination intelligente
+	 *
+	 * @param BotMoyen pour lequel le traitement s'effectue
+	 * @return La destination choisie
+	 */
 	
 	public int choixBestDest (BotMoyen core) {
 		out.println("Entrez une destination");
@@ -102,6 +147,13 @@ public class TraitementBot {
 		}
 		return dest;
 	}
+	
+	/**
+	 * Choix de destination intelligente du zombie vengeur
+	 *
+	 * @param BotMoyen pour lequel le traitement s'effectue
+	 * @return La destination choisie
+	 */
 
 	public int choixBestZDest(BotMoyen core) {
 		out.println("Entrez une destination");
@@ -114,6 +166,13 @@ public class TraitementBot {
 		}
 		return dest;
 	}
+	
+	/**
+	 * Debut du deplacement
+	 *
+	 * @param BotMoyen pour lequel le traitement s'effectue
+	 * @param une liste d'integer correspondant aux lieux ouvert
+	 */
 
 	public void debutDeplacemant(BotMoyen core, List<?> lieuxT) {
 		List<Integer> lieux = new ArrayList<>();
@@ -124,6 +183,15 @@ public class TraitementBot {
 				core.getLieuOuvert().remove(i);
 		core.setLieuxFerme(lieux);
 	}
+	
+	/**
+	 * Choix du pion a deplacer
+	 *
+	 * @param BotMoyen pour lequel le traitement s'effectue
+	 * @param un integer correspond au numéro d'un lieu
+	 * @param un dictionnaire d'integer/Liste d'integer correspondant a la liste des deplacements
+	 * @return la liste des deplacements
+	 */
 
 	public List<Object> pionADeplacer(BotMoyen core, int dest, HashMap<Integer, List<Integer>> listedp) {
 		List<Object> listRenvoye = new ArrayList<>();
@@ -162,6 +230,15 @@ public class TraitementBot {
 		listRenvoye.add(sprintJoue);
 		return listRenvoye;
 	}
+	
+	/**
+	 * Attaque des zombies
+	 *
+	 * @param BotMoyen pour lequel le traitement s'effectue
+	 * @param Une liste de pionCouleur
+	 * @param Une autre liste de PionCouleur (temporaire)
+	 * @return la liste des personnage sacrifiable après l'attaque
+	 */
 
 	public void attaqueZombie(BotMoyen core, List<PionCouleur> l, List<PionCouleur> ltemp) {
 		for (PionCouleur pc : l) {
@@ -171,6 +248,7 @@ public class TraitementBot {
 		}
 		core.setPoinSacrDispo(ltemp);
 	}
+	
 
 	public int choixBestDest3 (BotMoyen core) {
 		out.println("Entrez une destination");
@@ -188,6 +266,14 @@ public class TraitementBot {
 		}
 		return dest;
 	}
+	
+	/**
+	 * Choix du personnage a sacrifier
+	 *
+	 * @param BotMoyen pour lequel le traitement s'effectue
+	 * @param une liste d'integer correspondant aux pions
+	 * @return Un pion a sacrifier
+	 */
 	public PionCouleur choisirSacrifice(BotMoyen core, List<?> listPionT) {
 		if (listPionT.size() > 0) {
 			List<Integer> listPion = new ArrayList<>();
@@ -202,12 +288,27 @@ public class TraitementBot {
 		} else
 			return null;
 	}
+	
+	/**
+	 * Fin de la partie
+	 *
+	 * @param BotMoyen pour lequel le traitement s'effectue
+	 * @param Une couleur du joueur gagnant
+	 */
 
 	public void finPartie(BotMoyen core, Couleur gagnant) {
 		out.println("Le gagant est le joueur " + gagnant + " !");
 		core.setEstFini(true);
 		// getControleurReseau().arreter();
 	}
+	
+	/**
+	 * Choix random des cartes a jouer  pendant l'attaque zombies
+	 *
+	 * @param BotMoyen pour lequel le traitement s'effectue
+	 * @param un integer correspond au numéro d'un lieu
+	 * @return la liste des carte jouées
+	 */
 
 	public List<Object> listeCarteJouee(BotMoyen core, int n) {
 		List<Object> listRenvoye = new ArrayList<>();
@@ -264,6 +365,13 @@ public class TraitementBot {
 		return listRenvoye;
 	}
 	
+	/**
+	 * Choix intelligent des cartes a jouer  pendant l'attaque zombies
+	 *
+	 * @param BotMoyen pour lequel le traitement s'effectue
+	 * @param un integer correspond au numéro d'un lieu
+	 * @return la liste des carte jouées
+	 */
 	public List<Object> BestlisteCarteJouee(BotMoyen core, int n) {
 		List<Object> listRenvoye = new ArrayList<>();
 		List<CarteType> listeCarteJouee = new ArrayList<>();
@@ -321,7 +429,13 @@ public class TraitementBot {
 		listRenvoye.add(listePionCache);
 		return listRenvoye;
 	}
-
+	
+	/**
+	 * Liste des pions cachés
+	 *
+	 * @param BotMoyen pour lequel le traitement s'effectue
+	 * @return la liste des pions cachés
+	 */
 	public List<PionCouleur> listePionCache(BotMoyen core) {
 		List<CarteType> listeCarteCachette = new ArrayList<>();
 		List<PionCouleur> listePionCache = new ArrayList<>();
@@ -342,6 +456,13 @@ public class TraitementBot {
 			listePionCache.add(core.getPoinSacrDispo().get(i));
 		return listePionCache;
 	}
+	
+	/**
+	 * Reponse du joueur courant
+	 *
+	 * @param BotMoyen pour lequel le traitement s'effectue
+	 * @return Un type de carte 
+	 */
 
 	public CarteType ReponseJoueurCourant(BotMoyen core) {
 		if ((core.getListeCarte().contains(CarteType.CDS)) && (new Random().nextInt(1) == 1)) {
@@ -350,6 +471,13 @@ public class TraitementBot {
 		}
 		return CarteType.NUL;
 	}
+	
+	/**
+	 * Indiquer les cartes jouées
+	 *
+	 * @param BotMoyen pour lequel le traitement s'effectue
+	 * @return le nombre de cartes jouées
+	 */
 
 	public int IndiquerCarteJouees(BotMoyen core) {
 		if (core.getListeCarte().isEmpty())
@@ -364,6 +492,14 @@ public class TraitementBot {
 			return 0;
 		return new Random().nextInt(nbrCarteMen);
 	}
+	
+	/**
+	 * Retourne une couleur random parmis les joueurs présents sauf le joueur actuel
+	 *
+	 * @param BotMoyen pour lequel le traitement s'effectue
+	 * @param un integer correspond au numéro d'un lieu
+	 * @return la liste des carte jouées
+	 */
 
 	public Couleur getRandom(BotMoyen core, VoteType vt) {
 		if (vt == VoteType.MPZ) {
@@ -374,10 +510,24 @@ public class TraitementBot {
 		return core.couleurJoueurPresent().get(new Random().nextInt(core.couleurJoueurPresent().size()));
 	}
 
+	/**
+	 * Retourne une couleur random parmis les joueurs présents 
+	 *
+	 * @param BotMoyen pour lequel le traitement s'effectue
+	 * @param un integer correspond au numéro d'un lieu
+	 * @return la liste des carte jouées
+	 */
 	public Couleur getRandom2(BotMoyen core, VoteType vt) {
 		return core.getJoueurEnVie().get(new Random().nextInt(core.getJoueurEnVie().size()));
 	}
-
+	
+	/**
+	 * Choix de la gestions de cartes de la fouille random
+	 *
+	 * @param BotMoyen pour lequel le traitement s'effectue
+	 * @param Une liste de carteType correspondant aux cartes récupérées
+	 * @return la liste des carte choisies
+	 */
 	public List<Object> carteFouille(List<CarteType> listeCarte, BotMoyen bot) {
 		CarteType carteGarde = CarteType.NUL;
 		CarteType carteOfferte = CarteType.NUL;
