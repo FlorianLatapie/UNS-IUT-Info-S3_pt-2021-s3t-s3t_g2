@@ -176,7 +176,21 @@ public class TraitementIdjr {
 			core.getInitializer().nomPhase("Phase de résolution de l’attaque des zombies");
 	}
 
-	public void attaqueZombie(Idjr core, List<PionCouleur> l) {
+	public void attaqueZombie(Idjr core, List<PionCouleur> l , int x) {
+		String nom = "";
+		if (x == 1)
+			nom = "Toilettes";
+		if (x == 2)
+			nom = "Cachou";
+		if (x == 3)
+			nom = "Megatoys";
+		if (x == 4)
+			nom = "Parking";
+		if (x == 5)
+			nom = "PC de sécurité";
+		if (x == 6)
+			nom = "Supermarché";
+		core.getInitializer().nomPhase("Attaque au lieu " + nom);
 		List<PionCouleur> ltemp = new ArrayList<>();
 		for (PionCouleur pc : l) {
 			if (IdjrTools.getCouleurByChar(pc) == core.getCouleur()) {
