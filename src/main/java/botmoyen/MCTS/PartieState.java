@@ -19,6 +19,7 @@ public class PartieState extends State {
 	public PartieState(Partie partie, Couleur couleur) {
 		super();
 		this.partie = partie;
+		this.couleur = couleur;
 	}
 
 	public String toString() {
