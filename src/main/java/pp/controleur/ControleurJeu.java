@@ -296,7 +296,7 @@ public class ControleurJeu {
 				List<Object> lo = cfc.resultatFouillage(jeu, j, (CarteType) nwm.getValueTcp("SCFC", mess, 1),
 						(CarteType) nwm.getValueTcp("SCFC", mess, 2), (Couleur) nwm.getValueTcp("SCFC", mess, 3),
 						(CarteType) nwm.getValueTcp("SCFC", mess, 4));
-				m = nwm.construirePaquetTcp("RFC", lo.get(1), lo.get(1), lo.get(1), partieId, numeroTour);
+				m = nwm.construirePaquetTcp("RFC", lo.get(0), lo.get(1), lo.get(2), partieId, numeroTour);
 				for (Joueur j2 : jeu.getJoueurs().values())
 					j2.getConnection().envoyer(m);
 			}
