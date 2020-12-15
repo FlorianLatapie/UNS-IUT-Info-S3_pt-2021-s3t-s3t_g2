@@ -121,11 +121,12 @@ public class ConfigPartiePane extends StackPane implements ConfigListener {
 		listView.setPrefWidth(400);
 		listView.setMaxWidth(400);
 		listView.setEditable(false);
-		listView.setStyle("-fx-background-color: white;-fx-control-inner-background: #1A1A1A ; -fx-control-inner-background-alt: derive(-fx-control-inner-background, 15%);");
+		listView.setStyle(
+				"-fx-background-color: white;-fx-control-inner-background: #1A1A1A ; -fx-control-inner-background-alt: derive(-fx-control-inner-background, 15%);");
 
 		Button bRefresh = new Button("Rafraichir");
-		bRefresh.setPrefSize(lBouton+30, hBouton);
-		bRefresh.setMinSize(lBouton+30, hBouton);
+		bRefresh.setPrefSize(lBouton + 30, hBouton);
+		bRefresh.setMinSize(lBouton + 30, hBouton);
 		bRefresh.setFont(policeBouton);
 		bRefresh.setStyle(styleBoutons);
 
@@ -139,14 +140,11 @@ public class ConfigPartiePane extends StackPane implements ConfigListener {
 
 		VBox vbCenter = new VBox();
 		vbCenter.setAlignment(Pos.CENTER);
-		vbCenter.setSpacing(20);
-		vbCenter.setPrefHeight(587);
-		vbCenter.setMinHeight(587);
-		vbCenter.setMaxHeight(587);
-		vbCenter.getChildren().addAll(partie, listView, bRefresh);
-
-
-
+		vbCenter.setSpacing(10);
+		vbCenter.setPrefHeight(500);
+		vbCenter.setMinHeight(500);
+		vbCenter.setMaxHeight(500);
+		vbCenter.getChildren().addAll(partie, listView);
 
 		// boutons
 		Button bJouer = new Button(International.trad("bouton.jouer"));
@@ -174,9 +172,9 @@ public class ConfigPartiePane extends StackPane implements ConfigListener {
 		nomP.textProperty().addListener((obs, oldText, newText) -> {
 			bJouer.setDisable(nomP.getText().isEmpty());
 		});
-		//nomP.textProperty().addListener((obs, oldText, newText) -> {
-		//	bJouer.setDisable(nomP.getText().isEmpty());
-		//});
+		// nomP.textProperty().addListener((obs, oldText, newText) -> {
+		// bJouer.setDisable(nomP.getText().isEmpty());
+		// });
 
 		Button bRetour = new Button(International.trad("bouton.retour"));
 		bRetour.setPrefSize(lBouton, hBouton);
@@ -195,9 +193,9 @@ public class ConfigPartiePane extends StackPane implements ConfigListener {
 		// grille contenant les boutons du bas
 		AnchorPane boutonsPanneau = new AnchorPane();
 		boutonsPanneau.setLeftAnchor(bRetour, 0.0);
+		boutonsPanneau.setLeftAnchor(bRefresh, 300.0);
 		boutonsPanneau.setRightAnchor(bJouer, 0.0);
-		boutonsPanneau.getChildren().addAll(bRetour, bJouer);
-
+		boutonsPanneau.getChildren().addAll(bRetour, bRefresh, bJouer);
 		// image fond
 		ImageView imgFond = new ImageView(DataControl.FOND);
 		// carre central qui contient tous les éléments (boutons et titre)
@@ -208,10 +206,10 @@ public class ConfigPartiePane extends StackPane implements ConfigListener {
 		centreMenu.setMargin(titre, new Insets(0, 0, 100, 0));
 
 		centreMenu.setAlignment(titre, Pos.CENTER);
-
 		centreMenu.setTop(titre);
 		centreMenu.setCenter(vbCenter);
 		centreMenu.setBottom(boutonsPanneau);
+		vbCenter.setTranslateY(-60);
 
 		// boite du fond qui contient tout
 		HBox fond = new HBox();
@@ -244,7 +242,11 @@ public class ConfigPartiePane extends StackPane implements ConfigListener {
 			listView.getItems().clear();
 			partieActuelle = partieInfo;
 			for (PartieInfo partieInfo2 : partieInfo) {
-				listView.getItems().add(new Label(partieInfo2.toString()));
+				Label res = new Label(partieInfo2.toString());
+				res.setAlignment(Pos.CENTER);
+				res.setTextFill(Color.WHITE);
+				res.setFont(Font.font("Segoe UI", FontWeight.BOLD, 27));
+				listView.getItems().add(res);
 			}
 		});
 	}
