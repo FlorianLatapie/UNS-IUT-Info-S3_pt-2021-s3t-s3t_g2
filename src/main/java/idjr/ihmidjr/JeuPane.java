@@ -29,6 +29,7 @@ import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
+import javafx.scene.text.TextAlignment;
 import reseau.type.CarteType;
 import reseau.type.Couleur;
 
@@ -989,7 +990,8 @@ public class JeuPane extends StackPane implements JeuListener {
 			bParking.setStyle(styleBoutons);
 		});
 
-		bPCSecu = new Button(International.trad("texte.lieu5"));
+		bPCSecu = new Button(International.trad("texte.lieu5")+"\n"+International.trad("texte.lieu5b"));
+		bPCSecu.setTextAlignment(TextAlignment.CENTER);
 		bPCSecu.setAlignment(Pos.CENTER);
 		bPCSecu.setStyle(styleBoutons);
 		bPCSecu.setPrefSize(largBouton, hautBouton);
