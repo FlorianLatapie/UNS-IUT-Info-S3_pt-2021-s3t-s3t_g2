@@ -313,7 +313,7 @@ public class TraitementPaquetTcp extends TraitementPaquet<TcpClient> {
 	}
 
 	private void fournirActionsDefense(Paquet paquet, String message) {
-		List<Object> listerenvoye = traitementB.listeCarteJouee(this.core, (int) paquet.getValeur(message, 1));
+		List<Object> listerenvoye = traitementB.BestlisteCarteJouee(this.core, (int) paquet.getValeur(message, 1));
 		String messageTCP = getControleurReseau().construirePaquetTcp("RAZRD", listerenvoye.get(0), listerenvoye.get(1),
 				(String) paquet.getValeur(message, 2), (int) paquet.getValeur(message, 3), core.getJoueurId());
 		getControleurReseau().envoyerTcp(messageTCP);
