@@ -76,10 +76,10 @@ public class TraitementBot {
 	}
 
 	public int choixDest(BotMoyen core) {
-		
+		out.println(core.getEtatPartie());
 		out.println("Entrez une destination");
 		int dest = 0;
-		if (core.getCompteurTour()%2==0) 
+		if (core.getCompteurTour()%2==1) 
 			dest = core.getLieuOuvert().get(new Random().nextInt(core.getLieuOuvert().size()));
 		else 
 			dest = MCTSBotMoyen.getChoisDest(core.getPartie(),core.getCouleur());
