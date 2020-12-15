@@ -93,7 +93,7 @@ public class Idjr {
 				if (partieInfo.getIdPartie().equals(nom)) {
 					System.out.println("OK");
 					current = partieInfo;
-					nwm.tcp(partieInfo.getIp());
+					nwm.demarrerClientTcp(partieInfo.getIp());
 					initializer.partieValide(nom);
 					return;
 				}
@@ -125,7 +125,7 @@ public class Idjr {
 		if (initializer != null)
 			initializer.nomPartie(current.getIdPartie());
 		String messageTcp = nwm.construirePaquetTcp("DCP", nom, typeJoueur, current.getIdPartie());
-		ThreadOutils.asyncTask(() -> {
+		ThreadOutils.asyncTask("rejoindrePartie", () -> {
 			nwm.envoyerTcp(messageTcp);
 			nwm.attendreTcp("ACP");
 			String message1 = nwm.getMessageTcp("ACP");
