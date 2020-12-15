@@ -202,7 +202,6 @@ public class TraitementPaquetTcp extends TraitementPaquet<TcpClient> {
 	}
 
 	private void recupInfoPerso(Paquet paquet, String message) {
-		core.recupInfoPerso((List<PionCouleur>)paquet.getValeur(message, 2),(Integer)paquet.getValeur(message, 1)); 
 		core.corectionZombie((Integer)paquet.getValeur(message, 1),(Integer)paquet.getValeur(message, 4));
 		System.out.println("recupInfoPerso : \n");
 		System.out.println(core.getEtatPartie());

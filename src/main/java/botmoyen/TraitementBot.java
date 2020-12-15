@@ -8,8 +8,13 @@ import java.util.List;
 import java.util.Map;
 import java.util.Random;
 
+
+
+import javax.swing.text.StyledEditorKit.ForegroundAction;
+
 import botmoyen.MCTS.MCTSBotMoyen;
 import botmoyen.partie.Lieu;
+import botmoyen.partie.Partie;
 import reseau.type.CarteType;
 import reseau.type.Couleur;
 import reseau.type.PionCouleur;
@@ -117,12 +122,13 @@ public class TraitementBot {
 		out.println(core.getEtatPartie());
 		out.println("Entrez une destination");
 		int dest = 0;
-		if (core.getCompteurTour()%2==1) 
+		if (core.getCompteurTour() % 2 == 1)
 			dest = core.getLieuOuvert().get(new Random().nextInt(core.getLieuOuvert().size()));
-		else 
-			dest = MCTSBotMoyen.getChoisDest(core.getPartie(),core.getCouleur());
+		else
+			dest = MCTSBotMoyen.getChoisDest(core.getPartie().copyOf(), core.getCouleur());
 		return dest;
 	}
+<<<<<<< Updated upstream
 	
 	/**
 	 * Choix de destination intelligente
@@ -132,18 +138,24 @@ public class TraitementBot {
 	 */
 	
 	public int choixBestDest (BotMoyen core) {
+=======
+
+	public int choixBestDest(BotMoyen core) {
+>>>>>>> Stashed changes
 		out.println("Entrez une destination");
 		int dest = 0;
-		int difference =-20;
-		for(int i =0;i<core.getLieuOuvert().size();i++) {
-			if(core.getPartie().getLieux().get(i).getPersonnage().size()-core.getPartie().getLieux().get(i).getNbZombies()>difference)
+		int difference = -20;
+		for (int i = 0; i < core.getLieuOuvert().size(); i++) {
+			if (core.getPartie().getLieux().get(i).getPersonnage().size()
+					- core.getPartie().getLieux().get(i).getNbZombies() > difference)
 				dest = core.getPartie().getLieux().get(i).getNum();
-			if(core.getPartie().getLieux().get(i).getPersonnage().size()-core.getPartie().getLieux().get(i).getNbZombies()==difference) {
-				if(core.getPartie().getLieux().get(i).getNum()==5) {
+			if (core.getPartie().getLieux().get(i).getPersonnage().size()
+					- core.getPartie().getLieux().get(i).getNbZombies() == difference) {
+				if (core.getPartie().getLieux().get(i).getNum() == 5) {
 					dest = core.getPartie().getLieux().get(i).getNum();
 				}
 			}
-		
+
 		}
 		return dest;
 	}
@@ -250,22 +262,25 @@ public class TraitementBot {
 	}
 	
 
-	public int choixBestDest3 (BotMoyen core) {
+	public int choixBestDest3(BotMoyen core) {
 		out.println("Entrez une destination");
 		int dest = 0;
-		int difference =-20;
-		for(int i =0;i<core.getLieuOuvert().size();i++) {
-			if(core.getPartie().getLieux().get(i).getPersonnage().size()-core.getPartie().getLieux().get(i).getNbZombies()>difference)
+		int difference = -20;
+		for (int i = 0; i < core.getLieuOuvert().size(); i++) {
+			if (core.getPartie().getLieux().get(i).getPersonnage().size()
+					- core.getPartie().getLieux().get(i).getNbZombies() > difference)
 				dest = core.getPartie().getLieux().get(i).getNum();
-			if(core.getPartie().getLieux().get(i).getPersonnage().size()-core.getPartie().getLieux().get(i).getNbZombies()==difference) {
-				if(core.getPartie().getLieux().get(i).getNum()==5) {
+			if (core.getPartie().getLieux().get(i).getPersonnage().size()
+					- core.getPartie().getLieux().get(i).getNbZombies() == difference) {
+				if (core.getPartie().getLieux().get(i).getNum() == 5) {
 					dest = core.getPartie().getLieux().get(i).getNum();
 				}
 			}
-		
+
 		}
 		return dest;
 	}
+<<<<<<< Updated upstream
 	
 	/**
 	 * Choix du personnage a sacrifier
@@ -274,6 +289,9 @@ public class TraitementBot {
 	 * @param une liste d'integer correspondant aux pions
 	 * @return Un pion a sacrifier
 	 */
+=======
+
+>>>>>>> Stashed changes
 	public PionCouleur choisirSacrifice(BotMoyen core, List<?> listPionT) {
 		if (listPionT.size() > 0) {
 			List<Integer> listPion = new ArrayList<>();
@@ -364,6 +382,7 @@ public class TraitementBot {
 		listRenvoye.add(listePionCache);
 		return listRenvoye;
 	}
+<<<<<<< Updated upstream
 	
 	/**
 	 * Choix intelligent des cartes a jouer  pendant l'attaque zombies
@@ -372,59 +391,89 @@ public class TraitementBot {
 	 * @param un integer correspond au numéro d'un lieu
 	 * @return la liste des carte jouées
 	 */
+=======
+
+>>>>>>> Stashed changes
 	public List<Object> BestlisteCarteJouee(BotMoyen core, int n) {
 		List<Object> listRenvoye = new ArrayList<>();
 		List<CarteType> listeCarteJouee = new ArrayList<>();
 		List<CarteType> listeCarteUtilisable = new ArrayList<>();
-	
-		
+
 		for (CarteType carte : core.getListeCarte()) {
 			if (n != 4) {
-				if (carte.name() == "MAT") {
+				switch (carte.name()) {
+				case "ACS":
+				case "ATR":
+				case "AGR":
+				case "ARE":
+				case "AHI":
+				case "ABA":
+				case "MAT":
 					listeCarteUtilisable.add(carte);
+					break;
+				default:
+					break;
 				}
 			}
-			switch (carte.name()) {
+		}
+		int forcePerso = core.getPartie().getLieux().get(n).getForce();
+		int nbZombie = core.getPartie().getLieux().get(n).getNbZombies();
+		for (CarteType carteAJouer : listeCarteUtilisable) {
+			switch (carteAJouer.name()) {
 			case "ACS":
-				listeCarteUtilisable.add(carte);
+				if (nbZombie >= forcePerso) {
+					listeCarteJouee.add(carteAJouer);
+					core.getListeCarte().remove(carteAJouer);
+					nbZombie = nbZombie - 2;
+				}
 				break;
 			case "ATR":
-				listeCarteUtilisable.add(carte);
+				if (nbZombie >= forcePerso) {
+					listeCarteJouee.add(carteAJouer);
+					core.getListeCarte().remove(carteAJouer);
+					nbZombie = nbZombie - 2;
+				}
 				break;
 			case "AGR":
-				listeCarteUtilisable.add(carte);
+				if (nbZombie >= forcePerso) {
+					listeCarteJouee.add(carteAJouer);
+					core.getListeCarte().remove(carteAJouer);
+					nbZombie = nbZombie - 2;
+				}
 				break;
 			case "ARE":
-				listeCarteUtilisable.add(carte);
+				if (nbZombie >= forcePerso) {
+					listeCarteJouee.add(carteAJouer);
+					core.getListeCarte().remove(carteAJouer);
+					nbZombie--;
+				}
 				break;
 			case "AHI":
-				listeCarteUtilisable.add(carte);
+				if (nbZombie >= forcePerso) {
+					listeCarteJouee.add(carteAJouer);
+					core.getListeCarte().remove(carteAJouer);
+					nbZombie--;
+				}
 				break;
 			case "ABA":
-				listeCarteUtilisable.add(carte);
+				if (nbZombie >= forcePerso) {
+					listeCarteJouee.add(carteAJouer);
+					core.getListeCarte().remove(carteAJouer);
+					nbZombie--;
+				}
+				break;
+			default:
 				break;
 			}
 		}
-		
-		int carteAJouer = 0;
-		if (!listeCarteUtilisable.isEmpty()) {
-			for(int i=0; i<6;i++) {
-			if(core.getPartie().getLieux().get(n).getPersonnage().get(i).getJoueur().getCouleur()== core.getCouleur()) {
-				listeCarteJouee.add(listeCarteUtilisable.get(carteAJouer));
-				core.getListeCarte().remove(listeCarteUtilisable.get(carteAJouer));
-				listeCarteUtilisable.remove(carteAJouer);
-				
-				
+		List<PionCouleur> listePionCache = new ArrayList<>();
+		for (PionCouleur pion : core.getPionSacrDispo())
+			if (listeCarteUtilisable.contains(CarteType.CAC)) {
+				listeCarteJouee.add(CarteType.CAC);
+				core.getListeCarte().remove(CarteType.CAC);
+				listeCarteUtilisable.remove(CarteType.CAC);
+				listePionCache.add(pion);
 			}
-			}
-		}
-		List<PionCouleur> listePionCache = listePionCache(core);
-		int i = 0;
-		while (i < listePionCache.size()) {
-			listeCarteJouee.add(CarteType.CAC);
-			core.getListeCarte().remove(CarteType.CAC);
-			i++;
-		}
 		listRenvoye.add(listeCarteJouee);
 		listRenvoye.add(listePionCache);
 		return listRenvoye;
@@ -446,14 +495,14 @@ public class TraitementBot {
 			return listePionCache;
 		Random r = new Random();
 		int nbrCartePossibleDejouer = listeCarteCachette.size();
-		int nbrPion = core.getPoinSacrDispo().size();
+		int nbrPion = core.getPionSacrDispo().size();
 		int nbrCarteJouee;
 		if (nbrCartePossibleDejouer > nbrPion)
 			nbrCarteJouee = r.nextInt(nbrPion);
 		else
 			nbrCarteJouee = r.nextInt(nbrCartePossibleDejouer);
 		for (int i = 0; i < nbrCarteJouee; i++)
-			listePionCache.add(core.getPoinSacrDispo().get(i));
+			listePionCache.add(core.getPionSacrDispo().get(i));
 		return listePionCache;
 	}
 	
