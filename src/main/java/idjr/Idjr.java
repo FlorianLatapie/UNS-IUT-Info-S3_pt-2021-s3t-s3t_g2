@@ -102,7 +102,7 @@ public class Idjr {
 		thread.start();
 	}
 
-	private void listOfServers() {
+	public void listOfServers() {
 		listOfServer.clear();
 
 		// TODO QUE MIXTE
