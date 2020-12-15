@@ -63,7 +63,7 @@ public class PlateauPane extends StackPane implements PlateauListener {
 	private String jaune = " -fx-background-color:#E9B902; -fx-text-fill: #000000";
 	private String bleu = " -fx-background-color:#008CDA; -fx-text-fill: #ffffff";
 	private String noir = " -fx-background-color:#000000; -fx-text-fill: #ffffff";
-	
+
 	private int largBouton = 155;
 	private int hautBouton = 70;
 
@@ -109,25 +109,24 @@ public class PlateauPane extends StackPane implements PlateauListener {
 	Label nbCartes5;
 	Label nbCartes6;
 
-	/*Label afficheJoueursLieu1;
-	Label afficheJoueursLieu2;
-	Label afficheJoueursLieu3;
-	Label afficheJoueursLieu4;
-	Label afficheJoueursLieu5;
-	Label afficheJoueursLieu6;*/
+	/*
+	 * Label afficheJoueursLieu1; Label afficheJoueursLieu2; Label
+	 * afficheJoueursLieu3; Label afficheJoueursLieu4; Label afficheJoueursLieu5;
+	 * Label afficheJoueursLieu6;
+	 */
 
 	BorderPane info1;
 	Label titreInfo1;
 	Label lInfo1;
-	
+
 	BorderPane info2;
 	Label titreInfo2;
 	Label lInfo2;
-	
+
 	BorderPane info3;
 	Label titreInfo3;
 	Label lInfo3;
-	
+
 	BorderPane info4;
 	Label titreInfo4;
 	Label lInfo4;
@@ -136,12 +135,12 @@ public class PlateauPane extends StackPane implements PlateauListener {
 	Label lChefVigile2;
 	Label lChefVigile3;
 	Label lChefVigile4;
-	
+
 	Button bQuitterInfo1;
 	Button bQuitterInfo2;
 	Button bQuitterInfo3;
 	Button bQuitterInfo4;
-	
+
 	AnchorPane notifInfo;
 	AnchorPane aPlateau;
 	ImageView imgFond;
@@ -153,21 +152,21 @@ public class PlateauPane extends StackPane implements PlateauListener {
 	ImageView imgCarteFerme5;
 	ImageView imgCarteFerme6;
 	Timer myTimer;
-	
+
 	ImageView l1p1;
 	ImageView l1p2;
 	ImageView l1p3;
-	
+
 	ImageView l2p1;
 	ImageView l2p2;
 	ImageView l2p3;
 	ImageView l2p4;
-	
+
 	ImageView l3p1;
 	ImageView l3p2;
 	ImageView l3p3;
 	ImageView l3p4;
-	
+
 	ImageView l4p1;
 	ImageView l4p2;
 	ImageView l4p3;
@@ -177,17 +176,24 @@ public class PlateauPane extends StackPane implements PlateauListener {
 	ImageView l4p7;
 	ImageView l4p8;
 	ImageView l4p9;
-	
+
 	ImageView l5p1;
 	ImageView l5p2;
 	ImageView l5p3;
-		
+
 	ImageView l6p1;
 	ImageView l6p2;
 	ImageView l6p3;
 	ImageView l6p4;
 	ImageView l6p5;
 	ImageView l6p6;
+
+	Label nbPlace1;
+	Label nbPlace2;
+	Label nbPlace3;
+	Label nbPlace4;
+	Label nbPlace5;
+	Label nbPlace6;
 
 	public PlateauPane(ScreenControl sc, Core c) {
 		core = c;
@@ -415,7 +421,8 @@ public class PlateauPane extends StackPane implements PlateauListener {
 		aPlateau.setMaxSize(taillePlateau, taillePlateau);
 
 		VBox vbRight1 = new VBox();
-		vbRight1.setAlignment(Pos.CENTER);
+		vbRight1.setAlignment(Pos.TOP_CENTER);
+		vbRight1.setSpacing(30);
 		HBox hbBot1 = new HBox();
 
 		force1 = new Label(International.trad("text.forceEquipeA") + "\n" + International.trad("text.forceEquipeB")
@@ -444,6 +451,10 @@ public class PlateauPane extends StackPane implements PlateauListener {
 		nbZombies1 = new Label(International.trad("text.nbZombie"));
 		nbZombies1.setFont(fontInfo);
 		nbZombies1.setTextFill(Color.RED);
+		
+		nbPlace1 = new Label("## / 3");
+		nbPlace1.setFont(Font.font("Segoe UI", FontWeight.BOLD, 20));
+		nbPlace1.setTextFill(Color.WHITE);
 
 		BorderPane b1 = new BorderPane();
 		b1.setPadding(new Insets(5));
@@ -451,7 +462,7 @@ public class PlateauPane extends StackPane implements PlateauListener {
 		b1.setMaxSize(320, 210);
 		b1.setBackground(new Background(new BackgroundFill(Color.BLACK, CornerRadii.EMPTY, null)));
 
-		vbRight1.getChildren().addAll(force1);
+		vbRight1.getChildren().addAll(nbPlace1,force1);
 		hbBot1.getChildren().add(nbZombies1);
 
 		b1.setCenter(joueursPresents1);
@@ -467,11 +478,12 @@ public class PlateauPane extends StackPane implements PlateauListener {
 		////
 
 		VBox vbRight2 = new VBox();
-		vbRight2.setAlignment(Pos.CENTER);
+		vbRight2.setAlignment(Pos.TOP_CENTER);
+		vbRight2.setSpacing(30);
 		HBox hbBot2 = new HBox();
 
 		force2 = new Label(International.trad("text.forceEquipeA") + "\n" + International.trad("text.forceEquipeB")
-		+ "\n\n" + "##");
+				+ "\n\n" + "##");
 		force2.setFont(fontInfo);
 		force2.setTextFill(Color.RED);
 		force2.setTextAlignment(TextAlignment.CENTER);
@@ -491,7 +503,7 @@ public class PlateauPane extends StackPane implements PlateauListener {
 
 		joueursPresents2L1.getChildren().addAll(l2p1, l2p2);
 		joueursPresents2L2.getChildren().addAll(l2p3, l2p4);
-		joueursPresents2.getChildren().addAll(/*afficheJoueursLieu2 = new Label(),*/ joueursPresents2L1,
+		joueursPresents2.getChildren().addAll(/* afficheJoueursLieu2 = new Label(), */ joueursPresents2L1,
 				joueursPresents2L2);
 		joueursPresents2.setSpacing(5);
 		joueursPresents2.setPrefSize(170, 100);
@@ -499,6 +511,10 @@ public class PlateauPane extends StackPane implements PlateauListener {
 		nbZombies2 = new Label(International.trad("text.nbZombie"));
 		nbZombies2.setFont(fontInfo);
 		nbZombies2.setTextFill(Color.RED);
+		
+		nbPlace2 = new Label("## / 4");
+		nbPlace2.setFont(Font.font("Segoe UI", FontWeight.BOLD, 20));
+		nbPlace2.setTextFill(Color.WHITE);
 
 		BorderPane b2 = new BorderPane();
 		b2.setPadding(new Insets(5));
@@ -506,7 +522,7 @@ public class PlateauPane extends StackPane implements PlateauListener {
 		b2.setMaxSize(320, 215);
 		b2.setBackground(new Background(new BackgroundFill(Color.BLACK, CornerRadii.EMPTY, null)));
 
-		vbRight2.getChildren().addAll(force2);
+		vbRight2.getChildren().addAll(nbPlace2, force2);
 		hbBot2.getChildren().add(nbZombies2);
 
 		b2.setCenter(joueursPresents2);
@@ -521,19 +537,19 @@ public class PlateauPane extends StackPane implements PlateauListener {
 		///
 
 		VBox vbRight3 = new VBox();
-		vbRight3.setAlignment(Pos.CENTER);
+		vbRight3.setAlignment(Pos.TOP_CENTER);
+		vbRight3.setSpacing(30);
 		HBox hbBot3 = new HBox();
 
 		force3 = new Label(International.trad("text.forceEquipeA") + "\n" + International.trad("text.forceEquipeB")
-		+ "\n\n" + "##");
+				+ "\n\n" + "##");
 		force3.setFont(fontInfo);
 		force3.setTextFill(Color.RED);
 		force3.setTextAlignment(TextAlignment.CENTER);
-		
 
 		VBox joueursPresents3 = new VBox();
 		joueursPresents3.setAlignment(Pos.CENTER);
-		HBox joueursPresents3L1 = new HBox();	
+		HBox joueursPresents3L1 = new HBox();
 		joueursPresents3L1.setAlignment(Pos.CENTER);
 		joueursPresents3L1.setSpacing(10);
 		HBox joueursPresents3L2 = new HBox();
@@ -546,10 +562,15 @@ public class PlateauPane extends StackPane implements PlateauListener {
 
 		joueursPresents3L1.getChildren().addAll(l3p1, l3p2);
 		joueursPresents3L2.getChildren().addAll(l3p3, l3p4);
-		joueursPresents3.getChildren().addAll(/*afficheJoueursLieu3 = new Label(), */joueursPresents3L1,
+		joueursPresents3.getChildren().addAll(/* afficheJoueursLieu3 = new Label(), */joueursPresents3L1,
 				joueursPresents3L2);
 		joueursPresents3.setSpacing(5);
 		joueursPresents3.setPrefSize(170, 100);
+		
+		
+		nbPlace3 = new Label("## / 4");
+		nbPlace3.setFont(Font.font("Segoe UI", FontWeight.BOLD, 20));
+		nbPlace3.setTextFill(Color.WHITE);
 
 		nbZombies3 = new Label(International.trad("text.nbZombie"));
 		nbZombies3.setFont(fontInfo);
@@ -561,7 +582,7 @@ public class PlateauPane extends StackPane implements PlateauListener {
 		b3.setMaxSize(325, 210);
 		b3.setBackground(new Background(new BackgroundFill(Color.BLACK, CornerRadii.EMPTY, null)));
 
-		vbRight3.getChildren().addAll(force3);
+		vbRight3.getChildren().addAll(nbPlace3,force3);
 		hbBot3.getChildren().add(nbZombies3);
 
 		b3.setCenter(joueursPresents3);
@@ -577,11 +598,12 @@ public class PlateauPane extends StackPane implements PlateauListener {
 		///
 
 		VBox vbRight4 = new VBox();
-		vbRight4.setAlignment(Pos.CENTER);
+		vbRight4.setAlignment(Pos.TOP_CENTER);
+		vbRight4.setSpacing(30);
 		HBox hbBot4 = new HBox();
 
 		force4 = new Label(International.trad("text.forceEquipeA") + "\n" + International.trad("text.forceEquipeB")
-		+ "\n\n" + "##");
+				+ "\n\n" + "##");
 		force4.setFont(fontInfo);
 		force4.setTextFill(Color.RED);
 		force4.setTextAlignment(TextAlignment.CENTER);
@@ -604,13 +626,17 @@ public class PlateauPane extends StackPane implements PlateauListener {
 		joueursPresents4L1.getChildren().addAll(l4p1, l4p2, l4p3);
 		joueursPresents4L2.getChildren().addAll(l4p4, l4p5, l4p6);
 		joueursPresents4L3.getChildren().addAll(l4p7, l4p8, l4p9);
-		joueursPresents4.getChildren().addAll(/*afficheJoueursLieu4 = new Label(), */joueursPresents4L1,
-				joueursPresents4L2,joueursPresents4L3);
+		joueursPresents4.getChildren().addAll(/* afficheJoueursLieu4 = new Label(), */joueursPresents4L1,
+				joueursPresents4L2, joueursPresents4L3);
 		joueursPresents4.setPrefSize(170, 100);
 
 		nbZombies4 = new Label(International.trad("text.nbZombie"));
 		nbZombies4.setFont(fontInfo);
 		nbZombies4.setTextFill(Color.RED);
+		
+		nbPlace4 = new Label("## / ∞");
+		nbPlace4.setFont(Font.font("Segoe UI", FontWeight.BOLD, 20));
+		nbPlace4.setTextFill(Color.WHITE);
 
 		BorderPane b4 = new BorderPane();
 		b4.setPadding(new Insets(5));
@@ -618,7 +644,7 @@ public class PlateauPane extends StackPane implements PlateauListener {
 		b4.setMaxSize(270, 210);
 		b4.setBackground(new Background(new BackgroundFill(Color.BLACK, CornerRadii.EMPTY, null)));
 
-		vbRight4.getChildren().addAll(force4);
+		vbRight4.getChildren().addAll(nbPlace4,force4);
 		hbBot4.getChildren().add(nbZombies4);
 
 		b4.setCenter(joueursPresents4);
@@ -634,11 +660,16 @@ public class PlateauPane extends StackPane implements PlateauListener {
 		///
 
 		VBox vbRight5 = new VBox();
-		vbRight5.setAlignment(Pos.CENTER);
+		vbRight5.setAlignment(Pos.TOP_CENTER);
+		vbRight5.setSpacing(30);
 		HBox hbBot5 = new HBox();
 
+		nbPlace5 = new Label("## / 3");
+		nbPlace5.setFont(Font.font("Segoe UI", FontWeight.BOLD, 20));
+		nbPlace5.setTextFill(Color.WHITE);
+
 		force5 = new Label(International.trad("text.forceEquipeA") + "\n" + International.trad("text.forceEquipeB")
-		+ "\n\n" + "##");
+				+ "\n\n" + "##");
 		force5.setFont(fontInfo);
 		force5.setTextFill(Color.RED);
 		force5.setTextAlignment(TextAlignment.CENTER);
@@ -655,11 +686,10 @@ public class PlateauPane extends StackPane implements PlateauListener {
 		l5p2 = new ImageView(DataControl.NOM_COULEUR);
 		l5p3 = new ImageView(DataControl.NOM_COULEUR);
 
-		joueursPresents5L1.getChildren().addAll(l5p1,l5p2);
+		joueursPresents5L1.getChildren().addAll(l5p1, l5p2);
 		joueursPresents5L2.getChildren().add(l5p3);
-		joueursPresents5.getChildren().addAll(joueursPresents5L1, joueursPresents5L2 );
+		joueursPresents5.getChildren().addAll(joueursPresents5L1, joueursPresents5L2);
 		joueursPresents5.setPrefSize(170, 100);
-
 
 		nbZombies5 = new Label(International.trad("text.nbZombie"));
 		nbZombies5.setFont(fontInfo);
@@ -671,7 +701,7 @@ public class PlateauPane extends StackPane implements PlateauListener {
 		b5.setMaxSize(325, 215);
 		b5.setBackground(new Background(new BackgroundFill(Color.BLACK, CornerRadii.EMPTY, null)));
 
-		vbRight5.getChildren().addAll(force5);
+		vbRight5.getChildren().addAll(nbPlace5, force5);
 		hbBot5.getChildren().add(nbZombies5);
 
 		b5.setCenter(joueursPresents5);
@@ -686,12 +716,13 @@ public class PlateauPane extends StackPane implements PlateauListener {
 
 		///
 
-		VBox vbLeft6 = new VBox();
-		vbLeft6.setAlignment(Pos.CENTER);
+		VBox vbRight6 = new VBox();
+		vbRight6.setAlignment(Pos.TOP_CENTER);
+		vbRight6.setSpacing(30);
 		HBox hbBot6 = new HBox();
 
 		force6 = new Label(International.trad("text.forceEquipeA") + "\n" + International.trad("text.forceEquipeB")
-		+ "\n\n" + "##");
+				+ "\n\n" + "##");
 		force6.setFont(fontInfo);
 		force6.setTextFill(Color.RED);
 		force6.setTextAlignment(TextAlignment.CENTER);
@@ -709,15 +740,18 @@ public class PlateauPane extends StackPane implements PlateauListener {
 
 		joueursPresents6L1.getChildren().addAll(l6p1, l6p2, l6p3);
 		joueursPresents6L2.getChildren().addAll(l6p4, l6p5, l6p6);
-		joueursPresents6.getChildren().addAll(/*afficheJoueursLieu5 = new Label(), */joueursPresents6L1,
+		joueursPresents6.getChildren().addAll(/* afficheJoueursLieu5 = new Label(), */joueursPresents6L1,
 				joueursPresents6L2);
 		joueursPresents6.setSpacing(20);
 		joueursPresents6.setPrefSize(170, 100);
 
-				
 		nbZombies6 = new Label(International.trad("text.nbZombie"));
 		nbZombies6.setFont(fontInfo);
 		nbZombies6.setTextFill(Color.RED);
+		
+		nbPlace6 = new Label("## / 6");
+		nbPlace6.setFont(Font.font("Segoe UI", FontWeight.BOLD, 20));
+		nbPlace6.setTextFill(Color.WHITE);
 
 		BorderPane b6 = new BorderPane();
 		b6.setPrefSize(310, 215);
@@ -726,11 +760,11 @@ public class PlateauPane extends StackPane implements PlateauListener {
 		b6.setBackground(new Background(new BackgroundFill(Color.BLACK, CornerRadii.EMPTY, null)));
 		b6.setOpacity(.9);
 
-		vbLeft6.getChildren().addAll(force6);
+		vbRight6.getChildren().addAll(nbPlace6,force6);
 		hbBot6.getChildren().add(nbZombies6);
 
 		b6.setCenter(joueursPresents6);
-		b6.setLeft(vbLeft6);
+		b6.setRight(vbRight6);
 		b6.setBottom(hbBot6);
 
 		b6.setRotate(53);
@@ -778,22 +812,22 @@ public class PlateauPane extends StackPane implements PlateauListener {
 		////
 
 		aPlateau.getChildren().addAll(b1, b2, b3, b4, b5, b6, lChefVigile, lChefVigile2, lChefVigile3, lChefVigile4);
-		
 
 		notifInfo = new AnchorPane();
 		notifInfo.setMinSize(1920, 1080);
-		
+
 		info1 = new BorderPane();
 		info1.setPrefSize(700, 200);
 		info1.setMaxSize(700, 200);
 		info1.setPadding(new Insets(10));
-		info1.setStyle(" -fx-background-color:#1A1A1A; -fx-background-radius: 20px; -fx-border-color: red; -fx-border-insets: -3; -fx-border-width: 3; -fx-border-radius: 20px;");
-		
+		info1.setStyle(
+				" -fx-background-color:#1A1A1A; -fx-background-radius: 20px; -fx-border-color: red; -fx-border-insets: -3; -fx-border-width: 3; -fx-border-radius: 20px;");
+
 		bQuitterInfo1 = new Button("QUITTER");
 		bQuitterInfo1.setAlignment(Pos.CENTER);
 		bQuitterInfo1.setStyle(styleBoutonInfo);
-		bQuitterInfo1.setPrefSize(largBouton*.7, hautBouton*.7);
-		bQuitterInfo1.setMinSize(largBouton*.7, hautBouton*.7);
+		bQuitterInfo1.setPrefSize(largBouton * .7, hautBouton * .7);
+		bQuitterInfo1.setMinSize(largBouton * .7, hautBouton * .7);
 		bQuitterInfo1.setFont(Font.font("Segoe UI", FontWeight.BOLD, 18));
 		bQuitterInfo1.setOnAction(event -> {
 			notifInfo.setVisible(false);
@@ -829,18 +863,19 @@ public class PlateauPane extends StackPane implements PlateauListener {
 		info1.setVisible(true);
 		notifInfo.setBottomAnchor(info1, 206.0);
 		notifInfo.setLeftAnchor(info1, 605.0);
-		
+
 		info2 = new BorderPane();
 		info2.setPrefSize(700, 200);
 		info2.setMaxSize(700, 200);
 		info2.setPadding(new Insets(10));
-		info2.setStyle(" -fx-background-color:#1A1A1A; -fx-background-radius: 20px; -fx-border-color: red; -fx-border-insets: -3; -fx-border-width: 3; -fx-border-radius: 20px;");
-		
+		info2.setStyle(
+				" -fx-background-color:#1A1A1A; -fx-background-radius: 20px; -fx-border-color: red; -fx-border-insets: -3; -fx-border-width: 3; -fx-border-radius: 20px;");
+
 		bQuitterInfo2 = new Button("QUITTER");
 		bQuitterInfo2.setAlignment(Pos.CENTER);
 		bQuitterInfo2.setStyle(styleBoutonInfo);
-		bQuitterInfo2.setPrefSize(largBouton*.7, hautBouton*.7);
-		bQuitterInfo2.setMinSize(largBouton*.7, hautBouton*.7);
+		bQuitterInfo2.setPrefSize(largBouton * .7, hautBouton * .7);
+		bQuitterInfo2.setMinSize(largBouton * .7, hautBouton * .7);
 		bQuitterInfo2.setFont(Font.font("Segoe UI", FontWeight.BOLD, 18));
 		bQuitterInfo2.setOnAction(event -> {
 			notifInfo.setVisible(false);
@@ -851,7 +886,7 @@ public class PlateauPane extends StackPane implements PlateauListener {
 		bQuitterInfo2.setOnMouseExited(event -> {
 			bQuitterInfo2.setStyle(styleBoutonInfo);
 		});
-		
+
 		VBox vTitreInfo2 = new VBox();
 		vTitreInfo2.setAlignment(Pos.CENTER);
 		vTitreInfo2.setPadding(new Insets(20));
@@ -868,26 +903,26 @@ public class PlateauPane extends StackPane implements PlateauListener {
 		lInfo2.setFont(Font.font("Segoe UI", FontWeight.BOLD, 20));
 		lInfo2.setTextFill(Color.WHITE);
 		vInfo2.getChildren().addAll(lInfo2);
-		
+
 		info2.setMargin(vInfo2, new Insets(-30, 0, 0, 0));
 		info2.setRotate(90);
 		info2.setTop(vTitreInfo2);
 		info2.setCenter(vInfo2);
 		info2.setBottom(bQuitterInfo2);
 		notifInfo.setTopAnchor(info2, 436.0);
-		
-		
+
 		info3 = new BorderPane();
 		info3.setPrefSize(700, 200);
 		info3.setMaxSize(700, 200);
 		info3.setPadding(new Insets(10));
-		info3.setStyle(" -fx-background-color:#1A1A1A; -fx-background-radius: 20px; -fx-border-color: red; -fx-border-insets: -3; -fx-border-width: 3; -fx-border-radius: 20px;");
-		
+		info3.setStyle(
+				" -fx-background-color:#1A1A1A; -fx-background-radius: 20px; -fx-border-color: red; -fx-border-insets: -3; -fx-border-width: 3; -fx-border-radius: 20px;");
+
 		bQuitterInfo3 = new Button("QUITTER");
 		bQuitterInfo3.setAlignment(Pos.CENTER);
 		bQuitterInfo3.setStyle(styleBoutonInfo);
-		bQuitterInfo3.setPrefSize(largBouton*.7, hautBouton*.7);
-		bQuitterInfo3.setMinSize(largBouton*.7, hautBouton*.7);
+		bQuitterInfo3.setPrefSize(largBouton * .7, hautBouton * .7);
+		bQuitterInfo3.setMinSize(largBouton * .7, hautBouton * .7);
 		bQuitterInfo3.setFont(Font.font("Segoe UI", FontWeight.BOLD, 18));
 		bQuitterInfo3.setOnAction(event -> {
 			notifInfo.setVisible(false);
@@ -898,7 +933,7 @@ public class PlateauPane extends StackPane implements PlateauListener {
 		bQuitterInfo3.setOnMouseExited(event -> {
 			bQuitterInfo3.setStyle(styleBoutonInfo);
 		});
-		
+
 		VBox vTitreInfo3 = new VBox();
 		vTitreInfo3.setAlignment(Pos.CENTER);
 		vTitreInfo3.setPadding(new Insets(20));
@@ -916,7 +951,6 @@ public class PlateauPane extends StackPane implements PlateauListener {
 		lInfo3.setTextFill(Color.WHITE);
 		vInfo3.getChildren().addAll(lInfo3);
 
-		
 		info3.setMargin(vInfo3, new Insets(-30, 0, 0, 0));
 		info3.setRotate(180);
 		info3.setTop(vTitreInfo3);
@@ -924,18 +958,19 @@ public class PlateauPane extends StackPane implements PlateauListener {
 		info3.setBottom(bQuitterInfo3);
 		notifInfo.setTopAnchor(info3, 206.0);
 		notifInfo.setLeftAnchor(info3, 605.0);
-		
+
 		info4 = new BorderPane();
 		info4.setPrefSize(700, 200);
 		info4.setMaxSize(700, 200);
 		info4.setPadding(new Insets(10));
-		info4.setStyle(" -fx-background-color:#1A1A1A; -fx-background-radius: 20px; -fx-border-color: red; -fx-border-insets: -3; -fx-border-width: 3; -fx-border-radius: 20px;");
-		
+		info4.setStyle(
+				" -fx-background-color:#1A1A1A; -fx-background-radius: 20px; -fx-border-color: red; -fx-border-insets: -3; -fx-border-width: 3; -fx-border-radius: 20px;");
+
 		bQuitterInfo4 = new Button("QUITTER");
 		bQuitterInfo4.setAlignment(Pos.CENTER);
 		bQuitterInfo4.setStyle(styleBoutonInfo);
-		bQuitterInfo4.setPrefSize(largBouton*.7, hautBouton*.7);
-		bQuitterInfo4.setMinSize(largBouton*.7, hautBouton*.7);
+		bQuitterInfo4.setPrefSize(largBouton * .7, hautBouton * .7);
+		bQuitterInfo4.setMinSize(largBouton * .7, hautBouton * .7);
 		bQuitterInfo4.setFont(Font.font("Segoe UI", FontWeight.BOLD, 18));
 		bQuitterInfo4.setOnAction(event -> {
 			notifInfo.setVisible(false);
@@ -946,7 +981,7 @@ public class PlateauPane extends StackPane implements PlateauListener {
 		bQuitterInfo4.setOnMouseExited(event -> {
 			bQuitterInfo4.setStyle(styleBoutonInfo);
 		});
-		
+
 		VBox vTitreInfo4 = new VBox();
 		vTitreInfo4.setAlignment(Pos.CENTER);
 		vTitreInfo4.setPadding(new Insets(20));
@@ -971,8 +1006,8 @@ public class PlateauPane extends StackPane implements PlateauListener {
 		info4.setBottom(bQuitterInfo4);
 		notifInfo.setTopAnchor(info4, 436.0);
 		notifInfo.setRightAnchor(info4, 0.0);
-		
-		notifInfo.getChildren().addAll(info1,info2, info3, info4);
+
+		notifInfo.getChildren().addAll(info1, info2, info3, info4);
 		notifInfo.setVisible(false);
 
 		borderJoueurs.setTop(hHaut);
@@ -988,18 +1023,20 @@ public class PlateauPane extends StackPane implements PlateauListener {
 		imgFond.setScaleX(0.4362);
 		imgFond.setScaleY(0.4362);
 
-		/*afficheJoueursLieu1.setTextFill(Color.WHITE);
-		afficheJoueursLieu2.setTextFill(Color.WHITE);
-		afficheJoueursLieu3.setTextFill(Color.WHITE);
-		afficheJoueursLieu4.setTextFill(Color.WHITE);
-		afficheJoueursLieu5.setTextFill(Color.WHITE);
-		afficheJoueursLieu6.setTextFill(Color.WHITE);
-		afficheJoueursLieu1.setFont(fontPerso);
-		afficheJoueursLieu2.setFont(fontPerso);
-		afficheJoueursLieu3.setFont(fontPerso);
-		afficheJoueursLieu4.setFont(fontPerso);
-		afficheJoueursLieu5.setFont(fontPerso);
-		afficheJoueursLieu6.setFont(fontPerso);*/
+		/*
+		 * afficheJoueursLieu1.setTextFill(Color.WHITE);
+		 * afficheJoueursLieu2.setTextFill(Color.WHITE);
+		 * afficheJoueursLieu3.setTextFill(Color.WHITE);
+		 * afficheJoueursLieu4.setTextFill(Color.WHITE);
+		 * afficheJoueursLieu5.setTextFill(Color.WHITE);
+		 * afficheJoueursLieu6.setTextFill(Color.WHITE);
+		 * afficheJoueursLieu1.setFont(fontPerso);
+		 * afficheJoueursLieu2.setFont(fontPerso);
+		 * afficheJoueursLieu3.setFont(fontPerso);
+		 * afficheJoueursLieu4.setFont(fontPerso);
+		 * afficheJoueursLieu5.setFont(fontPerso);
+		 * afficheJoueursLieu6.setFont(fontPerso);
+		 */
 
 		imgCarteFerme1 = new ImageView(DataControl.FERME1);
 		imgCarteFerme1.setRotate(128);
@@ -1041,8 +1078,8 @@ public class PlateauPane extends StackPane implements PlateauListener {
 		j5.setVisible(false);
 		j6.setVisible(false);
 
-		this.getChildren().addAll(imgFond, borderJoueurs, aPlateau, imgCarteFerme1, imgCarteFerme2,
-				imgCarteFerme3, imgCarteFerme5, imgCarteFerme6, notifInfo);
+		this.getChildren().addAll(imgFond, borderJoueurs, aPlateau, imgCarteFerme1, imgCarteFerme2, imgCarteFerme3,
+				imgCarteFerme5, imgCarteFerme6, notifInfo);
 		this.setMinSize(1920, 1080);
 		this.setPrefSize(1920, 1080);
 		this.setMaxSize(1920, 1080);
@@ -1081,7 +1118,7 @@ public class PlateauPane extends StackPane implements PlateauListener {
 
 	@Override
 	public void nomJoueur(int joueur, Couleur couleur, String val) {
-		//String tmp = val;
+		// String tmp = val;
 		Platform.runLater(() -> {
 			switch (joueur) {
 			case 0:
@@ -1153,7 +1190,7 @@ public class PlateauPane extends StackPane implements PlateauListener {
 		case M:
 			return marron;
 		default:
-			System.err.println("couleur "+couleur+"inconnue"); //TODO en faire une exception 
+			System.err.println("couleur " + couleur + "inconnue"); // TODO en faire une exception
 			break;
 		}
 
@@ -1204,8 +1241,8 @@ public class PlateauPane extends StackPane implements PlateauListener {
 			case 3:
 				imgCarteFerme3.setVisible(false);
 				break;
-			case 4: 
-				//c'est le parking il est forcément ouvert 
+			case 4:
+				// c'est le parking il est forcément ouvert
 				break;
 			case 5:
 				imgCarteFerme5.setVisible(false);
@@ -1279,7 +1316,8 @@ public class PlateauPane extends StackPane implements PlateauListener {
 
 	@Override
 	public void forceLieu(int lieu, int force) {
-		String tmp = International.trad("text.forceEquipeA")+"\n"+International.trad("text.forceEquipeB")+"\n\n" + force;
+		String tmp = International.trad("text.forceEquipeA") + "\n" + International.trad("text.forceEquipeB") + "\n\n"
+				+ force;
 		Platform.runLater(() -> {
 			switch (lieu) {
 			case 1:
@@ -1324,32 +1362,33 @@ public class PlateauPane extends StackPane implements PlateauListener {
 
 	@Override
 	public void destionationPerso(int lieu, String nomPersosCouleur) {
-		//TODO prendre le string le déouper et trouver quel perso il faut afficher et non afficher 
+		// TODO prendre le string le déouper et trouver quel perso il faut afficher et
+		// non afficher
 		Platform.runLater(() -> {
 			switch (lieu) {
 			case 1:
-				System.out.println("TODO afficher les images maintenant"); //TODO 
-				//afficheJoueursLieu1.setText(nomPersosCouleur);
+				System.out.println("TODO afficher les images maintenant"); // TODO
+				// afficheJoueursLieu1.setText(nomPersosCouleur);
 				break;
 			case 2:
-				System.out.println("TODO afficher les images maintenant"); //TODO 
-				//afficheJoueursLieu2.setText(nomPersosCouleur);
+				System.out.println("TODO afficher les images maintenant"); // TODO
+				// afficheJoueursLieu2.setText(nomPersosCouleur);
 				break;
 			case 3:
-				System.out.println("TODO afficher les images maintenant"); //TODO 
-				//afficheJoueursLieu3.setText(nomPersosCouleur);
+				System.out.println("TODO afficher les images maintenant"); // TODO
+				// afficheJoueursLieu3.setText(nomPersosCouleur);
 				break;
 			case 4:
-				System.out.println("TODO afficher les images maintenant"); //TODO 
-				//afficheJoueursLieu4.setText(nomPersosCouleur);
+				System.out.println("TODO afficher les images maintenant"); // TODO
+				// afficheJoueursLieu4.setText(nomPersosCouleur);
 				break;
 			case 5:
-				System.out.println("TODO afficher les images maintenant"); //TODO 
-				//afficheJoueursLieu5.setText(nomPersosCouleur);
+				System.out.println("TODO afficher les images maintenant"); // TODO
+				// afficheJoueursLieu5.setText(nomPersosCouleur);
 				break;
 			case 6:
-				System.out.println("TODO afficher les images maintenant"); //TODO 
-				//afficheJoueursLieu6.setText(nomPersosCouleur);
+				System.out.println("TODO afficher les images maintenant"); // TODO
+				// afficheJoueursLieu6.setText(nomPersosCouleur);
 				break;
 			default:
 				throw new IllegalStateException("Unexpected value: " + lieu);
@@ -1364,7 +1403,7 @@ public class PlateauPane extends StackPane implements PlateauListener {
 			titreInfo2.setText("Fouille du camion");
 			titreInfo3.setText("Fouille du camion");
 			titreInfo4.setText("Fouille du camion");
-			
+
 			lInfo1.setText(camion);
 			lInfo2.setText(camion);
 			lInfo3.setText(camion);
