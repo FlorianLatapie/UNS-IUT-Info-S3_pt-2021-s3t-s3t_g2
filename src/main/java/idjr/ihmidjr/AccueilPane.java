@@ -57,11 +57,11 @@ public class AccueilPane extends StackPane {
 		stackPane.setAlignment(Pos.CENTER);
 
 		// titre
-		Label titre1 = new Label(International.trad("texte.zombies"));
+		Label titre1 = new Label(International.trad("texte.preTitre"));
 		titre1.setFont(Font.font("Segoe UI", FontWeight.BOLD, 160));
 		titre1.setTextFill(Color.BLACK);
 
-		Label titre2 = new Label(International.trad("texte.titre"));
+		Label titre2 = new Label(International.trad("texte.titreIDJR"));
 		titre2.setFont(Font.font("Segoe UI", 35));
 		titre2.setTextFill(Color.BLACK);
 		titre2.setPadding(new Insets(0, 0, 20, 0));
@@ -85,7 +85,7 @@ public class AccueilPane extends StackPane {
 		nomjoueur.setMinHeight(hauteurElemtents);
 
 		// boutons
-		Button bJouer = new Button(International.trad("boutton.jouer"));
+		Button bJouer = new Button(International.trad("bouton.jouer"));
 		bJouer.setPrefSize(lBouton, hBouton);
 		bJouer.setMinSize(lBouton, hBouton);
 		bJouer.setFont(policeBouton);
