@@ -9,7 +9,7 @@ import java.util.Map;
 import java.util.Random;
 
 import botmoyen.MCTS.MCTSBotMoyen;
-import botmoyen.partie.Partie;
+import botmoyen.partie.Lieu;
 import reseau.type.CarteType;
 import reseau.type.Couleur;
 import reseau.type.PionCouleur;
@@ -250,6 +250,64 @@ public class TraitementBot {
 				listeCarteJouee.add(listeCarteUtilisable.get(indexCarteJouee));
 				core.getListeCarte().remove(listeCarteUtilisable.get(indexCarteJouee));
 				listeCarteUtilisable.remove(indexCarteJouee);
+			}
+		}
+		List<PionCouleur> listePionCache = listePionCache(core);
+		int i = 0;
+		while (i < listePionCache.size()) {
+			listeCarteJouee.add(CarteType.CAC);
+			core.getListeCarte().remove(CarteType.CAC);
+			i++;
+		}
+		listRenvoye.add(listeCarteJouee);
+		listRenvoye.add(listePionCache);
+		return listRenvoye;
+	}
+	
+	public List<Object> BestlisteCarteJouee(BotMoyen core, int n) {
+		List<Object> listRenvoye = new ArrayList<>();
+		List<CarteType> listeCarteJouee = new ArrayList<>();
+		List<CarteType> listeCarteUtilisable = new ArrayList<>();
+	
+		
+		for (CarteType carte : core.getListeCarte()) {
+			if (n != 4) {
+				if (carte.name() == "MAT") {
+					listeCarteUtilisable.add(carte);
+				}
+			}
+			switch (carte.name()) {
+			case "ACS":
+				listeCarteUtilisable.add(carte);
+				break;
+			case "ATR":
+				listeCarteUtilisable.add(carte);
+				break;
+			case "AGR":
+				listeCarteUtilisable.add(carte);
+				break;
+			case "ARE":
+				listeCarteUtilisable.add(carte);
+				break;
+			case "AHI":
+				listeCarteUtilisable.add(carte);
+				break;
+			case "ABA":
+				listeCarteUtilisable.add(carte);
+				break;
+			}
+		}
+		
+		int carteAJouer = 0;
+		if (!listeCarteUtilisable.isEmpty()) {
+			for(int i=0; i<6;i++) {
+			if(core.getPartie().getLieux().get(n).getPersonnage().get(i).getJoueur().getCouleur()== core.getCouleur()) {
+				listeCarteJouee.add(listeCarteUtilisable.get(carteAJouer));
+				core.getListeCarte().remove(listeCarteUtilisable.get(carteAJouer));
+				listeCarteUtilisable.remove(carteAJouer);
+				
+				
+			}
 			}
 		}
 		List<PionCouleur> listePionCache = listePionCache(core);
