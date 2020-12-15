@@ -155,6 +155,8 @@ public class JeuPane extends StackPane implements JeuListener {
 	HBox infoZombie;
 	Label linfoZombie;
 
+	VBox des;
+
 	public JeuPane(ScreenControl sc, Core c) {
 		core = c;
 		sControl = sc;
@@ -1025,7 +1027,7 @@ public class JeuPane extends StackPane implements JeuListener {
 		vbDeplCentre.getChildren().addAll(vbDeplPers, vbDeplLieux);
 		vbDeplCentre.setDisable(false);
 
-		VBox des = new VBox();
+		des = new VBox();
 		des.setTranslateX(790);
 		des.setTranslateY(-100);
 		des.setAlignment(Pos.CENTER);
@@ -1299,7 +1301,7 @@ public class JeuPane extends StackPane implements JeuListener {
 
 		vote.setVisible(false);
 	}
-	
+
 	//TODO
 
 	public ListView<Label> updateLog(ListView<Label> list, Label l) {
@@ -1390,19 +1392,8 @@ public class JeuPane extends StackPane implements JeuListener {
 	@Override
 	public void desVigiles(List<String> list) {
 		Platform.runLater(() -> {
-			titreInfo.setText("Zombies");
-			lInfo.setText("Des zombies ont été placé dans " + list.get(0) + ", " + list.get(1) + ", " + list.get(2)
+			linfoZombie.setText("Des zombies ont été placé dans " + list.get(0) + ", " + list.get(1) + ", " + list.get(2)
 					+ " et " + list.get(3));
-			info.setVisible(true);
-
-			Timer myTimer = new Timer();
-			myTimer.schedule(new TimerTask() {
-
-				@Override
-				public void run() {
-					info.setVisible(false);
-				}
-			}, 5000);
 		});
 	}
 
@@ -1769,5 +1760,15 @@ public class JeuPane extends StackPane implements JeuListener {
 				resetUtiliserCarte();
 			});
 		});
+	}
+
+	@Override
+	public void log(String action) {
+		updateLog(log, new Label(action));
+	}
+
+	@Override
+	public void enleverDes() {
+		des.setVisible(false);
 	}
 }

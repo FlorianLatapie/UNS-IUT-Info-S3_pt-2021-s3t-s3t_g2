@@ -139,4 +139,14 @@ public class Initializer {
 		for (ConfigListener cl : listenerscl)
 			cl.partie(partieInfo);
 	}
+
+	public void log(String action) {
+		for (JeuListener jl : listenersjl)
+			jl.log(action);
+	}
+
+	public void enleverDes() {
+		for (JeuListener jl : listenersjl)
+			jl.enleverDes();
+	}
 }
