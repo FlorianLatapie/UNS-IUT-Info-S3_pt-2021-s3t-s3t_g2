@@ -34,7 +34,7 @@ public class DataControl {
 	public static final String FERME6 = "pp/ihm/images/6Fermé.png";
 	
 	// Pions
-	//public static final String NOM_COULEUR = "pp/ihm/images/Pions/SamplePion.png";
+	public static final String NOM_COULEUR = "pp/ihm/images/Pions/SamplePion.png";
 	
 	public static final String TRUAND_B = "pp/ihm/images/Pions/bleu1.png";
 	public static final String BRUTE_B = "pp/ihm/images/Pions/bleu2.png";
@@ -65,7 +65,7 @@ public class DataControl {
 	
 
 	// for testing purpose
-	public static final String NOM_COULEUR = TRUAND_V;
+	//public static final String NOM_COULEUR = TRUAND_V;
 
 
 	public static final ObservableList<Integer> nombreJoueur = FXCollections.observableArrayList(3, 4, 5, 6);
