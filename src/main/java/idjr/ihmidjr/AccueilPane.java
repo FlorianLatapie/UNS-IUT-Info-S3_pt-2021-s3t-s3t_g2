@@ -155,7 +155,7 @@ public class AccueilPane extends StackPane {
 		});
 		bQuitter.setOnAction(event -> {
 			boolean resultat = ConfirmationPane.afficher("Quitter le jeu",
-					"Êtes-vous sûr de vouloir quitter le jeu ? \nSi vous quittez, la partie en cours sera perdue.");//TODO
+					"Êtes-vous sûr de vouloir quitter le jeu ?"+ "\n"+ "Si vous quittez, la partie en cours sera perdue.");
 			if (resultat) {
 				if (core.getIdjr() != null)
 					core.getIdjr().stop();
