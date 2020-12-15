@@ -128,7 +128,7 @@ public class TraitementBot {
 			dest = MCTSBotMoyen.getChoisDest(core.getPartie().copyOf(), core.getCouleur());
 		return dest;
 	}
-<<<<<<< Updated upstream
+
 	
 	/**
 	 * Choix de destination intelligente
@@ -136,12 +136,8 @@ public class TraitementBot {
 	 * @param BotMoyen pour lequel le traitement s'effectue
 	 * @return La destination choisie
 	 */
-	
-	public int choixBestDest (BotMoyen core) {
-=======
-
 	public int choixBestDest(BotMoyen core) {
->>>>>>> Stashed changes
+
 		out.println("Entrez une destination");
 		int dest = 0;
 		int difference = -20;
@@ -280,7 +276,7 @@ public class TraitementBot {
 		}
 		return dest;
 	}
-<<<<<<< Updated upstream
+
 	
 	/**
 	 * Choix du personnage a sacrifier
@@ -289,9 +285,7 @@ public class TraitementBot {
 	 * @param une liste d'integer correspondant aux pions
 	 * @return Un pion a sacrifier
 	 */
-=======
 
->>>>>>> Stashed changes
 	public PionCouleur choisirSacrifice(BotMoyen core, List<?> listPionT) {
 		if (listPionT.size() > 0) {
 			List<Integer> listPion = new ArrayList<>();
@@ -382,7 +376,7 @@ public class TraitementBot {
 		listRenvoye.add(listePionCache);
 		return listRenvoye;
 	}
-<<<<<<< Updated upstream
+
 	
 	/**
 	 * Choix intelligent des cartes a jouer  pendant l'attaque zombies
@@ -391,9 +385,9 @@ public class TraitementBot {
 	 * @param un integer correspond au numéro d'un lieu
 	 * @return la liste des carte jouées
 	 */
-=======
 
->>>>>>> Stashed changes
+
+
 	public List<Object> BestlisteCarteJouee(BotMoyen core, int n) {
 		List<Object> listRenvoye = new ArrayList<>();
 		List<CarteType> listeCarteJouee = new ArrayList<>();
