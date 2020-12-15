@@ -17,7 +17,7 @@ import java.util.Random;
 import static java.lang.System.out;
 
 /**
- * <h1>Permet de gerer les packets</h1>
+ * <h1>Permet de gérer les packets TCP</h1>
  *
  * @author Sébastien Aglaé
  * @version 1.0

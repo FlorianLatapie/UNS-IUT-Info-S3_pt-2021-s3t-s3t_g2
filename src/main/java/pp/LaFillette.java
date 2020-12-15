@@ -3,7 +3,7 @@ package pp;
 import reseau.type.TypePersonnage;
 
 /**
- * <h1>La classe La fillette</h1>. A pour rôle de définir un Personnage.
+ * <h1>La classe La fillette</h1>.
  * 
  * @author Leo
  * @author Theo
@@ -16,9 +16,9 @@ import reseau.type.TypePersonnage;
 public class LaFillette extends Personnage {
 
 	/**
-	 * Instantie un nouveau Personnage LaFillette
+	 * Instantie une nouvelle fillette.
 	 * 
-	 * @param joueur le joueur cible
+	 * @param joueur Le joueur cible
 	 */
 	public LaFillette(Joueur joueur) {
 		super(joueur, TypePersonnage.FILLETTE);
@@ -27,11 +27,12 @@ public class LaFillette extends Personnage {
 	}
 
 	/**
-	 * @return le nom du personnage
+	 * Gère l'affichage de la fillette.
+	 * 
+	 * @return Le nom du personnage
 	 */
 	@Override
 	public String toString() {
 		return "La Fillette";
 	}
-
 }
