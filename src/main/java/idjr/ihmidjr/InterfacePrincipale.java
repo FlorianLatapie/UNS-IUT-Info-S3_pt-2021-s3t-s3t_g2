@@ -1,6 +1,7 @@
 package idjr.ihmidjr;
 
 import idjr.Idjr;
+import idjr.ihmidjr.langues.International;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.scene.Node;
@@ -21,8 +22,8 @@ public class InterfacePrincipale extends Application {
 	public void start(Stage primaryStage) throws Exception {
 		primaryStage.getIcons().add(new Image(DataControl.ICONE));
 		primaryStage.setOnCloseRequest((e) -> {
-			boolean resultat = ConfirmationPane.afficher("Quitter le jeu",
-					"Êtes-vous sûr de vouloir quitter le jeu ? \nSi vous quittez, la partie en cours sera perdue.");
+			boolean resultat = ConfirmationPane.afficher(International.trad("texte.confirmationTitre"),
+					International.trad("texte.confirmationL1") + "\n" + International.trad("texte.confirmationL2"));
 			if (resultat)
 				Platform.exit();
 		});
