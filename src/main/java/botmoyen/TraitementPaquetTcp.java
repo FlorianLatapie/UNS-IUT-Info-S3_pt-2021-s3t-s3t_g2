@@ -335,8 +335,7 @@ public class TraitementPaquetTcp extends TraitementPaquet<TcpClient> {
 	public void lancerDes(Paquet paquet, String message) {
 		traitementB.lancerDes(core, (List<?>) paquet.getValeur(message, 2));
 		String m1 = (String) paquet.getValeur(message, 3);
-		getControleurReseau().getTcpClient()
-				.envoyer(getControleurReseau().construirePaquetTcp("PILD", m1, core.getJoueurId()));
+		getControleurReseau().envoyerTcp(getControleurReseau().construirePaquetTcp("PILD", m1, core.getJoueurId()));
 		System.out.println("lancerDes : \n");
 		System.out.println(core.getEtatPartie());
 	}
@@ -472,8 +471,7 @@ public class TraitementPaquetTcp extends TraitementPaquet<TcpClient> {
 
 	private void choixCarteFouille(Paquet paquet, String message) {
 		List<Object> listeResultat = traitementB.carteFouille((List<CarteType>) paquet.getValeur(message, 1), core);
-		getControleurReseau().getTcpClient()
-				.envoyer(getControleurReseau().construirePaquetTcp("SCFC", (CarteType) listeResultat.get(0),
+		getControleurReseau().envoyerTcp(getControleurReseau().construirePaquetTcp("SCFC", (CarteType) listeResultat.get(0),
 						(CarteType) listeResultat.get(1), (Couleur) listeResultat.get(3),
 						(CarteType) listeResultat.get(2), (String) paquet.getValeur(message, 2),
 						paquet.getValeur(message, 3), core.getJoueurId()));
