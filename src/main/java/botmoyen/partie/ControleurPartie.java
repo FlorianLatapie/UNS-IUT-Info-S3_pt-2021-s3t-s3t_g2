@@ -4,7 +4,6 @@ import reseau.type.*;
 
 import java.util.*;
 
-
 /**
  * <h1>La classe controleurJeu</h1>
  *
@@ -23,12 +22,9 @@ public class ControleurPartie {
 	private Couleur couleurBotCourant;
 	private Partie partie;
 
-
 	public Partie getPartie() {
 		return partie;
 	}
-
-
 
 	public ControleurPartie(Partie partie, Couleur c) {
 		this.partie = partie;
@@ -40,8 +36,6 @@ public class ControleurPartie {
 			joueurs.add(j);
 
 	}
-
-
 
 	/**
 	 * Execute le déroulement d'une partie
@@ -64,8 +58,6 @@ public class ControleurPartie {
 		electionChefVigi();
 		this.lieuZombie = arriveZombie();
 	}
-
-	
 
 	/**
 	 * @return le partie
@@ -174,11 +166,24 @@ public class ControleurPartie {
 		for (Joueur j : partie.getJoueurs().values()) {
 			if (j.isEnVie()) {
 				List<Integer> pions = new ArrayList<>();
+				List<Integer> perso = new ArrayList<>();
 				for (Personnage p : j.getPersonnages().values())
-					if ((p.estVivant) && (p.getMonLieu().getNum() != destination.get(j.getCouleur())))
-						pions.add(p.getPoint());
+					if (p.estVivant) {
+						if (p.getMonLieu().getNum() != destination.get(j.getCouleur()))
+							pions.add(p.getPoint());
+						else
+							perso.add(p.getPoint());
+					}
 				Collections.shuffle(pions);
-				partie.deplacePerso(j.getCouleur(), pions.get(0), destination.get(j.getCouleur()));
+				Collections.shuffle(perso);
+				System.out.println("Joueur "+ j.getCouleur()+ "allperso = " +j.getPersonnages());
+				System.out.println("Joueur "+ j.getCouleur()+ "perso = " +perso);
+				System.out.println("Joueur "+ j.getCouleur()+ "perso = " +pions);
+				
+				if (pions.isEmpty())
+					partie.deplacePerso(j.getCouleur(), perso.get(0), 4);
+				else
+					partie.deplacePerso(j.getCouleur(), pions.get(0), destination.get(j.getCouleur()));
 				if (partie.estFini())
 					return;
 				this.partie.fermerLieu();
@@ -226,12 +231,12 @@ public class ControleurPartie {
 
 	public Joueur phaseVote(Lieu l, VoteType tv) {
 		if (tv.equals(VoteType.ECD)) {
-			int res = new Random().nextInt(l.getJoueurs().size()+1);
+			int res = new Random().nextInt(l.getJoueurs().size() + 1);
 			if (res == l.getJoueurs().size())
 				return null;
 			return l.getJoueurs().get(res);
 		}
-		
+
 		return l.getJoueurs().get(new Random().nextInt(l.getJoueurs().size()));
 	}
 
