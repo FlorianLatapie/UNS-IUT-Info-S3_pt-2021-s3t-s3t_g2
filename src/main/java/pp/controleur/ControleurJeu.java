@@ -97,7 +97,7 @@ public class ControleurJeu {
 	}
 
 	private synchronized void initPartie() {
-		coreThread = ThreadOutils.asyncTask(() -> {
+		coreThread = ThreadOutils.asyncTask("initPartie",() -> {
 			try {
 				Thread.sleep(1000);
 			} catch (InterruptedException e1) {
