@@ -25,7 +25,7 @@ public class Initializer {
 	public void addListener(FinListener toAdd) {
 		listenersfl.add(toAdd);
 	}
-	
+
 	public void addListener(CouleurListener toAdd) {
 		listenerscl.add(toAdd);
 	}
@@ -91,12 +91,8 @@ public class Initializer {
 	}
 
 	public void forceLieuAll(List<Lieu> lieux) {
-		for (Lieu l : lieux) {
-			int i = 0;
-			for (Personnage p : l.getPersonnage())
-				i += p.getPoint();
-			forceLieu(l.getNum(), i);
-		}
+		for (Lieu l : lieux)
+			forceLieu(l.getNum(), l.getForce());
 	}
 
 	private void forceLieu(int lieu, int val) {
@@ -162,7 +158,7 @@ public class Initializer {
 		for (AttenteListener al : listenersal)
 			al.nomPartie(nom);
 	}
-	
+
 	public void nomJoueurs(List<Joueur> joueurs) {
 		for (CouleurListener cl : listenerscl)
 			cl.joueurNoms(joueurs);
