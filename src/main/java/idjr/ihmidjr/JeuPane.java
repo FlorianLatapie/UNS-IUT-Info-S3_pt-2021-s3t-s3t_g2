@@ -1143,7 +1143,7 @@ public class JeuPane extends StackPane implements JeuListener {
 		bLog.setTranslateY(-350);
 
 		Label lo = new Label(International.trad("texte.nomPerso") + International.trad("texte.coulPerso")
-				+ International.trad(("texte.depLieu") + International.trad("texte.lieu")));
+				+ International.trad(("texte.depLieu")));
 		lo.setFont(policeLog);
 		updateLog(log, lo);
 
