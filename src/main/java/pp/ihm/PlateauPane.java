@@ -1041,8 +1041,8 @@ public class PlateauPane extends StackPane implements PlateauListener {
 		j5.setVisible(false);
 		j6.setVisible(false);
 
-		this.getChildren().addAll(imgFond, borderJoueurs, aPlateau, notifInfo, imgCarteFerme1, imgCarteFerme2,
-				imgCarteFerme3, imgCarteFerme5, imgCarteFerme6);
+		this.getChildren().addAll(imgFond, borderJoueurs, aPlateau, imgCarteFerme1, imgCarteFerme2,
+				imgCarteFerme3, imgCarteFerme5, imgCarteFerme6, notifInfo);
 		this.setMinSize(1920, 1080);
 		this.setPrefSize(1920, 1080);
 		this.setMaxSize(1920, 1080);
