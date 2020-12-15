@@ -1144,9 +1144,13 @@ public class JeuPane extends StackPane implements JeuListener {
 		updateLog(log, lo);
 		
 		infoZombie = new HBox(); //TODO .setVisible() aux bons moments
+		infoZombie.setPrefSize(450, 70);
+		infoZombie.setMinSize(450, 70);
+		infoZombie.setMaxSize(450, 70);
 		infoZombie.setTranslateX(-675);
 		infoZombie.setTranslateY(-400);
 		infoZombie.setAlignment(Pos.CENTER);
+		infoZombie.setStyle(styleVBox);
 		
 		linfoZombie = new Label ("Des zombies arriveront dans les lieux X, X, X, X"); //TODO afficher ca dans un event 
 		linfoZombie.setFont(Font.font("Segoe UI", 20));
@@ -1155,7 +1159,7 @@ public class JeuPane extends StackPane implements JeuListener {
 		infoZombie.getChildren().addAll(linfoZombie);
 		
 
-		stackPane.getChildren().addAll(fond, rectVigile, nomJoueur, phasePartie, hbCartes, vote, vbDeplCentre,infoZombie, des,
+		stackPane.getChildren().addAll(fond, rectVigile, nomJoueur, phasePartie, hbCartes, vote, vbDeplCentre, des, infoZombie,
 				fouilleCamion, info, log, bLog);
 		stackPane.setBackground(new Background(new BackgroundFill(Color.BLACK, CornerRadii.EMPTY, null)));
 
