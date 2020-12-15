@@ -102,18 +102,38 @@ public class ConfigPartiePane extends StackPane implements ConfigListener {
 
 		// Create a ListView
 		ListView<Label> listView = new ListView<Label>(liste);
-
+				
 		// Only allowed to select single row in the ListView.	
 		listView.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
-		listView.setPrefSize(400, 800);
-		listView.setMaxSize(400, 800);
+		listView.setPrefWidth(400);
+		listView.setMaxWidth(400);
 		listView.setEditable(false);
-		listView.setStyle("-fx-control-inner-background: #1A1A1A ; -fx-control-inner-background-alt: derive(-fx-control-inner-background, 15%);");
+		listView.setStyle("-fx-background-color: white;-fx-control-inner-background: #1A1A1A ; -fx-control-inner-background-alt: derive(-fx-control-inner-background, 15%);");
+		
+		Button bRefresh = new Button("Raffraichir");
+		bRefresh.setPrefSize(lBouton+30, hBouton);
+		bRefresh.setMinSize(lBouton+30, hBouton);
+		bRefresh.setFont(policeBouton);
+		bRefresh.setStyle(styleBoutons);
+
+		bRefresh.setOnMouseEntered(event -> {
+
+			bRefresh.setStyle(styleBoutonsSouris);
+		});
+		bRefresh.setOnMouseExited(event -> {
+			bRefresh.setStyle(styleBoutons);
+		});
 
 		VBox vbCenter = new VBox();
 		vbCenter.setAlignment(Pos.CENTER);
 		vbCenter.setSpacing(20);
-		vbCenter.getChildren().addAll(partie, listView);
+		vbCenter.setPrefHeight(587);
+		vbCenter.setMinHeight(587);
+		vbCenter.setMaxHeight(587);
+		vbCenter.getChildren().addAll(partie, listView, bRefresh);
+		
+		
+		
 
 		// boutons
 		Button bJouer = new Button(International.trad("bouton.jouer"));
