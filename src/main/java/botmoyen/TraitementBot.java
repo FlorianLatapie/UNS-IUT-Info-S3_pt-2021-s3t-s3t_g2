@@ -85,8 +85,25 @@ public class TraitementBot {
 			dest = MCTSBotMoyen.getChoisDest(core.getPartie(),core.getCouleur());
 		return dest;
 	}
+	
+	public int choixBestDest (BotMoyen core) {
+		out.println("Entrez une destination");
+		int dest = 0;
+		int difference =-20;
+		for(int i =0;i<core.getLieuOuvert().size();i++) {
+			if(core.getPartie().getLieux().get(i).getPersonnage().size()-core.getPartie().getLieux().get(i).getNbZombies()>difference)
+				dest = core.getPartie().getLieux().get(i).getNum();
+			if(core.getPartie().getLieux().get(i).getPersonnage().size()-core.getPartie().getLieux().get(i).getNbZombies()==difference) {
+				if(core.getPartie().getLieux().get(i).getNum()==5) {
+					dest = core.getPartie().getLieux().get(i).getNum();
+				}
+			}
+		
+		}
+		return dest;
+	}
 
-	public int choixBestDest(BotMoyen core) {
+	public int choixBestZDest(BotMoyen core) {
 		out.println("Entrez une destination");
 		int dest = 0;
 		int lieuMin = 20;
@@ -155,6 +172,22 @@ public class TraitementBot {
 		core.setPoinSacrDispo(ltemp);
 	}
 
+	public int choixBestDest3 (BotMoyen core) {
+		out.println("Entrez une destination");
+		int dest = 0;
+		int difference =-20;
+		for(int i =0;i<core.getLieuOuvert().size();i++) {
+			if(core.getPartie().getLieux().get(i).getPersonnage().size()-core.getPartie().getLieux().get(i).getNbZombies()>difference)
+				dest = core.getPartie().getLieux().get(i).getNum();
+			if(core.getPartie().getLieux().get(i).getPersonnage().size()-core.getPartie().getLieux().get(i).getNbZombies()==difference) {
+				if(core.getPartie().getLieux().get(i).getNum()==5) {
+					dest = core.getPartie().getLieux().get(i).getNum();
+				}
+			}
+		
+		}
+		return dest;
+	}
 	public PionCouleur choisirSacrifice(BotMoyen core, List<?> listPionT) {
 		if (listPionT.size() > 0) {
 			List<Integer> listPion = new ArrayList<>();
