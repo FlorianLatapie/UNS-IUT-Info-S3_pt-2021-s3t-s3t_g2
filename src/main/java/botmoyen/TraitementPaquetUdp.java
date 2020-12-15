@@ -80,14 +80,14 @@ public class TraitementPaquetUdp extends TraitementPaquet<DatagramPacket> {
 		core.setPortPp((int) paquet.getValeur(message, 3));
 		System.out.println(core.getIpPp());
 		core.setPortPp(core.getPortPp());
-		
+
 		System.out.println(
 				MessageFormat.format("Une nouvelle partie vient d''etre trouvÃ© !\n{0}", paquet.getValeur(message, 1)));
 		String nomdujoueur = "BOT" + new Random().nextInt(9999);
 		core.setNom(nomdujoueur);
-		getControleurReseau().tcp(core.getIpPp());	
-		
-		ThreadOutils.asyncTask(() ->{
+		getControleurReseau().demarrerClientTcp(core.getIpPp());
+
+		ThreadOutils.asyncTask("acp", () -> {
 			try {
 				Thread.sleep(1000);
 			} catch (InterruptedException e) {
@@ -100,11 +100,9 @@ public class TraitementPaquetUdp extends TraitementPaquet<DatagramPacket> {
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
-			getControleurReseau().getTcpClient().envoyer(messageTcp);
-			getControleurReseau().getTcpClient().attendreMessage("ACP");
+			getControleurReseau().envoyerTcp(messageTcp);
+			getControleurReseau().attendreTcp("ACP");
 		});
-		
-		
 
 	}
 
@@ -124,6 +122,6 @@ public class TraitementPaquetUdp extends TraitementPaquet<DatagramPacket> {
 
 	@Override
 	public void set(Object core) {
-		this.core = (BotMoyen)core;
+		this.core = (BotMoyen) core;
 	}
 }

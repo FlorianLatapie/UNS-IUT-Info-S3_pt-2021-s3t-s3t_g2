@@ -13,25 +13,25 @@ import java.util.List;
  */
 public class Lieu {
 
-	/**  Numéro de la partie où se trouve le lieu. */
+	/** Numéro de la partie où se trouve le lieu. */
 	private int num;
 
-	/**  Entier correspondant au nombre de places d'un lieu. */
+	/** Entier correspondant au nombre de places d'un lieu. */
 	private int nbPlaces;
 
-	/**  Entier correspondant au nombre de zombie sur un lieu. */
+	/** Entier correspondant au nombre de zombie sur un lieu. */
 	private int nbZombies;
 
-	/**  Chaine de caractère correspondant au nom d'un lieu. */
+	/** Chaine de caractère correspondant au nom d'un lieu. */
 	public String name;
 
-	/**  Booléen indiquant si un lieu est ouvert ou non. */
+	/** Booléen indiquant si un lieu est ouvert ou non. */
 	private boolean ouvert;
 
-	/**  Collection des personnages présents sur un lieu. */
+	/** Collection des personnages présents sur un lieu. */
 	private ArrayList<Personnage> personnage;
-	
-	/**  Nombre de personnage caché sur un lieu. */
+
+	/** Nombre de personnage caché sur un lieu. */
 	private Integer nbPersoCache;
 
 	/**
@@ -111,8 +111,8 @@ public class Lieu {
 	}
 
 	/**
-	 * Indique si un lieu est attaquable ou non
-	 * Le lieu doit contenir des personnages pour être attaqué.
+	 * Indique si un lieu est attaquable ou non Le lieu doit contenir des
+	 * personnages pour être attaqué.
 	 *
 	 * @return Si le lieu est attaquable
 	 */
@@ -257,5 +257,13 @@ public class Lieu {
 
 	public void setNbPersoCache(Integer nbPersoCache) {
 		this.nbPersoCache = nbPersoCache;
+	}
+
+	public List<Joueur> getJoueurs() {
+		List<Joueur> joueurs = new ArrayList<>();
+		for (Personnage p : personnage)
+			if (!joueurs.contains(p.getJoueur()))
+				joueurs.add(p.getJoueur());
+		return joueurs;
 	}
 }

@@ -8,6 +8,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Random;
 
+import botmoyen.MCTS.MCTSBotMoyen;
+import botmoyen.partie.Partie;
 import reseau.type.CarteType;
 import reseau.type.Couleur;
 import reseau.type.PionCouleur;
@@ -66,6 +68,7 @@ public class TraitementBot {
 	}
 
 	public void debutTour(BotMoyen core, List<Couleur> couleurs) {
+		core.newTour();
 		core.setJoueurEnVie(couleurs);
 		if (!couleurs.contains(core.getCouleur())) {
 			core.setEnvie(false);
@@ -73,9 +76,13 @@ public class TraitementBot {
 	}
 
 	public int choixDest(BotMoyen core) {
+		
 		out.println("Entrez une destination");
 		int dest = 0;
-		dest = core.getLieuOuvert().get(new Random().nextInt(core.getLieuOuvert().size()));
+		if (core.getCompteurTour()%2==0) 
+			dest = core.getLieuOuvert().get(new Random().nextInt(core.getLieuOuvert().size()));
+		else 
+			dest = MCTSBotMoyen.getChoisDest(core.getPartie(),core.getCouleur());
 		return dest;
 	}
 
