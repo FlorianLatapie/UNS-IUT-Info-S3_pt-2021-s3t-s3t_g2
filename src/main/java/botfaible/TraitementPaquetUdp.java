@@ -90,8 +90,8 @@ public class TraitementPaquetUdp extends TraitementPaquet<DatagramPacket> {
 		
 		String nomdujoueur = "BOT" + new Random().nextInt(9999);
 		core.setNom(nomdujoueur);
-		getControleurReseau().tcp(core.getIpPp());
-		ThreadOutils.asyncTask(() -> {
+		getControleurReseau().demarrerClientTcp(core.getIpPp());
+		ThreadOutils.asyncTask("acp",() -> {
 			try {
 				Thread.sleep(1000);
 			} catch (InterruptedException e) {
