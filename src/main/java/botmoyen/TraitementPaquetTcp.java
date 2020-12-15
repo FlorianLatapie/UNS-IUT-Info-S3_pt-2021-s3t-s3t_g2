@@ -399,7 +399,7 @@ public class TraitementPaquetTcp extends TraitementPaquet<TcpClient> {
 			return;
 
 		} else {
-			String messageTcp = getControleurReseau().construirePaquetTcp("CDDJ", traitementB.choixDest(core),
+			String messageTcp = getControleurReseau().construirePaquetTcp("CDDJ", traitementB.choixBestDest(core),
 					(String) paquet.getValeur(message, 3), (int) paquet.getValeur(message, 4), core.getJoueurId());
 			getControleurReseau().envoyerTcp(messageTcp);
 		}
@@ -408,7 +408,7 @@ public class TraitementPaquetTcp extends TraitementPaquet<TcpClient> {
 	}
 
 	public void destZombieVengeur(Paquet paquet, String message) {
-		String message1 = getControleurReseau().construirePaquetTcp("CDDZVJE", traitementB.choixBestDest(core),
+		String message1 = getControleurReseau().construirePaquetTcp("CDDZVJE", traitementB.choixBestZDest(core),
 				paquet.getValeur(message, 1), paquet.getValeur(message, 2), core.getJoueurId());
 		getControleurReseau().envoyerTcp(message1);
 		System.out.println("destZombieVengeur : \n");
