@@ -24,16 +24,17 @@ public class ControleurReseau implements IControleSocket {
 	private final Map<String, Paquet> tcpPaquets;
 
 	private static final String CHEMIN_PACKET = "Ressources\\reseau";
+	private static final String CLE_FIN = "FP";
 
 	private UdpConnexion udpConnexion;
 	private TcpServeur tcpServeur;
 	private TcpClient tcpClient;
-	private InetAddress ip;
-	private int tcpPort;
 
+	private InetAddress ip;
+
+	private int tcpPort;
 	private final TraitementPaquet<DatagramPacket> traitementPaquetUdp;
 	private final TraitementPaquet<TcpClient> traitementPaquetTcp;
-
 	private ConnexionType connexionType;
 
 	private Logger logger;
@@ -67,31 +68,18 @@ public class ControleurReseau implements IControleSocket {
 		this.traitementPaquetUdp.init(this);
 		this.traitementPaquetTcp.init(this);
 		this.connexionType = connexionType;
+		this.ip = ReseauOutils.getLocalIp();
+		this.tcpPort = ReseauOutils.getPortSocket(1024, 65535);
 
 		if (udpPaquets.isEmpty() || tcpPaquets.isEmpty())
 			throw new IllegalArgumentException("Il n'y a pas de définitions pour les paquets TCP/UDP");
-
+		logger.log(Level.INFO, "Mon port est {0}", tcpPort);
 		new Thread(udpConnexion = new UdpConnexion(this, ip), "udpConnexion").start();
-		udpConnexion.attendreConnexion();
+
+		if (connexionType == ConnexionType.SERVEUR)
+			new Thread(tcpServeur = new TcpServeur(this, ip, tcpPort, CLE_FIN), "tcpServeur").start();
 
 		logger.info("Controleur initialisé");
-	}
-
-	public void initClient(InetAddress ip, int port) {
-		this.ip = ip;
-		logger.finest("Initialisation du client réseau");
-		this.tcpPort = port;
-		new Thread(tcpClient = new TcpClient(this, ip, tcpPort), "tcpClient").start();
-		logger.log(Level.INFO, "Mon port est {0}", tcpPort);
-	}
-
-	public void initServeur(InetAddress ip, String cle) {
-		logger.finest("Ip récupéré depuis UDP : " + ip);
-		this.ip = ip;
-		logger.finest("Initialisation du client réseau");
-		this.tcpPort = ReseauOutils.getPortSocket(1024, 65535);
-		new Thread(tcpServeur = new TcpServeur(this, ip, tcpPort, cle), "tcpServeur").start();
-		logger.log(Level.INFO, "Mon port est {0}", tcpPort);
 	}
 
 	/**
@@ -123,15 +111,6 @@ public class ControleurReseau implements IControleSocket {
 	 */
 	public void envoyerUdp(String message) {
 		udpConnexion.envoyer(message);
-	}
-
-	/**
-	 * Envoyer un message UDP et obtiens l'ip
-	 *
-	 * @param message Le message a envoyer
-	 */
-	public InetAddress envoyerUdpIp(String message) {
-		return udpConnexion.envoyerEtIp(message);
 	}
 
 	/**
@@ -343,5 +322,9 @@ public class ControleurReseau implements IControleSocket {
 	 */
 	public ConnexionType getConnexionType() {
 		return connexionType;
+	}
+
+	public void demarrerClientTcp(InetAddress ipPp) {
+		new Thread(tcpClient = new TcpClient(this, ipPp, tcpPort), "tcpClient").start();
 	}
 }
