@@ -3,6 +3,7 @@ package idjr.ihmidjr;
 
 import idjr.ihmidjr.DataControl.ApplicationPane;
 import idjr.ihmidjr.event.AttenteListener;
+import idjr.ihmidjr.langues.International;
 import javafx.application.Platform;
 //TODO import ihm.eventListener.AttenteListener;
 import javafx.geometry.Insets;
@@ -57,7 +58,8 @@ public class AttenteJoueurPane extends StackPane implements AttenteListener {
 		stackPane.setAlignment(Pos.CENTER);
 
 		// titre
-		Label titre1 = new Label("Connexion \nen cours");
+		Label titre1 = new Label(
+				International.trad("texte.titreAttenteA") + "\n" + International.trad("texte.titreAttenteB"));
 		titre1.setTextAlignment(TextAlignment.CENTER);
 		titre1.setFont(Font.font("Segoe UI", FontWeight.BOLD, 80));
 		titre1.setTextFill(Color.BLACK);
@@ -75,7 +77,7 @@ public class AttenteJoueurPane extends StackPane implements AttenteListener {
 		lIDPartie.setMinHeight(hauteurElemtents);
 		lIDPartie.setPadding(padding);
 
-		Label desc = new Label("En attente des joueurs... Veuillez entrer la couleur dans le PP");
+		Label desc = new Label(International.trad("texte.attenteJoueur"));
 		desc.setFont(Font.font("Segoe UI", FontWeight.BOLD, 27));
 		desc.setTextFill(Color.WHITE);
 		desc.setPadding(new Insets(7));
@@ -142,7 +144,7 @@ public class AttenteJoueurPane extends StackPane implements AttenteListener {
 		vbCenter.getChildren().addAll(vbWait);
 
 		// boutons
-		Button bRetour = new Button("RETOUR");
+		Button bRetour = new Button(International.trad("bouton.retour"));
 		bRetour.setPrefSize(lBouton, hBouton);
 		bRetour.setMinSize(lBouton, hBouton);
 		bRetour.setFont(policeBouton);
