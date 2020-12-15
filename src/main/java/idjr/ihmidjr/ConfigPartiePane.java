@@ -5,6 +5,7 @@ import java.util.List;
 import idjr.PartieInfo;
 import idjr.ihmidjr.DataControl.ApplicationPane;
 import idjr.ihmidjr.event.ConfigListener;
+import idjr.ihmidjr.langues.International;
 import javafx.application.Platform;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -66,7 +67,8 @@ public class ConfigPartiePane extends StackPane implements ConfigListener {
 		sControl = sc;
 		stackPane.setAlignment(Pos.CENTER);
 		// titre
-		Label titre1 = new Label("Rejoindre\nune partie");
+		Label titre1 = new Label(
+				International.trad("texte.titreConfigPartieA") + "\n" + International.trad("texte.titreConfigPartieB"));
 		titre1.setTextAlignment(TextAlignment.CENTER);
 		titre1.setFont(Font.font("Segoe UI", FontWeight.BOLD, 80));
 		titre1.setTextFill(Color.BLACK);
@@ -79,7 +81,7 @@ public class ConfigPartiePane extends StackPane implements ConfigListener {
 
 		////
 
-		Label desc = new Label("Entrez l'identifiant de la partie");
+		Label desc = new Label(International.trad("texte.idPartie"));
 		desc.setAlignment(Pos.CENTER);
 		desc.setFont(policeNom);
 		desc.setMinHeight(hauteurElemtents);
@@ -116,7 +118,7 @@ public class ConfigPartiePane extends StackPane implements ConfigListener {
 		vbCenter.getChildren().addAll(partie, listView);
 
 		// boutons
-		Button bJouer = new Button("JOUER");
+		Button bJouer = new Button(International.trad("bouton.jouer"));
 		bJouer.setPrefSize(lBouton, hBouton);
 		bJouer.setMinSize(lBouton, hBouton);
 		bJouer.setFont(policeBouton);
@@ -136,7 +138,7 @@ public class ConfigPartiePane extends StackPane implements ConfigListener {
 			bJouer.setDisable(nomP.getText().isEmpty());
 		});
 
-		Button bRetour = new Button("RETOUR");
+		Button bRetour = new Button(International.trad("bouton.retour"));
 		bRetour.setPrefSize(lBouton, hBouton);
 		bRetour.setMinSize(lBouton, hBouton);
 		bRetour.setFont(policeBouton);
@@ -199,12 +201,12 @@ public class ConfigPartiePane extends StackPane implements ConfigListener {
 	@Override
 	public void partie(List<PartieInfo> partieInfo) {
 		Platform.runLater(() -> {
-			//int i = 0;
-			//for (PartieInfo partieInfo2 : partieInfo) {
-			//Label label = new Label(partieInfo2.getIdPartie());
-			//liste.set(0, label);
-			//i++;
-			//}
+			// int i = 0;
+			// for (PartieInfo partieInfo2 : partieInfo) {
+			// Label label = new Label(partieInfo2.getIdPartie());
+			// liste.set(0, label);
+			// i++;
+			// }
 		});
 	}
 }
