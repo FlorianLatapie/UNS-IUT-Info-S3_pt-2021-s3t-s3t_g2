@@ -40,6 +40,14 @@
 			<artifactId>javafx-controls</artifactId>
 			<version>14</version>
 		</dependency>
+		<dependency>
+        <groupId>mcts-ja</groupId>
+        <artifactId>mcts-ja</artifactId>
+        <version>1.4</version>
+        <type>jar</type>
+        <scope>system</scope>
+        <systemPath>${project.basedir}/Ressources/MCTS-1.0.mcts.jar</systemPath>
+    </dependency>
 	</dependencies>
 
 	<build>
