@@ -15,22 +15,22 @@ import reseau.type.TypePersonnage;
  */
 public class Lieu {
 
-	/**  Numéro de la partie où se trouve le lieu. */
+	/** Numéro de la partie où se trouve le lieu. */
 	private int num;
 
-	/**  Entier correspondant au nombre de places d'un lieu. */
+	/** Entier correspondant au nombre de places d'un lieu. */
 	private int nbPlaces;
 
-	/**  Entier correspondant au nombre de zombie sur un lieu. */
+	/** Entier correspondant au nombre de zombie sur un lieu. */
 	private int nbZombies;
 
-	/**  Chaine de caractère correspondant au nom d'un lieu. */
+	/** Chaine de caractère correspondant au nom d'un lieu. */
 	public String name;
 
-	/**  Booléen indiquant si un lieu est ouvert ou non. */
+	/** Booléen indiquant si un lieu est ouvert ou non. */
 	private boolean ouvert;
 
-	/**  Collection des personnages présents sur un lieu. */
+	/** Collection des personnages présents sur un lieu. */
 	private ArrayList<Personnage> personnage;
 
 	/**
@@ -94,8 +94,8 @@ public class Lieu {
 	}
 
 	/**
-	 * Indique si un lieu est attaquable ou non
-	 * Le lieu doit contenir des personnages pour être attaqué.
+	 * Indique si un lieu est attaquable ou non Le lieu doit contenir des
+	 * personnages pour être attaqué.
 	 *
 	 * @return Si le lieu est attaquable
 	 */
@@ -122,10 +122,17 @@ public class Lieu {
 		}
 		return false;
 	}
-	
+
+	/**
+	 * Indique si un lieu est attaquable ou non Le lieu doit contenir des
+	 * personnages pour être attaqué.
+	 * 
+	 * @param nbCarteMateriel
+	 * @return Si le lieu est attaquable
+	 */
 	public boolean estAttaquable(int nbCarteMateriel) {
 		List<Personnage> personnagePresent = new ArrayList<>();
-		for (Personnage personnage: this.personnage) {
+		for (Personnage personnage : this.personnage) {
 			if (!personnage.isEstCache()) {
 				personnagePresent.add(personnage);
 			}
@@ -155,7 +162,6 @@ public class Lieu {
 		}
 		return false;
 	}
-
 
 	/**
 	 * Calcule la force totale de tous les personnages présent sur un lieu.
@@ -213,7 +219,7 @@ public class Lieu {
 	public void setNbZombies(int nbZombies) {
 		if (nbZombies < 0)
 			this.nbZombies = 0;
-		else 
+		else
 			this.nbZombies = nbZombies;
 	}
 
