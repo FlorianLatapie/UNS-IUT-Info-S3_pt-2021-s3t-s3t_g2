@@ -17,6 +17,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
+import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 
@@ -62,7 +63,16 @@ public class ReglesPane extends StackPane {
 		titre.setBackground(new Background(new BackgroundFill(Color.RED, coin, null)));
 		titre.setPrefWidth(730);
 		titre.setMinWidth(730);
-
+		
+		Rectangle rect = new Rectangle();
+		//rect.setStroke(Color.RED);
+		rect.setStrokeWidth(2);
+		rect.setWidth(tailleCarreCentral);
+		rect.setHeight(tailleCarreCentral-154);
+		rect.setArcHeight(30);
+		rect.setArcWidth(30);
+		rect.setOpacity(.3);
+		
 		Label desc1 = new Label();
 		desc1.setText(International.trad("texte.pourQuiA") + "\n" + International.trad("texte.pourQuiB") + "\n\n"
 				+ International.trad("texte.histoireA") + "\n" + International.trad("texte.histoireB") + "\n"
@@ -78,8 +88,9 @@ public class ReglesPane extends StackPane {
 				+ International.trad("texte.FDPsit2B") + "\n" + International.trad("texte.FDPfinA") + "\n"
 				+ International.trad("texte.FDPfinB") + "\n" + International.trad("texte.FDPfinC") + "\n");
 		desc1.setFont(policeNom);
+		desc1.setTextFill(Color.WHITE);
 		desc1.setPadding(new Insets(5,10,5,10));
-		desc1.setBackground(fondBlanc);
+		//desc1.setBackground(fondBlanc);
 
 
 		VBox vbCenter = new VBox();
@@ -127,7 +138,7 @@ public class ReglesPane extends StackPane {
 		fond.setEffect(flou);
 		fond.getChildren().add(imgFond);
 
-		stackPane.getChildren().addAll(fond, centreMenu);
+		stackPane.getChildren().addAll(fond, rect ,centreMenu);
 		stackPane.setBackground(new Background(new BackgroundFill(Color.BLACK, CornerRadii.EMPTY, null)));
 
 		this.getChildren().add(stackPane);
