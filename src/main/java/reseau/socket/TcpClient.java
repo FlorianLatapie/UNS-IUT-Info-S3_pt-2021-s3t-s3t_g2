@@ -138,6 +138,7 @@ public class TcpClient implements Runnable, IEchangeSocket, IMessagePaquet {
 	 * @param message Le message a a envoyer
 	 */
 	public void envoyer(String message) {
+		attendreConnexion();
 		logger.log(Level.INFO, "Envoie d'un message : " + message);
 
 		System.out.println(socket.getInetAddress().getHostAddress());
