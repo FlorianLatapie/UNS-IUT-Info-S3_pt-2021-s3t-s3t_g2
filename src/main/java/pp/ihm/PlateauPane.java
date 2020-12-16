@@ -1,11 +1,15 @@
 package pp.ihm;
 
+import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
+
+import pp.Personnage;
 import pp.ihm.DataControl.ApplicationPane;
 import pp.ihm.eventListener.PlateauListener;
 import pp.ihm.langues.International;
 import reseau.type.Couleur;
+import reseau.type.TypePersonnage;
 import javafx.animation.FadeTransition;
 import javafx.animation.TranslateTransition;
 import javafx.application.Platform;
@@ -14,6 +18,7 @@ import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.effect.GaussianBlur;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
@@ -583,9 +588,9 @@ public class PlateauPane extends StackPane implements PlateauListener {
 		HBox joueursPresents4L3 = new HBox();
 		HBox joueursPresents4L4 = new HBox();
 		HBox joueursPresents4L5 = new HBox();
-		
-		double carteScale = 0.7; 
-		
+
+		double carteScale = 0.7;
+
 		l4p1 = new ImageView(DataControl.NOM_COULEUR);
 		l4p1.setScaleX(carteScale);
 		l4p1.setScaleY(carteScale);
@@ -640,7 +645,7 @@ public class PlateauPane extends StackPane implements PlateauListener {
 		l4p18 = new ImageView(DataControl.NOM_COULEUR);
 		l4p18.setScaleX(carteScale);
 		l4p18.setScaleY(carteScale);
-		
+
 		int carteSpacing = -20;
 		joueursPresents4L1.getChildren().addAll(l4p1, l4p2, l4p3, l4p4);
 		joueursPresents4L1.setSpacing(carteSpacing);
@@ -652,7 +657,7 @@ public class PlateauPane extends StackPane implements PlateauListener {
 		joueursPresents4L4.setSpacing(carteSpacing);
 		joueursPresents4L5.getChildren().addAll(l4p17, l4p18);
 		joueursPresents4L5.setSpacing(carteSpacing);
-		
+
 		joueursPresents4.getChildren().addAll(joueursPresents4L1, joueursPresents4L2, joueursPresents4L3,
 				joueursPresents4L4, joueursPresents4L5);
 		joueursPresents4.setSpacing(carteSpacing);
@@ -678,7 +683,7 @@ public class PlateauPane extends StackPane implements PlateauListener {
 		b4.setRight(vbRight4);
 		b4.setOpacity(.9);
 
-		//b4.setRotate(11);
+		// b4.setRotate(11);
 
 		AnchorPane.setTopAnchor(b4, 440.0);
 		AnchorPane.setLeftAnchor(b4, 365.0);
@@ -1339,39 +1344,122 @@ public class PlateauPane extends StackPane implements PlateauListener {
 	}
 
 	@Override
-	public void destionationPerso(int lieu, String nomPersosCouleur) {
+	public void destionationPerso(int lieu, List<Personnage> p) {
 		// TODO prendre le string le déouper et trouver quel perso il faut afficher et
 		// non afficher
 		Platform.runLater(() -> {
 			switch (lieu) {
 			case 1:
-				System.out.println("TODO afficher les images maintenant"); // TODO
-				// afficheJoueursLieu1.setText(nomPersosCouleur);
+				ImageView[] l1 = { l1p1, l1p2, l1p3 };
+				setPersonnageLieu(lieu, p, l1);
 				break;
 			case 2:
-				System.out.println("TODO afficher les images maintenant"); // TODO
-				// afficheJoueursLieu2.setText(nomPersosCouleur);
+				ImageView[] l2 = { l2p1, l2p2, l2p3, l2p4 };
+				setPersonnageLieu(lieu, p, l2);
 				break;
 			case 3:
-				System.out.println("TODO afficher les images maintenant"); // TODO
-				// afficheJoueursLieu3.setText(nomPersosCouleur);
+				ImageView[] l3 = { l3p1, l3p2, l3p3, l3p4 };
+				setPersonnageLieu(lieu, p, l3);
 				break;
 			case 4:
-				System.out.println("TODO afficher les images maintenant"); // TODO
-				// afficheJoueursLieu4.setText(nomPersosCouleur);
+				ImageView[] l4 = { l4p1, l4p2, l4p3, l4p4, l4p5, l4p6, l4p7, l4p8, l4p9, l4p10, l4p11, l4p12, l4p13,
+						l4p14, l4p15, l4p16, l4p17, l4p18 };
+				setPersonnageLieu(lieu, p, l4);
 				break;
 			case 5:
-				System.out.println("TODO afficher les images maintenant"); // TODO
-				// afficheJoueursLieu5.setText(nomPersosCouleur);
+				ImageView[] l5 = { l5p1, l5p2, l5p3 };
+				setPersonnageLieu(lieu, p, l5);
 				break;
 			case 6:
-				System.out.println("TODO afficher les images maintenant"); // TODO
-				// afficheJoueursLieu6.setText(nomPersosCouleur);
+				ImageView[] l6 = { l6p1, l6p2, l6p3, l6p4, l6p5, l6p6 };
+				setPersonnageLieu(lieu, p, l6);
 				break;
 			default:
 				throw new IllegalStateException("Unexpected value: " + lieu);
 			}
 		});
+	}
+
+	public void setPersonnageLieu(int lieu, List<Personnage> p, ImageView[] imageViews) {
+		for (int i = 0; i < imageViews.length; i++) {
+			if (i < p.size()) {
+				p.get(i).getType();
+				p.get(i).getJoueur().getCouleur();
+				imageViews[i].setVisible(true);
+				imageViews[i].setImage(
+						new Image(convertVersImagePerso(p.get(i).getJoueur().getCouleur(), p.get(i).getType())));
+			} else {
+				imageViews[i].setVisible(false);
+			}
+		}
+	}
+
+	public String convertVersImagePerso(Couleur couleur, TypePersonnage type) {
+		switch (type) {
+		case BLONDE:
+			switch (couleur) {
+			case M:
+				return DataControl.BLONDE_M;
+			case N:
+				return DataControl.BLONDE_N;
+			case V:
+				return DataControl.BLONDE_V;
+			case R:
+				return DataControl.BLONDE_R;
+			case J:
+				return DataControl.BLONDE_J;
+			case B:
+				return DataControl.BLONDE_B;
+			default:
+				break;
+			}
+		case BRUTE:
+			switch (couleur) {
+			case M:
+				return DataControl.BRUTE_M;
+			case N:
+				return DataControl.BRUTE_N;
+			case V:
+				return DataControl.BRUTE_V;
+			case R:
+				return DataControl.BRUTE_R;
+			case J:
+				return DataControl.BRUTE_J;
+			case B:
+				return DataControl.BRUTE_B;
+			default:
+				break;
+			}
+		case TRUAND:
+			switch (couleur) {
+			case M:
+				return DataControl.TRUAND_M;
+			case N:
+				return DataControl.TRUAND_N;
+			case V:
+				return DataControl.TRUAND_V;
+			case R:
+				return DataControl.TRUAND_R;
+			case J:
+				return DataControl.TRUAND_J;
+			case B:
+				return DataControl.TRUAND_B;
+			default:
+				break;
+			}
+		case FILLETTE:
+			switch (couleur) {
+			case R:
+				return DataControl.FILLETTE_R;
+			case J:
+				return DataControl.FILLETTE_J;
+			case B:
+				return DataControl.FILLETTE_B;
+			default:
+				break;
+			}
+		}
+		return DataControl.NOM_COULEUR;
 	}
 
 	@Override

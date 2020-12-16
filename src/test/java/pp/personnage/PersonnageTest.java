@@ -8,6 +8,7 @@ import java.net.UnknownHostException;
 import org.junit.jupiter.api.Test;
 
 import pp.*;
+import reseau.type.TypePersonnage;
 
 class PersonnageTest {
     @Test
