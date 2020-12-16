@@ -32,7 +32,7 @@ public class ConfigBotPane extends StackPane {
 	private int hBouton = 75;
 	private int lBouton = 150;
 	private int hauteurElemtents = 60;
-	private int largeurTF = 100;
+	private int largeurTF = 200;
 	private int largeurTexte = 100;
 	private int spacing = 30;
 
