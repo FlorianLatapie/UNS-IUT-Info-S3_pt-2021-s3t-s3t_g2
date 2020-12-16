@@ -47,10 +47,10 @@ public class OptionPane extends StackPane {
 		sControl = sc;
 
 		Rectangle rect = new Rectangle();
-		rect.setStroke(Color.RED);
-		rect.setStrokeWidth(2);
 		rect.setWidth(tailleCarreCentral);
 		rect.setHeight(tailleCarreCentral);
+		rect.setArcHeight(30);
+		rect.setArcWidth(30);
 		rect.setOpacity(.3);
 
 		VBox vbFond = new VBox();
@@ -92,7 +92,7 @@ public class OptionPane extends StackPane {
 		bEcranHaut.setPrefSize(80, 80);
 		bEcranHaut.setRotate(180);
 		bEcranHaut.setGraphic(img1);
-		bEcranHaut.setOnAction(EventHandler -> sc.setRotatePane(vbCentral, "haut"));
+		bEcranHaut.setOnAction(EventHandler -> sc.setRotatePane(rect, vbCentral, "haut"));
 
 		Button bEcranBas = new Button();
 		bEcranBas.setBackground(new Background(new BackgroundFill(null, CornerRadii.EMPTY, null)));
@@ -100,7 +100,7 @@ public class OptionPane extends StackPane {
 		bEcranBas.setTranslateY(490);
 		bEcranBas.setPrefSize(80, 80);
 		bEcranBas.setGraphic(img2);
-		bEcranBas.setOnAction(EventHandler -> sc.setRotatePane(vbCentral, "bas"));
+		bEcranBas.setOnAction(EventHandler -> sc.setRotatePane(rect, vbCentral, "bas"));
 
 		Button bEcranGauche = new Button();
 		bEcranGauche.setBackground(new Background(new BackgroundFill(null, CornerRadii.EMPTY, null)));
@@ -109,7 +109,7 @@ public class OptionPane extends StackPane {
 		bEcranGauche.setPrefSize(80, 80);
 		bEcranGauche.setRotate(90);
 		bEcranGauche.setGraphic(img3);
-		bEcranGauche.setOnAction(EventHandler -> sc.setRotatePane(vbCentral, "gauche"));
+		bEcranGauche.setOnAction(EventHandler -> sc.setRotatePane(rect, vbCentral, "gauche"));
 
 		Button bEcranDroite = new Button();
 		bEcranDroite.setBackground(new Background(new BackgroundFill(null, CornerRadii.EMPTY, null)));
@@ -118,7 +118,7 @@ public class OptionPane extends StackPane {
 		bEcranDroite.setRotate(-90);
 		bEcranDroite.setPrefSize(80, 80);
 		bEcranDroite.setGraphic(img4);
-		bEcranDroite.setOnAction(EventHandler -> sc.setRotatePane(vbCentral, "droite"));
+		bEcranDroite.setOnAction(EventHandler -> sc.setRotatePane(rect, vbCentral, "droite"));
 
 		///
 

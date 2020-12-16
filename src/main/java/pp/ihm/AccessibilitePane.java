@@ -43,10 +43,10 @@ public class AccessibilitePane extends StackPane{
 		stackPane.setAlignment(Pos.CENTER);
 		
 		Rectangle rect = new Rectangle();
-		rect.setStroke(Color.RED);
-		rect.setStrokeWidth(2);
 		rect.setWidth(tailleCarreCentral);
 		rect.setHeight(tailleCarreCentral);
+		rect.setArcHeight(30);
+		rect.setArcWidth(30);
 		rect.setOpacity(.3);
 		
 		VBox vbFond = new VBox();
@@ -121,7 +121,7 @@ public class AccessibilitePane extends StackPane{
 		vbBoutons.getChildren().add(hbDaltonisme);
 		
 		// checkboxes 
-		
+		/*
 		CheckBox bHematophobie = new CheckBox(International.trad("texte.hematophobie"));
 		bHematophobie.setStyle(styleTexte);
 		bHematophobie.setPadding(new Insets(10));
@@ -132,7 +132,7 @@ public class AccessibilitePane extends StackPane{
 		bAudio.setStyle(styleTexte);
 		bAudio.setPadding(new Insets(10));
 		bAudio.setFont(policeBouton);
-		bAudio.setAlignment(Pos.CENTER_LEFT);
+		bAudio.setAlignment(Pos.CENTER_LEFT);*/
 
 		Button bRetour = new Button(International.trad("bouton.retour"));
 		bRetour.setFont(policeBoutonRetour);
@@ -145,15 +145,15 @@ public class AccessibilitePane extends StackPane{
 		
 		vbRetour.getChildren().add(bRetour);
 		
-		vbCheckBoutons.setSpacing(20);
-		vbCheckBoutons.getChildren().addAll(bHematophobie, bAudio);
+		/*vbCheckBoutons.setSpacing(20);
+		vbCheckBoutons.getChildren().addAll(bHematophobie, bAudio);*/
 		
 		// centre
 		
 		VBox vbCentre = new VBox();
 		vbCentre.setSpacing(20);
 		vbCentre.setMargin(titre, new Insets(100,0,0,0));
-		vbCentre.getChildren().addAll(vbTitre, vbBoutons, vbCheckBoutons);
+		vbCentre.getChildren().addAll(vbTitre, vbBoutons/*, vbCheckBoutons*/);
 		bpCentral.setCenter(vbCentre);
 		bpCentral.setBottom(vbRetour);
 		
@@ -180,7 +180,7 @@ public class AccessibilitePane extends StackPane{
 		bEcranHaut.setPrefSize(80, 80);
 		bEcranHaut.setRotate(180);
 		bEcranHaut.setGraphic(img1);
-		bEcranHaut.setOnAction(EventHandler -> sc.setRotatePane(vbCentre, "haut"));
+		bEcranHaut.setOnAction(EventHandler -> sc.setRotatePane(rect, bpCentral, "haut"));
 
 		Button bEcranBas = new Button();
 		bEcranBas.setBackground(new Background(new BackgroundFill(null, CornerRadii.EMPTY, null)));
@@ -188,7 +188,7 @@ public class AccessibilitePane extends StackPane{
 		bEcranBas.setTranslateY(490);
 		bEcranBas.setPrefSize(80, 80);
 		bEcranBas.setGraphic(img2);
-		bEcranBas.setOnAction(EventHandler -> sc.setRotatePane(vbCentre, "bas"));
+		bEcranBas.setOnAction(EventHandler -> sc.setRotatePane(rect, bpCentral, "bas"));
 
 		Button bEcranGauche = new Button();
 		bEcranGauche.setBackground(new Background(new BackgroundFill(null, CornerRadii.EMPTY, null)));
@@ -197,7 +197,7 @@ public class AccessibilitePane extends StackPane{
 		bEcranGauche.setPrefSize(80, 80);
 		bEcranGauche.setRotate(90);
 		bEcranGauche.setGraphic(img3);
-		bEcranGauche.setOnAction(EventHandler -> sc.setRotatePane(vbCentre, "gauche"));
+		bEcranGauche.setOnAction(EventHandler -> sc.setRotatePane(rect, bpCentral, "gauche"));
 
 		Button bEcranDroite = new Button();
 		bEcranDroite.setBackground(new Background(new BackgroundFill(null, CornerRadii.EMPTY, null)));
@@ -206,7 +206,7 @@ public class AccessibilitePane extends StackPane{
 		bEcranDroite.setRotate(-90);
 		bEcranDroite.setPrefSize(80, 80);
 		bEcranDroite.setGraphic(img4);
-		bEcranDroite.setOnAction(EventHandler -> sc.setRotatePane(vbCentre, "droite"));
+		bEcranDroite.setOnAction(EventHandler -> sc.setRotatePane(rect, bpCentral, "droite"));
 		
 		// boite du fond qui contient le fond et les autres boites 
 		ImageView img = new ImageView(DataControl.FOND);
