@@ -92,6 +92,16 @@ public class ConfigPartiePane extends StackPane {
 		nomPTexte.setPadding(new Insets(10, 50, 10, 10));
 		nomPTexte.setMinWidth(largeurTexte);
 
+		Label infoNomPartie = new Label();// TODO trad
+		infoNomPartie.setText("Le nom de la partie, sous la forme d’une chaine de caractères pouvant" + "\n"
+				+ "contenir des lettres majuscules et minuscule (accentuées ou non), des" + " \n"
+				+ "nombres et les caractères spéciaux apostrophe «’», espace « » et souligné" + "\n" + " bas «_».");
+		infoNomPartie.setMinHeight(100);
+		infoNomPartie.setPrefSize(580, 100);
+		infoNomPartie.setFont(policeNom);
+		infoNomPartie.setPadding(new Insets(5, 10, 5, 10));
+		infoNomPartie.setBackground(fondBlanc);
+		
 		TextField nomP = new TextField();
 		nomP.setText("Partie" + (int) (100 * Math.random()));
 		nomP.setFont(Font.font("Segoe UI",FontWeight.BOLD, 30));
@@ -156,10 +166,10 @@ public class ConfigPartiePane extends StackPane {
 		nbTotBot.setDisable(false);
 
 		vJoueurs.setSpacing(spacing / 2.0);
-		vJoueurs.getChildren().addAll(desc,nomPartie, nbTotJr, nbTotBot);
+		vJoueurs.getChildren().addAll(desc, infoNomPartie,nomPartie, nbTotJr, nbTotBot);
 
 		VBox vbCenter = new VBox();
-		vbCenter.setMargin(vJoueurs, new Insets(0, 0, 100, 0));
+		//vbCenter.setMargin(vJoueurs, new Insets(0, 0, 100, 0));
 		vbCenter.setAlignment(Pos.CENTER);
 		vbCenter.setSpacing(spacing);
 		vbCenter.getChildren().addAll(vJoueurs);
