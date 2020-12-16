@@ -26,6 +26,7 @@ public abstract class International {
 	 */
 	public static void changerLangue(Locale l) {
 		langue = l;
+		// TODO ajout event
 	}
 
 	/**
@@ -42,7 +43,7 @@ public abstract class International {
 
 	/**
 	 * Permet de traduire la phrase cible avec des arguments
-	 *
+	 * 
 	 * @param phrase     la phrase à traduire
 	 * @param argStrings la liste des arguments custom
 	 * @return la traduction de la phrase
