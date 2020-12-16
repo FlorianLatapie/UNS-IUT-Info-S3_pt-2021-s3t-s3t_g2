@@ -222,8 +222,44 @@ public class TraitementIntelligent {
 	}
 
 	protected static List<Object> pionADeplacerIntelligent(Bot core, int dest, HashMap<Integer, List<Integer>> listedp) {
-		// TODO Auto-generated method stub
-		return null;
+		int bestLieu =10;
+		int LieuPionABouger;
+		int nbCartesSprint=0;
+		List<Integer> pionPossibles = new ArrayList<Integer>();
+		int bestPionABouger = 0; int difference=0;
+		List<Object> listARenvoyer= new ArrayList<Object>();
+		for(int i = 0; i<core.getPartie().getLieuxOuverts().size();i++) {
+			if(difference>(core.getPartie().getLieux().get(i).getForce()-core.getPartie().getLieux().get(i).getNbZombies())&&core.getPartie().getLieux().get(i).getJoueursCouleurs().contains(core.getCouleur())) {
+				difference = (core.getPartie().getLieux().get(i).getForce()-core.getPartie().getLieux().get(i).getNbZombies());
+				LieuPionABouger=core.getPartie().getLieux().get(i).getNum();
+				for(int j = 0;j<core.getPartie().getLieux().get(i).getPersonnage().size();j++) {
+					if(core.getPartie().getLieux().get(i).getPersonnage().get(j).getCouleur().equals(core.getCouleur())) {
+						pionPossibles.add(core.getPartie().getLieux().get(i).getPersonnage().get(j).getPoint());
+					}
+				}
+			}
+			
+		}
+		for(int z=0;z<pionPossibles.size();z++) {
+			if(pionPossibles.get(z)>bestPionABouger) {
+				bestPionABouger = pionPossibles.get(z);
+			}
+		}
+		for(int y=0;y<core.getListeCarte().size();y++) {
+			if(core.getListeCarte().get(y)==CarteType.SPR) {
+				nbCartesSprint++;
+			}
+		}
+		
+		listARenvoyer.add(dest);
+		listARenvoyer.add(bestPionABouger);
+		if(nbCartesSprint>0) {
+			listARenvoyer.add(CarteType.SPR);
+		}
+		else {
+			listARenvoyer.add(CarteType.NUL);
+		}
+		return listARenvoyer;
 	}
 
 
