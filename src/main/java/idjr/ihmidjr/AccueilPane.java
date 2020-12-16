@@ -120,7 +120,7 @@ public class AccueilPane extends StackPane {
 				core.getIdjr().listOfServers();
 				sc.setPaneOnTop(ApplicationPane.CONFIG);
 			} else
-				nomjoueur.setText("INVALIDE");//TODO
+				nomjoueur.setText("INVALIDE");// TODO
 		});
 
 		Button bOptions = new Button(International.trad("bouton.options"));
@@ -170,8 +170,8 @@ public class AccueilPane extends StackPane {
 			bQuitter.setStyle(styleBoutons);
 		});
 		bQuitter.setOnAction(event -> {
-			boolean resultat = ConfirmationPane.afficher("Quitter le jeu",
-					"Êtes-vous sûr de vouloir quitter le jeu ?"+ "\n"+ "Si vous quittez, la partie en cours sera perdue.");
+			boolean resultat = ConfirmationPane.afficher(International.trad("texte.confirmationTitre"),
+					International.trad("texte.confirmationL1") + "\n" + International.trad("texte.confirmationL2"));
 			if (resultat) {
 				if (core.getIdjr() != null)
 					core.getIdjr().stop();
@@ -220,7 +220,5 @@ public class AccueilPane extends StackPane {
 		sControl.registerNode(paneName, this);
 		sControl.setPaneOnTop(paneName);
 	}
-	
-	
 
 }
