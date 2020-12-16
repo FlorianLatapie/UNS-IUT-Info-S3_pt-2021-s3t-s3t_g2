@@ -56,6 +56,12 @@ public class TraitementPaquetTcp extends TraitementPaquet<TcpClient> {
 	}
 
 	private void dcp(Paquet packet, String message, TcpClient connection) {
+		if (core.estPleine()) {
+			connection.envoyer(ControleurReseau.construirePaquetTcp("RCP", core.getPartieId()));
+			//TODO peut pas se connecter (REFUSER)
+			return;
+		}
+
 		switch (core.getStatus()) {
 		case ATTENTE:
 			String id = core.ajouterJoueur((String) packet.getValeur(message, 1),
