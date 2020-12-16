@@ -7,6 +7,8 @@ import reseau.socket.TraitementPaquet;
 import reseau.tool.ThreadOutils;
 import reseau.type.ConnexionType;
 
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.DatagramPacket;
 import java.net.InetAddress;
@@ -32,8 +34,8 @@ public class TraitementPaquetUdp extends TraitementPaquet<DatagramPacket> {
 		this.core = (BotFaible) core;// TODO Add the game manager (core)
 	}
 
-	public void init(ControleurReseau netWorkManager) {
-		setControleurReseau(netWorkManager);
+	public void init() {
+		
 	}
 
 	/**
@@ -69,7 +71,7 @@ public class TraitementPaquetUdp extends TraitementPaquet<DatagramPacket> {
 	}
 
 	public void acp(Paquet packet, String message) {
-		if (ConnexionType.CLIENT != getControleurReseau().getConnexionType())
+		if (ConnexionType.CLIENT != ControleurReseau.getConnexionType())
 			return;
 		InetAddress address = null;
 		try {
@@ -88,39 +90,56 @@ public class TraitementPaquetUdp extends TraitementPaquet<DatagramPacket> {
 				MessageFormat.format("Une nouvelle partie vient d''etre trouvÃ© !\n{0}", packet.getValeur(message, 1)));
 		System.out.println("Voulez-vous rejoindre cette partie ? (K)");
 		
-		String nomdujoueur = "BOT" + new Random().nextInt(9999);
-		core.setNom(nomdujoueur);
-		getControleurReseau().demarrerClientTcp(core.getIpPp());
-		ThreadOutils.asyncTask("acp",() -> {
+		String prenoms = "Ressources/Prenoms/prenomsFR.txt";
+		Scanner scanneurPrenom;
+		String nomDuJoueur = "Bot Faible ";
+		try {
+			scanneurPrenom = new Scanner(new File(prenoms));
+			StringBuilder fichierLu = new StringBuilder();
+			while(scanneurPrenom.hasNext()) {
+				fichierLu.append(scanneurPrenom.nextLine()+"\n");
+			}
+			String[] tableauPrenom = fichierLu.toString().split("\n");
+			int choix= new Random().nextInt(tableauPrenom.length);
+			System.out.println(nomDuJoueur + tableauPrenom[choix]);
+			nomDuJoueur += tableauPrenom[choix];
+			scanneurPrenom.close();
+		} catch (FileNotFoundException e) {
+			nomDuJoueur += new Random().nextInt(9999);
+			System.out.println("bug");
+			e.printStackTrace();
+		}
+		core.setNom(nomDuJoueur);
+		ControleurReseau.demarrerClientTcp(core.getIpPp());
+
+		ThreadOutils.asyncTask("acp", () -> {
 			try {
 				Thread.sleep(1000);
 			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			String messageTcp = getControleurReseau().construirePaquetTcp("DCP", nomdujoueur, core.getTypeJoueur(),
+			String messageTcp = ControleurReseau.construirePaquetTcp("DCP", core.getNom(), core.getTypeJoueur(),
 					"P" + (int) packet.getValeur(message, 1));
 			try {
 				Thread.sleep(1000);
 			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			getControleurReseau().envoyerTcp(messageTcp);
-
-			getControleurReseau().attendreTcp("ACP");
+			ControleurReseau.envoyerTcp(messageTcp);
+			ControleurReseau.attendreTcp("ACP");
 		});
+
 	}
 
 	public void amp(Paquet packet, String message) {
-		if (ConnexionType.CLIENT != getControleurReseau().getConnexionType())
+		if (ConnexionType.CLIENT != ControleurReseau.getConnexionType())
 			return;
 
 		System.out.println(MessageFormat.format("Mise a jour d''une partie !\n{0}", packet.getValeur(message, 1)));
 	}
 
 	public void ip(Paquet packet, String message) {
-		if (ConnexionType.CLIENT != getControleurReseau().getConnexionType())
+		if (ConnexionType.CLIENT != ControleurReseau.getConnexionType())
 			return;
 
 		System.out.println("Informations sur la partie !");

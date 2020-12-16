@@ -28,7 +28,6 @@ public class BotFaible {
 	private boolean envie;
 	private List<Integer> lieuOuvert;
 	private int delay;
-	private ControleurReseau nwm;
 	private boolean estFini;
 	private List<CarteType> listeCarte;
 	private List<PionCouleur> listePion;
@@ -73,12 +72,11 @@ public class BotFaible {
 	private void initReseau() throws IOException {
 		TraitementPaquetUdp traitementPaquetUdp = new TraitementPaquetUdp(this);
 		TraitementPaquetTcp traitementPaquetTcp = new TraitementPaquetTcp(this);
-		nwm = new ControleurReseau(traitementPaquetTcp, traitementPaquetUdp);
-		nwm.initConnexion(connexionType, ReseauOutils.getLocalIp());
+		ControleurReseau.initConnexion(traitementPaquetTcp, traitementPaquetUdp, connexionType, ReseauOutils.getLocalIp());
 	}
 
 	public void arreter() {
-		nwm.arreter();
+		ControleurReseau.arreter();
 	}
 
 	public int getDelay() {
@@ -212,6 +210,5 @@ public class BotFaible {
 	public void setJoueurEnVie(List<Couleur> joueurEnVie) {
 		this.joueurEnVie = joueurEnVie;
 	}
-	
-	
+
 }
