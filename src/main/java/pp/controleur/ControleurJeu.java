@@ -59,6 +59,7 @@ public class ControleurJeu {
 
 	private ControleurFouilleCamion cfc;
 	private ControleurVote cVote;
+	private ControleurElectionVigile cev;
 
 	private final Random rd = new Random();
 
@@ -76,6 +77,7 @@ public class ControleurJeu {
 		this.joueurs = new ArrayList<>();
 		this.cfc = new ControleurFouilleCamion();
 		this.cVote = new ControleurVote();
+		this.cev = new ControleurElectionVigile();
 
 		TraitementPaquetTcp tcp = new TraitementPaquetTcp(this);
 		TraitementPaquetUdp udp = new TraitementPaquetUdp(this);
@@ -331,27 +333,22 @@ public class ControleurJeu {
 	 * Affiche et met à jour le nouveau chef des vigiles
 	 */
 	private void electionChefVigi() {
-		// TODO PREVENIR QUI EST LE CHEF DES VIGILES
 		String m = nwm.construirePaquetTcp("PECV", getPersosLieu(5), partieId, numeroTour);
 		for (Joueur j : jeu.getJoueurs().values())
 			j.getConnection().envoyer(m);
 		Joueur j;
-		if (!jeu.getJoueurSurLieu(jeu.getLieux().get(5)).isEmpty()) {
-			if (jeu.getJoueurSurLieu(jeu.getLieux().get(5)).size() == 1)
-				j = jeu.getJoueurSurLieu(jeu.getLieux().get(5)).get(0);
-			else
+		if (cev.isElectableBoolean(jeu)) {
+			j = cev.joueurElection(jeu);
+			if ( j == null)
 				j = phaseVote(jeu.getLieux().get(5), VoteType.ECD);
 			if (j != null) {
-				jeu.resultatChefVigile(j);
-				out.println(j + " est le nouveau chef des vigiles!");
-				jeu.setNewChef(true);
+				cev.newVigile(jeu, j);
 				m = nwm.construirePaquetTcp("RECV", jeu.getChefVIgile().getCouleur(), partieId, numeroTour);
 				for (Joueur joueur : jeu.getJoueurs().values())
 					j.getConnection().envoyer(m);
 				if (initializer != null)
 					initializer.electionChef("Nouveau chef des vigiles : " + jeu.getChefVIgile());
 			} else {
-				out.println("Pas de nouveau chef des vigiles!");
 				jeu.setNewChef(false);
 				m = nwm.construirePaquetTcp("RECV", Couleur.NUL, partieId, numeroTour);
 				for (Joueur j2 : jeu.getJoueurs().values())
@@ -360,8 +357,7 @@ public class ControleurJeu {
 					initializer.electionChef("Il n'y a pas de nouveau chef des vigiles");
 			}
 		} else {
-			out.println("Pas de nouveau chef des vigiles!");
-			jeu.setNewChef(false);
+			cev.noNewVigile(jeu);
 			m = nwm.construirePaquetTcp("RECV", Couleur.NUL, partieId, numeroTour);
 			for (Joueur j2 : jeu.getJoueurs().values())
 				j2.getConnection().envoyer(m);
@@ -392,7 +388,6 @@ public class ControleurJeu {
 		lieuZombie.add(z2);
 		lieuZombie.add(z3);
 		lieuZombie.add(z4);
-		out.println(jeu.getChefVIgile() + " , chef des vigiles, regarde les résulats de l'arrivé des Zombies:");
 		for (Integer integer : lieuZombie) {
 			out.println(jeu.getLieux().get(integer) + "-> Zombie + 1");
 		}
