@@ -581,32 +581,81 @@ public class PlateauPane extends StackPane implements PlateauListener {
 		HBox joueursPresents4L1 = new HBox();
 		HBox joueursPresents4L2 = new HBox();
 		HBox joueursPresents4L3 = new HBox();
+		HBox joueursPresents4L4 = new HBox();
+		HBox joueursPresents4L5 = new HBox();
+		
+		double carteScale = 0.7; 
+		
 		l4p1 = new ImageView(DataControl.NOM_COULEUR);
+		l4p1.setScaleX(carteScale);
+		l4p1.setScaleY(carteScale);
 		l4p2 = new ImageView(DataControl.NOM_COULEUR);
+		l4p2.setScaleX(carteScale);
+		l4p2.setScaleY(carteScale);
 		l4p3 = new ImageView(DataControl.NOM_COULEUR);
+		l4p3.setScaleX(carteScale);
+		l4p3.setScaleY(carteScale);
 		l4p4 = new ImageView(DataControl.NOM_COULEUR);
+		l4p4.setScaleX(carteScale);
+		l4p4.setScaleY(carteScale);
 		l4p5 = new ImageView(DataControl.NOM_COULEUR);
+		l4p5.setScaleX(carteScale);
+		l4p5.setScaleY(carteScale);
 		l4p6 = new ImageView(DataControl.NOM_COULEUR);
+		l4p6.setScaleX(carteScale);
+		l4p6.setScaleY(carteScale);
 		l4p7 = new ImageView(DataControl.NOM_COULEUR);
+		l4p7.setScaleX(carteScale);
+		l4p7.setScaleY(carteScale);
 		l4p8 = new ImageView(DataControl.NOM_COULEUR);
+		l4p8.setScaleX(carteScale);
+		l4p8.setScaleY(carteScale);
 		l4p9 = new ImageView(DataControl.NOM_COULEUR);
+		l4p9.setScaleX(carteScale);
+		l4p9.setScaleY(carteScale);
 		l4p10 = new ImageView(DataControl.NOM_COULEUR);
+		l4p10.setScaleX(carteScale);
+		l4p10.setScaleY(carteScale);
 		l4p11 = new ImageView(DataControl.NOM_COULEUR);
+		l4p11.setScaleX(carteScale);
+		l4p11.setScaleY(carteScale);
 		l4p12 = new ImageView(DataControl.NOM_COULEUR);
+		l4p12.setScaleX(carteScale);
+		l4p12.setScaleY(carteScale);
 		l4p13 = new ImageView(DataControl.NOM_COULEUR);
+		l4p13.setScaleX(carteScale);
+		l4p13.setScaleY(carteScale);
 		l4p14 = new ImageView(DataControl.NOM_COULEUR);
+		l4p14.setScaleX(carteScale);
+		l4p14.setScaleY(carteScale);
 		l4p15 = new ImageView(DataControl.NOM_COULEUR);
+		l4p15.setScaleX(carteScale);
+		l4p15.setScaleY(carteScale);
 		l4p16 = new ImageView(DataControl.NOM_COULEUR);
+		l4p16.setScaleX(carteScale);
+		l4p16.setScaleY(carteScale);
 		l4p17 = new ImageView(DataControl.NOM_COULEUR);
+		l4p17.setScaleX(carteScale);
+		l4p17.setScaleY(carteScale);
 		l4p18 = new ImageView(DataControl.NOM_COULEUR);
-
-		joueursPresents4L1.getChildren().addAll(l4p1, l4p2, l4p3,l4p4);
-		joueursPresents4L2.getChildren().addAll(l4p5, l4p6, l4p7,l4p8);
-		joueursPresents4L2.getChildren().addAll(l4p9, l4p10, l4p11,l4p12);
-		joueursPresents4L2.getChildren().addAll(l4p13, l4p14, l4p15,l4p16);
-		joueursPresents4L2.getChildren().addAll(l4p17, l4p18);
-		joueursPresents4.getChildren().addAll(/* afficheJoueursLieu4 = new Label(), */joueursPresents4L1,
-				joueursPresents4L2, joueursPresents4L3);
+		l4p18.setScaleX(carteScale);
+		l4p18.setScaleY(carteScale);
+		
+		int carteSpacing = -20;
+		joueursPresents4L1.getChildren().addAll(l4p1, l4p2, l4p3, l4p4);
+		joueursPresents4L1.setSpacing(carteSpacing);
+		joueursPresents4L2.getChildren().addAll(l4p5, l4p6, l4p7, l4p8);
+		joueursPresents4L2.setSpacing(carteSpacing);
+		joueursPresents4L3.getChildren().addAll(l4p9, l4p10, l4p11, l4p12);
+		joueursPresents4L3.setSpacing(carteSpacing);
+		joueursPresents4L4.getChildren().addAll(l4p13, l4p14, l4p15, l4p16);
+		joueursPresents4L4.setSpacing(carteSpacing);
+		joueursPresents4L5.getChildren().addAll(l4p17, l4p18);
+		joueursPresents4L5.setSpacing(carteSpacing);
+		
+		joueursPresents4.getChildren().addAll(joueursPresents4L1, joueursPresents4L2, joueursPresents4L3,
+				joueursPresents4L4, joueursPresents4L5);
+		joueursPresents4.setSpacing(carteSpacing);
 		joueursPresents4.setPrefSize(170, 100);
 
 		nbZombies4 = new Label(International.trad("text.nbZombie"));
@@ -629,10 +678,10 @@ public class PlateauPane extends StackPane implements PlateauListener {
 		b4.setRight(vbRight4);
 		b4.setOpacity(.9);
 
-		b4.setRotate(11);
+		//b4.setRotate(11);
 
-		AnchorPane.setTopAnchor(b4, 450.0);
-		AnchorPane.setLeftAnchor(b4, 370.0);
+		AnchorPane.setTopAnchor(b4, 440.0);
+		AnchorPane.setLeftAnchor(b4, 365.0);
 
 		///
 
