@@ -135,7 +135,7 @@ public class AccueilPane extends StackPane {
 				core.getIdjr().listOfServers();
 				sc.setPaneOnTop(ApplicationPane.CONFIG);
 			} else
-				nomjoueur.setText("INVALIDE");// TODO
+				nomjoueur.setText(International.trad("texte.invalide"));
 		});
 
 		Button bOptions = new Button(International.trad("bouton.options"));
