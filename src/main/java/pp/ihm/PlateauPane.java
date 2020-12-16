@@ -1327,7 +1327,6 @@ public class PlateauPane extends StackPane implements PlateauListener {
 			transi.setFromValue(0.0);
 			transi.setToValue(1.0);
 			transi.setCycleCount((int) 2f);
-			transi.setAutoReverse(false);
 			transi.play();
 			notifInfo.setVisible(true);
 			if (myTimer != null) {
@@ -1362,7 +1361,6 @@ public class PlateauPane extends StackPane implements PlateauListener {
 			transi.setFromValue(0.0);
 			transi.setToValue(1.0);
 			transi.setCycleCount((int) 2f);
-			transi.setAutoReverse(false);
 			transi.play();
 			notifInfo.setVisible(true);
 			if (myTimer != null) {
@@ -1397,7 +1395,6 @@ public class PlateauPane extends StackPane implements PlateauListener {
 			transi.setFromValue(0.0);
 			transi.setToValue(1.0);
 			transi.setCycleCount((int) 2f);
-			transi.setAutoReverse(false);
 			transi.play();
 			notifInfo.setVisible(true);
 			if (myTimer != null) {
