@@ -108,7 +108,7 @@ public class Idjr {
 		ControleurReseau.envoyerUdp(message);
 
 		try {
-			Thread.sleep(1000);
+			Thread.sleep(250);
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
