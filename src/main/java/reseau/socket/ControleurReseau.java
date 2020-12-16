@@ -43,13 +43,11 @@ public abstract class ControleurReseau {
 		try {
 			udpPaquets = PtOutils.loadPacket(CHEMIN_PACKET, "UDP");
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		try {
 			tcpPaquets = PtOutils.loadPacket(CHEMIN_PACKET, "TCP");
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		logger = Logger.getLogger("ControleurReseau");
