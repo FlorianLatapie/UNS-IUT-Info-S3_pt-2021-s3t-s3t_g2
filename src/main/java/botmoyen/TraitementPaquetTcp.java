@@ -445,7 +445,7 @@ public class TraitementPaquetTcp extends TraitementPaquet<TcpClient> {
 	public void choisirSacrifice(Paquet paquet, String message) {
 		out.println(paquet.getDocs());
 		String messageTcp = getControleurReseau().construirePaquetTcp("RAZCS", (int) paquet.getValeur(message, 1),
-				traitementB.choisirSacrifice(core, (List<?>) paquet.getValeur(message, 2)),
+				traitementB.choisirBestSacrifice(core, (List<?>) paquet.getValeur(message, 2)),
 				(String) paquet.getValeur(message, 3), (int) paquet.getValeur(message, 4), core.getJoueurId());
 		getControleurReseau().envoyerTcp(messageTcp);
 		System.out.println("choisirSacrifice : \n");
