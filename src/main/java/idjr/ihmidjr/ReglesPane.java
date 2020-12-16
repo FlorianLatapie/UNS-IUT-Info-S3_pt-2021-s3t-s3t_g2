@@ -54,7 +54,7 @@ public class ReglesPane extends StackPane {
 		stackPane.setAlignment(Pos.CENTER);
 
 		// titre
-		Label titre1 = new Label("REGLÈS DU JEU");
+		Label titre1 = new Label(International.trad("text.titreRegle"));
 		titre1.setFont(Font.font("Segoe UI", FontWeight.BOLD, 80));
 		titre1.setTextFill(Color.BLACK);
 
@@ -63,16 +63,16 @@ public class ReglesPane extends StackPane {
 		titre.setBackground(new Background(new BackgroundFill(Color.RED, coin, null)));
 		titre.setPrefWidth(730);
 		titre.setMinWidth(730);
-		
+
 		Rectangle rect = new Rectangle();
-		//rect.setStroke(Color.RED);
+		// rect.setStroke(Color.RED);
 		rect.setStrokeWidth(2);
 		rect.setWidth(tailleCarreCentral);
-		rect.setHeight(tailleCarreCentral-154);
+		rect.setHeight(tailleCarreCentral - 154);
 		rect.setArcHeight(30);
 		rect.setArcWidth(30);
 		rect.setOpacity(.3);
-		
+
 		Label desc1 = new Label();
 		desc1.setText(International.trad("texte.pourQuiA") + "\n" + International.trad("texte.pourQuiB") + "\n\n"
 				+ International.trad("texte.histoireA") + "\n" + International.trad("texte.histoireB") + "\n"
@@ -89,16 +89,15 @@ public class ReglesPane extends StackPane {
 				+ International.trad("texte.FDPfinB") + "\n" + International.trad("texte.FDPfinC") + "\n");
 		desc1.setFont(policeNom);
 		desc1.setTextFill(Color.WHITE);
-		desc1.setPadding(new Insets(5,10,5,10));
-		//desc1.setBackground(fondBlanc);
-
+		desc1.setPadding(new Insets(5, 10, 5, 10));
+		// desc1.setBackground(fondBlanc);
 
 		VBox vbCenter = new VBox();
 		vbCenter.setAlignment(Pos.CENTER);
 		vbCenter.getChildren().addAll(desc1);
 
 		// bouton
-		Button bRetour = new Button("RETOUR");
+		Button bRetour = new Button(International.trad("bouton.retour"));
 		bRetour.setPrefSize(lBouton, hBouton);
 		bRetour.setMinSize(lBouton, hBouton);
 		bRetour.setFont(policeBouton);
@@ -124,7 +123,7 @@ public class ReglesPane extends StackPane {
 		centreMenu.setMinSize(tailleCarreCentral, tailleCarreCentral);
 		centreMenu.setPrefSize(tailleCarreCentral, tailleCarreCentral);
 		centreMenu.setMaxSize(tailleCarreCentral, tailleCarreCentral);
-		//centreMenu.setMargin(titre, new Insets(0, 0, 100, 0));
+		// centreMenu.setMargin(titre, new Insets(0, 0, 100, 0));
 		centreMenu.setAlignment(titre, Pos.CENTER);
 		centreMenu.setTop(titre);
 		centreMenu.setCenter(vbCenter);
@@ -138,7 +137,7 @@ public class ReglesPane extends StackPane {
 		fond.setEffect(flou);
 		fond.getChildren().add(imgFond);
 
-		stackPane.getChildren().addAll(fond, rect ,centreMenu);
+		stackPane.getChildren().addAll(fond, rect, centreMenu);
 		stackPane.setBackground(new Background(new BackgroundFill(Color.BLACK, CornerRadii.EMPTY, null)));
 
 		this.getChildren().add(stackPane);
