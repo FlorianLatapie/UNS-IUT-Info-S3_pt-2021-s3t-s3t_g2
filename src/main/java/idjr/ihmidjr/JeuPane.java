@@ -117,7 +117,6 @@ public class JeuPane extends StackPane implements JeuListener {
 	ImageView imgDeCarte6;
 	ImageView imgDeCarte7;
 	ImageView imgDeCarte8;
-	ImageView imgDeCarte9;
 
 	Button bDeCarte1;
 	Button bDeCarte2;
@@ -127,7 +126,6 @@ public class JeuPane extends StackPane implements JeuListener {
 	Button bDeCarte6;
 	Button bDeCarte7;
 	Button bDeCarte8;
-	Button bDeCarte9;
 	Button bPasserCarte;
 
 	VBox carte1;
@@ -138,7 +136,6 @@ public class JeuPane extends StackPane implements JeuListener {
 	VBox carte6;
 	VBox carte7;
 	VBox carte8;
-	VBox carte9;
 	VBox passerCarte;
 
 	BorderPane fouilleCamion;
@@ -155,7 +152,7 @@ public class JeuPane extends StackPane implements JeuListener {
 
 	HBox infoZombie;
 	Label linfoZombie;
-	
+
 	Button bForce;
 	Label force;
 	VBox des;
@@ -203,7 +200,7 @@ public class JeuPane extends StackPane implements JeuListener {
 		hbCartes.setMaxSize(1800, 250);
 		hbCartes.setStyle(styleVBox);
 		// hbCartes.setPadding(new Insets(0,10,0,10));
-		hbCartes.setSpacing(20);
+		hbCartes.setSpacing(8);
 
 		carte1 = new VBox();
 		carte1.setAlignment(Pos.CENTER);
@@ -214,6 +211,7 @@ public class JeuPane extends StackPane implements JeuListener {
 		imgDeCarte1.setFitWidth(tailleCarte);
 
 		bDeCarte1 = new Button();
+		bDeCarte1.setAlignment(Pos.CENTER);
 		bDeCarte1.setPrefSize(tailleCarte, tailleCarte);
 		bDeCarte1.setMinSize(tailleCarte, tailleCarte);
 		bDeCarte1.setGraphic(imgDeCarte1);
@@ -231,10 +229,11 @@ public class JeuPane extends StackPane implements JeuListener {
 		imgDeCarte2.setFitWidth(tailleCarte);
 
 		bDeCarte2 = new Button(); // TODO Event
+		bDeCarte2.setAlignment(Pos.CENTER);
 		bDeCarte2.setPrefSize(tailleCarte, tailleCarte);
 		bDeCarte2.setMinSize(tailleCarte, tailleCarte);
 		bDeCarte2.setGraphic(imgDeCarte2);
-		carte2.getChildren().addAll(imgDeCarte2, bDeCarte2);
+		carte2.getChildren().addAll(bDeCarte2);
 
 		carte3 = new VBox();
 		carte3.setAlignment(Pos.CENTER);
@@ -250,7 +249,7 @@ public class JeuPane extends StackPane implements JeuListener {
 		bDeCarte3.setMinSize(tailleCarte, tailleCarte);
 		bDeCarte3.setGraphic(imgDeCarte3);
 
-		carte3.getChildren().addAll(imgDeCarte3, bDeCarte3);
+		carte3.getChildren().addAll(bDeCarte3);
 
 		carte4 = new VBox();
 		carte4.setAlignment(Pos.CENTER);
@@ -266,7 +265,7 @@ public class JeuPane extends StackPane implements JeuListener {
 		bDeCarte4.setMinSize(tailleCarte, tailleCarte);
 		bDeCarte4.setGraphic(imgDeCarte4);
 
-		carte4.getChildren().addAll(imgDeCarte4, bDeCarte4);
+		carte4.getChildren().addAll(bDeCarte4);
 
 		carte5 = new VBox();
 		carte5.setAlignment(Pos.CENTER);
@@ -281,7 +280,7 @@ public class JeuPane extends StackPane implements JeuListener {
 		bDeCarte5.setPrefSize(tailleCarte, tailleCarte);
 		bDeCarte5.setMinSize(tailleCarte, tailleCarte);
 		bDeCarte5.setGraphic(imgDeCarte5);
-		carte5.getChildren().addAll(imgDeCarte5, bDeCarte5);
+		carte5.getChildren().addAll(bDeCarte5);
 
 		carte6 = new VBox();
 		carte6.setAlignment(Pos.CENTER);
@@ -298,7 +297,7 @@ public class JeuPane extends StackPane implements JeuListener {
 		bDeCarte6.setMinSize(tailleCarte, tailleCarte);
 		bDeCarte6.setGraphic(imgDeCarte6);
 
-		carte6.getChildren().addAll(imgDeCarte6, bDeCarte6);
+		carte6.getChildren().addAll(bDeCarte6);
 
 		carte7 = new VBox();
 		carte7.setAlignment(Pos.CENTER);
@@ -313,7 +312,7 @@ public class JeuPane extends StackPane implements JeuListener {
 		bDeCarte7.setPrefSize(tailleCarte, tailleCarte);
 		bDeCarte7.setMinSize(tailleCarte, tailleCarte);
 		bDeCarte7.setGraphic(imgDeCarte7);
-		carte7.getChildren().addAll(imgDeCarte7, bDeCarte7);
+		carte7.getChildren().addAll(bDeCarte7);
 
 		carte8 = new VBox();
 		carte8.setAlignment(Pos.CENTER);
@@ -328,22 +327,33 @@ public class JeuPane extends StackPane implements JeuListener {
 		bDeCarte8.setPrefSize(tailleCarte, tailleCarte);
 		bDeCarte8.setMinSize(tailleCarte, tailleCarte);
 		bDeCarte8.setGraphic(imgDeCarte8);
-		carte8.getChildren().addAll(imgDeCarte8, bDeCarte8);
+		carte8.getChildren().addAll(bDeCarte8);
 
-		carte9 = new VBox();
-		carte9.setAlignment(Pos.CENTER);
-		carte9.setSpacing(10);
+		Button cartePrecedente = new Button("<");
+		cartePrecedente.setStyle(styleBoutons);
+		cartePrecedente.setPrefSize(58, tailleCarte);
+		cartePrecedente.setMinSize(58, tailleCarte);
+		cartePrecedente.setMaxSize(58, tailleCarte);
+		cartePrecedente.setFont(policeBoutonC);
+		cartePrecedente.setOnMouseEntered(event -> {
+			cartePrecedente.setStyle(styleBoutonsSouris);
+		});
+		cartePrecedente.setOnMouseExited(event -> {
+			cartePrecedente.setStyle(styleBoutons);
+		});
 
-		imgDeCarte9 = new ImageView(DataControl.CARTE_CS);
-		imgDeCarte9.setFitHeight(150);
-		imgDeCarte9.setFitWidth(150);
-
-		bDeCarte9 = new Button("Utiliser"); // TODO Event
-		bDeCarte9.setAlignment(Pos.CENTER);
-		bDeCarte9.setPrefSize(tailleCarte, tailleCarte);
-		bDeCarte9.setMinSize(tailleCarte, tailleCarte);
-		bDeCarte9.setGraphic(imgDeCarte9);
-		carte9.getChildren().addAll(imgDeCarte9, bDeCarte9);
+		Button carteSuivante = new Button(">");
+		carteSuivante.setStyle(styleBoutons);
+		carteSuivante.setPrefSize(58, tailleCarte);
+		carteSuivante.setMinSize(58, tailleCarte);
+		carteSuivante.setMaxSize(58, tailleCarte);
+		carteSuivante.setFont(policeBoutonC);
+		carteSuivante.setOnMouseEntered(event -> {
+			carteSuivante.setStyle(styleBoutonsSouris);
+		});
+		carteSuivante.setOnMouseExited(event -> {
+			carteSuivante.setStyle(styleBoutons);
+		});
 
 		passerCarte = new VBox();
 		passerCarte.setAlignment(Pos.CENTER);
@@ -364,8 +374,8 @@ public class JeuPane extends StackPane implements JeuListener {
 
 		passerCarte.getChildren().addAll(bPasserCarte);
 
-		hbCartes.getChildren().addAll(carte1, carte2, carte3, carte4, carte5, carte6, carte7, carte8, /* carte9 */
-				passerCarte);
+		hbCartes.getChildren().addAll(cartePrecedente, carte1, carte2, carte3, carte4, carte5, carte6, carte7, carte8,
+				carteSuivante, passerCarte);
 
 		//////////////////////////////////////////
 
@@ -1098,18 +1108,18 @@ public class JeuPane extends StackPane implements JeuListener {
 		linfoZombie.setTextFill(Color.BLACK);
 
 		infoZombie.getChildren().addAll(linfoZombie);
-		
+
 		vbForce = new VBox();
 		vbForce.setAlignment(Pos.TOP_RIGHT);
-		
-		force = new Label("La force de l\'équipe \npour le *lieu* est de XX"); //TODO traduction à faire
+
+		force = new Label("La force de l\'équipe \npour le *lieu* est de XX"); // TODO traduction à faire
 		force.setFont(Font.font("Segoe UI", FontWeight.BOLD, 23));
 		force.setTextAlignment(TextAlignment.CENTER);
 		force.setStyle(styleVBox);
 		force.setPadding(new Insets(20));
 		force.setTextFill(Color.WHITESMOKE);
 		force.setVisible(false);
-		
+
 		bForce = new Button("Force \nde l\'équipe");
 		bForce.setAlignment(Pos.CENTER);
 		bForce.setTextAlignment(TextAlignment.CENTER);
@@ -1259,10 +1269,10 @@ public class JeuPane extends StackPane implements JeuListener {
 		fouilleCamion.setVisible(false);
 
 		ImageView[] imgViews = { imgDeCarte1, imgDeCarte2, imgDeCarte3, imgDeCarte4, imgDeCarte5, imgDeCarte6,
-				imgDeCarte7, imgDeCarte8, imgDeCarte9 };
+				imgDeCarte7, imgDeCarte8 };
 		Button[] buttons = { bDeCarte1, bDeCarte2, bDeCarte3, bDeCarte4, bDeCarte5, bDeCarte6, bDeCarte7, bDeCarte8,
-				bDeCarte9, bPasserCarte };
-		VBox[] carteVbox = { carte1, carte2, carte3, carte4, carte5, carte6, carte7, carte8, carte9, passerCarte };
+				bPasserCarte };
+		VBox[] carteVbox = { carte1, carte2, carte3, carte4, carte5, carte6, carte7, carte8, passerCarte };
 
 		for (VBox vBox : carteVbox)
 			vBox.setVisible(true);
@@ -1597,10 +1607,10 @@ public class JeuPane extends StackPane implements JeuListener {
 	public void updateCarte() {
 		Platform.runLater(() -> {
 			ImageView[] imgViews = { imgDeCarte1, imgDeCarte2, imgDeCarte3, imgDeCarte4, imgDeCarte5, imgDeCarte6,
-					imgDeCarte7, imgDeCarte8, imgDeCarte9 };
-			Button[] buttons = { bDeCarte1, bDeCarte2, bDeCarte3, bDeCarte4, bDeCarte5, bDeCarte6, bDeCarte7, bDeCarte8,
-					bDeCarte9 };
-			VBox[] carteVbox = { carte1, carte2, carte3, carte4, carte5, carte6, carte7, carte8, carte9 };
+					imgDeCarte7, imgDeCarte8 };
+			Button[] buttons = { bDeCarte1, bDeCarte2, bDeCarte3, bDeCarte4, bDeCarte5, bDeCarte6, bDeCarte7,
+					bDeCarte8 };
+			VBox[] carteVbox = { carte1, carte2, carte3, carte4, carte5, carte6, carte7, carte8 };
 			for (int i = 0; i < 9; i++) {
 				if (i < core.getIdjr().getListeCarte().size()) {
 					imgViews[i].setImage(new Image(convertCarte(core.getIdjr().getListeCarte().get(i))));
@@ -1623,7 +1633,7 @@ public class JeuPane extends StackPane implements JeuListener {
 
 	public void resetUtiliserCarte() {
 		Button[] buttons = { bDeCarte1, bDeCarte2, bDeCarte3, bDeCarte4, bDeCarte5, bDeCarte6, bDeCarte7, bDeCarte8,
-				bDeCarte9, bPasserCarte };
+				bPasserCarte };
 		for (int i = 0; i < 10; i++) {
 			if (i < core.getIdjr().getListeCarte().size()) {
 				buttons[i].setDisable(true);
@@ -1668,8 +1678,8 @@ public class JeuPane extends StackPane implements JeuListener {
 	@Override
 	public void choisirUtiliserCarte() {
 		Platform.runLater(() -> {
-			Button[] buttons = { bDeCarte1, bDeCarte2, bDeCarte3, bDeCarte4, bDeCarte5, bDeCarte6, bDeCarte7, bDeCarte8,
-					bDeCarte9 };
+			Button[] buttons = { bDeCarte1, bDeCarte2, bDeCarte3, bDeCarte4, bDeCarte5, bDeCarte6, bDeCarte7,
+					bDeCarte8, };
 			for (int i = 0; i < 9; i++) {
 				if (i < core.getIdjr().getListeCarte().size()) {
 					buttons[i].setDisable(false);
@@ -1690,8 +1700,8 @@ public class JeuPane extends StackPane implements JeuListener {
 	@Override
 	public void choisirUtiliserCarte(CarteType carteType) {
 		Platform.runLater(() -> {
-			Button[] buttons = { bDeCarte1, bDeCarte2, bDeCarte3, bDeCarte4, bDeCarte5, bDeCarte6, bDeCarte7, bDeCarte8,
-					bDeCarte9 };
+			Button[] buttons = { bDeCarte1, bDeCarte2, bDeCarte3, bDeCarte4, bDeCarte5, bDeCarte6, bDeCarte7,
+					bDeCarte8, };
 			for (int i = 0; i < 9; i++) {
 				if (i < core.getIdjr().getListeCarte().size()) {
 					if (carteType == core.getIdjr().getListeCarte().get(i))
@@ -1713,8 +1723,8 @@ public class JeuPane extends StackPane implements JeuListener {
 	@Override
 	public void choisirUtiliserCarte(List<CarteType> carteTypes) {
 		Platform.runLater(() -> {
-			Button[] buttons = { bDeCarte1, bDeCarte2, bDeCarte3, bDeCarte4, bDeCarte5, bDeCarte6, bDeCarte7, bDeCarte8,
-					bDeCarte9 };
+			Button[] buttons = { bDeCarte1, bDeCarte2, bDeCarte3, bDeCarte4, bDeCarte5, bDeCarte6, bDeCarte7,
+					bDeCarte8, };
 			for (int i = 0; i < 9; i++) {
 				if (i < core.getIdjr().getListeCarte().size()) {
 					for (CarteType carteType2 : carteTypes) {
