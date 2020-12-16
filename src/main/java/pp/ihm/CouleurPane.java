@@ -88,11 +88,10 @@ public class CouleurPane extends StackPane implements CouleurListener {
 		titre.setMinWidth(730);
 		
 		Label infoVigile = new Label();// TODO trad
-		infoVigile.setText("le premier joueur commence et sera chef des vigiles");
-		//infoVigile.setMinHeight(50);
-		infoVigile.setFont(policeNom);
+		infoVigile.setText("Le premier joueur commence et sera chef des vigiles");
+		infoVigile.setFont(Font.font("Segoe UI",FontWeight.BOLD, 30));
+		infoVigile.setTextFill(Color.WHITE);
 		infoVigile.setPadding(new Insets(5, 10, 5, 10));
-		infoVigile.setBackground(fondBlanc);
 		
 		////
 

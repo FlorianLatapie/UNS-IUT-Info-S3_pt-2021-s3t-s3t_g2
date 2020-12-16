@@ -77,7 +77,6 @@ public class ConfigPartiePane extends StackPane {
 		desc.setFont(Font.font("Segoe UI",FontWeight.BOLD, 30));
 		desc.setTextFill(Color.WHITE);
 		desc.setMinHeight(hauteurElemtents);
-		desc.setPadding(new Insets(0, 20, 30, 20));
 
 		VBox vJoueurs = new VBox();
 		vJoueurs.setAlignment(Pos.CENTER);
@@ -169,7 +168,6 @@ public class ConfigPartiePane extends StackPane {
 		vJoueurs.getChildren().addAll(desc, infoNomPartie,nomPartie, nbTotJr, nbTotBot);
 
 		VBox vbCenter = new VBox();
-		//vbCenter.setMargin(vJoueurs, new Insets(0, 0, 100, 0));
 		vbCenter.setAlignment(Pos.CENTER);
 		vbCenter.setSpacing(spacing);
 		vbCenter.getChildren().addAll(vJoueurs);
@@ -231,7 +229,6 @@ public class ConfigPartiePane extends StackPane {
 		centreMenu.setMinSize(tailleCarreCentral, tailleCarreCentral);
 		centreMenu.setPrefSize(tailleCarreCentral, tailleCarreCentral);
 		centreMenu.setMaxSize(tailleCarreCentral, tailleCarreCentral);
-		centreMenu.setMargin(titre, new Insets(0, 0, 100, 0));
 
 		centreMenu.setAlignment(titre, Pos.CENTER);
 
