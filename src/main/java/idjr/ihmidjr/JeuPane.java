@@ -155,8 +155,11 @@ public class JeuPane extends StackPane implements JeuListener {
 
 	HBox infoZombie;
 	Label linfoZombie;
-
+	
+	Button bForce;
+	Label force;
 	VBox des;
+	VBox vbForce;
 
 	public JeuPane(ScreenControl sc, Core c) {
 		core = c;
@@ -1097,9 +1100,44 @@ public class JeuPane extends StackPane implements JeuListener {
 		linfoZombie.setTextFill(Color.BLACK);
 
 		infoZombie.getChildren().addAll(linfoZombie);
+		
+		vbForce = new VBox();
+		vbForce.setAlignment(Pos.TOP_RIGHT);
+		
+		force = new Label("La force de l\'équipe \npour le *lieu* est de XX"); //TODO traduction à faire
+		force.setFont(Font.font("Segoe UI", FontWeight.BOLD, 23));
+		force.setTextAlignment(TextAlignment.CENTER);
+		force.setStyle(styleVBox);
+		force.setPadding(new Insets(20));
+		force.setTextFill(Color.WHITESMOKE);
+		force.setVisible(false);
+		
+		bForce = new Button("Force \nde l\'équipe");
+		bForce.setAlignment(Pos.CENTER);
+		bForce.setTextAlignment(TextAlignment.CENTER);
+		bForce.setFont(Font.font("Segoe UI", FontWeight.BOLD, 23));
+		bForce.setStyle(styleBoutons);
+		bForce.setPrefSize(largBouton, hautBouton+10);
+		bForce.setMinSize(largBouton, hautBouton+10);
+		bForce.setOnAction(event -> {
+			if (!force.isVisible())
+				force.setVisible(true);
+			else
+				force.setVisible(false);
+		});
+		bForce.setOnMouseEntered(event -> {
+			bForce.setStyle(styleBoutonsSouris);
+		});
+		bForce.setOnMouseExited(event -> {
+			bForce.setStyle(styleBoutons);
+		});
+		vbForce.setTranslateX(-92);
+		vbForce.setTranslateY(240);
+		vbForce.getChildren().addAll(bForce, force);
+		vbForce.setVisible(false);
 
 		stackPane.getChildren().addAll(fond, rectVigile, nomJoueur, phasePartie, hbCartes, vote, vbDeplCentre, des,
-				infoZombie, fouilleCamion, info, log, bLog);
+				infoZombie, fouilleCamion, info, log, bLog, vbForce);
 		stackPane.setBackground(new Background(new BackgroundFill(Color.BLACK, CornerRadii.EMPTY, null)));
 
 		this.getChildren().add(stackPane);
