@@ -1,6 +1,7 @@
 package idjr.ihmidjr;
 
 import idjr.ihmidjr.DataControl.ApplicationPane;
+import idjr.ihmidjr.langues.International;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
@@ -78,7 +79,7 @@ public class OptionPane extends StackPane {
 		vbBoutons.setTranslateY(-40);
 		vbBoutons.setSpacing(15);
 
-		Label titre = new Label("OPTIONS");
+		Label titre = new Label(International.trad("bouton.options"));
 		titre.setStyle(styleTitre);
 		titre.setFont(policeTitre);
 		vbTitre.getChildren().add(titre);
@@ -108,8 +109,8 @@ public class OptionPane extends StackPane {
 		bEnglish.setOnMouseExited(event -> {
 			bEnglish.setStyle(styleBoutons);
 		});
-		
-		Button bPleinEcran = new Button("Mettre en plein écran"); // TODO
+
+		Button bPleinEcran = new Button(International.trad("bouton.pEcran"));
 		bPleinEcran.setFont(policeBouton);
 		bPleinEcran.setAlignment(Pos.CENTER);
 		bPleinEcran.setPrefSize(500, hauteurElement);
@@ -117,11 +118,11 @@ public class OptionPane extends StackPane {
 		bPleinEcran.setOnMouseEntered(event -> bPleinEcran.setStyle(styleBoutonsSouris));
 		bPleinEcran.setOnMouseExited(event -> bPleinEcran.setStyle(styleBoutons));
 		bPleinEcran.setOnAction(EventHandler -> {
-			 Stage stage = (Stage) bPleinEcran.getScene().getWindow();
-		     stage.setFullScreen(true);
+			Stage stage = (Stage) bPleinEcran.getScene().getWindow();
+			stage.setFullScreen(true);
 		});
 
-		Button bRetour = new Button("RETOUR");
+		Button bRetour = new Button(International.trad("bouton.retour"));
 		bRetour.setFont(policeBouton);
 		bRetour.setAlignment(Pos.CENTER);
 		bRetour.setPrefSize(180, hauteurElement);
