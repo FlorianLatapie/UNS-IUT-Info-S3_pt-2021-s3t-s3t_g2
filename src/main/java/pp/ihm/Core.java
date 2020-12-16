@@ -17,7 +17,7 @@ public class Core {
      * crée un nouvel Initializer
      */
     public void eventInit() {
-        this.initializer = new Initializer();
+        
     }
 
     private ApplicationPane pauseDepuis = ApplicationPane.ACCUEIL;
