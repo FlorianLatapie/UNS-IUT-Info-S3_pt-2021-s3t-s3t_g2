@@ -49,10 +49,12 @@ public class DataControl {
 	public static final String TRUAND_M = "pp/ihm/images/Pions/marron1.png";
 	public static final String BRUTE_M = "pp/ihm/images/Pions/marron2.png";
 	public static final String BLONDE_M = "pp/ihm/images/Pions/marron3.png";
+	public static final String FILLETTE_M = "pp/ihm/images/Pions/marron4.png";
 
 	public static final String TRUAND_N = "pp/ihm/images/Pions/noir1.png";
 	public static final String BRUTE_N = "pp/ihm/images/Pions/noir2.png";
 	public static final String BLONDE_N = "pp/ihm/images/Pions/noir3.png";
+	public static final String FILLETTE_N = "pp/ihm/images/Pions/noir4.png";
 
 	public static final String TRUAND_R = "pp/ihm/images/Pions/rouge1.png";
 	public static final String BRUTE_R = "pp/ihm/images/Pions/rouge2.png";
@@ -62,6 +64,7 @@ public class DataControl {
 	public static final String TRUAND_V = "pp/ihm/images/Pions/vert1.png";
 	public static final String BRUTE_V = "pp/ihm/images/Pions/vert2.png";
 	public static final String BLONDE_V = "pp/ihm/images/Pions/vert3.png";
+	public static final String FILLETTE_V = "pp/ihm/images/Pions/vert4.png";
 	
 
 	// for testing purpose
