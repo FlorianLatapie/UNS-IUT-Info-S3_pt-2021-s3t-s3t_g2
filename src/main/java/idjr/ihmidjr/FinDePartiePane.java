@@ -66,7 +66,7 @@ public class FinDePartiePane extends StackPane implements FinListener {
 		titre.setPrefWidth(730);
 		titre.setMinWidth(730);
 
-		desc = new Label("vous avez perdu, joueur " + "x" + " a gagné\n (ou) vous avez gagné");//TODO
+		desc = new Label("vous avez perdu, joueur " + "x" + " a gagné\n (ou) vous avez gagné");// TODO
 		desc.setFont(policeNom);
 		desc.setPadding(new Insets(20));
 		desc.setBackground(fondBlanc);
@@ -129,9 +129,9 @@ public class FinDePartiePane extends StackPane implements FinListener {
 	public void gagnant(String nom) {
 		Platform.runLater(() -> {
 			if (nom.equals(core.getIdjr().getNom()))
-				desc.setText("Vous avez gagné !");
+				desc.setText(International.trad("text.gagne"));
 			else
-				desc.setText("Vous avez perdu !\nLe gagnant est " + nom);
+				desc.setText(International.trad("text.perd1") + "\n" + International.trad("text.perd2", nom));
 		});
 	}
 
