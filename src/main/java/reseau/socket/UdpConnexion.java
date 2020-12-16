@@ -26,7 +26,6 @@ public class UdpConnexion implements Runnable, IEchangeSocket, IControleSocket {
 	private final Logger logger;
 
 	private final InetAddress groupe;
-	private final ControleurReseau controleurReseau;
 	private final InetAddress monip;
 
 	private MulticastSocket multicastSocket;
@@ -39,9 +38,8 @@ public class UdpConnexion implements Runnable, IEchangeSocket, IControleSocket {
 	 * @param ip               L'ip sur lequel le serveur demarre
 	 * @exception UnknownHostException Si le cast de l'ip provoque une erreur
 	 */
-	public UdpConnexion(ControleurReseau controleurReseau, InetAddress ip) throws UnknownHostException {
+	public UdpConnexion(InetAddress ip) throws UnknownHostException {
 		this.monip = ip;
-		this.controleurReseau = controleurReseau;
 		this.multicastSocket = null;
 		this.groupe = InetAddress.getByName(MULTICAST_IP);
 		this.estLancer = false;
@@ -110,7 +108,7 @@ public class UdpConnexion implements Runnable, IEchangeSocket, IControleSocket {
 	 */
 	private void reception(DatagramPacket datagramPacket, String message) {
 		logger.log(Level.INFO, "Message recu : {0}", message);
-		controleurReseau.traitementPaquetUdp(PtOutils.strToPacketUdp(message, controleurReseau), message,
+		ControleurReseau.traitementPaquetUdp(PtOutils.strToPacketUdp(message), message,
 				datagramPacket);
 	}
 

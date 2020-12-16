@@ -255,11 +255,11 @@ public interface PtOutils {
 	 * @param controleurReseau Le NetworkManager associé
 	 * @return Le paquet associé
 	 */
-	public static Paquet strToPacketUdp(String message, ControleurReseau controleurReseau) {
-		if (controleurReseau.getPaquetUdpCount() == 0)
+	public static Paquet strToPacketUdp(String message) {
+		if (ControleurReseau.getPaquetUdpCount() == 0)
 			throw new IllegalArgumentException("NetWorkManager n'a pas ete initialise au moins une fois !");
 
-		return controleurReseau.getPaquetUdp(PaquetOutils.getCleMessage(message));
+		return ControleurReseau.getPaquetUdp(PaquetOutils.getCleMessage(message));
 	}
 
 	/**
@@ -269,11 +269,11 @@ public interface PtOutils {
 	 * @param controleurReseau Le NetworkManager associé
 	 * @return Le paquet associé
 	 */
-	public static Paquet strToPacketTcp(String message, ControleurReseau controleurReseau) {
-		if (controleurReseau.getPaquetUdpCount() == 0)
+	public static Paquet strToPacketTcp(String message) {
+		if (ControleurReseau.getPaquetUdpCount() == 0)
 			throw new IllegalArgumentException("NetWorkManager n'a pas ete initialise au moins une fois !");
 
-		return controleurReseau.getPaquetTcp(PaquetOutils.getCleMessage(message));
+		return ControleurReseau.getPaquetTcp(PaquetOutils.getCleMessage(message));
 	}
 
 	/**
