@@ -1,4 +1,4 @@
-package botmoyen.partie;
+package bot.partie;
 
 import reseau.type.CarteType;
 import reseau.type.Couleur;

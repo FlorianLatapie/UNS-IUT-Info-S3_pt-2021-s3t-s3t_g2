@@ -1,4 +1,4 @@
-package botmoyen;
+package bot;
 
 import reseau.socket.ControleurReseau;
 import reseau.tool.ReseauOutils;
@@ -17,11 +17,11 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-import botmoyen.partie.Joueur;
-import botmoyen.partie.Lieu;
-import botmoyen.partie.Partie;
+import bot.partie.Joueur;
+import bot.partie.Lieu;
+import bot.partie.Partie;
 
-public class BotMoyen {
+public class Bot {
 	/* Parametre Idjr */
 	private String nom;
 	private String numPartie;
@@ -35,7 +35,6 @@ public class BotMoyen {
 	private boolean envie;
 	private List<Integer> lieuOuvert;
 	private int delay;
-	private ControleurReseau nwm;
 	private boolean estFini;
 	private int compteurTour;
 	private List<CarteType> listeCarte;
@@ -44,14 +43,16 @@ public class BotMoyen {
 	private List<Couleur> joueurEnVie;
 	private VoteType voteType;
 	private Partie partie;
+	private BotType botType;
 
 	
 
 	/* Parametre Temporaire */
 	private List<Integer> pionAPos;
 
-	public BotMoyen(int delay) {
+	public Bot(int delay,BotType botType) {
 		this.delay = delay;
+		this.botType=botType;
 	}
 
 	public void start() throws IOException {
@@ -85,12 +86,11 @@ public class BotMoyen {
 	private void initReseau() throws IOException {
 		TraitementPaquetUdp traitementPaquetUdp = new TraitementPaquetUdp(this);
 		TraitementPaquetTcp traitementPaquetTcp = new TraitementPaquetTcp(this);
-		nwm = new ControleurReseau(traitementPaquetTcp, traitementPaquetUdp);
-		nwm.initConnexion(connexionType, ReseauOutils.getLocalIp());
+		ControleurReseau.initConnexion(traitementPaquetTcp,traitementPaquetUdp,connexionType, ReseauOutils.getLocalIp());
 	}
 
 	public void arreter() {
-		nwm.arreter();
+		ControleurReseau.arreter();
 	}
 
 	public int getDelay() {
@@ -433,7 +433,7 @@ public class BotMoyen {
 
 
 
-	public void corectionZombie(Integer lieu, Integer nbz) {
+	public void correctionZombie(Integer lieu, Integer nbz) {
 		partie.setZombieSurLieu(lieu, nbz);
 
 	}
@@ -461,6 +461,14 @@ public class BotMoyen {
 
 	public String getEtatPartie() {
 		return partie.getEtatPartie();
+	}
+
+	public BotType getBotType() {
+		return botType;
+	}
+
+	public void setBotType(BotType botType) {
+		this.botType = botType;
 	}
 
 }

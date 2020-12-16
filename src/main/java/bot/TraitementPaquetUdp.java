@@ -1,4 +1,4 @@
-package botmoyen;
+package bot;
 
 import reseau.paquet.Paquet;
 import reseau.socket.ControleurReseau;
@@ -22,17 +22,16 @@ import java.util.Scanner;
  * @version 1.0
  */
 public class TraitementPaquetUdp extends TraitementPaquet<DatagramPacket> {
-	private BotMoyen core;// TODO Add the game manager (core)
+	private Bot core;// TODO Add the game manager (core)
 
 	/**
 	 * @param core coeur du jeu
 	 */
 	public TraitementPaquetUdp(Object core) {
-		this.core = (BotMoyen) core;// TODO Add the game manager (core)
+		this.core = (Bot) core;// TODO Add the game manager (core)
 	}
 
-	public void init(ControleurReseau netWorkManager) {
-		setControleurReseau(netWorkManager);
+	public void init() {
 	}
 
 	/**
@@ -68,7 +67,7 @@ public class TraitementPaquetUdp extends TraitementPaquet<DatagramPacket> {
 	}
 
 	public void acp(Paquet paquet, String message) {
-		if (ConnexionType.CLIENT != getControleurReseau().getConnexionType())
+		if (ConnexionType.CLIENT != ControleurReseau.getConnexionType())
 			return;
 		InetAddress address = null;
 		try {
@@ -105,7 +104,7 @@ public class TraitementPaquetUdp extends TraitementPaquet<DatagramPacket> {
 			e.printStackTrace();
 		}
 		core.setNom(nomDuJoueur);
-		getControleurReseau().demarrerClientTcp(core.getIpPp());
+		ControleurReseau.demarrerClientTcp(core.getIpPp());
 
 		ThreadOutils.asyncTask("acp", () -> {
 			try {
@@ -113,28 +112,28 @@ public class TraitementPaquetUdp extends TraitementPaquet<DatagramPacket> {
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
-			String messageTcp = getControleurReseau().construirePaquetTcp("DCP", core.getNom(), core.getTypeJoueur(),
+			String messageTcp = ControleurReseau.construirePaquetTcp("DCP", core.getNom(), core.getTypeJoueur(),
 					"P" + (int) paquet.getValeur(message, 1));
 			try {
 				Thread.sleep(1000);
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
-			getControleurReseau().envoyerTcp(messageTcp);
-			getControleurReseau().attendreTcp("ACP");
+			ControleurReseau.envoyerTcp(messageTcp);
+			ControleurReseau.attendreTcp("ACP");
 		});
 
 	}
 
 	public void amp(Paquet paquet, String message) {
-		if (ConnexionType.CLIENT != getControleurReseau().getConnexionType())
+		if (ConnexionType.CLIENT != ControleurReseau.getConnexionType())
 			return;
 
 		System.out.println(MessageFormat.format("Mise a jour d''une partie !\n{0}", paquet.getValeur(message, 1)));
 	}
 
 	public void ip(Paquet paquet, String message) {
-		if (ConnexionType.CLIENT != getControleurReseau().getConnexionType())
+		if (ConnexionType.CLIENT != ControleurReseau.getConnexionType())
 			return;
 
 		System.out.println("Informations sur la partie !");
@@ -142,6 +141,6 @@ public class TraitementPaquetUdp extends TraitementPaquet<DatagramPacket> {
 
 	@Override
 	public void set(Object core) {
-		this.core = (BotMoyen) core;
+		this.core = (Bot) core;
 	}
 }

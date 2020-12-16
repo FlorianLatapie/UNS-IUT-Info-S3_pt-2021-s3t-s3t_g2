@@ -1,4 +1,4 @@
-package botmoyen.partie;
+package bot.partie;
 
 
 import java.util.ArrayList;

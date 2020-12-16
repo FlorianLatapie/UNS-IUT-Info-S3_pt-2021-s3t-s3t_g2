@@ -1,4 +1,4 @@
-package botmoyen.MCTS;
+package bot.MCTS;
 
 import MCTS.Base.Action;
 
