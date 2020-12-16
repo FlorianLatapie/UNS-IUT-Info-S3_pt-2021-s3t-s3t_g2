@@ -2,7 +2,7 @@ package pp.ihm;
 
 import pp.Joueur;
 import pp.ihm.DataControl.ApplicationPane;
-import pp.ihm.eventListener.CouleurListener;
+import pp.ihm.event.ICouleurListener;
 import pp.ihm.langues.International;
 import javafx.application.Platform;
 import javafx.geometry.Insets;
@@ -28,7 +28,7 @@ import java.util.List;
  * @version 0.1
  * @since 26/10/2020
  */
-public class CouleurPane extends StackPane implements CouleurListener {
+public class CouleurPane extends StackPane implements ICouleurListener {
 	private ScreenControl sControl = null;
 	private Core core = null;
 	private final ApplicationPane paneName = ApplicationPane.COULEUR;
@@ -327,10 +327,10 @@ public class CouleurPane extends StackPane implements CouleurListener {
 		bJouer.setOnMouseEntered(event -> bJouer.setStyle(styleBoutonsSouris));
 		bJouer.setOnMouseExited(event -> bJouer.setStyle(styleBoutons));
 		bJouer.setOnAction(EventHandler -> {
-			boolean isOk = IhmTools.isAllUniqueColor(core.getNbJoueur(), couleur1, couleur2, couleur3, couleur4,
+			boolean isOk = IhmOutils.isAllUniqueColor(core.getNbJoueur(), couleur1, couleur2, couleur3, couleur4,
 					couleur5, couleur6);
 			if (isOk) {
-				List<Couleur> cs = IhmTools.comboStringToColorList(core.getNbJoueur(), couleur1, couleur2, couleur3,
+				List<Couleur> cs = IhmOutils.comboStringToColorList(core.getNbJoueur(), couleur1, couleur2, couleur3,
 						couleur4, couleur5, couleur6);
 				core.getCj().setJoueurCouleur(cs);
 				sc.setPaneOnTop(ApplicationPane.PLATEAU);

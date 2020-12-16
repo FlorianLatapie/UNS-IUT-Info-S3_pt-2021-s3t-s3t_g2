@@ -1,7 +1,7 @@
 package pp.ihm;
 
 import pp.ihm.DataControl.ApplicationPane;
-import pp.ihm.eventListener.AttenteListener;
+import pp.ihm.event.IAttenteListener;
 import pp.ihm.langues.International;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -23,7 +23,7 @@ import javafx.scene.text.TextAlignment;
  * @version 0.1
  * @since 26/10/2020
  */
-public class AttenteJoueurPane extends StackPane implements AttenteListener {
+public class AttenteJoueurPane extends StackPane implements IAttenteListener {
     private ScreenControl sControl = null;
     private Core core = null;
     private final ApplicationPane paneName = ApplicationPane.WAIT;

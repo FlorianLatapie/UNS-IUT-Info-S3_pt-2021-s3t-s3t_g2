@@ -1,34 +1,33 @@
-package pp.ihm.eventListener;
+package pp.ihm.event;
 
 import pp.Joueur;
 import pp.Lieu;
 import pp.Personnage;
-import reseau.type.CarteType;
 import reseau.type.Couleur;
-import reseau.type.PionCouleur;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public abstract class Initializer {
-	private static List<PlateauListener> listenerspl = new ArrayList<>();
-	private static List<AttenteListener> listenersal = new ArrayList<>();
-	private static List<FinListener> listenersfl = new ArrayList<>();
-	private static List<CouleurListener> listenerscl = new ArrayList<>();
+	private static List<IPlateauListener> listenerspl = new ArrayList<>();
+	private static List<IAttenteListener> listenersal = new ArrayList<>();
+	private static List<IFinListener> listenersfl = new ArrayList<>();
+	private static List<ICouleurListener> listenerscl = new ArrayList<>();
+	private static List<IRotationListener> listenersrl = new ArrayList<>();
 
-	public static void addListener(PlateauListener toAdd) {
+	public static void addListener(IPlateauListener toAdd) {
 		listenerspl.add(toAdd);
 	}
 
-	public static void addListener(AttenteListener toAdd) {
+	public static void addListener(IAttenteListener toAdd) {
 		listenersal.add(toAdd);
 	}
 
-	public static void addListener(FinListener toAdd) {
+	public static void addListener(IFinListener toAdd) {
 		listenersfl.add(toAdd);
 	}
 
-	public static void addListener(CouleurListener toAdd) {
+	public static void addListener(ICouleurListener toAdd) {
 		listenerscl.add(toAdd);
 	}
 
@@ -38,17 +37,18 @@ public abstract class Initializer {
 	}
 
 	private static void nbZombiesLieu(int lieu, int val) {
-		for (PlateauListener pl : listenerspl)
+		for (IPlateauListener pl : listenerspl)
 			pl.nbLieuZombie(lieu, val);
 	}
 
 	public static void nomJoueurAll(List<Joueur> joueurs) {
-		for (Joueur l : joueurs)
-			nomJoueur(l.getJoueurIdint(), l.getCouleur(), l.getNom());
+		for (int i = 0; i < joueurs.size(); i++) {
+			nomJoueur(i, joueurs.get(i).getCouleur(), joueurs.get(i).getNom());
+		}
 	}
 
 	private static void nomJoueur(int joueur, Couleur couleur, String val) {
-		for (PlateauListener pl : listenerspl)
+		for (IPlateauListener pl : listenerspl)
 			pl.nomJoueur(joueur, couleur, val);
 	}
 
@@ -58,7 +58,7 @@ public abstract class Initializer {
 	}
 
 	private static void lieuFerme(int lieu, boolean val) {
-		for (PlateauListener pl : listenerspl)
+		for (IPlateauListener pl : listenerspl)
 			pl.lieuFerme(lieu, val);
 	}
 
@@ -68,7 +68,7 @@ public abstract class Initializer {
 	}
 
 	private static void lieuOuvert(int lieu, boolean val) {
-		for (PlateauListener pl : listenerspl)
+		for (IPlateauListener pl : listenerspl)
 			pl.lieuOuvert(lieu, val);
 	}
 
@@ -78,7 +78,7 @@ public abstract class Initializer {
 	}
 
 	private static void nbPersoJoueur(int joueur, int persoNb) {
-		for (PlateauListener pl : listenerspl)
+		for (IPlateauListener pl : listenerspl)
 			pl.nbPersoJoueur(joueur, persoNb);
 	}
 
@@ -88,30 +88,22 @@ public abstract class Initializer {
 	}
 
 	private static void nbCarteJoueur(int joueur, int carteNb) {
-		for (PlateauListener pl : listenerspl)
+		for (IPlateauListener pl : listenerspl)
 			pl.nbCarteJoueur(joueur, carteNb);
 	}
 
-	/*
-	 * public void forceLieuAll(List<Lieu> lieux) { for (Lieu l : lieux)
-	 * forceLieu(l.getNum(), l.getForce()); }
-	 * 
-	 * private void forceLieu(int lieu, int val) { for (PlateauListener pl :
-	 * listenerspl) pl.forceLieu(lieu, val); }
-	 */
-
 	public static void finPartie() {
-		for (PlateauListener pl : listenerspl)
+		for (IPlateauListener pl : listenerspl)
 			pl.finPartie();
 	}
 
 	public static void joueurPret() {
-		for (AttenteListener al : listenersal)
+		for (IAttenteListener al : listenersal)
 			al.joueurPret();
 	}
 
 	public static void getGagnant(Joueur joueur) {
-		for (FinListener fl : listenersfl)
+		for (IFinListener fl : listenersfl)
 			fl.getGagnant(joueur.getNom());
 	}
 
@@ -122,7 +114,7 @@ public abstract class Initializer {
 	}
 
 	private static void nomChefVigile(String joueur) {
-		for (PlateauListener pl : listenerspl)
+		for (IPlateauListener pl : listenerspl)
 			pl.nomChefVigile(joueur);
 	}
 
@@ -132,32 +124,37 @@ public abstract class Initializer {
 	}
 
 	private static void destionationPerso(int lieu, List<Personnage> personnages) {
-		for (PlateauListener pl : listenerspl)
+		for (IPlateauListener pl : listenerspl)
 			pl.destionationPerso(lieu, personnages);
 	}
 
 	public static void fouilleCamion(String camion) {
-		for (PlateauListener pl : listenerspl)
+		for (IPlateauListener pl : listenerspl)
 			pl.fouilleCamion(camion);
 	}
 
 	public static void electionChef(String message) {
-		for (PlateauListener pl : listenerspl)
+		for (IPlateauListener pl : listenerspl)
 			pl.electionChef(message);
 	}
 
 	public static void prevenirDeplacementVigile(String depvig) {
-		for (PlateauListener pl : listenerspl)
+		for (IPlateauListener pl : listenerspl)
 			pl.prevenirDeplacementVigile(depvig);
 	}
 
 	public static void nomPartie(String nom) {
-		for (AttenteListener al : listenersal)
+		for (IAttenteListener al : listenersal)
 			al.nomPartie(nom);
 	}
 
 	public static void nomJoueurs(List<Joueur> joueurs) {
-		for (CouleurListener cl : listenerscl)
+		for (ICouleurListener cl : listenerscl)
 			cl.joueurNoms(joueurs);
+	}
+	
+	public static void rotation(int angle) {
+		for (IRotationListener cl : listenersrl)
+			cl.rotation(angle);
 	}
 }

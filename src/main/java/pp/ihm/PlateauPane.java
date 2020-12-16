@@ -6,7 +6,7 @@ import java.util.TimerTask;
 
 import pp.Personnage;
 import pp.ihm.DataControl.ApplicationPane;
-import pp.ihm.eventListener.PlateauListener;
+import pp.ihm.event.IPlateauListener;
 import pp.ihm.langues.International;
 import reseau.type.Couleur;
 import reseau.type.TypePersonnage;
@@ -27,7 +27,7 @@ import javafx.scene.text.FontWeight;
 import javafx.scene.text.TextAlignment;
 import javafx.util.Duration;
 
-public class PlateauPane extends StackPane implements PlateauListener {
+public class PlateauPane extends StackPane implements IPlateauListener {
 	private ScreenControl sControl = null;
 	private Core core = null;
 	private final ApplicationPane paneName = ApplicationPane.PLATEAU; // nom du pane
@@ -63,12 +63,6 @@ public class PlateauPane extends StackPane implements PlateauListener {
 	private String tmpColor = " -fx-background-color:#000000; -fx-text-fill: #FF2626"; // TODO si cette couleur est
 																						// affichée en partie, il y a
 																						// une erreur dans l'event
-	private String vert = " -fx-background-color:#5EB137; -fx-text-fill: #000000";
-	private String rouge = " -fx-background-color:#F30101; -fx-text-fill: #000000";
-	private String marron = " -fx-background-color:#6C3505; -fx-text-fill: #000000";
-	private String jaune = " -fx-background-color:#E9B902; -fx-text-fill: #000000";
-	private String bleu = " -fx-background-color:#008CDA; -fx-text-fill: #ffffff";
-	private String noir = " -fx-background-color:#000000; -fx-text-fill: #ffffff";
 
 	private int largBouton = 155;
 	private int hautBouton = 70;
@@ -1125,89 +1119,69 @@ public class PlateauPane extends StackPane implements PlateauListener {
 			case 6:
 				nbZombies6.setText(tmp);
 				break;
+			default:
+				throw new IllegalArgumentException("Impossible de rajouter des zombies dans le lieu " + lieu);
 			}
 		});
 	}
 
 	@Override
 	public void nomJoueur(int joueur, Couleur couleur, String val) {
-		// String tmp = val;
 		Platform.runLater(() -> {
+			System.out.println("Joueur " + joueur + " " + couleur.nomEntier() + " " + val);
 			switch (joueur) {
 			case 0:
 				nomJoueur1.setText(val);
-				nbPerso1.setStyle(color(couleur));
-				nbCartes1.setStyle(color(couleur));
-				nomJoueur1.setStyle(color(couleur));
-				j1.setStyle(color(couleur));
+				nbPerso1.setStyle(IhmOutils.color(couleur));
+				nbCartes1.setStyle(IhmOutils.color(couleur));
+				nomJoueur1.setStyle(IhmOutils.color(couleur));
+				j1.setStyle(IhmOutils.color(couleur));
 				j1.setVisible(true);
 				break;
 			case 1:
 				nomJoueur2.setText(val);
-				nbPerso2.setStyle(color(couleur));
-				nbCartes2.setStyle(color(couleur));
-				nomJoueur2.setStyle(color(couleur));
-				j2.setStyle(color(couleur));
+				nbPerso2.setStyle(IhmOutils.color(couleur));
+				nbCartes2.setStyle(IhmOutils.color(couleur));
+				nomJoueur2.setStyle(IhmOutils.color(couleur));
+				j2.setStyle(IhmOutils.color(couleur));
 				j2.setVisible(true);
 				break;
 			case 2:
 				nomJoueur3.setText(val);
-				nbPerso3.setStyle(color(couleur));
-				nbCartes3.setStyle(color(couleur));
-				nomJoueur3.setStyle(color(couleur));
-				j3.setStyle(color(couleur));
+				nbPerso3.setStyle(IhmOutils.color(couleur));
+				nbCartes3.setStyle(IhmOutils.color(couleur));
+				nomJoueur3.setStyle(IhmOutils.color(couleur));
+				j3.setStyle(IhmOutils.color(couleur));
 				j3.setVisible(true);
 				break;
 			case 3:
 				nomJoueur4.setText(val);
-				nbPerso4.setStyle(color(couleur));
-				nbCartes4.setStyle(color(couleur));
-				nomJoueur4.setStyle(color(couleur));
-				j4.setStyle(color(couleur));
+				nbPerso4.setStyle(IhmOutils.color(couleur));
+				nbCartes4.setStyle(IhmOutils.color(couleur));
+				nomJoueur4.setStyle(IhmOutils.color(couleur));
+				j4.setStyle(IhmOutils.color(couleur));
 				j4.setVisible(true);
 				break;
 			case 4:
 				nomJoueur5.setText(val);
-				nbPerso5.setStyle(color(couleur));
-				nbCartes5.setStyle(color(couleur));
-				nomJoueur5.setStyle(color(couleur));
-				j5.setStyle(color(couleur));
+				nbPerso5.setStyle(IhmOutils.color(couleur));
+				nbCartes5.setStyle(IhmOutils.color(couleur));
+				nomJoueur5.setStyle(IhmOutils.color(couleur));
+				j5.setStyle(IhmOutils.color(couleur));
 				j5.setVisible(true);
 				break;
 			case 5:
 				nomJoueur6.setText(val);
-				nbPerso6.setStyle(color(couleur));
-				nbCartes6.setStyle(color(couleur));
-				nomJoueur6.setStyle(color(couleur));
-				j6.setStyle(color(couleur));
+				nbPerso6.setStyle(IhmOutils.color(couleur));
+				nbCartes6.setStyle(IhmOutils.color(couleur));
+				nomJoueur6.setStyle(IhmOutils.color(couleur));
+				j6.setStyle(IhmOutils.color(couleur));
 				j6.setVisible(true);
 				break;
 			default:
 				throw new IllegalStateException("Unexpected value: " + joueur);
 			}
 		});
-	}
-
-	public String color(Couleur couleur) {
-		switch (couleur) {
-		case B:
-			return bleu;
-		case R:
-			return rouge;
-		case V:
-			return vert;
-		case N:
-			return noir;
-		case J:
-			return jaune;
-		case M:
-			return marron;
-		default:
-			System.err.println("couleur " + couleur + "inconnue"); // TODO en faire une exception
-			break;
-		}
-
-		return null;
 	}
 
 	@Override
@@ -1380,92 +1354,6 @@ public class PlateauPane extends StackPane implements PlateauListener {
 		});
 	}
 
-	public void setPersonnageLieu(int lieu, List<Personnage> p, ImageView[] imageViews) {
-		for (int i = 0; i < imageViews.length; i++) {
-			if (i < p.size()) {
-				imageViews[i].setVisible(true);
-				imageViews[i].setImage(
-						new Image(convertVersImagePerso(p.get(i).getJoueur().getCouleur(), p.get(i).getType())));
-			} else {
-				imageViews[i].setVisible(false);
-			}
-		}
-	}
-
-	public String convertVersImagePerso(Couleur couleur, TypePersonnage type) {
-		switch (type) {
-		case BLONDE:
-			switch (couleur) {
-			case M:
-				return DataControl.BLONDE_M;
-			case N:
-				return DataControl.BLONDE_N;
-			case V:
-				return DataControl.BLONDE_V;
-			case R:
-				return DataControl.BLONDE_R;
-			case J:
-				return DataControl.BLONDE_J;
-			case B:
-				return DataControl.BLONDE_B;
-			default:
-				break;
-			}
-		case BRUTE:
-			switch (couleur) {
-			case M:
-				return DataControl.BRUTE_M;
-			case N:
-				return DataControl.BRUTE_N;
-			case V:
-				return DataControl.BRUTE_V;
-			case R:
-				return DataControl.BRUTE_R;
-			case J:
-				return DataControl.BRUTE_J;
-			case B:
-				return DataControl.BRUTE_B;
-			default:
-				break;
-			}
-		case TRUAND:
-			switch (couleur) {
-			case M:
-				return DataControl.TRUAND_M;
-			case N:
-				return DataControl.TRUAND_N;
-			case V:
-				return DataControl.TRUAND_V;
-			case R:
-				return DataControl.TRUAND_R;
-			case J:
-				return DataControl.TRUAND_J;
-			case B:
-				return DataControl.TRUAND_B;
-			default:
-				break;
-			}
-		case FILLETTE:
-			switch (couleur) {
-			case R:
-				return DataControl.FILLETTE_R;
-			case J:
-				return DataControl.FILLETTE_J;
-			case B:
-				return DataControl.FILLETTE_B;
-			case M:
-				return DataControl.FILLETTE_M;
-			case N:
-				return DataControl.FILLETTE_N;
-			case V:
-				return DataControl.FILLETTE_V;
-			default:
-				break;
-			}
-		}
-		return DataControl.NOM_COULEUR;
-	}
-
 	@Override
 	public void fouilleCamion(String camion) {
 		Platform.runLater(() -> {
@@ -1568,5 +1456,17 @@ public class PlateauPane extends StackPane implements PlateauListener {
 				}
 			}, 5000);
 		});
+	}
+
+	public void setPersonnageLieu(int lieu, List<Personnage> p, ImageView[] imageViews) {
+		for (int i = 0; i < imageViews.length; i++) {
+			if (i < p.size()) {
+				imageViews[i].setVisible(true);
+				imageViews[i].setImage(new Image(
+						IhmOutils.convertVersImagePerso(p.get(i).getJoueur().getCouleur(), p.get(i).getType())));
+			} else {
+				imageViews[i].setVisible(false);
+			}
+		}
 	}
 }

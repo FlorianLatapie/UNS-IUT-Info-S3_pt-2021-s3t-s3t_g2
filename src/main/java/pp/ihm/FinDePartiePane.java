@@ -1,7 +1,7 @@
 package pp.ihm;
 
 import pp.ihm.DataControl.ApplicationPane;
-import pp.ihm.eventListener.FinListener;
+import pp.ihm.event.IFinListener;
 import pp.ihm.langues.International;
 import javafx.application.Platform;
 import javafx.geometry.Insets;
@@ -23,7 +23,7 @@ import javafx.scene.text.TextAlignment;
  * @version 0.1
  * @since 26/10/2020
  */
-public class FinDePartiePane extends StackPane implements FinListener {
+public class FinDePartiePane extends StackPane implements IFinListener {
 	private ScreenControl sControl = null;
 	private Core core = null;
 	private final ApplicationPane paneName = ApplicationPane.ENDGAME;

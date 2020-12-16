@@ -7,6 +7,7 @@ import javafx.scene.image.Image;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
+import pp.ihm.event.Initializer;
 
 public class InterfacePrincipale extends Application {
 	private StackPane root = new StackPane();
@@ -40,10 +41,11 @@ public class InterfacePrincipale extends Application {
 		PlateauPane plateauPane = new PlateauPane(sControl, core);
 
 		core.eventInit();
-		core.getInitializer().addListener(attenteJoueurPane);
-		core.getInitializer().addListener(plateauPane);
-		core.getInitializer().addListener(finDePartiePane);
-		core.getInitializer().addListener(couleurPane);
+		Initializer.addListener(attenteJoueurPane);
+		Initializer.addListener(plateauPane);
+		Initializer.addListener(finDePartiePane);
+		Initializer.addListener(couleurPane);
+		Initializer.addListener(couleurPane);
 		
 		root.getChildren().add(new AccessibilitePane(sControl));
 		root.getChildren().add(new ReglesPane(sControl, core));
