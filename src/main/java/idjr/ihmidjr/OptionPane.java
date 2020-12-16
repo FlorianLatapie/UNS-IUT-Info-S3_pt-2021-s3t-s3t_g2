@@ -17,6 +17,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
+import javafx.stage.Stage;
 
 public class OptionPane extends StackPane {
 
@@ -107,6 +108,18 @@ public class OptionPane extends StackPane {
 		bEnglish.setOnMouseExited(event -> {
 			bEnglish.setStyle(styleBoutons);
 		});
+		
+		Button bPleinEcran = new Button("Mettre en plein écran"); // TODO
+		bPleinEcran.setFont(policeBouton);
+		bPleinEcran.setAlignment(Pos.CENTER);
+		bPleinEcran.setPrefSize(500, hauteurElement);
+		bPleinEcran.setStyle(styleBoutons);
+		bPleinEcran.setOnMouseEntered(event -> bPleinEcran.setStyle(styleBoutonsSouris));
+		bPleinEcran.setOnMouseExited(event -> bPleinEcran.setStyle(styleBoutons));
+		bPleinEcran.setOnAction(EventHandler -> {
+			 Stage stage = (Stage) bPleinEcran.getScene().getWindow();
+		     stage.setFullScreen(true);
+		});
 
 		Button bRetour = new Button("RETOUR");
 		bRetour.setFont(policeBouton);
@@ -122,9 +135,8 @@ public class OptionPane extends StackPane {
 		});
 
 		hbBRetour.getChildren().add(bRetour);
-		hbLang.getChildren().add(bFrancais);
-		hbLang.getChildren().add(bEnglish);
-		vbBoutons.getChildren().addAll(hbLang);
+		hbLang.getChildren().addAll(bFrancais, bEnglish);
+		vbBoutons.getChildren().addAll(hbLang, bPleinEcran);
 		vbBoutons.setMargin(vbTitre, new Insets(140));
 		vbBoutons.setMargin(hbBRetour, new Insets(140, 0, 30, 15));
 
