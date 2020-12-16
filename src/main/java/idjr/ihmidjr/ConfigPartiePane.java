@@ -50,7 +50,6 @@ public class ConfigPartiePane extends StackPane implements ConfigListener {
 	private String styleBoutonsSouris = "-fx-background-color:#ff0000;  -fx-text-fill:#000000; -fx-background-radius: 15px;";
 	private StackPane stackPane = new StackPane();
 	private GaussianBlur flou = new GaussianBlur(30);
-
 	private Font policeNom = Font.font("Segoe UI", 25);
 	private int hauteurElemtents = 60;
 	private int largeurTF = 200;
@@ -58,13 +57,9 @@ public class ConfigPartiePane extends StackPane implements ConfigListener {
 	private int spacing = 30;
 	private CornerRadii coinfb = new CornerRadii(5.0);
 	private Background fondBlanc = new Background(new BackgroundFill(Color.WHITE, coinfb, null));
-
 	ListView<Label> listView;
-
 	List<PartieInfo> partieActuelle = new ArrayList<>();
-
 	private Insets botPadding = new Insets(10);
-
 	ObservableList<Label> liste = FXCollections.observableArrayList();
 
 	public ConfigPartiePane(ScreenControl sc, Core c) {
@@ -96,8 +91,7 @@ public class ConfigPartiePane extends StackPane implements ConfigListener {
 		TextField nomP = new TextField();
 		nomP.setText(International.trad("texte.Partie"));
 		nomP.setFont(Font.font("Segoe UI", FontWeight.BOLD, 27));
-		nomP.setStyle(
-				"-fx-background-color: #1A1A1A; -fx-border-color: white; -fx-border-width: 1; -fx-text-fill: white;");
+		nomP.setStyle("-fx-background-color: #1A1A1A; -fx-border-color: white; -fx-border-width: 1; -fx-text-fill: white;");
 		nomP.setPrefSize(400, hauteurElemtents);
 		nomP.setMinSize(400, hauteurElemtents);
 		nomP.setMaxSize(400, hauteurElemtents);
@@ -141,6 +135,20 @@ public class ConfigPartiePane extends StackPane implements ConfigListener {
 		bRefresh.setOnAction(EventHandler -> {
 			core.getIdjr().listOfServers();
 		});
+		
+		Button bPbConnexion = new Button("Problème de \nconnexion ?");
+		bPbConnexion.setTextAlignment(TextAlignment.CENTER);
+		bPbConnexion.setPrefSize(120 , 50);
+		bPbConnexion.setMinSize(120, 50);
+		bPbConnexion.setFont(Font.font("Segoe UI", FontWeight.BOLD, 15));
+		bPbConnexion.setStyle(styleBoutons);
+		bPbConnexion.setOnMouseEntered(event -> {
+		bPbConnexion.setStyle(styleBoutonsSouris);
+		});
+		bPbConnexion.setOnMouseExited(event -> {
+			bPbConnexion.setStyle(styleBoutons);
+		});
+		bPbConnexion.setTranslateX(140);
 
 		VBox vbCenter = new VBox();
 		vbCenter.setAlignment(Pos.CENTER);
@@ -148,7 +156,7 @@ public class ConfigPartiePane extends StackPane implements ConfigListener {
 		vbCenter.setPrefHeight(500);
 		vbCenter.setMinHeight(500);
 		vbCenter.setMaxHeight(500);
-		vbCenter.getChildren().addAll(partie, listView);
+		vbCenter.getChildren().addAll(partie, listView, bPbConnexion);
 
 		// boutons
 		Button bJouer = new Button(International.trad("bouton.jouer"));
