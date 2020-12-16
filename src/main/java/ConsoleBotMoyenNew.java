@@ -7,7 +7,7 @@ import bot.Bot;
 import bot.BotType;
 import reseau.tool.ThreadOutils;
 
-public class ConsoleBotMoyen {
+public class ConsoleBotMoyenNew {
 
 	public static void main(String[] args) {
 		Logger.getGlobal().setLevel(Level.FINEST);

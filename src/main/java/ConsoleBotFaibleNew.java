@@ -7,14 +7,14 @@ import bot.Bot;
 import bot.BotType;
 import reseau.tool.ThreadOutils;
 
-public class ConsoleBotFort {
+public class ConsoleBotFaibleNew {
 
 	public static void main(String[] args) {
 		Logger.getGlobal().setLevel(Level.FINEST);
 		ThreadOutils.asyncTaskRepeat(10,() -> {
-			Bot botFort = new Bot(0,BotType.FORT);
+			Bot botFaible = new Bot(0,BotType.FAIBLE);
 			try {
-				botFort.start();
+				botFaible.start();
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
