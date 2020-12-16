@@ -93,26 +93,6 @@ public class TraitementAleatoire {
 		return pion;
 	}
 
-	/**
-	 * Debut du tour
-	 *
-	 * @param Bot pour lequel le traitement s'effectue
-	 * @param Une liste de couleur correspondant aux joueurs
-	 */
-
-	protected static void debutTour(Bot core, List<Couleur> couleurs) {
-		core.newTour();
-		core.setJoueurEnVie(couleurs);
-		if (!couleurs.contains(core.getCouleur())) {
-			core.setEnvie(false);
-		}
-	}
-
-	
-
-	
-
-	
 
 	/**
 	 * Choix du pion a deplacer
@@ -313,7 +293,7 @@ public class TraitementAleatoire {
 
 	protected static int choixDestAleatoire(Bot core) {
 		out.println(core.getEtatPartie());
-		out.println("Le bot choisit une destination");
+		out.println("Le bot choisit une destination de placement");
 		int dest = 0;
 		dest = core.getLieuOuvert().get(new Random().nextInt(core.getLieuOuvert().size()));
 		return dest;

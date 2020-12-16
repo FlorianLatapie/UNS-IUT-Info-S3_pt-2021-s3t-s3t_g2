@@ -265,13 +265,20 @@ public class TraitementIntelligent {
 
 
 	protected static Integer choisirPionPlacementIntelligent(Bot core) {
-		// TODO Auto-generated method stub
-		return null;
+		int pion = 0;
+		if (!core.getPionAPos().isEmpty())
+			pion = core.getPionAPos().get(new Random().nextInt(core.getPionAPos().size()));
+		return pion;
 	}
 
-	protected static Integer choisirDestPlacementIntelligent(List<?> destRestanteT) {
-		// TODO Auto-generated method stub
-		return null;
+	protected static Integer choisirDestPlacementIntelligent(List<?> destRestantT) {
+		List<Integer> destRestant = new ArrayList<>();
+		for (Object o : destRestantT)
+			destRestant.add((Integer) o);
+		int dest = 0;
+		if (!destRestant.isEmpty())
+			dest = destRestant.get(new Random().nextInt(destRestant.size()));
+		return dest;
 	}
 	
 	protected static Couleur voteIntelligent(Bot core, VoteType vt) {
