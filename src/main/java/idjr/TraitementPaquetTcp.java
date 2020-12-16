@@ -17,6 +17,8 @@ import java.text.MessageFormat;
 import java.util.HashMap;
 import java.util.List;
 
+import idjr.ihmidjr.event.Initializer;
+
 /**
  * <h1>Permet de gerer les Paquets</h1>
  *
@@ -160,11 +162,11 @@ public class TraitementPaquetTcp extends TraitementPaquet<TcpClient> {
 	}
 
 	private void arrivezombies(Paquet paquet, String message) {
-		core.getInitializer().desVigiles((List<Integer>) paquet.getValeur(message, 1));
+		Initializer.desVigiles((List<Integer>) paquet.getValeur(message, 1));
 	}
 
 	private void placementzombie(Paquet paquet, String message) {
-		core.getInitializer().enleverDes();
+		Initializer.enleverDes();
 	}
 
 	private void debutPhaseAttaque(Paquet Paquet, String message) {
@@ -226,8 +228,7 @@ public class TraitementPaquetTcp extends TraitementPaquet<TcpClient> {
 
 	public void lanceDesChefVigil(Paquet packet, String message) {
 		// TODO réorganiser
-		if (core.getInitializer() != null)
-			core.getInitializer().nomPhase("Phase d’arrivée des zombies");
+			Initializer.nomPhase("Phase d’arrivée des zombies");
 		Couleur c1 = (Couleur) packet.getValeur(message, 1);
 		if (core.getCouleur() == c1) {
 			String m1 = (String) packet.getValeur(message, 3);
@@ -249,8 +250,7 @@ public class TraitementPaquetTcp extends TraitementPaquet<TcpClient> {
 
 	public void choixDestVigil(Paquet Paquet, String message) {
 		// TODO réorganiser
-		if (core.getInitializer() != null)
-			core.getInitializer().nomPhase("Phase de choix d’une destination");
+			Initializer.nomPhase("Phase de choix d’une destination");
 		if (!core.getEnvie())
 			return;
 		if (core.getCouleur() == (Couleur) Paquet.getValeur(message, 1)
@@ -327,15 +327,13 @@ public class TraitementPaquetTcp extends TraitementPaquet<TcpClient> {
 
 	public void phaseFouilleCamion() {
 		// TODO réorganiser
-		if (core.getInitializer() != null)
-			core.getInitializer().nomPhase("Phase de fouille du camion");
+			Initializer.nomPhase("Phase de fouille du camion");
 
 	}
 
 	public void phaseElectionChefVigile(Paquet paquet, String message) {
 		// TODO réorganiser
-		if (core.getInitializer() != null)
-			core.getInitializer().nomPhase("Phase d’élection du chef des vigiles");
+			Initializer.nomPhase("Phase d’élection du chef des vigiles");
 	}
 
 	public void initialiserPartie(Paquet Paquet, String message) {
