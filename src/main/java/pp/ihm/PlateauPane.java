@@ -170,6 +170,15 @@ public class PlateauPane extends StackPane implements PlateauListener {
 	ImageView l4p7;
 	ImageView l4p8;
 	ImageView l4p9;
+	ImageView l4p10;
+	ImageView l4p11;
+	ImageView l4p12;
+	ImageView l4p13;
+	ImageView l4p14;
+	ImageView l4p15;
+	ImageView l4p16;
+	ImageView l4p17;
+	ImageView l4p18;
 
 	ImageView l5p1;
 	ImageView l5p2;
@@ -418,7 +427,6 @@ public class PlateauPane extends StackPane implements PlateauListener {
 		vbRight1.setAlignment(Pos.TOP_CENTER);
 		vbRight1.setSpacing(30);
 
-
 		VBox joueursPresents1 = new VBox();
 		joueursPresents1.setAlignment(Pos.CENTER);
 		HBox joueursPresents1L1 = new HBox();
@@ -439,7 +447,7 @@ public class PlateauPane extends StackPane implements PlateauListener {
 		nbZombies1 = new Label(International.trad("text.nbZombie"));
 		nbZombies1.setFont(fontInfo);
 		nbZombies1.setTextFill(Color.GREEN);
-		
+
 		nbPlace1 = new Label("## / 3");
 		nbPlace1.setFont(Font.font("Segoe UI", FontWeight.BOLD, 20));
 		nbPlace1.setTextFill(Color.WHITE);
@@ -490,7 +498,7 @@ public class PlateauPane extends StackPane implements PlateauListener {
 		nbZombies2 = new Label(International.trad("text.nbZombie"));
 		nbZombies2.setFont(fontInfo);
 		nbZombies2.setTextFill(Color.GREEN);
-		
+
 		nbPlace2 = new Label("## / 4");
 		nbPlace2.setFont(Font.font("Segoe UI", FontWeight.BOLD, 20));
 		nbPlace2.setTextFill(Color.WHITE);
@@ -536,8 +544,7 @@ public class PlateauPane extends StackPane implements PlateauListener {
 				joueursPresents3L2);
 		joueursPresents3.setSpacing(5);
 		joueursPresents3.setPrefSize(170, 100);
-		
-		
+
 		nbPlace3 = new Label("## / 4");
 		nbPlace3.setFont(Font.font("Segoe UI", FontWeight.BOLD, 20));
 		nbPlace3.setTextFill(Color.WHITE);
@@ -569,7 +576,6 @@ public class PlateauPane extends StackPane implements PlateauListener {
 		vbRight4.setAlignment(Pos.TOP_CENTER);
 		vbRight4.setSpacing(30);
 
-
 		VBox joueursPresents4 = new VBox();
 		joueursPresents4.setAlignment(Pos.CENTER);
 		HBox joueursPresents4L1 = new HBox();
@@ -584,10 +590,21 @@ public class PlateauPane extends StackPane implements PlateauListener {
 		l4p7 = new ImageView(DataControl.NOM_COULEUR);
 		l4p8 = new ImageView(DataControl.NOM_COULEUR);
 		l4p9 = new ImageView(DataControl.NOM_COULEUR);
+		l4p10 = new ImageView(DataControl.NOM_COULEUR);
+		l4p11 = new ImageView(DataControl.NOM_COULEUR);
+		l4p12 = new ImageView(DataControl.NOM_COULEUR);
+		l4p13 = new ImageView(DataControl.NOM_COULEUR);
+		l4p14 = new ImageView(DataControl.NOM_COULEUR);
+		l4p15 = new ImageView(DataControl.NOM_COULEUR);
+		l4p16 = new ImageView(DataControl.NOM_COULEUR);
+		l4p17 = new ImageView(DataControl.NOM_COULEUR);
+		l4p18 = new ImageView(DataControl.NOM_COULEUR);
 
-		joueursPresents4L1.getChildren().addAll(l4p1, l4p2, l4p3);
-		joueursPresents4L2.getChildren().addAll(l4p4, l4p5, l4p6);
-		joueursPresents4L3.getChildren().addAll(l4p7, l4p8, l4p9);
+		joueursPresents4L1.getChildren().addAll(l4p1, l4p2, l4p3,l4p4);
+		joueursPresents4L2.getChildren().addAll(l4p5, l4p6, l4p7,l4p8);
+		joueursPresents4L2.getChildren().addAll(l4p9, l4p10, l4p11,l4p12);
+		joueursPresents4L2.getChildren().addAll(l4p13, l4p14, l4p15,l4p16);
+		joueursPresents4L2.getChildren().addAll(l4p17, l4p18);
 		joueursPresents4.getChildren().addAll(/* afficheJoueursLieu4 = new Label(), */joueursPresents4L1,
 				joueursPresents4L2, joueursPresents4L3);
 		joueursPresents4.setPrefSize(170, 100);
@@ -595,7 +612,7 @@ public class PlateauPane extends StackPane implements PlateauListener {
 		nbZombies4 = new Label(International.trad("text.nbZombie"));
 		nbZombies4.setFont(fontInfo);
 		nbZombies4.setTextFill(Color.GREEN);
-		
+
 		nbPlace4 = new Label("## / ∞");
 		nbPlace4.setFont(Font.font("Segoe UI", FontWeight.BOLD, 20));
 		nbPlace4.setTextFill(Color.WHITE);
@@ -626,7 +643,6 @@ public class PlateauPane extends StackPane implements PlateauListener {
 		nbPlace5 = new Label("## / 3");
 		nbPlace5.setFont(Font.font("Segoe UI", FontWeight.BOLD, 20));
 		nbPlace5.setTextFill(Color.WHITE);
-
 
 		VBox joueursPresents5 = new VBox();
 		joueursPresents5.setAlignment(Pos.CENTER);
@@ -693,7 +709,7 @@ public class PlateauPane extends StackPane implements PlateauListener {
 		nbZombies6 = new Label(International.trad("text.nbZombie"));
 		nbZombies6.setFont(fontInfo);
 		nbZombies6.setTextFill(Color.GREEN);
-		
+
 		nbPlace6 = new Label("## / 6");
 		nbPlace6.setFont(Font.font("Segoe UI", FontWeight.BOLD, 20));
 		nbPlace6.setTextFill(Color.WHITE);
@@ -1256,8 +1272,6 @@ public class PlateauPane extends StackPane implements PlateauListener {
 			}
 		});
 	}
-
-
 
 	@Override
 	public void nomChefVigile(String joueur) {
