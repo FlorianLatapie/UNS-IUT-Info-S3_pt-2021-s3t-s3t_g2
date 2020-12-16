@@ -28,14 +28,14 @@ public class FinDePartiePane extends StackPane implements FinListener {
 	private Core core = null;
 	private final ApplicationPane paneName = ApplicationPane.ENDGAME;
 
-	private int tailleCarreCentral = 800;
+	private int tailleCarreCentral = 1000;
 	private int hBouton = 75;
 	private int lBouton = 150;
 
 	private Font policeBouton = Font.font("Segoe UI", FontWeight.BOLD, 27);
-	private Font policeNom = Font.font("Segoe UI", 17);
+	private Font policeNom = Font.font("Segoe UI",FontWeight.BOLD, 37);
 
-	private String styleBoutons = " -fx-background-color:#000000; -fx-background-radius: 15px; -fx-text-fill: #ffffff";
+	private String styleBoutons = "-fx-background-color:#000000; -fx-background-radius: 15px; -fx-text-fill: #ffffff";
 	private String styleBoutonsSouris = "-fx-background-color:#ff0000;  -fx-text-fill:#000000; -fx-background-radius: 15px;";
 
 	private GaussianBlur flou = new GaussianBlur(30);
@@ -66,6 +66,8 @@ public class FinDePartiePane extends StackPane implements FinListener {
 		VBox titre = new VBox(titre1);
 		titre.setAlignment(Pos.CENTER);
 		titre.setMinWidth(400);
+		titre.setMaxWidth(400);
+		titre.setPrefWidth(400);
 		titre.setBackground(new Background(new BackgroundFill(Color.RED, coin, null)));
 
 		VBox vbCenter = new VBox();
@@ -76,10 +78,13 @@ public class FinDePartiePane extends StackPane implements FinListener {
 		BorderPane bBas = new BorderPane();
 
 		HBox bBasCentre = new HBox();
-		gagnant1 = new Label("");
+		gagnant1 = new Label("Le gagnant est le joueur\nMACHIN");
+		gagnant1.setTextAlignment(TextAlignment.CENTER);
 		gagnant1.setFont(policeNom);
-		gagnant1.setBackground(fondBlanc);
+		gagnant1.setTextFill(Color.WHITESMOKE);
+		gagnant1.setStyle("-fx-background-color:#1A1A1A; -fx-background-radius: 20px; -fx-border-color: red; -fx-border-insets: -3; -fx-border-width: 3; -fx-border-radius: 20px;");
 		gagnant1.setPadding(padding);
+		
 		bBasCentre.setAlignment(Pos.CENTER);
 		bBasCentre.getChildren().addAll(gagnant1);
 
@@ -104,7 +109,7 @@ public class FinDePartiePane extends StackPane implements FinListener {
 		bRetour2.setOnAction(EventHandler -> sc.setPaneOnTop(ApplicationPane.ACCUEIL));
 		bRetour2.setRotate(-90);
 
-		bBas.setCenter(bBasCentre);
+		bBas.setTop(bBasCentre);
 		bBas.setLeft(bRetour1);
 		bBas.setRight(bRetour2);
 
@@ -113,9 +118,11 @@ public class FinDePartiePane extends StackPane implements FinListener {
 		BorderPane bHaut = new BorderPane();
 
 		HBox bHautCentre = new HBox();
-		gagnant2 = new Label("");
+		gagnant2 = new Label("Le gagnant est le joueur\nMACHIN");
+		gagnant2.setTextAlignment(TextAlignment.CENTER);
 		gagnant2.setFont(policeNom);
-		gagnant2.setBackground(fondBlanc);
+		gagnant2.setTextFill(Color.WHITESMOKE);
+		gagnant2.setStyle("-fx-background-color:#1A1A1A; -fx-background-radius: 20px; -fx-border-color: red; -fx-border-insets: -3; -fx-border-width: 3; -fx-border-radius: 20px;");
 		gagnant2.setPadding(padding);
 		bHautCentre.setAlignment(Pos.CENTER);
 		bHautCentre.getChildren().addAll(gagnant2);
@@ -142,29 +149,35 @@ public class FinDePartiePane extends StackPane implements FinListener {
 		bRetour4.setRotate(-90);
 
 		bHaut.setRotate(180);
-		bHaut.setCenter(bHautCentre);
+		bHaut.setTop(bHautCentre);
 		bHaut.setLeft(bRetour3);
 		bHaut.setRight(bRetour4);
 
 		///
 		HBox hDroite = new HBox();
-		gagnant3 = new Label("");
+		gagnant3 = new Label("Le gagnant est le joueur\nMACHIN");
+		gagnant3.setTextAlignment(TextAlignment.CENTER);
 		gagnant3.setFont(policeNom);
-		gagnant3.setBackground(fondBlanc);
+		gagnant3.setTextFill(Color.WHITESMOKE);
+		gagnant3.setStyle("-fx-background-color:#1A1A1A; -fx-background-radius: 20px; -fx-border-color: red; -fx-border-insets: -3; -fx-border-width: 3; -fx-border-radius: 20px;");
 		gagnant3.setPadding(padding);
 		gagnant3.setRotate(-90);
-		hDroite.setAlignment(Pos.CENTER);
+		hDroite.setAlignment(Pos.CENTER_RIGHT);
+		hDroite.setTranslateX(80);
 		hDroite.getChildren().addAll(gagnant3);
 
 		///
 
 		HBox hGauche = new HBox();
-		gagnant4 = new Label("");
+		gagnant4 = new Label("Le gagnant est le joueur\nMACHIN");
+		gagnant4.setTextAlignment(TextAlignment.CENTER);
 		gagnant4.setFont(policeNom);
-		gagnant4.setBackground(fondBlanc);
+		gagnant4.setTextFill(Color.WHITESMOKE);
+		gagnant4.setStyle("-fx-background-color:#1A1A1A; -fx-background-radius: 20px; -fx-border-color: red; -fx-border-insets: -3; -fx-border-width: 3; -fx-border-radius: 20px;");
 		gagnant4.setPadding(padding);
 		gagnant4.setRotate(90);
 		hGauche.setAlignment(Pos.CENTER);
+		hGauche.setTranslateX(-80);
 		hGauche.getChildren().addAll(gagnant4);
 		//
 
@@ -176,10 +189,7 @@ public class FinDePartiePane extends StackPane implements FinListener {
 		centreMenu.setMinSize(tailleCarreCentral, tailleCarreCentral);
 		centreMenu.setPrefSize(tailleCarreCentral, tailleCarreCentral);
 		centreMenu.setMaxSize(tailleCarreCentral, tailleCarreCentral);
-		centreMenu.setMargin(titre, new Insets(0, 0, 100, 0));
-
 		centreMenu.setAlignment(titre, Pos.CENTER);
-
 		centreMenu.setCenter(vbCenter);
 		centreMenu.setBottom(bBas);
 		centreMenu.setTop(bHaut);
