@@ -146,7 +146,7 @@ public class ControleurJeu {
 			joueurs.get(i).setCouleur(couleurs.get(i));
 	}
 
-	private List<Couleur> getJoueursCouleurs() {
+	private  List<Couleur> getJoueursCouleurs() {
 		List<Couleur> lc = new ArrayList<>();
 		lc.add(jeu.getChefVIgile().getCouleur());
 		for (Joueur j : jeu.getJoueurs().values())
@@ -231,7 +231,7 @@ public class ControleurJeu {
 				partieId, numeroTour);
 		for (Joueur j : jeu.getJoueurs().values())
 			j.getConnection().envoyer(m);
-		fouilleCamion();
+		cfc.phaseFouilleCamion(jeu, partieId, numeroTour);
 		electionChefVigi();
 		this.lieuZombie = arriveZombie();
 		ArrayList<Integer> destination = new ArrayList<>();
@@ -259,46 +259,7 @@ public class ControleurJeu {
 		start();
 	}
 
-	/**
-	 * Affiche le joueur qui fouille le camion
-	 */
-	private void fouilleCamion() {
-		String s = "";
-		String m = ControleurReseau.construirePaquetTcp("PFC", getJoueursCouleurs(), jeu.getCartes().size(), partieId,
-				numeroTour);
-		for (Joueur j : jeu.getJoueurs().values())
-			j.getConnection().envoyer(m);
-		Joueur j;
-		if (cfc.isFouillable(jeu)) {
-			j = cfc.joueurFouille(jeu);
-			if (j == null)
-				phaseVote(jeu.getLieux().get(4), VoteType.FDC);
-			if (j != null) {
-				s = "Phase fouille camion";
-				j.getConnection().envoyer(
-						ControleurReseau.construirePaquetTcp("FCLC", jeu.tirerCartes(j), partieId, numeroTour));
-				j.getConnection().attendreMessage("SCFC");
-				String mess = j.getConnection().getMessage("SCFC");
-				List<Object> lo = cfc.resultatFouillage(jeu, j,
-						(CarteType) ControleurReseau.getValueTcp("SCFC", mess, 1),
-						(CarteType) ControleurReseau.getValueTcp("SCFC", mess, 2),
-						(Couleur) ControleurReseau.getValueTcp("SCFC", mess, 3),
-						(CarteType) ControleurReseau.getValueTcp("SCFC", mess, 4));
-				m = ControleurReseau.construirePaquetTcp("RFC", lo.get(0), lo.get(1), lo.get(2), partieId, numeroTour);
-				for (Joueur j2 : jeu.getJoueurs().values())
-					j2.getConnection().envoyer(m);
-			}
-		}
-		if (s == "") {
-			s = "Pezrsonne fouille le Camion";
-			m = ControleurReseau.construirePaquetTcp("RFC", Couleur.NUL, Couleur.NUL, CarteEtat.NUL, partieId,
-					numeroTour);
-			for (Joueur j2 : jeu.getJoueurs().values())
-				j2.getConnection().envoyer(m);
-		}
-		Initializer.fouilleCamion(s);
-	}
-
+	
 	private List<PionCouleur> getPersosLieu(int i) {
 		List<PionCouleur> pc = new ArrayList<>();
 		Lieu l = jeu.getLieux().get(i);
@@ -326,7 +287,7 @@ public class ControleurJeu {
 		if (cev.isElectableBoolean(jeu)) {
 			j = cev.joueurElection(jeu);
 			if (j == null)
-				j = phaseVote(jeu.getLieux().get(5), VoteType.ECD);
+				j = cVote.phaseVote(jeu, jeu.getLieux().get(5), VoteType.ECD, partieId, numeroTour);
 			if (j != null) {
 				cev.newVigile(jeu, j);
 				m = ControleurReseau.construirePaquetTcp("RECV", jeu.getChefVIgile().getCouleur(), partieId,
@@ -671,7 +632,7 @@ public class ControleurJeu {
 		if (jeu.getJoueurSurLieu(jeu.getLieux().get(i)).size() == 1)
 			jou = jeu.getJoueurSurLieu(jeu.getLieux().get(i)).get(0);
 		else
-			jou = phaseVote(jeu.getLieux().get(i), VoteType.MPZ);
+			jou = cVote.phaseVote(jeu, jeu.getLieux().get(i), VoteType.MPZ, partieId, numeroTour);
 		List<Integer> listePion = new ArrayList<>();
 		for (Personnage p : jou.getPersonnages().values()) {
 			if (jeu.getLieux().get(i).getPersonnage().contains(p)) {
@@ -806,164 +767,6 @@ public class ControleurJeu {
 				e.printStackTrace();
 			}
 		}
-	}
-
-	public Joueur phaseVote(Lieu l, VoteType tv) {
-		Joueur joueur = voteJoueurTour1(l, tv);
-		if (joueur != null)
-			return joueur;
-		joueur = voteJoueurTour2(l, tv);
-		if (joueur != null)
-			return joueur;
-		if (tv == VoteType.MPZ)
-			return jeu.getJoueurSurLieu(l).get(new Random().nextInt(jeu.getJoueurSurLieu(l).size()));
-		return null;
-	}
-
-	/**
-	 * @param lieu the lieu
-	 * @return the joueur
-	 */
-	// TODO
-	public Joueur voteJoueurTour1(Lieu l, VoteType tv) {
-		List<Object> lo = cVote.Tour1(jeu, l, tv);
-		for (Joueur j : jeu.getJoueurs().values()) {
-			j.getConnection().envoyer(ControleurReseau.construirePaquetTcp("IPV", tv, VoteEtape.PRE, lo.get(0),
-					lo.get(1), lo.get(2), partieId, numeroTour));
-		}
-
-		List<Integer> listeNbVoix = new ArrayList<>();
-		List<Couleur> listeVotes = new ArrayList<>();
-		List<Integer> listeVoixRecu = new ArrayList<>();
-		while (listeVoixRecu.size() < jeu.getJoueurSurLieu(l).size()) {
-			listeVoixRecu.add(0);
-		}
-
-		for (Joueur j : jeu.getJoueurSurLieu(l)) {
-			j.getConnection().envoyer(ControleurReseau.construirePaquetTcp("PVD", partieId, numeroTour));
-		}
-		for (Joueur j : jeu.getJoueurSurLieu(l)) {
-			j.getConnection().attendreMessage("PVC");
-			String m = j.getConnection().getMessage("PVC");
-			listeNbVoix.add(j.getNbVoix(l, 1, (int) ControleurReseau.getValueTcp("PVC", m, 1)));
-			for (Joueur jou : jeu.getJoueurs().values()) {
-				jou.getConnection().envoyer(ControleurReseau.construirePaquetTcp("PVIC", j.getCouleur(),
-						(int) ControleurReseau.getValueTcp("PVC", m, 1),
-						j.getNbVoix(l, 1, (int) ControleurReseau.getValueTcp("PVC", m, 1)), partieId, numeroTour));
-			}
-		}
-		for (Joueur j : jeu.getJoueurSurLieu(l)) {
-			j.getConnection().envoyer(ControleurReseau.construirePaquetTcp("PVDV", partieId, numeroTour));
-		}
-		int i = 0;
-		for (Joueur j : jeu.getJoueurSurLieu(l)) {
-			j.getConnection().attendreMessage("PVCV");
-			String m = j.getConnection().getMessage("PVCV");
-			listeVotes.add((Couleur) ControleurReseau.getValueTcp("PVCV", m, 1));
-			int a = 0;
-			for (Joueur jou : jeu.getJoueurSurLieu(l)) {
-				if (jou.getCouleur() == (Couleur) ControleurReseau.getValueTcp("PVCV", m, 1))
-					listeVoixRecu.set(a, listeVoixRecu.get(a) + listeNbVoix.get(i));
-				a++;
-			}
-			i++;
-		}
-		for (Joueur j : jeu.getJoueurSurLieu(l)) {
-			j.getConnection().envoyer(ControleurReseau.construirePaquetTcp("PVVC", partieId, numeroTour));
-		}
-		Couleur couleurVote = cVote.eluVote(listeVoixRecu, (List<Couleur>) lo.get(0));
-		for (Joueur j : jeu.getJoueurs().values()) {
-			j.getConnection().envoyer(ControleurReseau.construirePaquetTcp("PVR", couleurVote, lo.get(1), listeVotes,
-					listeVoixRecu, partieId, numeroTour));
-		}
-		if (couleurVote == Couleur.NUL)
-			return null;
-		return jeu.getJoueurCouleur(couleurVote);
-	}
-
-	public Joueur voteJoueurTour2(Lieu l, VoteType tv) {
-		List<Couleur> joueursPresent = new ArrayList<>();
-		List<Integer> nbVoix = new ArrayList<>();
-		List<Integer> voixRecu = new ArrayList<>();
-		List<Couleur> votes = new ArrayList<>();
-		List<Couleur> joueursVotant = new ArrayList<>();
-		while (voixRecu.size() < jeu.getJoueurs().size()) {
-			voixRecu.add(0);
-		}
-		for (Joueur j : jeu.getJoueurSurLieu(l)) {
-			joueursPresent.add(j.getCouleur());
-		}
-		for (Joueur j : jeu.getJoueurs().values()) {
-			nbVoix.add(j.getNbVoix(l, 2, 0));
-		}
-		for (Joueur j : jeu.getJoueurs().values()) {
-			joueursVotant.add(j.getCouleur());
-		}
-		System.out.println("Joueur Présent:" + joueursPresent.size());
-		for (Joueur j : jeu.getJoueurs().values()) {
-			j.getConnection().envoyer(ControleurReseau.construirePaquetTcp("IPV", tv, VoteEtape.SEC, joueursPresent,
-					joueursVotant, nbVoix, partieId, numeroTour));
-		}
-		for (Joueur j : jeu.getJoueurSurLieu(l)) {
-			j.getConnection().envoyer(ControleurReseau.construirePaquetTcp("PVD", partieId, numeroTour));
-		}
-		for (Joueur j : jeu.getJoueurSurLieu(l)) {
-			j.getConnection().attendreMessage("PVC");
-			String m = j.getConnection().getMessage("PVC");
-			int a = 0;
-			for (Integer i : jeu.getJoueurs().keySet())
-				if (jeu.getJoueurs().get(i) == j)
-					a = i;
-			nbVoix.remove(a);
-			nbVoix.add(a, j.getNbVoix(l, 2, (int) ControleurReseau.getValueTcp("PVC", m, 1)));
-			for (Joueur jou : jeu.getJoueurs().values()) {
-				jou.getConnection().envoyer(ControleurReseau.construirePaquetTcp("PVIC", j.getCouleur(),
-						(int) ControleurReseau.getValueTcp("PVC", m, 1),
-						j.getNbVoix(l, 2, (int) ControleurReseau.getValueTcp("PVC", m, 1)), partieId, numeroTour));
-			}
-		}
-		for (Joueur j : jeu.getJoueurs().values()) {
-			j.getConnection().envoyer(ControleurReseau.construirePaquetTcp("PVDV", partieId, numeroTour));
-		}
-		int i = 0;
-		for (Joueur j : jeu.getJoueurs().values()) {
-			j.getConnection().attendreMessage("PVCV");
-			String m = j.getConnection().getMessage("PVCV");
-			if (!joueursPresent.contains((Couleur) ControleurReseau.getValueTcp("PVCV", m, 1)))
-				throw new IllegalArgumentException("Couleur joueur voté incorrect");
-			votes.add((Couleur) ControleurReseau.getValueTcp("PVCV", m, 1));
-			int a = 0;
-			for (Joueur jou : jeu.getJoueurs().values()) {
-				if (jou.getCouleur() == (Couleur) ControleurReseau.getValueTcp("PVCV", m, 1))
-					voixRecu.set(a, voixRecu.get(a) + nbVoix.get(i));
-				a++;
-			}
-			i++;
-		}
-		for (Joueur j : jeu.getJoueurs().values()) {
-			j.getConnection().envoyer(ControleurReseau.construirePaquetTcp("PVVC", partieId, numeroTour));
-		}
-		i = 0;
-		int nbVoteTemp = 0;
-		Couleur couleurVote = Couleur.NUL;
-		for (int a : voixRecu) {
-			if (a > nbVoteTemp) {
-				couleurVote = joueursVotant.get(i);
-				if (!joueursPresent.contains(couleurVote))
-					throw new IllegalArgumentException("Couleur joueur voté incorrect");
-				nbVoteTemp = a;
-			} else if (a == nbVoteTemp) {
-				couleurVote = Couleur.NUL;
-			}
-			i++;
-		}
-		for (Joueur j : jeu.getJoueurs().values()) {
-			j.getConnection().envoyer(ControleurReseau.construirePaquetTcp("PVR", couleurVote, joueursVotant, votes,
-					voixRecu, partieId, numeroTour));
-		}
-		if (couleurVote == Couleur.NUL)
-			return null;
-		return jeu.getJoueurCouleur(couleurVote);
 	}
 
 	public String getPartieId() {
