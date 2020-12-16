@@ -35,7 +35,6 @@ public class BotMoyen {
 	private boolean envie;
 	private List<Integer> lieuOuvert;
 	private int delay;
-	private ControleurReseau nwm;
 	private boolean estFini;
 	private int compteurTour;
 	private List<CarteType> listeCarte;
@@ -44,8 +43,6 @@ public class BotMoyen {
 	private List<Couleur> joueurEnVie;
 	private VoteType voteType;
 	private Partie partie;
-
-	
 
 	/* Parametre Temporaire */
 	private List<Integer> pionAPos;
@@ -85,12 +82,11 @@ public class BotMoyen {
 	private void initReseau() throws IOException {
 		TraitementPaquetUdp traitementPaquetUdp = new TraitementPaquetUdp(this);
 		TraitementPaquetTcp traitementPaquetTcp = new TraitementPaquetTcp(this);
-		nwm = new ControleurReseau(traitementPaquetTcp, traitementPaquetUdp);
-		nwm.initConnexion(connexionType, ReseauOutils.getLocalIp());
+		ControleurReseau.initConnexion(traitementPaquetTcp, traitementPaquetUdp, connexionType, ReseauOutils.getLocalIp());
 	}
 
 	public void arreter() {
-		nwm.arreter();
+		ControleurReseau.arreter();
 	}
 
 	public int getDelay() {
@@ -232,11 +228,11 @@ public class BotMoyen {
 	public void setCompteurTour(int compteurTour) {
 		this.compteurTour = compteurTour;
 	}
-	
+
 	public void newTour() {
-		this.compteurTour ++;
+		this.compteurTour++;
 	}
-	
+
 	public Partie getPartie() {
 		return partie;
 	}
@@ -374,7 +370,7 @@ public class BotMoyen {
 	public void joueCarte(Couleur value, CarteType carte) {
 		if (partie.getJoueurs().get(value).getCartes().contains(carte)) {
 			partie.getJoueurs().get(value).getCartes().remove(carte);
-		} else if ((partie.getCartes().contains(carte))&& (partie.getJoueurs().get(value).getCartes().size() > 0))  {
+		} else if ((partie.getCartes().contains(carte)) && (partie.getJoueurs().get(value).getCartes().size() > 0)) {
 			partie.getCartes().remove(carte);
 			int rand = new Random().nextInt(partie.getJoueurs().get(value).getCartes().size());
 			if (rand == 0)
@@ -430,8 +426,6 @@ public class BotMoyen {
 		}
 
 	}
-
-
 
 	public void corectionZombie(Integer lieu, Integer nbz) {
 		partie.setZombieSurLieu(lieu, nbz);
