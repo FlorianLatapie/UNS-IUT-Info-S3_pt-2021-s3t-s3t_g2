@@ -46,14 +46,14 @@ public class FinDePartiePane extends StackPane implements FinListener {
 	private String styleBoutonsSouris = "-fx-background-color:#ff0000;  -fx-text-fill:#000000; -fx-background-radius: 15px;";
 	private StackPane stackPane = new StackPane();
 	private GaussianBlur flou = new GaussianBlur(30);
-	private Font policeNom = Font.font("Segoe UI",FontWeight.BOLD, 35);
+	private Font policeNom = Font.font("Segoe UI", FontWeight.BOLD, 35);
 	private CornerRadii coinfb = new CornerRadii(10.0);
 	private Background fondBlanc = new Background(new BackgroundFill(Color.WHITE, coinfb, null));
 	private String styleVBox = "-fx-border-color: #1A1A1A; -fx-border-insets: 5; -fx-border-width: 3;";
-	private Font policeScoreBoard = Font.font("Segoe UI",FontWeight.BOLD, 20);
+	private Font policeScoreBoard = Font.font("Segoe UI", FontWeight.BOLD, 20);
 
 	Label desc;
-	Label nomJoueur1; 
+	Label nomJoueur1;
 	Label score1;
 	Label nbPersVivant1;
 	Label nbZbTue1;
@@ -61,29 +61,27 @@ public class FinDePartiePane extends StackPane implements FinListener {
 	Label score2;
 	Label nbPersVivant2;
 	Label nbZbTue2;
-	Label nomJoueur3; 
+	Label nomJoueur3;
 	Label score3;
 	Label nbPersVivant3;
 	Label nbZbTue3;
-	Label nomJoueur4; 
+	Label nomJoueur4;
 	Label score4;
 	Label nbPersVivant4;
 	Label nbZbTue4;
-	Label nomJoueur5; 
+	Label nomJoueur5;
 	Label score5;
 	Label nbPersVivant5;
 	Label nbZbTue5;
-	Label nomJoueur6; 
+	Label nomJoueur6;
 	Label score6;
 	Label nbPersVivant6;
 	Label nbZbTue6;
-	
+
 	Label titreJoueur;
 	Label titreScore;
 	Label titreNbPersVivant;
 	Label titreNbZbTues;
-	
-	
 
 	public FinDePartiePane(ScreenControl sc, Core c) {
 		core = c;
@@ -101,15 +99,14 @@ public class FinDePartiePane extends StackPane implements FinListener {
 		titre.setBackground(new Background(new BackgroundFill(Color.RED, coin, null)));
 		titre.setPrefWidth(730);
 		titre.setMinWidth(730);
-		
 
-		desc = new Label("vous avez perdu, joueur " + "x" + " a gagné\n (ou) vous avez gagné");// TODO
+		desc = new Label("");
 		desc.setTextAlignment(TextAlignment.CENTER);
 		desc.setTextFill(Color.WHITE);
 		desc.setFont(policeNom);
 		desc.setPadding(new Insets(20));
-		
-		nomJoueur1 = new Label("Joueur1");
+
+		nomJoueur1 = new Label(International.trad("texte.j1"));
 		nomJoueur1.setAlignment(Pos.CENTER);
 		nomJoueur1.setFont(policeScoreBoard);
 		nomJoueur1.setTextFill(Color.WHITESMOKE);
@@ -125,8 +122,8 @@ public class FinDePartiePane extends StackPane implements FinListener {
 		nbZbTue1.setAlignment(Pos.CENTER);
 		nbZbTue1.setFont(policeScoreBoard);
 		nbZbTue1.setTextFill(Color.WHITESMOKE);
-		
-		nomJoueur2 = new Label("Joueur2");
+
+		nomJoueur2 = new Label(International.trad("texte.j2"));
 		nomJoueur2.setAlignment(Pos.CENTER);
 		nomJoueur2.setFont(policeScoreBoard);
 		nomJoueur2.setTextFill(Color.WHITESMOKE);
@@ -142,8 +139,8 @@ public class FinDePartiePane extends StackPane implements FinListener {
 		nbZbTue2.setAlignment(Pos.CENTER);
 		nbZbTue2.setFont(policeScoreBoard);
 		nbZbTue2.setTextFill(Color.WHITESMOKE);
-		
-		nomJoueur3 = new Label("Joueur3");
+
+		nomJoueur3 = new Label(International.trad("texte.j3"));
 		nomJoueur3.setAlignment(Pos.CENTER);
 		nomJoueur3.setFont(policeScoreBoard);
 		nomJoueur3.setTextFill(Color.WHITESMOKE);
@@ -159,8 +156,8 @@ public class FinDePartiePane extends StackPane implements FinListener {
 		nbZbTue3.setAlignment(Pos.CENTER);
 		nbZbTue3.setFont(policeScoreBoard);
 		nbZbTue3.setTextFill(Color.WHITESMOKE);
-		
-		nomJoueur4 = new Label("Joueur4");
+
+		nomJoueur4 = new Label(International.trad("texte.j4"));
 		nomJoueur4.setAlignment(Pos.CENTER);
 		nomJoueur4.setFont(policeScoreBoard);
 		nomJoueur4.setTextFill(Color.WHITESMOKE);
@@ -176,8 +173,8 @@ public class FinDePartiePane extends StackPane implements FinListener {
 		nbZbTue4.setAlignment(Pos.CENTER);
 		nbZbTue4.setFont(policeScoreBoard);
 		nbZbTue4.setTextFill(Color.WHITESMOKE);
-		
-		nomJoueur5 = new Label("Joueur5");
+
+		nomJoueur5 = new Label(International.trad("texte.j5"));
 		nomJoueur5.setAlignment(Pos.CENTER);
 		nomJoueur5.setFont(policeScoreBoard);
 		nomJoueur5.setTextFill(Color.WHITESMOKE);
@@ -193,8 +190,8 @@ public class FinDePartiePane extends StackPane implements FinListener {
 		nbZbTue5.setAlignment(Pos.CENTER);
 		nbZbTue5.setFont(policeScoreBoard);
 		nbZbTue5.setTextFill(Color.WHITESMOKE);
-		
-		nomJoueur6 = new Label("Joueur6");
+
+		nomJoueur6 = new Label(International.trad("texte.j6"));
 		nomJoueur6.setAlignment(Pos.CENTER);
 		nomJoueur6.setFont(policeScoreBoard);
 		nomJoueur6.setTextFill(Color.WHITESMOKE);
@@ -210,33 +207,33 @@ public class FinDePartiePane extends StackPane implements FinListener {
 		nbZbTue6.setAlignment(Pos.CENTER);
 		nbZbTue6.setFont(policeScoreBoard);
 		nbZbTue6.setTextFill(Color.WHITESMOKE);
-		
-		titreJoueur = new Label("NOM");
+
+		titreJoueur = new Label(International.trad("texte.nom"));
 		titreJoueur.setAlignment(Pos.CENTER);
 		titreJoueur.setFont(policeScoreBoard);
 		titreJoueur.setTextFill(Color.RED);
-		
-		titreScore = new Label("SCORE");
+
+		titreScore = new Label(International.trad("texte.score"));
 		titreScore.setAlignment(Pos.CENTER);
 		titreScore.setFont(policeScoreBoard);
 		titreScore.setTextFill(Color.RED);
-		
-		titreNbPersVivant = new Label("PERS. VIVANT");
+
+		titreNbPersVivant = new Label(International.trad("texte.alive"));
 		titreNbPersVivant.setAlignment(Pos.CENTER);
 		titreNbPersVivant.setFont(policeScoreBoard);
 		titreNbPersVivant.setTextFill(Color.RED);
-		
-		titreNbZbTues = new Label("ZOMBIE TUES");
+
+		titreNbZbTues = new Label(International.trad("texte.zTues"));
 		titreNbZbTues.setAlignment(Pos.CENTER);
 		titreNbZbTues.setFont(policeScoreBoard);
 		titreNbZbTues.setTextFill(Color.RED);
-		
+
 		VBox vbCenter = new VBox();
 		vbCenter.setAlignment(Pos.CENTER);
 		vbCenter.setPrefHeight(500);
 		vbCenter.setMinHeight(500);
 		vbCenter.setTranslateY(-50);
-		
+
 		TilePane tile1 = new TilePane();
 		tile1.setAlignment(Pos.CENTER_LEFT);
 		tile1.setStyle(styleVBox);
@@ -323,7 +320,7 @@ public class FinDePartiePane extends StackPane implements FinListener {
 		vbScoreBoard.setMaxSize(700, 390);
 		vbScore.getChildren().addAll(tile1, tile2, tile3, tile4, tile5, tile6);
 		vbScoreBoard.getChildren().addAll(tileTitreScore, vbScore);
-		
+
 		vbCenter.getChildren().addAll(desc, vbScoreBoard);
 
 		// bouton
