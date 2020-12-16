@@ -14,6 +14,7 @@ import reseau.type.VoteType;
 import java.io.IOException;
 import java.net.InetAddress;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Random;
 
@@ -41,6 +42,7 @@ public class Bot {
 	private List<PionCouleur> listePion;
 	private List<Couleur> couleurJoueursPresent;
 	private List<Couleur> joueurEnVie;
+	private HashMap<Couleur,Integer> joueursVotant;
 	private VoteType voteType;
 	private Partie partie;
 	private BotType botType;
@@ -469,6 +471,14 @@ public class Bot {
 
 	public void setBotType(BotType botType) {
 		this.botType = botType;
+	}
+
+	public HashMap<Couleur,Integer> getJoueursVotant() {
+		return joueursVotant;
+	}
+
+	public void setJoueursVotant(HashMap<Couleur,Integer> joueursVotant) {
+		this.joueursVotant = joueursVotant;
 	}
 
 }
