@@ -516,6 +516,22 @@ public class TraitementBot {
 	}
 	
 	/**
+	 * Meilleure Reponse du joueur(bot) courant
+	 *
+	 * @param BotMoyen pour lequel le traitement s'effectue
+	 * @return Un type de carte 
+	 */
+	public CarteType BestReponseJoueurCourant(BotMoyen core) {
+		if (core.getListeCarte().contains(CarteType.CDS)) {
+			core.getListeCarte().remove(CarteType.CDS);
+			return CarteType.CDS;
+		}
+		return CarteType.NUL;
+	}
+	
+	
+	
+	/**
 	 * Indiquer les cartes jouées
 	 *
 	 * @param BotMoyen pour lequel le traitement s'effectue
