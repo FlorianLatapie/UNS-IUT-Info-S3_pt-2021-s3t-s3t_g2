@@ -37,7 +37,6 @@ public class Idjr {
 	private boolean envie;
 	private List<Integer> lieuOuvert;
 	private int delay;
-	private ControleurReseau nwm;
 	private boolean estFini;
 	private List<CarteType> listeCarte;
 	private List<PionCouleur> listePion;
@@ -58,8 +57,7 @@ public class Idjr {
 	/* Parametre Temporaire */
 	private List<Integer> pionAPos;
 
-	public Idjr(Initializer initializer) throws IOException {
-		this.initializer = initializer;
+	public Idjr() throws IOException {
 		initBot();
 		initReseau();
 	}
@@ -82,8 +80,7 @@ public class Idjr {
 	private void initReseau() throws IOException {
 		TraitementPaquetTcp traitementPaquetTcp = new TraitementPaquetTcp(this);
 		TraitementPaquetUdp traitementPaquetUdp = new TraitementPaquetUdp(this);
-		nwm = new ControleurReseau(traitementPaquetTcp, traitementPaquetUdp);
-		nwm.initConnexion(connexionType, ReseauOutils.getLocalIp());
+		ControleurReseau.initConnexion(traitementPaquetTcp, traitementPaquetUdp,connexionType, ReseauOutils.getLocalIp());
 	}
 
 	public void estPartieConnecte(String nom) {
@@ -93,7 +90,7 @@ public class Idjr {
 				if (partieInfo.getIdPartie().equals(nom)) {
 					System.out.println("OK");
 					current = partieInfo;
-					nwm.demarrerClientTcp(partieInfo.getIp());
+					ControleurReseau.demarrerClientTcp(partieInfo.getIp());
 					initializer.partieValide(nom);
 					return;
 				}
@@ -107,8 +104,8 @@ public class Idjr {
 
 		// TODO QUE MIXTE
 		// QUE 6
-		String message = nwm.construirePaquetUdp("RP", TypePartie.MIXTE, 5);
-		nwm.envoyerUdp(message);
+		String message = ControleurReseau.construirePaquetUdp("RP", TypePartie.MIXTE, 5);
+		ControleurReseau.envoyerUdp(message);
 
 		try {
 			Thread.sleep(1000);
@@ -124,12 +121,12 @@ public class Idjr {
 		setPortPp(current.getPort());
 		if (initializer != null)
 			initializer.nomPartie(current.getIdPartie());
-		String messageTcp = nwm.construirePaquetTcp("DCP", nom, typeJoueur, current.getIdPartie());
+		String messageTcp = ControleurReseau.construirePaquetTcp("DCP", nom, typeJoueur, current.getIdPartie());
 		ThreadOutils.asyncTask("rejoindrePartie", () -> {
-			nwm.envoyerTcp(messageTcp);
-			nwm.attendreTcp("ACP");
-			String message1 = nwm.getMessageTcp("ACP");
-			setJoueurId((String) nwm.getValueTcp("ACP", message1, 2));
+			ControleurReseau.envoyerTcp(messageTcp);
+			ControleurReseau.attendreTcp("ACP");
+			String message1 = ControleurReseau.getMessageTcp("ACP");
+			setJoueurId((String) ControleurReseau.getValueTcp("ACP", message1, 2));
 		});
 	}
 
@@ -238,7 +235,7 @@ public class Idjr {
 	}
 
 	public synchronized void stop() {
-		nwm.arreter();
+		ControleurReseau.arreter();
 	}
 
 	public void setCouleurJoueurs(List<Couleur> couleurJoueurs) {
@@ -246,7 +243,7 @@ public class Idjr {
 	}
 
 	public void arreter() {
-		nwm.arreter();
+		ControleurReseau.arreter();
 	}
 
 	public int getDelay() {
