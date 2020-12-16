@@ -257,7 +257,7 @@ public class TraitementAleatoire {
 		CarteType carteMenace = CarteType.MEN;
 		int nbrCarteMen = 0;
 		for (CarteType carte : core.getListeCarte())
-			if (carte.name() == carteMenace.name())
+			if (carte.name().equals(carteMenace.name()))
 				nbrCarteMen++;
 		if (nbrCarteMen == 0)
 			return 0;
