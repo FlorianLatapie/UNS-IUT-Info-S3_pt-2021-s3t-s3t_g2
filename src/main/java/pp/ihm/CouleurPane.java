@@ -5,6 +5,8 @@ import pp.ihm.DataControl.ApplicationPane;
 import pp.ihm.event.ICouleurListener;
 import pp.ihm.langues.International;
 import javafx.application.Platform;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
@@ -87,8 +89,16 @@ public class CouleurPane extends StackPane implements ICouleurListener {
 	Button descendre5;
 	Button descendre6;
 
+	ComboBox<String> couleur1;
+	ComboBox<String> couleur2;
+	ComboBox<String> couleur3;
+	ComboBox<String> couleur4;
+	ComboBox<String> couleur5;
+	ComboBox<String> couleur6;
+
 	int[] ordre;
 	List<Joueur> joueurs;
+	List<String> couleursChoix;
 
 	public CouleurPane(ScreenControl sc, Core c) {
 		core = c;
@@ -125,10 +135,17 @@ public class CouleurPane extends StackPane implements ICouleurListener {
 		nom1.setPrefSize(largeurTF, hauteurElemtents);
 		nom1.setMinHeight(hauteurElemtents);
 		nom1.setAlignment(Pos.CENTER);
-		ComboBox<String> couleur1 = new ComboBox<>();
+		couleur1 = new ComboBox<>();
 		couleur1.setMinHeight(hauteurElemtents);
 		couleur1.setPrefSize(largeurComboBox, hauteurElemtents);
 		couleur1.getItems().addAll(DataControl.couleursJoueur);
+		couleur1.valueProperty().addListener(new ChangeListener<String>() {
+
+			@Override
+			public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
+				couleursChoix.set(0, newValue);
+			}
+		});
 		monter1 = new Button(International.trad("bouton.monter"));
 		monter1.setPrefSize(lBoutonMD, hBoutonMD);
 		monter1.setMinSize(lBoutonMD, hBoutonMD);
@@ -165,10 +182,17 @@ public class CouleurPane extends StackPane implements ICouleurListener {
 		nom2.setPrefSize(largeurTF, hauteurElemtents);
 		nom2.setMinHeight(hauteurElemtents);
 		nom2.setAlignment(Pos.CENTER);
-		ComboBox<String> couleur2 = new ComboBox<>();
+		couleur2 = new ComboBox<>();
 		couleur2.setPrefSize(largeurComboBox, hauteurElemtents);
 		couleur2.setMinHeight(hauteurElemtents);
 		couleur2.getItems().addAll(DataControl.couleursJoueur);
+		couleur2.valueProperty().addListener(new ChangeListener<String>() {
+
+			@Override
+			public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
+				couleursChoix.set(1, newValue);
+			}
+		});
 		monter2 = new Button(International.trad("bouton.monter"));
 		monter2.setPrefSize(lBoutonMD, hBoutonMD);
 		monter2.setMinSize(lBoutonMD, hBoutonMD);
@@ -208,10 +232,17 @@ public class CouleurPane extends StackPane implements ICouleurListener {
 		nom3.setPrefSize(largeurTF, hauteurElemtents);
 		nom3.setMinHeight(hauteurElemtents);
 		nom3.setAlignment(Pos.CENTER);
-		ComboBox<String> couleur3 = new ComboBox<>();
+		couleur3 = new ComboBox<>();
 		couleur3.setMinHeight(hauteurElemtents);
 		couleur3.setPrefSize(largeurComboBox, hauteurElemtents);
 		couleur3.getItems().addAll(DataControl.couleursJoueur);
+		couleur3.valueProperty().addListener(new ChangeListener<String>() {
+
+			@Override
+			public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
+				couleursChoix.set(2, newValue);
+			}
+		});
 		monter3 = new Button(International.trad("bouton.monter"));
 		monter3.setPrefSize(lBoutonMD, hBoutonMD);
 		monter3.setMinSize(lBoutonMD, hBoutonMD);
@@ -251,10 +282,17 @@ public class CouleurPane extends StackPane implements ICouleurListener {
 		nom4.setPrefSize(largeurTF, hauteurElemtents);
 		nom4.setMinHeight(hauteurElemtents);
 		nom4.setAlignment(Pos.CENTER);
-		ComboBox<String> couleur4 = new ComboBox<>();
+		couleur4 = new ComboBox<>();
 		couleur4.setMinHeight(hauteurElemtents);
 		couleur4.setPrefSize(largeurComboBox, hauteurElemtents);
 		couleur4.getItems().addAll(DataControl.couleursJoueur);
+		couleur4.valueProperty().addListener(new ChangeListener<String>() {
+
+			@Override
+			public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
+				couleursChoix.set(3, newValue);
+			}
+		});
 		monter4 = new Button(International.trad("bouton.monter"));
 		monter4.setPrefSize(lBoutonMD, hBoutonMD);
 		monter4.setMinSize(lBoutonMD, hBoutonMD);
@@ -294,10 +332,17 @@ public class CouleurPane extends StackPane implements ICouleurListener {
 		nom5.setPrefSize(largeurTF, hauteurElemtents);
 		nom5.setMinHeight(hauteurElemtents);
 		nom5.setAlignment(Pos.CENTER);
-		ComboBox<String> couleur5 = new ComboBox<>();
+		couleur5 = new ComboBox<>();
 		couleur5.setMinHeight(hauteurElemtents);
 		couleur5.setPrefSize(largeurComboBox, hauteurElemtents);
 		couleur5.getItems().addAll(DataControl.couleursJoueur);
+		couleur5.valueProperty().addListener(new ChangeListener<String>() {
+
+			@Override
+			public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
+				couleursChoix.set(4, newValue);
+			}
+		});
 		monter5 = new Button(International.trad("bouton.monter"));
 		monter5.setPrefSize(lBoutonMD, hBoutonMD);
 		monter5.setMinSize(lBoutonMD, hBoutonMD);
@@ -337,10 +382,17 @@ public class CouleurPane extends StackPane implements ICouleurListener {
 		nom6.setPrefSize(largeurTF, hauteurElemtents);
 		nom6.setMinHeight(hauteurElemtents);
 		nom6.setAlignment(Pos.CENTER);
-		ComboBox<String> couleur6 = new ComboBox<>();
+		couleur6 = new ComboBox<>();
 		couleur6.setMinHeight(hauteurElemtents);
 		couleur6.setPrefSize(largeurComboBox, hauteurElemtents);
 		couleur6.getItems().addAll(DataControl.couleursJoueur);
+		couleur6.valueProperty().addListener(new ChangeListener<String>() {
+
+			@Override
+			public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
+				couleursChoix.set(5, newValue);
+			}
+		});
 		monter6 = new Button(International.trad("bouton.monter"));
 		monter6.setPrefSize(lBoutonMD, hBoutonMD);
 		monter6.setMinSize(lBoutonMD, hBoutonMD);
@@ -388,8 +440,8 @@ public class CouleurPane extends StackPane implements ICouleurListener {
 		bJouer.setOnMouseEntered(event -> bJouer.setStyle(styleBoutonsSouris));
 		bJouer.setOnMouseExited(event -> bJouer.setStyle(styleBoutons));
 		bJouer.setOnAction(EventHandler -> {
-			boolean isOk = IhmOutils.isAllUniqueColor(core.getNbJoueur(), couleur1, couleur2, couleur3, couleur4,
-					couleur5, couleur6);
+			boolean isOk = IhmOutils.isAllUniqueColor(core.getNbJoueur(), couleursChoix.get(ordre[0]), couleursChoix.get(ordre[1]), couleursChoix.get(ordre[2]), couleursChoix.get(ordre[3]),
+					couleursChoix.get(ordre[4]), couleursChoix.get(ordre[4]));
 			if (isOk) {
 				List<Couleur> cs = IhmOutils.comboStringToColorList(core.getNbJoueur(), couleur1, couleur2, couleur3,
 						couleur4, couleur5, couleur6);
@@ -455,8 +507,24 @@ public class CouleurPane extends StackPane implements ICouleurListener {
 	@Override
 	public void joueurNoms(List<Joueur> joueurs) {
 		Platform.runLater(() -> {
+			Button[] buttons = { descendre1, descendre2, descendre3, descendre4, descendre5, descendre6 };
+
 			ordre = new int[joueurs.size()];
+			for (int i = 0; i < ordre.length; i++)
+				ordre[i] = i;
+			couleursChoix = new ArrayList<>();
+			for (int i = 0; i < joueurs.size(); i++)
+				couleursChoix.add("");
+
+			buttons[joueurs.size() - 1].setDisable(true);
+
 			this.joueurs = joueurs;
+
+			Label[] noms = { nom1, nom2, nom3, nom4, nom5, nom6 };
+
+			for (int i = 0; i < noms.length; i++)
+				noms[i].setText(joueurs.size() >= i + 1 ? joueurs.get(i).getNom() : "");
+
 			nom1.setText(joueurs.size() >= 1 ? joueurs.get(0).getNom() : "");
 			nom2.setText(joueurs.size() >= 2 ? joueurs.get(1).getNom() : "");
 			nom3.setText(joueurs.size() >= 3 ? joueurs.get(2).getNom() : "");
@@ -468,12 +536,27 @@ public class CouleurPane extends StackPane implements ICouleurListener {
 	}
 
 	public void updateOrdre() {
+		List<ComboBox<String>> combos = new ArrayList<>();
+		combos.add(couleur1);
+		combos.add(couleur2);
+		combos.add(couleur3);
+		combos.add(couleur4);
+		combos.add(couleur5);
+		combos.add(couleur6);
+
 		nom1.setText(joueurs.size() >= 1 ? joueurs.get(ordre[0]).getNom() : "");
 		nom2.setText(joueurs.size() >= 2 ? joueurs.get(ordre[1]).getNom() : "");
 		nom3.setText(joueurs.size() >= 3 ? joueurs.get(ordre[2]).getNom() : "");
 		nom4.setText(joueurs.size() >= 4 ? joueurs.get(ordre[3]).getNom() : "");
 		nom5.setText(joueurs.size() >= 5 ? joueurs.get(ordre[4]).getNom() : "");
 		nom6.setText(joueurs.size() >= 6 ? joueurs.get(ordre[5]).getNom() : "");
+
+		couleur1.setValue(joueurs.size() >= 1 ? couleursChoix.get(ordre[0]) : "");
+		couleur2.setValue(joueurs.size() >= 2 ? couleursChoix.get(ordre[1]) : "");
+		couleur3.setValue(joueurs.size() >= 3 ? couleursChoix.get(ordre[2]) : "");
+		couleur4.setValue(joueurs.size() >= 4 ? couleursChoix.get(ordre[3]) : "");
+		couleur5.setValue(joueurs.size() >= 5 ? couleursChoix.get(ordre[4]) : "");
+		couleur6.setValue(joueurs.size() >= 6 ? couleursChoix.get(ordre[5]) : "");
 	}
 
 	private void setJoueurConfig(int maxJr) {
