@@ -46,7 +46,9 @@ public class AccueilPane extends StackPane {
 	private StackPane stackPane = new StackPane();
 	private GaussianBlur flou = new GaussianBlur(30);
 	private Font policeNom = Font.font("Segoe UI", 17);
-	private int largeurTF = 100;
+	private CornerRadii coinfb = new CornerRadii(5.0);
+	private Background fondBlanc = new Background(new BackgroundFill(Color.WHITE, coinfb, null));
+	private int largeurTF = 600;
 	private int hauteurElemtents = 60;
 
 	TextField nomjoueur;
@@ -78,6 +80,16 @@ public class AccueilPane extends StackPane {
 		titre.setMinWidth(800);
 
 		// nom du joueur
+		Label infoNomJoueur = new Label();// TODO trad
+		infoNomJoueur.setText("Le nom de la partie, sous la forme d’une chaine de caractères pouvant" + "\n"
+				+ "contenir des lettres majuscules et minuscule (accentuées ou non), des" + " \n"
+				+ "nombres et les caractères spéciaux apostrophe «’», espace « » et souligné" + "\n" + " bas «_».");
+		infoNomJoueur.setMinHeight(2 * hauteurElemtents);
+		infoNomJoueur.setPrefSize(largeurTF, 2 * hauteurElemtents);
+		infoNomJoueur.setFont(policeNom);
+		infoNomJoueur.setPadding(new Insets(5, 10, 5, 10));
+		infoNomJoueur.setBackground(fondBlanc);
+				
 		nomjoueur = new TextField();
 		nomjoueur.setText("JoueurSansNom" + (int) (100 * Math.random()));
 		nomjoueur.setFont(policeNom);
@@ -189,8 +201,9 @@ public class AccueilPane extends StackPane {
 		centreMenu.setPrefSize(tailleCarreCentral, tailleCarreCentral);
 		centreMenu.setMaxSize(tailleCarreCentral, tailleCarreCentral);
 		centreMenu.setAlignment(Pos.CENTER);
-		centreMenu.setMargin(titre, new Insets(0, 0, 100, 0));
-		centreMenu.getChildren().addAll(titre, nomjoueur, grilleBoutons);
+		centreMenu.setMargin(titre, new Insets(0, 0, 50, 0));
+		centreMenu.setSpacing(20);
+		centreMenu.getChildren().addAll(titre, infoNomJoueur,nomjoueur, grilleBoutons);
 
 		// boite du fond qui contient tout
 		HBox fond = new HBox();
