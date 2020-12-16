@@ -64,15 +64,15 @@ public abstract class ControleurReseau {
 	 *                                  correctement
 	 * @throws UnknownHostException     Si le cast de l'ip provoque une erreur
 	 */
-	public static void initConnexion(TraitementPaquet<TcpClient> traitementPaquetTcp,
-			TraitementPaquet<DatagramPacket> traitementPaquetUdp, ConnexionType connexionType, InetAddress ip)
+	public static void initConnexion(TraitementPaquet<TcpClient> traitementPaquetTcpCible,
+			TraitementPaquet<DatagramPacket> traitementPaquetUdpCible, ConnexionType connexionTypeCible, InetAddress ipCible)
 			throws UnknownHostException {
 		logger.finest("Initialisation du controleur réseau");
-		traitementPaquetUdp = traitementPaquetUdp;
-		traitementPaquetTcp = traitementPaquetTcp;
+		traitementPaquetUdp = traitementPaquetUdpCible;
+		traitementPaquetTcp = traitementPaquetTcpCible;
 		traitementPaquetUdp.init();
 		traitementPaquetTcp.init();
-		connexionType = connexionType;
+		connexionType = connexionTypeCible;
 		ip = ReseauOutils.getLocalIp();
 		tcpPort = ReseauOutils.getPortSocket(1024, 65535);
 
