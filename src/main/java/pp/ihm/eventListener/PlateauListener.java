@@ -1,5 +1,9 @@
 package pp.ihm.eventListener;
 
+import java.util.List;
+
+import pp.Personnage;
+import reseau.type.CarteType;
 import reseau.type.Couleur;
 
 public interface PlateauListener {
@@ -19,7 +23,7 @@ public interface PlateauListener {
 
     void finPartie();
 
-    void destionationPerso(int lieu, String destionationPerso);
+    void destionationPerso(int lieu, List<Personnage> destionationPerso);
 
     void fouilleCamion(String camion);
 

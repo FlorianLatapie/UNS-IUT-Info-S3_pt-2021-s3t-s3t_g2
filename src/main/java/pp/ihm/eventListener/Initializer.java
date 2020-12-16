@@ -3,7 +3,9 @@ package pp.ihm.eventListener;
 import pp.Joueur;
 import pp.Lieu;
 import pp.Personnage;
+import reseau.type.CarteType;
 import reseau.type.Couleur;
+import reseau.type.PionCouleur;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -126,15 +128,12 @@ public abstract class Initializer {
 
 	public static void destionationPersoAll(List<Lieu> lieux) {
 		for (Lieu l : lieux)
-			destionationPerso(l);
+			destionationPerso(l.getNum(), l.getPersonnage());
 	}
 
-	private static void destionationPerso(Lieu lieu) {
-		String np = "";
-		for (Personnage p : lieu.getPersonnage())
-			np += p.getType().name() + " " + p.getJoueur().getCouleur().nomEntier() + "\n";
+	private static void destionationPerso(int lieu, List<Personnage> personnages) {
 		for (PlateauListener pl : listenerspl)
-			pl.destionationPerso(lieu.getNum(), np);
+			pl.destionationPerso(lieu, personnages);
 	}
 
 	public static void fouilleCamion(String camion) {
