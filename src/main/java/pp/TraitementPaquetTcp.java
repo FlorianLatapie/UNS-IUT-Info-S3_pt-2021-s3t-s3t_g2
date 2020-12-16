@@ -26,15 +26,15 @@ public class TraitementPaquetTcp extends TraitementPaquet<TcpClient> {
 	private ControleurJeu core;
 
 	/**
-	 * @param core           coeur du jeu
+	 * @param core coeur du jeu
 	 */
 	public TraitementPaquetTcp(Object core) {
 		this.core = (ControleurJeu) core;
 	}
-	
+
 	@Override
 	public void init() {
-		
+
 	}
 
 	/**
@@ -58,19 +58,14 @@ public class TraitementPaquetTcp extends TraitementPaquet<TcpClient> {
 	private void dcp(Paquet packet, String message, TcpClient connection) {
 		switch (core.getStatus()) {
 		case ATTENTE:
-			String id = null;
-			try {
-				id = core.ajouterJoueur(InetAddress.getLocalHost(), 5555, (String) packet.getValeur(message, 1),
-						(TypeJoueur) packet.getValeur(message, 2), connection);
-			} catch (UnknownHostException e) {
-				e.printStackTrace();
-			}
-			connection.envoyer(ControleurReseau.construirePaquetTcp("ACP",core.getPartieId(), id));
+			String id = core.ajouterJoueur((String) packet.getValeur(message, 1),
+					(TypeJoueur) packet.getValeur(message, 2), connection);
+			connection.envoyer(ControleurReseau.construirePaquetTcp("ACP", core.getPartieId(), id));
 			break;
 		case ANNULEE:
 		case COMPLETE:
 		case TERMINEE:
-			connection.envoyer(ControleurReseau.construirePaquetTcp("RCP",core.getPartieId()));
+			connection.envoyer(ControleurReseau.construirePaquetTcp("RCP", core.getPartieId()));
 			break;
 		default:
 			throw new IllegalStateException("Unexpected value: " + core.getStatus());
