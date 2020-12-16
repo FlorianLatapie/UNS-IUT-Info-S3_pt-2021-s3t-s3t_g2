@@ -83,22 +83,24 @@ public class AccueilPane extends StackPane {
 		titre.setMinWidth(800);
 
 		// nom du joueur
-		
-		HBox HNomJoueur = new HBox(); 
+
+		HBox HNomJoueur = new HBox();
 		HNomJoueur.setAlignment(Pos.CENTER);
 		HNomJoueur.setSpacing(10);
-		
-		Tooltip infoNomJoueur = new Tooltip("Le nom de la partie, sous la forme d’une chaine de caractères pouvant" + "\n"
-				+ "contenir des lettres majuscules et minuscule (accentuées ou non), des" + " \n"
-				+ "nombres et les caractères spéciaux apostrophe «’», espace « » et souligné" + "\n" + " bas «_».");	
+
+		Tooltip infoNomJoueur = new Tooltip(
+				(International.trad("texte.infoNom1") + "\n" + International.trad("texte.infoNom2") + "\n"
+						+ International.trad("texte.infoNom3") + "\n" + International.trad("texte.infoNom4")));
+
 		infoNomJoueur.setFont(policeNom);
 		nomjoueur = new TextField();
 		nomjoueur.setText("JoueurSansNom" + (int) (100 * Math.random()));
-		nomjoueur.setStyle("-fx-background-color: #1A1A1A; -fx-text-fill: white; -fx-border-color: white;  -fx-border-width: 1;");
+		nomjoueur.setStyle(
+				"-fx-background-color: #1A1A1A; -fx-text-fill: white; -fx-border-color: white;  -fx-border-width: 1;");
 		nomjoueur.setFont(policeNom);
 		nomjoueur.setPrefSize(largeurTF, hauteurElemtents);
 		nomjoueur.setMinHeight(hauteurElemtents);
-		
+
 		Label iconeQuestion = new Label("?");
 		iconeQuestion.setAlignment(Pos.CENTER);
 		iconeQuestion.setPrefSize(hauteurElemtents, hauteurElemtents);
@@ -106,7 +108,7 @@ public class AccueilPane extends StackPane {
 		iconeQuestion.setStyle(styleQuestion);
 		iconeQuestion.setFont(policeBouton);
 		iconeQuestion.setTooltip(infoNomJoueur);
-		
+
 		HNomJoueur.getChildren().addAll(nomjoueur, iconeQuestion);
 
 		// boutons
@@ -216,7 +218,7 @@ public class AccueilPane extends StackPane {
 		centreMenu.setAlignment(Pos.CENTER);
 		centreMenu.setMargin(titre, new Insets(0, 0, 50, 0));
 		centreMenu.setSpacing(20);
-		centreMenu.getChildren().addAll(titre,HNomJoueur, grilleBoutons);
+		centreMenu.getChildren().addAll(titre, HNomJoueur, grilleBoutons);
 
 		// boite du fond qui contient tout
 		HBox fond = new HBox();
