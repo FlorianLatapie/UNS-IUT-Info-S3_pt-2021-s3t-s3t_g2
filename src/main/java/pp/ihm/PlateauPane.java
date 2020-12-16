@@ -836,7 +836,7 @@ public class PlateauPane extends StackPane implements PlateauListener {
 		info1.setStyle(
 				" -fx-background-color:#1A1A1A; -fx-background-radius: 20px; -fx-border-color: red; -fx-border-insets: -3; -fx-border-width: 3; -fx-border-radius: 20px;");
 
-		bQuitterInfo1 = new Button("QUITTER");
+		bQuitterInfo1 = new Button(International.trad("bouton.quitter"));
 		bQuitterInfo1.setAlignment(Pos.CENTER);
 		bQuitterInfo1.setStyle(styleBoutonInfo);
 		bQuitterInfo1.setPrefSize(largBouton * .7, hautBouton * .7);
@@ -884,7 +884,7 @@ public class PlateauPane extends StackPane implements PlateauListener {
 		info2.setStyle(
 				" -fx-background-color:#1A1A1A; -fx-background-radius: 20px; -fx-border-color: red; -fx-border-insets: -3; -fx-border-width: 3; -fx-border-radius: 20px;");
 
-		bQuitterInfo2 = new Button("QUITTER");
+		bQuitterInfo2 = new Button(International.trad("bouton.quitter"));
 		bQuitterInfo2.setAlignment(Pos.CENTER);
 		bQuitterInfo2.setStyle(styleBoutonInfo);
 		bQuitterInfo2.setPrefSize(largBouton * .7, hautBouton * .7);
@@ -931,7 +931,7 @@ public class PlateauPane extends StackPane implements PlateauListener {
 		info3.setStyle(
 				" -fx-background-color:#1A1A1A; -fx-background-radius: 20px; -fx-border-color: red; -fx-border-insets: -3; -fx-border-width: 3; -fx-border-radius: 20px;");
 
-		bQuitterInfo3 = new Button("QUITTER");
+		bQuitterInfo3 = new Button(International.trad("bouton.quitter"));
 		bQuitterInfo3.setAlignment(Pos.CENTER);
 		bQuitterInfo3.setStyle(styleBoutonInfo);
 		bQuitterInfo3.setPrefSize(largBouton * .7, hautBouton * .7);
