@@ -78,7 +78,7 @@ public class FinDePartiePane extends StackPane implements FinListener {
 		BorderPane bBas = new BorderPane();
 
 		HBox bBasCentre = new HBox();
-		gagnant1 = new Label("Le gagnant est le joueur\nMACHIN");
+		gagnant1 = new Label("");
 		gagnant1.setTextAlignment(TextAlignment.CENTER);
 		gagnant1.setFont(policeNom);
 		gagnant1.setTextFill(Color.WHITESMOKE);
@@ -118,7 +118,7 @@ public class FinDePartiePane extends StackPane implements FinListener {
 		BorderPane bHaut = new BorderPane();
 
 		HBox bHautCentre = new HBox();
-		gagnant2 = new Label("Le gagnant est le joueur\nMACHIN");
+		gagnant2 = new Label("");
 		gagnant2.setTextAlignment(TextAlignment.CENTER);
 		gagnant2.setFont(policeNom);
 		gagnant2.setTextFill(Color.WHITESMOKE);
@@ -155,7 +155,7 @@ public class FinDePartiePane extends StackPane implements FinListener {
 
 		///
 		HBox hDroite = new HBox();
-		gagnant3 = new Label("Le gagnant est le joueur\nMACHIN");
+		gagnant3 = new Label("");
 		gagnant3.setTextAlignment(TextAlignment.CENTER);
 		gagnant3.setFont(policeNom);
 		gagnant3.setTextFill(Color.WHITESMOKE);
@@ -169,7 +169,7 @@ public class FinDePartiePane extends StackPane implements FinListener {
 		///
 
 		HBox hGauche = new HBox();
-		gagnant4 = new Label("Le gagnant est le joueur\nMACHIN");
+		gagnant4 = new Label("");
 		gagnant4.setTextAlignment(TextAlignment.CENTER);
 		gagnant4.setFont(policeNom);
 		gagnant4.setTextFill(Color.WHITESMOKE);
