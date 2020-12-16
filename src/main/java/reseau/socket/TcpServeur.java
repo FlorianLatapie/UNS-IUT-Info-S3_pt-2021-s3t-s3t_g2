@@ -16,7 +16,6 @@ import java.util.logging.Logger;
  * @version 2.0
  */
 public class TcpServeur implements Runnable, IControleSocket {
-	private final ControleurReseau controleurReseau;
 	private ServerSocket serveurSocket;
 
 	private final List<TcpClient> connexions;
@@ -31,16 +30,15 @@ public class TcpServeur implements Runnable, IControleSocket {
 	 * @param controleurReseau Le controleur reseau associé
 	 * @param port             Le port du serveur TCP
 	 */
-	public TcpServeur(ControleurReseau controleurReseau, InetAddress ip, int port, String cleFin) {
+	public TcpServeur(InetAddress ip, int port, String cleFin) {
 		this.ip = ip;
 		this.port = port;
 		this.cleFin = cleFin;
 		this.connexions = new ArrayList<>();
 		this.estLancer = true;
-		this.controleurReseau = controleurReseau;
 		this.logger = Logger.getLogger(getClass().getName());
 		logger.log(Level.INFO, "Le serveur TCP démarre sur : {0}",
-				controleurReseau.getIp().getHostAddress() + " " + port);
+				ControleurReseau.getIp().getHostAddress() + " " + port);
 	}
 
 	/**
@@ -65,7 +63,7 @@ public class TcpServeur implements Runnable, IControleSocket {
 				break;
 			}
 			TcpClient connection;
-			new Thread(connection = new TcpClient(sock, controleurReseau, cleFin)).start();
+			new Thread(connection = new TcpClient(sock, cleFin)).start();
 			connexions.add(connection);
 		}
 		if (estLancer)
