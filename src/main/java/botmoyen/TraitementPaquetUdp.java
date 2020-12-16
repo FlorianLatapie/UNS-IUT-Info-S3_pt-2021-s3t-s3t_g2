@@ -6,6 +6,8 @@ import reseau.socket.TraitementPaquet;
 import reseau.tool.ThreadOutils;
 import reseau.type.ConnexionType;
 
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.net.DatagramPacket;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
@@ -83,8 +85,26 @@ public class TraitementPaquetUdp extends TraitementPaquet<DatagramPacket> {
 
 		System.out.println(
 				MessageFormat.format("Une nouvelle partie vient d''etre trouvÃ© !\n{0}", paquet.getValeur(message, 1)));
-		String nomdujoueur = "BOT" + new Random().nextInt(9999);
-		core.setNom(nomdujoueur);
+		String prenoms = "Ressources/Prenoms/prenomsFR.txt";
+		Scanner scanneurPrenom;
+		String nomDuJoueur = "Bot Moyen ";
+		try {
+			scanneurPrenom = new Scanner(new File(prenoms));
+			StringBuilder fichierLu = new StringBuilder();
+			while(scanneurPrenom.hasNext()) {
+				fichierLu.append(scanneurPrenom.nextLine()+"\n");
+			}
+			String[] tableauPrenom = fichierLu.toString().split("\n");
+			int choix= new Random().nextInt(tableauPrenom.length);
+			System.out.println(nomDuJoueur + tableauPrenom[choix]);
+			nomDuJoueur += tableauPrenom[choix];
+			scanneurPrenom.close();
+		} catch (FileNotFoundException e) {
+			nomDuJoueur += new Random().nextInt(9999);
+			System.out.println("bug");
+			e.printStackTrace();
+		}
+		core.setNom(nomDuJoueur);
 		getControleurReseau().demarrerClientTcp(core.getIpPp());
 
 		ThreadOutils.asyncTask("acp", () -> {
@@ -93,7 +113,7 @@ public class TraitementPaquetUdp extends TraitementPaquet<DatagramPacket> {
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
-			String messageTcp = getControleurReseau().construirePaquetTcp("DCP", nomdujoueur, core.getTypeJoueur(),
+			String messageTcp = getControleurReseau().construirePaquetTcp("DCP", core.getNom(), core.getTypeJoueur(),
 					"P" + (int) paquet.getValeur(message, 1));
 			try {
 				Thread.sleep(1000);
