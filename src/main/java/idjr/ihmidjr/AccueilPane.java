@@ -92,6 +92,7 @@ public class AccueilPane extends StackPane {
 				
 		nomjoueur = new TextField();
 		nomjoueur.setText("JoueurSansNom" + (int) (100 * Math.random()));
+		nomjoueur.setStyle("-fx-background-color: #1A1A1A; -fx-text-fill: white; -fx-border-color: white;  -fx-border-width: 1;");
 		nomjoueur.setFont(policeNom);
 		nomjoueur.setPrefSize(largeurTF, hauteurElemtents);
 		nomjoueur.setMinHeight(hauteurElemtents);
