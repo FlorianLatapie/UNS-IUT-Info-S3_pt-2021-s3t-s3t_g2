@@ -432,19 +432,7 @@ public class TraitementBot {
 		for (CarteType carteAJouer : listeCarteUtilisable) {
 			switch (carteAJouer.name()) {
 			case "ACS":
-				if (nbZombie >= forcePerso) {
-					listeCarteJouee.add(carteAJouer);
-					core.getListeCarte().remove(carteAJouer);
-					nbZombie = nbZombie - 2;
-				}
-				break;
 			case "ATR":
-				if (nbZombie >= forcePerso) {
-					listeCarteJouee.add(carteAJouer);
-					core.getListeCarte().remove(carteAJouer);
-					nbZombie = nbZombie - 2;
-				}
-				break;
 			case "AGR":
 				if (nbZombie >= forcePerso) {
 					listeCarteJouee.add(carteAJouer);
@@ -453,19 +441,7 @@ public class TraitementBot {
 				}
 				break;
 			case "ARE":
-				if (nbZombie >= forcePerso) {
-					listeCarteJouee.add(carteAJouer);
-					core.getListeCarte().remove(carteAJouer);
-					nbZombie--;
-				}
-				break;
 			case "AHI":
-				if (nbZombie >= forcePerso) {
-					listeCarteJouee.add(carteAJouer);
-					core.getListeCarte().remove(carteAJouer);
-					nbZombie--;
-				}
-				break;
 			case "ABA":
 				if (nbZombie >= forcePerso) {
 					listeCarteJouee.add(carteAJouer);
