@@ -89,7 +89,8 @@ public class Initializer {
 		for (PlateauListener pl : listenerspl)
 			pl.nbCarteJoueur(joueur, carteNb);
 	}
-
+	
+	/*
 	public void forceLieuAll(List<Lieu> lieux) {
 		for (Lieu l : lieux)
 			forceLieu(l.getNum(), l.getForce());
@@ -99,6 +100,7 @@ public class Initializer {
 		for (PlateauListener pl : listenerspl)
 			pl.forceLieu(lieu, val);
 	}
+	*/
 
 	public void finPartie() {
 		for (PlateauListener pl : listenerspl)

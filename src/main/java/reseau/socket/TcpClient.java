@@ -28,7 +28,6 @@ import static java.util.Collections.synchronizedList;
  * @version 2.0
  */
 public class TcpClient implements Runnable, IEchangeSocket, IMessagePaquet {
-	private final ControleurReseau controleurReseau;
 	private Socket socket;
 	private DataOutputStream fluxSortie;
 	private DataInputStream fluxEntre;
@@ -47,10 +46,9 @@ public class TcpClient implements Runnable, IEchangeSocket, IMessagePaquet {
 	 * @param ip               L'ip du serveur TCP cible
 	 * @param port             Le port du serveur TCP cible
 	 */
-	public TcpClient(ControleurReseau controleurReseau, InetAddress ip, int port) {
+	public TcpClient(InetAddress ip, int port) {
 		this.ip = ip;
 		this.messagesTampon = synchronizedList(new ArrayList<String>());
-		this.controleurReseau = controleurReseau;
 		this.estLancer = true;
 		this.port = port;
 		this.logger = Logger.getLogger(getClass().getName());
@@ -61,12 +59,11 @@ public class TcpClient implements Runnable, IEchangeSocket, IMessagePaquet {
 	 * @param controleurReseau Le controleur reseau du client
 	 * @param cleFin           Mot cle pour arreter le client
 	 */
-	public TcpClient(Socket socket, ControleurReseau controleurReseau, String cleFin) {
+	public TcpClient(Socket socket, String cleFin) {
 		this.messagesTampon = synchronizedList(new ArrayList<String>());
-		this.controleurReseau = controleurReseau;
 		this.estLancer = true;
-		this.ip = controleurReseau.getIp();
-		this.port = controleurReseau.getTcpPort();
+		this.ip = ControleurReseau.getIp();
+		this.port = ControleurReseau.getTcpPort();
 		this.logger = Logger.getLogger(getClass().getName());
 		this.socket = socket;
 		this.cleFin = cleFin;
@@ -171,7 +168,7 @@ public class TcpClient implements Runnable, IEchangeSocket, IMessagePaquet {
 				if (cleFin.equals(cle))
 					break;
 
-			controleurReseau.traitementPaquetTcp(controleurReseau.getPaquetTcp(cle), message, this);
+			ControleurReseau.traitementPaquetTcp(ControleurReseau.getPaquetTcp(cle), message, this);
 			messagesTampon.add(message);
 		}
 

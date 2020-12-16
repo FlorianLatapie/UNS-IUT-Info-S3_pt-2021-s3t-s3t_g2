@@ -13,7 +13,7 @@ public interface PlateauListener {
 
     void nbCarteJoueur(int joueur, int carteNb);
 
-    void forceLieu(int lieu, int force);
+    //void forceLieu(int lieu, int force);
 
     void nomChefVigile(String joueur);
 
