@@ -246,7 +246,7 @@ public class ConfigPartiePane extends StackPane implements ConfigListener {
 			listView.getItems().clear();
 			if (partieInfo.isEmpty()) {
 				partieActuelle = null;
-				Label res = new Label("Il n'y a pas partie disponible !");
+				Label res = new Label(International.trad("texte.dispoPartie"));
 				res.setAlignment(Pos.CENTER);
 				res.setTextFill(Color.WHITE);
 				res.setFont(Font.font("Segoe UI", FontWeight.BOLD, 27));
