@@ -167,13 +167,13 @@ public class JeuPane extends StackPane implements JeuListener {
 
 		stackPane.setAlignment(Pos.CENTER);
 
-		nomJoueur = new Label("Nom du joueur");
+		nomJoueur = new Label(International.trad("texte.nomJoueur"));
 		nomJoueur.setAlignment(Pos.CENTER);
 		nomJoueur.setTranslateY(-400);
 		nomJoueur.setFont(Font.font("Segoe UI", FontWeight.BOLD, 50));
 		nomJoueur.setTextFill(Color.BLACK);
 
-		phasePartie = new Label("Phase de la partie");
+		phasePartie = new Label(International.trad("texte.phase"));
 		phasePartie.setAlignment(Pos.CENTER);
 		phasePartie.setTranslateY(-325);
 		phasePartie.setFont(Font.font("Segoe UI", 50));
@@ -208,12 +208,12 @@ public class JeuPane extends StackPane implements JeuListener {
 		carte1 = new VBox();
 		carte1.setAlignment(Pos.CENTER);
 		carte1.setSpacing(10);
-		
+
 		imgDeCarte1 = new ImageView(DataControl.CARTE_CS);
 		imgDeCarte1.setFitHeight(tailleCarte);
 		imgDeCarte1.setFitWidth(tailleCarte);
-		
-		bDeCarte1 = new Button(); 
+
+		bDeCarte1 = new Button();
 		bDeCarte1.setPrefSize(tailleCarte, tailleCarte);
 		bDeCarte1.setMinSize(tailleCarte, tailleCarte);
 		bDeCarte1.setGraphic(imgDeCarte1);
@@ -249,7 +249,6 @@ public class JeuPane extends StackPane implements JeuListener {
 		bDeCarte3.setPrefSize(tailleCarte, tailleCarte);
 		bDeCarte3.setMinSize(tailleCarte, tailleCarte);
 		bDeCarte3.setGraphic(imgDeCarte3);
-		
 
 		carte3.getChildren().addAll(imgDeCarte3, bDeCarte3);
 
@@ -266,7 +265,7 @@ public class JeuPane extends StackPane implements JeuListener {
 		bDeCarte4.setPrefSize(tailleCarte, tailleCarte);
 		bDeCarte4.setMinSize(tailleCarte, tailleCarte);
 		bDeCarte4.setGraphic(imgDeCarte4);
-		
+
 		carte4.getChildren().addAll(imgDeCarte4, bDeCarte4);
 
 		carte5 = new VBox();
@@ -295,7 +294,7 @@ public class JeuPane extends StackPane implements JeuListener {
 		bDeCarte6 = new Button(); // TODO Event
 		bDeCarte6.setAlignment(Pos.CENTER);
 		bDeCarte6.setStyle(styleBoutons);
-		bDeCarte6.setPrefSize(tailleCarte,tailleCarte);
+		bDeCarte6.setPrefSize(tailleCarte, tailleCarte);
 		bDeCarte6.setMinSize(tailleCarte, tailleCarte);
 		bDeCarte6.setGraphic(imgDeCarte6);
 
@@ -365,7 +364,7 @@ public class JeuPane extends StackPane implements JeuListener {
 
 		passerCarte.getChildren().addAll(bPasserCarte);
 
-		hbCartes.getChildren().addAll(carte1, carte2, carte3, carte4, carte5, carte6, carte7, carte8, /*carte9*/
+		hbCartes.getChildren().addAll(carte1, carte2, carte3, carte4, carte5, carte6, carte7, carte8, /* carte9 */
 				passerCarte);
 
 		//////////////////////////////////////////
@@ -717,8 +716,7 @@ public class JeuPane extends StackPane implements JeuListener {
 		titreFouille.setFont(Font.font("Segoe UI", FontWeight.BOLD, 25));
 		titreFouille.setTextFill(Color.WHITE);
 
-		Label titreQuestionCarte = new Label("Sélectionnez les cartes et faite vos choix"); // TODO ajouter ca dans le
-																							// fichier de langues
+		Label titreQuestionCarte = new Label(International.trad("texte.qCarte"));
 		titreQuestionCarte.setAlignment(Pos.CENTER);
 		titreQuestionCarte.setFont(Font.font("Segoe UI", FontWeight.BOLD, 25));
 		titreQuestionCarte.setTextFill(Color.WHITE);
@@ -927,7 +925,7 @@ public class JeuPane extends StackPane implements JeuListener {
 			bParking.setStyle(styleBoutons);
 		});
 
-		bPCSecu = new Button(International.trad("texte.lieu5")+"\n"+International.trad("texte.lieu5b"));
+		bPCSecu = new Button(International.trad("texte.lieu5") + "\n" + International.trad("texte.lieu5b"));
 		bPCSecu.setTextAlignment(TextAlignment.CENTER);
 		bPCSecu.setAlignment(Pos.CENTER);
 		bPCSecu.setStyle(styleBoutons);
@@ -1033,7 +1031,7 @@ public class JeuPane extends StackPane implements JeuListener {
 
 		VBox vInfo = new VBox();
 		vInfo.setAlignment(Pos.CENTER);
-		lInfo = new Label("Voici l'information que vous voulez savoir");
+		lInfo = new Label(International.trad("texte.info"));
 		lInfo.setFont(Font.font("Segoe UI", FontWeight.BOLD, 20));
 		lInfo.setTextFill(Color.WHITE);
 		vInfo.getChildren().addAll(lInfo);
@@ -1095,7 +1093,7 @@ public class JeuPane extends StackPane implements JeuListener {
 		infoZombie.setAlignment(Pos.CENTER);
 		infoZombie.setStyle(styleVBox);
 
-		linfoZombie = new Label("Des zombies arriveront dans les lieux X, X, X, X"); // TODO afficher ca dans un event
+		linfoZombie = new Label("");
 		linfoZombie.setFont(Font.font("Segoe UI", 20));
 		linfoZombie.setTextFill(Color.BLACK);
 
@@ -1366,8 +1364,8 @@ public class JeuPane extends StackPane implements JeuListener {
 	@Override
 	public void desVigiles(List<Integer> list) {
 		Platform.runLater(() -> {
-			linfoZombie.setText("Des zombies arriveront dans les lieux " + list.get(0) + ", " + list.get(1) + ", "
-					+ list.get(2) + ", " + list.get(3));
+			linfoZombie.setText(International.trad("Des zombies arriveront dans les lieux {0}, {1}, {2}, {3}",
+					list.get(0).toString(), list.get(1).toString(), list.get(2).toString(), list.get(3).toString()));
 		});
 	}
 
@@ -1409,14 +1407,14 @@ public class JeuPane extends StackPane implements JeuListener {
 	@Override
 	public void sacrificeChange() {
 		Platform.runLater(() -> {
-			labDeplPers.setText("Sacrifice d'un personnage");
+			labDeplPers.setText(International.trad("texte.sacrifice"));
 		});
 	}
 
 	@Override
 	public void deplacementChange() {
 		Platform.runLater(() -> {
-			labDeplPers.setText("Déplacement des personnages");
+			labDeplPers.setText(International.trad("texte.labDeplPers"));
 		});
 	}
 
@@ -1490,7 +1488,7 @@ public class JeuPane extends StackPane implements JeuListener {
 					if (selectedCouleur != null && selectedCarte != null) {
 						core.getIdjr().setCarteChoisi(selectedCarte);
 						core.getIdjr().setCouleurChoisi(selectedCouleur);
-						core.getIdjr().setEtatChoisi("Donner");
+						core.getIdjr().setEtatChoisi(International.trad("texte.donner"));
 						core.getIdjr().carteChoisi(true);
 						cartePanelReset();
 					}
@@ -1514,7 +1512,7 @@ public class JeuPane extends StackPane implements JeuListener {
 			if (listeCartes.size() >= 1) {
 				imgCarte1.setImage(new Image(convertCarte(listeCartes.get(0))));
 				bCarte1.setDisable(false);
-				bCarte1.setText("Selectionner");
+				bCarte1.setText(International.trad("texte.selectionner"));
 				bCarte1.setOnAction(EventHandler -> {
 					selectedCarte = listeCartes.get(0);
 					bChoixGarder.setDisable(!garder);
@@ -1531,7 +1529,7 @@ public class JeuPane extends StackPane implements JeuListener {
 			if (listeCartes.size() >= 2) {
 				imgCarte2.setImage(new Image(convertCarte(listeCartes.get(1))));
 				bCarte2.setDisable(false);
-				bCarte2.setText("Selectionner");
+				bCarte2.setText(International.trad("texte.selectionner"));
 				bCarte2.setOnAction(EventHandler -> {
 					selectedCarte = listeCartes.get(1);
 					bChoixGarder.setDisable(!garder);
@@ -1548,7 +1546,7 @@ public class JeuPane extends StackPane implements JeuListener {
 			if (listeCartes.size() >= 3) {
 				imgCarte3.setImage(new Image(convertCarte(listeCartes.get(2))));
 				bCarte3.setDisable(false);
-				bCarte3.setText("Selectionner");
+				bCarte3.setText(International.trad("texte.selectionner"));
 				bCarte3.setOnAction(EventHandler -> {
 					selectedCarte = listeCartes.get(2);
 					bChoixGarder.setDisable(!garder);
