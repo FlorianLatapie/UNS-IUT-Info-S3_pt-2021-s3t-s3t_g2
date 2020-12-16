@@ -8,7 +8,7 @@ import reseau.type.Couleur;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Initializer {
+public abstract class Initializer {
 	private static List<PlateauListener> listenerspl = new ArrayList<>();
 	private static List<AttenteListener> listenersal = new ArrayList<>();
 	private static List<FinListener> listenersfl = new ArrayList<>();

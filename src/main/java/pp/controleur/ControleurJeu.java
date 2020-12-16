@@ -10,7 +10,6 @@ import reseau.type.*;
 
 import java.io.IOException;
 import java.net.InetAddress;
-import java.sql.Connection;
 import java.util.*;
 
 import static java.lang.System.out;
@@ -41,7 +40,6 @@ public class ControleurJeu {
 
 	// private final ControleurReseau ControleurReseau;
 	private Partie jeu;
-	private final Initializer initializer;
 	private Thread coreThread;
 	private List<Joueur> jmort;
 	private Statut statut;
@@ -58,10 +56,9 @@ public class ControleurJeu {
 
 	private final Random rd = new Random();
 
-	public ControleurJeu(String nom, int njr, int njv, Initializer initializer) throws IOException {
+	public ControleurJeu(String nom, int njr, int njv, Initializer Initializer) throws IOException {
 		if (njr + njv > 6 || njr + njv < 3)
 			throw new IllegalArgumentException("Mauvais nombre de joueur");
-		this.initializer = initializer;
 		this.jmort = new ArrayList<>();
 		this.tempPaquet = new ArrayList<>();
 		this.nomPartie = nom;
@@ -79,22 +76,19 @@ public class ControleurJeu {
 		this.port = ControleurReseau.getTcpPort();
 		this.intPartieId = new Random().nextInt(10000000);
 		this.partieId = "P" + intPartieId;
-		if (initializer != null)
-			initializer.nomPartie(partieId);
+		Initializer.nomPartie(partieId);
 		initPartie();
 	}
 
 	private void updateValues() {
-		if (initializer != null) {
-			initializer.nbZombiesLieuAll(new ArrayList<>(jeu.getLieux().values()));
-			initializer.lieuFermeAll(new ArrayList<>(jeu.getLieux().values()));
-			initializer.lieuOuvertAll(new ArrayList<>(jeu.getLieux().values()));
-			initializer.nbCarteJoueurAll(new ArrayList<>(jeu.getJoueurs().values()));
-			initializer.nbPersoJoueurAll(new ArrayList<>(jeu.getJoueurs().values()));
-			initializer.nomChefVigileAll(new ArrayList<>(jeu.getJoueurs().values()));
-			initializer.nomJoueurs(new ArrayList<>(jeu.getJoueurs().values()));
-			initializer.destionationPersoAll(new ArrayList<>(jeu.getLieux().values()));
-		}
+		Initializer.nbZombiesLieuAll(new ArrayList<>(jeu.getLieux().values()));
+		Initializer.lieuFermeAll(new ArrayList<>(jeu.getLieux().values()));
+		Initializer.lieuOuvertAll(new ArrayList<>(jeu.getLieux().values()));
+		Initializer.nbCarteJoueurAll(new ArrayList<>(jeu.getJoueurs().values()));
+		Initializer.nbPersoJoueurAll(new ArrayList<>(jeu.getJoueurs().values()));
+		Initializer.nomChefVigileAll(new ArrayList<>(jeu.getJoueurs().values()));
+		Initializer.nomJoueurs(new ArrayList<>(jeu.getJoueurs().values()));
+		Initializer.destionationPersoAll(new ArrayList<>(jeu.getLieux().values()));
 	}
 
 	private synchronized void initPartie() {
@@ -110,16 +104,14 @@ public class ControleurJeu {
 			ControleurReseau.envoyerUdp(m);
 			while (joueurs.size() != this.nbjtotal)
 				Thread.yield();
-			if (initializer != null)
-				initializer.joueurPret();
+			Initializer.joueurPret();
 			statut = Statut.COMPLETE;
 			joueurs.get(0).setChefDesVigiles(true);
 			jeu = new Partie(joueurs);
 			updateValues();
 			while (!couleurPret)
 				Thread.yield();
-			if (initializer != null)
-				initializer.nomJoueurAll(new ArrayList<>(jeu.getJoueurs().values()));
+			Initializer.nomJoueurAll(new ArrayList<>(jeu.getJoueurs().values()));
 			try {
 				demarerJeu();
 			} catch (InterruptedException e) {
@@ -251,13 +243,10 @@ public class ControleurJeu {
 		finJeu();
 		if (isFinished)
 			return;
-		if (initializer != null)
-			initializer.nbZombiesLieuAll(new ArrayList<>(jeu.getLieux().values()));
+		Initializer.nbZombiesLieuAll(new ArrayList<>(jeu.getLieux().values()));
 		jeu.fermerLieu();
-		if (initializer != null)
-			initializer.lieuFermeAll(new ArrayList<>(jeu.getLieux().values()));
-		if (initializer != null)
-			initializer.lieuOuvertAll(new ArrayList<>(jeu.getLieux().values()));
+		Initializer.lieuFermeAll(new ArrayList<>(jeu.getLieux().values()));
+		Initializer.lieuOuvertAll(new ArrayList<>(jeu.getLieux().values()));
 		finJeu();
 		if (isFinished)
 			return;
@@ -307,8 +296,7 @@ public class ControleurJeu {
 			for (Joueur j2 : jeu.getJoueurs().values())
 				j2.getConnection().envoyer(m);
 		}
-		if (initializer != null)
-			initializer.fouilleCamion(s);
+		Initializer.fouilleCamion(s);
 	}
 
 	private List<PionCouleur> getPersosLieu(int i) {
@@ -345,23 +333,20 @@ public class ControleurJeu {
 						numeroTour);
 				for (Joueur joueur : jeu.getJoueurs().values())
 					j.getConnection().envoyer(m);
-				if (initializer != null)
-					initializer.electionChef("Nouveau chef des vigiles : " + jeu.getChefVIgile());
+				Initializer.electionChef("Nouveau chef des vigiles : " + jeu.getChefVIgile());
 			} else {
 				jeu.setNewChef(false);
 				m = ControleurReseau.construirePaquetTcp("RECV", Couleur.NUL, partieId, numeroTour);
 				for (Joueur j2 : jeu.getJoueurs().values())
 					j2.getConnection().envoyer(m);
-				if (initializer != null)
-					initializer.electionChef("Il n'y a pas de nouveau chef des vigiles");
+				Initializer.electionChef("Il n'y a pas de nouveau chef des vigiles");
 			}
 		} else {
 			cev.noNewVigile(jeu);
 			m = ControleurReseau.construirePaquetTcp("RECV", Couleur.NUL, partieId, numeroTour);
 			for (Joueur j2 : jeu.getJoueurs().values())
 				j2.getConnection().envoyer(m);
-			if (initializer != null)
-				initializer.electionChef("Il n'y a pas de nouveau chef des vigiles");
+			Initializer.electionChef("Il n'y a pas de nouveau chef des vigiles");
 		}
 
 	}
@@ -439,9 +424,8 @@ public class ControleurJeu {
 			for (Joueur j : jeu.getJoueurs().values())
 				if (!(j.isChefDesVigiles()) && ve == VigileEtat.NE)
 					j.getConnection().envoyer(m);
-			if (initializer != null)
-				initializer.prevenirDeplacementVigile("Le chef des vigile (" + jeu.getChefVIgile().getCouleur()
-						+ ") a choisi la detination :" + this.jeu.getLieux().get(dest));
+			Initializer.prevenirDeplacementVigile("Le chef des vigile (" + jeu.getChefVIgile().getCouleur()
+					+ ") a choisi la detination :" + this.jeu.getLieux().get(dest));
 			HashMap<String, Integer> idj = new HashMap<>();
 			for (Joueur j : jeu.getJoueurs().values())
 				if (j != jeu.getChefVIgile() && j.isEnVie())
@@ -531,8 +515,7 @@ public class ControleurJeu {
 				for (Joueur j2 : jeu.getJoueurs().values())
 					if (j2 != j)
 						j2.getConnection().envoyer(m);
-				if (initializer != null)
-					initializer.destionationPersoAll(new ArrayList<>(jeu.getLieux().values()));
+				Initializer.destionationPersoAll(new ArrayList<>(jeu.getLieux().values()));
 			}
 		}
 		for (Joueur j : jeu.getJoueurs().values()) {
@@ -559,8 +542,7 @@ public class ControleurJeu {
 				for (Joueur j2 : jeu.getJoueurs().values())
 					if (j2 != j)
 						j2.getConnection().envoyer(m);
-				if (initializer != null)
-					initializer.destionationPersoAll(new ArrayList<>(jeu.getLieux().values()));
+				Initializer.destionationPersoAll(new ArrayList<>(jeu.getLieux().values()));
 			}
 		}
 
@@ -568,8 +550,7 @@ public class ControleurJeu {
 
 	private void phaseAttaqueZombie() {
 		List<Integer> nb = jeu.lastAttaqueZombie();
-		if (initializer != null)
-			initializer.nbZombiesLieuAll(new ArrayList<>(jeu.getLieux().values()));
+		Initializer.nbZombiesLieuAll(new ArrayList<>(jeu.getLieux().values()));
 		String me = ControleurReseau.construirePaquetTcp("PRAZ", nb.get(0), nb.get(1), jeu.getLieuxOuverts(),
 				jeu.getNbZombieLieux(), jeu.getNbPionLieux(), partieId, numeroTour);
 		for (Joueur joueur : jeu.getJoueurs().values())
@@ -643,8 +624,7 @@ public class ControleurJeu {
 								jeu.getLieux().get(i).getNbZombies(), partieId, numeroTour));
 			}
 		}
-		if (initializer != null)
-			initializer.nbZombiesLieuAll(new ArrayList<>(jeu.getLieux().values()));
+		Initializer.nbZombiesLieuAll(new ArrayList<>(jeu.getLieux().values()));
 		defense.add(persoCache);
 		defense.add(nbCarteMatériel);
 		return defense;
@@ -705,16 +685,13 @@ public class ControleurJeu {
 		PionCouleur pionCou = (PionCouleur) ControleurReseau.getValueTcp("RAZCS", rep, 2);
 		int pion = PpTools.getPionByValue(pionCou);
 		jeu.sacrifie(jou, PpTools.valeurToIndex(pion));
-		if (initializer != null) {
-			initializer.nbPersoJoueurAll(new ArrayList<>(jeu.getJoueurs().values()));
-			initializer.destionationPersoAll(new ArrayList<>(jeu.getLieux().values()));
-		}
+		Initializer.nbPersoJoueurAll(new ArrayList<>(jeu.getJoueurs().values()));
+		Initializer.destionationPersoAll(new ArrayList<>(jeu.getLieux().values()));
 		m = ControleurReseau.construirePaquetTcp("RAZIF", i, pionCou, jeu.getLieux().get(i).getNbZombies(), partieId,
 				numeroTour);
 		for (Joueur joueur : jeu.getJoueurs().values())
 			joueur.getConnection().envoyer(m);
-		if (initializer != null)
-			initializer.nbZombiesLieuAll(new ArrayList<>(jeu.getLieux().values()));
+		Initializer.nbZombiesLieuAll(new ArrayList<>(jeu.getLieux().values()));
 	}
 
 	private void placementPersonnage() {
@@ -746,8 +723,7 @@ public class ControleurJeu {
 					if (j != jeu.getJoueurs().get(i))
 						j.getConnection().envoyer(message);
 			}
-			if (initializer != null)
-				initializer.destionationPersoAll(new ArrayList<>(jeu.getLieux().values()));
+			Initializer.destionationPersoAll(new ArrayList<>(jeu.getLieux().values()));
 		}
 	}
 
@@ -819,10 +795,8 @@ public class ControleurJeu {
 					numeroTour);
 			for (Joueur j : jeu.getJoueurs().values())
 				j.getConnection().envoyer(message);
-			if (initializer != null)
-				initializer.finPartie();
-			if (initializer != null)
-				initializer.getGagnant(gagnantNotFair);
+			Initializer.finPartie();
+			Initializer.getGagnant(gagnantNotFair);
 			statut = Statut.COMPLETE;
 			try {
 				ControleurReseau.getTcpServeur().arreter();
