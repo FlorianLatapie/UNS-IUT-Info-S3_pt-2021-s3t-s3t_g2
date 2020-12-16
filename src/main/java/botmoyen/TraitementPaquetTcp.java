@@ -291,7 +291,7 @@ public class TraitementPaquetTcp extends TraitementPaquet<TcpClient> {
 	}
 
 	public void ReponseJoueurCourant(Paquet paquet, String message) {
-		CarteType RJ = traitementB.ReponseJoueurCourant(core);
+		CarteType RJ = traitementB.BestReponseJoueurCourant(core);
 		String IDP = (String) paquet.getValeur(message, 1);
 		int NT = (int) paquet.getValeur(message, 2);
 		getControleurReseau()
