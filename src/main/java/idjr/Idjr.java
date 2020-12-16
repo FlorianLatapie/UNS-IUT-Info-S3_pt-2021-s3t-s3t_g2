@@ -49,6 +49,7 @@ public class Idjr {
 	private CarteType carteChoisi;
 	private Couleur couleurChoisi;
 	private CarteType carteUtiliser;
+	private List<CarteType> cartesUtiliser;
 	private Couleur voteChoisi;
 	private boolean isContinue;
 	private String etat;
@@ -162,6 +163,24 @@ public class Idjr {
 
 	public void utiliserCarteChoisi(boolean etat) {
 		estUtiliserCarteChoisi = etat;
+	}
+	
+	private boolean estUtiliserCartesChoisi = false;
+
+	public void choisirUtiliserCartes(List<CarteType> cartesUtiliser) {
+		this.cartesUtiliser = cartesUtiliser;
+	}
+
+	public boolean utiliserCartesDisponible() {
+		return estUtiliserCartesChoisi;
+	}
+
+	public List<CarteType> getUtiliserCartesChosi() {
+		return cartesUtiliser;
+	}
+
+	public void utiliserCartesChoisi(boolean etat) {
+		estUtiliserCartesChoisi = etat;
 	}
 
 	public int getPionChoisi() {

@@ -44,4 +44,6 @@ public interface JeuListener {
 	void log(String action);
 	
 	void enleverDes();
+	
+	void choisirUtiliserCartes(List<CarteType> carteTypes);
 }

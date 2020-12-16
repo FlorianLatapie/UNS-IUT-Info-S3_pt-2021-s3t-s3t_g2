@@ -258,24 +258,15 @@ public class TraitementIdjr {
 		}
 		int nbCarteJouee = 0;
 		if (!listeCarteUtilisable.isEmpty()) {
-			// TODO choisir carte parmis carte utilisable
-			nbCarteJouee = r.nextInt(listeCarteUtilisable.size());
-			for (int i = 0; i < nbCarteJouee; i++) {
-
-				Initializer.choisirUtiliserCarte(listeCarteUtilisable);
-				while (!core.utiliserCarteDisponible())
-					Thread.yield();
-				core.utiliserCarteChoisi(false);
-
-				CarteType tmpCarteType = core.getUtiliserCarteChosi();
-				if (tmpCarteType == null)
-					tmpCarteType = tmpCarteType.NUL;
-				listeCarteJouee.add(tmpCarteType);
-				core.getListeCarte().remove(tmpCarteType);
-				Initializer.updateCarte();
-				// TODO Mettre a jour liste carte
-				listeCarteUtilisable.remove(tmpCarteType);
-			}
+			Initializer.choisirUtiliserCartes(listeCarteUtilisable);
+			while (!core.utiliserCartesDisponible())
+				Thread.yield();
+			core.utiliserCartesChoisi(false);
+			List<CarteType> tmpCarteType = core.getUtiliserCartesChosi();
+			listeCarteJouee.addAll(tmpCarteType);
+			core.getListeCarte().removeAll(tmpCarteType);
+			Initializer.updateCarte();
+			listeCarteUtilisable.removeAll(tmpCarteType);
 		}
 		List<PionCouleur> listePionCache = listePionCache(core);
 		int i = 0;
