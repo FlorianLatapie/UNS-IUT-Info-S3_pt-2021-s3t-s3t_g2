@@ -20,6 +20,8 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
+import javafx.scene.text.TextAlignment;
+import javafx.stage.Stage;
 
 public class OptionPane extends StackPane {
 
@@ -156,20 +158,21 @@ public class OptionPane extends StackPane {
 		bEnglish.setOnMouseEntered(event -> bEnglish.setStyle(styleBoutonsSouris));
 		bEnglish.setOnMouseExited(event -> bEnglish.setStyle(styleBoutons));
 
+		
+
+		Button bPleinEcran = new Button("Mettre en plein écran"); // TODO
+		bPleinEcran.setFont(policeBouton);
+		bPleinEcran.setAlignment(Pos.CENTER);
+		bPleinEcran.setPrefSize(500, hauteurElement);
+		bPleinEcran.setStyle(styleBoutons);
+		bPleinEcran.setOnMouseEntered(event -> bPleinEcran.setStyle(styleBoutonsSouris));
+		bPleinEcran.setOnMouseExited(event -> bPleinEcran.setStyle(styleBoutons));
+		bPleinEcran.setOnAction(EventHandler -> {
+			 Stage stage = (Stage) bPleinEcran.getScene().getWindow();
+		     stage.setFullScreen(true);
+		});
+		
 		Button bAcc = new Button(International.trad("texte.titreAcc"));
-
-		CheckBox cbPleinEcran = new CheckBox("fullscreen"); // TODO
-		cbPleinEcran.setStyle(styleTexte);
-		cbPleinEcran.setPadding(new Insets(10));
-		cbPleinEcran.setFont(policeBouton);
-		cbPleinEcran.setAlignment(Pos.CENTER_LEFT);
-		/*if (fs) {
-			cbPleinEcran.setSelected(true);
-		}
-		else {
-			cbPleinEcran.setSelected(false);
-		}*/
-
 		bAcc.setFont(policeBouton);
 		bAcc.setAlignment(Pos.CENTER);
 		bAcc.setPrefSize(500, hauteurElement);
@@ -190,7 +193,7 @@ public class OptionPane extends StackPane {
 		hbBRetour.getChildren().add(bRetour);
 		hbLang.getChildren().add(bFrancais);
 		hbLang.getChildren().add(bEnglish);
-		vbBoutons.getChildren().addAll(hbLang, cbPleinEcran, bAcc);
+		vbBoutons.getChildren().addAll(hbLang, bPleinEcran, bAcc);
 		vbBoutons.setMargin(vbTitre, new Insets(140));
 		vbBoutons.setMargin(hbBRetour, new Insets(57, 0, 30, 19));
 
