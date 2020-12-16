@@ -143,7 +143,8 @@ public class CouleurPane extends StackPane implements ICouleurListener {
 
 			@Override
 			public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
-				couleursChoix.set(0, newValue);
+				if (ordre.length > 0)
+					couleursChoix.set(ordre[0], newValue);
 			}
 		});
 		monter1 = new Button(International.trad("bouton.monter"));
@@ -190,7 +191,8 @@ public class CouleurPane extends StackPane implements ICouleurListener {
 
 			@Override
 			public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
-				couleursChoix.set(1, newValue);
+				if (ordre.length > 1)
+					couleursChoix.set(ordre[1], newValue);
 			}
 		});
 		monter2 = new Button(International.trad("bouton.monter"));
@@ -240,7 +242,8 @@ public class CouleurPane extends StackPane implements ICouleurListener {
 
 			@Override
 			public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
-				couleursChoix.set(2, newValue);
+				if (ordre.length > 2)
+					couleursChoix.set(ordre[2], newValue);
 			}
 		});
 		monter3 = new Button(International.trad("bouton.monter"));
@@ -290,7 +293,8 @@ public class CouleurPane extends StackPane implements ICouleurListener {
 
 			@Override
 			public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
-				couleursChoix.set(3, newValue);
+				if (ordre.length > 3)
+					couleursChoix.set(ordre[3], newValue);
 			}
 		});
 		monter4 = new Button(International.trad("bouton.monter"));
@@ -340,7 +344,8 @@ public class CouleurPane extends StackPane implements ICouleurListener {
 
 			@Override
 			public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
-				couleursChoix.set(4, newValue);
+				if (ordre.length > 4)
+					couleursChoix.set(ordre[4], newValue);
 			}
 		});
 		monter5 = new Button(International.trad("bouton.monter"));
@@ -390,7 +395,8 @@ public class CouleurPane extends StackPane implements ICouleurListener {
 
 			@Override
 			public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
-				couleursChoix.set(5, newValue);
+				if (ordre.length > 5)
+					couleursChoix.set(ordre[5], newValue);
 			}
 		});
 		monter6 = new Button(International.trad("bouton.monter"));
@@ -440,11 +446,9 @@ public class CouleurPane extends StackPane implements ICouleurListener {
 		bJouer.setOnMouseEntered(event -> bJouer.setStyle(styleBoutonsSouris));
 		bJouer.setOnMouseExited(event -> bJouer.setStyle(styleBoutons));
 		bJouer.setOnAction(EventHandler -> {
-			boolean isOk = IhmOutils.isAllUniqueColor(core.getNbJoueur(), couleursChoix.get(ordre[0]), couleursChoix.get(ordre[1]), couleursChoix.get(ordre[2]), couleursChoix.get(ordre[3]),
-					couleursChoix.get(ordre[4]), couleursChoix.get(ordre[4]));
+			boolean isOk = IhmOutils.isAllUniqueColor(couleursChoix);
 			if (isOk) {
-				List<Couleur> cs = IhmOutils.comboStringToColorList(core.getNbJoueur(), couleur1, couleur2, couleur3,
-						couleur4, couleur5, couleur6);
+				List<Couleur> cs = IhmOutils.comboStringToColorList(ordre, couleursChoix);
 				core.getCj().setJoueurCouleur(cs, IhmOutils.reOrdre(ordre, joueurs));
 				sc.setPaneOnTop(ApplicationPane.PLATEAU);
 			}

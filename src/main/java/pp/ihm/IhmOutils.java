@@ -23,11 +23,11 @@ public interface IhmOutils {
 	 * @param couleurs couleurs
 	 * @return l'unicité de chaque couleur
 	 */
-	public static boolean isAllUniqueColor(int max, String... couleurs) {
-		for (int i = 0; i < max; i++)
-			for (int y = 0; y < max; y++)
+	public static boolean isAllUniqueColor(List<String> couleurs) {
+		for (int i = 0; i < couleurs.size(); i++)
+			for (int y = 0; y < couleurs.size(); y++)
 				if (i != y)
-					if (couleurs[i] == couleurs[y])
+					if (couleurs.get(i) == couleurs.get(y))
 						return false;
 
 		return true;
@@ -40,12 +40,12 @@ public interface IhmOutils {
 	 * @param couleurs couleurs
 	 * @return une liste de couleur
 	 */
-	public static List<Couleur> comboStringToColorList(int max, ComboBox<String>... couleurs) {
-		List<Couleur> cs = new ArrayList<>();
-		for (int i = 0; i < max; i++)
-			cs.add(Couleur.valueOf(String.valueOf(couleurs[i].getValue().charAt(0)).toUpperCase()));
+	public static List<Couleur> comboStringToColorList(int[] tab, List<String> couleList) {
+		List<Couleur> tmp = new ArrayList<>();
+		for (int i = 0; i < tab.length; i++)
+			tmp.add(Couleur.valueOf(String.valueOf(couleList.get(tab[i]).charAt(0)).toUpperCase()));
 
-		return cs;
+		return tmp;
 	}
 
 	static boolean nomEstValide(String nom) {
@@ -185,12 +185,12 @@ public interface IhmOutils {
 
 		return tab;
 	}
-	
+
 	public static List<Joueur> reOrdre(int[] tab, List<Joueur> joueurs) {
 		List<Joueur> tmp = new ArrayList<>();
-		for (int i = 0; i < tab.length; i++) 
+		for (int i = 0; i < tab.length; i++)
 			tmp.add(joueurs.get(tab[i]));
-		
-		return joueurs;
+
+		return tmp;
 	}
 }
