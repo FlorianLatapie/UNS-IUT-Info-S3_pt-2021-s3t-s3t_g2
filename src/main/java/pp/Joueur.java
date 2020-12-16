@@ -27,13 +27,7 @@ public class Joueur {
 
 	/** Identifiant du joueur sous la forme d'un entier */
 	private final int joueurIdint;
-
-	/** Adresse IP du joueur */
-	private final InetAddress ip;
-
-	/** Port de connexion du joueur sur le serveur TCP */
-	private final int port;
-
+	
 	/** Couleur en jeu d'un joueur */
 	private Couleur couleur;
 
@@ -64,12 +58,10 @@ public class Joueur {
 	 * @param nom         Le nom
 	 * @param connection  La connexion au client TCP
 	 */
-	public Joueur(int joueurIdint, InetAddress ip, int port, String nom, TcpClient connection) {
+	public Joueur(int joueurIdint, String nom, TcpClient connection) {
 		this.connection = connection;
 		this.joueurIdint = joueurIdint;
 		this.joueurId = "J" + joueurIdint;
-		this.ip = ip;
-		this.port = port;
 		enVie = true;
 		personnages = new HashMap<>();
 		cartes = new ArrayList<>();
@@ -88,8 +80,6 @@ public class Joueur {
 		this.connection = null;
 		this.joueurIdint = joueurIdint;
 		this.joueurId = "J" + joueurIdint;
-		this.ip = ip;
-		this.port = port;
 		enVie = true;
 		personnages = new HashMap<>();
 		cartes = new ArrayList<>();
@@ -112,24 +102,6 @@ public class Joueur {
 	 */
 	public int getJoueurIdint() {
 		return joueurIdint;
-	}
-
-	/**
-	 * Récupère l'adresse IP du joueur.
-	 * 
-	 * @return ip L'adresse IP du joueur
-	 */
-	public InetAddress getIp() {
-		return ip;
-	}
-
-	/**
-	 * Récupère le port de connexion au serveur TCP du joueur.
-	 * 
-	 * @return port Le port de connexion au serveur TCP du joueur
-	 */
-	public int getPort() {
-		return port;
 	}
 
 	/**

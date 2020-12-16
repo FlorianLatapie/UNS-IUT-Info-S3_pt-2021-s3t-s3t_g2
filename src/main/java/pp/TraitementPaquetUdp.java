@@ -46,9 +46,6 @@ public class TraitementPaquetUdp extends TraitementPaquet<DatagramPacket> {
 		case "AMP":
 			amp(packet, message);
 			break;
-		case "IP":
-			ip(packet, message);
-			break;
 		default:
 			throw new IllegalStateException(
 					MessageFormat.format("[UDP] Il n''y a pas de traitement possible pour {0}", packet.getCle()));
@@ -70,13 +67,14 @@ public class TraitementPaquetUdp extends TraitementPaquet<DatagramPacket> {
 				ControleurReseau.getIp().getHostAddress(), ControleurReseau.getTcpPort(), core.getNomPartie(),
 				core.getNbjtotal(), core.getNbjr(), core.getNbjv(), core.getNbjractuel(), core.getNbjvactuel(),
 				core.getStatus());
+		
 		switch (typePartie) {
 		case JRU:
-			if (core.getNbjr() == 6)
+			if (core.getNbjr() == core.getNbjtotal())
 				ControleurReseau.envoyerUdp(m);
 			break;
 		case BOTU:
-			if (core.getNbjv() == 6)
+			if (core.getNbjv() == core.getNbjtotal())
 				ControleurReseau.envoyerUdp(m);
 			break;
 		case MIXTE:

@@ -146,7 +146,7 @@ public class ControleurJeu {
 			joueurs.get(i).setCouleur(couleurs.get(i));
 	}
 
-	private  List<Couleur> getJoueursCouleurs() {
+	private List<Couleur> getJoueursCouleurs() {
 		List<Couleur> lc = new ArrayList<>();
 		lc.add(jeu.getChefVIgile().getCouleur());
 		for (Joueur j : jeu.getJoueurs().values())
@@ -191,12 +191,12 @@ public class ControleurJeu {
 		ControleurReseau.initConnexion(tcp, udp, ConnexionType.SERVEUR, ip);
 	}
 
-	public String ajouterJoueur(InetAddress ip, int port, String nom, TypeJoueur typeJoueur, TcpClient connection) {
+	public String ajouterJoueur(String nom, TypeJoueur typeJoueur, TcpClient connection) {
 		if (typeJoueur == TypeJoueur.JR && nbjractuel == nbjr)
 			return null;
 		if (typeJoueur == TypeJoueur.BOT && nbjvactuel == nbjv)
 			return null;
-		Joueur joueur = new Joueur(getNewJoueurId(), ip, port, nom, connection);
+		Joueur joueur = new Joueur(port, nom, connection);
 		if (typeJoueur == TypeJoueur.JR)
 			nbjractuel++;
 		else if (typeJoueur == TypeJoueur.BOT)
@@ -259,7 +259,6 @@ public class ControleurJeu {
 		start();
 	}
 
-	
 	private List<PionCouleur> getPersosLieu(int i) {
 		List<PionCouleur> pc = new ArrayList<>();
 		Lieu l = jeu.getLieux().get(i);
