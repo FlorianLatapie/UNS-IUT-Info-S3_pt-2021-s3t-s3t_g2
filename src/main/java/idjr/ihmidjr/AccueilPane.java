@@ -8,6 +8,7 @@ import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.control.Tooltip;
 import javafx.scene.effect.GaussianBlur;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Background;
@@ -20,6 +21,7 @@ import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
+import javafx.scene.text.TextAlignment;
 
 /**
  * The Class AccueilPane.
@@ -41,13 +43,13 @@ public class AccueilPane extends StackPane {
 	private Insets margeBoutons = new Insets(marge, marge, marge, marge);
 	private Font policeBouton = Font.font("Segoe UI", FontWeight.BOLD, 33);
 	private CornerRadii coin = new CornerRadii(15.0);
+	private String styleQuestion = " -fx-background-color:#000000; -fx-background-radius: 50px; -fx-text-fill: #ffffff";
 	private String styleBoutons = " -fx-background-color:#000000; -fx-background-radius: 15px; -fx-text-fill: #ffffff";
 	private String styleBoutonsSouris = "-fx-background-color:#ff0000;  -fx-text-fill:#000000; -fx-background-radius: 15px;";
 	private StackPane stackPane = new StackPane();
 	private GaussianBlur flou = new GaussianBlur(30);
 	private Font policeNom = Font.font("Segoe UI", 17);
 	private CornerRadii coinfb = new CornerRadii(5.0);
-	private Background fondBlanc = new Background(new BackgroundFill(Color.WHITE, coinfb, null));
 	private int largeurTF = 600;
 	private int hauteurElemtents = 60;
 
@@ -80,22 +82,32 @@ public class AccueilPane extends StackPane {
 		titre.setMinWidth(800);
 
 		// nom du joueur
-		Label infoNomJoueur = new Label();// TODO trad
-		infoNomJoueur.setText("Le nom de la partie, sous la forme d’une chaine de caractères pouvant" + "\n"
+		
+		HBox HNomJoueur = new HBox(); 
+		HNomJoueur.setAlignment(Pos.CENTER);
+		HNomJoueur.setSpacing(10);
+		
+		Tooltip infoNomJoueur = new Tooltip("Le nom de la partie, sous la forme d’une chaine de caractères pouvant" + "\n"
 				+ "contenir des lettres majuscules et minuscule (accentuées ou non), des" + " \n"
-				+ "nombres et les caractères spéciaux apostrophe «’», espace « » et souligné" + "\n" + " bas «_».");
-		infoNomJoueur.setMinHeight(2 * hauteurElemtents);
-		infoNomJoueur.setPrefSize(largeurTF, 2 * hauteurElemtents);
+				+ "nombres et les caractères spéciaux apostrophe «’», espace « » et souligné" + "\n" + " bas «_».");	
 		infoNomJoueur.setFont(policeNom);
-		infoNomJoueur.setPadding(new Insets(5, 10, 5, 10));
-		infoNomJoueur.setBackground(fondBlanc);
-				
 		nomjoueur = new TextField();
 		nomjoueur.setText("JoueurSansNom" + (int) (100 * Math.random()));
 		nomjoueur.setStyle("-fx-background-color: #1A1A1A; -fx-text-fill: white; -fx-border-color: white;  -fx-border-width: 1;");
 		nomjoueur.setFont(policeNom);
 		nomjoueur.setPrefSize(largeurTF, hauteurElemtents);
 		nomjoueur.setMinHeight(hauteurElemtents);
+		nomjoueur.setTooltip(infoNomJoueur);
+		
+		Label iconeQuestion = new Label("?");
+		iconeQuestion.setAlignment(Pos.CENTER);
+		iconeQuestion.setPrefSize(hauteurElemtents, hauteurElemtents);
+		iconeQuestion.setMinSize(hauteurElemtents, hauteurElemtents);
+		iconeQuestion.setStyle(styleQuestion);
+		iconeQuestion.setFont(policeBouton);
+		iconeQuestion.setTooltip(infoNomJoueur);
+		
+		HNomJoueur.getChildren().addAll(nomjoueur, iconeQuestion);
 
 		// boutons
 		Button bJouer = new Button(International.trad("bouton.jouer"));
@@ -204,7 +216,7 @@ public class AccueilPane extends StackPane {
 		centreMenu.setAlignment(Pos.CENTER);
 		centreMenu.setMargin(titre, new Insets(0, 0, 50, 0));
 		centreMenu.setSpacing(20);
-		centreMenu.getChildren().addAll(titre, infoNomJoueur,nomjoueur, grilleBoutons);
+		centreMenu.getChildren().addAll(titre,HNomJoueur, grilleBoutons);
 
 		// boite du fond qui contient tout
 		HBox fond = new HBox();
