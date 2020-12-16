@@ -93,24 +93,22 @@ public class ControleurJeu {
 
 	private synchronized void initPartie() {
 		coreThread = ThreadOutils.asyncTask("initPartie", () -> {
-			try {
-				Thread.sleep(1000);
-			} catch (InterruptedException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
-			}
 			String m = ControleurReseau.construirePaquetUdp("ACP", intPartieId,
 					ControleurReseau.getIp().getHostAddress(), port, nomPartie, nbjtotal, nbjr, nbjv, statut);
 			ControleurReseau.envoyerUdp(m);
+			
 			while (joueurs.size() != this.nbjtotal)
 				Thread.yield();
+			
 			Initializer.joueurPret();
 			statut = Statut.COMPLETE;
 			joueurs.get(0).setChefDesVigiles(true);
 			jeu = new Partie(joueurs);
 			updateValues();
+			
 			while (!couleurPret)
 				Thread.yield();
+			
 			Initializer.nomJoueurAll(new ArrayList<>(jeu.getJoueurs().values()));
 			try {
 				demarerJeu();
@@ -192,18 +190,16 @@ public class ControleurJeu {
 	}
 
 	public String ajouterJoueur(String nom, TypeJoueur typeJoueur, TcpClient connection) {
-		if (typeJoueur == TypeJoueur.JR && nbjractuel == nbjr)
-			return null;
-		if (typeJoueur == TypeJoueur.BOT && nbjvactuel == nbjv)
-			return null;
-		Joueur joueur = new Joueur(port, nom, connection);
+		Joueur joueur = new Joueur(getNewJoueurId(), nom, connection);
 		if (typeJoueur == TypeJoueur.JR)
 			nbjractuel++;
 		else if (typeJoueur == TypeJoueur.BOT)
 			nbjvactuel++;
+		
 		synchronized (joueurs) {
 			joueurs.add(joueur);
 		}
+		
 		return joueur.getJoueurId();
 	}
 
@@ -766,6 +762,10 @@ public class ControleurJeu {
 				e.printStackTrace();
 			}
 		}
+	}
+	
+	public boolean estPleine() {
+		return joueurs.size() == this.nbjtotal;
 	}
 
 	public String getPartieId() {
