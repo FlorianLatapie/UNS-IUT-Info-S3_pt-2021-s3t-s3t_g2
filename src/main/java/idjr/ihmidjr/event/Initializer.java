@@ -149,4 +149,9 @@ public abstract class Initializer {
 		for (JeuListener jl : listenersjl)
 			jl.enleverDes();
 	}
+
+	public static void choisirUtiliserCartes(List<CarteType> carteTypes) {
+		for (JeuListener jl : listenersjl)
+			jl.choisirUtiliserCartes(carteTypes);
+	}
 }

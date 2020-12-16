@@ -1,5 +1,6 @@
 package idjr.ihmidjr;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -158,6 +159,9 @@ public class JeuPane extends StackPane implements JeuListener {
 	VBox des;
 	VBox vbForce;
 
+	List<Boolean> estActif = new ArrayList<>();
+	List<CarteType> cartes = new ArrayList<>();
+
 	public JeuPane(ScreenControl sc, Core c) {
 		core = c;
 		sControl = sc;
@@ -215,9 +219,6 @@ public class JeuPane extends StackPane implements JeuListener {
 		bDeCarte1.setPrefSize(tailleCarte, tailleCarte);
 		bDeCarte1.setMinSize(tailleCarte, tailleCarte);
 		bDeCarte1.setGraphic(imgDeCarte1);
-		bDeCarte1.setOnAction(EventHandler -> {
-			bDeCarte1.setStyle("-fx-border-color: red; -fx-border-insets: -5; -fx-border-width: 3;");
-		});
 		carte1.getChildren().addAll(bDeCarte1);
 
 		carte2 = new VBox();
@@ -1125,8 +1126,8 @@ public class JeuPane extends StackPane implements JeuListener {
 		bForce.setTextAlignment(TextAlignment.CENTER);
 		bForce.setFont(Font.font("Segoe UI", FontWeight.BOLD, 23));
 		bForce.setStyle(styleBoutons);
-		bForce.setPrefSize(largBouton, hautBouton+10);
-		bForce.setMinSize(largBouton, hautBouton+10);
+		bForce.setPrefSize(largBouton, hautBouton + 10);
+		bForce.setMinSize(largBouton, hautBouton + 10);
 		bForce.setOnAction(event -> {
 			if (!force.isVisible())
 				force.setVisible(true);
@@ -1611,17 +1612,12 @@ public class JeuPane extends StackPane implements JeuListener {
 			Button[] buttons = { bDeCarte1, bDeCarte2, bDeCarte3, bDeCarte4, bDeCarte5, bDeCarte6, bDeCarte7,
 					bDeCarte8 };
 			VBox[] carteVbox = { carte1, carte2, carte3, carte4, carte5, carte6, carte7, carte8 };
-			for (int i = 0; i < 9; i++) {
+			cartes = core.getIdjr().getListeCarte();
+			for (int i = 0; i < imgViews.length; i++) {
 				if (i < core.getIdjr().getListeCarte().size()) {
 					imgViews[i].setImage(new Image(convertCarte(core.getIdjr().getListeCarte().get(i))));
 					carteVbox[i].setVisible(true);
 					imgViews[i].setDisable(false);
-					CarteType type = core.getIdjr().getListeCarte().get(i);
-					buttons[i].setOnAction(EventHandler -> {
-						core.getIdjr().choisirUtiliserCarte(type);
-						core.getIdjr().utiliserCarteChoisi(true);
-						resetUtiliserCarte();
-					});
 				} else {
 					imgViews[i].setImage(new Image(DataControl.CARTE_VIDE));
 					carteVbox[i].setVisible(false);
@@ -1642,6 +1638,7 @@ public class JeuPane extends StackPane implements JeuListener {
 		passerCarte.setVisible(false);
 		passerCarte.setDisable(true);
 		bPasserCarte.setDisable(true);
+		bPasserCarte.setText("Passer");
 	}
 
 	public void resetVoteCarte() {
@@ -1680,7 +1677,7 @@ public class JeuPane extends StackPane implements JeuListener {
 		Platform.runLater(() -> {
 			Button[] buttons = { bDeCarte1, bDeCarte2, bDeCarte3, bDeCarte4, bDeCarte5, bDeCarte6, bDeCarte7,
 					bDeCarte8, };
-			for (int i = 0; i < 9; i++) {
+			for (int i = 0; i < buttons.length; i++) {
 				if (i < core.getIdjr().getListeCarte().size()) {
 					buttons[i].setDisable(false);
 				}
@@ -1701,11 +1698,18 @@ public class JeuPane extends StackPane implements JeuListener {
 	public void choisirUtiliserCarte(CarteType carteType) {
 		Platform.runLater(() -> {
 			Button[] buttons = { bDeCarte1, bDeCarte2, bDeCarte3, bDeCarte4, bDeCarte5, bDeCarte6, bDeCarte7,
-					bDeCarte8, };
-			for (int i = 0; i < 9; i++) {
+					bDeCarte8 };
+			for (int i = 0; i < buttons.length; i++) {
 				if (i < core.getIdjr().getListeCarte().size()) {
-					if (carteType == core.getIdjr().getListeCarte().get(i))
+					if (carteType == cartes.get(i)) {
 						buttons[i].setDisable(false);
+						CarteType type = cartes.get(i);
+						buttons[i].setOnAction(EventHandler -> {
+							core.getIdjr().choisirUtiliserCarte(type);
+							core.getIdjr().utiliserCarteChoisi(true);
+							resetUtiliserCarte();
+						});
+					}
 				}
 			}
 
@@ -1725,11 +1729,18 @@ public class JeuPane extends StackPane implements JeuListener {
 		Platform.runLater(() -> {
 			Button[] buttons = { bDeCarte1, bDeCarte2, bDeCarte3, bDeCarte4, bDeCarte5, bDeCarte6, bDeCarte7,
 					bDeCarte8, };
-			for (int i = 0; i < 9; i++) {
+			for (int i = 0; i < buttons.length; i++) {
 				if (i < core.getIdjr().getListeCarte().size()) {
 					for (CarteType carteType2 : carteTypes) {
-						if (carteType2 == core.getIdjr().getListeCarte().get(i))
+						if (carteType2 == cartes.get(i)) {
 							buttons[i].setDisable(false);
+							CarteType type = cartes.get(i);
+							buttons[i].setOnAction(EventHandler -> {
+								core.getIdjr().choisirUtiliserCarte(type);
+								core.getIdjr().utiliserCarteChoisi(true);
+								resetUtiliserCarte();
+							});
+						}
 					}
 				}
 			}
@@ -1742,6 +1753,63 @@ public class JeuPane extends StackPane implements JeuListener {
 				resetUtiliserCarte();
 			});
 		});
+	}
+
+	public void setContinue() {
+		if (cartes.contains(true)) {
+			bPasserCarte.setText("Valider");
+		} else {
+			bPasserCarte.setText("Passer");
+		}
+	}
+
+	@Override
+	public void choisirUtiliserCartes(List<CarteType> carteTypes) {
+		Platform.runLater(() -> {
+			Button[] buttons = { bDeCarte1, bDeCarte2, bDeCarte3, bDeCarte4, bDeCarte5, bDeCarte6, bDeCarte7,
+					bDeCarte8 };
+			for (int i = 0; i < buttons.length; i++) {
+				if (i < core.getIdjr().getListeCarte().size()) {
+					estActif.add(false);
+					for (CarteType carteType2 : carteTypes) {
+						if (carteType2 == cartes.get(i)) {
+							buttons[i].setDisable(false);
+							CarteType type = cartes.get(i);
+							int tmp = i;
+							buttons[i].setOnAction(EventHandler -> {
+								estActif.set(tmp, !estActif.get(tmp));
+								setContinue();
+								if (estActif.get(tmp))
+									buttons[tmp].setStyle(
+											"-fx-border-color: red; -fx-border-insets: -5; -fx-border-width: 3;");
+								else
+									buttons[tmp].setStyle(null);
+							});
+						}
+					}
+				}
+			}
+			passerCarte.setVisible(true);
+			passerCarte.setDisable(false);
+			bPasserCarte.setDisable(false);
+			bPasserCarte.setOnAction(EventHandler -> {
+				core.getIdjr().setContinue(false);
+				core.getIdjr().choisirUtiliserCartes(getList());
+				core.getIdjr().utiliserCartesChoisi(true);
+				resetUtiliserCarte();
+			});
+		});
+	}
+
+	public List<CarteType> getList() {
+		List<CarteType> cartesResultaTypes = new ArrayList<>();
+		for (int i = 0; i < estActif.size(); i++) {
+			if (estActif.get(i)) {
+				cartesResultaTypes.add(cartes.get(i));
+			}
+		}
+
+		return cartesResultaTypes;
 	}
 
 	@Override
