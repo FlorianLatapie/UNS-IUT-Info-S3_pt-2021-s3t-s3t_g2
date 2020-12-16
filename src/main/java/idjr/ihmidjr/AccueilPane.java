@@ -97,7 +97,6 @@ public class AccueilPane extends StackPane {
 		nomjoueur.setFont(policeNom);
 		nomjoueur.setPrefSize(largeurTF, hauteurElemtents);
 		nomjoueur.setMinHeight(hauteurElemtents);
-		nomjoueur.setTooltip(infoNomJoueur);
 		
 		Label iconeQuestion = new Label("?");
 		iconeQuestion.setAlignment(Pos.CENTER);
