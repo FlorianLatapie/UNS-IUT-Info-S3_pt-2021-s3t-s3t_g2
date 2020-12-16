@@ -36,13 +36,16 @@ public class CouleurPane extends StackPane implements CouleurListener {
 	private int tailleCarreCentral = 800;
 	private int hBouton = 75;
 	private int lBouton = 150;
+	private int hBoutonMD = 60;
+	private int lBoutonMD = 150;
 	private int hauteurElemtents = 60;
 	private int largeurTF = 200;
 	private int largeurComboBox = 220;
-	private int spacing = 30;
+	private int spacing = 20;
 	
 	private String nomPolice = "Segoe UI";
 	private Font policeBouton = Font.font(nomPolice, FontWeight.BOLD, 27);
+	private Font policeBoutonMD = Font.font(nomPolice, FontWeight.BOLD, 23);
 	private Font policeNom = Font.font(nomPolice, 17);
 
 	private String styleBoutons = " -fx-background-color:#000000; -fx-background-radius: 15px; -fx-text-fill: #ffffff";
@@ -83,7 +86,14 @@ public class CouleurPane extends StackPane implements CouleurListener {
 		titre.setBackground(new Background(new BackgroundFill(Color.RED, coin, null)));
 		titre.setPrefWidth(730);
 		titre.setMinWidth(730);
-
+		
+		Label infoVigile = new Label();// TODO trad
+		infoVigile.setText("le premier joueur commence et sera chef des vigiles");
+		//infoVigile.setMinHeight(50);
+		infoVigile.setFont(policeNom);
+		infoVigile.setPadding(new Insets(5, 10, 5, 10));
+		infoVigile.setBackground(fondBlanc);
+		
 		////
 
 		VBox vJoueurs = new VBox();
@@ -101,10 +111,25 @@ public class CouleurPane extends StackPane implements CouleurListener {
 		couleur1.setMinHeight(hauteurElemtents);
 		couleur1.setPrefSize(largeurComboBox, hauteurElemtents);
 		couleur1.getItems().addAll(DataControl.couleursJoueur);
+		Button monter1 = new Button("Monter");
+		monter1.setPrefSize(lBoutonMD, hBoutonMD);
+		monter1.setMinSize(lBoutonMD, hBoutonMD);
+		monter1.setFont(policeBoutonMD);
+		monter1.setStyle(styleBoutons);
+		monter1.setOnMouseEntered(event -> monter1.setStyle(styleBoutonsSouris));
+		monter1.setOnMouseExited(event -> monter1.setStyle(styleBoutons));
+		Button descendre1 = new Button("Descendre");
+		descendre1.setPrefSize(lBoutonMD, hBoutonMD);
+		descendre1.setMinSize(lBoutonMD, hBoutonMD);
+		descendre1.setFont(policeBoutonMD);
+		descendre1.setStyle(styleBoutons);
+		descendre1.setOnMouseEntered(event -> descendre1.setStyle(styleBoutonsSouris));
+		descendre1.setOnMouseExited(event -> descendre1.setStyle(styleBoutons));
+		
 
 		j1.setAlignment(Pos.CENTER);
 		j1.setSpacing(spacing);
-		j1.getChildren().addAll(nom1, couleur1);
+		j1.getChildren().addAll(nom1, couleur1, monter1 ,descendre1);
 		j1.setDisable(false);
 
 		///
@@ -122,10 +147,24 @@ public class CouleurPane extends StackPane implements CouleurListener {
 		couleur2.setPrefSize(largeurComboBox, hauteurElemtents);
 		couleur2.setMinHeight(hauteurElemtents);
 		couleur2.getItems().addAll(DataControl.couleursJoueur);
+		Button monter2 = new Button("Monter");
+		monter2.setPrefSize(lBoutonMD, hBoutonMD);
+		monter2.setMinSize(lBoutonMD, hBoutonMD);
+		monter2.setFont(policeBoutonMD);
+		monter2.setStyle(styleBoutons);
+		monter2.setOnMouseEntered(event -> monter2.setStyle(styleBoutonsSouris));
+		monter2.setOnMouseExited(event -> monter2.setStyle(styleBoutons));
+		Button descendre2 = new Button("Descendre");
+		descendre2.setPrefSize(lBoutonMD, hBoutonMD);
+		descendre2.setMinSize(lBoutonMD, hBoutonMD);
+		descendre2.setFont(policeBoutonMD);
+		descendre2.setStyle(styleBoutons);
+		descendre2.setOnMouseEntered(event -> descendre2.setStyle(styleBoutonsSouris));
+		descendre2.setOnMouseExited(event -> descendre2.setStyle(styleBoutons));
 
 		j2.setAlignment(Pos.CENTER);
 		j2.setSpacing(spacing);
-		j2.getChildren().addAll(nom2, couleur2);
+		j2.getChildren().addAll(nom2, couleur2, monter2, descendre2);
 		j2.setDisable(false);
 
 		///
@@ -143,10 +182,24 @@ public class CouleurPane extends StackPane implements CouleurListener {
 		couleur3.setMinHeight(hauteurElemtents);
 		couleur3.setPrefSize(largeurComboBox, hauteurElemtents);
 		couleur3.getItems().addAll(DataControl.couleursJoueur);
+		Button monter3 = new Button("Monter");
+		monter3.setPrefSize(lBoutonMD, hBoutonMD);
+		monter3.setMinSize(lBoutonMD, hBoutonMD);
+		monter3.setFont(policeBoutonMD);
+		monter3.setStyle(styleBoutons);
+		monter3.setOnMouseEntered(event -> monter3.setStyle(styleBoutonsSouris));
+		monter3.setOnMouseExited(event -> monter3.setStyle(styleBoutons));
+		Button descendre3 = new Button("Descendre");
+		descendre3.setPrefSize(lBoutonMD, hBoutonMD);
+		descendre3.setMinSize(lBoutonMD, hBoutonMD);
+		descendre3.setFont(policeBoutonMD);
+		descendre3.setStyle(styleBoutons);
+		descendre3.setOnMouseEntered(event -> descendre3.setStyle(styleBoutonsSouris));
+		descendre3.setOnMouseExited(event -> descendre3.setStyle(styleBoutons));
 
 		j3.setAlignment(Pos.CENTER);
 		j3.setSpacing(spacing);
-		j3.getChildren().addAll(nom3, couleur3);
+		j3.getChildren().addAll(nom3, couleur3, monter3, descendre3);
 		j3.setDisable(false);
 
 		///
@@ -164,10 +217,24 @@ public class CouleurPane extends StackPane implements CouleurListener {
 		couleur4.setMinHeight(hauteurElemtents);
 		couleur4.setPrefSize(largeurComboBox, hauteurElemtents);
 		couleur4.getItems().addAll(DataControl.couleursJoueur);
+		Button monter4 = new Button("Monter");
+		monter4.setPrefSize(lBoutonMD, hBoutonMD);
+		monter4.setMinSize(lBoutonMD, hBoutonMD);
+		monter4.setFont(policeBoutonMD);
+		monter4.setStyle(styleBoutons);
+		monter4.setOnMouseEntered(event -> monter4.setStyle(styleBoutonsSouris));
+		monter4.setOnMouseExited(event -> monter4.setStyle(styleBoutons));
+		Button descendre4 = new Button("Descendre");
+		descendre4.setPrefSize(lBoutonMD, hBoutonMD);
+		descendre4.setMinSize(lBoutonMD, hBoutonMD);
+		descendre4.setFont(policeBoutonMD);
+		descendre4.setStyle(styleBoutons);
+		descendre4.setOnMouseEntered(event -> descendre4.setStyle(styleBoutonsSouris));
+		descendre4.setOnMouseExited(event -> descendre4.setStyle(styleBoutons));
 
 		j4.setAlignment(Pos.CENTER);
 		j4.setSpacing(spacing);
-		j4.getChildren().addAll(nom4, couleur4);
+		j4.getChildren().addAll(nom4, couleur4, monter4, descendre4);
 		j4.setDisable(false);
 
 		///
@@ -185,10 +252,24 @@ public class CouleurPane extends StackPane implements CouleurListener {
 		couleur5.setMinHeight(hauteurElemtents);
 		couleur5.setPrefSize(largeurComboBox, hauteurElemtents);
 		couleur5.getItems().addAll(DataControl.couleursJoueur);
+		Button monter5 = new Button("Monter");
+		monter5.setPrefSize(lBoutonMD, hBoutonMD);
+		monter5.setMinSize(lBoutonMD, hBoutonMD);
+		monter5.setFont(policeBoutonMD);
+		monter5.setStyle(styleBoutons);
+		monter5.setOnMouseEntered(event -> monter5.setStyle(styleBoutonsSouris));
+		monter5.setOnMouseExited(event -> monter5.setStyle(styleBoutons));
+		Button descendre5 = new Button("Descendre");
+		descendre5.setPrefSize(lBoutonMD, hBoutonMD);
+		descendre5.setMinSize(lBoutonMD, hBoutonMD);
+		descendre5.setFont(policeBoutonMD);
+		descendre5.setStyle(styleBoutons);
+		descendre5.setOnMouseEntered(event -> descendre5.setStyle(styleBoutonsSouris));
+		descendre5.setOnMouseExited(event -> descendre5.setStyle(styleBoutons));
 
 		j5.setAlignment(Pos.CENTER);
 		j5.setSpacing(spacing);
-		j5.getChildren().addAll(nom5, couleur5);
+		j5.getChildren().addAll(nom5, couleur5, monter5, descendre5);
 		j5.setDisable(false);
 
 		///
@@ -206,16 +287,31 @@ public class CouleurPane extends StackPane implements CouleurListener {
 		couleur6.setMinHeight(hauteurElemtents);
 		couleur6.setPrefSize(largeurComboBox, hauteurElemtents);
 		couleur6.getItems().addAll(DataControl.couleursJoueur);
+		Button monter6 = new Button("Monter");
+		monter6.setPrefSize(lBoutonMD, hBoutonMD);
+		monter6.setMinSize(lBoutonMD, hBoutonMD);
+		monter6.setFont(policeBoutonMD);
+		monter6.setStyle(styleBoutons);
+		monter6.setOnMouseEntered(event -> monter6.setStyle(styleBoutonsSouris));
+		monter6.setOnMouseExited(event -> monter6.setStyle(styleBoutons));
+		Button descendre6 = new Button("Descendre");
+		descendre6.setPrefSize(lBoutonMD, hBoutonMD);
+		descendre6.setMinSize(lBoutonMD, hBoutonMD);
+		descendre6.setFont(policeBoutonMD);
+		descendre6.setStyle(styleBoutons);
+		descendre6.setOnMouseEntered(event -> descendre6.setStyle(styleBoutonsSouris));
+		descendre6.setOnMouseExited(event -> descendre6.setStyle(styleBoutons));
 
 		j6.setAlignment(Pos.CENTER);
 		j6.setSpacing(spacing);
-		j6.getChildren().addAll(nom6, couleur6);
+		j6.getChildren().addAll(nom6, couleur6, monter6, descendre6);
 		j6.setDisable(true);
 
 		///
 
 		vJoueurs.setSpacing(14);
-		vJoueurs.getChildren().addAll(j1, j2, j3, j4, j5, j6);
+		vJoueurs.setAlignment(Pos.CENTER);
+		vJoueurs.getChildren().addAll(infoVigile,j1, j2, j3, j4, j5, j6);
 
 		VBox vbCenter = new VBox();
 		vbCenter.setMargin(vJoueurs, new Insets(0, 0, 100, 0));
