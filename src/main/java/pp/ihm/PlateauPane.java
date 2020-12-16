@@ -1383,8 +1383,6 @@ public class PlateauPane extends StackPane implements PlateauListener {
 	public void setPersonnageLieu(int lieu, List<Personnage> p, ImageView[] imageViews) {
 		for (int i = 0; i < imageViews.length; i++) {
 			if (i < p.size()) {
-				p.get(i).getType();
-				p.get(i).getJoueur().getCouleur();
 				imageViews[i].setVisible(true);
 				imageViews[i].setImage(
 						new Image(convertVersImagePerso(p.get(i).getJoueur().getCouleur(), p.get(i).getType())));
@@ -1455,6 +1453,12 @@ public class PlateauPane extends StackPane implements PlateauListener {
 				return DataControl.FILLETTE_J;
 			case B:
 				return DataControl.FILLETTE_B;
+			case M:
+				return DataControl.FILLETTE_M;
+			case N:
+				return DataControl.FILLETTE_N;
+			case V:
+				return DataControl.FILLETTE_V;
 			default:
 				break;
 			}
