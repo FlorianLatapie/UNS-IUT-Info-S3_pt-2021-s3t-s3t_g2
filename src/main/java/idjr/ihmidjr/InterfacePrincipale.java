@@ -1,6 +1,7 @@
 package idjr.ihmidjr;
 
 import idjr.Idjr;
+import idjr.ihmidjr.event.Initializer;
 import idjr.ihmidjr.langues.International;
 import javafx.application.Application;
 import javafx.application.Platform;
@@ -48,11 +49,11 @@ public class InterfacePrincipale extends Application {
 		root.getChildren().add(jeuPane);
 
 		core.eventInit();
-		core.setIdjr(new Idjr(core.getInitializer()));
-		core.getInitializer().addListenerConfig(configPartiePane);
-		core.getInitializer().addListenerJeu(jeuPane);
-		core.getInitializer().addListenerFin(finDePartiePane);
-		core.getInitializer().addListenerAttente(attenteJoueurPane);
+		core.setIdjr(new Idjr());
+		Initializer.addListenerConfig(configPartiePane);
+		Initializer.addListenerJeu(jeuPane);
+		Initializer.addListenerFin(finDePartiePane);
+		Initializer.addListenerAttente(attenteJoueurPane);
 		root.getChildren().add(new OptionPane(sControl, core));
 		root.getChildren().add(new ReglesPane(sControl, core));
 		root.getChildren().add(attenteJoueurPane);

@@ -29,8 +29,8 @@ public class TraitementPaquetUdp extends TraitementPaquet<DatagramPacket> {
 	}
 
 	@Override
-	public void init(ControleurReseau netWorkManager) {
-		setControleurReseau(netWorkManager);
+	public void init() {
+
 	}
 
 	/**
@@ -59,17 +59,17 @@ public class TraitementPaquetUdp extends TraitementPaquet<DatagramPacket> {
 	}
 
 	private void rp(Paquet packet, String message) {
-		if (ConnexionType.SERVEUR != getControleurReseau().getConnexionType())
+		if (ConnexionType.SERVEUR != ControleurReseau.getConnexionType())
 			return;
 	}
 
 	public void acp(Paquet packet, String message) {
-		if (ConnexionType.CLIENT != getControleurReseau().getConnexionType())
+		if (ConnexionType.CLIENT != ControleurReseau.getConnexionType())
 			return;
 	}
 
 	public void amp(Paquet packet, String message) {
-		if (ConnexionType.CLIENT != getControleurReseau().getConnexionType())
+		if (ConnexionType.CLIENT != ControleurReseau.getConnexionType())
 			return;
 		String partie = (String) packet.getValeur(message, 1);
 		InetAddress ip = null;

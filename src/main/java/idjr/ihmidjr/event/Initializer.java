@@ -7,145 +7,145 @@ import idjr.PartieInfo;
 import reseau.type.CarteType;
 import reseau.type.Couleur;
 
-public class Initializer {
-	private final List<JeuListener> listenersjl = new ArrayList<>();
-	private final List<FinListener> listenersfl = new ArrayList<>();
-	private final List<ConfigListener> listenerscl = new ArrayList<>();
-	private final List<AttenteListener> listenersal = new ArrayList<>();
+public abstract class Initializer {
+	private static final List<JeuListener> listenersjl = new ArrayList<>();
+	private static final List<FinListener> listenersfl = new ArrayList<>();
+	private static final List<ConfigListener> listenerscl = new ArrayList<>();
+	private static final List<AttenteListener> listenersal = new ArrayList<>();
 
-	public void addListenerJeu(JeuListener toAdd) {
+	public static void addListenerJeu(JeuListener toAdd) {
 		listenersjl.add(toAdd);
 	}
 
-	public void addListenerFin(FinListener toAdd) {
+	public static void addListenerFin(FinListener toAdd) {
 		listenersfl.add(toAdd);
 	}
 
-	public void addListenerConfig(ConfigListener toAdd) {
+	public static void addListenerConfig(ConfigListener toAdd) {
 		listenerscl.add(toAdd);
 	}
 
-	public void addListenerAttente(AttenteListener toAdd) {
+	public static void addListenerAttente(AttenteListener toAdd) {
 		listenersal.add(toAdd);
 	}
 
-	public void partieValide(String nom) {
+	public static void partieValide(String nom) {
 		for (ConfigListener cl : listenerscl)
 			cl.partieValide(nom);
 	}
 
-	public void choisirPion(List<Integer> list) {
+	public static void choisirPion(List<Integer> list) {
 		for (JeuListener jl : listenersjl)
 			jl.choisirPion(list);
 	}
 
-	public void choisirLieu(List<Integer> list) {
+	public static void choisirLieu(List<Integer> list) {
 		for (JeuListener jl : listenersjl)
 			jl.choisirLieu(list);
 	}
 
-	public void desValeur(List<Integer> list) {
+	public static void desValeur(List<Integer> list) {
 		for (JeuListener jl : listenersjl)
 			jl.desValeur(list);
 	}
 
-	public void nomJoueur(String nom) {
+	public static void nomJoueur(String nom) {
 		for (JeuListener jl : listenersjl)
 			jl.nomJoueur(nom);
 	}
 
-	public void nomPhase(String nom) {
+	public static void nomPhase(String nom) {
 		for (JeuListener jl : listenersjl)
 			jl.nomPhase(nom);
 	}
 
-	public void stopWait() {
+	public static void stopWait() {
 		for (AttenteListener al : listenersal)
 			al.stopWait();
 	}
 
-	public void nomPartie(String nom) {
+	public static void nomPartie(String nom) {
 		for (AttenteListener al : listenersal)
 			al.nomPartie(nom);
 	}
 
-	public void desVigiles(List<Integer> list) {
+	public static void desVigiles(List<Integer> list) {
 		for (JeuListener jl : listenersjl)
 			jl.desVigiles(list);
 	}
 
-	public void fin() {
+	public static void fin() {
 		for (JeuListener jl : listenersjl)
 			jl.fin();
 	}
 
-	public void gagnant(String nom) {
+	public static void gagnant(String nom) {
 		for (FinListener jl : listenersfl)
 			jl.gagnant(nom);
 	}
 
-	public void couleurJoueur(Couleur couleur) {
+	public static void couleurJoueur(Couleur couleur) {
 		for (JeuListener jl : listenersjl)
 			jl.couleurJoueur(couleur);
 	}
 
-	public void sacrificeChange() {
+	public static void sacrificeChange() {
 		for (JeuListener jl : listenersjl)
 			jl.sacrificeChange();
 	}
 
-	public void deplacementChange() {
+	public static void deplacementChange() {
 		for (JeuListener jl : listenersjl)
 			jl.deplacementChange();
 	}
 
-	public void choisirCarte(List<CarteType> listeCartes, List<Couleur> listeCouleurJoueurVivant, boolean garder,
+	public static void choisirCarte(List<CarteType> listeCartes, List<Couleur> listeCouleurJoueurVivant, boolean garder,
 			boolean donner, boolean defausser, boolean utiliser) {
 		for (JeuListener jl : listenersjl)
 			jl.choisirCarte(listeCartes, listeCouleurJoueurVivant, garder, donner, defausser, utiliser);
 	}
 
-	public void nomJoueurs(List<String> listeNomJoueur) {
+	public static void nomJoueurs(List<String> listeNomJoueur) {
 		for (JeuListener jl : listenersjl)
 			jl.nomJoueurs(listeNomJoueur);
 	}
 
-	public void choisirUtiliserCarte() {
+	public static void choisirUtiliserCarte() {
 		for (JeuListener jl : listenersjl)
 			jl.choisirUtiliserCarte();
 	}
 
-	public void choisirUtiliserCarte(CarteType carteType) {
+	public static void choisirUtiliserCarte(CarteType carteType) {
 		for (JeuListener jl : listenersjl)
 			jl.choisirUtiliserCarte(carteType);
 	}
 
-	public void choisirUtiliserCarte(List<CarteType> carteTypes) {
+	public static void choisirUtiliserCarte(List<CarteType> carteTypes) {
 		for (JeuListener jl : listenersjl)
 			jl.choisirUtiliserCarte(carteTypes);
 	}
 
-	public void updateCarte() {
+	public static void updateCarte() {
 		for (JeuListener jl : listenersjl)
 			jl.updateCarte();
 	}
 
-	public void setVote(List<Couleur> joueur) {
+	public static void setVote(List<Couleur> joueur) {
 		for (JeuListener jl : listenersjl)
 			jl.setVote(joueur);
 	}
 
-	public void partie(List<PartieInfo> partieInfo) {
+	public static void partie(List<PartieInfo> partieInfo) {
 		for (ConfigListener cl : listenerscl)
 			cl.partie(partieInfo);
 	}
 
-	public void log(String action) {
+	public static void log(String action) {
 		for (JeuListener jl : listenersjl)
 			jl.log(action);
 	}
 
-	public void enleverDes() {
+	public static void enleverDes() {
 		for (JeuListener jl : listenersjl)
 			jl.enleverDes();
 	}

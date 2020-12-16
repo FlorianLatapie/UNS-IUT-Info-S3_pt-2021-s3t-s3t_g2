@@ -8,11 +8,10 @@ public class Core {
 	private int nbJoueur = 5;
 	private int nbBot = 4;
 	private String nomPartie = "partieParDéfaut";
-	private Initializer initializer;
 	private Idjr idjr;
 
 	public void eventInit() {
-		this.initializer = new Initializer();
+		
 	}
 
 	private ApplicationPane pauseDepuis = ApplicationPane.ACCUEIL;
@@ -60,10 +59,6 @@ public class Core {
 
 	public int getNbJoueurReel() {
 		return nbJoueur - nbBot;
-	}
-
-	public Initializer getInitializer() {
-		return initializer;
 	}
 
 	public void setIdjr(Idjr idjr) {
