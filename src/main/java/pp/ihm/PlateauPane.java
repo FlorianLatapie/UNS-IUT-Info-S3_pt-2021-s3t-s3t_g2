@@ -423,7 +423,6 @@ public class PlateauPane extends StackPane implements PlateauListener {
 		VBox vbRight1 = new VBox();
 		vbRight1.setAlignment(Pos.TOP_CENTER);
 		vbRight1.setSpacing(30);
-		HBox hbBot1 = new HBox();
 
 		force1 = new Label(International.trad("text.forceEquipeA") + "\n" + International.trad("text.forceEquipeB")
 				+ "\n\n" + "##");
@@ -450,7 +449,7 @@ public class PlateauPane extends StackPane implements PlateauListener {
 
 		nbZombies1 = new Label(International.trad("text.nbZombie"));
 		nbZombies1.setFont(fontInfo);
-		nbZombies1.setTextFill(Color.RED);
+		nbZombies1.setTextFill(Color.GREEN);
 		
 		nbPlace1 = new Label("## / 3");
 		nbPlace1.setFont(Font.font("Segoe UI", FontWeight.BOLD, 20));
@@ -462,12 +461,10 @@ public class PlateauPane extends StackPane implements PlateauListener {
 		b1.setMaxSize(320, 210);
 		b1.setBackground(new Background(new BackgroundFill(Color.BLACK, CornerRadii.EMPTY, null)));
 
-		vbRight1.getChildren().addAll(nbPlace1,force1);
-		hbBot1.getChildren().add(nbZombies1);
+		vbRight1.getChildren().addAll(nbPlace1,force1, nbZombies1);
 
 		b1.setCenter(joueursPresents1);
 		b1.setRight(vbRight1);
-		b1.setBottom(hbBot1);
 		b1.setOpacity(.9);
 
 		b1.setRotate(128);
@@ -480,7 +477,6 @@ public class PlateauPane extends StackPane implements PlateauListener {
 		VBox vbRight2 = new VBox();
 		vbRight2.setAlignment(Pos.TOP_CENTER);
 		vbRight2.setSpacing(30);
-		HBox hbBot2 = new HBox();
 
 		force2 = new Label(International.trad("text.forceEquipeA") + "\n" + International.trad("text.forceEquipeB")
 				+ "\n\n" + "##");
@@ -510,7 +506,7 @@ public class PlateauPane extends StackPane implements PlateauListener {
 
 		nbZombies2 = new Label(International.trad("text.nbZombie"));
 		nbZombies2.setFont(fontInfo);
-		nbZombies2.setTextFill(Color.RED);
+		nbZombies2.setTextFill(Color.GREEN);
 		
 		nbPlace2 = new Label("## / 4");
 		nbPlace2.setFont(Font.font("Segoe UI", FontWeight.BOLD, 20));
@@ -522,12 +518,10 @@ public class PlateauPane extends StackPane implements PlateauListener {
 		b2.setMaxSize(320, 215);
 		b2.setBackground(new Background(new BackgroundFill(Color.BLACK, CornerRadii.EMPTY, null)));
 
-		vbRight2.getChildren().addAll(nbPlace2, force2);
-		hbBot2.getChildren().add(nbZombies2);
+		vbRight2.getChildren().addAll(nbPlace2, force2, nbZombies2);
 
 		b2.setCenter(joueursPresents2);
 		b2.setRight(vbRight2);
-		b2.setBottom(hbBot2);
 		b2.setOpacity(.9);
 		b2.setRotate(-133);
 
@@ -539,7 +533,6 @@ public class PlateauPane extends StackPane implements PlateauListener {
 		VBox vbRight3 = new VBox();
 		vbRight3.setAlignment(Pos.TOP_CENTER);
 		vbRight3.setSpacing(30);
-		HBox hbBot3 = new HBox();
 
 		force3 = new Label(International.trad("text.forceEquipeA") + "\n" + International.trad("text.forceEquipeB")
 				+ "\n\n" + "##");
@@ -574,7 +567,7 @@ public class PlateauPane extends StackPane implements PlateauListener {
 
 		nbZombies3 = new Label(International.trad("text.nbZombie"));
 		nbZombies3.setFont(fontInfo);
-		nbZombies3.setTextFill(Color.RED);
+		nbZombies3.setTextFill(Color.GREEN);
 
 		BorderPane b3 = new BorderPane();
 		b3.setPadding(new Insets(5));
@@ -582,12 +575,10 @@ public class PlateauPane extends StackPane implements PlateauListener {
 		b3.setMaxSize(325, 210);
 		b3.setBackground(new Background(new BackgroundFill(Color.BLACK, CornerRadii.EMPTY, null)));
 
-		vbRight3.getChildren().addAll(nbPlace3,force3);
-		hbBot3.getChildren().add(nbZombies3);
+		vbRight3.getChildren().addAll(nbPlace3,force3, nbZombies3);
 
 		b3.setCenter(joueursPresents3);
 		b3.setRight(vbRight3);
-		b3.setBottom(hbBot3);
 		b3.setOpacity(.9);
 
 		b3.setRotate(-62);
@@ -600,7 +591,6 @@ public class PlateauPane extends StackPane implements PlateauListener {
 		VBox vbRight4 = new VBox();
 		vbRight4.setAlignment(Pos.TOP_CENTER);
 		vbRight4.setSpacing(30);
-		HBox hbBot4 = new HBox();
 
 		force4 = new Label(International.trad("text.forceEquipeA") + "\n" + International.trad("text.forceEquipeB")
 				+ "\n\n" + "##");
@@ -632,7 +622,7 @@ public class PlateauPane extends StackPane implements PlateauListener {
 
 		nbZombies4 = new Label(International.trad("text.nbZombie"));
 		nbZombies4.setFont(fontInfo);
-		nbZombies4.setTextFill(Color.RED);
+		nbZombies4.setTextFill(Color.GREEN);
 		
 		nbPlace4 = new Label("## / ∞");
 		nbPlace4.setFont(Font.font("Segoe UI", FontWeight.BOLD, 20));
@@ -644,12 +634,10 @@ public class PlateauPane extends StackPane implements PlateauListener {
 		b4.setMaxSize(270, 210);
 		b4.setBackground(new Background(new BackgroundFill(Color.BLACK, CornerRadii.EMPTY, null)));
 
-		vbRight4.getChildren().addAll(nbPlace4,force4);
-		hbBot4.getChildren().add(nbZombies4);
+		vbRight4.getChildren().addAll(nbPlace4,force4, nbZombies4);
 
 		b4.setCenter(joueursPresents4);
 		b4.setRight(vbRight4);
-		b4.setBottom(hbBot4);
 		b4.setOpacity(.9);
 
 		b4.setRotate(11);
@@ -662,7 +650,6 @@ public class PlateauPane extends StackPane implements PlateauListener {
 		VBox vbRight5 = new VBox();
 		vbRight5.setAlignment(Pos.TOP_CENTER);
 		vbRight5.setSpacing(30);
-		HBox hbBot5 = new HBox();
 
 		nbPlace5 = new Label("## / 3");
 		nbPlace5.setFont(Font.font("Segoe UI", FontWeight.BOLD, 20));
@@ -693,7 +680,7 @@ public class PlateauPane extends StackPane implements PlateauListener {
 
 		nbZombies5 = new Label(International.trad("text.nbZombie"));
 		nbZombies5.setFont(fontInfo);
-		nbZombies5.setTextFill(Color.RED);
+		nbZombies5.setTextFill(Color.GREEN);
 
 		BorderPane b5 = new BorderPane();
 		b5.setPadding(new Insets(5));
@@ -701,12 +688,10 @@ public class PlateauPane extends StackPane implements PlateauListener {
 		b5.setMaxSize(325, 215);
 		b5.setBackground(new Background(new BackgroundFill(Color.BLACK, CornerRadii.EMPTY, null)));
 
-		vbRight5.getChildren().addAll(nbPlace5, force5);
-		hbBot5.getChildren().add(nbZombies5);
+		vbRight5.getChildren().addAll(nbPlace5, force5, nbZombies5);
 
 		b5.setCenter(joueursPresents5);
 		b5.setRight(vbRight5);
-		b5.setBottom(hbBot5);
 		b5.setOpacity(.9);
 
 		b5.setRotate(4);
@@ -719,7 +704,6 @@ public class PlateauPane extends StackPane implements PlateauListener {
 		VBox vbRight6 = new VBox();
 		vbRight6.setAlignment(Pos.TOP_CENTER);
 		vbRight6.setSpacing(30);
-		HBox hbBot6 = new HBox();
 
 		force6 = new Label(International.trad("text.forceEquipeA") + "\n" + International.trad("text.forceEquipeB")
 				+ "\n\n" + "##");
@@ -747,7 +731,7 @@ public class PlateauPane extends StackPane implements PlateauListener {
 
 		nbZombies6 = new Label(International.trad("text.nbZombie"));
 		nbZombies6.setFont(fontInfo);
-		nbZombies6.setTextFill(Color.RED);
+		nbZombies6.setTextFill(Color.GREEN);
 		
 		nbPlace6 = new Label("## / 6");
 		nbPlace6.setFont(Font.font("Segoe UI", FontWeight.BOLD, 20));
@@ -760,12 +744,10 @@ public class PlateauPane extends StackPane implements PlateauListener {
 		b6.setBackground(new Background(new BackgroundFill(Color.BLACK, CornerRadii.EMPTY, null)));
 		b6.setOpacity(.9);
 
-		vbRight6.getChildren().addAll(nbPlace6,force6);
-		hbBot6.getChildren().add(nbZombies6);
+		vbRight6.getChildren().addAll(nbPlace6,force6, nbZombies6);
 
 		b6.setCenter(joueursPresents6);
 		b6.setRight(vbRight6);
-		b6.setBottom(hbBot6);
 
 		b6.setRotate(53);
 
@@ -1091,7 +1073,7 @@ public class PlateauPane extends StackPane implements PlateauListener {
 
 	@Override
 	public synchronized void nbLieuZombie(int lieu, int val) {
-		String tmp = "Nb zombies : " + val;
+		String tmp = val + " " + International.trad("text.nbZombie");
 		Platform.runLater(() -> {
 			switch (lieu) {
 			case 1:
