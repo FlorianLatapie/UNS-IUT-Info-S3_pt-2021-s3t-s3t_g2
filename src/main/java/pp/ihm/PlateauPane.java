@@ -614,7 +614,7 @@ public class PlateauPane extends StackPane implements PlateauListener {
 		b4.setRotate(11);
 
 		AnchorPane.setTopAnchor(b4, 450.0);
-		AnchorPane.setLeftAnchor(b4, 385.0);
+		AnchorPane.setLeftAnchor(b4, 370.0);
 
 		///
 
