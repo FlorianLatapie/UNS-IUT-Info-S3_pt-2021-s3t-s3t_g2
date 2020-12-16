@@ -138,6 +138,10 @@ public class ConfigPartiePane extends StackPane implements ConfigListener {
 			bRefresh.setStyle(styleBoutons);
 		});
 
+		bRefresh.setOnAction(EventHandler -> {
+			core.getIdjr().listOfServers();
+		});
+
 		VBox vbCenter = new VBox();
 		vbCenter.setAlignment(Pos.CENTER);
 		vbCenter.setSpacing(10);
@@ -240,13 +244,22 @@ public class ConfigPartiePane extends StackPane implements ConfigListener {
 	public void partie(List<PartieInfo> partieInfo) {
 		Platform.runLater(() -> {
 			listView.getItems().clear();
-			partieActuelle = partieInfo;
-			for (PartieInfo partieInfo2 : partieInfo) {
-				Label res = new Label(partieInfo2.toString());
+			if (partieInfo.isEmpty()) {
+				partieActuelle = null;
+				Label res = new Label("Il n'y a pas partie disponible !");
 				res.setAlignment(Pos.CENTER);
 				res.setTextFill(Color.WHITE);
 				res.setFont(Font.font("Segoe UI", FontWeight.BOLD, 27));
 				listView.getItems().add(res);
+			} else {
+				partieActuelle = partieInfo;
+				for (PartieInfo partieInfo2 : partieInfo) {
+					Label res = new Label(partieInfo2.toString());
+					res.setAlignment(Pos.CENTER);
+					res.setTextFill(Color.WHITE);
+					res.setFont(Font.font("Segoe UI", FontWeight.BOLD, 27));
+					listView.getItems().add(res);
+				}
 			}
 		});
 	}
