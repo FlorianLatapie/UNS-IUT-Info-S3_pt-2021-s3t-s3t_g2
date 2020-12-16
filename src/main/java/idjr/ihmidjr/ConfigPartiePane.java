@@ -94,7 +94,7 @@ public class ConfigPartiePane extends StackPane implements ConfigListener {
 		desc.setPadding(botPadding);
 
 		TextField nomP = new TextField();
-		nomP.setText("Partie");
+		nomP.setText(International.trad("texte.Partie"));
 		nomP.setFont(Font.font("Segoe UI", FontWeight.BOLD, 27));
 		nomP.setStyle(
 				"-fx-background-color: #1A1A1A; -fx-border-color: white; -fx-border-width: 1; -fx-text-fill: white;");
