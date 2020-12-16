@@ -301,6 +301,23 @@ public class TraitementBot {
 			return null;
 	}
 	
+	public PionCouleur choisirBestSacrifice(BotMoyen core, List<?> listPionT) {
+		int bestPion = 20;
+		if (listPionT.size() > 0) {
+			List<Integer> listPion = new ArrayList<>();
+			for (Object o : listPionT)
+				listPion.add((Integer) o);
+			for(int i=0; i<listPion.size();i++) {
+			if(listPion.get(i)<bestPion) {
+				bestPion = listPion.get(i);
+			}
+			}
+			PionCouleur pion = PionCouleur.valueOf(String.valueOf(core.getCouleur().name().charAt(0))+bestPion);
+			return pion;
+		} else
+			return null;
+	}
+	
 	/**
 	 * Fin de la partie
 	 *
@@ -568,6 +585,8 @@ public class TraitementBot {
 		}
 		return core.couleurJoueurPresent().get(new Random().nextInt(core.couleurJoueurPresent().size()));
 	}
+	
+	
 
 	/**
 	 * Retourne une couleur random parmis les joueurs présents 
