@@ -191,7 +191,7 @@ public class ConfigPartiePane extends StackPane {
 		bJouer.setOnMouseEntered(event -> bJouer.setStyle(styleBoutonsSouris));
 		bJouer.setOnMouseExited(event -> bJouer.setStyle(styleBoutons));
 		bJouer.setOnAction(EventHandler -> {
-			if (!IhmTools.nomEstValide(nomP.getText()))
+			if (!IhmOutils.nomEstValide(nomP.getText()))
 				return;
 
 			if (nbJr.getValue() > 6 || nbJr.getValue() < 3)
@@ -208,8 +208,7 @@ public class ConfigPartiePane extends StackPane {
 			core.setNomPartie(nomP.getText());
 
 			try {
-				core.setCj(new ControleurJeu(core.getNomPartie(), core.getNbJoueurReel(), core.getNbBot(),
-						core.getInitializer()));
+				core.setCj(new ControleurJeu(core.getNomPartie(), core.getNbJoueurReel(), core.getNbBot()));
 			} catch (IOException e) {
 				e.printStackTrace();
 			}

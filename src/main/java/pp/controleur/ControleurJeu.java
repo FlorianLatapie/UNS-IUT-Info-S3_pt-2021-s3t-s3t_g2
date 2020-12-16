@@ -1,7 +1,7 @@
 package pp.controleur;
 
-import pp.ihm.eventListener.Initializer;
 import pp.*;
+import pp.ihm.event.Initializer;
 import reseau.socket.ControleurReseau;
 import reseau.socket.TcpClient;
 import reseau.tool.ReseauOutils;
@@ -56,7 +56,7 @@ public class ControleurJeu {
 
 	private final Random rd = new Random();
 
-	public ControleurJeu(String nom, int njr, int njv, Initializer Initializer) throws IOException {
+	public ControleurJeu(String nom, int njr, int njv) throws IOException {
 		if (njr + njv > 6 || njr + njv < 3)
 			throw new IllegalArgumentException("Mauvais nombre de joueur");
 		this.jmort = new ArrayList<>();

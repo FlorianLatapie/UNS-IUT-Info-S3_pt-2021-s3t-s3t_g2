@@ -1,12 +1,11 @@
-package pp.ihm.eventListener;
+package pp.ihm.event;
 
 import java.util.List;
 
 import pp.Personnage;
-import reseau.type.CarteType;
 import reseau.type.Couleur;
 
-public interface PlateauListener {
+public interface IPlateauListener {
     void nbLieuZombie(int lieu, int val);
 
     void lieuFerme(int lieu, boolean val);
@@ -16,8 +15,6 @@ public interface PlateauListener {
     void nbPersoJoueur(int joueur, int persoNb);
 
     void nbCarteJoueur(int joueur, int carteNb);
-
-    //void forceLieu(int lieu, int force);
 
     void nomChefVigile(String joueur);
 
