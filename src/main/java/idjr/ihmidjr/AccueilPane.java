@@ -1,6 +1,7 @@
 package idjr.ihmidjr;
 
 import idjr.ihmidjr.DataControl.ApplicationPane;
+import idjr.ihmidjr.event.Initializer;
 import idjr.ihmidjr.langues.International;
 import javafx.application.Platform;
 import javafx.geometry.Insets;
@@ -128,7 +129,7 @@ public class AccueilPane extends StackPane {
 			// TODO CARACTERE NON AUTORISE
 			if (nomjoueur.getText().length() < 32 && IhmTools.nomEstValide(nomjoueur.getText())) {
 				core.getIdjr().setNom(nomjoueur.getText());
-				core.getIdjr().getInitializer().nomJoueur(core.getIdjr().getNom());
+				Initializer.nomJoueur(core.getIdjr().getNom());
 				core.getIdjr().listOfServers();
 				sc.setPaneOnTop(ApplicationPane.CONFIG);
 			} else

@@ -52,7 +52,6 @@ public class Idjr {
 	private Couleur voteChoisi;
 	private boolean isContinue;
 	private String etat;
-	Initializer initializer;
 
 	/* Parametre Temporaire */
 	private List<Integer> pionAPos;
@@ -91,7 +90,7 @@ public class Idjr {
 					System.out.println("OK");
 					current = partieInfo;
 					ControleurReseau.demarrerClientTcp(partieInfo.getIp());
-					initializer.partieValide(nom);
+					Initializer.partieValide(nom);
 					return;
 				}
 			}
@@ -113,14 +112,13 @@ public class Idjr {
 			e.printStackTrace();
 		}
 
-		initializer.partie(listOfServer);
+		Initializer.partie(listOfServer);
 	}
 
 	public void rejoindrePartie(String nomp) {
 		setIpPp(current.getIp());
 		setPortPp(current.getPort());
-		if (initializer != null)
-			initializer.nomPartie(current.getIdPartie());
+			Initializer.nomPartie(current.getIdPartie());
 		String messageTcp = ControleurReseau.construirePaquetTcp("DCP", nom, typeJoueur, current.getIdPartie());
 		ThreadOutils.asyncTask("rejoindrePartie", () -> {
 			ControleurReseau.envoyerTcp(messageTcp);
@@ -128,10 +126,6 @@ public class Idjr {
 			String message1 = ControleurReseau.getMessageTcp("ACP");
 			setJoueurId((String) ControleurReseau.getValueTcp("ACP", message1, 2));
 		});
-	}
-
-	public Initializer getInitializer() {
-		return initializer;
 	}
 
 	private boolean voteChoisiBool = false;
@@ -344,7 +338,7 @@ public class Idjr {
 
 	public void addCarte(CarteType n) {
 		listeCarte.add(n);
-		initializer.updateCarte();
+		Initializer.updateCarte();
 	}
 
 	public void setListeCarte(List<CarteType> listeCarte) {
