@@ -33,8 +33,8 @@ public class TraitementPaquetTcp extends TraitementPaquet<TcpClient> {
 	}
 	
 	@Override
-	public void init(ControleurReseau controleurReseau) {
-		setControleurReseau(controleurReseau);
+	public void init() {
+		
 	}
 
 	/**
@@ -65,12 +65,12 @@ public class TraitementPaquetTcp extends TraitementPaquet<TcpClient> {
 			} catch (UnknownHostException e) {
 				e.printStackTrace();
 			}
-			connection.envoyer(getControleurReseau().construirePaquetTcp("ACP",core.getPartieId(), id));
+			connection.envoyer(ControleurReseau.construirePaquetTcp("ACP",core.getPartieId(), id));
 			break;
 		case ANNULEE:
 		case COMPLETE:
 		case TERMINEE:
-			connection.envoyer(getControleurReseau().construirePaquetTcp("RCP",core.getPartieId()));
+			connection.envoyer(ControleurReseau.construirePaquetTcp("RCP",core.getPartieId()));
 			break;
 		default:
 			throw new IllegalStateException("Unexpected value: " + core.getStatus());
