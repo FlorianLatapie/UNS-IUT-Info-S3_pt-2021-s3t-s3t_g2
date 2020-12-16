@@ -72,7 +72,7 @@ public class ConfigPartiePane extends StackPane {
 		titre.setBackground(new Background(new BackgroundFill(Color.RED, coin, null)));
 		titre.setPrefWidth(730);
 		titre.setMinWidth(730);
-		
+
 		Rectangle rect = new Rectangle();
 		rect.setWidth(800);
 		rect.setHeight(500);
@@ -80,7 +80,7 @@ public class ConfigPartiePane extends StackPane {
 		rect.setArcWidth(30);
 		rect.setOpacity(.3);
 		rect.setTranslateY(60);
-		
+
 		// texte
 		Label desc = new Label(International.trad("texte.descriptionConfigPartie"));
 		desc.setFont(Font.font("Segoe UI", FontWeight.BOLD, 30));
@@ -191,19 +191,22 @@ public class ConfigPartiePane extends StackPane {
 		bJouer.setOnMouseEntered(event -> bJouer.setStyle(styleBoutonsSouris));
 		bJouer.setOnMouseExited(event -> bJouer.setStyle(styleBoutons));
 		bJouer.setOnAction(EventHandler -> {
+			if (!IhmTools.nomEstValide(nomP.getText()))
+				return;
 
-			if (nbJr.getValue() > 6 || nbJr.getValue() < 3) {
-				core.setNbJoueur(nbJr.getValue());
-			} else {
-				core.setNbJoueur(nbJr.getValue());
-			}
+			if (nbJr.getValue() > 6 || nbJr.getValue() < 3)
+				return;
 
-			if (nbBot.getValue() > 6 || nbBot.getValue() < 0 || nbBot.getValue() > nbJr.getValue()) {
-				core.setNbBot(core.getNbJoueur());
-			} else {
-				core.setNbBot(nbBot.getValue());
-			}
+			if (nbBot.getValue() > 6 || nbBot.getValue() < 0)
+				return;
+
+			if (nbBot.getValue() > nbJr.getValue())
+				return;
+
+			core.setNbJoueur(nbJr.getValue());
+			core.setNbBot(nbBot.getValue());
 			core.setNomPartie(nomP.getText());
+
 			try {
 				core.setCj(new ControleurJeu(core.getNomPartie(), core.getNbJoueurReel(), core.getNbBot(),
 						core.getInitializer()));
