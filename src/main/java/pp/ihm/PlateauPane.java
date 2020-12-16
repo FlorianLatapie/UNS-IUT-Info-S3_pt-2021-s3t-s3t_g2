@@ -88,13 +88,6 @@ public class PlateauPane extends StackPane implements PlateauListener {
 	Label nomJoueur5;
 	Label nomJoueur6;
 
-	Label force1;
-	Label force2;
-	Label force3;
-	Label force4;
-	Label force5;
-	Label force6;
-
 	Label nbPerso1;
 	Label nbPerso2;
 	Label nbPerso3;
@@ -424,11 +417,6 @@ public class PlateauPane extends StackPane implements PlateauListener {
 		vbRight1.setAlignment(Pos.TOP_CENTER);
 		vbRight1.setSpacing(30);
 
-		force1 = new Label(International.trad("text.forceEquipeA") + "\n" + International.trad("text.forceEquipeB")
-				+ "\n\n" + "##");
-		force1.setFont(fontInfo);
-		force1.setTextFill(Color.RED);
-		force1.setTextAlignment(TextAlignment.CENTER);
 
 		VBox joueursPresents1 = new VBox();
 		joueursPresents1.setAlignment(Pos.CENTER);
@@ -461,7 +449,7 @@ public class PlateauPane extends StackPane implements PlateauListener {
 		b1.setMaxSize(320, 210);
 		b1.setBackground(new Background(new BackgroundFill(Color.BLACK, CornerRadii.EMPTY, null)));
 
-		vbRight1.getChildren().addAll(nbPlace1,force1, nbZombies1);
+		vbRight1.getChildren().addAll(nbPlace1, nbZombies1);
 
 		b1.setCenter(joueursPresents1);
 		b1.setRight(vbRight1);
@@ -477,12 +465,6 @@ public class PlateauPane extends StackPane implements PlateauListener {
 		VBox vbRight2 = new VBox();
 		vbRight2.setAlignment(Pos.TOP_CENTER);
 		vbRight2.setSpacing(30);
-
-		force2 = new Label(International.trad("text.forceEquipeA") + "\n" + International.trad("text.forceEquipeB")
-				+ "\n\n" + "##");
-		force2.setFont(fontInfo);
-		force2.setTextFill(Color.RED);
-		force2.setTextAlignment(TextAlignment.CENTER);
 
 		VBox joueursPresents2 = new VBox();
 		joueursPresents2.setAlignment(Pos.CENTER);
@@ -518,7 +500,7 @@ public class PlateauPane extends StackPane implements PlateauListener {
 		b2.setMaxSize(320, 215);
 		b2.setBackground(new Background(new BackgroundFill(Color.BLACK, CornerRadii.EMPTY, null)));
 
-		vbRight2.getChildren().addAll(nbPlace2, force2, nbZombies2);
+		vbRight2.getChildren().addAll(nbPlace2, nbZombies2);
 
 		b2.setCenter(joueursPresents2);
 		b2.setRight(vbRight2);
@@ -533,12 +515,6 @@ public class PlateauPane extends StackPane implements PlateauListener {
 		VBox vbRight3 = new VBox();
 		vbRight3.setAlignment(Pos.TOP_CENTER);
 		vbRight3.setSpacing(30);
-
-		force3 = new Label(International.trad("text.forceEquipeA") + "\n" + International.trad("text.forceEquipeB")
-				+ "\n\n" + "##");
-		force3.setFont(fontInfo);
-		force3.setTextFill(Color.RED);
-		force3.setTextAlignment(TextAlignment.CENTER);
 
 		VBox joueursPresents3 = new VBox();
 		joueursPresents3.setAlignment(Pos.CENTER);
@@ -575,7 +551,7 @@ public class PlateauPane extends StackPane implements PlateauListener {
 		b3.setMaxSize(325, 210);
 		b3.setBackground(new Background(new BackgroundFill(Color.BLACK, CornerRadii.EMPTY, null)));
 
-		vbRight3.getChildren().addAll(nbPlace3,force3, nbZombies3);
+		vbRight3.getChildren().addAll(nbPlace3, nbZombies3);
 
 		b3.setCenter(joueursPresents3);
 		b3.setRight(vbRight3);
@@ -592,11 +568,6 @@ public class PlateauPane extends StackPane implements PlateauListener {
 		vbRight4.setAlignment(Pos.TOP_CENTER);
 		vbRight4.setSpacing(30);
 
-		force4 = new Label(International.trad("text.forceEquipeA") + "\n" + International.trad("text.forceEquipeB")
-				+ "\n\n" + "##");
-		force4.setFont(fontInfo);
-		force4.setTextFill(Color.RED);
-		force4.setTextAlignment(TextAlignment.CENTER);
 
 		VBox joueursPresents4 = new VBox();
 		joueursPresents4.setAlignment(Pos.CENTER);
@@ -634,7 +605,7 @@ public class PlateauPane extends StackPane implements PlateauListener {
 		b4.setMaxSize(270, 210);
 		b4.setBackground(new Background(new BackgroundFill(Color.BLACK, CornerRadii.EMPTY, null)));
 
-		vbRight4.getChildren().addAll(nbPlace4,force4, nbZombies4);
+		vbRight4.getChildren().addAll(nbPlace4, nbZombies4);
 
 		b4.setCenter(joueursPresents4);
 		b4.setRight(vbRight4);
@@ -655,11 +626,6 @@ public class PlateauPane extends StackPane implements PlateauListener {
 		nbPlace5.setFont(Font.font("Segoe UI", FontWeight.BOLD, 20));
 		nbPlace5.setTextFill(Color.WHITE);
 
-		force5 = new Label(International.trad("text.forceEquipeA") + "\n" + International.trad("text.forceEquipeB")
-				+ "\n\n" + "##");
-		force5.setFont(fontInfo);
-		force5.setTextFill(Color.RED);
-		force5.setTextAlignment(TextAlignment.CENTER);
 
 		VBox joueursPresents5 = new VBox();
 		joueursPresents5.setAlignment(Pos.CENTER);
@@ -688,7 +654,7 @@ public class PlateauPane extends StackPane implements PlateauListener {
 		b5.setMaxSize(325, 215);
 		b5.setBackground(new Background(new BackgroundFill(Color.BLACK, CornerRadii.EMPTY, null)));
 
-		vbRight5.getChildren().addAll(nbPlace5, force5, nbZombies5);
+		vbRight5.getChildren().addAll(nbPlace5, nbZombies5);
 
 		b5.setCenter(joueursPresents5);
 		b5.setRight(vbRight5);
@@ -704,12 +670,6 @@ public class PlateauPane extends StackPane implements PlateauListener {
 		VBox vbRight6 = new VBox();
 		vbRight6.setAlignment(Pos.TOP_CENTER);
 		vbRight6.setSpacing(30);
-
-		force6 = new Label(International.trad("text.forceEquipeA") + "\n" + International.trad("text.forceEquipeB")
-				+ "\n\n" + "##");
-		force6.setFont(fontInfo);
-		force6.setTextFill(Color.RED);
-		force6.setTextAlignment(TextAlignment.CENTER);
 
 		VBox joueursPresents6 = new VBox();
 		joueursPresents6.setAlignment(Pos.CENTER);
@@ -744,7 +704,7 @@ public class PlateauPane extends StackPane implements PlateauListener {
 		b6.setBackground(new Background(new BackgroundFill(Color.BLACK, CornerRadii.EMPTY, null)));
 		b6.setOpacity(.9);
 
-		vbRight6.getChildren().addAll(nbPlace6,force6, nbZombies6);
+		vbRight6.getChildren().addAll(nbPlace6, nbZombies6);
 
 		b6.setCenter(joueursPresents6);
 		b6.setRight(vbRight6);
@@ -1296,35 +1256,7 @@ public class PlateauPane extends StackPane implements PlateauListener {
 		});
 	}
 
-	@Override
-	public void forceLieu(int lieu, int force) {
-		String tmp = International.trad("text.forceEquipeA") + "\n" + International.trad("text.forceEquipeB") + "\n\n"
-				+ force;
-		Platform.runLater(() -> {
-			switch (lieu) {
-			case 1:
-				force1.setText(tmp);
-				break;
-			case 2:
-				force2.setText(tmp);
-				break;
-			case 3:
-				force3.setText(tmp);
-				break;
-			case 4:
-				force4.setText(tmp);
-				break;
-			case 5:
-				force5.setText(tmp);
-				break;
-			case 6:
-				force6.setText(tmp);
-				break;
-			default:
-				throw new IllegalStateException("Unexpected value: " + lieu);
-			}
-		});
-	}
+
 
 	@Override
 	public void nomChefVigile(String joueur) {
