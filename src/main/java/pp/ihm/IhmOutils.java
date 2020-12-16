@@ -1,6 +1,7 @@
 package pp.ihm;
 
 import javafx.scene.control.ComboBox;
+import pp.Joueur;
 import reseau.type.Couleur;
 import reseau.type.TypePersonnage;
 
@@ -102,7 +103,7 @@ public interface IhmOutils {
 			throw new IllegalArgumentException("Couleur inconnue");
 		}
 	}
-	
+
 	public static String convertVersImagePerso(Couleur couleur, TypePersonnage type) {
 		switch (type) {
 		case BLONDE:
@@ -175,5 +176,21 @@ public interface IhmOutils {
 			}
 		}
 		return DataControl.NOM_COULEUR;
+	}
+
+	public static int[] echanger(int[] tab, int de, int a) {
+		int tmp = tab[a];
+		tab[a] = tab[de];
+		tab[de] = tmp;
+
+		return tab;
+	}
+	
+	public static List<Joueur> reOrdre(int[] tab, List<Joueur> joueurs) {
+		List<Joueur> tmp = new ArrayList<>();
+		for (int i = 0; i < tab.length; i++) 
+			tmp.add(joueurs.get(tab[i]));
+		
+		return joueurs;
 	}
 }

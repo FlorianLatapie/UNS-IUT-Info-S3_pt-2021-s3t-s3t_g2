@@ -45,7 +45,9 @@ public class InterfacePrincipale extends Application {
 		Initializer.addListener(plateauPane);
 		Initializer.addListener(finDePartiePane);
 		Initializer.addListener(couleurPane);
-		Initializer.addListener(couleurPane);
+		
+		/* Ajouter les panes qui implements IRotationListener */
+		//Initializer.addListener(PANE);
 		
 		root.getChildren().add(new AccessibilitePane(sControl));
 		root.getChildren().add(new ReglesPane(sControl, core));

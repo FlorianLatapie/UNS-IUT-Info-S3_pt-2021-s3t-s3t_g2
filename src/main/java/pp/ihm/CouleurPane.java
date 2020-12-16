@@ -19,6 +19,8 @@ import javafx.scene.text.FontWeight;
 import javafx.scene.text.TextAlignment;
 import reseau.type.Couleur;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -71,6 +73,23 @@ public class CouleurPane extends StackPane implements ICouleurListener {
 	HBox j5;
 	HBox j6;
 
+	Button monter1;
+	Button monter2;
+	Button monter3;
+	Button monter4;
+	Button monter5;
+	Button monter6;
+
+	Button descendre1;
+	Button descendre2;
+	Button descendre3;
+	Button descendre4;
+	Button descendre5;
+	Button descendre6;
+
+	int[] ordre;
+	List<Joueur> joueurs;
+
 	public CouleurPane(ScreenControl sc, Core c) {
 		core = c;
 		sControl = sc;
@@ -110,20 +129,25 @@ public class CouleurPane extends StackPane implements ICouleurListener {
 		couleur1.setMinHeight(hauteurElemtents);
 		couleur1.setPrefSize(largeurComboBox, hauteurElemtents);
 		couleur1.getItems().addAll(DataControl.couleursJoueur);
-		Button monter1 = new Button(International.trad("bouton.monter"));
+		monter1 = new Button(International.trad("bouton.monter"));
 		monter1.setPrefSize(lBoutonMD, hBoutonMD);
 		monter1.setMinSize(lBoutonMD, hBoutonMD);
 		monter1.setFont(policeBoutonMD);
 		monter1.setStyle(styleBoutons);
 		monter1.setOnMouseEntered(event -> monter1.setStyle(styleBoutonsSouris));
 		monter1.setOnMouseExited(event -> monter1.setStyle(styleBoutons));
-		Button descendre1 = new Button(International.trad("bouton.descendre"));
+		monter1.setVisible(false);
+		descendre1 = new Button(International.trad("bouton.descendre"));
 		descendre1.setPrefSize(lBoutonMD, hBoutonMD);
 		descendre1.setMinSize(lBoutonMD, hBoutonMD);
 		descendre1.setFont(policeBoutonMD);
 		descendre1.setStyle(styleBoutons);
 		descendre1.setOnMouseEntered(event -> descendre1.setStyle(styleBoutonsSouris));
 		descendre1.setOnMouseExited(event -> descendre1.setStyle(styleBoutons));
+		descendre1.setOnAction(EventHandler -> {
+			ordre = IhmOutils.echanger(ordre, 0, 1);
+			updateOrdre();
+		});
 
 		j1.setAlignment(Pos.CENTER);
 		j1.setSpacing(spacing);
@@ -145,20 +169,28 @@ public class CouleurPane extends StackPane implements ICouleurListener {
 		couleur2.setPrefSize(largeurComboBox, hauteurElemtents);
 		couleur2.setMinHeight(hauteurElemtents);
 		couleur2.getItems().addAll(DataControl.couleursJoueur);
-		Button monter2 = new Button(International.trad("bouton.monter"));
+		monter2 = new Button(International.trad("bouton.monter"));
 		monter2.setPrefSize(lBoutonMD, hBoutonMD);
 		monter2.setMinSize(lBoutonMD, hBoutonMD);
 		monter2.setFont(policeBoutonMD);
 		monter2.setStyle(styleBoutons);
 		monter2.setOnMouseEntered(event -> monter2.setStyle(styleBoutonsSouris));
 		monter2.setOnMouseExited(event -> monter2.setStyle(styleBoutons));
-		Button descendre2 = new Button(International.trad("bouton.descendre"));
+		monter2.setOnAction(EventHandler -> {
+			ordre = IhmOutils.echanger(ordre, 1, 0);
+			updateOrdre();
+		});
+		descendre2 = new Button(International.trad("bouton.descendre"));
 		descendre2.setPrefSize(lBoutonMD, hBoutonMD);
 		descendre2.setMinSize(lBoutonMD, hBoutonMD);
 		descendre2.setFont(policeBoutonMD);
 		descendre2.setStyle(styleBoutons);
 		descendre2.setOnMouseEntered(event -> descendre2.setStyle(styleBoutonsSouris));
 		descendre2.setOnMouseExited(event -> descendre2.setStyle(styleBoutons));
+		descendre2.setOnAction(EventHandler -> {
+			ordre = IhmOutils.echanger(ordre, 1, 2);
+			updateOrdre();
+		});
 
 		j2.setAlignment(Pos.CENTER);
 		j2.setSpacing(spacing);
@@ -180,20 +212,28 @@ public class CouleurPane extends StackPane implements ICouleurListener {
 		couleur3.setMinHeight(hauteurElemtents);
 		couleur3.setPrefSize(largeurComboBox, hauteurElemtents);
 		couleur3.getItems().addAll(DataControl.couleursJoueur);
-		Button monter3 = new Button(International.trad("bouton.monter"));
+		monter3 = new Button(International.trad("bouton.monter"));
 		monter3.setPrefSize(lBoutonMD, hBoutonMD);
 		monter3.setMinSize(lBoutonMD, hBoutonMD);
 		monter3.setFont(policeBoutonMD);
 		monter3.setStyle(styleBoutons);
+		monter3.setOnAction(EventHandler -> {
+			ordre = IhmOutils.echanger(ordre, 2, 1);
+			updateOrdre();
+		});
 		monter3.setOnMouseEntered(event -> monter3.setStyle(styleBoutonsSouris));
 		monter3.setOnMouseExited(event -> monter3.setStyle(styleBoutons));
-		Button descendre3 = new Button(International.trad("bouton.descendre"));
+		descendre3 = new Button(International.trad("bouton.descendre"));
 		descendre3.setPrefSize(lBoutonMD, hBoutonMD);
 		descendre3.setMinSize(lBoutonMD, hBoutonMD);
 		descendre3.setFont(policeBoutonMD);
 		descendre3.setStyle(styleBoutons);
 		descendre3.setOnMouseEntered(event -> descendre3.setStyle(styleBoutonsSouris));
 		descendre3.setOnMouseExited(event -> descendre3.setStyle(styleBoutons));
+		descendre3.setOnAction(EventHandler -> {
+			ordre = IhmOutils.echanger(ordre, 2, 3);
+			updateOrdre();
+		});
 
 		j3.setAlignment(Pos.CENTER);
 		j3.setSpacing(spacing);
@@ -215,20 +255,28 @@ public class CouleurPane extends StackPane implements ICouleurListener {
 		couleur4.setMinHeight(hauteurElemtents);
 		couleur4.setPrefSize(largeurComboBox, hauteurElemtents);
 		couleur4.getItems().addAll(DataControl.couleursJoueur);
-		Button monter4 = new Button(International.trad("bouton.monter"));
+		monter4 = new Button(International.trad("bouton.monter"));
 		monter4.setPrefSize(lBoutonMD, hBoutonMD);
 		monter4.setMinSize(lBoutonMD, hBoutonMD);
 		monter4.setFont(policeBoutonMD);
 		monter4.setStyle(styleBoutons);
 		monter4.setOnMouseEntered(event -> monter4.setStyle(styleBoutonsSouris));
 		monter4.setOnMouseExited(event -> monter4.setStyle(styleBoutons));
-		Button descendre4 = new Button(International.trad("bouton.descendre"));
+		monter4.setOnAction(EventHandler -> {
+			ordre = IhmOutils.echanger(ordre, 3, 2);
+			updateOrdre();
+		});
+		descendre4 = new Button(International.trad("bouton.descendre"));
 		descendre4.setPrefSize(lBoutonMD, hBoutonMD);
 		descendre4.setMinSize(lBoutonMD, hBoutonMD);
 		descendre4.setFont(policeBoutonMD);
 		descendre4.setStyle(styleBoutons);
 		descendre4.setOnMouseEntered(event -> descendre4.setStyle(styleBoutonsSouris));
 		descendre4.setOnMouseExited(event -> descendre4.setStyle(styleBoutons));
+		descendre4.setOnAction(EventHandler -> {
+			ordre = IhmOutils.echanger(ordre, 3, 4);
+			updateOrdre();
+		});
 
 		j4.setAlignment(Pos.CENTER);
 		j4.setSpacing(spacing);
@@ -250,20 +298,28 @@ public class CouleurPane extends StackPane implements ICouleurListener {
 		couleur5.setMinHeight(hauteurElemtents);
 		couleur5.setPrefSize(largeurComboBox, hauteurElemtents);
 		couleur5.getItems().addAll(DataControl.couleursJoueur);
-		Button monter5 = new Button(International.trad("bouton.monter"));
+		monter5 = new Button(International.trad("bouton.monter"));
 		monter5.setPrefSize(lBoutonMD, hBoutonMD);
 		monter5.setMinSize(lBoutonMD, hBoutonMD);
 		monter5.setFont(policeBoutonMD);
 		monter5.setStyle(styleBoutons);
 		monter5.setOnMouseEntered(event -> monter5.setStyle(styleBoutonsSouris));
 		monter5.setOnMouseExited(event -> monter5.setStyle(styleBoutons));
-		Button descendre5 = new Button(International.trad("bouton.descendre"));
+		monter5.setOnAction(EventHandler -> {
+			ordre = IhmOutils.echanger(ordre, 4, 3);
+			updateOrdre();
+		});
+		descendre5 = new Button(International.trad("bouton.descendre"));
 		descendre5.setPrefSize(lBoutonMD, hBoutonMD);
 		descendre5.setMinSize(lBoutonMD, hBoutonMD);
 		descendre5.setFont(policeBoutonMD);
 		descendre5.setStyle(styleBoutons);
 		descendre5.setOnMouseEntered(event -> descendre5.setStyle(styleBoutonsSouris));
 		descendre5.setOnMouseExited(event -> descendre5.setStyle(styleBoutons));
+		descendre5.setOnAction(EventHandler -> {
+			ordre = IhmOutils.echanger(ordre, 4, 5);
+			updateOrdre();
+		});
 
 		j5.setAlignment(Pos.CENTER);
 		j5.setSpacing(spacing);
@@ -285,20 +341,25 @@ public class CouleurPane extends StackPane implements ICouleurListener {
 		couleur6.setMinHeight(hauteurElemtents);
 		couleur6.setPrefSize(largeurComboBox, hauteurElemtents);
 		couleur6.getItems().addAll(DataControl.couleursJoueur);
-		Button monter6 = new Button(International.trad("bouton.monter"));
+		monter6 = new Button(International.trad("bouton.monter"));
 		monter6.setPrefSize(lBoutonMD, hBoutonMD);
 		monter6.setMinSize(lBoutonMD, hBoutonMD);
 		monter6.setFont(policeBoutonMD);
 		monter6.setStyle(styleBoutons);
 		monter6.setOnMouseEntered(event -> monter6.setStyle(styleBoutonsSouris));
 		monter6.setOnMouseExited(event -> monter6.setStyle(styleBoutons));
-		Button descendre6 = new Button(International.trad("bouton.descendre"));
+		monter6.setOnAction(EventHandler -> {
+			ordre = IhmOutils.echanger(ordre, 5, 4);
+			updateOrdre();
+		});
+		descendre6 = new Button(International.trad("bouton.descendre"));
 		descendre6.setPrefSize(lBoutonMD, hBoutonMD);
 		descendre6.setMinSize(lBoutonMD, hBoutonMD);
 		descendre6.setFont(policeBoutonMD);
 		descendre6.setStyle(styleBoutons);
 		descendre6.setOnMouseEntered(event -> descendre6.setStyle(styleBoutonsSouris));
 		descendre6.setOnMouseExited(event -> descendre6.setStyle(styleBoutons));
+		descendre6.setVisible(false);
 
 		j6.setAlignment(Pos.CENTER);
 		j6.setSpacing(spacing);
@@ -332,7 +393,7 @@ public class CouleurPane extends StackPane implements ICouleurListener {
 			if (isOk) {
 				List<Couleur> cs = IhmOutils.comboStringToColorList(core.getNbJoueur(), couleur1, couleur2, couleur3,
 						couleur4, couleur5, couleur6);
-				core.getCj().setJoueurCouleur(cs);
+				core.getCj().setJoueurCouleur(cs, IhmOutils.reOrdre(ordre, joueurs));
 				sc.setPaneOnTop(ApplicationPane.PLATEAU);
 			}
 		});
@@ -394,6 +455,8 @@ public class CouleurPane extends StackPane implements ICouleurListener {
 	@Override
 	public void joueurNoms(List<Joueur> joueurs) {
 		Platform.runLater(() -> {
+			ordre = new int[joueurs.size()];
+			this.joueurs = joueurs;
 			nom1.setText(joueurs.size() >= 1 ? joueurs.get(0).getNom() : "");
 			nom2.setText(joueurs.size() >= 2 ? joueurs.get(1).getNom() : "");
 			nom3.setText(joueurs.size() >= 3 ? joueurs.get(2).getNom() : "");
@@ -402,6 +465,15 @@ public class CouleurPane extends StackPane implements ICouleurListener {
 			nom6.setText(joueurs.size() >= 6 ? joueurs.get(5).getNom() : "");
 			setJoueurConfig(core.getNbJoueur());
 		});
+	}
+
+	public void updateOrdre() {
+		nom1.setText(joueurs.size() >= 1 ? joueurs.get(ordre[0]).getNom() : "");
+		nom2.setText(joueurs.size() >= 2 ? joueurs.get(ordre[1]).getNom() : "");
+		nom3.setText(joueurs.size() >= 3 ? joueurs.get(ordre[2]).getNom() : "");
+		nom4.setText(joueurs.size() >= 4 ? joueurs.get(ordre[3]).getNom() : "");
+		nom5.setText(joueurs.size() >= 5 ? joueurs.get(ordre[4]).getNom() : "");
+		nom6.setText(joueurs.size() >= 6 ? joueurs.get(ordre[5]).getNom() : "");
 	}
 
 	private void setJoueurConfig(int maxJr) {

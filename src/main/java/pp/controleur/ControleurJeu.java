@@ -45,7 +45,7 @@ public class ControleurJeu {
 	private Statut statut;
 	private final List<String> tempPaquet;
 
-	private final ArrayList<Joueur> joueurs;
+	private List<Joueur> joueurs;
 	private ArrayList<Integer> lieuZombie;
 	private boolean couleurPret = false;
 	private boolean isFinished = false;
@@ -96,19 +96,19 @@ public class ControleurJeu {
 			String m = ControleurReseau.construirePaquetUdp("ACP", intPartieId,
 					ControleurReseau.getIp().getHostAddress(), port, nomPartie, nbjtotal, nbjr, nbjv, statut);
 			ControleurReseau.envoyerUdp(m);
-			
+
 			while (joueurs.size() != this.nbjtotal)
 				Thread.yield();
-			
+
 			Initializer.joueurPret();
 			statut = Statut.COMPLETE;
 			joueurs.get(0).setChefDesVigiles(true);
 			jeu = new Partie(joueurs);
 			updateValues();
-			
+
 			while (!couleurPret)
 				Thread.yield();
-			
+
 			Initializer.nomJoueurAll(new ArrayList<>(jeu.getJoueurs().values()));
 			try {
 				demarerJeu();
@@ -138,8 +138,9 @@ public class ControleurJeu {
 			coreThread.interrupt();
 	}
 
-	public void setJoueurCouleur(List<Couleur> couleurs) {
+	public void setJoueurCouleur(List<Couleur> couleurs, List<Joueur> joueursOrdre) {
 		this.couleurPret = true;
+		joueurs = joueursOrdre;
 		for (int i = 0; i < joueurs.size(); i++)
 			joueurs.get(i).setCouleur(couleurs.get(i));
 	}
@@ -195,11 +196,11 @@ public class ControleurJeu {
 			nbjractuel++;
 		else if (typeJoueur == TypeJoueur.BOT)
 			nbjvactuel++;
-		
+
 		synchronized (joueurs) {
 			joueurs.add(joueur);
 		}
-		
+
 		return joueur.getJoueurId();
 	}
 
@@ -763,7 +764,7 @@ public class ControleurJeu {
 			}
 		}
 	}
-	
+
 	public boolean estPleine() {
 		return joueurs.size() == this.nbjtotal;
 	}
