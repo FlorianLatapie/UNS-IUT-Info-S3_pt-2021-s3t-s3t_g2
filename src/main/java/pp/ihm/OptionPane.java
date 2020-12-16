@@ -158,9 +158,7 @@ public class OptionPane extends StackPane {
 		bEnglish.setOnMouseEntered(event -> bEnglish.setStyle(styleBoutonsSouris));
 		bEnglish.setOnMouseExited(event -> bEnglish.setStyle(styleBoutons));
 
-		
-
-		Button bPleinEcran = new Button("Mettre en plein écran"); // TODO
+		Button bPleinEcran = new Button(International.trad("bouton.pEcran"));
 		bPleinEcran.setFont(policeBouton);
 		bPleinEcran.setAlignment(Pos.CENTER);
 		bPleinEcran.setPrefSize(500, hauteurElement);
@@ -168,10 +166,10 @@ public class OptionPane extends StackPane {
 		bPleinEcran.setOnMouseEntered(event -> bPleinEcran.setStyle(styleBoutonsSouris));
 		bPleinEcran.setOnMouseExited(event -> bPleinEcran.setStyle(styleBoutons));
 		bPleinEcran.setOnAction(EventHandler -> {
-			 Stage stage = (Stage) bPleinEcran.getScene().getWindow();
-		     stage.setFullScreen(true);
+			Stage stage = (Stage) bPleinEcran.getScene().getWindow();
+			stage.setFullScreen(true);
 		});
-		
+
 		Button bAcc = new Button(International.trad("texte.titreAcc"));
 		bAcc.setFont(policeBouton);
 		bAcc.setAlignment(Pos.CENTER);
