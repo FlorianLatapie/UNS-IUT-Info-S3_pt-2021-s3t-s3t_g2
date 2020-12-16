@@ -60,11 +60,11 @@ public class ConfigPartiePane extends StackPane {
 		sControl = sc;
 
 		// titre
-		Label titre1 = new Label(International.trad("texte.titreConfigPartieA")+"\n"+International.trad("texte.titreConfigPartieB"));
+		Label titre1 = new Label(
+				International.trad("texte.titreConfigPartieA") + "\n" + International.trad("texte.titreConfigPartieB"));
 		titre1.setTextAlignment(TextAlignment.CENTER);
 		titre1.setFont(Font.font(nomPolice, FontWeight.BOLD, 80));
 		titre1.setTextFill(Color.BLACK);
-
 
 		VBox titre = new VBox(titre1);
 		titre.setAlignment(Pos.CENTER);
@@ -74,7 +74,7 @@ public class ConfigPartiePane extends StackPane {
 
 		// texte
 		Label desc = new Label(International.trad("texte.descriptionConfigPartie"));
-		desc.setFont(Font.font("Segoe UI",FontWeight.BOLD, 30));
+		desc.setFont(Font.font("Segoe UI", FontWeight.BOLD, 30));
 		desc.setTextFill(Color.WHITE);
 		desc.setMinHeight(hauteurElemtents);
 
@@ -84,32 +84,32 @@ public class ConfigPartiePane extends StackPane {
 		HBox nomPartie = new HBox();
 
 		Label nomPTexte = new Label(International.trad("texte.idPartie"));
-		nomPTexte.setFont(Font.font("Segoe UI",FontWeight.BOLD, 30));
+		nomPTexte.setFont(Font.font("Segoe UI", FontWeight.BOLD, 30));
 		nomPTexte.setTextFill(Color.WHITE);
 		nomPTexte.setStyle(styleVBox);
 		nomPTexte.setMinHeight(hauteurElemtents);
 		nomPTexte.setPadding(new Insets(10, 50, 10, 10));
 		nomPTexte.setMinWidth(largeurTexte);
 
-		Label infoNomPartie = new Label();// TODO trad
-		infoNomPartie.setText("Le nom de la partie, sous la forme d’une chaine de caractères pouvant" + "\n"
-				+ "contenir des lettres majuscules et minuscule (accentuées ou non), des" + " \n"
-				+ "nombres et les caractères spéciaux apostrophe «’», espace « » et souligné" + "\n" + " bas «_».");
+		Label infoNomPartie = new Label();
+		infoNomPartie.setText(International.trad("texte.infoNom1") + "\n" + International.trad("texte.infoNom2") + "\n"
+				+ International.trad("texte.infoNom3") + "\n" + International.trad("texte.infoNom4"));
 		infoNomPartie.setMinHeight(100);
 		infoNomPartie.setPrefSize(580, 100);
 		infoNomPartie.setFont(policeNom);
 		infoNomPartie.setPadding(new Insets(5, 10, 5, 10));
 		infoNomPartie.setBackground(fondBlanc);
-		
+
 		TextField nomP = new TextField();
 		nomP.setText("Partie" + (int) (100 * Math.random()));
-		nomP.setFont(Font.font("Segoe UI",FontWeight.BOLD, 30));
-		nomP.setStyle("-fx-background-color: #DFDFDF; -fx-text-fill: black; -fx-border-color: black; -fx-border-width: 3;");
+		nomP.setFont(Font.font("Segoe UI", FontWeight.BOLD, 30));
+		nomP.setStyle(
+				"-fx-background-color: #DFDFDF; -fx-text-fill: black; -fx-border-color: black; -fx-border-width: 3;");
 		nomP.setBackground(null);
 		nomP.setAlignment(Pos.CENTER);
 		nomP.setPrefSize(160, 63);
 		nomP.setMinHeight(63);
-		
+
 		nomPartie.setAlignment(Pos.CENTER);
 		nomPartie.setSpacing(spacing);
 		nomPartie.getChildren().addAll(nomPTexte, nomP);
@@ -119,7 +119,7 @@ public class ConfigPartiePane extends StackPane {
 		HBox nbTotJr = new HBox();
 
 		Label nbjrTexte = new Label(International.trad("texte.nbdeJr"));
-		nbjrTexte.setFont(Font.font("Segoe UI",FontWeight.BOLD, 30));
+		nbjrTexte.setFont(Font.font("Segoe UI", FontWeight.BOLD, 30));
 		nbjrTexte.setTextFill(Color.WHITE);
 		nbjrTexte.setStyle(styleVBox);
 		nbjrTexte.setMinHeight(hauteurElemtents);
@@ -130,7 +130,7 @@ public class ConfigPartiePane extends StackPane {
 		nbJr.getItems().addAll(DataControl.nombreJoueur);
 		nbJr.setValue(5);
 		nbJr.setStyle("-fx-text-fill: white;");
-		nbJr.setPadding(new Insets(0,0,0,60));
+		nbJr.setPadding(new Insets(0, 0, 0, 60));
 		nbJr.setPrefSize(160, 63);
 		nbJr.setMinHeight(63);
 
@@ -144,7 +144,7 @@ public class ConfigPartiePane extends StackPane {
 		HBox nbTotBot = new HBox();
 
 		Label nbBotTexte = new Label(International.trad("texte.nbdeBot"));
-		nbBotTexte.setFont(Font.font("Segoe UI",FontWeight.BOLD, 30));
+		nbBotTexte.setFont(Font.font("Segoe UI", FontWeight.BOLD, 30));
 		nbBotTexte.setTextFill(Color.WHITE);
 		nbBotTexte.setAlignment(Pos.CENTER_LEFT);
 		nbBotTexte.setStyle(styleVBox);
@@ -155,7 +155,7 @@ public class ConfigPartiePane extends StackPane {
 		ComboBox<Integer> nbBot = new ComboBox<>();
 		nbBot.getItems().addAll(DataControl.nombreBot);
 		nbBot.setValue(5);
-		nbBot.setPadding(new Insets(0,0,0,60));
+		nbBot.setPadding(new Insets(0, 0, 0, 60));
 		nbBot.setPrefSize(160, 63);
 		nbBot.setMinHeight(63);
 
@@ -165,7 +165,7 @@ public class ConfigPartiePane extends StackPane {
 		nbTotBot.setDisable(false);
 
 		vJoueurs.setSpacing(spacing / 2.0);
-		vJoueurs.getChildren().addAll(desc, infoNomPartie,nomPartie, nbTotJr, nbTotBot);
+		vJoueurs.getChildren().addAll(desc, infoNomPartie, nomPartie, nbTotJr, nbTotBot);
 
 		VBox vbCenter = new VBox();
 		vbCenter.setAlignment(Pos.CENTER);
@@ -182,7 +182,7 @@ public class ConfigPartiePane extends StackPane {
 		bJouer.setOnMouseEntered(event -> bJouer.setStyle(styleBoutonsSouris));
 		bJouer.setOnMouseExited(event -> bJouer.setStyle(styleBoutons));
 		bJouer.setOnAction(EventHandler -> {
-			
+
 			if (nbJr.getValue() > 6 || nbJr.getValue() < 3) {
 				core.setNbJoueur(nbJr.getValue());
 			} else {
