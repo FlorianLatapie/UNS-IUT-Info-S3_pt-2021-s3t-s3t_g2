@@ -17,7 +17,7 @@ public class TraitementIntelligent {
 	
 	
 	/**
-	 * Choix de destination random
+	 * Choix de destination
 	 *
 	 * @param Bot pour lequel le traitement s'effectue
 	 * @return La destination choisie
@@ -26,12 +26,7 @@ public class TraitementIntelligent {
 	protected static int choixDestIntelligent(Bot core) {
 		out.println(core.getEtatPartie());
 		out.println("Entrez une destination");
-		int dest = 0;
-		if (core.getCompteurTour() % 2 == 1)
-			dest = core.getLieuOuvert().get(new Random().nextInt(core.getLieuOuvert().size()));
-		else
-			dest = MCTSBotMoyen.getChoisDest(core.getPartie().copyOf(), core.getCouleur());
-		return dest;
+		return MCTSBotMoyen.getChoisDest(core.getPartie().copyOf(), core.getCouleur());
 	}
 
 	/**
