@@ -61,6 +61,8 @@ public class ScreenControl implements EventHandler<MouseEvent> {
 		}
 
 	}
+	
+	
 	public void setRotatePane(Node n, String sens) {
 		double angle = n.getRotate();
 		this.setAnglePane(sens);
@@ -96,6 +98,10 @@ public class ScreenControl implements EventHandler<MouseEvent> {
 		rotateTransition.play();
 	}
 	
+	public void setRotatePane(Node n1, Node n2, String sens) {
+		setRotatePane(n1, sens);
+		setRotatePane(n2, sens);
+	}
 	public static double getAngle(String sens) {
 		double currentAngle = 0;
 		switch (sens) {

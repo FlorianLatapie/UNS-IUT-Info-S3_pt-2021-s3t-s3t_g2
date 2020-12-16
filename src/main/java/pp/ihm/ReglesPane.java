@@ -17,6 +17,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
+import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 
@@ -65,6 +66,12 @@ public class ReglesPane extends StackPane {
 		titre.setMinWidth(730);
 
 		//
+		Rectangle rect = new Rectangle();
+		rect.setWidth(tailleCarreCentral);
+		rect.setHeight(tailleCarreCentral-154);
+		rect.setArcHeight(30);
+		rect.setArcWidth(30);
+		rect.setOpacity(.3);
 
 		Label desc1 = new Label();
 		desc1.setText(International.trad("texte.pourQuiA") + "\n" + International.trad("texte.pourQuiB") + "\n\n"
@@ -82,7 +89,8 @@ public class ReglesPane extends StackPane {
 				+ International.trad("texte.FDPfinB") + "\n" + International.trad("texte.FDPfinC") + "\n");
 		desc1.setFont(policeNom);
 		desc1.setPadding(new Insets(5,10,5,10));
-		desc1.setBackground(fondBlanc);
+		desc1.setTextFill(Color.WHITE);
+		//desc1.setBackground(fondBlanc);
 
 		VBox vbCenter = new VBox();
 
@@ -140,7 +148,7 @@ public class ReglesPane extends StackPane {
 		bEcranHaut.setPrefSize(80, 80);
 		bEcranHaut.setRotate(180);
 		bEcranHaut.setGraphic(img1);
-		bEcranHaut.setOnAction(EventHandler -> sc.setRotatePane(centreMenu, "haut"));
+		bEcranHaut.setOnAction(EventHandler -> sc.setRotatePane(rect, centreMenu, "haut"));
 
 		Button bEcranBas = new Button();
 		bEcranBas.setBackground(new Background(new BackgroundFill(null, CornerRadii.EMPTY, null)));
@@ -148,7 +156,7 @@ public class ReglesPane extends StackPane {
 		bEcranBas.setTranslateY(490);
 		bEcranBas.setPrefSize(80, 80);
 		bEcranBas.setGraphic(img2);
-		bEcranBas.setOnAction(EventHandler -> sc.setRotatePane(centreMenu, "bas"));
+		bEcranBas.setOnAction(EventHandler -> sc.setRotatePane(rect, centreMenu, "bas"));
 
 		Button bEcranGauche = new Button();
 		bEcranGauche.setBackground(new Background(new BackgroundFill(null, CornerRadii.EMPTY, null)));
@@ -157,7 +165,7 @@ public class ReglesPane extends StackPane {
 		bEcranGauche.setPrefSize(80, 80);
 		bEcranGauche.setRotate(90);
 		bEcranGauche.setGraphic(img3);
-		bEcranGauche.setOnAction(EventHandler -> sc.setRotatePane(centreMenu, "gauche"));
+		bEcranGauche.setOnAction(EventHandler -> sc.setRotatePane(rect, centreMenu, "gauche"));
 
 		Button bEcranDroite = new Button();
 		bEcranDroite.setBackground(new Background(new BackgroundFill(null, CornerRadii.EMPTY, null)));
@@ -166,7 +174,7 @@ public class ReglesPane extends StackPane {
 		bEcranDroite.setRotate(-90);
 		bEcranDroite.setPrefSize(80, 80);
 		bEcranDroite.setGraphic(img4);
-		bEcranDroite.setOnAction(EventHandler -> sc.setRotatePane(centreMenu, "droite"));
+		bEcranDroite.setOnAction(EventHandler -> sc.setRotatePane(rect, centreMenu, "droite"));
 
 		// boite du fond qui contient tout
 		HBox fond = new HBox();
@@ -177,7 +185,7 @@ public class ReglesPane extends StackPane {
 		fond.getChildren().add(imgFond);
 
 		this.setAlignment(Pos.CENTER);
-		this.getChildren().addAll(fond, centreMenu, bEcranDroite, bEcranHaut, bEcranGauche, bEcranBas);
+		this.getChildren().addAll(fond, rect, centreMenu, bEcranDroite, bEcranHaut, bEcranGauche, bEcranBas);
 		this.setBackground(new Background(new BackgroundFill(Color.BLACK, CornerRadii.EMPTY, null)));
 
 		sControl.registerNode(paneName, this);
