@@ -23,11 +23,11 @@ public interface IhmOutils {
 	 * @param couleurs couleurs
 	 * @return l'unicité de chaque couleur
 	 */
-	public static boolean isAllUniqueColor(int max, ComboBox<String>... couleurs) {
+	public static boolean isAllUniqueColor(int max, String... couleurs) {
 		for (int i = 0; i < max; i++)
 			for (int y = 0; y < max; y++)
 				if (i != y)
-					if (couleurs[i].getValue() == couleurs[y].getValue())
+					if (couleurs[i] == couleurs[y])
 						return false;
 
 		return true;
