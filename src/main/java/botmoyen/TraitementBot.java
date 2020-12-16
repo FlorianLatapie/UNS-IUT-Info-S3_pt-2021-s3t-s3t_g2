@@ -301,6 +301,23 @@ public class TraitementBot {
 			return null;
 	}
 	
+	public PionCouleur choisirBestSacrifice(BotMoyen core, List<?> listPionT) {
+		int bestPion = 20;
+		if (listPionT.size() > 0) {
+			List<Integer> listPion = new ArrayList<>();
+			for (Object o : listPionT)
+				listPion.add((Integer) o);
+			for(int i=0; i<listPion.size();i++) {
+			if(listPion.get(i)<bestPion) {
+				bestPion = listPion.get(i);
+			}
+			}
+			PionCouleur pion = PionCouleur.valueOf(String.valueOf(core.getCouleur().name().charAt(0))+bestPion);
+			return pion;
+		} else
+			return null;
+	}
+	
 	/**
 	 * Fin de la partie
 	 *
@@ -415,19 +432,7 @@ public class TraitementBot {
 		for (CarteType carteAJouer : listeCarteUtilisable) {
 			switch (carteAJouer.name()) {
 			case "ACS":
-				if (nbZombie >= forcePerso) {
-					listeCarteJouee.add(carteAJouer);
-					core.getListeCarte().remove(carteAJouer);
-					nbZombie = nbZombie - 2;
-				}
-				break;
 			case "ATR":
-				if (nbZombie >= forcePerso) {
-					listeCarteJouee.add(carteAJouer);
-					core.getListeCarte().remove(carteAJouer);
-					nbZombie = nbZombie - 2;
-				}
-				break;
 			case "AGR":
 				if (nbZombie >= forcePerso) {
 					listeCarteJouee.add(carteAJouer);
@@ -436,19 +441,7 @@ public class TraitementBot {
 				}
 				break;
 			case "ARE":
-				if (nbZombie >= forcePerso) {
-					listeCarteJouee.add(carteAJouer);
-					core.getListeCarte().remove(carteAJouer);
-					nbZombie--;
-				}
-				break;
 			case "AHI":
-				if (nbZombie >= forcePerso) {
-					listeCarteJouee.add(carteAJouer);
-					core.getListeCarte().remove(carteAJouer);
-					nbZombie--;
-				}
-				break;
 			case "ABA":
 				if (nbZombie >= forcePerso) {
 					listeCarteJouee.add(carteAJouer);
@@ -516,6 +509,22 @@ public class TraitementBot {
 	}
 	
 	/**
+	 * Meilleure Reponse du joueur(bot) courant
+	 *
+	 * @param BotMoyen pour lequel le traitement s'effectue
+	 * @return Un type de carte 
+	 */
+	public CarteType BestReponseJoueurCourant(BotMoyen core) {
+		if (core.getListeCarte().contains(CarteType.CDS)) {
+			core.getListeCarte().remove(CarteType.CDS);
+			return CarteType.CDS;
+		}
+		return CarteType.NUL;
+	}
+	
+	
+	
+	/**
 	 * Indiquer les cartes jouées
 	 *
 	 * @param BotMoyen pour lequel le traitement s'effectue
@@ -552,6 +561,8 @@ public class TraitementBot {
 		}
 		return core.couleurJoueurPresent().get(new Random().nextInt(core.couleurJoueurPresent().size()));
 	}
+	
+	
 
 	/**
 	 * Retourne une couleur random parmis les joueurs présents 
