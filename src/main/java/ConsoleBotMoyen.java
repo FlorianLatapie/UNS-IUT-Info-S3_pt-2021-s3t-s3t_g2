@@ -1,8 +1,10 @@
+
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import botmoyen.BotMoyen;
+import bot.Bot;
+import bot.BotType;
 import reseau.tool.ThreadOutils;
 
 public class ConsoleBotMoyen {
@@ -10,7 +12,7 @@ public class ConsoleBotMoyen {
 	public static void main(String[] args) {
 		Logger.getGlobal().setLevel(Level.FINEST);
 		ThreadOutils.asyncTaskRepeat(10,() -> {
-			BotMoyen botMoyen = new BotMoyen(0);
+			Bot botMoyen = new Bot(0,BotType.MOYEN);
 			try {
 				botMoyen.start();
 			} catch (IOException e) {

@@ -1,4 +1,4 @@
-package botmoyen;
+package bot;
 
 import reseau.paquet.Paquet;
 import reseau.socket.ControleurReseau;
@@ -22,17 +22,16 @@ import java.util.Scanner;
  * @version 1.0
  */
 public class TraitementPaquetUdp extends TraitementPaquet<DatagramPacket> {
-	private BotMoyen core;// TODO Add the game manager (core)
+	private Bot core;// TODO Add the game manager (core)
 
 	/**
 	 * @param core coeur du jeu
 	 */
 	public TraitementPaquetUdp(Object core) {
-		this.core = (BotMoyen) core;// TODO Add the game manager (core)
+		this.core = (Bot) core;// TODO Add the game manager (core)
 	}
 
 	public void init() {
-		
 	}
 
 	/**
@@ -142,6 +141,6 @@ public class TraitementPaquetUdp extends TraitementPaquet<DatagramPacket> {
 
 	@Override
 	public void set(Object core) {
-		this.core = (BotMoyen) core;
+		this.core = (Bot) core;
 	}
 }

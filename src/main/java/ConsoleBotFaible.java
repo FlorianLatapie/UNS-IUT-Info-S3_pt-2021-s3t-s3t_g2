@@ -1,8 +1,10 @@
+
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import botfaible.BotFaible;
+import bot.Bot;
+import bot.BotType;
 import reseau.tool.ThreadOutils;
 
 public class ConsoleBotFaible {
@@ -10,7 +12,7 @@ public class ConsoleBotFaible {
 	public static void main(String[] args) {
 		Logger.getGlobal().setLevel(Level.FINEST);
 		ThreadOutils.asyncTaskRepeat(10,() -> {
-			BotFaible botFaible = new BotFaible(0);
+			Bot botFaible = new Bot(0,BotType.FAIBLE);
 			try {
 				botFaible.start();
 			} catch (IOException e) {

@@ -1,4 +1,4 @@
-package botmoyen;
+package bot;
 
 import reseau.socket.ControleurReseau;
 import reseau.tool.ReseauOutils;
@@ -17,11 +17,11 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-import botmoyen.partie.Joueur;
-import botmoyen.partie.Lieu;
-import botmoyen.partie.Partie;
+import bot.partie.Joueur;
+import bot.partie.Lieu;
+import bot.partie.Partie;
 
-public class BotMoyen {
+public class Bot {
 	/* Parametre Idjr */
 	private String nom;
 	private String numPartie;
@@ -43,12 +43,16 @@ public class BotMoyen {
 	private List<Couleur> joueurEnVie;
 	private VoteType voteType;
 	private Partie partie;
+	private BotType botType;
+
+	
 
 	/* Parametre Temporaire */
 	private List<Integer> pionAPos;
 
-	public BotMoyen(int delay) {
+	public Bot(int delay,BotType botType) {
 		this.delay = delay;
+		this.botType=botType;
 	}
 
 	public void start() throws IOException {
@@ -82,7 +86,7 @@ public class BotMoyen {
 	private void initReseau() throws IOException {
 		TraitementPaquetUdp traitementPaquetUdp = new TraitementPaquetUdp(this);
 		TraitementPaquetTcp traitementPaquetTcp = new TraitementPaquetTcp(this);
-		ControleurReseau.initConnexion(traitementPaquetTcp, traitementPaquetUdp, connexionType, ReseauOutils.getLocalIp());
+		ControleurReseau.initConnexion(traitementPaquetTcp,traitementPaquetUdp,connexionType, ReseauOutils.getLocalIp());
 	}
 
 	public void arreter() {
@@ -228,11 +232,11 @@ public class BotMoyen {
 	public void setCompteurTour(int compteurTour) {
 		this.compteurTour = compteurTour;
 	}
-
+	
 	public void newTour() {
-		this.compteurTour++;
+		this.compteurTour ++;
 	}
-
+	
 	public Partie getPartie() {
 		return partie;
 	}
@@ -370,7 +374,7 @@ public class BotMoyen {
 	public void joueCarte(Couleur value, CarteType carte) {
 		if (partie.getJoueurs().get(value).getCartes().contains(carte)) {
 			partie.getJoueurs().get(value).getCartes().remove(carte);
-		} else if ((partie.getCartes().contains(carte)) && (partie.getJoueurs().get(value).getCartes().size() > 0)) {
+		} else if ((partie.getCartes().contains(carte))&& (partie.getJoueurs().get(value).getCartes().size() > 0))  {
 			partie.getCartes().remove(carte);
 			int rand = new Random().nextInt(partie.getJoueurs().get(value).getCartes().size());
 			if (rand == 0)
@@ -427,7 +431,9 @@ public class BotMoyen {
 
 	}
 
-	public void corectionZombie(Integer lieu, Integer nbz) {
+
+
+	public void correctionZombie(Integer lieu, Integer nbz) {
 		partie.setZombieSurLieu(lieu, nbz);
 
 	}
@@ -455,6 +461,14 @@ public class BotMoyen {
 
 	public String getEtatPartie() {
 		return partie.getEtatPartie();
+	}
+
+	public BotType getBotType() {
+		return botType;
+	}
+
+	public void setBotType(BotType botType) {
+		this.botType = botType;
 	}
 
 }

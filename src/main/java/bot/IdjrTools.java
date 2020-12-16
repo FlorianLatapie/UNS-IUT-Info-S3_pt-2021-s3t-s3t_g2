@@ -1,4 +1,4 @@
-package botmoyen;
+package bot;
 
 import java.util.List;
 

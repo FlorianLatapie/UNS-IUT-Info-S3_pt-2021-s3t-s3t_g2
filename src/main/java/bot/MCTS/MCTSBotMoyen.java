@@ -1,4 +1,4 @@
-package botmoyen.MCTS;
+package bot.MCTS;
 
 import java.util.Random;
 
@@ -8,7 +8,7 @@ import MCTS.Base.StateInfo;
 import MCTS.Conditions.StopAfterMaxIterations;
 import MCTS.Policies.RandomPolicy;
 import MCTS.Policies.UpperConfidenceBoundPolicy;
-import botmoyen.partie.Partie;
+import bot.partie.Partie;
 import reseau.type.Couleur;
 
 public class MCTSBotMoyen {

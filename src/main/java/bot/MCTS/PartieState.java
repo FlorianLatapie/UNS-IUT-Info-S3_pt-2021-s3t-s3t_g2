@@ -1,15 +1,15 @@
-package botmoyen.MCTS;
+package bot.MCTS;
 
 import java.util.LinkedList;
 
 import MCTS.Base.Action;
 import MCTS.Base.Player;
 import MCTS.Base.State;
-import botmoyen.partie.ControleurPartie;
-import botmoyen.partie.Joueur;
-import botmoyen.partie.Lieu;
-import botmoyen.partie.Partie;
-import botmoyen.partie.Personnage;
+import bot.partie.ControleurPartie;
+import bot.partie.Joueur;
+import bot.partie.Lieu;
+import bot.partie.Partie;
+import bot.partie.Personnage;
 import reseau.type.Couleur;
 
 public class PartieState extends State {
