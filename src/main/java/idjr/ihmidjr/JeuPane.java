@@ -1749,6 +1749,7 @@ public class JeuPane extends StackPane implements IJeuListener {
 								core.getIdjr().choisirUtiliserCarte(type);
 							}
 							if (core.getIdjr().getUtiliserCarteChosi() != CarteType.NUL) {
+								bPasserCarte.setFont(Font.font("Segoe UI", FontWeight.BOLD, 25));
 								bPasserCarte.setText(International.trad("texte.valider"));
 							} else {
 								bPasserCarte.setText(International.trad("texte.passer"));
