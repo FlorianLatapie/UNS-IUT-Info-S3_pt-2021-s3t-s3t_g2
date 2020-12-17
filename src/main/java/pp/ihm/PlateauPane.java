@@ -897,7 +897,8 @@ public class PlateauPane extends StackPane implements IPlateauListener {
 		VBox vTitreInfo2 = new VBox();
 		vTitreInfo2.setAlignment(Pos.CENTER);
 		vTitreInfo2.setPadding(new Insets(20));
-		titreInfo2 = new Label("Déplacement d'un pion du chef \ndes vigiles");
+		titreInfo2 = new Label(
+				International.trad("text.deplChefVigile1") + "\n" + International.trad("text.deplChefVigile2"));
 		titreInfo2.setTextAlignment(TextAlignment.CENTER);
 		titreInfo2.setFont(Font.font("Segoe UI", FontWeight.BOLD, 25));
 		titreInfo2.setTextFill(Color.WHITE);
@@ -905,7 +906,7 @@ public class PlateauPane extends StackPane implements IPlateauListener {
 
 		VBox vInfo2 = new VBox();
 		vInfo2.setAlignment(Pos.CENTER);
-		lInfo2 = new Label("Voici l'information que vous voulez savoir");
+		lInfo2 = new Label(International.trad("text.lInfo"));
 		lInfo2.setTextAlignment(TextAlignment.CENTER);
 		lInfo2.setFont(Font.font("Segoe UI", FontWeight.BOLD, 20));
 		lInfo2.setTextFill(Color.WHITE);
@@ -944,7 +945,8 @@ public class PlateauPane extends StackPane implements IPlateauListener {
 		VBox vTitreInfo3 = new VBox();
 		vTitreInfo3.setAlignment(Pos.CENTER);
 		vTitreInfo3.setPadding(new Insets(20));
-		titreInfo3 = new Label("Déplacement d'un pion du chef \ndes vigiles");
+		titreInfo3 = new Label(
+				International.trad("text.deplChefVigile1") + "\n" + International.trad("text.deplChefVigile2"));
 		titreInfo3.setTextAlignment(TextAlignment.CENTER);
 		titreInfo3.setFont(Font.font("Segoe UI", FontWeight.BOLD, 25));
 		titreInfo3.setTextFill(Color.WHITE);
@@ -952,7 +954,7 @@ public class PlateauPane extends StackPane implements IPlateauListener {
 
 		VBox vInfo3 = new VBox();
 		vInfo3.setAlignment(Pos.CENTER);
-		lInfo3 = new Label("Voici l'information que vous voulez savoir");
+		lInfo3 = new Label(International.trad("text.lInfo"));
 		lInfo3.setTextAlignment(TextAlignment.CENTER);
 		lInfo3.setFont(Font.font("Segoe UI", FontWeight.BOLD, 20));
 		lInfo3.setTextFill(Color.WHITE);
@@ -973,7 +975,7 @@ public class PlateauPane extends StackPane implements IPlateauListener {
 		info4.setStyle(
 				" -fx-background-color:#1A1A1A; -fx-background-radius: 20px; -fx-border-color: red; -fx-border-insets: -3; -fx-border-width: 3; -fx-border-radius: 20px;");
 
-		bQuitterInfo4 = new Button("QUITTER");
+		bQuitterInfo4 = new Button(International.trad("bouton.quitter"));
 		bQuitterInfo4.setAlignment(Pos.CENTER);
 		bQuitterInfo4.setStyle(styleBoutonInfo);
 		bQuitterInfo4.setPrefSize(largBouton * .7, hautBouton * .7);
@@ -992,7 +994,8 @@ public class PlateauPane extends StackPane implements IPlateauListener {
 		VBox vTitreInfo4 = new VBox();
 		vTitreInfo4.setAlignment(Pos.CENTER);
 		vTitreInfo4.setPadding(new Insets(20));
-		titreInfo4 = new Label("Déplacement d'un pion du chef \ndes vigiles");
+		titreInfo4 = new Label(
+				International.trad("text.deplChefVigile1") + "\n" + International.trad("text.deplChefVigile2"));
 		titreInfo4.setTextAlignment(TextAlignment.CENTER);
 		titreInfo4.setFont(Font.font("Segoe UI", FontWeight.BOLD, 25));
 		titreInfo4.setTextFill(Color.WHITE);
@@ -1000,7 +1003,7 @@ public class PlateauPane extends StackPane implements IPlateauListener {
 
 		VBox vInfo4 = new VBox();
 		vInfo4.setAlignment(Pos.CENTER);
-		lInfo4 = new Label("Voici l'information que vous voulez savoir");
+		lInfo4 = new Label(International.trad("text.lInfo"));
 		lInfo4.setTextAlignment(TextAlignment.CENTER);
 		lInfo4.setFont(Font.font("Segoe UI", FontWeight.BOLD, 20));
 		lInfo4.setTextFill(Color.WHITE);
@@ -1386,10 +1389,10 @@ public class PlateauPane extends StackPane implements IPlateauListener {
 	@Override
 	public void fouilleCamion(String camion) {
 		Platform.runLater(() -> {
-			titreInfo1.setText("Fouille du camion");
-			titreInfo2.setText("Fouille du camion");
-			titreInfo3.setText("Fouille du camion");
-			titreInfo4.setText("Fouille du camion");
+			titreInfo1.setText(International.trad("text.fouilleCamion"));
+			titreInfo2.setText(International.trad("text.fouilleCamion"));
+			titreInfo3.setText(International.trad("text.fouilleCamion"));
+			titreInfo4.setText(International.trad("text.fouilleCamion"));
 
 			lInfo1.setText(camion);
 			lInfo2.setText(camion);
@@ -1421,10 +1424,10 @@ public class PlateauPane extends StackPane implements IPlateauListener {
 	@Override
 	public void prevenirDeplacementVigile(String depvig) {
 		Platform.runLater(() -> {
-			titreInfo1.setText("Déplacement d'un pion du chef des vigiles");
-			titreInfo2.setText("Déplacement d'un pion du chef des vigiles");
-			titreInfo3.setText("Déplacement d'un pion du chef des vigiles");
-			titreInfo4.setText("Déplacement d'un pion du chef des vigiles");
+			titreInfo1.setText(International.trad("text.deplChefVigile3"));
+			titreInfo2.setText(International.trad("text.deplChefVigile3"));
+			titreInfo3.setText(International.trad("text.deplChefVigile3"));
+			titreInfo4.setText(International.trad("text.deplChefVigile3"));
 			lInfo1.setText(depvig);
 			lInfo2.setText(depvig);
 			lInfo3.setText(depvig);
@@ -1455,10 +1458,10 @@ public class PlateauPane extends StackPane implements IPlateauListener {
 	@Override
 	public void electionChef(String message) {
 		Platform.runLater(() -> {
-			titreInfo1.setText("Election du chef des vigiles");
-			titreInfo2.setText("Election du chef des vigiles");
-			titreInfo3.setText("Election du chef des vigiles");
-			titreInfo4.setText("Election du chef des vigiles");
+			titreInfo1.setText(International.trad("text.elecChefVigile"));
+			titreInfo2.setText(International.trad("text.elecChefVigile"));
+			titreInfo3.setText(International.trad("text.elecChefVigile"));
+			titreInfo4.setText(International.trad("text.elecChefVigile"));
 			lInfo1.setText(message);
 			lInfo2.setText(message);
 			lInfo3.setText(message);
