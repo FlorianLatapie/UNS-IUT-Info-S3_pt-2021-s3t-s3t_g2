@@ -325,14 +325,25 @@ public class TraitementIntelligent {
 		return pion;
 	}
 
-	protected static Integer choisirDestPlacementIntelligent(List<?> destRestantT) {
-		// TODO faire la version intelligente
+	protected static Integer choisirDestPlacementIntelligent(Bot core, List<?> destRestantT) {
 		List<Integer> destRestant = new ArrayList<>();
+		int nbZombie=100;
 		for (Object o : destRestantT)
 			destRestant.add((Integer) o);
 		int dest = 0;
 		if (!destRestant.isEmpty())
-			dest = destRestant.get(new Random().nextInt(destRestant.size()));
+			for (int i =0; i<core.getPartie().getLieuxOuverts().size();i++) {
+				for (int j =0; j<core.getPartie().getLieuxOuverts().size();j++) {
+					if(destRestant.get(i)==core.getPartie().getLieux().get(j).getNum()) {
+						if(core.getPartie().getLieux().get(j).getNbZombies()<nbZombie) {
+							nbZombie = core.getPartie().getLieux().get(j).getNbZombies();
+							dest = core.getPartie().getLieux().get(j).getNum();
+						}
+					}
+				}
+			}
+			
+			
 		return dest;
 	}
 

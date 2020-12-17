@@ -169,7 +169,7 @@ public class TraitementBot {
 			choix.add(TraitementAleatoire.choisirDestPlacementAleatoire(destRestanteT));
 			choix.add(TraitementAleatoire.choisirPionPlacementAleatoire(core));
 		} else {
-			choix.add(TraitementIntelligent.choisirDestPlacementIntelligent(destRestanteT));
+			choix.add(TraitementIntelligent.choisirDestPlacementIntelligent(core, destRestanteT));
 			choix.add(TraitementIntelligent.choisirPionPlacementIntelligent(core));
 		}
 		return choix;
