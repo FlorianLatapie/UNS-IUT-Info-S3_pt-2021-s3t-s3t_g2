@@ -153,7 +153,7 @@ public class AccueilPane extends StackPane {
 		});
 		bOptions.setOnAction(EventHandler -> {
 			core.setPauseDepuis(paneName);
-			sc.setPaneOnTop(ApplicationPane.JEU);
+			sc.setPaneOnTop(ApplicationPane.OPTION);
 		});
 
 		Button bRegles = new Button(International.trad("bouton.regles"));
