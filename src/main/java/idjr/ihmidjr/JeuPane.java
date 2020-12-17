@@ -1706,14 +1706,19 @@ public class JeuPane extends StackPane implements IJeuListener {
 		Platform.runLater(() -> {
 			Button[] buttons = { bDeCarte1, bDeCarte2, bDeCarte3, bDeCarte4, bDeCarte5, bDeCarte6, bDeCarte7,
 					bDeCarte8 };
+			core.getIdjr().choisirUtiliserCarte(CarteType.NUL);
 			for (int i = 0; i < buttons.length; i++) {
-				if (i < core.getIdjr().getListeCarte().size()) {
+				if (i < cartes.size()) {
 					if (carteType == cartes.get(i)) {
 						buttons[i].setDisable(false);
 						CarteType type = cartes.get(i);
 						buttons[i].setOnAction(EventHandler -> {
 							core.getIdjr().choisirUtiliserCarte(type);
-							resetUtiliserCarte();
+							if (core.getIdjr().getUtiliserCarteChosi() != CarteType.NUL) {
+								bPasserCarte.setText(International.trad("texte.valider"));
+							} else {
+								bPasserCarte.setText(International.trad("texte.passer"));
+							}
 						});
 					}
 				}
@@ -1724,7 +1729,6 @@ public class JeuPane extends StackPane implements IJeuListener {
 			bPasserCarte.setDisable(false);
 			bPasserCarte.setOnAction(EventHandler -> {
 				core.getIdjr().setContinue(false);
-				core.getIdjr().utiliserCarteChoisi(true);
 				resetUtiliserCarte();
 			});
 		});
@@ -1735,15 +1739,20 @@ public class JeuPane extends StackPane implements IJeuListener {
 		Platform.runLater(() -> {
 			Button[] buttons = { bDeCarte1, bDeCarte2, bDeCarte3, bDeCarte4, bDeCarte5, bDeCarte6, bDeCarte7,
 					bDeCarte8 };
+			core.getIdjr().choisirUtiliserCarte(CarteType.NUL);
 			for (int i = 0; i < buttons.length; i++) {
-				if (i < core.getIdjr().getListeCarte().size()) {
+				if (i < cartes.size()) {
 					for (CarteType carteType2 : carteTypes) {
 						if (carteType2 == cartes.get(i)) {
 							buttons[i].setDisable(false);
 							CarteType type = cartes.get(i);
 							buttons[i].setOnAction(EventHandler -> {
 								core.getIdjr().choisirUtiliserCarte(type);
-								resetUtiliserCarte();
+								if (core.getIdjr().getUtiliserCarteChosi() != CarteType.NUL) {
+									bPasserCarte.setText(International.trad("texte.valider"));
+								} else {
+									bPasserCarte.setText(International.trad("texte.passer"));
+								}
 							});
 						}
 					}

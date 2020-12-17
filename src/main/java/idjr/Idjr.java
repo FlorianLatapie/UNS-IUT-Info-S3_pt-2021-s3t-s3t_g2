@@ -113,7 +113,9 @@ public class Idjr {
 			e.printStackTrace();
 		}
 		
-		for (PartieInfo partieInfo : listOfServer) {
+		List<PartieInfo> partieInfos = listOfServer;
+		
+		for (PartieInfo partieInfo : partieInfos) {
 			if (partieInfo.getTypeP() != typePartie)
 				listOfServer.remove(partieInfo);
 			
