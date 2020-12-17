@@ -51,16 +51,20 @@ public abstract class International {
 	public static String trad(String phrase, String... argStrings) {
 		if (!resourceBundle.containsKey(phrase))
 			throw new IllegalArgumentException("La traduction " + phrase + " n'existe pas");
+		System.out.println(phrase);
 
+		String tmp = resourceBundle.getString(phrase);
+		StringBuilder t = new StringBuilder(tmp);
 		int i = 0;
-		while (phrase.contains("{" + i + "}")) {
-			if (argStrings.length == i)
-				throw new ArrayIndexOutOfBoundsException();
-
-			phrase = phrase.replaceFirst("{" + i + "}", argStrings[i]);
+		while (tmp.contains("{" + i + "}")) {
+			int startIndex = t.indexOf("{");
+			int stopIndex = t.indexOf("}") + 1;
+			t = t.replace(startIndex, stopIndex, argStrings[i]);
+			System.out.println(t);
+			i++;
 		}
 
-		return resourceBundle.getString(phrase);
+		return t.toString();
 	}
 
 	/**
