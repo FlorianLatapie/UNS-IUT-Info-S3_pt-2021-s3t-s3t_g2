@@ -94,7 +94,7 @@ public class FinDePartiePane extends StackPane implements IFinListener, ITraduct
 		gagnant1.setPadding(padding);
 		gagnant1.setTranslateY(350);
 		
-		Button bRetour1 = new Button(International.trad("bouton.retour"));
+		bRetour1 = new Button(International.trad("bouton.retour"));
 		bRetour1.setPrefSize(lBouton, hBouton);
 		bRetour1.setMinSize(lBouton, hBouton);
 		bRetour1.setFont(policeBouton);

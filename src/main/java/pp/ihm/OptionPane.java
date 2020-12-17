@@ -5,6 +5,9 @@ import pp.ihm.DataControl.ApplicationPane;
 import pp.ihm.event.IPleineEcranListener;
 import pp.ihm.langues.ITraduction;
 import pp.ihm.langues.International;
+
+import java.util.Locale;
+
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
@@ -155,7 +158,9 @@ public class OptionPane extends StackPane implements IPleineEcranListener, ITrad
 		bFrancais.setAlignment(Pos.CENTER);
 		bFrancais.setPrefSize(245, hauteurElement);
 		bFrancais.setStyle(styleBoutons);
-		bFrancais.setOnAction(EventHandler -> sc.setPaneOnTop(ApplicationPane.OPTION));
+		bFrancais.setOnAction(EventHandler -> {
+			International.changerLangue(Locale.FRENCH);
+		});
 
 		bFrancais.setOnMouseEntered(event -> bFrancais.setStyle(styleBoutonsSouris));
 		bFrancais.setOnMouseExited(event -> bFrancais.setStyle(styleBoutons));
@@ -167,6 +172,9 @@ public class OptionPane extends StackPane implements IPleineEcranListener, ITrad
 		bEnglish.setStyle(styleBoutons);
 		bEnglish.setOnMouseEntered(event -> bEnglish.setStyle(styleBoutonsSouris));
 		bEnglish.setOnMouseExited(event -> bEnglish.setStyle(styleBoutons));
+		bEnglish.setOnAction(EventHandler -> {
+			International.changerLangue(Locale.ENGLISH);
+		});
 
 		bPleinEcran = new Button(International.trad("bouton.pEcran"));
 		bPleinEcran.setFont(policeBouton);

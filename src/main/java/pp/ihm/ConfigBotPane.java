@@ -100,7 +100,7 @@ public class ConfigBotPane extends StackPane implements ITraduction {
 		bot1Texte.setPadding(botPadding);
 		bot1Texte.setMinWidth(largeurTexte);
 		bot1Texte.setTextFill(Color.WHITE);
-		ComboBox<String> diffBot1 = new ComboBox<>();
+		diffBot1 = new ComboBox<>();
 		diffBot1.getItems().addAll(DataControl.difficulteBot);
 		diffBot1.setValue(International.trad("texte.valueFaible"));
 		diffBot1.setPrefSize(largeurTF, hauteurElemtents);
@@ -124,7 +124,7 @@ public class ConfigBotPane extends StackPane implements ITraduction {
 		bot2Texte.setPadding(botPadding);
 		bot2Texte.setMinWidth(largeurTexte);
 
-		ComboBox<String> diffBot2 = new ComboBox<>();
+		diffBot2 = new ComboBox<>();
 		diffBot2.getItems().addAll(DataControl.difficulteBot);
 		diffBot2.setValue(International.trad("texte.valueFaible"));
 		diffBot2.setPrefSize(largeurTF, hauteurElemtents);
@@ -147,7 +147,7 @@ public class ConfigBotPane extends StackPane implements ITraduction {
 		bot3Texte.setPadding(botPadding);
 		bot3Texte.setMinWidth(largeurTexte);
 		bot3Texte.setTextFill(Color.WHITE);
-		ComboBox<String> diffBot3 = new ComboBox<>();
+		diffBot3 = new ComboBox<>();
 		diffBot3.getItems().addAll(DataControl.difficulteBot);
 		diffBot3.setValue(International.trad("texte.valueFaible"));
 		diffBot3.setPrefSize(largeurTF, hauteurElemtents);
@@ -170,7 +170,7 @@ public class ConfigBotPane extends StackPane implements ITraduction {
 		bot4Texte.setPadding(botPadding);
 		bot4Texte.setMinWidth(largeurTexte);
 		bot4Texte.setTextFill(Color.WHITE);
-		ComboBox<String> diffBot4 = new ComboBox<>();
+		diffBot4 = new ComboBox<>();
 		diffBot4.getItems().addAll(DataControl.difficulteBot);
 		diffBot4.setValue(International.trad("texte.valueFaible"));
 		diffBot4.setPrefSize(largeurTF, hauteurElemtents);
@@ -193,7 +193,7 @@ public class ConfigBotPane extends StackPane implements ITraduction {
 		bot5Texte.setPadding(botPadding);
 		bot5Texte.setMinWidth(largeurTexte);
 		bot5Texte.setTextFill(Color.WHITE);
-		ComboBox<String> diffBot5 = new ComboBox<>();
+		diffBot5 = new ComboBox<>();
 		diffBot5.getItems().addAll(DataControl.difficulteBot);
 		diffBot5.setValue(International.trad("texte.valueFaible"));
 		diffBot5.setPrefSize(largeurTF, hauteurElemtents);
@@ -216,7 +216,7 @@ public class ConfigBotPane extends StackPane implements ITraduction {
 		bot6Texte.setPadding(botPadding);
 		bot6Texte.setMinWidth(largeurTexte);
 		bot6Texte.setTextFill(Color.WHITE);
-		ComboBox<String> diffBot6 = new ComboBox<>();
+		diffBot6 = new ComboBox<>();
 		diffBot6.getItems().addAll(DataControl.difficulteBot);
 		diffBot6.setValue(International.trad("texte.valueFaible"));
 		diffBot6.setPrefSize(largeurTF, hauteurElemtents);

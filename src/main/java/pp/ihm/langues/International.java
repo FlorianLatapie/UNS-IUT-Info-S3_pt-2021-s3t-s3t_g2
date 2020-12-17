@@ -1,5 +1,7 @@
 package pp.ihm.langues;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Locale;
 import java.util.ResourceBundle;
 
@@ -13,10 +15,12 @@ public abstract class International {
 	private static Locale langue;
 	private static ResourceBundle resourceBundle;
 	private static String CHEMIN_LANGUE = "langues.messages";
+	private static List<ITraduction> traductionListener;
 
 	static {
-		langue = Locale.FRENCH;
+		langue = Locale.ENGLISH;
 		resourceBundle = ResourceBundle.getBundle(CHEMIN_LANGUE, langue);
+		traductionListener = new ArrayList<>();
 	}
 
 	/**
@@ -26,6 +30,7 @@ public abstract class International {
 	 */
 	public static void changerLangue(Locale l) {
 		langue = l;
+		updateTraduction();
 	}
 
 	/**
@@ -76,4 +81,13 @@ public abstract class International {
 		return langue.getDisplayLanguage();
 	}
 
+	public static void ajouterPane(ITraduction trad) {
+		traductionListener.add(trad);
+	}
+
+	private static void updateTraduction() {
+		for (ITraduction iTraduction : traductionListener) {
+			iTraduction.traduire();
+		}
+	}
 }
