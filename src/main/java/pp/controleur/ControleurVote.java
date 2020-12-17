@@ -36,24 +36,38 @@ public class ControleurVote {
 
 	public Joueur phaseVoteTour(Partie jeu, Lieu l, VoteType tv, VoteEtape ve, String partieId, int numeroTour) {
 		List<Object> lo = infoVote(jeu, l, tv, ve, partieId, numeroTour);
-		List<Couleur> joueursVotant = (List<Couleur>)lo.get(0);
-		List<Integer> nbVoix = (List<Integer>)lo.get(1);
+		List<Couleur> joueursVotant = (List<Couleur>) lo.get(0);
+		List<Integer> nbVoix = (List<Integer>) lo.get(1);
 		List<Couleur> votes = new ArrayList<>();
 		List<Integer> voixRecu = initVoixRecu(ve, jeu, l);
 		vr.demanderCarte(jeu, l, partieId, numeroTour);
 		traitementMenace(ve, jeu, nbVoix, l, partieId, numeroTour);
 		vr.demanderVote(jeu, l, partieId, numeroTour);
 		int i = 0;
-		for (Joueur j : jeu.getJoueurSurLieu(l)) {
-			Couleur couleurVote = vr.recupVote(j);
-			votes.add(couleurVote);
-			int a = 0;
-			for (Joueur jou : jeu.getJoueurSurLieu(l)) {
-				if (jou.getCouleur() == couleurVote)
-					voixRecu.set(a, voixRecu.get(a) + nbVoix.get(i));
-				a++;
+		if (ve == VoteEtape.PRE) {
+			for (Joueur j : jeu.getJoueurSurLieu(l)) {
+				Couleur couleurVote = vr.recupVote(j);
+				votes.add(couleurVote);
+				int a = 0;
+				for (Joueur jou : jeu.getJoueurSurLieu(l)) {
+					if (jou.getCouleur() == couleurVote)
+						voixRecu.set(a, voixRecu.get(a) + nbVoix.get(i));
+					a++;
+				}
+				i++;
 			}
-			i++;
+		}else if (ve == VoteEtape.SEC) {
+			for (Joueur j : jeu.getJoueurs().values()) {
+				Couleur couleurVote = vr.recupVote(j);
+				votes.add(couleurVote);
+				int a = 0;
+				for (Joueur jou : jeu.getJoueurs().values()) {
+					if (jou.getCouleur() == couleurVote)
+						voixRecu.set(a, voixRecu.get(a) + nbVoix.get(i));
+					a++;
+				}
+				i++;
+			}
 		}
 		vr.cloreVote(jeu, l, partieId, numeroTour);
 		Couleur couleurVote = eluVote(voixRecu, joueursVotant);
@@ -104,8 +118,7 @@ public class ControleurVote {
 			if (ve == VoteEtape.PRE) {
 				int nbMenace = vr.carteJoue(j);
 				nbVoix.add(j.getNbVoix(l, 1, nbMenace));
-				for (Joueur jou : jeu.getJoueurs().values())
-					vr.informeCarteJouee(l, jou, nbMenace, partieId, numeroTour);
+				vr.informeCarteJouee(jeu, 1, l, j, nbMenace, partieId, numeroTour);
 			} else if (ve == VoteEtape.SEC) {
 				int nbMenace = vr.carteJoue(j);
 				int a = 0;
@@ -114,9 +127,7 @@ public class ControleurVote {
 						a = i;
 				nbVoix.remove(a);
 				nbVoix.add(a, j.getNbVoix(l, 2, nbMenace));
-				for (Joueur jou : jeu.getJoueurs().values())
-					jou.getConnection().envoyer(ControleurReseau.construirePaquetTcp("PVIC", j.getCouleur(), nbMenace,
-							j.getNbVoix(l, 2, nbMenace), partieId, numeroTour));
+				vr.informeCarteJouee(jeu, 2, l, j, nbMenace, partieId, numeroTour);
 			}
 		}
 	}
