@@ -11,14 +11,9 @@ import reseau.type.CarteType;
 import reseau.type.Couleur;
 
 public class FouilleCamionReseau {
-	private ToolsReseauPP toolsReseauPP;
-
-	public FouilleCamionReseau() {
-		toolsReseauPP = new ToolsReseauPP();
-	}
 
 	public void debutPhaseFouille(Partie jeu, String partieId, int numeroTour) {
-		String m = ControleurReseau.construirePaquetTcp("PFC", toolsReseauPP.getJoueursCouleurs(jeu),
+		String m = ControleurReseau.construirePaquetTcp("PFC", jeu.getJoueursCouleurs(jeu),
 				jeu.getCartes().size(), partieId, numeroTour);
 		for (Joueur j : jeu.getJoueurs().values())
 			j.getConnection().envoyer(m);

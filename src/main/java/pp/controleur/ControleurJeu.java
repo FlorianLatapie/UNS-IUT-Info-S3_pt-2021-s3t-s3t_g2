@@ -230,7 +230,7 @@ public class ControleurJeu {
 		for (Joueur j : jeu.getJoueurs().values())
 			j.getConnection().envoyer(m);
 		cfc.phaseFouilleCamion(jeu, partieId, numeroTour);
-		electionChefVigi();
+		cev.phaseElectionChefVigi(jeu, partieId, numeroTour);
 		this.lieuZombie = arriveZombie();
 		ArrayList<Integer> destination = new ArrayList<>();
 		phasechoixDestination(destination);
@@ -257,14 +257,6 @@ public class ControleurJeu {
 		start();
 	}
 
-	private List<PionCouleur> getPersosLieu(int i) {
-		List<PionCouleur> pc = new ArrayList<>();
-		Lieu l = jeu.getLieux().get(i);
-		for (Personnage p : l.getPersonnage())
-			pc.add(PionCouleur.valueOf(p.getJoueur().getCouleur().toString().substring(0, 1) + p.getPoint()));
-
-		return pc;
-	}
 
 	/**
 	 * @return le jeu
@@ -273,41 +265,6 @@ public class ControleurJeu {
 		return jeu;
 	}
 
-	/**
-	 * Affiche et met à jour le nouveau chef des vigiles
-	 */
-	private void electionChefVigi() {
-		String m = ControleurReseau.construirePaquetTcp("PECV", getPersosLieu(5), partieId, numeroTour);
-		for (Joueur j : jeu.getJoueurs().values())
-			j.getConnection().envoyer(m);
-		Joueur j;
-		if (cev.isElectableBoolean(jeu)) {
-			j = cev.joueurElection(jeu);
-			if (j == null)
-				j = cVote.phaseVote(jeu, jeu.getLieux().get(5), VoteType.ECD, partieId, numeroTour);
-			if (j != null) {
-				cev.newVigile(jeu, j);
-				m = ControleurReseau.construirePaquetTcp("RECV", jeu.getChefVIgile().getCouleur(), partieId,
-						numeroTour);
-				for (Joueur joueur : jeu.getJoueurs().values())
-					j.getConnection().envoyer(m);
-				Initializer.electionChef("Nouveau chef des vigiles : " + jeu.getChefVIgile());
-			} else {
-				jeu.setNewChef(false);
-				m = ControleurReseau.construirePaquetTcp("RECV", Couleur.NUL, partieId, numeroTour);
-				for (Joueur j2 : jeu.getJoueurs().values())
-					j2.getConnection().envoyer(m);
-				Initializer.electionChef("Il n'y a pas de nouveau chef des vigiles");
-			}
-		} else {
-			cev.noNewVigile(jeu);
-			m = ControleurReseau.construirePaquetTcp("RECV", Couleur.NUL, partieId, numeroTour);
-			for (Joueur j2 : jeu.getJoueurs().values())
-				j2.getConnection().envoyer(m);
-			Initializer.electionChef("Il n'y a pas de nouveau chef des vigiles");
-		}
-
-	}
 
 	/**
 	 * Definit l'arrivée des zombies et l'affiche pour le chef des vigiles

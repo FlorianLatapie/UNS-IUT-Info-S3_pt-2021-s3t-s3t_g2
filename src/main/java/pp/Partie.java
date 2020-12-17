@@ -2,6 +2,7 @@ package pp;
 
 import reseau.type.CarteType;
 import reseau.type.Couleur;
+import reseau.type.PionCouleur;
 
 import java.util.*;
 
@@ -139,15 +140,14 @@ public class Partie {
 			for (Lieu l : lieux.values())
 				if (!l.isFull() && l.isOuvert())
 					destinationPossible.add(l.getNum());
-		} else if (lieux.get(destination1).isFull() && !lieux.get(destination2).isFull()) {
+		}else if (lieux.get(destination1).isFull() && !lieux.get(destination2).isFull())
 			destinationPossible.add(destination2);
-		} else if (!lieux.get(destination1).isFull() && lieux.get(destination2).isFull()) {
+		else if (!lieux.get(destination1).isFull() && lieux.get(destination2).isFull())
 			destinationPossible.add(destination1);
-		} else {
+		else {
 			destinationPossible.add(destination1);
 			destinationPossible.add(destination2);
 		}
-
 		return destinationPossible;
 	}
 
@@ -331,13 +331,13 @@ public class Partie {
 		boolean maxP = true;
 		boolean maxB = true;
 		for (int i = 2; i < 7; i++) {
-			if (lieux.get(i).getPersonnage().size() > lieux.get(idLieuP).getPersonnage().size()) {
+			if (lieux.get(i).getPersonnage().size() > lieux.get(idLieuP).getPersonnage().size())
 				idLieuP = i;
-			} else if (lieux.get(i).getPersonnage().size() == lieux.get(idLieuP).getPersonnage().size())
+			else if (lieux.get(i).getPersonnage().size() == lieux.get(idLieuP).getPersonnage().size())
 				maxP = false;
-			if (lieux.get(i).getBlonde().size() > lieux.get(idLieuB).getBlonde().size()) {
+			if (lieux.get(i).getBlonde().size() > lieux.get(idLieuB).getBlonde().size())
 				idLieuB = i;
-			} else if (lieux.get(i).getBlonde().size() == lieux.get(idLieuB).getBlonde().size())
+			else if (lieux.get(i).getBlonde().size() == lieux.get(idLieuB).getBlonde().size())
 				maxB = false;
 		}
 		if (maxP) {
@@ -348,7 +348,7 @@ public class Partie {
 		if (maxB) {
 			lieux.get(idLieuB).addZombie();
 			nb.add(idLieuB);
-		} else
+		}else
 			nb.add(0);
 		return nb;
 	}
@@ -423,16 +423,13 @@ public class Partie {
 	 */
 	public String getEtatPartie() { // TODO ajouter les cartes
 		StringBuilder etatPartie = new StringBuilder();
-		for (Joueur joueur : joueurs.values()) {
-			if (joueur.isChefDesVigiles()) {
+		for (Joueur joueur : joueurs.values())
+			if (joueur.isChefDesVigiles())
 				etatPartie.append(">>> ").append(joueur).append(" est le chef des Vigiles <<<\n");
-			}
-		}
 		for (Lieu lieu : lieux.values()) {
 			etatPartie.append(lieu).append(":\n");
-			for (Personnage personnage : lieu.getPersonnage()) {
+			for (Personnage personnage : lieu.getPersonnage())
 				etatPartie.append("(").append(personnage.getJoueur()).append(") ").append(personnage).append("\n");
-			}
 			etatPartie.append("Nombre de place-> ").append(lieu.getNbPlaces()).append("\n");
 			etatPartie.append("Nombre de Zombie-> ").append(lieu.getNbZombies()).append("\n\n");
 		}
@@ -477,11 +474,9 @@ public class Partie {
 	}
 
 	public Joueur getJoueurCouleur(Couleur c) {
-		for (Joueur j : joueurs.values()) {
-			if (j.getCouleur() == c) {
+		for (Joueur j : joueurs.values())
+			if (j.getCouleur() == c)
 				return j;
-			}
-		}
 		return null;
 	}
 
@@ -492,17 +487,12 @@ public class Partie {
 	 */
 	public Map<Integer, Joueur> getJoueurs() {
 		Map<Integer, Joueur> toutJoueur = new HashMap<>();
-		for (Integer i : joueurs.keySet()) {
-			if (joueurs.get(i).isChefDesVigiles()) {
+		for (Integer i : joueurs.keySet())
+			if (joueurs.get(i).isChefDesVigiles())
 				toutJoueur.put(i, joueurs.get(i));
-			}
-		}
-		for (Integer i : joueurs.keySet()) {
-			if (!joueurs.get(i).isChefDesVigiles()) {
+		for (Integer i : joueurs.keySet())
+			if (!joueurs.get(i).isChefDesVigiles())
 				toutJoueur.put(i, joueurs.get(i));
-			}
-		}
-
 		return joueurs;
 	}
 
@@ -584,30 +574,42 @@ public class Partie {
 		for (Joueur j : joueurs.values()) {
 			int a = 0;
 			if (j.isChefDesVigiles()) {
-				for (Personnage p : j.getPersonnages().values()) {
-					if (l.getPersonnage().contains(p) && !p.estCache) {
+				for (Personnage p : j.getPersonnages().values())
+					if (l.getPersonnage().contains(p) && !p.estCache)
 						a = 1;
-					}
-				}
-				if (a == 1) {
+				if (a == 1)
 					n.add(j);
-				}
 			}
 		}
 		for (Joueur j : joueurs.values()) {
 			int a = 0;
 			if (!j.isChefDesVigiles()) {
-				for (Personnage p : j.getPersonnages().values()) {
-					if (l.getPersonnage().contains(p) && !p.estCache) {
+				for (Personnage p : j.getPersonnages().values())
+					if (l.getPersonnage().contains(p) && !p.estCache)
 						a = 1;
-					}
-				}
-				if (a == 1) {
+				if (a == 1)
 					n.add(j);
-				}
 			}
 		}
 		return n;
+	}
+
+	public List<Couleur> getJoueursCouleurs(Partie jeu) {
+		List<Couleur> lc = new ArrayList<>();
+		lc.add(jeu.getChefVIgile().getCouleur());
+		for (Joueur j : jeu.getJoueurs().values())
+			if (j != jeu.getChefVIgile() && j.isEnVie())
+				lc.add(j.getCouleur());
+		return lc;
+	}
+	
+	public List<PionCouleur> getPersosLieu(int i) {
+		List<PionCouleur> pc = new ArrayList<>();
+		Lieu l = getLieux().get(i);
+		for (Personnage p : l.getPersonnage())
+			pc.add(PionCouleur.valueOf(p.getJoueur().getCouleur().toString().substring(0, 1) + p.getPoint()));
+
+		return pc;
 	}
 
 }
