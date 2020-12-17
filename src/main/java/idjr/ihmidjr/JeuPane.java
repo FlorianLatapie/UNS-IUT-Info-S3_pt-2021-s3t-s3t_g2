@@ -1066,6 +1066,26 @@ public class JeuPane extends StackPane implements IJeuListener {
 		fond.setEffect(flou);
 		fond.getChildren().add(imgFond);
 
+		Button bOption = new Button("| |");
+		bOption.setAlignment(Pos.CENTER);
+		bOption.setFont(Font.font("Segoe UI", FontWeight.BOLD, 30));
+		bOption.setStyle(styleBoutons);
+		bOption.setPrefSize(hautBouton, hautBouton);
+		bOption.setMinSize(hautBouton, hautBouton);
+		bOption.setOnAction(EventHandler -> {
+			core.setPauseDepuis(paneName);
+			sc.setPaneOnTop(ApplicationPane.OPTION);
+		});
+		bOption.setOnMouseEntered(event -> {
+			bOption.setStyle(styleBoutonsSouris);
+		});
+		bOption.setOnMouseExited(event -> {
+			bOption.setStyle(styleBoutons);
+		});
+		bOption.setTranslateX(790);
+		bOption.setTranslateY(-380);
+		
+		
 		log = new ListView<>();
 		log.setStyle(
 				"-fx-background-color: red; -fx-control-inner-background: #1A1A1A ; -fx-control-inner-background-alt: derive(-fx-control-inner-background, 15%);");
@@ -1094,7 +1114,9 @@ public class JeuPane extends StackPane implements IJeuListener {
 			bLog.setStyle(styleBoutons);
 		});
 		bLog.setTranslateX(790);
-		bLog.setTranslateY(-350);
+		bLog.setTranslateY(-305);
+		
+		
 
 		Label lo = new Label(International.trad("texte.nomPerso") + International.trad("texte.coulPerso")
 				+ International.trad(("texte.depLieu")));
@@ -1110,11 +1132,12 @@ public class JeuPane extends StackPane implements IJeuListener {
 		infoZombie.setAlignment(Pos.CENTER);
 		infoZombie.setStyle(styleVBox);
 
-		linfoZombie = new Label("");
+		linfoZombie = new Label("Des zombies arriveront dans les lieux {0}, {1}, {2}, {3}"); //this is a placeholder do not translate
 		linfoZombie.setFont(Font.font("Segoe UI", 20));
 		linfoZombie.setTextFill(Color.BLACK);
 
 		infoZombie.getChildren().addAll(linfoZombie);
+		infoZombie.setVisible(false);
 
 		vbForce = new VBox();
 		vbForce.setAlignment(Pos.TOP_RIGHT);
@@ -1152,7 +1175,7 @@ public class JeuPane extends StackPane implements IJeuListener {
 		vbForce.setVisible(false);
 
 		stackPane.getChildren().addAll(fond, rectVigile, nomJoueur, phasePartie, hbCartes, vote, vbDeplCentre, des,
-				infoZombie, fouilleCamion, info, log, bLog, vbForce);
+				infoZombie, fouilleCamion, info, log,bOption, bLog, vbForce);
 		stackPane.setBackground(new Background(new BackgroundFill(Color.BLACK, CornerRadii.EMPTY, null)));
 
 		this.getChildren().add(stackPane);
@@ -1381,6 +1404,7 @@ public class JeuPane extends StackPane implements IJeuListener {
 	@Override
 	public void desVigiles(List<Integer> list) {
 		Platform.runLater(() -> {
+			infoZombie.setVisible(true);
 			linfoZombie.setText(International.trad("Des zombies arriveront dans les lieux {0}, {1}, {2}, {3}",
 					list.get(0).toString(), list.get(1).toString(), list.get(2).toString(), list.get(3).toString()));
 		});
