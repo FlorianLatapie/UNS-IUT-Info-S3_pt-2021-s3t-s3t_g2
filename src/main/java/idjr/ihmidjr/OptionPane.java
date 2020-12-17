@@ -1,6 +1,7 @@
 package idjr.ihmidjr;
 
 import idjr.ihmidjr.DataControl.ApplicationPane;
+import idjr.ihmidjr.event.IPleineEcranListener;
 import idjr.ihmidjr.langues.International;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -20,7 +21,7 @@ import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.stage.Stage;
 
-public class OptionPane extends StackPane {
+public class OptionPane extends StackPane implements IPleineEcranListener {
 
 	private ScreenControl sControl = null;
 	private Core core = null;
@@ -34,6 +35,8 @@ public class OptionPane extends StackPane {
 	private Font policeTitre = Font.font("Segoe UI", FontWeight.BOLD, 75);
 	private Font policeBouton = Font.font("Segoe UI", FontWeight.BOLD, 33);
 	private int hauteurElement = 60;
+
+	Button bPleinEcran;
 
 	public OptionPane(ScreenControl sc, Core c) {
 		core = c;
@@ -110,7 +113,7 @@ public class OptionPane extends StackPane {
 			bEnglish.setStyle(styleBoutons);
 		});
 
-		Button bPleinEcran = new Button(International.trad("bouton.pEcran"));
+		bPleinEcran = new Button(International.trad("bouton.pEcran"));
 		bPleinEcran.setFont(policeBouton);
 		bPleinEcran.setAlignment(Pos.CENTER);
 		bPleinEcran.setPrefSize(500, hauteurElement);
@@ -119,7 +122,15 @@ public class OptionPane extends StackPane {
 		bPleinEcran.setOnMouseExited(event -> bPleinEcran.setStyle(styleBoutons));
 		bPleinEcran.setOnAction(EventHandler -> {
 			Stage stage = (Stage) bPleinEcran.getScene().getWindow();
-			stage.setFullScreen(true);
+			if (core.getSauvegarderOptions().isEstPleineEcran()) {
+				stage.setFullScreen(false);
+				core.getSauvegarderOptions().setEstPleineEcran(false);
+				bPleinEcran.setText("Mettre en pleine écran");
+			} else {
+				stage.setFullScreen(true);
+				core.getSauvegarderOptions().setEstPleineEcran(true);
+				bPleinEcran.setText("Mettre en fenetré");
+			}
 		});
 
 		Button bRetour = new Button(International.trad("bouton.retour"));
@@ -153,4 +164,11 @@ public class OptionPane extends StackPane {
 		sControl.setPaneOnTop(paneName);
 	}
 
+	@Override
+	public void updatePleineEcran() {
+		if (!core.getSauvegarderOptions().isEstPleineEcran())
+			bPleinEcran.setText("Mettre en pleine écran");
+		else
+			bPleinEcran.setText("Mettre en fenetré");
+	}
 }
