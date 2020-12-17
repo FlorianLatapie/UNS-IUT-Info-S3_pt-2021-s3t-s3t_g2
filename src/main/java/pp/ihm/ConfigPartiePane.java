@@ -3,6 +3,7 @@ package pp.ihm;
 import pp.controleur.ControleurJeu;
 import pp.ihm.DataControl.ApplicationPane;
 import pp.ihm.event.Initializer;
+import pp.ihm.langues.ITraduction;
 import pp.ihm.langues.International;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -29,7 +30,7 @@ import java.util.ArrayList;
  * @version 0.1
  * @since 26/10/2020
  */
-public class ConfigPartiePane extends StackPane {
+public class ConfigPartiePane extends StackPane implements ITraduction {
 
 	private ScreenControl sControl = null;
 	private Core core = null;
@@ -58,12 +59,21 @@ public class ConfigPartiePane extends StackPane {
 
 	private Insets botPadding = new Insets(10);
 
+	Label titre1;
+	Label desc;
+	Label nomPTexte;
+	Label nbjrTexte;
+	Label infoNomPartie;
+	Label nbBotTexte;
+	Button bJouer;
+	Button bRetour;
+
 	public ConfigPartiePane(ScreenControl sc, Core c) {
 		core = c;
 		sControl = sc;
 
 		// titre
-		Label titre1 = new Label(
+		titre1 = new Label(
 				International.trad("texte.titreConfigPartieA") + "\n" + International.trad("texte.titreConfigPartieB"));
 		titre1.setTextAlignment(TextAlignment.CENTER);
 		titre1.setFont(Font.font(nomPolice, FontWeight.BOLD, 80));
@@ -73,10 +83,10 @@ public class ConfigPartiePane extends StackPane {
 		titre.setAlignment(Pos.CENTER);
 		titre.setBackground(new Background(new BackgroundFill(Color.RED, coin, null)));
 		titre.setPrefWidth(730);
-		titre.setMinWidth(730);	
-		
+		titre.setMinWidth(730);
+
 		// texte
-		Label desc = new Label(International.trad("texte.descriptionConfigPartie"));
+		desc = new Label(International.trad("texte.descriptionConfigPartie"));
 		desc.setFont(Font.font("Segoe UI", FontWeight.BOLD, 30));
 		desc.setTextFill(Color.WHITE);
 		desc.setMinHeight(hauteurElemtents);
@@ -86,15 +96,15 @@ public class ConfigPartiePane extends StackPane {
 		vJoueurs.setPadding(botPadding);
 		HBox nomPartie = new HBox();
 
-		Label nomPTexte = new Label(International.trad("texte.idPartie"));
+		nomPTexte = new Label(International.trad("texte.idPartie"));
 		nomPTexte.setFont(Font.font("Segoe UI", FontWeight.BOLD, 30));
 		nomPTexte.setTextFill(Color.WHITE);
 		nomPTexte.setStyle(styleVBox);
 		nomPTexte.setMinHeight(hauteurElemtents);
 		nomPTexte.setPadding(new Insets(10, 10, 10, 10));
-		nomPTexte.setMinWidth(largeurTexte+200);
+		nomPTexte.setMinWidth(largeurTexte + 200);
 
-		Label infoNomPartie = new Label();
+		infoNomPartie = new Label();
 		infoNomPartie.setText(International.trad("texte.infoNom1") + "\n" + International.trad("texte.infoNom2") + "\n"
 				+ International.trad("texte.infoNom3") + "\n" + International.trad("texte.infoNom4"));
 		infoNomPartie.setMinHeight(100);
@@ -121,7 +131,7 @@ public class ConfigPartiePane extends StackPane {
 		//
 		HBox nbTotJr = new HBox();
 
-		Label nbjrTexte = new Label(International.trad("texte.nbdeJr"));
+		nbjrTexte = new Label(International.trad("texte.nbdeJr"));
 		nbjrTexte.setFont(Font.font("Segoe UI", FontWeight.BOLD, 30));
 		nbjrTexte.setTextFill(Color.WHITE);
 		nbjrTexte.setStyle(styleVBox);
@@ -146,14 +156,14 @@ public class ConfigPartiePane extends StackPane {
 
 		HBox nbTotBot = new HBox();
 
-		Label nbBotTexte = new Label(International.trad("texte.nbdeBot"));
+		nbBotTexte = new Label(International.trad("texte.nbdeBot"));
 		nbBotTexte.setFont(Font.font("Segoe UI", FontWeight.BOLD, 30));
 		nbBotTexte.setTextFill(Color.WHITE);
 		nbBotTexte.setAlignment(Pos.CENTER_LEFT);
 		nbBotTexte.setStyle(styleVBox);
 		nbBotTexte.setMinHeight(hauteurElemtents);
 		nbBotTexte.setPadding(new Insets(10, 10, 10, 10));
-		nbBotTexte.setMinWidth(largeurTexte+200);
+		nbBotTexte.setMinWidth(largeurTexte + 200);
 
 		ComboBox<Integer> nbBot = new ComboBox<>();
 		nbBot.getItems().addAll(DataControl.nombreBot);
@@ -176,7 +186,7 @@ public class ConfigPartiePane extends StackPane {
 		vbCenter.getChildren().addAll(vJoueurs);
 
 		// boutons
-		Button bJouer = new Button(International.trad("bouton.jouer"));
+		bJouer = new Button(International.trad("bouton.jouer"));
 		bJouer.setPrefSize(lBouton, hBouton);
 		bJouer.setMinSize(lBouton, hBouton);
 		bJouer.setFont(policeBouton);
@@ -210,7 +220,7 @@ public class ConfigPartiePane extends StackPane {
 			sc.setPaneOnTop(ApplicationPane.WAIT);
 		});
 
-		Button bRetour = new Button(International.trad("bouton.retour"));
+		bRetour = new Button(International.trad("bouton.retour"));
 		bRetour.setPrefSize(lBouton, hBouton);
 		bRetour.setMinSize(lBouton, hBouton);
 		bRetour.setFont(policeBouton);
@@ -264,7 +274,7 @@ public class ConfigPartiePane extends StackPane {
 		bEcranHaut.setRotate(180);
 		bEcranHaut.setGraphic(img1);
 		bEcranHaut.setOnAction(EventHandler -> sc.setRotatePane(centreMenu, "haut"));
-		
+
 		Button bEcranBas = new Button();
 		bEcranBas.setBackground(new Background(new BackgroundFill(null, CornerRadii.EMPTY, null)));
 		bEcranBas.setAlignment(Pos.CENTER);
@@ -300,10 +310,24 @@ public class ConfigPartiePane extends StackPane {
 		fond.getChildren().add(imgFond);
 
 		this.setAlignment(Pos.CENTER);
-		this.getChildren().addAll(fond,centreMenu, bEcranDroite, bEcranHaut, bEcranGauche, bEcranBas);
+		this.getChildren().addAll(fond, centreMenu, bEcranDroite, bEcranHaut, bEcranGauche, bEcranBas);
 		this.setBackground(new Background(new BackgroundFill(Color.BLACK, CornerRadii.EMPTY, null)));
 
 		sControl.registerNode(paneName, this);
 		sControl.setPaneOnTop(paneName);
+	}
+
+	@Override
+	public void traduire() {
+		titre1.setText(
+				International.trad("texte.titreConfigPartieA") + "\n" + International.trad("texte.titreConfigPartieB"));
+		desc.setText(International.trad("texte.descriptionConfigPartie"));
+		nomPTexte.setText(International.trad("texte.idPartie"));
+		nbjrTexte.setText(International.trad("texte.nbdeJr"));
+		infoNomPartie.setText(International.trad("texte.infoNom1") + "\n" + International.trad("texte.infoNom2") + "\n"
+				+ International.trad("texte.infoNom3") + "\n" + International.trad("texte.infoNom4"));
+		nbBotTexte.setText(International.trad("texte.nbdeBot"));
+		bJouer.setText(International.trad("bouton.jouer"));
+		bRetour.setText(International.trad("bouton.retour"));
 	}
 }
