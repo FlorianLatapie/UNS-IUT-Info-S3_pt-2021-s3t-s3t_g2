@@ -261,8 +261,8 @@ public class TraitementIntelligent {
 			return 0;
 
 		int maxDiff = 0;
-		for (Couleur c : core.getJoueursVotant().keySet()) {
-			int diff = core.getJoueursVotant().get(core.getCouleur()) - core.getJoueursVotant().get(c);
+		for (Couleur c : core.getJoueursVotantPresent().keySet()) {
+			int diff = core.getJoueursVotantPresent().get(core.getCouleur()) - core.getJoueursVotantPresent().get(c);
 			if (diff > maxDiff)
 				maxDiff = diff;
 		}

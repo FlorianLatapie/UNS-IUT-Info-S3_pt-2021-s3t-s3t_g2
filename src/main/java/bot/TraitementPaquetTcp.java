@@ -339,14 +339,17 @@ public class TraitementPaquetTcp extends TraitementPaquet<TcpClient> {
 	}
 
 	private void traitementIPV(Paquet paquet, String message) {
-		List<Couleur> joueursCouleurs = (List<Couleur>) paquet.getValeur(message, 4);
-		List<Integer> joueursValeurVote = (List<Integer>) paquet.getValeur(message, 5);
-		core.setCouleurJoueurs(joueursCouleurs);
+		List<Couleur> joueursVotantCouleurs = (List<Couleur>) paquet.getValeur(message, 4);
+		List<Integer> joueursVotantValeur = (List<Integer>) paquet.getValeur(message, 5);
+		core.setCouleurJoueurs(joueursVotantCouleurs);
 		core.setVoteType((VoteType) paquet.getValeur(message, 1));
 		HashMap<Couleur, Integer> joueursVotant = new HashMap<Couleur, Integer>();
-		for (int i = 0; i < joueursCouleurs.size(); i++)
-			joueursVotant.put(joueursCouleurs.get(i), joueursValeurVote.get(i));
-		core.setJoueursVotant(joueursVotant);
+		for (int i = 0; i < joueursVotantCouleurs.size(); i++)
+			joueursVotant.put(joueursVotantCouleurs.get(i), joueursVotantValeur.get(i));
+		HashMap<Couleur, Integer> joueurPresent = new HashMap<Couleur, Integer>();
+		for (Couleur c :  (List<Couleur>) paquet.getValeur(message, 3))
+			joueurPresent.put(c, joueursVotant.get(c));
+		core.setJoueursVotantPresent(joueurPresent);
 		// System.out.println("recupInfoVote : \n");
 		// System.out.println(core.getEtatPartie());
 	}
