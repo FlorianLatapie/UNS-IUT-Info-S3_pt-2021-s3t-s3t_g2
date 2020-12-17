@@ -120,11 +120,6 @@ public abstract class Initializer {
 			jl.nomJoueurs(listeNomJoueur);
 	}
 
-	public static void choisirUtiliserCarte() {
-		for (IJeuListener jl : listenersjl)
-			jl.choisirUtiliserCarte();
-	}
-
 	public static void choisirUtiliserCarte(CarteType carteType) {
 		for (IJeuListener jl : listenersjl)
 			jl.choisirUtiliserCarte(carteType);
