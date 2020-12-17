@@ -3,6 +3,8 @@ package pp.ihm;
 import pp.controleur.ControleurJeu;
 import pp.ihm.DataControl.ApplicationPane;
 import pp.ihm.event.Initializer;
+import pp.ihm.langues.International;
+import pp.ihm.langues.Langues;
 
 public class Core {
 	private ControleurJeu cj = null;
@@ -63,5 +65,10 @@ public class Core {
 
 	public SauvegarderOptions getSauvegarderOptions() {
 		return sauvegarderOptions;
+	}
+	
+	public void changerLangue(Langues l) {
+		International.changerLangue(l);
+		getSauvegarderOptions().setLangues(l);
 	}
 }

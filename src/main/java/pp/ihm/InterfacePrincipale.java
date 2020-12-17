@@ -9,6 +9,7 @@ import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 import pp.ihm.event.Initializer;
 import pp.ihm.langues.International;
+import pp.ihm.langues.Langues;
 
 public class InterfacePrincipale extends Application {
 	private StackPane root = new StackPane();
@@ -111,5 +112,4 @@ public class InterfacePrincipale extends Application {
 			core.getCj().stopThreads();
 		System.exit(0);
 	}
-
 }
