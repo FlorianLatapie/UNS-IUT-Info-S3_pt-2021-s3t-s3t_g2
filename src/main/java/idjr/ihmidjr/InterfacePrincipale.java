@@ -24,7 +24,7 @@ public class InterfacePrincipale extends Application {
 		primaryStage.getIcons().add(new Image(DataControl.ICONE));
 		primaryStage.setOnCloseRequest((e) -> {
 			boolean resultat = ConfirmationPane.afficher(International.trad("texte.confirmationTitre"),
-					International.trad("texte.confirmationL1") + "\n" + International.trad("texte.confirmationL2"));
+					International.trad("texte.confirmationL1"), International.trad("texte.confirmationL2"));
 			if (resultat)
 				Platform.exit();
 		});
