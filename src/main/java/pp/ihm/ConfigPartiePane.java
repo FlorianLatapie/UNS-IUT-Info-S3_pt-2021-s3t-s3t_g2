@@ -75,13 +75,10 @@ public class ConfigPartiePane extends StackPane {
 		titre.setPrefWidth(730);
 		titre.setMinWidth(730);
 
-		Rectangle rect = new Rectangle();
-		rect.setWidth(tailleCarreCentral);
-		rect.setHeight(tailleCarreCentral-154);
-		rect.setArcHeight(30);
-		rect.setArcWidth(30);
-		rect.setOpacity(.3);
-
+		
+		
+		
+		
 		// texte
 		Label desc = new Label(International.trad("texte.descriptionConfigPartie"));
 		desc.setFont(Font.font("Segoe UI", FontWeight.BOLD, 30));
@@ -98,8 +95,8 @@ public class ConfigPartiePane extends StackPane {
 		nomPTexte.setTextFill(Color.WHITE);
 		nomPTexte.setStyle(styleVBox);
 		nomPTexte.setMinHeight(hauteurElemtents);
-		nomPTexte.setPadding(new Insets(10, 50, 10, 10));
-		nomPTexte.setMinWidth(largeurTexte);
+		nomPTexte.setPadding(new Insets(10, 10, 10, 10));
+		nomPTexte.setMinWidth(largeurTexte+200);
 
 		Label infoNomPartie = new Label();
 		infoNomPartie.setText(International.trad("texte.infoNom1") + "\n" + International.trad("texte.infoNom2") + "\n"
@@ -159,8 +156,8 @@ public class ConfigPartiePane extends StackPane {
 		nbBotTexte.setAlignment(Pos.CENTER_LEFT);
 		nbBotTexte.setStyle(styleVBox);
 		nbBotTexte.setMinHeight(hauteurElemtents);
-		nbBotTexte.setPadding(new Insets(10, 139, 10, 10));
-		nbBotTexte.setMinWidth(largeurTexte);
+		nbBotTexte.setPadding(new Insets(10, 10, 10, 10));
+		nbBotTexte.setMinWidth(largeurTexte+200);
 
 		ComboBox<Integer> nbBot = new ComboBox<>();
 		nbBot.getItems().addAll(DataControl.nombreBot);
@@ -270,15 +267,15 @@ public class ConfigPartiePane extends StackPane {
 		bEcranHaut.setPrefSize(80, 80);
 		bEcranHaut.setRotate(180);
 		bEcranHaut.setGraphic(img1);
-		bEcranHaut.setOnAction(EventHandler -> sc.setRotatePane(rect, centreMenu, "haut"));
-
+		bEcranHaut.setOnAction(EventHandler -> sc.setRotatePane(centreMenu, "haut"));
+		
 		Button bEcranBas = new Button();
 		bEcranBas.setBackground(new Background(new BackgroundFill(null, CornerRadii.EMPTY, null)));
 		bEcranBas.setAlignment(Pos.CENTER);
 		bEcranBas.setTranslateY(490);
 		bEcranBas.setPrefSize(80, 80);
 		bEcranBas.setGraphic(img2);
-		bEcranBas.setOnAction(EventHandler -> sc.setRotatePane(rect, centreMenu, "bas"));
+		bEcranBas.setOnAction(EventHandler -> sc.setRotatePane(centreMenu, "bas"));
 
 		Button bEcranGauche = new Button();
 		bEcranGauche.setBackground(new Background(new BackgroundFill(null, CornerRadii.EMPTY, null)));
@@ -287,7 +284,7 @@ public class ConfigPartiePane extends StackPane {
 		bEcranGauche.setPrefSize(80, 80);
 		bEcranGauche.setRotate(90);
 		bEcranGauche.setGraphic(img3);
-		bEcranGauche.setOnAction(EventHandler -> sc.setRotatePane(rect, centreMenu, "gauche"));
+		bEcranGauche.setOnAction(EventHandler -> sc.setRotatePane(centreMenu, "gauche"));
 
 		Button bEcranDroite = new Button();
 		bEcranDroite.setBackground(new Background(new BackgroundFill(null, CornerRadii.EMPTY, null)));
@@ -296,7 +293,7 @@ public class ConfigPartiePane extends StackPane {
 		bEcranDroite.setRotate(-90);
 		bEcranDroite.setPrefSize(80, 80);
 		bEcranDroite.setGraphic(img4);
-		bEcranDroite.setOnAction(EventHandler -> sc.setRotatePane(rect, centreMenu, "droite"));
+		bEcranDroite.setOnAction(EventHandler -> sc.setRotatePane(centreMenu, "droite"));
 
 		// boite du fond qui contient le fond et les autres boites
 		HBox fond = new HBox();
@@ -307,7 +304,7 @@ public class ConfigPartiePane extends StackPane {
 		fond.getChildren().add(imgFond);
 
 		this.setAlignment(Pos.CENTER);
-		this.getChildren().addAll(fond, rect, centreMenu, bEcranDroite, bEcranHaut, bEcranGauche, bEcranBas);
+		this.getChildren().addAll(fond,centreMenu, bEcranDroite, bEcranHaut, bEcranGauche, bEcranBas);
 		this.setBackground(new Background(new BackgroundFill(Color.BLACK, CornerRadii.EMPTY, null)));
 
 		sControl.registerNode(paneName, this);
