@@ -40,6 +40,8 @@ public class InterfacePrincipale extends Application {
 		primaryStage.setMinHeight(960);
 		
 		primaryStage.setFullScreen(core.getSauvegarderOptions().isEstPleineEcran());
+		
+		scene.getStylesheets().add(DataControl.CSS); 
 
 		ConfigPartiePane configPartiePane = new ConfigPartiePane(sControl, core);
 		FinDePartiePane finDePartiePane = new FinDePartiePane(sControl, core);
