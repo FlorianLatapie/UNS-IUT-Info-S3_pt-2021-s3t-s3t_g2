@@ -1,6 +1,7 @@
 package pp.ihm;
 
 import pp.ihm.DataControl.ApplicationPane;
+import pp.ihm.langues.ITraduction;
 import pp.ihm.langues.International;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -28,7 +29,7 @@ import javafx.scene.text.FontWeight;
  * @version 0.1
  * @since 01/11/2020
  */
-public class ReglesPane extends StackPane {
+public class ReglesPane extends StackPane implements ITraduction {
 
 	private ScreenControl sControl = null;
 	private Core core = null;
@@ -50,12 +51,16 @@ public class ReglesPane extends StackPane {
 
 	private Background fondBlanc = new Background(new BackgroundFill(Color.WHITE, coinfb, null));
 
+	Label titre1;
+	Label desc1;
+	Button bRetour;
+
 	public ReglesPane(ScreenControl sc, Core c) {
 		core = c;
 		sControl = sc;
 
 		// titre
-		Label titre1 = new Label(International.trad("text.titreRegle"));
+		titre1 = new Label(International.trad("text.titreRegle"));
 		titre1.setFont(Font.font("Segoe UI", FontWeight.BOLD, 80));
 		titre1.setTextFill(Color.BLACK);
 
@@ -68,12 +73,12 @@ public class ReglesPane extends StackPane {
 		//
 		Rectangle rect = new Rectangle();
 		rect.setWidth(tailleCarreCentral);
-		rect.setHeight(tailleCarreCentral-154);
+		rect.setHeight(tailleCarreCentral - 154);
 		rect.setArcHeight(30);
 		rect.setArcWidth(30);
 		rect.setOpacity(.5);
 
-		Label desc1 = new Label();
+		desc1 = new Label();
 		desc1.setText(International.trad("texte.pourQuiA") + "\n" + International.trad("texte.pourQuiB") + "\n\n"
 				+ International.trad("texte.histoireA") + "\n" + International.trad("texte.histoireB") + "\n"
 				+ International.trad("texte.histoireC") + "\n" + International.trad("texte.histoireD") + "\n"
@@ -88,9 +93,9 @@ public class ReglesPane extends StackPane {
 				+ International.trad("texte.FDPsit2B") + "\n" + International.trad("texte.FDPfinA") + "\n"
 				+ International.trad("texte.FDPfinB") + "\n" + International.trad("texte.FDPfinC") + "\n");
 		desc1.setFont(policeNom);
-		desc1.setPadding(new Insets(5,10,5,10));
+		desc1.setPadding(new Insets(5, 10, 5, 10));
 		desc1.setTextFill(Color.WHITE);
-		//desc1.setBackground(fondBlanc);
+		// desc1.setBackground(fondBlanc);
 
 		VBox vbCenter = new VBox();
 
@@ -98,7 +103,7 @@ public class ReglesPane extends StackPane {
 		vbCenter.getChildren().addAll(desc1);
 
 		// bouton
-		Button bRetour = new Button(International.trad("bouton.retour"));
+		bRetour = new Button(International.trad("bouton.retour"));
 		bRetour.setPrefSize(lBouton, hBouton);
 		bRetour.setMinSize(lBouton, hBouton);
 		bRetour.setFont(policeBouton);
@@ -191,6 +196,25 @@ public class ReglesPane extends StackPane {
 		sControl.registerNode(paneName, this);
 		sControl.setPaneOnTop(paneName);
 
+	}
+
+	@Override
+	public void traduire() {
+		titre1.setText(International.trad("text.titreRegle"));
+		desc1.setText(International.trad("texte.pourQuiA") + "\n" + International.trad("texte.pourQuiB") + "\n\n"
+				+ International.trad("texte.histoireA") + "\n" + International.trad("texte.histoireB") + "\n"
+				+ International.trad("texte.histoireC") + "\n" + International.trad("texte.histoireD") + "\n"
+				+ International.trad("texte.histoireE") + "\n" + International.trad("texte.histoireF") + "\n"
+				+ International.trad("texte.histoireG") + "\n\n" + International.trad("texte.but") + "\n"
+				+ International.trad("texte.butExplicationA") + "\n" + International.trad("texte.butExplicationB")
+				+ "\n" + International.trad("texte.butExplicationC") + "\n"
+				+ International.trad("texte.butExplicationD") + "\n" + International.trad("texte.butExplicationE")
+				+ "\n" + International.trad("texte.butExplicationF") + "\n\n" + International.trad("texte.finDePartieA")
+				+ "\n" + International.trad("texte.finDePartieB") + "\n" + International.trad("texte.FDPsit1A") + "\n"
+				+ International.trad("texte.FDPsit1B") + "\n" + International.trad("texte.FDPsit2A") + "\n"
+				+ International.trad("texte.FDPsit2B") + "\n" + International.trad("texte.FDPfinA") + "\n"
+				+ International.trad("texte.FDPfinB") + "\n" + International.trad("texte.FDPfinC") + "\n");
+		bRetour.setText(International.trad("bouton.retour"));
 	}
 
 }
