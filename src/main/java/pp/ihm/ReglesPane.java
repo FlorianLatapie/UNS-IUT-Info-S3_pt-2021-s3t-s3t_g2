@@ -68,11 +68,10 @@ public class ReglesPane extends StackPane {
 		//
 		Rectangle rect = new Rectangle();
 		rect.setWidth(tailleCarreCentral);
-		rect.setHeight(620);
+		rect.setHeight(tailleCarreCentral-154);
 		rect.setArcHeight(30);
 		rect.setArcWidth(30);
-		rect.setOpacity(.3);
-		rect.setTranslateY(13);
+		rect.setOpacity(.5);
 
 		Label desc1 = new Label();
 		desc1.setText(International.trad("texte.pourQuiA") + "\n" + International.trad("texte.pourQuiB") + "\n\n"

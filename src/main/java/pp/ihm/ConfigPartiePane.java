@@ -76,12 +76,11 @@ public class ConfigPartiePane extends StackPane {
 		titre.setMinWidth(730);
 
 		Rectangle rect = new Rectangle();
-		rect.setWidth(800);
-		rect.setHeight(500);
+		rect.setWidth(tailleCarreCentral);
+		rect.setHeight(tailleCarreCentral-154);
 		rect.setArcHeight(30);
 		rect.setArcWidth(30);
 		rect.setOpacity(.3);
-		rect.setTranslateY(60);
 
 		// texte
 		Label desc = new Label(International.trad("texte.descriptionConfigPartie"));
