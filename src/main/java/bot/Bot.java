@@ -481,4 +481,6 @@ public class Bot {
 		this.joueursVotant = joueursVotant;
 	}
 
+
+
 }

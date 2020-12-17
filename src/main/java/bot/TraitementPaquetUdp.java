@@ -86,7 +86,7 @@ public class TraitementPaquetUdp extends TraitementPaquet<DatagramPacket> {
 				MessageFormat.format("Une nouvelle partie vient d''etre trouvÃ© !\n{0}", paquet.getValeur(message, 1)));
 		String prenoms = "Ressources/Prenoms/prenomsFR.txt";
 		Scanner scanneurPrenom;
-		String nomDuJoueur = "Bot Moyen ";
+		String nomDuJoueur = "Bot "+ core.getBotType().typeString() + " ";
 		try {
 			scanneurPrenom = new Scanner(new File(prenoms));
 			StringBuilder fichierLu = new StringBuilder();
