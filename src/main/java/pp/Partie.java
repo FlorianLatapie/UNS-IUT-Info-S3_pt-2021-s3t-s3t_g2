@@ -123,34 +123,7 @@ public class Partie {
 			}
 	}
 
-	/**
-	 * Retourne la liste des index des destinations valides. Une destination valide
-	 * est un lieu sur lequel, il est possible de placer un personnage. Pour chaque
-	 * résulatat de dé, si le résultat du dé est valide il est ajouté a la liste. Si
-	 * les résultat des dés ne sont pas valides alors toutes les destinations
-	 * valides de la partie sont ajouté à la liste. Puis la liste est renvoyée.
-	 *
-	 * @param destination1 résultat du 1er dé
-	 * @param destination2 résultat du 2ème dé
-	 * @return la liste des index des destination valides
-	 */
-	public List<Integer> getDestinationPossible(int destination1, int destination2) {
-		List<Integer> destinationPossible = new ArrayList<>();
-		if (lieux.get(destination1).isFull() && lieux.get(destination2).isFull()) {
-			for (Lieu l : lieux.values())
-				if (!l.isFull() && l.isOuvert())
-					destinationPossible.add(l.getNum());
-		}else if (lieux.get(destination1).isFull() && !lieux.get(destination2).isFull())
-			destinationPossible.add(destination2);
-		else if (!lieux.get(destination1).isFull() && lieux.get(destination2).isFull())
-			destinationPossible.add(destination1);
-		else {
-			destinationPossible.add(destination1);
-			destinationPossible.add(destination2);
-		}
-		return destinationPossible;
-	}
-
+	
 	/**
 	 * Retourne le nombre de place disponible dans l'ensemble des lieux de la
 	 * partie.
@@ -551,7 +524,7 @@ public class Partie {
 	}
 
 	public List<CarteType> tirerCartes(Joueur j) {
-		List<CarteType> l = new ArrayList();
+		List<CarteType> l = new ArrayList<>();
 		int i = 0;
 		while (!cartes.isEmpty() && i < 3) {
 			l.add(cartes.get(0));

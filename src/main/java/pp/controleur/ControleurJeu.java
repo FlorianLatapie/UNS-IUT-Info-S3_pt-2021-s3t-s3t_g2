@@ -55,6 +55,7 @@ public class ControleurJeu {
 	private ControleurElectionVigile cev;
 	private ControleurArriveZombie caz;
 	private ControleurChoixDestination ccd;
+	private ControleurPlacementPersonnage cpp;
 
 	private final Random rd = new Random();
 
@@ -74,6 +75,7 @@ public class ControleurJeu {
 		this.cev = new ControleurElectionVigile();
 		this.caz = new ControleurArriveZombie();
 		this.ccd = new ControleurChoixDestination();
+		this.cpp = new ControleurPlacementPersonnage();
 
 		this.statut = Statut.ATTENTE;
 		initReseau();
@@ -166,7 +168,7 @@ public class ControleurJeu {
 		for (Joueur j : jeu.getJoueurs().values())
 			j.getConnection().envoyer(m);
 		distribuerCarte();
-		this.placementPersonnage();
+		cpp.placementPersonnage(jeu, partieId, numeroTour);
 		this.jeu.resultatChefVigile(jeu.getJoueurs().get(0));
 		this.lieuZombie = caz.lanceDes();
 		this.jeu.entreZombie(lieuZombie);
@@ -554,39 +556,6 @@ public class ControleurJeu {
 		for (Joueur joueur : jeu.getJoueurs().values())
 			joueur.getConnection().envoyer(m);
 		Initializer.nbZombiesLieuAll(new ArrayList<>(jeu.getLieux().values()));
-	}
-
-	private void placementPersonnage() {
-		for (int n = 0; n < jeu.getJoueurs().get(0).getPersonnages().size(); n++) {
-			for (int i = 0; i < jeu.getJoueurs().size(); i++) {
-				String message = ControleurReseau.construirePaquetTcp("PIIJ", jeu.nombrePlaceDisponible(),
-						jeu.getPersonnageAPlace(jeu.getJoueurs().get(i)), partieId);
-				jeu.getJoueurs().get(i).getConnection().envoyer(message);
-				out.println(jeu.toString());
-				out.println();
-				out.println("Lancement des dés.");
-				int x = jeu.getLieuxOuverts().get(rd.nextInt(jeu.getLieuxOuverts().size()));
-				int y = jeu.getLieuxOuverts().get(rd.nextInt(jeu.getLieuxOuverts().size()));
-				out.println("Résultat du lancement :");
-				List<Integer> des = new ArrayList<>();
-				des.add(x);
-				des.add(y);
-				List<Integer> listePion = jeu.getDestinationPossible(x, y);
-				message = ControleurReseau.construirePaquetTcp("PIRD", des, listePion, partieId);
-				jeu.getJoueurs().get(i).getConnection().envoyer(message);
-				jeu.getJoueurs().get(i).getConnection().attendreMessage("PICD");
-				String rep = jeu.getJoueurs().get(i).getConnection().getMessage("PICD");
-				int destEntre = (int) ControleurReseau.getValueTcp("PICD", rep, 1);
-				int persEntre = (int) ControleurReseau.getValueTcp("PICD", rep, 2);
-				jeu.placePerso(jeu.getJoueurs().get(i), PpTools.valeurToIndex(persEntre), destEntre);
-				message = ControleurReseau.construirePaquetTcp("PIIG", jeu.getJoueurs().get(i).getCouleur(), des,
-						listePion, destEntre, persEntre, partieId);
-				for (Joueur j : jeu.getJoueurs().values())
-					if (j != jeu.getJoueurs().get(i))
-						j.getConnection().envoyer(message);
-			}
-			Initializer.destionationPersoAll(new ArrayList<>(jeu.getLieux().values()));
-		}
 	}
 
 	/**
