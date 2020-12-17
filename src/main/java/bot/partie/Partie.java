@@ -7,8 +7,6 @@ import java.util.*;
 
 import static java.lang.System.out;
 
-
-
 /**
  * <h1>La classe partie</h1>.
  *
@@ -19,8 +17,6 @@ import static java.lang.System.out;
  */
 public class Partie {
 
-
-
 	/** Dictionnaire des lieux identifiés par un entier. */
 	HashMap<Integer, Lieu> lieux;
 
@@ -29,7 +25,7 @@ public class Partie {
 
 	/** Liste des cartes. */
 	List<CarteType> cartes;
-	
+
 	/** Booléen indiquant si un nouveauChef à été élu. */
 	boolean nouveauChef;
 
@@ -55,11 +51,9 @@ public class Partie {
 		initJoueurs();
 		initLieu();
 	}
-	
-	
 
-	public Partie(HashMap<Integer, Lieu> lieux, HashMap<Couleur, Joueur> joueurs,
-			boolean nouveauChef, Couleur gagnant, boolean egalite) {
+	public Partie(HashMap<Integer, Lieu> lieux, HashMap<Couleur, Joueur> joueurs, boolean nouveauChef, Couleur gagnant,
+			boolean egalite) {
 		super();
 		this.lieux = lieux;
 		this.joueurs = joueurs;
@@ -67,7 +61,6 @@ public class Partie {
 		this.gagnant = gagnant;
 		this.egalite = egalite;
 	}
-
 
 	/**
 	 * Initialise les cartes du
@@ -90,7 +83,6 @@ public class Partie {
 		Collections.shuffle(cartes);
 
 	}
-	
 
 	/**
 	 * Initialise les lieux du jeu
@@ -118,18 +110,18 @@ public class Partie {
 		if (joueurs.size() < 4)
 			for (Joueur j : joueurs.values()) {
 				HashMap<Integer, Personnage> dp = new HashMap<>();
-				dp.put(7, new Personnage(j,7,1,1));
-				dp.put(5, new Personnage(j,5,2,1));
-				dp.put(3, new Personnage(j,3,1,2));
-				dp.put(1, new Personnage(j,1,1,1));
+				dp.put(7, new Personnage(j, 7, 1, 1));
+				dp.put(5, new Personnage(j, 5, 2, 1));
+				dp.put(3, new Personnage(j, 3, 1, 2));
+				dp.put(1, new Personnage(j, 1, 1, 1));
 				j.setPersonnages(dp);
 			}
 		else
 			for (Joueur j : joueurs.values()) {
 				HashMap<Integer, Personnage> dp = new HashMap<>();
-				dp.put(7, new Personnage(j,7,1,1));
-				dp.put(5, new Personnage(j,5,2,1));
-				dp.put(3, new Personnage(j,3,1,2));
+				dp.put(7, new Personnage(j, 7, 1, 1));
+				dp.put(5, new Personnage(j, 5, 2, 1));
+				dp.put(3, new Personnage(j, 3, 1, 2));
 				j.setPersonnages(dp);
 			}
 	}
@@ -145,7 +137,7 @@ public class Partie {
 		// gestion des cartes
 		List<Couleur> couleurs = lieux.get(lieu).afficheJoueurSurLieu();
 		ArrayList<Joueur> joueurList = new ArrayList<>();
-		for(Couleur c : couleurs)
+		for (Couleur c : couleurs)
 			for (Joueur j : joueurs.values())
 				if (j.getCouleur().equals(c))
 					joueurList.add(j);
@@ -411,16 +403,16 @@ public class Partie {
 	/**
 	 * Deplace le personnage du joueur au lieu choisi.
 	 *
-	 * @param joueur     le joueur dont le personnage est déplacé
+	 * @param joueur    le joueur dont le personnage est déplacé
 	 * @param choixPion le personnage qui est déplacé
-	 * @param dest       le lieu de destination du personnage
+	 * @param dest      le lieu de destination du personnage
 	 */
 	public void deplacePerso(Couleur couleur, Integer choixPion, Integer destination) {
 		for (Joueur joueur : joueurs.values()) {
 			if (joueur.getCouleur().equals(couleur)) {
-				int dest=destination;
-				if (lieux.get(dest).isFull()) 
-					dest=4;
+				int dest = destination;
+				if (lieux.get(dest).isFull())
+					dest = 4;
 				System.out.println(choixPion);
 				System.out.println(joueur);
 				System.out.println(joueur.getPersonnages());
@@ -430,7 +422,7 @@ public class Partie {
 				joueur.getPersonnages().get(choixPion).changerDeLieux(dest);
 				lieux.get(idPosActuel).getPersonnage().remove(joueur.getPersonnages().get(choixPion));
 				lieux.get(dest).addPersonnage(joueur.getPersonnages().get(choixPion));
-				
+
 			}
 		}
 	}
@@ -491,7 +483,8 @@ public class Partie {
 		for (Lieu lieu : lieux.values()) {
 			etatPartie.append(lieu).append(":\n");
 			for (Personnage personnage : lieu.getPersonnage()) {
-				etatPartie.append("(").append(joueurs.get(personnage.getCouleur())).append(") ").append(personnage).append("\n");
+				etatPartie.append("(").append(joueurs.get(personnage.getCouleur())).append(") ").append(personnage)
+						.append("\n");
 			}
 			etatPartie.append("Nombre de place-> ").append(lieu.getNbPlaces()).append("\n");
 			etatPartie.append("Nombre de Zombie-> ").append(lieu.getNbZombies()).append("\n\n");
@@ -560,8 +553,6 @@ public class Partie {
 		return lieux;
 	}
 
-
-
 	/**
 	 * Retourne nouveauChef.
 	 *
@@ -594,8 +585,6 @@ public class Partie {
 	public void setNewChef(boolean nouveauChef) {
 		this.nouveauChef = nouveauChef;
 	}
-
-
 
 	public void setZombieSurLieu(Integer lieu, Integer nbz) {
 		lieux.get(lieu).setNbZombies(nbz);
@@ -661,37 +650,33 @@ public class Partie {
 		HashMap<Couleur, Joueur> joueursCopy = new HashMap<Couleur, Joueur>();
 		for (Lieu lieu : lieux.values()) {
 			lieuxCopy.put(lieu.getNum(), lieu.copyOf());
-			
+
 		}
 
 		for (Joueur joueur : joueurs.values()) {
 			joueursCopy.put(joueur.getCouleur(), joueur.copyOf());
-			
+
 		}
-		Partie partieCopy = new Partie(lieuxCopy, joueursCopy,
-				nouveauChef, gagnant,egalite);
+		Partie partieCopy = new Partie(lieuxCopy, joueursCopy, nouveauChef, gagnant, egalite);
 		for (Joueur joueur : partieCopy.getJoueurs().values())
-			for ( Personnage personnage : joueur.getPersonnages().values())
-				partieCopy.placePerso(joueur.getCouleur(), personnage.getPoint(), personnage.getMonLieu());
-		
+			if (joueur.isEnVie())
+				for (Personnage personnage : joueur.getPersonnages().values())
+					partieCopy.placePerso(joueur.getCouleur(), personnage.getPoint(), personnage.getMonLieu());
+
 		return partieCopy;
-		
+
 	}
 
-
-	
-	
-	public ArrayList<Joueur> getJoueursSurLieu(Integer numlieu){
+	public ArrayList<Joueur> getJoueursSurLieu(Integer numlieu) {
 		List<Couleur> couleurs = lieux.get(numlieu).afficheJoueurSurLieu();
 		ArrayList<Joueur> joueurList = new ArrayList<>();
-		for(Couleur c : couleurs)
+		for (Couleur c : couleurs)
 			for (Joueur j : joueurs.values())
 				if (j.getCouleur().equals(c))
 					joueurList.add(j);
 		return joueurList;
 	}
 
-	
 	/*
 	 * Retourne la liste des cartes
 	 *
@@ -700,7 +685,7 @@ public class Partie {
 	public List<CarteType> getCartes() {
 		return cartes;
 	}
-	
+
 	public void givecarte(Couleur c, CarteType carte) {
 		joueurs.get(c).getCartes().add(carte);
 		cartes.remove(carte);

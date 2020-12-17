@@ -27,7 +27,7 @@ public class TraitementBot {
 		for (Couleur o : couleursT)
 			couleurs.add((Couleur) o);
 		core.setCouleur(IdjrTools.getCouleurByName(core.getNom(), noms, couleurs));
-		if (lieuferme == "2") {
+		if (lieuferme.equals("2")) {
 			core.getLieuOuvert().add(1);
 			core.getLieuOuvert().add(3);
 			core.getLieuOuvert().add(4);
