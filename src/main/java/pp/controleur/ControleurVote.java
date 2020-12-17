@@ -43,7 +43,7 @@ public class ControleurVote {
 		vr.demanderCarte(jeu, l, partieId, numeroTour);
 		traitementMenace(ve, jeu, nbVoix, l, partieId, numeroTour);
 		demanderVote(jeu, l, ve, partieId, numeroTour);
-		traitementVotes(jeu, l, ve, votes, voixRecu, nbVoix);
+		voixRecu = traitementVotes(jeu, l, ve, votes, voixRecu, nbVoix);
 		vr.cloreVote(jeu, l, partieId, numeroTour);
 		Couleur couleurVote = eluVote(voixRecu, joueursVotant);
 		vr.informerResultatVote(jeu, couleurVote, voixRecu, votes, joueursVotant, partieId, numeroTour);
@@ -116,7 +116,7 @@ public class ControleurVote {
 				vr.demanderVote(j, partieId, numeroTour);
 	}
 	
-	public void traitementVotes(Partie jeu, Lieu l, VoteEtape ve, List<Couleur> votes, List<Integer> voixRecu, List<Integer> nbVoix){
+	public List<Integer> traitementVotes(Partie jeu, Lieu l, VoteEtape ve, List<Couleur> votes, List<Integer> voixRecu, List<Integer> nbVoix){
 		int i = 0;
 		if (ve == VoteEtape.PRE) {
 			for (Joueur j : jeu.getJoueurSurLieu(l)) {
@@ -143,6 +143,7 @@ public class ControleurVote {
 				i++;
 			}
 		}
+		return voixRecu;
 	}
 	
 	
