@@ -5,17 +5,18 @@ import static java.lang.System.out;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Random;
 
 import bot.MCTS.MCTSBotMoyen;
+import bot.partie.Personnage;
 import reseau.type.CarteType;
 import reseau.type.Couleur;
 import reseau.type.PionCouleur;
 import reseau.type.VoteType;
 
 public class TraitementIntelligent {
-	
-	
+
 	/**
 	 * Choix de destination
 	 *
@@ -47,9 +48,6 @@ public class TraitementIntelligent {
 		}
 		return dest;
 	}
-
-
-
 
 	/**
 	 * Attaque des zombies
@@ -90,12 +88,11 @@ public class TraitementIntelligent {
 				}
 			}
 			return PionCouleur.valueOf(String.valueOf(core.getCouleur().name().charAt(0)) + bestPion);
-		} else
+		} else {
+			System.out.println("erreur listePionT vide!!!!!!!!!");
 			return null;
+		}
 	}
-
-
-
 
 	/**
 	 * Choix intelligent des cartes a jouer pendant l'attaque zombies
@@ -180,7 +177,7 @@ public class TraitementIntelligent {
 				listeCarteCachette.add(carte);
 		if (listeCarteCachette.isEmpty())
 			return listePionCache;
-		
+
 		int nbrCartePossibleDejouer = listeCarteCachette.size();
 		int nbrPion = core.getPionSacrDispo().size();
 		int nbrCarteJouee;
@@ -192,8 +189,6 @@ public class TraitementIntelligent {
 			listePionCache.add(core.getPionSacrDispo().get(i));
 		return listePionCache;
 	}
-
-
 
 	/**
 	 * Meilleure Reponse du joueur(bot) courant
@@ -208,8 +203,6 @@ public class TraitementIntelligent {
 		}
 		return CarteType.NUL;
 	}
-
-
 
 	protected static List<Object> carteFouilleIntelligent(List<CarteType> listeCarte, Bot core) {
 		// TODO faire la version intelligente
@@ -247,7 +240,7 @@ public class TraitementIntelligent {
 	}
 
 	protected static int IndiquerCarteJoueesIntelligent(Bot core) {
-		if ((core.getListeCarte().isEmpty())||!core.getVoteType().equals(VoteType.MPZ))
+		if ((core.getListeCarte().isEmpty()) || !core.getVoteType().equals(VoteType.MPZ))
 			return 0;
 
 		CarteType carteMenace = CarteType.MEN;
@@ -258,61 +251,71 @@ public class TraitementIntelligent {
 		if (nbrCarteMen == 0)
 			return 0;
 
-		int maxDiff=0;
+		int maxDiff = 0;
 		for (Couleur c : core.getJoueursVotant().keySet()) {
-			int diff =core.getJoueursVotant().get(core.getCouleur()) - core.getJoueursVotant().get(c) ;
-			if (diff>maxDiff)
-				maxDiff=diff;
+			int diff = core.getJoueursVotant().get(core.getCouleur()) - core.getJoueursVotant().get(c);
+			if (diff > maxDiff)
+				maxDiff = diff;
 		}
-		
-		if (maxDiff>=nbrCarteMen)
+
+		if (maxDiff >= nbrCarteMen)
 			return nbrCarteMen;
 		else
 			return maxDiff;
 	}
 
-	protected static List<Object> pionADeplacerIntelligent(Bot core, int dest, HashMap<Integer, List<Integer>> listedp) {
-		int bestLieu =10;
-		int LieuPionABouger;
-		int nbCartesSprint=0;
-		List<Integer> pionPossibles = new ArrayList<Integer>();
-		int bestPionABouger = 0; int difference=0;
-		List<Object> listARenvoyer= new ArrayList<Object>();
-		for(int i = 0; i<core.getPartie().getLieuxOuverts().size();i++) {
-			if(difference>(core.getPartie().getLieux().get(i).getForce()-core.getPartie().getLieux().get(i).getNbZombies())&&core.getPartie().getLieux().get(i).getJoueursCouleurs().contains(core.getCouleur())) {
-				difference = (core.getPartie().getLieux().get(i).getForce()-core.getPartie().getLieux().get(i).getNbZombies());
-				LieuPionABouger=core.getPartie().getLieux().get(i).getNum();
-				for(int j = 0;j<core.getPartie().getLieux().get(i).getPersonnage().size();j++) {
-					if(core.getPartie().getLieux().get(i).getPersonnage().get(j).getCouleur().equals(core.getCouleur())) {
-						pionPossibles.add(core.getPartie().getLieux().get(i).getPersonnage().get(j).getPoint());
-					}
-				}
+	protected static List<Object> pionADeplacerIntelligent(Bot core, int dest,
+			HashMap<Integer, List<Integer>> listedp) {
+		List<Object> listRenvoye = new ArrayList<>();
+		List<Integer> listePion = new ArrayList<>();
+		List<Integer> destPossible = new ArrayList<>();
+		List<Integer> destPossibleNonAttaquable = new ArrayList<>();
+		CarteType sprintJoue = CarteType.NUL;
+		for (Map.Entry<Integer, List<Integer>> dp : listedp.entrySet())
+			for (int destPos : dp.getValue())
+				destPossible.add(destPos);
+		if ((core.getListeCarte().contains(CarteType.SPR)) && (core.getPartie().getLieux().get(dest).estAttaquable())) {
+			dest = destPossible.get(new Random().nextInt(destPossible.size()));
+			sprintJoue = CarteType.SPR;
+			for (int i : destPossible) {
+				if (!core.getPartie().getLieux().get(i).estAttaquable())
+					destPossibleNonAttaquable.add(i);
 			}
-			
+			if (!destPossibleNonAttaquable.isEmpty())
+				dest = destPossibleNonAttaquable.get(new Random().nextInt(destPossibleNonAttaquable.size()));
 		}
-		for(int z=0;z<pionPossibles.size();z++) {
-			if(pionPossibles.get(z)>bestPionABouger) {
-				bestPionABouger = pionPossibles.get(z);
-			}
+		for (Map.Entry<Integer, List<Integer>> dp : listedp.entrySet())
+			for (int destPos : dp.getValue())
+				if (destPos == dest)
+					listePion.add(dp.getKey());
+		int pionAdep=0;
+		if (listePion.isEmpty()) {
+			dest = 4;
+			for (Map.Entry<Integer, List<Integer>> dp : listedp.entrySet())
+				for (int destPos : dp.getValue())
+					if (destPos == dest)
+						listePion.add(dp.getKey());
+			if (!listePion.isEmpty())
+				pionAdep = listePion.get(new Random().nextInt(listePion.size()));
+			else
+				pionAdep = new ArrayList<Integer>(listedp.keySet()).get(0);
+		} else {
+			System.out.println("liste pion not mpty : listepion = "+ listePion);
+			pionAdep = listePion.get(new Random().nextInt(listePion.size()));
+			listePion.sort(null);
+			if (core.getPartie().getLieux().get(dest).estAttaquable())
+				pionAdep = listePion.get(0);
+			else
+				for (Integer pion : listePion)
+					if (core.getPartie().getLieux().get(core.getPartie().getJoueurs().get(core.getCouleur())
+							.getPersonnages().get(pion).getMonLieu()).estAttaquable())
+						pionAdep = pion;
 		}
-		for(int y=0;y<core.getListeCarte().size();y++) {
-			if(core.getListeCarte().get(y)==CarteType.SPR) {
-				nbCartesSprint++;
-			}
-		}
-		
-		listARenvoyer.add(dest);
-		listARenvoyer.add(bestPionABouger);
-		if(nbCartesSprint>0) {
-			listARenvoyer.add(CarteType.SPR);
-		}
-		else {
-			listARenvoyer.add(CarteType.NUL);
-		}
-		return listARenvoyer;
+		listRenvoye.add(dest);
+		listRenvoye.add(pionAdep);
+		listRenvoye.add(sprintJoue);
+		return listRenvoye;
 	}
-
-
 
 	protected static Integer choisirPionPlacementIntelligent(Bot core) {
 		// TODO faire la version intelligente
@@ -332,7 +335,7 @@ public class TraitementIntelligent {
 			dest = destRestant.get(new Random().nextInt(destRestant.size()));
 		return dest;
 	}
-	
+
 	protected static Couleur voteIntelligent(Bot core, VoteType vt) {
 		// TODO can be upgrade
 		if (vt == VoteType.MPZ) {
@@ -342,7 +345,7 @@ public class TraitementIntelligent {
 		}
 		return core.getCouleur();
 	}
-	
+
 	/**
 	 * Retourne une couleur random parmis les joueurs présents
 	 *
