@@ -1298,19 +1298,9 @@ public class JeuPane extends StackPane implements IJeuListener {
 		cartePanelReset();
 		fouilleCamion.setVisible(false);
 
-		ImageView[] imgViews = { imgDeCarte1, imgDeCarte2, imgDeCarte3, imgDeCarte4, imgDeCarte5, imgDeCarte6,
-				imgDeCarte7, imgDeCarte8 };
-		Button[] buttons = { bDeCarte1, bDeCarte2, bDeCarte3, bDeCarte4, bDeCarte5, bDeCarte6, bDeCarte7, bDeCarte8,
-				bPasserCarte };
-		VBox[] carteVbox = { carte1, carte2, carte3, carte4, carte5, carte6, carte7, carte8, passerCarte };
-
-		for (VBox vBox : carteVbox)
-			vBox.setVisible(true);
-		for (ImageView imageView : imgViews)
-			imageView.setDisable(false);
-		for (Button button : buttons)
-			button.setDisable(false);
-
+		resetVoteCarte();
+		resetUtiliserCarte();
+		
 		vote.setVisible(false);
 	}
 
@@ -1653,6 +1643,7 @@ public class JeuPane extends StackPane implements IJeuListener {
 					carteVbox[i].setVisible(false);
 					imgViews[i].setDisable(true);
 				}
+				buttons[i].setStyle(null);
 			}
 		});
 	}
@@ -1663,6 +1654,7 @@ public class JeuPane extends StackPane implements IJeuListener {
 		for (int i = 0; i < buttons.length - 1; i++) {
 			if (i < core.getIdjr().getListeCarte().size()) {
 				buttons[i].setDisable(true);
+				buttons[i].setStyle(null);
 			}
 		}
 		passerCarte.setVisible(false);
@@ -1800,7 +1792,7 @@ public class JeuPane extends StackPane implements IJeuListener {
 			Button[] buttons = { bDeCarte1, bDeCarte2, bDeCarte3, bDeCarte4, bDeCarte5, bDeCarte6, bDeCarte7,
 					bDeCarte8 };
 			for (int i = 0; i < buttons.length; i++) {
-				if (i < core.getIdjr().getListeCarte().size()) {
+				if (i < cartes.size()) {
 					estActif.add(false);
 					for (CarteType carteType2 : carteTypes) {
 						if (carteType2 == cartes.get(i)) {
@@ -1816,6 +1808,8 @@ public class JeuPane extends StackPane implements IJeuListener {
 								else
 									buttons[tmp].setStyle(null);
 							});
+						} else {
+							buttons[i].setDisable(true);
 						}
 					}
 				}
