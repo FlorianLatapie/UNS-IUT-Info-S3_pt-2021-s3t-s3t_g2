@@ -2,6 +2,7 @@
 package pp.ihm;
 
 import pp.ihm.DataControl.ApplicationPane;
+import pp.ihm.langues.ITraduction;
 import pp.ihm.langues.International;
 import javafx.application.Platform;
 import javafx.geometry.Insets;
@@ -20,20 +21,26 @@ import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 
-public class PausePane extends StackPane {
+public class PausePane extends StackPane implements ITraduction {
 
 	private ScreenControl sControl = null;
-	private Core core; 
+	private Core core;
 	private final ApplicationPane paneName = ApplicationPane.PAUSE;
 
 	private String styleBoutons = " -fx-background-color:#000000; -fx-background-radius: 15px; -fx-text-fill: #ffffff";
 	private String styleBoutonsSouris = "-fx-background-color:#ff0000;  -fx-text-fill:#000000; -fx-background-radius: 15px;";
-	
+
 	private GaussianBlur flou = new GaussianBlur(30);
-	
+
+	Label titre;
+	Button bOption;
+	Button bRegles;
+	Button bRecommencer;
+	Button bQuitter;
+	Button bRetour;
 
 	public PausePane(ScreenControl sc, Core c) {
-		core = c; 
+		core = c;
 		sControl = sc;
 
 		Rectangle rect = new Rectangle();
@@ -55,8 +62,8 @@ public class PausePane extends StackPane {
 		vbCentral.setPrefSize(700, 600);
 		vbCentral.setMinSize(700, 600);
 		vbCentral.setMaxSize(700, 600);
-		
-		// Boutons de rotation d'écran 
+
+		// Boutons de rotation d'écran
 		ImageView img1 = new ImageView(DataControl.SCREEN);
 		img1.setFitHeight(70);
 		img1.setPreserveRatio(true);
@@ -104,21 +111,21 @@ public class PausePane extends StackPane {
 		bEcranDroite.setPrefSize(80, 80);
 		bEcranDroite.setGraphic(img4);
 		bEcranDroite.setOnAction(EventHandler -> sc.setRotatePane(rect, vbCentral, "droite"));
-		
+
 		///
-		
+
 		VBox vbTitre = new VBox();
 		vbTitre.setAlignment(Pos.CENTER);
 
 		VBox vbBoutons = new VBox();
 		vbBoutons.setAlignment(Pos.CENTER);
-		Label titre = new Label(International.trad("text.titerPause"));
+		titre = new Label(International.trad("text.titerPause"));
 		titre.setStyle("-fx-text-fill: #ff1c16");
 		titre.setFont(Font.font("Arial", FontWeight.BOLD, 75));
 		vbTitre.getChildren().add(titre);
 		vbTitre.setMargin(vbBoutons, new Insets(70));
 
-		Button bOption = new Button(International.trad("bouton.options"));
+		bOption = new Button(International.trad("bouton.options"));
 		bOption.setFont(Font.font("Arial", FontWeight.BOLD, 30));
 		bOption.setAlignment(Pos.CENTER);
 		bOption.setPrefSize(500, 60);
@@ -131,7 +138,7 @@ public class PausePane extends StackPane {
 		bOption.setOnMouseEntered(event -> bOption.setStyle(styleBoutonsSouris));
 		bOption.setOnMouseExited(event -> bOption.setStyle(styleBoutons));
 
-		Button bRegles = new Button(International.trad("text.titreRegle"));
+		bRegles = new Button(International.trad("text.titreRegle"));
 		bRegles.setFont(Font.font("Arial", FontWeight.BOLD, 30));
 		bRegles.setAlignment(Pos.CENTER);
 		bRegles.setPrefSize(500, 60);
@@ -143,7 +150,7 @@ public class PausePane extends StackPane {
 			sc.setPaneOnTop(ApplicationPane.REGLES);
 		});
 
-		Button bRecommencer = new Button(International.trad("text.recommencer"));
+		bRecommencer = new Button(International.trad("text.recommencer"));
 		bRecommencer.setFont(Font.font("Arial", FontWeight.BOLD, 30));
 		bRecommencer.setAlignment(Pos.CENTER);
 		bRecommencer.setPrefSize(500, 60);
@@ -151,7 +158,7 @@ public class PausePane extends StackPane {
 		bRecommencer.setOnMouseEntered(event -> bRecommencer.setStyle(styleBoutonsSouris));
 		bRecommencer.setOnMouseExited(event -> bRecommencer.setStyle(styleBoutons));
 
-		Button bQuitter = new Button(International.trad("bouton.quitter"));
+		bQuitter = new Button(International.trad("bouton.quitter"));
 		bQuitter.setFont(Font.font("Arial", FontWeight.BOLD, 30));
 		bQuitter.setAlignment(Pos.CENTER);
 		bQuitter.setPrefSize(500, 60);
@@ -163,12 +170,12 @@ public class PausePane extends StackPane {
 
 		bQuitter.setOnAction(event -> {
 			boolean resultat = ConfirmationPane.afficher(International.trad("texte.confirmationTitre"),
-					International.trad("texte.confirmationL1") +"\n"+ International.trad("texte.confirmationL2"));
+					International.trad("texte.confirmationL1") + "\n" + International.trad("texte.confirmationL2"));
 			if (resultat)
 				Platform.exit();
 		});
 
-		Button bRetour = new Button(International.trad("bouton.retour"));
+		bRetour = new Button(International.trad("bouton.retour"));
 		bRetour.setFont(Font.font("Arial", FontWeight.BOLD, 30));
 		bRetour.setAlignment(Pos.CENTER);
 		bRetour.setPrefSize(500, 60);
@@ -185,13 +192,23 @@ public class PausePane extends StackPane {
 
 		ImageView img = new ImageView(DataControl.FOND);
 		vbFond.getChildren().add(img);
-		
+
 		this.setAlignment(Pos.CENTER);
 		this.getChildren().addAll(vbFond, bEcranHaut, bEcranGauche, bEcranDroite, bEcranBas, rect, vbCentral);
 		this.setBackground(new Background(new BackgroundFill(Color.BLACK, CornerRadii.EMPTY, null)));
 
 		sControl.registerNode(paneName, this);
 		sControl.setPaneOnTop(paneName);
+	}
+
+	@Override
+	public void traduire() {
+		titre.setText(International.trad("text.titerPause"));
+		bOption.setText(International.trad("bouton.options"));
+		bRegles.setText(International.trad("text.titreRegle"));
+		bRecommencer.setText(International.trad("text.recommencer"));
+		bQuitter.setText(International.trad("bouton.quitter"));
+		bRetour.setText(International.trad("bouton.retour"));
 	}
 
 }
