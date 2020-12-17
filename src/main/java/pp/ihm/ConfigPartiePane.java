@@ -207,10 +207,9 @@ public class ConfigPartiePane extends StackPane {
 
 			core.setNbJoueur(nbJr.getValue());
 			core.setNbBot(nbBot.getValue());
-			core.setNomPartie(nomP.getText());
 
 			try {
-				core.setCj(new ControleurJeu(core.getNomPartie(), core.getNbJoueurReel(), core.getNbBot()));
+				core.setCj(new ControleurJeu(nomP.getText(), core.getNbJoueurReel(), core.getNbBot()));
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
