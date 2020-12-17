@@ -24,8 +24,8 @@ import pp.ihm.langues.International;
 public class ConfirmationPane {
 
 	static boolean reponse;
-	private static int tailleFenetreL = 450;
-	private static int tailleFenetreH = 150;
+	private static int tailleFenetreL = 500;
+	private static int tailleFenetreH = 200;
 	private static String nomPolice = "Segoe UI";
 	
 	/**
@@ -41,6 +41,11 @@ public class ConfirmationPane {
 		window.getIcons().add(new Image(DataControl.ICONE));
 		window.initModality(Modality.APPLICATION_MODAL);
 		window.setTitle(titre);
+
+		window.setMaxWidth(tailleFenetreL);
+		window.setMaxHeight(tailleFenetreH);
+		window.setWidth(tailleFenetreL);
+		window.setHeight(tailleFenetreH);
 		window.setMinWidth(tailleFenetreL);
 		window.setMinHeight(tailleFenetreH);
 		
