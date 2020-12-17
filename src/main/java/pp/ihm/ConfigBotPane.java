@@ -1,6 +1,7 @@
 package pp.ihm;
 
 import pp.ihm.DataControl.ApplicationPane;
+import pp.ihm.langues.ITraduction;
 import pp.ihm.langues.International;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -22,7 +23,7 @@ import javafx.scene.text.TextAlignment;
  * @version 0.1
  * @since 26/10/2020
  */
-public class ConfigBotPane extends StackPane {
+public class ConfigBotPane extends StackPane implements ITraduction {
 
 	private ScreenControl sControl = null;
 	private Core core;
@@ -58,12 +59,23 @@ public class ConfigBotPane extends StackPane {
 	HBox bot5 = new HBox();
 	HBox bot6 = new HBox();
 
+	Label titre1;
+	ComboBox<String> diffBot1;
+	ComboBox<String> diffBot2;
+	ComboBox<String> diffBot3;
+	ComboBox<String> diffBot4;
+	ComboBox<String> diffBot5;
+	ComboBox<String> diffBot6;
+	Button bJouer;
+	Button bRetour;
+
 	public ConfigBotPane(ScreenControl sc, Core c) {
 		core = c;
 		sControl = sc;
 
 		// titre
-		Label titre1 = new Label(International.trad("texte.titreConfigBotA")+"\n"+International.trad("texte.titreConfigBotB"));
+		titre1 = new Label(
+				International.trad("texte.titreConfigBotA") + "\n" + International.trad("texte.titreConfigBotB"));
 		titre1.setTextAlignment(TextAlignment.CENTER);
 		titre1.setFont(Font.font(nomPolice, FontWeight.BOLD, 80));
 		titre1.setTextFill(Color.BLACK);
@@ -224,7 +236,7 @@ public class ConfigBotPane extends StackPane {
 		vbCenter.setSpacing(spacing);
 		vbCenter.getChildren().addAll(vBots);
 		// boutons
-		Button bJouer = new Button(International.trad("bouton.jouer"));
+		bJouer = new Button(International.trad("bouton.jouer"));
 		bJouer.setPrefSize(lBouton, hBouton);
 		bJouer.setMinSize(lBouton, hBouton);
 		bJouer.setFont(policeBouton);
@@ -234,7 +246,7 @@ public class ConfigBotPane extends StackPane {
 		bJouer.setOnMouseExited(event -> bJouer.setStyle(styleBoutons));
 		bJouer.setOnAction(EventHandler -> sc.setPaneOnTop(ApplicationPane.WAIT));
 
-		Button bRetour = new Button(International.trad("bouton.retour"));
+		bRetour = new Button(International.trad("bouton.retour"));
 		bRetour.setPrefSize(lBouton, hBouton);
 		bRetour.setMinSize(lBouton, hBouton);
 		bRetour.setFont(policeBouton);
@@ -330,5 +342,20 @@ public class ConfigBotPane extends StackPane {
 
 		sControl.registerNode(paneName, this);
 		sControl.setPaneOnTop(paneName);
+	}
+
+	@Override
+	public void traduire() {
+		titre1.setText(
+				International.trad("texte.titreConfigBotA") + "\n" + International.trad("texte.titreConfigBotB"));
+		diffBot1.setValue(International.trad("texte.valueFaible"));
+		diffBot2.setValue(International.trad("texte.valueFaible"));
+		diffBot3.setValue(International.trad("texte.valueFaible"));
+		diffBot4.setValue(International.trad("texte.valueFaible"));
+		diffBot5.setValue(International.trad("texte.valueFaible"));
+		diffBot6.setValue(International.trad("texte.valueFaible"));
+		bJouer.setText(International.trad("bouton.jouer"));
+		bRetour.setText(International.trad("bouton.retour"));
+
 	}
 }
