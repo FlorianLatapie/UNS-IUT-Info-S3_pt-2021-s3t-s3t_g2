@@ -182,12 +182,9 @@ public class TraitementPaquetTcp extends TraitementPaquet<TcpClient> {
 			traitementIPV(paquet, message);
 			break;
 		default:
-			throw new IllegalStateException(
-					MessageFormat.format("[TCP] Il n'y a pas de traitement possible pour {0}", paquet.getCle()));
+			throw new IllegalStateException("[TCP] Il n'y a pas de traitement possible pour " + paquet.getCle());
 		}
 	}
-
-
 
 	private void traitementPVVC(Paquet paquet, String message) {
 		// TODO Auto-generated method stub
@@ -227,9 +224,9 @@ public class TraitementPaquetTcp extends TraitementPaquet<TcpClient> {
 	private void traitementRAZIF(Paquet paquet, String message) {
 		core.sacrifice((PionCouleur) paquet.getValeur(message, 2));
 		core.correctionZombie((Integer) paquet.getValeur(message, 1), (Integer) paquet.getValeur(message, 3));
-		
-		//System.out.println("resSacrifice : \n");
-		//System.out.println(core.getEtatPartie());
+
+		// System.out.println("resSacrifice : \n");
+		// System.out.println(core.getEtatPartie());
 
 	}
 
@@ -237,24 +234,25 @@ public class TraitementPaquetTcp extends TraitementPaquet<TcpClient> {
 		core.joueCartes((Couleur) paquet.getValeur(message, 2), (List<CarteType>) paquet.getValeur(message, 3));
 		core.correctionZombie((Integer) paquet.getValeur(message, 1), (Integer) paquet.getValeur(message, 6));
 		core.setPersoCache((Integer) paquet.getValeur(message, 1), (List<Integer>) paquet.getValeur(message, 3));
-		
-		//System.out.println("joueCarteDEF : \n");
-		//System.out.println(core.getEtatPartie());
+
+		// System.out.println("joueCarteDEF : \n");
+		// System.out.println(core.getEtatPartie());
 
 	}
 
 	private void traitementRAZPA(Paquet paquet, String message) {
 		core.correctionZombie((Integer) paquet.getValeur(message, 1), (Integer) paquet.getValeur(message, 4));
 
-		//System.out.println("traitementRAZPA  : \n");
-		//System.out.println(core.getEtatPartie());
+		// System.out.println("traitementRAZPA : \n");
+		// System.out.println(core.getEtatPartie());
 	}
 
 	private void traitementPRAZ(Paquet paquet, String message) {
 		core.setZombie((List<Integer>) paquet.getValeur(message, 3), (List<Integer>) paquet.getValeur(message, 4));
-		
-		//System.out.println("resoAttaqueZombie phase de résolution de l’attaque des zombies, pas d’attaque : \n");
-		//System.out.println(core.getEtatPartie());
+
+		// System.out.println("resoAttaqueZombie phase de résolution de l’attaque des
+		// zombies, pas d’attaque : \n");
+		// System.out.println(core.getEtatPartie());
 
 	}
 
@@ -263,17 +261,18 @@ public class TraitementPaquetTcp extends TraitementPaquet<TcpClient> {
 				(Integer) paquet.getValeur(message, 3));
 		if (((CarteType) paquet.getValeur(message, 4)).equals(CarteType.SPR))
 			core.joueCarte((Couleur) paquet.getValeur(message, 1), CarteType.SPR);
-		
-		//System.out.println("traitementDPI  phase de déplacement des personnages : information aux joueurs : \n");
-		//System.out.println(core.getEtatPartie());
+
+		// System.out.println("traitementDPI phase de déplacement des personnages :
+		// information aux joueurs : \n");
+		// System.out.println(core.getEtatPartie());
 
 	}
 
 	private void traitementCDZVDI(Paquet paquet, String message) {
 		core.arriveSoloZombie((Integer) paquet.getValeur(message, 2));
-		
-		//System.out.println("arriveSoloZombie : \n");
-		//System.out.println(core.getEtatPartie());
+
+		// System.out.println("arriveSoloZombie : \n");
+		// System.out.println(core.getEtatPartie());
 
 	}
 
@@ -282,51 +281,51 @@ public class TraitementPaquetTcp extends TraitementPaquet<TcpClient> {
 				&& (!((Couleur) paquet.getValeur(message, 1)).equals(core.getCouleur()))) {
 			core.joueCarte((Couleur) paquet.getValeur(message, 1), CarteType.CDS);
 		}
-		
-		//System.out.println("joueCarteCDS : \n");
-		//System.out.println(core.getEtatPartie());
+
+		// System.out.println("joueCarteCDS : \n");
+		// System.out.println(core.getEtatPartie());
 
 	}
 
 	private void traitementAZLAZ(Paquet paquet, String message) {
 		core.arriveZombie((List<Integer>) paquet.getValeur(message, 1));
-		
-		//System.out.println("arriveZombie : \n");
-		//System.out.println(core.getEtatPartie());
+
+		// System.out.println("arriveZombie : \n");
+		// System.out.println(core.getEtatPartie());
 
 	}
 
 	private void traitementRECV(Paquet paquet, String message) {
 		core.resVigile((Couleur) paquet.getValeur(message, 1));
-		
-		//System.out.println("resVigile : \n");
-		//System.out.println(core.getEtatPartie());
+
+		// System.out.println("resVigile : \n");
+		// System.out.println(core.getEtatPartie());
 
 	}
 
 	private void traitementRFC(Paquet paquet, String message) {
 		core.resFouille((Couleur) paquet.getValeur(message, 1), (Couleur) paquet.getValeur(message, 2),
 				(CarteEtat) paquet.getValeur(message, 3));
-		
-		//System.out.println("resFouille : \n");
-		//System.out.println(core.getEtatPartie());
+
+		// System.out.println("resFouille : \n");
+		// System.out.println(core.getEtatPartie());
 
 	}
 
 	private void traitementPIPZ(Paquet paquet, String message) {
 		core.initZombie((List<Integer>) paquet.getValeur(message, 1));
-		
-		//System.out.println("placeZombie : \n");
-		//System.out.println(core.getEtatPartie());
+
+		// System.out.println("placeZombie : \n");
+		// System.out.println(core.getEtatPartie());
 
 	}
 
 	private void traitementPIIG(Paquet paquet, String message) {
 		core.placePionCouleur((Couleur) paquet.getValeur(message, 1), (Integer) paquet.getValeur(message, 4),
 				(Integer) paquet.getValeur(message, 5));
-		
-		//System.out.println("placementPerso : \n");
-		//System.out.println(core.getEtatPartie());
+
+		// System.out.println("placementPerso : \n");
+		// System.out.println(core.getEtatPartie());
 
 	}
 
@@ -334,9 +333,9 @@ public class TraitementPaquetTcp extends TraitementPaquet<TcpClient> {
 		core.getListeCarte().add((CarteType) paquet.getValeur(message, 1));
 		core.initCarte((CarteType) paquet.getValeur(message, 1));
 		core.recupCarte((CarteType) paquet.getValeur(message, 1));
-		
-		//System.out.println("recupCarte : \n");
-		//System.out.println(core.getEtatPartie());
+
+		// System.out.println("recupCarte : \n");
+		// System.out.println(core.getEtatPartie());
 	}
 
 	private void traitementIPV(Paquet paquet, String message) {
@@ -344,22 +343,21 @@ public class TraitementPaquetTcp extends TraitementPaquet<TcpClient> {
 		List<Integer> joueursValeurVote = (List<Integer>) paquet.getValeur(message, 5);
 		core.setCouleurJoueurs(joueursCouleurs);
 		core.setVoteType((VoteType) paquet.getValeur(message, 1));
-		HashMap<Couleur,Integer> joueursVotant= new HashMap<Couleur,Integer>();
-		for (int i = 0 ; i<joueursCouleurs.size();i++ )
+		HashMap<Couleur, Integer> joueursVotant = new HashMap<Couleur, Integer>();
+		for (int i = 0; i < joueursCouleurs.size(); i++)
 			joueursVotant.put(joueursCouleurs.get(i), joueursValeurVote.get(i));
 		core.setJoueursVotant(joueursVotant);
-		//System.out.println("recupInfoVote : \n");
-		//System.out.println(core.getEtatPartie());
+		// System.out.println("recupInfoVote : \n");
+		// System.out.println(core.getEtatPartie());
 	}
 
 	public void traitementAZDCS(Paquet paquet, String message) {
 
-		ControleurReseau
-				.envoyerTcp(ControleurReseau.construirePaquetTcp("AZRCS", traitementB.traitementAZDCS(core),
-						(String) paquet.getValeur(message, 1), (int) paquet.getValeur(message, 2), core.getJoueurId()));
+		ControleurReseau.envoyerTcp(ControleurReseau.construirePaquetTcp("AZRCS", traitementB.traitementAZDCS(core),
+				(String) paquet.getValeur(message, 1), (int) paquet.getValeur(message, 2), core.getJoueurId()));
 
-		//System.out.println("ReponseJoueurCourant : \n");
-		//System.out.println(core.getEtatPartie());
+		// System.out.println("ReponseJoueurCourant : \n");
+		// System.out.println(core.getEtatPartie());
 	}
 
 	private void traitementPVDV(Paquet paquet, String message) {
@@ -369,10 +367,10 @@ public class TraitementPaquetTcp extends TraitementPaquet<TcpClient> {
 				ControleurReseau.construirePaquetTcp("PVCV", traitementB.traitementPVDV(core, core.getVoteType()),
 						(String) paquet.getValeur(message, 1), (int) paquet.getValeur(message, 2), core.getJoueurId()));
 
-		//System.out.println("ChoisirQuiVoter : \n");
-		//System.out.println(core.getEtatPartie());
+		// System.out.println("ChoisirQuiVoter : \n");
+		// System.out.println(core.getEtatPartie());
 	}
-	
+
 	private void traitementRAZA(Paquet paquet, String message) {
 		traitementB.traitementRAZA(core, (List<PionCouleur>) (paquet.getValeur(message, 2)));
 		core.correctionZombie((Integer) paquet.getValeur(message, 1), (Integer) paquet.getValeur(message, 4));
@@ -385,12 +383,12 @@ public class TraitementPaquetTcp extends TraitementPaquet<TcpClient> {
 				.envoyerTcp(ControleurReseau.construirePaquetTcp("RAZRD", listerenvoye.get(0), listerenvoye.get(1),
 						(String) paquet.getValeur(message, 2), (int) paquet.getValeur(message, 3), core.getJoueurId()));
 
-		//System.out.println("fournirActionsDefense : \n");
-		//System.out.println(core.getEtatPartie());
+		// System.out.println("fournirActionsDefense : \n");
+		// System.out.println(core.getEtatPartie());
 	}
 
 	private void traitementACP(Paquet paquet, String message) {
-		//System.out.println((String) paquet.getValeur(message, 2));
+		// System.out.println((String) paquet.getValeur(message, 2));
 
 		core.setJoueurId((String) paquet.getValeur(message, 2));
 	}
@@ -405,8 +403,8 @@ public class TraitementPaquetTcp extends TraitementPaquet<TcpClient> {
 
 		ControleurReseau.envoyerTcp(ControleurReseau.construirePaquetTcp("PILD", (String) paquet.getValeur(message, 3),
 				core.getJoueurId()));
-		//System.out.println("lancerDes : \n");
-		//System.out.println(core.getEtatPartie());
+		// System.out.println("lancerDes : \n");
+		// System.out.println(core.getEtatPartie());
 	}
 
 	private void traitementPIDR(Paquet paquet, String message) {
@@ -420,16 +418,16 @@ public class TraitementPaquetTcp extends TraitementPaquet<TcpClient> {
 		ControleurReseau.envoyerTcp(ControleurReseau.construirePaquetTcp("PICD", dest, pion,
 				(String) paquet.getValeur(message, 3), core.getJoueurId()));
 
-		//System.out.println("choisirDestPlacement : \n");
-		//System.out.println(core.getEtatPartie());
+		// System.out.println("choisirDestPlacement : \n");
+		// System.out.println(core.getEtatPartie());
 	}
 
 	private void traitementIT(Paquet paquet, String message) {
 		traitementB.traitementIT(core, (List<Couleur>) paquet.getValeur(message, 2));
 		core.resetPersoCache();
 
-		//System.out.println("debutTour : \n");
-		//System.out.println(core.getEtatPartie());
+		// System.out.println("debutTour : \n");
+		// System.out.println(core.getEtatPartie());
 	}
 
 	private void traitementPAZ(Paquet paquet, String message) {
@@ -442,8 +440,8 @@ public class TraitementPaquetTcp extends TraitementPaquet<TcpClient> {
 
 		core.NewChef((VigileEtat) paquet.getValeur(message, 2));
 
-		//System.out.println("lanceDesChefVigil : \n");
-		//System.out.println(core.getEtatPartie());
+		// System.out.println("lanceDesChefVigil : \n");
+		// System.out.println(core.getEtatPartie());
 	}
 
 	private void traitementPCD(Paquet paquet, String message) {
@@ -463,8 +461,8 @@ public class TraitementPaquetTcp extends TraitementPaquet<TcpClient> {
 			ControleurReseau.envoyerTcp(ControleurReseau.construirePaquetTcp("CDDJ", traitementB.traitementPCD(core),
 					(String) paquet.getValeur(message, 3), (int) paquet.getValeur(message, 4), core.getJoueurId()));
 		}
-		//System.out.println("choixDestVigil : \n");
-		//System.out.println(core.getEtatPartie());
+		// System.out.println("choixDestVigil : \n");
+		// System.out.println(core.getEtatPartie());
 	}
 
 	private void traitementCDCDV(Paquet paquet, String message) {
@@ -479,8 +477,8 @@ public class TraitementPaquetTcp extends TraitementPaquet<TcpClient> {
 			ControleurReseau.envoyerTcp(ControleurReseau.construirePaquetTcp("CDDJ", traitementB.traitementCDCDV(core),
 					(String) paquet.getValeur(message, 3), (int) paquet.getValeur(message, 4), core.getJoueurId()));
 		}
-		//System.out.println("choisirDest : \n");
-		//System.out.println(core.getEtatPartie());
+		// System.out.println("choisirDest : \n");
+		// System.out.println(core.getEtatPartie());
 	}
 
 	private void traitementCDZVI(Paquet paquet, String message) {
@@ -488,8 +486,8 @@ public class TraitementPaquetTcp extends TraitementPaquet<TcpClient> {
 		ControleurReseau.envoyerTcp(ControleurReseau.construirePaquetTcp("CDDZVJE", traitementB.traitementCDZVI(core),
 				paquet.getValeur(message, 1), paquet.getValeur(message, 2), core.getJoueurId()));
 
-		//System.out.println("destZombieVengeur : \n");
-		//System.out.println(core.getEtatPartie());
+		// System.out.println("destZombieVengeur : \n");
+		// System.out.println(core.getEtatPartie());
 	}
 
 	private void traitementPDP(Paquet paquet, String message) {
@@ -500,11 +498,14 @@ public class TraitementPaquetTcp extends TraitementPaquet<TcpClient> {
 		List<Object> listRenvoye = traitementB.traitementDPD(core, (int) paquet.getValeur(message, 1),
 				(HashMap<Integer, List<Integer>>) paquet.getValeur(message, 2));
 
-		/*System.out.println("deplacerPion avant dpl: {" +"Couleur = " + core.getCouleur() + ", Dest = " + (Integer) listRenvoye.get(0) + ", Pion =  "
-				+ (Integer) listRenvoye.get(1) + "}\n");*/
-		//System.out.println(core.getEtatPartie());
+		/*
+		 * System.out.println("deplacerPion avant dpl: {" +"Couleur = " +
+		 * core.getCouleur() + ", Dest = " + (Integer) listRenvoye.get(0) + ", Pion =  "
+		 * + (Integer) listRenvoye.get(1) + "}\n");
+		 */
+		// System.out.println(core.getEtatPartie());
 
-		core.deplPionJoueurCourant( core.getCouleur(), (Integer) listRenvoye.get(0), (Integer) listRenvoye.get(1));
+		core.deplPionJoueurCourant(core.getCouleur(), (Integer) listRenvoye.get(0), (Integer) listRenvoye.get(1));
 
 		if (((CarteType) listRenvoye.get(2)).equals(CarteType.SPR))
 			core.joueCarte(core.getCouleur(), CarteType.SPR);
@@ -513,8 +514,8 @@ public class TraitementPaquetTcp extends TraitementPaquet<TcpClient> {
 				listRenvoye.get(1), listRenvoye.get(2), (String) paquet.getValeur(message, 3),
 				(int) paquet.getValeur(message, 4), core.getJoueurId()));
 
-		//System.out.println("deplacerPion apres dpl: \n");
-		//System.out.println(core.getEtatPartie());
+		// System.out.println("deplacerPion apres dpl: \n");
+		// System.out.println(core.getEtatPartie());
 	}
 
 	private void traitementRAZDS(Paquet paquet, String message) {
@@ -524,15 +525,15 @@ public class TraitementPaquetTcp extends TraitementPaquet<TcpClient> {
 				traitementB.traitementRAZDS(core, (List<?>) paquet.getValeur(message, 2)),
 				(String) paquet.getValeur(message, 3), (int) paquet.getValeur(message, 4), core.getJoueurId()));
 
-		//System.out.println("choisirSacrifice : \n");
-		//System.out.println(core.getEtatPartie());
+		// System.out.println("choisirSacrifice : \n");
+		// System.out.println(core.getEtatPartie());
 	}
 
 	private void traitementFP(Paquet paquet, String message) {
 		traitementB.traitementFP(core, (Couleur) paquet.getValeur(message, 2));
 
 		System.out.println("finPartie : \n");
-		//System.out.println(core.getEtatPartie());
+		// System.out.println(core.getEtatPartie());
 	}
 
 	private void traitementPVD(Paquet paquet, String message) {
@@ -542,7 +543,7 @@ public class TraitementPaquetTcp extends TraitementPaquet<TcpClient> {
 				(String) paquet.getValeur(message, 1), (int) paquet.getValeur(message, 2), core.getJoueurId()));
 
 		System.out.println("IndiquerCarteJouees : \n");
-		//System.out.println(core.getEtatPartie());
+		// System.out.println(core.getEtatPartie());
 	}
 
 	private void traitementFCLC(Paquet paquet, String message) {
@@ -552,7 +553,7 @@ public class TraitementPaquetTcp extends TraitementPaquet<TcpClient> {
 				(String) paquet.getValeur(message, 2), paquet.getValeur(message, 3), core.getJoueurId()));
 
 		System.out.println("choixCarteFouille : \n");
-		//System.out.println(core.getEtatPartie());
+		// System.out.println(core.getEtatPartie());
 
 	}
 
