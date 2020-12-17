@@ -3,6 +3,7 @@ package pp.ihm;
 import pp.Joueur;
 import pp.ihm.DataControl.ApplicationPane;
 import pp.ihm.event.ICouleurListener;
+import pp.ihm.langues.ITraduction;
 import pp.ihm.langues.International;
 import javafx.application.Platform;
 import javafx.beans.value.ChangeListener;
@@ -32,7 +33,7 @@ import java.util.List;
  * @version 0.1
  * @since 26/10/2020
  */
-public class CouleurPane extends StackPane implements ICouleurListener {
+public class CouleurPane extends StackPane implements ICouleurListener, ITraduction {
 	private ScreenControl sControl = null;
 	private Core core = null;
 	private final ApplicationPane paneName = ApplicationPane.COULEUR;
@@ -100,12 +101,17 @@ public class CouleurPane extends StackPane implements ICouleurListener {
 	List<Joueur> joueurs;
 	List<String> couleursChoix;
 
+	Label titre1;
+	Label infoVigile;
+	Button bJouer;
+	Button bRetour;
+
 	public CouleurPane(ScreenControl sc, Core c) {
 		core = c;
 		sControl = sc;
 
 		// titre
-		Label titre1 = new Label(
+		titre1 = new Label(
 				International.trad("texte.titreCouleurPaneA") + "\n" + International.trad("texte.titreCouleurPaneB"));
 		titre1.setTextAlignment(TextAlignment.CENTER);
 		titre1.setFont(Font.font(nomPolice, FontWeight.BOLD, 80));
@@ -117,7 +123,7 @@ public class CouleurPane extends StackPane implements ICouleurListener {
 		titre.setPrefWidth(730);
 		titre.setMinWidth(730);
 
-		Label infoVigile = new Label(International.trad("texte.infoVigile"));
+		infoVigile = new Label(International.trad("texte.infoVigile"));
 		infoVigile.setFont(Font.font("Segoe UI", FontWeight.BOLD, 30));
 		infoVigile.setTextFill(Color.WHITE);
 		infoVigile.setPadding(new Insets(5, 10, 5, 10));
@@ -131,7 +137,7 @@ public class CouleurPane extends StackPane implements ICouleurListener {
 		nom1 = new Label();
 		nom1.setStyle("-fx-background-color: #1B1B1B; -fx-background-radius: 10px;");
 		nom1.setText(International.trad("texte.j1"));
-		nom1.setFont(Font.font(nomPolice,  FontWeight.BOLD, 23));
+		nom1.setFont(Font.font(nomPolice, FontWeight.BOLD, 23));
 		nom1.setTextFill(Color.WHITE);
 		nom1.setPrefSize(largeurTF, hauteurElemtents);
 		nom1.setMinHeight(hauteurElemtents);
@@ -180,7 +186,7 @@ public class CouleurPane extends StackPane implements ICouleurListener {
 		nom2 = new Label();
 		nom2.setStyle("-fx-background-color: #1B1B1B; -fx-background-radius: 10px;");
 		nom2.setText(International.trad("texte.j2"));
-		nom2.setFont(Font.font(nomPolice,  FontWeight.BOLD, 23));
+		nom2.setFont(Font.font(nomPolice, FontWeight.BOLD, 23));
 		nom2.setTextFill(Color.WHITE);
 		nom2.setPrefSize(largeurTF, hauteurElemtents);
 		nom2.setMinHeight(hauteurElemtents);
@@ -233,7 +239,7 @@ public class CouleurPane extends StackPane implements ICouleurListener {
 		nom3 = new Label();
 		nom3.setStyle("-fx-background-color: #1B1B1B; -fx-background-radius: 10px;");
 		nom3.setText(International.trad("texte.j3"));
-		nom3.setFont(Font.font(nomPolice,  FontWeight.BOLD, 23));
+		nom3.setFont(Font.font(nomPolice, FontWeight.BOLD, 23));
 		nom3.setTextFill(Color.WHITE);
 		nom3.setPrefSize(largeurTF, hauteurElemtents);
 		nom3.setMinHeight(hauteurElemtents);
@@ -286,7 +292,7 @@ public class CouleurPane extends StackPane implements ICouleurListener {
 		nom4 = new Label();
 		nom4.setStyle("-fx-background-color: #1B1B1B; -fx-background-radius: 10px;");
 		nom4.setText(International.trad("texte.j4"));
-		nom4.setFont(Font.font(nomPolice,  FontWeight.BOLD, 23));
+		nom4.setFont(Font.font(nomPolice, FontWeight.BOLD, 23));
 		nom4.setTextFill(Color.WHITE);
 		nom4.setPrefSize(largeurTF, hauteurElemtents);
 		nom4.setMinHeight(hauteurElemtents);
@@ -339,7 +345,7 @@ public class CouleurPane extends StackPane implements ICouleurListener {
 		nom5 = new Label();
 		nom5.setStyle("-fx-background-color: #1B1B1B; -fx-background-radius: 10px;");
 		nom5.setText(International.trad("texte.j5"));
-		nom5.setFont(Font.font(nomPolice,  FontWeight.BOLD, 23));
+		nom5.setFont(Font.font(nomPolice, FontWeight.BOLD, 23));
 		nom5.setTextFill(Color.WHITE);
 		nom5.setPrefSize(largeurTF, hauteurElemtents);
 		nom5.setMinHeight(hauteurElemtents);
@@ -392,7 +398,7 @@ public class CouleurPane extends StackPane implements ICouleurListener {
 		nom6 = new Label();
 		nom6.setStyle("-fx-background-color: #1B1B1B; -fx-background-radius: 10px;");
 		nom6.setText(International.trad("texte.j6"));
-		nom6.setFont(Font.font(nomPolice,  FontWeight.BOLD, 23));
+		nom6.setFont(Font.font(nomPolice, FontWeight.BOLD, 23));
 		nom6.setTextFill(Color.WHITE);
 		nom6.setPrefSize(largeurTF, hauteurElemtents);
 		nom6.setMinHeight(hauteurElemtents);
@@ -447,7 +453,7 @@ public class CouleurPane extends StackPane implements ICouleurListener {
 		vbCenter.getChildren().addAll(vJoueurs);
 
 		// boutons
-		Button bJouer = new Button(International.trad("bouton.jouer"));
+		bJouer = new Button(International.trad("bouton.jouer"));
 		bJouer.setPrefSize(lBouton, hBouton);
 		bJouer.setMinSize(lBouton, hBouton);
 		bJouer.setFont(policeBouton);
@@ -464,7 +470,7 @@ public class CouleurPane extends StackPane implements ICouleurListener {
 			}
 		});
 
-		Button bRetour = new Button(International.trad("bouton.retour"));
+		bRetour = new Button(International.trad("bouton.retour"));
 		bRetour.setPrefSize(lBouton, hBouton);
 		bRetour.setMinSize(lBouton, hBouton);
 		bRetour.setFont(policeBouton);
@@ -611,24 +617,51 @@ public class CouleurPane extends StackPane implements ICouleurListener {
 			j6.setDisable(false);
 		}
 	}
-	
-	
+
 	public static String getCouleur(String c) {
 		switch (c) {
 		case "Bleu":
-			return IhmOutils.bleu+";-fx-background-radius: 10px;";
+			return IhmOutils.bleu + ";-fx-background-radius: 10px;";
 		case "Rouge":
-			return IhmOutils.rouge+";-fx-background-radius: 10px;";
+			return IhmOutils.rouge + ";-fx-background-radius: 10px;";
 		case "Vert":
-			return IhmOutils.vert+";-fx-background-radius: 10px;";
+			return IhmOutils.vert + ";-fx-background-radius: 10px;";
 		case "Noir":
-			return IhmOutils.noir+";-fx-background-radius: 10px;";
+			return IhmOutils.noir + ";-fx-background-radius: 10px;";
 		case "Jaune":
-			return IhmOutils.jaune+";-fx-background-radius: 10px;";
+			return IhmOutils.jaune + ";-fx-background-radius: 10px;";
 		case "Marron":
-			return IhmOutils.marron+";-fx-background-radius: 10px;";
+			return IhmOutils.marron + ";-fx-background-radius: 10px;";
 		default:
 			return "#1A1A1A";
 		}
+	}
+
+	@Override
+	public void traduire() {
+		titre1.setText(
+				International.trad("texte.titreCouleurPaneA") + "\n" + International.trad("texte.titreCouleurPaneB"));
+		infoVigile.setText(International.trad("texte.infoVigile"));
+		nom1.setText(International.trad("texte.j1"));
+		monter1.setText(International.trad("bouton.monter"));
+		descendre1.setText(International.trad("bouton.descendre"));
+		nom2.setText(International.trad("texte.j2"));
+		monter2.setText(International.trad("bouton.monter"));
+		descendre2.setText(International.trad("bouton.descendre"));
+		nom3.setText(International.trad("texte.j3"));
+		monter3.setText(International.trad("bouton.monter"));
+		descendre3.setText(International.trad("bouton.descendre"));
+		nom4.setText(International.trad("texte.j4"));
+		monter4.setText(International.trad("bouton.monter"));
+		descendre4.setText(International.trad("bouton.descendre"));
+		nom5.setText(International.trad("texte.j5"));
+		monter5.setText(International.trad("bouton.monter"));
+		descendre5.setText(International.trad("bouton.descendre"));
+		nom6.setText(International.trad("texte.j6"));
+		monter6.setText(International.trad("bouton.monter"));
+		descendre6.setText(International.trad("bouton.descendre"));
+		bJouer.setText(International.trad("bouton.jouer"));
+		bRetour.setText(International.trad("bouton.retour"));
+
 	}
 }
