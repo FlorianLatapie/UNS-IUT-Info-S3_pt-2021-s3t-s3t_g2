@@ -33,12 +33,12 @@ public class ConfigBotPane extends StackPane {
 	private int lBouton = 150;
 	private int hauteurElemtents = 60;
 	private int largeurTF = 200;
-	private int largeurTexte = 100;
+	private int largeurTexte = 200;
 	private int spacing = 30;
 
 	private String nomPolice = "Segoe UI";
 	private Font policeBouton = Font.font(nomPolice, FontWeight.BOLD, 27);
-	private Font policeNom = Font.font(nomPolice, 17);
+	private Font policeNom = Font.font(nomPolice, FontWeight.BOLD, 27);
 
 	private String styleBoutons = " -fx-background-color:#000000; -fx-background-radius: 15px; -fx-text-fill: #ffffff";
 	private String styleBoutonsSouris = "-fx-background-color:#ff0000;  -fx-text-fill:#000000; -fx-background-radius: 15px;";
@@ -84,10 +84,10 @@ public class ConfigBotPane extends StackPane {
 		bot1Texte.setAlignment(Pos.CENTER);
 		bot1Texte.setFont(policeNom);
 		bot1Texte.setMinHeight(hauteurElemtents);
-		bot1Texte.setBackground(fondBlanc);
+		bot1Texte.setStyle("-fx-background-color: #2B2B2B; -fx-background-radius: 10px;");
 		bot1Texte.setPadding(botPadding);
 		bot1Texte.setMinWidth(largeurTexte);
-
+		bot1Texte.setTextFill(Color.WHITE);
 		ComboBox<String> diffBot1 = new ComboBox<>();
 		diffBot1.getItems().addAll(DataControl.difficulteBot);
 		diffBot1.setValue(International.trad("texte.valueFaible"));
@@ -107,7 +107,8 @@ public class ConfigBotPane extends StackPane {
 		bot2Texte.setAlignment(Pos.CENTER);
 		bot2Texte.setFont(policeNom);
 		bot2Texte.setMinHeight(hauteurElemtents);
-		bot2Texte.setBackground(fondBlanc);
+		bot2Texte.setStyle("-fx-background-color: #2B2B2B; -fx-background-radius: 10px;");
+		bot2Texte.setTextFill(Color.WHITE);
 		bot2Texte.setPadding(botPadding);
 		bot2Texte.setMinWidth(largeurTexte);
 
@@ -130,10 +131,10 @@ public class ConfigBotPane extends StackPane {
 		bot3Texte.setAlignment(Pos.CENTER);
 		bot3Texte.setFont(policeNom);
 		bot3Texte.setMinHeight(hauteurElemtents);
-		bot3Texte.setBackground(fondBlanc);
+		bot3Texte.setStyle("-fx-background-color: #2B2B2B; -fx-background-radius: 10px;");
 		bot3Texte.setPadding(botPadding);
 		bot3Texte.setMinWidth(largeurTexte);
-
+		bot3Texte.setTextFill(Color.WHITE);
 		ComboBox<String> diffBot3 = new ComboBox<>();
 		diffBot3.getItems().addAll(DataControl.difficulteBot);
 		diffBot3.setValue(International.trad("texte.valueFaible"));
@@ -153,10 +154,10 @@ public class ConfigBotPane extends StackPane {
 		bot4Texte.setAlignment(Pos.CENTER);
 		bot4Texte.setFont(policeNom);
 		bot4Texte.setMinHeight(hauteurElemtents);
-		bot4Texte.setBackground(fondBlanc);
+		bot4Texte.setStyle("-fx-background-color: #2B2B2B; -fx-background-radius: 10px;");
 		bot4Texte.setPadding(botPadding);
 		bot4Texte.setMinWidth(largeurTexte);
-
+		bot4Texte.setTextFill(Color.WHITE);
 		ComboBox<String> diffBot4 = new ComboBox<>();
 		diffBot4.getItems().addAll(DataControl.difficulteBot);
 		diffBot4.setValue(International.trad("texte.valueFaible"));
@@ -176,10 +177,10 @@ public class ConfigBotPane extends StackPane {
 		bot5Texte.setAlignment(Pos.CENTER);
 		bot5Texte.setFont(policeNom);
 		bot5Texte.setMinHeight(hauteurElemtents);
-		bot5Texte.setBackground(fondBlanc);
+		bot5Texte.setStyle("-fx-background-color: #2B2B2B; -fx-background-radius: 10px;");
 		bot5Texte.setPadding(botPadding);
 		bot5Texte.setMinWidth(largeurTexte);
-
+		bot5Texte.setTextFill(Color.WHITE);
 		ComboBox<String> diffBot5 = new ComboBox<>();
 		diffBot5.getItems().addAll(DataControl.difficulteBot);
 		diffBot5.setValue(International.trad("texte.valueFaible"));
@@ -199,10 +200,10 @@ public class ConfigBotPane extends StackPane {
 		bot6Texte.setAlignment(Pos.CENTER);
 		bot6Texte.setFont(policeNom);
 		bot6Texte.setMinHeight(hauteurElemtents);
-		bot6Texte.setBackground(fondBlanc);
+		bot6Texte.setStyle("-fx-background-color: #2B2B2B; -fx-background-radius: 10px;");
 		bot6Texte.setPadding(botPadding);
 		bot6Texte.setMinWidth(largeurTexte);
-
+		bot6Texte.setTextFill(Color.WHITE);
 		ComboBox<String> diffBot6 = new ComboBox<>();
 		diffBot6.getItems().addAll(DataControl.difficulteBot);
 		diffBot6.setValue(International.trad("texte.valueFaible"));
