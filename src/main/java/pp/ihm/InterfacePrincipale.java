@@ -8,6 +8,7 @@ import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 import pp.ihm.event.Initializer;
+import pp.ihm.langues.International;
 
 public class InterfacePrincipale extends Application {
 	private StackPane root = new StackPane();
@@ -51,6 +52,19 @@ public class InterfacePrincipale extends Application {
 		Initializer.addListener(optionPane);
 
 		Initializer.updatePleineEcran();
+
+		International.ajouterPane(accessibilitePane);
+		International.ajouterPane(reglesPane);
+		International.ajouterPane(optionPane);
+		International.ajouterPane(pausePane);
+		International.ajouterPane(attenteJoueurPane);
+		International.ajouterPane(configPartiePane);
+		International.ajouterPane(finDePartiePane);
+		International.ajouterPane(configBotPane);
+		International.ajouterPane(plateauPane);
+		International.ajouterPane(couleurPane);
+		International.ajouterPane(accueilPane);
+
 		scene.getStylesheets().add(DataControl.CSS);
 		/* Ajouter les panes qui implements IRotationListener */
 		// Initializer.addListener(PANE);
