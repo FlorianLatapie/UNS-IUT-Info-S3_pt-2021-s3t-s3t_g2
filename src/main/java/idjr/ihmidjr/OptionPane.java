@@ -125,11 +125,11 @@ public class OptionPane extends StackPane implements IPleineEcranListener {
 			if (core.getSauvegarderOptions().isEstPleineEcran()) {
 				stage.setFullScreen(false);
 				core.getSauvegarderOptions().setEstPleineEcran(false);
-				bPleinEcran.setText("Mettre en pleine écran");
+				bPleinEcran.setText(International.trad("bouton.pEcran"));
 			} else {
 				stage.setFullScreen(true);
 				core.getSauvegarderOptions().setEstPleineEcran(true);
-				bPleinEcran.setText("Mettre en fenetré");
+				bPleinEcran.setText(International.trad("bouton.fenetre"));
 			}
 		});
 
@@ -167,8 +167,8 @@ public class OptionPane extends StackPane implements IPleineEcranListener {
 	@Override
 	public void updatePleineEcran() {
 		if (!core.getSauvegarderOptions().isEstPleineEcran())
-			bPleinEcran.setText("Mettre en pleine écran");
+			bPleinEcran.setText(International.trad("bouton.pEcran"));
 		else
-			bPleinEcran.setText("Mettre en fenetré");
+			bPleinEcran.setText(International.trad("bouton.fenetre"));
 	}
 }

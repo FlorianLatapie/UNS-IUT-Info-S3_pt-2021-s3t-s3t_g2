@@ -187,7 +187,7 @@ public class AccueilPane extends StackPane {
 		});
 		bQuitter.setOnAction(event -> {
 			boolean resultat = ConfirmationPane.afficher(International.trad("texte.confirmationTitre"),
-					International.trad("texte.confirmationL1"), International.trad("texte.confirmationL2"));
+					International.trad("texte.confirmationL1") +"\n"+ International.trad("texte.confirmationL2"));
 			if (resultat) {
 				if (core.getIdjr() != null)
 					core.getIdjr().stop();
