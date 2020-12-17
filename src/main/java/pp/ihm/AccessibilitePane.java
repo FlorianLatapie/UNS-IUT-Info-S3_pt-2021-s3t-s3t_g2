@@ -127,19 +127,6 @@ public class AccessibilitePane extends StackPane implements ITraduction {
 		vbBoutons.setSpacing(20);
 		vbBoutons.getChildren().add(hbDaltonisme);
 
-		// checkboxes
-		/*
-		 * CheckBox bHematophobie = new
-		 * CheckBox(International.trad("texte.hematophobie"));
-		 * bHematophobie.setStyle(styleTexte); bHematophobie.setPadding(new Insets(10));
-		 * bHematophobie.setFont(policeBouton);
-		 * bHematophobie.setAlignment(Pos.CENTER_LEFT);
-		 * 
-		 * CheckBox bAudio = new CheckBox(International.trad("texte.audioDesc"));
-		 * bAudio.setStyle(styleTexte); bAudio.setPadding(new Insets(10));
-		 * bAudio.setFont(policeBouton); bAudio.setAlignment(Pos.CENTER_LEFT);
-		 */
-
 		bRetour = new Button(International.trad("bouton.retour"));
 		bRetour.setFont(policeBoutonRetour);
 		bRetour.setAlignment(Pos.CENTER);
@@ -151,17 +138,12 @@ public class AccessibilitePane extends StackPane implements ITraduction {
 
 		vbRetour.getChildren().add(bRetour);
 
-		/*
-		 * vbCheckBoutons.setSpacing(20);
-		 * vbCheckBoutons.getChildren().addAll(bHematophobie, bAudio);
-		 */
-
 		// centre
 
 		VBox vbCentre = new VBox();
 		vbCentre.setSpacing(20);
 		vbCentre.setMargin(titre, new Insets(100, 0, 0, 0));
-		vbCentre.getChildren().addAll(vbTitre, vbBoutons/* , vbCheckBoutons */);
+		vbCentre.getChildren().addAll(vbTitre, vbBoutons);
 		bpCentral.setCenter(vbCentre);
 		bpCentral.setBottom(vbRetour);
 

@@ -73,11 +73,7 @@ public class ConfigPartiePane extends StackPane {
 		titre.setAlignment(Pos.CENTER);
 		titre.setBackground(new Background(new BackgroundFill(Color.RED, coin, null)));
 		titre.setPrefWidth(730);
-		titre.setMinWidth(730);
-
-		
-		
-		
+		titre.setMinWidth(730);	
 		
 		// texte
 		Label desc = new Label(International.trad("texte.descriptionConfigPartie"));
