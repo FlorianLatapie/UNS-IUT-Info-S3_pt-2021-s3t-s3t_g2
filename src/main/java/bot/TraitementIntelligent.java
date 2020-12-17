@@ -9,6 +9,7 @@ import java.util.Map;
 import java.util.Random;
 
 import bot.MCTS.MCTSBotMoyen;
+import bot.partie.Lieu;
 import bot.partie.Personnage;
 import reseau.type.CarteType;
 import reseau.type.Couleur;
@@ -203,12 +204,12 @@ public class TraitementIntelligent {
 		}
 		return CarteType.NUL;
 	}
-	
+
 	/**
 	 * Choix carte fouille intelligente
 	 *
 	 * @param Une liste de type de carte
-	 * @param Un bot pour lequel le traitement s'effectue
+	 * @param Un  bot pour lequel le traitement s'effectue
 	 * @return La liste des carte gardée/donnée/choisie
 	 */
 
@@ -305,7 +306,7 @@ public class TraitementIntelligent {
 			for (int destPos : dp.getValue())
 				if (destPos == dest)
 					listePion.add(dp.getKey());
-		int pionAdep=0;
+		int pionAdep = 0;
 		if (listePion.isEmpty()) {
 			dest = 4;
 			for (Map.Entry<Integer, List<Integer>> dp : listedp.entrySet())
@@ -317,7 +318,7 @@ public class TraitementIntelligent {
 			else
 				pionAdep = new ArrayList<Integer>(listedp.keySet()).get(0);
 		} else {
-			System.out.println("liste pion not mpty : listepion = "+ listePion);
+			System.out.println("liste pion not mpty : listepion = " + listePion);
 			pionAdep = listePion.get(new Random().nextInt(listePion.size()));
 			listePion.sort(null);
 			if (core.getPartie().getLieux().get(dest).estAttaquable())
@@ -341,7 +342,7 @@ public class TraitementIntelligent {
 			pion = core.getPionAPos().get(new Random().nextInt(core.getPionAPos().size()));
 		return pion;
 	}
-	
+
 	/**
 	 * Choix de la destination intelligente
 	 *
@@ -352,31 +353,28 @@ public class TraitementIntelligent {
 
 	protected static Integer choisirDestPlacementIntelligent(Bot core, List<?> destRestantT) {
 		List<Integer> destRestant = new ArrayList<>();
-		int nbZombie=100;
+		int nbZombie = 100;
 		for (Object o : destRestantT)
 			destRestant.add((Integer) o);
 		int dest = 0;
 		if (!destRestant.isEmpty())
-			for (int i =0; i<core.getPartie().getLieuxOuverts().size();i++) {
-				for (int j =0; j<core.getPartie().getLieuxOuverts().size();j++) {
-					if(destRestant.get(i)==core.getPartie().getLieux().get(j).getNum()) {
-						if(core.getPartie().getLieux().get(j).getNbZombies()<nbZombie) {
-							nbZombie = core.getPartie().getLieux().get(j).getNbZombies();
-							dest = core.getPartie().getLieux().get(j).getNum();
-						}
+			for (int i = 0; i < destRestant.size(); i++) {
+				for (Lieu l : core.getPartie().getLieux().values()) {
+					if ((destRestant.get(i) == l.getNum()) && (l.getNbZombies() < nbZombie)) {
+						nbZombie = l.getNbZombies();
+						dest = l.getNum();
 					}
 				}
 			}
-			
-			
+
 		return dest;
 	}
-	
+
 	/**
 	 * Vote intelligent
 	 *
 	 * @param Bot pour lequel le traitement s'effectue
-	 * @param Un type de vote
+	 * @param Un  type de vote
 	 * @return la couleur du joueur pour lequel on vote
 	 */
 
