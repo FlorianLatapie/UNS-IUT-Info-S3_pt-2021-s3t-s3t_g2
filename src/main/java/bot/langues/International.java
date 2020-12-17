@@ -12,7 +12,7 @@ import java.util.ResourceBundle;
 public abstract class International {
 	private static Locale langue;
 	private static ResourceBundle resourceBundle;
-	private static String CHEMIN_LANGUE = "langues.messages";
+	private static String CHEMIN_LANGUE = "langues_BOT.messages";
 
 	static {
 		langue = Locale.FRENCH;
