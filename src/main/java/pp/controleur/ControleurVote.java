@@ -35,8 +35,9 @@ public class ControleurVote {
 	}
 
 	public Joueur phaseVoteTour(Partie jeu, Lieu l, VoteType tv, VoteEtape ve, String partieId, int numeroTour) {
-		List<Couleur> joueursVotant = infoVote(jeu, l, tv, ve, partieId, numeroTour);
-		List<Integer> nbVoix = new ArrayList<>();
+		List<Object> lo = infoVote(jeu, l, tv, ve, partieId, numeroTour);
+		List<Couleur> joueursVotant = (List<Couleur>)lo.get(0);
+		List<Integer> nbVoix = (List<Integer>)lo.get(1);
 		List<Couleur> votes = new ArrayList<>();
 		List<Integer> voixRecu = initVoixRecu(ve, jeu, l);
 		vr.demanderCarte(jeu, l, partieId, numeroTour);
@@ -62,7 +63,8 @@ public class ControleurVote {
 		return jeu.getJoueurCouleur(couleurVote);
 	}
 
-	public List<Couleur> infoVote(Partie jeu, Lieu l, VoteType tv, VoteEtape ve, String partieId, int numeroTour) {
+	public List<Object> infoVote(Partie jeu, Lieu l, VoteType tv, VoteEtape ve, String partieId, int numeroTour) {
+		List<Object> lo = new ArrayList<>();
 		List<Couleur> joueursPresent = new ArrayList<>();
 		List<Integer> nbVoix = new ArrayList<>();
 		List<Couleur> joueursVotant = new ArrayList<>();
@@ -80,7 +82,9 @@ public class ControleurVote {
 				joueursVotant.add(j.getCouleur());
 			vr.debutVote(jeu, tv, VoteEtape.SEC, joueursPresent, joueursVotant, nbVoix, partieId, numeroTour);
 		}
-		return joueursVotant;
+		lo.add(joueursVotant);
+		lo.add(nbVoix);
+		return lo;
 	}
 
 	public List<Integer> initVoixRecu(VoteEtape ve, Partie jeu, Lieu l) {
