@@ -2,6 +2,7 @@ package pp.ihm;
 
 import pp.controleur.ControleurJeu;
 import pp.ihm.DataControl.ApplicationPane;
+import pp.ihm.event.Initializer;
 import pp.ihm.langues.International;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -19,6 +20,7 @@ import javafx.scene.text.FontWeight;
 import javafx.scene.text.TextAlignment;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 /**
  * The Class ConfigPartiePane.
@@ -212,6 +214,8 @@ public class ConfigPartiePane extends StackPane {
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
+
+			Initializer.updateJoueurs(new ArrayList<>(), core.getCj().getNbjtotal());
 			sc.setPaneOnTop(ApplicationPane.WAIT);
 		});
 
