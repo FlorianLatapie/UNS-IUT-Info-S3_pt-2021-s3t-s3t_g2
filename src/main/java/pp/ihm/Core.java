@@ -8,7 +8,6 @@ public class Core {
 	private ControleurJeu cj = null;
 	private int nbJoueur = 5;
 	private int nbBot = 4;
-	private String nomPartie = "partieParDéfaut";
 	private final SauvegarderOptions sauvegarderOptions;
 
 	public Core() {
@@ -32,14 +31,6 @@ public class Core {
 
 	public void setPauseDepuis(ApplicationPane pauseDepuis) {
 		this.pauseDepuis = pauseDepuis;
-	}
-
-	public String getNomPartie() {
-		return nomPartie;
-	}
-
-	public void setNomPartie(String nomPartie) {
-		this.nomPartie = nomPartie;
 	}
 
 	public int getNbJoueur() {
