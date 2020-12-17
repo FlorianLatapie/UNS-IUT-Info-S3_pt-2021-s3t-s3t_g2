@@ -34,6 +34,8 @@ Projet Tutoré 2020 en S3T Groupe 2
 
 [logo]: ./Branches.png "Branches"
 
+Ce github est paramétré pour merge automatiquement si la compilation et les testes passent.
+
 La branche **PP** (*Programme Principal*) contient : 
 L’interface graphique principale du jeu qui permet de configurer le programme, créer une partie…
 Le moteur du jeu qui gère le déroulement d’une partie.
