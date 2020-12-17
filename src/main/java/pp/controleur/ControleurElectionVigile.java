@@ -3,7 +3,6 @@ package pp.controleur;
 import pp.Joueur;
 import pp.Partie;
 import pp.ihm.event.Initializer;
-import pp.reseau.ToolsReseauPP;
 import pp.reseau.electionChefVigileReseau;
 import reseau.socket.ControleurReseau;
 import reseau.type.Couleur;
