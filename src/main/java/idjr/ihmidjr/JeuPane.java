@@ -1752,6 +1752,7 @@ public class JeuPane extends StackPane implements IJeuListener {
 								bPasserCarte.setFont(Font.font("Segoe UI", FontWeight.BOLD, 25));
 								bPasserCarte.setText(International.trad("texte.valider"));
 							} else {
+								bPasserCarte.setFont(policeBoutonC);
 								bPasserCarte.setText(International.trad("texte.passer"));
 							}
 						});
