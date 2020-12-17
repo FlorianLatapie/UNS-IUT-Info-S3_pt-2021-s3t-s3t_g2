@@ -1743,7 +1743,11 @@ public class JeuPane extends StackPane implements IJeuListener {
 						buttons[i].setDisable(false);
 						CarteType type = cartes.get(i);
 						buttons[i].setOnAction(EventHandler -> {
-							core.getIdjr().choisirUtiliserCarte(type);
+							if (core.getIdjr().getUtiliserCarteChosi() == CarteType.NUL) {
+								core.getIdjr().choisirUtiliserCarte(type);
+							} else {
+								core.getIdjr().choisirUtiliserCarte(type);
+							}
 							if (core.getIdjr().getUtiliserCarteChosi() != CarteType.NUL) {
 								bPasserCarte.setText(International.trad("texte.valider"));
 							} else {
@@ -1778,7 +1782,11 @@ public class JeuPane extends StackPane implements IJeuListener {
 							buttons[i].setDisable(false);
 							CarteType type = cartes.get(i);
 							buttons[i].setOnAction(EventHandler -> {
-								core.getIdjr().choisirUtiliserCarte(type);
+								if (core.getIdjr().getUtiliserCarteChosi() == CarteType.NUL) {
+									core.getIdjr().choisirUtiliserCarte(type);
+								} else {
+									core.getIdjr().choisirUtiliserCarte(type);
+								}
 								if (core.getIdjr().getUtiliserCarteChosi() != CarteType.NUL) {
 									bPasserCarte.setText(International.trad("texte.valider"));
 								} else {
