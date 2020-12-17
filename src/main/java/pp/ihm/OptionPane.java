@@ -5,6 +5,7 @@ import pp.ihm.DataControl.ApplicationPane;
 import pp.ihm.event.IPleineEcranListener;
 import pp.ihm.langues.ITraduction;
 import pp.ihm.langues.International;
+import pp.ihm.langues.Langues;
 
 import java.util.Locale;
 
@@ -159,7 +160,7 @@ public class OptionPane extends StackPane implements IPleineEcranListener, ITrad
 		bFrancais.setPrefSize(245, hauteurElement);
 		bFrancais.setStyle(styleBoutons);
 		bFrancais.setOnAction(EventHandler -> {
-			International.changerLangue(Locale.FRENCH);
+			International.changerLangue(Langues.FR);
 		});
 
 		bFrancais.setOnMouseEntered(event -> bFrancais.setStyle(styleBoutonsSouris));
@@ -173,7 +174,7 @@ public class OptionPane extends StackPane implements IPleineEcranListener, ITrad
 		bEnglish.setOnMouseEntered(event -> bEnglish.setStyle(styleBoutonsSouris));
 		bEnglish.setOnMouseExited(event -> bEnglish.setStyle(styleBoutons));
 		bEnglish.setOnAction(EventHandler -> {
-			International.changerLangue(Locale.ENGLISH);
+			International.changerLangue(Langues.EN);
 		});
 
 		bPleinEcran = new Button(International.trad("bouton.pEcran"));

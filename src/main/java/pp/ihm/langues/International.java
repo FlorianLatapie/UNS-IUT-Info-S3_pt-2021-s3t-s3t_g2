@@ -18,7 +18,7 @@ public abstract class International {
 	private static List<ITraduction> traductionListener;
 
 	static {
-		langue = Locale.ENGLISH;
+		langue = Locale.FRENCH;
 		resourceBundle = ResourceBundle.getBundle(CHEMIN_LANGUE, langue);
 		traductionListener = new ArrayList<>();
 	}
@@ -28,9 +28,19 @@ public abstract class International {
 	 *
 	 * @param l la langue cible
 	 */
-	public static void changerLangue(Locale l) {
-		langue = l;
+	public static void changerLangue(Langues l) {
+		langue = convertirLangue(l);
+		resourceBundle = ResourceBundle.getBundle(CHEMIN_LANGUE, langue);
 		updateTraduction();
+	}
+
+	private static Locale convertirLangue(Langues l) {
+		switch (l) {
+		case EN:
+			return Locale.ENGLISH;
+		default:
+			return Locale.FRENCH;
+		}
 	}
 
 	/**
