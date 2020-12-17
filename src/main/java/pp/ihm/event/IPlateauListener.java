@@ -15,6 +15,8 @@ public interface IPlateauListener {
     void nbPersoJoueur(int joueur, int persoNb);
 
     void nbCarteJoueur(int joueur, int carteNb);
+    
+    void nbPlaceLieu(int lieu, int val);
 
     void nomChefVigile(String joueur);
 
