@@ -30,8 +30,6 @@ public interface IJeuListener {
 			boolean donner, boolean defausser, boolean utiliser);
 
 	void nomJoueurs(List<String> listeNomJoueur);
-
-	void choisirUtiliserCarte();
 	
 	void choisirUtiliserCarte(CarteType carteType);
 	

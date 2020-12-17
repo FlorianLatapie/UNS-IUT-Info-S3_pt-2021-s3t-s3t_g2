@@ -1301,8 +1301,8 @@ public class JeuPane extends StackPane implements IJeuListener {
 		Button[] buttons = { bDeCarte1, bDeCarte2, bDeCarte3, bDeCarte4, bDeCarte5, bDeCarte6, bDeCarte7, bDeCarte8,
 				bPasserCarte };
 		for (int i = 0; i < buttons.length - 1; i++) {
-				buttons[i].setDisable(true);
-				buttons[i].setStyle(null);
+			buttons[i].setDisable(true);
+			buttons[i].setStyle(null);
 		}
 		passerCarte.setVisible(false);
 		passerCarte.setDisable(true);
@@ -1702,28 +1702,6 @@ public class JeuPane extends StackPane implements IJeuListener {
 	}
 
 	@Override
-	public void choisirUtiliserCarte() {
-		Platform.runLater(() -> {
-			Button[] buttons = { bDeCarte1, bDeCarte2, bDeCarte3, bDeCarte4, bDeCarte5, bDeCarte6, bDeCarte7,
-					bDeCarte8, };
-			for (int i = 0; i < buttons.length; i++) {
-				if (i < core.getIdjr().getListeCarte().size()) {
-					buttons[i].setDisable(false);
-				}
-			}
-
-			passerCarte.setVisible(true);
-			passerCarte.setDisable(false);
-			bPasserCarte.setDisable(false);
-			bPasserCarte.setOnAction(EventHandler -> {
-				core.getIdjr().setContinue(false);
-				core.getIdjr().utiliserCarteChoisi(true);
-				resetUtiliserCarte();
-			});
-		});
-	}
-
-	@Override
 	public void choisirUtiliserCarte(CarteType carteType) {
 		Platform.runLater(() -> {
 			Button[] buttons = { bDeCarte1, bDeCarte2, bDeCarte3, bDeCarte4, bDeCarte5, bDeCarte6, bDeCarte7,
@@ -1735,7 +1713,6 @@ public class JeuPane extends StackPane implements IJeuListener {
 						CarteType type = cartes.get(i);
 						buttons[i].setOnAction(EventHandler -> {
 							core.getIdjr().choisirUtiliserCarte(type);
-							core.getIdjr().utiliserCarteChoisi(true);
 							resetUtiliserCarte();
 						});
 					}
@@ -1766,7 +1743,6 @@ public class JeuPane extends StackPane implements IJeuListener {
 							CarteType type = cartes.get(i);
 							buttons[i].setOnAction(EventHandler -> {
 								core.getIdjr().choisirUtiliserCarte(type);
-								core.getIdjr().utiliserCarteChoisi(true);
 								resetUtiliserCarte();
 							});
 						}
