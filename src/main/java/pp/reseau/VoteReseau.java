@@ -32,9 +32,10 @@ public class VoteReseau {
 		return (int) ControleurReseau.getValueTcp("PVC", m, 1);
 	}
 
-	public void informeCarteJouee(Lieu l, Joueur j, int nbMateriel, String partieId, int numeroTour) {
-		j.getConnection().envoyer(ControleurReseau.construirePaquetTcp("PVIC", j.getCouleur(), nbMateriel,
-				j.getNbVoix(l, 1, nbMateriel), partieId, numeroTour));
+	public void informeCarteJouee(Partie jeu, int numVote, Lieu l, Joueur j, int nbMenace, String partieId, int numeroTour) {
+		for (Joueur jou : jeu.getJoueurs().values())
+			jou.getConnection().envoyer(ControleurReseau.construirePaquetTcp("PVIC", j.getCouleur(), nbMenace,
+					j.getNbVoix(l, numVote, nbMenace), partieId, numeroTour));
 	}
 
 	public void demanderVote(Partie jeu, Lieu l, String partieId, int numeroTour) {
@@ -63,3 +64,4 @@ public class VoteReseau {
 		}
 	}
 }
+
