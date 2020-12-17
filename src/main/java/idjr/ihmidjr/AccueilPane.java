@@ -23,6 +23,8 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.TextAlignment;
+import reseau.type.Statut;
+import reseau.type.TypePartie;
 
 /**
  * The Class AccueilPane.
@@ -133,7 +135,7 @@ public class AccueilPane extends StackPane {
 			if (nomjoueur.getText().length() < 20 && IhmTools.nomEstValide(nomjoueur.getText())) {
 				core.getIdjr().setNom(nomjoueur.getText());
 				Initializer.nomJoueur(core.getIdjr().getNom());
-				core.getIdjr().listOfServers();
+				core.getIdjr().listOfServers(6, TypePartie.MIXTE, Statut.ATTENTE);
 				core.getSauvegarderOptions().setNom(nomjoueur.getText());
 				sc.setPaneOnTop(ApplicationPane.CONFIG);
 			}
@@ -187,7 +189,7 @@ public class AccueilPane extends StackPane {
 		});
 		bQuitter.setOnAction(event -> {
 			boolean resultat = ConfirmationPane.afficher(International.trad("texte.confirmationTitre"),
-					International.trad("texte.confirmationL1") +"\n"+ International.trad("texte.confirmationL2"));
+					International.trad("texte.confirmationL1") + "\n" + International.trad("texte.confirmationL2"));
 			if (resultat) {
 				if (core.getIdjr() != null)
 					core.getIdjr().stop();

@@ -9,6 +9,7 @@ import reseau.type.CarteType;
 import reseau.type.ConnexionType;
 import reseau.type.Couleur;
 import reseau.type.PionCouleur;
+import reseau.type.Statut;
 import reseau.type.TypeJoueur;
 import reseau.type.TypePartie;
 import reseau.type.VoteType;
@@ -80,12 +81,13 @@ public class Idjr {
 	private void initReseau() throws IOException {
 		TraitementPaquetTcp traitementPaquetTcp = new TraitementPaquetTcp(this);
 		TraitementPaquetUdp traitementPaquetUdp = new TraitementPaquetUdp(this);
-		ControleurReseau.initConnexion(traitementPaquetTcp, traitementPaquetUdp,connexionType, ReseauOutils.getLocalIp());
+		ControleurReseau.initConnexion(traitementPaquetTcp, traitementPaquetUdp, connexionType,
+				ReseauOutils.getLocalIp());
 	}
 
-	public void estPartieConnecte(String nom) {
+	public void estPartieConnecte(String nom, int maxJr, TypePartie typePartie, Statut statut) {
 		Thread thread = new Thread(() -> {
-			listOfServers();
+			listOfServers(maxJr, typePartie, statut);
 			for (PartieInfo partieInfo : listOfServer) {
 				if (partieInfo.getIdPartie().equals(nom)) {
 					System.out.println("OK");
@@ -99,18 +101,24 @@ public class Idjr {
 		thread.start();
 	}
 
-	public void listOfServers() {
+	public void listOfServers(int maxJr, TypePartie typePartie, Statut statut) {
 		listOfServer.clear();
 
-		// TODO QUE MIXTE
-		// QUE 6
-		String message = ControleurReseau.construirePaquetUdp("RP", TypePartie.MIXTE, 5);
+		String message = ControleurReseau.construirePaquetUdp("RP", typePartie, maxJr);
 		ControleurReseau.envoyerUdp(message);
 
 		try {
-			Thread.sleep(250);
+			Thread.sleep(350);
 		} catch (InterruptedException e) {
 			e.printStackTrace();
+		}
+		
+		for (PartieInfo partieInfo : listOfServer) {
+			if (partieInfo.getTypeP() != typePartie)
+				listOfServer.remove(partieInfo);
+			
+			if (partieInfo.getNbJoueurMax() > maxJr)
+				listOfServer.remove(partieInfo);
 		}
 
 		Initializer.partie(listOfServer);
@@ -119,7 +127,7 @@ public class Idjr {
 	public void rejoindrePartie(String nomp) {
 		setIpPp(current.getIp());
 		setPortPp(current.getPort());
-			Initializer.nomPartie(current.getIdPartie());
+		Initializer.nomPartie(current.getIdPartie());
 		String messageTcp = ControleurReseau.construirePaquetTcp("DCP", nom, typeJoueur, current.getIdPartie());
 		ThreadOutils.asyncTask("rejoindrePartie", () -> {
 			ControleurReseau.envoyerTcp(messageTcp);
@@ -164,7 +172,7 @@ public class Idjr {
 	public void utiliserCarteChoisi(boolean etat) {
 		estUtiliserCarteChoisi = etat;
 	}
-	
+
 	private boolean estUtiliserCartesChoisi = false;
 
 	public void choisirUtiliserCartes(List<CarteType> cartesUtiliser) {

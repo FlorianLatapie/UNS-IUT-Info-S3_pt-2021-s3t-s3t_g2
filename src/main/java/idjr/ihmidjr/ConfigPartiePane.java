@@ -8,8 +8,6 @@ import idjr.ihmidjr.DataControl.ApplicationPane;
 import idjr.ihmidjr.event.IConfigListener;
 import idjr.ihmidjr.langues.International;
 import javafx.application.Platform;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
@@ -27,6 +25,8 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.TextAlignment;
+import reseau.type.Statut;
+import reseau.type.TypePartie;
 
 /**
  * The Class ConfigPartiePane.
@@ -63,6 +63,10 @@ public class ConfigPartiePane extends StackPane implements IConfigListener {
 	private Insets botPadding = new Insets(10);
 	ObservableList<Label> liste = FXCollections.observableArrayList();
 
+	ComboBox<String> cbtypePartie;
+	ComboBox<Integer> cbnbJr;
+	ComboBox<String> cbStatutPartie;
+
 	public ConfigPartiePane(ScreenControl sc, Core c) {
 		core = c;
 		sControl = sc;
@@ -90,36 +94,37 @@ public class ConfigPartiePane extends StackPane implements IConfigListener {
 		desc.setPadding(botPadding);
 
 		HBox hComboTri = new HBox();
-		ComboBox<String> cbtypePartie = new ComboBox<>();
-		cbtypePartie.getItems().addAll(DataControl.typePartie);
-		cbtypePartie.setValue("cbtypePartie");//TODO
+		cbtypePartie = new ComboBox<>();
+		cbtypePartie.getItems().addAll(TypePartie.BOTU.name(), TypePartie.JRU.name(), TypePartie.MIXTE.name());
+		cbtypePartie.setValue(TypePartie.MIXTE.name());// TODO
 		cbtypePartie.setStyle("-fx-text-fill: white;");
-		//cbtypePartie.setPadding(new Insets(0, 0, 0, 40));
+		// cbtypePartie.setPadding(new Insets(0, 0, 0, 40));
 		cbtypePartie.setPrefSize(200, 63);
 		cbtypePartie.setMinHeight(63);
-		ComboBox<Integer> cbnbJr = new ComboBox<>();
-		cbnbJr.getItems().addAll(DataControl.nombreJoueur);
-		cbnbJr.setValue(6);//TODO
+		cbnbJr = new ComboBox<>();
+		cbnbJr.getItems().addAll(3, 4, 5, 6);
+		cbnbJr.setValue(6);// TODO
 		cbnbJr.setStyle("-fx-text-fill: white;");
 		cbnbJr.setPadding(new Insets(0, 0, 0, 20));
 		cbnbJr.setPrefSize(100, 63);
 		cbnbJr.setMinHeight(63);
-		ComboBox<String> cbStatutPartie = new ComboBox<>();
-		cbStatutPartie.getItems().addAll(DataControl.statutPartie);
-		cbStatutPartie.setValue("StatutPartie");//TODO
+		cbStatutPartie = new ComboBox<>();
+		cbStatutPartie.getItems().addAll(Statut.ATTENTE.name(), Statut.COMPLETE.name(), Statut.TERMINEE.name());
+		cbStatutPartie.setValue(Statut.ATTENTE.name());// TODO
 		cbStatutPartie.setStyle("-fx-text-fill: white;");
-		//cbStatutPartie.setPadding(new Insets(0, 0, 0, 40));
+		// cbStatutPartie.setPadding(new Insets(0, 0, 0, 40));
 		cbStatutPartie.setPrefSize(200, 63);
 		cbStatutPartie.setMinHeight(63);
-		
-		hComboTri.getChildren().addAll(cbtypePartie,cbnbJr,cbStatutPartie);
+
+		hComboTri.getChildren().addAll(cbtypePartie, cbnbJr, cbStatutPartie);
 		hComboTri.setAlignment(Pos.CENTER);
 		hComboTri.setSpacing(20);
-		
+
 		TextField nomP = new TextField();
 		nomP.setText(International.trad("texte.Partie"));
 		nomP.setFont(policeBouton);
-		nomP.setStyle("-fx-background-color: #1A1A1A; -fx-border-color: white; -fx-border-width: 1; -fx-text-fill: white;");
+		nomP.setStyle(
+				"-fx-background-color: #1A1A1A; -fx-border-color: white; -fx-border-width: 1; -fx-text-fill: white;");
 		nomP.setPrefSize(400, hauteurElemtents);
 		nomP.setMinSize(400, hauteurElemtents);
 		nomP.setMaxSize(400, hauteurElemtents);
@@ -161,17 +166,19 @@ public class ConfigPartiePane extends StackPane implements IConfigListener {
 		});
 
 		bRefresh.setOnAction(EventHandler -> {
-			core.getIdjr().listOfServers();
+			core.getIdjr().listOfServers(cbnbJr.getValue(), TypePartie.valueOf(cbtypePartie.getValue()),
+					Statut.valueOf(cbStatutPartie.getValue()));
 		});
-		
-		Button bPbConnexion = new Button(International.trad("texte.pbConnexionA")+"\n"+International.trad("texte.pbConnexionB")); 
+
+		Button bPbConnexion = new Button(
+				International.trad("texte.pbConnexionA") + "\n" + International.trad("texte.pbConnexionB"));
 		bPbConnexion.setTextAlignment(TextAlignment.CENTER);
-		bPbConnexion.setPrefSize(120 , 50);
+		bPbConnexion.setPrefSize(120, 50);
 		bPbConnexion.setMinSize(120, 50);
 		bPbConnexion.setFont(Font.font("Segoe UI", FontWeight.BOLD, 15));
 		bPbConnexion.setStyle(styleBoutons);
 		bPbConnexion.setOnMouseEntered(event -> {
-		bPbConnexion.setStyle(styleBoutonsSouris);
+			bPbConnexion.setStyle(styleBoutonsSouris);
 		});
 		bPbConnexion.setOnMouseExited(event -> {
 			bPbConnexion.setStyle(styleBoutons);
@@ -207,7 +214,8 @@ public class ConfigPartiePane extends StackPane implements IConfigListener {
 			PartieInfo partieInfo = partieActuelle.get(index);
 			if (partieInfo == null)
 				return;
-			core.getIdjr().estPartieConnecte(partieInfo.getIdPartie());
+			core.getIdjr().estPartieConnecte(partieInfo.getIdPartie(), cbnbJr.getValue(),
+					TypePartie.valueOf(cbtypePartie.getValue()), Statut.valueOf(cbStatutPartie.getValue()));
 		});
 		nomP.textProperty().addListener((obs, oldText, newText) -> {
 			bJouer.setDisable(nomP.getText().isEmpty());
