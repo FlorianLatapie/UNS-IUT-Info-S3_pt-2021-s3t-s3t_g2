@@ -782,8 +782,7 @@ public class PlateauPane extends StackPane implements IPlateauListener {
 		lChefVigile.setBackground(fondBlanc);
 		lChefVigile.setFont(fontInfo);
 		lChefVigile.setPadding(margeLieu);
-		AnchorPane.setTopAnchor(lChefVigile, 750.0);
-		AnchorPane.setLeftAnchor(lChefVigile, 375.0);
+		lChefVigile.setTranslateY(210);
 
 		lChefVigile2 = new Label();
 		lChefVigile2.setText("XXXXXXX" + " est le chef des vigiles");
@@ -791,8 +790,7 @@ public class PlateauPane extends StackPane implements IPlateauListener {
 		lChefVigile2.setFont(fontInfo);
 		lChefVigile2.setPadding(margeLieu);
 		lChefVigile2.setRotate(180);
-		AnchorPane.setTopAnchor(lChefVigile2, 350.0);
-		AnchorPane.setRightAnchor(lChefVigile2, 425.0);
+		lChefVigile2.setTranslateY(-180);
 
 		lChefVigile3 = new Label();
 		lChefVigile3.setText("XXXXXXX" + " est le chef des vigiles"); 
@@ -800,8 +798,7 @@ public class PlateauPane extends StackPane implements IPlateauListener {
 		lChefVigile3.setFont(fontInfo);
 		lChefVigile3.setPadding(margeLieu);
 		lChefVigile3.setRotate(90);
-		AnchorPane.setTopAnchor(lChefVigile3, 550.0);
-		AnchorPane.setLeftAnchor(lChefVigile3, 180.0);
+		lChefVigile3.setTranslateX(-200);
 
 		lChefVigile4 = new Label();
 		lChefVigile4.setText("XXXXXXX" + " est le chef des vigiles");
@@ -809,12 +806,11 @@ public class PlateauPane extends StackPane implements IPlateauListener {
 		lChefVigile4.setFont(fontInfo);
 		lChefVigile4.setPadding(margeLieu);
 		lChefVigile4.setRotate(-90);
-		AnchorPane.setTopAnchor(lChefVigile4, 550.0);
-		AnchorPane.setLeftAnchor(lChefVigile4, 575.0);
+		lChefVigile4.setTranslateX(160);
 
 		////
 
-		aPlateau.getChildren().addAll(b1, b2, b3, b4, b5, b6, lChefVigile, lChefVigile2, lChefVigile3, lChefVigile4);
+		aPlateau.getChildren().addAll(b1, b2, b3, b4, b5, b6);
 
 		notifInfo = new AnchorPane();
 		notifInfo.setMinSize(1920, 1080);
@@ -1029,21 +1025,6 @@ public class PlateauPane extends StackPane implements IPlateauListener {
 		imgFond.setScaleX(0.4362);
 		imgFond.setScaleY(0.4362);
 
-		/*
-		 * afficheJoueursLieu1.setTextFill(Color.WHITE);
-		 * afficheJoueursLieu2.setTextFill(Color.WHITE);
-		 * afficheJoueursLieu3.setTextFill(Color.WHITE);
-		 * afficheJoueursLieu4.setTextFill(Color.WHITE);
-		 * afficheJoueursLieu5.setTextFill(Color.WHITE);
-		 * afficheJoueursLieu6.setTextFill(Color.WHITE);
-		 * afficheJoueursLieu1.setFont(fontPerso);
-		 * afficheJoueursLieu2.setFont(fontPerso);
-		 * afficheJoueursLieu3.setFont(fontPerso);
-		 * afficheJoueursLieu4.setFont(fontPerso);
-		 * afficheJoueursLieu5.setFont(fontPerso);
-		 * afficheJoueursLieu6.setFont(fontPerso);
-		 */
-
 		imgCarteFerme1 = new ImageView(DataControl.FERME1);
 		imgCarteFerme1.setRotate(128);
 		imgCarteFerme1.setTranslateX(250);
@@ -1084,7 +1065,7 @@ public class PlateauPane extends StackPane implements IPlateauListener {
 		j5.setVisible(false);
 		j6.setVisible(false);
 
-		this.getChildren().addAll(imgFond, borderJoueurs, aPlateau, imgCarteFerme1, imgCarteFerme2, imgCarteFerme3,
+		this.getChildren().addAll(imgFond, borderJoueurs, aPlateau, lChefVigile, lChefVigile2, lChefVigile3, lChefVigile4, imgCarteFerme1, imgCarteFerme2, imgCarteFerme3,
 				imgCarteFerme5, imgCarteFerme6, notifInfo);
 		this.setMinSize(1920, 1080);
 		this.setPrefSize(1920, 1080);
