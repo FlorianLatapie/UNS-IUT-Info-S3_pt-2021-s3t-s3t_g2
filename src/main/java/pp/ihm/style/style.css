@@ -1,5 +1,5 @@
 .combo-box{ 
--fx-background-color:#2B2B2B; 
+-fx-background-color:#1B1B1B; 
 -fx-text-fill: white;
 -fx-border-color: black; 
 -fx-border-width: 3;
@@ -10,7 +10,7 @@
 
 .combo-box .list-cell{ 
 -fx-text-fill: white;
--fx-control-inner-background: #2B2B2B;
+-fx-control-inner-background: #1B1B1B;
 -fx-padding: 0 0 0 8;
 } 
 
