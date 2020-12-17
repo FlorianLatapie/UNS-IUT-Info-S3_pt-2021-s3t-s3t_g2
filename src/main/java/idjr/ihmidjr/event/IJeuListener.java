@@ -5,7 +5,7 @@ import java.util.List;
 import reseau.type.CarteType;
 import reseau.type.Couleur;
 
-public interface JeuListener {
+public interface IJeuListener {
 	void choisirPion(List<Integer> list);
 
 	void choisirLieu(List<Integer> list);

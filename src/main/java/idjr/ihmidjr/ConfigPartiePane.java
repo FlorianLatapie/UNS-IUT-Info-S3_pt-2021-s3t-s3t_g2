@@ -5,7 +5,7 @@ import java.util.List;
 
 import idjr.PartieInfo;
 import idjr.ihmidjr.DataControl.ApplicationPane;
-import idjr.ihmidjr.event.ConfigListener;
+import idjr.ihmidjr.event.IConfigListener;
 import idjr.ihmidjr.langues.International;
 import javafx.application.Platform;
 import javafx.beans.value.ChangeListener;
@@ -34,7 +34,7 @@ import javafx.scene.text.TextAlignment;
  * @version 0.1
  * @since 26/10/2020
  */
-public class ConfigPartiePane extends StackPane implements ConfigListener {
+public class ConfigPartiePane extends StackPane implements IConfigListener {
 	// private ControleurJeu cj = new ControleurJeu(); // mettre ne paramètres les
 	// joueurs
 

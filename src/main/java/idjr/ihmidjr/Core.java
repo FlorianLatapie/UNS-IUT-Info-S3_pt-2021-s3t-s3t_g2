@@ -9,9 +9,10 @@ public class Core {
 	private int nbBot = 4;
 	private String nomPartie = "partieParDéfaut";
 	private Idjr idjr;
-
-	public void eventInit() {
-		
+	private SauvegarderOptions sauvegarderOptions;
+	
+	public Core() {
+		sauvegarderOptions = new SauvegarderOptions();
 	}
 
 	private ApplicationPane pauseDepuis = ApplicationPane.ACCUEIL;
@@ -67,5 +68,9 @@ public class Core {
 
 	public Idjr getIdjr() {
 		return idjr;
+	}
+
+	public SauvegarderOptions getSauvegarderOptions() {
+		return sauvegarderOptions;
 	}
 }

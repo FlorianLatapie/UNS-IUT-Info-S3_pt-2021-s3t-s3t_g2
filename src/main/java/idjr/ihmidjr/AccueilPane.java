@@ -95,6 +95,7 @@ public class AccueilPane extends StackPane {
 		infoNomJoueur.setFont(policeNom);
 		nomjoueur = new TextField();
 		nomjoueur.setText("JoueurSansNom" + (int) (100 * Math.random()));
+		nomjoueur.setText(core.getSauvegarderOptions().getNom());
 		nomjoueur.setStyle(
 				"-fx-background-color: #1A1A1A; -fx-text-fill: white; -fx-border-color: white;  -fx-border-width: 1;");
 		nomjoueur.setFont(policeNom);
@@ -125,7 +126,7 @@ public class AccueilPane extends StackPane {
 			bJouer.setStyle(styleBoutons);
 		});
 		nomjoueur.textProperty().addListener((obs, oldText, newText) -> {
-			bJouer.setDisable(!IhmTools.nomEstValide(nomjoueur.getText()));
+			bJouer.setDisable(!(nomjoueur.getText().length() < 32 && IhmTools.nomEstValide(nomjoueur.getText())));
 		});
 		bJouer.setOnAction(EventHandler -> {
 			// TODO CARACTERE NON AUTORISE
@@ -133,9 +134,9 @@ public class AccueilPane extends StackPane {
 				core.getIdjr().setNom(nomjoueur.getText());
 				Initializer.nomJoueur(core.getIdjr().getNom());
 				core.getIdjr().listOfServers();
+				core.getSauvegarderOptions().setNom(nomjoueur.getText());
 				sc.setPaneOnTop(ApplicationPane.CONFIG);
-			} else
-				nomjoueur.setText(International.trad("texte.invalide"));
+			}
 		});
 
 		Button bOptions = new Button(International.trad("bouton.options"));

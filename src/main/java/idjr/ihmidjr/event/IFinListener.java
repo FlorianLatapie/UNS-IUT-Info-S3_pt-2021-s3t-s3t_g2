@@ -1,5 +1,5 @@
 package idjr.ihmidjr.event;
 
-public interface FinListener {
+public interface IFinListener {
 	void gagnant(String nom);
 }

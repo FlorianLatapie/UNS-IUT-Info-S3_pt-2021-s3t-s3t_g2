@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
 import idjr.ihmidjr.DataControl.ApplicationPane;
-import idjr.ihmidjr.event.JeuListener;
+import idjr.ihmidjr.event.IJeuListener;
 import idjr.ihmidjr.langues.International;
 import javafx.application.Platform;
 import javafx.geometry.Insets;
@@ -33,7 +33,7 @@ import javafx.scene.text.TextAlignment;
 import reseau.type.CarteType;
 import reseau.type.Couleur;
 
-public class JeuPane extends StackPane implements JeuListener {
+public class JeuPane extends StackPane implements IJeuListener {
 
 	private ScreenControl sControl = null;
 	private Core core = null;

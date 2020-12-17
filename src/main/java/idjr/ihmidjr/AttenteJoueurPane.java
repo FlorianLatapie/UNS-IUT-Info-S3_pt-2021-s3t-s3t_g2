@@ -2,7 +2,7 @@
 package idjr.ihmidjr;
 
 import idjr.ihmidjr.DataControl.ApplicationPane;
-import idjr.ihmidjr.event.AttenteListener;
+import idjr.ihmidjr.event.IAttenteListener;
 import idjr.ihmidjr.langues.International;
 import javafx.application.Platform;
 //TODO import ihm.eventListener.AttenteListener;
@@ -26,7 +26,7 @@ import javafx.scene.text.TextAlignment;
  * @version 0.1
  * @since 26/10/2020
  */
-public class AttenteJoueurPane extends StackPane implements AttenteListener {
+public class AttenteJoueurPane extends StackPane implements IAttenteListener {
 	// private ControleurJeu cj = new ControleurJeu(); // mettre ne paramètres les
 	// joueurs
 

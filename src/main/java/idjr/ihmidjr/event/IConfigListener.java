@@ -4,7 +4,7 @@ import java.util.List;
 
 import idjr.PartieInfo;
 
-public interface ConfigListener {
+public interface IConfigListener {
     void partieValide(String id);
 
 	void partie(List<PartieInfo> partieInfo);

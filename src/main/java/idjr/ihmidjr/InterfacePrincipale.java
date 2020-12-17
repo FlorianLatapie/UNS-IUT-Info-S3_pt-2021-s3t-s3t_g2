@@ -38,23 +38,32 @@ public class InterfacePrincipale extends Application {
 		primaryStage.setHeight(hauteur - 100);
 		primaryStage.setMinWidth(1800);
 		primaryStage.setMinHeight(960);
+		
+		primaryStage.setFullScreen(core.getSauvegarderOptions().isEstPleineEcran());
 
 		ConfigPartiePane configPartiePane = new ConfigPartiePane(sControl, core);
 		FinDePartiePane finDePartiePane = new FinDePartiePane(sControl, core);
 		AttenteJoueurPane attenteJoueurPane = new AttenteJoueurPane(sControl, core);
 		JeuPane jeuPane = new JeuPane(sControl, core);
+		OptionPane optionPane = new OptionPane(sControl, core);
 
 		root.getChildren().add(configPartiePane);
 		root.getChildren().add(finDePartiePane);
 		root.getChildren().add(jeuPane);
 
-		core.eventInit();
 		core.setIdjr(new Idjr());
-		Initializer.addListenerConfig(configPartiePane);
-		Initializer.addListenerJeu(jeuPane);
-		Initializer.addListenerFin(finDePartiePane);
-		Initializer.addListenerAttente(attenteJoueurPane);
-		root.getChildren().add(new OptionPane(sControl, core));
+		Initializer.addListener(configPartiePane);
+		Initializer.addListener(jeuPane);
+		Initializer.addListener(finDePartiePane);
+		Initializer.addListener(attenteJoueurPane);
+		Initializer.addListener(optionPane);
+		
+		/* Ajouter les panes dont il y de la rotation */
+		//Initializer.addListenerAttente(PANE);
+		
+		Initializer.updatePleineEcran();
+		
+		root.getChildren().add(optionPane);
 		root.getChildren().add(new ReglesPane(sControl, core));
 		root.getChildren().add(attenteJoueurPane);
 		root.getChildren().add(new AccueilPane(sControl, core));
