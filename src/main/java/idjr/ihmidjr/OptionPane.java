@@ -45,10 +45,10 @@ public class OptionPane extends StackPane implements IPleineEcranListener {
 		stackPane.setAlignment(Pos.CENTER);
 
 		Rectangle rect = new Rectangle();
-		rect.setStroke(Color.RED);
-		rect.setStrokeWidth(2);
 		rect.setWidth(tailleCarreCentral);
 		rect.setHeight(tailleCarreCentral);
+		rect.setArcHeight(30);
+		rect.setArcWidth(30);
 		rect.setOpacity(.3);
 
 		VBox vbFond = new VBox();

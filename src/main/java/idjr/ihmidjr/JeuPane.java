@@ -996,12 +996,18 @@ public class JeuPane extends StackPane implements IJeuListener {
 		de2.setTextFill(Color.BLACK);
 		de2.setFont(policeBoutonDe);
 
-		Label titrede = new Label(International.trad("texte.des"));
+		Button titrede = new Button(International.trad("texte.des"));
 		titrede.setMinSize(100, 50);
 		titrede.setAlignment(Pos.CENTER);
 		titrede.setTextFill(Color.WHITE);
-		titrede.setFont(policeBouton);
-		titrede.setStyle("-fx-background-radius: 3px;-fx-background-color:#000000;");
+		titrede.setFont(policeBoutonC);
+		titrede.setStyle(styleBoutons);
+		titrede.setOnMouseEntered(event -> {
+			titrede.setStyle(styleBoutonsSouris);
+		});
+		titrede.setOnMouseExited(event -> {
+			titrede.setStyle(styleBoutons);
+		});
 
 		des.setPadding(new Insets(10));
 		des.setSpacing(10);
