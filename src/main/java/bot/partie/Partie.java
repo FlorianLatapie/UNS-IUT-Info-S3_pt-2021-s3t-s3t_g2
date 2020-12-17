@@ -412,23 +412,24 @@ public class Partie {
 	 * Deplace le personnage du joueur au lieu choisi.
 	 *
 	 * @param joueur     le joueur dont le personnage est déplacé
-	 * @param choixPerso le personnage qui est déplacé
+	 * @param choixPion le personnage qui est déplacé
 	 * @param dest       le lieu de destination du personnage
 	 */
-	public void deplacePerso(Couleur couleur, Integer choixPerso, Integer destination) {
+	public void deplacePerso(Couleur couleur, Integer choixPion, Integer destination) {
 		for (Joueur joueur : joueurs.values()) {
 			if (joueur.getCouleur().equals(couleur)) {
 				int dest=destination;
 				if (lieux.get(dest).isFull()) 
 					dest=4;
+				System.out.println(choixPion);
 				System.out.println(joueur);
 				System.out.println(joueur.getPersonnages());
-				System.out.println(joueur.getPersonnages().get(choixPerso));
-				System.out.println(joueur.getPersonnages().get(choixPerso).getMonLieu());
-				int idPosActuel = joueur.getPersonnages().get(choixPerso).getMonLieu();
-				joueur.getPersonnages().get(choixPerso).changerDeLieux(dest);
-				lieux.get(idPosActuel).getPersonnage().remove(joueur.getPersonnages().get(choixPerso));
-				lieux.get(dest).addPersonnage(joueur.getPersonnages().get(choixPerso));
+				System.out.println(joueur.getPersonnages().get(choixPion));
+				System.out.println(joueur.getPersonnages().get(choixPion).getMonLieu());
+				int idPosActuel = joueur.getPersonnages().get(choixPion).getMonLieu();
+				joueur.getPersonnages().get(choixPion).changerDeLieux(dest);
+				lieux.get(idPosActuel).getPersonnage().remove(joueur.getPersonnages().get(choixPion));
+				lieux.get(dest).addPersonnage(joueur.getPersonnages().get(choixPion));
 				
 			}
 		}
