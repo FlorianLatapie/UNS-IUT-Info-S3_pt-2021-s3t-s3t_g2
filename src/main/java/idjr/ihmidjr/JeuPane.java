@@ -158,7 +158,13 @@ public class JeuPane extends StackPane implements IJeuListener {
 	Label force;
 	VBox des;
 	VBox vbForce;
-
+	
+	HBox fond;
+	Rectangle rectVigile;
+	Button cartePrecedente;
+	Button carteSuivante;
+	HBox hbCartes;
+	VBox vbDeplCentre;
 	List<Boolean> estActif = new ArrayList<>();
 	List<CarteType> cartes = new ArrayList<>();
 
@@ -182,7 +188,7 @@ public class JeuPane extends StackPane implements IJeuListener {
 
 		//////////////////////////////////////////
 		// TODO afficher une image dedans
-		Rectangle rectVigile = new Rectangle();
+		rectVigile = new Rectangle();
 		rectVigile.setTranslateX(793);
 		rectVigile.setTranslateY(150);
 		rectVigile.setFill(null);
@@ -196,7 +202,7 @@ public class JeuPane extends StackPane implements IJeuListener {
 		rectVigile.setVisible(false);// TODO event pour l'afficher au bon moment
 
 		//////////////////////////////////////////
-		HBox hbCartes = new HBox();
+		hbCartes = new HBox();
 		hbCartes.setAlignment(Pos.CENTER);
 		hbCartes.setTranslateY(340);
 		hbCartes.setPrefSize(1800, 250);
@@ -330,7 +336,7 @@ public class JeuPane extends StackPane implements IJeuListener {
 		bDeCarte8.setGraphic(imgDeCarte8);
 		carte8.getChildren().addAll(bDeCarte8);
 
-		Button cartePrecedente = new Button("<");
+		cartePrecedente = new Button("<");
 		cartePrecedente.setStyle(styleBoutons);
 		cartePrecedente.setPrefSize(58, tailleCarte);
 		cartePrecedente.setMinSize(58, tailleCarte);
@@ -343,7 +349,7 @@ public class JeuPane extends StackPane implements IJeuListener {
 			cartePrecedente.setStyle(styleBoutons);
 		});
 
-		Button carteSuivante = new Button(">");
+		carteSuivante = new Button(">");
 		carteSuivante.setStyle(styleBoutons);
 		carteSuivante.setPrefSize(58, tailleCarte);
 		carteSuivante.setMinSize(58, tailleCarte);
@@ -737,21 +743,15 @@ public class JeuPane extends StackPane implements IJeuListener {
 		vbTitreCamion.setPrefHeight(80);
 		vbTitreCamion.setBackground(fondNoir);
 		vbTitreCamion.getChildren().addAll(titreFouille, titreQuestionCarte);
-		// vbTitreCamion.setStyle("-fx-border-color: yellow; -fx-border-insets: 5;
-		// -fx-border-width: 3;");
-
 		fouilleCamion.setTop(vbTitreCamion);
 		fouilleCamion.setCenter(vbChoixCarteCentre);
 
-		/*
-		 * fond.setEffect(flou); TODO A mettre quand le popup fouille camion est activé
-		 * rectVigile.setEffect(flou); nomJoueur.setEffect(flou);
-		 * hbCartes.setEffect(flou); vbDeplCentre.setEffect(flou); des.setEffect(flou);
-		 */
+	
+		
 
 		///
 
-		VBox vbDeplCentre = new VBox();
+		vbDeplCentre = new VBox();
 		vbDeplCentre.setAlignment(Pos.CENTER_LEFT);
 		vbDeplCentre.setTranslateX(-700);
 		vbDeplCentre.setTranslateY(-70);
@@ -1061,7 +1061,7 @@ public class JeuPane extends StackPane implements IJeuListener {
 
 		imgFond = new ImageView(DataControl.BLEU);
 
-		HBox fond = new HBox();
+		fond = new HBox();
 		fond.setAlignment(Pos.CENTER);
 		fond.setEffect(flou);
 		fond.getChildren().add(imgFond);
@@ -1082,8 +1082,8 @@ public class JeuPane extends StackPane implements IJeuListener {
 		bOption.setOnMouseExited(event -> {
 			bOption.setStyle(styleBoutons);
 		});
-		bOption.setTranslateX(790);
-		bOption.setTranslateY(-380);
+		bOption.setTranslateX(900);
+		bOption.setTranslateY(-480);
 
 		log = new ListView<>();
 		log.setStyle(
@@ -1546,6 +1546,16 @@ public class JeuPane extends StackPane implements IJeuListener {
 			vote.setVisible(false);
 			System.out.println(listeCartes.size());
 			System.out.println(listeCouleurJoueurVivant.size());
+			fond.setEffect(flou);
+			rectVigile.setEffect(flou);
+			nomJoueur.setEffect(flou);
+			hbCartes.setEffect(flou);
+			vbDeplCentre.setEffect(flou);
+			des.setEffect(flou);
+			bLog.setEffect(flou);
+			cartePrecedente.setDisable(true);
+			carteSuivante.setDisable(true);
+			bLog.setDisable(true);
 			fouilleCamion.setVisible(true);
 			if (listeCartes.size() >= 1) {
 				imgCarte1.setImage(new Image(convertCarte(listeCartes.get(0))));
@@ -1614,6 +1624,16 @@ public class JeuPane extends StackPane implements IJeuListener {
 	}
 
 	public void cartePanelReset() {
+		fond.setEffect(null);
+		rectVigile.setEffect(null);
+		nomJoueur.setEffect(null);
+		hbCartes.setEffect(null);
+		vbDeplCentre.setEffect(null);
+		des.setEffect(null);
+		bLog.setEffect(null);
+		cartePrecedente.setDisable(false);
+		carteSuivante.setDisable(false);
+		bLog.setDisable(false);
 		fouilleCamion.setVisible(false);
 		hboxBoutonJoueur.setVisible(false);
 		joueur1c.setDisable(true);
@@ -1682,6 +1702,16 @@ public class JeuPane extends StackPane implements IJeuListener {
 	public void setVote(List<Couleur> listeCouleurJoueur) {
 		Platform.runLater(() -> {
 			vote.setVisible(true);
+			fond.setEffect(null);
+			rectVigile.setEffect(null);
+			nomJoueur.setEffect(null);
+			hbCartes.setEffect(null);
+			vbDeplCentre.setEffect(null);
+			des.setEffect(null);
+			bLog.setEffect(null);
+			cartePrecedente.setDisable(false);
+			carteSuivante.setDisable(false);
+			bLog.setDisable(false);
 			fouilleCamion.setVisible(false);
 			Button[] buttons = { joueur1, joueur2, joueur3, joueur4, joueur5 };
 			for (int i = 0; i < buttons.length; i++) {
