@@ -512,13 +512,20 @@ public class CouleurPane extends StackPane implements ICouleurListener {
 	public void joueurNoms(List<Joueur> joueurs) {
 		Platform.runLater(() -> {
 			Button[] buttons = { descendre1, descendre2, descendre3, descendre4, descendre5, descendre6 };
+			List<ComboBox<String>> combos = new ArrayList<>();
+			combos.add(couleur1);
+			combos.add(couleur2);
+			combos.add(couleur3);
+			combos.add(couleur4);
+			combos.add(couleur5);
+			combos.add(couleur6);
 
 			ordre = new int[joueurs.size()];
 			for (int i = 0; i < ordre.length; i++)
 				ordre[i] = i;
 			couleursChoix = new ArrayList<>();
 			for (int i = 0; i < joueurs.size(); i++)
-				couleursChoix.add("");
+				couleursChoix.add(combos.get(i).getValue());
 
 			buttons[joueurs.size() - 1].setDisable(true);
 
