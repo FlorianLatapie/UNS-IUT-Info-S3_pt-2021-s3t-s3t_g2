@@ -226,7 +226,7 @@ public class TraitementBot {
 				|| (core.getBotType().equals(BotType.MOYEN)) && (core.getCompteurTour() % 2 == 1))
 			return TraitementAleatoire.choisirSacrificeAleatoire(core, arg2);
 		else
-			return TraitementIntelligent.choisirBestSacrificeIntelligent(core, arg2);
+			return TraitementAleatoire.choisirSacrificeAleatoire(core, arg2);
 	}
 
 	public void traitementFP(Bot core, Couleur couleur) {
