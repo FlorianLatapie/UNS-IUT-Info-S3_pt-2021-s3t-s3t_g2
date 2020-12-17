@@ -75,6 +75,7 @@ public class AccueilPane extends StackPane {
 
 		// boutons
 		Button bJouer = new Button(International.trad("bouton.jouer"));
+		bJouer.setAlignment(Pos.CENTER);
 		bJouer.setPrefSize(lBouton, hBouton);
 		bJouer.setMinSize(lBouton, hBouton);
 		bJouer.setFont(policeBouton);
