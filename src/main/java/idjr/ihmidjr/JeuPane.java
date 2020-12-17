@@ -1729,6 +1729,7 @@ public class JeuPane extends StackPane implements IJeuListener {
 			bPasserCarte.setDisable(false);
 			bPasserCarte.setOnAction(EventHandler -> {
 				core.getIdjr().setContinue(false);
+				core.getIdjr().utiliserCarteChoisi(true);
 				resetUtiliserCarte();
 			});
 		});
