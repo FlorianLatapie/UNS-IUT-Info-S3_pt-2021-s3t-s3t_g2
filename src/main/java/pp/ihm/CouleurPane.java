@@ -129,9 +129,10 @@ public class CouleurPane extends StackPane implements ICouleurListener {
 		j1 = new HBox();
 
 		nom1 = new Label();
-		nom1.setBackground(fondBlanc);
+		nom1.setStyle("-fx-background-color: #1B1B1B; -fx-background-radius: 10px;");
 		nom1.setText(International.trad("texte.j1"));
-		nom1.setFont(policeNom);
+		nom1.setFont(Font.font(nomPolice,  FontWeight.BOLD, 23));
+		nom1.setTextFill(Color.WHITE);
 		nom1.setPrefSize(largeurTF, hauteurElemtents);
 		nom1.setMinHeight(hauteurElemtents);
 		nom1.setAlignment(Pos.CENTER);
@@ -140,9 +141,9 @@ public class CouleurPane extends StackPane implements ICouleurListener {
 		couleur1.setPrefSize(largeurComboBox, hauteurElemtents);
 		couleur1.getItems().addAll(DataControl.couleursJoueur);
 		couleur1.valueProperty().addListener(new ChangeListener<String>() {
-
 			@Override
 			public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
+				nom1.setStyle(getCouleur(couleur1.getValue()));
 				if (ordre.length > 0)
 					couleursChoix.set(ordre[0], newValue);
 			}
@@ -154,7 +155,7 @@ public class CouleurPane extends StackPane implements ICouleurListener {
 		monter1.setStyle(styleBoutons);
 		monter1.setOnMouseEntered(event -> monter1.setStyle(styleBoutonsSouris));
 		monter1.setOnMouseExited(event -> monter1.setStyle(styleBoutons));
-		monter1.setVisible(false);
+		monter1.setDisable(true);
 		descendre1 = new Button(International.trad("bouton.descendre"));
 		descendre1.setPrefSize(lBoutonMD, hBoutonMD);
 		descendre1.setMinSize(lBoutonMD, hBoutonMD);
@@ -177,9 +178,10 @@ public class CouleurPane extends StackPane implements ICouleurListener {
 		j2 = new HBox();
 
 		nom2 = new Label();
-		nom2.setBackground(fondBlanc);
+		nom2.setStyle("-fx-background-color: #1B1B1B; -fx-background-radius: 10px;");
 		nom2.setText(International.trad("texte.j2"));
-		nom2.setFont(policeNom);
+		nom2.setFont(Font.font(nomPolice,  FontWeight.BOLD, 23));
+		nom2.setTextFill(Color.WHITE);
 		nom2.setPrefSize(largeurTF, hauteurElemtents);
 		nom2.setMinHeight(hauteurElemtents);
 		nom2.setAlignment(Pos.CENTER);
@@ -191,6 +193,7 @@ public class CouleurPane extends StackPane implements ICouleurListener {
 
 			@Override
 			public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
+				nom2.setStyle(getCouleur(couleur2.getValue()));
 				if (ordre.length > 1)
 					couleursChoix.set(ordre[1], newValue);
 			}
@@ -228,9 +231,10 @@ public class CouleurPane extends StackPane implements ICouleurListener {
 		j3 = new HBox();
 
 		nom3 = new Label();
-		nom3.setBackground(fondBlanc);
+		nom3.setStyle("-fx-background-color: #1B1B1B; -fx-background-radius: 10px;");
 		nom3.setText(International.trad("texte.j3"));
-		nom3.setFont(policeNom);
+		nom3.setFont(Font.font(nomPolice,  FontWeight.BOLD, 23));
+		nom3.setTextFill(Color.WHITE);
 		nom3.setPrefSize(largeurTF, hauteurElemtents);
 		nom3.setMinHeight(hauteurElemtents);
 		nom3.setAlignment(Pos.CENTER);
@@ -242,6 +246,7 @@ public class CouleurPane extends StackPane implements ICouleurListener {
 
 			@Override
 			public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
+				nom3.setStyle(getCouleur(couleur3.getValue()));
 				if (ordre.length > 2)
 					couleursChoix.set(ordre[2], newValue);
 			}
@@ -279,9 +284,10 @@ public class CouleurPane extends StackPane implements ICouleurListener {
 		j4 = new HBox();
 
 		nom4 = new Label();
-		nom4.setBackground(fondBlanc);
+		nom4.setStyle("-fx-background-color: #1B1B1B; -fx-background-radius: 10px;");
 		nom4.setText(International.trad("texte.j4"));
-		nom4.setFont(policeNom);
+		nom4.setFont(Font.font(nomPolice,  FontWeight.BOLD, 23));
+		nom4.setTextFill(Color.WHITE);
 		nom4.setPrefSize(largeurTF, hauteurElemtents);
 		nom4.setMinHeight(hauteurElemtents);
 		nom4.setAlignment(Pos.CENTER);
@@ -293,6 +299,7 @@ public class CouleurPane extends StackPane implements ICouleurListener {
 
 			@Override
 			public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
+				nom4.setStyle(getCouleur(couleur4.getValue()));
 				if (ordre.length > 3)
 					couleursChoix.set(ordre[3], newValue);
 			}
@@ -330,9 +337,10 @@ public class CouleurPane extends StackPane implements ICouleurListener {
 		j5 = new HBox();
 
 		nom5 = new Label();
-		nom5.setBackground(fondBlanc);
+		nom5.setStyle("-fx-background-color: #1B1B1B; -fx-background-radius: 10px;");
 		nom5.setText(International.trad("texte.j5"));
-		nom5.setFont(policeNom);
+		nom5.setFont(Font.font(nomPolice,  FontWeight.BOLD, 23));
+		nom5.setTextFill(Color.WHITE);
 		nom5.setPrefSize(largeurTF, hauteurElemtents);
 		nom5.setMinHeight(hauteurElemtents);
 		nom5.setAlignment(Pos.CENTER);
@@ -344,6 +352,7 @@ public class CouleurPane extends StackPane implements ICouleurListener {
 
 			@Override
 			public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
+				nom5.setStyle(getCouleur(couleur5.getValue()));
 				if (ordre.length > 4)
 					couleursChoix.set(ordre[4], newValue);
 			}
@@ -381,9 +390,10 @@ public class CouleurPane extends StackPane implements ICouleurListener {
 		j6 = new HBox();
 
 		nom6 = new Label();
-		nom6.setBackground(fondBlanc);
+		nom6.setStyle("-fx-background-color: #1B1B1B; -fx-background-radius: 10px;");
 		nom6.setText(International.trad("texte.j6"));
-		nom6.setFont(policeNom);
+		nom6.setFont(Font.font(nomPolice,  FontWeight.BOLD, 23));
+		nom6.setTextFill(Color.WHITE);
 		nom6.setPrefSize(largeurTF, hauteurElemtents);
 		nom6.setMinHeight(hauteurElemtents);
 		nom6.setAlignment(Pos.CENTER);
@@ -395,6 +405,7 @@ public class CouleurPane extends StackPane implements ICouleurListener {
 
 			@Override
 			public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
+				nom6.setStyle(getCouleur(couleur6.getValue()));
 				if (ordre.length > 5)
 					couleursChoix.set(ordre[5], newValue);
 			}
@@ -417,12 +428,11 @@ public class CouleurPane extends StackPane implements ICouleurListener {
 		descendre6.setStyle(styleBoutons);
 		descendre6.setOnMouseEntered(event -> descendre6.setStyle(styleBoutonsSouris));
 		descendre6.setOnMouseExited(event -> descendre6.setStyle(styleBoutons));
-		descendre6.setVisible(false);
+		descendre6.setDisable(true);
 
 		j6.setAlignment(Pos.CENTER);
 		j6.setSpacing(spacing);
 		j6.getChildren().addAll(nom6, couleur6, monter6, descendre6);
-		j6.setDisable(true);
 
 		///
 
@@ -462,8 +472,8 @@ public class CouleurPane extends StackPane implements ICouleurListener {
 
 		bRetour.setOnMouseEntered(event -> bRetour.setStyle(styleBoutonsSouris));
 		bRetour.setOnMouseExited(event -> {
-			core.getCj().stopThreads();
 			bRetour.setStyle(styleBoutons);
+			core.getCj().stopThreads();
 		});
 		bRetour.setOnAction(EventHandler -> sc.setPaneOnTop(ApplicationPane.ACCUEIL));
 
@@ -599,6 +609,26 @@ public class CouleurPane extends StackPane implements ICouleurListener {
 			j4.setDisable(false);
 			j5.setDisable(false);
 			j6.setDisable(false);
+		}
+	}
+	
+	
+	public static String getCouleur(String c) {
+		switch (c) {
+		case "Bleu":
+			return IhmOutils.bleu+";-fx-background-radius: 10px;";
+		case "Rouge":
+			return IhmOutils.rouge+";-fx-background-radius: 10px;";
+		case "Vert":
+			return IhmOutils.vert+";-fx-background-radius: 10px;";
+		case "Noir":
+			return IhmOutils.noir+";-fx-background-radius: 10px;";
+		case "Jaune":
+			return IhmOutils.jaune+";-fx-background-radius: 10px;";
+		case "Marron":
+			return IhmOutils.marron+";-fx-background-radius: 10px;";
+		default:
+			return "#1A1A1A";
 		}
 	}
 }
