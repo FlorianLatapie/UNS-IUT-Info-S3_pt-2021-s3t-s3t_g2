@@ -46,13 +46,14 @@ public class ControleurJeu {
 	private final List<String> tempPaquet;
 
 	private List<Joueur> joueurs;
-	private ArrayList<Integer> lieuZombie;
+	private List<Integer> lieuZombie;
 	private boolean couleurPret = false;
 	private boolean isFinished = false;
 
 	private ControleurFouilleCamion cfc;
 	private ControleurVote cVote;
 	private ControleurElectionVigile cev;
+	private ControleurArriveZombie caz;
 
 	private final Random rd = new Random();
 
@@ -70,6 +71,7 @@ public class ControleurJeu {
 		this.cfc = new ControleurFouilleCamion();
 		this.cVote = new ControleurVote();
 		this.cev = new ControleurElectionVigile();
+		this.caz = new ControleurArriveZombie();
 
 		this.statut = Statut.ATTENTE;
 		initReseau();
@@ -231,7 +233,7 @@ public class ControleurJeu {
 			j.getConnection().envoyer(m);
 		cfc.phaseFouilleCamion(jeu, partieId, numeroTour);
 		cev.phaseElectionChefVigi(jeu, partieId, numeroTour);
-		this.lieuZombie = arriveZombie();
+		this.lieuZombie = caz.phaseArriveZombie(jeu, partieId, numeroTour);
 		ArrayList<Integer> destination = new ArrayList<>();
 		phasechoixDestination(destination);
 		jeu.entreZombie(lieuZombie);
@@ -400,7 +402,7 @@ public class ControleurJeu {
 		}
 	}
 
-	private void phaseDeplacementPerso(ArrayList<Integer> destination, ArrayList<Integer> zombie) {
+	private void phaseDeplacementPerso(List<Integer> destination, List<Integer> zombie) {
 		String m = ControleurReseau.construirePaquetTcp("PDP", jeu.getChefVIgile().getCouleur(), destination, zombie,
 				jeu.getLieuxFermes(), partieId, numeroTour);
 		for (Joueur j : jeu.getJoueurs().values())
