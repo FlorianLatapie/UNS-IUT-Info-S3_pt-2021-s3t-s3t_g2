@@ -22,8 +22,8 @@ import javafx.stage.Stage;
 public class ConfirmationPane {
 
 	static boolean reponse;
-	private static int tailleFenetreL = 450;
-	private static int tailleFenetreH = 150;
+	private static int tailleFenetreL = 500;
+	private static int tailleFenetreH = 200;
 	private static String nomPolice = "Segoe UI";
 	
 	/**
@@ -32,24 +32,32 @@ public class ConfirmationPane {
 	 * @param message message affiché dans la fenetre 
 	 * @return
 	 */
-	public static boolean afficher(String titre, String messageL1) {
+	public static boolean afficher(String titre, String messageL1, String messageL2) {
 		
 		//nouvelle fenetre
 		Stage window = new Stage();
 		window.getIcons().add(new Image(DataControl.ICONE));
 		window.initModality(Modality.APPLICATION_MODAL);
 		window.setTitle(titre);
+
+		window.setMaxWidth(tailleFenetreL);
+		window.setMaxHeight(tailleFenetreH);
+		window.setWidth(tailleFenetreL);
+		window.setHeight(tailleFenetreH);
 		window.setMinWidth(tailleFenetreL);
 		window.setMinHeight(tailleFenetreH);
 		
 		//titre
 		Label labelL1 = new Label();
 		labelL1.setText(messageL1);
-		labelL1.setTextAlignment(TextAlignment.CENTER);
 		labelL1.setStyle("-fx-text-fill: #DDDDDD");
 		labelL1.setFont(Font.font(nomPolice, FontWeight.BOLD, 20));
 		labelL1.setPadding(new Insets(10,10,0,10));
-
+		Label labelL2 = new Label();
+		labelL2.setText(messageL2);
+		labelL2.setStyle("-fx-text-fill: #DDDDDD");
+		labelL2.setFont(Font.font(nomPolice, FontWeight.BOLD, 20));
+		labelL2.setPadding(new Insets(0,10,10,10));
 
 		//boutons
 		Button boutonOui = new Button(International.trad("bouton.quitter"));
@@ -75,12 +83,11 @@ public class ConfirmationPane {
 		HBox boutonHbox = new HBox(10);
 		boutonHbox.getChildren().addAll(boutonNon, boutonOui);
 		boutonHbox.setAlignment(Pos.CENTER);
-		boutonHbox.setSpacing(20);
 		boutonHbox.setPadding(new Insets(10));
 
 		VBox layout = new VBox(10);
 		layout.setAlignment(Pos.TOP_CENTER);
-		layout.getChildren().addAll(labelL1,boutonHbox);
+		layout.getChildren().addAll(labelL1, labelL2,boutonHbox);
 		layout.setStyle(" -fx-background-color: #1F1F1F;");
 		Scene scene = new Scene(layout);
 
