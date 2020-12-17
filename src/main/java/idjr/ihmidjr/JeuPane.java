@@ -1084,8 +1084,7 @@ public class JeuPane extends StackPane implements IJeuListener {
 		});
 		bOption.setTranslateX(790);
 		bOption.setTranslateY(-380);
-		
-		
+
 		log = new ListView<>();
 		log.setStyle(
 				"-fx-background-color: red; -fx-control-inner-background: #1A1A1A ; -fx-control-inner-background-alt: derive(-fx-control-inner-background, 15%);");
@@ -1115,8 +1114,6 @@ public class JeuPane extends StackPane implements IJeuListener {
 		});
 		bLog.setTranslateX(790);
 		bLog.setTranslateY(-305);
-		
-		
 
 		Label lo = new Label(International.trad("texte.nomPerso") + International.trad("texte.coulPerso")
 				+ International.trad(("texte.depLieu")));
@@ -1132,7 +1129,8 @@ public class JeuPane extends StackPane implements IJeuListener {
 		infoZombie.setAlignment(Pos.CENTER);
 		infoZombie.setStyle(styleVBox);
 
-		linfoZombie = new Label("Des zombies arriveront dans les lieux {0}, {1}, {2}, {3}"); //this is a placeholder do not translate
+		linfoZombie = new Label("Des zombies arriveront dans les lieux {0}, {1}, {2}, {3}"); // this is a placeholder do
+																								// not translate
 		linfoZombie.setFont(Font.font("Segoe UI", 20));
 		linfoZombie.setTextFill(Color.BLACK);
 
@@ -1175,7 +1173,7 @@ public class JeuPane extends StackPane implements IJeuListener {
 		vbForce.setVisible(false);
 
 		stackPane.getChildren().addAll(fond, rectVigile, nomJoueur, phasePartie, hbCartes, vote, vbDeplCentre, des,
-				infoZombie, fouilleCamion, info, log,bOption, bLog, vbForce);
+				infoZombie, fouilleCamion, info, log, bOption, bLog, vbForce);
 		stackPane.setBackground(new Background(new BackgroundFill(Color.BLACK, CornerRadii.EMPTY, null)));
 
 		this.getChildren().add(stackPane);
@@ -1299,8 +1297,17 @@ public class JeuPane extends StackPane implements IJeuListener {
 		fouilleCamion.setVisible(false);
 
 		resetVoteCarte();
-		resetUtiliserCarte();
-		
+
+		Button[] buttons = { bDeCarte1, bDeCarte2, bDeCarte3, bDeCarte4, bDeCarte5, bDeCarte6, bDeCarte7, bDeCarte8,
+				bPasserCarte };
+		for (int i = 0; i < buttons.length - 1; i++) {
+				buttons[i].setDisable(true);
+				buttons[i].setStyle(null);
+		}
+		passerCarte.setVisible(false);
+		passerCarte.setDisable(true);
+		bPasserCarte.setDisable(true);
+
 		vote.setVisible(false);
 	}
 
@@ -1652,7 +1659,7 @@ public class JeuPane extends StackPane implements IJeuListener {
 		Button[] buttons = { bDeCarte1, bDeCarte2, bDeCarte3, bDeCarte4, bDeCarte5, bDeCarte6, bDeCarte7, bDeCarte8,
 				bPasserCarte };
 		for (int i = 0; i < buttons.length - 1; i++) {
-			if (i < core.getIdjr().getListeCarte().size()) {
+			if (i < cartes.size()) {
 				buttons[i].setDisable(true);
 				buttons[i].setStyle(null);
 			}
