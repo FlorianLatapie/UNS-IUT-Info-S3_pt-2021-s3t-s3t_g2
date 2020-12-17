@@ -42,33 +42,8 @@ public class ControleurVote {
 		List<Integer> voixRecu = initVoixRecu(ve, jeu, l);
 		vr.demanderCarte(jeu, l, partieId, numeroTour);
 		traitementMenace(ve, jeu, nbVoix, l, partieId, numeroTour);
-		vr.demanderVote(jeu, l, partieId, numeroTour);
-		int i = 0;
-		if (ve == VoteEtape.PRE) {
-			for (Joueur j : jeu.getJoueurSurLieu(l)) {
-				Couleur couleurVote = vr.recupVote(j);
-				votes.add(couleurVote);
-				int a = 0;
-				for (Joueur jou : jeu.getJoueurSurLieu(l)) {
-					if (jou.getCouleur() == couleurVote)
-						voixRecu.set(a, voixRecu.get(a) + nbVoix.get(i));
-					a++;
-				}
-				i++;
-			}
-		}else if (ve == VoteEtape.SEC) {
-			for (Joueur j : jeu.getJoueurs().values()) {
-				Couleur couleurVote = vr.recupVote(j);
-				votes.add(couleurVote);
-				int a = 0;
-				for (Joueur jou : jeu.getJoueurs().values()) {
-					if (jou.getCouleur() == couleurVote)
-						voixRecu.set(a, voixRecu.get(a) + nbVoix.get(i));
-					a++;
-				}
-				i++;
-			}
-		}
+		demanderVote(jeu, l, ve, partieId, numeroTour);
+		traitementVotes(jeu, l, ve, votes, voixRecu, nbVoix);
 		vr.cloreVote(jeu, l, partieId, numeroTour);
 		Couleur couleurVote = eluVote(voixRecu, joueursVotant);
 		vr.informerResultatVote(jeu, couleurVote, voixRecu, votes, joueursVotant, partieId, numeroTour);
@@ -131,7 +106,46 @@ public class ControleurVote {
 			}
 		}
 	}
-
+	
+	public void demanderVote(Partie jeu, Lieu l, VoteEtape ve, String partieId, int numeroTour) {
+		if (ve == VoteEtape.PRE)
+			for (Joueur j : jeu.getJoueurSurLieu(l))
+				vr.demanderVote(j, partieId, numeroTour);
+		else if (ve == VoteEtape.SEC)
+			for (Joueur j : jeu.getJoueurs().values())
+				vr.demanderVote(j, partieId, numeroTour);
+	}
+	
+	public void traitementVotes(Partie jeu, Lieu l, VoteEtape ve, List<Couleur> votes, List<Integer> voixRecu, List<Integer> nbVoix){
+		int i = 0;
+		if (ve == VoteEtape.PRE) {
+			for (Joueur j : jeu.getJoueurSurLieu(l)) {
+				Couleur couleurVote = vr.recupVote(j);
+				votes.add(couleurVote);
+				int a = 0;
+				for (Joueur jou : jeu.getJoueurSurLieu(l)) {
+					if (jou.getCouleur() == couleurVote)
+						voixRecu.set(a, voixRecu.get(a) + nbVoix.get(i));
+					a++;
+				}
+				i++;
+			}
+		}else if (ve == VoteEtape.SEC) {
+			for (Joueur j : jeu.getJoueurs().values()) {
+				Couleur couleurVote = vr.recupVote(j);
+				votes.add(couleurVote);
+				int a = 0;
+				for (Joueur jou : jeu.getJoueurs().values()) {
+					if (jou.getCouleur() == couleurVote)
+						voixRecu.set(a, voixRecu.get(a) + nbVoix.get(i));
+					a++;
+				}
+				i++;
+			}
+		}
+	}
+	
+	
 	public Couleur eluVote(List<Integer> listeVoixRecu, List<Couleur> listeJoueursPresent) {
 		int i = 0;
 		int nbVoteTemp = 0;
