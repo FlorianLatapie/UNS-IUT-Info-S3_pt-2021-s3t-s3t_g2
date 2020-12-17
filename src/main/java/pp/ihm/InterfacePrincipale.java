@@ -39,23 +39,26 @@ public class InterfacePrincipale extends Application {
 		CouleurPane couleurPane = new CouleurPane(sControl, core);
 		PlateauPane plateauPane = new PlateauPane(sControl, core);
 		OptionPane optionPane = new OptionPane(sControl, core);
+		AccessibilitePane accessibilitePane = new AccessibilitePane(sControl);
+		ReglesPane reglesPane = new ReglesPane(sControl, core);
+		PausePane pausePane = new PausePane(sControl, core);
+		AccueilPane accueilPane = new AccueilPane(sControl, core);
 
 		Initializer.addListener(attenteJoueurPane);
 		Initializer.addListener(plateauPane);
 		Initializer.addListener(finDePartiePane);
 		Initializer.addListener(couleurPane);
 		Initializer.addListener(optionPane);
-		
 
 		Initializer.updatePleineEcran();
 		scene.getStylesheets().add(DataControl.CSS);
 		/* Ajouter les panes qui implements IRotationListener */
 		// Initializer.addListener(PANE);
 
-		root.getChildren().add(new AccessibilitePane(sControl));
-		root.getChildren().add(new ReglesPane(sControl, core));
+		root.getChildren().add(accessibilitePane);
+		root.getChildren().add(reglesPane);
 		root.getChildren().add(optionPane);
-		root.getChildren().add(new PausePane(sControl, core));
+		root.getChildren().add(pausePane);
 		root.getChildren().add(attenteJoueurPane);
 		root.getChildren().add(configPartiePane);
 		root.getChildren().add(finDePartiePane);
@@ -63,7 +66,7 @@ public class InterfacePrincipale extends Application {
 		root.getChildren().add(plateauPane);
 		root.getChildren().add(couleurPane);
 
-		root.getChildren().add(new AccueilPane(sControl, core));
+		root.getChildren().add(accueilPane);
 
 		primaryStage.setScene(scene);
 		primaryStage.getScene().getWindow().addEventFilter(WindowEvent.WINDOW_CLOSE_REQUEST, this::onClose);
