@@ -160,7 +160,7 @@ public class OptionPane extends StackPane implements IPleineEcranListener, ITrad
 		bFrancais.setPrefSize(245, hauteurElement);
 		bFrancais.setStyle(styleBoutons);
 		bFrancais.setOnAction(EventHandler -> {
-			International.changerLangue(Langues.FR);
+			core.changerLangue(Langues.FR);
 		});
 
 		bFrancais.setOnMouseEntered(event -> bFrancais.setStyle(styleBoutonsSouris));
@@ -174,7 +174,7 @@ public class OptionPane extends StackPane implements IPleineEcranListener, ITrad
 		bEnglish.setOnMouseEntered(event -> bEnglish.setStyle(styleBoutonsSouris));
 		bEnglish.setOnMouseExited(event -> bEnglish.setStyle(styleBoutons));
 		bEnglish.setOnAction(EventHandler -> {
-			International.changerLangue(Langues.EN);
+			core.changerLangue(Langues.EN);
 		});
 
 		bPleinEcran = new Button(International.trad("bouton.pEcran"));
