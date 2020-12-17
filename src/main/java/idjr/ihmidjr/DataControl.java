@@ -19,6 +19,7 @@ public class DataControl {
 	public final static Locale localeEN = new Locale("en", "UK");
 	public final static Locale localeFR = new Locale("fr", "FR");
 	public final static String localMsgURL = "Ressources.Textes.messages";
+	public static final String CSS = "idjr/ihmidjr/style/style.css";
 
 	public static final String FOND = "idjr/ihmidjr/images/fond.png";
 	public static final String PLATEAU = "idjr/ihmidjr/images/plateau.png";
@@ -51,6 +52,8 @@ public class DataControl {
 
 	public static final ObservableList<Integer> nombreJoueur = FXCollections.observableArrayList(3, 4, 5, 6);
 	public static final ObservableList<Integer> nombreBot = FXCollections.observableArrayList(0, 1, 2, 3, 4, 5, 6);
+	public static final ObservableList<String> typePartie = FXCollections.observableArrayList("seb mets","les types","dans le","datacontrol");//TODO
+	public static final ObservableList<String> statutPartie = FXCollections.observableArrayList("seb mets","les types","dans le","datacontrol");//TODO
 	public static final ObservableList<String> couleursJoueur = FXCollections.observableArrayList(
 			International.trad("text.noir"), International.trad("text.vert"), International.trad("text.marron"),
 			International.trad("text.rouge"), International.trad("text.bleu"), International.trad("text.jaune"));

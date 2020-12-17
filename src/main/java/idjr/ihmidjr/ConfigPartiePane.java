@@ -15,6 +15,7 @@ import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.SelectionMode;
@@ -88,6 +89,33 @@ public class ConfigPartiePane extends StackPane implements IConfigListener {
 		desc.setMinHeight(hauteurElemtents);
 		desc.setPadding(botPadding);
 
+		HBox hComboTri = new HBox();
+		ComboBox<String> cbtypePartie = new ComboBox<>();
+		cbtypePartie.getItems().addAll(DataControl.typePartie);
+		cbtypePartie.setValue("cbtypePartie");//TODO
+		cbtypePartie.setStyle("-fx-text-fill: white;");
+		//cbtypePartie.setPadding(new Insets(0, 0, 0, 40));
+		cbtypePartie.setPrefSize(200, 63);
+		cbtypePartie.setMinHeight(63);
+		ComboBox<Integer> cbnbJr = new ComboBox<>();
+		cbnbJr.getItems().addAll(DataControl.nombreJoueur);
+		cbnbJr.setValue(6);//TODO
+		cbnbJr.setStyle("-fx-text-fill: white;");
+		cbnbJr.setPadding(new Insets(0, 0, 0, 20));
+		cbnbJr.setPrefSize(100, 63);
+		cbnbJr.setMinHeight(63);
+		ComboBox<String> cbStatutPartie = new ComboBox<>();
+		cbStatutPartie.getItems().addAll(DataControl.statutPartie);
+		cbStatutPartie.setValue("StatutPartie");//TODO
+		cbStatutPartie.setStyle("-fx-text-fill: white;");
+		//cbStatutPartie.setPadding(new Insets(0, 0, 0, 40));
+		cbStatutPartie.setPrefSize(200, 63);
+		cbStatutPartie.setMinHeight(63);
+		
+		hComboTri.getChildren().addAll(cbtypePartie,cbnbJr,cbStatutPartie);
+		hComboTri.setAlignment(Pos.CENTER);
+		hComboTri.setSpacing(20);
+		
 		TextField nomP = new TextField();
 		nomP.setText(International.trad("texte.Partie"));
 		nomP.setFont(policeBouton);
@@ -98,7 +126,7 @@ public class ConfigPartiePane extends StackPane implements IConfigListener {
 
 		VBox partie = new VBox();
 		partie.setAlignment(Pos.CENTER);
-		partie.getChildren().addAll(desc);
+		partie.getChildren().addAll(desc, hComboTri);
 		partie.setPadding(new Insets(10));
 		partie.setSpacing(17);
 		partie.setPrefWidth(220);
@@ -148,7 +176,7 @@ public class ConfigPartiePane extends StackPane implements IConfigListener {
 		bPbConnexion.setOnMouseExited(event -> {
 			bPbConnexion.setStyle(styleBoutons);
 		});
-		bPbConnexion.setTranslateX(240);
+		bPbConnexion.setTranslateX(155);
 
 		VBox vbCenter = new VBox();
 		vbCenter.setAlignment(Pos.CENTER);
@@ -184,9 +212,6 @@ public class ConfigPartiePane extends StackPane implements IConfigListener {
 		nomP.textProperty().addListener((obs, oldText, newText) -> {
 			bJouer.setDisable(nomP.getText().isEmpty());
 		});
-		// nomP.textProperty().addListener((obs, oldText, newText) -> {
-		// bJouer.setDisable(nomP.getText().isEmpty());
-		// });
 
 		Button bRetour = new Button(International.trad("bouton.retour"));
 		bRetour.setPrefSize(lBouton, hBouton);
