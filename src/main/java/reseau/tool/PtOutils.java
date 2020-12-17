@@ -36,8 +36,10 @@ public interface PtOutils {
 		FileInputStream fileInputStream = new FileInputStream(file);
 		byte[] buffer = new byte[(int) file.length()];
 		int result = fileInputStream.read(buffer);
-		if (result == -1)
+		if (result == -1){
+			fileInputStream.close();
 			throw new IllegalArgumentException(MessageFormat.format("Le fichier {0} est vide !", chemin));
+		}
 		fileInputStream.close();
 		String[] str = new String(buffer, StandardCharsets.UTF_8).split("\n");
 

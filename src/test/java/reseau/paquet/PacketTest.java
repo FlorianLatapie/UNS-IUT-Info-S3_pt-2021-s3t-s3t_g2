@@ -32,7 +32,6 @@ class PacketTest {
 		assertThrows(IllegalArgumentException.class, () -> packet.construire());
 		assertThrows(IllegalArgumentException.class, () -> packet.construire("0", 1));
 		assertThrows(IllegalArgumentException.class, () -> packet.construire("0"));
-		assertThrows(NullPointerException.class, () -> packet.construire(null));
 	}
 
 	@Test
