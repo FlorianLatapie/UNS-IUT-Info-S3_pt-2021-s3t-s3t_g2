@@ -225,14 +225,14 @@ public class AttenteJoueurPane extends StackPane implements IAttenteListener {
 		Circle[] circles = { cercle1, cercle2, cercle3, cercle4, cercle5, cercle6 };
 		for (int i = 0; i < circles.length; i++) {
 			if (i < max) {
-				if (i < joueurs.size()) {
-					circles[i].setFill(Color.LIGHTGREEN);
-				}
+				if (i < joueurs.size())
+					circles[i].setFill(Color.GREEN);
+				else
+					circles[i].setFill(null);
 
 				circles[i].setVisible(true);
-			}else {
+			} else
 				circles[i].setVisible(false);
-			}
 		}
 	}
 
