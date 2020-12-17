@@ -130,7 +130,7 @@ public class AccueilPane extends StackPane {
 		});
 		bJouer.setOnAction(EventHandler -> {
 			// TODO CARACTERE NON AUTORISE
-			if (nomjoueur.getText().length() < 32 && IhmTools.nomEstValide(nomjoueur.getText())) {
+			if (nomjoueur.getText().length() < 20 && IhmTools.nomEstValide(nomjoueur.getText())) {
 				core.getIdjr().setNom(nomjoueur.getText());
 				Initializer.nomJoueur(core.getIdjr().getNom());
 				core.getIdjr().listOfServers();
