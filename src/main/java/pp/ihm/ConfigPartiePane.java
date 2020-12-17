@@ -107,7 +107,7 @@ public class ConfigPartiePane extends StackPane {
 		nomP.setText("Partie" + (int) (100 * Math.random()));
 		nomP.setFont(Font.font("Segoe UI", FontWeight.BOLD, 30));
 		nomP.setStyle(
-				"-fx-background-color: #DFDFDF; -fx-text-fill: black; -fx-border-color: black; -fx-border-width: 3;");
+				"-fx-background-color: #2B2B2B; -fx-text-fill: white; -fx-border-color: black; -fx-border-width: 3;");
 		nomP.setBackground(null);
 		nomP.setAlignment(Pos.CENTER);
 		nomP.setPrefSize(160, 63);
@@ -133,7 +133,7 @@ public class ConfigPartiePane extends StackPane {
 		nbJr.getItems().addAll(DataControl.nombreJoueur);
 		nbJr.setValue(5);
 		nbJr.setStyle("-fx-text-fill: white;");
-		nbJr.setPadding(new Insets(0, 0, 0, 60));
+		nbJr.setPadding(new Insets(0, 0, 0, 40));
 		nbJr.setPrefSize(160, 63);
 		nbJr.setMinHeight(63);
 
@@ -158,7 +158,7 @@ public class ConfigPartiePane extends StackPane {
 		ComboBox<Integer> nbBot = new ComboBox<>();
 		nbBot.getItems().addAll(DataControl.nombreBot);
 		nbBot.setValue(5);
-		nbBot.setPadding(new Insets(0, 0, 0, 60));
+		nbBot.setPadding(new Insets(0, 0, 0, 40));
 		nbBot.setPrefSize(160, 63);
 		nbBot.setMinHeight(63);
 
