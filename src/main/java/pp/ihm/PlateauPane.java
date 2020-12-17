@@ -60,10 +60,7 @@ public class PlateauPane extends StackPane implements IPlateauListener {
 	private CornerRadii coinfb = new CornerRadii(5.0);
 	private Background fondBlanc = new Background(new BackgroundFill(Color.WHITE, coinfb, null));
 	private Background fondNoir = new Background(new BackgroundFill(Color.BLACK, coinfb, null));
-	private String tmpColor = " -fx-background-color:#000000; -fx-text-fill: #FF2626"; // TODO si cette couleur est
-																						// affichée en partie, il y a
-																						// une erreur dans l'event
-
+	private String tmpColor = " -fx-background-color:#000000; -fx-text-fill: #FF2626"; 
 	private int largBouton = 155;
 	private int hautBouton = 70;
 
@@ -231,8 +228,7 @@ public class PlateauPane extends StackPane implements IPlateauListener {
 		bPause2.setFont(policeBoutonPause);
 		HBox.setMargin(bPause2, margeBoutonPause);
 
-		j1 = new VBox(); // TODO j'ai ajouté les couleurs en ligne 53 à 58 il faut les appliquer avec des
-							// event sur j1,nbPerso1,nbCartes1,nomJoueur1 etc
+		j1 = new VBox(); 
 		nbPerso1 = new Label("## personnages");
 		nbPerso1.setFont(Font.font("Segoe UI", 20));
 		nbPerso1.setTextFill(Color.BLACK);
@@ -782,7 +778,7 @@ public class PlateauPane extends StackPane implements IPlateauListener {
 		/////
 
 		lChefVigile = new Label();
-		lChefVigile.setText("XXXXXXX" + " est le chef des vigiles"); // TODO
+		lChefVigile.setText("XXXXXXX" + " est le chef des vigiles"); 
 		lChefVigile.setBackground(fondBlanc);
 		lChefVigile.setFont(fontInfo);
 		lChefVigile.setPadding(margeLieu);
@@ -790,7 +786,7 @@ public class PlateauPane extends StackPane implements IPlateauListener {
 		AnchorPane.setLeftAnchor(lChefVigile, 375.0);
 
 		lChefVigile2 = new Label();
-		lChefVigile2.setText("XXXXXXX" + " est le chef des vigiles");// TODO
+		lChefVigile2.setText("XXXXXXX" + " est le chef des vigiles");
 		lChefVigile2.setBackground(fondBlanc);
 		lChefVigile2.setFont(fontInfo);
 		lChefVigile2.setPadding(margeLieu);
@@ -799,7 +795,7 @@ public class PlateauPane extends StackPane implements IPlateauListener {
 		AnchorPane.setRightAnchor(lChefVigile2, 425.0);
 
 		lChefVigile3 = new Label();
-		lChefVigile3.setText("XXXXXXX" + " est le chef des vigiles"); // TODO
+		lChefVigile3.setText("XXXXXXX" + " est le chef des vigiles"); 
 		lChefVigile3.setBackground(fondBlanc);
 		lChefVigile3.setFont(fontInfo);
 		lChefVigile3.setPadding(margeLieu);
@@ -808,7 +804,7 @@ public class PlateauPane extends StackPane implements IPlateauListener {
 		AnchorPane.setLeftAnchor(lChefVigile3, 180.0);
 
 		lChefVigile4 = new Label();
-		lChefVigile4.setText("XXXXXXX" + " est le chef des vigiles");// TODO
+		lChefVigile4.setText("XXXXXXX" + " est le chef des vigiles");
 		lChefVigile4.setBackground(fondBlanc);
 		lChefVigile4.setFont(fontInfo);
 		lChefVigile4.setPadding(margeLieu);
@@ -1351,8 +1347,6 @@ public class PlateauPane extends StackPane implements IPlateauListener {
 
 	@Override
 	public void destionationPerso(int lieu, List<Personnage> p) {
-		// TODO prendre le string le déouper et trouver quel perso il faut afficher et
-		// non afficher
 		Platform.runLater(() -> {
 			switch (lieu) {
 			case 1:
