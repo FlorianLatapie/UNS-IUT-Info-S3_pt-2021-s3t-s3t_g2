@@ -42,7 +42,7 @@ public class Bot {
 	private List<PionCouleur> listePion;
 	private List<Couleur> couleurJoueursPresent;
 	private List<Couleur> joueurEnVie;
-	private HashMap<Couleur,Integer> joueursVotant;
+	private HashMap<Couleur,Integer> joueursVotantPresent;
 	private VoteType voteType;
 	private Partie partie;
 	private BotType botType;
@@ -473,12 +473,12 @@ public class Bot {
 		this.botType = botType;
 	}
 
-	public HashMap<Couleur,Integer> getJoueursVotant() {
-		return joueursVotant;
+	public HashMap<Couleur,Integer> getJoueursVotantPresent() {
+		return joueursVotantPresent;
 	}
 
-	public void setJoueursVotant(HashMap<Couleur,Integer> joueursVotant) {
-		this.joueursVotant = joueursVotant;
+	public void setJoueursVotantPresent(HashMap<Couleur,Integer> joueursVotant) {
+		this.joueursVotantPresent = joueursVotant;
 	}
 
 
