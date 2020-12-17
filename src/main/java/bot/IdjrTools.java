@@ -1,5 +1,6 @@
 package bot;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import reseau.type.Couleur;
@@ -26,6 +27,14 @@ public abstract class IdjrTools {
 
         return Couleur.NUL;
     }
+    
+	public static List<Integer> getPionsByValues(List<PionCouleur> pc) {
+		List<Integer> tmp = new ArrayList<Integer>();
+		for (PionCouleur p : pc)
+			tmp.add(getPionByValue(p));
+
+		return tmp;
+	}
 
     public static int getPionByValue(PionCouleur pc) {
         String tmp = "" + pc.name().charAt(1);
