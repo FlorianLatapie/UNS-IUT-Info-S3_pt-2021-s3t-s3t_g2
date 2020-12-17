@@ -1,7 +1,7 @@
 package idjr.ihmidjr;
 
 import idjr.ihmidjr.DataControl.ApplicationPane;
-import idjr.ihmidjr.event.FinListener;
+import idjr.ihmidjr.event.IFinListener;
 import idjr.ihmidjr.langues.International;
 import javafx.application.Platform;
 import javafx.geometry.Insets;
@@ -31,7 +31,7 @@ import javafx.scene.text.TextAlignment;
  * @version 0.1
  * @since 01/11/2020
  */
-public class FinDePartiePane extends StackPane implements FinListener {
+public class FinDePartiePane extends StackPane implements IFinListener {
 
 	private ScreenControl sControl = null;
 	private Core core = null;

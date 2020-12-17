@@ -23,7 +23,6 @@ public interface IhmTools {
 		boolean result = true;
 		for (int i = 0; i < nom.length(); i++) {
 			boolean tmp = false;
-			System.out.println((int) nom.charAt(i));
 			for (int j = 0; j < intervalle.length; j++) {
 				if (intervalle[j][0] <= (int) nom.charAt(i) && intervalle[j][1] >= (int) nom.charAt(i)) {
 					boolean t = true;

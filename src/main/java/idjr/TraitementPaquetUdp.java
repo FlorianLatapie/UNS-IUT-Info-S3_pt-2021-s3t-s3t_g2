@@ -66,6 +66,8 @@ public class TraitementPaquetUdp extends TraitementPaquet<DatagramPacket> {
 	public void acp(Paquet packet, String message) {
 		if (ConnexionType.CLIENT != ControleurReseau.getConnexionType())
 			return;
+		
+		core.listOfServers();
 	}
 
 	public void amp(Paquet packet, String message) {
