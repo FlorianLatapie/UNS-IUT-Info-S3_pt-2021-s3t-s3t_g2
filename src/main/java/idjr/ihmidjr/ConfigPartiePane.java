@@ -83,14 +83,14 @@ public class ConfigPartiePane extends StackPane implements IConfigListener {
 
 		Label desc = new Label(International.trad("texte.idPartie"));
 		desc.setAlignment(Pos.CENTER);
-		desc.setFont(Font.font("Segoe UI", FontWeight.BOLD, 27));
+		desc.setFont(policeBouton);
 		desc.setTextFill(Color.WHITE);
 		desc.setMinHeight(hauteurElemtents);
 		desc.setPadding(botPadding);
 
 		TextField nomP = new TextField();
 		nomP.setText(International.trad("texte.Partie"));
-		nomP.setFont(Font.font("Segoe UI", FontWeight.BOLD, 27));
+		nomP.setFont(policeBouton);
 		nomP.setStyle("-fx-background-color: #1A1A1A; -fx-border-color: white; -fx-border-width: 1; -fx-text-fill: white;");
 		nomP.setPrefSize(400, hauteurElemtents);
 		nomP.setMinSize(400, hauteurElemtents);
@@ -257,7 +257,7 @@ public class ConfigPartiePane extends StackPane implements IConfigListener {
 				Label res = new Label(International.trad("texte.dispoPartie"));
 				res.setAlignment(Pos.CENTER);
 				res.setTextFill(Color.WHITE);
-				res.setFont(Font.font("Segoe UI", FontWeight.BOLD, 27));
+				res.setFont(policeBouton);
 				listView.getItems().add(res);
 			} else {
 				partieActuelle = partieInfo;
@@ -265,7 +265,7 @@ public class ConfigPartiePane extends StackPane implements IConfigListener {
 					Label res = new Label(partieInfo2.toString());
 					res.setAlignment(Pos.CENTER);
 					res.setTextFill(Color.WHITE);
-					res.setFont(Font.font("Segoe UI", FontWeight.BOLD, 27));
+					res.setFont(policeBouton);
 					listView.getItems().add(res);
 				}
 			}
