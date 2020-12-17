@@ -7,6 +7,7 @@ import java.util.TimerTask;
 import pp.Personnage;
 import pp.ihm.DataControl.ApplicationPane;
 import pp.ihm.event.IPlateauListener;
+import pp.ihm.langues.ITraduction;
 import pp.ihm.langues.International;
 import reseau.type.Couleur;
 import reseau.type.TypePersonnage;
@@ -27,7 +28,7 @@ import javafx.scene.text.FontWeight;
 import javafx.scene.text.TextAlignment;
 import javafx.util.Duration;
 
-public class PlateauPane extends StackPane implements IPlateauListener {
+public class PlateauPane extends StackPane implements IPlateauListener, ITraduction {
 	private ScreenControl sControl = null;
 	private Core core = null;
 	private final ApplicationPane paneName = ApplicationPane.PLATEAU; // nom du pane
@@ -60,7 +61,7 @@ public class PlateauPane extends StackPane implements IPlateauListener {
 	private CornerRadii coinfb = new CornerRadii(5.0);
 	private Background fondBlanc = new Background(new BackgroundFill(Color.WHITE, coinfb, null));
 	private Background fondNoir = new Background(new BackgroundFill(Color.BLACK, coinfb, null));
-	private String tmpColor = " -fx-background-color:#000000; -fx-text-fill: #FF2626"; 
+	private String tmpColor = " -fx-background-color:#000000; -fx-text-fill: #FF2626";
 	private int largBouton = 155;
 	private int hautBouton = 70;
 
@@ -228,7 +229,7 @@ public class PlateauPane extends StackPane implements IPlateauListener {
 		bPause2.setFont(policeBoutonPause);
 		HBox.setMargin(bPause2, margeBoutonPause);
 
-		j1 = new VBox(); 
+		j1 = new VBox();
 		nbPerso1 = new Label("## personnages");
 		nbPerso1.setFont(Font.font("Segoe UI", 20));
 		nbPerso1.setTextFill(Color.BLACK);
@@ -237,7 +238,7 @@ public class PlateauPane extends StackPane implements IPlateauListener {
 		nbCartes1.setFont(Font.font("Segoe UI", 20));
 		nbCartes1.setTextFill(Color.BLACK);
 		nbCartes1.setStyle(tmpColor);
-		nomJoueur1 = new Label("nom Joueur1");
+		nomJoueur1 = new Label(International.trad("texte.nomJoueur1"));
 		nomJoueur1.setFont(Font.font("Segoe UI", 20));
 		nomJoueur1.setTextFill(Color.BLACK);
 		nomJoueur1.setStyle(tmpColor);
@@ -261,7 +262,7 @@ public class PlateauPane extends StackPane implements IPlateauListener {
 		nbCartes2.setFont(Font.font("Segoe UI", 20));
 		nbCartes2.setTextFill(Color.BLACK);
 		nbCartes2.setStyle(tmpColor);
-		nomJoueur2 = new Label("Nom Joueur 2");
+		nomJoueur2 = new Label(International.trad("texte.nomJoueur2"));
 		nomJoueur2.setFont(Font.font("Segoe UI", 20));
 		nomJoueur2.setTextFill(Color.BLACK);
 		nomJoueur2.setStyle(tmpColor);
@@ -312,7 +313,7 @@ public class PlateauPane extends StackPane implements IPlateauListener {
 		nbCartes3.setFont(Font.font("Segoe UI", 20));
 		nbCartes3.setTextFill(Color.BLACK);
 		nbCartes3.setStyle(tmpColor);
-		nomJoueur3 = new Label("Nom Joueur 3");
+		nomJoueur3 = new Label(International.trad("texte.nomJoueur3"));
 		nomJoueur3.setFont(Font.font("Segoe UI", 20));
 		nomJoueur3.setTextFill(Color.BLACK);
 		nomJoueur3.setStyle(tmpColor);
@@ -336,7 +337,7 @@ public class PlateauPane extends StackPane implements IPlateauListener {
 		nbCartes4.setFont(Font.font("Segoe UI", 20));
 		nbCartes4.setTextFill(Color.BLACK);
 		nbCartes4.setStyle(tmpColor);
-		nomJoueur4 = new Label("Nom Joueur 4");
+		nomJoueur4 = new Label(International.trad("texte.nomJoueur4"));
 		nomJoueur4.setFont(Font.font("Segoe UI", 20));
 		nomJoueur4.setTextFill(Color.BLACK);
 		nomJoueur4.setStyle(tmpColor);
@@ -364,7 +365,7 @@ public class PlateauPane extends StackPane implements IPlateauListener {
 		nbCartes5.setFont(Font.font("Segoe UI", 20));
 		nbCartes5.setTextFill(Color.BLACK);
 		nbCartes5.setStyle(tmpColor);
-		nomJoueur5 = new Label("Nom Joueur 5");
+		nomJoueur5 = new Label(International.trad("texte.nomJoueur5"));
 		nomJoueur5.setFont(Font.font("Segoe UI", 20));
 		nomJoueur5.setTextFill(Color.BLACK);
 		nomJoueur5.setStyle(tmpColor);
@@ -393,7 +394,7 @@ public class PlateauPane extends StackPane implements IPlateauListener {
 		nbCartes6.setFont(Font.font("Segoe UI", 20));
 		nbCartes6.setTextFill(Color.BLACK);
 		nbCartes6.setStyle(tmpColor);
-		nomJoueur6 = new Label("Nom Joueur 6");
+		nomJoueur6 = new Label(International.trad("texte.nomJoueur6"));
 		nomJoueur6.setFont(Font.font("Segoe UI", 20));
 		nomJoueur6.setTextFill(Color.BLACK);
 		nomJoueur6.setStyle(tmpColor);
@@ -778,14 +779,14 @@ public class PlateauPane extends StackPane implements IPlateauListener {
 		/////
 
 		lChefVigile = new Label();
-		lChefVigile.setText("XXXXXXXXXX" + " est le chef des vigiles"); 
+		lChefVigile.setText("");
 		lChefVigile.setBackground(fondBlanc);
 		lChefVigile.setFont(fontInfo);
 		lChefVigile.setPadding(margeLieu);
 		lChefVigile.setTranslateY(210);
 
 		lChefVigile2 = new Label();
-		lChefVigile2.setText("XXXXXXXXXX" + " est le chef des vigiles");
+		lChefVigile2.setText("");
 		lChefVigile2.setBackground(fondBlanc);
 		lChefVigile2.setFont(fontInfo);
 		lChefVigile2.setPadding(margeLieu);
@@ -793,7 +794,7 @@ public class PlateauPane extends StackPane implements IPlateauListener {
 		lChefVigile2.setTranslateY(-200);
 
 		lChefVigile3 = new Label();
-		lChefVigile3.setText("XXXXXXXXXX" + " est le chef des vigiles"); 
+		lChefVigile3.setText("");
 		lChefVigile3.setBackground(fondBlanc);
 		lChefVigile3.setFont(fontInfo);
 		lChefVigile3.setPadding(margeLieu);
@@ -801,7 +802,7 @@ public class PlateauPane extends StackPane implements IPlateauListener {
 		lChefVigile3.setTranslateX(-200);
 
 		lChefVigile4 = new Label();
-		lChefVigile4.setText("XXXXXXXXXX" + " est le chef des vigiles");
+		lChefVigile4.setText("");
 		lChefVigile4.setBackground(fondBlanc);
 		lChefVigile4.setFont(fontInfo);
 		lChefVigile4.setPadding(margeLieu);
@@ -841,7 +842,8 @@ public class PlateauPane extends StackPane implements IPlateauListener {
 		VBox vTitreInfo1 = new VBox();
 		vTitreInfo1.setAlignment(Pos.CENTER);
 		vTitreInfo1.setPadding(new Insets(20));
-		titreInfo1 = new Label("Déplacement d'un pion du chef \ndes vigiles");
+		titreInfo1 = new Label(
+				International.trad("text.deplChefVigile1") + "\n" + International.trad("text.deplChefVigile2"));
 		titreInfo1.setTextAlignment(TextAlignment.CENTER);
 		titreInfo1.setFont(Font.font("Segoe UI", FontWeight.BOLD, 25));
 		titreInfo1.setTextFill(Color.WHITE);
@@ -849,7 +851,7 @@ public class PlateauPane extends StackPane implements IPlateauListener {
 
 		VBox vInfo1 = new VBox();
 		vInfo1.setAlignment(Pos.CENTER);
-		lInfo1 = new Label("Voici l'information que vous voulez savoir");
+		lInfo1 = new Label(International.trad("text.lInfo"));
 		lInfo1.setTextAlignment(TextAlignment.CENTER);
 		lInfo1.setFont(Font.font("Segoe UI", FontWeight.BOLD, 20));
 		lInfo1.setTextFill(Color.WHITE);
@@ -1065,8 +1067,9 @@ public class PlateauPane extends StackPane implements IPlateauListener {
 		j5.setVisible(false);
 		j6.setVisible(false);
 
-		this.getChildren().addAll(imgFond, borderJoueurs, aPlateau, lChefVigile, lChefVigile2, lChefVigile3, lChefVigile4, imgCarteFerme1, imgCarteFerme2, imgCarteFerme3,
-				imgCarteFerme5, imgCarteFerme6, notifInfo);
+		this.getChildren().addAll(imgFond, borderJoueurs, aPlateau, lChefVigile, lChefVigile2, lChefVigile3,
+				lChefVigile4, imgCarteFerme1, imgCarteFerme2, imgCarteFerme3, imgCarteFerme5, imgCarteFerme6,
+				notifInfo);
 		this.setMinSize(1920, 1080);
 		this.setPrefSize(1920, 1080);
 		this.setMaxSize(1920, 1080);
@@ -1475,5 +1478,35 @@ public class PlateauPane extends StackPane implements IPlateauListener {
 				imageViews[i].setVisible(false);
 			}
 		}
+	}
+
+	@Override
+	public void traduire() {
+		nbZombies1.setText(International.trad("text.nbZombie"));
+		nbZombies2.setText(International.trad("text.nbZombie"));
+		nbZombies3.setText(International.trad("text.nbZombie"));
+		nbZombies4.setText(International.trad("text.nbZombie"));
+		nbZombies5.setText(International.trad("text.nbZombie"));
+		nbZombies6.setText(International.trad("text.nbZombie"));
+		nomJoueur1.setText(International.trad("texte.nomJoueur1"));
+		nomJoueur2.setText(International.trad("texte.nomJoueur2"));
+		nomJoueur3.setText(International.trad("texte.nomJoueur3"));
+		nomJoueur4.setText(International.trad("texte.nomJoueur4"));
+		nomJoueur5.setText(International.trad("texte.nomJoueur5"));
+		nomJoueur6.setText(International.trad("texte.nomJoueur6"));
+		bQuitterInfo1.setText(International.trad("bouton.quitter"));
+		bQuitterInfo2.setText(International.trad("bouton.quitter"));
+		bQuitterInfo3.setText(International.trad("bouton.quitter"));
+		bQuitterInfo4.setText(International.trad("bouton.quitter"));
+		titreInfo1.setText(
+				International.trad("text.deplChefVigile1") + "\n" + International.trad("text.deplChefVigile2"));
+		titreInfo2.setText(
+				International.trad("text.deplChefVigile1") + "\n" + International.trad("text.deplChefVigile2"));
+		titreInfo3.setText(
+				International.trad("text.deplChefVigile1") + "\n" + International.trad("text.deplChefVigile2"));
+		lInfo1.setText(International.trad("text.lInfo"));
+		lInfo2.setText(International.trad("text.lInfo"));
+		lInfo3.setText(International.trad("text.lInfo"));
+		lInfo4.setText(International.trad("text.lInfo"));
 	}
 }
