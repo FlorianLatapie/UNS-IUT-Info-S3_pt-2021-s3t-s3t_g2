@@ -67,6 +67,9 @@ public class TcpClient implements Runnable, IEchangeSocket, IMessagePaquet {
 		this.logger = Logger.getLogger(getClass().getName());
 		this.socket = socket;
 		this.cleFin = cleFin;
+		this.paquetRecuEnvoyeList = new ArrayList<>();
+		this.paquetRecuList = new ArrayList<>();
+		this.paquetEnvoyeList = new ArrayList<>();
 	}
 
 	/**
