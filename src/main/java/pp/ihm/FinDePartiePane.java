@@ -122,7 +122,6 @@ public class FinDePartiePane extends StackPane implements IFinListener, ITraduct
 
 		BorderPane bHaut = new BorderPane();
 
-		HBox bHautCentre = new HBox();
 		gagnant2 = new Label("Le joueur XXXXXXXX a gagné"); // do not translate 
 		gagnant2.setTextAlignment(TextAlignment.CENTER);
 		gagnant2.setFont(policeNom);
@@ -196,6 +195,8 @@ public class FinDePartiePane extends StackPane implements IFinListener, ITraduct
 		centreMenu.setMaxSize(tailleCarreCentral, tailleCarreCentral);
 		centreMenu.setAlignment(titre, Pos.CENTER);
 		centreMenu.setCenter(vbCenter);
+		centreMenu.setTop(bHaut);
+		centreMenu.setBottom(bBas);
 
 		// Boutons de rotation d'écran
 		ImageView img1 = new ImageView(DataControl.SCREEN);
