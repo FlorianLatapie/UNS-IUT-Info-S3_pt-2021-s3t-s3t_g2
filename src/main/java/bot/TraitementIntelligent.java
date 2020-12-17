@@ -203,6 +203,14 @@ public class TraitementIntelligent {
 		}
 		return CarteType.NUL;
 	}
+	
+	/**
+	 * Choix carte fouille intelligente
+	 *
+	 * @param Une liste de type de carte
+	 * @param Un bot pour lequel le traitement s'effectue
+	 * @return La liste des carte gardée/donnée/choisie
+	 */
 
 	protected static List<Object> carteFouilleIntelligent(List<CarteType> listeCarte, Bot core) {
 		// TODO faire la version intelligente
@@ -264,6 +272,15 @@ public class TraitementIntelligent {
 			return maxDiff;
 	}
 
+	/**
+	 * Choix du pion a deplacer
+	 *
+	 * @param Bot pour lequel le traitement s'effectue
+	 * @param un  integer correspond au numéro d'un lieu
+	 * @param un  dictionnaire d'integer/Liste d'integer correspondant a la liste
+	 *            des deplacements
+	 * @return la liste des deplacements
+	 */
 	protected static List<Object> pionADeplacerIntelligent(Bot core, int dest,
 			HashMap<Integer, List<Integer>> listedp) {
 		List<Object> listRenvoye = new ArrayList<>();
@@ -324,6 +341,14 @@ public class TraitementIntelligent {
 			pion = core.getPionAPos().get(new Random().nextInt(core.getPionAPos().size()));
 		return pion;
 	}
+	
+	/**
+	 * Choix de la destination intelligente
+	 *
+	 * @param Bot pour lequel le traitement s'effectue
+	 * @param Une liste qui correspond a la liste de lieux
+	 * @return la destination choisie
+	 */
 
 	protected static Integer choisirDestPlacementIntelligent(Bot core, List<?> destRestantT) {
 		List<Integer> destRestant = new ArrayList<>();
@@ -346,6 +371,14 @@ public class TraitementIntelligent {
 			
 		return dest;
 	}
+	
+	/**
+	 * Vote intelligent
+	 *
+	 * @param Bot pour lequel le traitement s'effectue
+	 * @param Un type de vote
+	 * @return la couleur du joueur pour lequel on vote
+	 */
 
 	protected static Couleur voteIntelligent(Bot core, VoteType vt) {
 		// TODO can be upgrade
