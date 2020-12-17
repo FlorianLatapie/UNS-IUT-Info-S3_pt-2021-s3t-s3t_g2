@@ -15,28 +15,33 @@ import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import pp.ihm.langues.ITraduction;
 import pp.ihm.langues.International;
 
 /**
  * @author Remy
  *
  */
-public class ConfirmationPane {
+public class ConfirmationPane implements ITraduction {
 
 	static boolean reponse;
 	private static int tailleFenetreL = 500;
 	private static int tailleFenetreH = 190;
 	private static String nomPolice = "Segoe UI";
-	
+
+	static Button boutonOui;
+	static Button boutonNon;
+
 	/**
 	 * affiche une fenêtre de confirmation avec un titre et un message personnalisé
-	 * @param titre titre de la fenetre
-	 * @param message message affiché dans la fenetre 
+	 * 
+	 * @param titre   titre de la fenetre
+	 * @param message message affiché dans la fenetre
 	 * @return
 	 */
 	public static boolean afficher(String titre, String messageL1) {
-		
-		//nouvelle fenetre
+
+		// nouvelle fenetre
 		Stage window = new Stage();
 		window.getIcons().add(new Image(DataControl.ICONE));
 		window.initModality(Modality.APPLICATION_MODAL);
@@ -48,21 +53,21 @@ public class ConfirmationPane {
 		window.setHeight(tailleFenetreH);
 		window.setMinWidth(tailleFenetreL);
 		window.setMinHeight(tailleFenetreH);
-		
-		//titre
+
+		// titre
 		Label labelL1 = new Label();
 		labelL1.setText(messageL1);
 		labelL1.setStyle("-fx-text-fill: #DDDDDD");
 		labelL1.setFont(Font.font(nomPolice, FontWeight.BOLD, 20));
-		labelL1.setPadding(new Insets(10,10,0,10));
+		labelL1.setPadding(new Insets(10, 10, 0, 10));
 
-		//boutons
-		Button boutonOui = new Button(International.trad("bouton.quitter"));
+		// boutons
+		boutonOui = new Button(International.trad("bouton.quitter"));
 		boutonOui.setPrefSize(200, 50);
 		boutonOui.setStyle("-fx-background-color: #ff0000; -fx-background-radius: 5px; -fx-text-fill: #ffffff");
 		boutonOui.setFont(Font.font(nomPolice, FontWeight.BOLD, 27));
 
-		Button boutonNon = new Button(International.trad("bouton.annuler"));
+		boutonNon = new Button(International.trad("bouton.annuler"));
 		boutonNon.setPrefSize(200, 50);
 		boutonNon.setStyle("-fx-background-color: #A9A9A9; -fx-background-radius: 5px; -fx-text-fill: #ffffff");
 		boutonNon.setFont(Font.font(nomPolice, FontWeight.BOLD, 27));
@@ -84,7 +89,7 @@ public class ConfirmationPane {
 
 		VBox layout = new VBox(10);
 		layout.setAlignment(Pos.TOP_CENTER);
-		layout.getChildren().addAll(labelL1,boutonHbox);
+		layout.getChildren().addAll(labelL1, boutonHbox);
 		layout.setStyle(" -fx-background-color: #1F1F1F;");
 		Scene scene = new Scene(layout);
 
@@ -92,5 +97,12 @@ public class ConfirmationPane {
 		window.showAndWait();
 
 		return reponse;
+	}
+
+	@Override
+	public void traduire() {
+		boutonOui.setText(International.trad("bouton.quitter"));
+		boutonNon.setText(International.trad("bouton.annuler"));
+
 	}
 }
