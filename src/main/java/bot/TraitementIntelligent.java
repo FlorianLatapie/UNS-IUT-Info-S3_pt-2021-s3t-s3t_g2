@@ -366,7 +366,6 @@ public class TraitementIntelligent {
 					}
 				}
 			}
-
 		return dest;
 	}
 

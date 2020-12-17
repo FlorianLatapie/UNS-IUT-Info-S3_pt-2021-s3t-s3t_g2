@@ -40,7 +40,9 @@ public class Bot {
 	private int compteurTour;
 	private List<CarteType> listeCarte;
 	private List<PionCouleur> listePion;
-	private List<Couleur> couleurJoueursPresent;
+	private List<Couleur> couleurJoueursPresentVotant;
+	
+
 	private List<Couleur> joueurEnVie;
 	private HashMap<Couleur,Integer> joueursVotantPresent;
 	private VoteType voteType;
@@ -67,8 +69,12 @@ public class Bot {
 		arreter();
 	}
 
-	public void setCouleurJoueurs(List<Couleur> couleurJoueurs) {
-		this.couleurJoueursPresent = couleurJoueurs;
+	public List<Couleur> getCouleurJoueursPresentVotant() {
+		return couleurJoueursPresentVotant;
+	}
+
+	public void setCouleurJoueursPresentVotant(List<Couleur> couleurJoueursPresentVotant) {
+		this.couleurJoueursPresentVotant = couleurJoueursPresentVotant;
 	}
 
 	private void initBot() {
@@ -77,7 +83,7 @@ public class Bot {
 		this.pionAPos = new ArrayList<>();
 		this.lieuOuvert = new ArrayList<>();
 		this.listeCarte = new ArrayList<>();
-		this.couleurJoueursPresent = new ArrayList<>();
+		this.couleurJoueursPresentVotant = new ArrayList<>();
 		this.listePion = new ArrayList<>();
 		this.envie = true;
 		this.estFini = false;
@@ -208,7 +214,7 @@ public class Bot {
 	}
 
 	public List<Couleur> couleurJoueurPresent() {
-		return couleurJoueursPresent;
+		return couleurJoueursPresentVotant;
 	}
 
 	public VoteType getVoteType() {
