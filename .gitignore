@@ -1,5 +1,6 @@
 ### University Nice ###
 .github/
+*.opts
 
 ### Eclipse ###
 .metadata
