@@ -9,8 +9,7 @@ import pp.ihm.langues.International;
 public class DataControl {
 
 	public static enum ApplicationPane {
-		ACCUEIL, AIDE, CREATION, JEU, OPTION, PAUSE, PLATEAU, CONFIG, REGLES, ACCESSIBILITE, ENDGAME, WAIT, COULEUR,
-		CONFIG_BOT
+		ACCUEIL, OPTION, PAUSE, PLATEAU, CONFIG, REGLES, ACCESSIBILITE, ENDGAME, WAIT, COULEUR, CONFIG_BOT
 	}
 
 	public static enum ApplicationLangue {
