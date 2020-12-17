@@ -4,18 +4,11 @@ import reseau.tool.PaquetOutils;
 
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
-import java.io.EOFException;
 import java.io.IOException;
-import java.lang.reflect.Array;
 import java.net.InetAddress;
 import java.net.Socket;
-import java.net.UnknownHostException;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.Iterator;
 import java.util.List;
-import java.util.concurrent.ExecutionException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -32,6 +25,10 @@ public class TcpClient implements Runnable, IEchangeSocket, IMessagePaquet {
 	private DataOutputStream fluxSortie;
 	private DataInputStream fluxEntre;
 	private InetAddress ip;
+
+	private List<String> paquetRecuEnvoyeList;
+	private List<String> paquetRecuList;
+	private List<String> paquetEnvoyeList;
 
 	private final int port;
 	private String cleFin;
@@ -52,6 +49,9 @@ public class TcpClient implements Runnable, IEchangeSocket, IMessagePaquet {
 		this.estLancer = true;
 		this.port = port;
 		this.logger = Logger.getLogger(getClass().getName());
+		this.paquetRecuEnvoyeList = new ArrayList<>();
+		this.paquetRecuList = new ArrayList<>();
+		this.paquetEnvoyeList = new ArrayList<>();
 	}
 
 	/**
@@ -147,6 +147,9 @@ public class TcpClient implements Runnable, IEchangeSocket, IMessagePaquet {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+		
+		this.paquetEnvoyeList.add(message);
+		this.paquetRecuEnvoyeList.add(message);
 	}
 
 	/**
@@ -170,6 +173,8 @@ public class TcpClient implements Runnable, IEchangeSocket, IMessagePaquet {
 
 			ControleurReseau.traitementPaquetTcp(ControleurReseau.getPaquetTcp(cle), message, this);
 			messagesTampon.add(message);
+			this.paquetRecuList.add(message);
+			this.paquetRecuEnvoyeList.add(message);
 		}
 
 		try {
@@ -268,5 +273,17 @@ public class TcpClient implements Runnable, IEchangeSocket, IMessagePaquet {
 	 */
 	public boolean isArreter() {
 		return !socket.isClosed();
+	}
+
+	public List<String> getPaquetRecuEnvoyeList() {
+		return paquetRecuEnvoyeList;
+	}
+
+	public List<String> getPaquetRecuList() {
+		return paquetRecuList;
+	}
+
+	public List<String> getPaquetEnvoyeList() {
+		return paquetEnvoyeList;
 	}
 }
