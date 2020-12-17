@@ -2,6 +2,7 @@ package pp.ihm;
 
 import pp.ihm.DataControl.ApplicationPane;
 import pp.ihm.event.IFinListener;
+import pp.ihm.langues.ITraduction;
 import pp.ihm.langues.International;
 import javafx.application.Platform;
 import javafx.geometry.Insets;
@@ -23,7 +24,7 @@ import javafx.scene.text.TextAlignment;
  * @version 0.1
  * @since 26/10/2020
  */
-public class FinDePartiePane extends StackPane implements IFinListener {
+public class FinDePartiePane extends StackPane implements IFinListener, ITraduction {
 	private ScreenControl sControl = null;
 	private Core core = null;
 	private final ApplicationPane paneName = ApplicationPane.ENDGAME;
@@ -33,7 +34,7 @@ public class FinDePartiePane extends StackPane implements IFinListener {
 	private int lBouton = 150;
 
 	private Font policeBouton = Font.font("Segoe UI", FontWeight.BOLD, 27);
-	private Font policeNom = Font.font("Segoe UI",FontWeight.BOLD, 37);
+	private Font policeNom = Font.font("Segoe UI", FontWeight.BOLD, 37);
 
 	private String styleBoutons = "-fx-background-color:#000000; -fx-background-radius: 15px; -fx-text-fill: #ffffff";
 	private String styleBoutonsSouris = "-fx-background-color:#ff0000;  -fx-text-fill:#000000; -fx-background-radius: 15px;";
@@ -52,12 +53,18 @@ public class FinDePartiePane extends StackPane implements IFinListener {
 	Label gagnant3;
 	Label gagnant4;
 
+	Label titre1;
+	Button bRetour1;
+	Button bRetour2;
+	Button bRetour3;
+	Button bRetour4;
+
 	public FinDePartiePane(ScreenControl sc, Core c) {
 		core = c;
 		sControl = sc;
 
 		// titre
-		Label titre1 = new Label(
+		titre1 = new Label(
 				International.trad("text.titreFinDePartieA") + "\n" + International.trad("text.titreFinDePartieB"));
 		titre1.setFont(Font.font("Segoe UI", FontWeight.BOLD, 80));
 		titre1.setTextFill(Color.BLACK);
@@ -82,13 +89,14 @@ public class FinDePartiePane extends StackPane implements IFinListener {
 		gagnant1.setTextAlignment(TextAlignment.CENTER);
 		gagnant1.setFont(policeNom);
 		gagnant1.setTextFill(Color.WHITESMOKE);
-		gagnant1.setStyle("-fx-background-color:#1A1A1A; -fx-background-radius: 20px; -fx-border-color: red; -fx-border-insets: -3; -fx-border-width: 3; -fx-border-radius: 20px;");
+		gagnant1.setStyle(
+				"-fx-background-color:#1A1A1A; -fx-background-radius: 20px; -fx-border-color: red; -fx-border-insets: -3; -fx-border-width: 3; -fx-border-radius: 20px;");
 		gagnant1.setPadding(padding);
-		
+
 		bBasCentre.setAlignment(Pos.CENTER);
 		bBasCentre.getChildren().addAll(gagnant1);
 
-		Button bRetour1 = new Button(International.trad("bouton.retour"));
+		bRetour1 = new Button(International.trad("bouton.retour"));
 		bRetour1.setPrefSize(lBouton, hBouton);
 		bRetour1.setMinSize(lBouton, hBouton);
 		bRetour1.setFont(policeBouton);
@@ -98,7 +106,7 @@ public class FinDePartiePane extends StackPane implements IFinListener {
 		bRetour1.setOnMouseExited(event -> bRetour1.setStyle(styleBoutons));
 		bRetour1.setOnAction(EventHandler -> sc.setPaneOnTop(ApplicationPane.ACCUEIL));
 
-		Button bRetour2 = new Button(International.trad("bouton.retour"));
+		bRetour2 = new Button(International.trad("bouton.retour"));
 		bRetour2.setPrefSize(lBouton, hBouton);
 		bRetour2.setMinSize(lBouton, hBouton);
 		bRetour2.setFont(policeBouton);
@@ -122,12 +130,13 @@ public class FinDePartiePane extends StackPane implements IFinListener {
 		gagnant2.setTextAlignment(TextAlignment.CENTER);
 		gagnant2.setFont(policeNom);
 		gagnant2.setTextFill(Color.WHITESMOKE);
-		gagnant2.setStyle("-fx-background-color:#1A1A1A; -fx-background-radius: 20px; -fx-border-color: red; -fx-border-insets: -3; -fx-border-width: 3; -fx-border-radius: 20px;");
+		gagnant2.setStyle(
+				"-fx-background-color:#1A1A1A; -fx-background-radius: 20px; -fx-border-color: red; -fx-border-insets: -3; -fx-border-width: 3; -fx-border-radius: 20px;");
 		gagnant2.setPadding(padding);
 		bHautCentre.setAlignment(Pos.CENTER);
 		bHautCentre.getChildren().addAll(gagnant2);
 
-		Button bRetour3 = new Button(International.trad("bouton.retour"));
+		bRetour3 = new Button(International.trad("bouton.retour"));
 		bRetour3.setPrefSize(lBouton, hBouton);
 		bRetour3.setMinSize(lBouton, hBouton);
 		bRetour3.setFont(policeBouton);
@@ -137,7 +146,7 @@ public class FinDePartiePane extends StackPane implements IFinListener {
 		bRetour3.setOnMouseExited(event -> bRetour3.setStyle(styleBoutons));
 		bRetour3.setOnAction(EventHandler -> sc.setPaneOnTop(ApplicationPane.ACCUEIL));
 
-		Button bRetour4 = new Button(International.trad("bouton.retour"));
+		bRetour4 = new Button(International.trad("bouton.retour"));
 		bRetour4.setPrefSize(lBouton, hBouton);
 		bRetour4.setMinSize(lBouton, hBouton);
 		bRetour4.setFont(policeBouton);
@@ -159,7 +168,8 @@ public class FinDePartiePane extends StackPane implements IFinListener {
 		gagnant3.setTextAlignment(TextAlignment.CENTER);
 		gagnant3.setFont(policeNom);
 		gagnant3.setTextFill(Color.WHITESMOKE);
-		gagnant3.setStyle("-fx-background-color:#1A1A1A; -fx-background-radius: 20px; -fx-border-color: red; -fx-border-insets: -3; -fx-border-width: 3; -fx-border-radius: 20px;");
+		gagnant3.setStyle(
+				"-fx-background-color:#1A1A1A; -fx-background-radius: 20px; -fx-border-color: red; -fx-border-insets: -3; -fx-border-width: 3; -fx-border-radius: 20px;");
 		gagnant3.setPadding(padding);
 		gagnant3.setRotate(-90);
 		hDroite.setAlignment(Pos.CENTER_RIGHT);
@@ -173,7 +183,8 @@ public class FinDePartiePane extends StackPane implements IFinListener {
 		gagnant4.setTextAlignment(TextAlignment.CENTER);
 		gagnant4.setFont(policeNom);
 		gagnant4.setTextFill(Color.WHITESMOKE);
-		gagnant4.setStyle("-fx-background-color:#1A1A1A; -fx-background-radius: 20px; -fx-border-color: red; -fx-border-insets: -3; -fx-border-width: 3; -fx-border-radius: 20px;");
+		gagnant4.setStyle(
+				"-fx-background-color:#1A1A1A; -fx-background-radius: 20px; -fx-border-color: red; -fx-border-insets: -3; -fx-border-width: 3; -fx-border-radius: 20px;");
 		gagnant4.setPadding(padding);
 		gagnant4.setRotate(90);
 		hGauche.setAlignment(Pos.CENTER);
@@ -272,5 +283,15 @@ public class FinDePartiePane extends StackPane implements IFinListener {
 			gagnant3.setText(tmp);
 			gagnant4.setText(tmp);
 		});
+	}
+
+	@Override
+	public void traduire() {
+		titre1.setText(
+				International.trad("text.titreFinDePartieA") + "\n" + International.trad("text.titreFinDePartieB"));
+		bRetour1.setText(International.trad("bouton.retour"));
+		bRetour2.setText(International.trad("bouton.retour"));
+		bRetour3.setText(International.trad("bouton.retour"));
+		bRetour4.setText(International.trad("bouton.retour"));
 	}
 }

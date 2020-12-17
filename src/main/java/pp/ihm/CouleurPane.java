@@ -588,33 +588,57 @@ public class CouleurPane extends StackPane implements ICouleurListener, ITraduct
 
 	private void setJoueurConfig(int maxJr) {
 		if (maxJr == 3) {
-			j1.setDisable(false);
+			/*j1.setDisable(false);
 			j2.setDisable(false);
 			j3.setDisable(false);
 			j4.setDisable(true);
 			j5.setDisable(true);
-			j6.setDisable(true);
+			j6.setDisable(true);*/
+			j1.setVisible(true);
+			j2.setVisible(true);
+			j3.setVisible(true);
+			j4.setVisible(false);
+			j5.setVisible(false);
+			j6.setVisible(false);
 		} else if (maxJr == 4) {
-			j1.setDisable(false);
+			/*j1.setDisable(false);
 			j2.setDisable(false);
 			j3.setDisable(false);
 			j4.setDisable(false);
 			j5.setDisable(true);
-			j6.setDisable(true);
+			j6.setDisable(true);*/
+			j1.setVisible(true);
+			j2.setVisible(true);
+			j3.setVisible(true);
+			j4.setVisible(true);
+			j5.setVisible(false);
+			j6.setVisible(false);
 		} else if (maxJr == 5) {
-			j1.setDisable(false);
+			/*j1.setDisable(false);
 			j2.setDisable(false);
 			j3.setDisable(false);
 			j4.setDisable(false);
 			j5.setDisable(false);
-			j6.setDisable(true);
+			j6.setDisable(true);*/
+			j1.setVisible(true);
+			j2.setVisible(true);
+			j3.setVisible(true);
+			j4.setVisible(true);
+			j5.setVisible(true);
+			j6.setVisible(false);
 		} else {
-			j1.setDisable(false);
+			/*j1.setDisable(false);
 			j2.setDisable(false);
 			j3.setDisable(false);
 			j4.setDisable(false);
 			j5.setDisable(false);
-			j6.setDisable(false);
+			j6.setDisable(false);*/
+			j1.setVisible(true);
+			j2.setVisible(true);
+			j3.setVisible(true);
+			j4.setVisible(true);
+			j5.setVisible(true);
+			j6.setVisible(true);
 		}
 	}
 
