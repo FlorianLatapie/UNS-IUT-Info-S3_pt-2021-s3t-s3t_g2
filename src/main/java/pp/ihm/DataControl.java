@@ -66,7 +66,7 @@ public class DataControl {
 	public static final String BLONDE_V = "pp/ihm/images/Pions/vert3.png";
 	public static final String FILLETTE_V = "pp/ihm/images/Pions/vert4.png";
 	
-
+	public static final String CSS = "pp/ihm/style/style.css";
 	// for testing purpose
 	//public static final String NOM_COULEUR = TRUAND_V;
 

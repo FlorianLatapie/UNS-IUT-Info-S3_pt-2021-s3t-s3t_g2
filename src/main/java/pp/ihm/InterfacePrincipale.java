@@ -48,7 +48,7 @@ public class InterfacePrincipale extends Application {
 		
 
 		Initializer.updatePleineEcran();
-
+		scene.getStylesheets().add(DataControl.CSS);
 		/* Ajouter les panes qui implements IRotationListener */
 		// Initializer.addListener(PANE);
 
