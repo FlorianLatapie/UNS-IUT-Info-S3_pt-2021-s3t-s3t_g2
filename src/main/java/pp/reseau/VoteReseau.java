@@ -38,10 +38,8 @@ public class VoteReseau {
 					j.getNbVoix(l, numVote, nbMenace), partieId, numeroTour));
 	}
 
-	public void demanderVote(Partie jeu, Lieu l, String partieId, int numeroTour) {
-		for (Joueur j : jeu.getJoueurSurLieu(l)) {
-			j.getConnection().envoyer(ControleurReseau.construirePaquetTcp("PVDV", partieId, numeroTour));
-		}
+	public void demanderVote(Joueur j, String partieId, int numeroTour) {
+		j.getConnection().envoyer(ControleurReseau.construirePaquetTcp("PVDV", partieId, numeroTour));
 	}
 
 	public Couleur recupVote(Joueur j) {
