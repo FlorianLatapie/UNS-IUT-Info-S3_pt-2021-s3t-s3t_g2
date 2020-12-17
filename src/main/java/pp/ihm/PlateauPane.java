@@ -778,22 +778,22 @@ public class PlateauPane extends StackPane implements IPlateauListener {
 		/////
 
 		lChefVigile = new Label();
-		lChefVigile.setText("XXXXXXX" + " est le chef des vigiles"); 
+		lChefVigile.setText("XXXXXXXXXX" + " est le chef des vigiles"); 
 		lChefVigile.setBackground(fondBlanc);
 		lChefVigile.setFont(fontInfo);
 		lChefVigile.setPadding(margeLieu);
 		lChefVigile.setTranslateY(210);
 
 		lChefVigile2 = new Label();
-		lChefVigile2.setText("XXXXXXX" + " est le chef des vigiles");
+		lChefVigile2.setText("XXXXXXXXXX" + " est le chef des vigiles");
 		lChefVigile2.setBackground(fondBlanc);
 		lChefVigile2.setFont(fontInfo);
 		lChefVigile2.setPadding(margeLieu);
 		lChefVigile2.setRotate(180);
-		lChefVigile2.setTranslateY(-180);
+		lChefVigile2.setTranslateY(-200);
 
 		lChefVigile3 = new Label();
-		lChefVigile3.setText("XXXXXXX" + " est le chef des vigiles"); 
+		lChefVigile3.setText("XXXXXXXXXX" + " est le chef des vigiles"); 
 		lChefVigile3.setBackground(fondBlanc);
 		lChefVigile3.setFont(fontInfo);
 		lChefVigile3.setPadding(margeLieu);
@@ -801,12 +801,12 @@ public class PlateauPane extends StackPane implements IPlateauListener {
 		lChefVigile3.setTranslateX(-200);
 
 		lChefVigile4 = new Label();
-		lChefVigile4.setText("XXXXXXX" + " est le chef des vigiles");
+		lChefVigile4.setText("XXXXXXXXXX" + " est le chef des vigiles");
 		lChefVigile4.setBackground(fondBlanc);
 		lChefVigile4.setFont(fontInfo);
 		lChefVigile4.setPadding(margeLieu);
 		lChefVigile4.setRotate(-90);
-		lChefVigile4.setTranslateX(160);
+		lChefVigile4.setTranslateX(180);
 
 		////
 
