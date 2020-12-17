@@ -1636,7 +1636,7 @@ public class JeuPane extends StackPane implements IJeuListener {
 	public void resetUtiliserCarte() {
 		Button[] buttons = { bDeCarte1, bDeCarte2, bDeCarte3, bDeCarte4, bDeCarte5, bDeCarte6, bDeCarte7, bDeCarte8,
 				bPasserCarte };
-		for (int i = 0; i < 10; i++) {
+		for (int i = 0; i < buttons.length - 1; i++) {
 			if (i < core.getIdjr().getListeCarte().size()) {
 				buttons[i].setDisable(true);
 			}
@@ -1734,7 +1734,7 @@ public class JeuPane extends StackPane implements IJeuListener {
 	public void choisirUtiliserCarte(List<CarteType> carteTypes) {
 		Platform.runLater(() -> {
 			Button[] buttons = { bDeCarte1, bDeCarte2, bDeCarte3, bDeCarte4, bDeCarte5, bDeCarte6, bDeCarte7,
-					bDeCarte8, };
+					bDeCarte8 };
 			for (int i = 0; i < buttons.length; i++) {
 				if (i < core.getIdjr().getListeCarte().size()) {
 					for (CarteType carteType2 : carteTypes) {
@@ -1772,6 +1772,7 @@ public class JeuPane extends StackPane implements IJeuListener {
 	@Override
 	public void choisirUtiliserCartes(List<CarteType> carteTypes) {
 		Platform.runLater(() -> {
+			updateCarte();
 			Button[] buttons = { bDeCarte1, bDeCarte2, bDeCarte3, bDeCarte4, bDeCarte5, bDeCarte6, bDeCarte7,
 					bDeCarte8 };
 			for (int i = 0; i < buttons.length; i++) {
