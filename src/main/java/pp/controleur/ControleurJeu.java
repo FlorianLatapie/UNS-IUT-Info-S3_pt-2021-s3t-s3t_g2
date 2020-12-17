@@ -54,6 +54,7 @@ public class ControleurJeu {
 	private ControleurVote cVote;
 	private ControleurElectionVigile cev;
 	private ControleurArriveZombie caz;
+	private ControleurChoixDestination ccd;
 
 	private final Random rd = new Random();
 
@@ -72,6 +73,7 @@ public class ControleurJeu {
 		this.cVote = new ControleurVote();
 		this.cev = new ControleurElectionVigile();
 		this.caz = new ControleurArriveZombie();
+		this.ccd = new ControleurChoixDestination();
 
 		this.statut = Statut.ATTENTE;
 		initReseau();
@@ -166,7 +168,7 @@ public class ControleurJeu {
 		distribuerCarte();
 		this.placementPersonnage();
 		this.jeu.resultatChefVigile(jeu.getJoueurs().get(0));
-		this.lieuZombie = arriveZombie();
+		this.lieuZombie = caz.lanceDes();
 		this.jeu.entreZombie(lieuZombie);
 		m = ControleurReseau.construirePaquetTcp("PIPZ", lieuZombie, partieId);
 		for (Joueur j : jeu.getJoueurs().values())
@@ -235,7 +237,7 @@ public class ControleurJeu {
 		cev.phaseElectionChefVigi(jeu, partieId, numeroTour);
 		this.lieuZombie = caz.phaseArriveZombie(jeu, partieId, numeroTour);
 		ArrayList<Integer> destination = new ArrayList<>();
-		phasechoixDestination(destination);
+		ccd.phasechoixDestination(jeu, destination, jmort, partieId, numeroTour);
 		jeu.entreZombie(lieuZombie);
 		phaseDeplacementPerso(destination, lieuZombie);
 		if (isFinished)
@@ -267,63 +269,6 @@ public class ControleurJeu {
 		return jeu;
 	}
 
-
-	/**
-	 * Definit l'arrivée des zombies et l'affiche pour le chef des vigiles
-	 *
-	 * @return liste des numéro des lieux d'arriveé des zombies
-	 */
-	private ArrayList<Integer> arriveZombie() {
-		VigileEtat ve = jeu.getNewChef() ? VigileEtat.NE : VigileEtat.NUL;
-		String m = ControleurReseau.construirePaquetTcp("PAZ", jeu.getChefVIgile().getCouleur(), ve, partieId,
-				numeroTour);
-		for (Joueur j : jeu.getJoueurs().values())
-			j.getConnection().envoyer(m);
-		jeu.getChefVIgile().getConnection().attendreMessage("AZLD");
-		jeu.getChefVIgile().getConnection().getMessage("AZLD");
-		int z1 = new Random().nextInt(6) + 1;
-		int z2 = new Random().nextInt(6) + 1;
-		int z3 = new Random().nextInt(6) + 1;
-		int z4 = new Random().nextInt(6) + 1;
-		ArrayList<Integer> lieuZombie = new ArrayList<>();
-		lieuZombie.add(z1);
-		lieuZombie.add(z2);
-		lieuZombie.add(z3);
-		lieuZombie.add(z4);
-		for (Integer integer : lieuZombie) {
-			out.println(jeu.getLieux().get(integer) + "-> Zombie + 1");
-		}
-		jeu.getChefVIgile().getConnection()
-				.envoyer(ControleurReseau.construirePaquetTcp("AZLAZ", lieuZombie, partieId, numeroTour));
-		for (Joueur j : jeu.getJoueurs().values()) {
-			if (j.getCartes().contains(CarteType.CDS)) {
-				j.getConnection().envoyer(ControleurReseau.construirePaquetTcp("AZDCS", partieId, numeroTour));
-			}
-		}
-		List<Joueur> joueurCDS = new ArrayList();
-		for (Joueur j : jeu.getJoueurs().values()) {
-			if (j.getCartes().contains(CarteType.CDS)) {
-				j.getConnection().attendreMessage("AZRCS");
-				String mess = j.getConnection().getMessage("AZRCS");
-				if ((CarteType) ControleurReseau.getValueTcp("AZRCS", mess, 1) != CarteType.NUL) {
-					joueurCDS.add(j);
-				}
-			}
-		}
-		for (Joueur j : joueurCDS) {
-			j.getConnection().envoyer(ControleurReseau.construirePaquetTcp("AZUCS", lieuZombie, partieId, numeroTour));
-			j.getCartes().remove(CarteType.CDS);
-		}
-		for (Joueur j : jeu.getJoueurs().values()) {
-			if (joueurCDS.contains(j))
-				j.getConnection().envoyer(ControleurReseau.construirePaquetTcp("AZICS", j.getCouleur(), CarteType.CDS,
-						partieId, numeroTour));
-			else
-				j.getConnection().envoyer(ControleurReseau.construirePaquetTcp("AZICS", j.getCouleur(), CarteType.NUL,
-						partieId, numeroTour));
-		}
-		return lieuZombie;
-	}
 
 	private void phasechoixDestination(ArrayList<Integer> destination) throws InterruptedException {
 		VigileEtat ve = jeu.getNewChef() ? VigileEtat.NE : VigileEtat.NUL;
