@@ -3,6 +3,7 @@ package pp.ihm;
 import pp.Joueur;
 import pp.ihm.DataControl.ApplicationPane;
 import pp.ihm.event.IAttenteListener;
+import pp.ihm.langues.ITraduction;
 import pp.ihm.langues.International;
 
 import java.util.List;
@@ -28,7 +29,7 @@ import javafx.scene.text.TextAlignment;
  * @version 0.1
  * @since 26/10/2020
  */
-public class AttenteJoueurPane extends StackPane implements IAttenteListener {
+public class AttenteJoueurPane extends StackPane implements IAttenteListener, ITraduction {
 	private ScreenControl sControl = null;
 	private Core core = null;
 	private final ApplicationPane paneName = ApplicationPane.WAIT;
@@ -61,12 +62,16 @@ public class AttenteJoueurPane extends StackPane implements IAttenteListener {
 	Circle cercle5;
 	Circle cercle6;
 
+	Label titre1;
+	Label desc;
+	Button bRetour;
+
 	public AttenteJoueurPane(ScreenControl sc, Core c) {
 		core = c;
 		sControl = sc;
 
 		// titre
-		Label titre1 = new Label(
+		titre1 = new Label(
 				International.trad("texte.titreAttenteA") + "\n" + International.trad("texte.titreAttenteB"));
 		titre1.setTextAlignment(TextAlignment.CENTER);
 		titre1.setFont(Font.font(nomPolice, FontWeight.BOLD, 80));
@@ -86,7 +91,7 @@ public class AttenteJoueurPane extends StackPane implements IAttenteListener {
 		lIDPartie.setMinHeight(hauteurElemtents);
 		lIDPartie.setPadding(padding);
 
-		Label desc = new Label(International.trad("texte.attenteJoueur"));
+		desc = new Label(International.trad("texte.attenteJoueur"));
 		desc.setFont(policeNom);
 		desc.setTextFill(Color.WHITE);
 		desc.setPadding(new Insets(7));
@@ -153,7 +158,7 @@ public class AttenteJoueurPane extends StackPane implements IAttenteListener {
 		vbCenter.getChildren().addAll(vbWait);
 
 		// boutons
-		Button bRetour = new Button(International.trad("bouton.retour"));
+		bRetour = new Button(International.trad("bouton.retour"));
 		bRetour.setPrefSize(lBouton, hBouton);
 		bRetour.setMinSize(lBouton, hBouton);
 		bRetour.setFont(policeBouton);
@@ -234,6 +239,14 @@ public class AttenteJoueurPane extends StackPane implements IAttenteListener {
 			} else
 				circles[i].setVisible(false);
 		}
+	}
+
+	@Override
+	public void traduire() {
+		titre1.setText(International.trad("texte.titreAttenteA") + "\n" + International.trad("texte.titreAttenteB"));
+		desc.setText(International.trad("texte.attenteJoueur"));
+		bRetour.setText(International.trad("bouton.retour"));
+
 	}
 
 }
