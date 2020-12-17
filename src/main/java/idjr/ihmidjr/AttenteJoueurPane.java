@@ -143,28 +143,7 @@ public class AttenteJoueurPane extends StackPane implements IAttenteListener {
 		vbCenter.setSpacing(spacing);
 		vbCenter.getChildren().addAll(vbWait);
 
-		// boutons
-		Button bRetour = new Button(International.trad("bouton.retour"));
-		bRetour.setPrefSize(lBouton, hBouton);
-		bRetour.setMinSize(lBouton, hBouton);
-		bRetour.setFont(policeBouton);
-		bRetour.setStyle(styleBoutons);
 
-		bRetour.setOnMouseEntered(event -> {
-			bRetour.setStyle(styleBoutonsSouris);
-		});
-		bRetour.setOnMouseExited(event -> {
-			bRetour.setStyle(styleBoutons);
-		});
-		bRetour.setOnAction(EventHandler -> {
-			// TODO remove core.getCj().stopThreads();
-			sc.setPaneOnTop(ApplicationPane.ACCUEIL);
-		});
-
-		// grille contenant les boutons du bas
-		AnchorPane boutonsPanneau = new AnchorPane();
-		boutonsPanneau.setLeftAnchor(bRetour, 0.0);
-		boutonsPanneau.getChildren().addAll(bRetour);
 
 		// image fond
 		ImageView imgFond = new ImageView(DataControl.FOND);
@@ -177,7 +156,7 @@ public class AttenteJoueurPane extends StackPane implements IAttenteListener {
 		centreMenu.setAlignment(titre, Pos.CENTER);
 		centreMenu.setTop(titre);
 		centreMenu.setCenter(vbCenter);
-		centreMenu.setBottom(boutonsPanneau);
+
 
 		// boite du fond qui contient tout
 		HBox fond = new HBox();
