@@ -61,8 +61,7 @@ public class TraitementPaquetUdp extends TraitementPaquet<DatagramPacket> {
 		case "RP":
 			break;
 		default:
-			throw new IllegalStateException(
-					MessageFormat.format("[UDP] Il n''y a pas de traitement possible pour {0}", paquet.getCle()));
+			throw new IllegalStateException("[UDP] Il n''y a pas de traitement possible pour " + paquet.getCle());
 		}
 	}
 
@@ -86,15 +85,15 @@ public class TraitementPaquetUdp extends TraitementPaquet<DatagramPacket> {
 				MessageFormat.format("Une nouvelle partie vient d''etre trouvÃ© !\n{0}", paquet.getValeur(message, 1)));
 		String prenoms = "Ressources/Prenoms/prenomsFR.txt";
 		Scanner scanneurPrenom;
-		String nomDuJoueur = "Bot "+ core.getBotType().typeString() + " ";
+		String nomDuJoueur = "Bot " + core.getBotType().typeString() + " ";
 		try {
 			scanneurPrenom = new Scanner(new File(prenoms));
 			StringBuilder fichierLu = new StringBuilder();
-			while(scanneurPrenom.hasNext()) {
-				fichierLu.append(scanneurPrenom.nextLine()+"\n");
+			while (scanneurPrenom.hasNext()) {
+				fichierLu.append(scanneurPrenom.nextLine() + "\n");
 			}
 			String[] tableauPrenom = fichierLu.toString().split("\n");
-			int choix= new Random().nextInt(tableauPrenom.length);
+			int choix = new Random().nextInt(tableauPrenom.length);
 			System.out.println(nomDuJoueur + tableauPrenom[choix]);
 			nomDuJoueur += tableauPrenom[choix];
 			scanneurPrenom.close();
