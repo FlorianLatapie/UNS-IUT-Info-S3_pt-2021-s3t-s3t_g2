@@ -85,18 +85,16 @@ public class FinDePartiePane extends StackPane implements IFinListener, ITraduct
 		BorderPane bBas = new BorderPane();
 
 		HBox bBasCentre = new HBox();
-		gagnant1 = new Label("");
+		gagnant1 = new Label("Le joueur XXXXXXXX a gagné"); // do not translate 
 		gagnant1.setTextAlignment(TextAlignment.CENTER);
 		gagnant1.setFont(policeNom);
 		gagnant1.setTextFill(Color.WHITESMOKE);
 		gagnant1.setStyle(
 				"-fx-background-color:#1A1A1A; -fx-background-radius: 20px; -fx-border-color: red; -fx-border-insets: -3; -fx-border-width: 3; -fx-border-radius: 20px;");
 		gagnant1.setPadding(padding);
-
-		bBasCentre.setAlignment(Pos.CENTER);
-		bBasCentre.getChildren().addAll(gagnant1);
-
-		bRetour1 = new Button(International.trad("bouton.retour"));
+		gagnant1.setTranslateY(350);
+		
+		Button bRetour1 = new Button(International.trad("bouton.retour"));
 		bRetour1.setPrefSize(lBouton, hBouton);
 		bRetour1.setMinSize(lBouton, hBouton);
 		bRetour1.setFont(policeBouton);
@@ -117,7 +115,6 @@ public class FinDePartiePane extends StackPane implements IFinListener, ITraduct
 		bRetour2.setOnAction(EventHandler -> sc.setPaneOnTop(ApplicationPane.ACCUEIL));
 		bRetour2.setRotate(-90);
 
-		bBas.setTop(bBasCentre);
 		bBas.setLeft(bRetour1);
 		bBas.setRight(bRetour2);
 
@@ -126,15 +123,15 @@ public class FinDePartiePane extends StackPane implements IFinListener, ITraduct
 		BorderPane bHaut = new BorderPane();
 
 		HBox bHautCentre = new HBox();
-		gagnant2 = new Label("");
+		gagnant2 = new Label("Le joueur XXXXXXXX a gagné"); // do not translate 
 		gagnant2.setTextAlignment(TextAlignment.CENTER);
 		gagnant2.setFont(policeNom);
 		gagnant2.setTextFill(Color.WHITESMOKE);
 		gagnant2.setStyle(
 				"-fx-background-color:#1A1A1A; -fx-background-radius: 20px; -fx-border-color: red; -fx-border-insets: -3; -fx-border-width: 3; -fx-border-radius: 20px;");
 		gagnant2.setPadding(padding);
-		bHautCentre.setAlignment(Pos.CENTER);
-		bHautCentre.getChildren().addAll(gagnant2);
+		gagnant2.setRotate(180);
+		gagnant2.setTranslateY(-350);
 
 		bRetour3 = new Button(International.trad("bouton.retour"));
 		bRetour3.setPrefSize(lBouton, hBouton);
@@ -158,13 +155,12 @@ public class FinDePartiePane extends StackPane implements IFinListener, ITraduct
 		bRetour4.setRotate(-90);
 
 		bHaut.setRotate(180);
-		bHaut.setTop(bHautCentre);
 		bHaut.setLeft(bRetour3);
 		bHaut.setRight(bRetour4);
 
 		///
 		HBox hDroite = new HBox();
-		gagnant3 = new Label("");
+		gagnant3 = new Label("Le joueur XXXXXXXX a gagné"); // do not translate 
 		gagnant3.setTextAlignment(TextAlignment.CENTER);
 		gagnant3.setFont(policeNom);
 		gagnant3.setTextFill(Color.WHITESMOKE);
@@ -172,14 +168,13 @@ public class FinDePartiePane extends StackPane implements IFinListener, ITraduct
 				"-fx-background-color:#1A1A1A; -fx-background-radius: 20px; -fx-border-color: red; -fx-border-insets: -3; -fx-border-width: 3; -fx-border-radius: 20px;");
 		gagnant3.setPadding(padding);
 		gagnant3.setRotate(-90);
-		hDroite.setAlignment(Pos.CENTER_RIGHT);
-		hDroite.setTranslateX(80);
-		hDroite.getChildren().addAll(gagnant3);
+		gagnant3.setTranslateX(350);
+
 
 		///
 
 		HBox hGauche = new HBox();
-		gagnant4 = new Label("");
+		gagnant4 = new Label("Le joueur XXXXXXXX a gagné"); // do not translate 
 		gagnant4.setTextAlignment(TextAlignment.CENTER);
 		gagnant4.setFont(policeNom);
 		gagnant4.setTextFill(Color.WHITESMOKE);
@@ -187,9 +182,8 @@ public class FinDePartiePane extends StackPane implements IFinListener, ITraduct
 				"-fx-background-color:#1A1A1A; -fx-background-radius: 20px; -fx-border-color: red; -fx-border-insets: -3; -fx-border-width: 3; -fx-border-radius: 20px;");
 		gagnant4.setPadding(padding);
 		gagnant4.setRotate(90);
-		hGauche.setAlignment(Pos.CENTER);
-		hGauche.setTranslateX(-80);
-		hGauche.getChildren().addAll(gagnant4);
+		gagnant4.setTranslateX(-350);
+
 		//
 
 		// image fond
@@ -202,10 +196,6 @@ public class FinDePartiePane extends StackPane implements IFinListener, ITraduct
 		centreMenu.setMaxSize(tailleCarreCentral, tailleCarreCentral);
 		centreMenu.setAlignment(titre, Pos.CENTER);
 		centreMenu.setCenter(vbCenter);
-		centreMenu.setBottom(bBas);
-		centreMenu.setTop(bHaut);
-		centreMenu.setRight(hDroite);
-		centreMenu.setLeft(hGauche);
 
 		// Boutons de rotation d'écran
 		ImageView img1 = new ImageView(DataControl.SCREEN);
@@ -263,7 +253,7 @@ public class FinDePartiePane extends StackPane implements IFinListener, ITraduct
 		fond.getChildren().add(imgFond);
 
 		this.setAlignment(Pos.CENTER);
-		this.getChildren().addAll(fond, centreMenu, bEcranDroite, bEcranHaut, bEcranGauche, bEcranBas);
+		this.getChildren().addAll(fond, centreMenu, gagnant1, gagnant2, gagnant3, gagnant4, bEcranDroite, bEcranHaut, bEcranGauche, bEcranBas);
 		this.setBackground(new Background(new BackgroundFill(Color.BLACK, CornerRadii.EMPTY, null)));
 
 		sControl.registerNode(paneName, this);
