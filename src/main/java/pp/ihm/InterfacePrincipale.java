@@ -64,6 +64,8 @@ public class InterfacePrincipale extends Application {
 		International.ajouterPane(plateauPane);
 		International.ajouterPane(couleurPane);
 		International.ajouterPane(accueilPane);
+		
+		International.changerLangue(core.getSauvegarderOptions().getLangues());
 
 		scene.getStylesheets().add(DataControl.CSS);
 		/* Ajouter les panes qui implements IRotationListener */
