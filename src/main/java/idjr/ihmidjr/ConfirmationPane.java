@@ -23,7 +23,7 @@ public class ConfirmationPane {
 
 	static boolean reponse;
 	private static int tailleFenetreL = 500;
-	private static int tailleFenetreH = 200;
+	private static int tailleFenetreH = 190;
 	private static String nomPolice = "Segoe UI";
 	
 	/**
@@ -32,7 +32,7 @@ public class ConfirmationPane {
 	 * @param message message affiché dans la fenetre 
 	 * @return
 	 */
-	public static boolean afficher(String titre, String messageL1, String messageL2) {
+	public static boolean afficher(String titre, String messageL1) {
 		
 		//nouvelle fenetre
 		Stage window = new Stage();
@@ -53,11 +53,6 @@ public class ConfirmationPane {
 		labelL1.setStyle("-fx-text-fill: #DDDDDD");
 		labelL1.setFont(Font.font(nomPolice, FontWeight.BOLD, 20));
 		labelL1.setPadding(new Insets(10,10,0,10));
-		Label labelL2 = new Label();
-		labelL2.setText(messageL2);
-		labelL2.setStyle("-fx-text-fill: #DDDDDD");
-		labelL2.setFont(Font.font(nomPolice, FontWeight.BOLD, 20));
-		labelL2.setPadding(new Insets(0,10,10,10));
 
 		//boutons
 		Button boutonOui = new Button(International.trad("bouton.quitter"));
@@ -87,7 +82,7 @@ public class ConfirmationPane {
 
 		VBox layout = new VBox(10);
 		layout.setAlignment(Pos.TOP_CENTER);
-		layout.getChildren().addAll(labelL1, labelL2,boutonHbox);
+		layout.getChildren().addAll(labelL1,boutonHbox);
 		layout.setStyle(" -fx-background-color: #1F1F1F;");
 		Scene scene = new Scene(layout);
 
