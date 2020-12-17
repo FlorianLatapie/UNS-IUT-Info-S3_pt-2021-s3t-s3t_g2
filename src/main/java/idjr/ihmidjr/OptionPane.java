@@ -87,7 +87,7 @@ public class OptionPane extends StackPane implements IPleineEcranListener {
 		titre.setFont(policeTitre);
 		vbTitre.getChildren().add(titre);
 
-		Button bFrancais = new Button("Français");
+		Button bFrancais = new Button(International.trad("texte.langue1"));
 		bFrancais.setFont(policeBouton);
 		bFrancais.setAlignment(Pos.CENTER);
 		bFrancais.setPrefSize(245, hauteurElement);
@@ -101,7 +101,7 @@ public class OptionPane extends StackPane implements IPleineEcranListener {
 			bFrancais.setStyle(styleBoutons);
 		});
 
-		Button bEnglish = new Button("English");
+		Button bEnglish = new Button(International.trad("texte.langue2"));
 		bEnglish.setFont(policeBouton);
 		bEnglish.setAlignment(Pos.CENTER);
 		bEnglish.setPrefSize(245, hauteurElement);

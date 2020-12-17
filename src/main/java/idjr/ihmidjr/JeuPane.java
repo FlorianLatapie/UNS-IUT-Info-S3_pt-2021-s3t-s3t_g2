@@ -360,7 +360,7 @@ public class JeuPane extends StackPane implements IJeuListener {
 		passerCarte.setAlignment(Pos.CENTER);
 		passerCarte.setSpacing(10);
 
-		bPasserCarte = new Button("Passer"); // TODO Event && rename field
+		bPasserCarte = new Button(International.trad("texte.passer")); // TODO Event
 		bPasserCarte.setAlignment(Pos.CENTER);
 		bPasserCarte.setStyle(styleBoutons);
 		bPasserCarte.setPrefSize(140, 80);
@@ -1644,7 +1644,7 @@ public class JeuPane extends StackPane implements IJeuListener {
 		passerCarte.setVisible(false);
 		passerCarte.setDisable(true);
 		bPasserCarte.setDisable(true);
-		bPasserCarte.setText("Passer");
+		bPasserCarte.setText(International.trad("texte.passer"));
 	}
 
 	public void resetVoteCarte() {
@@ -1763,9 +1763,9 @@ public class JeuPane extends StackPane implements IJeuListener {
 
 	public void setContinue() {
 		if (cartes.contains(true)) {
-			bPasserCarte.setText("Valider");
+			bPasserCarte.setText(International.trad("texte.valider"));
 		} else {
-			bPasserCarte.setText("Passer");
+			bPasserCarte.setText(International.trad("texte.passer"));
 		}
 	}
 
