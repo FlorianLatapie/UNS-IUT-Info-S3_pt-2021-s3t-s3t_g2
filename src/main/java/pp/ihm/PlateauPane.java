@@ -1097,7 +1097,7 @@ public class PlateauPane extends StackPane implements IPlateauListener {
 	}
 
 	@Override
-	public synchronized void nbLieuZombie(int lieu, int val) {
+	public void nbLieuZombie(int lieu, int val) {
 		String tmp = val + " " + International.trad("text.nbZombie");
 		Platform.runLater(() -> {
 			switch (lieu) {
@@ -1118,6 +1118,35 @@ public class PlateauPane extends StackPane implements IPlateauListener {
 				break;
 			case 6:
 				nbZombies6.setText(tmp);
+				break;
+			default:
+				throw new IllegalArgumentException("Impossible de rajouter des zombies dans le lieu " + lieu);
+			}
+		});
+	}
+
+	@Override
+	public void nbPlaceLieu(int lieu, int val) {
+		String tmp = val + "/" + "euh";
+		Platform.runLater(() -> {
+			switch (lieu) {
+			case 1:
+				nbPlace1.setText(tmp);
+				break;
+			case 2:
+				nbPlace2.setText(tmp);
+				break;
+			case 3:
+				nbPlace3.setText(tmp);
+				break;
+			case 4:
+				nbPlace4.setText(tmp);
+				break;
+			case 5:
+				nbPlace5.setText(tmp);
+				break;
+			case 6:
+				nbPlace6.setText(tmp);
 				break;
 			default:
 				throw new IllegalArgumentException("Impossible de rajouter des zombies dans le lieu " + lieu);
