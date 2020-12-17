@@ -1,5 +1,26 @@
 package reseau.type;
 
 public enum TypePersonnage {
-	BLONDE, TRUAND, BRUTE, FILLETTE
+	BLONDE {
+		public String nomNormal() {
+			return "Blonde";
+		}
+	},
+	TRUAND {
+		public String nomNormal() {
+			return "Truand";
+		}
+	},
+	BRUTE {
+		public String nomNormal() {
+			return "Brute";
+		}
+	},
+	FILLETTE {
+		public String nomNormal() {
+			return "Fillette";
+		}
+	};
+
+	public abstract String nomNormal();
 }
