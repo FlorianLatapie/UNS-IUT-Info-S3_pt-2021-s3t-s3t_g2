@@ -76,7 +76,7 @@ public class ControleurJeu {
 		this.port = ControleurReseau.getTcpPort();
 		this.intPartieId = new Random().nextInt(10000000);
 		this.partieId = "P" + intPartieId;
-		Initializer.nomPartie(partieId);
+		Initializer.nomPartie(partieId, nomPartie);
 		initPartie();
 	}
 
@@ -200,6 +200,7 @@ public class ControleurJeu {
 		synchronized (joueurs) {
 			joueurs.add(joueur);
 		}
+		Initializer.updateJoueurs(joueurs, nbjtotal);
 
 		return joueur.getJoueurId();
 	}

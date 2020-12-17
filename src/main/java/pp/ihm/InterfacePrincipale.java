@@ -22,36 +22,39 @@ public class InterfacePrincipale extends Application {
 		sControl = new ScreenControl(this, core);
 		int largeur = 1920;
 		int hauteur = 1080;
-		
+
 		primaryStage.setTitle("PP - G2 - ZOMBIES la blonde la brute et le truand");
 
 		primaryStage.setMaxWidth(largeur);
 		primaryStage.setMaxHeight(hauteur);
-		primaryStage.setMinWidth(largeur-20.0);
-		primaryStage.setMinHeight(hauteur-50.0);
-		
-		primaryStage.setFullScreen(true);
+		primaryStage.setMinWidth(largeur - 20.0);
+		primaryStage.setMinHeight(hauteur - 50.0);
 
-		
+		primaryStage.setFullScreen(core.getSauvegarderOptions().isEstPleineEcran());
+
 		AttenteJoueurPane attenteJoueurPane = new AttenteJoueurPane(sControl, core);
 		ConfigPartiePane configPartiePane = new ConfigPartiePane(sControl, core);
 		FinDePartiePane finDePartiePane = new FinDePartiePane(sControl, core);
 		ConfigBotPane configBotPane = new ConfigBotPane(sControl, core);
 		CouleurPane couleurPane = new CouleurPane(sControl, core);
 		PlateauPane plateauPane = new PlateauPane(sControl, core);
+		OptionPane optionPane = new OptionPane(sControl, core);
 
-		core.eventInit();
 		Initializer.addListener(attenteJoueurPane);
 		Initializer.addListener(plateauPane);
 		Initializer.addListener(finDePartiePane);
 		Initializer.addListener(couleurPane);
+		Initializer.addListener(optionPane);
 		
+
+		Initializer.updatePleineEcran();
+
 		/* Ajouter les panes qui implements IRotationListener */
-		//Initializer.addListener(PANE);
-		
+		// Initializer.addListener(PANE);
+
 		root.getChildren().add(new AccessibilitePane(sControl));
 		root.getChildren().add(new ReglesPane(sControl, core));
-		root.getChildren().add(new OptionPane(sControl, core));
+		root.getChildren().add(optionPane);
 		root.getChildren().add(new PausePane(sControl, core));
 		root.getChildren().add(attenteJoueurPane);
 		root.getChildren().add(configPartiePane);
@@ -59,7 +62,6 @@ public class InterfacePrincipale extends Application {
 		root.getChildren().add(configBotPane);
 		root.getChildren().add(plateauPane);
 		root.getChildren().add(couleurPane);
-
 
 		root.getChildren().add(new AccueilPane(sControl, core));
 

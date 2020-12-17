@@ -14,6 +14,7 @@ public abstract class Initializer {
 	private static List<IFinListener> listenersfl = new ArrayList<>();
 	private static List<ICouleurListener> listenerscl = new ArrayList<>();
 	private static List<IRotationListener> listenersrl = new ArrayList<>();
+	private static List<IPleineEcranListener> listenerspel = new ArrayList<>();
 
 	public static void addListener(IPlateauListener toAdd) {
 		listenerspl.add(toAdd);
@@ -29,6 +30,14 @@ public abstract class Initializer {
 
 	public static void addListener(ICouleurListener toAdd) {
 		listenerscl.add(toAdd);
+	}
+
+	public static void addListener(IRotationListener toAdd) {
+		listenersrl.add(toAdd);
+	}
+
+	public static void addListener(IPleineEcranListener toAdd) {
+		listenerspel.add(toAdd);
 	}
 
 	public static void nbZombiesLieuAll(List<Lieu> lieux) {
@@ -143,18 +152,28 @@ public abstract class Initializer {
 			pl.prevenirDeplacementVigile(depvig);
 	}
 
-	public static void nomPartie(String nom) {
+	public static void nomPartie(String id, String nom) {
 		for (IAttenteListener al : listenersal)
-			al.nomPartie(nom);
+			al.nomPartie(id, nom);
 	}
 
 	public static void nomJoueurs(List<Joueur> joueurs) {
 		for (ICouleurListener cl : listenerscl)
 			cl.joueurNoms(joueurs);
 	}
-	
+
 	public static void rotation(int angle) {
 		for (IRotationListener cl : listenersrl)
 			cl.rotation(angle);
+	}
+
+	public static void updatePleineEcran() {
+		for (IPleineEcranListener pel : listenerspel)
+			pel.updatePleineEcran();
+	}
+
+	public static void updateJoueurs(List<Joueur> joueurs, int max) {
+		for (IAttenteListener al : listenersal)
+			al.updateJoueurs(joueurs, max);
 	}
 }

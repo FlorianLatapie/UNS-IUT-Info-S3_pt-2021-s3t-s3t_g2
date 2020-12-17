@@ -1,7 +1,13 @@
 package pp.ihm.event;
 
-public interface IAttenteListener {
-    void joueurPret();
+import java.util.List;
 
-    void nomPartie(String nom);
+import pp.Joueur;
+
+public interface IAttenteListener {
+	void joueurPret();
+
+	void nomPartie(String id, String nom);
+
+	void updateJoueurs(List<Joueur> joueurs, int max);
 }
