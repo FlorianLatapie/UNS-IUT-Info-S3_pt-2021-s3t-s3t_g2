@@ -32,42 +32,42 @@ public class DataControl {
 	public static final String FERME5 = "pp/ihm/images/5Fermé.png";
 	public static final String FERME6 = "pp/ihm/images/6Fermé.png";
 	
-	// Pions
+	// NewPions
 	public static final String NOM_COULEUR = "pp/ihm/images/Pions/SamplePion.png";
 	
-	public static final String TRUAND_B = "pp/ihm/images/Pions/bleu1.png";
-	public static final String BRUTE_B = "pp/ihm/images/Pions/bleu2.png";
-	public static final String BLONDE_B = "pp/ihm/images/Pions/bleu3.png";
-	public static final String FILLETTE_B = "pp/ihm/images/Pions/bleu4.png";
+	public static final String TRUAND_B = "pp/ihm/images/NewPions/bleu1.png";
+	public static final String BRUTE_B = "pp/ihm/images/NewPions/bleu2.png";
+	public static final String BLONDE_B = "pp/ihm/images/NewPions/bleu3.png";
+	public static final String FILLETTE_B = "pp/ihm/images/NewPions/bleu4.png";
 	
-	public static final String TRUAND_J = "pp/ihm/images/Pions/jaune1.png";
-	public static final String BRUTE_J = "pp/ihm/images/Pions/jaune2.png";
-	public static final String BLONDE_J= "pp/ihm/images/Pions/jaune3.png";
-	public static final String FILLETTE_J = "pp/ihm/images/Pions/jaune4.png";
+	public static final String TRUAND_J = "pp/ihm/images/NewPions/jaune1.png";
+	public static final String BRUTE_J = "pp/ihm/images/NewPions/jaune2.png";
+	public static final String BLONDE_J= "pp/ihm/images/NewPions/jaune3.png";
+	public static final String FILLETTE_J = "pp/ihm/images/NewPions/jaune4.png";
 	
-	public static final String TRUAND_M = "pp/ihm/images/Pions/marron1.png";
-	public static final String BRUTE_M = "pp/ihm/images/Pions/marron2.png";
-	public static final String BLONDE_M = "pp/ihm/images/Pions/marron3.png";
-	public static final String FILLETTE_M = "pp/ihm/images/Pions/marron4.png";
+	public static final String TRUAND_M = "pp/ihm/images/NewPions/marron1.png";
+	public static final String BRUTE_M = "pp/ihm/images/NewPions/marron2.png";
+	public static final String BLONDE_M = "pp/ihm/images/NewPions/marron3.png";
+	public static final String FILLETTE_M = "pp/ihm/images/NewPions/marron4.png";
 
-	public static final String TRUAND_N = "pp/ihm/images/Pions/noir1.png";
-	public static final String BRUTE_N = "pp/ihm/images/Pions/noir2.png";
-	public static final String BLONDE_N = "pp/ihm/images/Pions/noir3.png";
-	public static final String FILLETTE_N = "pp/ihm/images/Pions/noir4.png";
+	public static final String TRUAND_N = "pp/ihm/images/NewPions/noir1.png";
+	public static final String BRUTE_N = "pp/ihm/images/NewPions/noir2.png";
+	public static final String BLONDE_N = "pp/ihm/images/NewPions/noir3.png";
+	public static final String FILLETTE_N = "pp/ihm/images/NewPions/noir4.png";
 
-	public static final String TRUAND_R = "pp/ihm/images/Pions/rouge1.png";
-	public static final String BRUTE_R = "pp/ihm/images/Pions/rouge2.png";
-	public static final String BLONDE_R = "pp/ihm/images/Pions/rouge3.png";
-	public static final String FILLETTE_R = "pp/ihm/images/Pions/rouge4.png";
+	public static final String TRUAND_R = "pp/ihm/images/NewPions/rouge1.png";
+	public static final String BRUTE_R = "pp/ihm/images/NewPions/rouge2.png";
+	public static final String BLONDE_R = "pp/ihm/images/NewPions/rouge3.png";
+	public static final String FILLETTE_R = "pp/ihm/images/NewPions/rouge4.png";
 	
-	public static final String TRUAND_V = "pp/ihm/images/Pions/vert1.png";
-	public static final String BRUTE_V = "pp/ihm/images/Pions/vert2.png";
-	public static final String BLONDE_V = "pp/ihm/images/Pions/vert3.png";
-	public static final String FILLETTE_V = "pp/ihm/images/Pions/vert4.png";
+	public static final String TRUAND_V = "pp/ihm/images/NewPions/vert1.png";
+	public static final String BRUTE_V = "pp/ihm/images/NewPions/vert2.png";
+	public static final String BLONDE_V = "pp/ihm/images/NewPions/vert3.png";
+	public static final String FILLETTE_V = "pp/ihm/images/NewPions/vert4.png";
 	
 	public static final String CSS = "pp/ihm/style/style.css";
 	// for testing purpose
-	//public static final String NOM_COULEUR = TEST_NEW_PION;
+	//public static final String NOM_COULEUR = "pp/ihm/images/NewNewPions/vert4.png";
 
 
 	public static final ObservableList<Integer> nombreJoueur = FXCollections.observableArrayList(3, 4, 5, 6);
