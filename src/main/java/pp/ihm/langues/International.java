@@ -91,9 +91,20 @@ public abstract class International {
 		return langue.getDisplayLanguage();
 	}
 
+	/**
+	 * Permet d'ajouter la traduction cible
+	 * 
+	 * @param trad la traduction à ajouter
+	 */
+
 	public static void ajouterPane(ITraduction trad) {
 		traductionListener.add(trad);
 	}
+
+	/**
+	 * Permet de passer d'une langue à l'autre
+	 * 
+	 */
 
 	private static void updateTraduction() {
 		for (ITraduction iTraduction : traductionListener) {
