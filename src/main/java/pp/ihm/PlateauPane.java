@@ -1280,7 +1280,7 @@ public class PlateauPane extends StackPane implements IPlateauListener, ITraduct
 
 	@Override
 	public void nomChefVigile(String joueur) {
-		String tmp = joueur + International.trad("text.chefVigile");
+		String tmp = joueur + " " +International.trad("text.chefVigile");
 		Platform.runLater(() -> {
 			lChefVigile.setText(tmp);
 			lChefVigile2.setText(tmp);
