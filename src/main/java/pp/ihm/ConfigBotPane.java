@@ -41,14 +41,13 @@ public class ConfigBotPane extends StackPane implements ITraduction {
 	private Font policeBouton = Font.font(nomPolice, FontWeight.BOLD, 27);
 	private Font policeNom = Font.font(nomPolice, FontWeight.BOLD, 27);
 
+	private String styleBotTexte = "-fx-background-color: #2B2B2B; -fx-background-radius: 10px;";
 	private String styleBoutons = " -fx-background-color:#000000; -fx-background-radius: 15px; -fx-text-fill: #ffffff";
 	private String styleBoutonsSouris = "-fx-background-color:#ff0000;  -fx-text-fill:#000000; -fx-background-radius: 15px;";
 
 	private GaussianBlur flou = new GaussianBlur(30);
 	private CornerRadii coin = new CornerRadii(15.0);
 	private CornerRadii coinfb = new CornerRadii(5.0);
-
-	private Background fondBlanc = new Background(new BackgroundFill(Color.WHITE, coinfb, null));
 
 	private Insets botPadding = new Insets(0, 10, 0, 10);
 
@@ -96,7 +95,7 @@ public class ConfigBotPane extends StackPane implements ITraduction {
 		bot1Texte.setAlignment(Pos.CENTER);
 		bot1Texte.setFont(policeNom);
 		bot1Texte.setMinHeight(hauteurElemtents);
-		bot1Texte.setStyle("-fx-background-color: #2B2B2B; -fx-background-radius: 10px;");
+		bot1Texte.setStyle(styleBotTexte);
 		bot1Texte.setPadding(botPadding);
 		bot1Texte.setMinWidth(largeurTexte);
 		bot1Texte.setTextFill(Color.WHITE);
@@ -119,7 +118,7 @@ public class ConfigBotPane extends StackPane implements ITraduction {
 		bot2Texte.setAlignment(Pos.CENTER);
 		bot2Texte.setFont(policeNom);
 		bot2Texte.setMinHeight(hauteurElemtents);
-		bot2Texte.setStyle("-fx-background-color: #2B2B2B; -fx-background-radius: 10px;");
+		bot2Texte.setStyle(styleBotTexte);
 		bot2Texte.setTextFill(Color.WHITE);
 		bot2Texte.setPadding(botPadding);
 		bot2Texte.setMinWidth(largeurTexte);
@@ -143,7 +142,7 @@ public class ConfigBotPane extends StackPane implements ITraduction {
 		bot3Texte.setAlignment(Pos.CENTER);
 		bot3Texte.setFont(policeNom);
 		bot3Texte.setMinHeight(hauteurElemtents);
-		bot3Texte.setStyle("-fx-background-color: #2B2B2B; -fx-background-radius: 10px;");
+		bot3Texte.setStyle(styleBotTexte);
 		bot3Texte.setPadding(botPadding);
 		bot3Texte.setMinWidth(largeurTexte);
 		bot3Texte.setTextFill(Color.WHITE);
@@ -166,7 +165,7 @@ public class ConfigBotPane extends StackPane implements ITraduction {
 		bot4Texte.setAlignment(Pos.CENTER);
 		bot4Texte.setFont(policeNom);
 		bot4Texte.setMinHeight(hauteurElemtents);
-		bot4Texte.setStyle("-fx-background-color: #2B2B2B; -fx-background-radius: 10px;");
+		bot4Texte.setStyle(styleBotTexte);
 		bot4Texte.setPadding(botPadding);
 		bot4Texte.setMinWidth(largeurTexte);
 		bot4Texte.setTextFill(Color.WHITE);
@@ -189,7 +188,7 @@ public class ConfigBotPane extends StackPane implements ITraduction {
 		bot5Texte.setAlignment(Pos.CENTER);
 		bot5Texte.setFont(policeNom);
 		bot5Texte.setMinHeight(hauteurElemtents);
-		bot5Texte.setStyle("-fx-background-color: #2B2B2B; -fx-background-radius: 10px;");
+		bot5Texte.setStyle(styleBotTexte);
 		bot5Texte.setPadding(botPadding);
 		bot5Texte.setMinWidth(largeurTexte);
 		bot5Texte.setTextFill(Color.WHITE);
@@ -212,7 +211,7 @@ public class ConfigBotPane extends StackPane implements ITraduction {
 		bot6Texte.setAlignment(Pos.CENTER);
 		bot6Texte.setFont(policeNom);
 		bot6Texte.setMinHeight(hauteurElemtents);
-		bot6Texte.setStyle("-fx-background-color: #2B2B2B; -fx-background-radius: 10px;");
+		bot6Texte.setStyle(styleBotTexte);
 		bot6Texte.setPadding(botPadding);
 		bot6Texte.setMinWidth(largeurTexte);
 		bot6Texte.setTextFill(Color.WHITE);

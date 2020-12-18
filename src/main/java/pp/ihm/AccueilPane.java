@@ -89,7 +89,7 @@ public class AccueilPane extends StackPane implements ITraduction {
 
 		bJouer.setOnMouseEntered(event -> bJouer.setStyle(styleBoutonsSouris));
 		bJouer.setOnMouseExited(event -> bJouer.setStyle(styleBoutons));
-		bJouer.setOnAction(EventHandler -> sc.setPaneOnTop(ApplicationPane.CONFIG));
+		bJouer.setOnAction(EventHandler -> sc.setPaneOnTop(ApplicationPane.COULEUR));
 
 		bOptions = new Button(International.trad("bouton.options"));
 		bOptions.setPrefSize(lBouton, hBouton);
@@ -224,9 +224,6 @@ public class AccueilPane extends StackPane implements ITraduction {
 		sControl.setPaneOnTop(paneName);
 
 	}
-	/*
-	 * public void changerAngle(double angle) { centreMenu.setRotate(angle); }
-	 */
 
 	@Override
 	public void traduire() {

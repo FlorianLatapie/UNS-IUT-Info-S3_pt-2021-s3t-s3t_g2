@@ -15,13 +15,13 @@ import javafx.scene.effect.GaussianBlur;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
-import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.TextAlignment;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Random;
 
 /**
  * The Class ConfigPartiePane.
@@ -40,11 +40,11 @@ public class ConfigPartiePane extends StackPane implements ITraduction {
 	private int hBouton = 75;
 	private int lBouton = 150;
 	private int hauteurElemtents = 60;
-	private int largeurTF = 100;
 	private int largeurTexte = 220;
 	private int spacing = 10;
 
 	private String nomPolice = "Segoe UI";
+	private Font policeTexte = Font.font(nomPolice, FontWeight.BOLD, 30);
 	private Font policeBouton = Font.font(nomPolice, FontWeight.BOLD, 27);
 	private Font policeNom = Font.font(nomPolice, 17);
 
@@ -53,9 +53,6 @@ public class ConfigPartiePane extends StackPane implements ITraduction {
 	private String styleVBox = "-fx-border-color: black; -fx-border-insets: 5; -fx-border-width: 3;";
 	private GaussianBlur flou = new GaussianBlur(30);
 	private CornerRadii coin = new CornerRadii(15.0);
-	private CornerRadii coinfb = new CornerRadii(5.0);
-
-	private Background fondBlanc = new Background(new BackgroundFill(Color.WHITE, coinfb, null));
 
 	private Insets botPadding = new Insets(10);
 
@@ -87,7 +84,7 @@ public class ConfigPartiePane extends StackPane implements ITraduction {
 
 		// texte
 		desc = new Label(International.trad("texte.descriptionConfigPartie"));
-		desc.setFont(Font.font("Segoe UI", FontWeight.BOLD, 30));
+		desc.setFont(policeTexte);
 		desc.setTextFill(Color.WHITE);
 		desc.setMinHeight(hauteurElemtents);
 
@@ -97,12 +94,12 @@ public class ConfigPartiePane extends StackPane implements ITraduction {
 		HBox nomPartie = new HBox();
 
 		nomPTexte = new Label(International.trad("texte.idPartie"));
-		nomPTexte.setFont(Font.font("Segoe UI", FontWeight.BOLD, 30));
+		nomPTexte.setFont(policeTexte);
 		nomPTexte.setTextFill(Color.WHITE);
 		nomPTexte.setStyle(styleVBox);
 		nomPTexte.setMinHeight(hauteurElemtents);
 		nomPTexte.setPadding(new Insets(10, 10, 10, 10));
-		nomPTexte.setMinWidth(largeurTexte + 200);
+		nomPTexte.setMinWidth(largeurTexte + 200.0);
 
 		infoNomPartie = new Label();
 		infoNomPartie.setTextAlignment(TextAlignment.JUSTIFY);
@@ -115,8 +112,8 @@ public class ConfigPartiePane extends StackPane implements ITraduction {
 		infoNomPartie.setTextFill(Color.WHITE);
 
 		TextField nomP = new TextField();
-		nomP.setText("Partie" + (int) (100 * Math.random()));
-		nomP.setFont(Font.font("Segoe UI", FontWeight.BOLD, 30));
+		nomP.setText("Partie" + (new Random().nextInt(100)));
+		nomP.setFont(policeTexte);
 		nomP.setStyle(
 				"-fx-background-color: #2B2B2B; -fx-text-fill: white; -fx-border-color: black; -fx-border-width: 3;");
 		nomP.setBackground(null);
@@ -133,7 +130,7 @@ public class ConfigPartiePane extends StackPane implements ITraduction {
 		HBox nbTotJr = new HBox();
 
 		nbjrTexte = new Label(International.trad("texte.nbdeJr"));
-		nbjrTexte.setFont(Font.font("Segoe UI", FontWeight.BOLD, 30));
+		nbjrTexte.setFont(policeTexte);
 		nbjrTexte.setTextFill(Color.WHITE);
 		nbjrTexte.setStyle(styleVBox);
 		nbjrTexte.setMinHeight(hauteurElemtents);
@@ -141,7 +138,7 @@ public class ConfigPartiePane extends StackPane implements ITraduction {
 		nbjrTexte.setMinWidth(420);
 		nbjrTexte.setPrefWidth(420);
 		
-		ComboBox<Integer> nbJr = new ComboBox<Integer>();
+		ComboBox<Integer> nbJr = new ComboBox<>();
 		nbJr.getItems().addAll(DataControl.nombreJoueur);
 		nbJr.setValue(5);
 		nbJr.setStyle("-fx-text-fill: white;");
@@ -159,13 +156,13 @@ public class ConfigPartiePane extends StackPane implements ITraduction {
 		HBox nbTotBot = new HBox();
 
 		nbBotTexte = new Label(International.trad("texte.nbdeBot"));
-		nbBotTexte.setFont(Font.font("Segoe UI", FontWeight.BOLD, 30));
+		nbBotTexte.setFont(policeTexte);
 		nbBotTexte.setTextFill(Color.WHITE);
 		nbBotTexte.setAlignment(Pos.CENTER_LEFT);
 		nbBotTexte.setStyle(styleVBox);
 		nbBotTexte.setMinHeight(hauteurElemtents);
 		nbBotTexte.setPadding(new Insets(10, 10, 10, 10));
-		nbBotTexte.setMinWidth(largeurTexte + 200);
+		nbBotTexte.setMinWidth(largeurTexte + 200.0);
 
 		ComboBox<Integer> nbBot = new ComboBox<>();
 		nbBot.getItems().addAll(DataControl.nombreBot);
