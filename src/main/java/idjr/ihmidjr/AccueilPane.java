@@ -150,6 +150,7 @@ public class AccueilPane extends StackPane implements ITraduction {
 		bOptions.setStyle(styleBoutons);
 
 		bOptions.setOnMouseEntered(event -> bOptions.setStyle(styleBoutonsSouris));
+		bOptions.setOnMouseExited(event -> bOptions.setStyle(styleBoutons));
 		bOptions.setOnAction(EventHandler -> {
 			core.setPauseDepuis(paneName);
 			sc.setPaneOnTop(ApplicationPane.OPTION);
