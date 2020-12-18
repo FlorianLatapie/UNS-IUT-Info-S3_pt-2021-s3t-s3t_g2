@@ -39,17 +39,15 @@ public class ReglesPane extends StackPane implements ITraduction {
 	private int hBouton = 75;
 	private int lBouton = 150;
 
-	private Font policeBouton = Font.font("Segoe UI", FontWeight.BOLD, 27);
-	private Font policeNom = Font.font("Segoe UI", 17);
+	private String nomPolice = "Segoe UI";
+	private Font policeBouton = Font.font(nomPolice, FontWeight.BOLD, 27);
+	private Font policeNom = Font.font(nomPolice, 17);
 
 	private String styleBoutons = " -fx-background-color:#000000; -fx-background-radius: 15px; -fx-text-fill: #ffffff";
 	private String styleBoutonsSouris = "-fx-background-color:#ff0000;  -fx-text-fill:#000000; -fx-background-radius: 15px;";
 
 	private GaussianBlur flou = new GaussianBlur(30);
 	private CornerRadii coin = new CornerRadii(15.0);
-	private CornerRadii coinfb = new CornerRadii(5.0);
-
-	private Background fondBlanc = new Background(new BackgroundFill(Color.WHITE, coinfb, null));
 
 	Label titre1;
 	Label desc1;
@@ -61,7 +59,7 @@ public class ReglesPane extends StackPane implements ITraduction {
 
 		// titre
 		titre1 = new Label(International.trad("text.titreRegle"));
-		titre1.setFont(Font.font("Segoe UI", FontWeight.BOLD, 80));
+		titre1.setFont(Font.font(nomPolice, FontWeight.BOLD, 80));
 		titre1.setTextFill(Color.BLACK);
 
 		VBox titre = new VBox(titre1);
@@ -73,7 +71,7 @@ public class ReglesPane extends StackPane implements ITraduction {
 		//
 		Rectangle rect = new Rectangle();
 		rect.setWidth(tailleCarreCentral);
-		rect.setHeight(tailleCarreCentral - 154);
+		rect.setHeight(tailleCarreCentral - 154.0);
 		rect.setArcHeight(30);
 		rect.setArcWidth(30);
 		rect.setOpacity(.5);
@@ -95,8 +93,7 @@ public class ReglesPane extends StackPane implements ITraduction {
 		desc1.setFont(policeNom);
 		desc1.setPadding(new Insets(5, 10, 5, 10));
 		desc1.setTextFill(Color.WHITE);
-		// desc1.setBackground(fondBlanc);
-
+		
 		VBox vbCenter = new VBox();
 
 		vbCenter.setAlignment(Pos.CENTER);
