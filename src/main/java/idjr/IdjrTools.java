@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+import idjr.ihmidjr.langues.International;
 import reseau.type.Couleur;
 import reseau.type.PionCouleur;
 
@@ -45,12 +46,12 @@ public abstract class IdjrTools {
 
 	public static List<String> getLieuByIndex(List<Integer> lieux) {
 		HashMap<Integer, String> listeLieu = new HashMap<Integer, String>();
-		listeLieu.put(1, "Toilettes");
-		listeLieu.put(2, "Cachou");
-		listeLieu.put(3, "Megatoys");
-		listeLieu.put(4, "Parking");
-		listeLieu.put(5, "PC de securite");
-		listeLieu.put(6, "Supermarche");
+		listeLieu.put(1, International.trad("texte.lieu1"));
+		listeLieu.put(2, International.trad("texte.lieu2"));
+		listeLieu.put(3, International.trad("texte.lieu3"));
+		listeLieu.put(4, International.trad("texte.lieu4"));
+		listeLieu.put(5, International.trad("texte.lieu5") + " " + International.trad("texte.lieu5b"));
+		listeLieu.put(6, International.trad("texte.lieu6"));
 
 		List<String> list = new ArrayList<>();
 		for (int i : lieux)
