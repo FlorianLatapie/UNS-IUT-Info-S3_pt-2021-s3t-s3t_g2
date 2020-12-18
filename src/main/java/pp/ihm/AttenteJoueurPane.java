@@ -159,6 +159,7 @@ public class AttenteJoueurPane extends StackPane implements IAttenteListener, IT
 
 		// boutons
 		bRetour = new Button(International.trad("bouton.retour"));
+		bRetour.setAlignment(Pos.CENTER);
 		bRetour.setPrefSize(lBouton, hBouton);
 		bRetour.setMinSize(lBouton, hBouton);
 		bRetour.setFont(policeBouton);
