@@ -42,13 +42,13 @@ public class ControleurJeu {
 	private Partie jeu;
 	private Thread coreThread;
 	private List<Joueur> jmort;
-	private Statut statut;
+	static Statut statut;
 	private final List<String> tempPaquet;
 
 	private List<Joueur> joueurs;
 	private List<Integer> lieuZombie;
 	private boolean couleurPret = false;
-	private boolean isFinished = false;
+	static boolean isFinished = false;
 
 	private ControleurFouilleCamion cfc;
 	private ControleurVote cVote;
@@ -56,6 +56,8 @@ public class ControleurJeu {
 	private ControleurArriveZombie caz;
 	private ControleurChoixDestination ccd;
 	private ControleurPlacementPersonnage cpp;
+	private ControleurDeplacementPersonnage cdp;
+	private ControleurFinPartie cfp;
 
 	private final Random rd = new Random();
 
@@ -76,6 +78,8 @@ public class ControleurJeu {
 		this.caz = new ControleurArriveZombie();
 		this.ccd = new ControleurChoixDestination();
 		this.cpp = new ControleurPlacementPersonnage();
+		this.cdp = new ControleurDeplacementPersonnage();
+		this.cfp = new ControleurFinPartie();
 
 		this.statut = Statut.ATTENTE;
 		initReseau();
@@ -241,17 +245,17 @@ public class ControleurJeu {
 		ArrayList<Integer> destination = new ArrayList<>();
 		ccd.phasechoixDestination(jeu, destination, jmort, partieId, numeroTour);
 		jeu.entreZombie(lieuZombie);
-		phaseDeplacementPerso(destination, lieuZombie);
+		cdp.phaseDeplacementPerso(jeu, destination, lieuZombie, partieId, numeroTour);
 		if (isFinished)
 			return;
-		finJeu();
+		cfp.finJeu(jeu, partieId, numeroTour);
 		if (isFinished)
 			return;
 		Initializer.nbZombiesLieuAll(new ArrayList<>(jeu.getLieux().values()));
 		jeu.fermerLieu();
 		Initializer.lieuFermeAll(new ArrayList<>(jeu.getLieux().values()));
 		Initializer.lieuOuvertAll(new ArrayList<>(jeu.getLieux().values()));
-		finJeu();
+		cfp.finJeu(jeu, partieId, numeroTour);
 		if (isFinished)
 			return;
 		phaseAttaqueZombie();
@@ -269,84 +273,6 @@ public class ControleurJeu {
 	 */
 	public Partie getJeu() {
 		return jeu;
-	}
-
-
-	private void phasechoixDestination(ArrayList<Integer> destination) throws InterruptedException {
-		VigileEtat ve = jeu.getNewChef() ? VigileEtat.NE : VigileEtat.NUL;
-		String m = ControleurReseau.construirePaquetTcp("PCD", jeu.getChefVIgile().getCouleur(), ve, partieId,
-				numeroTour);
-		for (Joueur j : jeu.getJoueurs().values())
-			j.getConnection().envoyer(m);
-		if (jeu.getNewChef()) {
-			jeu.getChefVIgile().getConnection().attendreMessage("CDDCV");
-			m = jeu.getChefVIgile().getConnection().getMessage("CDDCV");
-			int dest = (int) ControleurReseau.getValueTcp("CDDCV", m, 1);
-			destination.add(dest);
-			m = ControleurReseau.construirePaquetTcp("CDCDV", jeu.getChefVIgile().getCouleur(), dest, partieId,
-					numeroTour);
-			for (Joueur j : jeu.getJoueurs().values())
-				if (!(j.isChefDesVigiles()) && ve == VigileEtat.NE)
-					j.getConnection().envoyer(m);
-			Initializer.prevenirDeplacementVigile("Le chef des vigile (" + jeu.getChefVIgile().getCouleur()
-					+ ") a choisi la detination :" + this.jeu.getLieux().get(dest));
-			HashMap<String, Integer> idj = new HashMap<>();
-			for (Joueur j : jeu.getJoueurs().values())
-				if (j != jeu.getChefVIgile() && j.isEnVie())
-					j.getConnection().attendreMessage("CDDJ");
-			for (Joueur j : jeu.getJoueurs().values())
-				if (j != jeu.getChefVIgile() && j.isEnVie()) {
-					String rep = j.getConnection().getMessage("CDDJ");
-					String id = (String) ControleurReseau.getValueTcp("CDDJ", rep, 4);
-					int idJoueur = (int) ControleurReseau.getValueTcp("CDDJ", rep, 1);
-					idj.put(id, idJoueur);
-				}
-			for (Joueur j : jeu.getJoueurs().values())
-				if (!j.isChefDesVigiles() && j.isEnVie())
-					for (Map.Entry<String, Integer> d : idj.entrySet())
-						if (d.getKey().equals(j.getJoueurId()))
-							destination.add(d.getValue());
-		} else {
-			HashMap<String, Integer> idj = new HashMap<>();
-			for (Joueur j : jeu.getJoueurs().values())
-				if (j.isEnVie())
-					j.getConnection().attendreMessage("CDDJ");
-
-			for (Joueur j : jeu.getJoueurs().values())
-				if (j.isEnVie()) {
-					String rep = j.getConnection().getMessage("CDDJ");
-					String id = (String) ControleurReseau.getValueTcp("CDDJ", rep, 4);
-					int idJoueur = (int) ControleurReseau.getValueTcp("CDDJ", rep, 1);
-					idj.put(id, idJoueur);
-				}
-
-			for (Map.Entry<String, Integer> d : idj.entrySet())
-				if (d.getKey().equals(jeu.getChefVIgile().getJoueurId()))
-					destination.add(d.getValue());
-
-			for (Joueur j : jeu.getJoueurs().values())
-				if (!j.isChefDesVigiles() && j.isEnVie())
-					for (Map.Entry<String, Integer> d : idj.entrySet())
-						if (d.getKey().equals(j.getJoueurId()))
-							destination.add(d.getValue());
-		}
-		m = ControleurReseau.construirePaquetTcp("CDFC", partieId, numeroTour);
-		for (Joueur j : jeu.getJoueurs().values())
-			j.getConnection().envoyer(m);
-		for (Joueur j : this.jeu.getJoueurs().values()) {
-			if (jmort.contains(j)) {
-				m = ControleurReseau.construirePaquetTcp("CDZVI", partieId, numeroTour);
-				j.getConnection().envoyer(m);
-				j.getConnection().attendreMessage("CDDZVJE");
-				String rep = j.getConnection().getMessage("CDDZVJE");
-				int dvz = (int) ControleurReseau.getValueTcp("CDDZVJE", rep, 1);
-				jeu.getLieux().get(dvz).addZombie();
-				for (Joueur j2 : this.jeu.getJoueurs().values()) {
-					j.getConnection().envoyer(
-							ControleurReseau.construirePaquetTcp("CDZVDI", j.getCouleur(), dvz, partieId, numeroTour));
-				}
-			}
-		}
 	}
 
 	private void phaseDeplacementPerso(List<Integer> destination, List<Integer> zombie) {
