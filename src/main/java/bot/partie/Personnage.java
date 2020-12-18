@@ -119,9 +119,9 @@ public class Personnage{
 		if (point==5)
 			return "La Brute";
 		if (point==3)
-			return "La Fillette";
-		if (point==1)
 			return "Le Truand";
+		if (point==1)
+			return "La Fillette";
 		return "Inconnu";
 		
 	}
