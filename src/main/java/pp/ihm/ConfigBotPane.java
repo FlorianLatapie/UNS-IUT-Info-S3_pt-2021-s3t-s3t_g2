@@ -34,7 +34,7 @@ public class ConfigBotPane extends StackPane implements ITraduction {
 	private int lBouton = 150;
 	private int hauteurElemtents = 60;
 	private int largeurTF = 200;
-	private int largeurTexte = 200;
+	private int largeurTexte = 350;
 	private int spacing = 30;
 
 	private String nomPolice = "Segoe UI";
