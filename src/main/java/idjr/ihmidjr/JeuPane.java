@@ -158,7 +158,7 @@ public class JeuPane extends StackPane implements IJeuListener {
 	Label force;
 	VBox des;
 	VBox vbForce;
-	
+
 	HBox fond;
 	Rectangle rectVigile;
 	Button cartePrecedente;
@@ -745,9 +745,6 @@ public class JeuPane extends StackPane implements IJeuListener {
 		vbTitreCamion.getChildren().addAll(titreFouille, titreQuestionCarte);
 		fouilleCamion.setTop(vbTitreCamion);
 		fouilleCamion.setCenter(vbChoixCarteCentre);
-
-	
-		
 
 		///
 
@@ -1742,19 +1739,22 @@ public class JeuPane extends StackPane implements IJeuListener {
 					if (carteType == cartes.get(i)) {
 						buttons[i].setDisable(false);
 						CarteType type = cartes.get(i);
+						int tmp = i;
 						buttons[i].setOnAction(EventHandler -> {
-							if (core.getIdjr().getUtiliserCarteChosi() == CarteType.NUL) {
+							if (core.getIdjr().getUtiliserCarteChosi() == CarteType.NUL)
 								core.getIdjr().choisirUtiliserCarte(type);
-							} else {
-								core.getIdjr().choisirUtiliserCarte(type);
-							}
+							else
+								core.getIdjr().choisirUtiliserCarte(CarteType.NUL);
+
 							if (core.getIdjr().getUtiliserCarteChosi() != CarteType.NUL) {
-								bPasserCarte.setFont(Font.font("Segoe UI", FontWeight.BOLD, 25));
-								bPasserCarte.setText(International.trad("texte.valider"));
+								buttons[tmp].setText(International.trad("texte.valider"));
+								buttons[tmp].setStyle(
+										"-fx-border-color: red; -fx-border-insets: -5; -fx-border-width: 3;");
 							} else {
-								bPasserCarte.setFont(policeBoutonC);
-								bPasserCarte.setText(International.trad("texte.passer"));
+								buttons[tmp].setText(International.trad("texte.passer"));
+								buttons[tmp].setStyle(null);
 							}
+							resetSelection(buttons[tmp]);
 						});
 					}
 				}
@@ -1783,17 +1783,22 @@ public class JeuPane extends StackPane implements IJeuListener {
 						if (carteType2 == cartes.get(i)) {
 							buttons[i].setDisable(false);
 							CarteType type = cartes.get(i);
+							int tmp = i;
 							buttons[i].setOnAction(EventHandler -> {
-								if (core.getIdjr().getUtiliserCarteChosi() == CarteType.NUL) {
+								if (core.getIdjr().getUtiliserCarteChosi() == CarteType.NUL)
 									core.getIdjr().choisirUtiliserCarte(type);
-								} else {
-									core.getIdjr().choisirUtiliserCarte(type);
-								}
+								else
+									core.getIdjr().choisirUtiliserCarte(CarteType.NUL);
+
 								if (core.getIdjr().getUtiliserCarteChosi() != CarteType.NUL) {
-									bPasserCarte.setText(International.trad("texte.valider"));
+									buttons[tmp].setText(International.trad("texte.valider"));
+									buttons[tmp].setStyle(
+											"-fx-border-color: red; -fx-border-insets: -5; -fx-border-width: 3;");
 								} else {
-									bPasserCarte.setText(International.trad("texte.passer"));
+									buttons[tmp].setText(International.trad("texte.passer"));
+									buttons[tmp].setStyle(null);
 								}
+								resetSelection(buttons[tmp]);
 							});
 						}
 					}
@@ -1809,6 +1814,16 @@ public class JeuPane extends StackPane implements IJeuListener {
 			});
 		});
 	}
+	
+	public void resetSelection(Button btn) {
+			Button[] buttons = { bDeCarte1, bDeCarte2, bDeCarte3, bDeCarte4, bDeCarte5, bDeCarte6, bDeCarte7,
+					bDeCarte8 };
+			for (Button button : buttons) {
+				if (!button.equals(btn)) {
+					button.setText(International.trad("texte.passer"));
+				}
+			}
+		}
 
 	public void setContinue() {
 		if (cartes.contains(true)) {
