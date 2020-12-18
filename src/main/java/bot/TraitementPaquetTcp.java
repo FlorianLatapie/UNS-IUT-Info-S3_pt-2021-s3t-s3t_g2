@@ -257,8 +257,8 @@ public class TraitementPaquetTcp extends TraitementPaquet<TcpClient> {
 	}
 
 	private void traitementDPI(Paquet paquet, String message) {
-		core.deplPionJoueurCourant((Couleur) paquet.getValeur(message, 1), (Integer) paquet.getValeur(message, 2),
-				(Integer) paquet.getValeur(message, 3));
+		core.deplPionJoueurCourant((Couleur) paquet.getValeur(message, 1), (Integer) paquet.getValeur(message, 3),
+				(Integer) paquet.getValeur(message, 2));
 		if (((CarteType) paquet.getValeur(message, 4)).equals(CarteType.SPR))
 			core.joueCarte((Couleur) paquet.getValeur(message, 1), CarteType.SPR);
 
