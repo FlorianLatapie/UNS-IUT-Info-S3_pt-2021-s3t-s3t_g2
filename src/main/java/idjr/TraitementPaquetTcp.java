@@ -362,8 +362,8 @@ public class TraitementPaquetTcp extends TraitementPaquet<TcpClient> {
 	private void logPFC(Paquet paquet, String message) {
 		String log = " La phase de la fouille du camion commence." + "\n" + "Les joueurs présent sur le lieux sont :"
 				+ "\n";
-		for (Couleur c : (List<Couleur>) paquet.getValeur(message, 1))
-			log += core.getListeJoueursInitiale().get(c) + "\n";
+		for (PionCouleur c : (List<PionCouleur>) paquet.getValeur(message, 1))
+			log += core.getListeJoueursInitiale().get(IdjrTools.getCouleurByChar(c)) + "\n";
 		log += "Il reste " + (Integer) paquet.getValeur(message, 2) + " cartes dans la pioche.";
 		Initializer.log(log);
 
