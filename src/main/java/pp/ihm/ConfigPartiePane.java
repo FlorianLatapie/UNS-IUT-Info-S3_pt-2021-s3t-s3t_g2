@@ -105,8 +105,9 @@ public class ConfigPartiePane extends StackPane implements ITraduction {
 		nomPTexte.setMinWidth(largeurTexte + 200);
 
 		infoNomPartie = new Label();
+		infoNomPartie.setTextAlignment(TextAlignment.JUSTIFY);
 		infoNomPartie.setText(International.trad("texte.infoNom1") + "\n" + International.trad("texte.infoNom2") + "\n"
-				+ International.trad("texte.infoNom3") + "\n" + International.trad("texte.infoNom4"));
+				+ International.trad("texte.infoNom3") + " " + International.trad("texte.infoNom4"));
 		infoNomPartie.setMinHeight(100);
 		infoNomPartie.setPrefSize(580, 100);
 		infoNomPartie.setFont(policeNom);
@@ -137,8 +138,9 @@ public class ConfigPartiePane extends StackPane implements ITraduction {
 		nbjrTexte.setStyle(styleVBox);
 		nbjrTexte.setMinHeight(hauteurElemtents);
 		nbjrTexte.setPadding(new Insets(10, 20, 10, 10));
-		nbjrTexte.setMinWidth(largeurTexte);
-
+		nbjrTexte.setMinWidth(420);
+		nbjrTexte.setPrefWidth(420);
+		
 		ComboBox<Integer> nbJr = new ComboBox<Integer>();
 		nbJr.getItems().addAll(DataControl.nombreJoueur);
 		nbJr.setValue(5);
