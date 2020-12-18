@@ -81,7 +81,6 @@ public class InterfacePrincipale extends Application {
 		International.ajouterPane(configPartiePane);
 		International.ajouterPane(finDePartiePane);
 		International.ajouterPane(confirmationPane);
-		International.ajouterPane(accueilPane);
 
 		International.changerLangue(core.getSauvegarderOptions().getLangues());
 
