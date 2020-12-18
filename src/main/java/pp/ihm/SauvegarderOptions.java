@@ -16,7 +16,7 @@ public class SauvegarderOptions implements Serializable {
 	private static final long serialVersionUID = 3409175594291680627L;
 
 	private Langues langues;
-	private boolean estPleineEcran;
+	private boolean estPleinEcran;
 	private int angleRotation;
 
 	private static String CHEMIN = "options.opts";
@@ -25,7 +25,7 @@ public class SauvegarderOptions implements Serializable {
 		File opt = new File(CHEMIN);
 		if (!opt.exists()) {
 			langues = Langues.FR;
-			estPleineEcran = true;
+			estPleinEcran = true;
 			angleRotation = 0;
 			sauvegarder();
 		} else {
@@ -39,7 +39,7 @@ public class SauvegarderOptions implements Serializable {
 				e.printStackTrace();
 			}
 			langues = so.getLangues();
-			estPleineEcran = so.isEstPleineEcran();
+			estPleinEcran = so.isEstPleinEcran();
 			angleRotation = so.getAngleRotation();
 		}
 	}
@@ -76,12 +76,12 @@ public class SauvegarderOptions implements Serializable {
 		sauvegarder();
 	}
 
-	public boolean isEstPleineEcran() {
-		return estPleineEcran;
+	public boolean isEstPleinEcran() {
+		return estPleinEcran;
 	}
 
-	public void setEstPleineEcran(boolean estPleineEcran) {
-		this.estPleineEcran = estPleineEcran;
+	public void setEstPleinEcran(boolean estPleinEcran) {
+		this.estPleinEcran = estPleinEcran;
 		sauvegarder();
 	}
 }
