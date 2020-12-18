@@ -32,7 +32,7 @@ public class DeplacementReseau {
 		if (ControleurReseau.getValueTcp("DPR", message, 3) == CarteType.SPR)
 			j.getCartes().remove(CarteType.SPR);
 		li.add(ControleurReseau.getValueTcp("DPR", message, 1));
-		li.add(PpTools.valeurToIndex((int) ControleurReseau.getValueTcp("DPR", message, 2)));
+		li.add(ControleurReseau.getValueTcp("DPR", message, 2));
 		li.add(ControleurReseau.getValueTcp("DPR", message, 3));
 		return li;
 	}
