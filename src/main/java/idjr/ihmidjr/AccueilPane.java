@@ -68,6 +68,8 @@ public class AccueilPane extends StackPane implements ITraduction {
 	Button bQuitter;
 
 	Label titre1;
+	Button bJouer;
+	Label titre2;
 
 	public AccueilPane(ScreenControl sc, Core c) {
 		core = c;
@@ -79,7 +81,7 @@ public class AccueilPane extends StackPane implements ITraduction {
 		titre1.setFont(Font.font(nomPolice, FontWeight.BOLD, 160));
 		titre1.setTextFill(Color.BLACK);
 
-		Label titre2 = new Label(International.trad("texte.titreIDJR"));
+		titre2 = new Label(International.trad("texte.titreIDJR"));
 		titre2.setFont(Font.font(nomPolice, 35));
 		titre2.setTextFill(Color.BLACK);
 		titre2.setPadding(new Insets(0, 0, 20, 0));
@@ -129,7 +131,7 @@ public class AccueilPane extends StackPane implements ITraduction {
 		HNomJoueur.getChildren().addAll(nomjoueur, iconeQuestion);
 
 		// boutons
-		Button bJouer = new Button(International.trad("bouton.jouer"));
+		bJouer = new Button(International.trad("bouton.jouer"));
 		bJouer.setPrefSize(lBouton, hBouton);
 		bJouer.setMinSize(lBouton, hBouton);
 		bJouer.setFont(policeBouton);
@@ -241,7 +243,9 @@ public class AccueilPane extends StackPane implements ITraduction {
 				+ International.trad("texte.infoNom3") + "\n" + International.trad("texte.infoNom4")));
 		bOptions.setText(International.trad("bouton.options"));
 		bRegles.setText(International.trad("bouton.regles"));
+		bJouer.setText(International.trad("bouton.jouer"));
 		bQuitter.setText(International.trad("bouton.quitter"));
+		titre2.setText(International.trad("texte.titreIDJR"));
 
 	}
 
