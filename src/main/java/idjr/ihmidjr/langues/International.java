@@ -1,5 +1,7 @@
 package idjr.ihmidjr.langues;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Locale;
 import java.util.ResourceBundle;
 
@@ -13,10 +15,12 @@ public abstract class International {
 	private static Locale langue;
 	private static ResourceBundle resourceBundle;
 	private static String CHEMIN_LANGUE = "langues_IDJR.messages";
+	private static List<ITraduction> traductionListener;
 
 	static {
 		langue = Locale.FRENCH;
 		resourceBundle = ResourceBundle.getBundle(CHEMIN_LANGUE, langue);
+		traductionListener = new ArrayList<>();
 	}
 
 	/**
@@ -24,8 +28,19 @@ public abstract class International {
 	 *
 	 * @param l la langue cible
 	 */
-	public static void changerLangue(Locale l) {
-		langue = l;
+	public static void changerLangue(Langues l) {
+		langue = convertirLangue(l);
+		resourceBundle = ResourceBundle.getBundle(CHEMIN_LANGUE, langue);
+		updateTraduction();
+	}
+
+	private static Locale convertirLangue(Langues l) {
+		switch (l) {
+		case EN:
+			return Locale.ENGLISH;
+		default:
+			return Locale.FRENCH;
+		}
 	}
 
 	/**
@@ -76,4 +91,24 @@ public abstract class International {
 		return langue.getDisplayLanguage();
 	}
 
+	/**
+	 * Permet d'ajouter la traduction cible
+	 * 
+	 * @param trad la traduction à ajouter
+	 */
+
+	public static void ajouterPane(ITraduction trad) {
+		traductionListener.add(trad);
+	}
+
+	/**
+	 * Permet de passer d'une langue à l'autre
+	 * 
+	 */
+
+	private static void updateTraduction() {
+		for (ITraduction iTraduction : traductionListener) {
+			iTraduction.traduire();
+		}
+	}
 }
