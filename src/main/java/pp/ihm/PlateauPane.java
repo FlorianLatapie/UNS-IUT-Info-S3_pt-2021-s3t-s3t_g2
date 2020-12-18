@@ -34,12 +34,17 @@ public class PlateauPane extends StackPane implements IPlateauListener, ITraduct
 	private final int margeP = 24;
 	private final Insets margeBoutonPause = new Insets(margeP, margeP, margeP, margeP);
 	private final int lhBoutonPause = 80;
+	
+	private String nomPolice = "Segoe UI";
 	private final Font policeBoutonPause = Font.font("Segoe UI", FontWeight.BOLD, 34);
+	
 	private String styleBoutons = " -fx-background-color:#000000; -fx-background-radius: 50px; -fx-text-fill: #ffffff";
 	private String styleBoutonsSouris = "-fx-background-color:#ff0000;  -fx-text-fill:#000000; -fx-background-radius: 50px;";
 	private String styleBoutonInfo = " -fx-background-color:#000000; -fx-background-radius: 15px; -fx-text-fill: #ffffff;";
 	private String styleBoutonInfoSouris = "-fx-background-color:#ff0000;  -fx-text-fill:#000000; -fx-background-radius: 15px;";
 	private String styleChefVigile = "-fx-background-color: #2D2D2D; -fx-border-color: whitesmoke; -fx-border-insets: -3; -fx-border-width: 3; -fx-border-radius: 10px;";
+	private String styleInfo = " -fx-background-color:#1A1A1A; -fx-background-radius: 20px; -fx-border-color: red; -fx-border-insets: -3; -fx-border-width: 3; -fx-border-radius: 20px;";
+	
 	private final int margeJ = 20;
 	private final Insets margeTexteJoueur = new Insets(margeJ, 10, margeJ, 10);
 	private final Insets insetJGauche = new Insets(0, 500, 0, 115);
@@ -52,14 +57,8 @@ public class PlateauPane extends StackPane implements IPlateauListener, ITraduct
 	private final Insets margeLieu = new Insets(margeL, margeL, margeL, margeL);
 	private final int tailleFont = 18;
 
-	private GaussianBlur flou = new GaussianBlur(20);
-
 	private final Font fontInfo = Font.font("Segoe UI", FontWeight.BOLD, tailleFont);
-	private final Font fontPerso = Font.font("Segoe UI", FontWeight.BOLD, 12);
 
-	private CornerRadii coinfb = new CornerRadii(5.0);
-	private Background fondBlanc = new Background(new BackgroundFill(Color.WHITE, coinfb, null));
-	private Background fondNoir = new Background(new BackgroundFill(Color.BLACK, coinfb, null));
 	private String tmpColor = " -fx-background-color:#000000; -fx-text-fill: #FF2626";
 	private int largBouton = 155;
 	private int hautBouton = 70;
@@ -815,8 +814,7 @@ public class PlateauPane extends StackPane implements IPlateauListener, ITraduct
 		info1.setPrefSize(700, 200);
 		info1.setMaxSize(700, 200);
 		info1.setPadding(new Insets(10));
-		info1.setStyle(
-				" -fx-background-color:#1A1A1A; -fx-background-radius: 20px; -fx-border-color: red; -fx-border-insets: -3; -fx-border-width: 3; -fx-border-radius: 20px;");
+		info1.setStyle(styleInfo);
 
 		bQuitterInfo1 = new Button(International.trad("bouton.quitter"));
 		bQuitterInfo1.setAlignment(Pos.CENTER);
@@ -858,8 +856,7 @@ public class PlateauPane extends StackPane implements IPlateauListener, ITraduct
 		info2.setPrefSize(700, 200);
 		info2.setMaxSize(700, 200);
 		info2.setPadding(new Insets(10));
-		info2.setStyle(
-				" -fx-background-color:#1A1A1A; -fx-background-radius: 20px; -fx-border-color: red; -fx-border-insets: -3; -fx-border-width: 3; -fx-border-radius: 20px;");
+		info2.setStyle(styleInfo);
 
 		bQuitterInfo2 = new Button(International.trad("bouton.quitter"));
 		bQuitterInfo2.setAlignment(Pos.CENTER);
@@ -900,8 +897,7 @@ public class PlateauPane extends StackPane implements IPlateauListener, ITraduct
 		info3.setPrefSize(700, 200);
 		info3.setMaxSize(700, 200);
 		info3.setPadding(new Insets(10));
-		info3.setStyle(
-				" -fx-background-color:#1A1A1A; -fx-background-radius: 20px; -fx-border-color: red; -fx-border-insets: -3; -fx-border-width: 3; -fx-border-radius: 20px;");
+		info3.setStyle(styleInfo);
 
 		bQuitterInfo3 = new Button(International.trad("bouton.quitter"));
 		bQuitterInfo3.setAlignment(Pos.CENTER);
@@ -943,8 +939,7 @@ public class PlateauPane extends StackPane implements IPlateauListener, ITraduct
 		info4.setPrefSize(700, 200);
 		info4.setMaxSize(700, 200);
 		info4.setPadding(new Insets(10));
-		info4.setStyle(
-				" -fx-background-color:#1A1A1A; -fx-background-radius: 20px; -fx-border-color: red; -fx-border-insets: -3; -fx-border-width: 3; -fx-border-radius: 20px;");
+		info4.setStyle(styleInfo);
 
 		bQuitterInfo4 = new Button(International.trad("bouton.quitter"));
 		bQuitterInfo4.setAlignment(Pos.CENTER);
