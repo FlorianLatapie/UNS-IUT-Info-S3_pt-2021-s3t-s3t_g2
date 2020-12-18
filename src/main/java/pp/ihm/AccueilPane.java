@@ -89,7 +89,7 @@ public class AccueilPane extends StackPane implements ITraduction {
 
 		bJouer.setOnMouseEntered(event -> bJouer.setStyle(styleBoutonsSouris));
 		bJouer.setOnMouseExited(event -> bJouer.setStyle(styleBoutons));
-		bJouer.setOnAction(EventHandler -> sc.setPaneOnTop(ApplicationPane.COULEUR));
+		bJouer.setOnAction(EventHandler -> sc.setPaneOnTop(ApplicationPane.CONFIG));
 
 		bOptions = new Button(International.trad("bouton.options"));
 		bOptions.setPrefSize(lBouton, hBouton);
