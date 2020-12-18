@@ -1,5 +1,7 @@
 package idjr.ihmidjr;
 
+import java.util.Random;
+
 import idjr.ihmidjr.DataControl.ApplicationPane;
 import idjr.ihmidjr.event.Initializer;
 import idjr.ihmidjr.langues.ITraduction;
@@ -23,7 +25,6 @@ import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
-import javafx.scene.text.TextAlignment;
 import reseau.type.Statut;
 import reseau.type.TypePartie;
 
@@ -45,15 +46,17 @@ public class AccueilPane extends StackPane implements ITraduction {
 	private int lBouton = 200;
 	private int marge = tailleCarreCentral / 25;
 	private Insets margeBoutons = new Insets(marge, marge, marge, marge);
-	private Font policeBouton = Font.font("Segoe UI", FontWeight.BOLD, 33);
+	
+	private String nomPolice = "Segoe UI";
+	private Font policeBouton = Font.font(nomPolice, FontWeight.BOLD, 33);
 	private CornerRadii coin = new CornerRadii(15.0);
 	private String styleQuestion = " -fx-background-color:#000000; -fx-background-radius: 50px; -fx-text-fill: #ffffff";
 	private String styleBoutons = " -fx-background-color:#000000; -fx-background-radius: 15px; -fx-text-fill: #ffffff";
 	private String styleBoutonsSouris = "-fx-background-color:#ff0000;  -fx-text-fill:#000000; -fx-background-radius: 15px;";
 	private StackPane stackPane = new StackPane();
 	private GaussianBlur flou = new GaussianBlur(30);
-	private Font policeNom = Font.font("Segoe UI", 17);
-	private CornerRadii coinfb = new CornerRadii(5.0);
+	private Font policeNom = Font.font(nomPolice, 17);
+
 	private int largeurTF = 600;
 	private int hauteurElemtents = 60;
 
@@ -72,16 +75,16 @@ public class AccueilPane extends StackPane implements ITraduction {
 
 		// titre
 		titre1 = new Label(International.trad("texte.preTitre"));
-		titre1.setFont(Font.font("Segoe UI", FontWeight.BOLD, 160));
+		titre1.setFont(Font.font(nomPolice, FontWeight.BOLD, 160));
 		titre1.setTextFill(Color.BLACK);
 
 		Label titre2 = new Label(International.trad("texte.titreIDJR"));
-		titre2.setFont(Font.font("Segoe UI", 35));
+		titre2.setFont(Font.font(nomPolice, 35));
 		titre2.setTextFill(Color.BLACK);
 		titre2.setPadding(new Insets(0, 0, 20, 0));
 
 		Label titre3 = new Label("IDJR");
-		titre3.setFont(Font.font("Segoe UI", 35));
+		titre3.setFont(Font.font(nomPolice, 35));
 		titre3.setTextFill(Color.BLACK);
 		titre3.setPadding(new Insets(0, 0, 20, 0));
 
@@ -102,7 +105,7 @@ public class AccueilPane extends StackPane implements ITraduction {
 
 		infoNomJoueur.setFont(policeNom);
 		nomjoueur = new TextField();
-		nomjoueur.setText("JoueurSansNom" + (int) (100 * Math.random()));
+		nomjoueur.setText("JoueurSansNom" + new Random().nextInt(100));
 		nomjoueur.setText(core.getSauvegarderOptions().getNom());
 		nomjoueur.setStyle(
 				"-fx-background-color: #1A1A1A; -fx-text-fill: white; -fx-border-color: white;  -fx-border-width: 1;");
@@ -127,17 +130,10 @@ public class AccueilPane extends StackPane implements ITraduction {
 		bJouer.setFont(policeBouton);
 		bJouer.setStyle(styleBoutons);
 
-		bJouer.setOnMouseEntered(event -> {
-			bJouer.setStyle(styleBoutonsSouris);
-		});
-		bJouer.setOnMouseExited(event -> {
-			bJouer.setStyle(styleBoutons);
-		});
-		nomjoueur.textProperty().addListener((obs, oldText, newText) -> {
-			bJouer.setDisable(!(nomjoueur.getText().length() < 32 && IhmTools.nomEstValide(nomjoueur.getText())));
-		});
+		bJouer.setOnMouseEntered(event -> bJouer.setStyle(styleBoutonsSouris));
+		bJouer.setOnMouseExited(event -> bJouer.setStyle(styleBoutons));
+		nomjoueur.textProperty().addListener((obs, oldText, newText) -> bJouer.setDisable(!(nomjoueur.getText().length() < 32 && IhmTools.nomEstValide(nomjoueur.getText()))));
 		bJouer.setOnAction(EventHandler -> {
-			// TODO CARACTERE NON AUTORISE
 			if (nomjoueur.getText().length() < 20 && IhmTools.nomEstValide(nomjoueur.getText())) {
 				core.getIdjr().setNom(nomjoueur.getText());
 				Initializer.nomJoueur(core.getIdjr().getNom());
@@ -153,12 +149,7 @@ public class AccueilPane extends StackPane implements ITraduction {
 		bOptions.setFont(policeBouton);
 		bOptions.setStyle(styleBoutons);
 
-		bOptions.setOnMouseEntered(event -> {
-			bOptions.setStyle(styleBoutonsSouris);
-		});
-		bOptions.setOnMouseExited(event -> {
-			bOptions.setStyle(styleBoutons);
-		});
+		bOptions.setOnMouseEntered(event -> bOptions.setStyle(styleBoutonsSouris));
 		bOptions.setOnAction(EventHandler -> {
 			core.setPauseDepuis(paneName);
 			sc.setPaneOnTop(ApplicationPane.OPTION);
@@ -170,12 +161,8 @@ public class AccueilPane extends StackPane implements ITraduction {
 		bRegles.setFont(policeBouton);
 		bRegles.setStyle(styleBoutons);
 
-		bRegles.setOnMouseEntered(event -> {
-			bRegles.setStyle(styleBoutonsSouris);
-		});
-		bRegles.setOnMouseExited(event -> {
-			bRegles.setStyle(styleBoutons);
-		});
+		bRegles.setOnMouseEntered(event -> bRegles.setStyle(styleBoutonsSouris));
+		bRegles.setOnMouseExited(event -> bRegles.setStyle(styleBoutons));
 		bRegles.setOnAction(EventHandler -> {
 			core.setReglesDepuis(paneName);
 			sc.setPaneOnTop(ApplicationPane.REGLES);
@@ -187,12 +174,8 @@ public class AccueilPane extends StackPane implements ITraduction {
 		bQuitter.setFont(policeBouton);
 		bQuitter.setStyle(styleBoutons);
 
-		bQuitter.setOnMouseEntered(event -> {
-			bQuitter.setStyle(styleBoutonsSouris);
-		});
-		bQuitter.setOnMouseExited(event -> {
-			bQuitter.setStyle(styleBoutons);
-		});
+		bQuitter.setOnMouseEntered(event -> bQuitter.setStyle(styleBoutonsSouris));
+		bQuitter.setOnMouseExited(event -> bQuitter.setStyle(styleBoutons));
 		bQuitter.setOnAction(event -> {
 			boolean resultat = ConfirmationPane.afficher(International.trad("texte.confirmationTitre"),
 					International.trad("texte.confirmationL1") + "\n" + International.trad("texte.confirmationL2"));
