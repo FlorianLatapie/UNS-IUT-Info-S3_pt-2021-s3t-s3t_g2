@@ -70,7 +70,7 @@ public class AccueilPane extends StackPane implements ITraduction {
 		titre1.setTextFill(Color.BLACK);
 
 		titre2 = new Label(International.trad("texte.titrePP"));
-		titre2.setFont(Font.font(nomPolice, 35));
+		titre2.setFont(Font.font(nomPolice, 34));
 		titre2.setTextFill(Color.BLACK);
 		titre2.setPadding(new Insets(0, 0, 20, 0));
 
