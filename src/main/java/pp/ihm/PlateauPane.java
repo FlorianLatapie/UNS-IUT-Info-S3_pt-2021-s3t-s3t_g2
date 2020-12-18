@@ -780,14 +780,16 @@ public class PlateauPane extends StackPane implements IPlateauListener, ITraduct
 
 		lChefVigile = new Label();
 		lChefVigile.setText("BOT MOYEN ALEXANDRE est le chef des vigiles"); //do not translate, do not remove (c'est du sample text pour l'ihm)
-		lChefVigile.setBackground(fondBlanc);
+		lChefVigile.setStyle("-fx-background-color: #2D2D2D; -fx-border-color: whitesmoke; -fx-border-insets: -3; -fx-border-width: 3; -fx-border-radius: 10px;");
+		lChefVigile.setTextFill(Color.WHITE);
 		lChefVigile.setFont(fontInfo);
 		lChefVigile.setPadding(margeLieu);
 		lChefVigile.setTranslateY(515);
 
 		lChefVigile2 = new Label();
 		lChefVigile2.setText("BOT MOYEN ALEXANDRE est le chef des vigiles"); //do not translate, do not remove (c'est du sample text pour l'ihm) 
-		lChefVigile2.setBackground(fondBlanc);
+		lChefVigile2.setStyle("-fx-background-color: #2D2D2D; -fx-border-color: whitesmoke; -fx-border-insets: -3; -fx-border-width: 3; -fx-border-radius: 10px;");
+		lChefVigile2.setTextFill(Color.WHITE);
 		lChefVigile2.setFont(fontInfo);
 		lChefVigile2.setPadding(margeLieu);
 		lChefVigile2.setRotate(180);
@@ -795,7 +797,8 @@ public class PlateauPane extends StackPane implements IPlateauListener, ITraduct
 
 		lChefVigile3 = new Label();
 		lChefVigile3.setText("BOT MOYEN ALEXANDRE est le chef des vigiles"); //do not translate, do not remove (c'est du sample text pour l'ihm)
-		lChefVigile3.setBackground(fondBlanc);
+		lChefVigile3.setStyle("-fx-background-color: #2D2D2D; -fx-border-color: whitesmoke; -fx-border-insets: -3; -fx-border-width: 3; -fx-border-radius: 10px;");
+		lChefVigile3.setTextFill(Color.WHITE);
 		lChefVigile3.setFont(fontInfo);
 		lChefVigile3.setPadding(margeLieu);
 		lChefVigile3.setRotate(90);
@@ -803,7 +806,8 @@ public class PlateauPane extends StackPane implements IPlateauListener, ITraduct
 
 		lChefVigile4 = new Label();
 		lChefVigile4.setText("BOT MOYEN ALEXANDRE est le chef des vigiles"); //do not translate, do not remove (c'est du sample text pour l'ihm)
-		lChefVigile4.setBackground(fondBlanc);
+		lChefVigile4.setStyle("-fx-background-color: #2D2D2D; -fx-border-color: whitesmoke; -fx-border-insets: -3; -fx-border-width: 3; -fx-border-radius: 10px;");
+		lChefVigile4.setTextFill(Color.WHITE);
 		lChefVigile4.setFont(fontInfo);
 		lChefVigile4.setPadding(margeLieu);
 		lChefVigile4.setRotate(-90);
