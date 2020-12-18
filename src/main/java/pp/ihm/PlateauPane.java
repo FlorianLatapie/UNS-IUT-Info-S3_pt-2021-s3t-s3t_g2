@@ -10,9 +10,7 @@ import pp.ihm.event.IPlateauListener;
 import pp.ihm.langues.ITraduction;
 import pp.ihm.langues.International;
 import reseau.type.Couleur;
-import reseau.type.TypePersonnage;
 import javafx.animation.FadeTransition;
-import javafx.animation.TranslateTransition;
 import javafx.application.Platform;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -41,6 +39,7 @@ public class PlateauPane extends StackPane implements IPlateauListener, ITraduct
 	private String styleBoutonsSouris = "-fx-background-color:#ff0000;  -fx-text-fill:#000000; -fx-background-radius: 50px;";
 	private String styleBoutonInfo = " -fx-background-color:#000000; -fx-background-radius: 15px; -fx-text-fill: #ffffff;";
 	private String styleBoutonInfoSouris = "-fx-background-color:#ff0000;  -fx-text-fill:#000000; -fx-background-radius: 15px;";
+	private String styleChefVigile = "-fx-background-color: #2D2D2D; -fx-border-color: whitesmoke; -fx-border-insets: -3; -fx-border-width: 3; -fx-border-radius: 10px;";
 	private final int margeJ = 20;
 	private final Insets margeTexteJoueur = new Insets(margeJ, 10, margeJ, 10);
 	private final Insets insetJGauche = new Insets(0, 500, 0, 115);
@@ -99,12 +98,6 @@ public class PlateauPane extends StackPane implements IPlateauListener, ITraduct
 	Label nbCartes4;
 	Label nbCartes5;
 	Label nbCartes6;
-
-	/*
-	 * Label afficheJoueursLieu1; Label afficheJoueursLieu2; Label
-	 * afficheJoueursLieu3; Label afficheJoueursLieu4; Label afficheJoueursLieu5;
-	 * Label afficheJoueursLieu6;
-	 */
 
 	BorderPane info1;
 	Label titreInfo1;
@@ -674,8 +667,6 @@ public class PlateauPane extends StackPane implements IPlateauListener, ITraduct
 		b4.setRight(vbRight4);
 		b4.setOpacity(.9);
 
-		// b4.setRotate(11);
-
 		AnchorPane.setTopAnchor(b4, 440.0);
 		AnchorPane.setLeftAnchor(b4, 365.0);
 
@@ -780,7 +771,7 @@ public class PlateauPane extends StackPane implements IPlateauListener, ITraduct
 
 		lChefVigile = new Label();
 		lChefVigile.setText("BOT MOYEN ALEXANDRE est le chef des vigiles"); //do not translate, do not remove (c'est du sample text pour l'ihm)
-		lChefVigile.setStyle("-fx-background-color: #2D2D2D; -fx-border-color: whitesmoke; -fx-border-insets: -3; -fx-border-width: 3; -fx-border-radius: 10px;");
+		lChefVigile.setStyle(styleChefVigile);
 		lChefVigile.setTextFill(Color.WHITE);
 		lChefVigile.setFont(fontInfo);
 		lChefVigile.setPadding(margeLieu);
@@ -788,7 +779,7 @@ public class PlateauPane extends StackPane implements IPlateauListener, ITraduct
 
 		lChefVigile2 = new Label();
 		lChefVigile2.setText("BOT MOYEN ALEXANDRE est le chef des vigiles"); //do not translate, do not remove (c'est du sample text pour l'ihm) 
-		lChefVigile2.setStyle("-fx-background-color: #2D2D2D; -fx-border-color: whitesmoke; -fx-border-insets: -3; -fx-border-width: 3; -fx-border-radius: 10px;");
+		lChefVigile2.setStyle(styleChefVigile);
 		lChefVigile2.setTextFill(Color.WHITE);
 		lChefVigile2.setFont(fontInfo);
 		lChefVigile2.setPadding(margeLieu);
@@ -797,7 +788,7 @@ public class PlateauPane extends StackPane implements IPlateauListener, ITraduct
 
 		lChefVigile3 = new Label();
 		lChefVigile3.setText("BOT MOYEN ALEXANDRE est le chef des vigiles"); //do not translate, do not remove (c'est du sample text pour l'ihm)
-		lChefVigile3.setStyle("-fx-background-color: #2D2D2D; -fx-border-color: whitesmoke; -fx-border-insets: -3; -fx-border-width: 3; -fx-border-radius: 10px;");
+		lChefVigile3.setStyle(styleChefVigile);
 		lChefVigile3.setTextFill(Color.WHITE);
 		lChefVigile3.setFont(fontInfo);
 		lChefVigile3.setPadding(margeLieu);
@@ -806,7 +797,7 @@ public class PlateauPane extends StackPane implements IPlateauListener, ITraduct
 
 		lChefVigile4 = new Label();
 		lChefVigile4.setText("BOT MOYEN ALEXANDRE est le chef des vigiles"); //do not translate, do not remove (c'est du sample text pour l'ihm)
-		lChefVigile4.setStyle("-fx-background-color: #2D2D2D; -fx-border-color: whitesmoke; -fx-border-insets: -3; -fx-border-width: 3; -fx-border-radius: 10px;");
+		lChefVigile4.setStyle(styleChefVigile);
 		lChefVigile4.setTextFill(Color.WHITE);
 		lChefVigile4.setFont(fontInfo);
 		lChefVigile4.setPadding(margeLieu);
@@ -833,15 +824,9 @@ public class PlateauPane extends StackPane implements IPlateauListener, ITraduct
 		bQuitterInfo1.setPrefSize(largBouton * .7, hautBouton * .7);
 		bQuitterInfo1.setMinSize(largBouton * .7, hautBouton * .7);
 		bQuitterInfo1.setFont(Font.font("Segoe UI", FontWeight.BOLD, 18));
-		bQuitterInfo1.setOnAction(event -> {
-			notifInfo.setVisible(false);
-		});
-		bQuitterInfo1.setOnMouseEntered(event -> {
-			bQuitterInfo1.setStyle(styleBoutonInfoSouris);
-		});
-		bQuitterInfo1.setOnMouseExited(event -> {
-			bQuitterInfo1.setStyle(styleBoutonInfo);
-		});
+		bQuitterInfo1.setOnAction(event -> notifInfo.setVisible(false));
+		bQuitterInfo1.setOnMouseEntered(event -> bQuitterInfo1.setStyle(styleBoutonInfoSouris));
+		bQuitterInfo1.setOnMouseExited(event -> bQuitterInfo1.setStyle(styleBoutonInfo));
 
 		VBox vTitreInfo1 = new VBox();
 		vTitreInfo1.setAlignment(Pos.CENTER);
@@ -882,15 +867,9 @@ public class PlateauPane extends StackPane implements IPlateauListener, ITraduct
 		bQuitterInfo2.setPrefSize(largBouton * .7, hautBouton * .7);
 		bQuitterInfo2.setMinSize(largBouton * .7, hautBouton * .7);
 		bQuitterInfo2.setFont(Font.font("Segoe UI", FontWeight.BOLD, 18));
-		bQuitterInfo2.setOnAction(event -> {
-			notifInfo.setVisible(false);
-		});
-		bQuitterInfo2.setOnMouseEntered(event -> {
-			bQuitterInfo2.setStyle(styleBoutonInfoSouris);
-		});
-		bQuitterInfo2.setOnMouseExited(event -> {
-			bQuitterInfo2.setStyle(styleBoutonInfo);
-		});
+		bQuitterInfo2.setOnAction(event -> notifInfo.setVisible(false));
+		bQuitterInfo2.setOnMouseEntered(event -> bQuitterInfo2.setStyle(styleBoutonInfoSouris));
+		bQuitterInfo2.setOnMouseExited(event -> bQuitterInfo2.setStyle(styleBoutonInfo));
 
 		VBox vTitreInfo2 = new VBox();
 		vTitreInfo2.setAlignment(Pos.CENTER);
@@ -930,15 +909,9 @@ public class PlateauPane extends StackPane implements IPlateauListener, ITraduct
 		bQuitterInfo3.setPrefSize(largBouton * .7, hautBouton * .7);
 		bQuitterInfo3.setMinSize(largBouton * .7, hautBouton * .7);
 		bQuitterInfo3.setFont(Font.font("Segoe UI", FontWeight.BOLD, 18));
-		bQuitterInfo3.setOnAction(event -> {
-			notifInfo.setVisible(false);
-		});
-		bQuitterInfo3.setOnMouseEntered(event -> {
-			bQuitterInfo3.setStyle(styleBoutonInfoSouris);
-		});
-		bQuitterInfo3.setOnMouseExited(event -> {
-			bQuitterInfo3.setStyle(styleBoutonInfo);
-		});
+		bQuitterInfo3.setOnAction(event -> notifInfo.setVisible(false));
+		bQuitterInfo3.setOnMouseEntered(event -> bQuitterInfo3.setStyle(styleBoutonInfoSouris));
+		bQuitterInfo3.setOnMouseExited(event -> bQuitterInfo3.setStyle(styleBoutonInfo));
 
 		VBox vTitreInfo3 = new VBox();
 		vTitreInfo3.setAlignment(Pos.CENTER);
@@ -979,15 +952,9 @@ public class PlateauPane extends StackPane implements IPlateauListener, ITraduct
 		bQuitterInfo4.setPrefSize(largBouton * .7, hautBouton * .7);
 		bQuitterInfo4.setMinSize(largBouton * .7, hautBouton * .7);
 		bQuitterInfo4.setFont(Font.font("Segoe UI", FontWeight.BOLD, 18));
-		bQuitterInfo4.setOnAction(event -> {
-			notifInfo.setVisible(false);
-		});
-		bQuitterInfo4.setOnMouseEntered(event -> {
-			bQuitterInfo4.setStyle(styleBoutonInfoSouris);
-		});
-		bQuitterInfo4.setOnMouseExited(event -> {
-			bQuitterInfo4.setStyle(styleBoutonInfo);
-		});
+		bQuitterInfo4.setOnAction(event -> notifInfo.setVisible(false));
+		bQuitterInfo4.setOnMouseEntered(event -> bQuitterInfo4.setStyle(styleBoutonInfoSouris));
+		bQuitterInfo4.setOnMouseExited(event -> bQuitterInfo4.setStyle(styleBoutonInfo));
 
 		VBox vTitreInfo4 = new VBox();
 		vTitreInfo4.setAlignment(Pos.CENTER);
