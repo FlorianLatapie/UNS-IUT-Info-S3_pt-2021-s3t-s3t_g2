@@ -45,16 +45,20 @@ public class InterfacePrincipale extends Application {
 
 		ConfigPartiePane configPartiePane = new ConfigPartiePane(sControl, core);
 		FinDePartiePane finDePartiePane = new FinDePartiePane(sControl, core);
-		AttenteJoueurPane attenteJoueurPane = new AttenteJoueurPane(sControl, core);
 		JeuPane jeuPane = new JeuPane(sControl, core);
 		OptionPane optionPane = new OptionPane(sControl, core);
-		AccueilPane accueilPane = new AccueilPane(sControl, core);
 		ReglesPane reglesPane = new ReglesPane(sControl, core);
 		ConfirmationPane confirmationPane = new ConfirmationPane();
+		AttenteJoueurPane attenteJoueurPane = new AttenteJoueurPane(sControl, core);
+		AccueilPane accueilPane = new AccueilPane(sControl, core);
 
 		root.getChildren().add(configPartiePane);
 		root.getChildren().add(finDePartiePane);
 		root.getChildren().add(jeuPane);
+		root.getChildren().add(optionPane);
+		root.getChildren().add(reglesPane);
+		root.getChildren().add(attenteJoueurPane);
+		root.getChildren().add(accueilPane);
 
 		core.setIdjr(new Idjr());
 		Initializer.addListener(configPartiePane);
@@ -62,6 +66,7 @@ public class InterfacePrincipale extends Application {
 		Initializer.addListener(finDePartiePane);
 		Initializer.addListener(attenteJoueurPane);
 		Initializer.addListener(optionPane);
+		
 		
 
 		/* Ajouter les panes dont il y de la rotation */
@@ -80,10 +85,7 @@ public class InterfacePrincipale extends Application {
 
 		International.changerLangue(core.getSauvegarderOptions().getLangues());
 
-		root.getChildren().add(optionPane);
-		root.getChildren().add(new ReglesPane(sControl, core));
-		root.getChildren().add(attenteJoueurPane);
-		root.getChildren().add(new AccueilPane(sControl, core));
+		
 
 		primaryStage.setScene(scene);
 		primaryStage.getScene().getWindow().addEventFilter(WindowEvent.WINDOW_CLOSE_REQUEST, this::onClose);
