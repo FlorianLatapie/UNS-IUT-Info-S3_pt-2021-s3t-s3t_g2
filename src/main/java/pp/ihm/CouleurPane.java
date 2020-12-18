@@ -23,7 +23,6 @@ import javafx.scene.text.TextAlignment;
 import reseau.type.Couleur;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -44,23 +43,20 @@ public class CouleurPane extends StackPane implements ICouleurListener, ITraduct
 	private int hBoutonMD = 60;
 	private int lBoutonMD = 150;
 	private int hauteurElemtents = 60;
-	private int largeurTF = 200;
-	private int largeurComboBox = 220;
+	private int largeurTF = 300;
+	private int largeurComboBox = 140;
 	private int spacing = 20;
 
 	private String nomPolice = "Segoe UI";
 	private Font policeBouton = Font.font(nomPolice, FontWeight.BOLD, 27);
 	private Font policeBoutonMD = Font.font(nomPolice, FontWeight.BOLD, 23);
-	private Font policeNom = Font.font(nomPolice, 17);
 
+	private String styleNom = "-fx-background-color: #1B1B1B; -fx-background-radius: 10px;";
 	private String styleBoutons = " -fx-background-color:#000000; -fx-background-radius: 15px; -fx-text-fill: #ffffff";
 	private String styleBoutonsSouris = "-fx-background-color:#ff0000;  -fx-text-fill:#000000; -fx-background-radius: 15px;";
 
 	private GaussianBlur flou = new GaussianBlur(30);
 	private CornerRadii coin = new CornerRadii(15.0);
-	private CornerRadii coinfb = new CornerRadii(5.0);
-
-	private Background fondBlanc = new Background(new BackgroundFill(Color.WHITE, coinfb, null));
 
 	Label nom1;
 	Label nom2;
@@ -135,7 +131,7 @@ public class CouleurPane extends StackPane implements ICouleurListener, ITraduct
 		j1 = new HBox();
 
 		nom1 = new Label();
-		nom1.setStyle("-fx-background-color: #1B1B1B; -fx-background-radius: 10px;");
+		nom1.setStyle(styleNom);
 		nom1.setText(International.trad("texte.j1"));
 		nom1.setFont(Font.font(nomPolice, FontWeight.BOLD, 23));
 		nom1.setTextFill(Color.WHITE);
@@ -184,7 +180,7 @@ public class CouleurPane extends StackPane implements ICouleurListener, ITraduct
 		j2 = new HBox();
 
 		nom2 = new Label();
-		nom2.setStyle("-fx-background-color: #1B1B1B; -fx-background-radius: 10px;");
+		nom2.setStyle(styleNom);
 		nom2.setText(International.trad("texte.j2"));
 		nom2.setFont(Font.font(nomPolice, FontWeight.BOLD, 23));
 		nom2.setTextFill(Color.WHITE);
@@ -237,7 +233,7 @@ public class CouleurPane extends StackPane implements ICouleurListener, ITraduct
 		j3 = new HBox();
 
 		nom3 = new Label();
-		nom3.setStyle("-fx-background-color: #1B1B1B; -fx-background-radius: 10px;");
+		nom3.setStyle(styleNom);
 		nom3.setText(International.trad("texte.j3"));
 		nom3.setFont(Font.font(nomPolice, FontWeight.BOLD, 23));
 		nom3.setTextFill(Color.WHITE);
@@ -290,7 +286,7 @@ public class CouleurPane extends StackPane implements ICouleurListener, ITraduct
 		j4 = new HBox();
 
 		nom4 = new Label();
-		nom4.setStyle("-fx-background-color: #1B1B1B; -fx-background-radius: 10px;");
+		nom4.setStyle(styleNom);
 		nom4.setText(International.trad("texte.j4"));
 		nom4.setFont(Font.font(nomPolice, FontWeight.BOLD, 23));
 		nom4.setTextFill(Color.WHITE);
@@ -343,7 +339,7 @@ public class CouleurPane extends StackPane implements ICouleurListener, ITraduct
 		j5 = new HBox();
 
 		nom5 = new Label();
-		nom5.setStyle("-fx-background-color: #1B1B1B; -fx-background-radius: 10px;");
+		nom5.setStyle(styleNom);
 		nom5.setText(International.trad("texte.j5"));
 		nom5.setFont(Font.font(nomPolice, FontWeight.BOLD, 23));
 		nom5.setTextFill(Color.WHITE);
@@ -396,7 +392,7 @@ public class CouleurPane extends StackPane implements ICouleurListener, ITraduct
 		j6 = new HBox();
 
 		nom6 = new Label();
-		nom6.setStyle("-fx-background-color: #1B1B1B; -fx-background-radius: 10px;");
+		nom6.setStyle(styleNom);
 		nom6.setText(International.trad("texte.j6"));
 		nom6.setFont(Font.font(nomPolice, FontWeight.BOLD, 23));
 		nom6.setTextFill(Color.WHITE);
@@ -505,9 +501,6 @@ public class CouleurPane extends StackPane implements ICouleurListener, ITraduct
 		centreMenu.setCenter(vbCenter);
 		centreMenu.setBottom(boutonsPanneau);
 
-		// rotation de l'interface TODO
-		// centreMenu.setRotate(90);
-
 		// boite du fond qui contient tout
 		HBox fond = new HBox();
 		fond.setAlignment(Pos.CENTER);
@@ -588,12 +581,7 @@ public class CouleurPane extends StackPane implements ICouleurListener, ITraduct
 
 	private void setJoueurConfig(int maxJr) {
 		if (maxJr == 3) {
-			/*j1.setDisable(false);
-			j2.setDisable(false);
-			j3.setDisable(false);
-			j4.setDisable(true);
-			j5.setDisable(true);
-			j6.setDisable(true);*/
+
 			j1.setVisible(true);
 			j2.setVisible(true);
 			j3.setVisible(true);
@@ -601,12 +589,6 @@ public class CouleurPane extends StackPane implements ICouleurListener, ITraduct
 			j5.setVisible(false);
 			j6.setVisible(false);
 		} else if (maxJr == 4) {
-			/*j1.setDisable(false);
-			j2.setDisable(false);
-			j3.setDisable(false);
-			j4.setDisable(false);
-			j5.setDisable(true);
-			j6.setDisable(true);*/
 			j1.setVisible(true);
 			j2.setVisible(true);
 			j3.setVisible(true);
@@ -614,12 +596,7 @@ public class CouleurPane extends StackPane implements ICouleurListener, ITraduct
 			j5.setVisible(false);
 			j6.setVisible(false);
 		} else if (maxJr == 5) {
-			/*j1.setDisable(false);
-			j2.setDisable(false);
-			j3.setDisable(false);
-			j4.setDisable(false);
-			j5.setDisable(false);
-			j6.setDisable(true);*/
+
 			j1.setVisible(true);
 			j2.setVisible(true);
 			j3.setVisible(true);
@@ -627,12 +604,6 @@ public class CouleurPane extends StackPane implements ICouleurListener, ITraduct
 			j5.setVisible(true);
 			j6.setVisible(false);
 		} else {
-			/*j1.setDisable(false);
-			j2.setDisable(false);
-			j3.setDisable(false);
-			j4.setDisable(false);
-			j5.setDisable(false);
-			j6.setDisable(false);*/
 			j1.setVisible(true);
 			j2.setVisible(true);
 			j3.setVisible(true);
@@ -643,19 +614,20 @@ public class CouleurPane extends StackPane implements ICouleurListener, ITraduct
 	}
 
 	public static String getCouleur(String c) {
+		String style = ";-fx-background-radius: 10px;";
 		switch (c) {
 		case "Bleu":
-			return IhmOutils.bleu + ";-fx-background-radius: 10px;";
+			return IhmOutils.bleu + style;
 		case "Rouge":
-			return IhmOutils.rouge + ";-fx-background-radius: 10px;";
+			return IhmOutils.rouge + style;
 		case "Vert":
-			return IhmOutils.vert + ";-fx-background-radius: 10px;";
+			return IhmOutils.vert + style;
 		case "Noir":
-			return IhmOutils.noir + ";-fx-background-radius: 10px;";
+			return IhmOutils.noir + style;
 		case "Jaune":
-			return IhmOutils.jaune + ";-fx-background-radius: 10px;";
+			return IhmOutils.jaune + style;
 		case "Marron":
-			return IhmOutils.marron + ";-fx-background-radius: 10px;";
+			return IhmOutils.marron + style;
 		default:
 			return "#1A1A1A";
 		}
