@@ -26,11 +26,15 @@ public class DataControl {
 	public static final String SCREEN = "pp/ihm/images/rotationEcran.png";
 	public static final String JOUEUR_ATTENDU = "pp/ihm/images/joueurAttente.png";
 	public static final String JOUEUR_CONNECTE = "pp/ihm/images/joueurConnecté.png";
+	
+	
 	public static final String FERME1 = "pp/ihm/images/1Fermé.png";
 	public static final String FERME2 = "pp/ihm/images/2Fermé.png";
 	public static final String FERME3 = "pp/ihm/images/3Fermé.png";
 	public static final String FERME5 = "pp/ihm/images/5Fermé.png";
 	public static final String FERME6 = "pp/ihm/images/6Fermé.png";
+	
+	public static final String DOS_CARTE = "pp/ihm/images/dosCarte.png";
 	
 	// NewPions
 	public static final String NOM_COULEUR = "pp/ihm/images/Pions/SamplePion.png";
