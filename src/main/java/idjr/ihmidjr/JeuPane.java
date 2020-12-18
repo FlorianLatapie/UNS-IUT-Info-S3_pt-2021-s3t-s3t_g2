@@ -171,9 +171,6 @@ public class JeuPane extends StackPane implements IJeuListener {
 	public JeuPane(ScreenControl sc, Core c) {
 		core = c;
 		sControl = sc;
-
-		stackPane.setAlignment(Pos.CENTER);
-
 		nomJoueur = new Label(International.trad("texte.nomJoueur"));
 		nomJoueur.setAlignment(Pos.CENTER);
 		nomJoueur.setTranslateY(-400);
@@ -1079,8 +1076,9 @@ public class JeuPane extends StackPane implements IJeuListener {
 		bOption.setOnMouseExited(event -> {
 			bOption.setStyle(styleBoutons);
 		});
-		bOption.setTranslateX(900);
-		bOption.setTranslateY(-480);
+		bOption.screenToLocal(900, 0);
+		bOption.setTranslateX(830);
+		bOption.setTranslateY(-430);
 
 		log = new ListView<>();
 		log.setStyle(
