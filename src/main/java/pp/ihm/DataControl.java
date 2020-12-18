@@ -67,7 +67,7 @@ public class DataControl {
 	
 	public static final String CSS = "pp/ihm/style/style.css";
 	// for testing purpose
-	//public static final String NOM_COULEUR = TRUAND_V;
+	//public static final String NOM_COULEUR = TEST_NEW_PION;
 
 
 	public static final ObservableList<Integer> nombreJoueur = FXCollections.observableArrayList(3, 4, 5, 6);

@@ -1110,26 +1110,25 @@ public class PlateauPane extends StackPane implements IPlateauListener, ITraduct
 
 	@Override
 	public void nbPlaceLieu(int lieu, int val) {
-		String tmp = val + "/" + "euh";
 		Platform.runLater(() -> {
 			switch (lieu) {
 			case 1:
-				nbPlace1.setText(tmp);
+				nbPlace1.setText(val + " / 3");
 				break;
 			case 2:
-				nbPlace2.setText(tmp);
+				nbPlace2.setText(val + " / 4");
 				break;
 			case 3:
-				nbPlace3.setText(tmp);
+				nbPlace3.setText(val + " / 4");
 				break;
 			case 4:
-				nbPlace4.setText(tmp);
+				nbPlace4.setText(val + " / ∞");
 				break;
 			case 5:
-				nbPlace5.setText(tmp);
+				nbPlace5.setText(val + " / 3");
 				break;
 			case 6:
-				nbPlace6.setText(tmp);
+				nbPlace6.setText(val + " / 6");
 				break;
 			default:
 				throw new IllegalArgumentException("Impossible de rajouter des zombies dans le lieu " + lieu);
