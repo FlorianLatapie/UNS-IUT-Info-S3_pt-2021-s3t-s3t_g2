@@ -35,7 +35,6 @@ public class PausePane extends StackPane implements ITraduction {
 	Label titre;
 	Button bOption;
 	Button bRegles;
-	Button bRecommencer;
 	Button bQuitter;
 	Button bRetour;
 
@@ -150,14 +149,6 @@ public class PausePane extends StackPane implements ITraduction {
 			sc.setPaneOnTop(ApplicationPane.REGLES);
 		});
 
-		bRecommencer = new Button(International.trad("text.recommencer"));
-		bRecommencer.setFont(Font.font("Arial", FontWeight.BOLD, 30));
-		bRecommencer.setAlignment(Pos.CENTER);
-		bRecommencer.setPrefSize(500, 60);
-		bRecommencer.setStyle(styleBoutons);
-		bRecommencer.setOnMouseEntered(event -> bRecommencer.setStyle(styleBoutonsSouris));
-		bRecommencer.setOnMouseExited(event -> bRecommencer.setStyle(styleBoutons));
-
 		bQuitter = new Button(International.trad("bouton.quitter"));
 		bQuitter.setFont(Font.font("Arial", FontWeight.BOLD, 30));
 		bQuitter.setAlignment(Pos.CENTER);
@@ -184,7 +175,7 @@ public class PausePane extends StackPane implements ITraduction {
 		bRetour.setOnMouseEntered(event -> bRetour.setStyle(styleBoutonsSouris));
 		bRetour.setOnMouseExited(event -> bRetour.setStyle(styleBoutons));
 
-		vbBoutons.getChildren().addAll(bOption, bRegles, bRecommencer, bRetour, bQuitter);
+		vbBoutons.getChildren().addAll(bOption, bRegles, bRetour, bQuitter);
 		vbBoutons.setMargin(bRegles, new Insets(10));
 		vbBoutons.setMargin(bRetour, new Insets(10));
 
@@ -206,7 +197,6 @@ public class PausePane extends StackPane implements ITraduction {
 		titre.setText(International.trad("text.titerPause"));
 		bOption.setText(International.trad("bouton.options"));
 		bRegles.setText(International.trad("text.titreRegle"));
-		bRecommencer.setText(International.trad("text.recommencer"));
 		bQuitter.setText(International.trad("bouton.quitter"));
 		bRetour.setText(International.trad("bouton.retour"));
 	}

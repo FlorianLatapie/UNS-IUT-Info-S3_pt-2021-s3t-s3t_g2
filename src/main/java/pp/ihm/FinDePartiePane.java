@@ -219,7 +219,7 @@ public class FinDePartiePane extends StackPane implements IFinListener, ITraduct
 		bEcranHaut.setPrefSize(80, 80);
 		bEcranHaut.setRotate(180);
 		bEcranHaut.setGraphic(img1);
-		bEcranHaut.setOnAction(EventHandler -> sc.setRotatePane(centreMenu, "haut"));
+		bEcranHaut.setOnAction(EventHandler -> sc.setRotatePane(vbCenter, "haut"));
 
 		Button bEcranBas = new Button();
 		bEcranBas.setBackground(new Background(new BackgroundFill(null, CornerRadii.EMPTY, null)));
@@ -227,7 +227,7 @@ public class FinDePartiePane extends StackPane implements IFinListener, ITraduct
 		bEcranBas.setTranslateY(490);
 		bEcranBas.setPrefSize(80, 80);
 		bEcranBas.setGraphic(img2);
-		bEcranBas.setOnAction(EventHandler -> sc.setRotatePane(centreMenu, "bas"));
+		bEcranBas.setOnAction(EventHandler -> sc.setRotatePane(vbCenter, "bas"));
 
 		Button bEcranGauche = new Button();
 		bEcranGauche.setBackground(new Background(new BackgroundFill(null, CornerRadii.EMPTY, null)));
@@ -236,7 +236,7 @@ public class FinDePartiePane extends StackPane implements IFinListener, ITraduct
 		bEcranGauche.setPrefSize(80, 80);
 		bEcranGauche.setRotate(90);
 		bEcranGauche.setGraphic(img3);
-		bEcranGauche.setOnAction(EventHandler -> sc.setRotatePane(centreMenu, "gauche"));
+		bEcranGauche.setOnAction(EventHandler -> sc.setRotatePane(vbCenter, "gauche"));
 
 		Button bEcranDroite = new Button();
 		bEcranDroite.setBackground(new Background(new BackgroundFill(null, CornerRadii.EMPTY, null)));
@@ -245,7 +245,7 @@ public class FinDePartiePane extends StackPane implements IFinListener, ITraduct
 		bEcranDroite.setRotate(-90);
 		bEcranDroite.setPrefSize(80, 80);
 		bEcranDroite.setGraphic(img4);
-		bEcranDroite.setOnAction(EventHandler -> sc.setRotatePane(centreMenu, "droite"));
+		bEcranDroite.setOnAction(EventHandler -> sc.setRotatePane(vbCenter, "droite"));
 
 		// boite du fond qui contient le fond et les autres boites
 		HBox fond = new HBox();
