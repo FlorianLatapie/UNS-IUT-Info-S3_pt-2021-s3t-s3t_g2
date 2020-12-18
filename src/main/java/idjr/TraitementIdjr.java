@@ -59,6 +59,9 @@ public class TraitementIdjr {
 		for (Object o : desT)
 			des.add((Integer) o);
 		Initializer.desValeur(des);
+		while (!core.desVote())
+			Thread.yield();
+		core.desVoteChoisi(false);
 		for (Object o : destRestantT)
 			destRestant.add((Integer) o);
 		Initializer.choisirLieu(destRestant);

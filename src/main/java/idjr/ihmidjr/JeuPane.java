@@ -1016,6 +1016,9 @@ public class JeuPane extends StackPane implements IJeuListener, ITraduction {
 		titrede.setOnMouseExited(event -> {
 			titrede.setStyle(styleBoutons);
 		});
+		titrede.setOnAction(EventHandler -> {
+			core.getIdjr().desVote();
+		});
 
 		des.setPadding(new Insets(10));
 		des.setSpacing(10);

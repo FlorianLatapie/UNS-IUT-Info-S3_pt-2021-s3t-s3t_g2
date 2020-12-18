@@ -138,6 +138,16 @@ public class Idjr {
 			setJoueurId((String) ControleurReseau.getValueTcp("ACP", message1, 2));
 		});
 	}
+	
+	private boolean desVote = false;
+
+	public boolean desVote() {
+		return desVote;
+	}
+	
+	public void desVoteChoisi(boolean etat) {
+		desVote = etat;
+	}
 
 	private boolean voteChoisiBool = false;
 
