@@ -24,7 +24,7 @@ public class InterfacePrincipale extends Application {
 		primaryStage.getIcons().add(new Image(DataControl.ICONE));
 		primaryStage.setOnCloseRequest((e) -> {
 			boolean resultat = ConfirmationPane.afficher(International.trad("texte.confirmationTitre"),
-					International.trad("texte.confirmationL1") +"\n"+ International.trad("texte.confirmationL2"));
+					International.trad("texte.confirmationL1") + "\n" + International.trad("texte.confirmationL2"));
 			if (resultat)
 				Platform.exit();
 		});
@@ -38,16 +38,19 @@ public class InterfacePrincipale extends Application {
 		primaryStage.setHeight(hauteur - 100);
 		primaryStage.setMinWidth(1800);
 		primaryStage.setMinHeight(960);
-		
+
 		primaryStage.setFullScreen(core.getSauvegarderOptions().isEstPleineEcran());
-		
-		scene.getStylesheets().add(DataControl.CSS); 
+
+		scene.getStylesheets().add(DataControl.CSS);
 
 		ConfigPartiePane configPartiePane = new ConfigPartiePane(sControl, core);
 		FinDePartiePane finDePartiePane = new FinDePartiePane(sControl, core);
 		AttenteJoueurPane attenteJoueurPane = new AttenteJoueurPane(sControl, core);
 		JeuPane jeuPane = new JeuPane(sControl, core);
 		OptionPane optionPane = new OptionPane(sControl, core);
+		AccueilPane accueilPane = new AccueilPane(sControl, core);
+		ReglesPane reglesPane = new ReglesPane(sControl, core);
+		ConfirmationPane confirmationPane = new ConfirmationPane();
 
 		root.getChildren().add(configPartiePane);
 		root.getChildren().add(finDePartiePane);
@@ -60,11 +63,23 @@ public class InterfacePrincipale extends Application {
 		Initializer.addListener(attenteJoueurPane);
 		Initializer.addListener(optionPane);
 		
+
 		/* Ajouter les panes dont il y de la rotation */
-		//Initializer.addListenerAttente(PANE);
-		
+		// Initializer.addListenerAttente(PANE);
+
 		Initializer.updatePleineEcran();
-		
+
+		International.ajouterPane(accueilPane);
+		International.ajouterPane(reglesPane);
+		International.ajouterPane(optionPane);
+		International.ajouterPane(attenteJoueurPane);
+		International.ajouterPane(configPartiePane);
+		International.ajouterPane(finDePartiePane);
+		International.ajouterPane(confirmationPane);
+		International.ajouterPane(accueilPane);
+
+		International.changerLangue(core.getSauvegarderOptions().getLangues());
+
 		root.getChildren().add(optionPane);
 		root.getChildren().add(new ReglesPane(sControl, core));
 		root.getChildren().add(attenteJoueurPane);
