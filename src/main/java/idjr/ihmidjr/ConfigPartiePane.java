@@ -159,10 +159,8 @@ public class ConfigPartiePane extends StackPane implements IConfigListener, ITra
 		bRefresh.setOnMouseEntered(event -> bRefresh.setStyle(styleBoutonsSouris));
 		bRefresh.setOnMouseExited(event -> bRefresh.setStyle(styleBoutons));
 
-		bRefresh.setOnAction(EventHandler -> 
-			core.getIdjr().listOfServers(cbnbJr.getValue(), TypePartie.valueOf(cbtypePartie.getValue()),
-					Statut.valueOf(cbStatutPartie.getValue()))
-		);
+		bRefresh.setOnAction(EventHandler -> core.getIdjr().listOfServers(cbnbJr.getValue(),
+				TypePartie.valueOf(cbtypePartie.getValue()), Statut.valueOf(cbStatutPartie.getValue())));
 
 		bPbConnexion = new Button(
 				International.trad("texte.pbConnexionA") + "\n" + International.trad("texte.pbConnexionB"));
@@ -196,6 +194,9 @@ public class ConfigPartiePane extends StackPane implements IConfigListener, ITra
 			int index = listView.getSelectionModel().getSelectedIndex();
 			if (index == -1)
 				return;
+			if (partieActuelle.size() <= index)
+				return;
+
 			PartieInfo partieInfo = partieActuelle.get(index);
 			if (partieInfo == null)
 				return;
