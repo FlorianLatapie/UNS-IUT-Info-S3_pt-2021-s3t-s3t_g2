@@ -54,7 +54,7 @@ public class OptionPane extends StackPane implements IPleineEcranListener, ITrad
 	Button bFrancais;
 	Button bEnglish;
 	Button bRetour;
-	Button bAcc;
+	//Button bAcc;
 
 	public OptionPane(ScreenControl sc, Core c) {
 		core = c;
@@ -177,7 +177,7 @@ public class OptionPane extends StackPane implements IPleineEcranListener, ITrad
 			core.changerLangue(Langues.EN);
 		});
 
-		bPleinEcran = new Button(International.trad("bouton.pEcran"));
+		bPleinEcran = new Button();
 		bPleinEcran.setFont(policeBouton);
 		bPleinEcran.setAlignment(Pos.CENTER);
 		bPleinEcran.setPrefSize(500, hauteurElement);
@@ -186,25 +186,25 @@ public class OptionPane extends StackPane implements IPleineEcranListener, ITrad
 		bPleinEcran.setOnMouseExited(event -> bPleinEcran.setStyle(styleBoutons));
 		bPleinEcran.setOnAction(EventHandler -> {
 			Stage stage = (Stage) bPleinEcran.getScene().getWindow();
-			if (core.getSauvegarderOptions().isEstPleineEcran()) {
+			if (core.getSauvegarderOptions().isEstPleinEcran()) {
 				stage.setFullScreen(false);
-				core.getSauvegarderOptions().setEstPleineEcran(false);
+				core.getSauvegarderOptions().setEstPleinEcran(false);
 				bPleinEcran.setText(International.trad("bouton.pEcran"));
 			} else {
 				stage.setFullScreen(true);
-				core.getSauvegarderOptions().setEstPleineEcran(true);
+				core.getSauvegarderOptions().setEstPleinEcran(true);
 				bPleinEcran.setText(International.trad("bouton.fenetre"));
 			}
 		});
 
-		bAcc = new Button(International.trad("texte.titreAcc"));
+		/*bAcc = new Button(International.trad("texte.titreAcc"));
 		bAcc.setFont(policeBouton);
 		bAcc.setAlignment(Pos.CENTER);
 		bAcc.setPrefSize(500, hauteurElement);
 		bAcc.setStyle(styleBoutons);
 		bAcc.setOnMouseEntered(event -> bAcc.setStyle(styleBoutonsSouris));
 		bAcc.setOnMouseExited(event -> bAcc.setStyle(styleBoutons));
-		bAcc.setOnAction(EventHandler -> sc.setPaneOnTop(ApplicationPane.ACCESSIBILITE));
+		bAcc.setOnAction(EventHandler -> sc.setPaneOnTop(ApplicationPane.ACCESSIBILITE));*/
 
 		bRetour = new Button(International.trad("bouton.retour"));
 		bRetour.setFont(policeBouton);
@@ -218,9 +218,9 @@ public class OptionPane extends StackPane implements IPleineEcranListener, ITrad
 		hbBRetour.getChildren().add(bRetour);
 		hbLang.getChildren().add(bFrancais);
 		hbLang.getChildren().add(bEnglish);
-		vbBoutons.getChildren().addAll(hbLang, bPleinEcran, bAcc);
+		vbBoutons.getChildren().addAll(hbLang, bPleinEcran/*, bAcc*/);
 		vbBoutons.setMargin(vbTitre, new Insets(140));
-		vbBoutons.setMargin(hbBRetour, new Insets(57, 0, 30, 19));
+		vbBoutons.setMargin(hbBRetour, new Insets(135, 0, 30, 19));
 
 		vbCentral.getChildren().addAll(vbTitre, vbBoutons, hbBRetour);
 		ImageView img = new ImageView(DataControl.FOND);
@@ -236,7 +236,7 @@ public class OptionPane extends StackPane implements IPleineEcranListener, ITrad
 
 	@Override
 	public void updatePleineEcran() {
-		if (!core.getSauvegarderOptions().isEstPleineEcran())
+		if (!core.getSauvegarderOptions().isEstPleinEcran())
 			bPleinEcran.setText(International.trad("bouton.pEcran"));
 		else
 			bPleinEcran.setText(International.trad("bouton.fenetre"));
@@ -248,7 +248,7 @@ public class OptionPane extends StackPane implements IPleineEcranListener, ITrad
 		bFrancais.setText(International.trad("texte.langue1"));
 		bEnglish.setText(International.trad("texte.langue2"));
 		bPleinEcran.setText(International.trad("bouton.pEcran"));
-		bAcc.setText(International.trad("texte.titreAcc"));
+		//bAcc.setText(International.trad("texte.titreAcc"));
 		bRetour.setText(International.trad("bouton.retour"));
 	}
 

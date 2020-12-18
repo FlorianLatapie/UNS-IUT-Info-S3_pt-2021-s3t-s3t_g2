@@ -32,7 +32,7 @@ public class InterfacePrincipale extends Application {
 		primaryStage.setMinWidth(largeur - 20.0);
 		primaryStage.setMinHeight(hauteur - 50.0);
 
-		primaryStage.setFullScreen(core.getSauvegarderOptions().isEstPleineEcran());
+		primaryStage.setFullScreen(core.getSauvegarderOptions().isEstPleinEcran());
 
 		AttenteJoueurPane attenteJoueurPane = new AttenteJoueurPane(sControl, core);
 		ConfigPartiePane configPartiePane = new ConfigPartiePane(sControl, core);

@@ -32,7 +32,7 @@ public class AccessibilitePane extends StackPane implements ITraduction {
 
 	private String nomPolice = "Segoe UI";
 	private Font policeTitre = Font.font(nomPolice, FontWeight.BOLD, 75);
-	private Font policeBouton = Font.font(nomPolice, FontWeight.BOLD, 27);
+	private Font policeBouton = Font.font(nomPolice, FontWeight.BOLD, 24);
 	private Font policeBoutonRetour = Font.font(nomPolice, FontWeight.BOLD, 33);
 
 	private int hauteurElement = 60;
@@ -92,14 +92,14 @@ public class AccessibilitePane extends StackPane implements ITraduction {
 		hbDaltonisme.setAlignment(Pos.CENTER);
 
 		titreVbBoutons = new Label(International.trad("texte.dalto"));
-		titreVbBoutons.setFont(policeBouton);
-		titreVbBoutons.setTextFill(Color.RED);
+		titreVbBoutons.setFont(Font.font(nomPolice, FontWeight.BOLD, 30));
+		titreVbBoutons.setTextFill(Color.WHITE);
 		titreVbBoutons.setPadding(new Insets(10));
 		vbBoutons.getChildren().add(titreVbBoutons);
 		vbBoutons.setMargin(vbCheckBoutons, new Insets(20));
 
 		// boutons de différents daltonismes
-		bDeuteranopie = new Button(International.trad("texte.deuteranopie"));
+		bDeuteranopie = new Button(International.trad("bouton.deuteranopie"));
 		bDeuteranopie.setFont(policeBouton);
 		bDeuteranopie.setAlignment(Pos.CENTER);
 		bDeuteranopie.setStyle(styleBoutons);
@@ -107,7 +107,7 @@ public class AccessibilitePane extends StackPane implements ITraduction {
 		bDeuteranopie.setOnMouseEntered(event -> bDeuteranopie.setStyle(styleBoutonsSouris));
 		bDeuteranopie.setOnMouseExited(event -> bDeuteranopie.setStyle(styleBoutons));
 
-		bProtanopie = new Button(International.trad("texte.protanopie"));
+		bProtanopie = new Button(International.trad("bouton.protanopie"));
 		bProtanopie.setFont(policeBouton);
 		bProtanopie.setAlignment(Pos.CENTER);
 		bProtanopie.setPrefSize(largeurBouton, hauteurElement);
@@ -115,7 +115,7 @@ public class AccessibilitePane extends StackPane implements ITraduction {
 		bProtanopie.setOnMouseEntered(event -> bProtanopie.setStyle(styleBoutonsSouris));
 		bProtanopie.setOnMouseExited(event -> bProtanopie.setStyle(styleBoutons));
 
-		bTritanopie = new Button(International.trad("texte.tritanopie"));
+		bTritanopie = new Button(International.trad("bouton.tritanopie"));
 		bTritanopie.setFont(policeBouton);
 		bTritanopie.setAlignment(Pos.CENTER);
 		bTritanopie.setPrefSize(largeurBouton, hauteurElement);
@@ -213,9 +213,9 @@ public class AccessibilitePane extends StackPane implements ITraduction {
 	public void traduire() {
 		titre.setText(International.trad("texte.titreAcc"));
 		titreVbBoutons.setText(International.trad("texte.dalto"));
-		bDeuteranopie.setText(International.trad("texte.deuteranopie"));
-		bProtanopie.setText(International.trad("texte.protanopie"));
-		bTritanopie.setText(International.trad("texte.tritanopie"));
+		bDeuteranopie.setText(International.trad("bouton.deuteranopie"));
+		bProtanopie.setText(International.trad("bouton.protanopie"));
+		bTritanopie.setText(International.trad("bouton.tritanopie"));
 		bRetour.setText(International.trad("bouton.retour"));
 	}
 }
