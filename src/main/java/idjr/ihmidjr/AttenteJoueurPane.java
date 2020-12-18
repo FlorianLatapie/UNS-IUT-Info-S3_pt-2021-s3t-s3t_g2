@@ -3,6 +3,7 @@ package idjr.ihmidjr;
 
 import idjr.ihmidjr.DataControl.ApplicationPane;
 import idjr.ihmidjr.event.IAttenteListener;
+import idjr.ihmidjr.langues.ITraduction;
 import idjr.ihmidjr.langues.International;
 import javafx.application.Platform;
 //TODO import ihm.eventListener.AttenteListener;
@@ -26,7 +27,7 @@ import javafx.scene.text.TextAlignment;
  * @version 0.1
  * @since 26/10/2020
  */
-public class AttenteJoueurPane extends StackPane implements IAttenteListener {
+public class AttenteJoueurPane extends StackPane implements IAttenteListener, ITraduction {
 	// private ControleurJeu cj = new ControleurJeu(); // mettre ne paramètres les
 	// joueurs
 
@@ -52,13 +53,16 @@ public class AttenteJoueurPane extends StackPane implements IAttenteListener {
 	private Insets padding = new Insets(0, 10, 0, 10);
 	Label lIDPartie;
 
+	Label titre1;
+	Label desc;
+
 	public AttenteJoueurPane(ScreenControl sc, Core c) {
 		core = c;
 		sControl = sc;
 		stackPane.setAlignment(Pos.CENTER);
 
 		// titre
-		Label titre1 = new Label(
+		titre1 = new Label(
 				International.trad("texte.titreAttenteA") + "\n" + International.trad("texte.titreAttenteB"));
 		titre1.setTextAlignment(TextAlignment.CENTER);
 		titre1.setFont(Font.font("Segoe UI", FontWeight.BOLD, 80));
@@ -77,7 +81,7 @@ public class AttenteJoueurPane extends StackPane implements IAttenteListener {
 		lIDPartie.setMinHeight(hauteurElemtents);
 		lIDPartie.setPadding(padding);
 
-		Label desc = new Label(International.trad("texte.attenteJoueur"));
+		desc = new Label(International.trad("texte.attenteJoueur"));
 		desc.setFont(Font.font("Segoe UI", FontWeight.BOLD, 27));
 		desc.setTextFill(Color.WHITE);
 		desc.setPadding(new Insets(7));
@@ -143,8 +147,6 @@ public class AttenteJoueurPane extends StackPane implements IAttenteListener {
 		vbCenter.setSpacing(spacing);
 		vbCenter.getChildren().addAll(vbWait);
 
-
-
 		// image fond
 		ImageView imgFond = new ImageView(DataControl.FOND);
 
@@ -156,7 +158,6 @@ public class AttenteJoueurPane extends StackPane implements IAttenteListener {
 		centreMenu.setAlignment(titre, Pos.CENTER);
 		centreMenu.setTop(titre);
 		centreMenu.setCenter(vbCenter);
-
 
 		// boite du fond qui contient tout
 		HBox fond = new HBox();
@@ -193,5 +194,12 @@ public class AttenteJoueurPane extends StackPane implements IAttenteListener {
 		Platform.runLater(() -> {
 			lIDPartie.setText(nom);
 		});
+	}
+
+	@Override
+	public void traduire() {
+		titre1.setText(International.trad("texte.titreAttenteA") + "\n" + International.trad("texte.titreAttenteB"));
+		desc.setText(International.trad("texte.attenteJoueur"));
+
 	}
 }
