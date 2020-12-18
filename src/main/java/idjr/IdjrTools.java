@@ -44,7 +44,7 @@ public abstract class IdjrTools {
 		return tmp;
 	}
 
-	public static List<String> getLieuByIndex(List<Integer> lieux) {
+	public static List<String> getLieuxByIndex(List<Integer> lieux) {
 		HashMap<Integer, String> listeLieu = new HashMap<Integer, String>();
 		listeLieu.put(1, International.trad("texte.lieu1"));
 		listeLieu.put(2, International.trad("texte.lieu2"));
@@ -58,5 +58,30 @@ public abstract class IdjrTools {
 			list.add(listeLieu.get(i));
 
 		return list;
+	}
+	
+	public static String getLieuByIndex(Integer idLieu) {
+		HashMap<Integer, String> listeLieu = new HashMap<Integer, String>();
+		listeLieu.put(1, "Toilettes");
+		listeLieu.put(2, "Cachou");
+		listeLieu.put(3, "Megatoys");
+		listeLieu.put(4, "Parking");
+		listeLieu.put(5, "PC de securite");
+		listeLieu.put(6, "Supermarche");
+		return listeLieu.get(idLieu);
+	}
+	
+	public static String getPionByIndex(Integer pionValue) {
+		HashMap<Integer, String> listePion = new HashMap<Integer, String>();
+		listePion.put(1, "Fillette");
+		listePion.put(3, "Truand");
+		listePion.put(5, "Brute");
+		listePion.put(7, "Blonde");
+		return listePion.get(pionValue);
+	}
+
+	public static String getVote() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }
