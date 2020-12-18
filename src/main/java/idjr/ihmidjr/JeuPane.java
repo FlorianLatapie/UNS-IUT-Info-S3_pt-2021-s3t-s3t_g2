@@ -23,6 +23,7 @@ import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
@@ -49,6 +50,7 @@ public class JeuPane extends StackPane implements IJeuListener, ITraduction {
 	private StackPane stackPane = new StackPane();
 	private GaussianBlur flou = new GaussianBlur(30);
 	private String styleVBox = "-fx-border-color: black; -fx-border-insets: 5; -fx-border-width: 3;";
+	private String styleVBoxAttention = "-fx-border-color: white; -fx-border-insets: 5; -fx-border-width: 3;";
 	private CornerRadii coinfb = new CornerRadii(5.0);
 	private Background fondBlanc = new Background(new BackgroundFill(Color.WHITE, coinfb, null));
 	private Background fondNoir = new Background(new BackgroundFill(Color.BLACK, CornerRadii.EMPTY, null));
@@ -176,6 +178,9 @@ public class JeuPane extends StackPane implements IJeuListener, ITraduction {
 	Label labDeplLieux;
 	Button titrede;
 	Label lo;
+
+	VBox vbDeplPers;
+	VBox vbDeplLieux;
 
 	public JeuPane(ScreenControl sc, Core c) {
 		core = c;
@@ -762,7 +767,7 @@ public class JeuPane extends StackPane implements IJeuListener, ITraduction {
 		vbDeplCentre.setMaxSize(300, 500);
 		vbDeplCentre.setStyle(styleVBox);
 
-		VBox vbDeplPers = new VBox();
+		vbDeplPers = new VBox();
 		vbDeplPers.setAlignment(Pos.CENTER);
 		vbDeplPers.setPrefSize(300, 500);
 		vbDeplPers.setMaxSize(300, 500);
@@ -855,7 +860,7 @@ public class JeuPane extends StackPane implements IJeuListener, ITraduction {
 
 		/////////////////////////////////////////////////////////
 
-		VBox vbDeplLieux = new VBox();
+		vbDeplLieux = new VBox();
 		vbDeplLieux.setAlignment(Pos.CENTER);
 		vbDeplLieux.setPrefSize(300, 500);
 		vbDeplLieux.setMaxSize(300, 500);
@@ -1326,6 +1331,7 @@ public class JeuPane extends StackPane implements IJeuListener, ITraduction {
 	@Override
 	public void choisirPion(List<Integer> list) {
 		Platform.runLater(() -> {
+			attirerAttention(vbDeplPers);
 			for (Integer integer : list) {
 				switch (integer) {
 				case 7:
@@ -1351,6 +1357,7 @@ public class JeuPane extends StackPane implements IJeuListener, ITraduction {
 	@Override
 	public void choisirLieu(List<Integer> list) {
 		Platform.runLater(() -> {
+			attirerAttention(vbDeplLieux);
 			for (Integer integer : list) {
 				switch (integer) {
 				case 1:
@@ -1381,6 +1388,7 @@ public class JeuPane extends StackPane implements IJeuListener, ITraduction {
 	@Override
 	public void desValeur(List<Integer> list) {
 		Platform.runLater(() -> {
+			attirerAttention(des);
 			String de1Int = list.get(0).toString();
 			String de2Int = list.get(1).toString();
 			de1.setText(de1Int);
@@ -1545,6 +1553,7 @@ public class JeuPane extends StackPane implements IJeuListener, ITraduction {
 	public void choisirCarte(List<CarteType> listeCartes, List<Couleur> listeCouleurJoueurVivant, boolean garder,
 			boolean donner, boolean defausser, boolean utiliser) {
 		Platform.runLater(() -> {
+			attirerAttention(fouilleCamion);
 			Background selecBackground = new Background(new BackgroundFill(Color.GREEN, CornerRadii.EMPTY, null));
 			Background deselecBackground = fondNoir;
 			vote.setVisible(false);
@@ -1699,6 +1708,7 @@ public class JeuPane extends StackPane implements IJeuListener, ITraduction {
 		Button[] buttons = { joueur1, joueur2, joueur3, joueur4, joueur5 };
 		for (int i = 0; i < buttons.length; i++) {
 			buttons[i].setDisable(true);
+			buttons[i].setStyle(styleBoutons);
 		}
 	}
 
@@ -1713,6 +1723,7 @@ public class JeuPane extends StackPane implements IJeuListener, ITraduction {
 	@Override
 	public void setVote(List<Couleur> listeCouleurJoueur) {
 		Platform.runLater(() -> {
+			attirerAttention(vote);
 			vote.setVisible(true);
 			fond.setEffect(null);
 			rectVigile.setEffect(null);
@@ -1729,7 +1740,7 @@ public class JeuPane extends StackPane implements IJeuListener, ITraduction {
 			for (int i = 0; i < buttons.length; i++) {
 				if (listeCouleurJoueur.size() > i) {
 					buttons[i].setDisable(false);
-					buttons[i].setText(listeCouleurJoueur.get(i).nomEntier());
+					buttons[i].setStyle(IhmTools.color(listeCouleurJoueur.get(i)));
 					Couleur cible = listeCouleurJoueur.get(i);
 					buttons[i].setOnAction(EventHandler -> {
 						core.getIdjr().setVoteChoisi(cible);
@@ -1749,6 +1760,8 @@ public class JeuPane extends StackPane implements IJeuListener, ITraduction {
 			Button[] buttons = { bDeCarte1, bDeCarte2, bDeCarte3, bDeCarte4, bDeCarte5, bDeCarte6, bDeCarte7,
 					bDeCarte8 };
 			selectedCarteChoi = CarteType.NUL;
+
+			attirerAttention(hbCartes);
 			for (int i = 0; i < buttons.length; i++) {
 				if (i < cartes.size()) {
 					if (carteType == cartes.get(i)) {
@@ -1790,6 +1803,7 @@ public class JeuPane extends StackPane implements IJeuListener, ITraduction {
 			Button[] buttons = { bDeCarte1, bDeCarte2, bDeCarte3, bDeCarte4, bDeCarte5, bDeCarte6, bDeCarte7,
 					bDeCarte8 };
 			selectedCarteChoi = CarteType.NUL;
+			attirerAttention(hbCartes);
 			for (int i = 0; i < buttons.length; i++) {
 				if (i < cartes.size()) {
 					for (CarteType carteType2 : carteTypes) {
@@ -1850,6 +1864,7 @@ public class JeuPane extends StackPane implements IJeuListener, ITraduction {
 			Button[] buttons = { bDeCarte1, bDeCarte2, bDeCarte3, bDeCarte4, bDeCarte5, bDeCarte6, bDeCarte7,
 					bDeCarte8 };
 			estActif.clear();
+			attirerAttention(hbCartes);
 			for (int i = 0; i < buttons.length; i++) {
 				if (i < cartes.size()) {
 					estActif.add(false);
@@ -1905,6 +1920,28 @@ public class JeuPane extends StackPane implements IJeuListener, ITraduction {
 	@Override
 	public void enleverDes() {
 		des.setVisible(false);
+	}
+
+	private void attirerAttention(Pane vbox) {
+		for (int i = 1; i <= 6; i++) {
+			Timer myTimer = new Timer();
+			myTimer.schedule(new TimerTask() {
+
+				@Override
+				public void run() {
+					vbox.setStyle(styleVBox);
+				}
+			}, 250 * i);
+
+			Timer myTimer1 = new Timer();
+			myTimer1.schedule(new TimerTask() {
+
+				@Override
+				public void run() {
+					vbox.setStyle(styleVBoxAttention);
+				}
+			}, 500 * i);
+		}
 	}
 
 	@Override
