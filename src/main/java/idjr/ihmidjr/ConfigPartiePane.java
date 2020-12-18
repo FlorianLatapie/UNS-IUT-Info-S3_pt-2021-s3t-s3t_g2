@@ -37,9 +37,6 @@ import reseau.type.TypePartie;
  * @since 26/10/2020
  */
 public class ConfigPartiePane extends StackPane implements IConfigListener, ITraduction {
-	// private ControleurJeu cj = new ControleurJeu(); // mettre ne paramètres les
-	// joueurs
-
 	private ScreenControl sControl = null;
 	private Core core = null;
 	private final ApplicationPane paneName = ApplicationPane.CONFIG;
@@ -52,13 +49,8 @@ public class ConfigPartiePane extends StackPane implements IConfigListener, ITra
 	private String styleBoutonsSouris = "-fx-background-color:#ff0000;  -fx-text-fill:#000000; -fx-background-radius: 15px;";
 	private StackPane stackPane = new StackPane();
 	private GaussianBlur flou = new GaussianBlur(30);
-	private Font policeNom = Font.font("Segoe UI", 25);
 	private int hauteurElemtents = 60;
-	private int largeurTF = 200;
-	private int largeurTexte = 220;
-	private int spacing = 30;
-	private CornerRadii coinfb = new CornerRadii(5.0);
-	private Background fondBlanc = new Background(new BackgroundFill(Color.WHITE, coinfb, null));
+
 	ListView<Label> listView;
 	List<PartieInfo> partieActuelle = new ArrayList<>();
 	private Insets botPadding = new Insets(10);
@@ -161,23 +153,18 @@ public class ConfigPartiePane extends StackPane implements IConfigListener, ITra
 				"-fx-background-color: white;-fx-control-inner-background: #1A1A1A ; -fx-control-inner-background-alt: derive(-fx-control-inner-background, 15%);");
 
 		bRefresh = new Button(International.trad("bouton.rafraichir"));
-		bRefresh.setPrefSize(lBouton + 30, hBouton);
-		bRefresh.setMinSize(lBouton + 30, hBouton);
+		bRefresh.setPrefSize(lBouton + 30.0, hBouton);
+		bRefresh.setMinSize(lBouton + 30.0, hBouton);
 		bRefresh.setFont(policeBouton);
 		bRefresh.setStyle(styleBoutons);
 
-		bRefresh.setOnMouseEntered(event -> {
+		bRefresh.setOnMouseEntered(event -> bRefresh.setStyle(styleBoutonsSouris));
+		bRefresh.setOnMouseExited(event -> bRefresh.setStyle(styleBoutons));
 
-			bRefresh.setStyle(styleBoutonsSouris);
-		});
-		bRefresh.setOnMouseExited(event -> {
-			bRefresh.setStyle(styleBoutons);
-		});
-
-		bRefresh.setOnAction(EventHandler -> {
+		bRefresh.setOnAction(EventHandler -> 
 			core.getIdjr().listOfServers(cbnbJr.getValue(), TypePartie.valueOf(cbtypePartie.getValue()),
-					Statut.valueOf(cbStatutPartie.getValue()));
-		});
+					Statut.valueOf(cbStatutPartie.getValue()))
+		);
 
 		bPbConnexion = new Button(
 				International.trad("texte.pbConnexionA") + "\n" + International.trad("texte.pbConnexionB"));
@@ -186,12 +173,8 @@ public class ConfigPartiePane extends StackPane implements IConfigListener, ITra
 		bPbConnexion.setMinSize(120, 50);
 		bPbConnexion.setFont(Font.font("Segoe UI", FontWeight.BOLD, 15));
 		bPbConnexion.setStyle(styleBoutons);
-		bPbConnexion.setOnMouseEntered(event -> {
-			bPbConnexion.setStyle(styleBoutonsSouris);
-		});
-		bPbConnexion.setOnMouseExited(event -> {
-			bPbConnexion.setStyle(styleBoutons);
-		});
+		bPbConnexion.setOnMouseEntered(event -> bPbConnexion.setStyle(styleBoutonsSouris));
+		bPbConnexion.setOnMouseExited(event -> bPbConnexion.setStyle(styleBoutons));
 		bPbConnexion.setTranslateX(240);
 
 		VBox vbCenter = new VBox();
@@ -209,13 +192,8 @@ public class ConfigPartiePane extends StackPane implements IConfigListener, ITra
 		bJouer.setFont(policeBouton);
 		bJouer.setStyle(styleBoutons);
 
-		bJouer.setOnMouseEntered(event -> {
-
-			bJouer.setStyle(styleBoutonsSouris);
-		});
-		bJouer.setOnMouseExited(event -> {
-			bJouer.setStyle(styleBoutons);
-		});
+		bJouer.setOnMouseEntered(event -> bJouer.setStyle(styleBoutonsSouris));
+		bJouer.setOnMouseExited(event -> bJouer.setStyle(styleBoutons));
 		bJouer.setOnAction(EventHandler -> {
 			int index = listView.getSelectionModel().getSelectedIndex();
 			if (index == -1)
@@ -226,9 +204,7 @@ public class ConfigPartiePane extends StackPane implements IConfigListener, ITra
 			core.getIdjr().estPartieConnecte(partieInfo.getIdPartie(), cbnbJr.getValue(),
 					TypePartie.valueOf(cbtypePartie.getValue()), Statut.valueOf(cbStatutPartie.getValue()));
 		});
-		nomP.textProperty().addListener((obs, oldText, newText) -> {
-			bJouer.setDisable(nomP.getText().isEmpty());
-		});
+		nomP.textProperty().addListener((obs, oldText, newText) -> bJouer.setDisable(nomP.getText().isEmpty()));
 
 		bRetour = new Button(International.trad("bouton.retour"));
 		bRetour.setPrefSize(lBouton, hBouton);
@@ -236,12 +212,8 @@ public class ConfigPartiePane extends StackPane implements IConfigListener, ITra
 		bRetour.setFont(policeBouton);
 		bRetour.setStyle(styleBoutons);
 
-		bRetour.setOnMouseEntered(event -> {
-			bRetour.setStyle(styleBoutonsSouris);
-		});
-		bRetour.setOnMouseExited(event -> {
-			bRetour.setStyle(styleBoutons);
-		});
+		bRetour.setOnMouseEntered(event -> bRetour.setStyle(styleBoutonsSouris));
+		bRetour.setOnMouseExited(event -> bRetour.setStyle(styleBoutons));
 		bRetour.setOnAction(EventHandler -> sc.setPaneOnTop(ApplicationPane.ACCUEIL));
 
 		// grille contenant les boutons du bas
