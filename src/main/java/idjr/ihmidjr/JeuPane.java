@@ -6,6 +6,7 @@ import java.util.Timer;
 import java.util.TimerTask;
 import idjr.ihmidjr.DataControl.ApplicationPane;
 import idjr.ihmidjr.event.IJeuListener;
+import idjr.ihmidjr.langues.ITraduction;
 import idjr.ihmidjr.langues.International;
 import javafx.application.Platform;
 import javafx.geometry.Insets;
@@ -33,7 +34,7 @@ import javafx.scene.text.TextAlignment;
 import reseau.type.CarteType;
 import reseau.type.Couleur;
 
-public class JeuPane extends StackPane implements IJeuListener {
+public class JeuPane extends StackPane implements IJeuListener, ITraduction {
 
 	private ScreenControl sControl = null;
 	private Core core = null;
@@ -168,6 +169,13 @@ public class JeuPane extends StackPane implements IJeuListener {
 	VBox vbDeplCentre;
 	List<Boolean> estActif = new ArrayList<>();
 	List<CarteType> cartes = new ArrayList<>();
+
+	Label titreQuestion;
+	Label titreFouille;
+	Label titreQuestionCarte;
+	Label labDeplLieux;
+	Button titrede;
+	Label lo;
 
 	public JeuPane(ScreenControl sc, Core c) {
 		core = c;
@@ -478,7 +486,7 @@ public class JeuPane extends StackPane implements IJeuListener {
 		titreVote.setFont(Font.font("Segoe UI", FontWeight.BOLD, 25));
 		titreVote.setTextFill(Color.WHITE);
 
-		Label titreQuestion = new Label(International.trad("texte.qVote"));
+		titreQuestion = new Label(International.trad("texte.qVote"));
 		titreQuestion.setAlignment(Pos.CENTER);
 		titreQuestion.setFont(Font.font("Segoe UI", FontWeight.BOLD, 25));
 		titreQuestion.setTextFill(Color.WHITE);
@@ -726,12 +734,12 @@ public class JeuPane extends StackPane implements IJeuListener {
 		vbChoix.getChildren().addAll(hboxBoutonChoix, hboxBoutonJoueur);
 		vbChoixCarteCentre.getChildren().addAll(vbCarte, vbChoix);
 
-		Label titreFouille = new Label(International.trad("text.fouilleCamion"));
+		titreFouille = new Label(International.trad("text.fouilleCamion"));
 		titreFouille.setAlignment(Pos.CENTER);
 		titreFouille.setFont(Font.font("Segoe UI", FontWeight.BOLD, 25));
 		titreFouille.setTextFill(Color.WHITE);
 
-		Label titreQuestionCarte = new Label(International.trad("texte.qCarte"));
+		titreQuestionCarte = new Label(International.trad("texte.qCarte"));
 		titreQuestionCarte.setAlignment(Pos.CENTER);
 		titreQuestionCarte.setFont(Font.font("Segoe UI", FontWeight.BOLD, 25));
 		titreQuestionCarte.setTextFill(Color.WHITE);
@@ -859,7 +867,7 @@ public class JeuPane extends StackPane implements IJeuListener {
 		vbTitre2.setMinHeight(50);
 		vbTitre2.setMaxHeight(50);
 
-		Label labDeplLieux = new Label(International.trad("texte.destination"));
+		labDeplLieux = new Label(International.trad("texte.destination"));
 		labDeplLieux.setAlignment(Pos.TOP_CENTER);
 		labDeplLieux.setFont(Font.font("Segoe UI", FontWeight.BOLD, 20));
 		labDeplLieux.setTextFill(Color.WHITE);
@@ -991,7 +999,7 @@ public class JeuPane extends StackPane implements IJeuListener {
 		de2.setTextFill(Color.BLACK);
 		de2.setFont(policeBoutonDe);
 
-		Button titrede = new Button(International.trad("texte.des"));
+		titrede = new Button(International.trad("texte.des"));
 		titrede.setMinSize(100, 50);
 		titrede.setAlignment(Pos.CENTER);
 		titrede.setTextFill(Color.WHITE);
@@ -1144,7 +1152,7 @@ public class JeuPane extends StackPane implements IJeuListener {
 		force.setTextFill(Color.WHITESMOKE);
 		force.setVisible(false);
 
-		bForce = new Button("Force \nde l\'équipe");
+		bForce = new Button(International.trad("text.forceEquipeA") + "\n" + International.trad("text.forceEquipeB"));
 		bForce.setAlignment(Pos.CENTER);
 		bForce.setTextAlignment(TextAlignment.CENTER);
 		bForce.setFont(Font.font("Segoe UI", FontWeight.BOLD, 23));
@@ -1309,317 +1317,403 @@ public class JeuPane extends StackPane implements IJeuListener {
 
 	// TODO
 
-		public ListView<Label> updateLog(ListView<Label> list, Label l) {
-			list.getItems().add(list.getItems().size(), l);
-			list.scrollTo(list.getItems().size() - 1);
-			return list;
-		}
+	public ListView<Label> updateLog(ListView<Label> list, Label l) {
+		list.getItems().add(list.getItems().size(), l);
+		list.scrollTo(list.getItems().size() - 1);
+		return list;
+	}
 
-		@Override
-		public void choisirPion(List<Integer> list) {
-			Platform.runLater(() -> {
-				for (Integer integer : list) {
-					switch (integer) {
-					case 7:
-						bBlonde.setDisable(false);
-						break;
-					case 5:
-						bBrute.setDisable(false);
-						break;
-					case 3:
-						bTruand.setDisable(false);
-						break;
-					case 1:
-						bFillette.setDisable(false);
-						break;
-					default:
-						break;
-					}
-				}
-			});
-
-		}
-
-		@Override
-		public void choisirLieu(List<Integer> list) {
-			Platform.runLater(() -> {
-				for (Integer integer : list) {
-					switch (integer) {
-					case 1:
-						bToilettes.setDisable(false);
-						break;
-					case 2:
-						bCachou.setDisable(false);
-						break;
-					case 3:
-						bMegatoys.setDisable(false);
-						break;
-					case 4:
-						bParking.setDisable(false);
-						break;
-					case 5:
-						bPCSecu.setDisable(false);
-						break;
-					case 6:
-						bSuperMarche.setDisable(false);
-						break;
-					default:
-						break;
-					}
-				}
-			});
-		}
-
-		@Override
-		public void desValeur(List<Integer> list) {
-			Platform.runLater(() -> {
-				String de1Int = list.get(0).toString();
-				String de2Int = list.get(1).toString();
-				de1.setText(de1Int);
-				de2.setText(de2Int);
-			});
-		}
-
-		@Override
-		public void nomJoueur(String nom) {
-			Platform.runLater(() -> {
-				nomJoueur.setText(nom);
-			});
-		}
-
-		@Override
-		public void nomPhase(String nom) {
-			Platform.runLater(() -> {
-				phasePartie.setText(nom);
-			});
-		}
-
-		@Override
-		public void desVigiles(List<Integer> list) {
-			Platform.runLater(() -> {
-				infoZombie.setVisible(true);
-				linfoZombie.setText(International.trad("Des zombies arriveront dans les lieux {0}, {1}, {2}, {3}",
-						list.get(0).toString(), list.get(1).toString(), list.get(2).toString(), list.get(3).toString()));
-			});
-		}
-
-		@Override
-		public void fin() {
-			Platform.runLater(() -> {
-				sControl.setPaneOnTop(ApplicationPane.ENDGAME);
-			});
-		}
-
-		@Override
-		public void couleurJoueur(Couleur couleur) {
-			Platform.runLater(() -> {
-				switch (couleur) {
-				case B:
-					imgFond.setImage(new Image(DataControl.BLEU));
+	@Override
+	public void choisirPion(List<Integer> list) {
+		Platform.runLater(() -> {
+			for (Integer integer : list) {
+				switch (integer) {
+				case 7:
+					bBlonde.setDisable(false);
 					break;
-				case R:
-					imgFond.setImage(new Image(DataControl.ROUGE));
+				case 5:
+					bBrute.setDisable(false);
 					break;
-				case V:
-					imgFond.setImage(new Image(DataControl.VERT));
+				case 3:
+					bTruand.setDisable(false);
 					break;
-				case J:
-					imgFond.setImage(new Image(DataControl.JAUNE));
-					break;
-				case M:
-					imgFond.setImage(new Image(DataControl.MARRON));
-					break;
-				case N:
-					imgFond.setImage(new Image(DataControl.NOIR));
+				case 1:
+					bFillette.setDisable(false);
 					break;
 				default:
-					throw new IllegalArgumentException("Pas la bonne couleur (NUL)");
-				}
-			});
-		}
-
-		@Override
-		public void sacrificeChange() {
-			Platform.runLater(() -> {
-				labDeplPers.setText(International.trad("texte.sacrifice"));
-			});
-		}
-
-		@Override
-		public void deplacementChange() {
-			Platform.runLater(() -> {
-				labDeplPers.setText(International.trad("texte.labDeplPers"));
-			});
-		}
-
-		public String convertCarte(CarteType carteType) {
-			switch (carteType) {
-			case ABA:
-				return DataControl.CARTE_BATTE;
-			case CAC:
-				return DataControl.CARTE_CACHETTE;
-			case CDS:
-				return DataControl.CARTE_CAMERA;
-			case ACS:
-				return DataControl.CARTE_CS;
-			case AGR:
-				return DataControl.CARTE_GRENADE;
-			case AHI:
-				return DataControl.CARTE_HACHE;
-			case MAT:
-				return DataControl.CARTE_MATERIEL;
-			case MEN:
-				return DataControl.CARTE_MENACE;
-			case ARE:
-				return DataControl.CARTE_REVOLVER;
-			case SPR:
-				return DataControl.CARTE_SPRINT;
-			case ATR:
-				return DataControl.CARTE_TRONCENNEUSE;
-			}
-
-			return null;
-		}
-
-		public CarteType convertCarte(String dataControl) {
-			switch (dataControl) {
-			case DataControl.CARTE_BATTE:
-				return CarteType.ABA;
-			case DataControl.CARTE_CACHETTE:
-				return CarteType.CAC;
-			case DataControl.CARTE_CAMERA:
-				return CarteType.CDS;
-			case DataControl.CARTE_CS:
-				return CarteType.ACS;
-			case DataControl.CARTE_GRENADE:
-				return CarteType.AGR;
-			case DataControl.CARTE_HACHE:
-				return CarteType.AHI;
-			case DataControl.CARTE_MATERIEL:
-				return CarteType.MAT;
-			case DataControl.CARTE_MENACE:
-				return CarteType.MEN;
-			case DataControl.CARTE_REVOLVER:
-				return CarteType.ARE;
-			case DataControl.CARTE_SPRINT:
-				return CarteType.SPR;
-			case DataControl.CARTE_TRONCENNEUSE:
-				return CarteType.ATR;
-			}
-
-			return CarteType.NUL;
-		}
-
-		public void setCarteOfferte(List<Couleur> listeCouleurJoueurVivant) {
-			Button[] joueursButton = { joueur1c, joueur2c, joueur3c, joueur4c, joueur5c };
-			for (int i = 0; i < joueursButton.length; i++) {
-				if (listeCouleurJoueurVivant.size() > i) {
-					joueursButton[i].setDisable(false);
-					joueursButton[i].setText(listeCouleurJoueurVivant.get(i).nomEntier());
-					Couleur tmpCouleur = listeCouleurJoueurVivant.get(i);
-					joueursButton[i].setOnAction(EventHandler -> {
-						selectedCouleurFouille = tmpCouleur;
-						if (selectedCouleurFouille != null && selectedCarteFouille != null) {
-							core.getIdjr().setCarteChoisi(selectedCarteFouille);
-							core.getIdjr().setCouleurChoisi(selectedCouleurFouille);
-							core.getIdjr().setEtatChoisi(International.trad("texte.donner"));
-							core.getIdjr().carteChoisi(true);
-							cartePanelReset();
-						}
-					});
-				} else {
-					joueursButton[i].setText("");
+					break;
 				}
 			}
+		});
+
+	}
+
+	@Override
+	public void choisirLieu(List<Integer> list) {
+		Platform.runLater(() -> {
+			for (Integer integer : list) {
+				switch (integer) {
+				case 1:
+					bToilettes.setDisable(false);
+					break;
+				case 2:
+					bCachou.setDisable(false);
+					break;
+				case 3:
+					bMegatoys.setDisable(false);
+					break;
+				case 4:
+					bParking.setDisable(false);
+					break;
+				case 5:
+					bPCSecu.setDisable(false);
+					break;
+				case 6:
+					bSuperMarche.setDisable(false);
+					break;
+				default:
+					break;
+				}
+			}
+		});
+	}
+
+	@Override
+	public void desValeur(List<Integer> list) {
+		Platform.runLater(() -> {
+			String de1Int = list.get(0).toString();
+			String de2Int = list.get(1).toString();
+			de1.setText(de1Int);
+			de2.setText(de2Int);
+		});
+	}
+
+	@Override
+	public void nomJoueur(String nom) {
+		Platform.runLater(() -> {
+			nomJoueur.setText(nom);
+		});
+	}
+
+	@Override
+	public void nomPhase(String nom) {
+		Platform.runLater(() -> {
+			phasePartie.setText(nom);
+		});
+	}
+
+	@Override
+	public void desVigiles(List<Integer> list) {
+		Platform.runLater(() -> {
+			infoZombie.setVisible(true);
+			linfoZombie.setText(International.trad("Des zombies arriveront dans les lieux {0}, {1}, {2}, {3}",
+					list.get(0).toString(), list.get(1).toString(), list.get(2).toString(), list.get(3).toString()));
+		});
+	}
+
+	@Override
+	public void fin() {
+		Platform.runLater(() -> {
+			sControl.setPaneOnTop(ApplicationPane.ENDGAME);
+		});
+	}
+
+	@Override
+	public void couleurJoueur(Couleur couleur) {
+		Platform.runLater(() -> {
+			switch (couleur) {
+			case B:
+				imgFond.setImage(new Image(DataControl.BLEU));
+				break;
+			case R:
+				imgFond.setImage(new Image(DataControl.ROUGE));
+				break;
+			case V:
+				imgFond.setImage(new Image(DataControl.VERT));
+				break;
+			case J:
+				imgFond.setImage(new Image(DataControl.JAUNE));
+				break;
+			case M:
+				imgFond.setImage(new Image(DataControl.MARRON));
+				break;
+			case N:
+				imgFond.setImage(new Image(DataControl.NOIR));
+				break;
+			default:
+				throw new IllegalArgumentException("Pas la bonne couleur (NUL)");
+			}
+		});
+	}
+
+	@Override
+	public void sacrificeChange() {
+		Platform.runLater(() -> {
+			labDeplPers.setText(International.trad("texte.sacrifice"));
+		});
+	}
+
+	@Override
+	public void deplacementChange() {
+		Platform.runLater(() -> {
+			labDeplPers.setText(International.trad("texte.labDeplPers"));
+		});
+	}
+
+	public String convertCarte(CarteType carteType) {
+		switch (carteType) {
+		case ABA:
+			return DataControl.CARTE_BATTE;
+		case CAC:
+			return DataControl.CARTE_CACHETTE;
+		case CDS:
+			return DataControl.CARTE_CAMERA;
+		case ACS:
+			return DataControl.CARTE_CS;
+		case AGR:
+			return DataControl.CARTE_GRENADE;
+		case AHI:
+			return DataControl.CARTE_HACHE;
+		case MAT:
+			return DataControl.CARTE_MATERIEL;
+		case MEN:
+			return DataControl.CARTE_MENACE;
+		case ARE:
+			return DataControl.CARTE_REVOLVER;
+		case SPR:
+			return DataControl.CARTE_SPRINT;
+		case ATR:
+			return DataControl.CARTE_TRONCENNEUSE;
 		}
 
-		@Override
-		public void choisirCarte(List<CarteType> listeCartes, List<Couleur> listeCouleurJoueurVivant, boolean garder,
-				boolean donner, boolean defausser, boolean utiliser) {
-			Platform.runLater(() -> {
-				Background selecBackground = new Background(new BackgroundFill(Color.GREEN, CornerRadii.EMPTY, null));
-				Background deselecBackground = fondNoir;
-				vote.setVisible(false);
-				System.out.println(listeCartes.size());
-				System.out.println(listeCouleurJoueurVivant.size());
-				fond.setEffect(flou);
-				rectVigile.setEffect(flou);
-				nomJoueur.setEffect(flou);
-				hbCartes.setEffect(flou);
-				vbDeplCentre.setEffect(flou);
-				des.setEffect(flou);
-				bLog.setEffect(flou);
-				cartePrecedente.setDisable(true);
-				carteSuivante.setDisable(true);
-				bLog.setDisable(true);
-				fouilleCamion.setVisible(true);
-				if (listeCartes.size() >= 1) {
-					imgCarte1.setImage(new Image(convertCarte(listeCartes.get(0))));
-					bCarte1.setDisable(false);
-					bCarte1.setText(International.trad("texte.selectionner"));
-					bCarte1.setOnAction(EventHandler -> {
-						selectedCarteFouille = listeCartes.get(0);
-						bChoixGarder.setDisable(!garder);
-						bChoixDonner.setDisable(!donner);
-						bChoixDefausser.setDisable(!defausser);
-						bCarte1.setBackground(selecBackground);
-						bCarte2.setBackground(fondNoir);
-						bCarte3.setBackground(fondNoir);
-					});
-				} else {
-					imgCarte1.setDisable(true);
-					imgCarte1.setImage(new Image(DataControl.CARTE_VIDE));
-				}
-				if (listeCartes.size() >= 2) {
-					imgCarte2.setImage(new Image(convertCarte(listeCartes.get(1))));
-					bCarte2.setDisable(false);
-					bCarte2.setText(International.trad("texte.selectionner"));
-					bCarte2.setOnAction(EventHandler -> {
-						selectedCarteFouille = listeCartes.get(1);
-						bChoixGarder.setDisable(!garder);
-						bChoixDonner.setDisable(!donner);
-						bChoixDefausser.setDisable(!defausser);
-						bCarte1.setBackground(fondNoir);
-						bCarte2.setBackground(selecBackground);
-						bCarte3.setBackground(fondNoir);
-					});
-				} else {
-					imgCarte2.setDisable(true);
-					imgCarte2.setImage(new Image(DataControl.CARTE_VIDE));
-				}
-				if (listeCartes.size() >= 3) {
-					imgCarte3.setImage(new Image(convertCarte(listeCartes.get(2))));
-					bCarte3.setDisable(false);
-					bCarte3.setText(International.trad("texte.selectionner"));
-					bCarte3.setOnAction(EventHandler -> {
-						selectedCarteFouille = listeCartes.get(2);
-						bChoixGarder.setDisable(!garder);
-						bChoixDonner.setDisable(!donner);
-						bChoixDefausser.setDisable(!defausser);
-						bCarte1.setBackground(fondNoir);
-						bCarte2.setBackground(fondNoir);
-						bCarte3.setBackground(selecBackground);
-					});
-				} else {
-					imgCarte3.setDisable(true);
-					imgCarte3.setImage(new Image(DataControl.CARTE_VIDE));
-				}
-				if (listeCouleurJoueurVivant != null)
-					setCarteOfferte(listeCouleurJoueurVivant);
-			});
+		return null;
+	}
 
+	public CarteType convertCarte(String dataControl) {
+		switch (dataControl) {
+		case DataControl.CARTE_BATTE:
+			return CarteType.ABA;
+		case DataControl.CARTE_CACHETTE:
+			return CarteType.CAC;
+		case DataControl.CARTE_CAMERA:
+			return CarteType.CDS;
+		case DataControl.CARTE_CS:
+			return CarteType.ACS;
+		case DataControl.CARTE_GRENADE:
+			return CarteType.AGR;
+		case DataControl.CARTE_HACHE:
+			return CarteType.AHI;
+		case DataControl.CARTE_MATERIEL:
+			return CarteType.MAT;
+		case DataControl.CARTE_MENACE:
+			return CarteType.MEN;
+		case DataControl.CARTE_REVOLVER:
+			return CarteType.ARE;
+		case DataControl.CARTE_SPRINT:
+			return CarteType.SPR;
+		case DataControl.CARTE_TRONCENNEUSE:
+			return CarteType.ATR;
 		}
 
-		@Override
-		public void nomJoueurs(List<String> listeNomJoueur) {
-			Platform.runLater(() -> {
-				Button[] joueursButton = { joueur1, joueur2, joueur3, joueur4, joueur5 };
-				for (int i = 0; i < listeNomJoueur.size(); i++)
-					joueursButton[i].setText(listeNomJoueur.get(i));
-			});
-		}
+		return CarteType.NUL;
+	}
 
-		public void cartePanelReset() {
+	public void setCarteOfferte(List<Couleur> listeCouleurJoueurVivant) {
+		Button[] joueursButton = { joueur1c, joueur2c, joueur3c, joueur4c, joueur5c };
+		for (int i = 0; i < joueursButton.length; i++) {
+			if (listeCouleurJoueurVivant.size() > i) {
+				joueursButton[i].setDisable(false);
+				joueursButton[i].setText(listeCouleurJoueurVivant.get(i).nomEntier());
+				Couleur tmpCouleur = listeCouleurJoueurVivant.get(i);
+				joueursButton[i].setOnAction(EventHandler -> {
+					selectedCouleurFouille = tmpCouleur;
+					if (selectedCouleurFouille != null && selectedCarteFouille != null) {
+						core.getIdjr().setCarteChoisi(selectedCarteFouille);
+						core.getIdjr().setCouleurChoisi(selectedCouleurFouille);
+						core.getIdjr().setEtatChoisi(International.trad("texte.donner"));
+						core.getIdjr().carteChoisi(true);
+						cartePanelReset();
+					}
+				});
+			} else {
+				joueursButton[i].setText("");
+			}
+		}
+	}
+
+	@Override
+	public void choisirCarte(List<CarteType> listeCartes, List<Couleur> listeCouleurJoueurVivant, boolean garder,
+			boolean donner, boolean defausser, boolean utiliser) {
+		Platform.runLater(() -> {
+			Background selecBackground = new Background(new BackgroundFill(Color.GREEN, CornerRadii.EMPTY, null));
+			Background deselecBackground = fondNoir;
+			vote.setVisible(false);
+			System.out.println(listeCartes.size());
+			System.out.println(listeCouleurJoueurVivant.size());
+			fond.setEffect(flou);
+			rectVigile.setEffect(flou);
+			nomJoueur.setEffect(flou);
+			hbCartes.setEffect(flou);
+			vbDeplCentre.setEffect(flou);
+			des.setEffect(flou);
+			bLog.setEffect(flou);
+			cartePrecedente.setDisable(true);
+			carteSuivante.setDisable(true);
+			bLog.setDisable(true);
+			fouilleCamion.setVisible(true);
+			if (listeCartes.size() >= 1) {
+				imgCarte1.setImage(new Image(convertCarte(listeCartes.get(0))));
+				bCarte1.setDisable(false);
+				bCarte1.setText(International.trad("texte.selectionner"));
+				bCarte1.setOnAction(EventHandler -> {
+					selectedCarteFouille = listeCartes.get(0);
+					bChoixGarder.setDisable(!garder);
+					bChoixDonner.setDisable(!donner);
+					bChoixDefausser.setDisable(!defausser);
+					bCarte1.setBackground(selecBackground);
+					bCarte2.setBackground(fondNoir);
+					bCarte3.setBackground(fondNoir);
+				});
+			} else {
+				imgCarte1.setDisable(true);
+				imgCarte1.setImage(new Image(DataControl.CARTE_VIDE));
+			}
+			if (listeCartes.size() >= 2) {
+				imgCarte2.setImage(new Image(convertCarte(listeCartes.get(1))));
+				bCarte2.setDisable(false);
+				bCarte2.setText(International.trad("texte.selectionner"));
+				bCarte2.setOnAction(EventHandler -> {
+					selectedCarteFouille = listeCartes.get(1);
+					bChoixGarder.setDisable(!garder);
+					bChoixDonner.setDisable(!donner);
+					bChoixDefausser.setDisable(!defausser);
+					bCarte1.setBackground(fondNoir);
+					bCarte2.setBackground(selecBackground);
+					bCarte3.setBackground(fondNoir);
+				});
+			} else {
+				imgCarte2.setDisable(true);
+				imgCarte2.setImage(new Image(DataControl.CARTE_VIDE));
+			}
+			if (listeCartes.size() >= 3) {
+				imgCarte3.setImage(new Image(convertCarte(listeCartes.get(2))));
+				bCarte3.setDisable(false);
+				bCarte3.setText(International.trad("texte.selectionner"));
+				bCarte3.setOnAction(EventHandler -> {
+					selectedCarteFouille = listeCartes.get(2);
+					bChoixGarder.setDisable(!garder);
+					bChoixDonner.setDisable(!donner);
+					bChoixDefausser.setDisable(!defausser);
+					bCarte1.setBackground(fondNoir);
+					bCarte2.setBackground(fondNoir);
+					bCarte3.setBackground(selecBackground);
+				});
+			} else {
+				imgCarte3.setDisable(true);
+				imgCarte3.setImage(new Image(DataControl.CARTE_VIDE));
+			}
+			if (listeCouleurJoueurVivant != null)
+				setCarteOfferte(listeCouleurJoueurVivant);
+		});
+
+	}
+
+	@Override
+	public void nomJoueurs(List<String> listeNomJoueur) {
+		Platform.runLater(() -> {
+			Button[] joueursButton = { joueur1, joueur2, joueur3, joueur4, joueur5 };
+			for (int i = 0; i < listeNomJoueur.size(); i++)
+				joueursButton[i].setText(listeNomJoueur.get(i));
+		});
+	}
+
+	public void cartePanelReset() {
+		fond.setEffect(null);
+		rectVigile.setEffect(null);
+		nomJoueur.setEffect(null);
+		hbCartes.setEffect(null);
+		vbDeplCentre.setEffect(null);
+		des.setEffect(null);
+		bLog.setEffect(null);
+		cartePrecedente.setDisable(false);
+		carteSuivante.setDisable(false);
+		bLog.setDisable(false);
+		fouilleCamion.setVisible(false);
+		hboxBoutonJoueur.setVisible(false);
+		joueur1c.setDisable(true);
+		joueur2c.setDisable(true);
+		joueur3c.setDisable(true);
+		joueur4c.setDisable(true);
+		joueur5c.setDisable(true);
+		bCarte1.setDisable(true);
+		bCarte2.setDisable(true);
+		bCarte3.setDisable(true);
+		bChoixGarder.setDisable(true);
+		bChoixDonner.setDisable(true);
+		bChoixDefausser.setDisable(true);
+		selectedCarteFouille = null;
+		selectedCouleurFouille = null;
+	}
+
+	@Override
+	public void updateCarte() {
+		Platform.runLater(() -> {
+			ImageView[] imgViews = { imgDeCarte1, imgDeCarte2, imgDeCarte3, imgDeCarte4, imgDeCarte5, imgDeCarte6,
+					imgDeCarte7, imgDeCarte8 };
+			Button[] buttons = { bDeCarte1, bDeCarte2, bDeCarte3, bDeCarte4, bDeCarte5, bDeCarte6, bDeCarte7,
+					bDeCarte8 };
+			VBox[] carteVbox = { carte1, carte2, carte3, carte4, carte5, carte6, carte7, carte8 };
+			cartes = core.getIdjr().getListeCarte();
+			for (int i = 0; i < imgViews.length; i++) {
+				if (i < core.getIdjr().getListeCarte().size()) {
+					imgViews[i].setImage(new Image(convertCarte(core.getIdjr().getListeCarte().get(i))));
+					carteVbox[i].setVisible(true);
+					imgViews[i].setDisable(false);
+				} else {
+					imgViews[i].setImage(new Image(DataControl.CARTE_VIDE));
+					carteVbox[i].setVisible(false);
+					imgViews[i].setDisable(true);
+				}
+				buttons[i].setStyle(null);
+			}
+		});
+	}
+
+	public void resetUtiliserCarte() {
+		Button[] buttons = { bDeCarte1, bDeCarte2, bDeCarte3, bDeCarte4, bDeCarte5, bDeCarte6, bDeCarte7, bDeCarte8,
+				bPasserCarte };
+		for (int i = 0; i < buttons.length - 1; i++) {
+			if (i < cartes.size()) {
+				buttons[i].setDisable(true);
+				buttons[i].setStyle(null);
+			}
+		}
+		passerCarte.setVisible(false);
+		passerCarte.setDisable(true);
+		bPasserCarte.setDisable(true);
+		bPasserCarte.setText(International.trad("texte.passer"));
+	}
+
+	public void resetVoteCarte() {
+		vote.setVisible(false);
+		Button[] buttons = { joueur1, joueur2, joueur3, joueur4, joueur5 };
+		for (int i = 0; i < buttons.length; i++) {
+			buttons[i].setDisable(true);
+		}
+	}
+
+	public void resetCartesSelection(Button btn) {
+		Button[] buttons = { joueur1, joueur2, joueur3, joueur4, joueur5 };
+		for (int i = 0; i < buttons.length; i++) {
+			if (!buttons[i].equals(btn))
+				buttons[i].setStyle(null);
+		}
+	}
+
+	@Override
+	public void setVote(List<Couleur> listeCouleurJoueur) {
+		Platform.runLater(() -> {
+			vote.setVisible(true);
 			fond.setEffect(null);
 			rectVigile.setEffect(null);
 			nomJoueur.setEffect(null);
@@ -1631,122 +1725,78 @@ public class JeuPane extends StackPane implements IJeuListener {
 			carteSuivante.setDisable(false);
 			bLog.setDisable(false);
 			fouilleCamion.setVisible(false);
-			hboxBoutonJoueur.setVisible(false);
-			joueur1c.setDisable(true);
-			joueur2c.setDisable(true);
-			joueur3c.setDisable(true);
-			joueur4c.setDisable(true);
-			joueur5c.setDisable(true);
-			bCarte1.setDisable(true);
-			bCarte2.setDisable(true);
-			bCarte3.setDisable(true);
-			bChoixGarder.setDisable(true);
-			bChoixDonner.setDisable(true);
-			bChoixDefausser.setDisable(true);
-			selectedCarteFouille = null;
-			selectedCouleurFouille = null;
-		}
-
-		@Override
-		public void updateCarte() {
-			Platform.runLater(() -> {
-				ImageView[] imgViews = { imgDeCarte1, imgDeCarte2, imgDeCarte3, imgDeCarte4, imgDeCarte5, imgDeCarte6,
-						imgDeCarte7, imgDeCarte8 };
-				Button[] buttons = { bDeCarte1, bDeCarte2, bDeCarte3, bDeCarte4, bDeCarte5, bDeCarte6, bDeCarte7,
-						bDeCarte8 };
-				VBox[] carteVbox = { carte1, carte2, carte3, carte4, carte5, carte6, carte7, carte8 };
-				cartes = core.getIdjr().getListeCarte();
-				for (int i = 0; i < imgViews.length; i++) {
-					if (i < core.getIdjr().getListeCarte().size()) {
-						imgViews[i].setImage(new Image(convertCarte(core.getIdjr().getListeCarte().get(i))));
-						carteVbox[i].setVisible(true);
-						imgViews[i].setDisable(false);
-					} else {
-						imgViews[i].setImage(new Image(DataControl.CARTE_VIDE));
-						carteVbox[i].setVisible(false);
-						imgViews[i].setDisable(true);
-					}
-					buttons[i].setStyle(null);
+			Button[] buttons = { joueur1, joueur2, joueur3, joueur4, joueur5 };
+			for (int i = 0; i < buttons.length; i++) {
+				if (listeCouleurJoueur.size() > i) {
+					buttons[i].setDisable(false);
+					buttons[i].setText(listeCouleurJoueur.get(i).nomEntier());
+					Couleur cible = listeCouleurJoueur.get(i);
+					buttons[i].setOnAction(EventHandler -> {
+						core.getIdjr().setVoteChoisi(cible);
+						core.getIdjr().voteChoisi(true);
+						resetVoteCarte();
+					});
+				} else {
+					buttons[i].setText("");
 				}
-			});
-		}
+			}
+		});
+	}
 
-		public void resetUtiliserCarte() {
-			Button[] buttons = { bDeCarte1, bDeCarte2, bDeCarte3, bDeCarte4, bDeCarte5, bDeCarte6, bDeCarte7, bDeCarte8,
-					bPasserCarte };
-			for (int i = 0; i < buttons.length - 1; i++) {
+	@Override
+	public void choisirUtiliserCarte(CarteType carteType) {
+		Platform.runLater(() -> {
+			Button[] buttons = { bDeCarte1, bDeCarte2, bDeCarte3, bDeCarte4, bDeCarte5, bDeCarte6, bDeCarte7,
+					bDeCarte8 };
+			selectedCarteChoi = CarteType.NUL;
+			for (int i = 0; i < buttons.length; i++) {
 				if (i < cartes.size()) {
-					buttons[i].setDisable(true);
-					buttons[i].setStyle(null);
-				}
-			}
-			passerCarte.setVisible(false);
-			passerCarte.setDisable(true);
-			bPasserCarte.setDisable(true);
-			bPasserCarte.setText(International.trad("texte.passer"));
-		}
-
-		public void resetVoteCarte() {
-			vote.setVisible(false);
-			Button[] buttons = { joueur1, joueur2, joueur3, joueur4, joueur5 };
-			for (int i = 0; i < buttons.length; i++) {
-				buttons[i].setDisable(true);
-			}
-		}
-
-		public void resetCartesSelection(Button btn) {
-			Button[] buttons = { joueur1, joueur2, joueur3, joueur4, joueur5 };
-			for (int i = 0; i < buttons.length; i++) {
-				if (!buttons[i].equals(btn))
-					buttons[i].setStyle(null);
-			}
-		}
-
-		@Override
-		public void setVote(List<Couleur> listeCouleurJoueur) {
-			Platform.runLater(() -> {
-				vote.setVisible(true);
-				fond.setEffect(null);
-				rectVigile.setEffect(null);
-				nomJoueur.setEffect(null);
-				hbCartes.setEffect(null);
-				vbDeplCentre.setEffect(null);
-				des.setEffect(null);
-				bLog.setEffect(null);
-				cartePrecedente.setDisable(false);
-				carteSuivante.setDisable(false);
-				bLog.setDisable(false);
-				fouilleCamion.setVisible(false);
-				Button[] buttons = { joueur1, joueur2, joueur3, joueur4, joueur5 };
-				for (int i = 0; i < buttons.length; i++) {
-					if (listeCouleurJoueur.size() > i) {
+					if (carteType == cartes.get(i)) {
 						buttons[i].setDisable(false);
-						buttons[i].setText(listeCouleurJoueur.get(i).nomEntier());
-						Couleur cible = listeCouleurJoueur.get(i);
+						CarteType type = cartes.get(i);
+						int tmp = i;
 						buttons[i].setOnAction(EventHandler -> {
-							core.getIdjr().setVoteChoisi(cible);
-							core.getIdjr().voteChoisi(true);
-							resetVoteCarte();
+							if (selectedCarteChoi == CarteType.NUL) {
+								selectedCarteChoi = type;
+								buttons[tmp]
+										.setStyle("-fx-border-color: red; -fx-border-insets: -5; -fx-border-width: 3;");
+								bPasserCarte.setText(International.trad("texte.valider"));
+							} else {
+								selectedCarteChoi = CarteType.NUL;
+								buttons[tmp].setStyle(null);
+								bPasserCarte.setText(International.trad("texte.passer"));
+							}
+							resetCartesSelection(buttons[tmp]);
 						});
-					} else {
-						buttons[i].setText("");
 					}
 				}
-			});
-		}
+			}
 
-		@Override
-		public void choisirUtiliserCarte(CarteType carteType) {
-			Platform.runLater(() -> {
-				Button[] buttons = { bDeCarte1, bDeCarte2, bDeCarte3, bDeCarte4, bDeCarte5, bDeCarte6, bDeCarte7,
-						bDeCarte8 };
-				selectedCarteChoi = CarteType.NUL;
-				for (int i = 0; i < buttons.length; i++) {
-					if (i < cartes.size()) {
-						if (carteType == cartes.get(i)) {
+			passerCarte.setVisible(true);
+			passerCarte.setDisable(false);
+			bPasserCarte.setDisable(false);
+			bPasserCarte.setOnAction(EventHandler -> {
+				core.getIdjr().setContinue(false);
+				core.getIdjr().utiliserCarteChoisi(true);
+				resetUtiliserCarte();
+				updateCarte();
+			});
+		});
+	}
+
+	@Override
+	public void choisirUtiliserCarte(List<CarteType> carteTypes) {
+		Platform.runLater(() -> {
+			Button[] buttons = { bDeCarte1, bDeCarte2, bDeCarte3, bDeCarte4, bDeCarte5, bDeCarte6, bDeCarte7,
+					bDeCarte8 };
+			selectedCarteChoi = CarteType.NUL;
+			for (int i = 0; i < buttons.length; i++) {
+				if (i < cartes.size()) {
+					for (CarteType carteType2 : carteTypes) {
+						if (carteType2 == cartes.get(i)) {
 							buttons[i].setDisable(false);
-							CarteType type = cartes.get(i);
 							int tmp = i;
+							CarteType type = cartes.get(i);
 							buttons[i].setOnAction(EventHandler -> {
 								if (selectedCarteChoi == CarteType.NUL) {
 									selectedCarteChoi = type;
@@ -1763,141 +1813,143 @@ public class JeuPane extends StackPane implements IJeuListener {
 						}
 					}
 				}
-
-				passerCarte.setVisible(true);
-				passerCarte.setDisable(false);
-				bPasserCarte.setDisable(false);
-				bPasserCarte.setOnAction(EventHandler -> {
-					core.getIdjr().setContinue(false);
-					core.getIdjr().utiliserCarteChoisi(true);
-					resetUtiliserCarte();
-					updateCarte();
-				});
-			});
-		}
-
-		@Override
-		public void choisirUtiliserCarte(List<CarteType> carteTypes) {
-			Platform.runLater(() -> {
-				Button[] buttons = { bDeCarte1, bDeCarte2, bDeCarte3, bDeCarte4, bDeCarte5, bDeCarte6, bDeCarte7,
-						bDeCarte8 };
-				selectedCarteChoi = CarteType.NUL;
-				for (int i = 0; i < buttons.length; i++) {
-					if (i < cartes.size()) {
-						for (CarteType carteType2 : carteTypes) {
-							if (carteType2 == cartes.get(i)) {
-								buttons[i].setDisable(false);
-								int tmp = i;
-								CarteType type = cartes.get(i);
-								buttons[i].setOnAction(EventHandler -> {
-									if (selectedCarteChoi == CarteType.NUL) {
-										selectedCarteChoi = type;
-										buttons[tmp].setStyle(
-												"-fx-border-color: red; -fx-border-insets: -5; -fx-border-width: 3;");
-										bPasserCarte.setText(International.trad("texte.valider"));
-									} else {
-										selectedCarteChoi = CarteType.NUL;
-										buttons[tmp].setStyle(null);
-										bPasserCarte.setText(International.trad("texte.passer"));
-									}
-									resetCartesSelection(buttons[tmp]);
-								});
-							}
-						}
-					}
-				}
-				passerCarte.setVisible(true);
-				passerCarte.setDisable(false);
-				bPasserCarte.setDisable(false);
-				bPasserCarte.setOnAction(EventHandler -> {
-					core.getIdjr().setContinue(false);
-					core.getIdjr().utiliserCarteChoisi(true);
-					resetUtiliserCarte();
-					updateCarte();
-				});
-			});
-		}
-
-		public void resetSelection(Button btn) {
-				Button[] buttons = { bDeCarte1, bDeCarte2, bDeCarte3, bDeCarte4, bDeCarte5, bDeCarte6, bDeCarte7,
-						bDeCarte8 };
-				for (Button button : buttons) {
-					if (!button.equals(btn)) {
-						button.setText(International.trad("texte.passer"));
-					}
-				}
 			}
-
-		public void setContinue() {
-			if (estActif.contains(true)) {
-				bPasserCarte.setText(International.trad("texte.valider"));
-			} else {
-				bPasserCarte.setText(International.trad("texte.passer"));
-			}
-		}
-
-		@Override
-		public void choisirUtiliserCartes(List<CarteType> carteTypes) {
-			Platform.runLater(() -> {
+			passerCarte.setVisible(true);
+			passerCarte.setDisable(false);
+			bPasserCarte.setDisable(false);
+			bPasserCarte.setOnAction(EventHandler -> {
+				core.getIdjr().setContinue(false);
+				core.getIdjr().utiliserCarteChoisi(true);
+				resetUtiliserCarte();
 				updateCarte();
-				Button[] buttons = { bDeCarte1, bDeCarte2, bDeCarte3, bDeCarte4, bDeCarte5, bDeCarte6, bDeCarte7,
-						bDeCarte8 };
-				estActif.clear();
-				for (int i = 0; i < buttons.length; i++) {
-					if (i < cartes.size()) {
-						estActif.add(false);
-						for (CarteType carteType2 : carteTypes) {
-							if (carteType2 == cartes.get(i)) {
-								buttons[i].setDisable(false);
-								CarteType type = cartes.get(i);
-								int tmp = i;
-								buttons[i].setOnAction(EventHandler -> {
-									estActif.set(tmp, !estActif.get(tmp));
-									setContinue();
-									if (estActif.get(tmp))
-										buttons[tmp].setStyle(
-												"-fx-border-color: red; -fx-border-insets: -5; -fx-border-width: 3;");
-									else
-										buttons[tmp].setStyle(null);
-								});
-							} else {
-								buttons[i].setDisable(true);
-							}
-						}
-					}
-				}
-				passerCarte.setVisible(true);
-				passerCarte.setDisable(false);
-				bPasserCarte.setDisable(false);
-				bPasserCarte.setOnAction(EventHandler -> {
-					core.getIdjr().setContinue(false);
-					core.getIdjr().choisirUtiliserCartes(getList());
-					core.getIdjr().utiliserCartesChoisi(true);
-					resetUtiliserCarte();
-					updateCarte();
-				});
 			});
-		}
+		});
+	}
 
-		public List<CarteType> getList() {
-			List<CarteType> cartesResultaTypes = new ArrayList<>();
-			for (int i = 0; i < cartes.size(); i++) {
-				if (estActif.get(i)) {
-					cartesResultaTypes.add(cartes.get(i));
-				}
+	public void resetSelection(Button btn) {
+		Button[] buttons = { bDeCarte1, bDeCarte2, bDeCarte3, bDeCarte4, bDeCarte5, bDeCarte6, bDeCarte7, bDeCarte8 };
+		for (Button button : buttons) {
+			if (!button.equals(btn)) {
+				button.setText(International.trad("texte.passer"));
 			}
-
-			return cartesResultaTypes;
-		}
-
-		@Override
-		public void log(String action) {
-			updateLog(log, new Label(action));
-		}
-
-		@Override
-		public void enleverDes() {
-			des.setVisible(false);
 		}
 	}
 
+	public void setContinue() {
+		if (estActif.contains(true)) {
+			bPasserCarte.setText(International.trad("texte.valider"));
+		} else {
+			bPasserCarte.setText(International.trad("texte.passer"));
+		}
+	}
+
+	@Override
+	public void choisirUtiliserCartes(List<CarteType> carteTypes) {
+		Platform.runLater(() -> {
+			updateCarte();
+			Button[] buttons = { bDeCarte1, bDeCarte2, bDeCarte3, bDeCarte4, bDeCarte5, bDeCarte6, bDeCarte7,
+					bDeCarte8 };
+			estActif.clear();
+			for (int i = 0; i < buttons.length; i++) {
+				if (i < cartes.size()) {
+					estActif.add(false);
+					for (CarteType carteType2 : carteTypes) {
+						if (carteType2 == cartes.get(i)) {
+							buttons[i].setDisable(false);
+							CarteType type = cartes.get(i);
+							int tmp = i;
+							buttons[i].setOnAction(EventHandler -> {
+								estActif.set(tmp, !estActif.get(tmp));
+								setContinue();
+								if (estActif.get(tmp))
+									buttons[tmp].setStyle(
+											"-fx-border-color: red; -fx-border-insets: -5; -fx-border-width: 3;");
+								else
+									buttons[tmp].setStyle(null);
+							});
+						} else {
+							buttons[i].setDisable(true);
+						}
+					}
+				}
+			}
+			passerCarte.setVisible(true);
+			passerCarte.setDisable(false);
+			bPasserCarte.setDisable(false);
+			bPasserCarte.setOnAction(EventHandler -> {
+				core.getIdjr().setContinue(false);
+				core.getIdjr().choisirUtiliserCartes(getList());
+				core.getIdjr().utiliserCartesChoisi(true);
+				resetUtiliserCarte();
+				updateCarte();
+			});
+		});
+	}
+
+	public List<CarteType> getList() {
+		List<CarteType> cartesResultaTypes = new ArrayList<>();
+		for (int i = 0; i < cartes.size(); i++) {
+			if (estActif.get(i)) {
+				cartesResultaTypes.add(cartes.get(i));
+			}
+		}
+
+		return cartesResultaTypes;
+	}
+
+	@Override
+	public void log(String action) {
+		updateLog(log, new Label(action));
+	}
+
+	@Override
+	public void enleverDes() {
+		des.setVisible(false);
+	}
+
+	@Override
+	public void traduire() {
+		nomJoueur.setText(International.trad("texte.nomJoueur"));
+		phasePartie.setText(International.trad("texte.phase"));
+		bPasserCarte.setText(International.trad("texte.passer"));
+		joueur1.setText(International.trad("texte.j1"));
+		joueur2.setText(International.trad("texte.j2"));
+		joueur3.setText(International.trad("texte.j3"));
+		joueur4.setText(International.trad("texte.j4"));
+		joueur5.setText(International.trad("texte.j5"));
+		titreQuestion.setText(International.trad("texte.qVote"));
+		bCarte1.setText(International.trad("texte.c1"));
+		bCarte2.setText(International.trad("texte.c2"));
+		bCarte3.setText(International.trad("texte.c3"));
+		bChoixGarder.setText(International.trad("bouton.garder"));
+		bChoixDonner.setText(International.trad("bouton.donner"));
+		bChoixDefausser.setText(International.trad("bouton.defausser"));
+		joueur1c.setText(International.trad("texte.j1"));
+		joueur2c.setText(International.trad("texte.j2"));
+		joueur3c.setText(International.trad("texte.j3"));
+		joueur4c.setText(International.trad("texte.j4"));
+		joueur5c.setText(International.trad("texte.j5"));
+		titreFouille.setText(International.trad("text.fouilleCamion"));
+		titreQuestionCarte.setText(International.trad("texte.qCarte"));
+		labDeplPers.setText(International.trad("text.deplPersonnages"));
+		bBlonde.setText(International.trad("bouton.laBlonde"));
+		bBrute.setText(International.trad("bouton.laBrute"));
+		bTruand.setText(International.trad("bouton.leTruand"));
+		bFillette.setText(International.trad("bouton.laFillette"));
+		labDeplLieux.setText(International.trad("texte.destination"));
+		bToilettes.setText(International.trad("texte.lieu1"));
+		bCachou.setText(International.trad("texte.lieu2"));
+		bMegatoys.setText(International.trad("texte.lieu3"));
+		bParking.setText(International.trad("texte.lieu4"));
+		bPCSecu.setText(International.trad("texte.lieu5") + "\n" + International.trad("texte.lieu5b"));
+		bSuperMarche.setText(International.trad("texte.lieu6"));
+		titrede.setText(International.trad("texte.des"));
+		lInfo.setText(International.trad("texte.info"));
+		bQuitterInfo.setText(International.trad("bouton.quitter"));
+		lo.setText(International.trad("texte.nomPerso") + International.trad("texte.coulPerso")
+				+ International.trad(("texte.depLieu")));
+		titreInfo.setText("Information");
+		linfoZombie.setText("Des zombies arriveront dans les lieux {0}, {1}, {2}, {3}");
+		bForce.setText(International.trad("text.forceEquipeA") + "\n" + International.trad("text.forceEquipeB"));
+	}
+}
