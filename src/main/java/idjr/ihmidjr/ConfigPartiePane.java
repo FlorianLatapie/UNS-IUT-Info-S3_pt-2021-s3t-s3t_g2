@@ -6,6 +6,7 @@ import java.util.List;
 import idjr.PartieInfo;
 import idjr.ihmidjr.DataControl.ApplicationPane;
 import idjr.ihmidjr.event.IConfigListener;
+import idjr.ihmidjr.langues.ITraduction;
 import idjr.ihmidjr.langues.International;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
@@ -35,7 +36,7 @@ import reseau.type.TypePartie;
  * @version 0.1
  * @since 26/10/2020
  */
-public class ConfigPartiePane extends StackPane implements IConfigListener {
+public class ConfigPartiePane extends StackPane implements IConfigListener, ITraduction {
 	// private ControleurJeu cj = new ControleurJeu(); // mettre ne paramètres les
 	// joueurs
 
@@ -67,12 +68,20 @@ public class ConfigPartiePane extends StackPane implements IConfigListener {
 	ComboBox<Integer> cbnbJr;
 	ComboBox<String> cbStatutPartie;
 
+	Label titre1;
+	Label desc;
+	TextField nomP;
+	Button bRefresh;
+	Button bPbConnexion;
+	Button bJouer;
+	Button bRetour;
+
 	public ConfigPartiePane(ScreenControl sc, Core c) {
 		core = c;
 		sControl = sc;
 		stackPane.setAlignment(Pos.CENTER);
 		// titre
-		Label titre1 = new Label(
+		titre1 = new Label(
 				International.trad("texte.titreConfigPartieA") + "\n" + International.trad("texte.titreConfigPartieB"));
 		titre1.setTextAlignment(TextAlignment.CENTER);
 		titre1.setFont(Font.font("Segoe UI", FontWeight.BOLD, 80));
@@ -86,7 +95,7 @@ public class ConfigPartiePane extends StackPane implements IConfigListener {
 
 		////
 
-		Label desc = new Label(International.trad("texte.idPartie"));
+		desc = new Label(International.trad("texte.idPartie"));
 		desc.setAlignment(Pos.CENTER);
 		desc.setFont(policeBouton);
 		desc.setTextFill(Color.WHITE);
@@ -120,7 +129,7 @@ public class ConfigPartiePane extends StackPane implements IConfigListener {
 		hComboTri.setAlignment(Pos.CENTER);
 		hComboTri.setSpacing(20);
 
-		TextField nomP = new TextField();
+		nomP = new TextField();
 		nomP.setText(International.trad("texte.Partie"));
 		nomP.setFont(policeBouton);
 		nomP.setStyle(
@@ -151,7 +160,7 @@ public class ConfigPartiePane extends StackPane implements IConfigListener {
 		listView.setStyle(
 				"-fx-background-color: white;-fx-control-inner-background: #1A1A1A ; -fx-control-inner-background-alt: derive(-fx-control-inner-background, 15%);");
 
-		Button bRefresh = new Button(International.trad("bouton.rafraichir"));
+		bRefresh = new Button(International.trad("bouton.rafraichir"));
 		bRefresh.setPrefSize(lBouton + 30, hBouton);
 		bRefresh.setMinSize(lBouton + 30, hBouton);
 		bRefresh.setFont(policeBouton);
@@ -170,7 +179,7 @@ public class ConfigPartiePane extends StackPane implements IConfigListener {
 					Statut.valueOf(cbStatutPartie.getValue()));
 		});
 
-		Button bPbConnexion = new Button(
+		bPbConnexion = new Button(
 				International.trad("texte.pbConnexionA") + "\n" + International.trad("texte.pbConnexionB"));
 		bPbConnexion.setTextAlignment(TextAlignment.CENTER);
 		bPbConnexion.setPrefSize(120, 50);
@@ -194,7 +203,7 @@ public class ConfigPartiePane extends StackPane implements IConfigListener {
 		vbCenter.getChildren().addAll(partie, listView, bPbConnexion);
 
 		// boutons
-		Button bJouer = new Button(International.trad("bouton.jouer"));
+		bJouer = new Button(International.trad("bouton.jouer"));
 		bJouer.setPrefSize(lBouton, hBouton);
 		bJouer.setMinSize(lBouton, hBouton);
 		bJouer.setFont(policeBouton);
@@ -221,7 +230,7 @@ public class ConfigPartiePane extends StackPane implements IConfigListener {
 			bJouer.setDisable(nomP.getText().isEmpty());
 		});
 
-		Button bRetour = new Button(International.trad("bouton.retour"));
+		bRetour = new Button(International.trad("bouton.retour"));
 		bRetour.setPrefSize(lBouton, hBouton);
 		bRetour.setMinSize(lBouton, hBouton);
 		bRetour.setFont(policeBouton);
@@ -303,5 +312,20 @@ public class ConfigPartiePane extends StackPane implements IConfigListener {
 				}
 			}
 		});
+	}
+
+	@Override
+	public void traduire() {
+		titre1.setText(
+				International.trad("texte.titreConfigPartieA") + "\n" + International.trad("texte.titreConfigPartieB"));
+		desc.setText(International.trad("texte.idPartie"));
+		nomP.setText(International.trad("texte.Partie"));
+		bRefresh.setText(International.trad("bouton.rafraichir"));
+		bPbConnexion
+				.setText(International.trad("texte.pbConnexionA") + "\n" + International.trad("texte.pbConnexionB"));
+
+		bJouer.setText(International.trad("bouton.jouer"));
+		bRetour.setText(International.trad("bouton.retour"));
+
 	}
 }
