@@ -45,7 +45,7 @@ public class ControleurDeplacementPersonnage {
 			return;
 		jeu.fermerLieu();
 		dr.informerDeplacment(jeu, j, (int) recupDeplacement.get(0), (int) recupDeplacement.get(1),
-				(CarteType) recupDeplacement.get(3), partieId, numeroTour);
+				(CarteType) recupDeplacement.get(2), partieId, numeroTour);
 		Initializer.destionationPersoAll(new ArrayList<>(jeu.getLieux().values()));
 	}
 
