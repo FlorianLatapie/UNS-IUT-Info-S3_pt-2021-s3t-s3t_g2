@@ -99,7 +99,6 @@ public class ConfigPartiePane extends StackPane implements IConfigListener, ITra
 		cbtypePartie.getItems().addAll(TypePartie.BOTU.name(), TypePartie.JRU.name(), TypePartie.MIXTE.name());
 		cbtypePartie.setValue(TypePartie.MIXTE.name());// TODO
 		cbtypePartie.setStyle("-fx-text-fill: white;");
-		// cbtypePartie.setPadding(new Insets(0, 0, 0, 40));
 		cbtypePartie.setPrefSize(200, 63);
 		cbtypePartie.setMinHeight(63);
 		cbnbJr = new ComboBox<>();
@@ -113,7 +112,6 @@ public class ConfigPartiePane extends StackPane implements IConfigListener, ITra
 		cbStatutPartie.getItems().addAll(Statut.ATTENTE.name(), Statut.COMPLETE.name(), Statut.TERMINEE.name());
 		cbStatutPartie.setValue(Statut.ATTENTE.name());// TODO
 		cbStatutPartie.setStyle("-fx-text-fill: white;");
-		// cbStatutPartie.setPadding(new Insets(0, 0, 0, 40));
 		cbStatutPartie.setPrefSize(200, 63);
 		cbStatutPartie.setMinHeight(63);
 
