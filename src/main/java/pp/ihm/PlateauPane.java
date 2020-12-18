@@ -458,7 +458,7 @@ public class PlateauPane extends StackPane implements IPlateauListener, ITraduct
 
 		b1.setCenter(joueursPresents1);
 		b1.setRight(vbRight1);
-		b1.setOpacity(.9);
+		//b1.setOpacity(.9);
 
 		b1.setRotate(128);
 
@@ -509,7 +509,7 @@ public class PlateauPane extends StackPane implements IPlateauListener, ITraduct
 
 		b2.setCenter(joueursPresents2);
 		b2.setRight(vbRight2);
-		b2.setOpacity(.9);
+		//b2.setOpacity(.9);
 		b2.setRotate(-133);
 
 		AnchorPane.setTopAnchor(b2, 725.0);
@@ -559,7 +559,7 @@ public class PlateauPane extends StackPane implements IPlateauListener, ITraduct
 
 		b3.setCenter(joueursPresents3);
 		b3.setRight(vbRight3);
-		b3.setOpacity(.9);
+		//b3.setOpacity(.9);
 
 		b3.setRotate(-62);
 
@@ -672,7 +672,7 @@ public class PlateauPane extends StackPane implements IPlateauListener, ITraduct
 
 		b4.setCenter(joueursPresents4);
 		b4.setRight(vbRight4);
-		b4.setOpacity(.9);
+		//b4.setOpacity(.9);
 
 		AnchorPane.setTopAnchor(b4, 440.0);
 		AnchorPane.setLeftAnchor(b4, 365.0);
@@ -718,7 +718,7 @@ public class PlateauPane extends StackPane implements IPlateauListener, ITraduct
 
 		b5.setCenter(joueursPresents5);
 		b5.setRight(vbRight5);
-		b5.setOpacity(.9);
+		//b5.setOpacity(.9);
 
 		b5.setRotate(4);
 
@@ -762,7 +762,7 @@ public class PlateauPane extends StackPane implements IPlateauListener, ITraduct
 		b6.setMaxSize(310, 215);
 		b6.setPadding(new Insets(5));
 		b6.setBackground(new Background(new BackgroundFill(Color.BLACK, CornerRadii.EMPTY, null)));
-		b6.setOpacity(.9);
+		//b6.setOpacity(.9);
 
 		vbRight6.getChildren().addAll(nbPlace6, nbZombies6);
 
@@ -1083,12 +1083,12 @@ public class PlateauPane extends StackPane implements IPlateauListener, ITraduct
 
 		this.setStyle(" -fx-background-color:#151515;");
 
-		/*j1.setVisible(false);
+		j1.setVisible(false);
 		j2.setVisible(false);
 		j3.setVisible(false);
 		j4.setVisible(false);
 		j5.setVisible(false);
-		j6.setVisible(false);*/
+		j6.setVisible(false);
 
 		this.getChildren().addAll(imgFond, bPileCarte, borderJoueurs, aPlateau, lChefVigile, lChefVigile2, lChefVigile3,
 				lChefVigile4, imgCarteFerme1, imgCarteFerme2, imgCarteFerme3, imgCarteFerme5, imgCarteFerme6,
