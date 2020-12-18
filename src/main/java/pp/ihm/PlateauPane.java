@@ -34,17 +34,17 @@ public class PlateauPane extends StackPane implements IPlateauListener, ITraduct
 	private final int margeP = 24;
 	private final Insets margeBoutonPause = new Insets(margeP, margeP, margeP, margeP);
 	private final int lhBoutonPause = 80;
-	
+
 	private String nomPolice = "Segoe UI";
 	private final Font policeBoutonPause = Font.font("Segoe UI", FontWeight.BOLD, 34);
-	
+
 	private String styleBoutons = " -fx-background-color:#000000; -fx-background-radius: 50px; -fx-text-fill: #ffffff";
 	private String styleBoutonsSouris = "-fx-background-color:#ff0000;  -fx-text-fill:#000000; -fx-background-radius: 50px;";
 	private String styleBoutonInfo = " -fx-background-color:#000000; -fx-background-radius: 15px; -fx-text-fill: #ffffff;";
 	private String styleBoutonInfoSouris = "-fx-background-color:#ff0000;  -fx-text-fill:#000000; -fx-background-radius: 15px;";
 	private String styleChefVigile = "-fx-background-color: #2D2D2D; -fx-border-color: whitesmoke; -fx-border-insets: -3; -fx-border-width: 3; -fx-border-radius: 10px;";
 	private String styleInfo = " -fx-background-color:#1A1A1A; -fx-background-radius: 20px; -fx-border-color: red; -fx-border-insets: -3; -fx-border-width: 3; -fx-border-radius: 20px;";
-	
+
 	private final int margeJ = 20;
 	private final Insets margeTexteJoueur = new Insets(margeJ, 10, margeJ, 10);
 	private final Insets insetJGauche = new Insets(0, 500, 0, 115);
@@ -168,6 +168,13 @@ public class PlateauPane extends StackPane implements IPlateauListener, ITraduct
 	ImageView l4p16;
 	ImageView l4p17;
 	ImageView l4p18;
+
+	BorderPane bPileCarte;
+	ImageView imgPileCarte;
+	Label lPileCarte1;
+	Label lPileCarte2;
+	Label lPileCarte3;
+	Label lPileCarte4;
 
 	ImageView l5p1;
 	ImageView l5p2;
@@ -405,6 +412,7 @@ public class PlateauPane extends StackPane implements IPlateauListener, ITraduct
 
 		hGauche.getChildren().addAll(j6);
 		hGauche.setAlignment(Pos.CENTER_LEFT);
+		hGauche.setTranslateY(150);
 
 		/////////////////////////////////////////////////////
 		aPlateau.setMinSize(taillePlateau, taillePlateau);
@@ -769,7 +777,8 @@ public class PlateauPane extends StackPane implements IPlateauListener, ITraduct
 		/////
 
 		lChefVigile = new Label();
-		lChefVigile.setText("BOT MOYEN ALEXANDRE est le chef des vigiles"); //do not translate, do not remove (c'est du sample text pour l'ihm)
+		lChefVigile.setText("BOT MOYEN ALEXANDRE est le chef des vigiles"); // do not translate, do not remove (c'est du
+																			// sample text pour l'ihm)
 		lChefVigile.setStyle(styleChefVigile);
 		lChefVigile.setTextFill(Color.WHITE);
 		lChefVigile.setFont(fontInfo);
@@ -777,7 +786,8 @@ public class PlateauPane extends StackPane implements IPlateauListener, ITraduct
 		lChefVigile.setTranslateY(515);
 
 		lChefVigile2 = new Label();
-		lChefVigile2.setText("BOT MOYEN ALEXANDRE est le chef des vigiles"); //do not translate, do not remove (c'est du sample text pour l'ihm) 
+		lChefVigile2.setText("BOT MOYEN ALEXANDRE est le chef des vigiles"); // do not translate, do not remove (c'est
+																				// du sample text pour l'ihm)
 		lChefVigile2.setStyle(styleChefVigile);
 		lChefVigile2.setTextFill(Color.WHITE);
 		lChefVigile2.setFont(fontInfo);
@@ -786,7 +796,8 @@ public class PlateauPane extends StackPane implements IPlateauListener, ITraduct
 		lChefVigile2.setTranslateY(-515);
 
 		lChefVigile3 = new Label();
-		lChefVigile3.setText("BOT MOYEN ALEXANDRE est le chef des vigiles"); //do not translate, do not remove (c'est du sample text pour l'ihm)
+		lChefVigile3.setText("BOT MOYEN ALEXANDRE est le chef des vigiles"); // do not translate, do not remove (c'est
+																				// du sample text pour l'ihm)
 		lChefVigile3.setStyle(styleChefVigile);
 		lChefVigile3.setTextFill(Color.WHITE);
 		lChefVigile3.setFont(fontInfo);
@@ -795,7 +806,8 @@ public class PlateauPane extends StackPane implements IPlateauListener, ITraduct
 		lChefVigile3.setTranslateX(-575);
 
 		lChefVigile4 = new Label();
-		lChefVigile4.setText("BOT MOYEN ALEXANDRE est le chef des vigiles"); //do not translate, do not remove (c'est du sample text pour l'ihm)
+		lChefVigile4.setText("BOT MOYEN ALEXANDRE est le chef des vigiles"); // do not translate, do not remove (c'est
+																				// du sample text pour l'ihm)
 		lChefVigile4.setStyle(styleChefVigile);
 		lChefVigile4.setTextFill(Color.WHITE);
 		lChefVigile4.setFont(fontInfo);
@@ -1023,17 +1035,62 @@ public class PlateauPane extends StackPane implements IPlateauListener, ITraduct
 		imgCarteFerme3.setVisible(false);
 		imgCarteFerme5.setVisible(false);
 		imgCarteFerme6.setVisible(false);
+		
+		
+		bPileCarte = new BorderPane();
+		bPileCarte.setMinSize(280, 280);
+		bPileCarte.setPrefSize(280, 280);
+		bPileCarte.setMaxSize(280, 280);
+		bPileCarte.setTranslateX(-780);
+		bPileCarte.setTranslateY(-140);
+		
+		imgPileCarte = new ImageView(DataControl.DOS_CARTE);
+		
+		lPileCarte1 = new Label("Nombre de carte : ##/##");
+		lPileCarte1.setFont(fontInfo);
+		lPileCarte1.setTextFill(Color.WHITE);
+		
+		lPileCarte2 = new Label("Nombre de carte : ##/##");
+		lPileCarte2.setFont(fontInfo);
+		lPileCarte2.setTextFill(Color.WHITE);
+		lPileCarte2.setRotate(90);
+		lPileCarte2.setTranslateX(-90);
+		
+		lPileCarte3 = new Label("Nombre de carte : ##/##");
+		lPileCarte3.setFont(fontInfo);
+		lPileCarte3.setTextFill(Color.WHITE);
+		lPileCarte3.setRotate(180);
+		
+		lPileCarte4 = new Label("Nombre de carte : ##/##");
+		lPileCarte4.setFont(fontInfo);
+		lPileCarte4.setTextFill(Color.WHITE);
+		lPileCarte4.setMinSize(210, 20);
+		lPileCarte4.setPrefSize(210, 20);
+		lPileCarte4.setMaxSize(210, 20);
+		lPileCarte4.setRotate(-90);
+		lPileCarte4.setTranslateX(90);
+		
+		BorderPane.setAlignment(imgPileCarte, Pos.CENTER);
+		BorderPane.setAlignment(lPileCarte1, Pos.CENTER);
+		BorderPane.setAlignment(lPileCarte2, Pos.CENTER);
+		BorderPane.setAlignment(lPileCarte3, Pos.CENTER);
+		BorderPane.setAlignment(lPileCarte4, Pos.CENTER_RIGHT);
+		bPileCarte.setCenter(imgPileCarte);
+		bPileCarte.setBottom(lPileCarte1);
+		bPileCarte.setLeft(lPileCarte2);
+		bPileCarte.setTop(lPileCarte3);
+		bPileCarte.setRight(lPileCarte4);
 
 		this.setStyle(" -fx-background-color:#151515;");
 
-		j1.setVisible(false);
+		/*j1.setVisible(false);
 		j2.setVisible(false);
 		j3.setVisible(false);
 		j4.setVisible(false);
 		j5.setVisible(false);
-		j6.setVisible(false);
+		j6.setVisible(false);*/
 
-		this.getChildren().addAll(imgFond, borderJoueurs, aPlateau, lChefVigile, lChefVigile2, lChefVigile3,
+		this.getChildren().addAll(imgFond, bPileCarte, borderJoueurs, aPlateau, lChefVigile, lChefVigile2, lChefVigile3,
 				lChefVigile4, imgCarteFerme1, imgCarteFerme2, imgCarteFerme3, imgCarteFerme5, imgCarteFerme6,
 				notifInfo);
 		this.setMinSize(1920, 1080);
@@ -1280,7 +1337,7 @@ public class PlateauPane extends StackPane implements IPlateauListener, ITraduct
 
 	@Override
 	public void nomChefVigile(String joueur) {
-		String tmp = joueur + " " +International.trad("text.chefVigile");
+		String tmp = joueur + " " + International.trad("text.chefVigile");
 		Platform.runLater(() -> {
 			lChefVigile.setText(tmp);
 			lChefVigile2.setText(tmp);
