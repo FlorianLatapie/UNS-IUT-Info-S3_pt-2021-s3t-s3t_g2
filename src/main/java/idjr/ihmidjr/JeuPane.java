@@ -1932,14 +1932,14 @@ public class JeuPane extends StackPane implements IJeuListener, ITraduction {
 		des.setVisible(false);
 	}
 
-	private void attirerAttention(Pane vbox) {
+	private void attirerAttention(Pane pane) {
 		for (int i = 1; i <= 6; i++) {
 			Timer myTimer = new Timer();
 			myTimer.schedule(new TimerTask() {
 
 				@Override
 				public void run() {
-					vbox.setStyle(styleVBox);
+					pane.setStyle(styleVBoxAttention);
 				}
 			}, 250 * i);
 
@@ -1948,9 +1948,9 @@ public class JeuPane extends StackPane implements IJeuListener, ITraduction {
 
 				@Override
 				public void run() {
-					vbox.setStyle(styleVBoxAttention);
+					pane.setStyle(styleVBox);
 				}
-			}, 500 * i);
+			}, 500 * (i+i));
 		}
 	}
 
