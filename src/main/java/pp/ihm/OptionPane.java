@@ -7,12 +7,9 @@ import pp.ihm.langues.ITraduction;
 import pp.ihm.langues.International;
 import pp.ihm.langues.Langues;
 
-import java.util.Locale;
-
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
-import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
 import javafx.scene.effect.GaussianBlur;
 import javafx.scene.image.ImageView;
@@ -26,7 +23,6 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
-import javafx.scene.text.TextAlignment;
 import javafx.stage.Stage;
 
 public class OptionPane extends StackPane implements IPleineEcranListener, ITraduction {
@@ -41,7 +37,6 @@ public class OptionPane extends StackPane implements IPleineEcranListener, ITrad
 	private Font policeTitre = Font.font("Segoe UI", FontWeight.BOLD, 75);
 	private Font policeBouton = Font.font("Segoe UI", FontWeight.BOLD, 33);
 
-	private String styleTexte = " -fx-background-color:#000000; -fx-text-fill: #ffffff; -fx-background-radius: 5px;";
 	private String styleBoutons = " -fx-background-color:#000000; -fx-background-radius: 15px; -fx-text-fill: #ffffff";
 	private String styleBoutonsSouris = "-fx-background-color:#ff0000;  -fx-text-fill:#000000; -fx-background-radius: 15px;";
 	private String styleTitre = "-fx-text-fill: #ff1c16";
@@ -159,9 +154,7 @@ public class OptionPane extends StackPane implements IPleineEcranListener, ITrad
 		bFrancais.setAlignment(Pos.CENTER);
 		bFrancais.setPrefSize(245, hauteurElement);
 		bFrancais.setStyle(styleBoutons);
-		bFrancais.setOnAction(EventHandler -> {
-			core.changerLangue(Langues.FR);
-		});
+		bFrancais.setOnAction(EventHandler -> core.changerLangue(Langues.FR));
 
 		bFrancais.setOnMouseEntered(event -> bFrancais.setStyle(styleBoutonsSouris));
 		bFrancais.setOnMouseExited(event -> bFrancais.setStyle(styleBoutons));
@@ -173,9 +166,7 @@ public class OptionPane extends StackPane implements IPleineEcranListener, ITrad
 		bEnglish.setStyle(styleBoutons);
 		bEnglish.setOnMouseEntered(event -> bEnglish.setStyle(styleBoutonsSouris));
 		bEnglish.setOnMouseExited(event -> bEnglish.setStyle(styleBoutons));
-		bEnglish.setOnAction(EventHandler -> {
-			core.changerLangue(Langues.EN);
-		});
+		bEnglish.setOnAction(EventHandler -> core.changerLangue(Langues.EN));
 
 		bPleinEcran = new Button();
 		bPleinEcran.setFont(policeBouton);

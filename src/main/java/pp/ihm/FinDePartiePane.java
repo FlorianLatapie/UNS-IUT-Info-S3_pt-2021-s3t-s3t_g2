@@ -32,18 +32,17 @@ public class FinDePartiePane extends StackPane implements IFinListener, ITraduct
 	private int tailleCarreCentral = 1000;
 	private int hBouton = 75;
 	private int lBouton = 150;
-
-	private Font policeBouton = Font.font("Segoe UI", FontWeight.BOLD, 27);
-	private Font policeNom = Font.font("Segoe UI", FontWeight.BOLD, 37);
+	
+	private String nomPolice = "Segoe UI";
+	private Font policeBouton = Font.font(nomPolice, FontWeight.BOLD, 27);
+	private Font policeNom = Font.font(nomPolice, FontWeight.BOLD, 37);
 
 	private String styleBoutons = "-fx-background-color:#000000; -fx-background-radius: 15px; -fx-text-fill: #ffffff";
 	private String styleBoutonsSouris = "-fx-background-color:#ff0000;  -fx-text-fill:#000000; -fx-background-radius: 15px;";
+	private String styleGagnant = "-fx-background-color:#1A1A1A; -fx-background-radius: 20px; -fx-border-color: red; -fx-border-insets: -3; -fx-border-width: 3; -fx-border-radius: 20px;";
 
 	private GaussianBlur flou = new GaussianBlur(30);
 	private CornerRadii coin = new CornerRadii(15.0);
-	private CornerRadii coinfb = new CornerRadii(5.0);
-
-	private Background fondBlanc = new Background(new BackgroundFill(Color.WHITE, coinfb, null));
 
 	private int valPadding = 10;
 	private Insets padding = new Insets(valPadding, valPadding * 2.0, valPadding, valPadding * 2.0);
@@ -66,7 +65,7 @@ public class FinDePartiePane extends StackPane implements IFinListener, ITraduct
 		// titre
 		titre1 = new Label(
 				International.trad("text.titreFinDePartieA") + "\n" + International.trad("text.titreFinDePartieB"));
-		titre1.setFont(Font.font("Segoe UI", FontWeight.BOLD, 80));
+		titre1.setFont(Font.font(nomPolice, FontWeight.BOLD, 80));
 		titre1.setTextFill(Color.BLACK);
 		titre1.setTextAlignment(TextAlignment.CENTER);
 
@@ -84,13 +83,11 @@ public class FinDePartiePane extends StackPane implements IFinListener, ITraduct
 		//
 		BorderPane bBas = new BorderPane();
 
-		HBox bBasCentre = new HBox();
 		gagnant1 = new Label("Player BOT MOYEN YASMINE won"); // do not translate 
 		gagnant1.setTextAlignment(TextAlignment.CENTER);
 		gagnant1.setFont(policeNom);
 		gagnant1.setTextFill(Color.WHITESMOKE);
-		gagnant1.setStyle(
-				"-fx-background-color:#1A1A1A; -fx-background-radius: 20px; -fx-border-color: red; -fx-border-insets: -3; -fx-border-width: 3; -fx-border-radius: 20px;");
+		gagnant1.setStyle(styleGagnant);
 		gagnant1.setPadding(padding);
 		gagnant1.setTranslateY(375);
 		
@@ -126,8 +123,7 @@ public class FinDePartiePane extends StackPane implements IFinListener, ITraduct
 		gagnant2.setTextAlignment(TextAlignment.CENTER);
 		gagnant2.setFont(policeNom);
 		gagnant2.setTextFill(Color.WHITESMOKE);
-		gagnant2.setStyle(
-				"-fx-background-color:#1A1A1A; -fx-background-radius: 20px; -fx-border-color: red; -fx-border-insets: -3; -fx-border-width: 3; -fx-border-radius: 20px;");
+		gagnant2.setStyle(styleGagnant);
 		gagnant2.setPadding(padding);
 		gagnant2.setRotate(180);
 		gagnant2.setTranslateY(-375);
@@ -158,13 +154,11 @@ public class FinDePartiePane extends StackPane implements IFinListener, ITraduct
 		bHaut.setRight(bRetour4);
 
 		///
-		HBox hDroite = new HBox();
 		gagnant3 = new Label("Player BOT MOYEN YASMINE won"); // do not translate 
 		gagnant3.setTextAlignment(TextAlignment.CENTER);
 		gagnant3.setFont(policeNom);
 		gagnant3.setTextFill(Color.WHITESMOKE);
-		gagnant3.setStyle(
-				"-fx-background-color:#1A1A1A; -fx-background-radius: 20px; -fx-border-color: red; -fx-border-insets: -3; -fx-border-width: 3; -fx-border-radius: 20px;");
+		gagnant3.setStyle(styleGagnant);
 		gagnant3.setPadding(padding);
 		gagnant3.setRotate(-90);
 		gagnant3.setTranslateX(375);
@@ -172,13 +166,11 @@ public class FinDePartiePane extends StackPane implements IFinListener, ITraduct
 
 		///
 
-		HBox hGauche = new HBox();
 		gagnant4 = new Label("Player BOT MOYEN YASMINE won"); // do not translate 
 		gagnant4.setTextAlignment(TextAlignment.CENTER);
 		gagnant4.setFont(policeNom);
 		gagnant4.setTextFill(Color.WHITESMOKE);
-		gagnant4.setStyle(
-				"-fx-background-color:#1A1A1A; -fx-background-radius: 20px; -fx-border-color: red; -fx-border-insets: -3; -fx-border-width: 3; -fx-border-radius: 20px;");
+		gagnant4.setStyle(styleGagnant);
 		gagnant4.setPadding(padding);
 		gagnant4.setRotate(90);
 		gagnant4.setTranslateX(-375);
