@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import pp.Joueur;
 import pp.Partie;
+import pp.PpTools;
 import pp.ihm.event.Initializer;
 import pp.reseau.DeplacementReseau;
 import reseau.type.CarteType;
@@ -39,7 +40,7 @@ public class ControleurDeplacementPersonnage {
 			int numeroTour) {
 		dr.demanderDeplacements(jeu, j, destination.get(compteur), partieId, numeroTour);
 		List<Object> recupDeplacement = dr.recupDeplacemnt(j);
-		jeu.deplacePerso(j, (int) recupDeplacement.get(1), (int) recupDeplacement.get(0));
+		jeu.deplacePerso(j, PpTools.valeurToIndex((int) recupDeplacement.get(1)), (int) recupDeplacement.get(0));
 		cfp.finJeu(jeu, partieId, numeroTour);
 		if (ControleurJeu.isFinished)
 			return;
