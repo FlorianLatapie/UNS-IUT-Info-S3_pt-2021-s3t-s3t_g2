@@ -779,35 +779,35 @@ public class PlateauPane extends StackPane implements IPlateauListener, ITraduct
 		/////
 
 		lChefVigile = new Label();
-		lChefVigile.setText("");
+		lChefVigile.setText("BOT MOYEN ALEXANDRE est le chef des vigiles"); //do not translate, do not remove (c'est du sample text pour l'ihm)
 		lChefVigile.setBackground(fondBlanc);
 		lChefVigile.setFont(fontInfo);
 		lChefVigile.setPadding(margeLieu);
-		lChefVigile.setTranslateY(210);
+		lChefVigile.setTranslateY(515);
 
 		lChefVigile2 = new Label();
-		lChefVigile2.setText("");
+		lChefVigile2.setText("BOT MOYEN ALEXANDRE est le chef des vigiles"); //do not translate, do not remove (c'est du sample text pour l'ihm) 
 		lChefVigile2.setBackground(fondBlanc);
 		lChefVigile2.setFont(fontInfo);
 		lChefVigile2.setPadding(margeLieu);
 		lChefVigile2.setRotate(180);
-		lChefVigile2.setTranslateY(-200);
+		lChefVigile2.setTranslateY(-515);
 
 		lChefVigile3 = new Label();
-		lChefVigile3.setText("");
+		lChefVigile3.setText("BOT MOYEN ALEXANDRE est le chef des vigiles"); //do not translate, do not remove (c'est du sample text pour l'ihm)
 		lChefVigile3.setBackground(fondBlanc);
 		lChefVigile3.setFont(fontInfo);
 		lChefVigile3.setPadding(margeLieu);
 		lChefVigile3.setRotate(90);
-		lChefVigile3.setTranslateX(-200);
+		lChefVigile3.setTranslateX(-575);
 
 		lChefVigile4 = new Label();
-		lChefVigile4.setText("");
+		lChefVigile4.setText("BOT MOYEN ALEXANDRE est le chef des vigiles"); //do not translate, do not remove (c'est du sample text pour l'ihm)
 		lChefVigile4.setBackground(fondBlanc);
 		lChefVigile4.setFont(fontInfo);
 		lChefVigile4.setPadding(margeLieu);
 		lChefVigile4.setRotate(-90);
-		lChefVigile4.setTranslateX(180);
+		lChefVigile4.setTranslateX(575);
 
 		////
 
