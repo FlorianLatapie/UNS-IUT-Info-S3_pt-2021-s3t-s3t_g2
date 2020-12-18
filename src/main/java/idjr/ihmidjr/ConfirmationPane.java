@@ -30,6 +30,11 @@ public class ConfirmationPane implements ITraduction {
 	static Button boutonOui;
 	static Button boutonNon;
 
+	static {
+		boutonOui = new Button("");
+		boutonNon = new Button("");
+	}
+
 	/**
 	 * affiche une fenêtre de confirmation avec un titre et un message personnalisé
 	 * 
