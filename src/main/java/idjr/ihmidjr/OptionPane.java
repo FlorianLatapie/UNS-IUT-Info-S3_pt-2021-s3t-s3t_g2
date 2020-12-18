@@ -2,6 +2,7 @@ package idjr.ihmidjr;
 
 import idjr.ihmidjr.DataControl.ApplicationPane;
 import idjr.ihmidjr.event.IPleineEcranListener;
+import idjr.ihmidjr.langues.ITraduction;
 import idjr.ihmidjr.langues.International;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -21,7 +22,7 @@ import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.stage.Stage;
 
-public class OptionPane extends StackPane implements IPleineEcranListener {
+public class OptionPane extends StackPane implements IPleineEcranListener, ITraduction {
 
 	private ScreenControl sControl = null;
 	private Core core = null;
@@ -37,6 +38,10 @@ public class OptionPane extends StackPane implements IPleineEcranListener {
 	private int hauteurElement = 60;
 
 	Button bPleinEcran;
+	Label titre;
+	Button bFrancais;
+	Button bEnglish;
+	Button bRetour;
 
 	public OptionPane(ScreenControl sc, Core c) {
 		core = c;
@@ -82,12 +87,12 @@ public class OptionPane extends StackPane implements IPleineEcranListener {
 		vbBoutons.setTranslateY(-40);
 		vbBoutons.setSpacing(15);
 
-		Label titre = new Label(International.trad("bouton.options"));
+		titre = new Label(International.trad("bouton.options"));
 		titre.setStyle(styleTitre);
 		titre.setFont(policeTitre);
 		vbTitre.getChildren().add(titre);
 
-		Button bFrancais = new Button(International.trad("texte.langue1"));
+		bFrancais = new Button(International.trad("texte.langue1"));
 		bFrancais.setFont(policeBouton);
 		bFrancais.setAlignment(Pos.CENTER);
 		bFrancais.setPrefSize(245, hauteurElement);
@@ -101,7 +106,7 @@ public class OptionPane extends StackPane implements IPleineEcranListener {
 			bFrancais.setStyle(styleBoutons);
 		});
 
-		Button bEnglish = new Button(International.trad("texte.langue2"));
+		bEnglish = new Button(International.trad("texte.langue2"));
 		bEnglish.setFont(policeBouton);
 		bEnglish.setAlignment(Pos.CENTER);
 		bEnglish.setPrefSize(245, hauteurElement);
@@ -133,7 +138,7 @@ public class OptionPane extends StackPane implements IPleineEcranListener {
 			}
 		});
 
-		Button bRetour = new Button(International.trad("bouton.retour"));
+		bRetour = new Button(International.trad("bouton.retour"));
 		bRetour.setFont(policeBouton);
 		bRetour.setAlignment(Pos.CENTER);
 		bRetour.setPrefSize(180, hauteurElement);
@@ -170,5 +175,16 @@ public class OptionPane extends StackPane implements IPleineEcranListener {
 			bPleinEcran.setText(International.trad("bouton.pEcran"));
 		else
 			bPleinEcran.setText(International.trad("bouton.fenetre"));
+	}
+
+	@Override
+	public void traduire() {
+
+		titre.setText(International.trad("bouton.options"));
+		bFrancais.setText(International.trad("texte.langue1"));
+		bEnglish.setText(International.trad("texte.langue2"));
+		bPleinEcran.setText(International.trad("bouton.pEcran"));
+		bRetour.setText(International.trad("bouton.retour"));
+
 	}
 }
