@@ -384,8 +384,6 @@ public class TraitementIdjr {
 	public Couleur getRandom(Idjr core, VoteType vt) {
 		// TODO choisir couleur qu'on souhaite voter en fonction du VoteType
 		System.out.println("Joueur Présent:" + core.couleurJoueurPresent().size());
-		if (vt == VoteType.MPZ)
-			core.couleurJoueurPresent().remove(core.getCouleur());
 
 		Initializer.setVote(core.couleurJoueurPresent());
 		while (!core.voteDisponible())
