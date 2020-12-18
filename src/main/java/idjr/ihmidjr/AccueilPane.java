@@ -2,6 +2,7 @@ package idjr.ihmidjr;
 
 import idjr.ihmidjr.DataControl.ApplicationPane;
 import idjr.ihmidjr.event.Initializer;
+import idjr.ihmidjr.langues.ITraduction;
 import idjr.ihmidjr.langues.International;
 import javafx.application.Platform;
 import javafx.geometry.Insets;
@@ -33,7 +34,7 @@ import reseau.type.TypePartie;
  * @version 0.1
  * @since 04/10/2020
  */
-public class AccueilPane extends StackPane {
+public class AccueilPane extends StackPane implements ITraduction {
 
 	// définition des variable pour la suite du pane
 	private ScreenControl sControl = null;
@@ -57,6 +58,12 @@ public class AccueilPane extends StackPane {
 	private int hauteurElemtents = 60;
 
 	TextField nomjoueur;
+	Tooltip infoNomJoueur;
+	Button bOptions;
+	Button bRegles;
+	Button bQuitter;
+
+	Label titre1;
 
 	public AccueilPane(ScreenControl sc, Core c) {
 		core = c;
@@ -64,7 +71,7 @@ public class AccueilPane extends StackPane {
 		stackPane.setAlignment(Pos.CENTER);
 
 		// titre
-		Label titre1 = new Label(International.trad("texte.preTitre"));
+		titre1 = new Label(International.trad("texte.preTitre"));
 		titre1.setFont(Font.font("Segoe UI", FontWeight.BOLD, 160));
 		titre1.setTextFill(Color.BLACK);
 
@@ -90,9 +97,8 @@ public class AccueilPane extends StackPane {
 		HNomJoueur.setAlignment(Pos.CENTER);
 		HNomJoueur.setSpacing(10);
 
-		Tooltip infoNomJoueur = new Tooltip(
-				(International.trad("texte.infoNom1") + "\n" + International.trad("texte.infoNom2") + "\n"
-						+ International.trad("texte.infoNom3") + "\n" + International.trad("texte.infoNom4")));
+		infoNomJoueur = new Tooltip((International.trad("texte.infoNom1") + "\n" + International.trad("texte.infoNom2")
+				+ "\n" + International.trad("texte.infoNom3") + "\n" + International.trad("texte.infoNom4")));
 
 		infoNomJoueur.setFont(policeNom);
 		nomjoueur = new TextField();
@@ -141,7 +147,7 @@ public class AccueilPane extends StackPane {
 			}
 		});
 
-		Button bOptions = new Button(International.trad("bouton.options"));
+		bOptions = new Button(International.trad("bouton.options"));
 		bOptions.setPrefSize(lBouton, hBouton);
 		bOptions.setMinSize(lBouton, hBouton);
 		bOptions.setFont(policeBouton);
@@ -158,7 +164,7 @@ public class AccueilPane extends StackPane {
 			sc.setPaneOnTop(ApplicationPane.OPTION);
 		});
 
-		Button bRegles = new Button(International.trad("bouton.regles"));
+		bRegles = new Button(International.trad("bouton.regles"));
 		bRegles.setPrefSize(lBouton, hBouton);
 		bRegles.setMinSize(lBouton, hBouton);
 		bRegles.setFont(policeBouton);
@@ -175,7 +181,7 @@ public class AccueilPane extends StackPane {
 			sc.setPaneOnTop(ApplicationPane.REGLES);
 		});
 
-		Button bQuitter = new Button(International.trad("bouton.quitter"));
+		bQuitter = new Button(International.trad("bouton.quitter"));
 		bQuitter.setPrefSize(lBouton, hBouton);
 		bQuitter.setMinSize(lBouton, hBouton);
 		bQuitter.setFont(policeBouton);
@@ -237,6 +243,17 @@ public class AccueilPane extends StackPane {
 		this.getChildren().add(stackPane);
 		sControl.registerNode(paneName, this);
 		sControl.setPaneOnTop(paneName);
+	}
+
+	@Override
+	public void traduire() {
+		titre1.setText(International.trad("texte.preTitre"));
+		infoNomJoueur.setText((International.trad("texte.infoNom1") + "\n" + International.trad("texte.infoNom2") + "\n"
+				+ International.trad("texte.infoNom3") + "\n" + International.trad("texte.infoNom4")));
+		bOptions.setText(International.trad("bouton.options"));
+		bRegles.setText(International.trad("bouton.regles"));
+		bQuitter.setText(International.trad("bouton.quitter"));
+
 	}
 
 }
