@@ -1,6 +1,14 @@
 package idjr.ihmidjr;
 
+import reseau.type.Couleur;
+
 public interface IhmTools {
+	String vert = " -fx-background-color:#5EB137; -fx-text-fill: #000000";
+	String rouge = " -fx-background-color:#F30101; -fx-text-fill: #000000";
+	String marron = " -fx-background-color:#6C3505; -fx-text-fill: #000000";
+	String jaune = " -fx-background-color:#E9B902; -fx-text-fill: #000000";
+	String bleu = " -fx-background-color:#008CDA; -fx-text-fill: #ffffff";
+	String noir = " -fx-background-color:#000000; -fx-text-fill: #ffffff";
 
 	static boolean nomEstValide(String nom) {
 		if (nom == null)
@@ -37,5 +45,24 @@ public interface IhmTools {
 		}
 
 		return result;
+	}
+	
+	public static String color(Couleur couleur) {
+		switch (couleur) {
+		case B:
+			return bleu;
+		case R:
+			return rouge;
+		case V:
+			return vert;
+		case N:
+			return noir;
+		case J:
+			return jaune;
+		case M:
+			return marron;
+		default:
+			throw new IllegalArgumentException("Couleur inconnue");
+		}
 	}
 }
