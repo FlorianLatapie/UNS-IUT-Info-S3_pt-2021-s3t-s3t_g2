@@ -48,7 +48,9 @@ public class DataControl {
 	public static final String CARTE_MENACE = "idjr/ihmidjr/images/Cartes/Cartes_Autres/menace.png";
 	public static final String CARTE_SPRINT = "idjr/ihmidjr/images/Cartes/Cartes_Autres/sprint.png";
 
+	// Autre autre carte 
 	public static final String CARTE_VIDE = "idjr/ihmidjr/images/carte_vide.png";
+	public static final String DOS_CARTE = "idjr/ihmidjr/images/Cartes_Autres/dosCarte.png";
 
 	public static final ObservableList<Integer> nombreJoueur = FXCollections.observableArrayList(3, 4, 5, 6);
 	public static final ObservableList<Integer> nombreBot = FXCollections.observableArrayList(0, 1, 2, 3, 4, 5, 6);
