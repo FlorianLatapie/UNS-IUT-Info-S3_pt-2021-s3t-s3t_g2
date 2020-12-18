@@ -25,6 +25,7 @@ import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
+import javafx.util.Duration;
 import reseau.type.Statut;
 import reseau.type.TypePartie;
 
@@ -104,6 +105,9 @@ public class AccueilPane extends StackPane implements ITraduction {
 				+ "\n" + International.trad("texte.infoNom3") + "\n" + International.trad("texte.infoNom4")));
 
 		infoNomJoueur.setFont(policeNom);
+		infoNomJoueur.setShowDelay(Duration.seconds(1));
+		infoNomJoueur.setHideDelay(Duration.seconds(20));
+		
 		nomjoueur = new TextField();
 		nomjoueur.setText("JoueurSansNom" + new Random().nextInt(100));
 		nomjoueur.setText(core.getSauvegarderOptions().getNom());
@@ -120,6 +124,7 @@ public class AccueilPane extends StackPane implements ITraduction {
 		iconeQuestion.setStyle(styleQuestion);
 		iconeQuestion.setFont(policeBouton);
 		iconeQuestion.setTooltip(infoNomJoueur);
+		iconeQuestion.tooltipProperty();
 
 		HNomJoueur.getChildren().addAll(nomjoueur, iconeQuestion);
 
