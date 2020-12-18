@@ -1741,6 +1741,13 @@ public class JeuPane extends StackPane implements IJeuListener, ITraduction {
 				if (listeCouleurJoueur.size() > i) {
 					buttons[i].setDisable(false);
 					buttons[i].setStyle(IhmTools.color(listeCouleurJoueur.get(i)));
+					int tmpi = i;
+					buttons[i].setOnMouseEntered(event -> {
+						buttons[tmpi].setStyle(styleBoutonsSouris);
+					});
+					buttons[i].setOnMouseExited(event -> {
+						buttons[tmpi].setStyle(IhmTools.color(listeCouleurJoueur.get(tmpi)));
+					});
 					Couleur cible = listeCouleurJoueur.get(i);
 					buttons[i].setOnAction(EventHandler -> {
 						core.getIdjr().setVoteChoisi(cible);
