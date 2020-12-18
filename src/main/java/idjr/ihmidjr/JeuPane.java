@@ -1017,7 +1017,7 @@ public class JeuPane extends StackPane implements IJeuListener, ITraduction {
 			titrede.setStyle(styleBoutons);
 		});
 		titrede.setOnAction(EventHandler -> {
-			core.getIdjr().desVote();
+			core.getIdjr().desVoteChoisi(true);
 		});
 
 		des.setPadding(new Insets(10));
@@ -1127,10 +1127,9 @@ public class JeuPane extends StackPane implements IJeuListener, ITraduction {
 		bLog.setTranslateX(790);
 		bLog.setTranslateY(-305);
 
-		Label lo = new Label(International.trad("texte.nomPerso") + International.trad("texte.coulPerso")
+		lo = new Label(International.trad("texte.nomPerso") + International.trad("texte.coulPerso")
 				+ International.trad(("texte.depLieu")));
 		lo.setFont(policeLog);
-		updateLog(log, lo);
 
 		infoZombie = new HBox(); // TODO .setVisible() aux bons moments
 		infoZombie.setPrefSize(450, 70);
@@ -1323,14 +1322,6 @@ public class JeuPane extends StackPane implements IJeuListener, ITraduction {
 		vote.setVisible(false);
 	}
 
-	// TODO
-
-	public ListView<Label> updateLog(ListView<Label> list, Label l) {
-		list.getItems().add(list.getItems().size(), l);
-		list.scrollTo(list.getItems().size() - 1);
-		return list;
-	}
-
 	@Override
 	public void choisirPion(List<Integer> list) {
 		Platform.runLater(() -> {
@@ -1425,6 +1416,7 @@ public class JeuPane extends StackPane implements IJeuListener, ITraduction {
 	@Override
 	public void fin() {
 		Platform.runLater(() -> {
+			log.getItems().clear();
 			sControl.setPaneOnTop(ApplicationPane.ENDGAME);
 		});
 	}
@@ -1924,7 +1916,11 @@ public class JeuPane extends StackPane implements IJeuListener, ITraduction {
 
 	@Override
 	public void log(String action) {
-		updateLog(log, new Label(action));
+		Platform.runLater(() -> {
+			log.getItems().add(log.getItems().size(), new Label(action));
+			if (!log.getItems().isEmpty())
+				log.scrollTo(log.getItems().size() - 1);
+		});
 	}
 
 	@Override
@@ -1933,6 +1929,7 @@ public class JeuPane extends StackPane implements IJeuListener, ITraduction {
 	}
 
 	private void attirerAttention(Pane pane) {
+		int tmp = 0;
 		for (int i = 1; i <= 6; i++) {
 			Timer myTimer = new Timer();
 			myTimer.schedule(new TimerTask() {
@@ -1941,8 +1938,10 @@ public class JeuPane extends StackPane implements IJeuListener, ITraduction {
 				public void run() {
 					pane.setStyle(styleVBoxAttention);
 				}
-			}, 250 * i);
+			}, tmp);
 
+			tmp+=250;
+			
 			Timer myTimer1 = new Timer();
 			myTimer1.schedule(new TimerTask() {
 
@@ -1950,7 +1949,9 @@ public class JeuPane extends StackPane implements IJeuListener, ITraduction {
 				public void run() {
 					pane.setStyle(styleVBox);
 				}
-			}, 500 * (i+i));
+			}, tmp);
+
+			tmp+=250;
 		}
 	}
 
