@@ -2,6 +2,7 @@ package idjr.ihmidjr;
 
 import idjr.ihmidjr.DataControl.ApplicationPane;
 import idjr.ihmidjr.event.IFinListener;
+import idjr.ihmidjr.langues.ITraduction;
 import idjr.ihmidjr.langues.International;
 import javafx.application.Platform;
 import javafx.geometry.Insets;
@@ -31,7 +32,7 @@ import javafx.scene.text.TextAlignment;
  * @version 0.1
  * @since 01/11/2020
  */
-public class FinDePartiePane extends StackPane implements IFinListener {
+public class FinDePartiePane extends StackPane implements IFinListener, ITraduction {
 
 	private ScreenControl sControl = null;
 	private Core core = null;
@@ -83,13 +84,16 @@ public class FinDePartiePane extends StackPane implements IFinListener {
 	Label titreNbPersVivant;
 	Label titreNbZbTues;
 
+	Label titre1;
+	Button bRetour;
+
 	public FinDePartiePane(ScreenControl sc, Core c) {
 		core = c;
 		sControl = sc;
 		stackPane.setAlignment(Pos.CENTER);
 
 		// titre
-		Label titre1 = new Label(
+		titre1 = new Label(
 				International.trad("text.titreFinDePartieA") + " " + International.trad("text.titreFinDePartieB"));
 		titre1.setFont(Font.font("Segoe UI", FontWeight.BOLD, 80));
 		titre1.setTextFill(Color.BLACK);
@@ -324,7 +328,7 @@ public class FinDePartiePane extends StackPane implements IFinListener {
 		vbCenter.getChildren().addAll(desc, vbScoreBoard);
 
 		// bouton
-		Button bRetour = new Button(International.trad("bouton.retour"));
+		bRetour = new Button(International.trad("bouton.retour"));
 		bRetour.setPrefSize(lBouton, hBouton);
 		bRetour.setMinSize(lBouton, hBouton);
 		bRetour.setFont(policeBouton);
@@ -381,6 +385,23 @@ public class FinDePartiePane extends StackPane implements IFinListener {
 			else
 				desc.setText(International.trad("text.perd1") + "\n" + International.trad("text.perd2", nom));
 		});
+	}
+
+	@Override
+	public void traduire() {
+		titre1.setText(
+				International.trad("text.titreFinDePartieA") + " " + International.trad("text.titreFinDePartieB"));
+		nomJoueur1.setText(International.trad("texte.j1"));
+		nomJoueur2.setText(International.trad("texte.j2"));
+		nomJoueur3.setText(International.trad("texte.j3"));
+		nomJoueur4.setText(International.trad("texte.j4"));
+		nomJoueur5.setText(International.trad("texte.j5"));
+		nomJoueur6.setText(International.trad("texte.j6"));
+		titreJoueur.setText(International.trad("texte.nom"));
+		titreScore.setText(International.trad("texte.score"));
+		titreNbPersVivant.setText(International.trad("texte.alive"));
+		titreNbZbTues.setText(International.trad("texte.zTues"));
+		bRetour.setText(International.trad("bouton.retour"));
 	}
 
 }
