@@ -524,8 +524,8 @@ public class TraitementPaquetTcp extends TraitementPaquet<TcpClient> {
 	}
 
 	private void logPIIJ(Paquet paquet, String message) {
-		String log = "Vous avez déjà placer " + (Integer) paquet.getValeur(message, 1) + " pions.";
-		log += "\n" + "Il vous reste à placer :";
+		
+		String log =  "Il vous reste à placer :";
 		for (Integer i : (List<Integer>) paquet.getValeur(message, 2)) {
 			log += "\n" + "Votre " + IdjrTools.getPionByIndex(i) + ".";
 		}
