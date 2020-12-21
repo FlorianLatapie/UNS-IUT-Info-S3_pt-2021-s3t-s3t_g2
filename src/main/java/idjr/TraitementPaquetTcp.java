@@ -328,7 +328,6 @@ public class TraitementPaquetTcp extends TraitementPaquet<TcpClient> {
 				couleur.add(IdjrTools.getCouleurByChar(pc));
 		for (Couleur c : couleur)
 			log += core.getListeJoueursInitiale().get(c) + "\n ";
-		log += International.trad("texte.logPECV3")+" " + (Integer) paquet.getValeur(message, 2) + " "+International.trad("texte.logPECV4");
 		Initializer.log(log);
 
 	}
