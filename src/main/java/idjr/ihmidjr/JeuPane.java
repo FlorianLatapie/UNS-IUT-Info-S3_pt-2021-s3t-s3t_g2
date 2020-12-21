@@ -182,6 +182,12 @@ public class JeuPane extends StackPane implements IJeuListener, ITraduction {
 	VBox vbDeplPers;
 	VBox vbDeplLieux;
 
+	Timer attenTimer1;
+	Timer attenTimer2;
+
+	int d1 = 0;
+	int d2 = 0;
+
 	public JeuPane(ScreenControl sc, Core c) {
 		core = c;
 		sControl = sc;
@@ -990,14 +996,14 @@ public class JeuPane extends StackPane implements IJeuListener, ITraduction {
 		des.setStyle(styleVBox);
 		des.setMaxSize(120, 275);
 
-		de1 = new Label("0");
+		de1 = new Label("?");
 		de1.setBackground(fondBlanc);
 		de1.setAlignment(Pos.CENTER);
 		de1.setMinSize(100, 100);
 		de1.setTextFill(Color.BLACK);
 		de1.setFont(policeBoutonDe);
 
-		de2 = new Label("0");
+		de2 = new Label("?");
 		de2.setBackground(fondBlanc);
 		de2.setAlignment(Pos.CENTER);
 		de2.setMinSize(100, 100);
@@ -1015,9 +1021,6 @@ public class JeuPane extends StackPane implements IJeuListener, ITraduction {
 		});
 		titrede.setOnMouseExited(event -> {
 			titrede.setStyle(styleBoutons);
-		});
-		titrede.setOnAction(EventHandler -> {
-			core.getIdjr().desVoteChoisi(true);
 		});
 
 		des.setPadding(new Insets(10));
@@ -1383,10 +1386,13 @@ public class JeuPane extends StackPane implements IJeuListener, ITraduction {
 	public void desValeur(List<Integer> list) {
 		Platform.runLater(() -> {
 			attirerAttention(des);
-			String de1Int = list.get(0).toString();
-			String de2Int = list.get(1).toString();
-			de1.setText(de1Int);
-			de2.setText(de2Int);
+			d1 = list.get(0);
+			d2 = list.get(1);
+			titrede.setOnAction(EventHandler -> {
+				de1.setText(String.valueOf(d1));
+				de2.setText(String.valueOf(d2));
+				core.getIdjr().desVoteChoisi(true);
+			});
 		});
 	}
 
@@ -1930,9 +1936,14 @@ public class JeuPane extends StackPane implements IJeuListener, ITraduction {
 
 	private void attirerAttention(Pane pane) {
 		int tmp = 0;
+		if (attenTimer1 != null) {
+			attenTimer1.cancel();
+			attenTimer2.cancel();
+		}
+
 		for (int i = 1; i <= 6; i++) {
-			Timer myTimer = new Timer();
-			myTimer.schedule(new TimerTask() {
+			attenTimer1 = new Timer();
+			attenTimer1.schedule(new TimerTask() {
 
 				@Override
 				public void run() {
@@ -1940,10 +1951,10 @@ public class JeuPane extends StackPane implements IJeuListener, ITraduction {
 				}
 			}, tmp);
 
-			tmp+=250;
-			
-			Timer myTimer1 = new Timer();
-			myTimer1.schedule(new TimerTask() {
+			tmp += 250;
+
+			attenTimer2 = new Timer();
+			attenTimer2.schedule(new TimerTask() {
 
 				@Override
 				public void run() {
@@ -1951,7 +1962,7 @@ public class JeuPane extends StackPane implements IJeuListener, ITraduction {
 				}
 			}, tmp);
 
-			tmp+=250;
+			tmp += 250;
 		}
 	}
 
