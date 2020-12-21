@@ -119,6 +119,7 @@ public class ControleurAttaqueZombie {
 		PionCouleur pionCou = azr.recupSacrifice(jou);
 		int pion = PpTools.getPionByValue(pionCou);
 		jeu.sacrifie(jou, PpTools.valeurToIndex(pion));
+		Initializer.nbPlaceLieuAll(new ArrayList<>(jeu.getLieux().values()));
 		Initializer.nbPersoJoueurAll(new ArrayList<>(jeu.getJoueurs().values()));
 		Initializer.destionationPersoAll(new ArrayList<>(jeu.getLieux().values()));
 		azr.informerSacrifice(jeu, lieu, pionCou, partieId, numeroTour);
