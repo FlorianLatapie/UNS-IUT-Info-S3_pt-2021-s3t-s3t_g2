@@ -1531,4 +1531,38 @@ public class PlateauPane extends StackPane implements IPlateauListener, ITraduct
 		lInfo3.setText(International.trad("text.lInfo"));
 		lInfo4.setText(International.trad("text.lInfo"));
 	}
+
+	@Override
+	public void quiJoue(int joueur) {
+		Platform.runLater(() -> {
+			j1.setStyle(null);
+			j2.setStyle(null);
+			j3.setStyle(null);
+			j4.setStyle(null);
+			j5.setStyle(null);
+			j6.setStyle(null);
+			switch (joueur) {
+			case 1:
+				j1.setStyle("-fx-border-color: red; -fx-border-insets: -3; -fx-border-width: 3;");
+				break;
+			case 2:
+				j2.setStyle("-fx-border-color: red; -fx-border-insets: -3; -fx-border-width: 3;");
+				break;
+			case 3:
+				j3.setStyle("-fx-border-color: red; -fx-border-insets: -3; -fx-border-width: 3;");
+				break;
+			case 4:
+				j4.setStyle("-fx-border-color: red; -fx-border-insets: -3; -fx-border-width: 3;");
+				break;
+			case 5:
+				j5.setStyle("-fx-border-color: red; -fx-border-insets: -3; -fx-border-width: 3;");
+				break;
+			case 6:
+				j6.setStyle("-fx-border-color: red; -fx-border-insets: -3; -fx-border-width: 3;");
+				break;
+			default:
+				throw new IllegalStateException("Unexpected value: " + joueur);
+			}
+		});
+	}
 }

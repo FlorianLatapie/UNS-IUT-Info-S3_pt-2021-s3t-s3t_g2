@@ -176,4 +176,9 @@ public abstract class Initializer {
 		for (IAttenteListener al : listenersal)
 			al.updateJoueurs(joueurs, max);
 	}
+
+	public static void quiJoue(int val) {
+		for (IPlateauListener pl : listenerspl)
+			pl.quiJoue(val);
+	}
 }
