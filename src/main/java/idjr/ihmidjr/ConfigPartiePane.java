@@ -58,7 +58,6 @@ public class ConfigPartiePane extends StackPane implements IConfigListener, ITra
 
 	ComboBox<String> cbtypePartie;
 	ComboBox<Integer> cbnbJr;
-	ComboBox<String> cbStatutPartie;
 
 	Label titre1;
 	Label desc;
@@ -108,14 +107,8 @@ public class ConfigPartiePane extends StackPane implements IConfigListener, ITra
 		cbnbJr.setPadding(new Insets(0, 0, 0, 20));
 		cbnbJr.setPrefSize(100, 63);
 		cbnbJr.setMinHeight(63);
-		cbStatutPartie = new ComboBox<>();
-		cbStatutPartie.getItems().addAll(Statut.ATTENTE.name(), Statut.COMPLETE.name(), Statut.TERMINEE.name());
-		cbStatutPartie.setValue(Statut.ATTENTE.name());// TODO
-		cbStatutPartie.setStyle("-fx-text-fill: white;");
-		cbStatutPartie.setPrefSize(200, 63);
-		cbStatutPartie.setMinHeight(63);
 
-		hComboTri.getChildren().addAll(cbtypePartie, cbnbJr, cbStatutPartie);
+		hComboTri.getChildren().addAll(cbtypePartie, cbnbJr);
 		hComboTri.setAlignment(Pos.CENTER);
 		hComboTri.setSpacing(20);
 
@@ -161,7 +154,7 @@ public class ConfigPartiePane extends StackPane implements IConfigListener, ITra
 		bRefresh.setOnMouseExited(event -> bRefresh.setStyle(styleBoutons));
 
 		bRefresh.setOnAction(EventHandler -> core.getIdjr().listOfServers(cbnbJr.getValue(),
-				TypePartie.valueOf(cbtypePartie.getValue()), Statut.valueOf(cbStatutPartie.getValue())));
+				TypePartie.valueOf(cbtypePartie.getValue()), null));
 
 		bPbConnexion = new Button(
 				International.trad("texte.pbConnexionA") + "\n" + International.trad("texte.pbConnexionB"));
