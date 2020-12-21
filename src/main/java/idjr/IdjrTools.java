@@ -62,26 +62,23 @@ public abstract class IdjrTools {
 	
 	public static String getLieuByIndex(Integer idLieu) {
 		HashMap<Integer, String> listeLieu = new HashMap<Integer, String>();
-		listeLieu.put(1, "Toilettes");
-		listeLieu.put(2, "Cachou");
-		listeLieu.put(3, "Megatoys");
-		listeLieu.put(4, "Parking");
-		listeLieu.put(5, "PC de securite");
-		listeLieu.put(6, "Supermarche");
+		listeLieu.put(1, International.trad("texte.lieu1"));
+		listeLieu.put(2, International.trad("texte.lieu2"));
+		listeLieu.put(3, International.trad("texte.lieu3"));
+		listeLieu.put(4, International.trad("texte.lieu4"));
+		listeLieu.put(5, International.trad("texte.lieu5") + " " + International.trad("texte.lieu5b"));
+		listeLieu.put(6, International.trad("texte.lieu6"));
 		return listeLieu.get(idLieu);
 	}
 	
 	public static String getPionByIndex(Integer pionValue) {
 		HashMap<Integer, String> listePion = new HashMap<Integer, String>();
-		listePion.put(1, "Fillette");
-		listePion.put(3, "Truand");
-		listePion.put(5, "Brute");
-		listePion.put(7, "Blonde");
+		listePion.put(1, International.trad("texte.Fillette"));
+		listePion.put(3, International.trad("texte.Truand"));
+		listePion.put(5, International.trad("texte.Brute"));
+		listePion.put(7, International.trad("texte.Blonde"));
 		return listePion.get(pionValue);
 	}
 
-	public static String getVote() {
-		// TODO Auto-generated method stub
-		return null;
-	}
+
 }

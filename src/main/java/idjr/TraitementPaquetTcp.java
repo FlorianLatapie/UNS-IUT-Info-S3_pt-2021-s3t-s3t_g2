@@ -19,6 +19,7 @@ import java.util.HashMap;
 import java.util.List;
 
 import idjr.ihmidjr.event.Initializer;
+import idjr.ihmidjr.langues.International;
 
 /**
  * <h1>Permet de gerer les Paquets</h1>
@@ -205,30 +206,30 @@ public class TraitementPaquetTcp extends TraitementPaquet<TcpClient> {
 			break;
 		default:
 			throw new IllegalStateException(
-					MessageFormat.format("[TCP] Il n''y a pas de traitement possible pour {0}", Paquet.getCle()));
+					MessageFormat.format("[TCP] Il n'y a pas de traitement possible pour {0}", Paquet.getCle()));
 		}
 	}
 
 	private void logPVR(Paquet paquet, String message) {
 		String log;
 		if (((Couleur) paquet.getValeur(message, 1)).equals(Couleur.NUL))
-			log = "Le résultat du vte est une égalité donc aucun joueur n'est choisit.";
+			log = International.trad("texte.logPVR1");
 		else
-			log = "Le joueur choisit est le joueur " + ((Couleur) paquet.getValeur(message, 1)).toString() + ".";
+			log = International.trad("texte.logPVR2") + ((Couleur) paquet.getValeur(message, 1)).toString() + ".";
 		Initializer.log(log);
 
 	}
 
 	private void logPVVC(Paquet paquet, String message) {
-		String log = "Le vote est clos.";
+		String log = International.trad("texte.logPVVC");
 		Initializer.log(log);
 
 	}
 
 	private void logPVIC(Paquet paquet, String message) {
-		String log = "Le joueur " + ((Couleur) paquet.getValeur(message, 2)).toString() + " joue "
-				+ (Integer) paquet.getValeur(message, 2) + " carte menace. Il a donc "
-				+ (Integer) paquet.getValeur(message, 3) + " voix pour ce vote.";
+		String log = International.trad("texte.logLejoueur") +" "+ ((Couleur) paquet.getValeur(message, 1)).toString() + " "+ International.trad("texte.logPVIC2")+" "
+				+ (Integer) paquet.getValeur(message, 2) + " " +International.trad("texte.logPVIC3")+" "
+				+ (Integer) paquet.getValeur(message, 3) + " " +International.trad("texte.logPVIC4");
 		Initializer.log(log);
 
 	}
@@ -236,50 +237,50 @@ public class TraitementPaquetTcp extends TraitementPaquet<TcpClient> {
 	private void logRAZID(Paquet paquet, String message) {
 		List<CarteType> carteJouee = (List<CarteType>) paquet.getValeur(message, 3);
 		List<Integer> pionCachee = (List<Integer>) paquet.getValeur(message, 4);
-		String log = "Le joueur " + ((Couleur) paquet.getValeur(message, 2)).toString() + " joue les cartes : ";
+		String log = International.trad("texte.logLejoueur")+ " " + ((Couleur) paquet.getValeur(message, 2)).toString() + " " +International.trad("texte.logRAZID1")+" : ";
 		for (int i = 0; i < carteJouee.size() - 1; i++)
 			log += carteJouee.get(i).toString() + ", ";
 		log += carteJouee.get(carteJouee.size() - 1).toString();
 
-		log += " pour la défence du lieu " + IdjrTools.getLieuByIndex((Integer) paquet.getValeur(message, 1)) + ".";
+		log += " "+International.trad("texte.logRAZID2")+" " + IdjrTools.getLieuByIndex((Integer) paquet.getValeur(message, 1)) + ".";
 
 		if (!pionCachee.isEmpty()) {
-			log += "Les pions cachées sont ";
+			log += International.trad("texte.logRAZID3")+" ";
 			for (int i = 0; i < pionCachee.size() - 1; i++)
 				log += pionCachee.get(i).toString() + ", ";
 			log += pionCachee.get(pionCachee.size() - 1).toString() + ".";
 		} else
-			log += "Il n'y a pas de pion cachée.";
+			log += International.trad("texte.logRAZID4");
 
-		log += " Il reste " + (Integer) paquet.getValeur(message, 6) + " zombies sur le lieu.";
+		log += " "+International.trad("texte.logRAZID5")+" " + (Integer) paquet.getValeur(message, 6) + " "+International.trad("texte.logRAZID6");
 		Initializer.log(log);
 	}
 
 	private void logRAZPA(Paquet paquet, String message) {
-		String log = "Il n'y a pas d'attaque sur le lieu "
+		String log = International.trad("texte.logRAZID1")+" "
 				+ IdjrTools.getLieuByIndex((Integer) paquet.getValeur(message, 1));
 		if (((RaisonType) paquet.getValeur(message, 3)).equals(RaisonType.PION))
-			log += " car il n'y a pas de personnage.";
+			log += " "+International.trad("texte.logRAZID2");
 		if (((RaisonType) paquet.getValeur(message, 3)).equals(RaisonType.ZOMBIE))
-			log += " car il n'y a pas de zombie.";
+			log += " "+International.trad("texte.logRAZID3");
 		if (((RaisonType) paquet.getValeur(message, 3)).equals(RaisonType.FORCE))
-			log += " car les zombies n'ont pas la force pour entrer dans le lieu.";
+			log += " "+International.trad("texte.logRAZID4");
 		Initializer.log(log);
 
 	}
 
 	private void logAZICS(Paquet paquet, String message) {
-		String log = "Le joueur " + ((Couleur) paquet.getValeur(message, 2)).toString();
+		String log = International.trad("texte.logLejoueur")+" " + ((Couleur) paquet.getValeur(message, 2)).toString();
 		if (!((CarteType) paquet.getValeur(message, 2)).equals(CarteType.CDS))
-			log += " a joué une carte Caméra de sécurité.";
+			log += " "+International.trad("texte.logAZICS1");
 		else
-			log += " n'a pas joué de carte Caméra de sécurité.";
+			log += " "+International.trad("texte.logAZICS2");
 		Initializer.log(log);
 	}
 
 	private void logCDZVDI(Paquet paquet, String message) {
 		List<Integer> lieuArriveZombie = (List<Integer>) paquet.getValeur(message, 1);
-		String log = " Un zombie vengeur arrive sur chacun de ces lieux ";
+		String log = " "+ International.trad("texte.logCDZVDI")+" ";
 		for (int i = 0; i < lieuArriveZombie.size() - 1; i++)
 			log += lieuArriveZombie.get(i) + ", ";
 		log += lieuArriveZombie.get(lieuArriveZombie.size() - 1) + ".";
@@ -288,7 +289,7 @@ public class TraitementPaquetTcp extends TraitementPaquet<TcpClient> {
 
 	private void logAZUCSvAZLAZ(Paquet paquet, String message) {
 		List<Integer> lieuArriveZombie = (List<Integer>) paquet.getValeur(message, 1);
-		String log = " Un zombie arrivera sur chacun de ces lieux  ";
+		String log = " "+International.trad("texte.logAZUCSvAZLAZ")+" ";
 		for (int i = 0; i < lieuArriveZombie.size() - 1; i++)
 			log += lieuArriveZombie.get(i) + ", ";
 		log += lieuArriveZombie.get(lieuArriveZombie.size() - 1) + ".";
@@ -296,53 +297,51 @@ public class TraitementPaquetTcp extends TraitementPaquet<TcpClient> {
 	}
 
 	private void logIPV(Paquet paquet, String message) {
-		String log = " Un vote de" + ((VoteType) paquet.getValeur(message, 1)).toString() + " commence.";
+		String log = " "+International.trad("texte.logIPV1") + ((VoteType) paquet.getValeur(message, 1)).toString() + " "+International.trad("texte.logIPV2");
 		Initializer.log(log);
-
 	}
 
 	private void logCDFC(Paquet paquet, String message) {
-		Initializer.log("La phase de choix d'une destination est fini.");
-
+		Initializer.log(International.trad("texte.logCDFC"));
 	}
 
 	private void logRECV(Paquet paquet, String message) {
-		String log = " La phase d'élection du chef des vigiles est terminé." + "\n";
+		String log = " "+ International.trad("texte.logRECV1") + "\n";
 		if (!((Couleur) paquet.getValeur(message, 1)).equals(Couleur.NUL))
-			log += "Le nouveau chef est " + core.getListeJoueursInitiale().get(((Couleur) paquet.getValeur(message, 1)))
+			log += International.trad("texte.logRECV2")+ " " + core.getListeJoueursInitiale().get(((Couleur) paquet.getValeur(message, 1)))
 					+ ".";
 		else
-			log += "Il n'y a pas de nouveau chef des vigiles.";
+			log += International.trad("texte.logRECV3");
 
-		log += "Il reste " + (Integer) paquet.getValeur(message, 2) + " cartes dans la pioche.";
+		log += International.trad("texte.logRECV4") + " " + (Integer) paquet.getValeur(message, 2) + " "+International.trad("texte.logRECV5");
 		Initializer.log(log);
 	}
 
 	private void logPECV(Paquet paquet, String message) {
-		String log = " La phase d'élection du chef des vigiles commence." + "\n"
-				+ "Les joueurs présent sur le lieux sont :" + "\n";
+		String log = " "+International.trad("texte.logPECV1") + "\n"
+				+ International.trad("texte.logPECV2") + "\n";
 		for (Couleur c : (List<Couleur>) paquet.getValeur(message, 1))
 			log += core.getListeJoueursInitiale().get(c) + "\n";
-		log += "Il reste " + (Integer) paquet.getValeur(message, 2) + " cartes dans la pioche.";
+		log += International.trad("texte.logPECV3")+" " + (Integer) paquet.getValeur(message, 2) + " "+International.trad("texte.logPECV4");
 		Initializer.log(log);
 
 	}
 
 	private void logRFC(Paquet paquet, String message) {
-		String log = " La phase de la fouille du camion est terminé." + "\n";
+		String log = " "+International.trad("texte.logRFC1") + "\n";
 		if (!((Couleur) paquet.getValeur(message, 1)).equals(Couleur.NUL))
-			log += "Le joueur " + ((Couleur) paquet.getValeur(message, 1)).toString()
-					+ " fouille le camion et a gardé une carte" + "\n";
+			log += International.trad("texte.logLejoueur")+" " + ((Couleur) paquet.getValeur(message, 1)).toString()
+					+ " "+International.trad("texte.logRFC2") + "\n";
 		else
-			log += "Aucune carte n'a été gardé" + "\n";
+			log += International.trad("texte.logRFC3") + "\n";
 		if (!((Couleur) paquet.getValeur(message, 2)).equals(Couleur.NUL))
-			log += "Le joueur " + ((Couleur) paquet.getValeur(message, 1)).toString() + " a reçu une carte" + "\n";
+			log += International.trad("texte.logLejoueur")+" " + ((Couleur) paquet.getValeur(message, 1)).toString() + " "+International.trad("texte.logRFC4") + "\n";
 		else
-			log += "Aucune carte n'a été offerte" + "\n";
+			log += International.trad("texte.logRFC5") + "\n";
 		if (!((CarteType) paquet.getValeur(message, 3)).equals(CarteType.NUL))
-			log += "Une carte a été défaussé";
+			log += International.trad("texte.logRFC6");
 		else
-			log += "Aucune carte n'a été défaussé";
+			log += International.trad("texte.logRFC7");
 
 		Initializer.log(log);
 
@@ -350,28 +349,28 @@ public class TraitementPaquetTcp extends TraitementPaquet<TcpClient> {
 
 	private void logFCLC(Paquet paquet, String message) {
 		List<CarteType> listeJC = (List<CarteType>) paquet.getValeur(message, 1);
-		String log = "Vous devez choisir parmi les cartes suivante : ";
+		String log = International.trad("texte.logFCLC1")+" ";
 		for (int i = 0; i < listeJC.size() - 1; i++)
 			log += listeJC.get(i).toString() + ", ";
 		log += listeJC.get(listeJC.size() - 1).toString();
-		log += " laquelle vous gardez, laquelle vous donnez, a quel joueur vous la donnez et la quelle vous defaussez.";
+		log += " "+International.trad("texte.logFCLC2");
 		Initializer.log(log);
 
 	}
 
 	private void logPFC(Paquet paquet, String message) {
-		String log = " La phase de la fouille du camion commence." + "\n" + "Les joueurs présent sur le lieux sont :"
+		String log = " "+ International.trad("texte.logPFC1") + "\n" + International.trad("texte.logPFC2")
 				+ "\n";
 		for (PionCouleur c : (List<PionCouleur>) paquet.getValeur(message, 1))
 			log += core.getListeJoueursInitiale().get(IdjrTools.getCouleurByChar(c)) + "\n";
-		log += "Il reste " + (Integer) paquet.getValeur(message, 2) + " cartes dans la pioche.";
+		log += International.trad("texte.logPFC3")+" " + (Integer) paquet.getValeur(message, 2) + " "+International.trad("texte.logPFC4");
 		Initializer.log(log);
 
 	}
 
 	private void logPIPZ(Paquet paquet, String message) {
 		List<Integer> lieuArriveZombie = (List<Integer>) paquet.getValeur(message, 1);
-		String log = " Un zombie est arrivé sur chacun de ces lieux  ";
+		String log = " "+International.trad("texte.logPIPZ")+"  ";
 		for (int i = 0; i < lieuArriveZombie.size() - 1; i++)
 			log += lieuArriveZombie.get(i) + ", ";
 		log += lieuArriveZombie.get(lieuArriveZombie.size() - 1) + ".";
@@ -380,26 +379,26 @@ public class TraitementPaquetTcp extends TraitementPaquet<TcpClient> {
 	}
 
 	private void logFCRC(Paquet paquet, String message) {
-		String log = "Le joueur " + ((Couleur) paquet.getValeur(message, 2)).toString() + " vous donne la carte "
+		String log = International.trad("texte.logLejoueur")+" " + ((Couleur) paquet.getValeur(message, 2)).toString() + " "+International.trad("texte.logFCRC")+" "
 				+ ((CarteType) paquet.getValeur(message, 1)).toString() + ".";
 		Initializer.log(log);
 
 	}
 
 	private void logPVD(Paquet paquet, String message) {
-		String log = "Quels cartes voulez vous jouez ?";
+		String log = International.trad("texte.logPVD");
 		Initializer.log(log);
 
 	}
 
 	private void logAZDCS(Paquet paquet, String message) {
-		String log = "Le PP vous demande si vous voulez jouer une carte caméra de sécurité.";
+		String log = International.trad("texte.logAZDCS");
 		Initializer.log(log);
 
 	}
 
 	private void logPVDV(Paquet paquet, String message) {
-		String log = "Votez pour un joueur";
+		String log = International.trad("texte.logPVDV");
 		Initializer.log(log);
 
 	}
