@@ -5,6 +5,7 @@ import java.util.List;
 
 import pp.Joueur;
 import pp.Partie;
+import pp.PpTools;
 import reseau.socket.ControleurReseau;
 import reseau.type.CarteEtat;
 import reseau.type.CarteType;
@@ -13,7 +14,7 @@ import reseau.type.Couleur;
 public class FouilleCamionReseau {
 
 	public void debutPhaseFouille(Partie jeu, String partieId, int numeroTour) {
-		String m = ControleurReseau.construirePaquetTcp("PFC", jeu.getJoueursCouleurs(jeu),
+		String m = ControleurReseau.construirePaquetTcp("PFC", PpTools.getPionsCouleurByPerso(jeu.getLieux().get(4).getPersonnage()),
 				jeu.getCartes().size(), partieId, numeroTour);
 		for (Joueur j : jeu.getJoueurs().values())
 			j.getConnection().envoyer(m);
