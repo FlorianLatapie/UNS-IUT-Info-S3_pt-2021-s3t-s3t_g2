@@ -182,7 +182,14 @@ public abstract class Initializer {
 			pl.quiJoue(val);
 	}
 	
-	public static void nbPlaceLieu(int lieu, int val) {
+	public static void nbPlaceLieuAll(List<Lieu> lieux) {
+		for (IPlateauListener pl : listenerspl)
+			for (Lieu lieu2 : lieux) {
+				nbPlaceLieu(lieu2.getNum(),lieu2.getPersonnage().size());
+			}
+	}
+	
+	private static void nbPlaceLieu(int lieu, int val) {
 		for (IPlateauListener pl : listenerspl)
 			pl.nbPlaceLieu(lieu, val);
 	}
