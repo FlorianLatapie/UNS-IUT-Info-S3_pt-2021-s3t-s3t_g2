@@ -195,7 +195,7 @@ public class ConfigPartiePane extends StackPane implements IConfigListener, ITra
 			if (partieInfo == null)
 				return;
 			core.getIdjr().estPartieConnecte(partieInfo.getIdPartie(), cbnbJr.getValue(),
-					TypePartie.valueOf(cbtypePartie.getValue()), Statut.valueOf(cbStatutPartie.getValue()));
+					TypePartie.valueOf(cbtypePartie.getValue()), null);
 		});
 		nomP.textProperty().addListener((obs, oldText, newText) -> bJouer.setDisable(nomP.getText().isEmpty()));
 
