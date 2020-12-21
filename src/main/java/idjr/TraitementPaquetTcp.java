@@ -229,9 +229,10 @@ public class TraitementPaquetTcp extends TraitementPaquet<TcpClient> {
 	}
 
 	private void logPVIC(Paquet paquet, String message) {
-		String log = International.trad("texte.logLejoueur") +" "+ ((Couleur) paquet.getValeur(message, 1)).toString() + " "+ International.trad("texte.logPVIC2")+" "
-				+ (Integer) paquet.getValeur(message, 2) + " " +International.trad("texte.logPVIC3")+" "
-				+ (Integer) paquet.getValeur(message, 3) + " " +International.trad("texte.logPVIC4");
+		String log = International.trad("texte.logLejoueur") + " " + ((Couleur) paquet.getValeur(message, 1)).toString()
+				+ " " + International.trad("texte.logPVIC2") + " " + (Integer) paquet.getValeur(message, 2) + " "
+				+ International.trad("texte.logPVIC3") + " " + (Integer) paquet.getValeur(message, 3) + " "
+				+ International.trad("texte.logPVIC4");
 		Initializer.log(log);
 
 	}
@@ -239,50 +240,58 @@ public class TraitementPaquetTcp extends TraitementPaquet<TcpClient> {
 	private void logRAZID(Paquet paquet, String message) {
 		List<CarteType> carteJouee = (List<CarteType>) paquet.getValeur(message, 3);
 		List<Integer> pionCachee = (List<Integer>) paquet.getValeur(message, 4);
-		String log = International.trad("texte.logLejoueur")+ " " + ((Couleur) paquet.getValeur(message, 2)).toString() + " " +International.trad("texte.logRAZID1")+" : ";
-		for (int i = 0; i < carteJouee.size() - 1; i++)
-			log += carteJouee.get(i).toString() + ", ";
-		log += carteJouee.get(carteJouee.size() - 1).toString();
+		String log = International.trad("texte.logLejoueur") + " " + ((Couleur) paquet.getValeur(message, 2)).toString()
+				+ " ";
 
-		log += " "+International.trad("texte.logRAZID2")+" " + IdjrTools.getLieuByIndex((Integer) paquet.getValeur(message, 1)) + ".";
+		if (!carteJouee.isEmpty()) {
+			log += International.trad("texte.logRAZID1") + " : ";
+			for (int i = 0; i < carteJouee.size() - 1; i++)
+				log += carteJouee.get(i).toString() + ", ";
+			log += carteJouee.get(carteJouee.size() - 1).toString();
 
+		} else
+			log += International.trad("texte.logRAZID7");
+		log += " " + International.trad("texte.logRAZID2") + " "
+				+ IdjrTools.getLieuByIndex((Integer) paquet.getValeur(message, 1)) + ".";
 		if (!pionCachee.isEmpty()) {
-			log += International.trad("texte.logRAZID3")+" ";
+			log += International.trad("texte.logRAZID3") + " ";
 			for (int i = 0; i < pionCachee.size() - 1; i++)
 				log += pionCachee.get(i).toString() + ", ";
 			log += pionCachee.get(pionCachee.size() - 1).toString() + ".";
 		} else
 			log += International.trad("texte.logRAZID4");
 
-		log += " "+International.trad("texte.logRAZID5")+" " + (Integer) paquet.getValeur(message, 6) + " "+International.trad("texte.logRAZID6");
+		log += " " + International.trad("texte.logRAZID5") + " " + (Integer) paquet.getValeur(message, 6) + " "
+				+ International.trad("texte.logRAZID6");
 		Initializer.log(log);
 	}
 
 	private void logRAZPA(Paquet paquet, String message) {
-		String log = International.trad("texte.logRAZID1")+" "
+		String log = International.trad("texte.logRAZID1") + " "
 				+ IdjrTools.getLieuByIndex((Integer) paquet.getValeur(message, 1));
 		if (((RaisonType) paquet.getValeur(message, 3)).equals(RaisonType.PION))
-			log += " "+International.trad("texte.logRAZID2");
+			log += " " + International.trad("texte.logRAZID2");
 		if (((RaisonType) paquet.getValeur(message, 3)).equals(RaisonType.ZOMBIE))
-			log += " "+International.trad("texte.logRAZID3");
+			log += " " + International.trad("texte.logRAZID3");
 		if (((RaisonType) paquet.getValeur(message, 3)).equals(RaisonType.FORCE))
-			log += " "+International.trad("texte.logRAZID4");
+			log += " " + International.trad("texte.logRAZID4");
 		Initializer.log(log);
 
 	}
 
 	private void logAZICS(Paquet paquet, String message) {
-		String log = International.trad("texte.logLejoueur")+" " + ((Couleur) paquet.getValeur(message, 2)).toString();
+		String log = International.trad("texte.logLejoueur") + " "
+				+ ((CarteType) paquet.getValeur(message, 2)).toString();
 		if (!((CarteType) paquet.getValeur(message, 2)).equals(CarteType.CDS))
-			log += " "+International.trad("texte.logAZICS1");
+			log += " " + International.trad("texte.logAZICS1");
 		else
-			log += " "+International.trad("texte.logAZICS2");
+			log += " " + International.trad("texte.logAZICS2");
 		Initializer.log(log);
 	}
 
 	private void logCDZVDI(Paquet paquet, String message) {
 		List<Integer> lieuArriveZombie = (List<Integer>) paquet.getValeur(message, 1);
-		String log = " "+ International.trad("texte.logCDZVDI")+" ";
+		String log = " " + International.trad("texte.logCDZVDI") + " ";
 		for (int i = 0; i < lieuArriveZombie.size() - 1; i++)
 			log += lieuArriveZombie.get(i) + ", ";
 		log += lieuArriveZombie.get(lieuArriveZombie.size() - 1) + ".";
@@ -291,7 +300,7 @@ public class TraitementPaquetTcp extends TraitementPaquet<TcpClient> {
 
 	private void logAZUCSvAZLAZ(Paquet paquet, String message) {
 		List<Integer> lieuArriveZombie = (List<Integer>) paquet.getValeur(message, 1);
-		String log = " "+International.trad("texte.logAZUCSvAZLAZ")+" ";
+		String log = " " + International.trad("texte.logAZUCSvAZLAZ") + " ";
 		for (int i = 0; i < lieuArriveZombie.size() - 1; i++)
 			log += lieuArriveZombie.get(i) + ", ";
 		log += lieuArriveZombie.get(lieuArriveZombie.size() - 1) + ".";
@@ -299,7 +308,8 @@ public class TraitementPaquetTcp extends TraitementPaquet<TcpClient> {
 	}
 
 	private void logIPV(Paquet paquet, String message) {
-		String log = " "+International.trad("texte.logIPV1") + ((VoteType) paquet.getValeur(message, 1)).toString() + " "+International.trad("texte.logIPV2");
+		String log = " " + International.trad("texte.logIPV1") + ((VoteType) paquet.getValeur(message, 1)).toString()
+				+ " " + International.trad("texte.logIPV2");
 		Initializer.log(log);
 	}
 
@@ -308,20 +318,17 @@ public class TraitementPaquetTcp extends TraitementPaquet<TcpClient> {
 	}
 
 	private void logRECV(Paquet paquet, String message) {
-		String log = " "+ International.trad("texte.logRECV1") + "\n ";
+		String log = " " + International.trad("texte.logRECV1") + "\n ";
 		if (!((Couleur) paquet.getValeur(message, 1)).equals(Couleur.NUL))
-			log += International.trad("texte.logRECV2")+ " " + core.getListeJoueursInitiale().get(((Couleur) paquet.getValeur(message, 1)))
-					+ ".";
+			log += International.trad("texte.logRECV2") + " "
+					+ core.getListeJoueursInitiale().get(((Couleur) paquet.getValeur(message, 1))) + ".";
 		else
 			log += International.trad("texte.logRECV3");
-
-		log += International.trad("texte.logRECV4") + " " + (Integer) paquet.getValeur(message, 2) + " "+International.trad("texte.logRECV5");
 		Initializer.log(log);
 	}
 
 	private void logPECV(Paquet paquet, String message) {
-		String log = " "+International.trad("texte.logPECV1") + "\n "
-				+ International.trad("texte.logPECV2") + "\n ";
+		String log = " " + International.trad("texte.logPECV1") + "\n " + International.trad("texte.logPECV2") + "\n ";
 		List<Couleur> couleur = new ArrayList<>();
 		for (PionCouleur pc : (List<PionCouleur>) paquet.getValeur(message, 1))
 			if (!couleur.contains(IdjrTools.getCouleurByChar(pc)))
@@ -333,14 +340,15 @@ public class TraitementPaquetTcp extends TraitementPaquet<TcpClient> {
 	}
 
 	private void logRFC(Paquet paquet, String message) {
-		String log = " "+International.trad("texte.logRFC1") + "\n ";
+		String log = " " + International.trad("texte.logRFC1") + "\n ";
 		if (!((Couleur) paquet.getValeur(message, 1)).equals(Couleur.NUL))
-			log += International.trad("texte.logLejoueur")+" " + ((Couleur) paquet.getValeur(message, 1)).toString()
-					+ " "+International.trad("texte.logRFC2") + "\n ";
+			log += International.trad("texte.logLejoueur") + " " + ((Couleur) paquet.getValeur(message, 1)).toString()
+					+ " " + International.trad("texte.logRFC2") + "\n ";
 		else
 			log += International.trad("texte.logRFC3") + "\n ";
 		if (!((Couleur) paquet.getValeur(message, 2)).equals(Couleur.NUL))
-			log += International.trad("texte.logLejoueur")+" " + ((Couleur) paquet.getValeur(message, 1)).toString() + " "+International.trad("texte.logRFC4") + "\n ";
+			log += International.trad("texte.logLejoueur") + " " + ((Couleur) paquet.getValeur(message, 1)).toString()
+					+ " " + International.trad("texte.logRFC4") + "\n ";
 		else
 			log += International.trad("texte.logRFC5") + "\n ";
 		if (!((CarteEtat) paquet.getValeur(message, 3)).equals(CarteEtat.NUL))
@@ -354,28 +362,28 @@ public class TraitementPaquetTcp extends TraitementPaquet<TcpClient> {
 
 	private void logFCLC(Paquet paquet, String message) {
 		List<CarteType> listeJC = (List<CarteType>) paquet.getValeur(message, 1);
-		String log = International.trad("texte.logFCLC1")+" ";
+		String log = International.trad("texte.logFCLC1") + " ";
 		for (int i = 0; i < listeJC.size() - 1; i++)
 			log += listeJC.get(i).toString() + ", ";
 		log += listeJC.get(listeJC.size() - 1).toString();
-		log += " "+International.trad("texte.logFCLC2");
+		log += " " + International.trad("texte.logFCLC2");
 		Initializer.log(log);
 
 	}
 
 	private void logPFC(Paquet paquet, String message) {
-		String log = " "+ International.trad("texte.logPFC1") + "\n " + International.trad("texte.logPFC2")
-				+ "\n ";
+		String log = " " + International.trad("texte.logPFC1") + "\n " + International.trad("texte.logPFC2") + "\n ";
 		for (PionCouleur c : (List<PionCouleur>) paquet.getValeur(message, 1))
 			log += core.getListeJoueursInitiale().get(IdjrTools.getCouleurByChar(c)) + "\n ";
-		log += International.trad("texte.logPFC3")+" " + (Integer) paquet.getValeur(message, 2) + " "+International.trad("texte.logPFC4");
+		log += International.trad("texte.logPFC3") + " " + (Integer) paquet.getValeur(message, 2) + " "
+				+ International.trad("texte.logPFC4");
 		Initializer.log(log);
 
 	}
 
 	private void logPIPZ(Paquet paquet, String message) {
 		List<Integer> lieuArriveZombie = (List<Integer>) paquet.getValeur(message, 1);
-		String log = " "+International.trad("texte.logPIPZ")+"  ";
+		String log = " " + International.trad("texte.logPIPZ") + "  ";
 		for (int i = 0; i < lieuArriveZombie.size() - 1; i++)
 			log += lieuArriveZombie.get(i) + ", ";
 		log += lieuArriveZombie.get(lieuArriveZombie.size() - 1) + ".";
@@ -384,7 +392,8 @@ public class TraitementPaquetTcp extends TraitementPaquet<TcpClient> {
 	}
 
 	private void logFCRC(Paquet paquet, String message) {
-		String log = International.trad("texte.logLejoueur")+" " + ((Couleur) paquet.getValeur(message, 2)).toString() + " "+International.trad("texte.logFCRC")+" "
+		String log = International.trad("texte.logLejoueur") + " " + ((Couleur) paquet.getValeur(message, 2)).toString()
+				+ " " + International.trad("texte.logFCRC") + " "
 				+ ((CarteType) paquet.getValeur(message, 1)).toString() + ".";
 		Initializer.log(log);
 
@@ -409,7 +418,7 @@ public class TraitementPaquetTcp extends TraitementPaquet<TcpClient> {
 	}
 
 	private void logRAZDD(Paquet paquet, String message) {
-		String log = International.trad("texte.logRAZDD")+" "
+		String log = International.trad("texte.logRAZDD") + " "
 				+ IdjrTools.getLieuByIndex((Integer) paquet.getValeur(message, 1)) + ".";
 		Initializer.log(log);
 
@@ -418,18 +427,21 @@ public class TraitementPaquetTcp extends TraitementPaquet<TcpClient> {
 	private void logFP(Paquet paquet, String message) {
 		String log = International.trad("texte.logFP1");
 		if (((CondType) paquet.getValeur(message, 1)).equals(CondType.LIEUX))
-			log += " "+International.trad("texte.logFP2");
+			log += " " + International.trad("texte.logFP2");
 		else if (((CondType) paquet.getValeur(message, 1)).equals(CondType.PION))
-			log += " "+International.trad("texte.logFP3");
+			log += " " + International.trad("texte.logFP3");
 		Initializer.log(log);
 	}
 
 	private void logRAZIF(Paquet paquet, String message) {
-		String log = International.trad("texte.logRAZIF1")+" "
-				+ IdjrTools.getPionByIndex(IdjrTools.getPionByValue((PionCouleur) paquet.getValeur(message, 2)))
-				+ " "+International.trad("texte.logRAZIF2")+" " + IdjrTools.getCouleurByChar((PionCouleur) paquet.getValeur(message, 2))
-				+ " "+International.trad("texte.logRAZIF3")+" " + IdjrTools.getLieuByIndex((Integer) paquet.getValeur(message, 1)) + ". ";
-		log += International.trad("texte.logRAZIF4")+" " + (Integer) paquet.getValeur(message, 3) + " "+International.trad("texte.logRAZIF5");
+		String log = International.trad("texte.logRAZIF1") + " "
+				+ IdjrTools.getPionByIndex(IdjrTools.getPionByValue((PionCouleur) paquet.getValeur(message, 2))) + " "
+				+ International.trad("texte.logRAZIF2") + " "
+				+ IdjrTools.getCouleurByChar((PionCouleur) paquet.getValeur(message, 2)) + " "
+				+ International.trad("texte.logRAZIF3") + " "
+				+ IdjrTools.getLieuByIndex((Integer) paquet.getValeur(message, 1)) + ". ";
+		log += International.trad("texte.logRAZIF4") + " " + (Integer) paquet.getValeur(message, 3) + " "
+				+ International.trad("texte.logRAZIF5");
 		Initializer.log(log);
 
 	}
@@ -437,42 +449,48 @@ public class TraitementPaquetTcp extends TraitementPaquet<TcpClient> {
 	private void logPRAZ(Paquet paquet, String message) {
 		String log = "";
 		if ((Integer) paquet.getValeur(message, 1) != 0)
-			log += International.trad("texte.logPRAZ1")+" " + IdjrTools.getLieuByIndex((Integer) paquet.getValeur(message, 1)) + " "+International.trad("texte.logPRAZ2");
+			log += International.trad("texte.logPRAZ1") + " "
+					+ IdjrTools.getLieuByIndex((Integer) paquet.getValeur(message, 1)) + " "
+					+ International.trad("texte.logPRAZ2");
 		if ((Integer) paquet.getValeur(message, 2) != 0)
-			log += International.trad("texte.logPRAZ1")+" " + IdjrTools.getLieuByIndex((Integer) paquet.getValeur(message, 2)) + " "+International.trad("texte.logPRAZ2");
+			log += International.trad("texte.logPRAZ1") + " "
+					+ IdjrTools.getLieuByIndex((Integer) paquet.getValeur(message, 2)) + " "
+					+ International.trad("texte.logPRAZ2");
 		Initializer.log(log);
 	}
 
 	private void logRAZDS(Paquet paquet, String message) {
-		String log = International.trad("texte.logRAZDS")+" "
+		String log = International.trad("texte.logRAZDS") + " "
 				+ IdjrTools.getLieuByIndex((Integer) paquet.getValeur(message, 1)) + " ?";
 		Initializer.log(log);
 
 	}
 
 	private void logRAZA(Paquet paquet, String message) {
-		String log = International.trad("texte.logRAZA")+" "
+		String log = International.trad("texte.logRAZA") + " "
 				+ IdjrTools.getLieuByIndex((Integer) paquet.getValeur(message, 1)) + ".";
 		Initializer.log(log);
 	}
 
 	private void logDPI(Paquet paquet, String message) {
-		String log = International.trad("texte.logLejoueur")+" " + ((Couleur) paquet.getValeur(message, 1)).toString() + " "+International.trad("texte.logDPI1")+" "
-				+ IdjrTools.getPionByIndex((Integer) paquet.getValeur(message, 3)) + " "+International.trad("texte.logDPI2")
+		String log = International.trad("texte.logLejoueur") + " " + ((Couleur) paquet.getValeur(message, 1)).toString()
+				+ " " + International.trad("texte.logDPI1") + " "
+				+ IdjrTools.getPionByIndex((Integer) paquet.getValeur(message, 3)) + " "
+				+ International.trad("texte.logDPI2")
 				+ IdjrTools.getLieuByIndex((Integer) paquet.getValeur(message, 2));
 		if (!((CarteType) paquet.getValeur(message, 4)).equals(CarteType.NUL))
-			log += " "+International.trad("texte.logDPI3");
+			log += " " + International.trad("texte.logDPI3");
 		else
-			log += " "+International.trad("texte.logDPI4");
+			log += " " + International.trad("texte.logDPI4");
 
 		Initializer.log(log);
 
 	}
 
 	private void logDPD(Paquet paquet, String message) {
-		String log = International.trad("texte.logDPD1")+" "
-				+ IdjrTools.getLieuByIndex((Integer) paquet.getValeur(message, 1))
-				+ " "+International.trad("texte.logDPD2");
+		String log = International.trad("texte.logDPD1") + " "
+				+ IdjrTools.getLieuByIndex((Integer) paquet.getValeur(message, 1)) + " "
+				+ International.trad("texte.logDPD2");
 		Initializer.log(log);
 
 	}
@@ -487,9 +505,10 @@ public class TraitementPaquetTcp extends TraitementPaquet<TcpClient> {
 	}
 
 	private void logCDCDV(Paquet paquet, String message) {
-		String log = International.trad("texte.logCDCDV1")+" " + ((Couleur) paquet.getValeur(message, 1)).toString()
-				+ International.trad("texte.logCDCDV2")+" " + IdjrTools.getLieuByIndex((Integer) paquet.getValeur(message, 2))
-				+ " "+International.trad("texte.logCDCDV3");
+		String log = International.trad("texte.logCDCDV1") + " " + ((Couleur) paquet.getValeur(message, 1)).toString()
+				+ International.trad("texte.logCDCDV2") + " "
+				+ IdjrTools.getLieuByIndex((Integer) paquet.getValeur(message, 2)) + " "
+				+ International.trad("texte.logCDCDV3");
 		Initializer.log(log);
 
 	}
@@ -505,21 +524,25 @@ public class TraitementPaquetTcp extends TraitementPaquet<TcpClient> {
 	}
 
 	private void logIT(Paquet paquet, String message) {
-		Initializer.log(International.trad("texte.logIT1")+" n° " + (Integer) paquet.getValeur(message, 4) + " "+International.trad("texte.logIT2"));
+		Initializer.log(International.trad("texte.logIT1") + " n° " + (Integer) paquet.getValeur(message, 4) + " "
+				+ International.trad("texte.logIT2"));
 	}
 
 	private void logPIIG(Paquet paquet, String message) {
-		String log = International.trad("texte.logLejoueur")+" " + ((Couleur) paquet.getValeur(message, 1)).toString() + " "+International.trad("texte.logPIIG1")+" "
-				+ IdjrTools.getPionByIndex((Integer) paquet.getValeur(message, 5)) + " "+International.trad("texte.logPIIG2")+" : "
+		String log = International.trad("texte.logLejoueur") + " " + ((Couleur) paquet.getValeur(message, 1)).toString()
+				+ " " + International.trad("texte.logPIIG1") + " "
+				+ IdjrTools.getPionByIndex((Integer) paquet.getValeur(message, 5)) + " "
+				+ International.trad("texte.logPIIG2") + " : "
 				+ IdjrTools.getLieuByIndex((Integer) paquet.getValeur(message, 4)) + ".";
 		Initializer.log(log);
 	}
 
 	private void logPIRD(Paquet paquet, String message) {
 		List<Integer> lieuPossible = (List<Integer>) paquet.getValeur(message, 2);
-		String log = International.trad("texte.logPIRD1")+" " + ((List<Integer>) paquet.getValeur(message, 1)).get(0) + " "+International.trad("texte.logPIRD2")+" "
+		String log = International.trad("texte.logPIRD1") + " " + ((List<Integer>) paquet.getValeur(message, 1)).get(0)
+				+ " " + International.trad("texte.logPIRD2") + " "
 				+ ((List<Integer>) paquet.getValeur(message, 1)).get(1) + ".\n ";
-		log += International.trad("texte.logPIRD3")+" ";
+		log += International.trad("texte.logPIRD3") + " ";
 
 		for (int i = 0; i < lieuPossible.size() - 1; i++)
 			log += lieuPossible.get(i) + ", ";
@@ -528,16 +551,17 @@ public class TraitementPaquetTcp extends TraitementPaquet<TcpClient> {
 	}
 
 	private void logPIIJ(Paquet paquet, String message) {
-		
-		String log =  International.trad("texte.logPIIJ1");
+
+		String log = International.trad("texte.logPIIJ1");
 		for (Integer i : (List<Integer>) paquet.getValeur(message, 2)) {
-			log += "\n " + International.trad("texte.logPIIJ2")+" " + IdjrTools.getPionByIndex(i) + ".";
+			log += "\n " + International.trad("texte.logPIIJ2") + " " + IdjrTools.getPionByIndex(i) + ".";
 		}
 		Initializer.log(log);
 	}
 
 	private void logDC(Paquet paquet, String message) {
-		Initializer.log(International.trad("texte.logDC")+" : " + ((CarteType) paquet.getValeur(message, 1)).toString());
+		Initializer
+				.log(International.trad("texte.logDC") + " : " + ((CarteType) paquet.getValeur(message, 1)).toString());
 	}
 
 	private void logIP(Paquet paquet, String message) {
@@ -573,8 +597,8 @@ public class TraitementPaquetTcp extends TraitementPaquet<TcpClient> {
 		Integer dest = traitementI.choisirDestPlacement(core, (List<?>) Paquet.getValeur(message, 1),
 				(List<?>) Paquet.getValeur(message, 2));
 		Integer pion = traitementI.choisirPionPlacement(core);
-		String log = International.trad("texte.logchoisirDestPion1")+" " + IdjrTools.getPionByIndex(pion) + " "+International.trad("texte.logchoisirDestPion2")+" "
-				+ IdjrTools.getLieuByIndex(dest) + ".";
+		String log = International.trad("texte.logchoisirDestPion1") + " " + IdjrTools.getPionByIndex(pion) + " "
+				+ International.trad("texte.logchoisirDestPion2") + " " + IdjrTools.getLieuByIndex(dest) + ".";
 		Initializer.log(log);
 		ControleurReseau.envoyerTcp(ControleurReseau.construirePaquetTcp("PICD", dest, pion, m1, core.getJoueurId()));
 	}
@@ -583,7 +607,7 @@ public class TraitementPaquetTcp extends TraitementPaquet<TcpClient> {
 		out.println(Paquet.getDocs());
 		System.out.print("ChoisirQuiVoter");
 		Couleur choix = traitementI.getRandom(core, core.getVoteType());
-		String log = International.trad("texte.logChoisirQuiVoter")+" " + choix.toString() + ".";
+		String log = International.trad("texte.logChoisirQuiVoter") + " " + choix.toString() + ".";
 		Initializer.log(log);
 		String messageTcp = ControleurReseau.construirePaquetTcp("PVCV", choix, (String) Paquet.getValeur(message, 1),
 				(int) Paquet.getValeur(message, 2), core.getJoueurId());
@@ -598,7 +622,8 @@ public class TraitementPaquetTcp extends TraitementPaquet<TcpClient> {
 	public void IndiquerCarteJouees(Paquet Paquet, String message) {
 		out.println(Paquet.getDocs());
 		int nbCarteJouee = traitementI.IndiquerCarteJouees(core);
-		String log = International.trad("texte.logIndiquerCarteJouees1")+" " + nbCarteJouee + " "+International.trad("texte.logIndiquerCarteJouees2");
+		String log = International.trad("texte.logIndiquerCarteJouees1") + " " + nbCarteJouee + " "
+				+ International.trad("texte.logIndiquerCarteJouees2");
 		Initializer.log(log);
 
 		String messageTcp = ControleurReseau.construirePaquetTcp("PVC", nbCarteJouee,
@@ -616,15 +641,21 @@ public class TraitementPaquetTcp extends TraitementPaquet<TcpClient> {
 
 		List<CarteType> carteJouee = (List<CarteType>) listerenvoye.get(0);
 		List<Integer> pionCachee = (List<Integer>) listerenvoye.get(1);
-		String log = International.trad("texte.logfournirActionsDefense1")+" : ";
-		for (int i = 0; i < carteJouee.size() - 1; i++)
-			log += carteJouee.get(i).toString() + ", ";
-		log += carteJouee.get(carteJouee.size() - 1).toString();
+		String log = "";
+		if (!carteJouee.isEmpty()) {
+			log += International.trad("texte.logfournirActionsDefense1") + " : ";
+			for (int i = 0; i < carteJouee.size() - 1; i++)
+				log += carteJouee.get(i).toString() + ", ";
 
-		log += " "+International.trad("texte.logfournirActionsDefense2")+" " + IdjrTools.getLieuByIndex((Integer) Paquet.getValeur(message, 1)) + ".";
+			log += carteJouee.get(carteJouee.size() - 1).toString();
 
+			log += " " + International.trad("texte.logfournirActionsDefense2") + " "
+					+ IdjrTools.getLieuByIndex((Integer) Paquet.getValeur(message, 1)) + ".";
+		} else
+			log += International.trad("texte.logfournirActionsDefense5") + " "
+					+ IdjrTools.getLieuByIndex((Integer) Paquet.getValeur(message, 1)) + ".";
 		if (!pionCachee.isEmpty()) {
-			log += International.trad("texte.logfournirActionsDefense3") +" ";
+			log += International.trad("texte.logfournirActionsDefense3") + " ";
 			for (int i = 0; i < pionCachee.size() - 1; i++)
 				log += pionCachee.get(i).toString() + ", ";
 			log += pionCachee.get(pionCachee.size() - 1).toString() + ".";
@@ -656,16 +687,20 @@ public class TraitementPaquetTcp extends TraitementPaquet<TcpClient> {
 		List<Object> listeResultat = traitementI.carteFouille((List<CarteType>) Paquet.getValeur(message, 1), core);
 		String log = "";
 		if (!((CarteType) listeResultat.get(0)).equals(CarteType.NUL))
-			log += International.trad("texte.logchoixCarteFouille1")+" " + ((CarteType) listeResultat.get(0)).toString() + ".";
+			log += International.trad("texte.logchoixCarteFouille1") + " "
+					+ ((CarteType) listeResultat.get(0)).toString() + ".";
 		else
 			log += International.trad("texte.logchoixCarteFouille2");
 		if (!((CarteType) listeResultat.get(1)).equals(CarteType.NUL))
-			log += International.trad("texte.logchoixCarteFouille3")+" " + ((CarteType) listeResultat.get(1)).toString() + " "+International.trad("texte.logchoixCarteFouille4")+" "
+			log += International.trad("texte.logchoixCarteFouille3") + " "
+					+ ((CarteType) listeResultat.get(1)).toString() + " "
+					+ International.trad("texte.logchoixCarteFouille4") + " "
 					+ ((Couleur) listeResultat.get(3)).toString() + ".";
 		else
 			log += International.trad("texte.logchoixCarteFouille5");
 		if (!((CarteType) listeResultat.get(2)).equals(CarteType.NUL))
-			log += International.trad("texte.logchoixCarteFouille6")+" " + ((CarteType) listeResultat.get(2)).toString() + ".";
+			log += International.trad("texte.logchoixCarteFouille6") + " "
+					+ ((CarteType) listeResultat.get(2)).toString() + ".";
 		else
 			log += International.trad("texte.logchoixCarteFouille7");
 		Initializer.log(log);
@@ -685,8 +720,7 @@ public class TraitementPaquetTcp extends TraitementPaquet<TcpClient> {
 			out.println("Entrez une destination");
 			int dest = traitementI.choixDest(core);
 
-			String log = International.trad("texte.logchoixDestVigil1")+" "
-					+ IdjrTools.getLieuByIndex(dest) + ".";
+			String log = International.trad("texte.logchoixDestVigil1") + " " + IdjrTools.getLieuByIndex(dest) + ".";
 			Initializer.log(log);
 
 			String messageTcp = ControleurReseau.construirePaquetTcp("CDDCV", dest,
@@ -698,7 +732,7 @@ public class TraitementPaquetTcp extends TraitementPaquet<TcpClient> {
 		} else {
 			int dest = traitementI.choixDest(core);
 
-			String log = International.trad("texte.logchoixDestVigil2")+" " + IdjrTools.getLieuByIndex(dest) + ".";
+			String log = International.trad("texte.logchoixDestVigil2") + " " + IdjrTools.getLieuByIndex(dest) + ".";
 			Initializer.log(log);
 
 			String messageTcp = ControleurReseau.construirePaquetTcp("CDDJ", dest,
@@ -713,7 +747,7 @@ public class TraitementPaquetTcp extends TraitementPaquet<TcpClient> {
 		if (RJ.equals(CarteType.NUL))
 			log += International.trad("texte.logReponseJoueurCourant1");
 		else
-			log += International.trad("texte.logReponseJoueurCourant2")+" " + RJ.toString() + ".";
+			log += International.trad("texte.logReponseJoueurCourant2") + " " + RJ.toString() + ".";
 		Initializer.log(log);
 		String IDP = (String) Paquet.getValeur(message, 1);
 		int NT = (int) Paquet.getValeur(message, 2);
@@ -728,7 +762,8 @@ public class TraitementPaquetTcp extends TraitementPaquet<TcpClient> {
 		} else {
 
 			int dest = traitementI.choixDest(core);
-			String log = International.trad("texte.logchoisirDest1")+" " + IdjrTools.getLieuByIndex(dest) + " "+International.trad("texte.logchoisirDest2");
+			String log = International.trad("texte.logchoisirDest1") + " " + IdjrTools.getLieuByIndex(dest) + " "
+					+ International.trad("texte.logchoisirDest2");
 			Initializer.log(log);
 
 			String messageTcp = ControleurReseau.construirePaquetTcp("CDDJ", dest,
@@ -740,8 +775,8 @@ public class TraitementPaquetTcp extends TraitementPaquet<TcpClient> {
 	public void destZombieVengeur(Paquet Paquet, String message) {
 		out.println("Entrez une destination pour le zombie vengeur");
 		int dest = traitementI.choixDest(core);
-		String log = International.trad("texte.logdestZombieVengeur1")+" " + IdjrTools.getLieuByIndex(dest)
-				+ " "+International.trad("texte.logdestZombieVengeur2");
+		String log = International.trad("texte.logdestZombieVengeur1") + " " + IdjrTools.getLieuByIndex(dest) + " "
+				+ International.trad("texte.logdestZombieVengeur2");
 		Initializer.log(log);
 		String message1 = ControleurReseau.construirePaquetTcp("CDDZVJE", dest, Paquet.getValeur(message, 1),
 				Paquet.getValeur(message, 2), core.getJoueurId());
@@ -755,12 +790,13 @@ public class TraitementPaquetTcp extends TraitementPaquet<TcpClient> {
 	public void deplacerPion(Paquet Paquet, String message) {
 		List<Object> listRenvoye = traitementI.pionADeplacer(core, (int) Paquet.getValeur(message, 1),
 				(HashMap<Integer, List<Integer>>) Paquet.getValeur(message, 2));
-		String log = International.trad("texte.logdeplacerPion1")+" " + IdjrTools.getPionByIndex((Integer) listRenvoye.get(1))
-				+ " "+International.trad("texte.logdeplacerPion2") + IdjrTools.getLieuByIndex((Integer) listRenvoye.get(0));
+		String log = International.trad("texte.logdeplacerPion1") + " "
+				+ IdjrTools.getPionByIndex((Integer) listRenvoye.get(1)) + " "
+				+ International.trad("texte.logdeplacerPion2") + IdjrTools.getLieuByIndex((Integer) listRenvoye.get(0));
 		if (!((CarteType) listRenvoye.get(2)).equals(CarteType.NUL))
-			log += " "+International.trad("texte.logdeplacerPion3");
+			log += " " + International.trad("texte.logdeplacerPion3");
 		else
-			log += " "+International.trad("texte.logdeplacerPion4");
+			log += " " + International.trad("texte.logdeplacerPion4");
 		Initializer.log(log);
 		String messageTcp = ControleurReseau.construirePaquetTcp("DPR", (Integer) listRenvoye.get(0),
 				listRenvoye.get(1), listRenvoye.get(2), (String) Paquet.getValeur(message, 3),
@@ -777,8 +813,9 @@ public class TraitementPaquetTcp extends TraitementPaquet<TcpClient> {
 		out.println(Paquet.getDocs());
 		PionCouleur sacrifice = traitementI.choisirSacrifice(core, (List<?>) Paquet.getValeur(message, 2));
 
-		String log = International.trad("texte.logchoisirSacrifice1")+" "
-				+ IdjrTools.getPionByIndex(IdjrTools.getPionByValue(sacrifice)) + " "+International.trad("texte.logchoisirSacrifice2")+" "
+		String log = International.trad("texte.logchoisirSacrifice1") + " "
+				+ IdjrTools.getPionByIndex(IdjrTools.getPionByValue(sacrifice)) + " "
+				+ International.trad("texte.logchoisirSacrifice2") + " "
 				+ IdjrTools.getLieuByIndex((Integer) (int) Paquet.getValeur(message, 1)) + ".";
 		Initializer.log(log);
 
