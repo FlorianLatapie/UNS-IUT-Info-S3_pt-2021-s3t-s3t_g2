@@ -16,6 +16,7 @@ import reseau.type.VoteType;
 import static java.lang.System.out;
 
 import java.text.MessageFormat;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -321,7 +322,11 @@ public class TraitementPaquetTcp extends TraitementPaquet<TcpClient> {
 	private void logPECV(Paquet paquet, String message) {
 		String log = " "+International.trad("texte.logPECV1") + "\n"
 				+ International.trad("texte.logPECV2") + "\n";
-		for (Couleur c : (List<Couleur>) paquet.getValeur(message, 1))
+		List<Couleur> couleur = new ArrayList<>();
+		for (PionCouleur pc : (List<PionCouleur>) paquet.getValeur(message, 1))
+			if (!couleur.contains(IdjrTools.getCouleurByChar(pc)))
+				couleur.add(IdjrTools.getCouleurByChar(pc));
+		for (Couleur c : couleur)
 			log += core.getListeJoueursInitiale().get(c) + "\n";
 		log += International.trad("texte.logPECV3")+" " + (Integer) paquet.getValeur(message, 2) + " "+International.trad("texte.logPECV4");
 		Initializer.log(log);
