@@ -181,4 +181,9 @@ public abstract class Initializer {
 		for (IPlateauListener pl : listenerspl)
 			pl.quiJoue(val);
 	}
+	
+	public static void nbPlaceLieu(int lieu, int val) {
+		for (IPlateauListener pl : listenerspl)
+			pl.nbPlaceLieu(lieu, val);
+	}
 }
