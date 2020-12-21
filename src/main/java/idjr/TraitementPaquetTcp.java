@@ -404,27 +404,27 @@ public class TraitementPaquetTcp extends TraitementPaquet<TcpClient> {
 	}
 
 	private void logRAZDD(Paquet paquet, String message) {
-		String log = "Voulez vous utiliser une carte Defense pour l'attaque du lieu "
+		String log = International.trad("texte.logRAZDD")+" "
 				+ IdjrTools.getLieuByIndex((Integer) paquet.getValeur(message, 1)) + ".";
 		Initializer.log(log);
 
 	}
 
 	private void logFP(Paquet paquet, String message) {
-		String log = "La partie est fini.";
+		String log = International.trad("texte.logFP1");
 		if (((CondType) paquet.getValeur(message, 1)).equals(CondType.LIEUX))
-			log += " Tous les personnages sont dans le même lieux.";
+			log += " "+International.trad("texte.logFP2");
 		else if (((CondType) paquet.getValeur(message, 1)).equals(CondType.PION))
-			log += " Le nombre minimal de pion a été atteint.";
+			log += " "+International.trad("texte.logFP3");
 		Initializer.log(log);
 	}
 
 	private void logRAZIF(Paquet paquet, String message) {
-		String log = "Le pion "
+		String log = International.trad("texte.logRAZIF1")+" "
 				+ IdjrTools.getPionByIndex(IdjrTools.getPionByValue((PionCouleur) paquet.getValeur(message, 2)))
-				+ " du joueur " + IdjrTools.getCouleurByChar((PionCouleur) paquet.getValeur(message, 2))
-				+ " a été mangé sur le lieu " + IdjrTools.getLieuByIndex((Integer) paquet.getValeur(message, 1)) + ". ";
-		log += "Il reste " + (Integer) paquet.getValeur(message, 3) + " zombies sur le lieu.";
+				+ " "+International.trad("texte.logRAZIF2")+" " + IdjrTools.getCouleurByChar((PionCouleur) paquet.getValeur(message, 2))
+				+ " "+International.trad("texte.logRAZIF3")+" " + IdjrTools.getLieuByIndex((Integer) paquet.getValeur(message, 1)) + ". ";
+		log += International.trad("texte.logRAZIF4")+" " + (Integer) paquet.getValeur(message, 3) + " "+International.trad("texte.logRAZIF5");
 		Initializer.log(log);
 
 	}
@@ -432,89 +432,89 @@ public class TraitementPaquetTcp extends TraitementPaquet<TcpClient> {
 	private void logPRAZ(Paquet paquet, String message) {
 		String log = "";
 		if ((Integer) paquet.getValeur(message, 1) != 0)
-			log += "Le lieu " + IdjrTools.getLieuByIndex((Integer) paquet.getValeur(message, 1)) + "attire un zombie.";
+			log += International.trad("texte.logPRAZ1")+" " + IdjrTools.getLieuByIndex((Integer) paquet.getValeur(message, 1)) + " "+International.trad("texte.logPRAZ2");
 		if ((Integer) paquet.getValeur(message, 2) != 0)
-			log += "Le lieu " + IdjrTools.getLieuByIndex((Integer) paquet.getValeur(message, 2)) + "attire un zombie.";
+			log += International.trad("texte.logPRAZ1")+" " + IdjrTools.getLieuByIndex((Integer) paquet.getValeur(message, 2)) + " "+International.trad("texte.logPRAZ2");
 		Initializer.log(log);
 	}
 
 	private void logRAZDS(Paquet paquet, String message) {
-		String log = "Quel pion voulez vous sacrifier sur le lieu "
-				+ IdjrTools.getLieuByIndex((Integer) paquet.getValeur(message, 1)) + ".";
+		String log = International.trad("texte.logRAZDS")+" "
+				+ IdjrTools.getLieuByIndex((Integer) paquet.getValeur(message, 1)) + " ?";
 		Initializer.log(log);
 
 	}
 
 	private void logRAZA(Paquet paquet, String message) {
-		String log = "Il y a une attaque sur le lieu "
+		String log = International.trad("texte.logRAZA")+" "
 				+ IdjrTools.getLieuByIndex((Integer) paquet.getValeur(message, 1)) + ".";
 		Initializer.log(log);
 	}
 
 	private void logDPI(Paquet paquet, String message) {
-		String log = "Le joueur " + ((Couleur) paquet.getValeur(message, 1)).toString() + " a déplacé le pion "
-				+ IdjrTools.getPionByIndex((Integer) paquet.getValeur(message, 3)) + " sur le lieu"
+		String log = International.trad("texte.logLejoueur")+" " + ((Couleur) paquet.getValeur(message, 1)).toString() + " "+International.trad("texte.logDPI1")+" "
+				+ IdjrTools.getPionByIndex((Integer) paquet.getValeur(message, 3)) + " "+International.trad("texte.logDPI2")
 				+ IdjrTools.getLieuByIndex((Integer) paquet.getValeur(message, 2));
 		if (!((CarteType) paquet.getValeur(message, 4)).equals(CarteType.NUL))
-			log += " en utilisant une carte Sprint.";
+			log += " "+International.trad("texte.logDPI3");
 		else
-			log += " sans utiliser de carte Sprint.";
+			log += " "+International.trad("texte.logDPI4");
 
 		Initializer.log(log);
 
 	}
 
 	private void logDPD(Paquet paquet, String message) {
-		String log = "Choissisez un pion a deplacé sur le lieu "
+		String log = International.trad("texte.logDPD1")+" "
 				+ IdjrTools.getLieuByIndex((Integer) paquet.getValeur(message, 1))
-				+ " ou jouez une carte Sprint pour choisir aussi un nouveau lieu de destination.";
+				+ " "+International.trad("texte.logDPD2");
 		Initializer.log(log);
 
 	}
 
 	private void logPDP(Paquet paquet, String message) {
-		Initializer.log("La phase de déplacement des personnage commence.");
+		Initializer.log(International.trad("texte.logPDP"));
 
 	}
 
 	private void logCDZVI(Paquet paquet, String message) {
-		Initializer.log("Vous etes mort au tour precedent vous pouvez déposer un zombie vengeur sur un lieu");
+		Initializer.log(International.trad("texte.logCDZVI"));
 	}
 
 	private void logCDCDV(Paquet paquet, String message) {
-		String log = "Le chef des vigiles (Joueur " + ((Couleur) paquet.getValeur(message, 1)).toString()
-				+ ") a choisit le lieu " + IdjrTools.getLieuByIndex((Integer) paquet.getValeur(message, 2))
-				+ " comme destination.";
+		String log = International.trad("texte.logCDCDV1")+" " + ((Couleur) paquet.getValeur(message, 1)).toString()
+				+ International.trad("texte.logCDCDV2")+" " + IdjrTools.getLieuByIndex((Integer) paquet.getValeur(message, 2))
+				+ " "+International.trad("texte.logCDCDV3");
 		Initializer.log(log);
 
 	}
 
 	private void logPCD(Paquet paquet, String message) {
-		Initializer.log("La phase de choix d'une destination débute.");
+		Initializer.log(International.trad("texte.logPCD"));
 
 	}
 
 	private void logPAZ(Paquet paquet, String message) {
-		Initializer.log("La phase d'arrivée des zombies débute.");
+		Initializer.log(International.trad("texte.logPAZ"));
 
 	}
 
 	private void logIT(Paquet paquet, String message) {
-		Initializer.log("Le tour n° " + (Integer) paquet.getValeur(message, 4) + " commence.");
+		Initializer.log(International.trad("texte.logIT1")+" n° " + (Integer) paquet.getValeur(message, 4) + " "+International.trad("texte.logIT2"));
 	}
 
 	private void logPIIG(Paquet paquet, String message) {
-		String log = "Le joueur " + ((Couleur) paquet.getValeur(message, 1)).toString() + " a placé son pion "
-				+ IdjrTools.getPionByIndex((Integer) paquet.getValeur(message, 5)) + " sur le lieu : "
+		String log = International.trad("texte.logLejoueur")+" " + ((Couleur) paquet.getValeur(message, 1)).toString() + " "+International.trad("texte.logPIIG1")+" "
+				+ IdjrTools.getPionByIndex((Integer) paquet.getValeur(message, 5)) + " "+International.trad("texte.logPIIG2")+" : "
 				+ IdjrTools.getLieuByIndex((Integer) paquet.getValeur(message, 4)) + ".";
 		Initializer.log(log);
 	}
 
 	private void logPIRD(Paquet paquet, String message) {
 		List<Integer> lieuPossible = (List<Integer>) paquet.getValeur(message, 2);
-		String log = "Les résultats des dés sont " + ((List<Integer>) paquet.getValeur(message, 1)).get(0) + " et "
+		String log = International.trad("texte.logPIRD1")+" " + ((List<Integer>) paquet.getValeur(message, 1)).get(0) + " "+International.trad("texte.logPIRD2")+" "
 				+ ((List<Integer>) paquet.getValeur(message, 1)).get(1) + ".\n";
-		log += "Les possibilités de placement sont ";
+		log += International.trad("texte.logPIRD3")+" ";
 
 		for (int i = 0; i < lieuPossible.size() - 1; i++)
 			log += lieuPossible.get(i) + ", ";
@@ -524,19 +524,19 @@ public class TraitementPaquetTcp extends TraitementPaquet<TcpClient> {
 
 	private void logPIIJ(Paquet paquet, String message) {
 		
-		String log =  "Il vous reste à placer :";
+		String log =  International.trad("texte.logPIIJ1");
 		for (Integer i : (List<Integer>) paquet.getValeur(message, 2)) {
-			log += "\n" + "Votre " + IdjrTools.getPionByIndex(i) + ".";
+			log += "\n" + International.trad("texte.logPIIJ2")+" " + IdjrTools.getPionByIndex(i) + ".";
 		}
 		Initializer.log(log);
 	}
 
 	private void logDC(Paquet paquet, String message) {
-		Initializer.log("Vous avez reçu la carte : " + ((CarteType) paquet.getValeur(message, 1)).toString());
+		Initializer.log(International.trad("texte.logDC")+" : " + ((CarteType) paquet.getValeur(message, 1)).toString());
 	}
 
 	private void logIP(Paquet paquet, String message) {
-		Initializer.log("La partie commence!");
+		Initializer.log(International.trad("texte.logIP"));
 	}
 
 	private void arrivezombies(Paquet paquet, String message) {
@@ -568,7 +568,7 @@ public class TraitementPaquetTcp extends TraitementPaquet<TcpClient> {
 		Integer dest = traitementI.choisirDestPlacement(core, (List<?>) Paquet.getValeur(message, 1),
 				(List<?>) Paquet.getValeur(message, 2));
 		Integer pion = traitementI.choisirPionPlacement(core);
-		String log = "Vous avez choisit de déplacer le pion " + IdjrTools.getPionByIndex(pion) + " sur le lieu "
+		String log = International.trad("texte.logchoisirDestPion1")+" " + IdjrTools.getPionByIndex(pion) + " "+International.trad("texte.logchoisirDestPion2")+" "
 				+ IdjrTools.getLieuByIndex(dest) + ".";
 		Initializer.log(log);
 		ControleurReseau.envoyerTcp(ControleurReseau.construirePaquetTcp("PICD", dest, pion, m1, core.getJoueurId()));
@@ -578,7 +578,7 @@ public class TraitementPaquetTcp extends TraitementPaquet<TcpClient> {
 		out.println(Paquet.getDocs());
 		System.out.print("ChoisirQuiVoter");
 		Couleur choix = traitementI.getRandom(core, core.getVoteType());
-		String log = "Vous avez voté pour le joueur " + choix.toString() + ".";
+		String log = International.trad("texte.logChoisirQuiVoter")+" " + choix.toString() + ".";
 		Initializer.log(log);
 		String messageTcp = ControleurReseau.construirePaquetTcp("PVCV", choix, (String) Paquet.getValeur(message, 1),
 				(int) Paquet.getValeur(message, 2), core.getJoueurId());
@@ -593,7 +593,7 @@ public class TraitementPaquetTcp extends TraitementPaquet<TcpClient> {
 	public void IndiquerCarteJouees(Paquet Paquet, String message) {
 		out.println(Paquet.getDocs());
 		int nbCarteJouee = traitementI.IndiquerCarteJouees(core);
-		String log = "Vous jouez " + nbCarteJouee + " cartes menace.";
+		String log = International.trad("texte.logIndiquerCarteJouees1")+" " + nbCarteJouee + " "+International.trad("texte.logIndiquerCarteJouees2");
 		Initializer.log(log);
 
 		String messageTcp = ControleurReseau.construirePaquetTcp("PVC", nbCarteJouee,
@@ -611,20 +611,20 @@ public class TraitementPaquetTcp extends TraitementPaquet<TcpClient> {
 
 		List<CarteType> carteJouee = (List<CarteType>) listerenvoye.get(0);
 		List<Integer> pionCachee = (List<Integer>) listerenvoye.get(1);
-		String log = "Vous jouez les cartes : ";
+		String log = International.trad("texte.logfournirActionsDefense1")+" : ";
 		for (int i = 0; i < carteJouee.size() - 1; i++)
 			log += carteJouee.get(i).toString() + ", ";
 		log += carteJouee.get(carteJouee.size() - 1).toString();
 
-		log += " pour la défence du lieu " + IdjrTools.getLieuByIndex((Integer) Paquet.getValeur(message, 1)) + ".";
+		log += " "+International.trad("texte.logfournirActionsDefense2")+" " + IdjrTools.getLieuByIndex((Integer) Paquet.getValeur(message, 1)) + ".";
 
 		if (!pionCachee.isEmpty()) {
-			log += "Vous cachez les pions ";
+			log += International.trad("texte.logfournirActionsDefense3") +" ";
 			for (int i = 0; i < pionCachee.size() - 1; i++)
 				log += pionCachee.get(i).toString() + ", ";
 			log += pionCachee.get(pionCachee.size() - 1).toString() + ".";
 		} else
-			log += "Vous ne cachez pas de pion.";
+			log += International.trad("texte.logfournirActionsDefense4");
 		Initializer.log(log);
 
 		String messageTCP = ControleurReseau.construirePaquetTcp("RAZRD", listerenvoye.get(0), listerenvoye.get(1),
@@ -639,7 +639,7 @@ public class TraitementPaquetTcp extends TraitementPaquet<TcpClient> {
 		if (core.getCouleur() == c1) {
 			String m1 = (String) packet.getValeur(message, 3);
 			int m2 = (int) packet.getValeur(message, 4);
-			String log = "En tant que chef des vigiles vous lancez 4 dés pour l'arrivée des zombies.";
+			String log = International.trad("texte.loglanceDesChefVigil");
 			Initializer.log(log);
 			String messageTcp = ControleurReseau.construirePaquetTcp("AZLD", m1, m2, core.getJoueurId());
 			ControleurReseau.envoyerTcp(messageTcp);
@@ -651,18 +651,18 @@ public class TraitementPaquetTcp extends TraitementPaquet<TcpClient> {
 		List<Object> listeResultat = traitementI.carteFouille((List<CarteType>) Paquet.getValeur(message, 1), core);
 		String log = "";
 		if (!((CarteType) listeResultat.get(0)).equals(CarteType.NUL))
-			log += "Vous choissisez de garder la carte " + ((CarteType) listeResultat.get(0)).toString() + ".";
+			log += International.trad("texte.logchoixCarteFouille1")+" " + ((CarteType) listeResultat.get(0)).toString() + ".";
 		else
-			log += "Vous choissisez de ne pas garder de carte.";
+			log += International.trad("texte.logchoixCarteFouille2");
 		if (!((CarteType) listeResultat.get(1)).equals(CarteType.NUL))
-			log += "Vous choissisez de donner la carte " + ((CarteType) listeResultat.get(1)).toString() + " au joueur "
+			log += International.trad("texte.logchoixCarteFouille3")+" " + ((CarteType) listeResultat.get(1)).toString() + " "+International.trad("texte.logchoixCarteFouille4")+" "
 					+ ((Couleur) listeResultat.get(3)).toString() + ".";
 		else
-			log += "Vous choissisez de ne pas donner de carte.";
+			log += International.trad("texte.logchoixCarteFouille5");
 		if (!((CarteType) listeResultat.get(2)).equals(CarteType.NUL))
-			log += "Vous choissisez de defausser la carte " + ((CarteType) listeResultat.get(2)).toString() + ".";
+			log += International.trad("texte.logchoixCarteFouille6")+" " + ((CarteType) listeResultat.get(2)).toString() + ".";
 		else
-			log += "Vous choissisez de ne pas defausser de carte.";
+			log += International.trad("texte.logchoixCarteFouille7");
 		Initializer.log(log);
 		ControleurReseau.envoyerTcp(ControleurReseau.construirePaquetTcp("SCFC", (CarteType) listeResultat.get(0),
 				(CarteType) listeResultat.get(1), (Couleur) listeResultat.get(3), (CarteType) listeResultat.get(2),
@@ -680,7 +680,7 @@ public class TraitementPaquetTcp extends TraitementPaquet<TcpClient> {
 			out.println("Entrez une destination");
 			int dest = traitementI.choixDest(core);
 
-			String log = "En tant que chef des vigiles vous avez choisit comme destination le lieu "
+			String log = International.trad("texte.logchoixDestVigil1")+" "
 					+ IdjrTools.getLieuByIndex(dest) + ".";
 			Initializer.log(log);
 
@@ -693,7 +693,7 @@ public class TraitementPaquetTcp extends TraitementPaquet<TcpClient> {
 		} else {
 			int dest = traitementI.choixDest(core);
 
-			String log = "Vous avez choisit comme destination le lieu " + IdjrTools.getLieuByIndex(dest) + ".";
+			String log = International.trad("texte.logchoixDestVigil2")+" " + IdjrTools.getLieuByIndex(dest) + ".";
 			Initializer.log(log);
 
 			String messageTcp = ControleurReseau.construirePaquetTcp("CDDJ", dest,
@@ -706,9 +706,9 @@ public class TraitementPaquetTcp extends TraitementPaquet<TcpClient> {
 		CarteType RJ = traitementI.ReponseJoueurCourant(core);
 		String log = "";
 		if (RJ.equals(CarteType.NUL))
-			log += "Vous choissisez de ne pas jouer de carte.";
+			log += International.trad("texte.logReponseJoueurCourant1");
 		else
-			log += "Vous choissisez de jouez la carte " + RJ.toString() + ".";
+			log += International.trad("texte.logReponseJoueurCourant2")+" " + RJ.toString() + ".";
 		Initializer.log(log);
 		String IDP = (String) Paquet.getValeur(message, 1);
 		int NT = (int) Paquet.getValeur(message, 2);
@@ -723,7 +723,7 @@ public class TraitementPaquetTcp extends TraitementPaquet<TcpClient> {
 		} else {
 
 			int dest = traitementI.choixDest(core);
-			String log = "Vous choissisez le lieu " + IdjrTools.getLieuByIndex(dest) + " comme destination.";
+			String log = International.trad("texte.logchoisirDest1")+" " + IdjrTools.getLieuByIndex(dest) + " "+International.trad("texte.logchoisirDest2");
 			Initializer.log(log);
 
 			String messageTcp = ControleurReseau.construirePaquetTcp("CDDJ", dest,
@@ -735,8 +735,8 @@ public class TraitementPaquetTcp extends TraitementPaquet<TcpClient> {
 	public void destZombieVengeur(Paquet Paquet, String message) {
 		out.println("Entrez une destination pour le zombie vengeur");
 		int dest = traitementI.choixDest(core);
-		String log = "Vous choissisez le lieu " + IdjrTools.getLieuByIndex(dest)
-				+ " comme destination pour le zombie vengeur.";
+		String log = International.trad("texte.logdestZombieVengeur1")+" " + IdjrTools.getLieuByIndex(dest)
+				+ " "+International.trad("texte.logdestZombieVengeur2");
 		Initializer.log(log);
 		String message1 = ControleurReseau.construirePaquetTcp("CDDZVJE", dest, Paquet.getValeur(message, 1),
 				Paquet.getValeur(message, 2), core.getJoueurId());
@@ -750,12 +750,12 @@ public class TraitementPaquetTcp extends TraitementPaquet<TcpClient> {
 	public void deplacerPion(Paquet Paquet, String message) {
 		List<Object> listRenvoye = traitementI.pionADeplacer(core, (int) Paquet.getValeur(message, 1),
 				(HashMap<Integer, List<Integer>>) Paquet.getValeur(message, 2));
-		String log = "Vous choissisez de déplacer votre pion " + IdjrTools.getPionByIndex((Integer) listRenvoye.get(1))
-				+ " sur le lieu" + IdjrTools.getLieuByIndex((Integer) listRenvoye.get(0));
+		String log = International.trad("texte.logdeplacerPion1")+" " + IdjrTools.getPionByIndex((Integer) listRenvoye.get(1))
+				+ " "+International.trad("texte.logdeplacerPion2") + IdjrTools.getLieuByIndex((Integer) listRenvoye.get(0));
 		if (!((CarteType) listRenvoye.get(2)).equals(CarteType.NUL))
-			log += " en utilisant une carte Sprint.";
+			log += " "+International.trad("texte.logdeplacerPion3");
 		else
-			log += " sans utiliser de carte Sprint.";
+			log += " "+International.trad("texte.logdeplacerPion4");
 		Initializer.log(log);
 		String messageTcp = ControleurReseau.construirePaquetTcp("DPR", (Integer) listRenvoye.get(0),
 				listRenvoye.get(1), listRenvoye.get(2), (String) Paquet.getValeur(message, 3),
@@ -772,8 +772,8 @@ public class TraitementPaquetTcp extends TraitementPaquet<TcpClient> {
 		out.println(Paquet.getDocs());
 		PionCouleur sacrifice = traitementI.choisirSacrifice(core, (List<?>) Paquet.getValeur(message, 2));
 
-		String log = "Vous avez choisit de sacrifier votre "
-				+ IdjrTools.getPionByIndex(IdjrTools.getPionByValue(sacrifice)) + " sur le lieu "
+		String log = International.trad("texte.logchoisirSacrifice1")+" "
+				+ IdjrTools.getPionByIndex(IdjrTools.getPionByValue(sacrifice)) + " "+International.trad("texte.logchoisirSacrifice2")+" "
 				+ IdjrTools.getLieuByIndex((Integer) (int) Paquet.getValeur(message, 1)) + ".";
 		Initializer.log(log);
 
