@@ -4,6 +4,7 @@ import reseau.paquet.Paquet;
 import reseau.socket.ControleurReseau;
 import reseau.socket.TcpClient;
 import reseau.socket.TraitementPaquet;
+import reseau.type.CarteEtat;
 import reseau.type.CarteType;
 import reseau.type.CondType;
 import reseau.type.Couleur;
@@ -338,7 +339,7 @@ public class TraitementPaquetTcp extends TraitementPaquet<TcpClient> {
 			log += International.trad("texte.logLejoueur")+" " + ((Couleur) paquet.getValeur(message, 1)).toString() + " "+International.trad("texte.logRFC4") + "\n";
 		else
 			log += International.trad("texte.logRFC5") + "\n";
-		if (!((CarteType) paquet.getValeur(message, 3)).equals(CarteType.NUL))
+		if (!((CarteEtat) paquet.getValeur(message, 3)).equals(CarteEtat.NUL))
 			log += International.trad("texte.logRFC6");
 		else
 			log += International.trad("texte.logRFC7");
