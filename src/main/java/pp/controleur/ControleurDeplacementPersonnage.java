@@ -27,12 +27,14 @@ public class ControleurDeplacementPersonnage {
 				deplacePerso(cj, jeu, compteur, j, destination, partieId, numeroTour);
 				compteur ++;
 			}
+			Initializer.nbPlaceLieuAll(new ArrayList<>(jeu.getLieux().values()));
 		}
 		for (Joueur j : jeu.getJoueurs().values()) {
 			if (j.isEnVie() && !(j.isChefDesVigiles())) {
 				deplacePerso(cj, jeu, compteur, j, destination, partieId, numeroTour);
 				compteur ++;
 			}
+			Initializer.nbPlaceLieuAll(new ArrayList<>(jeu.getLieux().values()));
 		}
 	}
 
