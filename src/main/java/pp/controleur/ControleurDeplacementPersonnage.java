@@ -18,31 +18,31 @@ public class ControleurDeplacementPersonnage {
 		cfp = new ControleurFinPartie();
 	}
 
-	public void phaseDeplacementPerso(Partie jeu, List<Integer> destination, List<Integer> zombie, String partieId,
+	public void phaseDeplacementPerso(ControleurJeu cj,Partie jeu, List<Integer> destination, List<Integer> zombie, String partieId,
 			int numeroTour) {
 		dr.debutPhaseDeplacement(jeu, destination, zombie, partieId, numeroTour);
 		int compteur = 0;
 		for (Joueur j : jeu.getJoueurs().values()) {
 			if (j.isEnVie() && j.isChefDesVigiles()) {
-				deplacePerso(jeu, compteur, j, destination, partieId, numeroTour);
+				deplacePerso(cj, jeu, compteur, j, destination, partieId, numeroTour);
 				compteur ++;
 			}
 		}
 		for (Joueur j : jeu.getJoueurs().values()) {
 			if (j.isEnVie() && !(j.isChefDesVigiles())) {
-				deplacePerso(jeu, compteur, j, destination, partieId, numeroTour);
+				deplacePerso(cj, jeu, compteur, j, destination, partieId, numeroTour);
 				compteur ++;
 			}
 		}
 	}
 
-	private void deplacePerso(Partie jeu, Integer compteur, Joueur j, List<Integer> destination, String partieId,
+	private void deplacePerso(ControleurJeu cj, Partie jeu, Integer compteur, Joueur j, List<Integer> destination, String partieId,
 			int numeroTour) {
 		dr.demanderDeplacements(jeu, j, destination.get(compteur), partieId, numeroTour);
 		List<Object> recupDeplacement = dr.recupDeplacemnt(j);
 		jeu.deplacePerso(j, PpTools.valeurToIndex((int) recupDeplacement.get(1)), (int) recupDeplacement.get(0));
-		cfp.finJeu(jeu, partieId, numeroTour);
-		if (ControleurJeu.isFinished)
+		cfp.finJeu(cj, jeu, partieId, numeroTour);
+		if (cj.isFinished())
 			return;
 		jeu.fermerLieu();
 		dr.informerDeplacment(jeu, j, (int) recupDeplacement.get(0), (int) recupDeplacement.get(1),

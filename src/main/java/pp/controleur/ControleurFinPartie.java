@@ -23,14 +23,14 @@ public class ControleurFinPartie {
 		fjr = new FinJeuReseau();
 	}
 
-	public void finJeu(Partie jeu, String partieId, int numeroTour) {
+	public void finJeu(ControleurJeu cj, Partie jeu, String partieId, int numeroTour) {
 		List<Object> lo = initFinPartie(jeu);
 		List<Lieu> lieu = (List<Lieu>) lo.get(0);
 		int nbPerso = (int) lo.get(1);
 		if (condFinJeu(jeu, lieu, nbPerso)) {
 			CondType cond = definirCondFin(jeu, lieu);
 			Joueur vainqueur = definirVainqueur(jeu);
-			ControleurJeu.isFinished = true;
+			cj.setFinished(true);
 			fjr.indiqueFinPartie(jeu, vainqueur, cond, partieId, numeroTour);
 			Initializer.finPartie();
 			Initializer.getGagnant(vainqueur);

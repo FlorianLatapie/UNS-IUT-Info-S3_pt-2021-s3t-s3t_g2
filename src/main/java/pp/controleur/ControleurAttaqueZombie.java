@@ -28,7 +28,7 @@ public class ControleurAttaqueZombie {
 		azr = new AttaqueZombieReseau();
 	}
 
-	public void phaseAttaqueZombie(Partie jeu, String partieId, int numeroTour) {
+	public void phaseAttaqueZombie(ControleurJeu cj, Partie jeu, String partieId, int numeroTour) {
 		List<Integer> nb = jeu.lastAttaqueZombie();
 		Initializer.nbZombiesLieuAll(new ArrayList<>(jeu.getLieux().values()));
 		azr.debuteAttaque(jeu, nb, partieId, numeroTour);
@@ -40,15 +40,15 @@ public class ControleurAttaqueZombie {
 						while (lieu.getNbZombies() != 0 && !lieu.getPersonnage().isEmpty()) {
 							attaqueZombie(jeu, lieu, partieId, numeroTour);
 							lieu.setNbZombies(lieu.getNbZombies() - 1);
-							cfp.finJeu(jeu, partieId, numeroTour);
-							if (ControleurJeu.isFinished)
+							cfp.finJeu(cj, jeu, partieId, numeroTour);
+							if (cj.isFinished())
 								return;
 						}
 					} else {
 						attaqueZombie(jeu, lieu, partieId, numeroTour);
 						lieu.setNbZombies(0);
-						cfp.finJeu(jeu, partieId, numeroTour);
-						if (ControleurJeu.isFinished)
+						cfp.finJeu(cj, jeu, partieId, numeroTour);
+						if (cj.isFinished())
 							return;
 					}
 				}

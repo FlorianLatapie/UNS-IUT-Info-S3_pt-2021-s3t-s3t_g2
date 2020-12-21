@@ -47,8 +47,8 @@ public class ControleurJeu {
 
 	private List<Joueur> joueurs;
 	private List<Integer> lieuZombie;
-	private boolean couleurPret = false;
-	static boolean isFinished = false;
+	private boolean couleurPret;
+	private boolean isFinished;
 
 	private ControleurFouilleCamion cfc;
 	private ControleurElectionVigile cev;
@@ -64,6 +64,8 @@ public class ControleurJeu {
 	public ControleurJeu(String nom, int njr, int njv) throws IOException {
 		if (njr + njv > 6 || njr + njv < 3)
 			throw new IllegalArgumentException("Mauvais nombre de joueur");
+		this.isFinished = false;
+		this.couleurPret = false;
 		this.jmort = new ArrayList<>();
 		this.tempPaquet = new ArrayList<>();
 		this.nomPartie = nom;
@@ -80,6 +82,7 @@ public class ControleurJeu {
 		this.cdp = new ControleurDeplacementPersonnage();
 		this.cfp = new ControleurFinPartie();
 		this.catz = new ControleurAttaqueZombie();
+		
 
 		this.statut = Statut.ATTENTE;
 		initReseau();
@@ -245,20 +248,20 @@ public class ControleurJeu {
 		ArrayList<Integer> destination = new ArrayList<>();
 		ccd.phasechoixDestination(jeu, destination, jmort, partieId, numeroTour);
 		jeu.entreZombie(lieuZombie);
-		cdp.phaseDeplacementPerso(jeu, destination, lieuZombie, partieId, numeroTour);
+		cdp.phaseDeplacementPerso(this, jeu, destination, lieuZombie, partieId, numeroTour);
 		if (isFinished)
 			return;
-		cfp.finJeu(jeu, partieId, numeroTour);
+		cfp.finJeu(this, jeu, partieId, numeroTour);
 		if (isFinished)
 			return;
 		Initializer.nbZombiesLieuAll(new ArrayList<>(jeu.getLieux().values()));
 		jeu.fermerLieu();
 		Initializer.lieuFermeAll(new ArrayList<>(jeu.getLieux().values()));
 		Initializer.lieuOuvertAll(new ArrayList<>(jeu.getLieux().values()));
-		cfp.finJeu(jeu, partieId, numeroTour);
+		cfp.finJeu(this, jeu, partieId, numeroTour);
 		if (isFinished)
 			return;
-		catz.phaseAttaqueZombie(jeu, partieId, numeroTour);
+		catz.phaseAttaqueZombie(this, jeu, partieId, numeroTour);
 		if (isFinished)
 			return;
 		jmort.clear();
@@ -321,4 +324,14 @@ public class ControleurJeu {
 	public void setLieuZombie(ArrayList<Integer> lieuZombie) {
 		this.lieuZombie = lieuZombie;
 	}
+
+	public boolean isFinished() {
+		return isFinished;
+	}
+
+	public void setFinished(boolean isFinished) {
+		this.isFinished = isFinished;
+	}
+	
+	
 }
