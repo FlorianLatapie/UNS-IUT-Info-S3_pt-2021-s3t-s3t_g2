@@ -144,8 +144,9 @@ public class ConfigPartiePane extends StackPane implements IConfigListener, ITra
 
 		// Only allowed to select single row in the ListView.
 		listView.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
-		listView.setPrefWidth(600);
-		listView.setMaxWidth(600);
+		listView.setPrefWidth(1200);
+		listView.setMaxWidth(1200);
+		listView.setMinWidth(1200);
 		listView.setEditable(false);
 		listView.setStyle(
 				"-fx-background-color: white;-fx-control-inner-background: #1A1A1A ; -fx-control-inner-background-alt: derive(-fx-control-inner-background, 15%);");
@@ -171,7 +172,7 @@ public class ConfigPartiePane extends StackPane implements IConfigListener, ITra
 		bPbConnexion.setStyle(styleBoutons);
 		bPbConnexion.setOnMouseEntered(event -> bPbConnexion.setStyle(styleBoutonsSouris));
 		bPbConnexion.setOnMouseExited(event -> bPbConnexion.setStyle(styleBoutons));
-		bPbConnexion.setTranslateX(240);
+		bPbConnexion.setTranslateX(540);
 
 		VBox vbCenter = new VBox();
 		vbCenter.setAlignment(Pos.CENTER);
