@@ -34,6 +34,7 @@ public class ControleurPlacementPersonnage {
 				jeu.placePerso(j, PpTools.valeurToIndex(choisirDest.get(1)), choisirDest.get(0));
 				pr.informerPlacement(jeu, j, des, listePion, choisirDest.get(0), choisirDest.get(1), partieId);
 				Initializer.destionationPersoAll(new ArrayList<>(jeu.getLieux().values()));
+				Initializer.nbPlaceLieuAll(new ArrayList<>(jeu.getLieux().values()));
 			}
 		}
 	}
