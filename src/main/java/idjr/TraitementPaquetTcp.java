@@ -308,7 +308,7 @@ public class TraitementPaquetTcp extends TraitementPaquet<TcpClient> {
 	}
 
 	private void logRECV(Paquet paquet, String message) {
-		String log = " "+ International.trad("texte.logRECV1") + "\n";
+		String log = " "+ International.trad("texte.logRECV1") + "\n ";
 		if (!((Couleur) paquet.getValeur(message, 1)).equals(Couleur.NUL))
 			log += International.trad("texte.logRECV2")+ " " + core.getListeJoueursInitiale().get(((Couleur) paquet.getValeur(message, 1)))
 					+ ".";
@@ -320,30 +320,30 @@ public class TraitementPaquetTcp extends TraitementPaquet<TcpClient> {
 	}
 
 	private void logPECV(Paquet paquet, String message) {
-		String log = " "+International.trad("texte.logPECV1") + "\n"
-				+ International.trad("texte.logPECV2") + "\n";
+		String log = " "+International.trad("texte.logPECV1") + "\n "
+				+ International.trad("texte.logPECV2") + "\n ";
 		List<Couleur> couleur = new ArrayList<>();
 		for (PionCouleur pc : (List<PionCouleur>) paquet.getValeur(message, 1))
 			if (!couleur.contains(IdjrTools.getCouleurByChar(pc)))
 				couleur.add(IdjrTools.getCouleurByChar(pc));
 		for (Couleur c : couleur)
-			log += core.getListeJoueursInitiale().get(c) + "\n";
+			log += core.getListeJoueursInitiale().get(c) + "\n ";
 		log += International.trad("texte.logPECV3")+" " + (Integer) paquet.getValeur(message, 2) + " "+International.trad("texte.logPECV4");
 		Initializer.log(log);
 
 	}
 
 	private void logRFC(Paquet paquet, String message) {
-		String log = " "+International.trad("texte.logRFC1") + "\n";
+		String log = " "+International.trad("texte.logRFC1") + "\n ";
 		if (!((Couleur) paquet.getValeur(message, 1)).equals(Couleur.NUL))
 			log += International.trad("texte.logLejoueur")+" " + ((Couleur) paquet.getValeur(message, 1)).toString()
-					+ " "+International.trad("texte.logRFC2") + "\n";
+					+ " "+International.trad("texte.logRFC2") + "\n ";
 		else
-			log += International.trad("texte.logRFC3") + "\n";
+			log += International.trad("texte.logRFC3") + "\n ";
 		if (!((Couleur) paquet.getValeur(message, 2)).equals(Couleur.NUL))
-			log += International.trad("texte.logLejoueur")+" " + ((Couleur) paquet.getValeur(message, 1)).toString() + " "+International.trad("texte.logRFC4") + "\n";
+			log += International.trad("texte.logLejoueur")+" " + ((Couleur) paquet.getValeur(message, 1)).toString() + " "+International.trad("texte.logRFC4") + "\n ";
 		else
-			log += International.trad("texte.logRFC5") + "\n";
+			log += International.trad("texte.logRFC5") + "\n ";
 		if (!((CarteEtat) paquet.getValeur(message, 3)).equals(CarteEtat.NUL))
 			log += International.trad("texte.logRFC6");
 		else
@@ -365,10 +365,10 @@ public class TraitementPaquetTcp extends TraitementPaquet<TcpClient> {
 	}
 
 	private void logPFC(Paquet paquet, String message) {
-		String log = " "+ International.trad("texte.logPFC1") + "\n" + International.trad("texte.logPFC2")
-				+ "\n";
+		String log = " "+ International.trad("texte.logPFC1") + "\n " + International.trad("texte.logPFC2")
+				+ "\n ";
 		for (PionCouleur c : (List<PionCouleur>) paquet.getValeur(message, 1))
-			log += core.getListeJoueursInitiale().get(IdjrTools.getCouleurByChar(c)) + "\n";
+			log += core.getListeJoueursInitiale().get(IdjrTools.getCouleurByChar(c)) + "\n ";
 		log += International.trad("texte.logPFC3")+" " + (Integer) paquet.getValeur(message, 2) + " "+International.trad("texte.logPFC4");
 		Initializer.log(log);
 
@@ -519,7 +519,7 @@ public class TraitementPaquetTcp extends TraitementPaquet<TcpClient> {
 	private void logPIRD(Paquet paquet, String message) {
 		List<Integer> lieuPossible = (List<Integer>) paquet.getValeur(message, 2);
 		String log = International.trad("texte.logPIRD1")+" " + ((List<Integer>) paquet.getValeur(message, 1)).get(0) + " "+International.trad("texte.logPIRD2")+" "
-				+ ((List<Integer>) paquet.getValeur(message, 1)).get(1) + ".\n";
+				+ ((List<Integer>) paquet.getValeur(message, 1)).get(1) + ".\n ";
 		log += International.trad("texte.logPIRD3")+" ";
 
 		for (int i = 0; i < lieuPossible.size() - 1; i++)
@@ -532,7 +532,7 @@ public class TraitementPaquetTcp extends TraitementPaquet<TcpClient> {
 		
 		String log =  International.trad("texte.logPIIJ1");
 		for (Integer i : (List<Integer>) paquet.getValeur(message, 2)) {
-			log += "\n" + International.trad("texte.logPIIJ2")+" " + IdjrTools.getPionByIndex(i) + ".";
+			log += "\n " + International.trad("texte.logPIIJ2")+" " + IdjrTools.getPionByIndex(i) + ".";
 		}
 		Initializer.log(log);
 	}
