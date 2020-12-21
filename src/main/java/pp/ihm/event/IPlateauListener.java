@@ -31,4 +31,6 @@ public interface IPlateauListener {
     void electionChef(String message);
 
 	void nomJoueur(int joueur, Couleur couleur, String val);
+
+	void quiJoue(int joueur);
 }
