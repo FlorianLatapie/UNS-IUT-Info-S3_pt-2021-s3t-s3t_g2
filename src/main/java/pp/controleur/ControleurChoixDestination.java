@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import pp.Joueur;
 import pp.Partie;
+import pp.ihm.event.EvenementStockage;
 import pp.ihm.event.Initializer;
 import pp.reseau.ChoixDestinationReseau;
 import reseau.type.VigileEtat;
@@ -33,6 +34,9 @@ public class ControleurChoixDestination {
 		cdr.informerDestChefVigile(jeu, dest, partieId, numeroTour);
 		Initializer.prevenirDeplacementVigile("Le chef des vigile (" + jeu.getChefVIgile().getCouleur()
 				+ ") a choisi la detination :" + jeu.getLieux().get(dest));
+		while (!EvenementStockage.isPopupAccepter())
+			Thread.yield();
+		EvenementStockage.setPopupAccepter(false);
 		for (Joueur j : jeu.getJoueurs().values())
 			if (!j.isChefDesVigiles() && j.isEnVie())
 				destination.add(cdr.indiqueChoixDest(j));

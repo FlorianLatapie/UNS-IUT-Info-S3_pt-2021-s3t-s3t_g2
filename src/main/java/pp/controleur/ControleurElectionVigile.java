@@ -2,6 +2,7 @@ package pp.controleur;
 
 import pp.Joueur;
 import pp.Partie;
+import pp.ihm.event.EvenementStockage;
 import pp.ihm.event.Initializer;
 import pp.reseau.electionChefVigileReseau;
 import reseau.socket.ControleurReseau;
@@ -28,15 +29,24 @@ public class ControleurElectionVigile {
 				newVigile(jeu, j);
 				ecvr.informerElectionChefVigile(jeu, jeu.getChefVIgile().getCouleur(), partieId, numeroTour);
 				Initializer.electionChef("Nouveau chef des vigiles : " + jeu.getChefVIgile());
+				while (!EvenementStockage.isPopupAccepter())
+					Thread.yield();
+				EvenementStockage.setPopupAccepter(false);
 			} else {
 				jeu.setNewChef(false);
 				ecvr.informerElectionChefVigile(jeu, Couleur.NUL, partieId, numeroTour);
 				Initializer.electionChef("Il n'y a pas de nouveau chef des vigiles");
+				while (!EvenementStockage.isPopupAccepter())
+					Thread.yield();
+				EvenementStockage.setPopupAccepter(false);
 			}
 		} else {
 			noNewVigile(jeu);
 			ecvr.informerElectionChefVigile(jeu, Couleur.NUL, partieId, numeroTour);
 			Initializer.electionChef("Il n'y a pas de nouveau chef des vigiles");
+			while (!EvenementStockage.isPopupAccepter())
+				Thread.yield();
+			EvenementStockage.setPopupAccepter(false);
 		}
 	}
 

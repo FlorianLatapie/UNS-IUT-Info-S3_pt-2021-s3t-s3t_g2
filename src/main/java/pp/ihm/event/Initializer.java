@@ -193,4 +193,9 @@ public abstract class Initializer {
 		for (IPlateauListener pl : listenerspl)
 			pl.nbPlaceLieu(lieu, val);
 	}
+	
+	public static void choiCouleur(List<Couleur> couleur) {
+		for (IPlateauListener pl : listenerspl)
+			pl.choiCouleur(couleur);
+	}
 }

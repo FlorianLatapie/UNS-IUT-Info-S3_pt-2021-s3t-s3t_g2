@@ -48,6 +48,16 @@ public class ControleurJeu {
 	private List<Joueur> joueurs;
 	private List<Integer> lieuZombie;
 	private boolean couleurPret;
+
+	public boolean isPlacerJoueur() {
+		return placerJoueur;
+	}
+
+	public void setPlacerJoueur(boolean placerJoueur) {
+		this.placerJoueur = placerJoueur;
+	}
+
+	private boolean placerJoueur;
 	private boolean isFinished;
 
 	private ControleurFouilleCamion cfc;
@@ -66,6 +76,7 @@ public class ControleurJeu {
 			throw new IllegalArgumentException("Mauvais nombre de joueur");
 		this.isFinished = false;
 		this.couleurPret = false;
+		this.placerJoueur = false;
 		this.jmort = new ArrayList<>();
 		this.tempPaquet = new ArrayList<>();
 		this.nomPartie = nom;
@@ -117,12 +128,21 @@ public class ControleurJeu {
 			statut = Statut.COMPLETE;
 			joueurs.get(0).setChefDesVigiles(true);
 			jeu = new Partie(joueurs);
-			updateValues();
+
+			Initializer.nomJoueurs(new ArrayList<>(jeu.getJoueurs().values()));
 
 			while (!couleurPret)
 				Thread.yield();
-
+			
+			Initializer.choiCouleur(getJoueursCouleurs());
+			
+			while (!placerJoueur)
+				Thread.yield();
+			
 			Initializer.nomJoueurAll(new ArrayList<>(jeu.getJoueurs().values()));
+
+			updateValues();
+			
 			try {
 				demarerJeu();
 			} catch (InterruptedException e) {

@@ -1,17 +1,25 @@
 package pp.ihm;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
 
+import com.sun.glass.events.MouseEvent;
+
 import pp.Personnage;
 import pp.ihm.DataControl.ApplicationPane;
+import pp.ihm.event.EvenementStockage;
 import pp.ihm.event.IPlateauListener;
 import pp.ihm.langues.ITraduction;
 import pp.ihm.langues.International;
 import reseau.type.Couleur;
 import javafx.animation.FadeTransition;
 import javafx.application.Platform;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
+import javafx.event.Event;
+import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
@@ -24,6 +32,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.TextAlignment;
+import javafx.stage.Popup;
 import javafx.util.Duration;
 
 public class PlateauPane extends StackPane implements IPlateauListener, ITraduction {
@@ -193,6 +202,13 @@ public class PlateauPane extends StackPane implements IPlateauListener, ITraduct
 	Label nbPlace4;
 	Label nbPlace5;
 	Label nbPlace6;
+
+	BorderPane b1;
+	BorderPane b2;
+	BorderPane b3;
+	BorderPane b4;
+	BorderPane b5;
+	BorderPane b6;
 
 	public PlateauPane(ScreenControl sc, Core c) {
 		core = c;
@@ -448,7 +464,7 @@ public class PlateauPane extends StackPane implements IPlateauListener, ITraduct
 		nbPlace1.setFont(Font.font("Segoe UI", FontWeight.BOLD, 20));
 		nbPlace1.setTextFill(Color.WHITE);
 
-		BorderPane b1 = new BorderPane();
+		b1 = new BorderPane();
 		b1.setPadding(new Insets(5));
 		b1.setPrefSize(320, 210);
 		b1.setMaxSize(320, 210);
@@ -458,7 +474,7 @@ public class PlateauPane extends StackPane implements IPlateauListener, ITraduct
 
 		b1.setCenter(joueursPresents1);
 		b1.setRight(vbRight1);
-		//b1.setOpacity(.9);
+		// b1.setOpacity(.9);
 
 		b1.setRotate(128);
 
@@ -499,7 +515,7 @@ public class PlateauPane extends StackPane implements IPlateauListener, ITraduct
 		nbPlace2.setFont(Font.font("Segoe UI", FontWeight.BOLD, 20));
 		nbPlace2.setTextFill(Color.WHITE);
 
-		BorderPane b2 = new BorderPane();
+		b2 = new BorderPane();
 		b2.setPadding(new Insets(5));
 		b2.setPrefSize(320, 215);
 		b2.setMaxSize(320, 215);
@@ -509,7 +525,7 @@ public class PlateauPane extends StackPane implements IPlateauListener, ITraduct
 
 		b2.setCenter(joueursPresents2);
 		b2.setRight(vbRight2);
-		//b2.setOpacity(.9);
+		// b2.setOpacity(.9);
 		b2.setRotate(-133);
 
 		AnchorPane.setTopAnchor(b2, 725.0);
@@ -549,7 +565,7 @@ public class PlateauPane extends StackPane implements IPlateauListener, ITraduct
 		nbZombies3.setFont(fontInfo);
 		nbZombies3.setTextFill(Color.GREEN);
 
-		BorderPane b3 = new BorderPane();
+		b3 = new BorderPane();
 		b3.setPadding(new Insets(5));
 		b3.setPrefSize(325, 210);
 		b3.setMaxSize(325, 210);
@@ -559,7 +575,7 @@ public class PlateauPane extends StackPane implements IPlateauListener, ITraduct
 
 		b3.setCenter(joueursPresents3);
 		b3.setRight(vbRight3);
-		//b3.setOpacity(.9);
+		// b3.setOpacity(.9);
 
 		b3.setRotate(-62);
 
@@ -662,7 +678,7 @@ public class PlateauPane extends StackPane implements IPlateauListener, ITraduct
 		nbPlace4.setFont(Font.font("Segoe UI", FontWeight.BOLD, 20));
 		nbPlace4.setTextFill(Color.WHITE);
 
-		BorderPane b4 = new BorderPane();
+		b4 = new BorderPane();
 		b4.setPadding(new Insets(5));
 		b4.setPrefSize(270, 210);
 		b4.setMaxSize(270, 210);
@@ -672,7 +688,7 @@ public class PlateauPane extends StackPane implements IPlateauListener, ITraduct
 
 		b4.setCenter(joueursPresents4);
 		b4.setRight(vbRight4);
-		//b4.setOpacity(.9);
+		// b4.setOpacity(.9);
 
 		AnchorPane.setTopAnchor(b4, 440.0);
 		AnchorPane.setLeftAnchor(b4, 365.0);
@@ -708,7 +724,7 @@ public class PlateauPane extends StackPane implements IPlateauListener, ITraduct
 		nbZombies5.setFont(fontInfo);
 		nbZombies5.setTextFill(Color.GREEN);
 
-		BorderPane b5 = new BorderPane();
+		b5 = new BorderPane();
 		b5.setPadding(new Insets(5));
 		b5.setPrefSize(325, 215);
 		b5.setMaxSize(325, 215);
@@ -718,7 +734,7 @@ public class PlateauPane extends StackPane implements IPlateauListener, ITraduct
 
 		b5.setCenter(joueursPresents5);
 		b5.setRight(vbRight5);
-		//b5.setOpacity(.9);
+		// b5.setOpacity(.9);
 
 		b5.setRotate(4);
 
@@ -757,12 +773,12 @@ public class PlateauPane extends StackPane implements IPlateauListener, ITraduct
 		nbPlace6.setFont(Font.font("Segoe UI", FontWeight.BOLD, 20));
 		nbPlace6.setTextFill(Color.WHITE);
 
-		BorderPane b6 = new BorderPane();
+		b6 = new BorderPane();
 		b6.setPrefSize(310, 215);
 		b6.setMaxSize(310, 215);
 		b6.setPadding(new Insets(5));
 		b6.setBackground(new Background(new BackgroundFill(Color.BLACK, CornerRadii.EMPTY, null)));
-		//b6.setOpacity(.9);
+		// b6.setOpacity(.9);
 
 		vbRight6.getChildren().addAll(nbPlace6, nbZombies6);
 
@@ -828,7 +844,7 @@ public class PlateauPane extends StackPane implements IPlateauListener, ITraduct
 		info1.setPadding(new Insets(10));
 		info1.setStyle(styleInfo);
 
-		bQuitterInfo1 = new Button(International.trad("bouton.quitter"));
+		bQuitterInfo1 = new Button("Ok");
 		bQuitterInfo1.setAlignment(Pos.CENTER);
 		bQuitterInfo1.setStyle(styleBoutonInfo);
 		bQuitterInfo1.setPrefSize(largBouton * .7, hautBouton * .7);
@@ -870,7 +886,7 @@ public class PlateauPane extends StackPane implements IPlateauListener, ITraduct
 		info2.setPadding(new Insets(10));
 		info2.setStyle(styleInfo);
 
-		bQuitterInfo2 = new Button(International.trad("bouton.quitter"));
+		bQuitterInfo2 = new Button("Ok");
 		bQuitterInfo2.setAlignment(Pos.CENTER);
 		bQuitterInfo2.setStyle(styleBoutonInfo);
 		bQuitterInfo2.setPrefSize(largBouton * .7, hautBouton * .7);
@@ -911,7 +927,7 @@ public class PlateauPane extends StackPane implements IPlateauListener, ITraduct
 		info3.setPadding(new Insets(10));
 		info3.setStyle(styleInfo);
 
-		bQuitterInfo3 = new Button(International.trad("bouton.quitter"));
+		bQuitterInfo3 = new Button("Ok");
 		bQuitterInfo3.setAlignment(Pos.CENTER);
 		bQuitterInfo3.setStyle(styleBoutonInfo);
 		bQuitterInfo3.setPrefSize(largBouton * .7, hautBouton * .7);
@@ -953,7 +969,7 @@ public class PlateauPane extends StackPane implements IPlateauListener, ITraduct
 		info4.setPadding(new Insets(10));
 		info4.setStyle(styleInfo);
 
-		bQuitterInfo4 = new Button(International.trad("bouton.quitter"));
+		bQuitterInfo4 = new Button("Ok");
 		bQuitterInfo4.setAlignment(Pos.CENTER);
 		bQuitterInfo4.setStyle(styleBoutonInfo);
 		bQuitterInfo4.setPrefSize(largBouton * .7, hautBouton * .7);
@@ -1035,32 +1051,31 @@ public class PlateauPane extends StackPane implements IPlateauListener, ITraduct
 		imgCarteFerme3.setVisible(false);
 		imgCarteFerme5.setVisible(false);
 		imgCarteFerme6.setVisible(false);
-		
-		
+
 		bPileCarte = new BorderPane();
 		bPileCarte.setMinSize(280, 280);
 		bPileCarte.setPrefSize(280, 280);
 		bPileCarte.setMaxSize(280, 280);
 		bPileCarte.setTranslateX(-780);
 		bPileCarte.setTranslateY(-140);
-		
+
 		imgPileCarte = new ImageView(DataControl.DOS_CARTE);
-		
+
 		lPileCarte1 = new Label("Nombre de carte : ##/##");
 		lPileCarte1.setFont(fontInfo);
 		lPileCarte1.setTextFill(Color.WHITE);
-		
+
 		lPileCarte2 = new Label("Nombre de carte : ##/##");
 		lPileCarte2.setFont(fontInfo);
 		lPileCarte2.setTextFill(Color.WHITE);
 		lPileCarte2.setRotate(90);
 		lPileCarte2.setTranslateX(-90);
-		
+
 		lPileCarte3 = new Label("Nombre de carte : ##/##");
 		lPileCarte3.setFont(fontInfo);
 		lPileCarte3.setTextFill(Color.WHITE);
 		lPileCarte3.setRotate(180);
-		
+
 		lPileCarte4 = new Label("Nombre de carte : ##/##");
 		lPileCarte4.setFont(fontInfo);
 		lPileCarte4.setTextFill(Color.WHITE);
@@ -1069,7 +1084,7 @@ public class PlateauPane extends StackPane implements IPlateauListener, ITraduct
 		lPileCarte4.setMaxSize(210, 20);
 		lPileCarte4.setRotate(-90);
 		lPileCarte4.setTranslateX(90);
-		
+
 		BorderPane.setAlignment(imgPileCarte, Pos.CENTER);
 		BorderPane.setAlignment(lPileCarte1, Pos.CENTER);
 		BorderPane.setAlignment(lPileCarte2, Pos.CENTER);
@@ -1083,12 +1098,43 @@ public class PlateauPane extends StackPane implements IPlateauListener, ITraduct
 
 		this.setStyle(" -fx-background-color:#151515;");
 
-		j1.setVisible(false);
-		j2.setVisible(false);
-		j3.setVisible(false);
-		j4.setVisible(false);
-		j5.setVisible(false);
-		j6.setVisible(false);
+		j1.setVisible(true);
+		j2.setVisible(true);
+		j3.setVisible(true);
+		j4.setVisible(true);
+		j5.setVisible(true);
+		j6.setVisible(true);
+
+		nomJoueur1.setText("Choisir");
+		nbPerso1.setText("");
+		nbCartes1.setText("");
+		nomJoueur2.setText("Choisir");
+		nbPerso2.setText("");
+		nbCartes2.setText("");
+		nomJoueur3.setText("Choisir");
+		nbPerso3.setText("");
+		nbCartes3.setText("");
+		nomJoueur4.setText("Choisir");
+		nbPerso4.setText("");
+		nbCartes4.setText("");
+		nomJoueur5.setText("Choisir");
+		nbPerso5.setText("");
+		nbCartes5.setText("");
+		nomJoueur6.setText("Choisir");
+		nbPerso6.setText("");
+		nbCartes6.setText("");
+
+		lChefVigile.setVisible(false);
+		lChefVigile2.setVisible(false);
+		lChefVigile3.setVisible(false);
+		lChefVigile4.setVisible(false);
+
+		b1.setVisible(false);
+		b2.setVisible(false);
+		b3.setVisible(false);
+		b4.setVisible(false);
+		b5.setVisible(false);
+		b6.setVisible(false);
 
 		this.getChildren().addAll(imgFond, bPileCarte, borderJoueurs, aPlateau, lChefVigile, lChefVigile2, lChefVigile3,
 				lChefVigile4, imgCarteFerme1, imgCarteFerme2, imgCarteFerme3, imgCarteFerme5, imgCarteFerme6,
@@ -1163,7 +1209,7 @@ public class PlateauPane extends StackPane implements IPlateauListener, ITraduct
 	public void nomJoueur(int joueur, Couleur couleur, String val) {
 		Platform.runLater(() -> {
 			System.out.println("Joueur " + joueur + " " + couleur.nomEntier() + " " + val);
-			switch (joueur) {
+			switch (index.get(joueur)) {
 			case 0:
 				nomJoueur1.setText(val);
 				nbPerso1.setStyle(IhmOutils.color(couleur));
@@ -1171,6 +1217,7 @@ public class PlateauPane extends StackPane implements IPlateauListener, ITraduct
 				nomJoueur1.setStyle(IhmOutils.color(couleur));
 				j1.setStyle(IhmOutils.color(couleur));
 				j1.setVisible(true);
+				j1.setDisable(false);
 				break;
 			case 1:
 				nomJoueur2.setText(val);
@@ -1179,6 +1226,7 @@ public class PlateauPane extends StackPane implements IPlateauListener, ITraduct
 				nomJoueur2.setStyle(IhmOutils.color(couleur));
 				j2.setStyle(IhmOutils.color(couleur));
 				j2.setVisible(true);
+				j2.setDisable(false);
 				break;
 			case 2:
 				nomJoueur3.setText(val);
@@ -1187,6 +1235,7 @@ public class PlateauPane extends StackPane implements IPlateauListener, ITraduct
 				nomJoueur3.setStyle(IhmOutils.color(couleur));
 				j3.setStyle(IhmOutils.color(couleur));
 				j3.setVisible(true);
+				j3.setDisable(false);
 				break;
 			case 3:
 				nomJoueur4.setText(val);
@@ -1195,6 +1244,7 @@ public class PlateauPane extends StackPane implements IPlateauListener, ITraduct
 				nomJoueur4.setStyle(IhmOutils.color(couleur));
 				j4.setStyle(IhmOutils.color(couleur));
 				j4.setVisible(true);
+				j4.setDisable(false);
 				break;
 			case 4:
 				nomJoueur5.setText(val);
@@ -1203,6 +1253,7 @@ public class PlateauPane extends StackPane implements IPlateauListener, ITraduct
 				nomJoueur5.setStyle(IhmOutils.color(couleur));
 				j5.setStyle(IhmOutils.color(couleur));
 				j5.setVisible(true);
+				j5.setDisable(false);
 				break;
 			case 5:
 				nomJoueur6.setText(val);
@@ -1211,6 +1262,7 @@ public class PlateauPane extends StackPane implements IPlateauListener, ITraduct
 				nomJoueur6.setStyle(IhmOutils.color(couleur));
 				j6.setStyle(IhmOutils.color(couleur));
 				j6.setVisible(true);
+				j6.setDisable(false);
 				break;
 			default:
 				throw new IllegalStateException("Unexpected value: " + joueur);
@@ -1281,7 +1333,7 @@ public class PlateauPane extends StackPane implements IPlateauListener, ITraduct
 	public void nbPersoJoueur(int joueur, int perso) {
 		String tmp = perso + " personnages";
 		Platform.runLater(() -> {
-			switch (joueur) {
+			switch (index.get(joueur)) {
 			case 0:
 				nbPerso1.setText(tmp);
 				break;
@@ -1310,7 +1362,7 @@ public class PlateauPane extends StackPane implements IPlateauListener, ITraduct
 	public void nbCarteJoueur(int joueur, int cartes) {
 		String tmp = cartes + " cartes";
 		Platform.runLater(() -> {
-			switch (joueur) {
+			switch (index.get(joueur)) {
 			case 0:
 				nbCartes1.setText(tmp);
 				break;
@@ -1389,105 +1441,61 @@ public class PlateauPane extends StackPane implements IPlateauListener, ITraduct
 	@Override
 	public void fouilleCamion(String camion) {
 		Platform.runLater(() -> {
-			titreInfo1.setText(International.trad("text.fouilleCamion"));
-			titreInfo2.setText(International.trad("text.fouilleCamion"));
-			titreInfo3.setText(International.trad("text.fouilleCamion"));
-			titreInfo4.setText(International.trad("text.fouilleCamion"));
-
-			lInfo1.setText(camion);
-			lInfo2.setText(camion);
-			lInfo3.setText(camion);
-			lInfo4.setText(camion);
-			FadeTransition transi = new FadeTransition(Duration.millis(1400), notifInfo);
-			transi.setFromValue(0.0);
-			transi.setToValue(1.0);
-			transi.setCycleCount((int) 2f);
-			transi.play();
-			notifInfo.setVisible(true);
-			if (myTimer != null) {
-				myTimer.cancel();
-			}
-			myTimer = new Timer();
-			myTimer.schedule(new TimerTask() {
-
-				@Override
-				public void run() {
-					imgFond.setEffect(null);
-					borderJoueurs.setEffect(null);
-					aPlateau.setEffect(null);
-					notifInfo.setVisible(false);
-				}
-			}, 5000);
+			popup(International.trad("text.fouilleCamion"), camion, false);
 		});
 	}
 
 	@Override
 	public void prevenirDeplacementVigile(String depvig) {
 		Platform.runLater(() -> {
-			titreInfo1.setText(International.trad("text.deplChefVigile3"));
-			titreInfo2.setText(International.trad("text.deplChefVigile3"));
-			titreInfo3.setText(International.trad("text.deplChefVigile3"));
-			titreInfo4.setText(International.trad("text.deplChefVigile3"));
-			lInfo1.setText(depvig);
-			lInfo2.setText(depvig);
-			lInfo3.setText(depvig);
-			lInfo4.setText(depvig);
-			FadeTransition transi = new FadeTransition(Duration.millis(1400), notifInfo);
-			transi.setFromValue(0.0);
-			transi.setToValue(1.0);
-			transi.setCycleCount((int) 2f);
-			transi.play();
-			notifInfo.setVisible(true);
-			if (myTimer != null) {
-				myTimer.cancel();
-			}
-			myTimer = new Timer();
-			myTimer.schedule(new TimerTask() {
-
-				@Override
-				public void run() {
-					imgFond.setEffect(null);
-					borderJoueurs.setEffect(null);
-					aPlateau.setEffect(null);
-					notifInfo.setVisible(false);
-				}
-			}, 5000);
+			popup(International.trad("text.deplChefVigile3"), depvig, false);
 		});
 	}
 
 	@Override
 	public void electionChef(String message) {
 		Platform.runLater(() -> {
-			titreInfo1.setText(International.trad("text.elecChefVigile"));
-			titreInfo2.setText(International.trad("text.elecChefVigile"));
-			titreInfo3.setText(International.trad("text.elecChefVigile"));
-			titreInfo4.setText(International.trad("text.elecChefVigile"));
-			lInfo1.setText(message);
-			lInfo2.setText(message);
-			lInfo3.setText(message);
-			lInfo4.setText(message);
-			FadeTransition transi = new FadeTransition(Duration.millis(1400), notifInfo);
-			transi.setFromValue(0.0);
-			transi.setToValue(1.0);
-			transi.setCycleCount((int) 2f);
-			transi.play();
-			notifInfo.setVisible(true);
-			if (myTimer != null) {
-				myTimer.cancel();
-			}
-
-			myTimer = new Timer();
-			myTimer.schedule(new TimerTask() {
-
-				@Override
-				public void run() {
-					imgFond.setEffect(null);
-					borderJoueurs.setEffect(null);
-					aPlateau.setEffect(null);
-					notifInfo.setVisible(false);
-				}
-			}, 5000);
+			popup(International.trad("text.elecChefVigile"), message, false);
 		});
+	}
+
+	public void popup(String titre, String message, boolean okFictif) {
+		titreInfo1.setText(titre);
+		titreInfo2.setText(titre);
+		titreInfo3.setText(titre);
+		titreInfo4.setText(titre);
+		lInfo1.setText(message);
+		lInfo2.setText(message);
+		lInfo3.setText(message);
+		lInfo4.setText(message);
+		FadeTransition transi = new FadeTransition(Duration.millis(500), notifInfo);
+		transi.setFromValue(0.0);
+		transi.setToValue(1.0);
+		transi.setCycleCount(1);
+		transi.play();
+		notifInfo.setVisible(true);
+		Button[] buttons = { bQuitterInfo1, bQuitterInfo2, bQuitterInfo3, bQuitterInfo4 };
+
+		for (Button button : buttons) {
+			if (okFictif) {
+				button.setOnMouseClicked(new EventHandler<Event>() {
+					@Override
+					public void handle(Event event) {
+						imgFond.setEffect(null);
+						borderJoueurs.setEffect(null);
+						aPlateau.setEffect(null);
+						notifInfo.setVisible(false);
+					}
+				});
+			} else {
+				button.setOnMouseClicked(new EventHandler<Event>() {
+					@Override
+					public void handle(Event event) {
+						EvenementStockage.setPopupAccepter(true);
+					}
+				});
+			}
+		}
 	}
 
 	public void setPersonnageLieu(int lieu, List<Personnage> p, ImageView[] imageViews) {
@@ -1510,16 +1518,16 @@ public class PlateauPane extends StackPane implements IPlateauListener, ITraduct
 		nbZombies4.setText(International.trad("text.nbZombie"));
 		nbZombies5.setText(International.trad("text.nbZombie"));
 		nbZombies6.setText(International.trad("text.nbZombie"));
-		nomJoueur1.setText(International.trad("texte.nomJoueur1"));
-		nomJoueur2.setText(International.trad("texte.nomJoueur2"));
-		nomJoueur3.setText(International.trad("texte.nomJoueur3"));
-		nomJoueur4.setText(International.trad("texte.nomJoueur4"));
-		nomJoueur5.setText(International.trad("texte.nomJoueur5"));
-		nomJoueur6.setText(International.trad("texte.nomJoueur6"));
-		bQuitterInfo1.setText(International.trad("bouton.quitter"));
-		bQuitterInfo2.setText(International.trad("bouton.quitter"));
-		bQuitterInfo3.setText(International.trad("bouton.quitter"));
-		bQuitterInfo4.setText(International.trad("bouton.quitter"));
+		// nomJoueur1.setText(International.trad("texte.nomJoueur1"));
+		// nomJoueur2.setText(International.trad("texte.nomJoueur2"));
+		// nomJoueur3.setText(International.trad("texte.nomJoueur3"));
+		// nomJoueur4.setText(International.trad("texte.nomJoueur4"));
+		// nomJoueur5.setText(International.trad("texte.nomJoueur5"));
+		// nomJoueur6.setText(International.trad("texte.nomJoueur6"));
+		// bQuitterInfo1.setText(International.trad("bouton.quitter"));
+		// bQuitterInfo2.setText(International.trad("bouton.quitter"));
+		// bQuitterInfo3.setText(International.trad("bouton.quitter"));
+		// bQuitterInfo4.setText(International.trad("bouton.quitter"));
 		titreInfo1.setText(
 				International.trad("text.deplChefVigile1") + "\n" + International.trad("text.deplChefVigile2"));
 		titreInfo2.setText(
@@ -1541,23 +1549,23 @@ public class PlateauPane extends StackPane implements IPlateauListener, ITraduct
 			j4.setStyle(null);
 			j5.setStyle(null);
 			j6.setStyle(null);
-			switch (joueur) {
-			case 1:
+			switch (index.get(joueur)) {
+			case 0:
 				j1.setStyle("-fx-border-color: red; -fx-border-insets: -3; -fx-border-width: 3;");
 				break;
-			case 2:
+			case 1:
 				j2.setStyle("-fx-border-color: red; -fx-border-insets: -3; -fx-border-width: 3;");
 				break;
-			case 3:
+			case 2:
 				j3.setStyle("-fx-border-color: red; -fx-border-insets: -3; -fx-border-width: 3;");
 				break;
-			case 4:
+			case 3:
 				j4.setStyle("-fx-border-color: red; -fx-border-insets: -3; -fx-border-width: 3;");
 				break;
-			case 5:
+			case 4:
 				j5.setStyle("-fx-border-color: red; -fx-border-insets: -3; -fx-border-width: 3;");
 				break;
-			case 6:
+			case 5:
 				j6.setStyle("-fx-border-color: red; -fx-border-insets: -3; -fx-border-width: 3;");
 				break;
 			default:
@@ -1565,4 +1573,94 @@ public class PlateauPane extends StackPane implements IPlateauListener, ITraduct
 			}
 		});
 	}
+
+	List<Couleur> couleurs1;
+	int o = 0;
+
+	List<VBox> vboxs = new ArrayList<>();
+	List<Integer> index = new ArrayList<>();
+
+	@Override
+	public void choiCouleur(List<Couleur> couleurs) {
+		Platform.runLater(() -> {
+			couleurs1 = couleurs;
+			getNextColor();
+		});
+	}
+
+	private void getNextColor() {
+		popup("Choi du placement autour de la table",
+				"C'est au " + couleurs1.get(o).nomEntier() + " de choisir son placement autour de la table !", true);
+		VBox[] j = { j1, j2, j3, j4, j5, j6 };
+		Label[] l = { nomJoueur1, nomJoueur2, nomJoueur3, nomJoueur4, nomJoueur5, nomJoueur6 };
+
+		int vboxIndex = 0;
+		for (VBox vBox : j) {
+			int tmp = vboxIndex;
+			if (!vboxs.contains(vBox)) {
+				vBox.setOnMouseClicked(new EventHandler<Event>() {
+					@Override
+					public void handle(Event event) {
+						l[tmp].setText("Déjà choisis");
+						vboxs.add(vBox);
+						index.add(tmp);
+						if (o == couleurs1.size()) {
+							resetCadreJoueur();
+							visibleCadreInutile();
+							afficherPlateau();
+							core.getCj().setPlacerJoueur(true);
+						} else
+							getNextColor();
+					}
+				});
+			} else {
+				vBox.setDisable(true);
+				vBox.setOnMouseClicked(new EventHandler<Event>() {
+					@Override
+					public void handle(Event event) {
+
+					}
+				});
+			}
+
+			vboxIndex++;
+		}
+		o++;
+	}
+
+	private void resetCadreJoueur() {
+		VBox[] j = { j1, j2, j3, j4, j5, j6 };
+		for (VBox vBox : j) {
+			vBox.setOnMouseClicked(new EventHandler<Event>() {
+				@Override
+				public void handle(Event event) {
+
+				}
+			});
+		}
+	}
+
+	private void visibleCadreInutile() {
+		VBox[] j = { j1, j2, j3, j4, j5, j6 };
+		for (VBox vBox : j) {
+			if (!vboxs.contains(vBox)) {
+				vBox.setVisible(false);
+			}
+		}
+	}
+
+	private void afficherPlateau() {
+		lChefVigile.setVisible(true);
+		lChefVigile2.setVisible(true);
+		lChefVigile3.setVisible(true);
+		lChefVigile4.setVisible(true);
+
+		b1.setVisible(true);
+		b2.setVisible(true);
+		b3.setVisible(true);
+		b4.setVisible(true);
+		b5.setVisible(true);
+		b6.setVisible(true);
+	}
+
 }
