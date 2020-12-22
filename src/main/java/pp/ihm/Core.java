@@ -15,6 +15,8 @@ public class Core {
 	public Core() {
 		sauvegarderOptions = new SauvegarderOptions();
 	}
+	
+	
 
 	private ApplicationPane pauseDepuis = ApplicationPane.ACCUEIL;
 	private ApplicationPane reglesDepuis = ApplicationPane.ACCUEIL;

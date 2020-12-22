@@ -33,4 +33,6 @@ public interface IPlateauListener {
 	void nomJoueur(int joueur, Couleur couleur, String val);
 
 	void quiJoue(int joueur);
+	
+	void choiCouleur(List<Couleur> couleurs);
 }
