@@ -19,59 +19,59 @@ public class DataControl {
 	public final static Locale localeEN = new Locale("en", "UK");
 	public final static Locale localeFR = new Locale("fr", "FR");
 	public final static String localMsgURL = "Ressources.Textes.messages";
-	public static final String FOND = "pp/ihm/images/fond.png";
-	public static final String PLATEAU = "pp/ihm/images/plateau.png";
-	public static final String PLATEAU_NB = "pp/ihm/images/plateauNB.png";
-	public static final String ICONE = "pp/ihm/images/desktop Icon.jpg";
-	public static final String SCREEN = "pp/ihm/images/rotationEcran.png";
-	public static final String JOUEUR_ATTENDU = "pp/ihm/images/joueurAttente.png";
-	public static final String JOUEUR_CONNECTE = "pp/ihm/images/joueurConnecté.png";
+	public static final String FOND = "Images/ImagesPP/fond.png";
+	public static final String PLATEAU = "Images/ImagesPP/plateau.png";
+	public static final String PLATEAU_NB = "Images/ImagesPP/plateauNB.png";
+	public static final String ICONE = "Images/ImagesPP/desktop Icon.jpg";
+	public static final String SCREEN = "Images/ImagesPP/rotationEcran.png";
+	public static final String JOUEUR_ATTENDU = "Images/ImagesPP/joueurAttente.png";
+	public static final String JOUEUR_CONNECTE = "Images/ImagesPP/joueurConnecté.png";
 	
 	
-	public static final String FERME1 = "pp/ihm/images/1Fermé.png";
-	public static final String FERME2 = "pp/ihm/images/2Fermé.png";
-	public static final String FERME3 = "pp/ihm/images/3Fermé.png";
-	public static final String FERME5 = "pp/ihm/images/5Fermé.png";
-	public static final String FERME6 = "pp/ihm/images/6Fermé.png";
+	public static final String FERME1 = "Images/ImagesPP/1Fermé.png";
+	public static final String FERME2 = "Images/ImagesPP/2Fermé.png";
+	public static final String FERME3 = "Images/ImagesPP/3Fermé.png";
+	public static final String FERME5 = "Images/ImagesPP/5Fermé.png";
+	public static final String FERME6 = "Images/ImagesPP/6Fermé.png";
 	
-	public static final String DOS_CARTE = "pp/ihm/images/dosCarte.png";
+	public static final String DOS_CARTE = "Images/ImagesPP/dosCarte.png";
 	
 	// Pions
-	public static final String NOM_COULEUR = "pp/ihm/images/Pions/SamplePion.png";
+	public static final String NOM_COULEUR = "Images/ImagesPP/Pions/SamplePion.png";
 	
-	public static final String TRUAND_B = "pp/ihm/images/Pions/bleu1.png";
-	public static final String BRUTE_B = "pp/ihm/images/Pions/bleu2.png";
-	public static final String BLONDE_B = "pp/ihm/images/Pions/bleu3.png";
-	public static final String FILLETTE_B = "pp/ihm/images/Pions/bleu4.png";
+	public static final String TRUAND_B = "Images/ImagesPP/Pions/bleu1.png";
+	public static final String BRUTE_B = "Images/ImagesPP/Pions/bleu2.png";
+	public static final String BLONDE_B = "Images/ImagesPP/Pions/bleu3.png";
+	public static final String FILLETTE_B = "Images/ImagesPP/Pions/bleu4.png";
 	
-	public static final String TRUAND_J = "pp/ihm/images/Pions/jaune1.png";
-	public static final String BRUTE_J = "pp/ihm/images/Pions/jaune2.png";
-	public static final String BLONDE_J= "pp/ihm/images/Pions/jaune3.png";
-	public static final String FILLETTE_J = "pp/ihm/images/Pions/jaune4.png";
+	public static final String TRUAND_J = "Images/ImagesPP/Pions/jaune1.png";
+	public static final String BRUTE_J = "Images/ImagesPP/Pions/jaune2.png";
+	public static final String BLONDE_J= "Images/ImagesPP/Pions/jaune3.png";
+	public static final String FILLETTE_J = "Images/ImagesPP/Pions/jaune4.png";
 	
-	public static final String TRUAND_M = "pp/ihm/images/Pions/marron1.png";
-	public static final String BRUTE_M = "pp/ihm/images/Pions/marron2.png";
-	public static final String BLONDE_M = "pp/ihm/images/Pions/marron3.png";
-	public static final String FILLETTE_M = "pp/ihm/images/Pions/marron4.png";
+	public static final String TRUAND_M = "Images/ImagesPP/Pions/marron1.png";
+	public static final String BRUTE_M = "Images/ImagesPP/Pions/marron2.png";
+	public static final String BLONDE_M = "Images/ImagesPP/Pions/marron3.png";
+	public static final String FILLETTE_M = "Images/ImagesPP/Pions/marron4.png";
 
-	public static final String TRUAND_N = "pp/ihm/images/Pions/noir1.png";
-	public static final String BRUTE_N = "pp/ihm/images/Pions/noir2.png";
-	public static final String BLONDE_N = "pp/ihm/images/Pions/noir3.png";
-	public static final String FILLETTE_N = "pp/ihm/images/Pions/noir4.png";
+	public static final String TRUAND_N = "Images/ImagesPP/Pions/noir1.png";
+	public static final String BRUTE_N = "Images/ImagesPP/Pions/noir2.png";
+	public static final String BLONDE_N = "Images/ImagesPP/Pions/noir3.png";
+	public static final String FILLETTE_N = "Images/ImagesPP/Pions/noir4.png";
 
-	public static final String TRUAND_R = "pp/ihm/images/Pions/rouge1.png";
-	public static final String BRUTE_R = "pp/ihm/images/Pions/rouge2.png";
-	public static final String BLONDE_R = "pp/ihm/images/Pions/rouge3.png";
-	public static final String FILLETTE_R = "pp/ihm/images/Pions/rouge4.png";
+	public static final String TRUAND_R = "Images/ImagesPP/Pions/rouge1.png";
+	public static final String BRUTE_R = "Images/ImagesPP/Pions/rouge2.png";
+	public static final String BLONDE_R = "Images/ImagesPP/Pions/rouge3.png";
+	public static final String FILLETTE_R = "Images/ImagesPP/Pions/rouge4.png";
 	
-	public static final String TRUAND_V = "pp/ihm/images/Pions/vert1.png";
-	public static final String BRUTE_V = "pp/ihm/images/Pions/vert2.png";
-	public static final String BLONDE_V = "pp/ihm/images/Pions/vert3.png";
-	public static final String FILLETTE_V = "pp/ihm/images/Pions/vert4.png";
+	public static final String TRUAND_V = "Images/ImagesPP/Pions/vert1.png";
+	public static final String BRUTE_V = "Images/ImagesPP/Pions/vert2.png";
+	public static final String BLONDE_V = "Images/ImagesPP/Pions/vert3.png";
+	public static final String FILLETTE_V = "Images/ImagesPP/Pions/vert4.png";
 	
 	public static final String CSS = "pp/ihm/style/style.css";
 	// for testing purpose
-	//public static final String NOM_COULEUR = "pp/ihm/images/Pions/marron1.png";
+	//public static final String NOM_COULEUR = "Images/ImagesPP/Pions/marron1.png";
 
 
 	public static final ObservableList<Integer> nombreJoueur = FXCollections.observableArrayList(3, 4, 5, 6);
