@@ -21,8 +21,15 @@ import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 
-public class PausePane extends StackPane implements ITraduction {
+/**
+ * 
+ * @author Remy 
+ * @author Tom 
+ *
+ */
 
+public class PausePane extends StackPane implements ITraduction {
+	//auteur Remy 
 	private ScreenControl sControl = null;
 	private Core core;
 	private final ApplicationPane paneName = ApplicationPane.PAUSE;
@@ -39,6 +46,7 @@ public class PausePane extends StackPane implements ITraduction {
 	Button bRetour;
 
 	public PausePane(ScreenControl sc, Core c) {
+		//auteur remy 
 		core = c;
 		sControl = sc;
 

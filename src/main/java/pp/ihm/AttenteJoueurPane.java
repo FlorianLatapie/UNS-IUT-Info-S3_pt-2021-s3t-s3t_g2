@@ -25,10 +25,15 @@ import javafx.scene.text.TextAlignment;
  * The Class AccueilPane.
  *
  * @author Florian
+ * @author Remy
+ * @author Sebastien
+ * @author Tom
+ * 
  * @version 0.1
  * @since 26/10/2020
  */
 public class AttenteJoueurPane extends StackPane implements IAttenteListener, ITraduction {
+	//auteur florian
 	private ScreenControl sControl = null;
 	private Core core = null;
 	private final ApplicationPane paneName = ApplicationPane.WAIT;
@@ -66,6 +71,7 @@ public class AttenteJoueurPane extends StackPane implements IAttenteListener, IT
 	Button bRetour;
 
 	public AttenteJoueurPane(ScreenControl sc, Core c) {
+		//auteur florian
 		core = c;
 		sControl = sc;
 
@@ -81,7 +87,6 @@ public class AttenteJoueurPane extends StackPane implements IAttenteListener, IT
 		titre.setBackground(new Background(new BackgroundFill(Color.RED, coin, null)));
 		titre.setPrefWidth(740);
 		titre.setMinWidth(740);
-
 		// identifiant de partie
 		lIDPartie = new Label();
 		lIDPartie.setStyle("-fx-border-color: black; -fx-border-insets: -3; -fx-border-width: 3");
@@ -98,7 +103,7 @@ public class AttenteJoueurPane extends StackPane implements IAttenteListener, IT
 		VBox vbDescPartie = new VBox();
 		vbDescPartie.setAlignment(Pos.CENTER);
 		vbDescPartie.getChildren().addAll(lIDPartie, desc);
-
+		//auteur remy 
 		// les cercles passent en rouge quand le joueur à rejoint TODO
 		cercle1 = new Circle();
 		cercle1.setRadius(tailleCercle);
@@ -142,7 +147,8 @@ public class AttenteJoueurPane extends StackPane implements IAttenteListener, IT
 		hbJoueurPret.setPadding(new Insets(20));
 		hbJoueurPret.setSpacing(12);
 		hbJoueurPret.getChildren().addAll(cercle1, cercle2, cercle3, cercle4, cercle5, cercle6);
-
+		
+		//auteur florian
 		VBox vbWait = new VBox();
 		vbWait.setStyle(styleVBox);
 		vbWait.setAlignment(Pos.CENTER);
@@ -208,6 +214,7 @@ public class AttenteJoueurPane extends StackPane implements IAttenteListener, IT
 
 	@Override
 	/**
+	 * @author Sebastien
 	 * Dès que les joueurs sont prets, le pane change vers le choix des couleurs de
 	 * chaque joueur
 	 */
@@ -217,6 +224,7 @@ public class AttenteJoueurPane extends StackPane implements IAttenteListener, IT
 
 	@Override
 	/**
+	 * @author Sebastien
 	 * applique le nom de la partie sur le label lIDPartie
 	 * 
 	 * @param nom le nom de la partie
@@ -225,6 +233,9 @@ public class AttenteJoueurPane extends StackPane implements IAttenteListener, IT
 		lIDPartie.setText(nom + " - " + id);
 	}
 
+	/**
+	 * @author Sebastien
+	 */
 	@Override
 	public void updateJoueurs(List<Joueur> joueurs, int max) {
 		Circle[] circles = { cercle1, cercle2, cercle3, cercle4, cercle5, cercle6 };

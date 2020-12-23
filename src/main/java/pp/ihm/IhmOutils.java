@@ -1,6 +1,5 @@
 package pp.ihm;
 
-import javafx.scene.control.ComboBox;
 import pp.Joueur;
 import reseau.type.Couleur;
 import reseau.type.TypePersonnage;
@@ -8,7 +7,15 @@ import reseau.type.TypePersonnage;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * 
+ * @author Sebastien
+ * @author Florian
+ *
+ */
+
 public interface IhmOutils {
+	//auteur florian
 	String vert = " -fx-background-color:#5EB137; -fx-text-fill: #000000";
 	String rouge = " -fx-background-color:#F30101; -fx-text-fill: #000000";
 	String marron = " -fx-background-color:#6C3505; -fx-text-fill: #000000";
@@ -17,9 +24,9 @@ public interface IhmOutils {
 	String noir = " -fx-background-color:#000000; -fx-text-fill: #ffffff";
 
 	/**
+	 * @author Sebastien
 	 * si toutes les couleurs choisies sont différentes cela renvoie vrai
 	 * 
-	 * @param max      nombre total de couleurs
 	 * @param couleurs couleurs
 	 * @return l'unicité de chaque couleur
 	 */
@@ -34,10 +41,11 @@ public interface IhmOutils {
 	}
 
 	/**
+	 * @author Sebastien 
 	 * convertis une combobox en liste de couleur
 	 * 
-	 * @param max      nombre total de couleurs
-	 * @param couleurs couleurs
+	 * @param tab //TODO expliquer
+	 * @param couleList liste des couleurs 
 	 * @return une liste de couleur
 	 */
 	public static List<Couleur> comboStringToColorList(int[] tab, List<String> couleList) {
@@ -48,6 +56,12 @@ public interface IhmOutils {
 		return tmp;
 	}
 
+	/**
+	 * @author Sebastien 
+	 * renvoie la validité du nom placé en etrée (critères imposés par le réseau) 
+	 * @param nom nom de la partie 
+	 * @return la validité du nom 
+	 */
 	static boolean nomEstValide(String nom) {
 		if (nom == null)
 			return false;
@@ -85,6 +99,12 @@ public interface IhmOutils {
 		return result;
 	}
 
+	/**
+	 * @author Sebastien 
+	 * renvoie le style en fonction de la couleur d'entrée 
+	 * @param couleur couleur
+	 * @return le style correspondant à l'entrée 
+	 */
 	public static String color(Couleur couleur) {
 		switch (couleur) {
 		case B:
@@ -103,7 +123,14 @@ public interface IhmOutils {
 			throw new IllegalArgumentException("Couleur inconnue");
 		}
 	}
-
+	
+	/**
+	 * @author Sebastien
+	 * retourne le chemin vers l'image correspondant aux données en entrée 
+	 * @param couleur couleur du personnage 
+	 * @param type type du personnage 
+	 * @return le chemin vers l'image souhaitée 
+	 */
 	public static String convertVersImagePerso(Couleur couleur, TypePersonnage type) {
 		switch (type) {
 		case BLONDE:
@@ -178,6 +205,14 @@ public interface IhmOutils {
 		return DataControl.NOM_COULEUR;
 	}
 
+	/**
+	 * @author Sebastien 
+	 * intervertis 2 valeurs dans un tableau 
+	 * @param tab tableau a modifier 
+	 * @param de première valeur a intervertir 
+	 * @param a seconde valeur a intervertir 
+	 * @return tableau interverti 
+	 */
 	public static int[] echanger(int[] tab, int de, int a) {
 		int tmp = tab[a];
 		tab[a] = tab[de];
@@ -185,7 +220,14 @@ public interface IhmOutils {
 
 		return tab;
 	}
-
+	
+	/**
+	 * @author Sebastien 
+	 * renvoie l'entrée sous forme d'ArrayList<Joueur>
+	 * @param tab position des joueurs 
+	 * @param joueurs joueur
+	 * @return les joueurs dans l'ordre indiqué par le tableau des positions des joueurs 
+	 */
 	public static List<Joueur> reOrdre(int[] tab, List<Joueur> joueurs) {
 		List<Joueur> tmp = new ArrayList<>();
 		for (int i = 0; i < tab.length; i++)

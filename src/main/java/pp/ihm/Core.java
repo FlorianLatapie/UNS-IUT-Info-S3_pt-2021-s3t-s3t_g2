@@ -2,25 +2,36 @@ package pp.ihm;
 
 import pp.controleur.ControleurJeu;
 import pp.ihm.DataControl.ApplicationPane;
-import pp.ihm.event.Initializer;
 import pp.ihm.langues.International;
 import pp.ihm.langues.Langues;
 
+/**
+ * 
+ * @author florian
+ * @author Sebastien
+ *
+ */
+
 public class Core {
+	//auteur florian
 	private ControleurJeu cj = null;
 	private int nbJoueur = 5;
 	private int nbBot = 4;
 	private final SauvegarderOptions sauvegarderOptions;
 
+	/**
+	 * @author Sebastien
+	 * constructeur par défaut 
+	 */
 	public Core() {
 		sauvegarderOptions = new SauvegarderOptions();
 	}
 	
-	
-
+	//auteur florian
 	private ApplicationPane pauseDepuis = ApplicationPane.ACCUEIL;
 	private ApplicationPane reglesDepuis = ApplicationPane.ACCUEIL;
-
+	
+	
 	public ApplicationPane getReglesDepuis() {
 		return reglesDepuis;
 	}
@@ -65,12 +76,18 @@ public class Core {
 		return nbJoueur - nbBot;
 	}
 
+	//auteur sebastien
 	public SauvegarderOptions getSauvegarderOptions() {
 		return sauvegarderOptions;
 	}
 	
-	public void changerLangue(Langues l) {
-		International.changerLangue(l);
-		getSauvegarderOptions().setLangues(l);
+	/**
+	 * @author Sebastien
+	 * applique la langue entrée en paramètre à l'interface graphique et sauvegarde l'information dans les options 
+	 * @param langue langue que l'on veut utiliser pour linterface graphique 
+	 */
+	public void changerLangue(Langues langue) {
+		International.changerLangue(langue);
+		getSauvegarderOptions().setLangues(langue);
 	}
 }

@@ -20,11 +20,14 @@ import javafx.scene.text.TextAlignment;
  * The Class ConfigPartiePane.
  *
  * @author Florian
+ * @author Remy
+ * @author Tom
+ * 
  * @version 0.1
  * @since 26/10/2020
  */
 public class ConfigBotPane extends StackPane implements ITraduction {
-
+	// auteur florian 
 	private ScreenControl sControl = null;
 	private Core core;
 	private final ApplicationPane paneName = ApplicationPane.CONFIG_BOT;
@@ -69,6 +72,7 @@ public class ConfigBotPane extends StackPane implements ITraduction {
 	Button bRetour;
 
 	public ConfigBotPane(ScreenControl sc, Core c) {
+		//auteur florian
 		core = c;
 		sControl = sc;
 
@@ -277,7 +281,8 @@ public class ConfigBotPane extends StackPane implements ITraduction {
 		centreMenu.setTop(titre);
 		centreMenu.setCenter(vbCenter);
 		centreMenu.setBottom(boutonsPanneau);
-
+		
+		//auteur remy 
 		// Boutons de rotation d'écran
 		ImageView img1 = new ImageView(DataControl.SCREEN);
 		img1.setFitHeight(70);
@@ -327,6 +332,7 @@ public class ConfigBotPane extends StackPane implements ITraduction {
 		bEcranDroite.setGraphic(img4);
 		bEcranDroite.setOnAction(EventHandler -> sc.setRotatePane(centreMenu, "droite"));
 
+		//auteur florian
 		// boite du fond qui contient le fond et les autres boites
 		HBox fond = new HBox();
 		fond.setAlignment(Pos.CENTER);

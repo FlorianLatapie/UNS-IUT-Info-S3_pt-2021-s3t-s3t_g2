@@ -10,8 +10,15 @@ import javafx.stage.WindowEvent;
 import pp.ihm.event.Initializer;
 import pp.ihm.langues.International;
 import pp.ihm.langues.Langues;
-
+/**
+ * 
+ * @author florian
+ * @author remy 
+ * @author sebastien 
+ *
+ */
 public class InterfacePrincipale extends Application {
+	//auteur florian
 	private StackPane root = new StackPane();
 	private Node currentTopNode = null;
 	private ScreenControl sControl = null;
@@ -20,6 +27,7 @@ public class InterfacePrincipale extends Application {
 
 	@Override
 	public void start(Stage primaryStage) throws Exception {
+		//auteur florian 
 		primaryStage.getIcons().add(new Image(DataControl.ICONE));
 		sControl = new ScreenControl(this, core);
 		int largeur = 1920;
@@ -46,6 +54,7 @@ public class InterfacePrincipale extends Application {
 		PausePane pausePane = new PausePane(sControl, core);
 		AccueilPane accueilPane = new AccueilPane(sControl, core);
 
+		//auteur florian 
 		Initializer.addListener(attenteJoueurPane);
 		Initializer.addListener(plateauPane);
 		Initializer.addListener(finDePartiePane);
@@ -67,11 +76,11 @@ public class InterfacePrincipale extends Application {
 		International.ajouterPane(accueilPane);
 		
 		International.changerLangue(core.getSauvegarderOptions().getLangues());
-
+		
+		//auteur remy 
 		scene.getStylesheets().add(DataControl.CSS);
-		/* Ajouter les panes qui implements IRotationListener */
-		// Initializer.addListener(PANE);
-
+		
+		//auteur floria n
 		root.getChildren().add(accessibilitePane);
 		root.getChildren().add(reglesPane);
 		root.getChildren().add(optionPane);
@@ -90,12 +99,19 @@ public class InterfacePrincipale extends Application {
 		primaryStage.show();
 
 	}
-
+	/**
+	 * @author florian
+	 * @param args arguments de lancement
+	 * @param c core 
+	 */
 	public static void lancement(String[] args, Core c) {
 		core = c;
 		InterfacePrincipale.launch(args);
 	}
-
+	/**
+	 * @author florian
+	 * @param n panneau a afficher 
+	 */
 	public void setOnTop(Node n) {
 		if (currentTopNode != null)
 			currentTopNode.setVisible(false);
@@ -106,7 +122,11 @@ public class InterfacePrincipale extends Application {
 	public Scene getScene() {
 		return scene;
 	}
-
+	
+	/**
+	 * @author Sebastien
+	 * @param event quand la fenetre demande la fermeture 
+	 */
 	public void onClose(WindowEvent event) {
 		if (core.getCj() != null)
 			core.getCj().stopThreads();

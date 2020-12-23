@@ -27,11 +27,15 @@ import java.util.Random;
  * The Class ConfigPartiePane.
  *
  * @author Florian
- * @version 0.1
+ * @author Remy 
+ * @author Sebastien
+ * @author Tom
+ * 
+ * @version 1.0
  * @since 26/10/2020
  */
 public class ConfigPartiePane extends StackPane implements ITraduction {
-
+	//auteur florian
 	private ScreenControl sControl = null;
 	private Core core = null;
 	private final ApplicationPane paneName = ApplicationPane.CONFIG;
@@ -66,6 +70,7 @@ public class ConfigPartiePane extends StackPane implements ITraduction {
 	Button bRetour;
 
 	public ConfigPartiePane(ScreenControl sc, Core c) {
+		//auteur florian
 		core = c;
 		sControl = sc;
 
@@ -110,7 +115,7 @@ public class ConfigPartiePane extends StackPane implements ITraduction {
 		infoNomPartie.setFont(policeNom);
 		infoNomPartie.setPadding(new Insets(5, 10, 5, 10));
 		infoNomPartie.setTextFill(Color.WHITE);
-
+		//auteur remy
 		TextField nomP = new TextField();
 		nomP.setText("Partie" + (new Random().nextInt(100)));
 		nomP.setFont(policeTexte);
@@ -126,7 +131,7 @@ public class ConfigPartiePane extends StackPane implements ITraduction {
 		nomPartie.getChildren().addAll(nomPTexte, nomP);
 		nomPartie.setDisable(false);
 
-		//
+		//auteur florian
 		HBox nbTotJr = new HBox();
 
 		nbjrTexte = new Label(International.trad("texte.nbdeJr"));
@@ -193,6 +198,7 @@ public class ConfigPartiePane extends StackPane implements ITraduction {
 
 		bJouer.setOnMouseEntered(event -> bJouer.setStyle(styleBoutonsSouris));
 		bJouer.setOnMouseExited(event -> bJouer.setStyle(styleBoutons));
+		//auteur Sebastien
 		bJouer.setOnAction(EventHandler -> {
 			if (!IhmOutils.nomEstValide(nomP.getText()))
 				return;
@@ -218,7 +224,7 @@ public class ConfigPartiePane extends StackPane implements ITraduction {
 			Initializer.updateJoueurs(new ArrayList<>(), core.getCj().getNbjtotal());
 			sc.setPaneOnTop(ApplicationPane.WAIT);
 		});
-
+		//auteur florian
 		bRetour = new Button(International.trad("bouton.retour"));
 		bRetour.setPrefSize(lBouton, hBouton);
 		bRetour.setMinSize(lBouton, hBouton);
@@ -250,7 +256,8 @@ public class ConfigPartiePane extends StackPane implements ITraduction {
 		centreMenu.setTop(titre);
 		centreMenu.setCenter(vbCenter);
 		centreMenu.setBottom(boutonsPanneau);
-
+		
+		//auteur Remy
 		// Boutons de rotation d'écran
 		ImageView img1 = new ImageView(DataControl.SCREEN);
 		img1.setFitHeight(70);
@@ -300,6 +307,7 @@ public class ConfigPartiePane extends StackPane implements ITraduction {
 		bEcranDroite.setGraphic(img4);
 		bEcranDroite.setOnAction(EventHandler -> sc.setRotatePane(centreMenu, "droite"));
 
+		//auteur florian
 		// boite du fond qui contient le fond et les autres boites
 		HBox fond = new HBox();
 		fond.setAlignment(Pos.CENTER);

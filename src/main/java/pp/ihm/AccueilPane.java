@@ -25,11 +25,14 @@ import javafx.scene.text.FontWeight;
  * The Class AccueilPane.
  *
  * @author Florian
- * @version 0.1
+ * @author Remy
+ * @author Tom
+ * 
+ * @version 1.0
  * @since 04/10/2020
  */
 public class AccueilPane extends StackPane implements ITraduction {
-
+	//auteur Florian
 	private ScreenControl sControl = null;
 	private Core core = null;
 	private final ApplicationPane paneName = ApplicationPane.ACCUEIL;
@@ -60,7 +63,7 @@ public class AccueilPane extends StackPane implements ITraduction {
 	Button bQuitter;
 
 	public AccueilPane(ScreenControl sc, Core c) {
-
+		// auteur florian 
 		core = c;
 		sControl = sc;
 
@@ -159,7 +162,8 @@ public class AccueilPane extends StackPane implements ITraduction {
 		centreMenu.setAlignment(Pos.CENTER);
 		centreMenu.setMargin(titre, new Insets(0, 0, 100, 0));
 		centreMenu.getChildren().addAll(titre, grilleBoutons);
-
+		
+		//auteur remy
 		// Boutons de rotation d'écran
 		ImageView img1 = new ImageView(DataControl.SCREEN);
 		img1.setFitHeight(70);
@@ -208,7 +212,8 @@ public class AccueilPane extends StackPane implements ITraduction {
 		bEcranDroite.setPrefSize(80, 80);
 		bEcranDroite.setGraphic(img4);
 		bEcranDroite.setOnAction(EventHandler -> sc.setRotatePane(centreMenu, "droite"));
-
+		
+		//auteur florian
 		// boite du fond qui contient l'image et les autres boites
 		HBox fond = new HBox();
 		fond.setAlignment(Pos.CENTER);
