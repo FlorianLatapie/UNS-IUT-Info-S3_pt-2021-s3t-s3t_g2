@@ -41,7 +41,7 @@ public class ControleurDeplacementPersonnage {
 	private void deplacePerso(ControleurJeu cj, Partie jeu, Integer compteur, Joueur j, List<Integer> destination, String partieId,
 			int numeroTour) {
 		dr.demanderDeplacements(jeu, j, destination.get(compteur), partieId, numeroTour);
-		List<Object> recupDeplacement = dr.recupDeplacemnt(j);
+		List<Object> recupDeplacement = dr.recupDeplacemnt(jeu, j);
 		jeu.deplacePerso(j, PpTools.valeurToIndex((int) recupDeplacement.get(1)), (int) recupDeplacement.get(0));
 		cfp.finJeu(cj, jeu, partieId, numeroTour);
 		if (cj.isFinished())
