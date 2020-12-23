@@ -1353,119 +1353,146 @@ public class JeuPane extends StackPane implements IJeuListener, ITraduction {
 
 	@Override
 	public void choisirLieu(List<Integer> list) {
-		Platform.runLater(() -> {
-			attirerAttention(vbDeplLieux);
-			for (Integer integer : list) {
-				switch (integer) {
-				case 1:
-					bToilettes.setDisable(false);
-					break;
-				case 2:
-					bCachou.setDisable(false);
-					break;
-				case 3:
-					bMegatoys.setDisable(false);
-					break;
-				case 4:
-					bParking.setDisable(false);
-					break;
-				case 5:
-					bPCSecu.setDisable(false);
-					break;
-				case 6:
-					bSuperMarche.setDisable(false);
-					break;
-				default:
-					break;
-				}
+		Platform.runLater(new Runnable() {
+			@Override
+			public void run() {
+				attirerAttention(des);
+				d1 = list.get(0);
+				d2 = list.get(1);
+				titrede.setOnAction(EventHandler -> {
+					de1.setText(String.valueOf(d1));
+					de2.setText(String.valueOf(d2));
+					core.getIdjr().desVoteChoisi(true);
+				});
 			}
 		});
 	}
 
 	@Override
 	public void desValeur(List<Integer> list) {
-		Platform.runLater(() -> {
-			attirerAttention(des);
-			d1 = list.get(0);
-			d2 = list.get(1);
-			titrede.setOnAction(EventHandler -> {
-				de1.setText(String.valueOf(d1));
-				de2.setText(String.valueOf(d2));
-				core.getIdjr().desVoteChoisi(true);
-			});
+		Platform.runLater(new Runnable() {
+			@Override
+			public void run() {
+				attirerAttention(vbDeplLieux);
+				for (Integer integer : list) {
+					switch (integer) {
+					case 1:
+						bToilettes.setDisable(false);
+						break;
+					case 2:
+						bCachou.setDisable(false);
+						break;
+					case 3:
+						bMegatoys.setDisable(false);
+						break;
+					case 4:
+						bParking.setDisable(false);
+						break;
+					case 5:
+						bPCSecu.setDisable(false);
+						break;
+					case 6:
+						bSuperMarche.setDisable(false);
+						break;
+					default:
+						break;
+					}
+				}
+			}
 		});
 	}
 
 	@Override
 	public void nomJoueur(String nom) {
-		Platform.runLater(() -> {
-			nomJoueur.setText(nom);
+		Platform.runLater(new Runnable() {
+			@Override
+			public void run() {
+				nomJoueur.setText(nom);
+			}
 		});
 	}
 
 	@Override
 	public void nomPhase(String nom) {
-		Platform.runLater(() -> {
-			phasePartie.setText(nom);
+		Platform.runLater(new Runnable() {
+			@Override
+			public void run() {
+				phasePartie.setText(nom);
+			}
 		});
 	}
 
 	@Override
 	public void desVigiles(List<Integer> list) {
-		Platform.runLater(() -> {
-			infoZombie.setVisible(true);
-			linfoZombie.setText(International.trad("Des zombies arriveront dans les lieux {0}, {1}, {2}, {3}",
-					list.get(0).toString(), list.get(1).toString(), list.get(2).toString(), list.get(3).toString()));
+		Platform.runLater(new Runnable() {
+			@Override
+			public void run() {
+				infoZombie.setVisible(true);
+				linfoZombie.setText(International.trad("Des zombies arriveront dans les lieux {0}, {1}, {2}, {3}",
+						list.get(0).toString(), list.get(1).toString(), list.get(2).toString(), list.get(3).toString()));
+			}
 		});
 	}
 
 	@Override
 	public void fin() {
-		Platform.runLater(() -> {
-			log.getItems().clear();
-			sControl.setPaneOnTop(ApplicationPane.ENDGAME);
+		Platform.runLater(new Runnable() {
+			@Override
+			public void run() {
+				log.getItems().clear();
+				sControl.setPaneOnTop(ApplicationPane.ENDGAME);
+			}
 		});
 	}
 
 	@Override
 	public void couleurJoueur(Couleur couleur) {
-		Platform.runLater(() -> {
-			switch (couleur) {
-			case B:
-				imgFond.setImage(new Image(DataControl.BLEU));
-				break;
-			case R:
-				imgFond.setImage(new Image(DataControl.ROUGE));
-				break;
-			case V:
-				imgFond.setImage(new Image(DataControl.VERT));
-				break;
-			case J:
-				imgFond.setImage(new Image(DataControl.JAUNE));
-				break;
-			case M:
-				imgFond.setImage(new Image(DataControl.MARRON));
-				break;
-			case N:
-				imgFond.setImage(new Image(DataControl.NOIR));
-				break;
-			default:
-				throw new IllegalArgumentException("Pas la bonne couleur (NUL)");
+		Platform.runLater(new Runnable() {
+			@Override
+			public void run() {
+				switch (couleur) {
+				case B:
+					imgFond.setImage(new Image(DataControl.BLEU));
+					break;
+				case R:
+					imgFond.setImage(new Image(DataControl.ROUGE));
+					break;
+				case V:
+					imgFond.setImage(new Image(DataControl.VERT));
+					break;
+				case J:
+					imgFond.setImage(new Image(DataControl.JAUNE));
+					break;
+				case M:
+					imgFond.setImage(new Image(DataControl.MARRON));
+					break;
+				case N:
+					imgFond.setImage(new Image(DataControl.NOIR));
+					break;
+				default:
+					throw new IllegalArgumentException("Pas la bonne couleur (NUL)");
+				}
 			}
 		});
 	}
 
 	@Override
 	public void sacrificeChange() {
-		Platform.runLater(() -> {
-			labDeplPers.setText(International.trad("texte.sacrifice"));
+		Platform.runLater(new Runnable() {
+			@Override
+			public void run() {
+				labDeplPers.setText(International.trad("texte.sacrifice"));
+			}
 		});
 	}
 
 	@Override
 	public void deplacementChange() {
-		Platform.runLater(() -> {
-			labDeplPers.setText(International.trad("texte.labDeplPers"));
+		Platform.runLater(new Runnable() {
+			@Override
+			public void run() {
+				labDeplPers.setText(International.trad("texte.labDeplPers"));
+			}
 		});
 	}
 
@@ -1553,87 +1580,92 @@ public class JeuPane extends StackPane implements IJeuListener, ITraduction {
 	@Override
 	public void choisirCarte(List<CarteType> listeCartes, List<Couleur> listeCouleurJoueurVivant, boolean garder,
 			boolean donner, boolean defausser, boolean utiliser) {
-		Platform.runLater(() -> {
-			attirerAttention(fouilleCamion);
-			Background selecBackground = new Background(new BackgroundFill(Color.GREEN, CornerRadii.EMPTY, null));
-			Background deselecBackground = fondNoir;
-			vote.setVisible(false);
-			System.out.println(listeCartes.size());
-			System.out.println(listeCouleurJoueurVivant.size());
-			fond.setEffect(flou);
-			rectVigile.setEffect(flou);
-			nomJoueur.setEffect(flou);
-			hbCartes.setEffect(flou);
-			vbDeplCentre.setEffect(flou);
-			des.setEffect(flou);
-			bLog.setEffect(flou);
-			cartePrecedente.setDisable(true);
-			carteSuivante.setDisable(true);
-			bLog.setDisable(true);
-			fouilleCamion.setVisible(true);
-			if (listeCartes.size() >= 1) {
-				imgCarte1.setImage(new Image(convertCarte(listeCartes.get(0))));
-				bCarte1.setDisable(false);
-				bCarte1.setText(International.trad("texte.selectionner"));
-				bCarte1.setOnAction(EventHandler -> {
-					selectedCarteFouille = listeCartes.get(0);
-					bChoixGarder.setDisable(!garder);
-					bChoixDonner.setDisable(!donner);
-					bChoixDefausser.setDisable(!defausser);
-					bCarte1.setBackground(selecBackground);
-					bCarte2.setBackground(fondNoir);
-					bCarte3.setBackground(fondNoir);
-				});
-			} else {
-				imgCarte1.setDisable(true);
-				imgCarte1.setImage(new Image(DataControl.CARTE_VIDE));
+		Platform.runLater(new Runnable() {
+			@Override
+			public void run() {
+				attirerAttention(fouilleCamion);
+				Background selecBackground = new Background(new BackgroundFill(Color.GREEN, CornerRadii.EMPTY, null));
+				Background deselecBackground = fondNoir;
+				vote.setVisible(false);
+				System.out.println(listeCartes.size());
+				System.out.println(listeCouleurJoueurVivant.size());
+				fond.setEffect(flou);
+				rectVigile.setEffect(flou);
+				nomJoueur.setEffect(flou);
+				hbCartes.setEffect(flou);
+				vbDeplCentre.setEffect(flou);
+				des.setEffect(flou);
+				bLog.setEffect(flou);
+				cartePrecedente.setDisable(true);
+				carteSuivante.setDisable(true);
+				bLog.setDisable(true);
+				fouilleCamion.setVisible(true);
+				if (listeCartes.size() >= 1) {
+					imgCarte1.setImage(new Image(convertCarte(listeCartes.get(0))));
+					bCarte1.setDisable(false);
+					bCarte1.setText(International.trad("texte.selectionner"));
+					bCarte1.setOnAction(EventHandler -> {
+						selectedCarteFouille = listeCartes.get(0);
+						bChoixGarder.setDisable(!garder);
+						bChoixDonner.setDisable(!donner);
+						bChoixDefausser.setDisable(!defausser);
+						bCarte1.setBackground(selecBackground);
+						bCarte2.setBackground(fondNoir);
+						bCarte3.setBackground(fondNoir);
+					});
+				} else {
+					imgCarte1.setDisable(true);
+					imgCarte1.setImage(new Image(DataControl.CARTE_VIDE));
+				}
+				if (listeCartes.size() >= 2) {
+					imgCarte2.setImage(new Image(convertCarte(listeCartes.get(1))));
+					bCarte2.setDisable(false);
+					bCarte2.setText(International.trad("texte.selectionner"));
+					bCarte2.setOnAction(EventHandler -> {
+						selectedCarteFouille = listeCartes.get(1);
+						bChoixGarder.setDisable(!garder);
+						bChoixDonner.setDisable(!donner);
+						bChoixDefausser.setDisable(!defausser);
+						bCarte1.setBackground(fondNoir);
+						bCarte2.setBackground(selecBackground);
+						bCarte3.setBackground(fondNoir);
+					});
+				} else {
+					imgCarte2.setDisable(true);
+					imgCarte2.setImage(new Image(DataControl.CARTE_VIDE));
+				}
+				if (listeCartes.size() >= 3) {
+					imgCarte3.setImage(new Image(convertCarte(listeCartes.get(2))));
+					bCarte3.setDisable(false);
+					bCarte3.setText(International.trad("texte.selectionner"));
+					bCarte3.setOnAction(EventHandler -> {
+						selectedCarteFouille = listeCartes.get(2);
+						bChoixGarder.setDisable(!garder);
+						bChoixDonner.setDisable(!donner);
+						bChoixDefausser.setDisable(!defausser);
+						bCarte1.setBackground(fondNoir);
+						bCarte2.setBackground(fondNoir);
+						bCarte3.setBackground(selecBackground);
+					});
+				} else {
+					imgCarte3.setDisable(true);
+					imgCarte3.setImage(new Image(DataControl.CARTE_VIDE));
+				}
+				if (listeCouleurJoueurVivant != null)
+					setCarteOfferte(listeCouleurJoueurVivant);
 			}
-			if (listeCartes.size() >= 2) {
-				imgCarte2.setImage(new Image(convertCarte(listeCartes.get(1))));
-				bCarte2.setDisable(false);
-				bCarte2.setText(International.trad("texte.selectionner"));
-				bCarte2.setOnAction(EventHandler -> {
-					selectedCarteFouille = listeCartes.get(1);
-					bChoixGarder.setDisable(!garder);
-					bChoixDonner.setDisable(!donner);
-					bChoixDefausser.setDisable(!defausser);
-					bCarte1.setBackground(fondNoir);
-					bCarte2.setBackground(selecBackground);
-					bCarte3.setBackground(fondNoir);
-				});
-			} else {
-				imgCarte2.setDisable(true);
-				imgCarte2.setImage(new Image(DataControl.CARTE_VIDE));
-			}
-			if (listeCartes.size() >= 3) {
-				imgCarte3.setImage(new Image(convertCarte(listeCartes.get(2))));
-				bCarte3.setDisable(false);
-				bCarte3.setText(International.trad("texte.selectionner"));
-				bCarte3.setOnAction(EventHandler -> {
-					selectedCarteFouille = listeCartes.get(2);
-					bChoixGarder.setDisable(!garder);
-					bChoixDonner.setDisable(!donner);
-					bChoixDefausser.setDisable(!defausser);
-					bCarte1.setBackground(fondNoir);
-					bCarte2.setBackground(fondNoir);
-					bCarte3.setBackground(selecBackground);
-				});
-			} else {
-				imgCarte3.setDisable(true);
-				imgCarte3.setImage(new Image(DataControl.CARTE_VIDE));
-			}
-			if (listeCouleurJoueurVivant != null)
-				setCarteOfferte(listeCouleurJoueurVivant);
 		});
-
 	}
 
 	@Override
 	public void nomJoueurs(List<String> listeNomJoueur) {
-		Platform.runLater(() -> {
-			Button[] joueursButton = { joueur1, joueur2, joueur3, joueur4, joueur5 };
-			for (int i = 0; i < listeNomJoueur.size(); i++)
-				joueursButton[i].setText(listeNomJoueur.get(i));
+		Platform.runLater(new Runnable() {
+			@Override
+			public void run() {
+				Button[] joueursButton = { joueur1, joueur2, joueur3, joueur4, joueur5 };
+				for (int i = 0; i < listeNomJoueur.size(); i++)
+					joueursButton[i].setText(listeNomJoueur.get(i));
+			}
 		});
 	}
 
@@ -1667,24 +1699,27 @@ public class JeuPane extends StackPane implements IJeuListener, ITraduction {
 
 	@Override
 	public void updateCarte() {
-		Platform.runLater(() -> {
-			ImageView[] imgViews = { imgDeCarte1, imgDeCarte2, imgDeCarte3, imgDeCarte4, imgDeCarte5, imgDeCarte6,
-					imgDeCarte7, imgDeCarte8 };
-			Button[] buttons = { bDeCarte1, bDeCarte2, bDeCarte3, bDeCarte4, bDeCarte5, bDeCarte6, bDeCarte7,
-					bDeCarte8 };
-			VBox[] carteVbox = { carte1, carte2, carte3, carte4, carte5, carte6, carte7, carte8 };
-			cartes = core.getIdjr().getListeCarte();
-			for (int i = 0; i < imgViews.length; i++) {
-				if (i < core.getIdjr().getListeCarte().size()) {
-					imgViews[i].setImage(new Image(convertCarte(core.getIdjr().getListeCarte().get(i))));
-					carteVbox[i].setVisible(true);
-					imgViews[i].setDisable(false);
-				} else {
-					imgViews[i].setImage(new Image(DataControl.CARTE_VIDE));
-					carteVbox[i].setVisible(false);
-					imgViews[i].setDisable(true);
+		Platform.runLater(new Runnable() {
+			@Override
+			public void run() {
+				ImageView[] imgViews = { imgDeCarte1, imgDeCarte2, imgDeCarte3, imgDeCarte4, imgDeCarte5, imgDeCarte6,
+						imgDeCarte7, imgDeCarte8 };
+				Button[] buttons = { bDeCarte1, bDeCarte2, bDeCarte3, bDeCarte4, bDeCarte5, bDeCarte6, bDeCarte7,
+						bDeCarte8 };
+				VBox[] carteVbox = { carte1, carte2, carte3, carte4, carte5, carte6, carte7, carte8 };
+				cartes = core.getIdjr().getListeCarte();
+				for (int i = 0; i < imgViews.length; i++) {
+					if (i < core.getIdjr().getListeCarte().size()) {
+						imgViews[i].setImage(new Image(convertCarte(core.getIdjr().getListeCarte().get(i))));
+						carteVbox[i].setVisible(true);
+						imgViews[i].setDisable(false);
+					} else {
+						imgViews[i].setImage(new Image(DataControl.CARTE_VIDE));
+						carteVbox[i].setVisible(false);
+						imgViews[i].setDisable(true);
+					}
+					buttons[i].setStyle(null);
 				}
-				buttons[i].setStyle(null);
 			}
 		});
 	}
@@ -1723,40 +1758,43 @@ public class JeuPane extends StackPane implements IJeuListener, ITraduction {
 
 	@Override
 	public void setVote(List<Couleur> listeCouleurJoueur) {
-		Platform.runLater(() -> {
-			attirerAttention(vote);
-			vote.setVisible(true);
-			fond.setEffect(null);
-			rectVigile.setEffect(null);
-			nomJoueur.setEffect(null);
-			hbCartes.setEffect(null);
-			vbDeplCentre.setEffect(null);
-			des.setEffect(null);
-			bLog.setEffect(null);
-			cartePrecedente.setDisable(false);
-			carteSuivante.setDisable(false);
-			bLog.setDisable(false);
-			fouilleCamion.setVisible(false);
-			Button[] buttons = { joueur1, joueur2, joueur3, joueur4, joueur5 };
-			for (int i = 0; i < buttons.length; i++) {
-				if (listeCouleurJoueur.size() > i) {
-					buttons[i].setDisable(false);
-					buttons[i].setStyle(IhmTools.color(listeCouleurJoueur.get(i)));
-					int tmpi = i;
-					buttons[i].setOnMouseEntered(event -> {
-						buttons[tmpi].setStyle(styleBoutonsSouris);
-					});
-					buttons[i].setOnMouseExited(event -> {
-						buttons[tmpi].setStyle(IhmTools.color(listeCouleurJoueur.get(tmpi)));
-					});
-					Couleur cible = listeCouleurJoueur.get(i);
-					buttons[i].setOnAction(EventHandler -> {
-						core.getIdjr().setVoteChoisi(cible);
-						core.getIdjr().voteChoisi(true);
-						resetVoteCarte();
-					});
-				} else {
-					buttons[i].setText("");
+		Platform.runLater(new Runnable() {
+			@Override
+			public void run() {
+				attirerAttention(vote);
+				vote.setVisible(true);
+				fond.setEffect(null);
+				rectVigile.setEffect(null);
+				nomJoueur.setEffect(null);
+				hbCartes.setEffect(null);
+				vbDeplCentre.setEffect(null);
+				des.setEffect(null);
+				bLog.setEffect(null);
+				cartePrecedente.setDisable(false);
+				carteSuivante.setDisable(false);
+				bLog.setDisable(false);
+				fouilleCamion.setVisible(false);
+				Button[] buttons = { joueur1, joueur2, joueur3, joueur4, joueur5 };
+				for (int i = 0; i < buttons.length; i++) {
+					if (listeCouleurJoueur.size() > i) {
+						buttons[i].setDisable(false);
+						buttons[i].setStyle(IhmTools.color(listeCouleurJoueur.get(i)));
+						int tmpi = i;
+						buttons[i].setOnMouseEntered(event -> {
+							buttons[tmpi].setStyle(styleBoutonsSouris);
+						});
+						buttons[i].setOnMouseExited(event -> {
+							buttons[tmpi].setStyle(IhmTools.color(listeCouleurJoueur.get(tmpi)));
+						});
+						Couleur cible = listeCouleurJoueur.get(i);
+						buttons[i].setOnAction(EventHandler -> {
+							core.getIdjr().setVoteChoisi(cible);
+							core.getIdjr().voteChoisi(true);
+							resetVoteCarte();
+						});
+					} else {
+						buttons[i].setText("");
+					}
 				}
 			}
 		});
@@ -1764,66 +1802,25 @@ public class JeuPane extends StackPane implements IJeuListener, ITraduction {
 
 	@Override
 	public void choisirUtiliserCarte(CarteType carteType) {
-		Platform.runLater(() -> {
-			Button[] buttons = { bDeCarte1, bDeCarte2, bDeCarte3, bDeCarte4, bDeCarte5, bDeCarte6, bDeCarte7,
-					bDeCarte8 };
-			selectedCarteChoi = CarteType.NUL;
+		Platform.runLater(new Runnable() {
+			@Override
+			public void run() {
+				Button[] buttons = { bDeCarte1, bDeCarte2, bDeCarte3, bDeCarte4, bDeCarte5, bDeCarte6, bDeCarte7,
+						bDeCarte8 };
+				selectedCarteChoi = CarteType.NUL;
 
-			attirerAttention(hbCartes);
-			for (int i = 0; i < buttons.length; i++) {
-				if (i < cartes.size()) {
-					if (carteType == cartes.get(i)) {
-						buttons[i].setDisable(false);
-						CarteType type = cartes.get(i);
-						int tmp = i;
-						buttons[i].setOnAction(EventHandler -> {
-							if (selectedCarteChoi == CarteType.NUL) {
-								selectedCarteChoi = type;
-								buttons[tmp]
-										.setStyle("-fx-border-color: red; -fx-border-insets: -5; -fx-border-width: 3;");
-								bPasserCarte.setText(International.trad("texte.valider"));
-							} else {
-								selectedCarteChoi = CarteType.NUL;
-								buttons[tmp].setStyle(null);
-								bPasserCarte.setText(International.trad("texte.passer"));
-							}
-							resetCartesSelection(buttons[tmp]);
-						});
-					}
-				}
-			}
-
-			passerCarte.setVisible(true);
-			passerCarte.setDisable(false);
-			bPasserCarte.setDisable(false);
-			bPasserCarte.setOnAction(EventHandler -> {
-				core.getIdjr().setContinue(false);
-				core.getIdjr().utiliserCarteChoisi(true);
-				resetUtiliserCarte();
-				updateCarte();
-			});
-		});
-	}
-
-	@Override
-	public void choisirUtiliserCarte(List<CarteType> carteTypes) {
-		Platform.runLater(() -> {
-			Button[] buttons = { bDeCarte1, bDeCarte2, bDeCarte3, bDeCarte4, bDeCarte5, bDeCarte6, bDeCarte7,
-					bDeCarte8 };
-			selectedCarteChoi = CarteType.NUL;
-			attirerAttention(hbCartes);
-			for (int i = 0; i < buttons.length; i++) {
-				if (i < cartes.size()) {
-					for (CarteType carteType2 : carteTypes) {
-						if (carteType2 == cartes.get(i)) {
+				attirerAttention(hbCartes);
+				for (int i = 0; i < buttons.length; i++) {
+					if (i < cartes.size()) {
+						if (carteType == cartes.get(i)) {
 							buttons[i].setDisable(false);
-							int tmp = i;
 							CarteType type = cartes.get(i);
+							int tmp = i;
 							buttons[i].setOnAction(EventHandler -> {
 								if (selectedCarteChoi == CarteType.NUL) {
 									selectedCarteChoi = type;
-									buttons[tmp].setStyle(
-											"-fx-border-color: red; -fx-border-insets: -5; -fx-border-width: 3;");
+									buttons[tmp]
+											.setStyle("-fx-border-color: red; -fx-border-insets: -5; -fx-border-width: 3;");
 									bPasserCarte.setText(International.trad("texte.valider"));
 								} else {
 									selectedCarteChoi = CarteType.NUL;
@@ -1835,16 +1832,63 @@ public class JeuPane extends StackPane implements IJeuListener, ITraduction {
 						}
 					}
 				}
+
+				passerCarte.setVisible(true);
+				passerCarte.setDisable(false);
+				bPasserCarte.setDisable(false);
+				bPasserCarte.setOnAction(EventHandler -> {
+					core.getIdjr().setContinue(false);
+					core.getIdjr().utiliserCarteChoisi(true);
+					resetUtiliserCarte();
+					updateCarte();
+				});
 			}
-			passerCarte.setVisible(true);
-			passerCarte.setDisable(false);
-			bPasserCarte.setDisable(false);
-			bPasserCarte.setOnAction(EventHandler -> {
-				core.getIdjr().setContinue(false);
-				core.getIdjr().utiliserCarteChoisi(true);
-				resetUtiliserCarte();
-				updateCarte();
-			});
+		});
+	}
+
+	@Override
+	public void choisirUtiliserCarte(List<CarteType> carteTypes) {
+		Platform.runLater(new Runnable() {
+			@Override
+			public void run() {
+				Button[] buttons = { bDeCarte1, bDeCarte2, bDeCarte3, bDeCarte4, bDeCarte5, bDeCarte6, bDeCarte7,
+						bDeCarte8 };
+				selectedCarteChoi = CarteType.NUL;
+				attirerAttention(hbCartes);
+				for (int i = 0; i < buttons.length; i++) {
+					if (i < cartes.size()) {
+						for (CarteType carteType2 : carteTypes) {
+							if (carteType2 == cartes.get(i)) {
+								buttons[i].setDisable(false);
+								int tmp = i;
+								CarteType type = cartes.get(i);
+								buttons[i].setOnAction(EventHandler -> {
+									if (selectedCarteChoi == CarteType.NUL) {
+										selectedCarteChoi = type;
+										buttons[tmp].setStyle(
+												"-fx-border-color: red; -fx-border-insets: -5; -fx-border-width: 3;");
+										bPasserCarte.setText(International.trad("texte.valider"));
+									} else {
+										selectedCarteChoi = CarteType.NUL;
+										buttons[tmp].setStyle(null);
+										bPasserCarte.setText(International.trad("texte.passer"));
+									}
+									resetCartesSelection(buttons[tmp]);
+								});
+							}
+						}
+					}
+				}
+				passerCarte.setVisible(true);
+				passerCarte.setDisable(false);
+				bPasserCarte.setDisable(false);
+				bPasserCarte.setOnAction(EventHandler -> {
+					core.getIdjr().setContinue(false);
+					core.getIdjr().utiliserCarteChoisi(true);
+					resetUtiliserCarte();
+					updateCarte();
+				});
+			}
 		});
 	}
 
@@ -1867,45 +1911,48 @@ public class JeuPane extends StackPane implements IJeuListener, ITraduction {
 
 	@Override
 	public void choisirUtiliserCartes(List<CarteType> carteTypes) {
-		Platform.runLater(() -> {
-			updateCarte();
-			Button[] buttons = { bDeCarte1, bDeCarte2, bDeCarte3, bDeCarte4, bDeCarte5, bDeCarte6, bDeCarte7,
-					bDeCarte8 };
-			estActif.clear();
-			attirerAttention(hbCartes);
-			for (int i = 0; i < buttons.length; i++) {
-				if (i < cartes.size()) {
-					estActif.add(false);
-					for (CarteType carteType2 : carteTypes) {
-						if (carteType2 == cartes.get(i)) {
-							buttons[i].setDisable(false);
-							CarteType type = cartes.get(i);
-							int tmp = i;
-							buttons[i].setOnAction(EventHandler -> {
-								estActif.set(tmp, !estActif.get(tmp));
-								setContinue();
-								if (estActif.get(tmp))
-									buttons[tmp].setStyle(
-											"-fx-border-color: red; -fx-border-insets: -5; -fx-border-width: 3;");
-								else
-									buttons[tmp].setStyle(null);
-							});
-						} else {
-							buttons[i].setDisable(true);
+		Platform.runLater(new Runnable() {
+			@Override
+			public void run() {
+				updateCarte();
+				Button[] buttons = { bDeCarte1, bDeCarte2, bDeCarte3, bDeCarte4, bDeCarte5, bDeCarte6, bDeCarte7,
+						bDeCarte8 };
+				estActif.clear();
+				attirerAttention(hbCartes);
+				for (int i = 0; i < buttons.length; i++) {
+					if (i < cartes.size()) {
+						estActif.add(false);
+						for (CarteType carteType2 : carteTypes) {
+							if (carteType2 == cartes.get(i)) {
+								buttons[i].setDisable(false);
+								CarteType type = cartes.get(i);
+								int tmp = i;
+								buttons[i].setOnAction(EventHandler -> {
+									estActif.set(tmp, !estActif.get(tmp));
+									setContinue();
+									if (estActif.get(tmp))
+										buttons[tmp].setStyle(
+												"-fx-border-color: red; -fx-border-insets: -5; -fx-border-width: 3;");
+									else
+										buttons[tmp].setStyle(null);
+								});
+							} else {
+								buttons[i].setDisable(true);
+							}
 						}
 					}
 				}
+				passerCarte.setVisible(true);
+				passerCarte.setDisable(false);
+				bPasserCarte.setDisable(false);
+				bPasserCarte.setOnAction(EventHandler -> {
+					core.getIdjr().setContinue(false);
+					core.getIdjr().choisirUtiliserCartes(getList());
+					core.getIdjr().utiliserCartesChoisi(true);
+					resetUtiliserCarte();
+					updateCarte();
+				});
 			}
-			passerCarte.setVisible(true);
-			passerCarte.setDisable(false);
-			bPasserCarte.setDisable(false);
-			bPasserCarte.setOnAction(EventHandler -> {
-				core.getIdjr().setContinue(false);
-				core.getIdjr().choisirUtiliserCartes(getList());
-				core.getIdjr().utiliserCartesChoisi(true);
-				resetUtiliserCarte();
-				updateCarte();
-			});
 		});
 	}
 
@@ -1922,10 +1969,13 @@ public class JeuPane extends StackPane implements IJeuListener, ITraduction {
 
 	@Override
 	public void log(String action) {
-		Platform.runLater(() -> {
-			log.getItems().add(log.getItems().size(), new Label(action));
-			if (!log.getItems().isEmpty())
-				log.scrollTo(log.getItems().size() - 1);
+		Platform.runLater(new Runnable() {
+			@Override
+			public void run() {
+				log.getItems().add(log.getItems().size(), new Label(action));
+				if (!log.getItems().isEmpty())
+					log.scrollTo(log.getItems().size() - 1);
+			}
 		});
 	}
 
