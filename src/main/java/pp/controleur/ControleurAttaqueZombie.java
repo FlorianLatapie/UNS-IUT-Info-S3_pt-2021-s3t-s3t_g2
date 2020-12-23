@@ -88,6 +88,7 @@ public class ControleurAttaqueZombie {
 			azr.informerDefense(jeu, lieu, persoCacheTemp, nbCarteMateriel, j, carte, partieId, numeroTour);
 		}
 		Initializer.nbZombiesLieuAll(new ArrayList<>(jeu.getLieux().values()));
+		Initializer.nbCarteJoueurAll(new ArrayList<>(jeu.getJoueurs().values()));
 		defense.add(persoCache);
 		defense.add(nbCarteMateriel);
 		return defense;

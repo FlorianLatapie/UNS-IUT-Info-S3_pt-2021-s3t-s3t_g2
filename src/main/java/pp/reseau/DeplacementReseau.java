@@ -6,6 +6,7 @@ import java.util.List;
 import pp.Joueur;
 import pp.Partie;
 import pp.PpTools;
+import pp.ihm.event.Initializer;
 import reseau.socket.ControleurReseau;
 import reseau.type.CarteType;
 
@@ -25,12 +26,13 @@ public class DeplacementReseau {
 		j.getConnection().envoyer(m);
 	}
 
-	public List<Object> recupDeplacemnt(Joueur j){
+	public List<Object> recupDeplacemnt(Partie jeu, Joueur j){
 		List<Object> li = new ArrayList<>();
 		j.getConnection().attendreMessage("DPR");
 		String message = j.getConnection().getMessage("DPR");
 		if (ControleurReseau.getValueTcp("DPR", message, 3) == CarteType.SPR)
 			j.getCartes().remove(CarteType.SPR);
+		Initializer.nbCarteJoueurAll(new ArrayList<>(jeu.getJoueurs().values()));
 		li.add(ControleurReseau.getValueTcp("DPR", message, 1));
 		li.add(ControleurReseau.getValueTcp("DPR", message, 2));
 		li.add(ControleurReseau.getValueTcp("DPR", message, 3));
