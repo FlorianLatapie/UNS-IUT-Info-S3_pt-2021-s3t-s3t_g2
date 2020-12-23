@@ -2,7 +2,7 @@
 package pp.ihm;
 
 import pp.ihm.DataControl.ApplicationPane;
-import pp.ihm.event.IPleineEcranListener;
+import pp.ihm.event.IPleinEcranListener;
 import pp.ihm.langues.ITraduction;
 import pp.ihm.langues.International;
 import pp.ihm.langues.Langues;
@@ -24,9 +24,16 @@ import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.stage.Stage;
-
-public class OptionPane extends StackPane implements IPleineEcranListener, ITraduction {
-
+/**
+ * 
+ * @author Remy 
+ * @author florian
+ * @author Sebastien 
+ * @author Tom
+ *
+ */
+public class OptionPane extends StackPane implements IPleinEcranListener, ITraduction {
+	//auteur remy 
 	private ScreenControl sControl = null;
 	private Core core = null;
 	private final ApplicationPane paneName = ApplicationPane.OPTION;
@@ -52,16 +59,17 @@ public class OptionPane extends StackPane implements IPleineEcranListener, ITrad
 	//Button bAcc;
 
 	public OptionPane(ScreenControl sc, Core c) {
+		//auteur remy 
 		core = c;
 		sControl = sc;
-
+		//auteur florian
 		Rectangle rect = new Rectangle();
 		rect.setWidth(tailleCarreCentral);
 		rect.setHeight(tailleCarreCentral);
 		rect.setArcHeight(30);
 		rect.setArcWidth(30);
 		rect.setOpacity(.3);
-
+		//auteur remy 
 		VBox vbFond = new VBox();
 		vbFond.setAlignment(Pos.CENTER);
 		vbFond.setSpacing(20);
@@ -226,7 +234,7 @@ public class OptionPane extends StackPane implements IPleineEcranListener, ITrad
 	}
 
 	@Override
-	public void updatePleineEcran() {
+	public void updatePleinEcran() {
 		if (!core.getSauvegarderOptions().isEstPleinEcran())
 			bPleinEcran.setText(International.trad("bouton.pEcran"));
 		else

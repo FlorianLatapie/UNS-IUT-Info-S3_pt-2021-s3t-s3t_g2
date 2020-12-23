@@ -29,10 +29,15 @@ import java.util.List;
  * The Class ConfigPartiePane.
  *
  * @author Florian
+ * @author Remy 
+ * @author Sebastien 
+ * @author Tom
+ * 
  * @version 0.1
  * @since 26/10/2020
  */
 public class CouleurPane extends StackPane implements ICouleurListener, ITraduction {
+	//auteur Florian
 	private ScreenControl sControl = null;
 	private Core core = null;
 	private final ApplicationPane paneName = ApplicationPane.COULEUR;
@@ -103,6 +108,7 @@ public class CouleurPane extends StackPane implements ICouleurListener, ITraduct
 	Button bRetour;
 
 	public CouleurPane(ScreenControl sc, Core c) {
+		//auteur florian
 		core = c;
 		sControl = sc;
 
@@ -403,6 +409,7 @@ public class CouleurPane extends StackPane implements ICouleurListener, ITraduct
 		couleur6.setMinHeight(hauteurElemtents);
 		couleur6.setPrefSize(largeurComboBox, hauteurElemtents);
 		couleur6.getItems().addAll(DataControl.couleursJoueur);
+		//auteur sebastien 
 		couleur6.valueProperty().addListener(new ChangeListener<String>() {
 
 			@Override
@@ -412,6 +419,7 @@ public class CouleurPane extends StackPane implements ICouleurListener, ITraduct
 					couleursChoix.set(ordre[5], newValue);
 			}
 		});
+		//auteur florian
 		monter6 = new Button(International.trad("bouton.monter"));
 		monter6.setPrefSize(lBoutonMD, hBoutonMD);
 		monter6.setMinSize(lBoutonMD, hBoutonMD);
@@ -517,6 +525,7 @@ public class CouleurPane extends StackPane implements ICouleurListener, ITraduct
 		sControl.setPaneOnTop(paneName);
 	}
 
+	
 	@Override
 	public void joueurNoms(List<Joueur> joueurs) {
 		Platform.runLater(() -> {
@@ -554,7 +563,11 @@ public class CouleurPane extends StackPane implements ICouleurListener, ITraduct
 			setJoueurConfig(core.getNbJoueur());
 		});
 	}
-
+	
+	/**
+	 * @author Sebastien 
+	 * permet d'appliquer la permutation de l'ordre des joueurs sur l'interface graphique  
+	 */
 	public void updateOrdre() {
 		List<ComboBox<String>> combos = new ArrayList<>();
 		combos.add(couleur1);
@@ -578,7 +591,12 @@ public class CouleurPane extends StackPane implements ICouleurListener, ITraduct
 		couleur5.setValue(joueurs.size() >= 5 ? couleursChoix.get(ordre[4]) : "");
 		couleur6.setValue(joueurs.size() >= 6 ? couleursChoix.get(ordre[5]) : "");
 	}
-
+	
+	/**
+	 * @author Sebastien 
+	 * Affiche le bon nombre de boutons sur l'interface graphique en fonction du nombre de joueurs donné en paramètre
+	 * @param maxJr nombre de joueurs a afficher 
+	 */
 	private void setJoueurConfig(int maxJr) {
 		if (maxJr == 3) {
 
@@ -613,9 +631,18 @@ public class CouleurPane extends StackPane implements ICouleurListener, ITraduct
 		}
 	}
 
-	public static String getCouleur(String c) {
+	/**
+	 * @author Sebastien 
+	 * @author Remy
+	 * @author Florian
+	 * 
+	 * retourne le style à appliquer pour les l'interface
+	 * @param couleur la couleur sous forme de String
+	 * @return la couleur sous forme de style (String)
+	 */
+	public static String getCouleur(String couleur) {
 		String style = ";-fx-background-radius: 10px;";
-		switch (c) {
+		switch (couleur) {
 		case "Bleu":
 			return IhmOutils.bleu + style;
 		case "Rouge":

@@ -15,8 +15,20 @@ import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 
-public class AccessibilitePane extends StackPane implements ITraduction {
+/**
+ * The Class AccueilPane.
+ *
+ * @author Florian
+ * @author Nina
+ * @author Remy
+ * @author Tom
+ * 
+ * @version 0.1
+ * @since 04/10/2020
+ */
 
+public class AccessibilitePane extends StackPane implements ITraduction {
+	//auteur nina 
 	private ScreenControl sControl = null;
 	private StackPane stackPane = new StackPane();
 	private final ApplicationPane paneName = ApplicationPane.ACCESSIBILITE;
@@ -48,14 +60,16 @@ public class AccessibilitePane extends StackPane implements ITraduction {
 
 		sControl = sc;
 		stackPane.setAlignment(Pos.CENTER);
-
+		
+		//auteur florian
 		Rectangle rect = new Rectangle();
 		rect.setWidth(tailleCarreCentral);
 		rect.setHeight(tailleCarreCentral);
 		rect.setArcHeight(30);
 		rect.setArcWidth(30);
 		rect.setOpacity(.3);
-
+		
+		//auteur nina
 		VBox vbFond = new VBox();
 		vbFond.setAlignment(Pos.CENTER);
 		vbFond.setSpacing(20);
@@ -148,7 +162,7 @@ public class AccessibilitePane extends StackPane implements ITraduction {
 		bpCentral.setBottom(vbRetour);
 
 		// Boutons de rotation d'écran
-
+		//auteur remy
 		ImageView img1 = new ImageView(DataControl.SCREEN);
 		img1.setFitHeight(70);
 		img1.setPreserveRatio(true);
@@ -196,7 +210,7 @@ public class AccessibilitePane extends StackPane implements ITraduction {
 		bEcranDroite.setPrefSize(80, 80);
 		bEcranDroite.setGraphic(img4);
 		bEcranDroite.setOnAction(EventHandler -> sc.setRotatePane(rect, bpCentral, "droite"));
-
+		//auteur nina
 		// boite du fond qui contient le fond et les autres boites
 		ImageView img = new ImageView(DataControl.FOND);
 		vbFond.getChildren().add(img);
@@ -208,6 +222,7 @@ public class AccessibilitePane extends StackPane implements ITraduction {
 		sControl.registerNode(paneName, this);
 		sControl.setPaneOnTop(paneName);
 	}
+	
 
 	@Override
 	public void traduire() {

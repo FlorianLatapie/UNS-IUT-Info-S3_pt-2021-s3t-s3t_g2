@@ -5,13 +5,20 @@ import java.util.Locale;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import pp.ihm.langues.International;
-
+/**
+ * 
+ * @author florian
+ * @author Remy 
+ * @author Sebastien
+ *
+ */
 public class DataControl {
-
+	// auteurs  florian, remy 
 	public static enum ApplicationPane {
 		ACCUEIL, OPTION, PAUSE, PLATEAU, CONFIG, REGLES, ACCESSIBILITE, ENDGAME, WAIT, COULEUR, CONFIG_BOT
 	}
-
+	
+	// auteur seb 
 	public static enum ApplicationLangue {
 		FRANCAIS, ENGLISH
 	}
@@ -19,13 +26,13 @@ public class DataControl {
 	public final static Locale localeEN = new Locale("en", "UK");
 	public final static Locale localeFR = new Locale("fr", "FR");
 	public final static String localMsgURL = "Ressources.Textes.messages";
-	public static final String FOND = "Images/ImagesPP/fond.png";
+	public static final String FOND = "Images/ImagesPP/fond.png"; // image modifiée par florian 
 	public static final String PLATEAU = "Images/ImagesPP/plateau.png";
 	public static final String PLATEAU_NB = "Images/ImagesPP/plateauNB.png";
-	public static final String ICONE = "Images/ImagesPP/desktop Icon.jpg";
-	public static final String SCREEN = "Images/ImagesPP/rotationEcran.png";
-	public static final String JOUEUR_ATTENDU = "Images/ImagesPP/joueurAttente.png";
-	public static final String JOUEUR_CONNECTE = "Images/ImagesPP/joueurConnecté.png";
+	public static final String ICONE = "Images/ImagesPP/desktop Icon.jpg"; // image modifiée par florian
+	public static final String SCREEN = "Images/ImagesPP/rotationEcran.png"; // image créée par remy 
+	public static final String JOUEUR_ATTENDU = "Images/ImagesPP/joueurAttente.png"; // image libre de droits (freepik) modifiée par florian 
+	public static final String JOUEUR_CONNECTE = "Images/ImagesPP/joueurConnecté.png"; // image libre de droits (freepik) modifiée par florian 
 	
 	
 	public static final String FERME1 = "Images/ImagesPP/1Fermé.png";
@@ -36,7 +43,7 @@ public class DataControl {
 	
 	public static final String DOS_CARTE = "Images/ImagesPP/dosCarte.png";
 	
-	// Pions
+	// Pions, tous les pions ont étés créés par florian 
 	public static final String NOM_COULEUR = "Images/ImagesPP/Pions/SamplePion.png";
 	
 	public static final String TRUAND_B = "Images/ImagesPP/Pions/bleu1.png";
@@ -69,11 +76,12 @@ public class DataControl {
 	public static final String BLONDE_V = "Images/ImagesPP/Pions/vert3.png";
 	public static final String FILLETTE_V = "Images/ImagesPP/Pions/vert4.png";
 	
+	// auteur remy 
 	public static final String CSS = "pp/ihm/style/style.css";
-	// for testing purpose
+	// redéfinition de NOM_COULEUR pour tester 
 	//public static final String NOM_COULEUR = "Images/ImagesPP/Pions/marron1.png";
 
-
+	//auteur florian 
 	public static final ObservableList<Integer> nombreJoueur = FXCollections.observableArrayList(3, 4, 5, 6);
 	public static final ObservableList<Integer> nombreBot = FXCollections.observableArrayList(0, 1, 2, 3, 4, 5, 6);
 	public static final ObservableList<String> couleursJoueur = FXCollections.observableArrayList(
@@ -83,17 +91,19 @@ public class DataControl {
 			International.trad("texte.valueFaible"), International.trad("texte.valueMoyen"),
 			International.trad("texte.valueFort"));
 
-	public static Locale getLocale(ApplicationLangue l) {
-		switch (l) {
+	//auteur sebastien 
+	public static Locale getLocale(ApplicationLangue langue) {
+		switch (langue) {
 		case ENGLISH:
 			return localeEN;
 		default:
 			return localeFR;
 		}
 	}
-
+	
+	// auteur sebastien 
 	public static ApplicationLangue getLangue(String l) {
-		if (l.equals(ControleurLangue.get("texte.langue2"))) {
+		if (l.equals(ControleurLangue.get("texte.langue2"))) {//TODO opérateur ternaire ? 
 			return ApplicationLangue.ENGLISH;
 		}
 		return ApplicationLangue.FRANCAIS;

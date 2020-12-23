@@ -21,10 +21,15 @@ import javafx.scene.text.TextAlignment;
  * The Class AccueilPane.
  *
  * @author Florian
- * @version 0.1
+ * @author Remy 
+ * @author Sebatien 
+ * @author Tom 
+ * 
+ * @version 1.0
  * @since 26/10/2020
  */
 public class FinDePartiePane extends StackPane implements IFinListener, ITraduction {
+	//auteur florian
 	private ScreenControl sControl = null;
 	private Core core = null;
 	private final ApplicationPane paneName = ApplicationPane.ENDGAME;
@@ -59,6 +64,7 @@ public class FinDePartiePane extends StackPane implements IFinListener, ITraduct
 	Button bRetour4;
 
 	public FinDePartiePane(ScreenControl sc, Core c) {
+		//auteur florian 
 		core = c;
 		sControl = sc;
 
@@ -189,7 +195,8 @@ public class FinDePartiePane extends StackPane implements IFinListener, ITraduct
 		centreMenu.setCenter(vbCenter);
 		centreMenu.setTop(bHaut);
 		centreMenu.setBottom(bBas);
-
+		
+		//auteur remy 
 		// Boutons de rotation d'écran
 		ImageView img1 = new ImageView(DataControl.SCREEN);
 		img1.setFitHeight(70);
@@ -239,6 +246,7 @@ public class FinDePartiePane extends StackPane implements IFinListener, ITraduct
 		bEcranDroite.setGraphic(img4);
 		bEcranDroite.setOnAction(EventHandler -> sc.setRotatePane(vbCenter, "droite"));
 
+		//auteur florian 
 		// boite du fond qui contient le fond et les autres boites
 		HBox fond = new HBox();
 		fond.setAlignment(Pos.CENTER);
@@ -254,9 +262,6 @@ public class FinDePartiePane extends StackPane implements IFinListener, ITraduct
 
 	}
 
-	/*
-	 * affiche le nom du joueur sur l'écran
-	 */
 	@Override
 	public void getGagnant(String nom) {
 		String tmp = International.trad("text.joueurGagngant", nom);

@@ -20,10 +20,11 @@ import pp.ihm.langues.International;
 
 /**
  * @author Remy
+ * @author Tom
  *
  */
 public class ConfirmationPane implements ITraduction {
-
+	//auteur remy
 	static boolean reponse;
 	private static int tailleFenetreL = 500;
 	private static int tailleFenetreH = 190;
@@ -40,7 +41,7 @@ public class ConfirmationPane implements ITraduction {
 	 * @return
 	 */
 	public static boolean afficher(String titre, String messageL1) {
-
+		//auteur remy
 		// nouvelle fenetre
 		Stage window = new Stage();
 		window.getIcons().add(new Image(DataControl.ICONE));

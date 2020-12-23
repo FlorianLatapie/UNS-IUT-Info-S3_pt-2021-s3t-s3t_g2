@@ -10,7 +10,11 @@ import java.io.Serializable;
 
 import pp.ihm.event.Initializer;
 import pp.ihm.langues.Langues;
-
+/**
+ * 
+ * @author Sebastien 
+ *
+ */
 public class SauvegarderOptions implements Serializable {
 
 	private static final long serialVersionUID = 3409175594291680627L;
@@ -21,6 +25,9 @@ public class SauvegarderOptions implements Serializable {
 
 	private static String CHEMIN = "options.opts";
 
+	/**
+	 * Sauvegarde les options dans le chemin en attribut 
+	 */
 	public SauvegarderOptions() {
 		File opt = new File(CHEMIN);
 		if (!opt.exists()) {
@@ -44,6 +51,9 @@ public class SauvegarderOptions implements Serializable {
 		}
 	}
 
+	/**
+	 * Sauvegarde les options dans le chemin en attribut 
+	 */
 	public void sauvegarder() {
 		FileOutputStream fioust;
 		try {

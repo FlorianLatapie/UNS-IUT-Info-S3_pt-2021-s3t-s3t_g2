@@ -14,7 +14,7 @@ public abstract class Initializer {
 	private static List<IFinListener> listenersfl = new ArrayList<>();
 	private static List<ICouleurListener> listenerscl = new ArrayList<>();
 	private static List<IRotationListener> listenersrl = new ArrayList<>();
-	private static List<IPleineEcranListener> listenerspel = new ArrayList<>();
+	private static List<IPleinEcranListener> listenerspel = new ArrayList<>();
 
 	public static void addListener(IPlateauListener toAdd) {
 		listenerspl.add(toAdd);
@@ -36,7 +36,7 @@ public abstract class Initializer {
 		listenersrl.add(toAdd);
 	}
 
-	public static void addListener(IPleineEcranListener toAdd) {
+	public static void addListener(IPleinEcranListener toAdd) {
 		listenerspel.add(toAdd);
 	}
 
@@ -168,8 +168,8 @@ public abstract class Initializer {
 	}
 
 	public static void updatePleineEcran() {
-		for (IPleineEcranListener pel : listenerspel)
-			pel.updatePleineEcran();
+		for (IPleinEcranListener pel : listenerspel)
+			pel.updatePleinEcran();
 	}
 
 	public static void updateJoueurs(List<Joueur> joueurs, int max) {

@@ -3,10 +3,6 @@ package pp.ihm;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Timer;
-import java.util.TimerTask;
-
-import com.sun.glass.events.MouseEvent;
-
 import pp.Personnage;
 import pp.ihm.DataControl.ApplicationPane;
 import pp.ihm.event.EvenementStockage;
@@ -16,15 +12,12 @@ import pp.ihm.langues.International;
 import reseau.type.Couleur;
 import javafx.animation.FadeTransition;
 import javafx.application.Platform;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.effect.GaussianBlur;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
@@ -32,10 +25,17 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.TextAlignment;
-import javafx.stage.Popup;
 import javafx.util.Duration;
-
+/**
+ * 
+ * @author florian 
+ * @author remy 
+ * @author sebastien 
+ * @author tom 
+ *
+ */
 public class PlateauPane extends StackPane implements IPlateauListener, ITraduction {
+	//auteur florian 
 	private ScreenControl sControl = null;
 	private Core core = null;
 	private final ApplicationPane paneName = ApplicationPane.PLATEAU; // nom du pane
@@ -45,7 +45,7 @@ public class PlateauPane extends StackPane implements IPlateauListener, ITraduct
 	private final int lhBoutonPause = 80;
 
 	private String nomPolice = "Segoe UI";
-	private final Font policeBoutonPause = Font.font("Segoe UI", FontWeight.BOLD, 34);
+	private final Font policeBoutonPause = Font.font(nomPolice, FontWeight.BOLD, 34);
 
 	private String styleBoutons = " -fx-background-color:#000000; -fx-background-radius: 50px; -fx-text-fill: #ffffff";
 	private String styleBoutonsSouris = "-fx-background-color:#ff0000;  -fx-text-fill:#000000; -fx-background-radius: 50px;";
@@ -211,6 +211,7 @@ public class PlateauPane extends StackPane implements IPlateauListener, ITraduct
 	BorderPane b6;
 
 	public PlateauPane(ScreenControl sc, Core c) {
+		//auteur florian 		
 		core = c;
 		sControl = sc;
 
@@ -482,7 +483,7 @@ public class PlateauPane extends StackPane implements IPlateauListener, ITraduct
 		AnchorPane.setLeftAnchor(b1, 630.0);
 
 		////
-
+		//auteur remy 
 		VBox vbRight2 = new VBox();
 		vbRight2.setAlignment(Pos.TOP_CENTER);
 		vbRight2.setSpacing(30);
@@ -532,7 +533,7 @@ public class PlateauPane extends StackPane implements IPlateauListener, ITraduct
 		AnchorPane.setLeftAnchor(b2, 70.0);
 
 		///
-
+		//auteur florian
 		VBox vbRight3 = new VBox();
 		vbRight3.setAlignment(Pos.TOP_CENTER);
 		vbRight3.setSpacing(30);
@@ -582,8 +583,7 @@ public class PlateauPane extends StackPane implements IPlateauListener, ITraduct
 		AnchorPane.setTopAnchor(b3, 260.0);
 		AnchorPane.setLeftAnchor(b3, 25.0);
 
-		///
-
+		/// 
 		VBox vbRight4 = new VBox();
 		vbRight4.setAlignment(Pos.TOP_CENTER);
 		vbRight4.setSpacing(30);
@@ -694,7 +694,7 @@ public class PlateauPane extends StackPane implements IPlateauListener, ITraduct
 		AnchorPane.setLeftAnchor(b4, 365.0);
 
 		///
-
+		//auteur remy 
 		VBox vbRight5 = new VBox();
 		vbRight5.setAlignment(Pos.TOP_CENTER);
 		vbRight5.setSpacing(30);
@@ -791,9 +791,9 @@ public class PlateauPane extends StackPane implements IPlateauListener, ITraduct
 		AnchorPane.setLeftAnchor(b6, 747.5);
 
 		/////
-
+		// auteur florian 
 		lChefVigile = new Label();
-		lChefVigile.setText("BOT MOYEN ALEXANDRE est le chef des vigiles"); // do not translate, do not remove (c'est du
+		lChefVigile.setText("XXXXXXXXX est le chef des vigiles"); // do not translate, do not remove (c'est du
 																			// sample text pour l'ihm)
 		lChefVigile.setStyle(styleChefVigile);
 		lChefVigile.setTextFill(Color.WHITE);
@@ -802,7 +802,7 @@ public class PlateauPane extends StackPane implements IPlateauListener, ITraduct
 		lChefVigile.setTranslateY(515);
 
 		lChefVigile2 = new Label();
-		lChefVigile2.setText("BOT MOYEN ALEXANDRE est le chef des vigiles"); // do not translate, do not remove (c'est
+		lChefVigile2.setText("XXXXXXXXX est le chef des vigiles"); // do not translate, do not remove (c'est
 																				// du sample text pour l'ihm)
 		lChefVigile2.setStyle(styleChefVigile);
 		lChefVigile2.setTextFill(Color.WHITE);
@@ -812,7 +812,7 @@ public class PlateauPane extends StackPane implements IPlateauListener, ITraduct
 		lChefVigile2.setTranslateY(-515);
 
 		lChefVigile3 = new Label();
-		lChefVigile3.setText("BOT MOYEN ALEXANDRE est le chef des vigiles"); // do not translate, do not remove (c'est
+		lChefVigile3.setText("XXXXXXXXX est le chef des vigiles"); // do not translate, do not remove (c'est
 																				// du sample text pour l'ihm)
 		lChefVigile3.setStyle(styleChefVigile);
 		lChefVigile3.setTextFill(Color.WHITE);
@@ -822,7 +822,7 @@ public class PlateauPane extends StackPane implements IPlateauListener, ITraduct
 		lChefVigile3.setTranslateX(-575);
 
 		lChefVigile4 = new Label();
-		lChefVigile4.setText("BOT MOYEN ALEXANDRE est le chef des vigiles"); // do not translate, do not remove (c'est
+		lChefVigile4.setText("XXXXXXXXX est le chef des vigiles"); // do not translate, do not remove (c'est
 																				// du sample text pour l'ihm)
 		lChefVigile4.setStyle(styleChefVigile);
 		lChefVigile4.setTextFill(Color.WHITE);
@@ -834,7 +834,7 @@ public class PlateauPane extends StackPane implements IPlateauListener, ITraduct
 		////
 
 		aPlateau.getChildren().addAll(b1, b2, b3, b4, b5, b6);
-
+		//auteur remy 
 		notifInfo = new AnchorPane();
 		notifInfo.setMinSize(1920, 1080);
 
@@ -1008,6 +1008,9 @@ public class PlateauPane extends StackPane implements IPlateauListener, ITraduct
 		notifInfo.getChildren().addAll(info1, info2, info3, info4);
 		notifInfo.setVisible(false);
 
+		///////////////////////////////////////
+		
+		
 		borderJoueurs.setTop(hHaut);
 		borderJoueurs.setBottom(hBas);
 		borderJoueurs.setLeft(hGauche);
@@ -1096,8 +1099,9 @@ public class PlateauPane extends StackPane implements IPlateauListener, ITraduct
 		bPileCarte.setTop(lPileCarte3);
 		bPileCarte.setRight(lPileCarte4);
 
-		this.setStyle(" -fx-background-color:#151515;");
+		this.setStyle(" -fx-background-color:#151515;"); //TODO à déplacer
 
+		//auteur sebastien 
 		j1.setVisible(true);
 		j2.setVisible(true);
 		j3.setVisible(true);
@@ -1135,7 +1139,7 @@ public class PlateauPane extends StackPane implements IPlateauListener, ITraduct
 		b4.setVisible(false);
 		b5.setVisible(false);
 		b6.setVisible(false);
-
+		//auteur florian 
 		this.getChildren().addAll(imgFond, bPileCarte, borderJoueurs, aPlateau, lChefVigile, lChefVigile2, lChefVigile3,
 				lChefVigile4, imgCarteFerme1, imgCarteFerme2, imgCarteFerme3, imgCarteFerme5, imgCarteFerme6,
 				notifInfo);
@@ -1459,6 +1463,14 @@ public class PlateauPane extends StackPane implements IPlateauListener, ITraduct
 		});
 	}
 
+	/**
+	 * @author Sebastien 
+	 * @author Remy 
+	 * affiche l'information placée en paramètre dans les 4 sens de lecture au dessus du plateau 
+	 * @param titre titre de l'information 
+	 * @param message message de l'information
+	 * @param okFictif si le bouton est actif ou non 
+	 */
 	public void popup(String titre, String message, boolean okFictif) {
 		titreInfo1.setText(titre);
 		titreInfo2.setText(titre);
@@ -1498,6 +1510,13 @@ public class PlateauPane extends StackPane implements IPlateauListener, ITraduct
 		}
 	}
 
+	/**
+	 * @author Sebastien 
+	 * affiche les images des pions dans chaque lieu 
+	 * @param lieu lieu auquel il faut appliquer le pion 
+	 * @param p type de pion a appliquer 
+	 * @param imageViews liste des images qui peuvent changer 
+	 */
 	public void setPersonnageLieu(int lieu, List<Personnage> p, ImageView[] imageViews) {
 		for (int i = 0; i < imageViews.length; i++) {
 			if (i < p.size()) {
@@ -1588,8 +1607,12 @@ public class PlateauPane extends StackPane implements IPlateauListener, ITraduct
 		});
 	}
 
+	/**
+	 * @author Sebastien 
+	 * permet de choisir sa place autout de la table 
+	 */
 	private void getNextColor() {
-		popup("Choi du placement autour de la table",
+		popup("Choix du placement autour de la table",
 				"C'est au " + couleurs1.get(o).nomEntier() + " de choisir son placement autour de la table !", true);
 		VBox[] j = { j1, j2, j3, j4, j5, j6 };
 		Label[] l = { nomJoueur1, nomJoueur2, nomJoueur3, nomJoueur4, nomJoueur5, nomJoueur6 };
@@ -1627,7 +1650,10 @@ public class PlateauPane extends StackPane implements IPlateauListener, ITraduct
 		}
 		o++;
 	}
-
+	/**
+	 * @author Sebastien 
+	 * TODO javadoc 
+	 */
 	private void resetCadreJoueur() {
 		VBox[] j = { j1, j2, j3, j4, j5, j6 };
 		for (VBox vBox : j) {
@@ -1639,7 +1665,11 @@ public class PlateauPane extends StackPane implements IPlateauListener, ITraduct
 			});
 		}
 	}
-
+	
+	/**
+	 * @author Sebastien 
+	 * TODO javadoc 
+	 */
 	private void visibleCadreInutile() {
 		VBox[] j = { j1, j2, j3, j4, j5, j6 };
 		for (VBox vBox : j) {
@@ -1649,6 +1679,10 @@ public class PlateauPane extends StackPane implements IPlateauListener, ITraduct
 		}
 	}
 
+	/**
+	 * @author Sebastien 
+	 * affiche le plateau 
+	 */
 	private void afficherPlateau() {
 		lChefVigile.setVisible(true);
 		lChefVigile2.setVisible(true);
@@ -1662,5 +1696,4 @@ public class PlateauPane extends StackPane implements IPlateauListener, ITraduct
 		b5.setVisible(true);
 		b6.setVisible(true);
 	}
-
 }

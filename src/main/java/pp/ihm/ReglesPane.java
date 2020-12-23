@@ -26,11 +26,13 @@ import javafx.scene.text.FontWeight;
  * The Class AccueilPane.
  * 
  * @author Florian
- * @version 0.1
+ * @author Tom 
+ * 
+ * @version 1.0
  * @since 01/11/2020
  */
 public class ReglesPane extends StackPane implements ITraduction {
-
+	//auteur florian 
 	private ScreenControl sControl = null;
 	private Core core = null;
 	private final ApplicationPane paneName = ApplicationPane.REGLES;
@@ -54,6 +56,7 @@ public class ReglesPane extends StackPane implements ITraduction {
 	Button bRetour;
 
 	public ReglesPane(ScreenControl sc, Core c) {
+		//auteur florian 
 		core = c;
 		sControl = sc;
 
