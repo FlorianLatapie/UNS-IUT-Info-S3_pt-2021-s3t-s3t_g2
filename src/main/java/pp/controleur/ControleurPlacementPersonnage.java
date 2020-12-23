@@ -29,6 +29,7 @@ public class ControleurPlacementPersonnage {
 				des.add(x);
 				des.add(y);
 				List<Integer> listePion = getDestinationPossible(jeu, x, y);
+				pr.attendreLancement(j);
 				pr.informerResultatDes(j, des, listePion, partieId);
 				List<Integer> choisirDest = pr.choisirDest(j);
 				jeu.placePerso(j, PpTools.valeurToIndex(choisirDest.get(1)), choisirDest.get(0));
