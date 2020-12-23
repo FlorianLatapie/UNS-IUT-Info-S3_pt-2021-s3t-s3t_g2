@@ -9,8 +9,10 @@ import com.sun.tools.sjavac.comp.dependencies.PublicApiCollector;
 import pp.Joueur;
 import pp.Lieu;
 import pp.Partie;
+import pp.ihm.event.Initializer;
 import pp.reseau.VoteReseau;
 import reseau.socket.ControleurReseau;
+import reseau.type.CarteType;
 import reseau.type.Couleur;
 import reseau.type.VoteEtape;
 import reseau.type.VoteType;
@@ -95,10 +97,16 @@ public class ControleurVote {
 		for (Joueur j : jeu.getJoueurSurLieu(l)) {
 			if (ve == VoteEtape.PRE) {
 				int nbMenace = vr.carteJoue(j);
+				for (int i = 0; i< nbMenace; i++)
+					j.getCartes().remove(CarteType.MEN);
+				Initializer.nbCarteJoueurAll(new ArrayList<>(jeu.getJoueurs().values()));	
 				nbVoix.add(j.getNbVoix(l, 1, nbMenace));
 				vr.informeCarteJouee(jeu, 1, l, j, nbMenace, partieId, numeroTour);
 			} else if (ve == VoteEtape.SEC) {
 				int nbMenace = vr.carteJoue(j);
+				for (int i = 0; i< nbMenace; i++)
+					j.getCartes().remove(CarteType.MEN);
+				Initializer.nbCarteJoueurAll(new ArrayList<>(jeu.getJoueurs().values()));	
 				int a = 0;
 				for (Integer i : jeu.getJoueurs().keySet())
 					if (jeu.getJoueurs().get(i) == j)
