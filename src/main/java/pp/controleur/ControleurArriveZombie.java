@@ -8,6 +8,7 @@ import java.util.Random;
 
 import pp.Joueur;
 import pp.Partie;
+import pp.ihm.event.Initializer;
 import pp.reseau.ArriveZombieReseau;
 import reseau.socket.ControleurReseau;
 import reseau.type.CarteType;
@@ -34,6 +35,7 @@ public class ControleurArriveZombie {
 			azr.informeArriveZombieCDS(jeu, j, lieuZombie, partieId, numeroTour);
 			j.getCartes().remove(CarteType.CDS);
 		}
+		Initializer.nbCarteJoueurAll(new ArrayList<>(jeu.getJoueurs().values()));	
 		azr.informerUtilisationCDS(jeu, joueurCDS, lieuZombie, partieId, numeroTour);
 		return lieuZombie;
 	}
