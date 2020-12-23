@@ -227,9 +227,13 @@ public class TraitementIdjr {
 	public List<Object> listeCarteJouee(Idjr core, int n) {
 		List<Object> listRenvoye = new ArrayList<>();
 		List<CarteType> listeCarteJouee = new ArrayList<>();
+		List<CarteType> listeCarteCachette = new ArrayList<>();
 		List<CarteType> listeCarteUtilisable = new ArrayList<>();
+		List<PionCouleur> listePionCache = new ArrayList<>();
+		List<PionCouleur> personnagesCachable = core.getPoinSacrDispo();
 		Random r = new Random();
 		int indexCarteJouee;
+		int nbCarteJouee = 0;
 		for (CarteType carte : core.getListeCarte()) {
 			if (n != 4) {
 				if (carte.name() == "MAT") {
@@ -237,30 +241,22 @@ public class TraitementIdjr {
 				}
 			}
 			switch (carte.name()) {
-			case "CAC":
-				listeCarteUtilisable.add(carte);
-				break;
 			case "ACS":
-				listeCarteUtilisable.add(carte);
-				break;
 			case "ATR":
-				listeCarteUtilisable.add(carte);
-				break;
 			case "AGR":
-				listeCarteUtilisable.add(carte);
-				break;
 			case "ARE":
-				listeCarteUtilisable.add(carte);
-				break;
 			case "AHI":
-				listeCarteUtilisable.add(carte);
-				break;
 			case "ABA":
 				listeCarteUtilisable.add(carte);
 				break;
+			case "CAC":
+				listeCarteCachette.add(carte);
+				break;
 			}
 		}
-		int nbCarteJouee = 0;
+		while (listeCarteCachette.size() > personnagesCachable.size())
+			listeCarteCachette.remove(0);
+		listeCarteUtilisable.addAll(listeCarteCachette);
 		if (!listeCarteUtilisable.isEmpty()) {
 			Initializer.choisirUtiliserCartes(listeCarteUtilisable);
 			while (!core.utiliserCartesDisponible())
@@ -272,14 +268,22 @@ public class TraitementIdjr {
 			Initializer.updateCarte();
 			listeCarteUtilisable.removeAll(tmpCarteType);
 		}
-		List<PionCouleur> listePionCache = listePionCache(core);
-		int i = 0;
-		while (i < listePionCache.size()) {
-			listeCarteJouee.add(CarteType.CAC);
-			core.getListeCarte().remove(CarteType.CAC);
-			Initializer.updateCarte();
-			i++;
+
+		int cartesCachette = 0;
+		for(CarteType carte : listeCarteJouee)
+			if(carte == CarteType.CAC)
+				cartesCachette++;
+
+		for (int i = 0; i < cartesCachette; i++) {
+			Initializer.choisirPion(IdjrTools.getPionsByValues(personnagesCachable));
+			while (!core.pionDisponible())
+				Thread.yield();
+			core.pionChoisi(false);
+			PionCouleur tmp = PionCouleur.valueOf(core.getCouleur().name() + core.getPionChoisi());
+			personnagesCachable.remove(tmp);
+			listePionCache.add(tmp);
 		}
+
 		listRenvoye.add(listeCarteJouee);
 		listRenvoye.add(IdjrTools.getPionsByValues(listePionCache));
 		return listRenvoye;
@@ -289,7 +293,7 @@ public class TraitementIdjr {
 		List<CarteType> listeCarteCachette = new ArrayList<>();
 		List<PionCouleur> listePionCache = new ArrayList<>();
 		List<CarteType> carteJouees = new ArrayList<>();
-		List<PionCouleur> personnagesCachable = core.getPoinSacrDispo();
+
 		for (CarteType carte : core.getListeCarte()) {
 			if (carte.name() == "CAC") {
 				listeCarteCachette.add(carte);
@@ -320,16 +324,6 @@ public class TraitementIdjr {
 		}
 		core.setContinue(true);
 
-		for (int i = 0; i < carteJouees.size(); i++) {
-			Initializer.choisirPion(IdjrTools.getPionsByValues(personnagesCachable));
-			while (!core.pionDisponible())
-				Thread.yield();
-
-			core.pionChoisi(false);
-			PionCouleur tmp = PionCouleur.valueOf(core.getCouleur().name() + core.getPionChoisi());
-			personnagesCachable.remove(tmp);
-			listePionCache.add(tmp);
-		}
 		return listePionCache;
 	}
 
