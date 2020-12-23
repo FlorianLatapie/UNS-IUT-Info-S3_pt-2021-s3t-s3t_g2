@@ -23,6 +23,9 @@ public class ControleurVote {
 	}
 
 	public Joueur phaseVote(Partie jeu, Lieu l, VoteType tv, String partieId, int numeroTour) {
+		if (jeu.getJoueurSurLieu(l).size() == 1) {
+			return jeu.getJoueurSurLieu(l).get(0);
+		}
 		Joueur joueur = phaseVoteTour(jeu, l, tv, VoteEtape.PRE, partieId, numeroTour);
 		if (joueur != null)
 			return joueur;
