@@ -251,7 +251,6 @@ public class ControleurJeu {
 			jeu.getCartes().remove(0);
 			j.getConnection().envoyer(ControleurReseau.construirePaquetTcp("DC", a, partieId));
 		}
-		Initializer.nbCarteJoueurAll(new ArrayList<>(jeu.getJoueurs().values()));
 	}
 
 	/**
