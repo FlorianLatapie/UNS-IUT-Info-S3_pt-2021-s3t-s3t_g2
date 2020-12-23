@@ -15,6 +15,10 @@ public class PlacementReseau {
 		j.getConnection().envoyer(message);
 	}
 
+	public void attendreLancement(Joueur j){
+		j.getConnection().attendreMessage("PILD");
+	}
+	
 	public void informerResultatDes(Joueur j, List<Integer> des, List<Integer> listePion, String partieId) {
 		String message = ControleurReseau.construirePaquetTcp("PIRD", des, listePion, partieId);
 		j.getConnection().envoyer(message);
