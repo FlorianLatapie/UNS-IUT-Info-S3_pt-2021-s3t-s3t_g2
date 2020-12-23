@@ -1358,23 +1358,6 @@ public class JeuPane extends StackPane implements IJeuListener, ITraduction {
 		Platform.runLater(new Runnable() {
 			@Override
 			public void run() {
-				attirerAttention(des);
-				d1 = list.get(0);
-				d2 = list.get(1);
-				titrede.setOnAction(EventHandler -> {
-					de1.setText(String.valueOf(d1));
-					de2.setText(String.valueOf(d2));
-					core.getIdjr().desVoteChoisi(true);
-				});
-			}
-		});
-	}
-
-	@Override
-	public void desValeur(List<Integer> list) {
-		Platform.runLater(new Runnable() {
-			@Override
-			public void run() {
 				attirerAttention(vbDeplLieux);
 				for (Integer integer : list) {
 					switch (integer) {
@@ -1400,6 +1383,25 @@ public class JeuPane extends StackPane implements IJeuListener, ITraduction {
 						break;
 					}
 				}
+			}
+		});
+	}
+
+	@Override
+	public void desValeur(List<Integer> list) {
+		Platform.runLater(new Runnable() {
+			@Override
+			public void run() {
+				Platform.runLater(() -> {
+					attirerAttention(des);
+					d1 = list.get(0);
+					d2 = list.get(1);
+					titrede.setOnAction(EventHandler -> {
+						de1.setText(String.valueOf(d1));
+						de2.setText(String.valueOf(d2));
+						core.getIdjr().desVoteChoisi(true);
+					});
+				});
 			}
 		});
 	}
@@ -1986,12 +1988,16 @@ public class JeuPane extends StackPane implements IJeuListener, ITraduction {
 		des.setVisible(false);
 	}
 
+	Pane lastPane;
 	private void attirerAttention(Pane pane) {
 		int tmp = 0;
 		if (attenTimer1 != null) {
+			if (lastPane != null)
+				lastPane.setStyle(styleVBox);
 			attenTimer1.cancel();
 			attenTimer2.cancel();
 		}
+		lastPane = pane;
 
 		for (int i = 1; i <= 6; i++) {
 			attenTimer1 = new Timer();
