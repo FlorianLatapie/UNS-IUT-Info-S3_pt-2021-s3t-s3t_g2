@@ -1327,28 +1327,30 @@ public class JeuPane extends StackPane implements IJeuListener, ITraduction {
 
 	@Override
 	public void choisirPion(List<Integer> list) {
-		Platform.runLater(() -> {
-			attirerAttention(vbDeplPers);
-			for (Integer integer : list) {
-				switch (integer) {
-				case 7:
-					bBlonde.setDisable(false);
-					break;
-				case 5:
-					bBrute.setDisable(false);
-					break;
-				case 3:
-					bTruand.setDisable(false);
-					break;
-				case 1:
-					bFillette.setDisable(false);
-					break;
-				default:
-					break;
+		Platform.runLater(new Runnable() {
+			@Override
+			public void run() {
+				attirerAttention(vbDeplPers);
+				for (Integer integer : list) {
+					switch (integer) {
+					case 7:
+						bBlonde.setDisable(false);
+						break;
+					case 5:
+						bBrute.setDisable(false);
+						break;
+					case 3:
+						bTruand.setDisable(false);
+						break;
+					case 1:
+						bFillette.setDisable(false);
+						break;
+					default:
+						break;
+					}
 				}
 			}
 		});
-
 	}
 
 	@Override
