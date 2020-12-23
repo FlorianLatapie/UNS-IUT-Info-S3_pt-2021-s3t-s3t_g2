@@ -70,8 +70,11 @@ public class ControleurAttaqueZombie {
 		int nbCarteCachette = 0;
 		azr.demanderDefense(jeu, lieu, partieId, numeroTour);
 		for (Joueur j : jeu.getJoueurSurLieu(lieu)) {
-			List<Integer> persoCacheTemp = new ArrayList<>();
 			List<Object> lo = azr.recupDefense(j);
+			List<Integer> persoCacheTemp = (List<Integer>) lo.get(1);
+			for(Personnage p : j.getPersonnages().values())
+				if(persoCacheTemp.contains(p.getPoint()))
+					p.setEstCache(true);
 			List<CarteType> carte = (List<CarteType>) lo.get(0);
 			for (CarteType c : carte) {
 				if (c == CarteType.MAT)
