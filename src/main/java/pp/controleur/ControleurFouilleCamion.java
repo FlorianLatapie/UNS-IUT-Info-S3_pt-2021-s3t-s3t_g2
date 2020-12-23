@@ -1,5 +1,6 @@
 package pp.controleur;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import pp.Joueur;
@@ -69,6 +70,7 @@ public class ControleurFouilleCamion {
 			jeu.getJoueurCouleur(couleur).getCartes().add(carte2);
 		if (carte3 != CarteType.NUL)
 			jeu.getCartes().add(carte3);
+		Initializer.nbCarteJoueurAll(new ArrayList<>(jeu.getJoueurs().values()));
 	}
 
 	public CarteEtat etatCarteDefausse(CarteType ct) {
