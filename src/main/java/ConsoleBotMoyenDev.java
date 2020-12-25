@@ -10,6 +10,6 @@ public class ConsoleBotMoyenDev {
 
 	public static void main(String[] args) {
 		Logger.getGlobal().setLevel(Level.FINEST);
-		ThreadOutils.asyncTaskRepeat(10, new Bot(0, BotType.MOYEN, BotMode.Automatique));
+		ThreadOutils.asyncTaskInfinite("Bot Moyen", new Bot(0, BotType.MOYEN, BotMode.Automatique));
 	}
 }
