@@ -138,6 +138,18 @@ public abstract class ControleurReseau {
 
 		udpConnexion.arreter();
 	}
+	
+	/**
+	 * Arreter le serveur TCP
+	 *
+	 * @throws IOException Si le serveur ne peut pas etre arreté
+	 */
+	public static void arreterTcp() throws IOException {
+		if (tcpClient == null)
+			return;
+
+		tcpClient.arreter();
+	}
 
 	/**
 	 * Permet de savoir si la clé existe.
