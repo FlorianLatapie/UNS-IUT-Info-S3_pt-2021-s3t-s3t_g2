@@ -54,6 +54,10 @@ public class Bot implements Runnable {
 	private BotMode botMode;
 	private List<PartieInfo> partiesActuel;
 
+	public List<PartieInfo> getPartiesActuel() {
+		return partiesActuel;
+	}
+
 	/* Parametre Temporaire */
 	private List<Integer> pionAPos;
 
@@ -115,26 +119,34 @@ public class Bot implements Runnable {
 		TraitementPaquetTcp traitementPaquetTcp = new TraitementPaquetTcp(this);
 		ControleurReseau.initConnexion(traitementPaquetTcp, traitementPaquetUdp, connexionType,
 				ReseauOutils.getLocalIp());
+
+		ThreadOutils.asyncTask("AMP", () -> {
+			try {
+				Thread.sleep(1000);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			if (botMode == BotMode.Automatique) {
+				ControleurReseau.envoyerUdp(ControleurReseau.construirePaquetUdp("RP", TypePartie.MIXTE, 6));
+			}
+		});
 	}
 
-	public List<PartieInfo> getPartie(TypePartie typePartie, int nbMaxJoueur) {
+	public void getPartie(TypePartie typePartie, int nbMaxJoueur) {
 		partiesActuel.clear();
 		ControleurReseau.envoyerUdp(ControleurReseau.construirePaquetUdp("RP", typePartie, nbMaxJoueur));
-		try {
-			Thread.sleep(250);
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-		}
-
-		return partiesActuel;
 	}
 
 	public void connecter(InetAddress address, int port, int identifiant) {
 		setIpPp(address);
 		setPortPp(port);
 
+		System.out.println(address.getHostAddress());
+		System.out.println(port);
+
 		setNom(BotOutils.getNom(botType));
-		ControleurReseau.demarrerClientTcp(address);
+		ControleurReseau.demarrerClientTcp(address, port);
 
 		ThreadOutils.asyncTask("acp", () -> {
 			try {
@@ -156,6 +168,11 @@ public class Bot implements Runnable {
 	public void connecter(PartieInfo partieInfo) {
 		int id = Integer.valueOf(partieInfo.getIdPartie().substring(1));
 		connecter(partieInfo.getIp(), partieInfo.getPort(), id);
+	}
+	
+	public void connecter(InetAddress address, int port, String identifiant) {
+		int id = Integer.valueOf(identifiant.substring(1));
+		connecter(address, port, id);
 	}
 
 	public void ajouterPartie(PartieInfo partieInfo) {
