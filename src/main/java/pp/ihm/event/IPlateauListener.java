@@ -35,4 +35,6 @@ public interface IPlateauListener {
 	void quiJoue(int joueur);
 	
 	void choiCouleur(List<Couleur> couleurs);
+	
+	void nbCartePiocheActuel(int val);
 }

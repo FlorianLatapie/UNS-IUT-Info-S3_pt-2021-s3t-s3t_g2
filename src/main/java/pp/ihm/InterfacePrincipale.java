@@ -7,7 +7,7 @@ import javafx.scene.image.Image;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
-import pp.ihm.event.Initializer;
+import pp.ihm.event.Evenement;
 import pp.ihm.langues.International;
 import pp.ihm.langues.Langues;
 /**
@@ -55,13 +55,13 @@ public class InterfacePrincipale extends Application {
 		AccueilPane accueilPane = new AccueilPane(sControl, core);
 
 		//auteur florian 
-		Initializer.addListener(attenteJoueurPane);
-		Initializer.addListener(plateauPane);
-		Initializer.addListener(finDePartiePane);
-		Initializer.addListener(couleurPane);
-		Initializer.addListener(optionPane);
+		Evenement.addListener(attenteJoueurPane);
+		Evenement.addListener(plateauPane);
+		Evenement.addListener(finDePartiePane);
+		Evenement.addListener(couleurPane);
+		Evenement.addListener(optionPane);
 
-		Initializer.updatePleineEcran();
+		Evenement.updatePleineEcran();
 
 		International.ajouterPane(accessibilitePane);
 		International.ajouterPane(reglesPane);

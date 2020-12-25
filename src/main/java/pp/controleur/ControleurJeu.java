@@ -1,7 +1,7 @@
 package pp.controleur;
 
 import pp.*;
-import pp.ihm.event.Initializer;
+import pp.ihm.event.Evenement;
 import reseau.socket.ControleurReseau;
 import reseau.socket.TcpClient;
 import reseau.tool.ReseauOutils;
@@ -100,19 +100,19 @@ public class ControleurJeu {
 		this.port = ControleurReseau.getTcpPort();
 		this.intPartieId = new Random().nextInt(10000000);
 		this.partieId = "P" + intPartieId;
-		Initializer.nomPartie(partieId, nomPartie);
+		Evenement.nomPartie(partieId, nomPartie);
 		initPartie();
 	}
 
 	private void updateValues() {
-		Initializer.nbZombiesLieuAll(new ArrayList<>(jeu.getLieux().values()));
-		Initializer.lieuFermeAll(new ArrayList<>(jeu.getLieux().values()));
-		Initializer.lieuOuvertAll(new ArrayList<>(jeu.getLieux().values()));
-		Initializer.nbCarteJoueurAll(new ArrayList<>(jeu.getJoueurs().values()));
-		Initializer.nbPersoJoueurAll(new ArrayList<>(jeu.getJoueurs().values()));
-		Initializer.nomChefVigileAll(new ArrayList<>(jeu.getJoueurs().values()));
-		Initializer.nomJoueurs(new ArrayList<>(jeu.getJoueurs().values()));
-		Initializer.destionationPersoAll(new ArrayList<>(jeu.getLieux().values()));
+		Evenement.nbZombiesLieuAll(new ArrayList<>(jeu.getLieux().values()));
+		Evenement.lieuFermeAll(new ArrayList<>(jeu.getLieux().values()));
+		Evenement.lieuOuvertAll(new ArrayList<>(jeu.getLieux().values()));
+		Evenement.nbCarteJoueurAll(new ArrayList<>(jeu.getJoueurs().values()));
+		Evenement.nbPersoJoueurAll(new ArrayList<>(jeu.getJoueurs().values()));
+		Evenement.nomChefVigileAll(new ArrayList<>(jeu.getJoueurs().values()));
+		Evenement.nomJoueurs(new ArrayList<>(jeu.getJoueurs().values()));
+		Evenement.destionationPersoAll(new ArrayList<>(jeu.getLieux().values()));
 	}
 
 	private synchronized void initPartie() {
@@ -124,22 +124,22 @@ public class ControleurJeu {
 			while (joueurs.size() != this.nbjtotal)
 				Thread.yield();
 
-			Initializer.joueurPret();
+			Evenement.joueurPret();
 			statut = Statut.COMPLETE;
 			joueurs.get(0).setChefDesVigiles(true);
 			jeu = new Partie(joueurs);
 
-			Initializer.nomJoueurs(new ArrayList<>(jeu.getJoueurs().values()));
+			Evenement.nomJoueurs(new ArrayList<>(jeu.getJoueurs().values()));
 
 			while (!couleurPret)
 				Thread.yield();
 			
-			Initializer.choiCouleur(getJoueursCouleurs());
+			Evenement.choiCouleur(getJoueursCouleurs());
 			
 			while (!placerJoueur)
 				Thread.yield();
 			
-			Initializer.nomJoueurAll(new ArrayList<>(jeu.getJoueurs().values()));
+			Evenement.nomJoueurAll(new ArrayList<>(jeu.getJoueurs().values()));
 
 			updateValues();
 			
@@ -233,7 +233,7 @@ public class ControleurJeu {
 		synchronized (joueurs) {
 			joueurs.add(joueur);
 		}
-		Initializer.updateJoueurs(joueurs, nbjtotal);
+		Evenement.updateJoueurs(joueurs, nbjtotal);
 
 		return joueur.getJoueurId();
 	}
@@ -251,7 +251,7 @@ public class ControleurJeu {
 			jeu.getCartes().remove(0);
 			j.getConnection().envoyer(ControleurReseau.construirePaquetTcp("DC", a, partieId));
 		}
-		Initializer.nbCarteJoueurAll(new ArrayList<>(jeu.getJoueurs().values()));
+		Evenement.nbCarteJoueurAll(new ArrayList<>(jeu.getJoueurs().values()));
 	}
 
 	/**
@@ -275,10 +275,10 @@ public class ControleurJeu {
 		cfp.finJeu(this, jeu, partieId, numeroTour);
 		if (isFinished)
 			return;
-		Initializer.nbZombiesLieuAll(new ArrayList<>(jeu.getLieux().values()));
+		Evenement.nbZombiesLieuAll(new ArrayList<>(jeu.getLieux().values()));
 		jeu.fermerLieu();
-		Initializer.lieuFermeAll(new ArrayList<>(jeu.getLieux().values()));
-		Initializer.lieuOuvertAll(new ArrayList<>(jeu.getLieux().values()));
+		Evenement.lieuFermeAll(new ArrayList<>(jeu.getLieux().values()));
+		Evenement.lieuOuvertAll(new ArrayList<>(jeu.getLieux().values()));
 		cfp.finJeu(this, jeu, partieId, numeroTour);
 		if (isFinished)
 			return;

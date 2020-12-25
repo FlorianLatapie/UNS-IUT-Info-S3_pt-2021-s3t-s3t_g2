@@ -8,7 +8,7 @@ import pp.Lieu;
 import pp.Partie;
 import pp.Personnage;
 import pp.PpTools;
-import pp.ihm.event.Initializer;
+import pp.ihm.event.Evenement;
 import pp.reseau.AttaqueZombieReseau;
 import reseau.socket.ControleurReseau;
 import reseau.type.CarteType;
@@ -30,7 +30,7 @@ public class ControleurAttaqueZombie {
 
 	public void phaseAttaqueZombie(ControleurJeu cj, Partie jeu, String partieId, int numeroTour) {
 		List<Integer> nb = jeu.lastAttaqueZombie();
-		Initializer.nbZombiesLieuAll(new ArrayList<>(jeu.getLieux().values()));
+		Evenement.nbZombiesLieuAll(new ArrayList<>(jeu.getLieux().values()));
 		azr.debuteAttaque(jeu, nb, partieId, numeroTour);
 		for (Lieu lieu : jeu.getLieux().values()) {
 			if (lieuAttaquableReseau(jeu, lieu, partieId, numeroTour)) {
@@ -87,8 +87,8 @@ public class ControleurAttaqueZombie {
 			}
 			azr.informerDefense(jeu, lieu, persoCacheTemp, nbCarteMateriel, j, carte, partieId, numeroTour);
 		}
-		Initializer.nbZombiesLieuAll(new ArrayList<>(jeu.getLieux().values()));
-		Initializer.nbCarteJoueurAll(new ArrayList<>(jeu.getJoueurs().values()));
+		Evenement.nbZombiesLieuAll(new ArrayList<>(jeu.getLieux().values()));
+		Evenement.nbCarteJoueurAll(new ArrayList<>(jeu.getJoueurs().values()));
 		defense.add(persoCache);
 		defense.add(nbCarteMateriel);
 		return defense;
@@ -123,11 +123,11 @@ public class ControleurAttaqueZombie {
 		PionCouleur pionCou = azr.recupSacrifice(jou);
 		int pion = PpTools.getPionByValue(pionCou);
 		jeu.sacrifie(jou, PpTools.valeurToIndex(pion));
-		Initializer.nbPlaceLieuAll(new ArrayList<>(jeu.getLieux().values()));
-		Initializer.nbPersoJoueurAll(new ArrayList<>(jeu.getJoueurs().values()));
-		Initializer.destionationPersoAll(new ArrayList<>(jeu.getLieux().values()));
+		Evenement.nbPlaceLieuAll(new ArrayList<>(jeu.getLieux().values()));
+		Evenement.nbPersoJoueurAll(new ArrayList<>(jeu.getJoueurs().values()));
+		Evenement.destionationPersoAll(new ArrayList<>(jeu.getLieux().values()));
 		azr.informerSacrifice(jeu, lieu, pionCou, partieId, numeroTour);
-		Initializer.nbZombiesLieuAll(new ArrayList<>(jeu.getLieux().values()));
+		Evenement.nbZombiesLieuAll(new ArrayList<>(jeu.getLieux().values()));
 	}
 
 }

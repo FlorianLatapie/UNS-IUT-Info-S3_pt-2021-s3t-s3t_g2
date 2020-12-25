@@ -7,7 +7,7 @@ import pp.Joueur;
 import pp.Partie;
 import pp.ihm.Core;
 import pp.ihm.event.EvenementStockage;
-import pp.ihm.event.Initializer;
+import pp.ihm.event.Evenement;
 import pp.reseau.FouilleCamionReseau;
 import reseau.type.CarteEtat;
 import reseau.type.CarteType;
@@ -44,7 +44,7 @@ public class ControleurFouilleCamion {
 				s = "Pezrsonne fouille le Camion";
 				fr.finFouilleCamion(jeu, Couleur.NUL, Couleur.NUL, CarteEtat.NUL, partieId, numeroTour);
 			}
-			Initializer.fouilleCamion(s);
+			Evenement.fouilleCamion(s);
 			while (!EvenementStockage.isPopupAccepter())
 				Thread.yield();
 			EvenementStockage.setPopupAccepter(false);
@@ -70,7 +70,7 @@ public class ControleurFouilleCamion {
 			jeu.getJoueurCouleur(couleur).getCartes().add(carte2);
 		if (carte3 != CarteType.NUL)
 			jeu.getCartes().add(carte3);
-		Initializer.nbCarteJoueurAll(new ArrayList<>(jeu.getJoueurs().values()));
+		Evenement.nbCarteJoueurAll(new ArrayList<>(jeu.getJoueurs().values()));
 	}
 
 	public CarteEtat etatCarteDefausse(CarteType ct) {

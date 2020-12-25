@@ -3,7 +3,7 @@ package pp.controleur;
 import pp.Joueur;
 import pp.Partie;
 import pp.ihm.event.EvenementStockage;
-import pp.ihm.event.Initializer;
+import pp.ihm.event.Evenement;
 import pp.reseau.electionChefVigileReseau;
 import reseau.socket.ControleurReseau;
 import reseau.type.Couleur;
@@ -28,14 +28,14 @@ public class ControleurElectionVigile {
 			if (j != null) {
 				newVigile(jeu, j);
 				ecvr.informerElectionChefVigile(jeu, jeu.getChefVIgile().getCouleur(), partieId, numeroTour);
-				Initializer.electionChef("Nouveau chef des vigiles : " + jeu.getChefVIgile());
+				Evenement.electionChef("Nouveau chef des vigiles : " + jeu.getChefVIgile());
 				while (!EvenementStockage.isPopupAccepter())
 					Thread.yield();
 				EvenementStockage.setPopupAccepter(false);
 			} else {
 				jeu.setNewChef(false);
 				ecvr.informerElectionChefVigile(jeu, Couleur.NUL, partieId, numeroTour);
-				Initializer.electionChef("Il n'y a pas de nouveau chef des vigiles");
+				Evenement.electionChef("Il n'y a pas de nouveau chef des vigiles");
 				while (!EvenementStockage.isPopupAccepter())
 					Thread.yield();
 				EvenementStockage.setPopupAccepter(false);
@@ -43,7 +43,7 @@ public class ControleurElectionVigile {
 		} else {
 			noNewVigile(jeu);
 			ecvr.informerElectionChefVigile(jeu, Couleur.NUL, partieId, numeroTour);
-			Initializer.electionChef("Il n'y a pas de nouveau chef des vigiles");
+			Evenement.electionChef("Il n'y a pas de nouveau chef des vigiles");
 			while (!EvenementStockage.isPopupAccepter())
 				Thread.yield();
 			EvenementStockage.setPopupAccepter(false);

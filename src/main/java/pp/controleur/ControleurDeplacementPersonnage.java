@@ -5,7 +5,7 @@ import java.util.List;
 import pp.Joueur;
 import pp.Partie;
 import pp.PpTools;
-import pp.ihm.event.Initializer;
+import pp.ihm.event.Evenement;
 import pp.reseau.DeplacementReseau;
 import reseau.type.CarteType;
 
@@ -27,14 +27,14 @@ public class ControleurDeplacementPersonnage {
 				deplacePerso(cj, jeu, compteur, j, destination, partieId, numeroTour);
 				compteur ++;
 			}
-			Initializer.nbPlaceLieuAll(new ArrayList<>(jeu.getLieux().values()));
+			Evenement.nbPlaceLieuAll(new ArrayList<>(jeu.getLieux().values()));
 		}
 		for (Joueur j : jeu.getJoueurs().values()) {
 			if (j.isEnVie() && !(j.isChefDesVigiles())) {
 				deplacePerso(cj, jeu, compteur, j, destination, partieId, numeroTour);
 				compteur ++;
 			}
-			Initializer.nbPlaceLieuAll(new ArrayList<>(jeu.getLieux().values()));
+			Evenement.nbPlaceLieuAll(new ArrayList<>(jeu.getLieux().values()));
 		}
 	}
 
@@ -49,7 +49,7 @@ public class ControleurDeplacementPersonnage {
 		jeu.fermerLieu();
 		dr.informerDeplacment(jeu, j, (int) recupDeplacement.get(0), (int) recupDeplacement.get(1),
 				(CarteType) recupDeplacement.get(2), partieId, numeroTour);
-		Initializer.destionationPersoAll(new ArrayList<>(jeu.getLieux().values()));
+		Evenement.destionationPersoAll(new ArrayList<>(jeu.getLieux().values()));
 	}
 
 }

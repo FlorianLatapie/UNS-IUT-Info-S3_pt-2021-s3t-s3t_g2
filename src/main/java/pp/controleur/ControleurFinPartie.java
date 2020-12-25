@@ -10,7 +10,7 @@ import java.util.Random;
 import pp.Joueur;
 import pp.Lieu;
 import pp.Partie;
-import pp.ihm.event.Initializer;
+import pp.ihm.event.Evenement;
 import pp.reseau.FinJeuReseau;
 import reseau.socket.ControleurReseau;
 import reseau.type.CondType;
@@ -32,8 +32,8 @@ public class ControleurFinPartie {
 			Joueur vainqueur = definirVainqueur(jeu);
 			cj.setFinished(true);
 			fjr.indiqueFinPartie(jeu, vainqueur, cond, partieId, numeroTour);
-			Initializer.finPartie();
-			Initializer.getGagnant(vainqueur);
+			Evenement.finPartie();
+			Evenement.getGagnant(vainqueur);
 			ControleurJeu.statut = Statut.COMPLETE;
 			try {
 				ControleurReseau.getTcpServeur().arreter();

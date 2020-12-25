@@ -2,7 +2,7 @@ package pp.ihm;
 
 import pp.controleur.ControleurJeu;
 import pp.ihm.DataControl.ApplicationPane;
-import pp.ihm.event.Initializer;
+import pp.ihm.event.Evenement;
 import pp.ihm.langues.ITraduction;
 import pp.ihm.langues.International;
 import javafx.geometry.Insets;
@@ -221,7 +221,7 @@ public class ConfigPartiePane extends StackPane implements ITraduction {
 				e.printStackTrace();
 			}
 
-			Initializer.updateJoueurs(new ArrayList<>(), core.getCj().getNbjtotal());
+			Evenement.updateJoueurs(new ArrayList<>(), core.getCj().getNbjtotal());
 			sc.setPaneOnTop(ApplicationPane.WAIT);
 		});
 		//auteur florian
