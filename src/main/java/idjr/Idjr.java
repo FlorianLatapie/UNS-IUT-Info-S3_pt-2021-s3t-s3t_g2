@@ -92,7 +92,7 @@ public class Idjr {
 				if (partieInfo.getIdPartie().equals(nom)) {
 					System.out.println("OK");
 					current = partieInfo;
-					ControleurReseau.demarrerClientTcp(partieInfo.getIp());
+					ControleurReseau.demarrerClientTcp(partieInfo.getIp(), partieInfo.getPort());
 					Initializer.partieValide(nom);
 					return;
 				}
@@ -112,13 +112,13 @@ public class Idjr {
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
-		
+
 		List<PartieInfo> partieInfos = listOfServer;
-		
+
 		for (PartieInfo partieInfo : partieInfos) {
 			if (partieInfo.getTypeP() != typePartie)
 				listOfServer.remove(partieInfo);
-			
+
 			if (partieInfo.getNbJoueurTotalMax() > maxJr)
 				listOfServer.remove(partieInfo);
 		}
@@ -138,13 +138,13 @@ public class Idjr {
 			setJoueurId((String) ControleurReseau.getValueTcp("ACP", message1, 2));
 		});
 	}
-	
+
 	private boolean desVote = false;
 
 	public boolean desVote() {
 		return desVote;
 	}
-	
+
 	public void desVoteChoisi(boolean etat) {
 		desVote = etat;
 	}
