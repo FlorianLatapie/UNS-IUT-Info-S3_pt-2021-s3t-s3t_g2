@@ -25,14 +25,14 @@ public class ConsoleBot {
 		} else if (args.length == 4 && botMode == BotMode.Manuel) {
 			ThreadOutils.asyncTask("Bot", bot = new Bot(getDelay(args[2]), getBotType(args[1]), botMode));
 			Thread.sleep(1000);
-			choisirPartie(args[3]);
+			ThreadOutils.asyncTask("Bot", () -> bot.connecter(choisirPartie(args[3])));
 		} else {
 			ThreadOutils.asyncTask("Bot", bot = new Bot(1000, choisirBot(), BotMode.Manuel));
 			Thread.sleep(1000);
-			choisirPartie("");
+			ThreadOutils.asyncTask("Bot", () -> bot.connecter(choisirPartie("")));
 		}
 	}
-	
+
 	private static BotMode getBotMode(String[] args) {
 		BotMode botMode;
 		try {
@@ -44,10 +44,10 @@ public class ConsoleBot {
 			System.out.println(args[0] + " est inconnu. Le bot est passé en manuel.");
 			botMode = BotMode.Manuel;
 		}
-		
+
 		return botMode;
 	}
-	
+
 	private static BotType getBotType(String val) {
 		BotType botType;
 		try {
@@ -56,10 +56,10 @@ public class ConsoleBot {
 			System.out.println(val + " est inconnu. Le bot est maintenant un bot faible");
 			botType = BotType.FAIBLE;
 		}
-		
+
 		return botType;
 	}
-	
+
 	private static int getDelay(String val) {
 		int delay;
 		try {
@@ -68,7 +68,7 @@ public class ConsoleBot {
 			System.out.println(val + " est inconnu. Le bot est passer sur un delai de 1000ms.");
 			delay = 1000;
 		}
-		
+
 		return delay;
 	}
 
@@ -87,7 +87,18 @@ public class ConsoleBot {
 	}
 
 	private static PartieInfo choisirPartie(String val) {
-		List<PartieInfo> partieInfos = bot.getPartie(TypePartie.MIXTE, 6);
+		List<PartieInfo> partieInfos;
+
+		bot.getPartie(TypePartie.MIXTE, 6);
+		
+		try {
+			Thread.sleep(5000);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+
+		partieInfos = bot.getPartiesActuel();
+
 		for (PartieInfo partieInfo : partieInfos)
 			if (partieInfo.getNom().equals(val))
 				return partieInfo;
@@ -112,21 +123,29 @@ public class ConsoleBot {
 			reponse1 = scanner.nextInt();
 		} while (reponse1 < 3 || reponse1 > 6);
 
-		int reponse2;
+		int reponse2 = -1;
 		do {
-			partieInfos = bot.getPartie(TypePartie.values()[reponse], reponse1);
+			bot.getPartie(TypePartie.values()[reponse], reponse1);
+			
+			try {
+				Thread.sleep(5000);
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+
+			partieInfos = bot.getPartiesActuel();
 
 			if (partieInfos.isEmpty()) {
 				System.out.println("Aucune partie trouvé");
 				System.out.println("Appuyez sur une touche pour actualiser");
 				scanner.next();
+			} else {
+				System.out.println("Choissisez une partie");
+				for (int i = 0; i < partieInfos.size(); i++) {
+					System.out.println(i + "." + partieInfos);
+				}
+				reponse2 = scanner.nextInt();
 			}
-
-			System.out.println("Choissisez une partie");
-			for (int i = 0; i < partieInfos.size(); i++) {
-				System.out.println(i + "." + partieInfos);
-			}
-			reponse2 = scanner.nextInt();
 		} while (reponse2 < 0 || reponse2 >= partieInfos.size());
 
 		return partieInfos.get(reponse2);
