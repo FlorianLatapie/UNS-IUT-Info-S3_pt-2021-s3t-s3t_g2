@@ -8,7 +8,7 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
 
-import pp.ihm.event.Initializer;
+import pp.ihm.event.Evenement;
 import pp.ihm.langues.Langues;
 /**
  * 

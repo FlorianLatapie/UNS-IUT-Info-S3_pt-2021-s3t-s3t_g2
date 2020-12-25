@@ -8,7 +8,7 @@ import reseau.type.Couleur;
 import java.util.ArrayList;
 import java.util.List;
 
-public abstract class Initializer {
+public abstract class Evenement {
 	private static List<IPlateauListener> listenerspl = new ArrayList<>();
 	private static List<IAttenteListener> listenersal = new ArrayList<>();
 	private static List<IFinListener> listenersfl = new ArrayList<>();
@@ -197,5 +197,10 @@ public abstract class Initializer {
 	public static void choiCouleur(List<Couleur> couleur) {
 		for (IPlateauListener pl : listenerspl)
 			pl.choiCouleur(couleur);
+	}
+	
+	public static void nbCartePiocheActuel(int val) {
+		for (IPlateauListener pl : listenerspl)
+			pl.nbCartePiocheActuel(val);
 	}
 }

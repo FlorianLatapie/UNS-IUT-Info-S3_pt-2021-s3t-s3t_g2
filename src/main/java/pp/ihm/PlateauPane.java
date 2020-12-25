@@ -27,16 +27,17 @@ import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.TextAlignment;
 import javafx.util.Duration;
+
 /**
  * 
- * @author florian 
- * @author remy 
- * @author sebastien 
- * @author tom 
+ * @author florian
+ * @author remy
+ * @author sebastien
+ * @author tom
  *
  */
 public class PlateauPane extends StackPane implements IPlateauListener, ITraduction {
-	//auteur florian 
+	// auteur florian
 	private ScreenControl sControl = null;
 	private Core core = null;
 	private final ApplicationPane paneName = ApplicationPane.PLATEAU; // nom du pane
@@ -212,7 +213,7 @@ public class PlateauPane extends StackPane implements IPlateauListener, ITraduct
 	BorderPane b4;
 	BorderPane b5;
 	BorderPane b6;
-	
+
 	Rectangle fondB1;
 	Rectangle fondB2;
 	Rectangle fondB3;
@@ -221,7 +222,7 @@ public class PlateauPane extends StackPane implements IPlateauListener, ITraduct
 	Rectangle fondB6;
 
 	public PlateauPane(ScreenControl sc, Core c) {
-		//auteur florian 		
+		// auteur florian
 		core = c;
 		sControl = sc;
 
@@ -479,7 +480,8 @@ public class PlateauPane extends StackPane implements IPlateauListener, ITraduct
 		b1.setPadding(new Insets(5));
 		b1.setPrefSize(320, 210);
 		b1.setMaxSize(320, 210);
-		//vbRight1.setBackground(new Background(new BackgroundFill(Color.BLACK, CornerRadii.EMPTY, null)));
+		// vbRight1.setBackground(new Background(new BackgroundFill(Color.BLACK,
+		// CornerRadii.EMPTY, null)));
 
 		vbRight1.getChildren().addAll(nbPlace1, nbZombies1);
 
@@ -491,7 +493,7 @@ public class PlateauPane extends StackPane implements IPlateauListener, ITraduct
 
 		AnchorPane.setTopAnchor(b1, 755.0);
 		AnchorPane.setLeftAnchor(b1, 630.0);
-		
+
 		fondB1 = new Rectangle();
 		fondB1.setWidth(330);
 		fondB1.setHeight(215);
@@ -503,7 +505,7 @@ public class PlateauPane extends StackPane implements IPlateauListener, ITraduct
 		AnchorPane.setLeftAnchor(fondB1, 630.0);
 
 		////
-		//auteur remy 
+		// auteur remy
 		VBox vbRight2 = new VBox();
 		vbRight2.setAlignment(Pos.TOP_CENTER);
 		vbRight2.setSpacing(30);
@@ -540,7 +542,8 @@ public class PlateauPane extends StackPane implements IPlateauListener, ITraduct
 		b2.setPadding(new Insets(5));
 		b2.setPrefSize(320, 215);
 		b2.setMaxSize(320, 215);
-		//vbRight2.setBackground(new Background(new BackgroundFill(Color.BLACK, CornerRadii.EMPTY, null)));
+		// vbRight2.setBackground(new Background(new BackgroundFill(Color.BLACK,
+		// CornerRadii.EMPTY, null)));
 
 		vbRight2.getChildren().addAll(nbPlace2, nbZombies2);
 
@@ -551,7 +554,7 @@ public class PlateauPane extends StackPane implements IPlateauListener, ITraduct
 
 		AnchorPane.setTopAnchor(b2, 725.0);
 		AnchorPane.setLeftAnchor(b2, 70.0);
-		
+
 		fondB2 = new Rectangle();
 		fondB2.setWidth(330);
 		fondB2.setHeight(215);
@@ -563,7 +566,7 @@ public class PlateauPane extends StackPane implements IPlateauListener, ITraduct
 		AnchorPane.setLeftAnchor(fondB2, 70.0);
 
 		///
-		//auteur florian
+		// auteur florian
 		VBox vbRight3 = new VBox();
 		vbRight3.setAlignment(Pos.TOP_CENTER);
 		vbRight3.setSpacing(30);
@@ -600,7 +603,8 @@ public class PlateauPane extends StackPane implements IPlateauListener, ITraduct
 		b3.setPadding(new Insets(5));
 		b3.setPrefSize(325, 210);
 		b3.setMaxSize(325, 210);
-		//vbRight3.setBackground(new Background(new BackgroundFill(Color.BLACK, CornerRadii.EMPTY, null)));
+		// vbRight3.setBackground(new Background(new BackgroundFill(Color.BLACK,
+		// CornerRadii.EMPTY, null)));
 
 		vbRight3.getChildren().addAll(nbPlace3, nbZombies3);
 
@@ -612,7 +616,7 @@ public class PlateauPane extends StackPane implements IPlateauListener, ITraduct
 
 		AnchorPane.setTopAnchor(b3, 260.0);
 		AnchorPane.setLeftAnchor(b3, 25.0);
-		
+
 		fondB3 = new Rectangle();
 		fondB3.setWidth(330);
 		fondB3.setHeight(215);
@@ -623,7 +627,7 @@ public class PlateauPane extends StackPane implements IPlateauListener, ITraduct
 		AnchorPane.setTopAnchor(fondB3, 260.0);
 		AnchorPane.setLeftAnchor(fondB3, 25.0);
 
-		/// 
+		///
 		VBox vbRight4 = new VBox();
 		vbRight4.setAlignment(Pos.TOP_CENTER);
 		vbRight4.setSpacing(30);
@@ -722,7 +726,8 @@ public class PlateauPane extends StackPane implements IPlateauListener, ITraduct
 		b4.setPadding(new Insets(5));
 		b4.setPrefSize(270, 210);
 		b4.setMaxSize(270, 210);
-		//vbRight4.setBackground(new Background(new BackgroundFill(Color.BLACK, CornerRadii.EMPTY, null)));
+		// vbRight4.setBackground(new Background(new BackgroundFill(Color.BLACK,
+		// CornerRadii.EMPTY, null)));
 
 		vbRight4.getChildren().addAll(nbPlace4, nbZombies4);
 
@@ -733,7 +738,7 @@ public class PlateauPane extends StackPane implements IPlateauListener, ITraduct
 
 		AnchorPane.setTopAnchor(b4, 440.0);
 		AnchorPane.setLeftAnchor(b4, 365.0);
-		
+
 		fondB4 = new Rectangle();
 		fondB4.setWidth(330);
 		fondB4.setHeight(280);
@@ -744,9 +749,8 @@ public class PlateauPane extends StackPane implements IPlateauListener, ITraduct
 		AnchorPane.setTopAnchor(fondB4, 440.0);
 		AnchorPane.setLeftAnchor(fondB4, 365.0);
 
-
 		///
-		//auteur remy 
+		// auteur remy
 		VBox vbRight5 = new VBox();
 		vbRight5.setAlignment(Pos.TOP_CENTER);
 		vbRight5.setSpacing(30);
@@ -780,7 +784,8 @@ public class PlateauPane extends StackPane implements IPlateauListener, ITraduct
 		b5.setPadding(new Insets(5));
 		b5.setPrefSize(325, 215);
 		b5.setMaxSize(325, 215);
-		//vbRight5.setBackground(new Background(new BackgroundFill(Color.BLACK, CornerRadii.EMPTY, null)));
+		// vbRight5.setBackground(new Background(new BackgroundFill(Color.BLACK,
+		// CornerRadii.EMPTY, null)));
 
 		vbRight5.getChildren().addAll(nbPlace5, nbZombies5);
 
@@ -792,7 +797,7 @@ public class PlateauPane extends StackPane implements IPlateauListener, ITraduct
 
 		AnchorPane.setTopAnchor(b5, 77.5);
 		AnchorPane.setLeftAnchor(b5, 408.5);
-		
+
 		fondB5 = new Rectangle();
 		fondB5.setWidth(330);
 		fondB5.setHeight(215);
@@ -839,7 +844,8 @@ public class PlateauPane extends StackPane implements IPlateauListener, ITraduct
 		b6.setPrefSize(310, 215);
 		b6.setMaxSize(310, 215);
 		b6.setPadding(new Insets(5));
-		//vbRight6.setBackground(new Background(new BackgroundFill(Color.BLACK, CornerRadii.EMPTY, null)));
+		// vbRight6.setBackground(new Background(new BackgroundFill(Color.BLACK,
+		// CornerRadii.EMPTY, null)));
 
 		vbRight6.getChildren().addAll(nbPlace6, nbZombies6);
 
@@ -850,7 +856,7 @@ public class PlateauPane extends StackPane implements IPlateauListener, ITraduct
 
 		AnchorPane.setTopAnchor(b6, 320.0);
 		AnchorPane.setLeftAnchor(b6, 747.5);
-		
+
 		fondB6 = new Rectangle();
 		fondB6.setWidth(330);
 		fondB6.setHeight(215);
@@ -862,10 +868,10 @@ public class PlateauPane extends StackPane implements IPlateauListener, ITraduct
 		AnchorPane.setLeftAnchor(fondB6, 747.0);
 
 		/////
-		// auteur florian 
+		// auteur florian
 		lChefVigile = new Label();
 		lChefVigile.setText("XXXXXXXXX est le chef des vigiles"); // do not translate, do not remove (c'est du
-																			// sample text pour l'ihm)
+																	// sample text pour l'ihm)
 		lChefVigile.setStyle(styleChefVigile);
 		lChefVigile.setTextFill(Color.WHITE);
 		lChefVigile.setFont(fontInfo);
@@ -874,7 +880,7 @@ public class PlateauPane extends StackPane implements IPlateauListener, ITraduct
 
 		lChefVigile2 = new Label();
 		lChefVigile2.setText("XXXXXXXXX est le chef des vigiles"); // do not translate, do not remove (c'est
-																				// du sample text pour l'ihm)
+																	// du sample text pour l'ihm)
 		lChefVigile2.setStyle(styleChefVigile);
 		lChefVigile2.setTextFill(Color.WHITE);
 		lChefVigile2.setFont(fontInfo);
@@ -884,7 +890,7 @@ public class PlateauPane extends StackPane implements IPlateauListener, ITraduct
 
 		lChefVigile3 = new Label();
 		lChefVigile3.setText("XXXXXXXXX est le chef des vigiles"); // do not translate, do not remove (c'est
-																				// du sample text pour l'ihm)
+																	// du sample text pour l'ihm)
 		lChefVigile3.setStyle(styleChefVigile);
 		lChefVigile3.setTextFill(Color.WHITE);
 		lChefVigile3.setFont(fontInfo);
@@ -894,7 +900,7 @@ public class PlateauPane extends StackPane implements IPlateauListener, ITraduct
 
 		lChefVigile4 = new Label();
 		lChefVigile4.setText("XXXXXXXXX est le chef des vigiles"); // do not translate, do not remove (c'est
-																				// du sample text pour l'ihm)
+																	// du sample text pour l'ihm)
 		lChefVigile4.setStyle(styleChefVigile);
 		lChefVigile4.setTextFill(Color.WHITE);
 		lChefVigile4.setFont(fontInfo);
@@ -904,8 +910,8 @@ public class PlateauPane extends StackPane implements IPlateauListener, ITraduct
 
 		////
 
-		aPlateau.getChildren().addAll(fondB1,fondB2,fondB3,fondB4,fondB5,fondB6, b1, b2, b3, b4, b5, b6);
-		//auteur remy 
+		aPlateau.getChildren().addAll(fondB1, fondB2, fondB3, fondB4, fondB5, fondB6, b1, b2, b3, b4, b5, b6);
+		// auteur remy
 		notifInfo = new AnchorPane();
 		notifInfo.setMinSize(1920, 1080);
 
@@ -1080,8 +1086,7 @@ public class PlateauPane extends StackPane implements IPlateauListener, ITraduct
 		notifInfo.setVisible(false);
 
 		///////////////////////////////////////
-		
-		
+
 		borderJoueurs.setTop(hHaut);
 		borderJoueurs.setBottom(hBas);
 		borderJoueurs.setLeft(hGauche);
@@ -1170,9 +1175,9 @@ public class PlateauPane extends StackPane implements IPlateauListener, ITraduct
 		bPileCarte.setTop(lPileCarte3);
 		bPileCarte.setRight(lPileCarte4);
 
-		this.setStyle(" -fx-background-color:#151515;"); //TODO à déplacer
+		this.setStyle(" -fx-background-color:#151515;"); // TODO à déplacer
 
-		//auteur sebastien 
+		// auteur sebastien
 		j1.setVisible(true);
 		j2.setVisible(true);
 		j3.setVisible(true);
@@ -1216,7 +1221,7 @@ public class PlateauPane extends StackPane implements IPlateauListener, ITraduct
 		fondB4.setVisible(false);
 		fondB5.setVisible(false);
 		fondB6.setVisible(false);
-		//auteur florian 
+		// auteur florian
 		this.getChildren().addAll(imgFond, bPileCarte, borderJoueurs, aPlateau, lChefVigile, lChefVigile2, lChefVigile3,
 				lChefVigile4, imgCarteFerme1, imgCarteFerme2, imgCarteFerme3, imgCarteFerme5, imgCarteFerme6,
 				notifInfo);
@@ -1541,12 +1546,12 @@ public class PlateauPane extends StackPane implements IPlateauListener, ITraduct
 	}
 
 	/**
-	 * @author Sebastien 
-	 * @author Remy 
-	 * affiche l'information placée en paramètre dans les 4 sens de lecture au dessus du plateau 
-	 * @param titre titre de l'information 
-	 * @param message message de l'information
-	 * @param okFictif si le bouton est actif ou non 
+	 * @author Sebastien
+	 * @author Remy affiche l'information placée en paramètre dans les 4 sens de
+	 *         lecture au dessus du plateau
+	 * @param titre    titre de l'information
+	 * @param message  message de l'information
+	 * @param okFictif si le bouton est actif ou non
 	 */
 	public void popup(String titre, String message, boolean okFictif) {
 		titreInfo1.setText(titre);
@@ -1588,11 +1593,10 @@ public class PlateauPane extends StackPane implements IPlateauListener, ITraduct
 	}
 
 	/**
-	 * @author Sebastien 
-	 * affiche les images des pions dans chaque lieu 
-	 * @param lieu lieu auquel il faut appliquer le pion 
-	 * @param p type de pion a appliquer 
-	 * @param imageViews liste des images qui peuvent changer 
+	 * @author Sebastien affiche les images des pions dans chaque lieu
+	 * @param lieu       lieu auquel il faut appliquer le pion
+	 * @param p          type de pion a appliquer
+	 * @param imageViews liste des images qui peuvent changer
 	 */
 	public void setPersonnageLieu(int lieu, List<Personnage> p, ImageView[] imageViews) {
 		for (int i = 0; i < imageViews.length; i++) {
@@ -1685,8 +1689,7 @@ public class PlateauPane extends StackPane implements IPlateauListener, ITraduct
 	}
 
 	/**
-	 * @author Sebastien 
-	 * permet de choisir sa place autout de la table 
+	 * @author Sebastien permet de choisir sa place autout de la table
 	 */
 	private void getNextColor() {
 		popup("Choix du placement autour de la table",
@@ -1727,9 +1730,9 @@ public class PlateauPane extends StackPane implements IPlateauListener, ITraduct
 		}
 		o++;
 	}
+
 	/**
-	 * @author Sebastien 
-	 * TODO javadoc 
+	 * @author Sebastien TODO javadoc
 	 */
 	private void resetCadreJoueur() {
 		VBox[] j = { j1, j2, j3, j4, j5, j6 };
@@ -1742,10 +1745,9 @@ public class PlateauPane extends StackPane implements IPlateauListener, ITraduct
 			});
 		}
 	}
-	
+
 	/**
-	 * @author Sebastien 
-	 * TODO javadoc 
+	 * @author Sebastien TODO javadoc
 	 */
 	private void visibleCadreInutile() {
 		VBox[] j = { j1, j2, j3, j4, j5, j6 };
@@ -1757,8 +1759,7 @@ public class PlateauPane extends StackPane implements IPlateauListener, ITraduct
 	}
 
 	/**
-	 * @author Sebastien 
-	 * affiche le plateau 
+	 * @author Sebastien affiche le plateau
 	 */
 	private void afficherPlateau() {
 		lChefVigile.setVisible(true);
@@ -1778,5 +1779,15 @@ public class PlateauPane extends StackPane implements IPlateauListener, ITraduct
 		b4.setVisible(true);
 		b5.setVisible(true);
 		b6.setVisible(true);
+	}
+
+	@Override
+	public void nbCartePiocheActuel(int val) {
+		Platform.runLater(() -> {
+			lPileCarte1.setText(val + " cartes dans la pioches");
+			lPileCarte2.setText(val + " cartes dans la pioches");
+			lPileCarte3.setText(val + " cartes dans la pioches");
+			lPileCarte4.setText(val + " cartes dans la pioches");
+		});
 	}
 }

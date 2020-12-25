@@ -7,7 +7,7 @@ import pp.Joueur;
 import pp.Lieu;
 import pp.Partie;
 import pp.PpTools;
-import pp.ihm.event.Initializer;
+import pp.ihm.event.Evenement;
 import pp.reseau.PlacementReseau;
 
 public class ControleurPlacementPersonnage {
@@ -34,8 +34,8 @@ public class ControleurPlacementPersonnage {
 				List<Integer> choisirDest = pr.choisirDest(j);
 				jeu.placePerso(j, PpTools.valeurToIndex(choisirDest.get(1)), choisirDest.get(0));
 				pr.informerPlacement(jeu, j, des, listePion, choisirDest.get(0), choisirDest.get(1), partieId);
-				Initializer.destionationPersoAll(new ArrayList<>(jeu.getLieux().values()));
-				Initializer.nbPlaceLieuAll(new ArrayList<>(jeu.getLieux().values()));
+				Evenement.destionationPersoAll(new ArrayList<>(jeu.getLieux().values()));
+				Evenement.nbPlaceLieuAll(new ArrayList<>(jeu.getLieux().values()));
 			}
 		}
 	}
