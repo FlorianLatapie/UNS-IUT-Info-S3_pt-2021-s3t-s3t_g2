@@ -22,7 +22,7 @@ import bot.partie.Joueur;
 import bot.partie.Lieu;
 import bot.partie.Partie;
 
-public class Bot {
+public class Bot implements Runnable {
 	/* Parametre Idjr */
 	private String nom;
 	private String numPartie;
@@ -59,7 +59,7 @@ public class Bot {
 		this.botType=botType;
 	}
 
-	public void start() throws IOException {
+	private void start() throws IOException {
 		initBot();
 		initReseau();
 
@@ -67,6 +67,18 @@ public class Bot {
 			Thread.yield();
 		}
 		arreter();
+	}
+	
+
+
+	@Override
+	public void run() {
+		try {
+			start();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 	public List<Couleur> getCouleurJoueursPresentVotant() {
@@ -486,7 +498,4 @@ public class Bot {
 	public void setJoueursVotantPresent(HashMap<Couleur,Integer> joueursVotant) {
 		this.joueursVotantPresent = joueursVotant;
 	}
-
-
-
 }
