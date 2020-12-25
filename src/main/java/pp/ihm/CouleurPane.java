@@ -687,4 +687,11 @@ public class CouleurPane extends StackPane implements ICouleurListener, ITraduct
 		bRetour.setText(International.trad("bouton.retour"));
 
 	}
+	
+	public void tradComboCouleur() {
+		couleur1.getItems().clear();
+		for (String string : Couleur.values()) {
+			
+		}
+	}
 }
