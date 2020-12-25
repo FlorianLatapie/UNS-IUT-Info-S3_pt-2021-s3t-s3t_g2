@@ -6,7 +6,7 @@ import pp.ihm.event.IPleinEcranListener;
 import pp.ihm.langues.ITraduction;
 import pp.ihm.langues.International;
 import pp.ihm.langues.Langues;
-
+import javafx.application.Platform;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
@@ -24,16 +24,17 @@ import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.stage.Stage;
+
 /**
  * 
- * @author Remy 
+ * @author Remy
  * @author florian
- * @author Sebastien 
+ * @author Sebastien
  * @author Tom
  *
  */
 public class OptionPane extends StackPane implements IPleinEcranListener, ITraduction {
-	//auteur remy 
+	// auteur remy
 	private ScreenControl sControl = null;
 	private Core core = null;
 	private final ApplicationPane paneName = ApplicationPane.OPTION;
@@ -56,20 +57,20 @@ public class OptionPane extends StackPane implements IPleinEcranListener, ITradu
 	Button bFrancais;
 	Button bEnglish;
 	Button bRetour;
-	//Button bAcc;
+	// Button bAcc;
 
 	public OptionPane(ScreenControl sc, Core c) {
-		//auteur remy 
+		// auteur remy
 		core = c;
 		sControl = sc;
-		//auteur florian
+		// auteur florian
 		Rectangle rect = new Rectangle();
 		rect.setWidth(tailleCarreCentral);
 		rect.setHeight(tailleCarreCentral);
 		rect.setArcHeight(30);
 		rect.setArcWidth(30);
 		rect.setOpacity(.3);
-		//auteur remy 
+		// auteur remy
 		VBox vbFond = new VBox();
 		vbFond.setAlignment(Pos.CENTER);
 		vbFond.setSpacing(20);
@@ -196,14 +197,15 @@ public class OptionPane extends StackPane implements IPleinEcranListener, ITradu
 			}
 		});
 
-		/*bAcc = new Button(International.trad("texte.titreAcc"));
-		bAcc.setFont(policeBouton);
-		bAcc.setAlignment(Pos.CENTER);
-		bAcc.setPrefSize(500, hauteurElement);
-		bAcc.setStyle(styleBoutons);
-		bAcc.setOnMouseEntered(event -> bAcc.setStyle(styleBoutonsSouris));
-		bAcc.setOnMouseExited(event -> bAcc.setStyle(styleBoutons));
-		bAcc.setOnAction(EventHandler -> sc.setPaneOnTop(ApplicationPane.ACCESSIBILITE));*/
+		/*
+		 * bAcc = new Button(International.trad("texte.titreAcc"));
+		 * bAcc.setFont(policeBouton); bAcc.setAlignment(Pos.CENTER);
+		 * bAcc.setPrefSize(500, hauteurElement); bAcc.setStyle(styleBoutons);
+		 * bAcc.setOnMouseEntered(event -> bAcc.setStyle(styleBoutonsSouris));
+		 * bAcc.setOnMouseExited(event -> bAcc.setStyle(styleBoutons));
+		 * bAcc.setOnAction(EventHandler ->
+		 * sc.setPaneOnTop(ApplicationPane.ACCESSIBILITE));
+		 */
 
 		bRetour = new Button(International.trad("bouton.retour"));
 		bRetour.setFont(policeBouton);
@@ -217,7 +219,7 @@ public class OptionPane extends StackPane implements IPleinEcranListener, ITradu
 		hbBRetour.getChildren().add(bRetour);
 		hbLang.getChildren().add(bFrancais);
 		hbLang.getChildren().add(bEnglish);
-		vbBoutons.getChildren().addAll(hbLang, bPleinEcran/*, bAcc*/);
+		vbBoutons.getChildren().addAll(hbLang, bPleinEcran/* , bAcc */);
 		vbBoutons.setMargin(vbTitre, new Insets(140));
 		vbBoutons.setMargin(hbBRetour, new Insets(135, 0, 30, 19));
 
@@ -233,22 +235,38 @@ public class OptionPane extends StackPane implements IPleinEcranListener, ITradu
 		sControl.setPaneOnTop(paneName);
 	}
 
+	/**
+	 * Met a jour le plein ecran
+	 */
 	@Override
 	public void updatePleinEcran() {
-		if (!core.getSauvegarderOptions().isEstPleinEcran())
-			bPleinEcran.setText(International.trad("bouton.pEcran"));
-		else
-			bPleinEcran.setText(International.trad("bouton.fenetre"));
+		Platform.runLater(new Runnable() {
+			@Override
+			public void run() {
+				if (!core.getSauvegarderOptions().isEstPleinEcran())
+					bPleinEcran.setText(International.trad("bouton.pEcran"));
+				else
+					bPleinEcran.setText(International.trad("bouton.fenetre"));
+			}
+		});
 	}
 
+	/**
+	 * Traduit les elements de ce pane
+	 */
 	@Override
 	public void traduire() {
-		titre.setText(International.trad("bouton.options"));
-		bFrancais.setText(International.trad("texte.langue1"));
-		bEnglish.setText(International.trad("texte.langue2"));
-		bPleinEcran.setText(International.trad("bouton.pEcran"));
-		//bAcc.setText(International.trad("texte.titreAcc"));
-		bRetour.setText(International.trad("bouton.retour"));
+		Platform.runLater(new Runnable() {
+			@Override
+			public void run() {
+				titre.setText(International.trad("bouton.options"));
+				bFrancais.setText(International.trad("texte.langue1"));
+				bEnglish.setText(International.trad("texte.langue2"));
+				bPleinEcran.setText(International.trad("bouton.pEcran"));
+				// bAcc.setText(International.trad("texte.titreAcc"));
+				bRetour.setText(International.trad("bouton.retour"));
+			}
+		});
 	}
 
 }

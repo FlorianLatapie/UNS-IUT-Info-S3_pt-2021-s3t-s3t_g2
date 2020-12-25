@@ -8,6 +8,7 @@ import pp.ihm.langues.International;
 
 import java.util.List;
 
+import javafx.application.Platform;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
@@ -33,7 +34,7 @@ import javafx.scene.text.TextAlignment;
  * @since 26/10/2020
  */
 public class AttenteJoueurPane extends StackPane implements IAttenteListener, ITraduction {
-	//auteur florian
+	// auteur florian
 	private ScreenControl sControl = null;
 	private Core core = null;
 	private final ApplicationPane paneName = ApplicationPane.WAIT;
@@ -71,7 +72,7 @@ public class AttenteJoueurPane extends StackPane implements IAttenteListener, IT
 	Button bRetour;
 
 	public AttenteJoueurPane(ScreenControl sc, Core c) {
-		//auteur florian
+		// auteur florian
 		core = c;
 		sControl = sc;
 
@@ -103,7 +104,7 @@ public class AttenteJoueurPane extends StackPane implements IAttenteListener, IT
 		VBox vbDescPartie = new VBox();
 		vbDescPartie.setAlignment(Pos.CENTER);
 		vbDescPartie.getChildren().addAll(lIDPartie, desc);
-		//auteur remy 
+		// auteur remy
 		// les cercles passent en rouge quand le joueur à rejoint TODO
 		cercle1 = new Circle();
 		cercle1.setRadius(tailleCercle);
@@ -147,8 +148,8 @@ public class AttenteJoueurPane extends StackPane implements IAttenteListener, IT
 		hbJoueurPret.setPadding(new Insets(20));
 		hbJoueurPret.setSpacing(12);
 		hbJoueurPret.getChildren().addAll(cercle1, cercle2, cercle3, cercle4, cercle5, cercle6);
-		
-		//auteur florian
+
+		// auteur florian
 		VBox vbWait = new VBox();
 		vbWait.setStyle(styleVBox);
 		vbWait.setAlignment(Pos.CENTER);
@@ -212,52 +213,76 @@ public class AttenteJoueurPane extends StackPane implements IAttenteListener, IT
 
 	}
 
-	@Override
 	/**
-	 * @author Sebastien
-	 * Dès que les joueurs sont prets, le pane change vers le choix des couleurs de
-	 * chaque joueur
+	 * Passe l'affichage sur panneau des choix de couleur des joueurs.
 	 */
+	@Override
 	public void joueurPret() {
-		sControl.setPaneOnTop(ApplicationPane.COULEUR);
+		Platform.runLater(new Runnable() {
+			@Override
+			public void run() {
+				sControl.setPaneOnTop(ApplicationPane.COULEUR);
+			}
+		});
 	}
 
-	@Override
 	/**
-	 * @author Sebastien
-	 * applique le nom de la partie sur le label lIDPartie
+	 * Met a jour l'affichage le nom et l'identifiant de la partie.
 	 * 
+	 * @param id  l'identifiant de la partie
 	 * @param nom le nom de la partie
 	 */
+	@Override
 	public void nomPartie(String id, String nom) {
-		lIDPartie.setText(nom + " - " + id);
+		Platform.runLater(new Runnable() {
+			@Override
+			public void run() {
+				lIDPartie.setText(nom + " - " + id);
+			}
+		});
 	}
 
 	/**
-	 * @author Sebastien
+	 * Met a jour le nombre de joueur representé par un cercle vert.
+	 * 
+	 * @param joueurs la liste de tout les joueurs
+	 * @param max     le nombre max de joueur possible
 	 */
 	@Override
 	public void updateJoueurs(List<Joueur> joueurs, int max) {
-		Circle[] circles = { cercle1, cercle2, cercle3, cercle4, cercle5, cercle6 };
-		for (int i = 0; i < circles.length; i++) {
-			if (i < max) {
-				if (i < joueurs.size())
-					circles[i].setFill(Color.GREEN);
-				else
-					circles[i].setFill(null);
+		Platform.runLater(new Runnable() {
+			@Override
+			public void run() {
+				Circle[] circles = { cercle1, cercle2, cercle3, cercle4, cercle5, cercle6 };
+				for (int i = 0; i < circles.length; i++) {
+					if (i < max) {
+						if (i < joueurs.size())
+							circles[i].setFill(Color.GREEN);
+						else
+							circles[i].setFill(null);
 
-				circles[i].setVisible(true);
-			} else
-				circles[i].setVisible(false);
-		}
+						circles[i].setVisible(true);
+					} else
+						circles[i].setVisible(false);
+				}
+			}
+		});
 	}
 
+	/**
+	 * Traduit les elements de ce pane.
+	 */
 	@Override
 	public void traduire() {
-		titre1.setText(International.trad("texte.titreAttenteA") + "\n" + International.trad("texte.titreAttenteB"));
-		desc.setText(International.trad("texte.attenteJoueur"));
-		bRetour.setText(International.trad("bouton.retour"));
-
+		Platform.runLater(new Runnable() {
+			@Override
+			public void run() {
+				titre1.setText(
+						International.trad("texte.titreAttenteA") + "\n" + International.trad("texte.titreAttenteB"));
+				desc.setText(International.trad("texte.attenteJoueur"));
+				bRetour.setText(International.trad("bouton.retour"));
+			}
+		});
 	}
 
 }

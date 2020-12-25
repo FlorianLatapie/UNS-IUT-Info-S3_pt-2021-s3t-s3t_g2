@@ -29,15 +29,15 @@ import java.util.List;
  * The Class ConfigPartiePane.
  *
  * @author Florian
- * @author Remy 
- * @author Sebastien 
+ * @author Remy
+ * @author Sebastien
  * @author Tom
  * 
  * @version 0.1
  * @since 26/10/2020
  */
 public class CouleurPane extends StackPane implements ICouleurListener, ITraduction {
-	//auteur Florian
+	// auteur Florian
 	private ScreenControl sControl = null;
 	private Core core = null;
 	private final ApplicationPane paneName = ApplicationPane.COULEUR;
@@ -108,7 +108,7 @@ public class CouleurPane extends StackPane implements ICouleurListener, ITraduct
 	Button bRetour;
 
 	public CouleurPane(ScreenControl sc, Core c) {
-		//auteur florian
+		// auteur florian
 		core = c;
 		sControl = sc;
 
@@ -151,7 +151,7 @@ public class CouleurPane extends StackPane implements ICouleurListener, ITraduct
 		couleur1.valueProperty().addListener(new ChangeListener<String>() {
 			@Override
 			public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
-				nom1.setStyle(getCouleur(couleur1.getValue()));
+				nom1.setStyle(IhmOutils.getCouleur(couleur1.getValue()));
 				if (ordre.length > 0)
 					couleursChoix.set(ordre[0], newValue);
 			}
@@ -201,7 +201,7 @@ public class CouleurPane extends StackPane implements ICouleurListener, ITraduct
 
 			@Override
 			public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
-				nom2.setStyle(getCouleur(couleur2.getValue()));
+				nom2.setStyle(IhmOutils.getCouleur(couleur2.getValue()));
 				if (ordre.length > 1)
 					couleursChoix.set(ordre[1], newValue);
 			}
@@ -254,7 +254,7 @@ public class CouleurPane extends StackPane implements ICouleurListener, ITraduct
 
 			@Override
 			public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
-				nom3.setStyle(getCouleur(couleur3.getValue()));
+				nom3.setStyle(IhmOutils.getCouleur(couleur3.getValue()));
 				if (ordre.length > 2)
 					couleursChoix.set(ordre[2], newValue);
 			}
@@ -307,7 +307,7 @@ public class CouleurPane extends StackPane implements ICouleurListener, ITraduct
 
 			@Override
 			public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
-				nom4.setStyle(getCouleur(couleur4.getValue()));
+				nom4.setStyle(IhmOutils.getCouleur(couleur4.getValue()));
 				if (ordre.length > 3)
 					couleursChoix.set(ordre[3], newValue);
 			}
@@ -360,7 +360,7 @@ public class CouleurPane extends StackPane implements ICouleurListener, ITraduct
 
 			@Override
 			public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
-				nom5.setStyle(getCouleur(couleur5.getValue()));
+				nom5.setStyle(IhmOutils.getCouleur(couleur5.getValue()));
 				if (ordre.length > 4)
 					couleursChoix.set(ordre[4], newValue);
 			}
@@ -409,17 +409,17 @@ public class CouleurPane extends StackPane implements ICouleurListener, ITraduct
 		couleur6.setMinHeight(hauteurElemtents);
 		couleur6.setPrefSize(largeurComboBox, hauteurElemtents);
 		couleur6.getItems().addAll(DataControl.couleursJoueur);
-		//auteur sebastien 
+		// auteur sebastien
 		couleur6.valueProperty().addListener(new ChangeListener<String>() {
 
 			@Override
 			public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
-				nom6.setStyle(getCouleur(couleur6.getValue()));
+				nom6.setStyle(IhmOutils.getCouleur(couleur6.getValue()));
 				if (ordre.length > 5)
 					couleursChoix.set(ordre[5], newValue);
 			}
 		});
-		//auteur florian
+		// auteur florian
 		monter6 = new Button(International.trad("bouton.monter"));
 		monter6.setPrefSize(lBoutonMD, hBoutonMD);
 		monter6.setMinSize(lBoutonMD, hBoutonMD);
@@ -466,7 +466,7 @@ public class CouleurPane extends StackPane implements ICouleurListener, ITraduct
 		bJouer.setOnMouseEntered(event -> bJouer.setStyle(styleBoutonsSouris));
 		bJouer.setOnMouseExited(event -> bJouer.setStyle(styleBoutons));
 		bJouer.setOnAction(EventHandler -> {
-			boolean isOk = IhmOutils.isAllUniqueColor(couleursChoix);
+			boolean isOk = IhmOutils.isDeLaMemeCouleur(couleursChoix);
 			if (isOk) {
 				List<Couleur> cs = IhmOutils.comboStringToColorList(ordre, couleursChoix);
 				core.getCj().setJoueurCouleur(cs, IhmOutils.reOrdre(ordre, joueurs));
@@ -525,7 +525,11 @@ public class CouleurPane extends StackPane implements ICouleurListener, ITraduct
 		sControl.setPaneOnTop(paneName);
 	}
 
-	
+	/**
+	 * Met a jour les noms des joueurs
+	 * 
+	 * @param joueurs la liste des joueurs dans la partie
+	 */
 	@Override
 	public void joueurNoms(List<Joueur> joueurs) {
 		Platform.runLater(() -> {
@@ -563,10 +567,9 @@ public class CouleurPane extends StackPane implements ICouleurListener, ITraduct
 			setJoueurConfig(core.getNbJoueur());
 		});
 	}
-	
+
 	/**
-	 * @author Sebastien 
-	 * permet d'appliquer la permutation de l'ordre des joueurs sur l'interface graphique  
+	 * Met a jour l'ordre des couleurs et joueurs
 	 */
 	public void updateOrdre() {
 		List<ComboBox<String>> combos = new ArrayList<>();
@@ -591,15 +594,14 @@ public class CouleurPane extends StackPane implements ICouleurListener, ITraduct
 		couleur5.setValue(joueurs.size() >= 5 ? couleursChoix.get(ordre[4]) : "");
 		couleur6.setValue(joueurs.size() >= 6 ? couleursChoix.get(ordre[5]) : "");
 	}
-	
+
 	/**
-	 * @author Sebastien 
-	 * Affiche le bon nombre de boutons sur l'interface graphique en fonction du nombre de joueurs donné en paramètre
-	 * @param maxJr nombre de joueurs a afficher 
+	 * Affiche uniquement le choix des couleurs pour un nombre x de joueur
+	 * 
+	 * @param maxJr le nombre max de joueur dans la partie
 	 */
 	private void setJoueurConfig(int maxJr) {
 		if (maxJr == 3) {
-
 			j1.setVisible(true);
 			j2.setVisible(true);
 			j3.setVisible(true);
@@ -632,59 +634,37 @@ public class CouleurPane extends StackPane implements ICouleurListener, ITraduct
 	}
 
 	/**
-	 * @author Sebastien 
-	 * @author Remy
-	 * @author Florian
-	 * 
-	 * retourne le style à appliquer pour les l'interface
-	 * @param couleur la couleur sous forme de String
-	 * @return la couleur sous forme de style (String)
+	 * Traduit les elements de ce pane
 	 */
-	public static String getCouleur(String couleur) {
-		String style = ";-fx-background-radius: 10px;";
-		switch (couleur) {
-		case "Bleu":
-			return IhmOutils.bleu + style;
-		case "Rouge":
-			return IhmOutils.rouge + style;
-		case "Vert":
-			return IhmOutils.vert + style;
-		case "Noir":
-			return IhmOutils.noir + style;
-		case "Jaune":
-			return IhmOutils.jaune + style;
-		case "Marron":
-			return IhmOutils.marron + style;
-		default:
-			return "#1A1A1A";
-		}
-	}
-
 	@Override
 	public void traduire() {
-		titre1.setText(
-				International.trad("texte.titreCouleurPaneA") + "\n" + International.trad("texte.titreCouleurPaneB"));
-		infoVigile.setText(International.trad("texte.infoVigile"));
-		nom1.setText(International.trad("texte.j1"));
-		monter1.setText(International.trad("bouton.monter"));
-		descendre1.setText(International.trad("bouton.descendre"));
-		nom2.setText(International.trad("texte.j2"));
-		monter2.setText(International.trad("bouton.monter"));
-		descendre2.setText(International.trad("bouton.descendre"));
-		nom3.setText(International.trad("texte.j3"));
-		monter3.setText(International.trad("bouton.monter"));
-		descendre3.setText(International.trad("bouton.descendre"));
-		nom4.setText(International.trad("texte.j4"));
-		monter4.setText(International.trad("bouton.monter"));
-		descendre4.setText(International.trad("bouton.descendre"));
-		nom5.setText(International.trad("texte.j5"));
-		monter5.setText(International.trad("bouton.monter"));
-		descendre5.setText(International.trad("bouton.descendre"));
-		nom6.setText(International.trad("texte.j6"));
-		monter6.setText(International.trad("bouton.monter"));
-		descendre6.setText(International.trad("bouton.descendre"));
-		bJouer.setText(International.trad("bouton.jouer"));
-		bRetour.setText(International.trad("bouton.retour"));
-
+		Platform.runLater(new Runnable() {
+			@Override
+			public void run() {
+				titre1.setText(International.trad("texte.titreCouleurPaneA") + "\n"
+						+ International.trad("texte.titreCouleurPaneB"));
+				infoVigile.setText(International.trad("texte.infoVigile"));
+				nom1.setText(International.trad("texte.j1"));
+				monter1.setText(International.trad("bouton.monter"));
+				descendre1.setText(International.trad("bouton.descendre"));
+				nom2.setText(International.trad("texte.j2"));
+				monter2.setText(International.trad("bouton.monter"));
+				descendre2.setText(International.trad("bouton.descendre"));
+				nom3.setText(International.trad("texte.j3"));
+				monter3.setText(International.trad("bouton.monter"));
+				descendre3.setText(International.trad("bouton.descendre"));
+				nom4.setText(International.trad("texte.j4"));
+				monter4.setText(International.trad("bouton.monter"));
+				descendre4.setText(International.trad("bouton.descendre"));
+				nom5.setText(International.trad("texte.j5"));
+				monter5.setText(International.trad("bouton.monter"));
+				descendre5.setText(International.trad("bouton.descendre"));
+				nom6.setText(International.trad("texte.j6"));
+				monter6.setText(International.trad("bouton.monter"));
+				descendre6.setText(International.trad("bouton.descendre"));
+				bJouer.setText(International.trad("bouton.jouer"));
+				bRetour.setText(International.trad("bouton.retour"));
+			}
+		});
 	}
 }

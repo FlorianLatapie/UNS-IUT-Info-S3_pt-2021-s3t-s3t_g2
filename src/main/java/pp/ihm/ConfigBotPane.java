@@ -3,6 +3,7 @@ package pp.ihm;
 import pp.ihm.DataControl.ApplicationPane;
 import pp.ihm.langues.ITraduction;
 import pp.ihm.langues.International;
+import javafx.application.Platform;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
@@ -27,7 +28,7 @@ import javafx.scene.text.TextAlignment;
  * @since 26/10/2020
  */
 public class ConfigBotPane extends StackPane implements ITraduction {
-	// auteur florian 
+	// auteur florian
 	private ScreenControl sControl = null;
 	private Core core;
 	private final ApplicationPane paneName = ApplicationPane.CONFIG_BOT;
@@ -72,7 +73,7 @@ public class ConfigBotPane extends StackPane implements ITraduction {
 	Button bRetour;
 
 	public ConfigBotPane(ScreenControl sc, Core c) {
-		//auteur florian
+		// auteur florian
 		core = c;
 		sControl = sc;
 
@@ -281,8 +282,8 @@ public class ConfigBotPane extends StackPane implements ITraduction {
 		centreMenu.setTop(titre);
 		centreMenu.setCenter(vbCenter);
 		centreMenu.setBottom(boutonsPanneau);
-		
-		//auteur remy 
+
+		// auteur remy
 		// Boutons de rotation d'écran
 		ImageView img1 = new ImageView(DataControl.SCREEN);
 		img1.setFitHeight(70);
@@ -332,7 +333,7 @@ public class ConfigBotPane extends StackPane implements ITraduction {
 		bEcranDroite.setGraphic(img4);
 		bEcranDroite.setOnAction(EventHandler -> sc.setRotatePane(centreMenu, "droite"));
 
-		//auteur florian
+		// auteur florian
 		// boite du fond qui contient le fond et les autres boites
 		HBox fond = new HBox();
 		fond.setAlignment(Pos.CENTER);
@@ -349,18 +350,25 @@ public class ConfigBotPane extends StackPane implements ITraduction {
 		sControl.setPaneOnTop(paneName);
 	}
 
+	/**
+	 * Traduit les elements de ce pane
+	 */
 	@Override
 	public void traduire() {
-		titre1.setText(
-				International.trad("texte.titreConfigBotA") + "\n" + International.trad("texte.titreConfigBotB"));
-		diffBot1.setValue(International.trad("texte.valueFaible"));
-		diffBot2.setValue(International.trad("texte.valueFaible"));
-		diffBot3.setValue(International.trad("texte.valueFaible"));
-		diffBot4.setValue(International.trad("texte.valueFaible"));
-		diffBot5.setValue(International.trad("texte.valueFaible"));
-		diffBot6.setValue(International.trad("texte.valueFaible"));
-		bJouer.setText(International.trad("bouton.jouer"));
-		bRetour.setText(International.trad("bouton.retour"));
-
+		Platform.runLater(new Runnable() {
+			@Override
+			public void run() {
+				titre1.setText(International.trad("texte.titreConfigBotA") + "\n"
+						+ International.trad("texte.titreConfigBotB"));
+				diffBot1.setValue(International.trad("texte.valueFaible"));
+				diffBot2.setValue(International.trad("texte.valueFaible"));
+				diffBot3.setValue(International.trad("texte.valueFaible"));
+				diffBot4.setValue(International.trad("texte.valueFaible"));
+				diffBot5.setValue(International.trad("texte.valueFaible"));
+				diffBot6.setValue(International.trad("texte.valueFaible"));
+				bJouer.setText(International.trad("bouton.jouer"));
+				bRetour.setText(International.trad("bouton.retour"));
+			}
+		});
 	}
 }

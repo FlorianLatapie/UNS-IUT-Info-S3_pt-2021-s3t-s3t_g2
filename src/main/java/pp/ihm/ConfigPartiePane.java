@@ -5,6 +5,7 @@ import pp.ihm.DataControl.ApplicationPane;
 import pp.ihm.event.Evenement;
 import pp.ihm.langues.ITraduction;
 import pp.ihm.langues.International;
+import javafx.application.Platform;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
@@ -27,7 +28,7 @@ import java.util.Random;
  * The Class ConfigPartiePane.
  *
  * @author Florian
- * @author Remy 
+ * @author Remy
  * @author Sebastien
  * @author Tom
  * 
@@ -35,7 +36,7 @@ import java.util.Random;
  * @since 26/10/2020
  */
 public class ConfigPartiePane extends StackPane implements ITraduction {
-	//auteur florian
+	// auteur florian
 	private ScreenControl sControl = null;
 	private Core core = null;
 	private final ApplicationPane paneName = ApplicationPane.CONFIG;
@@ -70,7 +71,7 @@ public class ConfigPartiePane extends StackPane implements ITraduction {
 	Button bRetour;
 
 	public ConfigPartiePane(ScreenControl sc, Core c) {
-		//auteur florian
+		// auteur florian
 		core = c;
 		sControl = sc;
 
@@ -115,7 +116,7 @@ public class ConfigPartiePane extends StackPane implements ITraduction {
 		infoNomPartie.setFont(policeNom);
 		infoNomPartie.setPadding(new Insets(5, 10, 5, 10));
 		infoNomPartie.setTextFill(Color.WHITE);
-		//auteur remy
+		// auteur remy
 		TextField nomP = new TextField();
 		nomP.setText("Partie" + (new Random().nextInt(100)));
 		nomP.setFont(policeTexte);
@@ -131,7 +132,7 @@ public class ConfigPartiePane extends StackPane implements ITraduction {
 		nomPartie.getChildren().addAll(nomPTexte, nomP);
 		nomPartie.setDisable(false);
 
-		//auteur florian
+		// auteur florian
 		HBox nbTotJr = new HBox();
 
 		nbjrTexte = new Label(International.trad("texte.nbdeJr"));
@@ -142,7 +143,7 @@ public class ConfigPartiePane extends StackPane implements ITraduction {
 		nbjrTexte.setPadding(new Insets(10, 20, 10, 10));
 		nbjrTexte.setMinWidth(420);
 		nbjrTexte.setPrefWidth(420);
-		
+
 		ComboBox<Integer> nbJr = new ComboBox<>();
 		nbJr.getItems().addAll(DataControl.nombreJoueur);
 		nbJr.setValue(5);
@@ -198,7 +199,7 @@ public class ConfigPartiePane extends StackPane implements ITraduction {
 
 		bJouer.setOnMouseEntered(event -> bJouer.setStyle(styleBoutonsSouris));
 		bJouer.setOnMouseExited(event -> bJouer.setStyle(styleBoutons));
-		//auteur Sebastien
+		// auteur Sebastien
 		bJouer.setOnAction(EventHandler -> {
 			if (!IhmOutils.nomEstValide(nomP.getText()))
 				return;
@@ -224,7 +225,7 @@ public class ConfigPartiePane extends StackPane implements ITraduction {
 			Evenement.updateJoueurs(new ArrayList<>(), core.getCj().getNbjtotal());
 			sc.setPaneOnTop(ApplicationPane.WAIT);
 		});
-		//auteur florian
+		// auteur florian
 		bRetour = new Button(International.trad("bouton.retour"));
 		bRetour.setPrefSize(lBouton, hBouton);
 		bRetour.setMinSize(lBouton, hBouton);
@@ -256,8 +257,8 @@ public class ConfigPartiePane extends StackPane implements ITraduction {
 		centreMenu.setTop(titre);
 		centreMenu.setCenter(vbCenter);
 		centreMenu.setBottom(boutonsPanneau);
-		
-		//auteur Remy
+
+		// auteur Remy
 		// Boutons de rotation d'écran
 		ImageView img1 = new ImageView(DataControl.SCREEN);
 		img1.setFitHeight(70);
@@ -307,7 +308,7 @@ public class ConfigPartiePane extends StackPane implements ITraduction {
 		bEcranDroite.setGraphic(img4);
 		bEcranDroite.setOnAction(EventHandler -> sc.setRotatePane(centreMenu, "droite"));
 
-		//auteur florian
+		// auteur florian
 		// boite du fond qui contient le fond et les autres boites
 		HBox fond = new HBox();
 		fond.setAlignment(Pos.CENTER);
@@ -324,17 +325,25 @@ public class ConfigPartiePane extends StackPane implements ITraduction {
 		sControl.setPaneOnTop(paneName);
 	}
 
+	/**
+	 * Traduit les elements de ce pane
+	 */
 	@Override
 	public void traduire() {
-		titre1.setText(
-				International.trad("texte.titreConfigPartieA") + "\n" + International.trad("texte.titreConfigPartieB"));
-		desc.setText(International.trad("texte.descriptionConfigPartie"));
-		nomPTexte.setText(International.trad("texte.idPartie"));
-		nbjrTexte.setText(International.trad("texte.nbdeJr"));
-		infoNomPartie.setText(International.trad("texte.infoNom1") + "\n" + International.trad("texte.infoNom2") + "\n"
-				+ International.trad("texte.infoNom3") + "\n" + International.trad("texte.infoNom4"));
-		nbBotTexte.setText(International.trad("texte.nbdeBot"));
-		bJouer.setText(International.trad("bouton.jouer"));
-		bRetour.setText(International.trad("bouton.retour"));
+		Platform.runLater(new Runnable() {
+			@Override
+			public void run() {
+				titre1.setText(International.trad("texte.titreConfigPartieA") + "\n"
+						+ International.trad("texte.titreConfigPartieB"));
+				desc.setText(International.trad("texte.descriptionConfigPartie"));
+				nomPTexte.setText(International.trad("texte.idPartie"));
+				nbjrTexte.setText(International.trad("texte.nbdeJr"));
+				infoNomPartie.setText(International.trad("texte.infoNom1") + "\n" + International.trad("texte.infoNom2")
+						+ "\n" + International.trad("texte.infoNom3") + "\n" + International.trad("texte.infoNom4"));
+				nbBotTexte.setText(International.trad("texte.nbdeBot"));
+				bJouer.setText(International.trad("bouton.jouer"));
+				bRetour.setText(International.trad("bouton.retour"));
+			}
+		});
 	}
 }
