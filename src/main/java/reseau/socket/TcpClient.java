@@ -89,10 +89,7 @@ public class TcpClient implements Runnable, IEchangeSocket, IMessagePaquet {
 				ignoreda.printStackTrace();
 				Thread.yield();
 			}
-		System.out.println(socket == null);
-		System.out.println(socket.getLocalPort());
-		System.out.println(socket.getPort());
-		System.out.println(socket.getInetAddress().getHostAddress());
+		
 		fluxSortie = new DataOutputStream(socket.getOutputStream());
 		fluxEntre = new DataInputStream(socket.getInputStream());
 
@@ -143,8 +140,7 @@ public class TcpClient implements Runnable, IEchangeSocket, IMessagePaquet {
 	public void envoyer(String message) {
 		attendreConnexion();
 		logger.log(Level.INFO, "Envoie d'un message : " + message);
-
-		System.out.println(socket.getInetAddress().getHostAddress());
+		
 		try {
 			fluxSortie.writeUTF(message);
 			fluxSortie.flush();
@@ -194,7 +190,7 @@ public class TcpClient implements Runnable, IEchangeSocket, IMessagePaquet {
 	 *
 	 * @throws IOException Si les flux ou si le socket ne se ferme pas correctement
 	 */
-	private void arreter() throws IOException {
+	public void arreter() throws IOException {
 		logger.log(Level.INFO, "Arret du client TCP");
 		estLancer = false;
 
