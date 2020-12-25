@@ -26,7 +26,7 @@ public class TraitementBot {
 			noms.add((String) o);
 		for (Couleur o : couleursT)
 			couleurs.add((Couleur) o);
-		core.setCouleur(IdjrTools.getCouleurByName(core.getNom(), noms, couleurs));
+		core.setCouleur(BotOutils.getCouleurByName(core.getNom(), noms, couleurs));
 		if (lieuferme.equals("2")) {
 			core.getLieuOuvert().add(1);
 			core.getLieuOuvert().add(3);
@@ -105,7 +105,7 @@ public class TraitementBot {
 	private void attaqueZombie(Bot core, List<PionCouleur> l) {
 		List<PionCouleur> ltemp = new ArrayList<PionCouleur>();
 		for (PionCouleur pc : l) {
-			if (IdjrTools.getCouleurByChar(pc) == core.getCouleur()) {
+			if (BotOutils.getCouleurByChar(pc) == core.getCouleur()) {
 				ltemp.add(pc);
 			}
 		}

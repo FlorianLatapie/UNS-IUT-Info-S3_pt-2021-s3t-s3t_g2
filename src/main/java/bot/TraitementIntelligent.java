@@ -62,7 +62,7 @@ public class TraitementIntelligent {
 	protected static void attaqueZombie(Bot core, List<PionCouleur> l) {
 		List<PionCouleur> ltemp = new ArrayList<PionCouleur>();
 		for (PionCouleur pc : l) {
-			if (IdjrTools.getCouleurByChar(pc) == core.getCouleur()) {
+			if (BotOutils.getCouleurByChar(pc) == core.getCouleur()) {
 				ltemp.add(pc);
 			}
 		}

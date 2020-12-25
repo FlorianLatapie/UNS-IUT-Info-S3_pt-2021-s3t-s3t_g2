@@ -1,18 +1,22 @@
 package bot;
 
 import reseau.socket.ControleurReseau;
+import reseau.socket.UdpConnexion;
 import reseau.tool.ReseauOutils;
+import reseau.tool.ThreadOutils;
 import reseau.type.CarteEtat;
 import reseau.type.CarteType;
 import reseau.type.ConnexionType;
 import reseau.type.Couleur;
 import reseau.type.PionCouleur;
 import reseau.type.TypeJoueur;
+import reseau.type.TypePartie;
 import reseau.type.VigileEtat;
 import reseau.type.VoteType;
 
 import java.io.IOException;
 import java.net.InetAddress;
+import java.net.UnknownHostException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -41,22 +45,27 @@ public class Bot implements Runnable {
 	private List<CarteType> listeCarte;
 	private List<PionCouleur> listePion;
 	private List<Couleur> couleurJoueursPresentVotant;
-	
 
 	private List<Couleur> joueurEnVie;
-	private HashMap<Couleur,Integer> joueursVotantPresent;
+	private HashMap<Couleur, Integer> joueursVotantPresent;
 	private VoteType voteType;
 	private Partie partie;
 	private BotType botType;
-
-	
+	private BotMode botMode;
+	private List<PartieInfo> partiesActuel;
 
 	/* Parametre Temporaire */
 	private List<Integer> pionAPos;
 
-	public Bot(int delay,BotType botType) {
+	public Bot(int delay, BotType botType, BotMode botMode) {
 		this.delay = delay;
-		this.botType=botType;
+		this.botType = botType;
+		this.partiesActuel = new ArrayList<>();
+		this.botMode = botMode;
+	}
+
+	public BotMode getBotMode() {
+		return botMode;
 	}
 
 	private void start() throws IOException {
@@ -68,8 +77,6 @@ public class Bot implements Runnable {
 		}
 		arreter();
 	}
-	
-
 
 	@Override
 	public void run() {
@@ -106,7 +113,53 @@ public class Bot implements Runnable {
 	private void initReseau() throws IOException {
 		TraitementPaquetUdp traitementPaquetUdp = new TraitementPaquetUdp(this);
 		TraitementPaquetTcp traitementPaquetTcp = new TraitementPaquetTcp(this);
-		ControleurReseau.initConnexion(traitementPaquetTcp,traitementPaquetUdp,connexionType, ReseauOutils.getLocalIp());
+		ControleurReseau.initConnexion(traitementPaquetTcp, traitementPaquetUdp, connexionType,
+				ReseauOutils.getLocalIp());
+	}
+
+	public List<PartieInfo> getPartie(TypePartie typePartie, int nbMaxJoueur) {
+		partiesActuel.clear();
+		ControleurReseau.envoyerUdp(ControleurReseau.construirePaquetUdp("RP", typePartie, nbMaxJoueur));
+		try {
+			Thread.sleep(250);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+
+		return partiesActuel;
+	}
+
+	public void connecter(InetAddress address, int port, int identifiant) {
+		setIpPp(address);
+		setPortPp(port);
+
+		setNom(BotOutils.getNom(botType));
+		ControleurReseau.demarrerClientTcp(address);
+
+		ThreadOutils.asyncTask("acp", () -> {
+			try {
+				Thread.sleep(500);
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+			String messageTcp = ControleurReseau.construirePaquetTcp("DCP", getNom(), getTypeJoueur(),
+					"P" + identifiant);
+			try {
+				Thread.sleep(1000);
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+			ControleurReseau.envoyerTcp(messageTcp);
+		});
+	}
+
+	public void connecter(PartieInfo partieInfo) {
+		int id = Integer.valueOf(partieInfo.getIdPartie().substring(1));
+		connecter(partieInfo.getIp(), partieInfo.getPort(), id);
+	}
+
+	public void ajouterPartie(PartieInfo partieInfo) {
+		partiesActuel.add(partieInfo);
 	}
 
 	public void arreter() {
@@ -252,11 +305,11 @@ public class Bot implements Runnable {
 	public void setCompteurTour(int compteurTour) {
 		this.compteurTour = compteurTour;
 	}
-	
+
 	public void newTour() {
-		this.compteurTour ++;
+		this.compteurTour++;
 	}
-	
+
 	public Partie getPartie() {
 		return partie;
 	}
@@ -394,7 +447,7 @@ public class Bot implements Runnable {
 	public void joueCarte(Couleur value, CarteType carte) {
 		if (partie.getJoueurs().get(value).getCartes().contains(carte)) {
 			partie.getJoueurs().get(value).getCartes().remove(carte);
-		} else if ((partie.getCartes().contains(carte))&& (partie.getJoueurs().get(value).getCartes().size() > 0))  {
+		} else if ((partie.getCartes().contains(carte)) && (partie.getJoueurs().get(value).getCartes().size() > 0)) {
 			partie.getCartes().remove(carte);
 			int rand = new Random().nextInt(partie.getJoueurs().get(value).getCartes().size());
 			if (rand == 0)
@@ -451,8 +504,6 @@ public class Bot implements Runnable {
 
 	}
 
-
-
 	public void correctionZombie(Integer lieu, Integer nbz) {
 		partie.setZombieSurLieu(lieu, nbz);
 
@@ -476,7 +527,7 @@ public class Bot implements Runnable {
 	}
 
 	public void sacrifice(PionCouleur pc) {
-		partie.sacrifie(IdjrTools.getCouleurByChar(pc), IdjrTools.getPionByValue(pc));
+		partie.sacrifie(BotOutils.getCouleurByChar(pc), BotOutils.getPionByValue(pc));
 	}
 
 	public String getEtatPartie() {
@@ -487,15 +538,11 @@ public class Bot implements Runnable {
 		return botType;
 	}
 
-	public void setBotType(BotType botType) {
-		this.botType = botType;
-	}
-
-	public HashMap<Couleur,Integer> getJoueursVotantPresent() {
+	public HashMap<Couleur, Integer> getJoueursVotantPresent() {
 		return joueursVotantPresent;
 	}
 
-	public void setJoueursVotantPresent(HashMap<Couleur,Integer> joueursVotant) {
+	public void setJoueursVotantPresent(HashMap<Couleur, Integer> joueursVotant) {
 		this.joueursVotantPresent = joueursVotant;
 	}
 }

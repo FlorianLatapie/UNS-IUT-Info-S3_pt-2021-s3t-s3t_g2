@@ -114,6 +114,9 @@ public class TraitementPaquetTcp extends TraitementPaquet<TcpClient> {
 		case "ACP":
 			traitementACP(paquet, message);
 			break;
+		case "RCP":
+			traitementRCP(paquet, message);
+			break;
 		case "RAZDD":
 			traitementRAZDD(paquet, message);
 			break;
@@ -391,9 +394,14 @@ public class TraitementPaquetTcp extends TraitementPaquet<TcpClient> {
 	}
 
 	private void traitementACP(Paquet paquet, String message) {
-		// System.out.println((String) paquet.getValeur(message, 2));
+		System.out.println("Connexion a la partie acceptée");
 
 		core.setJoueurId((String) paquet.getValeur(message, 2));
+	}
+	
+	private void traitementRCP(Paquet paquet, String message) {
+		System.out.println("Connexion a la partie refusée");
+		//TODO Arreter TCP
 	}
 
 	private void traitementIP(Paquet paquet, String message) {
