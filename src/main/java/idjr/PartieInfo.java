@@ -61,8 +61,12 @@ public class PartieInfo {
 		return typeP;
 	}
 
-	public int getNbJoueurMax() {
+	public int getNbJoueurTotalMax() {
 		return nbjbMax + nbjrMax;
+	}
+	
+	public int getNbJoueurTotal() {
+		return nbjb + nbjr;
 	}
 
 	public Statut getStatut() {
@@ -71,7 +75,7 @@ public class PartieInfo {
 
 	@Override
 	public String toString() {
-		return "[" + statut.name() + "] " + idPartie + " " + statut.name() + " " + nbjr + "/" + nbjrMax
-				+ " joueurs réels " + nbjb + "/" + nbjbMax + " joueurs virtuels";
+		return "[" + statut.nomEntier() + "] " + idPartie + " " + nbjr + "/" + nbjrMax
+				+ " joueurs réels " + nbjb + "/" + nbjbMax + " joueurs virtuels " +  getNbJoueurTotal() + "/" + getNbJoueurTotalMax() + " joueurs total";
 	}
 }

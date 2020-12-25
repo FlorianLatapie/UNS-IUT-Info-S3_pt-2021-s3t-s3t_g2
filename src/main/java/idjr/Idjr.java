@@ -119,7 +119,7 @@ public class Idjr {
 			if (partieInfo.getTypeP() != typePartie)
 				listOfServer.remove(partieInfo);
 			
-			if (partieInfo.getNbJoueurMax() > maxJr)
+			if (partieInfo.getNbJoueurTotalMax() > maxJr)
 				listOfServer.remove(partieInfo);
 		}
 
