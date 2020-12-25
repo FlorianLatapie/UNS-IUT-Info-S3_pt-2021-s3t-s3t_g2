@@ -22,6 +22,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
+import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.TextAlignment;
@@ -61,6 +62,8 @@ public class PlateauPane extends StackPane implements IPlateauListener, ITraduct
 	private final int tailleVBoxJoueur = 210;
 
 	private final int taillePlateau = 1080;
+	private final double opaciteFondLieu = .7;
+	private final double arrondiFondLieu = 30;
 
 	private final int margeL = 10;
 	private final Insets margeLieu = new Insets(margeL, margeL, margeL, margeL);
@@ -209,6 +212,13 @@ public class PlateauPane extends StackPane implements IPlateauListener, ITraduct
 	BorderPane b4;
 	BorderPane b5;
 	BorderPane b6;
+	
+	Rectangle fondB1;
+	Rectangle fondB2;
+	Rectangle fondB3;
+	Rectangle fondB4;
+	Rectangle fondB5;
+	Rectangle fondB6;
 
 	public PlateauPane(ScreenControl sc, Core c) {
 		//auteur florian 		
@@ -469,7 +479,7 @@ public class PlateauPane extends StackPane implements IPlateauListener, ITraduct
 		b1.setPadding(new Insets(5));
 		b1.setPrefSize(320, 210);
 		b1.setMaxSize(320, 210);
-		b1.setBackground(new Background(new BackgroundFill(Color.BLACK, CornerRadii.EMPTY, null)));
+		//vbRight1.setBackground(new Background(new BackgroundFill(Color.BLACK, CornerRadii.EMPTY, null)));
 
 		vbRight1.getChildren().addAll(nbPlace1, nbZombies1);
 
@@ -481,6 +491,16 @@ public class PlateauPane extends StackPane implements IPlateauListener, ITraduct
 
 		AnchorPane.setTopAnchor(b1, 755.0);
 		AnchorPane.setLeftAnchor(b1, 630.0);
+		
+		fondB1 = new Rectangle();
+		fondB1.setWidth(330);
+		fondB1.setHeight(215);
+		fondB1.setArcHeight(arrondiFondLieu);
+		fondB1.setArcWidth(arrondiFondLieu);
+		fondB1.setOpacity(opaciteFondLieu);
+		fondB1.setRotate(128);
+		AnchorPane.setTopAnchor(fondB1, 755.0);
+		AnchorPane.setLeftAnchor(fondB1, 630.0);
 
 		////
 		//auteur remy 
@@ -520,7 +540,7 @@ public class PlateauPane extends StackPane implements IPlateauListener, ITraduct
 		b2.setPadding(new Insets(5));
 		b2.setPrefSize(320, 215);
 		b2.setMaxSize(320, 215);
-		b2.setBackground(new Background(new BackgroundFill(Color.BLACK, CornerRadii.EMPTY, null)));
+		//vbRight2.setBackground(new Background(new BackgroundFill(Color.BLACK, CornerRadii.EMPTY, null)));
 
 		vbRight2.getChildren().addAll(nbPlace2, nbZombies2);
 
@@ -531,6 +551,16 @@ public class PlateauPane extends StackPane implements IPlateauListener, ITraduct
 
 		AnchorPane.setTopAnchor(b2, 725.0);
 		AnchorPane.setLeftAnchor(b2, 70.0);
+		
+		fondB2 = new Rectangle();
+		fondB2.setWidth(330);
+		fondB2.setHeight(215);
+		fondB2.setArcHeight(arrondiFondLieu);
+		fondB2.setArcWidth(arrondiFondLieu);
+		fondB2.setOpacity(opaciteFondLieu);
+		fondB2.setRotate(-133);
+		AnchorPane.setTopAnchor(fondB2, 725.0);
+		AnchorPane.setLeftAnchor(fondB2, 70.0);
 
 		///
 		//auteur florian
@@ -570,7 +600,7 @@ public class PlateauPane extends StackPane implements IPlateauListener, ITraduct
 		b3.setPadding(new Insets(5));
 		b3.setPrefSize(325, 210);
 		b3.setMaxSize(325, 210);
-		b3.setBackground(new Background(new BackgroundFill(Color.BLACK, CornerRadii.EMPTY, null)));
+		//vbRight3.setBackground(new Background(new BackgroundFill(Color.BLACK, CornerRadii.EMPTY, null)));
 
 		vbRight3.getChildren().addAll(nbPlace3, nbZombies3);
 
@@ -582,6 +612,16 @@ public class PlateauPane extends StackPane implements IPlateauListener, ITraduct
 
 		AnchorPane.setTopAnchor(b3, 260.0);
 		AnchorPane.setLeftAnchor(b3, 25.0);
+		
+		fondB3 = new Rectangle();
+		fondB3.setWidth(330);
+		fondB3.setHeight(215);
+		fondB3.setArcHeight(arrondiFondLieu);
+		fondB3.setArcWidth(arrondiFondLieu);
+		fondB3.setOpacity(opaciteFondLieu);
+		fondB3.setRotate(-62);
+		AnchorPane.setTopAnchor(fondB3, 260.0);
+		AnchorPane.setLeftAnchor(fondB3, 25.0);
 
 		/// 
 		VBox vbRight4 = new VBox();
@@ -682,16 +722,28 @@ public class PlateauPane extends StackPane implements IPlateauListener, ITraduct
 		b4.setPadding(new Insets(5));
 		b4.setPrefSize(270, 210);
 		b4.setMaxSize(270, 210);
-		b4.setBackground(new Background(new BackgroundFill(Color.BLACK, CornerRadii.EMPTY, null)));
+		//vbRight4.setBackground(new Background(new BackgroundFill(Color.BLACK, CornerRadii.EMPTY, null)));
 
 		vbRight4.getChildren().addAll(nbPlace4, nbZombies4);
 
 		b4.setCenter(joueursPresents4);
 		b4.setRight(vbRight4);
+		b4.setRotate(10);
 		// b4.setOpacity(.9);
 
 		AnchorPane.setTopAnchor(b4, 440.0);
 		AnchorPane.setLeftAnchor(b4, 365.0);
+		
+		fondB4 = new Rectangle();
+		fondB4.setWidth(330);
+		fondB4.setHeight(280);
+		fondB4.setArcHeight(arrondiFondLieu);
+		fondB4.setArcWidth(arrondiFondLieu);
+		fondB4.setOpacity(opaciteFondLieu);
+		fondB4.setRotate(10);
+		AnchorPane.setTopAnchor(fondB4, 440.0);
+		AnchorPane.setLeftAnchor(fondB4, 365.0);
+
 
 		///
 		//auteur remy 
@@ -728,7 +780,7 @@ public class PlateauPane extends StackPane implements IPlateauListener, ITraduct
 		b5.setPadding(new Insets(5));
 		b5.setPrefSize(325, 215);
 		b5.setMaxSize(325, 215);
-		b5.setBackground(new Background(new BackgroundFill(Color.BLACK, CornerRadii.EMPTY, null)));
+		//vbRight5.setBackground(new Background(new BackgroundFill(Color.BLACK, CornerRadii.EMPTY, null)));
 
 		vbRight5.getChildren().addAll(nbPlace5, nbZombies5);
 
@@ -740,6 +792,16 @@ public class PlateauPane extends StackPane implements IPlateauListener, ITraduct
 
 		AnchorPane.setTopAnchor(b5, 77.5);
 		AnchorPane.setLeftAnchor(b5, 408.5);
+		
+		fondB5 = new Rectangle();
+		fondB5.setWidth(330);
+		fondB5.setHeight(215);
+		fondB5.setArcHeight(arrondiFondLieu);
+		fondB5.setArcWidth(arrondiFondLieu);
+		fondB5.setOpacity(opaciteFondLieu);
+		fondB5.setRotate(4);
+		AnchorPane.setTopAnchor(fondB5, 77.0);
+		AnchorPane.setLeftAnchor(fondB5, 408.0);
 
 		///
 
@@ -777,8 +839,7 @@ public class PlateauPane extends StackPane implements IPlateauListener, ITraduct
 		b6.setPrefSize(310, 215);
 		b6.setMaxSize(310, 215);
 		b6.setPadding(new Insets(5));
-		b6.setBackground(new Background(new BackgroundFill(Color.BLACK, CornerRadii.EMPTY, null)));
-		// b6.setOpacity(.9);
+		//vbRight6.setBackground(new Background(new BackgroundFill(Color.BLACK, CornerRadii.EMPTY, null)));
 
 		vbRight6.getChildren().addAll(nbPlace6, nbZombies6);
 
@@ -789,6 +850,16 @@ public class PlateauPane extends StackPane implements IPlateauListener, ITraduct
 
 		AnchorPane.setTopAnchor(b6, 320.0);
 		AnchorPane.setLeftAnchor(b6, 747.5);
+		
+		fondB6 = new Rectangle();
+		fondB6.setWidth(330);
+		fondB6.setHeight(215);
+		fondB6.setArcHeight(arrondiFondLieu);
+		fondB6.setArcWidth(arrondiFondLieu);
+		fondB6.setOpacity(opaciteFondLieu);
+		fondB6.setRotate(53);
+		AnchorPane.setTopAnchor(fondB6, 320.0);
+		AnchorPane.setLeftAnchor(fondB6, 747.0);
 
 		/////
 		// auteur florian 
@@ -833,7 +904,7 @@ public class PlateauPane extends StackPane implements IPlateauListener, ITraduct
 
 		////
 
-		aPlateau.getChildren().addAll(b1, b2, b3, b4, b5, b6);
+		aPlateau.getChildren().addAll(fondB1,fondB2,fondB3,fondB4,fondB5,fondB6, b1, b2, b3, b4, b5, b6);
 		//auteur remy 
 		notifInfo = new AnchorPane();
 		notifInfo.setMinSize(1920, 1080);
@@ -1139,6 +1210,12 @@ public class PlateauPane extends StackPane implements IPlateauListener, ITraduct
 		b4.setVisible(false);
 		b5.setVisible(false);
 		b6.setVisible(false);
+		fondB1.setVisible(false);
+		fondB2.setVisible(false);
+		fondB3.setVisible(false);
+		fondB4.setVisible(false);
+		fondB5.setVisible(false);
+		fondB6.setVisible(false);
 		//auteur florian 
 		this.getChildren().addAll(imgFond, bPileCarte, borderJoueurs, aPlateau, lChefVigile, lChefVigile2, lChefVigile3,
 				lChefVigile4, imgCarteFerme1, imgCarteFerme2, imgCarteFerme3, imgCarteFerme5, imgCarteFerme6,
@@ -1689,6 +1766,12 @@ public class PlateauPane extends StackPane implements IPlateauListener, ITraduct
 		lChefVigile3.setVisible(true);
 		lChefVigile4.setVisible(true);
 
+		fondB1.setVisible(true);
+		fondB2.setVisible(true);
+		fondB3.setVisible(true);
+		fondB4.setVisible(true);
+		fondB5.setVisible(true);
+		fondB6.setVisible(true);
 		b1.setVisible(true);
 		b2.setVisible(true);
 		b3.setVisible(true);

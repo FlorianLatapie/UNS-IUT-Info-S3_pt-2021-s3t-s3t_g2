@@ -6,6 +6,7 @@ import reseau.socket.ControleurReseau;
 import reseau.socket.TcpClient;
 import reseau.socket.TraitementPaquet;
 import reseau.type.TypeJoueur;
+import reseau.type.TypePartie;
 
 import java.net.InetAddress;
 import java.net.Socket;
@@ -56,17 +57,24 @@ public class TraitementPaquetTcp extends TraitementPaquet<TcpClient> {
 	}
 
 	private void dcp(Paquet packet, String message, TcpClient connection) {
-		if (core.estPleine()) {
-			connection.envoyer(ControleurReseau.construirePaquetTcp("RCP", core.getPartieId()));
-			//TODO peut pas se connecter (REFUSER)
-			return;
-		}
-
 		switch (core.getStatus()) {
 		case ATTENTE:
-			String id = core.ajouterJoueur((String) packet.getValeur(message, 1),
-					(TypeJoueur) packet.getValeur(message, 2), connection);
-			connection.envoyer(ControleurReseau.construirePaquetTcp("ACP", core.getPartieId(), id));
+			if (core.estPleine()) {
+				connection.envoyer(ControleurReseau.construirePaquetTcp("RCP", core.getPartieId()));
+			} else {
+				TypeJoueur typeJoueur = (TypeJoueur) packet.getValeur(message, 2);
+				if (core.getNbjractuel() != core.getNbjr() && TypeJoueur.JR == typeJoueur) {
+					String id = core.ajouterJoueur((String) packet.getValeur(message, 1),
+							(TypeJoueur) packet.getValeur(message, 2), connection);
+					connection.envoyer(ControleurReseau.construirePaquetTcp("ACP", core.getPartieId(), id));
+				} else if (core.getNbjvactuel() != core.getNbjv() && TypeJoueur.BOT == typeJoueur) {
+					String id = core.ajouterJoueur((String) packet.getValeur(message, 1),
+							(TypeJoueur) packet.getValeur(message, 2), connection);
+					connection.envoyer(ControleurReseau.construirePaquetTcp("ACP", core.getPartieId(), id));
+				} else {
+					connection.envoyer(ControleurReseau.construirePaquetTcp("RCP", core.getPartieId()));
+				}
+			}
 			break;
 		case ANNULEE:
 		case COMPLETE:
