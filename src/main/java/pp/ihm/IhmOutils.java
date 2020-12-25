@@ -8,14 +8,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * 
- * @author Sebastien
- * @author Florian
+ * <h1>Outils pour l'IHM</h1> Permet de facilité l'utilisation des methodes a
+ * travers l'IHM
  *
+ * @author Sébastien Aglaé
+ * @author Florian Latapie
  */
-
 public interface IhmOutils {
-	//auteur florian
+	// auteur florian
 	String vert = " -fx-background-color:#5EB137; -fx-text-fill: #000000";
 	String rouge = " -fx-background-color:#F30101; -fx-text-fill: #000000";
 	String marron = " -fx-background-color:#6C3505; -fx-text-fill: #000000";
@@ -24,13 +24,12 @@ public interface IhmOutils {
 	String noir = " -fx-background-color:#000000; -fx-text-fill: #ffffff";
 
 	/**
-	 * @author Sebastien
-	 * si toutes les couleurs choisies sont différentes cela renvoie vrai
+	 * Permet de savoir si les couleurs de la liste sont unique
 	 * 
-	 * @param couleurs couleurs
+	 * @param couleurs la liste des couleurs a tester
 	 * @return l'unicité de chaque couleur
 	 */
-	public static boolean isAllUniqueColor(List<String> couleurs) {
+	public static boolean isDeLaMemeCouleur(List<String> couleurs) {
 		for (int i = 0; i < couleurs.size(); i++)
 			for (int y = 0; y < couleurs.size(); y++)
 				if (i != y)
@@ -41,11 +40,10 @@ public interface IhmOutils {
 	}
 
 	/**
-	 * @author Sebastien 
-	 * convertis une combobox en liste de couleur
+	 * Convertis une combobox en liste de couleur
 	 * 
-	 * @param tab //TODO expliquer
-	 * @param couleList liste des couleurs 
+	 * @param tab       l'ordre
+	 * @param couleList liste des couleurs
 	 * @return une liste de couleur
 	 */
 	public static List<Couleur> comboStringToColorList(int[] tab, List<String> couleList) {
@@ -57,10 +55,11 @@ public interface IhmOutils {
 	}
 
 	/**
-	 * @author Sebastien 
-	 * renvoie la validité du nom placé en etrée (critères imposés par le réseau) 
-	 * @param nom nom de la partie 
-	 * @return la validité du nom 
+	 * Permet de savoir la validité du nom placé en entrée (critères imposés par le
+	 * réseau)
+	 * 
+	 * @param nom nom de la partie
+	 * @return la validité du nom
 	 */
 	static boolean nomEstValide(String nom) {
 		if (nom == null)
@@ -100,10 +99,10 @@ public interface IhmOutils {
 	}
 
 	/**
-	 * @author Sebastien 
-	 * renvoie le style en fonction de la couleur d'entrée 
-	 * @param couleur couleur
-	 * @return le style correspondant à l'entrée 
+	 * Permet d'obtenir un style en fonction de la couleur d'entrée
+	 * 
+	 * @param couleur couleur cible
+	 * @return le style correspondant à l'entrée
 	 */
 	public static String color(Couleur couleur) {
 		switch (couleur) {
@@ -123,13 +122,13 @@ public interface IhmOutils {
 			throw new IllegalArgumentException("Couleur inconnue");
 		}
 	}
-	
+
 	/**
-	 * @author Sebastien
-	 * retourne le chemin vers l'image correspondant aux données en entrée 
-	 * @param couleur couleur du personnage 
-	 * @param type type du personnage 
-	 * @return le chemin vers l'image souhaitée 
+	 * Permet d'obtenir le chemin vers l'image correspondant aux données en entrée
+	 * 
+	 * @param couleur couleur du personnage
+	 * @param type    type du personnage
+	 * @return le chemin vers l'image souhaitée
 	 */
 	public static String convertVersImagePerso(Couleur couleur, TypePersonnage type) {
 		switch (type) {
@@ -206,12 +205,12 @@ public interface IhmOutils {
 	}
 
 	/**
-	 * @author Sebastien 
-	 * intervertis 2 valeurs dans un tableau 
-	 * @param tab tableau a modifier 
-	 * @param de première valeur a intervertir 
-	 * @param a seconde valeur a intervertir 
-	 * @return tableau interverti 
+	 * Permet d'intervertir 2 valeurs dans un tableau
+	 * 
+	 * @param tab tableau a modifier
+	 * @param de  première valeur a intervertir
+	 * @param a   seconde valeur a intervertir
+	 * @return tableau interverti
 	 */
 	public static int[] echanger(int[] tab, int de, int a) {
 		int tmp = tab[a];
@@ -220,13 +219,14 @@ public interface IhmOutils {
 
 		return tab;
 	}
-	
+
 	/**
-	 * @author Sebastien 
-	 * renvoie l'entrée sous forme d'ArrayList<Joueur>
-	 * @param tab position des joueurs 
+	 * Permet d'obtenir le nouvel ordre
+	 * 
+	 * @param tab     position des joueurs
 	 * @param joueurs joueur
-	 * @return les joueurs dans l'ordre indiqué par le tableau des positions des joueurs 
+	 * @return les joueurs dans l'ordre indiqué par le tableau des positions des
+	 *         joueurs
 	 */
 	public static List<Joueur> reOrdre(int[] tab, List<Joueur> joueurs) {
 		List<Joueur> tmp = new ArrayList<>();
@@ -234,5 +234,31 @@ public interface IhmOutils {
 			tmp.add(joueurs.get(tab[i]));
 
 		return tmp;
+	}
+
+	/**
+	 * Convertit une couleur String en Couleur
+	 * 
+	 * @param couleur la couleur cible
+	 * @return la nouveau style
+	 */
+	public static String getCouleur(String couleur) {
+		String style = ";-fx-background-radius: 10px;";
+		switch (couleur) {
+		case "Bleu":
+			return IhmOutils.bleu + style;
+		case "Rouge":
+			return IhmOutils.rouge + style;
+		case "Vert":
+			return IhmOutils.vert + style;
+		case "Noir":
+			return IhmOutils.noir + style;
+		case "Jaune":
+			return IhmOutils.jaune + style;
+		case "Marron":
+			return IhmOutils.marron + style;
+		default:
+			return "#1A1A1A";
+		}
 	}
 }

@@ -32,7 +32,7 @@ import javafx.scene.text.FontWeight;
  * @since 04/10/2020
  */
 public class AccueilPane extends StackPane implements ITraduction {
-	//auteur Florian
+	// auteur Florian
 	private ScreenControl sControl = null;
 	private Core core = null;
 	private final ApplicationPane paneName = ApplicationPane.ACCUEIL;
@@ -63,7 +63,7 @@ public class AccueilPane extends StackPane implements ITraduction {
 	Button bQuitter;
 
 	public AccueilPane(ScreenControl sc, Core c) {
-		// auteur florian 
+		// auteur florian
 		core = c;
 		sControl = sc;
 
@@ -130,7 +130,7 @@ public class AccueilPane extends StackPane implements ITraduction {
 		bQuitter.setOnMouseExited(event -> bQuitter.setStyle(styleBoutons));
 		bQuitter.setOnAction(event -> {
 			boolean resultat = ConfirmationPane.afficher(International.trad("texte.confirmationTitre"),
-					International.trad("texte.confirmationL1")+"\n"+International.trad("texte.confirmationL2"));
+					International.trad("texte.confirmationL1") + "\n" + International.trad("texte.confirmationL2"));
 			if (resultat) {
 				Platform.exit();
 				System.exit(0);
@@ -162,8 +162,8 @@ public class AccueilPane extends StackPane implements ITraduction {
 		centreMenu.setAlignment(Pos.CENTER);
 		centreMenu.setMargin(titre, new Insets(0, 0, 100, 0));
 		centreMenu.getChildren().addAll(titre, grilleBoutons);
-		
-		//auteur remy
+
+		// auteur remy
 		// Boutons de rotation d'écran
 		ImageView img1 = new ImageView(DataControl.SCREEN);
 		img1.setFitHeight(70);
@@ -212,8 +212,8 @@ public class AccueilPane extends StackPane implements ITraduction {
 		bEcranDroite.setPrefSize(80, 80);
 		bEcranDroite.setGraphic(img4);
 		bEcranDroite.setOnAction(EventHandler -> sc.setRotatePane(centreMenu, "droite"));
-		
-		//auteur florian
+
+		// auteur florian
 		// boite du fond qui contient l'image et les autres boites
 		HBox fond = new HBox();
 		fond.setAlignment(Pos.CENTER);
@@ -230,14 +230,21 @@ public class AccueilPane extends StackPane implements ITraduction {
 
 	}
 
+	/**
+	 * Traduit les elements de ce pane
+	 */
 	@Override
 	public void traduire() {
-		titre1.setText(International.trad("texte.preTitre"));
-		titre2.setText(International.trad("texte.titrePP"));
-		bJouer.setText(International.trad("bouton.jouer"));
-		bOptions.setText(International.trad("bouton.options"));
-		bRegles.setText(International.trad("bouton.regles"));
-		bQuitter.setText(International.trad("bouton.quitter"));
-
+		Platform.runLater(new Runnable() {
+			@Override
+			public void run() {
+				titre1.setText(International.trad("texte.preTitre"));
+				titre2.setText(International.trad("texte.titrePP"));
+				bJouer.setText(International.trad("bouton.jouer"));
+				bOptions.setText(International.trad("bouton.options"));
+				bRegles.setText(International.trad("bouton.regles"));
+				bQuitter.setText(International.trad("bouton.quitter"));
+			}
+		});
 	}
 }

@@ -3,6 +3,7 @@
  */
 package pp.ihm;
 
+import javafx.application.Platform;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -24,7 +25,7 @@ import pp.ihm.langues.International;
  *
  */
 public class ConfirmationPane implements ITraduction {
-	//auteur remy
+	// auteur remy
 	static boolean reponse;
 	private static int tailleFenetreL = 500;
 	private static int tailleFenetreH = 190;
@@ -41,7 +42,7 @@ public class ConfirmationPane implements ITraduction {
 	 * @return
 	 */
 	public static boolean afficher(String titre, String messageL1) {
-		//auteur remy
+		// auteur remy
 		// nouvelle fenetre
 		Stage window = new Stage();
 		window.getIcons().add(new Image(DataControl.ICONE));
@@ -100,10 +101,17 @@ public class ConfirmationPane implements ITraduction {
 		return reponse;
 	}
 
+	/**
+	 * Traduit les elements de ce pane
+	 */
 	@Override
 	public void traduire() {
-		boutonOui.setText(International.trad("bouton.quitter"));
-		boutonNon.setText(International.trad("bouton.annuler"));
-
+		Platform.runLater(new Runnable() {
+			@Override
+			public void run() {
+				boutonOui.setText(International.trad("bouton.quitter"));
+				boutonNon.setText(International.trad("bouton.annuler"));
+			}
+		});
 	}
 }

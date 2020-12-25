@@ -23,13 +23,13 @@ import javafx.scene.text.FontWeight;
 
 /**
  * 
- * @author Remy 
- * @author Tom 
+ * @author Remy
+ * @author Tom
  *
  */
 
 public class PausePane extends StackPane implements ITraduction {
-	//auteur Remy 
+	// auteur Remy
 	private ScreenControl sControl = null;
 	private Core core;
 	private final ApplicationPane paneName = ApplicationPane.PAUSE;
@@ -46,7 +46,7 @@ public class PausePane extends StackPane implements ITraduction {
 	Button bRetour;
 
 	public PausePane(ScreenControl sc, Core c) {
-		//auteur remy 
+		// auteur remy
 		core = c;
 		sControl = sc;
 
@@ -200,13 +200,20 @@ public class PausePane extends StackPane implements ITraduction {
 		sControl.setPaneOnTop(paneName);
 	}
 
+	/**
+	 * Traduit les elements de ce pane
+	 */
 	@Override
 	public void traduire() {
-		titre.setText(International.trad("text.titerPause"));
-		bOption.setText(International.trad("bouton.options"));
-		bRegles.setText(International.trad("text.titreRegle"));
-		bQuitter.setText(International.trad("bouton.quitter"));
-		bRetour.setText(International.trad("bouton.retour"));
+		Platform.runLater(new Runnable() {
+			@Override
+			public void run() {
+				titre.setText(International.trad("text.titerPause"));
+				bOption.setText(International.trad("bouton.options"));
+				bRegles.setText(International.trad("text.titreRegle"));
+				bQuitter.setText(International.trad("bouton.quitter"));
+				bRetour.setText(International.trad("bouton.retour"));
+			}
+		});
 	}
-
 }

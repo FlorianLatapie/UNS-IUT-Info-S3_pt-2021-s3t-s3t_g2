@@ -3,7 +3,7 @@ package pp.ihm;
 import pp.ihm.DataControl.ApplicationPane;
 import pp.ihm.langues.ITraduction;
 import pp.ihm.langues.International;
-
+import javafx.application.Platform;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.*;
@@ -28,7 +28,7 @@ import javafx.scene.text.FontWeight;
  */
 
 public class AccessibilitePane extends StackPane implements ITraduction {
-	//auteur nina 
+	// auteur nina
 	private ScreenControl sControl = null;
 	private StackPane stackPane = new StackPane();
 	private final ApplicationPane paneName = ApplicationPane.ACCESSIBILITE;
@@ -60,16 +60,16 @@ public class AccessibilitePane extends StackPane implements ITraduction {
 
 		sControl = sc;
 		stackPane.setAlignment(Pos.CENTER);
-		
-		//auteur florian
+
+		// auteur florian
 		Rectangle rect = new Rectangle();
 		rect.setWidth(tailleCarreCentral);
 		rect.setHeight(tailleCarreCentral);
 		rect.setArcHeight(30);
 		rect.setArcWidth(30);
 		rect.setOpacity(.3);
-		
-		//auteur nina
+
+		// auteur nina
 		VBox vbFond = new VBox();
 		vbFond.setAlignment(Pos.CENTER);
 		vbFond.setSpacing(20);
@@ -162,7 +162,7 @@ public class AccessibilitePane extends StackPane implements ITraduction {
 		bpCentral.setBottom(vbRetour);
 
 		// Boutons de rotation d'écran
-		//auteur remy
+		// auteur remy
 		ImageView img1 = new ImageView(DataControl.SCREEN);
 		img1.setFitHeight(70);
 		img1.setPreserveRatio(true);
@@ -210,7 +210,7 @@ public class AccessibilitePane extends StackPane implements ITraduction {
 		bEcranDroite.setPrefSize(80, 80);
 		bEcranDroite.setGraphic(img4);
 		bEcranDroite.setOnAction(EventHandler -> sc.setRotatePane(rect, bpCentral, "droite"));
-		//auteur nina
+		// auteur nina
 		// boite du fond qui contient le fond et les autres boites
 		ImageView img = new ImageView(DataControl.FOND);
 		vbFond.getChildren().add(img);
@@ -222,15 +222,22 @@ public class AccessibilitePane extends StackPane implements ITraduction {
 		sControl.registerNode(paneName, this);
 		sControl.setPaneOnTop(paneName);
 	}
-	
 
+	/**
+	 * Traduit les elements de ce pane
+	 */
 	@Override
 	public void traduire() {
-		titre.setText(International.trad("texte.titreAcc"));
-		titreVbBoutons.setText(International.trad("texte.dalto"));
-		bDeuteranopie.setText(International.trad("bouton.deuteranopie"));
-		bProtanopie.setText(International.trad("bouton.protanopie"));
-		bTritanopie.setText(International.trad("bouton.tritanopie"));
-		bRetour.setText(International.trad("bouton.retour"));
+		Platform.runLater(new Runnable() {
+			@Override
+			public void run() {
+				titre.setText(International.trad("texte.titreAcc"));
+				titreVbBoutons.setText(International.trad("texte.dalto"));
+				bDeuteranopie.setText(International.trad("bouton.deuteranopie"));
+				bProtanopie.setText(International.trad("bouton.protanopie"));
+				bTritanopie.setText(International.trad("bouton.tritanopie"));
+				bRetour.setText(International.trad("bouton.retour"));
+			}
+		});
 	}
 }

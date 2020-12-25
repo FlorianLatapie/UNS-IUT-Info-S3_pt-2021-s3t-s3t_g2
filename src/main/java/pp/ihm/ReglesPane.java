@@ -3,6 +3,7 @@ package pp.ihm;
 import pp.ihm.DataControl.ApplicationPane;
 import pp.ihm.langues.ITraduction;
 import pp.ihm.langues.International;
+import javafx.application.Platform;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
@@ -26,13 +27,13 @@ import javafx.scene.text.FontWeight;
  * The Class AccueilPane.
  * 
  * @author Florian
- * @author Tom 
+ * @author Tom
  * 
  * @version 1.0
  * @since 01/11/2020
  */
 public class ReglesPane extends StackPane implements ITraduction {
-	//auteur florian 
+	// auteur florian
 	private ScreenControl sControl = null;
 	private Core core = null;
 	private final ApplicationPane paneName = ApplicationPane.REGLES;
@@ -56,7 +57,7 @@ public class ReglesPane extends StackPane implements ITraduction {
 	Button bRetour;
 
 	public ReglesPane(ScreenControl sc, Core c) {
-		//auteur florian 
+		// auteur florian
 		core = c;
 		sControl = sc;
 
@@ -96,7 +97,7 @@ public class ReglesPane extends StackPane implements ITraduction {
 		desc1.setFont(policeNom);
 		desc1.setPadding(new Insets(5, 10, 5, 10));
 		desc1.setTextFill(Color.WHITE);
-		
+
 		VBox vbCenter = new VBox();
 
 		vbCenter.setAlignment(Pos.CENTER);
@@ -198,23 +199,33 @@ public class ReglesPane extends StackPane implements ITraduction {
 
 	}
 
+	/**
+	 * Traduit les elements de ce pane
+	 */
 	@Override
 	public void traduire() {
-		titre1.setText(International.trad("text.titreRegle"));
-		desc1.setText(International.trad("texte.pourQuiA") + "\n" + International.trad("texte.pourQuiB") + "\n\n"
-				+ International.trad("texte.histoireA") + "\n" + International.trad("texte.histoireB") + "\n"
-				+ International.trad("texte.histoireC") + "\n" + International.trad("texte.histoireD") + "\n"
-				+ International.trad("texte.histoireE") + "\n" + International.trad("texte.histoireF") + "\n"
-				+ International.trad("texte.histoireG") + "\n\n" + International.trad("texte.but") + "\n"
-				+ International.trad("texte.butExplicationA") + "\n" + International.trad("texte.butExplicationB")
-				+ "\n" + International.trad("texte.butExplicationC") + "\n"
-				+ International.trad("texte.butExplicationD") + "\n" + International.trad("texte.butExplicationE")
-				+ "\n" + International.trad("texte.butExplicationF") + "\n\n" + International.trad("texte.finDePartieA")
-				+ "\n" + International.trad("texte.finDePartieB") + "\n" + International.trad("texte.FDPsit1A") + "\n"
-				+ International.trad("texte.FDPsit1B") + "\n" + International.trad("texte.FDPsit2A") + "\n"
-				+ International.trad("texte.FDPsit2B") + "\n" + International.trad("texte.FDPfinA") + "\n"
-				+ International.trad("texte.FDPfinB") + "\n" + International.trad("texte.FDPfinC") + "\n");
-		bRetour.setText(International.trad("bouton.retour"));
+		Platform.runLater(new Runnable() {
+			@Override
+			public void run() {
+				titre1.setText(International.trad("text.titreRegle"));
+				desc1.setText(International.trad("texte.pourQuiA") + "\n" + International.trad("texte.pourQuiB")
+						+ "\n\n" + International.trad("texte.histoireA") + "\n" + International.trad("texte.histoireB")
+						+ "\n" + International.trad("texte.histoireC") + "\n" + International.trad("texte.histoireD")
+						+ "\n" + International.trad("texte.histoireE") + "\n" + International.trad("texte.histoireF")
+						+ "\n" + International.trad("texte.histoireG") + "\n\n" + International.trad("texte.but") + "\n"
+						+ International.trad("texte.butExplicationA") + "\n"
+						+ International.trad("texte.butExplicationB") + "\n"
+						+ International.trad("texte.butExplicationC") + "\n"
+						+ International.trad("texte.butExplicationD") + "\n"
+						+ International.trad("texte.butExplicationE") + "\n"
+						+ International.trad("texte.butExplicationF") + "\n\n"
+						+ International.trad("texte.finDePartieA") + "\n" + International.trad("texte.finDePartieB")
+						+ "\n" + International.trad("texte.FDPsit1A") + "\n" + International.trad("texte.FDPsit1B")
+						+ "\n" + International.trad("texte.FDPsit2A") + "\n" + International.trad("texte.FDPsit2B")
+						+ "\n" + International.trad("texte.FDPfinA") + "\n" + International.trad("texte.FDPfinB") + "\n"
+						+ International.trad("texte.FDPfinC") + "\n");
+				bRetour.setText(International.trad("bouton.retour"));
+			}
+		});
 	}
-
 }

@@ -76,6 +76,12 @@ public class PlateauPane extends StackPane implements IPlateauListener, ITraduct
 	private int largBouton = 155;
 	private int hautBouton = 70;
 
+	List<Couleur> couleurs1;
+	int o = 0;
+
+	List<VBox> vboxs = new ArrayList<>();
+	List<Integer> index = new ArrayList<>();
+
 	Label nbZombies1;
 	Label nbZombies2;
 	Label nbZombies3;
@@ -1234,324 +1240,438 @@ public class PlateauPane extends StackPane implements IPlateauListener, ITraduct
 
 	}
 
+	/**
+	 * Met a jour le nombre de zombies dans le lieu
+	 * 
+	 * @param lieu le lieu cible
+	 * @param val  le nombre de zombies actuel dans le lieu
+	 */
 	@Override
 	public void nbLieuZombie(int lieu, int val) {
-		String tmp = val + " " + International.trad("text.nbZombie");
-		Platform.runLater(() -> {
-			switch (lieu) {
-			case 1:
-				nbZombies1.setText(tmp);
-				break;
-			case 2:
-				nbZombies2.setText(tmp);
-				break;
-			case 3:
-				nbZombies3.setText(tmp);
-				break;
-			case 4:
-				nbZombies4.setText(tmp);
-				break;
-			case 5:
-				nbZombies5.setText(tmp);
-				break;
-			case 6:
-				nbZombies6.setText(tmp);
-				break;
-			default:
-				throw new IllegalArgumentException("Impossible de rajouter des zombies dans le lieu " + lieu);
+		Platform.runLater(new Runnable() {
+			@Override
+			public void run() {
+				String tmp = val + " " + International.trad("text.nbZombie");
+				switch (lieu) {
+				case 1:
+					nbZombies1.setText(tmp);
+					break;
+				case 2:
+					nbZombies2.setText(tmp);
+					break;
+				case 3:
+					nbZombies3.setText(tmp);
+					break;
+				case 4:
+					nbZombies4.setText(tmp);
+					break;
+				case 5:
+					nbZombies5.setText(tmp);
+					break;
+				case 6:
+					nbZombies6.setText(tmp);
+					break;
+				default:
+					throw new IllegalArgumentException("Impossible de rajouter des zombies dans le lieu " + lieu);
+				}
 			}
-		});
-	}
-
-	@Override
-	public void nbPlaceLieu(int lieu, int val) {
-		Platform.runLater(() -> {
-			switch (lieu) {
-			case 1:
-				nbPlace1.setText(val + " / 3");
-				break;
-			case 2:
-				nbPlace2.setText(val + " / 4");
-				break;
-			case 3:
-				nbPlace3.setText(val + " / 4");
-				break;
-			case 4:
-				nbPlace4.setText(val + " / ∞");
-				break;
-			case 5:
-				nbPlace5.setText(val + " / 3");
-				break;
-			case 6:
-				nbPlace6.setText(val + " / 6");
-				break;
-			default:
-				throw new IllegalArgumentException("Impossible de rajouter des zombies dans le lieu " + lieu);
-			}
-		});
-	}
-
-	@Override
-	public void nomJoueur(int joueur, Couleur couleur, String val) {
-		Platform.runLater(() -> {
-			System.out.println("Joueur " + joueur + " " + couleur.nomEntier() + " " + val);
-			switch (index.get(joueur)) {
-			case 0:
-				nomJoueur1.setText(val);
-				nbPerso1.setStyle(IhmOutils.color(couleur));
-				nbCartes1.setStyle(IhmOutils.color(couleur));
-				nomJoueur1.setStyle(IhmOutils.color(couleur));
-				j1.setStyle(IhmOutils.color(couleur));
-				j1.setVisible(true);
-				j1.setDisable(false);
-				break;
-			case 1:
-				nomJoueur2.setText(val);
-				nbPerso2.setStyle(IhmOutils.color(couleur));
-				nbCartes2.setStyle(IhmOutils.color(couleur));
-				nomJoueur2.setStyle(IhmOutils.color(couleur));
-				j2.setStyle(IhmOutils.color(couleur));
-				j2.setVisible(true);
-				j2.setDisable(false);
-				break;
-			case 2:
-				nomJoueur3.setText(val);
-				nbPerso3.setStyle(IhmOutils.color(couleur));
-				nbCartes3.setStyle(IhmOutils.color(couleur));
-				nomJoueur3.setStyle(IhmOutils.color(couleur));
-				j3.setStyle(IhmOutils.color(couleur));
-				j3.setVisible(true);
-				j3.setDisable(false);
-				break;
-			case 3:
-				nomJoueur4.setText(val);
-				nbPerso4.setStyle(IhmOutils.color(couleur));
-				nbCartes4.setStyle(IhmOutils.color(couleur));
-				nomJoueur4.setStyle(IhmOutils.color(couleur));
-				j4.setStyle(IhmOutils.color(couleur));
-				j4.setVisible(true);
-				j4.setDisable(false);
-				break;
-			case 4:
-				nomJoueur5.setText(val);
-				nbPerso5.setStyle(IhmOutils.color(couleur));
-				nbCartes5.setStyle(IhmOutils.color(couleur));
-				nomJoueur5.setStyle(IhmOutils.color(couleur));
-				j5.setStyle(IhmOutils.color(couleur));
-				j5.setVisible(true);
-				j5.setDisable(false);
-				break;
-			case 5:
-				nomJoueur6.setText(val);
-				nbPerso6.setStyle(IhmOutils.color(couleur));
-				nbCartes6.setStyle(IhmOutils.color(couleur));
-				nomJoueur6.setStyle(IhmOutils.color(couleur));
-				j6.setStyle(IhmOutils.color(couleur));
-				j6.setVisible(true);
-				j6.setDisable(false);
-				break;
-			default:
-				throw new IllegalStateException("Unexpected value: " + joueur);
-			}
-		});
-	}
-
-	@Override
-	public void lieuFerme(int lieu, boolean val) {
-		if (!val)
-			return;
-		Platform.runLater(() -> {
-			switch (lieu) {
-			case 1:
-				imgCarteFerme1.setVisible(true);
-				break;
-			case 2:
-				imgCarteFerme2.setVisible(true);
-
-				break;
-			case 3:
-				imgCarteFerme3.setVisible(true);
-
-				break;
-			case 5:
-				imgCarteFerme5.setVisible(true);
-				break;
-			case 6:
-				imgCarteFerme6.setVisible(true);
-				break;
-			default:
-				throw new IllegalStateException("Unexpected value: " + lieu);
-			}
-		});
-	}
-
-	@Override
-	public void lieuOuvert(int lieu, boolean val) {
-		if (!val)
-			return;
-		Platform.runLater(() -> {
-			switch (lieu) {
-			case 1:
-				imgCarteFerme1.setVisible(false);
-				break;
-			case 2:
-				imgCarteFerme2.setVisible(false);
-				break;
-			case 3:
-				imgCarteFerme3.setVisible(false);
-				break;
-			case 4:
-				// c'est le parking il est forcément ouvert
-				break;
-			case 5:
-				imgCarteFerme5.setVisible(false);
-				break;
-			case 6:
-				imgCarteFerme6.setVisible(false);
-				break;
-			default:
-				throw new IllegalStateException("Unexpected value: " + lieu);
-			}
-		});
-	}
-
-	@Override
-	public void nbPersoJoueur(int joueur, int perso) {
-		String tmp = perso + " personnages";
-		Platform.runLater(() -> {
-			switch (index.get(joueur)) {
-			case 0:
-				nbPerso1.setText(tmp);
-				break;
-			case 1:
-				nbPerso2.setText(tmp);
-				break;
-			case 2:
-				nbPerso3.setText(tmp);
-				break;
-			case 3:
-				nbPerso4.setText(tmp);
-				break;
-			case 4:
-				nbPerso5.setText(tmp);
-				break;
-			case 5:
-				nbPerso6.setText(tmp);
-				break;
-			default:
-				throw new IllegalStateException("Unexpected value: " + joueur);
-			}
-		});
-	}
-
-	@Override
-	public void nbCarteJoueur(int joueur, int cartes) {
-		String tmp = cartes + " cartes";
-		Platform.runLater(() -> {
-			switch (index.get(joueur)) {
-			case 0:
-				nbCartes1.setText(tmp);
-				break;
-			case 1:
-				nbCartes2.setText(tmp);
-				break;
-			case 2:
-				nbCartes3.setText(tmp);
-				break;
-			case 3:
-				nbCartes4.setText(tmp);
-				break;
-			case 4:
-				nbCartes5.setText(tmp);
-				break;
-			case 5:
-				nbCartes6.setText(tmp);
-				break;
-			default:
-				throw new IllegalStateException("Unexpected value: " + joueur);
-			}
-		});
-	}
-
-	@Override
-	public void nomChefVigile(String joueur) {
-		String tmp = joueur + " " + International.trad("text.chefVigile");
-		Platform.runLater(() -> {
-			lChefVigile.setText(tmp);
-			lChefVigile2.setText(tmp);
-			lChefVigile3.setText(tmp);
-			lChefVigile4.setText(tmp);
-		});
-	}
-
-	@Override
-	public void finPartie() {
-		sControl.setPaneOnTop(ApplicationPane.ENDGAME);
-	}
-
-	@Override
-	public void destionationPerso(int lieu, List<Personnage> p) {
-		Platform.runLater(() -> {
-			switch (lieu) {
-			case 1:
-				ImageView[] l1 = { l1p1, l1p2, l1p3 };
-				setPersonnageLieu(lieu, p, l1);
-				break;
-			case 2:
-				ImageView[] l2 = { l2p1, l2p2, l2p3, l2p4 };
-				setPersonnageLieu(lieu, p, l2);
-				break;
-			case 3:
-				ImageView[] l3 = { l3p1, l3p2, l3p3, l3p4 };
-				setPersonnageLieu(lieu, p, l3);
-				break;
-			case 4:
-				ImageView[] l4 = { l4p1, l4p2, l4p3, l4p4, l4p5, l4p6, l4p7, l4p8, l4p9, l4p10, l4p11, l4p12, l4p13,
-						l4p14, l4p15, l4p16, l4p17, l4p18 };
-				setPersonnageLieu(lieu, p, l4);
-				break;
-			case 5:
-				ImageView[] l5 = { l5p1, l5p2, l5p3 };
-				setPersonnageLieu(lieu, p, l5);
-				break;
-			case 6:
-				ImageView[] l6 = { l6p1, l6p2, l6p3, l6p4, l6p5, l6p6 };
-				setPersonnageLieu(lieu, p, l6);
-				break;
-			default:
-				throw new IllegalStateException("Unexpected value: " + lieu);
-			}
-		});
-	}
-
-	@Override
-	public void fouilleCamion(String camion) {
-		Platform.runLater(() -> {
-			popup(International.trad("text.fouilleCamion"), camion, false);
-		});
-	}
-
-	@Override
-	public void prevenirDeplacementVigile(String depvig) {
-		Platform.runLater(() -> {
-			popup(International.trad("text.deplChefVigile3"), depvig, false);
-		});
-	}
-
-	@Override
-	public void electionChef(String message) {
-		Platform.runLater(() -> {
-			popup(International.trad("text.elecChefVigile"), message, false);
 		});
 	}
 
 	/**
-	 * @author Sebastien
-	 * @author Remy affiche l'information placée en paramètre dans les 4 sens de
-	 *         lecture au dessus du plateau
+	 * Met a jour le nombre de place dans le lieu
+	 * 
+	 * @param lieu le lieu cible
+	 * @param val  le nombre de place actuel dans le lieu
+	 */
+	@Override
+	public void nbPlaceLieu(int lieu, int val) {
+		Platform.runLater(new Runnable() {
+			@Override
+			public void run() {
+				switch (lieu) {
+				case 1:
+					nbPlace1.setText(val + " / 3");
+					break;
+				case 2:
+					nbPlace2.setText(val + " / 4");
+					break;
+				case 3:
+					nbPlace3.setText(val + " / 4");
+					break;
+				case 4:
+					nbPlace4.setText(val + " / ∞");
+					break;
+				case 5:
+					nbPlace5.setText(val + " / 3");
+					break;
+				case 6:
+					nbPlace6.setText(val + " / 6");
+					break;
+				default:
+					throw new IllegalArgumentException("Impossible de rajouter des zombies dans le lieu " + lieu);
+				}
+			}
+		});
+	}
+
+	/**
+	 * Met a jour les joueurs sur le plateau
+	 * 
+	 * @param joueur  le joueur cible
+	 * @param couleur la couleur du joueur
+	 * @param val     le nom du joueur
+	 */
+	@Override
+	public void nomJoueur(int joueur, Couleur couleur, String val) {
+		Platform.runLater(new Runnable() {
+			@Override
+			public void run() {
+				System.out.println("Joueur " + joueur + " " + couleur.nomEntier() + " " + val);
+				switch (index.get(joueur)) {
+				case 0:
+					nomJoueur1.setText(val);
+					nbPerso1.setStyle(IhmOutils.color(couleur));
+					nbCartes1.setStyle(IhmOutils.color(couleur));
+					nomJoueur1.setStyle(IhmOutils.color(couleur));
+					j1.setStyle(IhmOutils.color(couleur));
+					j1.setVisible(true);
+					j1.setDisable(false);
+					break;
+				case 1:
+					nomJoueur2.setText(val);
+					nbPerso2.setStyle(IhmOutils.color(couleur));
+					nbCartes2.setStyle(IhmOutils.color(couleur));
+					nomJoueur2.setStyle(IhmOutils.color(couleur));
+					j2.setStyle(IhmOutils.color(couleur));
+					j2.setVisible(true);
+					j2.setDisable(false);
+					break;
+				case 2:
+					nomJoueur3.setText(val);
+					nbPerso3.setStyle(IhmOutils.color(couleur));
+					nbCartes3.setStyle(IhmOutils.color(couleur));
+					nomJoueur3.setStyle(IhmOutils.color(couleur));
+					j3.setStyle(IhmOutils.color(couleur));
+					j3.setVisible(true);
+					j3.setDisable(false);
+					break;
+				case 3:
+					nomJoueur4.setText(val);
+					nbPerso4.setStyle(IhmOutils.color(couleur));
+					nbCartes4.setStyle(IhmOutils.color(couleur));
+					nomJoueur4.setStyle(IhmOutils.color(couleur));
+					j4.setStyle(IhmOutils.color(couleur));
+					j4.setVisible(true);
+					j4.setDisable(false);
+					break;
+				case 4:
+					nomJoueur5.setText(val);
+					nbPerso5.setStyle(IhmOutils.color(couleur));
+					nbCartes5.setStyle(IhmOutils.color(couleur));
+					nomJoueur5.setStyle(IhmOutils.color(couleur));
+					j5.setStyle(IhmOutils.color(couleur));
+					j5.setVisible(true);
+					j5.setDisable(false);
+					break;
+				case 5:
+					nomJoueur6.setText(val);
+					nbPerso6.setStyle(IhmOutils.color(couleur));
+					nbCartes6.setStyle(IhmOutils.color(couleur));
+					nomJoueur6.setStyle(IhmOutils.color(couleur));
+					j6.setStyle(IhmOutils.color(couleur));
+					j6.setVisible(true);
+					j6.setDisable(false);
+					break;
+				default:
+					throw new IllegalStateException("Unexpected value: " + joueur);
+				}
+			}
+		});
+	}
+
+	/**
+	 * Met a jour les lieux fermé
+	 * 
+	 * @param lieu le lieu cible
+	 * @param val  si c'est ouvert
+	 */
+	@Override
+	public void lieuFerme(int lieu, boolean val) {
+		Platform.runLater(new Runnable() {
+			@Override
+			public void run() {
+				if (!val)
+					return;
+				switch (lieu) {
+				case 1:
+					imgCarteFerme1.setVisible(true);
+					break;
+				case 2:
+					imgCarteFerme2.setVisible(true);
+
+					break;
+				case 3:
+					imgCarteFerme3.setVisible(true);
+
+					break;
+				case 5:
+					imgCarteFerme5.setVisible(true);
+					break;
+				case 6:
+					imgCarteFerme6.setVisible(true);
+					break;
+				default:
+					throw new IllegalStateException("Unexpected value: " + lieu);
+				}
+			}
+		});
+	}
+
+	/**
+	 * Met a jour les lieux ouverts
+	 * 
+	 * @param lieu le lieu cible
+	 * @param val  si c'est fermé
+	 */
+	@Override
+	public void lieuOuvert(int lieu, boolean val) {
+		Platform.runLater(new Runnable() {
+			@Override
+			public void run() {
+				if (!val)
+					return;
+				switch (lieu) {
+				case 1:
+					imgCarteFerme1.setVisible(false);
+					break;
+				case 2:
+					imgCarteFerme2.setVisible(false);
+					break;
+				case 3:
+					imgCarteFerme3.setVisible(false);
+					break;
+				case 4:
+					// c'est le parking il est forcément ouvert
+					break;
+				case 5:
+					imgCarteFerme5.setVisible(false);
+					break;
+				case 6:
+					imgCarteFerme6.setVisible(false);
+					break;
+				default:
+					throw new IllegalStateException("Unexpected value: " + lieu);
+				}
+			}
+		});
+	}
+
+	/**
+	 * Met a jour le nombre de personnages d'un joueur
+	 * 
+	 * @param joueur le joueur cible
+	 * @param perso  le nombre de personnages
+	 */
+	@Override
+	public void nbPersoJoueur(int joueur, int perso) {
+		Platform.runLater(new Runnable() {
+			@Override
+			public void run() {
+				String tmp = perso + " personnages";
+				switch (index.get(joueur)) {
+				case 0:
+					nbPerso1.setText(tmp);
+					break;
+				case 1:
+					nbPerso2.setText(tmp);
+					break;
+				case 2:
+					nbPerso3.setText(tmp);
+					break;
+				case 3:
+					nbPerso4.setText(tmp);
+					break;
+				case 4:
+					nbPerso5.setText(tmp);
+					break;
+				case 5:
+					nbPerso6.setText(tmp);
+					break;
+				default:
+					throw new IllegalStateException("Unexpected value: " + joueur);
+				}
+			}
+		});
+	}
+
+	/**
+	 * Met a jour le nombre de carte d'un joueur
+	 * 
+	 * @param joueur le joueur cible
+	 * @param cartes le nombre de carte
+	 */
+	@Override
+	public void nbCarteJoueur(int joueur, int cartes) {
+		Platform.runLater(new Runnable() {
+			@Override
+			public void run() {
+				String tmp = cartes + " cartes";
+
+				switch (index.get(joueur)) {
+				case 0:
+					nbCartes1.setText(tmp);
+					break;
+				case 1:
+					nbCartes2.setText(tmp);
+					break;
+				case 2:
+					nbCartes3.setText(tmp);
+					break;
+				case 3:
+					nbCartes4.setText(tmp);
+					break;
+				case 4:
+					nbCartes5.setText(tmp);
+					break;
+				case 5:
+					nbCartes6.setText(tmp);
+					break;
+				default:
+					throw new IllegalStateException("Unexpected value: " + joueur);
+				}
+			}
+		});
+	}
+
+	/**
+	 * Met a jour le nom du chef des vigiles
+	 * 
+	 * @param joueur le joueur chef des vigiles
+	 */
+	@Override
+	public void nomChefVigile(String joueur) {
+		Platform.runLater(new Runnable() {
+			@Override
+			public void run() {
+				String tmp = joueur + " " + International.trad("text.chefVigile");
+				lChefVigile.setText(tmp);
+				lChefVigile2.setText(tmp);
+				lChefVigile3.setText(tmp);
+				lChefVigile4.setText(tmp);
+			}
+		});
+	}
+
+	/**
+	 * Passage du l'affichage de fin
+	 */
+	@Override
+	public void finPartie() {
+		Platform.runLater(new Runnable() {
+			@Override
+			public void run() {
+				sControl.setPaneOnTop(ApplicationPane.ENDGAME);
+			}
+		});
+	}
+
+	/**
+	 * Met a jour les personnages dans les lieux
+	 * 
+	 * @param lieu le lieu cible
+	 * @param p    les personnages du lieu
+	 */
+	@Override
+	public void destionationPerso(int lieu, List<Personnage> p) {
+		Platform.runLater(new Runnable() {
+			@Override
+			public void run() {
+
+				switch (lieu) {
+				case 1:
+					ImageView[] l1 = { l1p1, l1p2, l1p3 };
+					setPersonnageLieu(lieu, p, l1);
+					break;
+				case 2:
+					ImageView[] l2 = { l2p1, l2p2, l2p3, l2p4 };
+					setPersonnageLieu(lieu, p, l2);
+					break;
+				case 3:
+					ImageView[] l3 = { l3p1, l3p2, l3p3, l3p4 };
+					setPersonnageLieu(lieu, p, l3);
+					break;
+				case 4:
+					ImageView[] l4 = { l4p1, l4p2, l4p3, l4p4, l4p5, l4p6, l4p7, l4p8, l4p9, l4p10, l4p11, l4p12, l4p13,
+							l4p14, l4p15, l4p16, l4p17, l4p18 };
+					setPersonnageLieu(lieu, p, l4);
+					break;
+				case 5:
+					ImageView[] l5 = { l5p1, l5p2, l5p3 };
+					setPersonnageLieu(lieu, p, l5);
+					break;
+				case 6:
+					ImageView[] l6 = { l6p1, l6p2, l6p3, l6p4, l6p5, l6p6 };
+					setPersonnageLieu(lieu, p, l6);
+					break;
+				default:
+					throw new IllegalStateException("Unexpected value: " + lieu);
+				}
+			}
+		});
+	}
+
+	/**
+	 * Affiche une popup pour la fouille du camion
+	 * 
+	 * @param camion le message a afficher
+	 */
+	@Override
+	public void fouilleCamion(String camion) {
+		Platform.runLater(new Runnable() {
+			@Override
+			public void run() {
+				popup(International.trad("text.fouilleCamion"), camion, false);
+			}
+		});
+	}
+
+	/**
+	 * Affiche une popup pour prévenir du déplacement du chef des vigiles
+	 * 
+	 * @param depvig le message a afficher
+	 */
+	@Override
+	public void prevenirDeplacementVigile(String depvig) {
+		Platform.runLater(new Runnable() {
+			@Override
+			public void run() {
+				popup(International.trad("text.deplChefVigile3"), depvig, false);
+			}
+		});
+	}
+
+	/**
+	 * Affiche une popup pour l'election du chef des vigiles
+	 * 
+	 * @param message le message a afficher
+	 */
+	@Override
+	public void electionChef(String message) {
+		Platform.runLater(new Runnable() {
+			@Override
+			public void run() {
+				popup(International.trad("text.elecChefVigile"), message, false);
+			}
+		});
+	}
+
+	/**
+	 * Permet d'afficher des popups
+	 * 
 	 * @param titre    titre de l'information
 	 * @param message  message de l'information
-	 * @param okFictif si le bouton est actif ou non
+	 * @param okFictif change le mode du bouton (continue ou attendre)
 	 */
 	public void popup(String titre, String message, boolean okFictif) {
 		titreInfo1.setText(titre);
@@ -1593,9 +1713,10 @@ public class PlateauPane extends StackPane implements IPlateauListener, ITraduct
 	}
 
 	/**
-	 * @author Sebastien affiche les images des pions dans chaque lieu
+	 * Permet d'afficher les personnages dans un lieu
+	 * 
 	 * @param lieu       lieu auquel il faut appliquer le pion
-	 * @param p          type de pion a appliquer
+	 * @param p          la liste des pions du lieu
 	 * @param imageViews liste des images qui peuvent changer
 	 */
 	public void setPersonnageLieu(int lieu, List<Personnage> p, ImageView[] imageViews) {
@@ -1610,88 +1731,120 @@ public class PlateauPane extends StackPane implements IPlateauListener, ITraduct
 		}
 	}
 
+	/**
+	 * Traduit les elements de ce pane
+	 */
 	@Override
 	public void traduire() {
-		nbZombies1.setText(International.trad("text.nbZombie"));
-		nbZombies2.setText(International.trad("text.nbZombie"));
-		nbZombies3.setText(International.trad("text.nbZombie"));
-		nbZombies4.setText(International.trad("text.nbZombie"));
-		nbZombies5.setText(International.trad("text.nbZombie"));
-		nbZombies6.setText(International.trad("text.nbZombie"));
-		// nomJoueur1.setText(International.trad("texte.nomJoueur1"));
-		// nomJoueur2.setText(International.trad("texte.nomJoueur2"));
-		// nomJoueur3.setText(International.trad("texte.nomJoueur3"));
-		// nomJoueur4.setText(International.trad("texte.nomJoueur4"));
-		// nomJoueur5.setText(International.trad("texte.nomJoueur5"));
-		// nomJoueur6.setText(International.trad("texte.nomJoueur6"));
-		// bQuitterInfo1.setText(International.trad("bouton.quitter"));
-		// bQuitterInfo2.setText(International.trad("bouton.quitter"));
-		// bQuitterInfo3.setText(International.trad("bouton.quitter"));
-		// bQuitterInfo4.setText(International.trad("bouton.quitter"));
-		titreInfo1.setText(
-				International.trad("text.deplChefVigile1") + "\n" + International.trad("text.deplChefVigile2"));
-		titreInfo2.setText(
-				International.trad("text.deplChefVigile1") + "\n" + International.trad("text.deplChefVigile2"));
-		titreInfo3.setText(
-				International.trad("text.deplChefVigile1") + "\n" + International.trad("text.deplChefVigile2"));
-		lInfo1.setText(International.trad("text.lInfo"));
-		lInfo2.setText(International.trad("text.lInfo"));
-		lInfo3.setText(International.trad("text.lInfo"));
-		lInfo4.setText(International.trad("text.lInfo"));
-	}
-
-	@Override
-	public void quiJoue(int joueur) {
-		Platform.runLater(() -> {
-			j1.setStyle(null);
-			j2.setStyle(null);
-			j3.setStyle(null);
-			j4.setStyle(null);
-			j5.setStyle(null);
-			j6.setStyle(null);
-			switch (index.get(joueur)) {
-			case 0:
-				j1.setStyle("-fx-border-color: red; -fx-border-insets: -3; -fx-border-width: 3;");
-				break;
-			case 1:
-				j2.setStyle("-fx-border-color: red; -fx-border-insets: -3; -fx-border-width: 3;");
-				break;
-			case 2:
-				j3.setStyle("-fx-border-color: red; -fx-border-insets: -3; -fx-border-width: 3;");
-				break;
-			case 3:
-				j4.setStyle("-fx-border-color: red; -fx-border-insets: -3; -fx-border-width: 3;");
-				break;
-			case 4:
-				j5.setStyle("-fx-border-color: red; -fx-border-insets: -3; -fx-border-width: 3;");
-				break;
-			case 5:
-				j6.setStyle("-fx-border-color: red; -fx-border-insets: -3; -fx-border-width: 3;");
-				break;
-			default:
-				throw new IllegalStateException("Unexpected value: " + joueur);
+		Platform.runLater(new Runnable() {
+			@Override
+			public void run() {
+				nbZombies1.setText(International.trad("text.nbZombie"));
+				nbZombies2.setText(International.trad("text.nbZombie"));
+				nbZombies3.setText(International.trad("text.nbZombie"));
+				nbZombies4.setText(International.trad("text.nbZombie"));
+				nbZombies5.setText(International.trad("text.nbZombie"));
+				nbZombies6.setText(International.trad("text.nbZombie"));
+				// nomJoueur1.setText(International.trad("texte.nomJoueur1"));
+				// nomJoueur2.setText(International.trad("texte.nomJoueur2"));
+				// nomJoueur3.setText(International.trad("texte.nomJoueur3"));
+				// nomJoueur4.setText(International.trad("texte.nomJoueur4"));
+				// nomJoueur5.setText(International.trad("texte.nomJoueur5"));
+				// nomJoueur6.setText(International.trad("texte.nomJoueur6"));
+				// bQuitterInfo1.setText(International.trad("bouton.quitter"));
+				// bQuitterInfo2.setText(International.trad("bouton.quitter"));
+				// bQuitterInfo3.setText(International.trad("bouton.quitter"));
+				// bQuitterInfo4.setText(International.trad("bouton.quitter"));
+				titreInfo1.setText(
+						International.trad("text.deplChefVigile1") + "\n" + International.trad("text.deplChefVigile2"));
+				titreInfo2.setText(
+						International.trad("text.deplChefVigile1") + "\n" + International.trad("text.deplChefVigile2"));
+				titreInfo3.setText(
+						International.trad("text.deplChefVigile1") + "\n" + International.trad("text.deplChefVigile2"));
+				lInfo1.setText(International.trad("text.lInfo"));
+				lInfo2.setText(International.trad("text.lInfo"));
+				lInfo3.setText(International.trad("text.lInfo"));
+				lInfo4.setText(International.trad("text.lInfo"));
 			}
 		});
 	}
 
-	List<Couleur> couleurs1;
-	int o = 0;
-
-	List<VBox> vboxs = new ArrayList<>();
-	List<Integer> index = new ArrayList<>();
-
+	/**
+	 * Permet de savoir qui joue sur le plateau
+	 * 
+	 * @param le joueur qui joue
+	 */
 	@Override
-	public void choiCouleur(List<Couleur> couleurs) {
-		Platform.runLater(() -> {
-			couleurs1 = couleurs;
-			getNextColor();
+	public void quiJoue(int joueur) {
+		Platform.runLater(new Runnable() {
+			@Override
+			public void run() {
+				if (couleurs1.size() >= 1)
+					j1.setStyle(IhmOutils.color(couleurs1.get(index.get(0))));
+				if (couleurs1.size() >= 2)
+					j2.setStyle(IhmOutils.color(couleurs1.get(index.get(1))));
+				if (couleurs1.size() >= 3)
+					j3.setStyle(IhmOutils.color(couleurs1.get(index.get(2))));
+				if (couleurs1.size() >= 4)
+					j4.setStyle(IhmOutils.color(couleurs1.get(index.get(3))));
+				if (couleurs1.size() >= 5)
+					j5.setStyle(IhmOutils.color(couleurs1.get(index.get(4))));
+				if (couleurs1.size() >= 6)
+					j6.setStyle(IhmOutils.color(couleurs1.get(index.get(5))));
+
+				switch (index.get(joueur)) {
+				case 0:
+					j1.setStyle(IhmOutils.color(couleurs1.get(index.get(0)))
+							+ " -fx-border-color: red; -fx-border-insets: -3; -fx-border-width: 3;");
+					break;
+				case 1:
+					j2.setStyle(IhmOutils.color(couleurs1.get(index.get(1)))
+							+ " -fx-border-color: red; -fx-border-insets: -3; -fx-border-width: 3;");
+					break;
+				case 2:
+					j3.setStyle(IhmOutils.color(couleurs1.get(index.get(2)))
+							+ " -fx-border-color: red; -fx-border-insets: -3; -fx-border-width: 3;");
+					break;
+				case 3:
+					j4.setStyle(IhmOutils.color(couleurs1.get(index.get(3)))
+							+ " -fx-border-color: red; -fx-border-insets: -3; -fx-border-width: 3;");
+					break;
+				case 4:
+					j5.setStyle(IhmOutils.color(couleurs1.get(index.get(4)))
+							+ " -fx-border-color: red; -fx-border-insets: -3; -fx-border-width: 3;");
+					break;
+				case 5:
+					j6.setStyle(IhmOutils.color(couleurs1.get(index.get(5)))
+							+ " -fx-border-color: red; -fx-border-insets: -3; -fx-border-width: 3;");
+					break;
+				default:
+					throw new IllegalStateException("Unexpected value: " + joueur);
+				}
+			}
 		});
 	}
 
 	/**
-	 * @author Sebastien permet de choisir sa place autout de la table
+	 * Permet de connaitre les couleurs a placer
+	 * 
+	 * @param la liste des couleurs a placer
 	 */
-	private void getNextColor() {
+	@Override
+	public void choiCouleur(List<Couleur> couleurs) {
+		Platform.runLater(new Runnable() {
+			@Override
+			public void run() {
+				couleurs1 = couleurs;
+				getProchaineCouleur();
+			}
+		});
+	}
+
+	/**
+	 * Permet de lancer la procédure pour que le joueur d'une couleur puisse choisir
+	 * sa place.
+	 */
+	private void getProchaineCouleur() {
 		popup("Choix du placement autour de la table",
 				"C'est au " + couleurs1.get(o).nomEntier() + " de choisir son placement autour de la table !", true);
 		VBox[] j = { j1, j2, j3, j4, j5, j6 };
@@ -1713,7 +1866,7 @@ public class PlateauPane extends StackPane implements IPlateauListener, ITraduct
 							afficherPlateau();
 							core.getCj().setPlacerJoueur(true);
 						} else
-							getNextColor();
+							getProchaineCouleur();
 					}
 				});
 			} else {
@@ -1732,7 +1885,7 @@ public class PlateauPane extends StackPane implements IPlateauListener, ITraduct
 	}
 
 	/**
-	 * @author Sebastien TODO javadoc
+	 * Rend les boutons des cadres (joueur) non cliquable
 	 */
 	private void resetCadreJoueur() {
 		VBox[] j = { j1, j2, j3, j4, j5, j6 };
@@ -1747,7 +1900,7 @@ public class PlateauPane extends StackPane implements IPlateauListener, ITraduct
 	}
 
 	/**
-	 * @author Sebastien TODO javadoc
+	 * Enleve les vbox reliés au carte inutile
 	 */
 	private void visibleCadreInutile() {
 		VBox[] j = { j1, j2, j3, j4, j5, j6 };
@@ -1759,35 +1912,48 @@ public class PlateauPane extends StackPane implements IPlateauListener, ITraduct
 	}
 
 	/**
-	 * @author Sebastien affiche le plateau
+	 * Affiche le plateau du jeu
 	 */
 	private void afficherPlateau() {
-		lChefVigile.setVisible(true);
-		lChefVigile2.setVisible(true);
-		lChefVigile3.setVisible(true);
-		lChefVigile4.setVisible(true);
+		Platform.runLater(new Runnable() {
+			@Override
+			public void run() {
+				lChefVigile.setVisible(true);
+				lChefVigile2.setVisible(true);
+				lChefVigile3.setVisible(true);
+				lChefVigile4.setVisible(true);
 
-		fondB1.setVisible(true);
-		fondB2.setVisible(true);
-		fondB3.setVisible(true);
-		fondB4.setVisible(true);
-		fondB5.setVisible(true);
-		fondB6.setVisible(true);
-		b1.setVisible(true);
-		b2.setVisible(true);
-		b3.setVisible(true);
-		b4.setVisible(true);
-		b5.setVisible(true);
-		b6.setVisible(true);
+				fondB1.setVisible(true);
+				fondB2.setVisible(true);
+				fondB3.setVisible(true);
+				fondB4.setVisible(true);
+				fondB5.setVisible(true);
+				fondB6.setVisible(true);
+				b1.setVisible(true);
+				b2.setVisible(true);
+				b3.setVisible(true);
+				b4.setVisible(true);
+				b5.setVisible(true);
+				b6.setVisible(true);
+			}
+		});
 	}
 
+	/**
+	 * Met a jour le nombre actuel de carte dans la pioche
+	 * 
+	 * @param val le nombre de carte dans la pioche
+	 */
 	@Override
 	public void nbCartePiocheActuel(int val) {
-		Platform.runLater(() -> {
-			lPileCarte1.setText(val + " cartes dans la pioches");
-			lPileCarte2.setText(val + " cartes dans la pioches");
-			lPileCarte3.setText(val + " cartes dans la pioches");
-			lPileCarte4.setText(val + " cartes dans la pioches");
+		Platform.runLater(new Runnable() {
+			@Override
+			public void run() {
+				lPileCarte1.setText(val + " cartes dans la pioches");
+				lPileCarte2.setText(val + " cartes dans la pioches");
+				lPileCarte3.setText(val + " cartes dans la pioches");
+				lPileCarte4.setText(val + " cartes dans la pioches");
+			}
 		});
 	}
 }

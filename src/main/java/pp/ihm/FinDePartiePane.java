@@ -21,15 +21,15 @@ import javafx.scene.text.TextAlignment;
  * The Class AccueilPane.
  *
  * @author Florian
- * @author Remy 
- * @author Sebatien 
- * @author Tom 
+ * @author Remy
+ * @author Sebatien
+ * @author Tom
  * 
  * @version 1.0
  * @since 26/10/2020
  */
 public class FinDePartiePane extends StackPane implements IFinListener, ITraduction {
-	//auteur florian
+	// auteur florian
 	private ScreenControl sControl = null;
 	private Core core = null;
 	private final ApplicationPane paneName = ApplicationPane.ENDGAME;
@@ -37,7 +37,7 @@ public class FinDePartiePane extends StackPane implements IFinListener, ITraduct
 	private int tailleCarreCentral = 1000;
 	private int hBouton = 75;
 	private int lBouton = 150;
-	
+
 	private String nomPolice = "Segoe UI";
 	private Font policeBouton = Font.font(nomPolice, FontWeight.BOLD, 27);
 	private Font policeNom = Font.font(nomPolice, FontWeight.BOLD, 37);
@@ -64,7 +64,7 @@ public class FinDePartiePane extends StackPane implements IFinListener, ITraduct
 	Button bRetour4;
 
 	public FinDePartiePane(ScreenControl sc, Core c) {
-		//auteur florian 
+		// auteur florian
 		core = c;
 		sControl = sc;
 
@@ -89,14 +89,14 @@ public class FinDePartiePane extends StackPane implements IFinListener, ITraduct
 		//
 		BorderPane bBas = new BorderPane();
 
-		gagnant1 = new Label("Player BOT MOYEN YASMINE won"); // do not translate 
+		gagnant1 = new Label("Player BOT MOYEN YASMINE won"); // do not translate
 		gagnant1.setTextAlignment(TextAlignment.CENTER);
 		gagnant1.setFont(policeNom);
 		gagnant1.setTextFill(Color.WHITESMOKE);
 		gagnant1.setStyle(styleGagnant);
 		gagnant1.setPadding(padding);
 		gagnant1.setTranslateY(375);
-		
+
 		bRetour1 = new Button(International.trad("bouton.retour"));
 		bRetour1.setPrefSize(lBouton, hBouton);
 		bRetour1.setMinSize(lBouton, hBouton);
@@ -125,7 +125,7 @@ public class FinDePartiePane extends StackPane implements IFinListener, ITraduct
 
 		BorderPane bHaut = new BorderPane();
 
-		gagnant2 = new Label("Player BOT MOYEN YASMINE won"); // do not translate 
+		gagnant2 = new Label("Player BOT MOYEN YASMINE won"); // do not translate
 		gagnant2.setTextAlignment(TextAlignment.CENTER);
 		gagnant2.setFont(policeNom);
 		gagnant2.setTextFill(Color.WHITESMOKE);
@@ -160,7 +160,7 @@ public class FinDePartiePane extends StackPane implements IFinListener, ITraduct
 		bHaut.setRight(bRetour4);
 
 		///
-		gagnant3 = new Label("Player BOT MOYEN YASMINE won"); // do not translate 
+		gagnant3 = new Label("Player BOT MOYEN YASMINE won"); // do not translate
 		gagnant3.setTextAlignment(TextAlignment.CENTER);
 		gagnant3.setFont(policeNom);
 		gagnant3.setTextFill(Color.WHITESMOKE);
@@ -169,10 +169,9 @@ public class FinDePartiePane extends StackPane implements IFinListener, ITraduct
 		gagnant3.setRotate(-90);
 		gagnant3.setTranslateX(375);
 
-
 		///
 
-		gagnant4 = new Label("Player BOT MOYEN YASMINE won"); // do not translate 
+		gagnant4 = new Label("Player BOT MOYEN YASMINE won"); // do not translate
 		gagnant4.setTextAlignment(TextAlignment.CENTER);
 		gagnant4.setFont(policeNom);
 		gagnant4.setTextFill(Color.WHITESMOKE);
@@ -195,8 +194,8 @@ public class FinDePartiePane extends StackPane implements IFinListener, ITraduct
 		centreMenu.setCenter(vbCenter);
 		centreMenu.setTop(bHaut);
 		centreMenu.setBottom(bBas);
-		
-		//auteur remy 
+
+		// auteur remy
 		// Boutons de rotation d'écran
 		ImageView img1 = new ImageView(DataControl.SCREEN);
 		img1.setFitHeight(70);
@@ -246,7 +245,7 @@ public class FinDePartiePane extends StackPane implements IFinListener, ITraduct
 		bEcranDroite.setGraphic(img4);
 		bEcranDroite.setOnAction(EventHandler -> sc.setRotatePane(vbCenter, "droite"));
 
-		//auteur florian 
+		// auteur florian
 		// boite du fond qui contient le fond et les autres boites
 		HBox fond = new HBox();
 		fond.setAlignment(Pos.CENTER);
@@ -254,7 +253,8 @@ public class FinDePartiePane extends StackPane implements IFinListener, ITraduct
 		fond.getChildren().add(imgFond);
 
 		this.setAlignment(Pos.CENTER);
-		this.getChildren().addAll(fond, centreMenu, gagnant1, gagnant2, gagnant3, gagnant4, bEcranDroite, bEcranHaut, bEcranGauche, bEcranBas);
+		this.getChildren().addAll(fond, centreMenu, gagnant1, gagnant2, gagnant3, gagnant4, bEcranDroite, bEcranHaut,
+				bEcranGauche, bEcranBas);
 		this.setBackground(new Background(new BackgroundFill(Color.BLACK, CornerRadii.EMPTY, null)));
 
 		sControl.registerNode(paneName, this);
@@ -262,24 +262,38 @@ public class FinDePartiePane extends StackPane implements IFinListener, ITraduct
 
 	}
 
+	/**
+	 * Affiche les gagnants
+	 */
 	@Override
 	public void getGagnant(String nom) {
-		String tmp = International.trad("text.joueurGagngant", nom);
-		Platform.runLater(() -> {
-			gagnant1.setText(tmp);
-			gagnant2.setText(tmp);
-			gagnant3.setText(tmp);
-			gagnant4.setText(tmp);
+		Platform.runLater(new Runnable() {
+			@Override
+			public void run() {
+				String tmp = International.trad("text.joueurGagngant", nom);
+				gagnant1.setText(tmp);
+				gagnant2.setText(tmp);
+				gagnant3.setText(tmp);
+				gagnant4.setText(tmp);
+			}
 		});
 	}
 
+	/**
+	 * Traduit les elements de ce pane
+	 */
 	@Override
 	public void traduire() {
-		titre1.setText(
-				International.trad("text.titreFinDePartieA") + "\n" + International.trad("text.titreFinDePartieB"));
-		bRetour1.setText(International.trad("bouton.retour"));
-		bRetour2.setText(International.trad("bouton.retour"));
-		bRetour3.setText(International.trad("bouton.retour"));
-		bRetour4.setText(International.trad("bouton.retour"));
+		Platform.runLater(new Runnable() {
+			@Override
+			public void run() {
+				titre1.setText(International.trad("text.titreFinDePartieA") + "\n"
+						+ International.trad("text.titreFinDePartieB"));
+				bRetour1.setText(International.trad("bouton.retour"));
+				bRetour2.setText(International.trad("bouton.retour"));
+				bRetour3.setText(International.trad("bouton.retour"));
+				bRetour4.setText(International.trad("bouton.retour"));
+			}
+		});
 	}
 }
