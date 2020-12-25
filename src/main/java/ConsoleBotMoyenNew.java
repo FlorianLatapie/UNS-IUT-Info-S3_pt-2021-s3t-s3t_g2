@@ -1,5 +1,3 @@
-
-import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -11,14 +9,6 @@ public class ConsoleBotMoyenNew {
 
 	public static void main(String[] args) {
 		Logger.getGlobal().setLevel(Level.FINEST);
-		ThreadOutils.asyncTaskRepeat(10,() -> {
-			Bot botMoyen = new Bot(0,BotType.MOYEN);
-			try {
-				botMoyen.start();
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-		});
+		ThreadOutils.asyncTaskRepeat(10,new Bot(0,BotType.MOYEN));
 	}
 }
