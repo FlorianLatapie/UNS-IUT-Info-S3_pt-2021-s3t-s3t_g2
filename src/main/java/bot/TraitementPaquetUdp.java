@@ -5,6 +5,7 @@ import reseau.socket.ControleurReseau;
 import reseau.socket.TraitementPaquet;
 import reseau.tool.ThreadOutils;
 import reseau.type.ConnexionType;
+import reseau.type.Statut;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -55,9 +56,6 @@ public class TraitementPaquetUdp extends TraitementPaquet<DatagramPacket> {
 		case "AMP":
 			amp(paquet, message);
 			break;
-		case "IP":
-			ip(paquet, message);
-			break;
 		case "RP":
 			break;
 		default:
@@ -68,74 +66,43 @@ public class TraitementPaquetUdp extends TraitementPaquet<DatagramPacket> {
 	public void acp(Paquet paquet, String message) {
 		if (ConnexionType.CLIENT != ControleurReseau.getConnexionType())
 			return;
+		
+		if (core.getBotMode() != BotMode.Automatique)
+			return;
+		
 		InetAddress address = null;
 		try {
-			System.out.println((String) paquet.getValeur(message, 2));
 			address = InetAddress.getByName((String) paquet.getValeur(message, 2));
 		} catch (UnknownHostException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
-		core.setIpPp(address);
-		core.setPortPp((int) paquet.getValeur(message, 3));
-		System.out.println(core.getIpPp());
-		core.setPortPp(core.getPortPp());
-
-		System.out.println(
-				MessageFormat.format("Une nouvelle partie vient d''etre trouvÃ© !\n{0}", paquet.getValeur(message, 1)));
-		String prenoms = "Ressources/Prenoms/prenomsFR.txt";
-		Scanner scanneurPrenom;
-		String nomDuJoueur = "Bot " + core.getBotType().typeString() + " ";
-		try {
-			scanneurPrenom = new Scanner(new File(prenoms));
-			StringBuilder fichierLu = new StringBuilder();
-			while (scanneurPrenom.hasNext()) {
-				fichierLu.append(scanneurPrenom.nextLine() + "\n");
-			}
-			String[] tableauPrenom = fichierLu.toString().split("\n");
-			int choix = new Random().nextInt(tableauPrenom.length);
-			System.out.println(nomDuJoueur + tableauPrenom[choix]);
-			nomDuJoueur += tableauPrenom[choix];
-			scanneurPrenom.close();
-		} catch (FileNotFoundException e) {
-			nomDuJoueur += new Random().nextInt(9999);
-			System.out.println("bug");
-			e.printStackTrace();
-		}
-		core.setNom(nomDuJoueur);
-		ControleurReseau.demarrerClientTcp(core.getIpPp());
-
-		ThreadOutils.asyncTask("acp", () -> {
-			try {
-				Thread.sleep(1000);
-			} catch (InterruptedException e) {
-				e.printStackTrace();
-			}
-			String messageTcp = ControleurReseau.construirePaquetTcp("DCP", core.getNom(), core.getTypeJoueur(),
-					"P" + (int) paquet.getValeur(message, 1));
-			try {
-				Thread.sleep(1000);
-			} catch (InterruptedException e) {
-				e.printStackTrace();
-			}
-			ControleurReseau.envoyerTcp(messageTcp);
-			ControleurReseau.attendreTcp("ACP");
-		});
-
+		core.connecter(address, (int) paquet.getValeur(message, 3), (int) paquet.getValeur(message, 1));
 	}
 
 	public void amp(Paquet paquet, String message) {
 		if (ConnexionType.CLIENT != ControleurReseau.getConnexionType())
 			return;
+		String partie = (String) paquet.getValeur(message, 1);
+		InetAddress ip = null;
+		try {
+			ip = InetAddress.getByName((String) paquet.getValeur(message, 2));
+		} catch (UnknownHostException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		int port = (int) paquet.getValeur(message, 3);
+		String nom = (String) paquet.getValeur(message, 4);
+		int nbjr = (int) paquet.getValeur(message, 8);
+		int nbjrMax = (int) paquet.getValeur(message, 6);
+		int nbjb = (int) paquet.getValeur(message, 9);
+		int nbjbMax = (int) paquet.getValeur(message, 7);
+		Statut stat = (Statut) paquet.getValeur(message, 10);
+		PartieInfo partieInfo = new PartieInfo(ip, port, partie, core.getTypeJoueur(), nbjr, nbjb, nbjrMax, nbjbMax,
+				stat,nom);
+		core.ajouterPartie(partieInfo);
 
 		System.out.println(MessageFormat.format("Mise a jour d''une partie !\n{0}", paquet.getValeur(message, 1)));
-	}
-
-	public void ip(Paquet paquet, String message) {
-		if (ConnexionType.CLIENT != ControleurReseau.getConnexionType())
-			return;
-
-		System.out.println("Informations sur la partie !");
 	}
 
 	@Override

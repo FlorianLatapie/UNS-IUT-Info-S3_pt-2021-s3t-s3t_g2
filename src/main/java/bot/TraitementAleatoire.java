@@ -220,7 +220,7 @@ public class TraitementAleatoire {
 			i++;
 		}
 		listRenvoye.add(listeCarteJouee);
-		listRenvoye.add(IdjrTools.getPionsByValues(listePionCache));
+		listRenvoye.add(BotOutils.getPionsByValues(listePionCache));
 		return listRenvoye;
 	}
 
