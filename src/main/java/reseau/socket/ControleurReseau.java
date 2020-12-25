@@ -329,7 +329,7 @@ public abstract class ControleurReseau {
 		return connexionType;
 	}
 
-	public static void demarrerClientTcp(InetAddress ipPp) {
-		new Thread(tcpClient = new TcpClient(ipPp, tcpPort), "tcpClient").start();
+	public static void demarrerClientTcp(InetAddress ipPp, int portPp) {
+		new Thread(tcpClient = new TcpClient(ipPp, portPp), "tcpClient").start();
 	}
 }
