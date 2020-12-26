@@ -186,7 +186,9 @@ public interface PaquetOutils {
 	 *
 	 * @param message Le message recu
 	 * @return Le mot-clé du paquet
-	 * @throws IllegalArgumentException
+	 * @throws IllegalArgumentException si le message est null
+	 * @throws IllegalArgumentException si le message est vide
+	 * @throws IllegalArgumentException si le message a moins d'un seul argument
 	 */
 	public static String getCleMessage(String message) {
 		if (message == null)
@@ -210,10 +212,15 @@ public interface PaquetOutils {
 	 * @param paquet  le paquet cible
 	 * @param message le message cible
 	 * @return le dernier argument du message
+	 * @throws IllegalArgumentException si le message est null
+	 * @throws IllegalArgumentException si le message est vide
+	 * @throws IllegalArgumentException si le message a moins de deux argument
 	 */
 	public static Object dernierArg(Paquet paquet, String message) {
 		if (paquet == null)
 			throw new IllegalArgumentException("Ne peut pas etre null !");
+		if (message.isEmpty())
+			throw new IllegalArgumentException("Ne peut pas etre vide !");
 		if (paquet.getArgNb() <= 1)
 			throw new IllegalArgumentException("Il n'y a pas assez d'argument, le mot clé est le dernier argument !");
 

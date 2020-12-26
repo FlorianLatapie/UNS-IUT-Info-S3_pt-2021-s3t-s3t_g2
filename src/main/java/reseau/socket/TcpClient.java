@@ -39,7 +39,6 @@ public class TcpClient implements Runnable, IEchangeSocket, IMessagePaquet {
 	private final Logger logger;
 
 	/**
-	 * @param controleurReseau Le controleur reseau du client
 	 * @param ip               L'ip du serveur TCP cible
 	 * @param port             Le port du serveur TCP cible
 	 * @param cleFin           Mot cle pour arreter le client
@@ -58,7 +57,6 @@ public class TcpClient implements Runnable, IEchangeSocket, IMessagePaquet {
 
 	/**
 	 * @param socket           L'ip du serveur TCP cible
-	 * @param controleurReseau Le controleur reseau du client
 	 */
 	public TcpClient(Socket socket) {
 		this.messagesTampon = synchronizedList(new ArrayList<String>());
@@ -263,6 +261,8 @@ public class TcpClient implements Runnable, IEchangeSocket, IMessagePaquet {
 
 	/**
 	 * Permet de savoir le client tcp est pret.
+	 * 
+	 * @return si le client tcp est connecté
 	 */
 	public boolean isPret() {
 		return socket.isConnected();
@@ -270,6 +270,8 @@ public class TcpClient implements Runnable, IEchangeSocket, IMessagePaquet {
 
 	/**
 	 * Permet de savoir le client tcp est arreter.
+	 * 
+	 * @return si le client tcp est arreté
 	 */
 	public boolean isArreter() {
 		return !socket.isClosed();
