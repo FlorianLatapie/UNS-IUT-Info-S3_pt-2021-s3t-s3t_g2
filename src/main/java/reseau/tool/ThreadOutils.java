@@ -1,5 +1,7 @@
 package reseau.tool;
 
+import reseau.socket.ControleurReseau;
+
 /**
  * <h1>Outils pour les threads</h1>
  *
@@ -42,5 +44,10 @@ public interface ThreadOutils {
 		t.start();
 
 		return t;
+	}
+
+	static void attendre() {
+		if (!ControleurReseau.isVite())
+			Thread.yield();
 	}
 }
