@@ -123,9 +123,9 @@ public class ControleurJeu {
 				Thread.yield();
 
 			Evenement.joueurPret();
-			statut = Statut.COMPLETE;
 			joueurs.get(0).setChefDesVigiles(true);
 			jeu = new Partie(joueurs);
+			statut = Statut.COMPLETE;
 
 			Evenement.nomJoueurs(new ArrayList<>(jeu.getJoueurs().values()));
 
