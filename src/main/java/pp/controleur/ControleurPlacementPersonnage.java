@@ -22,11 +22,21 @@ public class ControleurPlacementPersonnage {
 	private PlacementReseau pr;
 	private Random rd;
 
+	/**
+	 * Instancie le Controleur de la phase de placement des personnages.
+	 */
 	public ControleurPlacementPersonnage() {
 		pr = new PlacementReseau();
 		rd = new Random();
 	}
 
+	/**
+	 * Execute la phase de placment des personnages.
+	 *
+	 * @param jeu        La partie courante.
+	 * @param partieID   L'identifiant de la partie en cours.
+	 * @param numeroTour Le numéro du tour courant.
+	 */
 	public void placementPersonnage(Partie jeu, String partieId, int numeroTour) {
 		for (int n = 0; n < jeu.getJoueurs().get(0).getPersonnages().size(); n++) {
 			for (Joueur j : jeu.getJoueurs().values()) {
@@ -49,17 +59,14 @@ public class ControleurPlacementPersonnage {
 	}
 
 	/**
-	 * Retourne la liste des index des destinations valides. Une destination valide
-	 * est un lieu sur lequel, il est possible de placer un personnage. Pour chaque
-	 * résultat de dé, si le résultat du dé est valide il est ajouté a la liste. Si
-	 * les résultat des dés ne sont pas valides alors toutes les destinations
-	 * valides de la partie sont ajouté à la liste. Puis la liste est renvoyée.
+	 * Retourne la liste des lieux valides au lancement des dès pour le placement.
 	 *
-	 * @param destination1 résultat du 1er dé
-	 * @param destination2 résultat du 2ème dé
-	 * @return la liste des index des destination valides
+	 * @param destination1 résultat du 1er dé.
+	 * @param destination2 résultat du 2ème dé.
+	 * 
+	 * @return la liste des index des destination valides.
 	 */
-	public List<Integer> getDestinationPossible(Partie jeu, int destination1, int destination2) {
+	private List<Integer> getDestinationPossible(Partie jeu, int destination1, int destination2) {
 		List<Integer> destinationPossible = new ArrayList<>();
 		if (jeu.getLieux().get(destination1).isFull() && jeu.getLieux().get(destination2).isFull()) {
 			for (Lieu l : jeu.getLieux().values())

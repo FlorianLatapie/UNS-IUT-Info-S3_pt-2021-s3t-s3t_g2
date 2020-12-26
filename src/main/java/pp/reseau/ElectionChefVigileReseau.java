@@ -15,12 +15,27 @@ import reseau.type.Couleur;
  */
 public class ElectionChefVigileReseau {
 
+	/**
+	 * Traitement du paquet PECV du protocole reseau.
+	 * 
+	 * @param jeu        La partie courante.
+	 * @param partieID   L'identifiant de la partie en cours.
+	 * @param numeroTour Le numéro du tour courant.
+	 */
 	public void debutElectionChefVigile(Partie jeu, String partieId, int numeroTour) {
 		String m = ControleurReseau.construirePaquetTcp("PECV", jeu.getPersosLieu(5), partieId, numeroTour);
 		for (Joueur j : jeu.getJoueurs().values())
 			j.getConnection().envoyer(m);
 	}
 
+	/**
+	 * Traitement du paquet RECV du protocole reseau.
+	 * 
+	 * @param jeu        La partie courante.
+	 * @param c          Couleur du nouveau chef des vigiles.
+	 * @param partieID   L'identifiant de la partie en cours.
+	 * @param numeroTour Le numéro du tour courant.
+	 */
 	public void informerElectionChefVigile(Partie jeu, Couleur c, String partieId, int numeroTour) {
 		String m = ControleurReseau.construirePaquetTcp("RECV", c, partieId, numeroTour);
 		for (Joueur j : jeu.getJoueurs().values())

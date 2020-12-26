@@ -15,6 +15,15 @@ import reseau.type.CondType;
  */
 public class FinJeuReseau {
 
+	/**
+	 * Traitement du paquet FP du protocole reseau.
+	 * 
+	 * @param jeu        La partie courante.
+	 * @param joueur     Joueur vainqueur.
+	 * @param cond       Condition de fin de partie.
+	 * @param partieID   L'identifiant de la partie en cours.
+	 * @param numeroTour Le numéro du tour courant.
+	 */
 	public void indiqueFinPartie(Partie jeu, Joueur vainqueur, CondType cond, String partieId, int numeroTour) {
 		String message = ControleurReseau.construirePaquetTcp("FP", cond, vainqueur.getCouleur(), partieId, numeroTour);
 		for (Joueur j : jeu.getJoueurs().values())

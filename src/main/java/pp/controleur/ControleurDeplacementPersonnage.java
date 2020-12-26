@@ -21,11 +21,24 @@ public class ControleurDeplacementPersonnage {
 	private DeplacementReseau dr;
 	private ControleurFinPartie cfp;
 
+	/**
+	 * Instancie le Contrtoleur de la phase de choix de deplacment des personnages.
+	 */
 	public ControleurDeplacementPersonnage() {
 		dr = new DeplacementReseau();
 		cfp = new ControleurFinPartie();
 	}
 
+	/**
+	 * Execute la phase de deplacment des personnages.
+	 *
+	 * @param cj          Le controleur de la partie courante.
+	 * @param jeu         La partie courante.
+	 * @param destination Liste des destinations des joueurs en vie.
+	 * @param zombie      Liste des lieux d'arrivés des zombies.
+	 * @param partieID    L'identifiant de la partie en cours.
+	 * @param numeroTour  Le numéro du tour courant.
+	 */
 	public void phaseDeplacementPerso(ControleurJeu cj, Partie jeu, List<Integer> destination, List<Integer> zombie,
 			String partieId, int numeroTour) {
 		dr.debutPhaseDeplacement(jeu, destination, zombie, partieId, numeroTour);
@@ -46,6 +59,16 @@ public class ControleurDeplacementPersonnage {
 		}
 	}
 
+	/**
+	 * Execute le deplacment d'un personnage.
+	 *
+	 * @param cj          Le controleur de la partie courante.
+	 * @param jeu         La partie courante.
+	 * @param compteur    Indice dans la liste destination.
+	 * @param destination Liste des lieux destination des joueurs en vie.
+	 * @param partieID    L'identifiant de la partie en cours.
+	 * @param numeroTour  Le numéro du tour courant.
+	 */
 	private void deplacePerso(ControleurJeu cj, Partie jeu, Integer compteur, Joueur j, List<Integer> destination,
 			String partieId, int numeroTour) {
 		dr.demanderDeplacements(jeu, j, destination.get(compteur), partieId, numeroTour);

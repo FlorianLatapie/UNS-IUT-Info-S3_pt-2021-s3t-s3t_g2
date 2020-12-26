@@ -27,12 +27,23 @@ public class ControleurAttaqueZombie {
 	ControleurFinPartie cfp;
 	AttaqueZombieReseau azr;
 
+	/**
+	 * Instancie le Contrtoleur de la phase d'attaque des zombies.
+	 */
 	public ControleurAttaqueZombie() {
 		cv = new ControleurVote();
 		cfp = new ControleurFinPartie();
 		azr = new AttaqueZombieReseau();
 	}
 
+	/**
+	 * Execute la phase d'attaque des zombies.
+	 *
+	 * @param cj         Le controleur de la partie courante.
+	 * @param jeu        La partie en cours.
+	 * @param partieID   L'identifiant de la partie en cours.
+	 * @param numeroTour Le numéro du tour courant.
+	 */
 	public void phaseAttaqueZombie(ControleurJeu cj, Partie jeu, String partieId, int numeroTour) {
 		List<Integer> nb = jeu.lastAttaqueZombie();
 		Evenement.nbZombiesLieuAll(new ArrayList<>(jeu.getLieux().values()));
@@ -62,12 +73,27 @@ public class ControleurAttaqueZombie {
 		reinitJoueurCache(jeu);
 	}
 
+	/**
+	 * Réinitialise la list des personnages cachées.
+	 *
+	 * @param jeu La partie courante.
+	 */
 	private void reinitJoueurCache(Partie jeu) {
 		for (Joueur j : jeu.getJoueurs().values())
 			for (Personnage p : j.getPersonnages().values())
 				p.setEstCache(false);
 	}
 
+	/**
+	 * Traite la defense des joueurs presents sur le lieu de l'attaque.
+	 *
+	 * @param jeu        La partie courante.
+	 * @param lieu       Lieu courant de l'attaque.
+	 * @param partieID   L'identifiant de la partie en cours.
+	 * @param numeroTour Le numéro du tour courant.
+	 *
+	 * @return La liste des lieux d'arrivés des zombies.
+	 */
 	private List<Object> defenseAttaqueZombie(Partie jeu, Lieu lieu, String partieId, int numeroTour) {
 		List<Object> defense = new ArrayList<>();
 		List<Personnage> persoCache = new ArrayList<>();
@@ -99,6 +125,17 @@ public class ControleurAttaqueZombie {
 		return defense;
 	}
 
+	/**
+	 * Definie si un lieu est attaquable et les raisons qu'il ne soit pas
+	 * attaquable.
+	 *
+	 * @param jeu        La partie courante.
+	 * @param lieu       Lieu courant.
+	 * @param partieID   L'identifiant de la partie en cours.
+	 * @param numeroTour Le numéro du tour courant.
+	 *
+	 * @return Le lieu est attaquable.
+	 */
 	private boolean lieuAttaquableReseau(Partie jeu, Lieu lieu, String partieId, int numeroTour) {
 		if (lieu.isOuvert() && !lieu.getPersonnage().isEmpty())
 			if (lieu.getNbZombies() > 0)
@@ -114,6 +151,14 @@ public class ControleurAttaqueZombie {
 		return false;
 	}
 
+	/**
+	 * Execute l'attaque d'un lieu par les zombies.
+	 *
+	 * @param jeu        La partie courante.
+	 * @param lieu       Lieu courant de l'attaque.
+	 * @param partieID   L'identifiant de la partie en cours.
+	 * @param numeroTour Le numéro du tour courant.
+	 */
 	private void attaqueZombie(Partie jeu, Lieu lieu, String partieId, int numeroTour) {
 		Joueur jou;
 		if (jeu.getJoueurSurLieu(lieu).size() == 1)
