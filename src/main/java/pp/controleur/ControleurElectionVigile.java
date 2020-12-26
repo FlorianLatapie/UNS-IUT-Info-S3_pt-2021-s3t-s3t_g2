@@ -4,17 +4,23 @@ import pp.Joueur;
 import pp.Partie;
 import pp.ihm.event.EvenementStockage;
 import pp.ihm.event.Evenement;
-import pp.reseau.electionChefVigileReseau;
-import reseau.socket.ControleurReseau;
+import pp.reseau.ElectionChefVigileReseau;
 import reseau.type.Couleur;
 import reseau.type.VoteType;
 
+/**
+ * <h1>La classe ControleurElectionVigile</h1>. A pour rôle de gérer la phase d'élection du chef des vigiles
+ *
+ * @author Aurelien
+ * @version 1
+ * @since 12/12/2020
+ */
 public class ControleurElectionVigile {
 	private ControleurVote cVote;
-	private electionChefVigileReseau ecvr;
+	private ElectionChefVigileReseau ecvr;
 	
 	public ControleurElectionVigile() {
-		ecvr = new electionChefVigileReseau();
+		ecvr = new ElectionChefVigileReseau();
 		cVote = new ControleurVote();
 	}
 	
@@ -55,6 +61,7 @@ public class ControleurElectionVigile {
 	}
 
 	public Joueur joueurElection(Partie jeu) {
+		//TODO modifier
 		Joueur j;
 		if (jeu.getJoueurSurLieu(jeu.getLieux().get(5)).size() == 1)
 			j = jeu.getJoueurSurLieu(jeu.getLieux().get(5)).get(0);
