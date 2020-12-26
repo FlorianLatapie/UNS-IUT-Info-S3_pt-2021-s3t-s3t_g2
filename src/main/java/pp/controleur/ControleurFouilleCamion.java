@@ -14,6 +14,13 @@ import reseau.type.CarteType;
 import reseau.type.Couleur;
 import reseau.type.VoteType;
 
+/**
+ * <h1>La classe ControleurFouilleCamion</h1>. A pour rôle de gérer la phase de fouille du camion
+ *
+ * @author Aurelien
+ * @version 1
+ * @since 12/12/2020
+ */
 public class ControleurFouilleCamion {
 	private FouilleCamionReseau fr;
 	private ControleurVote cVote;
