@@ -81,6 +81,16 @@ public class AttaqueZombieReseau {
 			j.getConnection()
 					.envoyer(ControleurReseau.construirePaquetTcp("RAZDD", lieu.getNum(), partieId, numeroTour));
 	}
+	
+	/**
+	 * Traitement du paquet RAZRD du protocole reseau.
+	 * 
+	 * @param l list des joueurs présents.
+	 */
+	public void attendreDefense(List<Joueur> l) {
+		for (Joueur j : l)
+			j.getConnection().attendreMessage("RAZRD");
+	}
 
 	/**
 	 * Traitement du paquet RAZRD du protocole reseau.
@@ -91,7 +101,6 @@ public class AttaqueZombieReseau {
 	 */
 	public List<Object> recupDefense(Joueur j) {
 		List<Object> lo = new ArrayList<>();
-		j.getConnection().attendreMessage("RAZRD");
 		String m = j.getConnection().getMessage("RAZRD");
 		lo.add(ControleurReseau.getValueTcp("RAZRD", m, 1));
 		lo.add(ControleurReseau.getValueTcp("RAZRD", m, 2));
