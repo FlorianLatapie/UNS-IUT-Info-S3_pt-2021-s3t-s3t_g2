@@ -125,11 +125,11 @@ public class TraitementIdjr {
 			while (!core.utiliserCarteDisponible())
 				Thread.yield();
 			sprintJoue = core.getUtiliserCarteChosi();
+			core.utiliserCarteChoisi(false);
 			if (sprintJoue == null)
 				sprintJoue = CarteType.NUL;
 			if (sprintJoue == CarteType.SPR) {
 				core.getListeCarte().remove(sprintJoue);
-				core.utiliserCarteChoisi(false);
 				// TODO choisir destination carte sprint parmis destPossible;
 				Initializer.choisirLieu(core.getLieuOuvert());
 				while (!core.lieuDisponible())
@@ -334,11 +334,11 @@ public class TraitementIdjr {
 			Initializer.choisirUtiliserCarte(CarteType.CDS);
 			while (!core.utiliserCarteDisponible())
 				Thread.yield();
+			core.utiliserCarteChoisi(false);
 
 			RJ = core.getUtiliserCarteChosi();
 			if (RJ == null)
 				RJ = CarteType.NUL;
-			core.utiliserCarteChoisi(false);
 
 			if (RJ == CarteType.CDS)
 				core.getListeCarte().remove(CarteType.CDS);

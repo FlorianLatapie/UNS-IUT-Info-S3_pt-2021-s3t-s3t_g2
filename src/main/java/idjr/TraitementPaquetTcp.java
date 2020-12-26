@@ -202,6 +202,8 @@ public class TraitementPaquetTcp extends TraitementPaquet<TcpClient> {
 			break;
 		case "ACP":
 			break;
+		case "RCP":
+			break;
 		case "IPV":
 			recupInfoVote(Paquet, message);
 			logIPV(Paquet, message);

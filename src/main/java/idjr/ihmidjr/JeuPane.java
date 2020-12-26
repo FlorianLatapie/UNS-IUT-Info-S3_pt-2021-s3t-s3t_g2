@@ -1940,8 +1940,6 @@ public class JeuPane extends StackPane implements IJeuListener, ITraduction {
 									else
 										buttons[tmp].setStyle(null);
 								});
-							} else {
-								buttons[i].setDisable(true);
 							}
 						}
 					}
