@@ -1184,49 +1184,10 @@ public class PlateauPane extends StackPane implements IPlateauListener, ITraduct
 		this.setStyle(" -fx-background-color:#151515;"); // TODO à déplacer
 
 		// auteur sebastien
-		j1.setVisible(true);
-		j2.setVisible(true);
-		j3.setVisible(true);
-		j4.setVisible(true);
-		j5.setVisible(true);
-		j6.setVisible(true);
 
-		nomJoueur1.setText("Choisir");
-		nbPerso1.setText("");
-		nbCartes1.setText("");
-		nomJoueur2.setText("Choisir");
-		nbPerso2.setText("");
-		nbCartes2.setText("");
-		nomJoueur3.setText("Choisir");
-		nbPerso3.setText("");
-		nbCartes3.setText("");
-		nomJoueur4.setText("Choisir");
-		nbPerso4.setText("");
-		nbCartes4.setText("");
-		nomJoueur5.setText("Choisir");
-		nbPerso5.setText("");
-		nbCartes5.setText("");
-		nomJoueur6.setText("Choisir");
-		nbPerso6.setText("");
-		nbCartes6.setText("");
+		choixCouleurReset();
 
-		lChefVigile.setVisible(false);
-		lChefVigile2.setVisible(false);
-		lChefVigile3.setVisible(false);
-		lChefVigile4.setVisible(false);
-
-		b1.setVisible(false);
-		b2.setVisible(false);
-		b3.setVisible(false);
-		b4.setVisible(false);
-		b5.setVisible(false);
-		b6.setVisible(false);
-		fondB1.setVisible(false);
-		fondB2.setVisible(false);
-		fondB3.setVisible(false);
-		fondB4.setVisible(false);
-		fondB5.setVisible(false);
-		fondB6.setVisible(false);
+		enleverPlateau();
 		// auteur florian
 		this.getChildren().addAll(imgFond, bPileCarte, borderJoueurs, aPlateau, lChefVigile, lChefVigile2, lChefVigile3,
 				lChefVigile4, imgCarteFerme1, imgCarteFerme2, imgCarteFerme3, imgCarteFerme5, imgCarteFerme6,
@@ -1572,6 +1533,8 @@ public class PlateauPane extends StackPane implements IPlateauListener, ITraduct
 			@Override
 			public void run() {
 				sControl.setPaneOnTop(ApplicationPane.ENDGAME);
+				enleverPlateau();
+				choixCouleurReset();
 			}
 		});
 	}
@@ -1861,6 +1824,7 @@ public class PlateauPane extends StackPane implements IPlateauListener, ITraduct
 						vboxs.add(vBox);
 						index.add(tmp);
 						if (o == couleurs1.size()) {
+							o = 0;
 							resetCadreJoueur();
 							visibleCadreInutile();
 							afficherPlateau();
@@ -1935,8 +1899,87 @@ public class PlateauPane extends StackPane implements IPlateauListener, ITraduct
 				b4.setVisible(true);
 				b5.setVisible(true);
 				b6.setVisible(true);
+				bPileCarte.setVisible(true);
 			}
 		});
+	}
+
+	/**
+	 * Eneleve le plateau du jeu
+	 */
+	private void enleverPlateau() {
+		Platform.runLater(new Runnable() {
+			@Override
+			public void run() {
+				lChefVigile.setVisible(false);
+				lChefVigile2.setVisible(false);
+				lChefVigile3.setVisible(false);
+				lChefVigile4.setVisible(false);
+
+				fondB1.setVisible(false);
+				fondB2.setVisible(false);
+				fondB3.setVisible(false);
+				fondB4.setVisible(false);
+				fondB5.setVisible(false);
+				fondB6.setVisible(false);
+				b1.setVisible(false);
+				b2.setVisible(false);
+				b3.setVisible(false);
+				b4.setVisible(false);
+				b5.setVisible(false);
+				b6.setVisible(false);
+				bPileCarte.setVisible(false);
+			}
+		});
+	}
+
+	private void choixCouleurReset() {
+		j1.setVisible(true);
+		j2.setVisible(true);
+		j3.setVisible(true);
+		j4.setVisible(true);
+		j5.setVisible(true);
+		j6.setVisible(true);
+		j1.setDisable(false);
+		j2.setDisable(false);
+		j3.setDisable(false);
+		j4.setDisable(false);
+		j5.setDisable(false);
+		j6.setDisable(false);
+		j1.setStyle(tmpColor);
+		j2.setStyle(tmpColor);
+		j3.setStyle(tmpColor);
+		j4.setStyle(tmpColor);
+		j5.setStyle(tmpColor);
+		j6.setStyle(tmpColor);
+
+		nomJoueur1.setStyle(tmpColor);
+		nomJoueur1.setText("Choisir");
+		nbPerso1.setText("");
+		nbCartes1.setText("");
+		nomJoueur2.setStyle(tmpColor);
+		nomJoueur2.setText("Choisir");
+		nbPerso2.setText("");
+		nbCartes2.setText("");
+		nomJoueur3.setStyle(tmpColor);
+		nomJoueur3.setText("Choisir");
+		nbPerso3.setText("");
+		nbCartes3.setText("");
+		nomJoueur4.setStyle(tmpColor);
+		nomJoueur4.setText("Choisir");
+		nbPerso4.setText("");
+		nbCartes4.setText("");
+		nomJoueur5.setStyle(tmpColor);
+		nomJoueur5.setText("Choisir");
+		nbPerso5.setText("");
+		nbCartes5.setText("");
+		nomJoueur6.setStyle(tmpColor);
+		nomJoueur6.setText("Choisir");
+		nbPerso6.setText("");
+		nbCartes6.setText("");
+		
+		vboxs.clear();
+		index.clear();
 	}
 
 	/**
