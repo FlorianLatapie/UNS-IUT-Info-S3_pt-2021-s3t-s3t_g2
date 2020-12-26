@@ -98,7 +98,6 @@ public class ControleurAttaqueZombie {
 		List<Object> defense = new ArrayList<>();
 		List<Personnage> persoCache = new ArrayList<>();
 		int nbCarteMateriel = 0;
-		int nbCarteCachette = 0;
 		azr.demanderDefense(jeu, lieu, partieId, numeroTour);
 		for (Joueur j : jeu.getJoueurSurLieu(lieu)) {
 			List<Object> lo = azr.recupDefense(j);
