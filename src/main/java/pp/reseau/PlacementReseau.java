@@ -7,6 +7,13 @@ import pp.Joueur;
 import pp.Partie;
 import reseau.socket.ControleurReseau;
 
+/**
+ * <h1>La classe PlacementReseau </h1>. A pour rôle de traiter les paquets réseaux de la phase de placement des personnages
+ *
+ * @author Aurelien
+ * @version 1
+ * @since 12/12/2020
+ */
 public class PlacementReseau {
 
 	public void informerJoueur(Partie jeu, Joueur j, String partieId) {
