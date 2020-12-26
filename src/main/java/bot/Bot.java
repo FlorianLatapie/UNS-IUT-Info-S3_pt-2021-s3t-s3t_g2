@@ -52,6 +52,7 @@ public class Bot implements Runnable {
 	private BotMode botMode;
 	private List<PartieInfo> partiesActuel;
 	private boolean connected;
+	private boolean vite;
 
 	public boolean isConnected() {
 		return connected;
@@ -64,11 +65,12 @@ public class Bot implements Runnable {
 	/* Parametre Temporaire */
 	private List<Integer> pionAPos;
 
-	public Bot(int delay, BotType botType, BotMode botMode) {
+	public Bot(int delay, BotType botType, BotMode botMode, boolean vite) {
 		this.delay = delay;
 		this.botType = botType;
 		this.partiesActuel = new ArrayList<>();
 		this.botMode = botMode;
+		this.vite = vite;
 	}
 
 	public BotMode getBotMode() {
@@ -95,8 +97,6 @@ public class Bot implements Runnable {
 		}
 	}
 
-	
-
 	private void initBot() {
 		this.typeJoueur = TypeJoueur.BOT;
 		this.connexionType = ConnexionType.CLIENT;
@@ -115,7 +115,7 @@ public class Bot implements Runnable {
 		TraitementPaquetUdp traitementPaquetUdp = new TraitementPaquetUdp(this);
 		TraitementPaquetTcp traitementPaquetTcp = new TraitementPaquetTcp(this);
 		ControleurReseau.initConnexion(traitementPaquetTcp, traitementPaquetUdp, connexionType,
-				ReseauOutils.getLocalIp());
+				ReseauOutils.getLocalIp(), vite);
 
 		ThreadOutils.asyncTask("AMP", () -> {
 			try {
@@ -166,7 +166,7 @@ public class Bot implements Runnable {
 		int id = Integer.valueOf(partieInfo.getIdPartie().substring(1));
 		connecter(partieInfo.getIp(), partieInfo.getPort(), id);
 	}
-	
+
 	public void connecter(InetAddress address, int port, String identifiant) {
 		int id = Integer.valueOf(identifiant.substring(1));
 		connecter(address, port, id);

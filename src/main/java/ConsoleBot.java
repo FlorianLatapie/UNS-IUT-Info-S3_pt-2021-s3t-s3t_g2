@@ -20,14 +20,14 @@ public class ConsoleBot {
 		BotMode botMode = getBotMode(args);
 
 		if (args.length == 3 && botMode == BotMode.Automatique) {
-			ThreadOutils.asyncTask("Bot", bot = new Bot(getDelay(args[2]), getBotType(args[1]), botMode));
+			ThreadOutils.asyncTask("Bot", bot = new Bot(getDelay(args[2]), getBotType(args[1]), botMode, false));
 			Thread.sleep(1000);
 		} else if (args.length == 4 && botMode == BotMode.Manuel) {
-			ThreadOutils.asyncTask("Bot", bot = new Bot(getDelay(args[2]), getBotType(args[1]), botMode));
+			ThreadOutils.asyncTask("Bot", bot = new Bot(getDelay(args[2]), getBotType(args[1]), botMode, false));
 			Thread.sleep(1000);
 			ThreadOutils.asyncTask("Bot", () -> bot.connecter(choisirPartie(args[3])));
 		} else {
-			ThreadOutils.asyncTask("Bot", bot = new Bot(1000, choisirBot(), BotMode.Manuel));
+			ThreadOutils.asyncTask("Bot", bot = new Bot(1000, choisirBot(), BotMode.Manuel, false));
 			Thread.sleep(1000);
 			ThreadOutils.asyncTask("Bot", () -> bot.connecter(choisirPartie("")));
 		}
@@ -89,7 +89,7 @@ public class ConsoleBot {
 		List<PartieInfo> partieInfos;
 
 		bot.getPartie(TypePartie.MIXTE, 6);
-		
+
 		try {
 			Thread.sleep(5000);
 		} catch (InterruptedException e) {
@@ -123,7 +123,7 @@ public class ConsoleBot {
 		int reponse2 = -1;
 		do {
 			bot.getPartie(TypePartie.values()[reponse], reponse1);
-			
+
 			try {
 				Thread.sleep(5000);
 			} catch (InterruptedException e) {
