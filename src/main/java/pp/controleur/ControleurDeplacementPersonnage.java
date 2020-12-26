@@ -8,7 +8,6 @@ import pp.PpTools;
 import pp.ihm.event.Evenement;
 import pp.reseau.DeplacementReseau;
 import reseau.type.CarteType;
-import reseau.type.Couleur;
 
 /**
  * <h1>La classe ControleurDeplacementPersonnage</h1>. A pour rôle de gérer la
