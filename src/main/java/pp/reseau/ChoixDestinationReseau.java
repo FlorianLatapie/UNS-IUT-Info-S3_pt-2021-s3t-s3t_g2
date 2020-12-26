@@ -58,13 +58,24 @@ public class ChoixDestinationReseau {
 			if (!(j.isChefDesVigiles()))
 				j.getConnection().envoyer(m);
 	}
-	
+
 	/**
 	 * Traitement du paquet CDDJ du protocole reseau.
 	 * 
 	 * @param jeu La partie courante.
 	 */
-	public void attendreChoixDestination(Partie jeu) {
+	public void attendreChoixDestinationNewChef(Partie jeu) {
+		for (Joueur j : jeu.getJoueurs().values())
+			if (!j.isChefDesVigiles())
+				j.getConnection().attendreMessage("CDDJ");
+	}
+
+	/**
+	 * Traitement du paquet CDDJ du protocole reseau.
+	 * 
+	 * @param jeu La partie courante.
+	 */
+	public void attendreChoixDestinationOldChef(Partie jeu) {
 		for (Joueur j : jeu.getJoueurs().values())
 			j.getConnection().attendreMessage("CDDJ");
 	}
