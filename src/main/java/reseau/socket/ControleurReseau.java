@@ -65,8 +65,8 @@ public abstract class ControleurReseau {
 	 * @throws UnknownHostException     Si le cast de l'ip provoque une erreur
 	 */
 	public static void initConnexion(TraitementPaquet<TcpClient> traitementPaquetTcpCible,
-			TraitementPaquet<DatagramPacket> traitementPaquetUdpCible, ConnexionType connexionTypeCible, InetAddress ipCible)
-			throws UnknownHostException {
+			TraitementPaquet<DatagramPacket> traitementPaquetUdpCible, ConnexionType connexionTypeCible,
+			InetAddress ipCible) throws UnknownHostException {
 		logger.finest("Initialisation du controleur réseau");
 		traitementPaquetUdp = traitementPaquetUdpCible;
 		traitementPaquetTcp = traitementPaquetTcpCible;
@@ -82,7 +82,7 @@ public abstract class ControleurReseau {
 		new Thread(udpConnexion = new UdpConnexion(ip), "udpConnexion").start();
 
 		if (connexionType == ConnexionType.SERVEUR)
-			new Thread(tcpServeur = new TcpServeur(ip, tcpPort, CLE_FIN), "tcpServeur").start();
+			new Thread(tcpServeur = new TcpServeur(ip, tcpPort), "tcpServeur").start();
 
 		logger.info("Controleur initialisé");
 	}
@@ -138,7 +138,7 @@ public abstract class ControleurReseau {
 
 		udpConnexion.arreter();
 	}
-	
+
 	/**
 	 * Arreter le serveur TCP
 	 *
@@ -342,6 +342,6 @@ public abstract class ControleurReseau {
 	}
 
 	public static void demarrerClientTcp(InetAddress ipPp, int portPp) {
-		new Thread(tcpClient = new TcpClient(ipPp, portPp), "tcpClient").start();
+		new Thread(tcpClient = new TcpClient(ipPp, portPp, CLE_FIN), "tcpClient").start();
 	}
 }
