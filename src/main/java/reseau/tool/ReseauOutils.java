@@ -37,6 +37,7 @@ public interface ReseauOutils {
      * Recupere l'adresse ip utilisée pour rejoindre le reseau (WINDOWS).
      *
      * @return L'adresse ip de la bonne interface
+     * @exception IOException si la commande ne peut pas etre executé
      */
     static InetAddress getWindowsIp() throws IOException {
         if (OsOutils.isWindows()){
@@ -49,6 +50,7 @@ public interface ReseauOutils {
      * Recupere toutes les interfaces du pc.
      *
      * @return La liste des interfaces
+     * @exception SocketException si il ne peut pas obtenir les interfaces réseaux
      */
      static List<InetAddress> getInterfaces() throws SocketException {
         List<InetAddress> inets = new ArrayList<>();

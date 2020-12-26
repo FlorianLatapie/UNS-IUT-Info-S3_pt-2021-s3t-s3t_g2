@@ -56,10 +56,10 @@ public abstract class ControleurReseau {
 	/**
 	 * Permet d'initialiser la connexion.
 	 *
-	 * @param traitementPaquetTcp Le traiteur de paquet du coté TCP
-	 * @param traitementPaquetUdp Le traiteur de paquet du coté UDP
-	 * @param connexionType       S'il s'agit du CLIENT ou du SERVER
-	 * @param ip                  L'adresse ip a utilisée
+	 * @param traitementPaquetTcpCible Le traiteur de paquet du coté TCP
+	 * @param traitementPaquetUdpCible Le traiteur de paquet du coté UDP
+	 * @param connexionTypeCible       S'il s'agit du CLIENT ou du SERVER
+	 * @param ipCible                  L'adresse ip a utilisée
 	 * @throws IllegalArgumentException Si les paquets n'ont pas ete initialisé
 	 *                                  correctement
 	 * @throws UnknownHostException     Si le cast de l'ip provoque une erreur
@@ -154,6 +154,7 @@ public abstract class ControleurReseau {
 	/**
 	 * Permet de savoir si la clé existe.
 	 *
+	 * @param cle La clé du paquet
 	 * @return Si la clé existe
 	 */
 	public static boolean isCleExiste(String cle) {
@@ -169,6 +170,8 @@ public abstract class ControleurReseau {
 	/**
 	 * Permet d'obtenir l'ensemble des paquets UDP.
 	 *
+	 * @param cle  la cle cible
+	 * @param args les arguments du paquet
 	 * @return L'ensemble des paquets UDP
 	 */
 	public static String construirePaquetUdp(String cle, Object... args) {
@@ -181,6 +184,8 @@ public abstract class ControleurReseau {
 	/**
 	 * Permet d'obtenir l'ensemble des paquets TCP.
 	 *
+	 * @param cle la cle cible
+	 * @param args les arguments du paquet
 	 * @return L'ensemble des paquets TCP
 	 */
 	public static String construirePaquetTcp(String cle, Object... args) {
@@ -193,7 +198,11 @@ public abstract class ControleurReseau {
 	/**
 	 * Permet d'obtenir l'ensemble des paquets UDP.
 	 *
+	 * @param cle la cle cible
+	 * @param message le message cible
+	 * @param val l'index de l'argument
 	 * @return L'ensemble des paquets UDP
+	 * @exception IllegalArgumentException si la clé n'est pas valide
 	 */
 	public static Object getValueUdp(String cle, String message, int val) {
 		if (!isCleExiste(cle))
@@ -205,7 +214,11 @@ public abstract class ControleurReseau {
 	/**
 	 * Permet d'obtenir l'ensemble des paquets TCP.
 	 *
+	 * @param cle la cle cible
+	 * @param message le message cible
+	 * @param val l'index de l'argument
 	 * @return L'ensemble des paquets TCP
+	 * @exception IllegalArgumentException si la clé n'est pas valide
 	 */
 	public static Object getValueTcp(String cle, String message, int val) {
 		if (!isCleExiste(cle))
@@ -219,6 +232,7 @@ public abstract class ControleurReseau {
 	 *
 	 * @param cle La clé du paquet cible
 	 * @return Le paquet UDP cible
+	 * @exception IllegalArgumentException si la clé n'est pas valide
 	 */
 	public static Paquet getPaquetUdp(String cle) {
 		if (!isCleExiste(cle))
