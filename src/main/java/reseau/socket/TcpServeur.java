@@ -22,7 +22,6 @@ public class TcpServeur implements Runnable, IControleSocket {
 	private boolean estLancer;
 	private final InetAddress ip;
 	private final int port;
-	private final String cleFin;
 
 	private final Logger logger;
 
@@ -30,10 +29,9 @@ public class TcpServeur implements Runnable, IControleSocket {
 	 * @param controleurReseau Le controleur reseau associé
 	 * @param port             Le port du serveur TCP
 	 */
-	public TcpServeur(InetAddress ip, int port, String cleFin) {
+	public TcpServeur(InetAddress ip, int port) {
 		this.ip = ip;
 		this.port = port;
-		this.cleFin = cleFin;
 		this.connexions = new ArrayList<>();
 		this.estLancer = true;
 		this.logger = Logger.getLogger(getClass().getName());
@@ -63,7 +61,7 @@ public class TcpServeur implements Runnable, IControleSocket {
 				break;
 			}
 			TcpClient connection;
-			new Thread(connection = new TcpClient(sock, cleFin)).start();
+			new Thread(connection = new TcpClient(sock)).start();
 			connexions.add(connection);
 		}
 		if (estLancer)
