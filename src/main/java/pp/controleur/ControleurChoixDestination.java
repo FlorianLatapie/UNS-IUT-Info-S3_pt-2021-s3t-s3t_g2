@@ -9,6 +9,14 @@ import pp.ihm.event.Evenement;
 import pp.reseau.ChoixDestinationReseau;
 import reseau.type.VigileEtat;
 
+
+/**
+ * <h1>La classe ControleurChoixDestination</h1>. A pour rôle de gérer la phase de choix de destination
+ *
+ * @author Aurelien
+ * @version 1
+ * @since 12/12/2020
+ */
 public class ControleurChoixDestination {
 	private ChoixDestinationReseau cdr;
 
