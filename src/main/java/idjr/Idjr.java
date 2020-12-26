@@ -82,7 +82,7 @@ public class Idjr {
 		TraitementPaquetTcp traitementPaquetTcp = new TraitementPaquetTcp(this);
 		TraitementPaquetUdp traitementPaquetUdp = new TraitementPaquetUdp(this);
 		ControleurReseau.initConnexion(traitementPaquetTcp, traitementPaquetUdp, connexionType,
-				ReseauOutils.getLocalIp());
+				ReseauOutils.getLocalIp(), false);
 	}
 
 	public void estPartieConnecte(String nom, int maxJr, TypePartie typePartie, Statut statut) {
