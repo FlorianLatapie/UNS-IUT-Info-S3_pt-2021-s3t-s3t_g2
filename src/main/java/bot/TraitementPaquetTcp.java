@@ -542,7 +542,7 @@ public class TraitementPaquetTcp extends TraitementPaquet<TcpClient> {
 
 	private void traitementFP(Paquet paquet, String message) {
 		traitementB.traitementFP(core, (Couleur) paquet.getValeur(message, 2));
-
+		core.setConnected(false);
 		System.out.println("finPartie : \n");
 		// System.out.println(core.getEtatPartie());
 	}
