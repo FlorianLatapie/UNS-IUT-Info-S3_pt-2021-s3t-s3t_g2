@@ -1738,7 +1738,7 @@ public class PlateauPane extends StackPane implements IPlateauListener, ITraduct
 	 * @param le joueur qui joue
 	 */
 	@Override
-	public void quiJoue(int joueur) {
+	public void quiJoue(Couleur joueur) {
 		Platform.runLater(new Runnable() {
 			@Override
 			public void run() {
@@ -1755,7 +1755,7 @@ public class PlateauPane extends StackPane implements IPlateauListener, ITraduct
 				if (couleurs1.size() >= 6)
 					j6.setStyle(IhmOutils.color(couleurs1.get(index.get(5))));
 
-				switch (index.get(joueur)) {
+				switch (index.get(couleurs1.indexOf(joueur))) {
 				case 0:
 					j1.setStyle(IhmOutils.color(couleurs1.get(index.get(0)))
 							+ " -fx-border-color: red; -fx-border-insets: -3; -fx-border-width: 3;");
