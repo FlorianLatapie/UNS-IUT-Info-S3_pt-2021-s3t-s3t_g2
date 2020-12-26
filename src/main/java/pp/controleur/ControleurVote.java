@@ -74,8 +74,8 @@ public class ControleurVote {
 		List<Integer> nbVoix = (List<Integer>) lo.get(1);
 		List<Couleur> votes = new ArrayList<>();
 		List<Integer> voixRecu = initVoixRecu(ve, jeu, l);
-		vr.attendreCarte(jeu, l);
 		vr.demanderCarte(jeu, l, partieId, numeroTour);
+		vr.attendreCarte(jeu, l);
 		traitementMenace(ve, jeu, nbVoix, l, partieId, numeroTour);
 		demanderVote(jeu, l, ve, partieId, numeroTour);
 		voixRecu = traitementVotes(jeu, l, ve, votes, voixRecu, nbVoix);
