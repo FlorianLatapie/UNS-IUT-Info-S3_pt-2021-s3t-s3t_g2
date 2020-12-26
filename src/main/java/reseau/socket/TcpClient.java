@@ -167,14 +167,15 @@ public class TcpClient implements Runnable, IEchangeSocket, IMessagePaquet {
 
 			logger.log(Level.INFO, "Reception de " + message);
 			String cle = PaquetOutils.getCleMessage(message);
-			if (cleFin != null)
-				if (cleFin.equals(cle))
-					break;
 
 			ControleurReseau.traitementPaquetTcp(ControleurReseau.getPaquetTcp(cle), message, this);
 			messagesTampon.add(message);
 			this.paquetRecuList.add(message);
 			this.paquetRecuEnvoyeList.add(message);
+			
+			if (cleFin != null)
+				if (cleFin.equals(cle))
+					break;
 		}
 
 		try {
