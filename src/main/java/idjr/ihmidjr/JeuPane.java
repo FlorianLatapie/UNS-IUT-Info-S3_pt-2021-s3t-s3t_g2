@@ -1865,6 +1865,7 @@ public class JeuPane extends StackPane implements IJeuListener, ITraduction {
 				bPasserCarte.setDisable(false);
 				bPasserCarte.setOnAction(EventHandler -> {
 					core.getIdjr().setContinue(false);
+					choisirUtiliserCarte(selectedCarteChoi);
 					core.getIdjr().utiliserCarteChoisi(true);
 					resetUtiliserCarte();
 					updateCarte();
@@ -1916,6 +1917,7 @@ public class JeuPane extends StackPane implements IJeuListener, ITraduction {
 				bPasserCarte.setDisable(false);
 				bPasserCarte.setOnAction(EventHandler -> {
 					core.getIdjr().setContinue(false);
+					choisirUtiliserCarte(selectedCarteChoi);
 					core.getIdjr().utiliserCarteChoisi(true);
 					resetUtiliserCarte();
 					updateCarte();
