@@ -9,9 +9,9 @@ import pp.ihm.event.Evenement;
 import pp.reseau.ChoixDestinationReseau;
 import reseau.type.VigileEtat;
 
-
 /**
- * <h1>La classe ControleurChoixDestination</h1>. A pour rôle de gérer la phase de choix de destination
+ * <h1>La classe ControleurChoixDestination</h1>. A pour rôle de gérer la phase
+ * de choix de destination
  *
  * @author Aurelien
  * @version 1
@@ -28,7 +28,7 @@ public class ControleurChoixDestination {
 			int numeroTour) {
 		VigileEtat ve = jeu.getNewChef() ? VigileEtat.NE : VigileEtat.NUL;
 		cdr.debuterPhaseChoixDestination(jeu, ve, partieId, numeroTour);
-		if (jeu.getNewChef()) 
+		if (jeu.getNewChef())
 			nouveauChef(jeu, destination, partieId, numeroTour);
 		else
 			ancienChef(jeu, destination, partieId, numeroTour);
@@ -49,7 +49,7 @@ public class ControleurChoixDestination {
 			if (!j.isChefDesVigiles() && j.isEnVie())
 				destination.add(cdr.indiqueChoixDest(j));
 	}
-	
+
 	public void ancienChef(Partie jeu, ArrayList<Integer> destination, String partieId, int numeroTour) {
 		for (Joueur j : jeu.getJoueurs().values())
 			if (j.isChefDesVigiles() && j.isEnVie())
