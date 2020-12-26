@@ -12,7 +12,7 @@ import reseau.type.VigileEtat;
 
 /**
  * <h1>La classe ControleurArriveZombie</h1>. A pour rôle de gérer la phase
- * d'arrivée des zombies
+ * d'arrivée des zombies.
  *
  * @author Aurelien
  * @version 1
@@ -21,10 +21,22 @@ import reseau.type.VigileEtat;
 public class ControleurArriveZombie {
 	private ArriveZombieReseau azr;
 
+	/**
+	 * Instancie le Contrtoleur de la phase d'arrivée des zombies.
+	 */
 	public ControleurArriveZombie() {
 		azr = new ArriveZombieReseau();
 	}
 
+	/**
+	 * Execute la phase d'arrivée des zombies.
+	 *
+	 * @param jeu        La partie courante.
+	 * @param partieID   L'identifiant de la partie en cours.
+	 * @param numeroTour Le numéro du tour courant.
+	 *
+	 * @return La liste des lieux d'arrivés des zombies.
+	 */
 	public List<Integer> phaseArriveZombie(Partie jeu, String partieId, int numeroTour) {
 		List<Integer> lieuZombie = new ArrayList<>();
 		List<Joueur> joueurCDS = new ArrayList<>();
@@ -44,6 +56,11 @@ public class ControleurArriveZombie {
 		return lieuZombie;
 	}
 
+	/**
+	 * Lance les dès (Random) pour définir les lieux d'arrivés des zombies.
+	 *
+	 * @return La liste des lieux d'arrivés des zombies.
+	 */
 	public List<Integer> lanceDes() {
 		List<Integer> lieuZombie = new ArrayList<>();
 		int z1 = new Random().nextInt(6) + 1;
