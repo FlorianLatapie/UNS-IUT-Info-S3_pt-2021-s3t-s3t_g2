@@ -16,6 +16,14 @@ import reseau.socket.ControleurReseau;
 import reseau.type.CondType;
 import reseau.type.Statut;
 
+
+/**
+ * <h1>La classe ControleurFinPartie</h1>. A pour rôle de gérer et de detecter une fin de partie
+ *
+ * @author Aurelien
+ * @version 1
+ * @since 12/12/2020
+ */
 public class ControleurFinPartie {
 	private FinJeuReseau fjr;
 	
