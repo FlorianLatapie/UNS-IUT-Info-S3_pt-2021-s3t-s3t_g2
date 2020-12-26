@@ -17,7 +17,7 @@ public class FastPP {
 		EvenementStockage.desactiverEvent(true);
 		ThreadOutils.asyncTaskRepeat("FastPPCore", 1000, () -> {
 			try {
-				controleurJeu = new ControleurJeu("Test", 0, 3);
+				controleurJeu = new ControleurJeu("Test", 0, 3, true);
 				controleurJeu.setPlacerJoueur(true);
 				while (controleurJeu.getStatus() != Statut.COMPLETE)
 					Thread.yield();

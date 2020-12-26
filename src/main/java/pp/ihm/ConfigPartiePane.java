@@ -217,7 +217,7 @@ public class ConfigPartiePane extends StackPane implements ITraduction {
 			core.setNbBot(nbBot.getValue());
 
 			try {
-				core.setCj(new ControleurJeu(nomP.getText(), core.getNbJoueurReel(), core.getNbBot()));
+				core.setCj(new ControleurJeu(nomP.getText(), core.getNbJoueurReel(), core.getNbBot(), false));
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
