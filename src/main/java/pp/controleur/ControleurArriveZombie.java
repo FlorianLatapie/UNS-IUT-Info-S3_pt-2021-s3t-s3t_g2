@@ -14,6 +14,13 @@ import reseau.socket.ControleurReseau;
 import reseau.type.CarteType;
 import reseau.type.VigileEtat;
 
+/**
+ * <h1>La classe ControleurArriveZombie</h1>. A pour rôle de gérer la phase d'arrivée des zombies
+ *
+ * @author Aurelien
+ * @version 1
+ * @since 12/12/2020
+ */
 public class ControleurArriveZombie {
 	private ArriveZombieReseau azr;
 	

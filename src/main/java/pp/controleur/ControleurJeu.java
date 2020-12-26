@@ -15,7 +15,7 @@ import java.util.*;
 import static java.lang.System.out;
 
 /**
- * <h1>La classe controleurJeu</h1>
+ * <h1>La classe controleurJeu</h1> A pour rôle de gérer une partie
  *
  * @author Alex
  * @author Aurelien

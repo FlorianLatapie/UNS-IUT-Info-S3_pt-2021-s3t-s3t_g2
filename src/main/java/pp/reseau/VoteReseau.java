@@ -10,6 +10,13 @@ import reseau.type.Couleur;
 import reseau.type.VoteEtape;
 import reseau.type.VoteType;
 
+/**
+ * <h1>La classe PlacementReseau </h1>. A pour rôle de traiter les paquets réseaux des phases de vote
+ *
+ * @author Aurelien
+ * @version 1
+ * @since 12/12/2020
+ */
 public class VoteReseau {
 
 	public void debutVote(Partie jeu, VoteType tv, VoteEtape ve, List<Couleur> joueurPresent,

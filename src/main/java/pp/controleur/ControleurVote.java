@@ -17,6 +17,13 @@ import reseau.type.Couleur;
 import reseau.type.VoteEtape;
 import reseau.type.VoteType;
 
+/**
+ * <h1>La classe ControleurVote</h1>. A pour rôle de gérer les phases de vote
+ *
+ * @author Aurelien
+ * @version 1
+ * @since 12/12/2020
+ */
 public class ControleurVote {
 	private VoteReseau vr;
 

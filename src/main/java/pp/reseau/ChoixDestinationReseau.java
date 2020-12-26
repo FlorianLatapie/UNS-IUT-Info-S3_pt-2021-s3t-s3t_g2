@@ -5,6 +5,13 @@ import pp.Partie;
 import reseau.socket.ControleurReseau;
 import reseau.type.VigileEtat;
 
+/**
+ * <h1>La classe ChoixDestinationReseau</h1>. A pour rôle de traiter les paquets réseaux de la phase d'attaque de choix d'une destination
+ *
+ * @author Aurelien
+ * @version 1
+ * @since 12/12/2020
+ */
 public class ChoixDestinationReseau {
 
 	public void debuterPhaseChoixDestination(Partie jeu, VigileEtat ve, String partieId, int numeroTour) {

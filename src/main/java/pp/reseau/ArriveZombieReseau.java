@@ -9,6 +9,13 @@ import reseau.socket.ControleurReseau;
 import reseau.type.CarteType;
 import reseau.type.VigileEtat;
 
+/**
+ * <h1>La classe ArriveZombieReseau</h1>. A pour rôle de traiter les paquets réseaux de la phase d'arrivée des zombies
+ *
+ * @author Aurelien
+ * @version 1
+ * @since 12/12/2020
+ */
 public class ArriveZombieReseau {
 
 	public void debutArriveZombie(Partie jeu, VigileEtat ve, String partieId, int numeroTour) {

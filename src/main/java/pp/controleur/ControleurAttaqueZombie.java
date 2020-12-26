@@ -17,6 +17,13 @@ import reseau.type.RaisonType;
 import reseau.type.VoteType;
 import sun.util.logging.resources.logging;
 
+/**
+ * <h1>La classe ControleurAttaqueZombie</h1>. A pour rôle de gérer la phase d'attaque des zombies
+ *
+ * @author Aurelien
+ * @version 1
+ * @since 12/12/2020
+ */
 public class ControleurAttaqueZombie {
 	ControleurVote cv;
 	ControleurFinPartie cfp;

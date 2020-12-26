@@ -11,6 +11,13 @@ import reseau.type.CarteType;
 import reseau.type.PionCouleur;
 import reseau.type.RaisonType;
 
+/**
+ * <h1>La classe AttaqueZombieReseau</h1>. A pour rôle de traiter les paquets réseaux de la phase d'attaque des zombies
+ *
+ * @author Aurelien
+ * @version 1
+ * @since 12/12/2020
+ */
 public class AttaqueZombieReseau {
 
 	public void debuteAttaque(Partie jeu, List<Integer> nb, String partieId, int numeroTour) {
