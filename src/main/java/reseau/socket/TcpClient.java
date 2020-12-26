@@ -1,6 +1,7 @@
 package reseau.socket;
 
 import reseau.tool.PaquetOutils;
+import reseau.tool.ThreadOutils;
 
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
@@ -85,7 +86,7 @@ public class TcpClient implements Runnable, IEchangeSocket, IMessagePaquet {
 				attendre = false;
 			} catch (Exception ignoreda) {
 				ignoreda.printStackTrace();
-				Thread.yield();
+				ThreadOutils.attendre();
 			}
 		
 		fluxSortie = new DataOutputStream(socket.getOutputStream());
@@ -246,7 +247,7 @@ public class TcpClient implements Runnable, IEchangeSocket, IMessagePaquet {
 	 */
 	public void attendreMessage(String cle) {
 		while (!contient(cle))
-			Thread.yield();
+			ThreadOutils.attendre();
 	}
 
 	/**
@@ -254,9 +255,9 @@ public class TcpClient implements Runnable, IEchangeSocket, IMessagePaquet {
 	 */
 	public void attendreConnexion() {
 		while (socket == null)
-			Thread.yield();
+			ThreadOutils.attendre();
 		while (!isPret())
-			Thread.yield();
+			ThreadOutils.attendre();
 	}
 
 	/**
