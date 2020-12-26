@@ -67,7 +67,7 @@ public class ControleurChoixDestination {
 		while (!EvenementStockage.isPopupAccepter())
 			Thread.yield();
 		EvenementStockage.setPopupAccepter(false);
-		cdr.attendreChoixDestination(jeu);
+		cdr.attendreChoixDestinationNewChef(jeu);
 		for (Joueur j : jeu.getJoueurs().values())
 			if (!j.isChefDesVigiles() && j.isEnVie()) {
 				destination.add(cdr.indiqueChoixDest(j));
@@ -84,7 +84,7 @@ public class ControleurChoixDestination {
 	 * @param numeroTour  Le numéro du tour courant.
 	 */
 	public void ancienChef(Partie jeu, List<Integer> destination) {
-		cdr.attendreChoixDestination(jeu);
+		cdr.attendreChoixDestinationOldChef(jeu);
 		for (Joueur j : jeu.getJoueurs().values())
 			if (j.isChefDesVigiles() && j.isEnVie())
 				destination.add(cdr.indiqueChoixDest(j));
