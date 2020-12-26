@@ -59,6 +59,7 @@ public class ControleurJeu {
 
 	private boolean placerJoueur;
 	private boolean isFinished;
+	private boolean vite;
 
 	private ControleurFouilleCamion cfc;
 	private ControleurElectionVigile cev;
@@ -69,12 +70,13 @@ public class ControleurJeu {
 	private ControleurFinPartie cfp;
 	private ControleurAttaqueZombie catz;
 
-	public ControleurJeu(String nom, int njr, int njv) throws IOException {
+	public ControleurJeu(String nom, int njr, int njv, boolean vite) throws IOException {
 		if (njr + njv > 6 || njr + njv < 3)
 			throw new IllegalArgumentException("Mauvais nombre de joueur");
 		this.isFinished = false;
 		this.couleurPret = false;
 		this.placerJoueur = false;
+		this.vite = vite;
 		this.jmort = new ArrayList<>();
 		this.tempPaquet = new ArrayList<>();
 		this.nomPartie = nom;
@@ -91,7 +93,6 @@ public class ControleurJeu {
 		this.cdp = new ControleurDeplacementPersonnage();
 		this.cfp = new ControleurFinPartie();
 		this.catz = new ControleurAttaqueZombie();
-		
 
 		this.statut = Statut.ATTENTE;
 		initReseau();
@@ -131,16 +132,16 @@ public class ControleurJeu {
 
 			while (!couleurPret)
 				Thread.yield();
-			
+
 			Evenement.choiCouleur(getJoueursCouleurs());
-			
+
 			while (!placerJoueur)
 				Thread.yield();
-			
+
 			Evenement.nomJoueurAll(new ArrayList<>(jeu.getJoueurs().values()));
 
 			updateValues();
-			
+
 			try {
 				demarerJeu();
 			} catch (InterruptedException e) {
@@ -218,7 +219,7 @@ public class ControleurJeu {
 			int val = new Scanner(System.in).nextInt();
 			ip = ips.get(val);
 		}
-		ControleurReseau.initConnexion(tcp, udp, ConnexionType.SERVEUR, ip);
+		ControleurReseau.initConnexion(tcp, udp, ConnexionType.SERVEUR, ip, vite);
 	}
 
 	public String ajouterJoueur(String nom, TypeJoueur typeJoueur, TcpClient connection) {
@@ -243,7 +244,7 @@ public class ControleurJeu {
 	}
 
 	/**
-	 * Distribue la premiere carte a chaque joueur. 
+	 * Distribue la premiere carte a chaque joueur.
 	 */
 	public void distribuerCarte() {
 		for (Joueur j : jeu.getJoueurs().values()) {
@@ -354,6 +355,5 @@ public class ControleurJeu {
 	public void setFinished(boolean isFinished) {
 		this.isFinished = isFinished;
 	}
-	
-	
+
 }
