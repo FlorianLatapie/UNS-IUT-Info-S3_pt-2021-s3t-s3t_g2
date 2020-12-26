@@ -10,6 +10,13 @@ import pp.ihm.event.Evenement;
 import reseau.socket.ControleurReseau;
 import reseau.type.CarteType;
 
+/**
+ * <h1>La classe DeplacementReseau</h1>. A pour rôle de traiter les paquets réseaux de la phase de deplacement de personnages
+ *
+ * @author Aurelien
+ * @version 1
+ * @since 12/12/2020
+ */
 public class DeplacementReseau {
 
 	public void debutPhaseDeplacement(Partie jeu, List<Integer> destination, List<Integer> zombie, String partieId,
