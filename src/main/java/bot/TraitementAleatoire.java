@@ -53,7 +53,7 @@ public class TraitementAleatoire {
 			carteGarde = listeCarte.get(0);
 			bot.addCarte(carteGarde);
 			System.out.print("carte fouille");
-			System.out.print("4" + bot.getCouleurJoueursPresent().size());
+			System.out.print("4" + bot.couleurJoueurPresent().size());
 			couleur = getRandom2(bot, VoteType.FDC);
 		}
 		if (listeCarte.size() == 1) {
@@ -274,11 +274,11 @@ public class TraitementAleatoire {
 
 	protected static Couleur voteAleatoire(Bot core, VoteType vt) {
 		if (vt == VoteType.MPZ) {
-			System.out.println("Joueur Présent:" + core.getCouleurJoueursPresent().size());
-			core.getCouleurJoueursPresent().remove(core.getCouleur());
-			return core.getCouleurJoueursPresent().get(new Random().nextInt(core.getCouleurJoueursPresent().size()));
+			System.out.println("Joueur Présent:" + core.couleurJoueurPresent().size());
+			core.couleurJoueurPresent().remove(core.getCouleur());
+			return core.couleurJoueurPresent().get(new Random().nextInt(core.couleurJoueurPresent().size()));
 		}
-		return core.getCouleurJoueursPresent().get(new Random().nextInt(core.getCouleurJoueursPresent().size()));
+		return core.couleurJoueurPresent().get(new Random().nextInt(core.couleurJoueurPresent().size()));
 	}
 
 
