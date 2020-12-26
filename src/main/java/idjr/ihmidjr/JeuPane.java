@@ -61,6 +61,7 @@ public class JeuPane extends StackPane implements IJeuListener, ITraduction {
 	private int tailleCarte = 180;
 	private int lBoutonCamion2 = 145;
 	private final ApplicationPane paneName = ApplicationPane.JEU;
+	Pane lastPane;
 
 	Label phasePartie;
 
@@ -1325,6 +1326,11 @@ public class JeuPane extends StackPane implements IJeuListener, ITraduction {
 		vote.setVisible(false);
 	}
 
+	/**
+	 * Permet de choisir un pion
+	 * 
+	 * @param list la liste des pions séléctionnable
+	 */
 	@Override
 	public void choisirPion(List<Integer> list) {
 		Platform.runLater(new Runnable() {
@@ -1353,6 +1359,11 @@ public class JeuPane extends StackPane implements IJeuListener, ITraduction {
 		});
 	}
 
+	/**
+	 * Petmet de choisir un lieu
+	 * 
+	 * @param list la liste des lieux séléctionnable
+	 */
 	@Override
 	public void choisirLieu(List<Integer> list) {
 		Platform.runLater(new Runnable() {
@@ -1387,6 +1398,11 @@ public class JeuPane extends StackPane implements IJeuListener, ITraduction {
 		});
 	}
 
+	/**
+	 * Affiche le resultat des dés
+	 * 
+	 * @param list la liste des dés
+	 */
 	@Override
 	public void desValeur(List<Integer> list) {
 		Platform.runLater(new Runnable() {
@@ -1406,6 +1422,9 @@ public class JeuPane extends StackPane implements IJeuListener, ITraduction {
 		});
 	}
 
+	/**
+	 * Met a jour son propre nom
+	 */
 	@Override
 	public void nomJoueur(String nom) {
 		Platform.runLater(new Runnable() {
@@ -1416,6 +1435,9 @@ public class JeuPane extends StackPane implements IJeuListener, ITraduction {
 		});
 	}
 
+	/**
+	 * Affiche la phase
+	 */
 	@Override
 	public void nomPhase(String nom) {
 		Platform.runLater(new Runnable() {
@@ -1426,6 +1448,11 @@ public class JeuPane extends StackPane implements IJeuListener, ITraduction {
 		});
 	}
 
+	/**
+	 * Affiche les lieux des 4 zombies
+	 * 
+	 * @param list la liste des 4 lieux
+	 */
 	@Override
 	public void desVigiles(List<Integer> list) {
 		Platform.runLater(new Runnable() {
@@ -1433,22 +1460,30 @@ public class JeuPane extends StackPane implements IJeuListener, ITraduction {
 			public void run() {
 				infoZombie.setVisible(true);
 				linfoZombie.setText(International.trad("Des zombies arriveront dans les lieux {0}, {1}, {2}, {3}",
-						list.get(0).toString(), list.get(1).toString(), list.get(2).toString(), list.get(3).toString()));
+						list.get(0).toString(), list.get(1).toString(), list.get(2).toString(),
+						list.get(3).toString()));
 			}
 		});
 	}
 
+	/**
+	 * Passe a l'écran de fin
+	 */
 	@Override
 	public void fin() {
 		Platform.runLater(new Runnable() {
 			@Override
 			public void run() {
 				log.getItems().clear();
+				des.setVisible(false);
 				sControl.setPaneOnTop(ApplicationPane.ENDGAME);
 			}
 		});
 	}
 
+	/**
+	 * Change l'image de fond selon la couleur du joueur
+	 */
 	@Override
 	public void couleurJoueur(Couleur couleur) {
 		Platform.runLater(new Runnable() {
@@ -1480,6 +1515,9 @@ public class JeuPane extends StackPane implements IJeuListener, ITraduction {
 		});
 	}
 
+	/**
+	 * Affichage le sacrifice
+	 */
 	@Override
 	public void sacrificeChange() {
 		Platform.runLater(new Runnable() {
@@ -1490,6 +1528,9 @@ public class JeuPane extends StackPane implements IJeuListener, ITraduction {
 		});
 	}
 
+	/**
+	 * Affiche le déplacement
+	 */
 	@Override
 	public void deplacementChange() {
 		Platform.runLater(new Runnable() {
@@ -1500,64 +1541,11 @@ public class JeuPane extends StackPane implements IJeuListener, ITraduction {
 		});
 	}
 
-	public String convertCarte(CarteType carteType) {
-		switch (carteType) {
-		case ABA:
-			return DataControl.CARTE_BATTE;
-		case CAC:
-			return DataControl.CARTE_CACHETTE;
-		case CDS:
-			return DataControl.CARTE_CAMERA;
-		case ACS:
-			return DataControl.CARTE_CS;
-		case AGR:
-			return DataControl.CARTE_GRENADE;
-		case AHI:
-			return DataControl.CARTE_HACHE;
-		case MAT:
-			return DataControl.CARTE_MATERIEL;
-		case MEN:
-			return DataControl.CARTE_MENACE;
-		case ARE:
-			return DataControl.CARTE_REVOLVER;
-		case SPR:
-			return DataControl.CARTE_SPRINT;
-		case ATR:
-			return DataControl.CARTE_TRONCENNEUSE;
-		}
-
-		return null;
-	}
-
-	public CarteType convertCarte(String dataControl) {
-		switch (dataControl) {
-		case DataControl.CARTE_BATTE:
-			return CarteType.ABA;
-		case DataControl.CARTE_CACHETTE:
-			return CarteType.CAC;
-		case DataControl.CARTE_CAMERA:
-			return CarteType.CDS;
-		case DataControl.CARTE_CS:
-			return CarteType.ACS;
-		case DataControl.CARTE_GRENADE:
-			return CarteType.AGR;
-		case DataControl.CARTE_HACHE:
-			return CarteType.AHI;
-		case DataControl.CARTE_MATERIEL:
-			return CarteType.MAT;
-		case DataControl.CARTE_MENACE:
-			return CarteType.MEN;
-		case DataControl.CARTE_REVOLVER:
-			return CarteType.ARE;
-		case DataControl.CARTE_SPRINT:
-			return CarteType.SPR;
-		case DataControl.CARTE_TRONCENNEUSE:
-			return CarteType.ATR;
-		}
-
-		return CarteType.NUL;
-	}
-
+	/**
+	 * Permet d'afficher l'offre d'une carte a un joueur
+	 * 
+	 * @param listeCouleurJoueurVivant la liste des joueurs viviant
+	 */
 	public void setCarteOfferte(List<Couleur> listeCouleurJoueurVivant) {
 		Button[] joueursButton = { joueur1c, joueur2c, joueur3c, joueur4c, joueur5c };
 		for (int i = 0; i < joueursButton.length; i++) {
@@ -1581,9 +1569,12 @@ public class JeuPane extends StackPane implements IJeuListener, ITraduction {
 		}
 	}
 
+	/**
+	 * Permet de choisir une carte lors de la phase de la fouille du camion
+	 */
 	@Override
 	public void choisirCarte(List<CarteType> listeCartes, List<Couleur> listeCouleurJoueurVivant, boolean garder,
-			boolean donner, boolean defausser, boolean utiliser) {
+			boolean donner, boolean defausser) {
 		Platform.runLater(new Runnable() {
 			@Override
 			public void run() {
@@ -1605,7 +1596,7 @@ public class JeuPane extends StackPane implements IJeuListener, ITraduction {
 				bLog.setDisable(true);
 				fouilleCamion.setVisible(true);
 				if (listeCartes.size() >= 1) {
-					imgCarte1.setImage(new Image(convertCarte(listeCartes.get(0))));
+					imgCarte1.setImage(new Image(IhmTools.convertCarte(listeCartes.get(0))));
 					bCarte1.setDisable(false);
 					bCarte1.setText(International.trad("texte.selectionner"));
 					bCarte1.setOnAction(EventHandler -> {
@@ -1622,7 +1613,7 @@ public class JeuPane extends StackPane implements IJeuListener, ITraduction {
 					imgCarte1.setImage(new Image(DataControl.CARTE_VIDE));
 				}
 				if (listeCartes.size() >= 2) {
-					imgCarte2.setImage(new Image(convertCarte(listeCartes.get(1))));
+					imgCarte2.setImage(new Image(IhmTools.convertCarte(listeCartes.get(1))));
 					bCarte2.setDisable(false);
 					bCarte2.setText(International.trad("texte.selectionner"));
 					bCarte2.setOnAction(EventHandler -> {
@@ -1639,7 +1630,7 @@ public class JeuPane extends StackPane implements IJeuListener, ITraduction {
 					imgCarte2.setImage(new Image(DataControl.CARTE_VIDE));
 				}
 				if (listeCartes.size() >= 3) {
-					imgCarte3.setImage(new Image(convertCarte(listeCartes.get(2))));
+					imgCarte3.setImage(new Image(IhmTools.convertCarte(listeCartes.get(2))));
 					bCarte3.setDisable(false);
 					bCarte3.setText(International.trad("texte.selectionner"));
 					bCarte3.setOnAction(EventHandler -> {
@@ -1661,6 +1652,11 @@ public class JeuPane extends StackPane implements IJeuListener, ITraduction {
 		});
 	}
 
+	/**
+	 * Met a jour le nom des joueurs
+	 * 
+	 * @param listeNomJoueur la liste des joueurs a afficher
+	 */
 	@Override
 	public void nomJoueurs(List<String> listeNomJoueur) {
 		Platform.runLater(new Runnable() {
@@ -1673,6 +1669,9 @@ public class JeuPane extends StackPane implements IJeuListener, ITraduction {
 		});
 	}
 
+	/**
+	 * Remet a zero les cartes de la phase du fouille du camion
+	 */
 	public void cartePanelReset() {
 		fond.setEffect(null);
 		rectVigile.setEffect(null);
@@ -1701,6 +1700,9 @@ public class JeuPane extends StackPane implements IJeuListener, ITraduction {
 		selectedCouleurFouille = null;
 	}
 
+	/*
+	 * Met a jour l'affichage des cartes
+	 */
 	@Override
 	public void updateCarte() {
 		Platform.runLater(new Runnable() {
@@ -1714,7 +1716,7 @@ public class JeuPane extends StackPane implements IJeuListener, ITraduction {
 				cartes = core.getIdjr().getListeCarte();
 				for (int i = 0; i < imgViews.length; i++) {
 					if (i < core.getIdjr().getListeCarte().size()) {
-						imgViews[i].setImage(new Image(convertCarte(core.getIdjr().getListeCarte().get(i))));
+						imgViews[i].setImage(new Image(IhmTools.convertCarte(core.getIdjr().getListeCarte().get(i))));
 						carteVbox[i].setVisible(true);
 						imgViews[i].setDisable(false);
 					} else {
@@ -1728,6 +1730,9 @@ public class JeuPane extends StackPane implements IJeuListener, ITraduction {
 		});
 	}
 
+	/**
+	 * Remet a zero l'utilisation des cartes
+	 */
 	public void resetUtiliserCarte() {
 		Button[] buttons = { bDeCarte1, bDeCarte2, bDeCarte3, bDeCarte4, bDeCarte5, bDeCarte6, bDeCarte7, bDeCarte8,
 				bPasserCarte };
@@ -1743,6 +1748,9 @@ public class JeuPane extends StackPane implements IJeuListener, ITraduction {
 		bPasserCarte.setText(International.trad("texte.passer"));
 	}
 
+	/**
+	 * Remet a zero l'affichage des votes
+	 */
 	public void resetVoteCarte() {
 		vote.setVisible(false);
 		Button[] buttons = { joueur1, joueur2, joueur3, joueur4, joueur5 };
@@ -1752,14 +1760,24 @@ public class JeuPane extends StackPane implements IJeuListener, ITraduction {
 		}
 	}
 
+	/**
+	 * Permet de reset le style des joueurs des votes
+	 * 
+	 * @param btn le boutton a modifier
+	 */
 	public void resetCartesSelection(Button btn) {
 		Button[] buttons = { joueur1, joueur2, joueur3, joueur4, joueur5 };
 		for (int i = 0; i < buttons.length; i++) {
 			if (!buttons[i].equals(btn))
-				buttons[i].setStyle(null);
+				buttons[i].setStyle(styleBoutons);
 		}
 	}
 
+	/**
+	 * Permet d'afficher les votes
+	 * 
+	 * @param listeCouleurJoueur la liste des joueurs pour qui on peut voter
+	 */
 	@Override
 	public void setVote(List<Couleur> listeCouleurJoueur) {
 		Platform.runLater(new Runnable() {
@@ -1804,6 +1822,11 @@ public class JeuPane extends StackPane implements IJeuListener, ITraduction {
 		});
 	}
 
+	/**
+	 * Permet de choisir une carte parmi une carte
+	 * 
+	 * @param carteType la cartes qui peut etre séléctionné
+	 */
 	@Override
 	public void choisirUtiliserCarte(CarteType carteType) {
 		Platform.runLater(new Runnable() {
@@ -1823,8 +1846,8 @@ public class JeuPane extends StackPane implements IJeuListener, ITraduction {
 							buttons[i].setOnAction(EventHandler -> {
 								if (selectedCarteChoi == CarteType.NUL) {
 									selectedCarteChoi = type;
-									buttons[tmp]
-											.setStyle("-fx-border-color: red; -fx-border-insets: -5; -fx-border-width: 3;");
+									buttons[tmp].setStyle(
+											"-fx-border-color: red; -fx-border-insets: -5; -fx-border-width: 3;");
 									bPasserCarte.setText(International.trad("texte.valider"));
 								} else {
 									selectedCarteChoi = CarteType.NUL;
@@ -1850,6 +1873,11 @@ public class JeuPane extends StackPane implements IJeuListener, ITraduction {
 		});
 	}
 
+	/**
+	 * Permet de choisir une carte parmi une liste
+	 * 
+	 * @param carteTypes la liste des cartes qui peuvent etre séléctionné
+	 */
 	@Override
 	public void choisirUtiliserCarte(List<CarteType> carteTypes) {
 		Platform.runLater(new Runnable() {
@@ -1896,6 +1924,11 @@ public class JeuPane extends StackPane implements IJeuListener, ITraduction {
 		});
 	}
 
+	/**
+	 * Permet de remettre a zero le bouton des cartes
+	 * 
+	 * @param btn le bouton a reset
+	 */
 	public void resetSelection(Button btn) {
 		Button[] buttons = { bDeCarte1, bDeCarte2, bDeCarte3, bDeCarte4, bDeCarte5, bDeCarte6, bDeCarte7, bDeCarte8 };
 		for (Button button : buttons) {
@@ -1905,6 +1938,10 @@ public class JeuPane extends StackPane implements IJeuListener, ITraduction {
 		}
 	}
 
+	/**
+	 * Permet de changer l'affichage du bouton des cartes selon les cartes
+	 * séléctionné
+	 */
 	public void setContinue() {
 		if (estActif.contains(true)) {
 			bPasserCarte.setText(International.trad("texte.valider"));
@@ -1913,6 +1950,11 @@ public class JeuPane extends StackPane implements IJeuListener, ITraduction {
 		}
 	}
 
+	/**
+	 * Permet de choisir plusieurs carte parmi une liste
+	 * 
+	 * @param carteTypes la liste des cartes qui peuvent etre séléctionné
+	 */
 	@Override
 	public void choisirUtiliserCartes(List<CarteType> carteTypes) {
 		Platform.runLater(new Runnable() {
@@ -1958,6 +2000,9 @@ public class JeuPane extends StackPane implements IJeuListener, ITraduction {
 		});
 	}
 
+	/**
+	 * Permet d'obtenir le carte choisi sur l'affichage
+	 */
 	public List<CarteType> getList() {
 		List<CarteType> cartesResultaTypes = new ArrayList<>();
 		for (int i = 0; i < cartes.size(); i++) {
@@ -1969,6 +2014,9 @@ public class JeuPane extends StackPane implements IJeuListener, ITraduction {
 		return cartesResultaTypes;
 	}
 
+	/**
+	 * Affiche les logs
+	 */
 	@Override
 	public void log(String action) {
 		Platform.runLater(new Runnable() {
@@ -1981,12 +2029,24 @@ public class JeuPane extends StackPane implements IJeuListener, ITraduction {
 		});
 	}
 
+	/**
+	 * Enleve l'affichage des dés
+	 */
 	@Override
 	public void enleverDes() {
-		des.setVisible(false);
+		Platform.runLater(new Runnable() {
+			@Override
+			public void run() {
+				des.setVisible(false);
+			}
+		});
 	}
 
-	Pane lastPane;
+	/**
+	 * Permet d'attirer l'attention du joueur sur un pane
+	 * 
+	 * @param pane le pane cible
+	 */
 	private void attirerAttention(Pane pane) {
 		int tmp = 0;
 		if (attenTimer1 != null) {
@@ -1997,7 +2057,7 @@ public class JeuPane extends StackPane implements IJeuListener, ITraduction {
 		}
 		lastPane = pane;
 
-		for (int i = 1; i <= 6; i++) {
+		for (int i = 1; i <= 10; i++) {
 			attenTimer1 = new Timer();
 			attenTimer1.schedule(new TimerTask() {
 
@@ -2022,49 +2082,58 @@ public class JeuPane extends StackPane implements IJeuListener, ITraduction {
 		}
 	}
 
+	/**
+	 * Traduit les elements de ce pane
+	 */
 	@Override
 	public void traduire() {
-		nomJoueur.setText(International.trad("texte.nomJoueur"));
-		phasePartie.setText(International.trad("texte.phase"));
-		bPasserCarte.setText(International.trad("texte.passer"));
-		joueur1.setText(International.trad("texte.j1"));
-		joueur2.setText(International.trad("texte.j2"));
-		joueur3.setText(International.trad("texte.j3"));
-		joueur4.setText(International.trad("texte.j4"));
-		joueur5.setText(International.trad("texte.j5"));
-		titreQuestion.setText(International.trad("texte.qVote"));
-		bCarte1.setText(International.trad("texte.c1"));
-		bCarte2.setText(International.trad("texte.c2"));
-		bCarte3.setText(International.trad("texte.c3"));
-		bChoixGarder.setText(International.trad("bouton.garder"));
-		bChoixDonner.setText(International.trad("bouton.donner"));
-		bChoixDefausser.setText(International.trad("bouton.defausser"));
-		joueur1c.setText(International.trad("texte.j1"));
-		joueur2c.setText(International.trad("texte.j2"));
-		joueur3c.setText(International.trad("texte.j3"));
-		joueur4c.setText(International.trad("texte.j4"));
-		joueur5c.setText(International.trad("texte.j5"));
-		titreFouille.setText(International.trad("text.fouilleCamion"));
-		titreQuestionCarte.setText(International.trad("texte.qCarte"));
-		labDeplPers.setText(International.trad("text.deplPersonnages"));
-		bBlonde.setText(International.trad("bouton.laBlonde"));
-		bBrute.setText(International.trad("bouton.laBrute"));
-		bTruand.setText(International.trad("bouton.leTruand"));
-		bFillette.setText(International.trad("bouton.laFillette"));
-		labDeplLieux.setText(International.trad("texte.destination"));
-		bToilettes.setText(International.trad("texte.lieu1"));
-		bCachou.setText(International.trad("texte.lieu2"));
-		bMegatoys.setText(International.trad("texte.lieu3"));
-		bParking.setText(International.trad("texte.lieu4"));
-		bPCSecu.setText(International.trad("texte.lieu5") + "\n" + International.trad("texte.lieu5b"));
-		bSuperMarche.setText(International.trad("texte.lieu6"));
-		titrede.setText(International.trad("texte.des"));
-		lInfo.setText(International.trad("texte.info"));
-		bQuitterInfo.setText(International.trad("bouton.quitter"));
-		lo.setText(International.trad("texte.nomPerso") + International.trad("texte.coulPerso")
-				+ International.trad(("texte.depLieu")));
-		titreInfo.setText("Information");
-		linfoZombie.setText("Des zombies arriveront dans les lieux {0}, {1}, {2}, {3}");
-		bForce.setText(International.trad("text.forceEquipeA") + "\n" + International.trad("text.forceEquipeB"));
+		Platform.runLater(new Runnable() {
+			@Override
+			public void run() {
+				nomJoueur.setText(International.trad("texte.nomJoueur"));
+				phasePartie.setText(International.trad("texte.phase"));
+				bPasserCarte.setText(International.trad("texte.passer"));
+				joueur1.setText(International.trad("texte.j1"));
+				joueur2.setText(International.trad("texte.j2"));
+				joueur3.setText(International.trad("texte.j3"));
+				joueur4.setText(International.trad("texte.j4"));
+				joueur5.setText(International.trad("texte.j5"));
+				titreQuestion.setText(International.trad("texte.qVote"));
+				bCarte1.setText(International.trad("texte.c1"));
+				bCarte2.setText(International.trad("texte.c2"));
+				bCarte3.setText(International.trad("texte.c3"));
+				bChoixGarder.setText(International.trad("bouton.garder"));
+				bChoixDonner.setText(International.trad("bouton.donner"));
+				bChoixDefausser.setText(International.trad("bouton.defausser"));
+				joueur1c.setText(International.trad("texte.j1"));
+				joueur2c.setText(International.trad("texte.j2"));
+				joueur3c.setText(International.trad("texte.j3"));
+				joueur4c.setText(International.trad("texte.j4"));
+				joueur5c.setText(International.trad("texte.j5"));
+				titreFouille.setText(International.trad("text.fouilleCamion"));
+				titreQuestionCarte.setText(International.trad("texte.qCarte"));
+				labDeplPers.setText(International.trad("text.deplPersonnages"));
+				bBlonde.setText(International.trad("bouton.laBlonde"));
+				bBrute.setText(International.trad("bouton.laBrute"));
+				bTruand.setText(International.trad("bouton.leTruand"));
+				bFillette.setText(International.trad("bouton.laFillette"));
+				labDeplLieux.setText(International.trad("texte.destination"));
+				bToilettes.setText(International.trad("texte.lieu1"));
+				bCachou.setText(International.trad("texte.lieu2"));
+				bMegatoys.setText(International.trad("texte.lieu3"));
+				bParking.setText(International.trad("texte.lieu4"));
+				bPCSecu.setText(International.trad("texte.lieu5") + "\n" + International.trad("texte.lieu5b"));
+				bSuperMarche.setText(International.trad("texte.lieu6"));
+				titrede.setText(International.trad("texte.des"));
+				lInfo.setText(International.trad("texte.info"));
+				bQuitterInfo.setText(International.trad("bouton.quitter"));
+				lo.setText(International.trad("texte.nomPerso") + International.trad("texte.coulPerso")
+						+ International.trad(("texte.depLieu")));
+				titreInfo.setText("Information");
+				linfoZombie.setText("Des zombies arriveront dans les lieux {0}, {1}, {2}, {3}");
+				bForce.setText(
+						International.trad("text.forceEquipeA") + "\n" + International.trad("text.forceEquipeB"));
+			}
+		});
 	}
 }

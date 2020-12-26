@@ -1,6 +1,6 @@
 package idjr;
 
-import idjr.ihmidjr.event.Initializer;
+import idjr.ihmidjr.event.Evenement;
 import idjr.ihmidjr.event.IJeuListener;
 import reseau.socket.ControleurReseau;
 import reseau.tool.ReseauOutils;
@@ -93,7 +93,7 @@ public class Idjr {
 					System.out.println("OK");
 					current = partieInfo;
 					ControleurReseau.demarrerClientTcp(partieInfo.getIp(), partieInfo.getPort());
-					Initializer.partieValide(nom);
+					Evenement.partieValide(nom);
 					return;
 				}
 			}
@@ -123,19 +123,16 @@ public class Idjr {
 				listOfServer.remove(partieInfo);
 		}
 
-		Initializer.partie(listOfServer);
+		Evenement.partie(listOfServer);
 	}
 
 	public void rejoindrePartie(String nomp) {
 		setIpPp(current.getIp());
 		setPortPp(current.getPort());
-		Initializer.nomPartie(current.getIdPartie());
+		Evenement.nomPartie(current.getIdPartie());
 		String messageTcp = ControleurReseau.construirePaquetTcp("DCP", nom, typeJoueur, current.getIdPartie());
 		ThreadOutils.asyncTask("rejoindrePartie", () -> {
 			ControleurReseau.envoyerTcp(messageTcp);
-			ControleurReseau.attendreTcp("ACP");
-			String message1 = ControleurReseau.getMessageTcp("ACP");
-			setJoueurId((String) ControleurReseau.getValueTcp("ACP", message1, 2));
 		});
 	}
 
@@ -377,7 +374,7 @@ public class Idjr {
 
 	public void addCarte(CarteType n) {
 		listeCarte.add(n);
-		Initializer.updateCarte();
+		Evenement.updateCarte();
 	}
 
 	public void setListeCarte(List<CarteType> listeCarte) {

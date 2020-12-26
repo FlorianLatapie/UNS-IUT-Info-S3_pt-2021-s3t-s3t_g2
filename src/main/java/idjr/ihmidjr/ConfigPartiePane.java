@@ -247,50 +247,85 @@ public class ConfigPartiePane extends StackPane implements IConfigListener, ITra
 
 	}
 
+	/**
+	 * Lance la procédure pour rejoindre une partie
+	 * 
+	 * @param id l'identifiant de la partie
+	 */
 	@Override
 	public void partieValide(String id) {
-		Platform.runLater(() -> {
-			core.getIdjr().rejoindrePartie(id);
-			sControl.setPaneOnTop(ApplicationPane.WAIT);
+		Platform.runLater(new Runnable() {
+			@Override
+			public void run() {
+				core.getIdjr().rejoindrePartie(id);
+			}
 		});
 	}
 
+	/**
+	 * Change l'affichage a l'attente
+	 */
+	@Override
+	public void partieValider() {
+		Platform.runLater(new Runnable() {
+			@Override
+			public void run() {
+				sControl.setPaneOnTop(ApplicationPane.WAIT);
+			}
+		});
+	}
+
+	/**
+	 * Met a jour les parties sur l'affichage
+	 * 
+	 * @param partieInfo la liste des partie
+	 */
 	@Override
 	public void partie(List<PartieInfo> partieInfo) {
-		Platform.runLater(() -> {
-			listView.getItems().clear();
-			if (partieInfo.isEmpty()) {
-				partieActuelle = null;
-				Label res = new Label(International.trad("texte.dispoPartie"));
-				res.setAlignment(Pos.CENTER);
-				res.setTextFill(Color.WHITE);
-				res.setFont(policeBouton);
-				listView.getItems().add(res);
-			} else {
-				partieActuelle = partieInfo;
-				for (PartieInfo partieInfo2 : partieInfo) {
-					Label res = new Label(partieInfo2.toString());
+		Platform.runLater(new Runnable() {
+			@Override
+			public void run() {
+				listView.getItems().clear();
+				if (partieInfo.isEmpty()) {
+					partieActuelle = null;
+					Label res = new Label(International.trad("texte.dispoPartie"));
 					res.setAlignment(Pos.CENTER);
 					res.setTextFill(Color.WHITE);
 					res.setFont(policeBouton);
 					listView.getItems().add(res);
+				} else {
+					partieActuelle = partieInfo;
+					for (PartieInfo partieInfo2 : partieInfo) {
+						Label res = new Label(partieInfo2.toString());
+						res.setAlignment(Pos.CENTER);
+						res.setTextFill(Color.WHITE);
+						res.setFont(policeBouton);
+						listView.getItems().add(res);
+					}
 				}
 			}
 		});
 	}
 
+	/**
+	 * Traduit les elements de ce pane
+	 */
 	@Override
 	public void traduire() {
-		titre1.setText(
-				International.trad("texte.titreConfigPartieA") + "\n" + International.trad("texte.titreConfigPartieB"));
-		desc.setText(International.trad("texte.idPartie"));
-		nomP.setText(International.trad("texte.Partie"));
-		bRefresh.setText(International.trad("bouton.rafraichir"));
-		bPbConnexion
-				.setText(International.trad("texte.pbConnexionA") + "\n" + International.trad("texte.pbConnexionB"));
+		Platform.runLater(new Runnable() {
+			@Override
+			public void run() {
+				titre1.setText(International.trad("texte.titreConfigPartieA") + "\n"
+						+ International.trad("texte.titreConfigPartieB"));
+				desc.setText(International.trad("texte.idPartie"));
+				nomP.setText(International.trad("texte.Partie"));
+				bRefresh.setText(International.trad("bouton.rafraichir"));
+				bPbConnexion.setText(
+						International.trad("texte.pbConnexionA") + "\n" + International.trad("texte.pbConnexionB"));
 
-		bJouer.setText(International.trad("bouton.jouer"));
-		bRetour.setText(International.trad("bouton.retour"));
-
+				bJouer.setText(International.trad("bouton.jouer"));
+				bRetour.setText(International.trad("bouton.retour"));
+			}
+		});
 	}
 }

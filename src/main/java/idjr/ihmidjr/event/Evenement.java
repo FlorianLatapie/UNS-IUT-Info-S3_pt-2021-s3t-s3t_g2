@@ -7,7 +7,7 @@ import idjr.PartieInfo;
 import reseau.type.CarteType;
 import reseau.type.Couleur;
 
-public abstract class Initializer {
+public abstract class Evenement {
 	private static final List<IJeuListener> listenersjl = new ArrayList<>();
 	private static final List<IFinListener> listenersfl = new ArrayList<>();
 	private static final List<IConfigListener> listenerscl = new ArrayList<>();
@@ -112,7 +112,7 @@ public abstract class Initializer {
 	public static void choisirCarte(List<CarteType> listeCartes, List<Couleur> listeCouleurJoueurVivant, boolean garder,
 			boolean donner, boolean defausser, boolean utiliser) {
 		for (IJeuListener jl : listenersjl)
-			jl.choisirCarte(listeCartes, listeCouleurJoueurVivant, garder, donner, defausser, utiliser);
+			jl.choisirCarte(listeCartes, listeCouleurJoueurVivant, garder, donner, defausser);
 	}
 
 	public static void nomJoueurs(List<String> listeNomJoueur) {
@@ -168,5 +168,10 @@ public abstract class Initializer {
 	public static void updatePleineEcran() {
 		for (IPleineEcranListener pel : listenerspel)
 			pel.updatePleineEcran();
+	}
+	
+	public static void partieValider() {
+		for (IConfigListener cl : listenerscl)
+			cl.partieValider();
 	}
 }

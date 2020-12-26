@@ -5,6 +5,7 @@ import idjr.ihmidjr.event.IPleineEcranListener;
 import idjr.ihmidjr.langues.ITraduction;
 import idjr.ihmidjr.langues.International;
 import idjr.ihmidjr.langues.Langues;
+import javafx.application.Platform;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
@@ -176,22 +177,36 @@ public class OptionPane extends StackPane implements IPleineEcranListener, ITrad
 		sControl.setPaneOnTop(paneName);
 	}
 
+	/**
+	 * Met a jour le bouton du mode plein écran
+	 */
 	@Override
 	public void updatePleineEcran() {
-		if (!core.getSauvegarderOptions().isEstPleineEcran())
-			bPleinEcran.setText(International.trad("bouton.pEcran"));
-		else
-			bPleinEcran.setText(International.trad("bouton.fenetre"));
+		Platform.runLater(new Runnable() {
+			@Override
+			public void run() {
+				if (!core.getSauvegarderOptions().isEstPleineEcran())
+					bPleinEcran.setText(International.trad("bouton.pEcran"));
+				else
+					bPleinEcran.setText(International.trad("bouton.fenetre"));
+			}
+		});
 	}
 
+	/**
+	 * Traduit les elements de ce pane
+	 */
 	@Override
 	public void traduire() {
-
-		titre.setText(International.trad("bouton.options"));
-		bFrancais.setText(International.trad("texte.langue1"));
-		bEnglish.setText(International.trad("texte.langue2"));
-		bPleinEcran.setText(International.trad("bouton.pEcran"));
-		bRetour.setText(International.trad("bouton.retour"));
-
+		Platform.runLater(new Runnable() {
+			@Override
+			public void run() {
+				titre.setText(International.trad("bouton.options"));
+				bFrancais.setText(International.trad("texte.langue1"));
+				bEnglish.setText(International.trad("texte.langue2"));
+				bPleinEcran.setText(International.trad("bouton.pEcran"));
+				bRetour.setText(International.trad("bouton.retour"));
+			}
+		});
 	}
 }

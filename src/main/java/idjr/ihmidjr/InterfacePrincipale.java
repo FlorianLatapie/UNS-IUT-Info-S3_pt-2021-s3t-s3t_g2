@@ -1,7 +1,7 @@
 package idjr.ihmidjr;
 
 import idjr.Idjr;
-import idjr.ihmidjr.event.Initializer;
+import idjr.ihmidjr.event.Evenement;
 import idjr.ihmidjr.langues.International;
 import javafx.application.Application;
 import javafx.application.Platform;
@@ -61,18 +61,16 @@ public class InterfacePrincipale extends Application {
 		root.getChildren().add(accueilPane);
 
 		core.setIdjr(new Idjr());
-		Initializer.addListener(configPartiePane);
-		Initializer.addListener(jeuPane);
-		Initializer.addListener(finDePartiePane);
-		Initializer.addListener(attenteJoueurPane);
-		Initializer.addListener(optionPane);
-		
-		
+		Evenement.addListener(configPartiePane);
+		Evenement.addListener(jeuPane);
+		Evenement.addListener(finDePartiePane);
+		Evenement.addListener(attenteJoueurPane);
+		Evenement.addListener(optionPane);
 
 		/* Ajouter les panes dont il y de la rotation */
 		// Initializer.addListenerAttente(PANE);
 
-		Initializer.updatePleineEcran();
+		Evenement.updatePleineEcran();
 
 		International.ajouterPane(accueilPane);
 		International.ajouterPane(reglesPane);
@@ -83,8 +81,6 @@ public class InterfacePrincipale extends Application {
 		International.ajouterPane(confirmationPane);
 
 		International.changerLangue(core.getSauvegarderOptions().getLangues());
-
-		
 
 		primaryStage.setScene(scene);
 		primaryStage.getScene().getWindow().addEventFilter(WindowEvent.WINDOW_CLOSE_REQUEST, this::onClose);

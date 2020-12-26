@@ -34,7 +34,7 @@ public class AttenteJoueurPane extends StackPane implements IAttenteListener, IT
 	private StackPane stackPane = new StackPane();
 	private GaussianBlur flou = new GaussianBlur(30);
 	private String styleVBox = "-fx-border-color: black; -fx-border-insets: -3; -fx-border-width: 3";
-	
+
 	private String nomPolice = "Segoe UI";
 	private Font policeNom = Font.font(nomPolice, FontWeight.BOLD, 33);
 	private int hauteurElemtents = 60;
@@ -172,20 +172,46 @@ public class AttenteJoueurPane extends StackPane implements IAttenteListener, IT
 	 * @Override public void nomPartie(String nom) { lIDPartie.setText(nom); }
 	 */
 
+	/**
+	 * Passe a l'affichage du jeu
+	 */
 	@Override
 	public void stopWait() {
-		Platform.runLater(() -> sControl.setPaneOnTop(ApplicationPane.JEU));
+		Platform.runLater(new Runnable() {
+			@Override
+			public void run() {
+				sControl.setPaneOnTop(ApplicationPane.JEU);
+			}
+		});
 	}
 
+	/**
+	 * Met a jour le nom de la partie
+	 * 
+	 * @param nom le nom du joueur
+	 */
 	@Override
 	public void nomPartie(String nom) {
-		Platform.runLater(() -> lIDPartie.setText(nom));
+		Platform.runLater(new Runnable() {
+			@Override
+			public void run() {
+				lIDPartie.setText(nom);
+			}
+		});
 	}
 
+	/**
+	 * Traduit les elements de ce pane
+	 */
 	@Override
 	public void traduire() {
-		titre1.setText(International.trad("texte.titreAttenteA") + "\n" + International.trad("texte.titreAttenteB"));
-		desc.setText(International.trad("texte.attenteJoueur"));
-
+		Platform.runLater(new Runnable() {
+			@Override
+			public void run() {
+				titre1.setText(
+						International.trad("texte.titreAttenteA") + "\n" + International.trad("texte.titreAttenteB"));
+				desc.setText(International.trad("texte.attenteJoueur"));
+			}
+		});
 	}
 }

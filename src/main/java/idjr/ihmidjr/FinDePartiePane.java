@@ -377,31 +377,46 @@ public class FinDePartiePane extends StackPane implements IFinListener, ITraduct
 
 	}
 
+	/**
+	 * Affiche le gagnant
+	 * 
+	 * @param nom le nom du joueur
+	 */
 	@Override
 	public void gagnant(String nom) {
-		Platform.runLater(() -> {
-			if (nom.equals(core.getIdjr().getNom()))
-				desc.setText(International.trad("text.gagne"));
-			else
-				desc.setText(International.trad("text.perd1") + "\n" + International.trad("text.perd2", nom));
+		Platform.runLater(new Runnable() {
+			@Override
+			public void run() {
+				if (nom.equals(core.getIdjr().getNom()))
+					desc.setText(International.trad("text.gagne"));
+				else
+					desc.setText(International.trad("text.perd1") + "\n" + International.trad("text.perd2", nom));
+			}
 		});
 	}
 
+	/**
+	 * Traduit les elements de ce pane
+	 */
 	@Override
 	public void traduire() {
-		titre1.setText(
-				International.trad("text.titreFinDePartieA") + " " + International.trad("text.titreFinDePartieB"));
-		nomJoueur1.setText(International.trad("texte.j1"));
-		nomJoueur2.setText(International.trad("texte.j2"));
-		nomJoueur3.setText(International.trad("texte.j3"));
-		nomJoueur4.setText(International.trad("texte.j4"));
-		nomJoueur5.setText(International.trad("texte.j5"));
-		nomJoueur6.setText(International.trad("texte.j6"));
-		titreJoueur.setText(International.trad("texte.nom"));
-		titreScore.setText(International.trad("texte.score"));
-		titreNbPersVivant.setText(International.trad("texte.alive"));
-		titreNbZbTues.setText(International.trad("texte.zTues"));
-		bRetour.setText(International.trad("bouton.retour"));
+		Platform.runLater(new Runnable() {
+			@Override
+			public void run() {
+				titre1.setText(International.trad("text.titreFinDePartieA") + " "
+						+ International.trad("text.titreFinDePartieB"));
+				nomJoueur1.setText(International.trad("texte.j1"));
+				nomJoueur2.setText(International.trad("texte.j2"));
+				nomJoueur3.setText(International.trad("texte.j3"));
+				nomJoueur4.setText(International.trad("texte.j4"));
+				nomJoueur5.setText(International.trad("texte.j5"));
+				nomJoueur6.setText(International.trad("texte.j6"));
+				titreJoueur.setText(International.trad("texte.nom"));
+				titreScore.setText(International.trad("texte.score"));
+				titreNbPersVivant.setText(International.trad("texte.alive"));
+				titreNbZbTues.setText(International.trad("texte.zTues"));
+				bRetour.setText(International.trad("bouton.retour"));
+			}
+		});
 	}
-
 }
