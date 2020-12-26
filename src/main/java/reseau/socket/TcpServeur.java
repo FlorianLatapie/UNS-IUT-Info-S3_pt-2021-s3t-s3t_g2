@@ -26,7 +26,7 @@ public class TcpServeur implements Runnable, IControleSocket {
 	private final Logger logger;
 
 	/**
-	 * @param controleurReseau Le controleur reseau associé
+	 * @param ip               L'ip du serveur TCP
 	 * @param port             Le port du serveur TCP
 	 */
 	public TcpServeur(InetAddress ip, int port) {
@@ -108,6 +108,8 @@ public class TcpServeur implements Runnable, IControleSocket {
 
 	/**
 	 * Permet de savoir le client tcp est pret.
+	 * 
+	 * @return si le serveur tcp a bloqué le port
 	 */
 	public boolean isPret() {
 		return serveurSocket.isBound();
@@ -115,6 +117,8 @@ public class TcpServeur implements Runnable, IControleSocket {
 
 	/**
 	 * Permet de savoir le client tcp est arreter.
+	 * 
+	 * @return si le serveur tcp est arreté
 	 */
 	public boolean isArreter() {
 		return !serveurSocket.isClosed();
