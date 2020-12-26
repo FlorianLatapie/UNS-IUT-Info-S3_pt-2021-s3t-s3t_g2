@@ -59,13 +59,9 @@ public class ControleurElectionVigile {
 	}
 
 	public Joueur joueurElection(Partie jeu, String partieId, int numeroTour) {
-		//TODO modifier
-		Joueur j = null;
-		if (jeu.getJoueurSurLieu(jeu.getLieux().get(5)).size() == 1)
-			j = jeu.getJoueurSurLieu(jeu.getLieux().get(5)).get(0);
-		if (j == null)
-			j = cVote.phaseVote(jeu, jeu.getLieux().get(5), VoteType.ECD, partieId, numeroTour);
-		return j;
+		if (jeu.getJoueurSurLieu(jeu.getLieux().get(4)).size() == 1)
+			return jeu.getJoueurSurLieu(jeu.getLieux().get(4)).get(0);
+		return cVote.phaseVote(jeu, jeu.getLieux().get(4), VoteType.FDC, partieId, numeroTour);
 	}
 	
 	public void newVigile(Partie jeu, Joueur j) {
