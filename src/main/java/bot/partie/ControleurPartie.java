@@ -69,7 +69,7 @@ public class ControleurPartie {
 	/**
 	 * @return le partie
 	 */
-	public Partie getJeu() {
+	public Partie getpartie() {
 		return partie;
 	}
 
