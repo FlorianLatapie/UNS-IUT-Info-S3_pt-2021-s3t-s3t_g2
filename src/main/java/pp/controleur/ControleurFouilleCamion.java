@@ -14,7 +14,8 @@ import reseau.type.Couleur;
 import reseau.type.VoteType;
 
 /**
- * <h1>La classe ControleurFouilleCamion</h1>. A pour rôle de gérer la phase de fouille du camion
+ * <h1>La classe ControleurFouilleCamion</h1>. A pour rôle de gérer la phase de
+ * fouille du camion
  *
  * @author Aurelien
  * @version 1
@@ -24,11 +25,21 @@ public class ControleurFouilleCamion {
 	private FouilleCamionReseau fr;
 	private ControleurVote cVote;
 
+	/**
+	 * Instancie le Contrtoleur de la phase de fouille du camion.
+	 */
 	public ControleurFouilleCamion() {
 		fr = new FouilleCamionReseau();
 		cVote = new ControleurVote();
 	}
 
+	/**
+	 * Execute la phase de fouille du camion.
+	 *
+	 * @param jeu        La partie courante.
+	 * @param partieID   L'identifiant de la partie en cours.
+	 * @param numeroTour Le numéro du tour courant.
+	 */
 	public void phaseFouilleCamion(Partie jeu, String partieId, int numeroTour) {
 		String s = "";
 		fr.debutPhaseFouille(jeu, partieId, numeroTour);
@@ -59,17 +70,44 @@ public class ControleurFouilleCamion {
 		}
 	}
 
-	public Boolean isFouillable(Partie jeu) {
+	/**
+	 * Vérifie si une fouille du camion est possible.
+	 *
+	 * @param jeu La partie en cours.
+	 * 
+	 * @return On peut faire une fouille du camion.
+	 */
+	private Boolean isFouillable(Partie jeu) {
 		return !jeu.getJoueurSurLieu(jeu.getLieux().get(4)).isEmpty() && !jeu.getCartes().isEmpty();
 	}
 
-	public Joueur joueurFouille(Partie jeu, String partieId, int numeroTour) {
+	/**
+	 * Definie le joueur elu pour fouiller le camion.
+	 *
+	 * @param jeu        La partie en cours.
+	 * @param partieID   L'identifiant de la partie en cours.
+	 * @param numeroTour Le numéro du tour courant.
+	 * 
+	 * @return le joueur élu pour fouiller le camion.
+	 */
+	private Joueur joueurFouille(Partie jeu, String partieId, int numeroTour) {
 		if (jeu.getJoueurSurLieu(jeu.getLieux().get(4)).size() == 1)
 			return jeu.getJoueurSurLieu(jeu.getLieux().get(4)).get(0);
 		return cVote.phaseVote(jeu, jeu.getLieux().get(4), VoteType.FDC, partieId, numeroTour);
 	}
 
-	public void traitementResultatFouille(Partie jeu, Joueur j, CarteType carte1, CarteType carte2, Couleur couleur,
+	/**
+	 * Traite le résultat de la fouille.
+	 *
+	 * @param jeu        La partie en cours.
+	 * @param carte1     La carte gardé par le fouilleur.
+	 * @param carte2     La carte donné par le fouilleur.
+	 * @param couleur    La couleur du joueur recevant la carte donné.
+	 * @param carte3     La carte defaussé.
+	 * @param partieID   L'identifiant de la partie en cours.
+	 * @param numeroTour Le numéro du tour courant.
+	 */
+	private void traitementResultatFouille(Partie jeu, Joueur j, CarteType carte1, CarteType carte2, Couleur couleur,
 			CarteType carte3) {
 		if (carte1 != CarteType.NUL)
 			j.getCartes().add(carte1);
@@ -80,7 +118,14 @@ public class ControleurFouilleCamion {
 		Evenement.nbCarteJoueurAll(new ArrayList<>(jeu.getJoueurs().values()));
 	}
 
-	public CarteEtat etatCarteDefausse(CarteType ct) {
+	/**
+	 * Definie l'état de la carte défaussé.
+	 *
+	 * @param ct La carte deffaussé.
+	 * 
+	 * @return Etat de la carte défaussé.
+	 */
+	private CarteEtat etatCarteDefausse(CarteType ct) {
 		CarteEtat ce = CarteEtat.NUL;
 		if (ct != null)
 			ce = CarteEtat.CD;
