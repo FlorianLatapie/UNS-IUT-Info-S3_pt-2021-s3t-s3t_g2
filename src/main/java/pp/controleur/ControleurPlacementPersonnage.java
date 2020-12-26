@@ -11,7 +11,8 @@ import pp.ihm.event.Evenement;
 import pp.reseau.PlacementReseau;
 
 /**
- * <h1>La classe ControleurPlacementPersonnage</h1>. A pour rôle de gérer la phase de placement des personnages
+ * <h1>La classe ControleurPlacementPersonnage</h1>. A pour rôle de gérer la
+ * phase de placement des personnages
  *
  * @author Aurelien
  * @version 1
@@ -25,10 +26,10 @@ public class ControleurPlacementPersonnage {
 		pr = new PlacementReseau();
 		rd = new Random();
 	}
-	
+
 	public void placementPersonnage(Partie jeu, String partieId, int numeroTour) {
 		for (int n = 0; n < jeu.getJoueurs().get(0).getPersonnages().size(); n++) {
-			for (Joueur j: jeu.getJoueurs().values()) {
+			for (Joueur j : jeu.getJoueurs().values()) {
 				pr.informerJoueur(jeu, j, partieId);
 				int x = jeu.getLieuxOuverts().get(rd.nextInt(jeu.getLieuxOuverts().size()));
 				int y = jeu.getLieuxOuverts().get(rd.nextInt(jeu.getLieuxOuverts().size()));
@@ -46,7 +47,7 @@ public class ControleurPlacementPersonnage {
 			}
 		}
 	}
-	
+
 	/**
 	 * Retourne la liste des index des destinations valides. Une destination valide
 	 * est un lieu sur lequel, il est possible de placer un personnage. Pour chaque
@@ -64,7 +65,7 @@ public class ControleurPlacementPersonnage {
 			for (Lieu l : jeu.getLieux().values())
 				if (!l.isFull() && l.isOuvert())
 					destinationPossible.add(l.getNum());
-		}else if (jeu.getLieux().get(destination1).isFull() && !jeu.getLieux().get(destination2).isFull())
+		} else if (jeu.getLieux().get(destination1).isFull() && !jeu.getLieux().get(destination2).isFull())
 			destinationPossible.add(destination2);
 		else if (!jeu.getLieux().get(destination1).isFull() && jeu.getLieux().get(destination2).isFull())
 			destinationPossible.add(destination1);
@@ -74,6 +75,5 @@ public class ControleurPlacementPersonnage {
 		}
 		return destinationPossible;
 	}
-
 
 }
