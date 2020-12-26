@@ -10,6 +10,13 @@ import pp.PpTools;
 import pp.ihm.event.Evenement;
 import pp.reseau.PlacementReseau;
 
+/**
+ * <h1>La classe ControleurPlacementPersonnage</h1>. A pour rôle de gérer la phase de placement des personnages
+ *
+ * @author Aurelien
+ * @version 1
+ * @since 12/12/2020
+ */
 public class ControleurPlacementPersonnage {
 	private PlacementReseau pr;
 	private Random rd;
