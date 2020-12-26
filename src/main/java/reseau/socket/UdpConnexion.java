@@ -1,6 +1,7 @@
 package reseau.socket;
 
 import reseau.tool.PtOutils;
+import reseau.tool.ThreadOutils;
 
 import java.io.IOException;
 import java.net.DatagramPacket;
@@ -148,9 +149,9 @@ public class UdpConnexion implements Runnable, IEchangeSocket, IControleSocket {
 	 */
 	public void attendreConnexion() {
 		while (multicastSocket == null)
-			Thread.yield();
+			ThreadOutils.attendre();
 		while (!isPret())
-			Thread.yield();
+			ThreadOutils.attendre();
 	}
 
 	/**
