@@ -1999,4 +1999,20 @@ public class PlateauPane extends StackPane implements IPlateauListener, ITraduct
 			}
 		});
 	}
+
+	@Override
+	public void suppQuiJoue() {
+		if (couleurs1.size() >= 1)
+			j1.setStyle(IhmOutils.color(couleurs1.get(index.get(0))));
+		if (couleurs1.size() >= 2)
+			j2.setStyle(IhmOutils.color(couleurs1.get(index.get(1))));
+		if (couleurs1.size() >= 3)
+			j3.setStyle(IhmOutils.color(couleurs1.get(index.get(2))));
+		if (couleurs1.size() >= 4)
+			j4.setStyle(IhmOutils.color(couleurs1.get(index.get(3))));
+		if (couleurs1.size() >= 5)
+			j5.setStyle(IhmOutils.color(couleurs1.get(index.get(4))));
+		if (couleurs1.size() >= 6)
+			j6.setStyle(IhmOutils.color(couleurs1.get(index.get(5))));
+	}
 }

@@ -181,24 +181,29 @@ public abstract class Evenement {
 		for (IPlateauListener pl : listenerspl)
 			pl.quiJoue(val);
 	}
-	
+
+	public static void suppQuiJoue() {
+		for (IPlateauListener pl : listenerspl)
+			pl.suppQuiJoue();
+	}
+
 	public static void nbPlaceLieuAll(List<Lieu> lieux) {
 		for (IPlateauListener pl : listenerspl)
 			for (Lieu lieu2 : lieux) {
-				nbPlaceLieu(lieu2.getNum(),lieu2.getPersonnage().size());
+				nbPlaceLieu(lieu2.getNum(), lieu2.getPersonnage().size());
 			}
 	}
-	
+
 	private static void nbPlaceLieu(int lieu, int val) {
 		for (IPlateauListener pl : listenerspl)
 			pl.nbPlaceLieu(lieu, val);
 	}
-	
+
 	public static void choiCouleur(List<Couleur> couleur) {
 		for (IPlateauListener pl : listenerspl)
 			pl.choiCouleur(couleur);
 	}
-	
+
 	public static void nbCartePiocheActuel(int val) {
 		for (IPlateauListener pl : listenerspl)
 			pl.nbCartePiocheActuel(val);
