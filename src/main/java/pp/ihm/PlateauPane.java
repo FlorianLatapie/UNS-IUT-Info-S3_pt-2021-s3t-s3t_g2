@@ -1742,47 +1742,13 @@ public class PlateauPane extends StackPane implements IPlateauListener, ITraduct
 		Platform.runLater(new Runnable() {
 			@Override
 			public void run() {
-				if (couleurs1.size() >= 1)
-					j1.setStyle(IhmOutils.color(couleurs1.get(index.get(0))));
-				if (couleurs1.size() >= 2)
-					j2.setStyle(IhmOutils.color(couleurs1.get(index.get(1))));
-				if (couleurs1.size() >= 3)
-					j3.setStyle(IhmOutils.color(couleurs1.get(index.get(2))));
-				if (couleurs1.size() >= 4)
-					j4.setStyle(IhmOutils.color(couleurs1.get(index.get(3))));
-				if (couleurs1.size() >= 5)
-					j5.setStyle(IhmOutils.color(couleurs1.get(index.get(4))));
-				if (couleurs1.size() >= 6)
-					j6.setStyle(IhmOutils.color(couleurs1.get(index.get(5))));
-
-				switch (index.get(couleurs1.indexOf(joueur))) {
-				case 0:
-					j1.setStyle(IhmOutils.color(couleurs1.get(index.get(0)))
-							+ " -fx-border-color: red; -fx-border-insets: -3; -fx-border-width: 3;");
-					break;
-				case 1:
-					j2.setStyle(IhmOutils.color(couleurs1.get(index.get(1)))
-							+ " -fx-border-color: red; -fx-border-insets: -3; -fx-border-width: 3;");
-					break;
-				case 2:
-					j3.setStyle(IhmOutils.color(couleurs1.get(index.get(2)))
-							+ " -fx-border-color: red; -fx-border-insets: -3; -fx-border-width: 3;");
-					break;
-				case 3:
-					j4.setStyle(IhmOutils.color(couleurs1.get(index.get(3)))
-							+ " -fx-border-color: red; -fx-border-insets: -3; -fx-border-width: 3;");
-					break;
-				case 4:
-					j5.setStyle(IhmOutils.color(couleurs1.get(index.get(4)))
-							+ " -fx-border-color: red; -fx-border-insets: -3; -fx-border-width: 3;");
-					break;
-				case 5:
-					j6.setStyle(IhmOutils.color(couleurs1.get(index.get(5)))
-							+ " -fx-border-color: red; -fx-border-insets: -3; -fx-border-width: 3;");
-					break;
-				default:
-					throw new IllegalStateException("Unexpected value: " + joueur);
+				for (int i = 0; i < vboxs.size(); i++) {
+					vboxs.get(i).setStyle(IhmOutils.color(couleurs1.get(i)));
 				}
+
+				int i = couleurs1.indexOf(joueur);
+				vboxs.get(i).setStyle(IhmOutils.color(couleurs1.get(i))
+						+ "; -fx-border-color: red; -fx-border-insets: -3; -fx-border-width: 3;");
 			}
 		});
 	}
@@ -1977,7 +1943,7 @@ public class PlateauPane extends StackPane implements IPlateauListener, ITraduct
 		nomJoueur6.setText("Choisir");
 		nbPerso6.setText("");
 		nbCartes6.setText("");
-		
+
 		vboxs.clear();
 		index.clear();
 	}
@@ -2002,17 +1968,13 @@ public class PlateauPane extends StackPane implements IPlateauListener, ITraduct
 
 	@Override
 	public void suppQuiJoue() {
-		if (couleurs1.size() >= 1)
-			j1.setStyle(IhmOutils.color(couleurs1.get(index.get(0))));
-		if (couleurs1.size() >= 2)
-			j2.setStyle(IhmOutils.color(couleurs1.get(index.get(1))));
-		if (couleurs1.size() >= 3)
-			j3.setStyle(IhmOutils.color(couleurs1.get(index.get(2))));
-		if (couleurs1.size() >= 4)
-			j4.setStyle(IhmOutils.color(couleurs1.get(index.get(3))));
-		if (couleurs1.size() >= 5)
-			j5.setStyle(IhmOutils.color(couleurs1.get(index.get(4))));
-		if (couleurs1.size() >= 6)
-			j6.setStyle(IhmOutils.color(couleurs1.get(index.get(5))));
+		Platform.runLater(new Runnable() {
+			@Override
+			public void run() {
+				for (int i = 0; i < vboxs.size(); i++) {
+					vboxs.get(i).setStyle(IhmOutils.color(couleurs1.get(i)));
+				}
+			}
+		});
 	}
 }
