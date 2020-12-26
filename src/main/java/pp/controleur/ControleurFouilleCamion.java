@@ -38,11 +38,13 @@ public class ControleurFouilleCamion {
 			if (j != null) {
 				s = "Phase fouille camion";
 				fr.envoyerCarte(jeu, j, partieId, numeroTour);
+				Evenement.nbCartePiocheActuel(jeu.getCartes().size());
 				List<Object> l = fr.choixCarte(jeu, j);
 				traitementResultatFouille(jeu, j, (CarteType) l.get(0), (CarteType) l.get(1), (Couleur) l.get(2),
 						(CarteType) l.get(3));
 				fr.receptionnerCarte(jeu.getJoueurCouleur((Couleur) l.get(2)), (CarteType) l.get(1), (Couleur) l.get(2),
 						partieId, numeroTour);
+				Evenement.nbCartePiocheActuel(jeu.getCartes().size());
 				fr.finFouilleCamion(jeu, j.getCouleur(), (Couleur) l.get(2), etatCarteDefausse((CarteType) l.get(3)),
 						partieId, numeroTour);
 			}
