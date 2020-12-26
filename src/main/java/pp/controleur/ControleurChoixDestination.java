@@ -11,7 +11,7 @@ import reseau.type.VigileEtat;
 
 /**
  * <h1>La classe ControleurChoixDestination</h1>. A pour rôle de gérer la phase
- * de choix de destination
+ * de choix de destination.
  *
  * @author Aurelien
  * @version 1
@@ -20,11 +20,23 @@ import reseau.type.VigileEtat;
 public class ControleurChoixDestination {
 	private ChoixDestinationReseau cdr;
 
+	/**
+	 * Instancie le Contrtoleur de la phase de choix d'une destination..
+	 */
 	public ControleurChoixDestination() {
 		cdr = new ChoixDestinationReseau();
 	}
 
-	public void phasechoixDestination(Partie jeu, ArrayList<Integer> destination, List<Joueur> jmort, String partieId,
+	/**
+	 * Execute la phase de choix d'une destination.
+	 *
+	 * @param jeu         La partie courante.
+	 * @param destination Liste des lieux destination des joueurs en vie.
+	 * @param jmort       La list des joueurs morst ce tour.
+	 * @param partieID    L'identifiant de la partie en cours.
+	 * @param numeroTour  Le numéro du tour courant.
+	 */
+	public void phasechoixDestination(Partie jeu, List<Integer> destination, List<Joueur> jmort, String partieId,
 			int numeroTour) {
 		VigileEtat ve = jeu.getNewChef() ? VigileEtat.NE : VigileEtat.NUL;
 		cdr.debuterPhaseChoixDestination(jeu, ve, partieId, numeroTour);
@@ -33,10 +45,19 @@ public class ControleurChoixDestination {
 		else
 			ancienChef(jeu, destination, partieId, numeroTour);
 		cdr.cloreChoiXDest(jeu, partieId, numeroTour);
-		zombieVenger(jeu, jmort, partieId, numeroTour);
+		zombieVengeur(jeu, jmort, partieId, numeroTour);
 	}
 
-	public void nouveauChef(Partie jeu, ArrayList<Integer> destination, String partieId, int numeroTour) {
+	/**
+	 * Execute la phase de choix d'une destination en cas de nouveau chef des
+	 * vigiles elu ce tour.
+	 *
+	 * @param jeu         La partie courante.
+	 * @param destination Liste des lieux d'arrivés des zombies.
+	 * @param partieID    L'identifiant de la partie en cours.
+	 * @param numeroTour  Le numéro du tour courant.
+	 */
+	public void nouveauChef(Partie jeu, List<Integer> destination, String partieId, int numeroTour) {
 		int dest = cdr.indiqueChoixDestChef(jeu);
 		destination.add(dest);
 		cdr.informerDestChefVigile(jeu, dest, partieId, numeroTour);
@@ -50,7 +71,16 @@ public class ControleurChoixDestination {
 				destination.add(cdr.indiqueChoixDest(j));
 	}
 
-	public void ancienChef(Partie jeu, ArrayList<Integer> destination, String partieId, int numeroTour) {
+	/**
+	 * Execute la phase de choix d'une destination lorsqu'aucun nouveau chef des
+	 * vigiles n'est elu ce tour.
+	 *
+	 * @param jeu         La partie courante.
+	 * @param destination Liste des lieux d'arrivés des zombies.
+	 * @param partieID    L'identifiant de la partie en cours.
+	 * @param numeroTour  Le numéro du tour courant.
+	 */
+	public void ancienChef(Partie jeu, List<Integer> destination, String partieId, int numeroTour) {
 		for (Joueur j : jeu.getJoueurs().values())
 			if (j.isChefDesVigiles() && j.isEnVie())
 				destination.add(cdr.indiqueChoixDest(j));
@@ -59,7 +89,15 @@ public class ControleurChoixDestination {
 				destination.add(cdr.indiqueChoixDest(j));
 	}
 
-	public void zombieVenger(Partie jeu, List<Joueur> jmort, String partieId, int numeroTour) {
+	/**
+	 * Execute la phase de choix d'une destination pour un zombie vengeur.
+	 *
+	 * @param jeu        La partie courante
+	 * @param jmort      La list des joueurs morst ce tour
+	 * @param partieID   L'identifient de la partie en cours
+	 * @param numeroTour Le numéro du tour courant
+	 */
+	public void zombieVengeur(Partie jeu, List<Joueur> jmort, String partieId, int numeroTour) {
 		for (Joueur j : jeu.getJoueurs().values())
 			if (jmort.contains(j)) {
 				cdr.choisirDestZombieVenger(j, partieId, numeroTour);
