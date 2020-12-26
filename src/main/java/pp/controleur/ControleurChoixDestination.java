@@ -1,6 +1,5 @@
 package pp.controleur;
 
-import java.util.ArrayList;
 import java.util.List;
 import pp.Joueur;
 import pp.Partie;
@@ -43,7 +42,7 @@ public class ControleurChoixDestination {
 		if (jeu.getNewChef())
 			nouveauChef(jeu, destination, partieId, numeroTour);
 		else
-			ancienChef(jeu, destination, partieId, numeroTour);
+			ancienChef(jeu, destination);
 		cdr.cloreChoiXDest(jeu, partieId, numeroTour);
 		zombieVengeur(jeu, jmort, partieId, numeroTour);
 	}
@@ -58,17 +57,21 @@ public class ControleurChoixDestination {
 	 * @param numeroTour  Le numéro du tour courant.
 	 */
 	public void nouveauChef(Partie jeu, List<Integer> destination, String partieId, int numeroTour) {
+		Evenement.quiJoue(jeu.getChefVIgile().getCouleur());
 		int dest = cdr.indiqueChoixDestChef(jeu);
 		destination.add(dest);
+		Evenement.suppQuiJoue();
 		cdr.informerDestChefVigile(jeu, dest, partieId, numeroTour);
 		Evenement.prevenirDeplacementVigile("Le chef des vigile (" + jeu.getChefVIgile().getCouleur()
 				+ ") a choisi la detination :" + jeu.getLieux().get(dest));
 		while (!EvenementStockage.isPopupAccepter())
 			Thread.yield();
 		EvenementStockage.setPopupAccepter(false);
+		cdr.attendreChoixDestination(jeu);
 		for (Joueur j : jeu.getJoueurs().values())
-			if (!j.isChefDesVigiles() && j.isEnVie())
+			if (!j.isChefDesVigiles() && j.isEnVie()) {
 				destination.add(cdr.indiqueChoixDest(j));
+			}
 	}
 
 	/**
@@ -80,7 +83,8 @@ public class ControleurChoixDestination {
 	 * @param partieID    L'identifiant de la partie en cours.
 	 * @param numeroTour  Le numéro du tour courant.
 	 */
-	public void ancienChef(Partie jeu, List<Integer> destination, String partieId, int numeroTour) {
+	public void ancienChef(Partie jeu, List<Integer> destination) {
+		cdr.attendreChoixDestination(jeu);
 		for (Joueur j : jeu.getJoueurs().values())
 			if (j.isChefDesVigiles() && j.isEnVie())
 				destination.add(cdr.indiqueChoixDest(j));
@@ -100,6 +104,7 @@ public class ControleurChoixDestination {
 	public void zombieVengeur(Partie jeu, List<Joueur> jmort, String partieId, int numeroTour) {
 		for (Joueur j : jeu.getJoueurs().values())
 			if (jmort.contains(j)) {
+				Evenement.quiJoue(j.getCouleur());
 				cdr.choisirDestZombieVenger(j, partieId, numeroTour);
 				int dvz = cdr.indiquerChoixDestZombieVenger(j);
 				jeu.getLieux().get(dvz).addZombie();
