@@ -344,13 +344,13 @@ public class TraitementPaquetTcp extends TraitementPaquet<TcpClient> {
 	private void traitementIPV(Paquet paquet, String message) {
 		List<Couleur> joueursVotantCouleurs = (List<Couleur>) paquet.getValeur(message, 4);
 		List<Integer> joueursVotantValeur = (List<Integer>) paquet.getValeur(message, 5);
-		core.setCouleurJoueursPresentVotant( (List<Couleur>) paquet.getValeur(message, 3));
+		core.setCouleurJoueursPresentVotant((List<Couleur>) paquet.getValeur(message, 3));
 		core.setVoteType((VoteType) paquet.getValeur(message, 1));
 		HashMap<Couleur, Integer> joueursVotant = new HashMap<Couleur, Integer>();
 		for (int i = 0; i < joueursVotantCouleurs.size(); i++)
 			joueursVotant.put(joueursVotantCouleurs.get(i), joueursVotantValeur.get(i));
 		HashMap<Couleur, Integer> joueurPresent = new HashMap<Couleur, Integer>();
-		for (Couleur c :  (List<Couleur>) paquet.getValeur(message, 3))
+		for (Couleur c : (List<Couleur>) paquet.getValeur(message, 3))
 			joueurPresent.put(c, joueursVotant.get(c));
 		core.setJoueursVotantPresent(joueurPresent);
 		// System.out.println("recupInfoVote : \n");
@@ -395,13 +395,13 @@ public class TraitementPaquetTcp extends TraitementPaquet<TcpClient> {
 
 	private void traitementACP(Paquet paquet, String message) {
 		System.out.println("Connexion a la partie acceptée");
-
+		core.setConnected(true);
 		core.setJoueurId((String) paquet.getValeur(message, 2));
 	}
-	
+
 	private void traitementRCP(Paquet paquet, String message) {
 		System.out.println("Connexion a la partie refusée");
-		//TODO Arreter TCP
+		// TODO Arreter TCP
 	}
 
 	private void traitementIP(Paquet paquet, String message) {
