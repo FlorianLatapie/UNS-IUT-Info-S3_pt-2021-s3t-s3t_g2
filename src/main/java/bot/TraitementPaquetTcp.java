@@ -231,7 +231,7 @@ public class TraitementPaquetTcp extends TraitementPaquet<TcpClient> {
 	private void traitementRAZID(Paquet paquet, String message) {
 		core.joueCartes((Couleur) paquet.getValeur(message, 2), (List<CarteType>) paquet.getValeur(message, 3));
 		core.correctionZombie((Integer) paquet.getValeur(message, 1), (Integer) paquet.getValeur(message, 6));
-		core.setPersoCache((Integer) paquet.getValeur(message, 1), (List<Integer>) paquet.getValeur(message, 3));
+		core.setPersoCache((Integer) paquet.getValeur(message, 1), (List<Integer>) paquet.getValeur(message, 4));
 
 		// System.out.println("joueCarteDEF : \n");
 		// System.out.println(core.getEtatPartie());
@@ -339,7 +339,7 @@ public class TraitementPaquetTcp extends TraitementPaquet<TcpClient> {
 	private void traitementIPV(Paquet paquet, String message) {
 		List<Couleur> joueursVotantCouleurs = (List<Couleur>) paquet.getValeur(message, 4);
 		List<Integer> joueursVotantValeur = (List<Integer>) paquet.getValeur(message, 5);
-		core.setCouleurJoueursPresentVotant((List<Couleur>) paquet.getValeur(message, 3));
+		core.setCouleurJoueursPresent((List<Couleur>) paquet.getValeur(message, 3));
 		core.setVoteType((VoteType) paquet.getValeur(message, 1));
 		HashMap<Couleur, Integer> joueursVotant = new HashMap<Couleur, Integer>();
 		for (int i = 0; i < joueursVotantCouleurs.size(); i++)
