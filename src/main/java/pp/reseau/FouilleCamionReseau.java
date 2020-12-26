@@ -12,7 +12,8 @@ import reseau.type.CarteType;
 import reseau.type.Couleur;
 
 /**
- * <h1>La classe FouilleCamionReseau </h1>. A pour rôle de traiter les paquets réseaux de la phase de fouille du camion
+ * <h1>La classe FouilleCamionReseau</h1>. A pour rôle de traiter les paquets
+ * réseaux de la phase de fouille du camion
  *
  * @author Aurelien
  * @version 1
@@ -21,8 +22,9 @@ import reseau.type.Couleur;
 public class FouilleCamionReseau {
 
 	public void debutPhaseFouille(Partie jeu, String partieId, int numeroTour) {
-		String m = ControleurReseau.construirePaquetTcp("PFC", PpTools.getPionsCouleurByPerso(jeu.getLieux().get(4).getPersonnage()),
-				jeu.getCartes().size(), partieId, numeroTour);
+		String m = ControleurReseau.construirePaquetTcp("PFC",
+				PpTools.getPionsCouleurByPerso(jeu.getLieux().get(4).getPersonnage()), jeu.getCartes().size(), partieId,
+				numeroTour);
 		for (Joueur j : jeu.getJoueurs().values())
 			j.getConnection().envoyer(m);
 	}
