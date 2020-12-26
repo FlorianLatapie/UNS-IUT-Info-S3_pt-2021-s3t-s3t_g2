@@ -214,15 +214,14 @@ public class TraitementPaquetTcp extends TraitementPaquet<TcpClient> {
 					MessageFormat.format("[TCP] Il n'y a pas de traitement possible pour {0}", Paquet.getCle()));
 		}
 	}
-	
+
 	private void accepterPartie(Paquet paquet, String message) {
-		String message1 = ControleurReseau.getMessageTcp("ACP");
-		core.setJoueurId((String) ControleurReseau.getValueTcp("ACP", message1, 2));
+		core.setJoueurId((String) paquet.getValeur(message, 2));
 		Evenement.partieValider();
 	}
-	
+
 	private void refuserPartie(Paquet paquet, String message) {
-		//TODO erreur
+		// TODO erreur
 	}
 
 	private void logPVR(Paquet paquet, String message) {
