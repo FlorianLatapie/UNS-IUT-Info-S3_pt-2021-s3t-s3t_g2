@@ -2,16 +2,15 @@ package pp.reseau;
 
 import java.util.ArrayList;
 import java.util.List;
-
 import pp.Joueur;
 import pp.Partie;
-import pp.PpTools;
 import pp.ihm.event.Evenement;
 import reseau.socket.ControleurReseau;
 import reseau.type.CarteType;
 
 /**
- * <h1>La classe DeplacementReseau</h1>. A pour rôle de traiter les paquets réseaux de la phase de deplacement de personnages
+ * <h1>La classe DeplacementReseau</h1>. A pour rôle de traiter les paquets
+ * réseaux de la phase de deplacement de personnages
  *
  * @author Aurelien
  * @version 1
@@ -33,7 +32,7 @@ public class DeplacementReseau {
 		j.getConnection().envoyer(m);
 	}
 
-	public List<Object> recupDeplacemnt(Partie jeu, Joueur j){
+	public List<Object> recupDeplacemnt(Partie jeu, Joueur j) {
 		List<Object> li = new ArrayList<>();
 		j.getConnection().attendreMessage("DPR");
 		String message = j.getConnection().getMessage("DPR");
@@ -46,7 +45,8 @@ public class DeplacementReseau {
 		return li;
 	}
 
-	public void informerDeplacment(Partie jeu, Joueur j, int dest, int pion, CarteType c, String partieId, int numeroTour) {
+	public void informerDeplacment(Partie jeu, Joueur j, int dest, int pion, CarteType c, String partieId,
+			int numeroTour) {
 		String m = ControleurReseau.construirePaquetTcp("DPI", j.getCouleur(), dest, pion, c, partieId, numeroTour);
 		for (Joueur j2 : jeu.getJoueurs().values())
 			if (j2 != j)
