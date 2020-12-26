@@ -2,6 +2,8 @@ package reseau.tool;
 
 import java.util.*;
 
+import reseau.paquet.Paquet;
+
 /**
  * <h1>Outils pour les paquets</h1> Permet de facilité la décapsulation de
  * certains message
@@ -184,11 +186,13 @@ public interface PaquetOutils {
 	 *
 	 * @param message Le message recu
 	 * @return Le mot-clé du paquet
+	 * @throws IllegalArgumentException
 	 */
 	public static String getCleMessage(String message) {
+		if (message == null)
+			throw new IllegalArgumentException("Ne peut pas etre null !");
 		if (message.isEmpty())
 			throw new IllegalArgumentException("Ne peut pas etre vide !");
-
 		if (message.startsWith("-"))
 			throw new IllegalArgumentException("Le mot-clé ne peut pas etre vide !");
 
@@ -198,5 +202,37 @@ public interface PaquetOutils {
 		String[] tmp = message.split("-");
 
 		return tmp[0];
+	}
+
+	/**
+	 * Permet d'obtenir le dernier argument du message
+	 * 
+	 * @param paquet  le paquet cible
+	 * @param message le message cible
+	 * @return le dernier argument du message
+	 */
+	public static Object dernierArg(Paquet paquet, String message) {
+		if (paquet == null)
+			throw new IllegalArgumentException("Ne peut pas etre null !");
+		if (paquet.getArgNb() <= 1)
+			throw new IllegalArgumentException("Il n'y a pas assez d'argument, le mot clé est le dernier argument !");
+
+		return paquet.getValeur(message, paquet.getArgNb() - 1);
+	}
+
+	/**
+	 * Permet d'obtenir l'avant dernier argument du message
+	 * 
+	 * @param paquet  le paquet cible
+	 * @param message le message cible
+	 * @return l'avant dernier argument du message
+	 */
+	public static Object avDernierArg(Paquet paquet, String message) {
+		if (paquet == null)
+			throw new IllegalArgumentException("Ne peut pas etre null !");
+		if (paquet.getArgNb() <= 2)
+			throw new IllegalArgumentException("Il n'y a pas assez d'argument !");
+
+		return paquet.getValeur(message, paquet.getArgNb() - 2);
 	}
 }
