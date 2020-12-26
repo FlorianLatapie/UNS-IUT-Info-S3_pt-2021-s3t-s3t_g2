@@ -11,6 +11,13 @@ import reseau.type.CarteEtat;
 import reseau.type.CarteType;
 import reseau.type.Couleur;
 
+/**
+ * <h1>La classe FouilleCamionReseau </h1>. A pour rôle de traiter les paquets réseaux de la phase de fouille du camion
+ *
+ * @author Aurelien
+ * @version 1
+ * @since 12/12/2020
+ */
 public class FouilleCamionReseau {
 
 	public void debutPhaseFouille(Partie jeu, String partieId, int numeroTour) {
