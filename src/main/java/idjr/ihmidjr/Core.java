@@ -2,7 +2,7 @@ package idjr.ihmidjr;
 
 import idjr.Idjr;
 import idjr.ihmidjr.DataControl.ApplicationPane;
-import idjr.ihmidjr.event.Initializer;
+import idjr.ihmidjr.event.Evenement;
 import idjr.ihmidjr.langues.International;
 import idjr.ihmidjr.langues.Langues;
 
@@ -12,7 +12,7 @@ public class Core {
 	private String nomPartie = "partieParDéfaut";
 	private Idjr idjr;
 	private SauvegarderOptions sauvegarderOptions;
-	
+
 	public Core() {
 		sauvegarderOptions = new SauvegarderOptions();
 	}
@@ -75,7 +75,7 @@ public class Core {
 	public SauvegarderOptions getSauvegarderOptions() {
 		return sauvegarderOptions;
 	}
-	
+
 	public void changerLangue(Langues langues) {
 		sauvegarderOptions.setLangues(langues);
 		International.changerLangue(langues);

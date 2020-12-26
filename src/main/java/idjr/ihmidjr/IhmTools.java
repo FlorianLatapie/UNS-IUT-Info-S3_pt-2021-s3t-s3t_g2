@@ -1,5 +1,6 @@
 package idjr.ihmidjr;
 
+import reseau.type.CarteType;
 import reseau.type.Couleur;
 
 public interface IhmTools {
@@ -10,6 +11,12 @@ public interface IhmTools {
 	String bleu = " -fx-background-color:#008CDA; -fx-text-fill: #ffffff";
 	String noir = " -fx-background-color:#000000; -fx-text-fill: #ffffff";
 
+	/**
+	 * Permet de savoir si le nom est conforme
+	 * 
+	 * @param nom le nom cible
+	 * @return si le nom est valide
+	 */
 	static boolean nomEstValide(String nom) {
 		if (nom == null)
 			return false;
@@ -24,7 +31,7 @@ public interface IhmTools {
 		if (nom.endsWith(" "))
 			return false;
 
-		//a-z A-Z À-ÿ  -  0-9  '-' _-_
+		// a-z A-Z À-ÿ - 0-9 '-' _-_
 		int[][] intervalle = { { 65, 90 }, { 97, 122 }, { 192, 255 }, { 32, 32 }, { 48, 57 }, { 39, 39 }, { 95, 95 } };
 		int[] exclure = { 215, 247 };
 
@@ -35,18 +42,24 @@ public interface IhmTools {
 				if (intervalle[j][0] <= (int) nom.charAt(i) && intervalle[j][1] >= (int) nom.charAt(i)) {
 					boolean t = true;
 					for (int u : exclure) {
-						if (u== (int) nom.charAt(i))
+						if (u == (int) nom.charAt(i))
 							t &= false;
 					}
 					tmp |= true && t;
-				}	
+				}
 			}
 			result &= tmp;
 		}
 
 		return result;
 	}
-	
+
+	/**
+	 * Convertit la couleur en style
+	 * 
+	 * @param couleur la couleur cible
+	 * @return le style
+	 */
 	public static String color(Couleur couleur) {
 		switch (couleur) {
 		case B:
@@ -64,5 +77,75 @@ public interface IhmTools {
 		default:
 			throw new IllegalArgumentException("Couleur inconnue");
 		}
+	}
+
+	/**
+	 * Convertit la carte en chemin (image)
+	 * 
+	 * @param carteType la carte cible
+	 * @return le chemin de l'image
+	 */
+	public static String convertCarte(CarteType carteType) {
+		switch (carteType) {
+		case ABA:
+			return DataControl.CARTE_BATTE;
+		case CAC:
+			return DataControl.CARTE_CACHETTE;
+		case CDS:
+			return DataControl.CARTE_CAMERA;
+		case ACS:
+			return DataControl.CARTE_CS;
+		case AGR:
+			return DataControl.CARTE_GRENADE;
+		case AHI:
+			return DataControl.CARTE_HACHE;
+		case MAT:
+			return DataControl.CARTE_MATERIEL;
+		case MEN:
+			return DataControl.CARTE_MENACE;
+		case ARE:
+			return DataControl.CARTE_REVOLVER;
+		case SPR:
+			return DataControl.CARTE_SPRINT;
+		case ATR:
+			return DataControl.CARTE_TRONCENNEUSE;
+		}
+
+		return null;
+	}
+
+	/**
+	 * Covertit la carte chemin d'acces en cartetype
+	 * 
+	 * @param dataControl le chemin de l'image
+	 * @return la carte
+	 */
+	public static CarteType convertCarte(String dataControl) {
+		switch (dataControl) {
+		case DataControl.CARTE_BATTE:
+			return CarteType.ABA;
+		case DataControl.CARTE_CACHETTE:
+			return CarteType.CAC;
+		case DataControl.CARTE_CAMERA:
+			return CarteType.CDS;
+		case DataControl.CARTE_CS:
+			return CarteType.ACS;
+		case DataControl.CARTE_GRENADE:
+			return CarteType.AGR;
+		case DataControl.CARTE_HACHE:
+			return CarteType.AHI;
+		case DataControl.CARTE_MATERIEL:
+			return CarteType.MAT;
+		case DataControl.CARTE_MENACE:
+			return CarteType.MEN;
+		case DataControl.CARTE_REVOLVER:
+			return CarteType.ARE;
+		case DataControl.CARTE_SPRINT:
+			return CarteType.SPR;
+		case DataControl.CARTE_TRONCENNEUSE:
+			return CarteType.ATR;
+		}
+
+		return CarteType.NUL;
 	}
 }

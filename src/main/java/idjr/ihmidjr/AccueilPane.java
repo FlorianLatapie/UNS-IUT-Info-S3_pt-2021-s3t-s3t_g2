@@ -3,7 +3,7 @@ package idjr.ihmidjr;
 import java.util.Random;
 
 import idjr.ihmidjr.DataControl.ApplicationPane;
-import idjr.ihmidjr.event.Initializer;
+import idjr.ihmidjr.event.Evenement;
 import idjr.ihmidjr.langues.ITraduction;
 import idjr.ihmidjr.langues.International;
 import javafx.application.Platform;
@@ -47,7 +47,7 @@ public class AccueilPane extends StackPane implements ITraduction {
 	private int lBouton = 200;
 	private int marge = tailleCarreCentral / 25;
 	private Insets margeBoutons = new Insets(marge, marge, marge, marge);
-	
+
 	private String nomPolice = "Segoe UI";
 	private Font policeBouton = Font.font(nomPolice, FontWeight.BOLD, 33);
 	private CornerRadii coin = new CornerRadii(15.0);
@@ -109,7 +109,7 @@ public class AccueilPane extends StackPane implements ITraduction {
 		infoNomJoueur.setFont(policeNom);
 		infoNomJoueur.setShowDelay(Duration.seconds(1));
 		infoNomJoueur.setHideDelay(Duration.seconds(20));
-		
+
 		nomjoueur = new TextField();
 		nomjoueur.setText("JoueurSansNom" + new Random().nextInt(100));
 		nomjoueur.setText(core.getSauvegarderOptions().getNom());
@@ -139,11 +139,12 @@ public class AccueilPane extends StackPane implements ITraduction {
 
 		bJouer.setOnMouseEntered(event -> bJouer.setStyle(styleBoutonsSouris));
 		bJouer.setOnMouseExited(event -> bJouer.setStyle(styleBoutons));
-		nomjoueur.textProperty().addListener((obs, oldText, newText) -> bJouer.setDisable(!(nomjoueur.getText().length() < 32 && IhmTools.nomEstValide(nomjoueur.getText()))));
+		nomjoueur.textProperty().addListener((obs, oldText, newText) -> bJouer
+				.setDisable(!(nomjoueur.getText().length() < 32 && IhmTools.nomEstValide(nomjoueur.getText()))));
 		bJouer.setOnAction(EventHandler -> {
 			if (nomjoueur.getText().length() < 20 && IhmTools.nomEstValide(nomjoueur.getText())) {
 				core.getIdjr().setNom(nomjoueur.getText());
-				Initializer.nomJoueur(core.getIdjr().getNom());
+				Evenement.nomJoueur(core.getIdjr().getNom());
 				core.getIdjr().listOfServers(6, TypePartie.MIXTE, Statut.ATTENTE);
 				core.getSauvegarderOptions().setNom(nomjoueur.getText());
 				sc.setPaneOnTop(ApplicationPane.CONFIG);
@@ -236,17 +237,24 @@ public class AccueilPane extends StackPane implements ITraduction {
 		sControl.setPaneOnTop(paneName);
 	}
 
+	/**
+	 * Traduit les elements de ce pane
+	 */
 	@Override
 	public void traduire() {
-		titre1.setText(International.trad("texte.preTitre"));
-		infoNomJoueur.setText((International.trad("texte.infoNom1") + "\n" + International.trad("texte.infoNom2") + "\n"
-				+ International.trad("texte.infoNom3") + "\n" + International.trad("texte.infoNom4")));
-		bOptions.setText(International.trad("bouton.options"));
-		bRegles.setText(International.trad("bouton.regles"));
-		bJouer.setText(International.trad("bouton.jouer"));
-		bQuitter.setText(International.trad("bouton.quitter"));
-		titre2.setText(International.trad("texte.titreIDJR"));
-
+		Platform.runLater(new Runnable() {
+			@Override
+			public void run() {
+				titre1.setText(International.trad("texte.preTitre"));
+				infoNomJoueur.setText(
+						(International.trad("texte.infoNom1") + "\n" + International.trad("texte.infoNom2") + "\n"
+								+ International.trad("texte.infoNom3") + "\n" + International.trad("texte.infoNom4")));
+				bOptions.setText(International.trad("bouton.options"));
+				bRegles.setText(International.trad("bouton.regles"));
+				bJouer.setText(International.trad("bouton.jouer"));
+				bQuitter.setText(International.trad("bouton.quitter"));
+				titre2.setText(International.trad("texte.titreIDJR"));
+			}
+		});
 	}
-
 }

@@ -2,6 +2,7 @@ package idjr.ihmidjr;
 
 import idjr.ihmidjr.langues.ITraduction;
 import idjr.ihmidjr.langues.International;
+import javafx.application.Platform;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -102,10 +103,17 @@ public class ConfirmationPane implements ITraduction {
 		return reponse;
 	}
 
+	/**
+	 * Traduit les elements de ce pane
+	 */
 	@Override
 	public void traduire() {
-		boutonOui.setText(International.trad("bouton.quitter"));
-		boutonNon.setText(International.trad("bouton.annuler"));
-
+		Platform.runLater(new Runnable() {
+			@Override
+			public void run() {
+				boutonOui.setText(International.trad("bouton.quitter"));
+				boutonNon.setText(International.trad("bouton.annuler"));
+			}
+		});
 	}
 }

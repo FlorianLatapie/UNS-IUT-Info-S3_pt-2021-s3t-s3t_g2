@@ -3,6 +3,7 @@ package idjr.ihmidjr;
 import idjr.ihmidjr.DataControl.ApplicationPane;
 import idjr.ihmidjr.langues.ITraduction;
 import idjr.ihmidjr.langues.International;
+import javafx.application.Platform;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
@@ -151,24 +152,33 @@ public class ReglesPane extends StackPane implements ITraduction {
 
 	}
 
+	/**
+	 * Traduit les elements de ce pane
+	 */
 	@Override
 	public void traduire() {
-		titre1.setText(International.trad("text.titreRegle"));
-		desc1.setText(International.trad("texte.pourQuiA") + "\n" + International.trad("texte.pourQuiB") + "\n\n"
-				+ International.trad("texte.histoireA") + "\n" + International.trad("texte.histoireB") + "\n"
-				+ International.trad("texte.histoireC") + "\n" + International.trad("texte.histoireD") + "\n"
-				+ International.trad("texte.histoireE") + "\n" + International.trad("texte.histoireF") + "\n"
-				+ International.trad("texte.histoireG") + "\n\n" + International.trad("texte.but") + "\n"
-				+ International.trad("texte.butExplicationA") + "\n" + International.trad("texte.butExplicationB")
-				+ "\n" + International.trad("texte.butExplicationC") + "\n"
-				+ International.trad("texte.butExplicationD") + "\n" + International.trad("texte.butExplicationE")
-				+ "\n" + International.trad("texte.butExplicationF") + "\n\n" + International.trad("texte.finDePartieA")
-				+ "\n" + International.trad("texte.finDePartieB") + "\n" + International.trad("texte.FDPsit1A") + "\n"
-				+ International.trad("texte.FDPsit1B") + "\n" + International.trad("texte.FDPsit2A") + "\n"
-				+ International.trad("texte.FDPsit2B") + "\n" + International.trad("texte.FDPfinA") + "\n"
-				+ International.trad("texte.FDPfinB") + "\n" + International.trad("texte.FDPfinC") + "\n");
-		bRetour.setText(International.trad("bouton.retour"));
-
+		Platform.runLater(new Runnable() {
+			@Override
+			public void run() {
+				titre1.setText(International.trad("text.titreRegle"));
+				desc1.setText(International.trad("texte.pourQuiA") + "\n" + International.trad("texte.pourQuiB")
+						+ "\n\n" + International.trad("texte.histoireA") + "\n" + International.trad("texte.histoireB")
+						+ "\n" + International.trad("texte.histoireC") + "\n" + International.trad("texte.histoireD")
+						+ "\n" + International.trad("texte.histoireE") + "\n" + International.trad("texte.histoireF")
+						+ "\n" + International.trad("texte.histoireG") + "\n\n" + International.trad("texte.but") + "\n"
+						+ International.trad("texte.butExplicationA") + "\n"
+						+ International.trad("texte.butExplicationB") + "\n"
+						+ International.trad("texte.butExplicationC") + "\n"
+						+ International.trad("texte.butExplicationD") + "\n"
+						+ International.trad("texte.butExplicationE") + "\n"
+						+ International.trad("texte.butExplicationF") + "\n\n"
+						+ International.trad("texte.finDePartieA") + "\n" + International.trad("texte.finDePartieB")
+						+ "\n" + International.trad("texte.FDPsit1A") + "\n" + International.trad("texte.FDPsit1B")
+						+ "\n" + International.trad("texte.FDPsit2A") + "\n" + International.trad("texte.FDPsit2B")
+						+ "\n" + International.trad("texte.FDPfinA") + "\n" + International.trad("texte.FDPfinB") + "\n"
+						+ International.trad("texte.FDPfinC") + "\n");
+				bRetour.setText(International.trad("bouton.retour"));
+			}
+		});
 	}
-
 }

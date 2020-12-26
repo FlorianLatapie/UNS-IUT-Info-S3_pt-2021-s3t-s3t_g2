@@ -27,21 +27,21 @@ public interface IJeuListener {
 	void deplacementChange();
 
 	void choisirCarte(List<CarteType> listeCartes, List<Couleur> listeCouleurJoueurVivant, boolean garder,
-			boolean donner, boolean defausser, boolean utiliser);
+			boolean donner, boolean defausser);
 
 	void nomJoueurs(List<String> listeNomJoueur);
-	
+
 	void choisirUtiliserCarte(CarteType carteType);
-	
+
 	void choisirUtiliserCarte(List<CarteType> carteTypes);
-	
+
 	void updateCarte();
 
 	void setVote(List<Couleur> listeCouleurJoueur);
-	
+
 	void log(String action);
-	
+
 	void enleverDes();
-	
+
 	void choisirUtiliserCartes(List<CarteType> carteTypes);
 }
