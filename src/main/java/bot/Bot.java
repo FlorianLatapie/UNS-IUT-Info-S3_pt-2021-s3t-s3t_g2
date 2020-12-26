@@ -42,7 +42,7 @@ public class Bot implements Runnable {
 	private int compteurTour;
 	private List<CarteType> listeCarte;
 	private List<PionCouleur> listePion;
-	private List<Couleur> couleurJoueursPresentVotant;
+	private List<Couleur> couleurJoueursPresent;
 
 	private List<Couleur> joueurEnVie;
 	private HashMap<Couleur, Integer> joueursVotantPresent;
@@ -95,13 +95,7 @@ public class Bot implements Runnable {
 		}
 	}
 
-	public List<Couleur> getCouleurJoueursPresentVotant() {
-		return couleurJoueursPresentVotant;
-	}
-
-	public void setCouleurJoueursPresentVotant(List<Couleur> couleurJoueursPresentVotant) {
-		this.couleurJoueursPresentVotant = couleurJoueursPresentVotant;
-	}
+	
 
 	private void initBot() {
 		this.typeJoueur = TypeJoueur.BOT;
@@ -109,7 +103,7 @@ public class Bot implements Runnable {
 		this.pionAPos = new ArrayList<>();
 		this.lieuOuvert = new ArrayList<>();
 		this.listeCarte = new ArrayList<>();
-		this.couleurJoueursPresentVotant = new ArrayList<>();
+		this.couleurJoueursPresent = new ArrayList<>();
 		this.listePion = new ArrayList<>();
 		this.envie = true;
 		this.estFini = false;
@@ -298,8 +292,12 @@ public class Bot implements Runnable {
 		this.listePion = listePion;
 	}
 
-	public List<Couleur> couleurJoueurPresent() {
-		return couleurJoueursPresentVotant;
+	public List<Couleur> getCouleurJoueursPresent() {
+		return couleurJoueursPresent;
+	}
+
+	public void setCouleurJoueursPresent(List<Couleur> couleurJoueursPresent) {
+		this.couleurJoueursPresent = couleurJoueursPresent;
 	}
 
 	public VoteType getVoteType() {
