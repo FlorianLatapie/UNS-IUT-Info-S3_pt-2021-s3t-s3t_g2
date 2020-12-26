@@ -9,6 +9,13 @@ import pp.ihm.event.Evenement;
 import pp.reseau.DeplacementReseau;
 import reseau.type.CarteType;
 
+/**
+ * <h1>La classe ControleurDeplacementPersonnage</h1>. A pour rôle de gérer la phase de déplacment des personnages
+ *
+ * @author Aurelien
+ * @version 1
+ * @since 12/12/2020
+ */
 public class ControleurDeplacementPersonnage {
 	private DeplacementReseau dr;
 	private ControleurFinPartie cfp;
