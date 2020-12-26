@@ -1475,7 +1475,7 @@ public class JeuPane extends StackPane implements IJeuListener, ITraduction {
 			@Override
 			public void run() {
 				log.getItems().clear();
-				des.setVisible(false);
+				afficherDes();
 				sControl.setPaneOnTop(ApplicationPane.ENDGAME);
 			}
 		});
@@ -2042,6 +2042,13 @@ public class JeuPane extends StackPane implements IJeuListener, ITraduction {
 				des.setVisible(false);
 			}
 		});
+	}
+
+	/**
+	 * Affiche l'affichage des dés
+	 */
+	public void afficherDes() {
+		des.setVisible(true);
 	}
 
 	/**
