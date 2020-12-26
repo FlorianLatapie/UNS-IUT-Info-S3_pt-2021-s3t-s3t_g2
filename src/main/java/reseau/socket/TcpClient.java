@@ -42,9 +42,11 @@ public class TcpClient implements Runnable, IEchangeSocket, IMessagePaquet {
 	 * @param controleurReseau Le controleur reseau du client
 	 * @param ip               L'ip du serveur TCP cible
 	 * @param port             Le port du serveur TCP cible
+	 * @param cleFin           Mot cle pour arreter le client
 	 */
-	public TcpClient(InetAddress ip, int port) {
+	public TcpClient(InetAddress ip, int port, String cleFin) {
 		this.ip = ip;
+		this.cleFin = cleFin;
 		this.messagesTampon = synchronizedList(new ArrayList<String>());
 		this.estLancer = true;
 		this.port = port;
@@ -57,16 +59,14 @@ public class TcpClient implements Runnable, IEchangeSocket, IMessagePaquet {
 	/**
 	 * @param socket           L'ip du serveur TCP cible
 	 * @param controleurReseau Le controleur reseau du client
-	 * @param cleFin           Mot cle pour arreter le client
 	 */
-	public TcpClient(Socket socket, String cleFin) {
+	public TcpClient(Socket socket) {
 		this.messagesTampon = synchronizedList(new ArrayList<String>());
 		this.estLancer = true;
 		this.ip = ControleurReseau.getIp();
 		this.port = ControleurReseau.getTcpPort();
 		this.logger = Logger.getLogger(getClass().getName());
 		this.socket = socket;
-		this.cleFin = cleFin;
 		this.paquetRecuEnvoyeList = new ArrayList<>();
 		this.paquetRecuList = new ArrayList<>();
 		this.paquetEnvoyeList = new ArrayList<>();

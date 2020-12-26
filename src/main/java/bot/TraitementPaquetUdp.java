@@ -66,10 +66,13 @@ public class TraitementPaquetUdp extends TraitementPaquet<DatagramPacket> {
 	public void acp(Paquet paquet, String message) {
 		if (ConnexionType.CLIENT != ControleurReseau.getConnexionType())
 			return;
-		
+
+		if (core.isConnected())
+			return;
+
 		if (core.getBotMode() != BotMode.Automatique)
 			return;
-		
+
 		InetAddress address = null;
 		try {
 			address = InetAddress.getByName((String) paquet.getValeur(message, 2));
@@ -83,7 +86,10 @@ public class TraitementPaquetUdp extends TraitementPaquet<DatagramPacket> {
 	public void amp(Paquet paquet, String message) {
 		if (ConnexionType.CLIENT != ControleurReseau.getConnexionType())
 			return;
-		
+
+		if (core.isConnected())
+			return;
+
 		if (core.getBotMode() == BotMode.Automatique) {
 			InetAddress address = null;
 			try {
@@ -95,8 +101,7 @@ public class TraitementPaquetUdp extends TraitementPaquet<DatagramPacket> {
 			core.connecter(address, (int) paquet.getValeur(message, 3), (String) paquet.getValeur(message, 1));
 			return;
 		}
-		
-		
+
 		String partie = (String) paquet.getValeur(message, 1);
 		InetAddress ip = null;
 		try {
@@ -113,7 +118,7 @@ public class TraitementPaquetUdp extends TraitementPaquet<DatagramPacket> {
 		int nbjbMax = (int) paquet.getValeur(message, 7);
 		Statut stat = (Statut) paquet.getValeur(message, 10);
 		PartieInfo partieInfo = new PartieInfo(ip, port, partie, core.getTypeJoueur(), nbjr, nbjb, nbjrMax, nbjbMax,
-				stat,nom);
+				stat, nom);
 		core.ajouterPartie(partieInfo);
 	}
 

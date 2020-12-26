@@ -53,6 +53,11 @@ public class Bot implements Runnable {
 	private BotType botType;
 	private BotMode botMode;
 	private List<PartieInfo> partiesActuel;
+	private boolean connected;
+
+	public boolean isConnected() {
+		return connected;
+	}
 
 	public List<PartieInfo> getPartiesActuel() {
 		return partiesActuel;
@@ -561,5 +566,9 @@ public class Bot implements Runnable {
 
 	public void setJoueursVotantPresent(HashMap<Couleur, Integer> joueursVotant) {
 		this.joueursVotantPresent = joueursVotant;
+	}
+
+	public void setConnected(boolean connected) {
+		this.connected = connected;
 	}
 }
