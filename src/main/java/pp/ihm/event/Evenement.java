@@ -177,7 +177,7 @@ public abstract class Evenement {
 			al.updateJoueurs(joueurs, max);
 	}
 
-	public static void quiJoue(int val) {
+	public static void quiJoue(Couleur val) {
 		for (IPlateauListener pl : listenerspl)
 			pl.quiJoue(val);
 	}
