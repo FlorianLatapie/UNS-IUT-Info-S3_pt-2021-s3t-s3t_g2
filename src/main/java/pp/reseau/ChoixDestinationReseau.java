@@ -58,6 +58,16 @@ public class ChoixDestinationReseau {
 			if (!(j.isChefDesVigiles()))
 				j.getConnection().envoyer(m);
 	}
+	
+	/**
+	 * Traitement du paquet CDDJ du protocole reseau.
+	 * 
+	 * @param jeu La partie courante.
+	 */
+	public void attendreChoixDestination(Partie jeu) {
+		for (Joueur j : jeu.getJoueurs().values())
+			j.getConnection().attendreMessage("CDDJ");
+	}
 
 	/**
 	 * Traitement du paquet CDDJ du protocole reseau.
@@ -67,7 +77,6 @@ public class ChoixDestinationReseau {
 	 * @return Destination choisie par le joueur courant.
 	 */
 	public int indiqueChoixDest(Joueur j) {
-		j.getConnection().attendreMessage("CDDJ");
 		String rep = j.getConnection().getMessage("CDDJ");
 		return (int) ControleurReseau.getValueTcp("CDDJ", rep, 1);
 	}
