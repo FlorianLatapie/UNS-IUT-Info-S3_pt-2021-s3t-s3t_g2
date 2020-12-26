@@ -9,7 +9,8 @@ import reseau.type.Couleur;
 import reseau.type.VoteType;
 
 /**
- * <h1>La classe ControleurElectionVigile</h1>. A pour rôle de gérer la phase d'élection du chef des vigiles
+ * <h1>La classe ControleurElectionVigile</h1>. A pour rôle de gérer la phase
+ * d'élection du chef des vigiles
  *
  * @author Aurelien
  * @version 1
@@ -18,12 +19,22 @@ import reseau.type.VoteType;
 public class ControleurElectionVigile {
 	private ControleurVote cVote;
 	private ElectionChefVigileReseau ecvr;
-	
+
+	/**
+	 * Instancie le Contrtoleur de la phase d'election du chef des vigiles.
+	 */
 	public ControleurElectionVigile() {
 		ecvr = new ElectionChefVigileReseau();
 		cVote = new ControleurVote();
 	}
-	
+
+	/**
+	 * Execute la phase d'election du chef des vigiles.
+	 *
+	 * @param jeu        La partie en cours.
+	 * @param partieID   L'identifiant de la partie en cours.
+	 * @param numeroTour Le numéro du tour courant.
+	 */
 	public void phaseElectionChefVigi(Partie jeu, String partieId, int numeroTour) {
 		ecvr.debutElectionChefVigile(jeu, partieId, numeroTour);
 		Joueur j;
@@ -54,23 +65,51 @@ public class ControleurElectionVigile {
 		}
 	}
 
-	public Boolean isElectableBoolean(Partie jeu) {
+	/**
+	 * Vérifie si une election du chef des vigiles est possible.
+	 *
+	 * @param jeu La partie en cours.
+	 * 
+	 * @return On peut faire une élection du chef des vigiles.
+	 */
+	private Boolean isElectableBoolean(Partie jeu) {
 		return !jeu.getJoueurSurLieu(jeu.getLieux().get(5)).isEmpty();
 	}
 
+	/**
+	 * Definie le joueur elu pour devenir chef des vigiles.
+	 *
+	 * @param jeu        La partie en cours.
+	 * @param partieID   L'identifiant de la partie en cours.
+	 * @param numeroTour Le numéro du tour courant.
+	 * 
+	 * @retrun le joueur élu chef des vigiles.
+	 */
 	public Joueur joueurElection(Partie jeu, String partieId, int numeroTour) {
 		if (jeu.getJoueurSurLieu(jeu.getLieux().get(4)).size() == 1)
 			return jeu.getJoueurSurLieu(jeu.getLieux().get(4)).get(0);
 		return cVote.phaseVote(jeu, jeu.getLieux().get(4), VoteType.FDC, partieId, numeroTour);
 	}
-	
+
+	/**
+	 * Met a jour la variable newChef, en cas de nouveau chef, de la classe Partie.
+	 *
+	 * @param cj     Le controleur de la partie courante.
+	 * @param joueur Le joueur élu chef des vigiles ce tour.
+	 */
 	public void newVigile(Partie jeu, Joueur j) {
 		jeu.resultatChefVigile(j);
 		jeu.setNewChef(true);
 	}
-	
+
+	/**
+	 * Met a jour la variable newChef, quand il n'y a pas de nouveau chef, de la classe Partie.
+	 *
+	 * @param cj     Le controleur de la partie courante.
+	 * @param joueur Le joueur élu chef des vigiles ce tour.
+	 */
 	public void noNewVigile(Partie jeu) {
 		jeu.setNewChef(false);
 	}
-	
+
 }
