@@ -12,7 +12,8 @@ import reseau.type.PionCouleur;
 import reseau.type.RaisonType;
 
 /**
- * <h1>La classe AttaqueZombieReseau</h1>. A pour rôle de traiter les paquets réseaux de la phase d'attaque des zombies
+ * <h1>La classe AttaqueZombieReseau</h1>. A pour rôle de traiter les paquets
+ * réseaux de la phase d'attaque des zombies
  *
  * @author Aurelien
  * @version 1

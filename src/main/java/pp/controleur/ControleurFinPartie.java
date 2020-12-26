@@ -1,12 +1,10 @@
 package pp.controleur;
 
 import static java.lang.System.out;
-
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
-
 import pp.Joueur;
 import pp.Lieu;
 import pp.Partie;
@@ -16,9 +14,9 @@ import reseau.socket.ControleurReseau;
 import reseau.type.CondType;
 import reseau.type.Statut;
 
-
 /**
- * <h1>La classe ControleurFinPartie</h1>. A pour rôle de gérer et de detecter une fin de partie
+ * <h1>La classe ControleurFinPartie</h1>. A pour rôle de gérer et de detecter
+ * une fin de partie
  *
  * @author Aurelien
  * @version 1
@@ -26,7 +24,7 @@ import reseau.type.Statut;
  */
 public class ControleurFinPartie {
 	private FinJeuReseau fjr;
-	
+
 	public ControleurFinPartie() {
 		fjr = new FinJeuReseau();
 	}
@@ -71,12 +69,12 @@ public class ControleurFinPartie {
 		lo.add(nbPerso);
 		return lo;
 	}
-	
-	private Boolean condFinJeu(Partie  jeu, List<Lieu> lieu, int nbPerso) {
-		return (lieu.size() < 2 && lieu.get(0) != jeu.getLieux().get(4)) || (nbPerso <= 4 && jeu.getJoueurs().size() < 6)
-				|| (nbPerso <= 6 && jeu.getJoueurs().size() == 6);
+
+	private Boolean condFinJeu(Partie jeu, List<Lieu> lieu, int nbPerso) {
+		return (lieu.size() < 2 && lieu.get(0) != jeu.getLieux().get(4))
+				|| (nbPerso <= 4 && jeu.getJoueurs().size() < 6) || (nbPerso <= 6 && jeu.getJoueurs().size() == 6);
 	}
-	
+
 	private CondType definirCondFin(Partie jeu, List<Lieu> lieu) {
 		CondType cond;
 		if (lieu.size() < 2 && lieu.get(0) != jeu.getLieux().get(4))
@@ -85,11 +83,11 @@ public class ControleurFinPartie {
 			cond = CondType.PION;
 		return cond;
 	}
-	
+
 	private Joueur definirVainqueur(Partie jeu) {
 		int pointVainqueur = 0;
 		Joueur vainqueur = null;
-		for (Joueur j: jeu.getJoueurs().values()) {
+		for (Joueur j : jeu.getJoueurs().values()) {
 			int point = 0;
 			if (j.isEnVie()) {
 				for (Integer p : j.getPersonnages().keySet())

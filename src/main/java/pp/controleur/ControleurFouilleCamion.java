@@ -5,7 +5,6 @@ import java.util.List;
 
 import pp.Joueur;
 import pp.Partie;
-import pp.ihm.Core;
 import pp.ihm.event.EvenementStockage;
 import pp.ihm.event.Evenement;
 import pp.reseau.FouilleCamionReseau;
@@ -63,7 +62,6 @@ public class ControleurFouilleCamion {
 	}
 
 	public Joueur joueurFouille(Partie jeu, String partieId, int numeroTour) {
-		Joueur j;
 		if (jeu.getJoueurSurLieu(jeu.getLieux().get(4)).size() == 1)
 			return jeu.getJoueurSurLieu(jeu.getLieux().get(4)).get(0);
 		return cVote.phaseVote(jeu, jeu.getLieux().get(4), VoteType.FDC, partieId, numeroTour);

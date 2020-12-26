@@ -10,7 +10,8 @@ import pp.reseau.DeplacementReseau;
 import reseau.type.CarteType;
 
 /**
- * <h1>La classe ControleurDeplacementPersonnage</h1>. A pour rôle de gérer la phase de déplacment des personnages
+ * <h1>La classe ControleurDeplacementPersonnage</h1>. A pour rôle de gérer la
+ * phase de déplacment des personnages
  *
  * @author Aurelien
  * @version 1
@@ -25,28 +26,28 @@ public class ControleurDeplacementPersonnage {
 		cfp = new ControleurFinPartie();
 	}
 
-	public void phaseDeplacementPerso(ControleurJeu cj,Partie jeu, List<Integer> destination, List<Integer> zombie, String partieId,
-			int numeroTour) {
+	public void phaseDeplacementPerso(ControleurJeu cj, Partie jeu, List<Integer> destination, List<Integer> zombie,
+			String partieId, int numeroTour) {
 		dr.debutPhaseDeplacement(jeu, destination, zombie, partieId, numeroTour);
 		int compteur = 0;
 		for (Joueur j : jeu.getJoueurs().values()) {
 			if (j.isEnVie() && j.isChefDesVigiles()) {
 				deplacePerso(cj, jeu, compteur, j, destination, partieId, numeroTour);
-				compteur ++;
+				compteur++;
 			}
 			Evenement.nbPlaceLieuAll(new ArrayList<>(jeu.getLieux().values()));
 		}
 		for (Joueur j : jeu.getJoueurs().values()) {
 			if (j.isEnVie() && !(j.isChefDesVigiles())) {
 				deplacePerso(cj, jeu, compteur, j, destination, partieId, numeroTour);
-				compteur ++;
+				compteur++;
 			}
 			Evenement.nbPlaceLieuAll(new ArrayList<>(jeu.getLieux().values()));
 		}
 	}
 
-	private void deplacePerso(ControleurJeu cj, Partie jeu, Integer compteur, Joueur j, List<Integer> destination, String partieId,
-			int numeroTour) {
+	private void deplacePerso(ControleurJeu cj, Partie jeu, Integer compteur, Joueur j, List<Integer> destination,
+			String partieId, int numeroTour) {
 		dr.demanderDeplacements(jeu, j, destination.get(compteur), partieId, numeroTour);
 		List<Object> recupDeplacement = dr.recupDeplacemnt(jeu, j);
 		jeu.deplacePerso(j, PpTools.valeurToIndex((int) recupDeplacement.get(1)), (int) recupDeplacement.get(0));

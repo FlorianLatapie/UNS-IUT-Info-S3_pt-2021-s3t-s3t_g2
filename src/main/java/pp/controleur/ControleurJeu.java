@@ -69,8 +69,6 @@ public class ControleurJeu {
 	private ControleurFinPartie cfp;
 	private ControleurAttaqueZombie catz;
 
-	private final Random rd = new Random();
-
 	public ControleurJeu(String nom, int njr, int njv) throws IOException {
 		if (njr + njv > 6 || njr + njv < 3)
 			throw new IllegalArgumentException("Mauvais nombre de joueur");

@@ -2,7 +2,6 @@ package pp.controleur;
 
 import java.util.ArrayList;
 import java.util.List;
-
 import pp.Joueur;
 import pp.Lieu;
 import pp.Partie;
@@ -10,15 +9,14 @@ import pp.Personnage;
 import pp.PpTools;
 import pp.ihm.event.Evenement;
 import pp.reseau.AttaqueZombieReseau;
-import reseau.socket.ControleurReseau;
 import reseau.type.CarteType;
 import reseau.type.PionCouleur;
 import reseau.type.RaisonType;
 import reseau.type.VoteType;
-import sun.util.logging.resources.logging;
 
 /**
- * <h1>La classe ControleurAttaqueZombie</h1>. A pour rôle de gérer la phase d'attaque des zombies
+ * <h1>La classe ControleurAttaqueZombie</h1>. A pour rôle de gérer la phase
+ * d'attaque des zombies
  *
  * @author Aurelien
  * @version 1
@@ -79,8 +77,8 @@ public class ControleurAttaqueZombie {
 		for (Joueur j : jeu.getJoueurSurLieu(lieu)) {
 			List<Object> lo = azr.recupDefense(j);
 			List<Integer> persoCacheTemp = (List<Integer>) lo.get(1);
-			for(Personnage p : j.getPersonnages().values())
-				if(persoCacheTemp.contains(p.getPoint()))
+			for (Personnage p : j.getPersonnages().values())
+				if (persoCacheTemp.contains(p.getPoint()))
 					p.setEstCache(true);
 			List<CarteType> carte = (List<CarteType>) lo.get(0);
 			for (CarteType c : carte) {
@@ -124,7 +122,7 @@ public class ControleurAttaqueZombie {
 			jou = cv.phaseVote(jeu, lieu, VoteType.MPZ, partieId, numeroTour);
 		List<Integer> listePion = new ArrayList<>();
 		for (Personnage p : jou.getPersonnages().values())
-			if (lieu.getPersonnage().contains(p)) 
+			if (lieu.getPersonnage().contains(p))
 				listePion.add(p.getPoint());
 		azr.demanderSacrifice(listePion, jou, lieu, partieId, numeroTour);
 		PionCouleur pionCou = azr.recupSacrifice(jou);

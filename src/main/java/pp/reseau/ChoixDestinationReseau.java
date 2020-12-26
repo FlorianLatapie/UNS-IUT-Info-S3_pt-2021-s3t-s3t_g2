@@ -6,7 +6,8 @@ import reseau.socket.ControleurReseau;
 import reseau.type.VigileEtat;
 
 /**
- * <h1>La classe ChoixDestinationReseau</h1>. A pour rôle de traiter les paquets réseaux de la phase d'attaque de choix d'une destination
+ * <h1>La classe ChoixDestinationReseau</h1>. A pour rôle de traiter les paquets
+ * réseaux de la phase d'attaque de choix d'une destination
  *
  * @author Aurelien
  * @version 1
@@ -38,33 +39,31 @@ public class ChoixDestinationReseau {
 	public int indiqueChoixDest(Joueur j) {
 		j.getConnection().attendreMessage("CDDJ");
 		String rep = j.getConnection().getMessage("CDDJ");
-		return (int)ControleurReseau.getValueTcp("CDDJ", rep, 1);
+		return (int) ControleurReseau.getValueTcp("CDDJ", rep, 1);
 	}
-	
+
 	public void cloreChoiXDest(Partie jeu, String partieId, int numeroTour) {
 		String m = ControleurReseau.construirePaquetTcp("CDFC", partieId, numeroTour);
 		for (Joueur j : jeu.getJoueurs().values())
 			j.getConnection().envoyer(m);
 	}
-	
-	public void choisirDestZombieVenger(Joueur j, String partieId, int numeroTour){
+
+	public void choisirDestZombieVenger(Joueur j, String partieId, int numeroTour) {
 		String m = ControleurReseau.construirePaquetTcp("CDZVI", partieId, numeroTour);
 		j.getConnection().envoyer(m);
 	}
-	
-	public int indiquerChoixDestZombieVenger(Joueur j){
+
+	public int indiquerChoixDestZombieVenger(Joueur j) {
 		j.getConnection().attendreMessage("CDDZVJE");
 		String rep = j.getConnection().getMessage("CDDZVJE");
 		return (int) ControleurReseau.getValueTcp("CDDZVJE", rep, 1);
 	}
-	
-	
+
 	public void informerChoixDestZombieVenger(Partie jeu, Joueur j, int dvz, String partieId, int numeroTour) {
 		for (Joueur j2 : jeu.getJoueurs().values()) {
-			j2.getConnection().envoyer(
-					ControleurReseau.construirePaquetTcp("CDZVDI", j.getCouleur(), dvz, partieId, numeroTour));
+			j2.getConnection()
+					.envoyer(ControleurReseau.construirePaquetTcp("CDZVDI", j.getCouleur(), dvz, partieId, numeroTour));
 		}
 	}
-	
 
 }

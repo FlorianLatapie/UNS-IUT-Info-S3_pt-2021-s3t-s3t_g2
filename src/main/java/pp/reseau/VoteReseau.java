@@ -11,7 +11,8 @@ import reseau.type.VoteEtape;
 import reseau.type.VoteType;
 
 /**
- * <h1>La classe PlacementReseau </h1>. A pour rôle de traiter les paquets réseaux des phases de vote
+ * <h1>La classe PlacementReseau</h1>. A pour rôle de traiter les paquets
+ * réseaux des phases de vote
  *
  * @author Aurelien
  * @version 1
@@ -39,7 +40,8 @@ public class VoteReseau {
 		return (int) ControleurReseau.getValueTcp("PVC", m, 1);
 	}
 
-	public void informeCarteJouee(Partie jeu, int numVote, Lieu l, Joueur j, int nbMenace, String partieId, int numeroTour) {
+	public void informeCarteJouee(Partie jeu, int numVote, Lieu l, Joueur j, int nbMenace, String partieId,
+			int numeroTour) {
 		for (Joueur jou : jeu.getJoueurs().values())
 			jou.getConnection().envoyer(ControleurReseau.construirePaquetTcp("PVIC", j.getCouleur(), nbMenace,
 					j.getNbVoix(l, numVote, nbMenace), partieId, numeroTour));
@@ -69,4 +71,3 @@ public class VoteReseau {
 		}
 	}
 }
-
