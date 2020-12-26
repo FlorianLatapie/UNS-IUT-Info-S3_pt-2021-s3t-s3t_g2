@@ -242,6 +242,9 @@ public class ControleurJeu {
 		return tmp;
 	}
 
+	/**
+	 * Distribue la premiere carte a chaque joueur. 
+	 */
 	public void distribuerCarte() {
 		for (Joueur j : jeu.getJoueurs().values()) {
 			CarteType a = jeu.getCartes().get(0);
