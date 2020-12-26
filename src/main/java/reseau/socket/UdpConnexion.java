@@ -34,7 +34,6 @@ public class UdpConnexion implements Runnable, IEchangeSocket, IControleSocket {
 	/**
 	 * Initialise le serveur UDP.
 	 *
-	 * @param controleurReseau le gestionnaire réseau
 	 * @param ip               L'ip sur lequel le serveur demarre
 	 * @exception UnknownHostException Si le cast de l'ip provoque une erreur
 	 */
@@ -108,8 +107,7 @@ public class UdpConnexion implements Runnable, IEchangeSocket, IControleSocket {
 	 */
 	private void reception(DatagramPacket datagramPacket, String message) {
 		logger.log(Level.INFO, "Message recu : {0}", message);
-		ControleurReseau.traitementPaquetUdp(PtOutils.strToPacketUdp(message), message,
-				datagramPacket);
+		ControleurReseau.traitementPaquetUdp(PtOutils.strToPacketUdp(message), message, datagramPacket);
 	}
 
 	/**
@@ -157,6 +155,8 @@ public class UdpConnexion implements Runnable, IEchangeSocket, IControleSocket {
 
 	/**
 	 * Permet de savoir le multicast udp est pret.
+	 * 
+	 * @return si le multicast udp est connecté
 	 */
 	public boolean isPret() {
 		return multicastSocket.isConnected();
@@ -164,6 +164,8 @@ public class UdpConnexion implements Runnable, IEchangeSocket, IControleSocket {
 
 	/**
 	 * Permet de savoir le multicast udp est arreter.
+	 * 
+	 * @return si le multicast udp est arreter
 	 */
 	public boolean isArreter() {
 		return !multicastSocket.isClosed();

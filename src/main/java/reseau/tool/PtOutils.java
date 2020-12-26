@@ -254,7 +254,6 @@ public interface PtOutils {
 	 * Obtient le paquet via une chaine de caractere.
 	 *
 	 * @param message          Le message a convertir
-	 * @param controleurReseau Le NetworkManager associé
 	 * @return Le paquet associé
 	 */
 	public static Paquet strToPacketUdp(String message) {
@@ -268,7 +267,6 @@ public interface PtOutils {
 	 * Obtient le paquet via une chaine de caractere.
 	 *
 	 * @param message          Le message a convertir
-	 * @param controleurReseau Le NetworkManager associé
 	 * @return Le paquet associé
 	 */
 	public static Paquet strToPacketTcp(String message) {
