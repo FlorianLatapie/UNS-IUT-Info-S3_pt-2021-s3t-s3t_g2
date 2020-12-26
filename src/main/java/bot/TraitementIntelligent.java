@@ -231,7 +231,7 @@ public class TraitementIntelligent {
 			carteGarde = listeCarte.get(0);
 			core.addCarte(carteGarde);
 			System.out.print("carte fouille");
-			System.out.print("4" + core.couleurJoueurPresent().size());
+			System.out.print("4" + core.getCouleurJoueursPresent().size());
 			couleur = getRandom2(core, VoteType.FDC);
 		}
 		if (listeCarte.size() == 1) {
@@ -379,9 +379,9 @@ public class TraitementIntelligent {
 	protected static Couleur voteIntelligent(Bot core, VoteType vt) {
 		// TODO can be upgrade
 		if (vt == VoteType.MPZ) {
-			System.out.println("Joueur Présent:" + core.couleurJoueurPresent().size());
-			core.couleurJoueurPresent().remove(core.getCouleur());
-			return core.couleurJoueurPresent().get(new Random().nextInt(core.couleurJoueurPresent().size()));
+			System.out.println("Joueur Présent:" + core.getCouleurJoueursPresent().size());
+			core.getCouleurJoueursPresent().remove(core.getCouleur());
+			return core.getCouleurJoueursPresent().get(new Random().nextInt(core.getCouleurJoueursPresent().size()));
 		}
 		return core.getCouleur();
 	}
