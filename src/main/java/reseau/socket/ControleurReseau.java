@@ -3,6 +3,7 @@ package reseau.socket;
 import reseau.paquet.Paquet;
 import reseau.tool.PtOutils;
 import reseau.tool.ReseauOutils;
+import reseau.tool.ThreadOutils;
 import reseau.type.*;
 
 import java.io.IOException;
@@ -36,6 +37,7 @@ public abstract class ControleurReseau {
 	private static TraitementPaquet<DatagramPacket> traitementPaquetUdp;
 	private static TraitementPaquet<TcpClient> traitementPaquetTcp;
 	private static ConnexionType connexionType;
+	private static boolean vite;
 
 	private static Logger logger;
 
@@ -66,10 +68,11 @@ public abstract class ControleurReseau {
 	 */
 	public static void initConnexion(TraitementPaquet<TcpClient> traitementPaquetTcpCible,
 			TraitementPaquet<DatagramPacket> traitementPaquetUdpCible, ConnexionType connexionTypeCible,
-			InetAddress ipCible) throws UnknownHostException {
+			InetAddress ipCible, boolean viteb) throws UnknownHostException {
 		logger.finest("Initialisation du controleur réseau");
 		traitementPaquetUdp = traitementPaquetUdpCible;
 		traitementPaquetTcp = traitementPaquetTcpCible;
+		vite = viteb;
 		traitementPaquetUdp.init();
 		traitementPaquetTcp.init();
 		connexionType = connexionTypeCible;
@@ -79,10 +82,10 @@ public abstract class ControleurReseau {
 		if (udpPaquets.isEmpty() || tcpPaquets.isEmpty())
 			throw new IllegalArgumentException("Il n'y a pas de définitions pour les paquets TCP/UDP");
 		logger.log(Level.INFO, "Mon port est {0}", tcpPort);
-		new Thread(udpConnexion = new UdpConnexion(ip), "udpConnexion").start();
+		ThreadOutils.asyncTask("udpConnexion", udpConnexion = new UdpConnexion(ip));
 
 		if (connexionType == ConnexionType.SERVEUR)
-			new Thread(tcpServeur = new TcpServeur(ip, tcpPort), "tcpServeur").start();
+			ThreadOutils.asyncTask("tcpServeur", tcpServeur = new TcpServeur(ip, tcpPort));
 
 		logger.info("Controleur initialisé");
 	}
@@ -184,7 +187,7 @@ public abstract class ControleurReseau {
 	/**
 	 * Permet d'obtenir l'ensemble des paquets TCP.
 	 *
-	 * @param cle la cle cible
+	 * @param cle  la cle cible
 	 * @param args les arguments du paquet
 	 * @return L'ensemble des paquets TCP
 	 */
@@ -198,9 +201,9 @@ public abstract class ControleurReseau {
 	/**
 	 * Permet d'obtenir l'ensemble des paquets UDP.
 	 *
-	 * @param cle la cle cible
+	 * @param cle     la cle cible
 	 * @param message le message cible
-	 * @param val l'index de l'argument
+	 * @param val     l'index de l'argument
 	 * @return L'ensemble des paquets UDP
 	 * @exception IllegalArgumentException si la clé n'est pas valide
 	 */
@@ -214,9 +217,9 @@ public abstract class ControleurReseau {
 	/**
 	 * Permet d'obtenir l'ensemble des paquets TCP.
 	 *
-	 * @param cle la cle cible
+	 * @param cle     la cle cible
 	 * @param message le message cible
-	 * @param val l'index de l'argument
+	 * @param val     l'index de l'argument
 	 * @return L'ensemble des paquets TCP
 	 * @exception IllegalArgumentException si la clé n'est pas valide
 	 */
@@ -356,6 +359,10 @@ public abstract class ControleurReseau {
 	}
 
 	public static void demarrerClientTcp(InetAddress ipPp, int portPp) {
-		new Thread(tcpClient = new TcpClient(ipPp, portPp, CLE_FIN), "tcpClient").start();
+		ThreadOutils.asyncTask("tcpClient", tcpClient = new TcpClient(ipPp, portPp, CLE_FIN));
+	}
+
+	public static boolean isVite() {
+		return vite;
 	}
 }

@@ -9,6 +9,8 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import reseau.tool.ThreadOutils;
+
 /**
  * <h1>Permet de gerer un serveur TCP du coté Serveur</h1>
  *
@@ -101,9 +103,9 @@ public class TcpServeur implements Runnable, IControleSocket {
 	 */
 	public void attendreConnexion() {
 		while (serveurSocket == null)
-			Thread.yield();
+			ThreadOutils.attendre();
 		while (!isPret())
-			Thread.yield();
+			ThreadOutils.attendre();
 	}
 
 	/**
