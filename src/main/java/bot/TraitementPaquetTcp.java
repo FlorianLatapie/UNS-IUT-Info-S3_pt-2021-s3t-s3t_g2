@@ -11,14 +11,9 @@ import reseau.type.PionCouleur;
 import reseau.type.VigileEtat;
 import reseau.type.VoteType;
 
-import java.text.MessageFormat;
 import java.util.*;
 
-import bot.partie.Joueur;
-
 import static java.lang.System.out;
-
-import java.net.Socket;
 
 /**
  * <h1>Permet de gerer les paquets</h1>

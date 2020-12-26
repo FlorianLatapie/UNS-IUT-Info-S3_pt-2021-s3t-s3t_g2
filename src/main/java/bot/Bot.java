@@ -1,7 +1,6 @@
 package bot;
 
 import reseau.socket.ControleurReseau;
-import reseau.socket.UdpConnexion;
 import reseau.tool.ReseauOutils;
 import reseau.tool.ThreadOutils;
 import reseau.type.CarteEtat;
@@ -16,7 +15,6 @@ import reseau.type.VoteType;
 
 import java.io.IOException;
 import java.net.InetAddress;
-import java.net.UnknownHostException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;

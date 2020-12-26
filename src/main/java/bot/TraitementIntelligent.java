@@ -10,7 +10,6 @@ import java.util.Random;
 
 import bot.MCTS.MCTSBotMoyen;
 import bot.partie.Lieu;
-import bot.partie.Personnage;
 import reseau.type.CarteType;
 import reseau.type.Couleur;
 import reseau.type.PionCouleur;

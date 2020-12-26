@@ -73,7 +73,6 @@ public class ConsoleBot {
 	}
 
 	private static BotType choisirBot() {
-		BotType tmp = BotType.FAIBLE;
 		int reponse;
 		do {
 			System.out.println("Choissisez un type de bot ");
@@ -102,8 +101,6 @@ public class ConsoleBot {
 		for (PartieInfo partieInfo : partieInfos)
 			if (partieInfo.getNom().equals(val))
 				return partieInfo;
-
-		TypePartie tmp = TypePartie.MIXTE;
 
 		System.out.println();
 		System.out.println("=======================================");

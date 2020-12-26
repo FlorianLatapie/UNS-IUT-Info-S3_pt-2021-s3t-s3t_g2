@@ -3,18 +3,12 @@ package bot;
 import reseau.paquet.Paquet;
 import reseau.socket.ControleurReseau;
 import reseau.socket.TraitementPaquet;
-import reseau.tool.ThreadOutils;
 import reseau.type.ConnexionType;
 import reseau.type.Statut;
 
-import java.io.File;
-import java.io.FileNotFoundException;
 import java.net.DatagramPacket;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
-import java.text.MessageFormat;
-import java.util.Random;
-import java.util.Scanner;
 
 /**
  * <h1>Permet de gerer les paquets</h1>
