@@ -40,6 +40,7 @@ public class ControleurPlacementPersonnage {
 	public void placementPersonnage(Partie jeu, String partieId, int numeroTour) {
 		for (int n = 0; n < jeu.getJoueurs().get(0).getPersonnages().size(); n++) {
 			for (Joueur j : jeu.getJoueurs().values()) {
+				Evenement.quiJoue(j.getCouleur());
 				pr.informerJoueur(jeu, j, partieId);
 				int x = jeu.getLieuxOuverts().get(rd.nextInt(jeu.getLieuxOuverts().size()));
 				int y = jeu.getLieuxOuverts().get(rd.nextInt(jeu.getLieuxOuverts().size()));
@@ -52,6 +53,7 @@ public class ControleurPlacementPersonnage {
 				List<Integer> choisirDest = pr.choisirDest(j);
 				jeu.placePerso(j, PpTools.valeurToIndex(choisirDest.get(1)), choisirDest.get(0));
 				pr.informerPlacement(jeu, j, des, listePion, choisirDest.get(0), choisirDest.get(1), partieId);
+				Evenement.suppQuiJoue();
 				Evenement.destionationPersoAll(new ArrayList<>(jeu.getLieux().values()));
 				Evenement.nbPlaceLieuAll(new ArrayList<>(jeu.getLieux().values()));
 			}

@@ -8,6 +8,7 @@ import pp.PpTools;
 import pp.ihm.event.Evenement;
 import pp.reseau.DeplacementReseau;
 import reseau.type.CarteType;
+import reseau.type.Couleur;
 
 /**
  * <h1>La classe ControleurDeplacementPersonnage</h1>. A pour rôle de gérer la
@@ -45,15 +46,19 @@ public class ControleurDeplacementPersonnage {
 		int compteur = 0;
 		for (Joueur j : jeu.getJoueurs().values()) {
 			if (j.isEnVie() && j.isChefDesVigiles()) {
+				Evenement.quiJoue(j.getCouleur());
 				deplacePerso(cj, jeu, compteur, j, destination, partieId, numeroTour);
 				compteur++;
+				Evenement.suppQuiJoue();
 			}
 			Evenement.nbPlaceLieuAll(new ArrayList<>(jeu.getLieux().values()));
 		}
 		for (Joueur j : jeu.getJoueurs().values()) {
 			if (j.isEnVie() && !(j.isChefDesVigiles())) {
+				Evenement.quiJoue(j.getCouleur());
 				deplacePerso(cj, jeu, compteur, j, destination, partieId, numeroTour);
 				compteur++;
+				Evenement.suppQuiJoue();
 			}
 			Evenement.nbPlaceLieuAll(new ArrayList<>(jeu.getLieux().values()));
 		}

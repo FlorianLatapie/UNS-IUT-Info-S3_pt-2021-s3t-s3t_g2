@@ -1,5 +1,6 @@
 package pp.reseau;
 
+import java.util.Collection;
 import java.util.List;
 
 import pp.Joueur;
@@ -34,10 +35,9 @@ public class VoteReseau {
 	 */
 	public void debutVote(Partie jeu, VoteType tv, VoteEtape ve, List<Couleur> joueurPresent,
 			List<Couleur> joueurVotant, List<Integer> nbVoix, String partieId, int numeroTour) {
-		for (Joueur j : jeu.getJoueurs().values()) {
+		for (Joueur j : jeu.getJoueurs().values())
 			j.getConnection().envoyer(ControleurReseau.construirePaquetTcp("IPV", tv, ve, joueurPresent, joueurVotant,
 					nbVoix, partieId, numeroTour));
-		}
 	}
 
 	/**
@@ -57,10 +57,20 @@ public class VoteReseau {
 	/**
 	 * Traitement du paquet PVC du protocole reseau.
 	 * 
+	 * @param jeu La partie courante.
+	 * @param l   lieu du vote.
+	 */
+	public void attendreCarte(Partie jeu, Lieu l) {
+		for (Joueur j : jeu.getJoueurSurLieu(l))
+			j.getConnection().attendreMessage("PVC");
+	}
+
+	/**
+	 * Traitement du paquet PVC du protocole reseau.
+	 * 
 	 * @param j Joueur courant.
 	 */
 	public int carteJoue(Joueur j) {
-		j.getConnection().attendreMessage("PVC");
 		String m = j.getConnection().getMessage("PVC");
 		return (int) ControleurReseau.getValueTcp("PVC", m, 1);
 	}
@@ -96,12 +106,22 @@ public class VoteReseau {
 	/**
 	 * Traitement du paquet PVCV du protocole reseau.
 	 * 
+	 * @param jeu        La partie courante.
+	 * @param collection liste des joueurs votants
+	 */
+	public void attendreVote(Partie jeu, Collection<Joueur> collection) {
+		for (Joueur j : collection)
+			j.getConnection().attendreMessage("PVCV");
+	}
+
+	/**
+	 * Traitement du paquet PVCV du protocole reseau.
+	 * 
 	 * @param j Joueur courant.
 	 * 
 	 * @return Couleur du joueur voté.
 	 */
 	public Couleur recupVote(Joueur j) {
-		j.getConnection().attendreMessage("PVCV");
 		String m = j.getConnection().getMessage("PVCV");
 		return (Couleur) ControleurReseau.getValueTcp("PVCV", m, 1);
 	}

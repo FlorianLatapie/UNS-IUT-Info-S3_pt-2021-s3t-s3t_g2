@@ -74,6 +74,7 @@ public class ControleurVote {
 		List<Integer> nbVoix = (List<Integer>) lo.get(1);
 		List<Couleur> votes = new ArrayList<>();
 		List<Integer> voixRecu = initVoixRecu(ve, jeu, l);
+		vr.attendreCarte(jeu, l);
 		vr.demanderCarte(jeu, l, partieId, numeroTour);
 		traitementMenace(ve, jeu, nbVoix, l, partieId, numeroTour);
 		demanderVote(jeu, l, ve, partieId, numeroTour);
@@ -213,6 +214,7 @@ public class ControleurVote {
 			List<Integer> nbVoix) {
 		int i = 0;
 		if (ve == VoteEtape.PRE) {
+			vr.attendreVote(jeu, jeu.getJoueurSurLieu(l));
 			for (Joueur j : jeu.getJoueurSurLieu(l)) {
 				Couleur couleurVote = vr.recupVote(j);
 				votes.add(couleurVote);
@@ -225,6 +227,7 @@ public class ControleurVote {
 				i++;
 			}
 		} else if (ve == VoteEtape.SEC) {
+			vr.attendreVote(jeu, jeu.getJoueurs().values());
 			for (Joueur j : jeu.getJoueurs().values()) {
 				Couleur couleurVote = vr.recupVote(j);
 				votes.add(couleurVote);

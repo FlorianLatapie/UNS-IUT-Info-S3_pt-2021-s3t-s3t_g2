@@ -47,6 +47,7 @@ public class ControleurFouilleCamion {
 		if (isFouillable(jeu)) {
 			j = joueurFouille(jeu, partieId, numeroTour);
 			if (j != null) {
+				Evenement.quiJoue(j.getCouleur());
 				s = "Phase fouille camion";
 				fr.envoyerCarte(jeu, j, partieId, numeroTour);
 				Evenement.nbCartePiocheActuel(jeu.getCartes().size());
@@ -58,9 +59,10 @@ public class ControleurFouilleCamion {
 				Evenement.nbCartePiocheActuel(jeu.getCartes().size());
 				fr.finFouilleCamion(jeu, j.getCouleur(), (Couleur) l.get(2), etatCarteDefausse((CarteType) l.get(3)),
 						partieId, numeroTour);
+				Evenement.suppQuiJoue();
 			}
 			if (s == "") {
-				s = "Pezrsonne fouille le Camion";
+				s = "Personne fouille le Camion";
 				fr.finFouilleCamion(jeu, Couleur.NUL, Couleur.NUL, CarteEtat.NUL, partieId, numeroTour);
 			}
 			Evenement.fouilleCamion(s);
