@@ -10,7 +10,8 @@ import reseau.type.CarteType;
 import reseau.type.VigileEtat;
 
 /**
- * <h1>La classe ArriveZombieReseau</h1>. A pour rôle de traiter les paquets réseaux de la phase d'arrivée des zombies
+ * <h1>La classe ArriveZombieReseau</h1>. A pour rôle de traiter les paquets
+ * réseaux de la phase d'arrivée des zombies
  *
  * @author Aurelien
  * @version 1
@@ -42,7 +43,7 @@ public class ArriveZombieReseau {
 	}
 
 	public List<Joueur> reponseCDS(Partie jeu) {
-		List<Joueur> joueurCDS = new ArrayList();
+		List<Joueur> joueurCDS = new ArrayList<>();
 		for (Joueur j : jeu.getJoueurs().values())
 			if (j.getCartes().contains(CarteType.CDS)) {
 				j.getConnection().attendreMessage("AZRCS");
