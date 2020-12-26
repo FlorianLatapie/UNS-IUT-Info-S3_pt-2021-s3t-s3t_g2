@@ -8,7 +8,8 @@ import pp.Partie;
 import reseau.socket.ControleurReseau;
 
 /**
- * <h1>La classe PlacementReseau </h1>. A pour rôle de traiter les paquets réseaux de la phase de placement des personnages
+ * <h1>La classe PlacementReseau</h1>. A pour rôle de traiter les paquets
+ * réseaux de la phase de placement des personnages
  *
  * @author Aurelien
  * @version 1
@@ -22,10 +23,10 @@ public class PlacementReseau {
 		j.getConnection().envoyer(message);
 	}
 
-	public void attendreLancement(Joueur j){
+	public void attendreLancement(Joueur j) {
 		j.getConnection().attendreMessage("PILD");
 	}
-	
+
 	public void informerResultatDes(Joueur j, List<Integer> des, List<Integer> listePion, String partieId) {
 		String message = ControleurReseau.construirePaquetTcp("PIRD", des, listePion, partieId);
 		j.getConnection().envoyer(message);
