@@ -28,9 +28,7 @@ public class ControleurElectionVigile {
 		ecvr.debutElectionChefVigile(jeu, partieId, numeroTour);
 		Joueur j;
 		if (isElectableBoolean(jeu)) {
-			j = joueurElection(jeu);
-			if (j == null)
-				j = cVote.phaseVote(jeu, jeu.getLieux().get(5), VoteType.ECD, partieId, numeroTour);
+			j = joueurElection(jeu, partieId, numeroTour);
 			if (j != null) {
 				newVigile(jeu, j);
 				ecvr.informerElectionChefVigile(jeu, jeu.getChefVIgile().getCouleur(), partieId, numeroTour);
@@ -60,12 +58,14 @@ public class ControleurElectionVigile {
 		return !jeu.getJoueurSurLieu(jeu.getLieux().get(5)).isEmpty();
 	}
 
-	public Joueur joueurElection(Partie jeu) {
+	public Joueur joueurElection(Partie jeu, String partieId, int numeroTour) {
 		//TODO modifier
-		Joueur j;
+		Joueur j = null;
 		if (jeu.getJoueurSurLieu(jeu.getLieux().get(5)).size() == 1)
 			j = jeu.getJoueurSurLieu(jeu.getLieux().get(5)).get(0);
-		return null;
+		if (j == null)
+			j = cVote.phaseVote(jeu, jeu.getLieux().get(5), VoteType.ECD, partieId, numeroTour);
+		return j;
 	}
 	
 	public void newVigile(Partie jeu, Joueur j) {
