@@ -118,6 +118,7 @@ public abstract class ControleurReseau {
 	 * @param message Le message a envoyer
 	 */
 	public static void envoyerUdp(String message) {
+		udpConnexion.attendreConnexion();
 		udpConnexion.envoyer(message);
 	}
 
