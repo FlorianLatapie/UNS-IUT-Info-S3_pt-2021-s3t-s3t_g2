@@ -144,6 +144,15 @@ public class Paquet {
 	public String getCle() {
 		return cle;
 	}
+	
+	/**
+	 * Obtient le nombre d'arguments.
+	 *
+	 * @return Le nombre d'argument
+	 */
+	public int getArgNb() {
+		return ptProtocol.taille();
+	}
 
 	@Override
 	public String toString() {

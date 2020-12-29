@@ -3,61 +3,76 @@
  */
 package pp.ihm;
 
+import javafx.application.Platform;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import pp.ihm.langues.ITraduction;
 import pp.ihm.langues.International;
 
 /**
  * @author Remy
+ * @author Tom
  *
  */
-public class ConfirmationPane {
-
+public class ConfirmationPane implements ITraduction {
+	// auteur remy
 	static boolean reponse;
-	private static int tailleFenetreL = 450;
-	private static int tailleFenetreH = 150;
-	
+	private static int tailleFenetreL = 500;
+	private static int tailleFenetreH = 190;
+	private static String nomPolice = "Segoe UI";
+
+	static Button boutonOui;
+	static Button boutonNon;
+
 	/**
 	 * affiche une fenêtre de confirmation avec un titre et un message personnalisé
-	 * @param titre titre de la fenetre
-	 * @param message message affiché dans la fenetre 
+	 * 
+	 * @param titre   titre de la fenetre
+	 * @param message message affiché dans la fenetre
 	 * @return
 	 */
-	public static boolean afficher(String titre, String message) {
-		
-		//nouvelle fenetre
+	public static boolean afficher(String titre, String messageL1) {
+		// auteur remy
+		// nouvelle fenetre
 		Stage window = new Stage();
+		window.getIcons().add(new Image(DataControl.ICONE));
 		window.initModality(Modality.APPLICATION_MODAL);
 		window.setTitle(titre);
+
+		window.setMaxWidth(tailleFenetreL);
+		window.setMaxHeight(tailleFenetreH);
+		window.setWidth(tailleFenetreL);
+		window.setHeight(tailleFenetreH);
 		window.setMinWidth(tailleFenetreL);
 		window.setMinHeight(tailleFenetreH);
-		
-		//titre
-		Label label = new Label();
-		label.setText(message);
-		label.setStyle("-fx-text-fill: #DDDDDD");
-		label.setFont(Font.font("Arial", FontWeight.BOLD, 20));
-		label.setPadding(new Insets(10));
 
-		//boutons
-		Button boutonOui = new Button(International.trad("bouton.quitter"));
+		// titre
+		Label labelL1 = new Label();
+		labelL1.setText(messageL1);
+		labelL1.setStyle("-fx-text-fill: #DDDDDD");
+		labelL1.setFont(Font.font(nomPolice, FontWeight.BOLD, 20));
+		labelL1.setPadding(new Insets(10, 10, 0, 10));
+
+		// boutons
+		boutonOui = new Button(International.trad("bouton.quitter"));
 		boutonOui.setPrefSize(200, 50);
 		boutonOui.setStyle("-fx-background-color: #ff0000; -fx-background-radius: 5px; -fx-text-fill: #ffffff");
-		boutonOui.setFont(Font.font("Arial", FontWeight.BOLD, 20));
+		boutonOui.setFont(Font.font(nomPolice, FontWeight.BOLD, 27));
 
-		Button boutonNon = new Button(International.trad("bouton.annuler"));
+		boutonNon = new Button(International.trad("bouton.annuler"));
 		boutonNon.setPrefSize(200, 50);
 		boutonNon.setStyle("-fx-background-color: #A9A9A9; -fx-background-radius: 5px; -fx-text-fill: #ffffff");
-		boutonNon.setFont(Font.font("Arial", FontWeight.BOLD, 20));
+		boutonNon.setFont(Font.font(nomPolice, FontWeight.BOLD, 27));
 
 		boutonOui.setOnAction(e -> {
 			reponse = true;
@@ -76,8 +91,7 @@ public class ConfirmationPane {
 
 		VBox layout = new VBox(10);
 		layout.setAlignment(Pos.TOP_CENTER);
-		layout.getChildren().add(label);
-		layout.getChildren().add(boutonHbox);
+		layout.getChildren().addAll(labelL1, boutonHbox);
 		layout.setStyle(" -fx-background-color: #1F1F1F;");
 		Scene scene = new Scene(layout);
 
@@ -85,5 +99,19 @@ public class ConfirmationPane {
 		window.showAndWait();
 
 		return reponse;
+	}
+
+	/**
+	 * Traduit les elements de ce pane
+	 */
+	@Override
+	public void traduire() {
+		Platform.runLater(new Runnable() {
+			@Override
+			public void run() {
+				boutonOui.setText(International.trad("bouton.quitter"));
+				boutonNon.setText(International.trad("bouton.annuler"));
+			}
+		});
 	}
 }

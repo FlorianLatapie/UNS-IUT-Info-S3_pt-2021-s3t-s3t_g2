@@ -1,12 +1,15 @@
 package reseau.socket;
 
 import java.io.IOException;
+import java.net.InetAddress;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
+import reseau.tool.ThreadOutils;
 
 /**
  * <h1>Permet de gerer un serveur TCP du coté Serveur</h1>
@@ -15,27 +18,27 @@ import java.util.logging.Logger;
  * @version 2.0
  */
 public class TcpServeur implements Runnable, IControleSocket {
-	private final ControleurReseau controleurReseau;
 	private ServerSocket serveurSocket;
 
 	private final List<TcpClient> connexions;
 	private boolean estLancer;
+	private final InetAddress ip;
 	private final int port;
 
 	private final Logger logger;
 
 	/**
-	 * @param controleurReseau Le controleur reseau associé
+	 * @param ip               L'ip du serveur TCP
 	 * @param port             Le port du serveur TCP
 	 */
-	public TcpServeur(ControleurReseau controleurReseau, int port) {
+	public TcpServeur(InetAddress ip, int port) {
+		this.ip = ip;
 		this.port = port;
 		this.connexions = new ArrayList<>();
 		this.estLancer = true;
-		this.controleurReseau = controleurReseau;
 		this.logger = Logger.getLogger(getClass().getName());
 		logger.log(Level.INFO, "Le serveur TCP démarre sur : {0}",
-				controleurReseau.getIp().getHostAddress() + " " + port);
+				ControleurReseau.getIp().getHostAddress() + " " + port);
 	}
 
 	/**
@@ -44,10 +47,10 @@ public class TcpServeur implements Runnable, IControleSocket {
 	@Override
 	public void run() {
 		logger.finest("Démarrage du serveur TCP");
-		logger.log(Level.FINEST, "Serveur TCP sur l'ip {0}", controleurReseau.getIp().getHostAddress());
+		logger.log(Level.FINEST, "Serveur TCP sur l'ip {0}", ip.getHostAddress());
 		logger.log(Level.FINEST, "Serveur TCP sur le port {1}", port);
 		try {
-			serveurSocket = new ServerSocket(port, 50, controleurReseau.getIp());
+			serveurSocket = new ServerSocket(port, 50, ip);
 		} catch (IOException e1) {
 			return;
 		}
@@ -60,7 +63,7 @@ public class TcpServeur implements Runnable, IControleSocket {
 				break;
 			}
 			TcpClient connection;
-			new Thread(connection = new TcpClient(sock, controleurReseau)).start();
+			new Thread(connection = new TcpClient(sock)).start();
 			connexions.add(connection);
 		}
 		if (estLancer)
@@ -93,5 +96,33 @@ public class TcpServeur implements Runnable, IControleSocket {
 	 */
 	public List<TcpClient> getConnexions() {
 		return connexions;
+	}
+
+	/**
+	 * Bloque l'execution du thread tant que le client n'est pas pret a recevoir.
+	 */
+	public void attendreConnexion() {
+		while (serveurSocket == null)
+			ThreadOutils.attendre();
+		while (!isPret())
+			ThreadOutils.attendre();
+	}
+
+	/**
+	 * Permet de savoir le client tcp est pret.
+	 * 
+	 * @return si le serveur tcp a bloqué le port
+	 */
+	public boolean isPret() {
+		return serveurSocket.isBound();
+	}
+
+	/**
+	 * Permet de savoir le client tcp est arreter.
+	 * 
+	 * @return si le serveur tcp est arreté
+	 */
+	public boolean isArreter() {
+		return !serveurSocket.isClosed();
 	}
 }

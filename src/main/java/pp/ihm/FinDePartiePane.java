@@ -1,7 +1,8 @@
 package pp.ihm;
 
 import pp.ihm.DataControl.ApplicationPane;
-import pp.ihm.eventListener.FinListener;
+import pp.ihm.event.IFinListener;
+import pp.ihm.langues.ITraduction;
 import pp.ihm.langues.International;
 import javafx.application.Platform;
 import javafx.geometry.Insets;
@@ -14,185 +15,189 @@ import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
+import javafx.scene.text.TextAlignment;
 
 /**
  * The Class AccueilPane.
  *
  * @author Florian
- * @version 0.1
+ * @author Remy
+ * @author Sebatien
+ * @author Tom
+ * 
+ * @version 1.0
  * @since 26/10/2020
  */
-public class FinDePartiePane extends StackPane implements FinListener {
-    private ScreenControl sControl = null;
-    private Core core = null;
-    private final ApplicationPane paneName = ApplicationPane.ENDGAME;
+public class FinDePartiePane extends StackPane implements IFinListener, ITraduction {
+	// auteur florian
+	private ScreenControl sControl = null;
+	private Core core = null;
+	private final ApplicationPane paneName = ApplicationPane.ENDGAME;
 
-    private int tailleCarreCentral = 800; 
-    private int hBouton = 75;
-    private int lBouton = 150;
-    
-    private Font policeBouton = Font.font("Segoe UI", FontWeight.BOLD, 27);
-    private Font policeNom = Font.font("Segoe UI", 17);
-    
-    
-    private String styleBoutons = " -fx-background-color:#000000; -fx-background-radius: 15px; -fx-text-fill: #ffffff";
-    private String styleBoutonsSouris = "-fx-background-color:#ff0000;  -fx-text-fill:#000000; -fx-background-radius: 15px;";
-    
-    private GaussianBlur flou = new GaussianBlur(30);
-    private CornerRadii coin = new CornerRadii(15.0);
-    private CornerRadii coinfb = new CornerRadii(5.0);
-    
-    private Background fondBlanc = new Background(new BackgroundFill(Color.WHITE, coinfb, null));
+	private int tailleCarreCentral = 1000;
+	private int hBouton = 75;
+	private int lBouton = 150;
 
-    private int valPadding = 10;
-    private Insets padding = new Insets(valPadding, valPadding * 2.0, valPadding, valPadding * 2.0);
+	private String nomPolice = "Segoe UI";
+	private Font policeBouton = Font.font(nomPolice, FontWeight.BOLD, 27);
+	private Font policeNom = Font.font(nomPolice, FontWeight.BOLD, 37);
 
-    Label gagnant1;
-    Label gagnant2;
-    Label gagnant3;
-    Label gagnant4;
+	private String styleBoutons = "-fx-background-color:#000000; -fx-background-radius: 15px; -fx-text-fill: #ffffff";
+	private String styleBoutonsSouris = "-fx-background-color:#ff0000;  -fx-text-fill:#000000; -fx-background-radius: 15px;";
+	private String styleGagnant = "-fx-background-color:#1A1A1A; -fx-background-radius: 20px; -fx-border-color: red; -fx-border-insets: -3; -fx-border-width: 3; -fx-border-radius: 20px;";
 
-    public FinDePartiePane(ScreenControl sc, Core c) {
-        core = c;
-        sControl = sc;
+	private GaussianBlur flou = new GaussianBlur(30);
+	private CornerRadii coin = new CornerRadii(15.0);
 
-        // titre
-        Label titre1 = new Label("Fin de\nla partie");//TODO
-        titre1.setFont(Font.font("Segoe UI", FontWeight.BOLD, 80));
-        titre1.setTextFill(Color.BLACK);
+	private int valPadding = 10;
+	private Insets padding = new Insets(valPadding, valPadding * 2.0, valPadding, valPadding * 2.0);
 
-        VBox titre = new VBox(titre1);
-        titre.setAlignment(Pos.CENTER);
-        titre.setMinWidth(400);
-        titre.setBackground(new Background(new BackgroundFill(Color.RED, coin, null)));
+	Label gagnant1;
+	Label gagnant2;
+	Label gagnant3;
+	Label gagnant4;
 
-        VBox vbCenter = new VBox();
-        vbCenter.setAlignment(Pos.CENTER);
-        vbCenter.getChildren().addAll(titre);
+	Label titre1;
+	Button bRetour1;
+	Button bRetour2;
+	Button bRetour3;
+	Button bRetour4;
 
-        //
-        BorderPane bBas = new BorderPane();
+	public FinDePartiePane(ScreenControl sc, Core c) {
+		// auteur florian
+		core = c;
+		sControl = sc;
 
-        HBox bBasCentre = new HBox();
-        gagnant1 = new Label("Le joueur " + "JOUEUR X" + " a gagné");//TODO
-        gagnant1.setFont(policeNom);
-        gagnant1.setBackground(fondBlanc);
-        gagnant1.setPadding(padding);
-        bBasCentre.setAlignment(Pos.CENTER);
-        bBasCentre.getChildren().addAll(gagnant1);
+		// titre
+		titre1 = new Label(
+				International.trad("text.titreFinDePartieA") + "\n" + International.trad("text.titreFinDePartieB"));
+		titre1.setFont(Font.font(nomPolice, FontWeight.BOLD, 80));
+		titre1.setTextFill(Color.BLACK);
+		titre1.setTextAlignment(TextAlignment.CENTER);
 
-        Button bRetour1 = new Button(International.trad("bouton.retour"));
-        bRetour1.setPrefSize(lBouton, hBouton);
-        bRetour1.setMinSize(lBouton, hBouton);
-        bRetour1.setFont(policeBouton);
-        bRetour1.setStyle(styleBoutons);
+		VBox titre = new VBox(titre1);
+		titre.setAlignment(Pos.CENTER);
+		titre.setMinWidth(400);
+		titre.setMaxWidth(400);
+		titre.setPrefWidth(400);
+		titre.setBackground(new Background(new BackgroundFill(Color.RED, coin, null)));
 
+		VBox vbCenter = new VBox();
+		vbCenter.setAlignment(Pos.CENTER);
+		vbCenter.getChildren().addAll(titre);
 
-        bRetour1.setOnMouseEntered(event -> bRetour1.setStyle(styleBoutonsSouris));
-        bRetour1.setOnMouseExited(event -> bRetour1.setStyle(styleBoutons));
-        bRetour1.setOnAction(EventHandler -> sc.setPaneOnTop(ApplicationPane.ACCUEIL));
+		//
+		BorderPane bBas = new BorderPane();
 
-        Button bRetour2 = new Button(International.trad("bouton.retour"));
-        bRetour2.setPrefSize(lBouton, hBouton);
-        bRetour2.setMinSize(lBouton, hBouton);
-        bRetour2.setFont(policeBouton);
-        bRetour2.setStyle(styleBoutons);
+		gagnant1 = new Label("Player BOT MOYEN YASMINE won"); // do not translate
+		gagnant1.setTextAlignment(TextAlignment.CENTER);
+		gagnant1.setFont(policeNom);
+		gagnant1.setTextFill(Color.WHITESMOKE);
+		gagnant1.setStyle(styleGagnant);
+		gagnant1.setPadding(padding);
+		gagnant1.setTranslateY(375);
 
+		bRetour1 = new Button(International.trad("bouton.retour"));
+		bRetour1.setPrefSize(lBouton, hBouton);
+		bRetour1.setMinSize(lBouton, hBouton);
+		bRetour1.setFont(policeBouton);
+		bRetour1.setStyle(styleBoutons);
 
-        bRetour2.setOnMouseEntered(event -> bRetour2.setStyle(styleBoutonsSouris));
-        bRetour2.setOnMouseExited(event -> bRetour2.setStyle(styleBoutons));
-        bRetour2.setOnAction(EventHandler -> sc.setPaneOnTop(ApplicationPane.ACCUEIL));
-        bRetour2.setRotate(-90);
+		bRetour1.setOnMouseEntered(event -> bRetour1.setStyle(styleBoutonsSouris));
+		bRetour1.setOnMouseExited(event -> bRetour1.setStyle(styleBoutons));
+		bRetour1.setOnAction(EventHandler -> sc.setPaneOnTop(ApplicationPane.ACCUEIL));
 
-        bBas.setCenter(bBasCentre);
-        bBas.setLeft(bRetour1);
-        bBas.setRight(bRetour2);
+		bRetour2 = new Button(International.trad("bouton.retour"));
+		bRetour2.setPrefSize(lBouton, hBouton);
+		bRetour2.setMinSize(lBouton, hBouton);
+		bRetour2.setFont(policeBouton);
+		bRetour2.setStyle(styleBoutons);
 
+		bRetour2.setOnMouseEntered(event -> bRetour2.setStyle(styleBoutonsSouris));
+		bRetour2.setOnMouseExited(event -> bRetour2.setStyle(styleBoutons));
+		bRetour2.setOnAction(EventHandler -> sc.setPaneOnTop(ApplicationPane.ACCUEIL));
+		bRetour2.setRotate(-90);
 
-        ///
+		bBas.setLeft(bRetour1);
+		bBas.setRight(bRetour2);
 
+		///
 
-        BorderPane bHaut = new BorderPane();
+		BorderPane bHaut = new BorderPane();
 
-        HBox bHautCentre = new HBox();
-        gagnant2 = new Label("Le joueur " + "JOUEUR X" + " a gagné");//TODO
-        gagnant2.setFont(policeNom);
-        gagnant2.setBackground(fondBlanc);
-        gagnant2.setPadding(padding);
-        bHautCentre.setAlignment(Pos.CENTER);
-        bHautCentre.getChildren().addAll(gagnant2);
+		gagnant2 = new Label("Player BOT MOYEN YASMINE won"); // do not translate
+		gagnant2.setTextAlignment(TextAlignment.CENTER);
+		gagnant2.setFont(policeNom);
+		gagnant2.setTextFill(Color.WHITESMOKE);
+		gagnant2.setStyle(styleGagnant);
+		gagnant2.setPadding(padding);
+		gagnant2.setRotate(180);
+		gagnant2.setTranslateY(-375);
 
-        Button bRetour3 = new Button(International.trad("bouton.retour"));
-        bRetour3.setPrefSize(lBouton, hBouton);
-        bRetour3.setMinSize(lBouton, hBouton);
-        bRetour3.setFont(policeBouton);
-        bRetour3.setStyle(styleBoutons);
+		bRetour3 = new Button(International.trad("bouton.retour"));
+		bRetour3.setPrefSize(lBouton, hBouton);
+		bRetour3.setMinSize(lBouton, hBouton);
+		bRetour3.setFont(policeBouton);
+		bRetour3.setStyle(styleBoutons);
 
-        bRetour3.setOnMouseEntered(event -> bRetour3.setStyle(styleBoutonsSouris));
-        bRetour3.setOnMouseExited(event -> bRetour3.setStyle(styleBoutons));
-        bRetour3.setOnAction(EventHandler -> sc.setPaneOnTop(ApplicationPane.ACCUEIL));
+		bRetour3.setOnMouseEntered(event -> bRetour3.setStyle(styleBoutonsSouris));
+		bRetour3.setOnMouseExited(event -> bRetour3.setStyle(styleBoutons));
+		bRetour3.setOnAction(EventHandler -> sc.setPaneOnTop(ApplicationPane.ACCUEIL));
 
-        Button bRetour4 = new Button(International.trad("bouton.retour"));
-        bRetour4.setPrefSize(lBouton, hBouton);
-        bRetour4.setMinSize(lBouton, hBouton);
-        bRetour4.setFont(policeBouton);
-        bRetour4.setStyle(styleBoutons);
+		bRetour4 = new Button(International.trad("bouton.retour"));
+		bRetour4.setPrefSize(lBouton, hBouton);
+		bRetour4.setMinSize(lBouton, hBouton);
+		bRetour4.setFont(policeBouton);
+		bRetour4.setStyle(styleBoutons);
 
+		bRetour4.setOnMouseEntered(event -> bRetour4.setStyle(styleBoutonsSouris));
+		bRetour4.setOnMouseExited(event -> bRetour4.setStyle(styleBoutons));
+		bRetour4.setOnAction(EventHandler -> sc.setPaneOnTop(ApplicationPane.ACCUEIL));
+		bRetour4.setRotate(-90);
 
-        bRetour4.setOnMouseEntered(event -> bRetour4.setStyle(styleBoutonsSouris));
-        bRetour4.setOnMouseExited(event -> bRetour4.setStyle(styleBoutons));
-        bRetour4.setOnAction(EventHandler -> sc.setPaneOnTop(ApplicationPane.ACCUEIL));
-        bRetour4.setRotate(-90);
+		bHaut.setRotate(180);
+		bHaut.setLeft(bRetour3);
+		bHaut.setRight(bRetour4);
 
-        bHaut.setRotate(180);
-        bHaut.setCenter(bHautCentre);
-        bHaut.setLeft(bRetour3);
-        bHaut.setRight(bRetour4);
+		///
+		gagnant3 = new Label("Player BOT MOYEN YASMINE won"); // do not translate
+		gagnant3.setTextAlignment(TextAlignment.CENTER);
+		gagnant3.setFont(policeNom);
+		gagnant3.setTextFill(Color.WHITESMOKE);
+		gagnant3.setStyle(styleGagnant);
+		gagnant3.setPadding(padding);
+		gagnant3.setRotate(-90);
+		gagnant3.setTranslateX(375);
 
-        ///
-        HBox hDroite = new HBox();
-        gagnant3 = new Label("Le joueur " + "JOUEUR X" + " a gagné");//TODO
-        gagnant3.setFont(policeNom);
-        gagnant3.setBackground(fondBlanc);
-        gagnant3.setPadding(padding);
-        gagnant3.setRotate(-90);
-        hDroite.setAlignment(Pos.CENTER);
-        hDroite.getChildren().addAll(gagnant3);
+		///
 
+		gagnant4 = new Label("Player BOT MOYEN YASMINE won"); // do not translate
+		gagnant4.setTextAlignment(TextAlignment.CENTER);
+		gagnant4.setFont(policeNom);
+		gagnant4.setTextFill(Color.WHITESMOKE);
+		gagnant4.setStyle(styleGagnant);
+		gagnant4.setPadding(padding);
+		gagnant4.setRotate(90);
+		gagnant4.setTranslateX(-375);
 
-        ///
+		//
 
+		// image fond
+		ImageView imgFond = new ImageView(DataControl.FOND);
+		// carre central qui contient tous les éléments (boutons et titre)
+		BorderPane centreMenu = new BorderPane();
 
-        HBox hGauche = new HBox();
-        gagnant4 = new Label("Le joueur " + "JOUEUR X" + " a gagné");//TODO
-        gagnant4.setFont(policeNom);
-        gagnant4.setBackground(fondBlanc);
-        gagnant4.setPadding(padding);
-        gagnant4.setRotate(90);
-        hGauche.setAlignment(Pos.CENTER);
-        hGauche.getChildren().addAll(gagnant4);
-        //
+		centreMenu.setMinSize(tailleCarreCentral, tailleCarreCentral);
+		centreMenu.setPrefSize(tailleCarreCentral, tailleCarreCentral);
+		centreMenu.setMaxSize(tailleCarreCentral, tailleCarreCentral);
+		centreMenu.setAlignment(titre, Pos.CENTER);
+		centreMenu.setCenter(vbCenter);
+		centreMenu.setTop(bHaut);
+		centreMenu.setBottom(bBas);
 
-        // image fond
-        ImageView imgFond = new ImageView(DataControl.FOND);
-        // carre central qui contient tous les éléments (boutons et titre)
-        BorderPane centreMenu = new BorderPane();
-
-        centreMenu.setMinSize(tailleCarreCentral, tailleCarreCentral);
-        centreMenu.setPrefSize(tailleCarreCentral, tailleCarreCentral);
-        centreMenu.setMaxSize(tailleCarreCentral, tailleCarreCentral);
-        centreMenu.setMargin(titre, new Insets(0, 0, 100, 0));
-
-        centreMenu.setAlignment(titre, Pos.CENTER);
-
-        centreMenu.setCenter(vbCenter);
-        centreMenu.setBottom(bBas);
-        centreMenu.setTop(bHaut);
-        centreMenu.setRight(hDroite);
-        centreMenu.setLeft(hGauche);
-
-        // Boutons de rotation d'écran 
-        ImageView img1 = new ImageView(DataControl.SCREEN);
+		// auteur remy
+		// Boutons de rotation d'écran
+		ImageView img1 = new ImageView(DataControl.SCREEN);
 		img1.setFitHeight(70);
 		img1.setPreserveRatio(true);
 		ImageView img2 = new ImageView(DataControl.SCREEN);
@@ -212,7 +217,7 @@ public class FinDePartiePane extends StackPane implements FinListener {
 		bEcranHaut.setPrefSize(80, 80);
 		bEcranHaut.setRotate(180);
 		bEcranHaut.setGraphic(img1);
-		bEcranHaut.setOnAction(EventHandler -> sc.setRotatePane(centreMenu, "haut"));
+		bEcranHaut.setOnAction(EventHandler -> sc.setRotatePane(vbCenter, "haut"));
 
 		Button bEcranBas = new Button();
 		bEcranBas.setBackground(new Background(new BackgroundFill(null, CornerRadii.EMPTY, null)));
@@ -220,7 +225,7 @@ public class FinDePartiePane extends StackPane implements FinListener {
 		bEcranBas.setTranslateY(490);
 		bEcranBas.setPrefSize(80, 80);
 		bEcranBas.setGraphic(img2);
-		bEcranBas.setOnAction(EventHandler -> sc.setRotatePane(centreMenu, "bas"));
+		bEcranBas.setOnAction(EventHandler -> sc.setRotatePane(vbCenter, "bas"));
 
 		Button bEcranGauche = new Button();
 		bEcranGauche.setBackground(new Background(new BackgroundFill(null, CornerRadii.EMPTY, null)));
@@ -229,7 +234,7 @@ public class FinDePartiePane extends StackPane implements FinListener {
 		bEcranGauche.setPrefSize(80, 80);
 		bEcranGauche.setRotate(90);
 		bEcranGauche.setGraphic(img3);
-		bEcranGauche.setOnAction(EventHandler -> sc.setRotatePane(centreMenu, "gauche"));
+		bEcranGauche.setOnAction(EventHandler -> sc.setRotatePane(vbCenter, "gauche"));
 
 		Button bEcranDroite = new Button();
 		bEcranDroite.setBackground(new Background(new BackgroundFill(null, CornerRadii.EMPTY, null)));
@@ -238,34 +243,57 @@ public class FinDePartiePane extends StackPane implements FinListener {
 		bEcranDroite.setRotate(-90);
 		bEcranDroite.setPrefSize(80, 80);
 		bEcranDroite.setGraphic(img4);
-		bEcranDroite.setOnAction(EventHandler -> sc.setRotatePane(centreMenu, "droite"));
+		bEcranDroite.setOnAction(EventHandler -> sc.setRotatePane(vbCenter, "droite"));
 
-		// boite du fond qui contient le fond et les autres boites 
-        HBox fond = new HBox();
-        fond.setAlignment(Pos.CENTER);
-        fond.setEffect(flou);
-        fond.getChildren().add(imgFond);
+		// auteur florian
+		// boite du fond qui contient le fond et les autres boites
+		HBox fond = new HBox();
+		fond.setAlignment(Pos.CENTER);
+		fond.setEffect(flou);
+		fond.getChildren().add(imgFond);
 
-        this.setAlignment(Pos.CENTER);
-        this.getChildren().addAll(fond, centreMenu, bEcranDroite, bEcranHaut, bEcranGauche, bEcranBas);
-        this.setBackground(new Background(new BackgroundFill(Color.BLACK, CornerRadii.EMPTY, null)));
+		this.setAlignment(Pos.CENTER);
+		this.getChildren().addAll(fond, centreMenu, gagnant1, gagnant2, gagnant3, gagnant4, bEcranDroite, bEcranHaut,
+				bEcranGauche, bEcranBas);
+		this.setBackground(new Background(new BackgroundFill(Color.BLACK, CornerRadii.EMPTY, null)));
 
-        sControl.registerNode(paneName, this);
-        sControl.setPaneOnTop(paneName);
+		sControl.registerNode(paneName, this);
+		sControl.setPaneOnTop(paneName);
 
-    }
+	}
 
-    /*
-     * affiche le nom du joueur sur l'écran 
-     */
-    @Override
-    public void getGagnant(String nom) {
-        String tmp = "Le joueur " + nom + " a gagné";//TODO
-        Platform.runLater(() -> {
-            gagnant1.setText(tmp);
-            gagnant2.setText(tmp);
-            gagnant3.setText(tmp);
-            gagnant4.setText(tmp);
-        });
-    }
+	/**
+	 * Affiche les gagnants
+	 */
+	@Override
+	public void getGagnant(String nom) {
+		Platform.runLater(new Runnable() {
+			@Override
+			public void run() {
+				String tmp = International.trad("text.joueurGagngant", nom);
+				gagnant1.setText(tmp);
+				gagnant2.setText(tmp);
+				gagnant3.setText(tmp);
+				gagnant4.setText(tmp);
+			}
+		});
+	}
+
+	/**
+	 * Traduit les elements de ce pane
+	 */
+	@Override
+	public void traduire() {
+		Platform.runLater(new Runnable() {
+			@Override
+			public void run() {
+				titre1.setText(International.trad("text.titreFinDePartieA") + "\n"
+						+ International.trad("text.titreFinDePartieB"));
+				bRetour1.setText(International.trad("bouton.retour"));
+				bRetour2.setText(International.trad("bouton.retour"));
+				bRetour3.setText(International.trad("bouton.retour"));
+				bRetour4.setText(International.trad("bouton.retour"));
+			}
+		});
+	}
 }

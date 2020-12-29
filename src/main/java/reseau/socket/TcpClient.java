@@ -1,21 +1,15 @@
 package reseau.socket;
 
 import reseau.tool.PaquetOutils;
+import reseau.tool.ThreadOutils;
 
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
-import java.io.EOFException;
 import java.io.IOException;
-import java.lang.reflect.Array;
 import java.net.InetAddress;
 import java.net.Socket;
-import java.net.UnknownHostException;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.Iterator;
 import java.util.List;
-import java.util.concurrent.ExecutionException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -28,11 +22,14 @@ import static java.util.Collections.synchronizedList;
  * @version 2.0
  */
 public class TcpClient implements Runnable, IEchangeSocket, IMessagePaquet {
-	private final ControleurReseau controleurReseau;
 	private Socket socket;
 	private DataOutputStream fluxSortie;
 	private DataInputStream fluxEntre;
 	private InetAddress ip;
+
+	private List<String> paquetRecuEnvoyeList;
+	private List<String> paquetRecuList;
+	private List<String> paquetEnvoyeList;
 
 	private final int port;
 	private String cleFin;
@@ -43,33 +40,35 @@ public class TcpClient implements Runnable, IEchangeSocket, IMessagePaquet {
 	private final Logger logger;
 
 	/**
-	 * @param controleurReseau Le controleur reseau du client
 	 * @param ip               L'ip du serveur TCP cible
 	 * @param port             Le port du serveur TCP cible
+	 * @param cleFin           Mot cle pour arreter le client
 	 */
-	public TcpClient(ControleurReseau controleurReseau, InetAddress ip, int port) {
+	public TcpClient(InetAddress ip, int port, String cleFin) {
 		this.ip = ip;
+		this.cleFin = cleFin;
 		this.messagesTampon = synchronizedList(new ArrayList<String>());
-		this.controleurReseau = controleurReseau;
 		this.estLancer = true;
 		this.port = port;
 		this.logger = Logger.getLogger(getClass().getName());
+		this.paquetRecuEnvoyeList = new ArrayList<>();
+		this.paquetRecuList = new ArrayList<>();
+		this.paquetEnvoyeList = new ArrayList<>();
 	}
 
-	// TODO Temporaire ?
-	public TcpClient(Socket socket, ControleurReseau controleurReseau) {
+	/**
+	 * @param socket           L'ip du serveur TCP cible
+	 */
+	public TcpClient(Socket socket) {
 		this.messagesTampon = synchronizedList(new ArrayList<String>());
-		this.controleurReseau = controleurReseau;
 		this.estLancer = true;
-		this.ip = controleurReseau.getIp();
-		this.port = controleurReseau.getTcpPort();
+		this.ip = ControleurReseau.getIp();
+		this.port = ControleurReseau.getTcpPort();
 		this.logger = Logger.getLogger(getClass().getName());
 		this.socket = socket;
-	}
-
-	public TcpClient(Socket socket, ControleurReseau controleurReseau, String cleFin) {
-		this(socket, controleurReseau);
-		this.cleFin = cleFin;
+		this.paquetRecuEnvoyeList = new ArrayList<>();
+		this.paquetRecuList = new ArrayList<>();
+		this.paquetEnvoyeList = new ArrayList<>();
 	}
 
 	/**
@@ -79,7 +78,7 @@ public class TcpClient implements Runnable, IEchangeSocket, IMessagePaquet {
 	 * @throws IOException Si les flux de s'ouvre pas correctement
 	 */
 	private boolean ouvrir(InetAddress ip, int port) throws IOException {
-		logger.log(Level.INFO, "Client TCP ouvert - EZ4E");
+		logger.log(Level.INFO, "Client TCP ouvert");
 		boolean attendre = true;
 		while (attendre)
 			try {
@@ -87,12 +86,9 @@ public class TcpClient implements Runnable, IEchangeSocket, IMessagePaquet {
 				attendre = false;
 			} catch (Exception ignoreda) {
 				ignoreda.printStackTrace();
-				Thread.yield();
+				ThreadOutils.attendre();
 			}
-		System.out.println(socket == null);
-		System.out.println(socket.getLocalPort());
-		System.out.println(socket.getPort());
-		System.out.println(socket.getInetAddress().getHostAddress());
+		
 		fluxSortie = new DataOutputStream(socket.getOutputStream());
 		fluxEntre = new DataInputStream(socket.getInputStream());
 
@@ -141,15 +137,18 @@ public class TcpClient implements Runnable, IEchangeSocket, IMessagePaquet {
 	 * @param message Le message a a envoyer
 	 */
 	public void envoyer(String message) {
+		attendreConnexion();
 		logger.log(Level.INFO, "Envoie d'un message : " + message);
-
-		System.out.println(socket.getInetAddress().getHostAddress());
+		
 		try {
 			fluxSortie.writeUTF(message);
 			fluxSortie.flush();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+		
+		this.paquetEnvoyeList.add(message);
+		this.paquetRecuEnvoyeList.add(message);
 	}
 
 	/**
@@ -167,12 +166,15 @@ public class TcpClient implements Runnable, IEchangeSocket, IMessagePaquet {
 
 			logger.log(Level.INFO, "Reception de " + message);
 			String cle = PaquetOutils.getCleMessage(message);
+
+			ControleurReseau.traitementPaquetTcp(ControleurReseau.getPaquetTcp(cle), message, this);
+			messagesTampon.add(message);
+			this.paquetRecuList.add(message);
+			this.paquetRecuEnvoyeList.add(message);
+			
 			if (cleFin != null)
 				if (cleFin.equals(cle))
 					break;
-
-			controleurReseau.traitementPaquetTcp(controleurReseau.getPaquetTcp(cle), message, this);
-			messagesTampon.add(message);
 		}
 
 		try {
@@ -188,7 +190,7 @@ public class TcpClient implements Runnable, IEchangeSocket, IMessagePaquet {
 	 *
 	 * @throws IOException Si les flux ou si le socket ne se ferme pas correctement
 	 */
-	private void arreter() throws IOException {
+	public void arreter() throws IOException {
 		logger.log(Level.INFO, "Arret du client TCP");
 		estLancer = false;
 
@@ -246,6 +248,46 @@ public class TcpClient implements Runnable, IEchangeSocket, IMessagePaquet {
 	 */
 	public void attendreMessage(String cle) {
 		while (!contient(cle))
-			Thread.yield();
+			ThreadOutils.attendre();
+	}
+
+	/**
+	 * Bloque l'execution du thread tant que le client n'est pas pret a recevoir.
+	 */
+	public void attendreConnexion() {
+		while (socket == null)
+			ThreadOutils.attendre();
+		while (!isPret())
+			ThreadOutils.attendre();
+	}
+
+	/**
+	 * Permet de savoir le client tcp est pret.
+	 * 
+	 * @return si le client tcp est connecté
+	 */
+	public boolean isPret() {
+		return socket.isConnected();
+	}
+
+	/**
+	 * Permet de savoir le client tcp est arreter.
+	 * 
+	 * @return si le client tcp est arreté
+	 */
+	public boolean isArreter() {
+		return !socket.isClosed();
+	}
+
+	public List<String> getPaquetRecuEnvoyeList() {
+		return paquetRecuEnvoyeList;
+	}
+
+	public List<String> getPaquetRecuList() {
+		return paquetRecuList;
+	}
+
+	public List<String> getPaquetEnvoyeList() {
+		return paquetEnvoyeList;
 	}
 }

@@ -1,7 +1,9 @@
 package pp.ihm;
 
 import pp.ihm.DataControl.ApplicationPane;
+import pp.ihm.langues.ITraduction;
 import pp.ihm.langues.International;
+import javafx.application.Platform;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
@@ -19,34 +21,37 @@ import javafx.scene.text.TextAlignment;
  * The Class ConfigPartiePane.
  *
  * @author Florian
+ * @author Remy
+ * @author Tom
+ * 
  * @version 0.1
  * @since 26/10/2020
  */
-public class ConfigBotPane extends StackPane {
-
+public class ConfigBotPane extends StackPane implements ITraduction {
+	// auteur florian
 	private ScreenControl sControl = null;
-	private Core core = null;
+	private Core core;
 	private final ApplicationPane paneName = ApplicationPane.CONFIG_BOT;
 
 	private int tailleCarreCentral = 800;
 	private int hBouton = 75;
 	private int lBouton = 150;
 	private int hauteurElemtents = 60;
-	private int largeurTF = 100;
-	private int largeurTexte = 100;
+	private int largeurTF = 200;
+	private int largeurTexte = 350;
 	private int spacing = 30;
 
-	private Font policeBouton = Font.font("Segoe UI", FontWeight.BOLD, 27);
-	private Font policeNom = Font.font("Segoe UI", 17);
+	private String nomPolice = "Segoe UI";
+	private Font policeBouton = Font.font(nomPolice, FontWeight.BOLD, 27);
+	private Font policeNom = Font.font(nomPolice, FontWeight.BOLD, 27);
 
+	private String styleBotTexte = "-fx-background-color: #2B2B2B; -fx-background-radius: 10px;";
 	private String styleBoutons = " -fx-background-color:#000000; -fx-background-radius: 15px; -fx-text-fill: #ffffff";
 	private String styleBoutonsSouris = "-fx-background-color:#ff0000;  -fx-text-fill:#000000; -fx-background-radius: 15px;";
 
 	private GaussianBlur flou = new GaussianBlur(30);
 	private CornerRadii coin = new CornerRadii(15.0);
 	private CornerRadii coinfb = new CornerRadii(5.0);
-
-	private Background fondBlanc = new Background(new BackgroundFill(Color.WHITE, coinfb, null));
 
 	private Insets botPadding = new Insets(0, 10, 0, 10);
 
@@ -57,14 +62,26 @@ public class ConfigBotPane extends StackPane {
 	HBox bot5 = new HBox();
 	HBox bot6 = new HBox();
 
+	Label titre1;
+	ComboBox<String> diffBot1;
+	ComboBox<String> diffBot2;
+	ComboBox<String> diffBot3;
+	ComboBox<String> diffBot4;
+	ComboBox<String> diffBot5;
+	ComboBox<String> diffBot6;
+	Button bJouer;
+	Button bRetour;
+
 	public ConfigBotPane(ScreenControl sc, Core c) {
+		// auteur florian
 		core = c;
 		sControl = sc;
 
 		// titre
-		Label titre1 = new Label("Configuration\ndes bots");// TODO
+		titre1 = new Label(
+				International.trad("texte.titreConfigBotA") + "\n" + International.trad("texte.titreConfigBotB"));
 		titre1.setTextAlignment(TextAlignment.CENTER);
-		titre1.setFont(Font.font("Segoe UI", FontWeight.BOLD, 80));
+		titre1.setFont(Font.font(nomPolice, FontWeight.BOLD, 80));
 		titre1.setTextFill(Color.BLACK);
 
 		VBox titre = new VBox(titre1);
@@ -72,13 +89,6 @@ public class ConfigBotPane extends StackPane {
 		titre.setBackground(new Background(new BackgroundFill(Color.RED, coin, null)));
 		titre.setPrefWidth(730);
 		titre.setMinWidth(730);
-
-		// texte
-		/*
-		 * Label desc = new Label("Choisissez un nombre de joueurs entre 3 et 6");
-		 * desc.setFont(policeNom); desc.setMinHeight(hauteurElemtents);
-		 * desc.setBackground(fondBlanc); desc.setPadding(botPadding);
-		 */
 
 		VBox vBots = new VBox();
 
@@ -90,11 +100,11 @@ public class ConfigBotPane extends StackPane {
 		bot1Texte.setAlignment(Pos.CENTER);
 		bot1Texte.setFont(policeNom);
 		bot1Texte.setMinHeight(hauteurElemtents);
-		bot1Texte.setBackground(fondBlanc);
+		bot1Texte.setStyle(styleBotTexte);
 		bot1Texte.setPadding(botPadding);
 		bot1Texte.setMinWidth(largeurTexte);
-
-		ComboBox<String> diffBot1 = new ComboBox<>();
+		bot1Texte.setTextFill(Color.WHITE);
+		diffBot1 = new ComboBox<>();
 		diffBot1.getItems().addAll(DataControl.difficulteBot);
 		diffBot1.setValue(International.trad("texte.valueFaible"));
 		diffBot1.setPrefSize(largeurTF, hauteurElemtents);
@@ -113,11 +123,12 @@ public class ConfigBotPane extends StackPane {
 		bot2Texte.setAlignment(Pos.CENTER);
 		bot2Texte.setFont(policeNom);
 		bot2Texte.setMinHeight(hauteurElemtents);
-		bot2Texte.setBackground(fondBlanc);
+		bot2Texte.setStyle(styleBotTexte);
+		bot2Texte.setTextFill(Color.WHITE);
 		bot2Texte.setPadding(botPadding);
 		bot2Texte.setMinWidth(largeurTexte);
 
-		ComboBox<String> diffBot2 = new ComboBox<>();
+		diffBot2 = new ComboBox<>();
 		diffBot2.getItems().addAll(DataControl.difficulteBot);
 		diffBot2.setValue(International.trad("texte.valueFaible"));
 		diffBot2.setPrefSize(largeurTF, hauteurElemtents);
@@ -136,11 +147,11 @@ public class ConfigBotPane extends StackPane {
 		bot3Texte.setAlignment(Pos.CENTER);
 		bot3Texte.setFont(policeNom);
 		bot3Texte.setMinHeight(hauteurElemtents);
-		bot3Texte.setBackground(fondBlanc);
+		bot3Texte.setStyle(styleBotTexte);
 		bot3Texte.setPadding(botPadding);
 		bot3Texte.setMinWidth(largeurTexte);
-
-		ComboBox<String> diffBot3 = new ComboBox<>();
+		bot3Texte.setTextFill(Color.WHITE);
+		diffBot3 = new ComboBox<>();
 		diffBot3.getItems().addAll(DataControl.difficulteBot);
 		diffBot3.setValue(International.trad("texte.valueFaible"));
 		diffBot3.setPrefSize(largeurTF, hauteurElemtents);
@@ -159,11 +170,11 @@ public class ConfigBotPane extends StackPane {
 		bot4Texte.setAlignment(Pos.CENTER);
 		bot4Texte.setFont(policeNom);
 		bot4Texte.setMinHeight(hauteurElemtents);
-		bot4Texte.setBackground(fondBlanc);
+		bot4Texte.setStyle(styleBotTexte);
 		bot4Texte.setPadding(botPadding);
 		bot4Texte.setMinWidth(largeurTexte);
-
-		ComboBox<String> diffBot4 = new ComboBox<>();
+		bot4Texte.setTextFill(Color.WHITE);
+		diffBot4 = new ComboBox<>();
 		diffBot4.getItems().addAll(DataControl.difficulteBot);
 		diffBot4.setValue(International.trad("texte.valueFaible"));
 		diffBot4.setPrefSize(largeurTF, hauteurElemtents);
@@ -182,11 +193,11 @@ public class ConfigBotPane extends StackPane {
 		bot5Texte.setAlignment(Pos.CENTER);
 		bot5Texte.setFont(policeNom);
 		bot5Texte.setMinHeight(hauteurElemtents);
-		bot5Texte.setBackground(fondBlanc);
+		bot5Texte.setStyle(styleBotTexte);
 		bot5Texte.setPadding(botPadding);
 		bot5Texte.setMinWidth(largeurTexte);
-
-		ComboBox<String> diffBot5 = new ComboBox<>();
+		bot5Texte.setTextFill(Color.WHITE);
+		diffBot5 = new ComboBox<>();
 		diffBot5.getItems().addAll(DataControl.difficulteBot);
 		diffBot5.setValue(International.trad("texte.valueFaible"));
 		diffBot5.setPrefSize(largeurTF, hauteurElemtents);
@@ -205,11 +216,11 @@ public class ConfigBotPane extends StackPane {
 		bot6Texte.setAlignment(Pos.CENTER);
 		bot6Texte.setFont(policeNom);
 		bot6Texte.setMinHeight(hauteurElemtents);
-		bot6Texte.setBackground(fondBlanc);
+		bot6Texte.setStyle(styleBotTexte);
 		bot6Texte.setPadding(botPadding);
 		bot6Texte.setMinWidth(largeurTexte);
-
-		ComboBox<String> diffBot6 = new ComboBox<>();
+		bot6Texte.setTextFill(Color.WHITE);
+		diffBot6 = new ComboBox<>();
 		diffBot6.getItems().addAll(DataControl.difficulteBot);
 		diffBot6.setValue(International.trad("texte.valueFaible"));
 		diffBot6.setPrefSize(largeurTF, hauteurElemtents);
@@ -229,7 +240,7 @@ public class ConfigBotPane extends StackPane {
 		vbCenter.setSpacing(spacing);
 		vbCenter.getChildren().addAll(vBots);
 		// boutons
-		Button bJouer = new Button(International.trad("bouton.jouer"));
+		bJouer = new Button(International.trad("bouton.jouer"));
 		bJouer.setPrefSize(lBouton, hBouton);
 		bJouer.setMinSize(lBouton, hBouton);
 		bJouer.setFont(policeBouton);
@@ -239,7 +250,7 @@ public class ConfigBotPane extends StackPane {
 		bJouer.setOnMouseExited(event -> bJouer.setStyle(styleBoutons));
 		bJouer.setOnAction(EventHandler -> sc.setPaneOnTop(ApplicationPane.WAIT));
 
-		Button bRetour = new Button(International.trad("bouton.retour"));
+		bRetour = new Button(International.trad("bouton.retour"));
 		bRetour.setPrefSize(lBouton, hBouton);
 		bRetour.setMinSize(lBouton, hBouton);
 		bRetour.setFont(policeBouton);
@@ -272,6 +283,7 @@ public class ConfigBotPane extends StackPane {
 		centreMenu.setCenter(vbCenter);
 		centreMenu.setBottom(boutonsPanneau);
 
+		// auteur remy
 		// Boutons de rotation d'écran
 		ImageView img1 = new ImageView(DataControl.SCREEN);
 		img1.setFitHeight(70);
@@ -321,6 +333,7 @@ public class ConfigBotPane extends StackPane {
 		bEcranDroite.setGraphic(img4);
 		bEcranDroite.setOnAction(EventHandler -> sc.setRotatePane(centreMenu, "droite"));
 
+		// auteur florian
 		// boite du fond qui contient le fond et les autres boites
 		HBox fond = new HBox();
 		fond.setAlignment(Pos.CENTER);
@@ -335,5 +348,27 @@ public class ConfigBotPane extends StackPane {
 
 		sControl.registerNode(paneName, this);
 		sControl.setPaneOnTop(paneName);
+	}
+
+	/**
+	 * Traduit les elements de ce pane
+	 */
+	@Override
+	public void traduire() {
+		Platform.runLater(new Runnable() {
+			@Override
+			public void run() {
+				titre1.setText(International.trad("texte.titreConfigBotA") + "\n"
+						+ International.trad("texte.titreConfigBotB"));
+				diffBot1.setValue(International.trad("texte.valueFaible"));
+				diffBot2.setValue(International.trad("texte.valueFaible"));
+				diffBot3.setValue(International.trad("texte.valueFaible"));
+				diffBot4.setValue(International.trad("texte.valueFaible"));
+				diffBot5.setValue(International.trad("texte.valueFaible"));
+				diffBot6.setValue(International.trad("texte.valueFaible"));
+				bJouer.setText(International.trad("bouton.jouer"));
+				bRetour.setText(International.trad("bouton.retour"));
+			}
+		});
 	}
 }

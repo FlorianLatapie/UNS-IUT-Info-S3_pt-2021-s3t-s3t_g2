@@ -3,7 +3,7 @@ package pp;
 import reseau.type.TypePersonnage;
 
 /**
- * <h1>La classe La brute</h1>. A pour rôle de définir un Personnage.
+ * <h1>La classe La brute</h1>.
  *
  * @author Leo
  * @author Theo
@@ -16,9 +16,9 @@ import reseau.type.TypePersonnage;
 public class LaBrute extends Personnage {
 
 	/**
-	 * Instantie un nouveau Personnage LaBrute
+	 * Instantie une nouvelle brute.
 	 * 
-	 * @param joueur le joueur cible
+	 * @param joueur Le joueur cible
 	 */
 	public LaBrute(Joueur joueur) {
 		super(joueur, TypePersonnage.BRUTE);
@@ -27,7 +27,9 @@ public class LaBrute extends Personnage {
 	}
 
 	/**
-	 * @return le String La Brute
+	 * Gère l'affichage de la brute.
+	 * 
+	 * @return Le nom du personnage
 	 */
 	@Override
 	public String toString() {

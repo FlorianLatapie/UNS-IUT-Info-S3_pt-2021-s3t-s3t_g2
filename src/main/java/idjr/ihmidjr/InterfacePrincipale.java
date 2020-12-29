@@ -1,6 +1,8 @@
 package idjr.ihmidjr;
 
 import idjr.Idjr;
+import idjr.ihmidjr.event.Evenement;
+import idjr.ihmidjr.langues.International;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.scene.Node;
@@ -21,8 +23,8 @@ public class InterfacePrincipale extends Application {
 	public void start(Stage primaryStage) throws Exception {
 		primaryStage.getIcons().add(new Image(DataControl.ICONE));
 		primaryStage.setOnCloseRequest((e) -> {
-			boolean resultat = ConfirmationPane.afficher("Quitter le jeu",
-					"Êtes-vous sûr de vouloir quitter le jeu ? \nSi vous quittez, la partie en cours sera perdue.");
+			boolean resultat = ConfirmationPane.afficher(International.trad("texte.confirmationTitre"),
+					International.trad("texte.confirmationL1") + "\n" + International.trad("texte.confirmationL2"));
 			if (resultat)
 				Platform.exit();
 		});
@@ -37,25 +39,48 @@ public class InterfacePrincipale extends Application {
 		primaryStage.setMinWidth(1800);
 		primaryStage.setMinHeight(960);
 
+		primaryStage.setFullScreen(core.getSauvegarderOptions().isEstPleineEcran());
+
+		scene.getStylesheets().add(DataControl.CSS);
+
 		ConfigPartiePane configPartiePane = new ConfigPartiePane(sControl, core);
 		FinDePartiePane finDePartiePane = new FinDePartiePane(sControl, core);
-		AttenteJoueurPane attenteJoueurPane = new AttenteJoueurPane(sControl, core);
 		JeuPane jeuPane = new JeuPane(sControl, core);
+		OptionPane optionPane = new OptionPane(sControl, core);
+		ReglesPane reglesPane = new ReglesPane(sControl, core);
+		ConfirmationPane confirmationPane = new ConfirmationPane();
+		AttenteJoueurPane attenteJoueurPane = new AttenteJoueurPane(sControl, core);
+		AccueilPane accueilPane = new AccueilPane(sControl, core);
 
 		root.getChildren().add(configPartiePane);
 		root.getChildren().add(finDePartiePane);
 		root.getChildren().add(jeuPane);
-
-		core.eventInit();
-		core.setIdjr(new Idjr(core.getInitializer()));
-		core.getInitializer().addListenerConfig(configPartiePane);
-		core.getInitializer().addListenerJeu(jeuPane);
-		core.getInitializer().addListenerFin(finDePartiePane);
-		core.getInitializer().addListenerAttente(attenteJoueurPane);
-		root.getChildren().add(new OptionPane(sControl, core));
-		root.getChildren().add(new ReglesPane(sControl, core));
+		root.getChildren().add(optionPane);
+		root.getChildren().add(reglesPane);
 		root.getChildren().add(attenteJoueurPane);
-		root.getChildren().add(new AccueilPane(sControl, core));
+		root.getChildren().add(accueilPane);
+
+		core.setIdjr(new Idjr());
+		Evenement.addListener(configPartiePane);
+		Evenement.addListener(jeuPane);
+		Evenement.addListener(finDePartiePane);
+		Evenement.addListener(attenteJoueurPane);
+		Evenement.addListener(optionPane);
+
+		/* Ajouter les panes dont il y de la rotation */
+		// Initializer.addListenerAttente(PANE);
+
+		Evenement.updatePleineEcran();
+
+		International.ajouterPane(accueilPane);
+		International.ajouterPane(reglesPane);
+		International.ajouterPane(optionPane);
+		International.ajouterPane(attenteJoueurPane);
+		International.ajouterPane(configPartiePane);
+		International.ajouterPane(finDePartiePane);
+		International.ajouterPane(confirmationPane);
+
+		International.changerLangue(core.getSauvegarderOptions().getLangues());
 
 		primaryStage.setScene(scene);
 		primaryStage.getScene().getWindow().addEventFilter(WindowEvent.WINDOW_CLOSE_REQUEST, this::onClose);

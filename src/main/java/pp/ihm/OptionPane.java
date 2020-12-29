@@ -2,7 +2,11 @@
 package pp.ihm;
 
 import pp.ihm.DataControl.ApplicationPane;
+import pp.ihm.event.IPleinEcranListener;
+import pp.ihm.langues.ITraduction;
 import pp.ihm.langues.International;
+import pp.ihm.langues.Langues;
+import javafx.application.Platform;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
@@ -19,36 +23,54 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
+import javafx.stage.Stage;
 
-public class OptionPane extends StackPane {
-
+/**
+ * 
+ * @author Remy
+ * @author florian
+ * @author Sebastien
+ * @author Tom
+ *
+ */
+public class OptionPane extends StackPane implements IPleinEcranListener, ITraduction {
+	// auteur remy
 	private ScreenControl sControl = null;
 	private Core core = null;
 	private final ApplicationPane paneName = ApplicationPane.OPTION;
-	
+
 	private int tailleCarreCentral = 700;
 	private int hauteurElement = 60;
-	
+
 	private Font policeTitre = Font.font("Segoe UI", FontWeight.BOLD, 75);
 	private Font policeBouton = Font.font("Segoe UI", FontWeight.BOLD, 33);
 
 	private String styleBoutons = " -fx-background-color:#000000; -fx-background-radius: 15px; -fx-text-fill: #ffffff";
 	private String styleBoutonsSouris = "-fx-background-color:#ff0000;  -fx-text-fill:#000000; -fx-background-radius: 15px;";
 	private String styleTitre = "-fx-text-fill: #ff1c16";
-	
+
 	private GaussianBlur flou = new GaussianBlur(30);
 
+	Button bPleinEcran;
+
+	Label titre;
+	Button bFrancais;
+	Button bEnglish;
+	Button bRetour;
+	// Button bAcc;
+
 	public OptionPane(ScreenControl sc, Core c) {
+		// auteur remy
 		core = c;
 		sControl = sc;
-
+		// auteur florian
 		Rectangle rect = new Rectangle();
-		rect.setStroke(Color.RED);
-		rect.setStrokeWidth(2);
 		rect.setWidth(tailleCarreCentral);
 		rect.setHeight(tailleCarreCentral);
+		rect.setArcHeight(30);
+		rect.setArcWidth(30);
 		rect.setOpacity(.3);
-
+		// auteur remy
 		VBox vbFond = new VBox();
 		vbFond.setAlignment(Pos.CENTER);
 		vbFond.setSpacing(20);
@@ -66,8 +88,8 @@ public class OptionPane extends StackPane {
 		vbCentral.setMinSize(tailleCarreCentral, tailleCarreCentral);
 		vbCentral.setMaxSize(tailleCarreCentral, tailleCarreCentral);
 		vbCentral.setPadding(new Insets(10));
-		
-		// Boutons de rotation d'écran 
+
+		// Boutons de rotation d'écran
 		ImageView img1 = new ImageView(DataControl.SCREEN);
 		img1.setFitHeight(70);
 		img1.setPreserveRatio(true);
@@ -88,7 +110,7 @@ public class OptionPane extends StackPane {
 		bEcranHaut.setPrefSize(80, 80);
 		bEcranHaut.setRotate(180);
 		bEcranHaut.setGraphic(img1);
-		bEcranHaut.setOnAction(EventHandler -> sc.setRotatePane(vbCentral, "haut"));
+		bEcranHaut.setOnAction(EventHandler -> sc.setRotatePane(rect, vbCentral, "haut"));
 
 		Button bEcranBas = new Button();
 		bEcranBas.setBackground(new Background(new BackgroundFill(null, CornerRadii.EMPTY, null)));
@@ -96,7 +118,7 @@ public class OptionPane extends StackPane {
 		bEcranBas.setTranslateY(490);
 		bEcranBas.setPrefSize(80, 80);
 		bEcranBas.setGraphic(img2);
-		bEcranBas.setOnAction(EventHandler -> sc.setRotatePane(vbCentral, "bas"));
+		bEcranBas.setOnAction(EventHandler -> sc.setRotatePane(rect, vbCentral, "bas"));
 
 		Button bEcranGauche = new Button();
 		bEcranGauche.setBackground(new Background(new BackgroundFill(null, CornerRadii.EMPTY, null)));
@@ -105,7 +127,7 @@ public class OptionPane extends StackPane {
 		bEcranGauche.setPrefSize(80, 80);
 		bEcranGauche.setRotate(90);
 		bEcranGauche.setGraphic(img3);
-		bEcranGauche.setOnAction(EventHandler -> sc.setRotatePane(vbCentral, "gauche"));
+		bEcranGauche.setOnAction(EventHandler -> sc.setRotatePane(rect, vbCentral, "gauche"));
 
 		Button bEcranDroite = new Button();
 		bEcranDroite.setBackground(new Background(new BackgroundFill(null, CornerRadii.EMPTY, null)));
@@ -114,10 +136,10 @@ public class OptionPane extends StackPane {
 		bEcranDroite.setRotate(-90);
 		bEcranDroite.setPrefSize(80, 80);
 		bEcranDroite.setGraphic(img4);
-		bEcranDroite.setOnAction(EventHandler -> sc.setRotatePane(vbCentral, "droite"));
+		bEcranDroite.setOnAction(EventHandler -> sc.setRotatePane(rect, vbCentral, "droite"));
 
 		///
-		
+
 		VBox vbTitre = new VBox();
 		vbTitre.setAlignment(Pos.TOP_CENTER);
 		vbTitre.setTranslateY(-40);
@@ -131,39 +153,61 @@ public class OptionPane extends StackPane {
 		vbBoutons.setTranslateY(-40);
 		vbBoutons.setSpacing(15);
 
-		Label titre = new Label(International.trad("bouton.options"));
+		titre = new Label(International.trad("bouton.options"));
 		titre.setStyle(styleTitre);
 		titre.setFont(policeTitre);
 		vbTitre.getChildren().add(titre);
 
-		Button bFrancais = new Button(International.trad("texte.langue1"));
+		bFrancais = new Button(International.trad("texte.langue1"));
 		bFrancais.setFont(policeBouton);
 		bFrancais.setAlignment(Pos.CENTER);
 		bFrancais.setPrefSize(245, hauteurElement);
 		bFrancais.setStyle(styleBoutons);
-		bFrancais.setOnAction(EventHandler -> sc.setPaneOnTop(ApplicationPane.OPTION));
+		bFrancais.setOnAction(EventHandler -> core.changerLangue(Langues.FR));
 
 		bFrancais.setOnMouseEntered(event -> bFrancais.setStyle(styleBoutonsSouris));
 		bFrancais.setOnMouseExited(event -> bFrancais.setStyle(styleBoutons));
 
-		Button bEnglish = new Button(International.trad("texte.langue2"));
+		bEnglish = new Button(International.trad("texte.langue2"));
 		bEnglish.setFont(policeBouton);
 		bEnglish.setAlignment(Pos.CENTER);
 		bEnglish.setPrefSize(245, hauteurElement);
 		bEnglish.setStyle(styleBoutons);
 		bEnglish.setOnMouseEntered(event -> bEnglish.setStyle(styleBoutonsSouris));
 		bEnglish.setOnMouseExited(event -> bEnglish.setStyle(styleBoutons));
+		bEnglish.setOnAction(EventHandler -> core.changerLangue(Langues.EN));
 
-		Button bAcc = new Button("Accessibilité");//TODO
-		bAcc.setFont(policeBouton);
-		bAcc.setAlignment(Pos.CENTER);
-		bAcc.setPrefSize(500, hauteurElement);
-		bAcc.setStyle(styleBoutons);
-		bAcc.setOnMouseEntered(event -> bAcc.setStyle(styleBoutonsSouris));
-		bAcc.setOnMouseExited(event -> bAcc.setStyle(styleBoutons));
-		bAcc.setOnAction(EventHandler -> sc.setPaneOnTop(ApplicationPane.ACCESSIBILITE));		
+		bPleinEcran = new Button();
+		bPleinEcran.setFont(policeBouton);
+		bPleinEcran.setAlignment(Pos.CENTER);
+		bPleinEcran.setPrefSize(500, hauteurElement);
+		bPleinEcran.setStyle(styleBoutons);
+		bPleinEcran.setOnMouseEntered(event -> bPleinEcran.setStyle(styleBoutonsSouris));
+		bPleinEcran.setOnMouseExited(event -> bPleinEcran.setStyle(styleBoutons));
+		bPleinEcran.setOnAction(EventHandler -> {
+			Stage stage = (Stage) bPleinEcran.getScene().getWindow();
+			if (core.getSauvegarderOptions().isEstPleinEcran()) {
+				stage.setFullScreen(false);
+				core.getSauvegarderOptions().setEstPleinEcran(false);
+				bPleinEcran.setText(International.trad("bouton.pEcran"));
+			} else {
+				stage.setFullScreen(true);
+				core.getSauvegarderOptions().setEstPleinEcran(true);
+				bPleinEcran.setText(International.trad("bouton.fenetre"));
+			}
+		});
 
-		Button bRetour = new Button(International.trad("bouton.retour"));
+		/*
+		 * bAcc = new Button(International.trad("texte.titreAcc"));
+		 * bAcc.setFont(policeBouton); bAcc.setAlignment(Pos.CENTER);
+		 * bAcc.setPrefSize(500, hauteurElement); bAcc.setStyle(styleBoutons);
+		 * bAcc.setOnMouseEntered(event -> bAcc.setStyle(styleBoutonsSouris));
+		 * bAcc.setOnMouseExited(event -> bAcc.setStyle(styleBoutons));
+		 * bAcc.setOnAction(EventHandler ->
+		 * sc.setPaneOnTop(ApplicationPane.ACCESSIBILITE));
+		 */
+
+		bRetour = new Button(International.trad("bouton.retour"));
 		bRetour.setFont(policeBouton);
 		bRetour.setAlignment(Pos.CENTER);
 		bRetour.setPrefSize(180, hauteurElement);
@@ -175,20 +219,54 @@ public class OptionPane extends StackPane {
 		hbBRetour.getChildren().add(bRetour);
 		hbLang.getChildren().add(bFrancais);
 		hbLang.getChildren().add(bEnglish);
-		vbBoutons.getChildren().addAll(hbLang, bAcc);
+		vbBoutons.getChildren().addAll(hbLang, bPleinEcran/* , bAcc */);
 		vbBoutons.setMargin(vbTitre, new Insets(140));
-		vbBoutons.setMargin(hbBRetour, new Insets(140, 0, 30, 15));
+		vbBoutons.setMargin(hbBRetour, new Insets(135, 0, 30, 19));
 
 		vbCentral.getChildren().addAll(vbTitre, vbBoutons, hbBRetour);
 		ImageView img = new ImageView(DataControl.FOND);
 		vbFond.getChildren().add(img);
-		
+
 		this.setAlignment(Pos.CENTER);
 		this.getChildren().addAll(vbFond, bEcranHaut, bEcranBas, bEcranGauche, bEcranDroite, rect, vbCentral);
 		this.setBackground(new Background(new BackgroundFill(Color.BLACK, CornerRadii.EMPTY, null)));
-		
+
 		sControl.registerNode(paneName, this);
 		sControl.setPaneOnTop(paneName);
+	}
+
+	/**
+	 * Met a jour le plein ecran
+	 */
+	@Override
+	public void updatePleinEcran() {
+		Platform.runLater(new Runnable() {
+			@Override
+			public void run() {
+				if (!core.getSauvegarderOptions().isEstPleinEcran())
+					bPleinEcran.setText(International.trad("bouton.pEcran"));
+				else
+					bPleinEcran.setText(International.trad("bouton.fenetre"));
+			}
+		});
+	}
+
+	/**
+	 * Traduit les elements de ce pane
+	 */
+	@Override
+	public void traduire() {
+		Platform.runLater(new Runnable() {
+			@Override
+			public void run() {
+				titre.setText(International.trad("bouton.options"));
+				bFrancais.setText(International.trad("texte.langue1"));
+				bEnglish.setText(International.trad("texte.langue2"));
+				bPleinEcran.setText(International.trad("bouton.pEcran"));
+				// bAcc.setText(International.trad("texte.titreAcc"));
+				bRetour.setText(International.trad("bouton.retour"));
+			}
+		});
 	}
 
 }

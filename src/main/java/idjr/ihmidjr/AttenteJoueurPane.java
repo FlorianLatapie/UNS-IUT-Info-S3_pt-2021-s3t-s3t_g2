@@ -2,12 +2,12 @@
 package idjr.ihmidjr;
 
 import idjr.ihmidjr.DataControl.ApplicationPane;
-import idjr.ihmidjr.event.AttenteListener;
+import idjr.ihmidjr.event.IAttenteListener;
+import idjr.ihmidjr.langues.ITraduction;
+import idjr.ihmidjr.langues.International;
 import javafx.application.Platform;
-//TODO import ihm.eventListener.AttenteListener;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
-import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.effect.GaussianBlur;
 import javafx.scene.image.ImageView;
@@ -25,31 +25,26 @@ import javafx.scene.text.TextAlignment;
  * @version 0.1
  * @since 26/10/2020
  */
-public class AttenteJoueurPane extends StackPane implements AttenteListener {
-	// private ControleurJeu cj = new ControleurJeu(); // mettre ne paramètres les
-	// joueurs
-
+public class AttenteJoueurPane extends StackPane implements IAttenteListener, ITraduction {
 	private ScreenControl sControl = null;
 	private Core core = null;
 	private final ApplicationPane paneName = ApplicationPane.WAIT;
 	private int tailleCarreCentral = 800;
-	private int hBouton = 75;
-	private int lBouton = 150;
-	private Font policeBouton = Font.font("Segoe UI", FontWeight.BOLD, 27);
 	private CornerRadii coin = new CornerRadii(15.0);
-	private String styleBoutons = " -fx-background-color:#000000; -fx-background-radius: 15px; -fx-text-fill: #ffffff";
-	private String styleBoutonsSouris = "-fx-background-color:#ff0000;  -fx-text-fill:#000000; -fx-background-radius: 15px;";
 	private StackPane stackPane = new StackPane();
 	private GaussianBlur flou = new GaussianBlur(30);
 	private String styleVBox = "-fx-border-color: black; -fx-border-insets: -3; -fx-border-width: 3";
-	private Font policeNom = Font.font("Segoe UI", FontWeight.BOLD, 33);
+
+	private String nomPolice = "Segoe UI";
+	private Font policeNom = Font.font(nomPolice, FontWeight.BOLD, 33);
 	private int hauteurElemtents = 60;
 	private int spacing = 30;
-	private CornerRadii coinfb = new CornerRadii(5.0);
-	private Background fondBlanc = new Background(new BackgroundFill(Color.WHITE, coinfb, null));
 	private int tailleCercle = 55;
 	private Insets padding = new Insets(0, 10, 0, 10);
 	Label lIDPartie;
+
+	Label titre1;
+	Label desc;
 
 	public AttenteJoueurPane(ScreenControl sc, Core c) {
 		core = c;
@@ -57,9 +52,10 @@ public class AttenteJoueurPane extends StackPane implements AttenteListener {
 		stackPane.setAlignment(Pos.CENTER);
 
 		// titre
-		Label titre1 = new Label("Connexion \nen cours");
+		titre1 = new Label(
+				International.trad("texte.titreAttenteA") + "\n" + International.trad("texte.titreAttenteB"));
 		titre1.setTextAlignment(TextAlignment.CENTER);
-		titre1.setFont(Font.font("Segoe UI", FontWeight.BOLD, 80));
+		titre1.setFont(Font.font(nomPolice, FontWeight.BOLD, 80));
 		titre1.setTextFill(Color.BLACK);
 
 		VBox titre = new VBox(titre1);
@@ -75,8 +71,8 @@ public class AttenteJoueurPane extends StackPane implements AttenteListener {
 		lIDPartie.setMinHeight(hauteurElemtents);
 		lIDPartie.setPadding(padding);
 
-		Label desc = new Label("En attente des joueurs... Veuillez entrer la couleur dans le PP");
-		desc.setFont(Font.font("Segoe UI", FontWeight.BOLD, 27));
+		desc = new Label(International.trad("texte.attenteJoueur"));
+		desc.setFont(Font.font(nomPolice, FontWeight.BOLD, 27));
 		desc.setTextFill(Color.WHITE);
 		desc.setPadding(new Insets(7));
 
@@ -141,29 +137,6 @@ public class AttenteJoueurPane extends StackPane implements AttenteListener {
 		vbCenter.setSpacing(spacing);
 		vbCenter.getChildren().addAll(vbWait);
 
-		// boutons
-		Button bRetour = new Button("RETOUR");
-		bRetour.setPrefSize(lBouton, hBouton);
-		bRetour.setMinSize(lBouton, hBouton);
-		bRetour.setFont(policeBouton);
-		bRetour.setStyle(styleBoutons);
-
-		bRetour.setOnMouseEntered(event -> {
-			bRetour.setStyle(styleBoutonsSouris);
-		});
-		bRetour.setOnMouseExited(event -> {
-			bRetour.setStyle(styleBoutons);
-		});
-		bRetour.setOnAction(EventHandler -> {
-			// TODO remove core.getCj().stopThreads();
-			sc.setPaneOnTop(ApplicationPane.ACCUEIL);
-		});
-
-		// grille contenant les boutons du bas
-		AnchorPane boutonsPanneau = new AnchorPane();
-		boutonsPanneau.setLeftAnchor(bRetour, 0.0);
-		boutonsPanneau.getChildren().addAll(bRetour);
-
 		// image fond
 		ImageView imgFond = new ImageView(DataControl.FOND);
 
@@ -175,7 +148,6 @@ public class AttenteJoueurPane extends StackPane implements AttenteListener {
 		centreMenu.setAlignment(titre, Pos.CENTER);
 		centreMenu.setTop(titre);
 		centreMenu.setCenter(vbCenter);
-		centreMenu.setBottom(boutonsPanneau);
 
 		// boite du fond qui contient tout
 		HBox fond = new HBox();
@@ -200,17 +172,46 @@ public class AttenteJoueurPane extends StackPane implements AttenteListener {
 	 * @Override public void nomPartie(String nom) { lIDPartie.setText(nom); }
 	 */
 
+	/**
+	 * Passe a l'affichage du jeu
+	 */
 	@Override
 	public void stopWait() {
-		Platform.runLater(() -> {
-			sControl.setPaneOnTop(ApplicationPane.JEU);
+		Platform.runLater(new Runnable() {
+			@Override
+			public void run() {
+				sControl.setPaneOnTop(ApplicationPane.JEU);
+			}
 		});
 	}
 
+	/**
+	 * Met a jour le nom de la partie
+	 * 
+	 * @param nom le nom du joueur
+	 */
 	@Override
 	public void nomPartie(String nom) {
-		Platform.runLater(() -> {
-			lIDPartie.setText(nom);
+		Platform.runLater(new Runnable() {
+			@Override
+			public void run() {
+				lIDPartie.setText(nom);
+			}
+		});
+	}
+
+	/**
+	 * Traduit les elements de ce pane
+	 */
+	@Override
+	public void traduire() {
+		Platform.runLater(new Runnable() {
+			@Override
+			public void run() {
+				titre1.setText(
+						International.trad("texte.titreAttenteA") + "\n" + International.trad("texte.titreAttenteB"));
+				desc.setText(International.trad("texte.attenteJoueur"));
+			}
 		});
 	}
 }

@@ -4,6 +4,7 @@ import reseau.paquet.Paquet;
 import reseau.socket.ControleurReseau;
 import reseau.socket.TraitementPaquet;
 import reseau.type.ConnexionType;
+import reseau.type.Statut;
 
 import java.net.DatagramPacket;
 import java.net.InetAddress;
@@ -28,8 +29,8 @@ public class TraitementPaquetUdp extends TraitementPaquet<DatagramPacket> {
 	}
 
 	@Override
-	public void init(ControleurReseau netWorkManager) {
-		setControleurReseau(netWorkManager);
+	public void init() {
+
 	}
 
 	/**
@@ -58,17 +59,17 @@ public class TraitementPaquetUdp extends TraitementPaquet<DatagramPacket> {
 	}
 
 	private void rp(Paquet packet, String message) {
-		if (ConnexionType.SERVEUR != getControleurReseau().getConnexionType())
+		if (ConnexionType.SERVEUR != ControleurReseau.getConnexionType())
 			return;
 	}
 
 	public void acp(Paquet packet, String message) {
-		if (ConnexionType.CLIENT != getControleurReseau().getConnexionType())
+		if (ConnexionType.CLIENT != ControleurReseau.getConnexionType())
 			return;
 	}
 
 	public void amp(Paquet packet, String message) {
-		if (ConnexionType.CLIENT != getControleurReseau().getConnexionType())
+		if (ConnexionType.CLIENT != ControleurReseau.getConnexionType())
 			return;
 		String partie = (String) packet.getValeur(message, 1);
 		InetAddress ip = null;
@@ -79,7 +80,13 @@ public class TraitementPaquetUdp extends TraitementPaquet<DatagramPacket> {
 			e.printStackTrace();
 		}
 		int port = (int) packet.getValeur(message, 3);
-		PartieInfo partieInfo = new PartieInfo(ip, port, partie, core.getTypeJoueur());
+		int nbjr = (int) packet.getValeur(message, 8);
+		int nbjrMax = (int) packet.getValeur(message, 6);
+		int nbjb = (int) packet.getValeur(message, 9);
+		int nbjbMax = (int) packet.getValeur(message, 7);
+		Statut stat = (Statut) packet.getValeur(message, 10);
+		PartieInfo partieInfo = new PartieInfo(ip, port, partie, core.getTypeJoueur(), nbjr, nbjb, nbjrMax, nbjbMax,
+				stat);
 		core.addPartie(partieInfo);
 
 		System.out.println(MessageFormat.format("Mise a jour d''une partie !\n{0}", packet.getValeur(message, 1)));

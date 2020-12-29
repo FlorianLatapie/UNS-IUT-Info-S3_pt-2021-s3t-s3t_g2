@@ -1,6 +1,7 @@
 package pp.ihm;
 
 import pp.ihm.DataControl.ApplicationPane;
+import pp.ihm.langues.ITraduction;
 import pp.ihm.langues.International;
 import javafx.application.Platform;
 import javafx.geometry.Insets;
@@ -22,13 +23,16 @@ import javafx.scene.text.FontWeight;
 
 /**
  * The Class AccueilPane.
- * 
+ *
  * @author Florian
- * @version 0.1
+ * @author Remy
+ * @author Tom
+ * 
+ * @version 1.0
  * @since 04/10/2020
  */
-public class AccueilPane extends StackPane {
-
+public class AccueilPane extends StackPane implements ITraduction {
+	// auteur Florian
 	private ScreenControl sControl = null;
 	private Core core = null;
 	private final ApplicationPane paneName = ApplicationPane.ACCUEIL;
@@ -40,7 +44,8 @@ public class AccueilPane extends StackPane {
 	private int marge = tailleCarreCentral / 25;
 	private Insets margeBoutons = new Insets(marge, marge, marge, marge);
 
-	private Font policeBouton = Font.font("Segoe UI", FontWeight.BOLD, 33);
+	private String nomPolice = "Segoe UI";
+	private Font policeBouton = Font.font(nomPolice, FontWeight.BOLD, 33);
 
 	private CornerRadii coin = new CornerRadii(15.0);
 
@@ -50,19 +55,25 @@ public class AccueilPane extends StackPane {
 	private GaussianBlur flou = new GaussianBlur(30);
 
 	VBox centreMenu;
+	Label titre1;
+	Label titre2;
+	Button bJouer;
+	Button bOptions;
+	Button bRegles;
+	Button bQuitter;
 
 	public AccueilPane(ScreenControl sc, Core c) {
-
+		// auteur florian
 		core = c;
 		sControl = sc;
 
 		// titre
-		Label titre1 = new Label(International.trad("texte.preTitre"));
-		titre1.setFont(Font.font("Segoe UI", FontWeight.BOLD, 160));
+		titre1 = new Label(International.trad("texte.preTitre"));
+		titre1.setFont(Font.font(nomPolice, FontWeight.BOLD, 160));
 		titre1.setTextFill(Color.BLACK);
 
-		Label titre2 = new Label(International.trad("texte.titrePP"));
-		titre2.setFont(Font.font("Segoe UI", 35));
+		titre2 = new Label(International.trad("texte.titrePP"));
+		titre2.setFont(Font.font(nomPolice, 34));
 		titre2.setTextFill(Color.BLACK);
 		titre2.setPadding(new Insets(0, 0, 20, 0));
 
@@ -73,7 +84,7 @@ public class AccueilPane extends StackPane {
 		titre.setMinWidth(800);
 
 		// boutons
-		Button bJouer = new Button(International.trad("bouton.jouer"));
+		bJouer = new Button(International.trad("bouton.jouer"));
 		bJouer.setPrefSize(lBouton, hBouton);
 		bJouer.setMinSize(lBouton, hBouton);
 		bJouer.setFont(policeBouton);
@@ -83,7 +94,7 @@ public class AccueilPane extends StackPane {
 		bJouer.setOnMouseExited(event -> bJouer.setStyle(styleBoutons));
 		bJouer.setOnAction(EventHandler -> sc.setPaneOnTop(ApplicationPane.CONFIG));
 
-		Button bOptions = new Button(International.trad("bouton.options"));
+		bOptions = new Button(International.trad("bouton.options"));
 		bOptions.setPrefSize(lBouton, hBouton);
 		bOptions.setMinSize(lBouton, hBouton);
 		bOptions.setFont(policeBouton);
@@ -96,7 +107,7 @@ public class AccueilPane extends StackPane {
 			sc.setPaneOnTop(ApplicationPane.OPTION);
 		});
 
-		Button bRegles = new Button(International.trad("bouton.regles"));
+		bRegles = new Button(International.trad("bouton.regles"));
 		bRegles.setPrefSize(lBouton, hBouton);
 		bRegles.setMinSize(lBouton, hBouton);
 		bRegles.setFont(policeBouton);
@@ -109,7 +120,7 @@ public class AccueilPane extends StackPane {
 			sc.setPaneOnTop(ApplicationPane.REGLES);
 		});
 
-		Button bQuitter = new Button(International.trad("bouton.quitter"));
+		bQuitter = new Button(International.trad("bouton.quitter"));
 		bQuitter.setPrefSize(lBouton, hBouton);
 		bQuitter.setMinSize(lBouton, hBouton);
 		bQuitter.setFont(policeBouton);
@@ -118,8 +129,8 @@ public class AccueilPane extends StackPane {
 		bQuitter.setOnMouseEntered(event -> bQuitter.setStyle(styleBoutonsSouris));
 		bQuitter.setOnMouseExited(event -> bQuitter.setStyle(styleBoutons));
 		bQuitter.setOnAction(event -> {
-			boolean resultat = ConfirmationPane.afficher("Quitter le jeu",
-					"Êtes-vous sûr de vouloir quitter le jeu ? \nSi vous quittez, la partie en cours sera perdue."); // TODO
+			boolean resultat = ConfirmationPane.afficher(International.trad("texte.confirmationTitre"),
+					International.trad("texte.confirmationL1") + "\n" + International.trad("texte.confirmationL2"));
 			if (resultat) {
 				Platform.exit();
 				System.exit(0);
@@ -152,6 +163,7 @@ public class AccueilPane extends StackPane {
 		centreMenu.setMargin(titre, new Insets(0, 0, 100, 0));
 		centreMenu.getChildren().addAll(titre, grilleBoutons);
 
+		// auteur remy
 		// Boutons de rotation d'écran
 		ImageView img1 = new ImageView(DataControl.SCREEN);
 		img1.setFitHeight(70);
@@ -201,6 +213,7 @@ public class AccueilPane extends StackPane {
 		bEcranDroite.setGraphic(img4);
 		bEcranDroite.setOnAction(EventHandler -> sc.setRotatePane(centreMenu, "droite"));
 
+		// auteur florian
 		// boite du fond qui contient l'image et les autres boites
 		HBox fond = new HBox();
 		fond.setAlignment(Pos.CENTER);
@@ -216,7 +229,22 @@ public class AccueilPane extends StackPane {
 		sControl.setPaneOnTop(paneName);
 
 	}
-	/*
-	 * public void changerAngle(double angle) { centreMenu.setRotate(angle); }
+
+	/**
+	 * Traduit les elements de ce pane
 	 */
+	@Override
+	public void traduire() {
+		Platform.runLater(new Runnable() {
+			@Override
+			public void run() {
+				titre1.setText(International.trad("texte.preTitre"));
+				titre2.setText(International.trad("texte.titrePP"));
+				bJouer.setText(International.trad("bouton.jouer"));
+				bOptions.setText(International.trad("bouton.options"));
+				bRegles.setText(International.trad("bouton.regles"));
+				bQuitter.setText(International.trad("bouton.quitter"));
+			}
+		});
+	}
 }

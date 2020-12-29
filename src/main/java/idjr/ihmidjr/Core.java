@@ -2,17 +2,19 @@ package idjr.ihmidjr;
 
 import idjr.Idjr;
 import idjr.ihmidjr.DataControl.ApplicationPane;
-import idjr.ihmidjr.event.Initializer;
+import idjr.ihmidjr.event.Evenement;
+import idjr.ihmidjr.langues.International;
+import idjr.ihmidjr.langues.Langues;
 
 public class Core {
 	private int nbJoueur = 5;
 	private int nbBot = 4;
 	private String nomPartie = "partieParDéfaut";
-	private Initializer initializer;
 	private Idjr idjr;
+	private SauvegarderOptions sauvegarderOptions;
 
-	public void eventInit() {
-		this.initializer = new Initializer();
+	public Core() {
+		sauvegarderOptions = new SauvegarderOptions();
 	}
 
 	private ApplicationPane pauseDepuis = ApplicationPane.ACCUEIL;
@@ -62,15 +64,20 @@ public class Core {
 		return nbJoueur - nbBot;
 	}
 
-	public Initializer getInitializer() {
-		return initializer;
-	}
-
 	public void setIdjr(Idjr idjr) {
 		this.idjr = idjr;
 	}
 
 	public Idjr getIdjr() {
 		return idjr;
+	}
+
+	public SauvegarderOptions getSauvegarderOptions() {
+		return sauvegarderOptions;
+	}
+
+	public void changerLangue(Langues langues) {
+		sauvegarderOptions.setLangues(langues);
+		International.changerLangue(langues);
 	}
 }

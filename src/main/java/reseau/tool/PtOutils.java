@@ -36,8 +36,10 @@ public interface PtOutils {
 		FileInputStream fileInputStream = new FileInputStream(file);
 		byte[] buffer = new byte[(int) file.length()];
 		int result = fileInputStream.read(buffer);
-		if (result == -1)
+		if (result == -1){
+			fileInputStream.close();
 			throw new IllegalArgumentException(MessageFormat.format("Le fichier {0} est vide !", chemin));
+		}
 		fileInputStream.close();
 		String[] str = new String(buffer, StandardCharsets.UTF_8).split("\n");
 
@@ -252,28 +254,26 @@ public interface PtOutils {
 	 * Obtient le paquet via une chaine de caractere.
 	 *
 	 * @param message          Le message a convertir
-	 * @param controleurReseau Le NetworkManager associé
 	 * @return Le paquet associé
 	 */
-	public static Paquet strToPacketUdp(String message, ControleurReseau controleurReseau) {
-		if (controleurReseau.getPaquetUdpCount() == 0)
+	public static Paquet strToPacketUdp(String message) {
+		if (ControleurReseau.getPaquetUdpCount() == 0)
 			throw new IllegalArgumentException("NetWorkManager n'a pas ete initialise au moins une fois !");
 
-		return controleurReseau.getPaquetUdp(PaquetOutils.getCleMessage(message));
+		return ControleurReseau.getPaquetUdp(PaquetOutils.getCleMessage(message));
 	}
 
 	/**
 	 * Obtient le paquet via une chaine de caractere.
 	 *
 	 * @param message          Le message a convertir
-	 * @param controleurReseau Le NetworkManager associé
 	 * @return Le paquet associé
 	 */
-	public static Paquet strToPacketTcp(String message, ControleurReseau controleurReseau) {
-		if (controleurReseau.getPaquetUdpCount() == 0)
+	public static Paquet strToPacketTcp(String message) {
+		if (ControleurReseau.getPaquetUdpCount() == 0)
 			throw new IllegalArgumentException("NetWorkManager n'a pas ete initialise au moins une fois !");
 
-		return controleurReseau.getPaquetTcp(PaquetOutils.getCleMessage(message));
+		return ControleurReseau.getPaquetTcp(PaquetOutils.getCleMessage(message));
 	}
 
 	/**

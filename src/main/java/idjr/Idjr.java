@@ -1,8 +1,7 @@
 package idjr;
 
-import idjr.ihmidjr.event.Initializer;
-import idjr.ihmidjr.event.JeuListener;
-import pp.ihm.Core;
+import idjr.ihmidjr.event.Evenement;
+import idjr.ihmidjr.event.IJeuListener;
 import reseau.socket.ControleurReseau;
 import reseau.tool.ReseauOutils;
 import reseau.tool.ThreadOutils;
@@ -10,6 +9,7 @@ import reseau.type.CarteType;
 import reseau.type.ConnexionType;
 import reseau.type.Couleur;
 import reseau.type.PionCouleur;
+import reseau.type.Statut;
 import reseau.type.TypeJoueur;
 import reseau.type.TypePartie;
 import reseau.type.VoteType;
@@ -38,7 +38,6 @@ public class Idjr {
 	private boolean envie;
 	private List<Integer> lieuOuvert;
 	private int delay;
-	private ControleurReseau nwm;
 	private boolean estFini;
 	private List<CarteType> listeCarte;
 	private List<PionCouleur> listePion;
@@ -51,16 +50,15 @@ public class Idjr {
 	private CarteType carteChoisi;
 	private Couleur couleurChoisi;
 	private CarteType carteUtiliser;
+	private List<CarteType> cartesUtiliser;
 	private Couleur voteChoisi;
 	private boolean isContinue;
 	private String etat;
-	Initializer initializer;
 
 	/* Parametre Temporaire */
 	private List<Integer> pionAPos;
 
-	public Idjr(Initializer initializer) throws IOException {
-		this.initializer = initializer;
+	public Idjr() throws IOException {
 		initBot();
 		initReseau();
 	}
@@ -83,19 +81,19 @@ public class Idjr {
 	private void initReseau() throws IOException {
 		TraitementPaquetTcp traitementPaquetTcp = new TraitementPaquetTcp(this);
 		TraitementPaquetUdp traitementPaquetUdp = new TraitementPaquetUdp(this);
-		nwm = new ControleurReseau(traitementPaquetTcp, traitementPaquetUdp);
-		nwm.initConnexion(connexionType, ReseauOutils.getLocalIp());
+		ControleurReseau.initConnexion(traitementPaquetTcp, traitementPaquetUdp, connexionType,
+				ReseauOutils.getLocalIp(), false);
 	}
 
-	public void estPartieConnecte(String nom) {
+	public void estPartieConnecte(String nom, int maxJr, TypePartie typePartie, Statut statut) {
 		Thread thread = new Thread(() -> {
-			listOfServers();
+			listOfServers(maxJr, typePartie, statut);
 			for (PartieInfo partieInfo : listOfServer) {
 				if (partieInfo.getIdPartie().equals(nom)) {
 					System.out.println("OK");
 					current = partieInfo;
-					nwm.tcp(partieInfo.getIp());
-					initializer.partieValide(nom);
+					ControleurReseau.demarrerClientTcp(partieInfo.getIp(), partieInfo.getPort());
+					Evenement.partieValide(nom);
 					return;
 				}
 			}
@@ -103,39 +101,49 @@ public class Idjr {
 		thread.start();
 	}
 
-	private void listOfServers() {
+	public void listOfServers(int maxJr, TypePartie typePartie, Statut statut) {
 		listOfServer.clear();
 
-		// TODO QUE MIXTE
-		// QUE 6
-		String message = nwm.construirePaquetUdp("RP", TypePartie.MIXTE, 5);
-		nwm.envoyerUdp(message);
+		String message = ControleurReseau.construirePaquetUdp("RP", typePartie, maxJr);
+		ControleurReseau.envoyerUdp(message);
 
 		try {
-			Thread.sleep(1000);
+			Thread.sleep(350);
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
 
-		initializer.partie(listOfServer);
+		List<PartieInfo> partieInfos = listOfServer;
+
+		for (PartieInfo partieInfo : partieInfos) {
+			if (partieInfo.getTypeP() != typePartie)
+				listOfServer.remove(partieInfo);
+
+			if (partieInfo.getNbJoueurTotalMax() > maxJr)
+				listOfServer.remove(partieInfo);
+		}
+
+		Evenement.partie(listOfServer);
 	}
 
 	public void rejoindrePartie(String nomp) {
 		setIpPp(current.getIp());
 		setPortPp(current.getPort());
-		if (initializer != null)
-			initializer.nomPartie(current.getIdPartie());
-		String messageTcp = nwm.construirePaquetTcp("DCP", nom, typeJoueur, current.getIdPartie());
-		ThreadOutils.asyncTask(() -> {
-			nwm.envoyerTcp(messageTcp);
-			nwm.attendreTcp("ACP");
-			String message1 = nwm.getMessageTcp("ACP");
-			setJoueurId((String) nwm.getValueTcp("ACP", message1, 2));
+		Evenement.nomPartie(current.getIdPartie());
+		String messageTcp = ControleurReseau.construirePaquetTcp("DCP", nom, typeJoueur, current.getIdPartie());
+		ThreadOutils.asyncTask("rejoindrePartie", () -> {
+			ControleurReseau.envoyerTcp(messageTcp);
 		});
 	}
 
-	public Initializer getInitializer() {
-		return initializer;
+	private boolean desVote = false;
+
+	public boolean desVote() {
+		return desVote;
+	}
+
+	public void desVoteChoisi(boolean etat) {
+		desVote = etat;
 	}
 
 	private boolean voteChoisiBool = false;
@@ -172,6 +180,24 @@ public class Idjr {
 
 	public void utiliserCarteChoisi(boolean etat) {
 		estUtiliserCarteChoisi = etat;
+	}
+
+	private boolean estUtiliserCartesChoisi = false;
+
+	public void choisirUtiliserCartes(List<CarteType> cartesUtiliser) {
+		this.cartesUtiliser = cartesUtiliser;
+	}
+
+	public boolean utiliserCartesDisponible() {
+		return estUtiliserCartesChoisi;
+	}
+
+	public List<CarteType> getUtiliserCartesChosi() {
+		return cartesUtiliser;
+	}
+
+	public void utiliserCartesChoisi(boolean etat) {
+		estUtiliserCartesChoisi = etat;
 	}
 
 	public int getPionChoisi() {
@@ -239,7 +265,7 @@ public class Idjr {
 	}
 
 	public synchronized void stop() {
-		nwm.arreter();
+		ControleurReseau.arreter();
 	}
 
 	public void setCouleurJoueurs(List<Couleur> couleurJoueurs) {
@@ -247,7 +273,7 @@ public class Idjr {
 	}
 
 	public void arreter() {
-		nwm.arreter();
+		ControleurReseau.arreter();
 	}
 
 	public int getDelay() {
@@ -348,7 +374,7 @@ public class Idjr {
 
 	public void addCarte(CarteType n) {
 		listeCarte.add(n);
-		initializer.updateCarte();
+		Evenement.updateCarte();
 	}
 
 	public void setListeCarte(List<CarteType> listeCarte) {

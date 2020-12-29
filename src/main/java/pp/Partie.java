@@ -2,6 +2,7 @@ package pp;
 
 import reseau.type.CarteType;
 import reseau.type.Couleur;
+import reseau.type.PionCouleur;
 
 import java.util.*;
 
@@ -61,22 +62,21 @@ public class Partie {
 		cartes.add(CarteType.SPR);
 		cartes.add(CarteType.SPR);
 		cartes.add(CarteType.SPR);
-		
+
 		cartes.add(CarteType.MAT);
 		cartes.add(CarteType.MAT);
 		cartes.add(CarteType.MAT);
-		
+
 		cartes.add(CarteType.ABA);
 		cartes.add(CarteType.ACS);
 		cartes.add(CarteType.AGR);
 		cartes.add(CarteType.AHI);
 		cartes.add(CarteType.ARE);
 		cartes.add(CarteType.ATR);
-		
+
 		cartes.add(CarteType.CAC);
 		cartes.add(CarteType.CAC);
 		cartes.add(CarteType.CAC);
-		
 
 		Collections.shuffle(cartes);
 	}
@@ -123,38 +123,7 @@ public class Partie {
 			}
 	}
 
-
-
-
-	/**
-	 * Retourne la liste des index des destinations valides. Une destination valide
-	 * est un lieu sur lequel, il est possible de placer un personnage. Pour chaque
-	 * résulatat de dé, si le résultat du dé est valide il est ajouté a la liste. Si
-	 * les résultat des dés ne sont pas valides alors toutes les destinations
-	 * valides de la partie sont ajouté à la liste. Puis la liste est renvoyée.
-	 *
-	 * @param destination1 résultat du 1er dé
-	 * @param destination2 résultat du 2ème dé
-	 * @return la liste des index des destination valides
-	 */
-	public List<Integer> getDestinationPossible(int destination1, int destination2) {
-		List<Integer> destinationPossible = new ArrayList<>();
-		if (lieux.get(destination1).isFull() && lieux.get(destination2).isFull()) {
-			for (Lieu l : lieux.values())
-				if (!l.isFull() && l.isOuvert())
-					destinationPossible.add(l.getNum());
-		} else if (lieux.get(destination1).isFull() && !lieux.get(destination2).isFull()) {
-			destinationPossible.add(destination2);
-		} else if (!lieux.get(destination1).isFull() && lieux.get(destination2).isFull()) {
-			destinationPossible.add(destination1);
-		} else {
-			destinationPossible.add(destination1);
-			destinationPossible.add(destination2);
-		}
-
-		return destinationPossible;
-	}
-
+	
 	/**
 	 * Retourne le nombre de place disponible dans l'ensemble des lieux de la
 	 * partie.
@@ -335,13 +304,13 @@ public class Partie {
 		boolean maxP = true;
 		boolean maxB = true;
 		for (int i = 2; i < 7; i++) {
-			if (lieux.get(i).getPersonnage().size() > lieux.get(idLieuP).getPersonnage().size()) {
+			if (lieux.get(i).getPersonnage().size() > lieux.get(idLieuP).getPersonnage().size())
 				idLieuP = i;
-			} else if (lieux.get(i).getPersonnage().size() == lieux.get(idLieuP).getPersonnage().size())
+			else if (lieux.get(i).getPersonnage().size() == lieux.get(idLieuP).getPersonnage().size())
 				maxP = false;
-			if (lieux.get(i).getBlonde().size() > lieux.get(idLieuB).getBlonde().size()) {
+			if (lieux.get(i).getBlonde().size() > lieux.get(idLieuB).getBlonde().size())
 				idLieuB = i;
-			} else if (lieux.get(i).getBlonde().size() == lieux.get(idLieuB).getBlonde().size())
+			else if (lieux.get(i).getBlonde().size() == lieux.get(idLieuB).getBlonde().size())
 				maxB = false;
 		}
 		if (maxP) {
@@ -352,7 +321,7 @@ public class Partie {
 		if (maxB) {
 			lieux.get(idLieuB).addZombie();
 			nb.add(idLieuB);
-		} else
+		}else
 			nb.add(0);
 		return nb;
 	}
@@ -427,16 +396,13 @@ public class Partie {
 	 */
 	public String getEtatPartie() { // TODO ajouter les cartes
 		StringBuilder etatPartie = new StringBuilder();
-		for (Joueur joueur : joueurs.values()) {
-			if (joueur.isChefDesVigiles()) {
+		for (Joueur joueur : joueurs.values())
+			if (joueur.isChefDesVigiles())
 				etatPartie.append(">>> ").append(joueur).append(" est le chef des Vigiles <<<\n");
-			}
-		}
 		for (Lieu lieu : lieux.values()) {
 			etatPartie.append(lieu).append(":\n");
-			for (Personnage personnage : lieu.getPersonnage()) {
+			for (Personnage personnage : lieu.getPersonnage())
 				etatPartie.append("(").append(personnage.getJoueur()).append(") ").append(personnage).append("\n");
-			}
 			etatPartie.append("Nombre de place-> ").append(lieu.getNbPlaces()).append("\n");
 			etatPartie.append("Nombre de Zombie-> ").append(lieu.getNbZombies()).append("\n\n");
 		}
@@ -479,13 +445,11 @@ public class Partie {
 			couleurs.add(joueur.getCouleur());
 		return couleurs;
 	}
-	
+
 	public Joueur getJoueurCouleur(Couleur c) {
-		for(Joueur j : joueurs.values()) {
-			if (j.getCouleur() == c) {
+		for (Joueur j : joueurs.values())
+			if (j.getCouleur() == c)
 				return j;
-			}
-		}
 		return null;
 	}
 
@@ -496,17 +460,12 @@ public class Partie {
 	 */
 	public Map<Integer, Joueur> getJoueurs() {
 		Map<Integer, Joueur> toutJoueur = new HashMap<>();
-		for (Integer i : joueurs.keySet()) {
-			if (joueurs.get(i).isChefDesVigiles()) {
+		for (Integer i : joueurs.keySet())
+			if (joueurs.get(i).isChefDesVigiles())
 				toutJoueur.put(i, joueurs.get(i));
-			}
-		}
-		for (Integer i : joueurs.keySet()) {
-			if (!joueurs.get(i).isChefDesVigiles()) {
+		for (Integer i : joueurs.keySet())
+			if (!joueurs.get(i).isChefDesVigiles())
 				toutJoueur.put(i, joueurs.get(i));
-			}
-		}
-		
 		return joueurs;
 	}
 
@@ -563,9 +522,9 @@ public class Partie {
 	public void setNewChef(Boolean nouveauChef) {
 		this.nouveauChef = nouveauChef;
 	}
-	
-	public List<CarteType> tirerCartes(Joueur j){
-		List<CarteType> l = new ArrayList();
+
+	public List<CarteType> tirerCartes(Joueur j) {
+		List<CarteType> l = new ArrayList<>();
 		int i = 0;
 		while (!cartes.isEmpty() && i < 3) {
 			l.add(cartes.get(0));
@@ -577,7 +536,7 @@ public class Partie {
 		}
 		return l;
 	}
-	
+
 	/**
 	 * Affiche les différents personnages qui se trouvent sur un lieu.
 	 *
@@ -588,30 +547,42 @@ public class Partie {
 		for (Joueur j : joueurs.values()) {
 			int a = 0;
 			if (j.isChefDesVigiles()) {
-				for(Personnage p : j.getPersonnages().values()) {
-					if (l.getPersonnage().contains(p) && !p.estCache) {
-						a=1;
-					}
-				}
-				if (a == 1) {
+				for (Personnage p : j.getPersonnages().values())
+					if (l.getPersonnage().contains(p) && !p.estCache)
+						a = 1;
+				if (a == 1)
 					n.add(j);
-				}
 			}
 		}
 		for (Joueur j : joueurs.values()) {
 			int a = 0;
 			if (!j.isChefDesVigiles()) {
-				for(Personnage p : j.getPersonnages().values()) {
-					if (l.getPersonnage().contains(p) && !p.estCache) {
-						a=1;
-					}
-				}
-				if (a == 1) {
+				for (Personnage p : j.getPersonnages().values())
+					if (l.getPersonnage().contains(p) && !p.estCache)
+						a = 1;
+				if (a == 1)
 					n.add(j);
-				}
 			}
 		}
 		return n;
+	}
+
+	public List<Couleur> getJoueursCouleurs(Partie jeu) {
+		List<Couleur> lc = new ArrayList<>();
+		lc.add(jeu.getChefVIgile().getCouleur());
+		for (Joueur j : jeu.getJoueurs().values())
+			if (j != jeu.getChefVIgile() && j.isEnVie())
+				lc.add(j.getCouleur());
+		return lc;
+	}
+	
+	public List<PionCouleur> getPersosLieu(int i) {
+		List<PionCouleur> pc = new ArrayList<>();
+		Lieu l = getLieux().get(i);
+		for (Personnage p : l.getPersonnage())
+			pc.add(PionCouleur.valueOf(p.getJoueur().getCouleur().toString().substring(0, 1) + p.getPoint()));
+
+		return pc;
 	}
 
 }

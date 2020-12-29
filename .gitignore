@@ -1,5 +1,7 @@
 ### University Nice ###
-.github/
+maven-publish.yml
+*.opts
+*.jar
 
 ### Eclipse ###
 .metadata

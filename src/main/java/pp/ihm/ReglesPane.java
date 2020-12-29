@@ -1,7 +1,9 @@
 package pp.ihm;
 
 import pp.ihm.DataControl.ApplicationPane;
+import pp.ihm.langues.ITraduction;
 import pp.ihm.langues.International;
+import javafx.application.Platform;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
@@ -17,6 +19,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
+import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 
@@ -24,11 +27,13 @@ import javafx.scene.text.FontWeight;
  * The Class AccueilPane.
  * 
  * @author Florian
- * @version 0.1
+ * @author Tom
+ * 
+ * @version 1.0
  * @since 01/11/2020
  */
-public class ReglesPane extends StackPane {
-
+public class ReglesPane extends StackPane implements ITraduction {
+	// auteur florian
 	private ScreenControl sControl = null;
 	private Core core = null;
 	private final ApplicationPane paneName = ApplicationPane.REGLES;
@@ -37,25 +42,28 @@ public class ReglesPane extends StackPane {
 	private int hBouton = 75;
 	private int lBouton = 150;
 
-	private Font policeBouton = Font.font("Segoe UI", FontWeight.BOLD, 27);
-	private Font policeNom = Font.font("Segoe UI", 17);
+	private String nomPolice = "Segoe UI";
+	private Font policeBouton = Font.font(nomPolice, FontWeight.BOLD, 27);
+	private Font policeNom = Font.font(nomPolice, 17);
 
 	private String styleBoutons = " -fx-background-color:#000000; -fx-background-radius: 15px; -fx-text-fill: #ffffff";
 	private String styleBoutonsSouris = "-fx-background-color:#ff0000;  -fx-text-fill:#000000; -fx-background-radius: 15px;";
 
 	private GaussianBlur flou = new GaussianBlur(30);
 	private CornerRadii coin = new CornerRadii(15.0);
-	private CornerRadii coinfb = new CornerRadii(5.0);
 
-	private Background fondBlanc = new Background(new BackgroundFill(Color.WHITE, coinfb, null));
+	Label titre1;
+	Label desc1;
+	Button bRetour;
 
 	public ReglesPane(ScreenControl sc, Core c) {
+		// auteur florian
 		core = c;
 		sControl = sc;
 
 		// titre
-		Label titre1 = new Label(International.trad("text.titreRegle"));
-		titre1.setFont(Font.font("Segoe UI", FontWeight.BOLD, 80));
+		titre1 = new Label(International.trad("text.titreRegle"));
+		titre1.setFont(Font.font(nomPolice, FontWeight.BOLD, 80));
 		titre1.setTextFill(Color.BLACK);
 
 		VBox titre = new VBox(titre1);
@@ -65,18 +73,38 @@ public class ReglesPane extends StackPane {
 		titre.setMinWidth(730);
 
 		//
+		Rectangle rect = new Rectangle();
+		rect.setWidth(tailleCarreCentral);
+		rect.setHeight(tailleCarreCentral - 154.0);
+		rect.setArcHeight(30);
+		rect.setArcWidth(30);
+		rect.setOpacity(.5);
 
-		Label desc = new Label("//TODO afficher texte des règles ");
-		desc.setFont(policeNom);
-		desc.setBackground(fondBlanc);
+		desc1 = new Label();
+		desc1.setText(International.trad("texte.pourQuiA") + "\n" + International.trad("texte.pourQuiB") + "\n\n"
+				+ International.trad("texte.histoireA") + "\n" + International.trad("texte.histoireB") + "\n"
+				+ International.trad("texte.histoireC") + "\n" + International.trad("texte.histoireD") + "\n"
+				+ International.trad("texte.histoireE") + "\n" + International.trad("texte.histoireF") + "\n"
+				+ International.trad("texte.histoireG") + "\n\n" + International.trad("texte.but") + "\n"
+				+ International.trad("texte.butExplicationA") + "\n" + International.trad("texte.butExplicationB")
+				+ "\n" + International.trad("texte.butExplicationC") + "\n"
+				+ International.trad("texte.butExplicationD") + "\n" + International.trad("texte.butExplicationE")
+				+ "\n" + International.trad("texte.butExplicationF") + "\n\n" + International.trad("texte.finDePartieA")
+				+ "\n" + International.trad("texte.finDePartieB") + "\n" + International.trad("texte.FDPsit1A") + "\n"
+				+ International.trad("texte.FDPsit1B") + "\n" + International.trad("texte.FDPsit2A") + "\n"
+				+ International.trad("texte.FDPsit2B") + "\n" + International.trad("texte.FDPfinA") + "\n"
+				+ International.trad("texte.FDPfinB") + "\n" + International.trad("texte.FDPfinC") + "\n");
+		desc1.setFont(policeNom);
+		desc1.setPadding(new Insets(5, 10, 5, 10));
+		desc1.setTextFill(Color.WHITE);
 
 		VBox vbCenter = new VBox();
 
 		vbCenter.setAlignment(Pos.CENTER);
-		vbCenter.getChildren().addAll(desc);
+		vbCenter.getChildren().addAll(desc1);
 
 		// bouton
-		Button bRetour = new Button(International.trad("bouton.retour"));
+		bRetour = new Button(International.trad("bouton.retour"));
 		bRetour.setPrefSize(lBouton, hBouton);
 		bRetour.setMinSize(lBouton, hBouton);
 		bRetour.setFont(policeBouton);
@@ -98,7 +126,6 @@ public class ReglesPane extends StackPane {
 		centreMenu.setMinSize(tailleCarreCentral, tailleCarreCentral);
 		centreMenu.setPrefSize(tailleCarreCentral, tailleCarreCentral);
 		centreMenu.setMaxSize(tailleCarreCentral, tailleCarreCentral);
-		centreMenu.setMargin(titre, new Insets(0, 0, 100, 0));
 
 		centreMenu.setAlignment(titre, Pos.CENTER);
 
@@ -127,7 +154,7 @@ public class ReglesPane extends StackPane {
 		bEcranHaut.setPrefSize(80, 80);
 		bEcranHaut.setRotate(180);
 		bEcranHaut.setGraphic(img1);
-		bEcranHaut.setOnAction(EventHandler -> sc.setRotatePane(centreMenu, "haut"));
+		bEcranHaut.setOnAction(EventHandler -> sc.setRotatePane(rect, centreMenu, "haut"));
 
 		Button bEcranBas = new Button();
 		bEcranBas.setBackground(new Background(new BackgroundFill(null, CornerRadii.EMPTY, null)));
@@ -135,7 +162,7 @@ public class ReglesPane extends StackPane {
 		bEcranBas.setTranslateY(490);
 		bEcranBas.setPrefSize(80, 80);
 		bEcranBas.setGraphic(img2);
-		bEcranBas.setOnAction(EventHandler -> sc.setRotatePane(centreMenu, "bas"));
+		bEcranBas.setOnAction(EventHandler -> sc.setRotatePane(rect, centreMenu, "bas"));
 
 		Button bEcranGauche = new Button();
 		bEcranGauche.setBackground(new Background(new BackgroundFill(null, CornerRadii.EMPTY, null)));
@@ -144,7 +171,7 @@ public class ReglesPane extends StackPane {
 		bEcranGauche.setPrefSize(80, 80);
 		bEcranGauche.setRotate(90);
 		bEcranGauche.setGraphic(img3);
-		bEcranGauche.setOnAction(EventHandler -> sc.setRotatePane(centreMenu, "gauche"));
+		bEcranGauche.setOnAction(EventHandler -> sc.setRotatePane(rect, centreMenu, "gauche"));
 
 		Button bEcranDroite = new Button();
 		bEcranDroite.setBackground(new Background(new BackgroundFill(null, CornerRadii.EMPTY, null)));
@@ -153,7 +180,7 @@ public class ReglesPane extends StackPane {
 		bEcranDroite.setRotate(-90);
 		bEcranDroite.setPrefSize(80, 80);
 		bEcranDroite.setGraphic(img4);
-		bEcranDroite.setOnAction(EventHandler -> sc.setRotatePane(centreMenu, "droite"));
+		bEcranDroite.setOnAction(EventHandler -> sc.setRotatePane(rect, centreMenu, "droite"));
 
 		// boite du fond qui contient tout
 		HBox fond = new HBox();
@@ -164,7 +191,7 @@ public class ReglesPane extends StackPane {
 		fond.getChildren().add(imgFond);
 
 		this.setAlignment(Pos.CENTER);
-		this.getChildren().addAll(fond, centreMenu, bEcranDroite, bEcranHaut, bEcranGauche, bEcranBas);
+		this.getChildren().addAll(fond, rect, centreMenu, bEcranDroite, bEcranHaut, bEcranGauche, bEcranBas);
 		this.setBackground(new Background(new BackgroundFill(Color.BLACK, CornerRadii.EMPTY, null)));
 
 		sControl.registerNode(paneName, this);
@@ -172,4 +199,33 @@ public class ReglesPane extends StackPane {
 
 	}
 
+	/**
+	 * Traduit les elements de ce pane
+	 */
+	@Override
+	public void traduire() {
+		Platform.runLater(new Runnable() {
+			@Override
+			public void run() {
+				titre1.setText(International.trad("text.titreRegle"));
+				desc1.setText(International.trad("texte.pourQuiA") + "\n" + International.trad("texte.pourQuiB")
+						+ "\n\n" + International.trad("texte.histoireA") + "\n" + International.trad("texte.histoireB")
+						+ "\n" + International.trad("texte.histoireC") + "\n" + International.trad("texte.histoireD")
+						+ "\n" + International.trad("texte.histoireE") + "\n" + International.trad("texte.histoireF")
+						+ "\n" + International.trad("texte.histoireG") + "\n\n" + International.trad("texte.but") + "\n"
+						+ International.trad("texte.butExplicationA") + "\n"
+						+ International.trad("texte.butExplicationB") + "\n"
+						+ International.trad("texte.butExplicationC") + "\n"
+						+ International.trad("texte.butExplicationD") + "\n"
+						+ International.trad("texte.butExplicationE") + "\n"
+						+ International.trad("texte.butExplicationF") + "\n\n"
+						+ International.trad("texte.finDePartieA") + "\n" + International.trad("texte.finDePartieB")
+						+ "\n" + International.trad("texte.FDPsit1A") + "\n" + International.trad("texte.FDPsit1B")
+						+ "\n" + International.trad("texte.FDPsit2A") + "\n" + International.trad("texte.FDPsit2B")
+						+ "\n" + International.trad("texte.FDPfinA") + "\n" + International.trad("texte.FDPfinB") + "\n"
+						+ International.trad("texte.FDPfinC") + "\n");
+				bRetour.setText(International.trad("bouton.retour"));
+			}
+		});
+	}
 }

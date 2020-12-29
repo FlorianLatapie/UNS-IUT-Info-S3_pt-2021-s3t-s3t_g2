@@ -1,6 +1,7 @@
 package reseau.socket;
 
 import reseau.tool.PtOutils;
+import reseau.tool.ThreadOutils;
 
 import java.io.IOException;
 import java.net.DatagramPacket;
@@ -26,7 +27,6 @@ public class UdpConnexion implements Runnable, IEchangeSocket, IControleSocket {
 	private final Logger logger;
 
 	private final InetAddress groupe;
-	private final ControleurReseau controleurReseau;
 	private final InetAddress monip;
 
 	private MulticastSocket multicastSocket;
@@ -35,13 +35,11 @@ public class UdpConnexion implements Runnable, IEchangeSocket, IControleSocket {
 	/**
 	 * Initialise le serveur UDP.
 	 *
-	 * @param controleurReseau le gestionnaire réseau
 	 * @param ip               L'ip sur lequel le serveur demarre
 	 * @exception UnknownHostException Si le cast de l'ip provoque une erreur
 	 */
-	public UdpConnexion(ControleurReseau controleurReseau, InetAddress ip) throws UnknownHostException {
+	public UdpConnexion(InetAddress ip) throws UnknownHostException {
 		this.monip = ip;
-		this.controleurReseau = controleurReseau;
 		this.multicastSocket = null;
 		this.groupe = InetAddress.getByName(MULTICAST_IP);
 		this.estLancer = false;
@@ -60,6 +58,7 @@ public class UdpConnexion implements Runnable, IEchangeSocket, IControleSocket {
 		multicastSocket = new MulticastSocket(MULTICAST_PORT);
 		multicastSocket.setInterface(monip);
 		multicastSocket.joinGroup(groupe);
+		System.out.println("[OK] " + InetAddress.getLocalHost());
 		estLancer = true;
 
 		logger.log(Level.FINEST, "Multicast UDP ouvert");
@@ -109,8 +108,7 @@ public class UdpConnexion implements Runnable, IEchangeSocket, IControleSocket {
 	 */
 	private void reception(DatagramPacket datagramPacket, String message) {
 		logger.log(Level.INFO, "Message recu : {0}", message);
-		controleurReseau.traitementPaquetUdp(PtOutils.strToPacketUdp(message, controleurReseau), message,
-				datagramPacket);
+		ControleurReseau.traitementPaquetUdp(PtOutils.strToPacketUdp(message), message, datagramPacket);
 	}
 
 	/**
@@ -144,5 +142,33 @@ public class UdpConnexion implements Runnable, IEchangeSocket, IControleSocket {
 			multicastSocket.close();
 
 		logger.log(Level.INFO, "Socket UDP arreté");
+	}
+
+	/**
+	 * Bloque l'execution du thread tant que le client n'est pas pret a recevoir.
+	 */
+	public void attendreConnexion() {
+		while (multicastSocket == null)
+			ThreadOutils.attendre();
+		while (!isPret())
+			ThreadOutils.attendre();
+	}
+
+	/**
+	 * Permet de savoir le multicast udp est pret.
+	 * 
+	 * @return si le multicast udp est connecté
+	 */
+	public boolean isPret() {
+		return multicastSocket.isConnected();
+	}
+
+	/**
+	 * Permet de savoir le multicast udp est arreter.
+	 * 
+	 * @return si le multicast udp est arreter
+	 */
+	public boolean isArreter() {
+		return !multicastSocket.isClosed();
 	}
 }

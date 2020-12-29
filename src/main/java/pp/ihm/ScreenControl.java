@@ -8,9 +8,14 @@ import javafx.scene.input.MouseEvent;
 import javafx.util.Duration;
 
 import java.util.HashMap;
-
+/**
+ * 
+ * @author florian
+ * @author remy 
+ *
+ */
 public class ScreenControl implements EventHandler<MouseEvent> {
-
+	//auteur florian 
 	private final Core core;
 	private InterfacePrincipale primary = null;
 	private HashMap<ApplicationPane, Node> listNode = new HashMap<>();
@@ -61,6 +66,13 @@ public class ScreenControl implements EventHandler<MouseEvent> {
 		}
 
 	}
+	
+	/**
+	 * @author Remy
+	 * modifie le sens d'un élément de l'interface
+	 * @param n objets dont il faut modifier l'angle 
+	 * @param sens sens vers lequel la rotation doit se faire 
+	 */
 	public void setRotatePane(Node n, String sens) {
 		double angle = n.getRotate();
 		this.setAnglePane(sens);
@@ -96,6 +108,18 @@ public class ScreenControl implements EventHandler<MouseEvent> {
 		rotateTransition.play();
 	}
 	
+	/**
+	 * @author florian 
+	 * modifie le sens de 2 éléments  l'interface
+	 * @param n1 objet dont il faut modifier l'angle 
+	 * @param n2 objet dont il faut modifier l'angle 
+	 * @param sens sens vers lequel la rotation doit se faire 
+	 */
+	public void setRotatePane(Node n1, Node n2, String sens) {
+		setRotatePane(n1, sens);
+		setRotatePane(n2, sens);
+		
+	}
 	public static double getAngle(String sens) {
 		double currentAngle = 0;
 		switch (sens) {
