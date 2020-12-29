@@ -80,7 +80,7 @@ public class ControleurFouilleCamion {
 	 * @return On peut faire une fouille du camion.
 	 */
 	private Boolean isFouillable(Partie jeu) {
-		return !jeu.getJoueurSurLieu(jeu.getLieux().get(4)).isEmpty() && !jeu.getCartes().isEmpty();
+		return !jeu.getJoueurSurLieu(jeu.getLieux().get(4)).isEmpty() || !jeu.getCartes().isEmpty();
 	}
 
 	/**
