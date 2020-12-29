@@ -118,7 +118,6 @@ public class UdpConnexion implements Runnable, IEchangeSocket, IControleSocket {
 	 */
 	public void envoyer(String message) {
 		logger.log(Level.FINEST, "Message envoyé : {0}", message);
-		attendreConnexion();
 		String uftMessage = new String(message.getBytes(), ENCODAGE);
 		byte[] buffer = uftMessage.getBytes();
 		DatagramPacket packet = new DatagramPacket(buffer, buffer.length, groupe, MULTICAST_PORT);
