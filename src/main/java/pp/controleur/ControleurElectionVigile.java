@@ -88,7 +88,7 @@ public class ControleurElectionVigile {
 	public Joueur joueurElection(Partie jeu, String partieId, int numeroTour) {
 		if (jeu.getJoueurSurLieu(jeu.getLieux().get(4)).size() == 1)
 			return jeu.getJoueurSurLieu(jeu.getLieux().get(4)).get(0);
-		return cVote.phaseVote(jeu, jeu.getLieux().get(4), VoteType.FDC, partieId, numeroTour);
+		return cVote.phaseVote(jeu, jeu.getLieux().get(5), VoteType.ECD, partieId, numeroTour);
 	}
 
 	/**

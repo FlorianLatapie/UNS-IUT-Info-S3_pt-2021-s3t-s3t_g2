@@ -66,7 +66,7 @@ public class ChoixDestinationReseau {
 	 */
 	public void attendreChoixDestinationNewChef(Partie jeu) {
 		for (Joueur j : jeu.getJoueurs().values())
-			if (!j.isChefDesVigiles())
+			if (!j.isChefDesVigiles() && j.isEnVie())
 				j.getConnection().attendreMessage("CDDJ");
 	}
 
@@ -77,7 +77,8 @@ public class ChoixDestinationReseau {
 	 */
 	public void attendreChoixDestinationOldChef(Partie jeu) {
 		for (Joueur j : jeu.getJoueurs().values())
-			j.getConnection().attendreMessage("CDDJ");
+			if (j.isEnVie())
+				j.getConnection().attendreMessage("CDDJ");
 	}
 
 	/**
