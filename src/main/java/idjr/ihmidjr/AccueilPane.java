@@ -33,11 +33,12 @@ import reseau.type.TypePartie;
  * The Class AccueilPane.
  * 
  * @author Florian
- * @version 0.1
+ * @author Tom
+ * @version 1.0
  * @since 04/10/2020
  */
 public class AccueilPane extends StackPane implements ITraduction {
-
+	// auteur florian
 	// définition des variable pour la suite du pane
 	private ScreenControl sControl = null;
 	private Core core = null;
@@ -72,6 +73,7 @@ public class AccueilPane extends StackPane implements ITraduction {
 	Label titre2;
 
 	public AccueilPane(ScreenControl sc, Core c) {
+		// auteur florian
 		core = c;
 		sControl = sc;
 		stackPane.setAlignment(Pos.CENTER);

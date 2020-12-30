@@ -6,7 +6,14 @@ import idjr.ihmidjr.event.Evenement;
 import idjr.ihmidjr.langues.International;
 import idjr.ihmidjr.langues.Langues;
 
+/**
+ * 
+ * @author florian
+ * @author sebastien
+ *
+ */
 public class Core {
+	//auteur florian 
 	private int nbJoueur = 5;
 	private int nbBot = 4;
 	private String nomPartie = "partieParDéfaut";
@@ -71,11 +78,18 @@ public class Core {
 	public Idjr getIdjr() {
 		return idjr;
 	}
-
+	/**
+	 * @author Sebastien
+	 * @return les options actuelles du programme
+	 */
 	public SauvegarderOptions getSauvegarderOptions() {
 		return sauvegarderOptions;
 	}
-
+	
+	/**
+	 * @author Sebastien
+	 * @param langues nouvelle langue a appliquer
+	 */
 	public void changerLangue(Langues langues) {
 		sauvegarderOptions.setLangues(langues);
 		International.changerLangue(langues);

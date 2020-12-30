@@ -12,8 +12,13 @@ import javafx.scene.image.Image;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
-
+/**
+ * 
+ * @author florian
+ *
+ */
 public class InterfacePrincipale extends Application {
+	//auteur florian 
 	private StackPane root = new StackPane();
 	private Node currentTopNode = null;
 	private ScreenControl sControl = null;
@@ -73,10 +78,7 @@ public class InterfacePrincipale extends Application {
 		Evenement.addListener(attenteJoueurPane);
 		Evenement.addListener(optionPane);
 
-		/* Ajouter les panes dont il y de la rotation */
-		// Initializer.addListenerAttente(PANE);
-
-		Evenement.updatePleineEcran();
+		Evenement.updatePleinEcran();
 
 		International.ajouterPane(accueilPane);
 		International.ajouterPane(reglesPane);

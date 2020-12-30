@@ -2,8 +2,13 @@ package idjr.ihmidjr;
 
 import reseau.type.CarteType;
 import reseau.type.Couleur;
-
+/**
+ * @author sebastien
+ * @author florian
+ *
+ */
 public interface IhmTools {
+	//auteur florian
 	String vert = " -fx-background-color:#5EB137; -fx-text-fill: #000000;";
 	String rouge = " -fx-background-color:#A80000; -fx-text-fill: #000000;";
 	String marron = " -fx-background-color:#6C3505; -fx-text-fill: #000000;";
@@ -13,7 +18,7 @@ public interface IhmTools {
 
 	/**
 	 * Permet de savoir si le nom est conforme
-	 * 
+	 * @author sebastien 
 	 * @param nom le nom cible
 	 * @return si le nom est valide
 	 */
@@ -56,7 +61,7 @@ public interface IhmTools {
 
 	/**
 	 * Convertit la couleur en style
-	 * 
+	 * @author sebastien
 	 * @param couleur la couleur cible
 	 * @return le style
 	 */
@@ -81,7 +86,7 @@ public interface IhmTools {
 
 	/**
 	 * Convertit la carte en chemin (image)
-	 * 
+	 * @author sebastien
 	 * @param carteType la carte cible
 	 * @return le chemin de l'image
 	 */
@@ -116,12 +121,12 @@ public interface IhmTools {
 
 	/**
 	 * Covertit la carte chemin d'acces en cartetype
-	 * 
+	 * @author sebastien 
 	 * @param dataControl le chemin de l'image
 	 * @return la carte
 	 */
-	public static CarteType convertCarte(String dataControl) {
-		switch (dataControl) {
+	public static CarteType convertCarte(String carte) {
+		switch (carte) {
 		case DataControl.CARTE_BATTE:
 			return CarteType.ABA;
 		case DataControl.CARTE_CACHETTE:

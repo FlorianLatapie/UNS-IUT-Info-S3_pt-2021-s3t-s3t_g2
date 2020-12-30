@@ -33,10 +33,14 @@ import reseau.type.TypePartie;
  * The Class ConfigPartiePane.
  *
  * @author Florian
+ * @author Sebastien 
+ * @author Remy
+ * @author Tom
  * @version 0.1
  * @since 26/10/2020
  */
 public class ConfigPartiePane extends StackPane implements IConfigListener, ITraduction {
+	//auteur florian 
 	private ScreenControl sControl = null;
 	private Core core = null;
 	private final ApplicationPane paneName = ApplicationPane.CONFIG;
@@ -68,6 +72,7 @@ public class ConfigPartiePane extends StackPane implements IConfigListener, ITra
 	Button bRetour;
 
 	public ConfigPartiePane(ScreenControl sc, Core c) {
+		//auteur florian 
 		core = c;
 		sControl = sc;
 		stackPane.setAlignment(Pos.CENTER);
@@ -131,11 +136,9 @@ public class ConfigPartiePane extends StackPane implements IConfigListener, ITra
 
 		// To Creating a Observable List
 		ObservableList<Label> liste = FXCollections.observableArrayList();
-
-		// Create a ListView
+		
+		//auteur remy 
 		listView = new ListView<Label>(liste);
-
-		// Only allowed to select single row in the ListView.
 		listView.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
 		listView.setPrefWidth(1200);
 		listView.setMaxWidth(1200);
@@ -166,7 +169,7 @@ public class ConfigPartiePane extends StackPane implements IConfigListener, ITra
 		bPbConnexion.setOnMouseEntered(event -> bPbConnexion.setStyle(styleBoutonsSouris));
 		bPbConnexion.setOnMouseExited(event -> bPbConnexion.setStyle(styleBoutons));
 		bPbConnexion.setTranslateX(540);
-
+		//auteur florian 
 		VBox vbCenter = new VBox();
 		vbCenter.setAlignment(Pos.CENTER);
 		vbCenter.setSpacing(10);
@@ -249,7 +252,7 @@ public class ConfigPartiePane extends StackPane implements IConfigListener, ITra
 
 	/**
 	 * Lance la procédure pour rejoindre une partie
-	 * 
+	 * @author Sebastien
 	 * @param id l'identifiant de la partie
 	 */
 	@Override
@@ -264,6 +267,7 @@ public class ConfigPartiePane extends StackPane implements IConfigListener, ITra
 
 	/**
 	 * Change l'affichage a l'attente
+	 * @author Sebastien
 	 */
 	@Override
 	public void partieValider() {
@@ -277,7 +281,7 @@ public class ConfigPartiePane extends StackPane implements IConfigListener, ITra
 
 	/**
 	 * Met a jour les parties sur l'affichage
-	 * 
+	 * @author Sebastien
 	 * @param partieInfo la liste des partie
 	 */
 	@Override

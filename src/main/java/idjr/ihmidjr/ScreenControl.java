@@ -10,6 +10,12 @@ import javafx.util.Duration;
 
 import java.util.HashMap;
 
+/**
+ * 
+ * @author florian 
+ * @author sebastien 
+ *
+ */
 public class ScreenControl implements EventHandler<MouseEvent> {
 
 	private final Core core;
@@ -19,7 +25,7 @@ public class ScreenControl implements EventHandler<MouseEvent> {
 
 	/**
 	 * crée le controleur de dialogue de l'application
-	 *
+	 * 
 	 * @param i : l'interface principale de l'application
 	 */
 	public ScreenControl(InterfacePrincipale i, Core core) {
@@ -75,6 +81,12 @@ public class ScreenControl implements EventHandler<MouseEvent> {
 		// //Phase 2 : à décommenter quand on travaillera sur l'internationalisation
 	}
 
+	/**
+	 * @author Remy
+	 * modifie le sens d'un élément de l'interface
+	 * @param n objets dont il faut modifier l'angle 
+	 * @param sens sens vers lequel la rotation doit se faire 
+	 */
 	public void rotatePane(Node n, String sens) {
 		double angle = n.getRotate();
 		switch (sens) {
@@ -107,7 +119,7 @@ public class ScreenControl implements EventHandler<MouseEvent> {
 	/**
 	 * Consomme les évènement souris qui ont lieu durant une animation pour
 	 * permettre à celle-ci d'avoir lieu sans problème.
-	 *
+	 * @author sebastien
 	 * @param event :un evènement souris
 	 */
 	@Override
