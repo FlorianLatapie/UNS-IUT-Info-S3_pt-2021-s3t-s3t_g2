@@ -120,7 +120,6 @@ public class TraitementIdjr {
 				destPossible.add(destPos);
 		if (core.getListeCarte().contains(CarteType.SPR)) {
 			// TODO choisir si utiliser carte sprint
-
 			Evenement.choisirUtiliserCarte(CarteType.SPR);
 			while (!core.utiliserCarteDisponible())
 				Thread.yield();

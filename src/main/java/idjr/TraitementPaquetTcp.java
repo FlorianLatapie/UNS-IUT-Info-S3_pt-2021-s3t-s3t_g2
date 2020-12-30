@@ -69,11 +69,11 @@ public class TraitementPaquetTcp extends TraitementPaquet<TcpClient> {
 			break;
 		case "PIIJ":
 			lancerDes(Paquet, message);// savoir comment return plusieur choses
-			logPIIJ(Paquet, message);
+			// logPIIJ(Paquet, message);
 			break;
 		case "PIRD":
 			choisirDestPion(Paquet, message);
-			logPIRD(Paquet, message);
+			// logPIRD(Paquet, message);
 			break;
 		case "PIIG":
 			logPIIG(Paquet, message);
@@ -134,7 +134,7 @@ public class TraitementPaquetTcp extends TraitementPaquet<TcpClient> {
 			break;
 		case "PVDV":
 			ChoisirQuiVoter(Paquet, message);
-			logPVDV(Paquet, message);
+			// logPVDV(Paquet, message);
 			break;
 		case "AZDCS":
 			ReponseJoueurCourant(Paquet, message);
@@ -142,7 +142,7 @@ public class TraitementPaquetTcp extends TraitementPaquet<TcpClient> {
 			break;
 		case "PVD":
 			IndiquerCarteJouees(Paquet, message);
-			logPVD(Paquet, message);
+			// logPVD(Paquet, message);
 			break;
 		case "FCRC":
 			recupCarte(Paquet, message);
@@ -158,7 +158,8 @@ public class TraitementPaquetTcp extends TraitementPaquet<TcpClient> {
 			break;
 		case "FCLC":
 			choixCarteFouille(Paquet, message);
-			logFCLC(Paquet, message);
+			logFCLC1(Paquet, message);
+			// logFCLC2(core.getResultatFouille());
 			break;
 		case "RFC":
 			logRFC(Paquet, message);
@@ -229,7 +230,7 @@ public class TraitementPaquetTcp extends TraitementPaquet<TcpClient> {
 		if (((Couleur) paquet.getValeur(message, 1)).equals(Couleur.NUL))
 			log = International.trad("texte.logPVR1");
 		else
-			log = International.trad("texte.logPVR2") + ((Couleur) paquet.getValeur(message, 1)).toString() + ".";
+			log = International.trad("texte.logPVR2") + " " + ((Couleur) paquet.getValeur(message, 1)).toString() + ".";
 		Evenement.log(log);
 
 	}
@@ -320,8 +321,8 @@ public class TraitementPaquetTcp extends TraitementPaquet<TcpClient> {
 	}
 
 	private void logIPV(Paquet paquet, String message) {
-		String log = " " + International.trad("texte.logIPV1") + ((VoteType) paquet.getValeur(message, 1)).toString()
-				+ " " + International.trad("texte.logIPV2");
+		String log = " " + International.trad("texte.logIPV1") + " ("
+				+ ((VoteType) paquet.getValeur(message, 1)).toString() + ") " + International.trad("texte.logIPV2");
 		Evenement.log(log);
 	}
 
@@ -340,13 +341,16 @@ public class TraitementPaquetTcp extends TraitementPaquet<TcpClient> {
 	}
 
 	private void logPECV(Paquet paquet, String message) {
-		String log = " " + International.trad("texte.logPECV1") + "\n " + International.trad("texte.logPECV2") + "\n ";
-		List<Couleur> couleur = new ArrayList<>();
-		for (PionCouleur pc : (List<PionCouleur>) paquet.getValeur(message, 1))
-			if (!couleur.contains(IdjrTools.getCouleurByChar(pc)))
-				couleur.add(IdjrTools.getCouleurByChar(pc));
-		for (Couleur c : couleur)
-			log += core.getListeJoueursInitiale().get(c) + "\n ";
+		String log = " " + International.trad("texte.logPECV1");
+		/*
+		 * + "\n " + International.trad("texte.logPECV2") + "\n ";
+		 * 
+		 * List<Couleur> couleur = new ArrayList<>(); for (PionCouleur pc :
+		 * (List<PionCouleur>) paquet.getValeur(message, 1)) if
+		 * (!couleur.contains(IdjrTools.getCouleurByChar(pc)))
+		 * couleur.add(IdjrTools.getCouleurByChar(pc)); for (Couleur c : couleur) log +=
+		 * core.getListeJoueursInitiale().get(c) + "\n ";
+		 */
 		Evenement.log(log);
 
 	}
@@ -359,7 +363,7 @@ public class TraitementPaquetTcp extends TraitementPaquet<TcpClient> {
 		else
 			log += International.trad("texte.logRFC3") + "\n ";
 		if (!((Couleur) paquet.getValeur(message, 2)).equals(Couleur.NUL))
-			log += International.trad("texte.logLejoueur") + " " + ((Couleur) paquet.getValeur(message, 1)).toString()
+			log += International.trad("texte.logLejoueur") + " " + ((Couleur) paquet.getValeur(message, 2)).toString()
 					+ " " + International.trad("texte.logRFC4") + "\n ";
 		else
 			log += International.trad("texte.logRFC5") + "\n ";
@@ -372,23 +376,49 @@ public class TraitementPaquetTcp extends TraitementPaquet<TcpClient> {
 
 	}
 
-	private void logFCLC(Paquet paquet, String message) {
+	private void logFCLC1(Paquet paquet, String message) {
 		List<CarteType> listeJC = (List<CarteType>) paquet.getValeur(message, 1);
 		String log = International.trad("texte.logFCLC1") + " ";
 		for (int i = 0; i < listeJC.size() - 1; i++)
 			log += listeJC.get(i).toString() + ", ";
 		log += listeJC.get(listeJC.size() - 1).toString();
-		log += " " + International.trad("texte.logFCLC2");
+//		log += " " + International.trad("texte.logFCLC2");
 		Evenement.log(log);
 
 	}
 
+	private void logFCLC2(List<Object> listeResultat) {
+		String log = "";
+		if (!((CarteType) listeResultat.get(0)).equals(CarteType.NUL))
+			log += International.trad("texte.logchoixCarteFouille1") + " "
+					+ ((CarteType) listeResultat.get(0)).toString() + ".";
+		else
+			log += International.trad("texte.logchoixCarteFouille2");
+		if (!((CarteType) listeResultat.get(1)).equals(CarteType.NUL))
+			log += International.trad("texte.logchoixCarteFouille3") + " "
+					+ ((CarteType) listeResultat.get(1)).toString() + " "
+					+ International.trad("texte.logchoixCarteFouille4") + " "
+					+ ((Couleur) listeResultat.get(3)).toString() + ".";
+		else
+			log += International.trad("texte.logchoixCarteFouille5");
+		if (!((CarteType) listeResultat.get(2)).equals(CarteType.NUL))
+			log += International.trad("texte.logchoixCarteFouille6") + " "
+					+ ((CarteType) listeResultat.get(2)).toString() + ".";
+		else
+			log += International.trad("texte.logchoixCarteFouille7");
+		Evenement.log(log);
+	}
+
 	private void logPFC(Paquet paquet, String message) {
-		String log = " " + International.trad("texte.logPFC1") + "\n " + International.trad("texte.logPFC2") + "\n ";
-		for (PionCouleur c : (List<PionCouleur>) paquet.getValeur(message, 1))
-			log += core.getListeJoueursInitiale().get(IdjrTools.getCouleurByChar(c)) + "\n ";
-		log += International.trad("texte.logPFC3") + " " + (Integer) paquet.getValeur(message, 2) + " "
-				+ International.trad("texte.logPFC4");
+		String log = " " + International.trad("texte.logPFC1");
+		/*
+		 * + "\n " + International.trad("texte.logPFC2") + "\n ";
+		 *
+		 * for (PionCouleur c : (List<PionCouleur>) paquet.getValeur(message, 1)) log +=
+		 * core.getListeJoueursInitiale().get(IdjrTools.getCouleurByChar(c)) + "\n ";
+		 * log += International.trad("texte.logPFC3") + " " + (Integer)
+		 * paquet.getValeur(message, 2) + " " + International.trad("texte.logPFC4");
+		 */
 		Evenement.log(log);
 
 	}
@@ -696,28 +726,10 @@ public class TraitementPaquetTcp extends TraitementPaquet<TcpClient> {
 	}
 
 	private void choixCarteFouille(Paquet Paquet, String message) {
-		List<Object> listeResultat = traitementI.carteFouille((List<CarteType>) Paquet.getValeur(message, 1), core);
-		String log = "";
-		if (!((CarteType) listeResultat.get(0)).equals(CarteType.NUL))
-			log += International.trad("texte.logchoixCarteFouille1") + " "
-					+ ((CarteType) listeResultat.get(0)).toString() + ".";
-		else
-			log += International.trad("texte.logchoixCarteFouille2");
-		if (!((CarteType) listeResultat.get(1)).equals(CarteType.NUL))
-			log += International.trad("texte.logchoixCarteFouille3") + " "
-					+ ((CarteType) listeResultat.get(1)).toString() + " "
-					+ International.trad("texte.logchoixCarteFouille4") + " "
-					+ ((Couleur) listeResultat.get(3)).toString() + ".";
-		else
-			log += International.trad("texte.logchoixCarteFouille5");
-		if (!((CarteType) listeResultat.get(2)).equals(CarteType.NUL))
-			log += International.trad("texte.logchoixCarteFouille6") + " "
-					+ ((CarteType) listeResultat.get(2)).toString() + ".";
-		else
-			log += International.trad("texte.logchoixCarteFouille7");
-		Evenement.log(log);
-		ControleurReseau.envoyerTcp(ControleurReseau.construirePaquetTcp("SCFC", (CarteType) listeResultat.get(0),
-				(CarteType) listeResultat.get(1), (Couleur) listeResultat.get(3), (CarteType) listeResultat.get(2),
+		core.setResultatFouille(traitementI.carteFouille((List<CarteType>) Paquet.getValeur(message, 1), core));
+		ControleurReseau.envoyerTcp(ControleurReseau.construirePaquetTcp("SCFC",
+				(CarteType) core.getResultatFouille().get(0), (CarteType) core.getResultatFouille().get(1),
+				(Couleur) core.getResultatFouille().get(3), (CarteType) core.getResultatFouille().get(2),
 				(String) Paquet.getValeur(message, 2), Paquet.getValeur(message, 3), core.getJoueurId()));
 
 	}
