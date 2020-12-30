@@ -29,18 +29,21 @@ import javafx.scene.text.TextAlignment;
  * The Class AccueilPane.
  * 
  * @author Florian
+ * @author Remy 
+ * @author Sebastien 
+ * @author Tom 
+ * 
  * @version 0.1
  * @since 01/11/2020
  */
 public class FinDePartiePane extends StackPane implements IFinListener, ITraduction {
-
+	//auteur florian 
 	private ScreenControl sControl = null;
 	private Core core = null;
 	private final ApplicationPane paneName = ApplicationPane.ENDGAME;
 	private int tailleCarreCentral = 800;
 	private int hBouton = 75;
 	private int lBouton = 150;
-	private int marge = tailleCarreCentral / 25;
 	private Font policeBouton = Font.font("Segoe UI", FontWeight.BOLD, 27);
 	private CornerRadii coin = new CornerRadii(15.0);
 	private String styleBoutons = " -fx-background-color:#000000; -fx-background-radius: 15px; -fx-text-fill: #ffffff";
@@ -48,8 +51,6 @@ public class FinDePartiePane extends StackPane implements IFinListener, ITraduct
 	private StackPane stackPane = new StackPane();
 	private GaussianBlur flou = new GaussianBlur(30);
 	private Font policeNom = Font.font("Segoe UI", FontWeight.BOLD, 35);
-	private CornerRadii coinfb = new CornerRadii(10.0);
-	private Background fondBlanc = new Background(new BackgroundFill(Color.WHITE, coinfb, null));
 	private String styleVBox = "-fx-border-color: #1A1A1A; -fx-border-insets: 5; -fx-border-width: 3;";
 	private Font policeScoreBoard = Font.font("Segoe UI", FontWeight.BOLD, 20);
 
@@ -88,6 +89,7 @@ public class FinDePartiePane extends StackPane implements IFinListener, ITraduct
 	Button bRetour;
 
 	public FinDePartiePane(ScreenControl sc, Core c) {
+		//auteur florian
 		core = c;
 		sControl = sc;
 		stackPane.setAlignment(Pos.CENTER);
@@ -109,7 +111,7 @@ public class FinDePartiePane extends StackPane implements IFinListener, ITraduct
 		desc.setTextFill(Color.WHITE);
 		desc.setFont(policeNom);
 		desc.setPadding(new Insets(20));
-
+		//auteur remy 
 		nomJoueur1 = new Label(International.trad("texte.j1"));
 		nomJoueur1.setAlignment(Pos.CENTER);
 		nomJoueur1.setFont(policeScoreBoard);
@@ -231,7 +233,7 @@ public class FinDePartiePane extends StackPane implements IFinListener, ITraduct
 		titreNbZbTues.setAlignment(Pos.CENTER);
 		titreNbZbTues.setFont(policeScoreBoard);
 		titreNbZbTues.setTextFill(Color.RED);
-
+		
 		VBox vbCenter = new VBox();
 		vbCenter.setAlignment(Pos.CENTER);
 		vbCenter.setPrefHeight(500);
@@ -327,6 +329,7 @@ public class FinDePartiePane extends StackPane implements IFinListener, ITraduct
 
 		vbCenter.getChildren().addAll(desc, vbScoreBoard);
 
+		// auteur florian 
 		// bouton
 		bRetour = new Button(International.trad("bouton.retour"));
 		bRetour.setPrefSize(lBouton, hBouton);
@@ -379,7 +382,7 @@ public class FinDePartiePane extends StackPane implements IFinListener, ITraduct
 
 	/**
 	 * Affiche le gagnant
-	 * 
+	 * @author sebastien 
 	 * @param nom le nom du joueur
 	 */
 	@Override

@@ -35,18 +35,26 @@ import javafx.scene.text.TextAlignment;
 import reseau.type.CarteType;
 import reseau.type.Couleur;
 
+/**
+ * 
+ * @author Remy
+ * @author Sebastien
+ * @author Florian
+ * @author Tom
+ *
+ */
 public class JeuPane extends StackPane implements IJeuListener, ITraduction {
-
+	//auteur florian 
 	private ScreenControl sControl = null;
 	private Core core = null;
 	private int hBouton = 100;
 	private int lBouton = 200;
 	
 	private String nomPolice = "Segoe UI";
-	private Font policeBouton = Font.font("Segoe UI", FontWeight.BOLD, 33);
-	private Font policeLog = Font.font("Segoe UI", FontWeight.BOLD, 15);
-	private Font policeBoutonC = Font.font("Segoe UI", FontWeight.BOLD, 25);
-	private Font policeBoutonDe = Font.font("Segoe UI", FontWeight.BOLD, 40);
+	private Font policeBouton = Font.font(nomPolice, FontWeight.BOLD, 33);
+	private Font policeLog = Font.font(nomPolice, FontWeight.BOLD, 15);
+	private Font policeBoutonC = Font.font(nomPolice, FontWeight.BOLD, 25);
+	private Font policeBoutonDe = Font.font(nomPolice, FontWeight.BOLD, 40);
 	private String styleBoutons = " -fx-background-color:#000000; -fx-background-radius: 15px; -fx-text-fill: #ffffff";
 	private String styleBoutonsSouris = "-fx-background-color:#ff0000;  -fx-text-fill:#000000; -fx-background-radius: 15px;";
 	private StackPane stackPane = new StackPane();
@@ -59,12 +67,12 @@ public class JeuPane extends StackPane implements IJeuListener, ITraduction {
 	private int largBouton = 155;
 	private int hautBouton = 70;
 	private int lBoutonCamion = 180;
-	private int hBoutonDeck = 60;
 	private int tailleCarte = 180;
 	private int lBoutonCamion2 = 145;
 	private final ApplicationPane paneName = ApplicationPane.JEU;
+	
+	//auteur sebastien 
 	Pane lastPane;
-
 	Label phasePartie;
 
 	BorderPane info;
@@ -193,22 +201,23 @@ public class JeuPane extends StackPane implements IJeuListener, ITraduction {
 	int d2 = 0;
 
 	public JeuPane(ScreenControl sc, Core c) {
+		//auteur remy
 		core = c;
 		sControl = sc;
 		nomJoueur = new Label(International.trad("texte.nomJoueur"));
 		nomJoueur.setAlignment(Pos.CENTER);
 		nomJoueur.setTranslateY(-400);
-		nomJoueur.setFont(Font.font("Segoe UI", FontWeight.BOLD, 50));
+		nomJoueur.setFont(Font.font(nomPolice, FontWeight.BOLD, 50));
 		nomJoueur.setTextFill(Color.BLACK);
 
 		phasePartie = new Label(International.trad("texte.phase"));
 		phasePartie.setAlignment(Pos.CENTER);
 		phasePartie.setTranslateY(-325);
-		phasePartie.setFont(Font.font("Segoe UI", 50));
+		phasePartie.setFont(Font.font(nomPolice, 50));
 		phasePartie.setTextFill(Color.BLACK);
 
 		//////////////////////////////////////////
-		// TODO afficher une image dedans
+		
 		rectVigile = new Rectangle();
 		rectVigile.setTranslateX(793);
 		rectVigile.setTranslateY(150);
@@ -223,6 +232,7 @@ public class JeuPane extends StackPane implements IJeuListener, ITraduction {
 		rectVigile.setVisible(false);// TODO event pour l'afficher au bon moment
 
 		//////////////////////////////////////////
+		//auteur florian 
 		hbCartes = new HBox();
 		hbCartes.setAlignment(Pos.CENTER);
 		hbCartes.setTranslateY(340);
@@ -230,7 +240,6 @@ public class JeuPane extends StackPane implements IJeuListener, ITraduction {
 		hbCartes.setMinSize(1800, 250);
 		hbCartes.setMaxSize(1800, 250);
 		hbCartes.setStyle(styleVBox);
-		// hbCartes.setPadding(new Insets(0,10,0,10));
 		hbCartes.setSpacing(8);
 
 		carte1 = new VBox();
@@ -256,7 +265,7 @@ public class JeuPane extends StackPane implements IJeuListener, ITraduction {
 		imgDeCarte2.setFitHeight(tailleCarte);
 		imgDeCarte2.setFitWidth(tailleCarte);
 
-		bDeCarte2 = new Button(); // TODO Event
+		bDeCarte2 = new Button(); 
 		bDeCarte2.setAlignment(Pos.CENTER);
 		bDeCarte2.setPrefSize(tailleCarte, tailleCarte);
 		bDeCarte2.setMinSize(tailleCarte, tailleCarte);
@@ -271,7 +280,7 @@ public class JeuPane extends StackPane implements IJeuListener, ITraduction {
 		imgDeCarte3.setFitHeight(tailleCarte);
 		imgDeCarte3.setFitWidth(tailleCarte);
 
-		bDeCarte3 = new Button(); // TODO Event
+		bDeCarte3 = new Button(); 
 		bDeCarte3.setAlignment(Pos.CENTER);
 		bDeCarte3.setPrefSize(tailleCarte, tailleCarte);
 		bDeCarte3.setMinSize(tailleCarte, tailleCarte);
@@ -287,7 +296,7 @@ public class JeuPane extends StackPane implements IJeuListener, ITraduction {
 		imgDeCarte4.setFitHeight(tailleCarte);
 		imgDeCarte4.setFitWidth(tailleCarte);
 
-		bDeCarte4 = new Button(); // TODO Event
+		bDeCarte4 = new Button();
 		bDeCarte4.setAlignment(Pos.CENTER);
 		bDeCarte4.setPrefSize(tailleCarte, tailleCarte);
 		bDeCarte4.setMinSize(tailleCarte, tailleCarte);
@@ -303,7 +312,7 @@ public class JeuPane extends StackPane implements IJeuListener, ITraduction {
 		imgDeCarte5.setFitHeight(tailleCarte);
 		imgDeCarte5.setFitWidth(tailleCarte);
 
-		bDeCarte5 = new Button(); // TODO Event
+		bDeCarte5 = new Button(); 
 		bDeCarte5.setAlignment(Pos.CENTER);
 		bDeCarte5.setPrefSize(tailleCarte, tailleCarte);
 		bDeCarte5.setMinSize(tailleCarte, tailleCarte);
@@ -318,7 +327,7 @@ public class JeuPane extends StackPane implements IJeuListener, ITraduction {
 		imgDeCarte6.setFitHeight(tailleCarte);
 		imgDeCarte6.setFitWidth(tailleCarte);
 
-		bDeCarte6 = new Button(); // TODO Event
+		bDeCarte6 = new Button();
 		bDeCarte6.setAlignment(Pos.CENTER);
 		bDeCarte6.setStyle(styleBoutons);
 		bDeCarte6.setPrefSize(tailleCarte, tailleCarte);
@@ -369,7 +378,7 @@ public class JeuPane extends StackPane implements IJeuListener, ITraduction {
 		cartePrecedente.setOnMouseExited(event -> {
 			cartePrecedente.setStyle(styleBoutons);
 		});
-
+		// auteur florian 
 		carteSuivante = new Button(">");
 		carteSuivante.setStyle(styleBoutons);
 		carteSuivante.setPrefSize(58, tailleCarte);
@@ -406,7 +415,7 @@ public class JeuPane extends StackPane implements IJeuListener, ITraduction {
 				carteSuivante, passerCarte);
 
 		//////////////////////////////////////////
-
+		//auteur remy 
 		vote = new BorderPane();
 		vote.setPrefSize(756, 376);
 		vote.setMinSize(756, 376);
@@ -498,12 +507,12 @@ public class JeuPane extends StackPane implements IJeuListener, ITraduction {
 
 		Label titreVote = new Label("Vote");
 		titreVote.setAlignment(Pos.CENTER);
-		titreVote.setFont(Font.font("Segoe UI", FontWeight.BOLD, 25));
+		titreVote.setFont(Font.font(nomPolice, FontWeight.BOLD, 25));
 		titreVote.setTextFill(Color.WHITE);
 
 		titreQuestion = new Label(International.trad("texte.qVote"));
 		titreQuestion.setAlignment(Pos.CENTER);
-		titreQuestion.setFont(Font.font("Segoe UI", FontWeight.BOLD, 25));
+		titreQuestion.setFont(Font.font(nomPolice, FontWeight.BOLD, 25));
 		titreQuestion.setTextFill(Color.WHITE);
 
 		VBox vbTitre = new VBox();
@@ -514,10 +523,8 @@ public class JeuPane extends StackPane implements IJeuListener, ITraduction {
 
 		vote.setTop(vbTitre);
 		vote.setCenter(vbVoteCentre);
-		// vote.setDisable(false);
-		// vote.setVisible(false);
 
-		///
+		//auteur florian 
 		fouilleCamion = new BorderPane();
 		fouilleCamion.setPrefSize(850, 550);
 		fouilleCamion.setMinSize(850, 550);
@@ -546,8 +553,6 @@ public class JeuPane extends StackPane implements IJeuListener, ITraduction {
 		hboxImgCarte.setMinSize(780, 255);
 		hboxImgCarte.setMaxSize(780, 255);
 		hboxImgCarte.setSpacing(10);
-		// hboxImgCarte.setStyle("-fx-border-color: red; -fx-border-insets: 5;
-		// -fx-border-width: 3;");
 
 		HBox hboxBoutonCarte = new HBox();
 		hboxBoutonCarte.setAlignment(Pos.CENTER);
@@ -751,12 +756,12 @@ public class JeuPane extends StackPane implements IJeuListener, ITraduction {
 
 		titreFouille = new Label(International.trad("text.fouilleCamion"));
 		titreFouille.setAlignment(Pos.CENTER);
-		titreFouille.setFont(Font.font("Segoe UI", FontWeight.BOLD, 25));
+		titreFouille.setFont(Font.font(nomPolice, FontWeight.BOLD, 25));
 		titreFouille.setTextFill(Color.WHITE);
 
 		titreQuestionCarte = new Label(International.trad("texte.qCarte"));
 		titreQuestionCarte.setAlignment(Pos.CENTER);
-		titreQuestionCarte.setFont(Font.font("Segoe UI", FontWeight.BOLD, 25));
+		titreQuestionCarte.setFont(Font.font(nomPolice, FontWeight.BOLD, 25));
 		titreQuestionCarte.setTextFill(Color.WHITE);
 
 		VBox vbTitreCamion = new VBox();
@@ -767,8 +772,7 @@ public class JeuPane extends StackPane implements IJeuListener, ITraduction {
 		fouilleCamion.setTop(vbTitreCamion);
 		fouilleCamion.setCenter(vbChoixCarteCentre);
 
-		///
-
+		//auteur remy 
 		vbDeplCentre = new VBox();
 		vbDeplCentre.setAlignment(Pos.CENTER_LEFT);
 		vbDeplCentre.setTranslateX(-700);
@@ -791,7 +795,7 @@ public class JeuPane extends StackPane implements IJeuListener, ITraduction {
 
 		labDeplPers = new Label(International.trad("text.deplPersonnages"));
 		labDeplPers.setAlignment(Pos.TOP_CENTER);
-		labDeplPers.setFont(Font.font("Segoe UI", FontWeight.BOLD, 20));
+		labDeplPers.setFont(Font.font(nomPolice, FontWeight.BOLD, 20));
 		labDeplPers.setTextFill(Color.WHITE);
 
 		VBox vbPersonnage = new VBox();
@@ -813,7 +817,7 @@ public class JeuPane extends StackPane implements IJeuListener, ITraduction {
 		bBlonde.setStyle(styleBoutons);
 		bBlonde.setPrefSize(largBouton, hautBouton);
 		bBlonde.setMinSize(largBouton, hautBouton);
-		bBlonde.setFont(Font.font("Segoe UI", FontWeight.BOLD, 20));
+		bBlonde.setFont(Font.font(nomPolice, FontWeight.BOLD, 20));
 		bBlonde.setOnMouseEntered(event -> {
 			bBlonde.setStyle(styleBoutonsSouris);
 		});
@@ -826,7 +830,7 @@ public class JeuPane extends StackPane implements IJeuListener, ITraduction {
 		bBrute.setStyle(styleBoutons);
 		bBrute.setPrefSize(largBouton, hautBouton);
 		bBrute.setMinSize(largBouton, hautBouton);
-		bBrute.setFont(Font.font("Segoe UI", FontWeight.BOLD, 20));
+		bBrute.setFont(Font.font(nomPolice, FontWeight.BOLD, 20));
 		bBrute.setOnMouseEntered(event -> {
 			bBrute.setStyle(styleBoutonsSouris);
 		});
@@ -839,7 +843,7 @@ public class JeuPane extends StackPane implements IJeuListener, ITraduction {
 		bTruand.setStyle(styleBoutons);
 		bTruand.setPrefSize(largBouton, hautBouton);
 		bTruand.setMinSize(largBouton, hautBouton);
-		bTruand.setFont(Font.font("Segoe UI", FontWeight.BOLD, 20));
+		bTruand.setFont(Font.font(nomPolice, FontWeight.BOLD, 20));
 		bTruand.setOnMouseEntered(event -> {
 			bTruand.setStyle(styleBoutonsSouris);
 		});
@@ -852,7 +856,7 @@ public class JeuPane extends StackPane implements IJeuListener, ITraduction {
 		bFillette.setStyle(styleBoutons);
 		bFillette.setPrefSize(largBouton, hautBouton);
 		bFillette.setMinSize(largBouton, hautBouton);
-		bFillette.setFont(Font.font("Segoe UI", FontWeight.BOLD, 20));
+		bFillette.setFont(Font.font(nomPolice, FontWeight.BOLD, 20));
 		bFillette.setOnMouseEntered(event -> {
 			bFillette.setStyle(styleBoutonsSouris);
 		});
@@ -884,7 +888,7 @@ public class JeuPane extends StackPane implements IJeuListener, ITraduction {
 
 		labDeplLieux = new Label(International.trad("texte.destination"));
 		labDeplLieux.setAlignment(Pos.TOP_CENTER);
-		labDeplLieux.setFont(Font.font("Segoe UI", FontWeight.BOLD, 20));
+		labDeplLieux.setFont(Font.font(nomPolice, FontWeight.BOLD, 20));
 		labDeplLieux.setTextFill(Color.WHITE);
 
 		HBox hbLieux = new HBox();
@@ -907,7 +911,7 @@ public class JeuPane extends StackPane implements IJeuListener, ITraduction {
 		bToilettes.setStyle(styleBoutons);
 		bToilettes.setPrefSize(largBouton, hautBouton);
 		bToilettes.setMinSize(largBouton, hautBouton);
-		bToilettes.setFont(Font.font("Segoe UI", FontWeight.BOLD, 20));
+		bToilettes.setFont(Font.font(nomPolice, FontWeight.BOLD, 20));
 		bToilettes.setOnMouseEntered(event -> {
 			bToilettes.setStyle(styleBoutonsSouris);
 		});
@@ -920,7 +924,7 @@ public class JeuPane extends StackPane implements IJeuListener, ITraduction {
 		bCachou.setStyle(styleBoutons);
 		bCachou.setPrefSize(largBouton, hautBouton);
 		bCachou.setMinSize(largBouton, hautBouton);
-		bCachou.setFont(Font.font("Segoe UI", FontWeight.BOLD, 20));
+		bCachou.setFont(Font.font(nomPolice, FontWeight.BOLD, 20));
 		bCachou.setOnMouseEntered(event -> {
 			bCachou.setStyle(styleBoutonsSouris);
 		});
@@ -933,7 +937,7 @@ public class JeuPane extends StackPane implements IJeuListener, ITraduction {
 		bMegatoys.setStyle(styleBoutons);
 		bMegatoys.setPrefSize(largBouton, hautBouton);
 		bMegatoys.setMinSize(largBouton, hautBouton);
-		bMegatoys.setFont(Font.font("Segoe UI", FontWeight.BOLD, 20));
+		bMegatoys.setFont(Font.font(nomPolice, FontWeight.BOLD, 20));
 		bMegatoys.setOnMouseEntered(event -> {
 			bMegatoys.setStyle(styleBoutonsSouris);
 		});
@@ -946,7 +950,7 @@ public class JeuPane extends StackPane implements IJeuListener, ITraduction {
 		bParking.setStyle(styleBoutons);
 		bParking.setPrefSize(largBouton, hautBouton);
 		bParking.setMinSize(largBouton, hautBouton);
-		bParking.setFont(Font.font("Segoe UI", FontWeight.BOLD, 20));
+		bParking.setFont(Font.font(nomPolice, FontWeight.BOLD, 20));
 		bParking.setOnMouseEntered(event -> {
 			bParking.setStyle(styleBoutonsSouris);
 		});
@@ -960,7 +964,7 @@ public class JeuPane extends StackPane implements IJeuListener, ITraduction {
 		bPCSecu.setStyle(styleBoutons);
 		bPCSecu.setPrefSize(largBouton, hautBouton);
 		bPCSecu.setMinSize(largBouton, hautBouton);
-		bPCSecu.setFont(Font.font("Segoe UI", FontWeight.BOLD, 20));
+		bPCSecu.setFont(Font.font(nomPolice, FontWeight.BOLD, 20));
 		bPCSecu.setOnMouseEntered(event -> {
 			bPCSecu.setStyle(styleBoutonsSouris);
 		});
@@ -973,7 +977,7 @@ public class JeuPane extends StackPane implements IJeuListener, ITraduction {
 		bSuperMarche.setStyle(styleBoutons);
 		bSuperMarche.setPrefSize(largBouton, hautBouton);
 		bSuperMarche.setMinSize(largBouton, hautBouton);
-		bSuperMarche.setFont(Font.font("Segoe UI", FontWeight.BOLD, 20));
+		bSuperMarche.setFont(Font.font(nomPolice, FontWeight.BOLD, 20));
 		bSuperMarche.setOnMouseEntered(event -> {
 			bSuperMarche.setStyle(styleBoutonsSouris);
 		});
@@ -993,6 +997,7 @@ public class JeuPane extends StackPane implements IJeuListener, ITraduction {
 		vbDeplCentre.getChildren().addAll(vbDeplPers, vbDeplLieux);
 		vbDeplCentre.setDisable(false);
 
+		//auteur florian 
 		des = new VBox();
 		des.setTranslateX(790);
 		des.setTranslateY(-100);
@@ -1032,6 +1037,7 @@ public class JeuPane extends StackPane implements IJeuListener, ITraduction {
 		des.getChildren().addAll(de1, de2, titrede);
 		des.setDisable(false); // TODO ne pas oublier de le retier
 
+		//auteur remy 
 		info = new BorderPane();
 		info.setPrefSize(1000, 200);
 		info.setMaxSize(1000, 200);
@@ -1045,7 +1051,7 @@ public class JeuPane extends StackPane implements IJeuListener, ITraduction {
 		bQuitterInfo.setStyle(styleBoutons);
 		bQuitterInfo.setPrefSize(largBouton * .7, hautBouton * .7);
 		bQuitterInfo.setMinSize(largBouton * .7, hautBouton * .7);
-		bQuitterInfo.setFont(Font.font("Segoe UI", FontWeight.BOLD, 18));
+		bQuitterInfo.setFont(Font.font(nomPolice, FontWeight.BOLD, 18));
 		bQuitterInfo.setOnAction(event -> {
 			info.setVisible(false);
 		});
@@ -1060,14 +1066,14 @@ public class JeuPane extends StackPane implements IJeuListener, ITraduction {
 		vTitreInfo.setAlignment(Pos.CENTER);
 		vTitreInfo.setPadding(new Insets(20));
 		titreInfo = new Label("Information");
-		titreInfo.setFont(Font.font("Segoe UI", FontWeight.BOLD, 25));
+		titreInfo.setFont(Font.font(nomPolice, FontWeight.BOLD, 25));
 		titreInfo.setTextFill(Color.WHITE);
 		vTitreInfo.getChildren().addAll(titreInfo);
 
 		VBox vInfo = new VBox();
 		vInfo.setAlignment(Pos.CENTER);
 		lInfo = new Label(International.trad("texte.info"));
-		lInfo.setFont(Font.font("Segoe UI", FontWeight.BOLD, 20));
+		lInfo.setFont(Font.font(nomPolice, FontWeight.BOLD, 20));
 		lInfo.setTextFill(Color.WHITE);
 		vInfo.getChildren().addAll(lInfo);
 
@@ -1077,6 +1083,7 @@ public class JeuPane extends StackPane implements IJeuListener, ITraduction {
 		info.setBottom(bQuitterInfo);
 		info.setVisible(false);
 
+		//auteur florian 
 		imgFond = new ImageView(DataControl.BLEU);
 
 		fond = new HBox();
@@ -1086,7 +1093,7 @@ public class JeuPane extends StackPane implements IJeuListener, ITraduction {
 
 		Button bOption = new Button("| |");
 		bOption.setAlignment(Pos.CENTER);
-		bOption.setFont(Font.font("Segoe UI", FontWeight.BOLD, 30));
+		bOption.setFont(Font.font(nomPolice, FontWeight.BOLD, 30));
 		bOption.setStyle(styleBoutons);
 		bOption.setPrefSize(hautBouton, hautBouton);
 		bOption.setMinSize(hautBouton, hautBouton);
@@ -1115,7 +1122,7 @@ public class JeuPane extends StackPane implements IJeuListener, ITraduction {
 
 		bLog = new Button("LOG");
 		bLog.setAlignment(Pos.CENTER);
-		bLog.setFont(Font.font("Segoe UI", FontWeight.BOLD, 30));
+		bLog.setFont(Font.font(nomPolice, FontWeight.BOLD, 30));
 		bLog.setStyle(styleBoutons);
 		bLog.setPrefSize(largBouton, hautBouton);
 		bLog.setMinSize(largBouton, hautBouton);
@@ -1149,7 +1156,7 @@ public class JeuPane extends StackPane implements IJeuListener, ITraduction {
 
 		linfoZombie = new Label("Des zombies arriveront dans les lieux {0}, {1}, {2}, {3}"); // this is a placeholder do
 																								// not translate
-		linfoZombie.setFont(Font.font("Segoe UI", 20));
+		linfoZombie.setFont(Font.font(nomPolice, 20));
 		linfoZombie.setTextFill(Color.BLACK);
 
 		infoZombie.getChildren().addAll(linfoZombie);
@@ -1159,7 +1166,7 @@ public class JeuPane extends StackPane implements IJeuListener, ITraduction {
 		vbForce.setAlignment(Pos.TOP_RIGHT);
 
 		force = new Label("La force de l\'équipe \npour le *lieu* est de XX"); // TODO traduction à faire
-		force.setFont(Font.font("Segoe UI", FontWeight.BOLD, 23));
+		force.setFont(Font.font(nomPolice, FontWeight.BOLD, 23));
 		force.setTextAlignment(TextAlignment.CENTER);
 		force.setStyle(styleVBox);
 		force.setPadding(new Insets(20));
@@ -1169,7 +1176,7 @@ public class JeuPane extends StackPane implements IJeuListener, ITraduction {
 		bForce = new Button(International.trad("text.forceEquipeA") + "\n" + International.trad("text.forceEquipeB"));
 		bForce.setAlignment(Pos.CENTER);
 		bForce.setTextAlignment(TextAlignment.CENTER);
-		bForce.setFont(Font.font("Segoe UI", FontWeight.BOLD, 23));
+		bForce.setFont(Font.font(nomPolice, FontWeight.BOLD, 23));
 		bForce.setStyle(styleBoutons);
 		bForce.setPrefSize(largBouton, hautBouton + 10);
 		bForce.setMinSize(largBouton, hautBouton + 10);
@@ -1198,6 +1205,8 @@ public class JeuPane extends StackPane implements IJeuListener, ITraduction {
 		sControl.registerNode(paneName, this);
 		sControl.setPaneOnTop(paneName);
 
+		
+		//auteur sebastien 
 		bBlonde.setOnAction(EventHandler -> {
 			core.getIdjr().setPionChoisi(7);
 			core.getIdjr().pionChoisi(true);
@@ -1331,7 +1340,7 @@ public class JeuPane extends StackPane implements IJeuListener, ITraduction {
 
 	/**
 	 * Permet de choisir un pion
-	 * 
+	 * @author sebastien
 	 * @param list la liste des pions séléctionnable
 	 */
 	@Override
@@ -1364,7 +1373,7 @@ public class JeuPane extends StackPane implements IJeuListener, ITraduction {
 
 	/**
 	 * Petmet de choisir un lieu
-	 * 
+	 * @author sebastien
 	 * @param list la liste des lieux séléctionnable
 	 */
 	@Override
@@ -1403,7 +1412,7 @@ public class JeuPane extends StackPane implements IJeuListener, ITraduction {
 
 	/**
 	 * Affiche le resultat des dés
-	 * 
+	 * @author sebastien
 	 * @param list la liste des dés
 	 */
 	@Override
@@ -1427,6 +1436,7 @@ public class JeuPane extends StackPane implements IJeuListener, ITraduction {
 
 	/**
 	 * Met a jour son propre nom
+	 * @author sebastien
 	 */
 	@Override
 	public void nomJoueur(String nom) {
@@ -1439,7 +1449,8 @@ public class JeuPane extends StackPane implements IJeuListener, ITraduction {
 	}
 
 	/**
-	 * Affiche la phase
+	 * Affiche la phase du jeu
+	 * @author sebastien
 	 */
 	@Override
 	public void nomPhase(String nom) {
@@ -1453,7 +1464,7 @@ public class JeuPane extends StackPane implements IJeuListener, ITraduction {
 
 	/**
 	 * Affiche les lieux des 4 zombies
-	 * 
+	 * @author sebastien
 	 * @param list la liste des 4 lieux
 	 */
 	@Override
@@ -1471,6 +1482,7 @@ public class JeuPane extends StackPane implements IJeuListener, ITraduction {
 
 	/**
 	 * Passe a l'écran de fin
+	 * @author sebastien
 	 */
 	@Override
 	public void fin() {
@@ -1486,6 +1498,7 @@ public class JeuPane extends StackPane implements IJeuListener, ITraduction {
 
 	/**
 	 * Change l'image de fond selon la couleur du joueur
+	 * @author sebastien
 	 */
 	@Override
 	public void couleurJoueur(Couleur couleur) {
@@ -1520,6 +1533,7 @@ public class JeuPane extends StackPane implements IJeuListener, ITraduction {
 
 	/**
 	 * Affichage le sacrifice
+	 * @author sebastien
 	 */
 	@Override
 	public void sacrificeChange() {
@@ -1533,6 +1547,7 @@ public class JeuPane extends StackPane implements IJeuListener, ITraduction {
 
 	/**
 	 * Affiche le déplacement
+	 * @author sebastien
 	 */
 	@Override
 	public void deplacementChange() {
@@ -1546,7 +1561,7 @@ public class JeuPane extends StackPane implements IJeuListener, ITraduction {
 
 	/**
 	 * Permet d'afficher l'offre d'une carte a un joueur
-	 * 
+	 * @author sebastien
 	 * @param listeCouleurJoueurVivant la liste des joueurs viviant
 	 */
 	public void setCarteOfferte(List<Couleur> listeCouleurJoueurVivant) {
@@ -1574,6 +1589,7 @@ public class JeuPane extends StackPane implements IJeuListener, ITraduction {
 
 	/**
 	 * Permet de choisir une carte lors de la phase de la fouille du camion
+	 * @author sebastien
 	 */
 	@Override
 	public void choisirCarte(List<CarteType> listeCartes, List<Couleur> listeCouleurJoueurVivant, boolean garder,
@@ -1657,7 +1673,7 @@ public class JeuPane extends StackPane implements IJeuListener, ITraduction {
 
 	/**
 	 * Met a jour le nom des joueurs
-	 * 
+	 * @author sebastien
 	 * @param listeNomJoueur la liste des joueurs a afficher
 	 */
 	@Override
@@ -1674,6 +1690,7 @@ public class JeuPane extends StackPane implements IJeuListener, ITraduction {
 
 	/**
 	 * Remet a zero les cartes de la phase du fouille du camion
+	 * @author sebastien
 	 */
 	public void cartePanelReset() {
 		fond.setEffect(null);
@@ -1705,6 +1722,7 @@ public class JeuPane extends StackPane implements IJeuListener, ITraduction {
 
 	/*
 	 * Met a jour l'affichage des cartes
+	 * @author sebastien
 	 */
 	@Override
 	public void updateCarte() {
@@ -1735,6 +1753,7 @@ public class JeuPane extends StackPane implements IJeuListener, ITraduction {
 
 	/**
 	 * Remet a zero l'utilisation des cartes
+	 * @author sebastien
 	 */
 	public void resetUtiliserCarte() {
 		Button[] buttons = { bDeCarte1, bDeCarte2, bDeCarte3, bDeCarte4, bDeCarte5, bDeCarte6, bDeCarte7, bDeCarte8,
@@ -1753,6 +1772,7 @@ public class JeuPane extends StackPane implements IJeuListener, ITraduction {
 
 	/**
 	 * Remet a zero l'affichage des votes
+	 * @author sebastien
 	 */
 	public void resetVoteCarte() {
 		vote.setVisible(false);
@@ -1778,7 +1798,7 @@ public class JeuPane extends StackPane implements IJeuListener, ITraduction {
 
 	/**
 	 * Permet d'afficher les votes
-	 * 
+	 * @author sebastien
 	 * @param listeCouleurJoueur la liste des joueurs pour qui on peut voter
 	 */
 	@Override
@@ -1828,7 +1848,7 @@ public class JeuPane extends StackPane implements IJeuListener, ITraduction {
 
 	/**
 	 * Permet de choisir une carte parmi une carte
-	 * 
+	 * @author sebastien
 	 * @param carteType la cartes qui peut etre séléctionné
 	 */
 	@Override
@@ -1880,7 +1900,7 @@ public class JeuPane extends StackPane implements IJeuListener, ITraduction {
 
 	/**
 	 * Permet de choisir une carte parmi une liste
-	 * 
+	 * @author sebastien
 	 * @param carteTypes la liste des cartes qui peuvent etre séléctionné
 	 */
 	@Override
@@ -1932,7 +1952,7 @@ public class JeuPane extends StackPane implements IJeuListener, ITraduction {
 
 	/**
 	 * Permet de remettre a zero le bouton des cartes
-	 * 
+	 * @author sebastien
 	 * @param btn le bouton a reset
 	 */
 	public void resetSelection(Button btn) {
@@ -1947,6 +1967,7 @@ public class JeuPane extends StackPane implements IJeuListener, ITraduction {
 	/**
 	 * Permet de changer l'affichage du bouton des cartes selon les cartes
 	 * séléctionné
+	 * @author sebastien
 	 */
 	public void setContinue() {
 		if (estActif.contains(true)) {
@@ -1958,7 +1979,7 @@ public class JeuPane extends StackPane implements IJeuListener, ITraduction {
 
 	/**
 	 * Permet de choisir plusieurs carte parmi une liste
-	 * 
+	 * @author sebastien
 	 * @param carteTypes la liste des cartes qui peuvent etre séléctionné
 	 */
 	@Override
@@ -2007,7 +2028,8 @@ public class JeuPane extends StackPane implements IJeuListener, ITraduction {
 	}
 
 	/**
-	 * Permet d'obtenir le carte choisi sur l'affichage
+	 * Permet d'obtenir le carte choisie sur l'affichage
+	 * @author sebastien
 	 */
 	public List<CarteType> getList() {
 		List<CarteType> cartesResultaTypes = new ArrayList<>();
@@ -2022,6 +2044,7 @@ public class JeuPane extends StackPane implements IJeuListener, ITraduction {
 
 	/**
 	 * Affiche les logs
+	 * @author sebastien
 	 */
 	@Override
 	public void log(String action) {
@@ -2037,6 +2060,7 @@ public class JeuPane extends StackPane implements IJeuListener, ITraduction {
 
 	/**
 	 * Enleve l'affichage des dés
+	 * @author sebastien
 	 */
 	@Override
 	public void enleverDes() {
@@ -2049,15 +2073,16 @@ public class JeuPane extends StackPane implements IJeuListener, ITraduction {
 	}
 
 	/**
-	 * Affiche l'affichage des dés
+	 * Affiche les dés
+	 * @author sebastien
 	 */
 	public void afficherDes() {
 		des.setVisible(true);
 	}
 
 	/**
-	 * Permet d'attirer l'attention du joueur sur un pane
-	 * 
+	 * Permet d'attirer l'attention du joueur sur un pane en le faisant clignotter en blanc 
+	 * @author sebastien
 	 * @param pane le pane cible
 	 */
 	private void attirerAttention(Pane pane) {

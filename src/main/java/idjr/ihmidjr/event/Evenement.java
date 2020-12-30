@@ -7,6 +7,11 @@ import idjr.PartieInfo;
 import reseau.type.CarteType;
 import reseau.type.Couleur;
 
+/**
+ * 
+ * @author sebastien 
+ *
+ */
 public abstract class Evenement {
 	private static final List<IJeuListener> listenersjl = new ArrayList<>();
 	private static final List<IFinListener> listenersfl = new ArrayList<>();
@@ -165,7 +170,7 @@ public abstract class Evenement {
 			rl.rotation(angle);
 	}
 
-	public static void updatePleineEcran() {
+	public static void updatePleinEcran() {
 		for (IPleineEcranListener pel : listenerspel)
 			pel.updatePleineEcran();
 	}
