@@ -100,7 +100,7 @@ public class CouleurPane extends StackPane implements ICouleurListener, ITraduct
 
 	int[] ordre;
 	List<Joueur> joueurs;
-	List<String> couleursChoix;
+	List<Integer> couleursChoix;
 
 	Label titre1;
 	Label infoVigile;
@@ -151,9 +151,12 @@ public class CouleurPane extends StackPane implements ICouleurListener, ITraduct
 		couleur1.valueProperty().addListener(new ChangeListener<String>() {
 			@Override
 			public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
-				nom1.setStyle(IhmOutils.getCouleur(couleur1.getValue()));
+				if (couleur1.getValue() == null)
+					nom1.setStyle(styleNom);
+				else
+					nom1.setStyle(IhmOutils.getCouleur(couleur1.getSelectionModel().getSelectedIndex()));
 				if (ordre.length > 0)
-					couleursChoix.set(ordre[0], newValue);
+					couleursChoix.set(ordre[0], couleur1.getSelectionModel().getSelectedIndex());
 			}
 		});
 		monter1 = new Button(International.trad("bouton.monter"));
@@ -201,9 +204,12 @@ public class CouleurPane extends StackPane implements ICouleurListener, ITraduct
 
 			@Override
 			public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
-				nom2.setStyle(IhmOutils.getCouleur(couleur2.getValue()));
+				if (couleur2.getValue() == null)
+					nom2.setStyle(styleNom);
+				else
+					nom2.setStyle(IhmOutils.getCouleur(couleur2.getSelectionModel().getSelectedIndex()));
 				if (ordre.length > 1)
-					couleursChoix.set(ordre[1], newValue);
+					couleursChoix.set(ordre[1], couleur2.getSelectionModel().getSelectedIndex());
 			}
 		});
 		monter2 = new Button(International.trad("bouton.monter"));
@@ -254,9 +260,12 @@ public class CouleurPane extends StackPane implements ICouleurListener, ITraduct
 
 			@Override
 			public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
-				nom3.setStyle(IhmOutils.getCouleur(couleur3.getValue()));
+				if (couleur3.getValue() == null)
+					nom3.setStyle(styleNom);
+				else
+					nom3.setStyle(IhmOutils.getCouleur(couleur3.getSelectionModel().getSelectedIndex()));
 				if (ordre.length > 2)
-					couleursChoix.set(ordre[2], newValue);
+					couleursChoix.set(ordre[2], couleur3.getSelectionModel().getSelectedIndex());
 			}
 		});
 		monter3 = new Button(International.trad("bouton.monter"));
@@ -307,9 +316,12 @@ public class CouleurPane extends StackPane implements ICouleurListener, ITraduct
 
 			@Override
 			public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
-				nom4.setStyle(IhmOutils.getCouleur(couleur4.getValue()));
+				if (couleur4.getValue() == null)
+					nom4.setStyle(styleNom);
+				else
+					nom4.setStyle(IhmOutils.getCouleur(couleur4.getSelectionModel().getSelectedIndex()));
 				if (ordre.length > 3)
-					couleursChoix.set(ordre[3], newValue);
+					couleursChoix.set(ordre[3], couleur4.getSelectionModel().getSelectedIndex());
 			}
 		});
 		monter4 = new Button(International.trad("bouton.monter"));
@@ -360,9 +372,12 @@ public class CouleurPane extends StackPane implements ICouleurListener, ITraduct
 
 			@Override
 			public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
-				nom5.setStyle(IhmOutils.getCouleur(couleur5.getValue()));
+				if (couleur5.getValue() == null)
+					nom5.setStyle(styleNom);
+				else
+					nom5.setStyle(IhmOutils.getCouleur(couleur5.getSelectionModel().getSelectedIndex()));
 				if (ordre.length > 4)
-					couleursChoix.set(ordre[4], newValue);
+					couleursChoix.set(ordre[4], couleur5.getSelectionModel().getSelectedIndex());
 			}
 		});
 		monter5 = new Button(International.trad("bouton.monter"));
@@ -414,9 +429,12 @@ public class CouleurPane extends StackPane implements ICouleurListener, ITraduct
 
 			@Override
 			public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
-				nom6.setStyle(IhmOutils.getCouleur(couleur6.getValue()));
+				if (couleur6.getValue() == null)
+					nom6.setStyle(styleNom);
+				else
+					nom6.setStyle(IhmOutils.getCouleur(couleur6.getSelectionModel().getSelectedIndex()));
 				if (ordre.length > 5)
-					couleursChoix.set(ordre[5], newValue);
+					couleursChoix.set(ordre[5], couleur6.getSelectionModel().getSelectedIndex());
 			}
 		});
 		// auteur florian
@@ -547,7 +565,7 @@ public class CouleurPane extends StackPane implements ICouleurListener, ITraduct
 				ordre[i] = i;
 			couleursChoix = new ArrayList<>();
 			for (int i = 0; i < joueurs.size(); i++)
-				couleursChoix.add(combos.get(i).getValue());
+				couleursChoix.add(combos.get(i).getSelectionModel().getSelectedIndex());
 
 			buttons[joueurs.size() - 1].setDisable(true);
 
@@ -572,14 +590,6 @@ public class CouleurPane extends StackPane implements ICouleurListener, ITraduct
 	 * Met a jour l'ordre des couleurs et joueurs
 	 */
 	public void updateOrdre() {
-		List<ComboBox<String>> combos = new ArrayList<>();
-		combos.add(couleur1);
-		combos.add(couleur2);
-		combos.add(couleur3);
-		combos.add(couleur4);
-		combos.add(couleur5);
-		combos.add(couleur6);
-
 		nom1.setText(joueurs.size() >= 1 ? joueurs.get(ordre[0]).getNom() : "");
 		nom2.setText(joueurs.size() >= 2 ? joueurs.get(ordre[1]).getNom() : "");
 		nom3.setText(joueurs.size() >= 3 ? joueurs.get(ordre[2]).getNom() : "");
@@ -587,12 +597,12 @@ public class CouleurPane extends StackPane implements ICouleurListener, ITraduct
 		nom5.setText(joueurs.size() >= 5 ? joueurs.get(ordre[4]).getNom() : "");
 		nom6.setText(joueurs.size() >= 6 ? joueurs.get(ordre[5]).getNom() : "");
 
-		couleur1.setValue(joueurs.size() >= 1 ? couleursChoix.get(ordre[0]) : "");
-		couleur2.setValue(joueurs.size() >= 2 ? couleursChoix.get(ordre[1]) : "");
-		couleur3.setValue(joueurs.size() >= 3 ? couleursChoix.get(ordre[2]) : "");
-		couleur4.setValue(joueurs.size() >= 4 ? couleursChoix.get(ordre[3]) : "");
-		couleur5.setValue(joueurs.size() >= 5 ? couleursChoix.get(ordre[4]) : "");
-		couleur6.setValue(joueurs.size() >= 6 ? couleursChoix.get(ordre[5]) : "");
+		couleur1.setValue(joueurs.size() >= 1 ? IhmOutils.getCouleurTrad(couleursChoix.get(ordre[0])) : "");
+		couleur2.setValue(joueurs.size() >= 2 ? IhmOutils.getCouleurTrad(couleursChoix.get(ordre[1])) : "");
+		couleur3.setValue(joueurs.size() >= 3 ? IhmOutils.getCouleurTrad(couleursChoix.get(ordre[2])) : "");
+		couleur4.setValue(joueurs.size() >= 4 ? IhmOutils.getCouleurTrad(couleursChoix.get(ordre[3])) : "");
+		couleur5.setValue(joueurs.size() >= 5 ? IhmOutils.getCouleurTrad(couleursChoix.get(ordre[4])) : "");
+		couleur6.setValue(joueurs.size() >= 6 ? IhmOutils.getCouleurTrad(couleursChoix.get(ordre[5])) : "");
 	}
 
 	/**
@@ -664,6 +674,18 @@ public class CouleurPane extends StackPane implements ICouleurListener, ITraduct
 				descendre6.setText(International.trad("bouton.descendre"));
 				bJouer.setText(International.trad("bouton.jouer"));
 				bRetour.setText(International.trad("bouton.retour"));
+				couleur1.getItems().clear();
+				couleur2.getItems().clear();
+				couleur3.getItems().clear();
+				couleur4.getItems().clear();
+				couleur5.getItems().clear();
+				couleur6.getItems().clear();
+				couleur1.getItems().addAll(IhmOutils.getTradCombo());
+				couleur2.getItems().addAll(IhmOutils.getTradCombo());
+				couleur3.getItems().addAll(IhmOutils.getTradCombo());
+				couleur4.getItems().addAll(IhmOutils.getTradCombo());
+				couleur5.getItems().addAll(IhmOutils.getTradCombo());
+				couleur6.getItems().addAll(IhmOutils.getTradCombo());
 			}
 		});
 	}
