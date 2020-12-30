@@ -41,9 +41,11 @@ public class JeuPane extends StackPane implements IJeuListener, ITraduction {
 	private Core core = null;
 	private int hBouton = 100;
 	private int lBouton = 200;
+	
+	private String nomPolice = "Segoe UI";
 	private Font policeBouton = Font.font("Segoe UI", FontWeight.BOLD, 33);
 	private Font policeLog = Font.font("Segoe UI", FontWeight.BOLD, 15);
-	private Font policeBoutonC = Font.font("Segoe UI", FontWeight.BOLD, 28);
+	private Font policeBoutonC = Font.font("Segoe UI", FontWeight.BOLD, 25);
 	private Font policeBoutonDe = Font.font("Segoe UI", FontWeight.BOLD, 40);
 	private String styleBoutons = " -fx-background-color:#000000; -fx-background-radius: 15px; -fx-text-fill: #ffffff";
 	private String styleBoutonsSouris = "-fx-background-color:#ff0000;  -fx-text-fill:#000000; -fx-background-radius: 15px;";
