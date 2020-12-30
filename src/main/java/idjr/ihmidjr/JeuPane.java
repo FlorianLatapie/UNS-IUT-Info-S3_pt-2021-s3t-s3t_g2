@@ -41,9 +41,11 @@ public class JeuPane extends StackPane implements IJeuListener, ITraduction {
 	private Core core = null;
 	private int hBouton = 100;
 	private int lBouton = 200;
+	
+	private String nomPolice = "Segoe UI";
 	private Font policeBouton = Font.font("Segoe UI", FontWeight.BOLD, 33);
 	private Font policeLog = Font.font("Segoe UI", FontWeight.BOLD, 15);
-	private Font policeBoutonC = Font.font("Segoe UI", FontWeight.BOLD, 28);
+	private Font policeBoutonC = Font.font("Segoe UI", FontWeight.BOLD, 25);
 	private Font policeBoutonDe = Font.font("Segoe UI", FontWeight.BOLD, 40);
 	private String styleBoutons = " -fx-background-color:#000000; -fx-background-radius: 15px; -fx-text-fill: #ffffff";
 	private String styleBoutonsSouris = "-fx-background-color:#ff0000;  -fx-text-fill:#000000; -fx-background-radius: 15px;";
@@ -1800,7 +1802,7 @@ public class JeuPane extends StackPane implements IJeuListener, ITraduction {
 				for (int i = 0; i < buttons.length; i++) {
 					if (listeCouleurJoueur.size() > i) {
 						buttons[i].setDisable(false);
-						buttons[i].setStyle(IhmTools.color(listeCouleurJoueur.get(i)));
+						buttons[i].setStyle(IhmTools.color(listeCouleurJoueur.get(i))+" -fx-background-radius: 15px;");
 						int tmpi = i;
 						buttons[i].setOnMouseEntered(event -> {
 							buttons[tmpi].setStyle(styleBoutonsSouris);
@@ -1865,7 +1867,7 @@ public class JeuPane extends StackPane implements IJeuListener, ITraduction {
 				bPasserCarte.setDisable(false);
 				bPasserCarte.setOnAction(EventHandler -> {
 					core.getIdjr().setContinue(false);
-					choisirUtiliserCarte(selectedCarteChoi);
+					core.getIdjr().choisirUtiliserCarte(selectedCarteChoi);
 					core.getIdjr().utiliserCarteChoisi(true);
 					resetUtiliserCarte();
 					updateCarte();
