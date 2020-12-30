@@ -5,6 +5,7 @@ import idjr.ihmidjr.event.Evenement;
 import idjr.ihmidjr.langues.International;
 import javafx.application.Application;
 import javafx.application.Platform;
+import javafx.event.EventHandler;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
@@ -22,11 +23,16 @@ public class InterfacePrincipale extends Application {
 	@Override
 	public void start(Stage primaryStage) throws Exception {
 		primaryStage.getIcons().add(new Image(DataControl.ICONE));
-		primaryStage.setOnCloseRequest((e) -> {
-			boolean resultat = ConfirmationPane.afficher(International.trad("texte.confirmationTitre"),
-					International.trad("texte.confirmationL1") + "\n" + International.trad("texte.confirmationL2"));
-			if (resultat)
-				Platform.exit();
+		primaryStage.setOnCloseRequest(new EventHandler<WindowEvent>() {
+			@Override
+			public void handle(WindowEvent event) {
+				boolean resultat = ConfirmationPane.afficher(International.trad("texte.confirmationTitre"),
+						International.trad("texte.confirmationL1") + "\n" + International.trad("texte.confirmationL2"));
+				if (resultat)
+					Platform.exit();
+				else
+					event.consume();
+			}
 		});
 		sControl = new ScreenControl(this, core);
 		int largeur = 1920;
