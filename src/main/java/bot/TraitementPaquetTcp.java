@@ -389,6 +389,8 @@ public class TraitementPaquetTcp extends TraitementPaquet<TcpClient> {
 	}
 
 	private void traitementACP(Paquet paquet, String message) {
+		if (core.isConnected())
+			return;
 		System.out.println("Connexion a la partie acceptée");
 		core.setConnected(true);
 		core.setJoueurId((String) paquet.getValeur(message, 2));
