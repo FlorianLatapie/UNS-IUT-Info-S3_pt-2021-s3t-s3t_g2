@@ -147,6 +147,7 @@ public class JeuPane extends StackPane implements IJeuListener, ITraduction {
 
 	BorderPane fouilleCamion;
 	BorderPane vote;
+	VBox vbVoteCentre;
 
 	Button bLog;
 	ListView<Label> log;
@@ -412,7 +413,7 @@ public class JeuPane extends StackPane implements IJeuListener, ITraduction {
 		vote.setMaxSize(756, 376);
 		vote.setStyle(styleVBox);
 
-		VBox vbVoteCentre = new VBox();
+		vbVoteCentre = new VBox();
 		vbVoteCentre.setAlignment(Pos.CENTER);
 		vbVoteCentre.setStyle(styleVBox);
 
@@ -1786,6 +1787,7 @@ public class JeuPane extends StackPane implements IJeuListener, ITraduction {
 			@Override
 			public void run() {
 				attirerAttention(vote);
+				attirerAttention(vbVoteCentre);
 				vote.setVisible(true);
 				fond.setEffect(null);
 				rectVigile.setEffect(null);
