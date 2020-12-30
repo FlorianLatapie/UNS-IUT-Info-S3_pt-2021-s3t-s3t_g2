@@ -1,6 +1,8 @@
 package reseau.socket;
 
+import reseau.tool.OsOutils;
 import reseau.tool.PtOutils;
+import reseau.tool.ReseauOutils;
 import reseau.tool.ThreadOutils;
 
 import java.io.IOException;
@@ -35,7 +37,7 @@ public class UdpConnexion implements Runnable, IEchangeSocket, IControleSocket {
 	/**
 	 * Initialise le serveur UDP.
 	 *
-	 * @param ip               L'ip sur lequel le serveur demarre
+	 * @param ip L'ip sur lequel le serveur demarre
 	 * @exception UnknownHostException Si le cast de l'ip provoque une erreur
 	 */
 	public UdpConnexion(InetAddress ip) throws UnknownHostException {
@@ -56,9 +58,9 @@ public class UdpConnexion implements Runnable, IEchangeSocket, IControleSocket {
 		logger.log(Level.FINEST, "Ouverture multicast UDP");
 
 		multicastSocket = new MulticastSocket(MULTICAST_PORT);
-		multicastSocket.setInterface(monip);
+ 
 		multicastSocket.joinGroup(groupe);
-		System.out.println("[OK] " + InetAddress.getLocalHost());
+		System.out.println("[OK] " + ReseauOutils.getWindowsIp());
 		estLancer = true;
 
 		logger.log(Level.FINEST, "Multicast UDP ouvert");
@@ -122,11 +124,16 @@ public class UdpConnexion implements Runnable, IEchangeSocket, IControleSocket {
 		byte[] buffer = uftMessage.getBytes();
 		DatagramPacket packet = new DatagramPacket(buffer, buffer.length, groupe, MULTICAST_PORT);
 
-		try {
-			multicastSocket.send(packet);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+		ThreadOutils.asyncTask("fds", () -> {
+			while (multicastSocket == null)
+				;
+			
+			try {
+				multicastSocket.send(packet);
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		});
 	}
 
 	/**
