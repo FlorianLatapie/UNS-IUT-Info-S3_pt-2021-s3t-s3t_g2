@@ -49,6 +49,10 @@ public class ControleurFouilleCamion {
 			if (j != null) {
 				Evenement.quiJoue(j.getCouleur());
 				s = j + " (" + j.getCouleur() + ") fouille le camion";
+				Evenement.fouilleCamion(s);
+				while (!EvenementStockage.isPopupAccepter())
+					Thread.yield();
+				EvenementStockage.setPopupAccepter(false);
 				fr.envoyerCarte(jeu, j, partieId, numeroTour);
 				Evenement.nbCartePiocheActuel(jeu.getCartes().size());
 				List<Object> l = fr.choixCarte(jeu, j);
@@ -60,20 +64,30 @@ public class ControleurFouilleCamion {
 				fr.finFouilleCamion(jeu, j.getCouleur(), (Couleur) l.get(2), etatCarteDefausse((CarteType) l.get(3)),
 						partieId, numeroTour);
 				Evenement.suppQuiJoue();
-			}
-			if (s == "") {
+				if ((Couleur) l.get(2) != null) {
+					String s1 = jeu.getJoueurCouleur((Couleur)l.get(2)) + " (" + (Couleur)l.get(2) + ")" + " a reçu une carte.";
+				    Evenement.fouilleCamion(s1);
+					while (!EvenementStockage.isPopupAccepter())
+						Thread.yield();
+					EvenementStockage.setPopupAccepter(false);
+				}
+			} else {
 				s = "Personne fouille le Camion";
 				fr.finFouilleCamion(jeu, Couleur.NUL, Couleur.NUL, CarteEtat.NUL, partieId, numeroTour);
+				Evenement.fouilleCamion(s);
+				while (!EvenementStockage.isPopupAccepter())
+					Thread.yield();
+				EvenementStockage.setPopupAccepter(false);
 			}
+		} else {
+			s = "Personne fouille le Camion";
+			fr.finFouilleCamion(jeu, Couleur.NUL, Couleur.NUL, CarteEtat.NUL, partieId, numeroTour);
 			Evenement.fouilleCamion(s);
 			while (!EvenementStockage.isPopupAccepter())
 				Thread.yield();
 			EvenementStockage.setPopupAccepter(false);
 		}
-		if (s == "") {
-			s = "Personne fouille le Camion";
-			fr.finFouilleCamion(jeu, Couleur.NUL, Couleur.NUL, CarteEtat.NUL, partieId, numeroTour);
-		}
+
 	}
 
 	/**
