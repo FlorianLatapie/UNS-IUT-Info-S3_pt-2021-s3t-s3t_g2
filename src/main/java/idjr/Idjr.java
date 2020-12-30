@@ -51,6 +51,7 @@ public class Idjr {
 	private Couleur couleurChoisi;
 	private CarteType carteUtiliser;
 	private List<CarteType> cartesUtiliser;
+	private List<Object> resultatFouille;
 	private Couleur voteChoisi;
 	private boolean isContinue;
 	private String etat;
@@ -432,4 +433,14 @@ public class Idjr {
 	public void setContinue(boolean isContinue) {
 		this.isContinue = isContinue;
 	}
+
+	public List<Object> getResultatFouille() {
+		return resultatFouille;
+	}
+
+	public void setResultatFouille(List<Object> resultatFouille) {
+		this.resultatFouille = resultatFouille;
+	}
+	
+	
 }
