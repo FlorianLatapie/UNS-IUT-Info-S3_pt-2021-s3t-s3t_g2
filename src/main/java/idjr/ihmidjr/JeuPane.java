@@ -1800,7 +1800,7 @@ public class JeuPane extends StackPane implements IJeuListener, ITraduction {
 				for (int i = 0; i < buttons.length; i++) {
 					if (listeCouleurJoueur.size() > i) {
 						buttons[i].setDisable(false);
-						buttons[i].setStyle(IhmTools.color(listeCouleurJoueur.get(i)));
+						buttons[i].setStyle(IhmTools.color(listeCouleurJoueur.get(i))+" -fx-background-radius: 15px;");
 						int tmpi = i;
 						buttons[i].setOnMouseEntered(event -> {
 							buttons[tmpi].setStyle(styleBoutonsSouris);
