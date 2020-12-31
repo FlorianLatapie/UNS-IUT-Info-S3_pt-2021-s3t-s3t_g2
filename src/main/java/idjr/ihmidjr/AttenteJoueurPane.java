@@ -31,7 +31,6 @@ import javafx.scene.text.TextAlignment;
 public class AttenteJoueurPane extends StackPane implements IAttenteListener, ITraduction {
 	//auteur florian 
 	private ScreenControl sControl = null;
-	private Core core = null;
 	private final ApplicationPane paneName = ApplicationPane.WAIT;
 	private int tailleCarreCentral = 800;
 	private CornerRadii coin = new CornerRadii(15.0);
@@ -51,8 +50,7 @@ public class AttenteJoueurPane extends StackPane implements IAttenteListener, IT
 	Label desc;
 
 	public AttenteJoueurPane(ScreenControl sc, Core c) {
-		//auteur florian 
-		core = c;
+		// auteur florian 
 		sControl = sc;
 		stackPane.setAlignment(Pos.CENTER);
 
@@ -170,7 +168,6 @@ public class AttenteJoueurPane extends StackPane implements IAttenteListener, IT
 		sControl.setPaneOnTop(paneName);
 
 	}
-	
 
 	/**
 	 * @author Sebastien 

@@ -44,15 +44,19 @@ public class FinDePartiePane extends StackPane implements IFinListener, ITraduct
 	private int tailleCarreCentral = 800;
 	private int hBouton = 75;
 	private int lBouton = 150;
-	private Font policeBouton = Font.font("Segoe UI", FontWeight.BOLD, 27);
+	
+	private String nomPolice = "Segoe UI";
+	private Font policeBouton = Font.font(nomPolice, FontWeight.BOLD, 27);
+
 	private CornerRadii coin = new CornerRadii(15.0);
 	private String styleBoutons = " -fx-background-color:#000000; -fx-background-radius: 15px; -fx-text-fill: #ffffff";
 	private String styleBoutonsSouris = "-fx-background-color:#ff0000;  -fx-text-fill:#000000; -fx-background-radius: 15px;";
 	private StackPane stackPane = new StackPane();
 	private GaussianBlur flou = new GaussianBlur(30);
-	private Font policeNom = Font.font("Segoe UI", FontWeight.BOLD, 35);
+
+	private Font policeNom = Font.font(nomPolice, FontWeight.BOLD, 35);
 	private String styleVBox = "-fx-border-color: #1A1A1A; -fx-border-insets: 5; -fx-border-width: 3;";
-	private Font policeScoreBoard = Font.font("Segoe UI", FontWeight.BOLD, 20);
+	private Font policeScoreBoard = Font.font(nomPolice, FontWeight.BOLD, 20);
 
 	Label desc;
 	Label nomJoueur1;
@@ -97,7 +101,7 @@ public class FinDePartiePane extends StackPane implements IFinListener, ITraduct
 		// titre
 		titre1 = new Label(
 				International.trad("text.titreFinDePartieA") + " " + International.trad("text.titreFinDePartieB"));
-		titre1.setFont(Font.font("Segoe UI", FontWeight.BOLD, 80));
+		titre1.setFont(Font.font(nomPolice, FontWeight.BOLD, 80));
 		titre1.setTextFill(Color.BLACK);
 
 		VBox titre = new VBox(titre1);
@@ -336,12 +340,8 @@ public class FinDePartiePane extends StackPane implements IFinListener, ITraduct
 		bRetour.setMinSize(lBouton, hBouton);
 		bRetour.setFont(policeBouton);
 		bRetour.setStyle(styleBoutons);
-		bRetour.setOnMouseEntered(event -> {
-			bRetour.setStyle(styleBoutonsSouris);
-		});
-		bRetour.setOnMouseExited(event -> {
-			bRetour.setStyle(styleBoutons);
-		});
+		bRetour.setOnMouseEntered(event -> bRetour.setStyle(styleBoutonsSouris));
+		bRetour.setOnMouseExited(event -> bRetour.setStyle(styleBoutons));
 		bRetour.setOnAction(EventHandler -> sc.setPaneOnTop(core.getReglesDepuis()));
 
 		// grille contenant les boutons du bas
