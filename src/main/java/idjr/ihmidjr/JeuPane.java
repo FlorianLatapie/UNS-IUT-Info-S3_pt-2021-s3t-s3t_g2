@@ -17,7 +17,6 @@ import javafx.scene.control.ListView;
 import javafx.scene.effect.GaussianBlur;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.BorderPane;
@@ -222,7 +221,6 @@ public class JeuPane extends StackPane implements IJeuListener, ITraduction {
 		rectVigile.setTranslateX(793);
 		rectVigile.setTranslateY(150);
 		rectVigile.setFill(null);
-		// rectVigile.setStroke(Color.BLACK);
 		rectVigile.setStrokeWidth(3);
 		rectVigile.setWidth(100);
 		rectVigile.setHeight(80);
@@ -372,12 +370,8 @@ public class JeuPane extends StackPane implements IJeuListener, ITraduction {
 		cartePrecedente.setMinSize(58, tailleCarte);
 		cartePrecedente.setMaxSize(58, tailleCarte);
 		cartePrecedente.setFont(policeBoutonC);
-		cartePrecedente.setOnMouseEntered(event -> {
-			cartePrecedente.setStyle(styleBoutonsSouris);
-		});
-		cartePrecedente.setOnMouseExited(event -> {
-			cartePrecedente.setStyle(styleBoutons);
-		});
+		cartePrecedente.setOnMouseEntered(event -> cartePrecedente.setStyle(styleBoutonsSouris));
+		cartePrecedente.setOnMouseExited(event -> cartePrecedente.setStyle(styleBoutons));
 		// auteur florian 
 		carteSuivante = new Button(">");
 		carteSuivante.setStyle(styleBoutons);
@@ -385,12 +379,8 @@ public class JeuPane extends StackPane implements IJeuListener, ITraduction {
 		carteSuivante.setMinSize(58, tailleCarte);
 		carteSuivante.setMaxSize(58, tailleCarte);
 		carteSuivante.setFont(policeBoutonC);
-		carteSuivante.setOnMouseEntered(event -> {
-			carteSuivante.setStyle(styleBoutonsSouris);
-		});
-		carteSuivante.setOnMouseExited(event -> {
-			carteSuivante.setStyle(styleBoutons);
-		});
+		carteSuivante.setOnMouseEntered(event -> carteSuivante.setStyle(styleBoutonsSouris));
+		carteSuivante.setOnMouseExited(event -> carteSuivante.setStyle(styleBoutons));
 
 		passerCarte = new VBox();
 		passerCarte.setAlignment(Pos.CENTER);
@@ -402,12 +392,8 @@ public class JeuPane extends StackPane implements IJeuListener, ITraduction {
 		bPasserCarte.setPrefSize(140, 80);
 		bPasserCarte.setMinSize(140, 80);
 		bPasserCarte.setFont(policeBoutonC);
-		bPasserCarte.setOnMouseEntered(event -> {
-			bPasserCarte.setStyle(styleBoutonsSouris);
-		});
-		bPasserCarte.setOnMouseExited(event -> {
-			bPasserCarte.setStyle(styleBoutons);
-		});
+		bPasserCarte.setOnMouseEntered(event -> bPasserCarte.setStyle(styleBoutonsSouris));
+		bPasserCarte.setOnMouseExited(event -> bPasserCarte.setStyle(styleBoutons));
 
 		passerCarte.getChildren().addAll(bPasserCarte);
 
@@ -442,12 +428,8 @@ public class JeuPane extends StackPane implements IJeuListener, ITraduction {
 		joueur1.setPrefSize(lBouton, hBouton);
 		joueur1.setMinSize(lBouton, hBouton);
 		joueur1.setFont(policeBouton);
-		joueur1.setOnMouseEntered(event -> {
-			joueur1.setStyle(styleBoutonsSouris);
-		});
-		joueur1.setOnMouseExited(event -> {
-			joueur1.setStyle(styleBoutons);
-		});
+		joueur1.setOnMouseEntered(event -> joueur1.setStyle(styleBoutonsSouris));
+		joueur1.setOnMouseExited(event -> joueur1.setStyle(styleBoutons));
 
 		joueur2 = new Button(International.trad("texte.j2"));
 		joueur2.setAlignment(Pos.CENTER);
@@ -455,12 +437,8 @@ public class JeuPane extends StackPane implements IJeuListener, ITraduction {
 		joueur2.setPrefSize(lBouton, hBouton);
 		joueur2.setMinSize(lBouton, hBouton);
 		joueur2.setFont(policeBouton);
-		joueur2.setOnMouseEntered(event -> {
-			joueur2.setStyle(styleBoutonsSouris);
-		});
-		joueur2.setOnMouseExited(event -> {
-			joueur2.setStyle(styleBoutons);
-		});
+		joueur2.setOnMouseEntered(event -> joueur2.setStyle(styleBoutonsSouris));
+		joueur2.setOnMouseExited(event -> joueur2.setStyle(styleBoutons));
 
 		joueur3 = new Button(International.trad("texte.j3"));
 		joueur3.setAlignment(Pos.CENTER);
@@ -468,12 +446,8 @@ public class JeuPane extends StackPane implements IJeuListener, ITraduction {
 		joueur3.setPrefSize(lBouton, hBouton);
 		joueur3.setMinSize(lBouton, hBouton);
 		joueur3.setFont(policeBouton);
-		joueur3.setOnMouseEntered(event -> {
-			joueur3.setStyle(styleBoutonsSouris);
-		});
-		joueur3.setOnMouseExited(event -> {
-			joueur3.setStyle(styleBoutons);
-		});
+		joueur3.setOnMouseEntered(event -> joueur3.setStyle(styleBoutonsSouris));
+		joueur3.setOnMouseExited(event -> joueur3.setStyle(styleBoutons));
 
 		joueur4 = new Button(International.trad("texte.j4"));
 		joueur4.setAlignment(Pos.CENTER);
@@ -481,12 +455,8 @@ public class JeuPane extends StackPane implements IJeuListener, ITraduction {
 		joueur4.setPrefSize(lBouton, hBouton);
 		joueur4.setMinSize(lBouton, hBouton);
 		joueur4.setFont(policeBouton);
-		joueur4.setOnMouseEntered(event -> {
-			joueur4.setStyle(styleBoutonsSouris);
-		});
-		joueur4.setOnMouseExited(event -> {
-			joueur4.setStyle(styleBoutons);
-		});
+		joueur4.setOnMouseEntered(event -> joueur4.setStyle(styleBoutonsSouris));
+		joueur4.setOnMouseExited(event -> joueur4.setStyle(styleBoutons));
 
 		joueur5 = new Button(International.trad("texte.j5"));
 		joueur5.setAlignment(Pos.CENTER);
@@ -494,12 +464,8 @@ public class JeuPane extends StackPane implements IJeuListener, ITraduction {
 		joueur5.setPrefSize(lBouton, hBouton);
 		joueur5.setMinSize(lBouton, hBouton);
 		joueur5.setFont(policeBouton);
-		joueur5.setOnMouseEntered(event -> {
-			joueur5.setStyle(styleBoutonsSouris);
-		});
-		joueur5.setOnMouseExited(event -> {
-			joueur5.setStyle(styleBoutons);
-		});
+		joueur5.setOnMouseEntered(event -> joueur5.setStyle(styleBoutonsSouris));
+		joueur5.setOnMouseExited(event -> joueur5.setStyle(styleBoutons));
 		hbJoueurHaut.getChildren().addAll(joueur1, joueur2, joueur3);
 		hbJoueurBas.getChildren().addAll(joueur4, joueur5);
 
@@ -584,12 +550,8 @@ public class JeuPane extends StackPane implements IJeuListener, ITraduction {
 		bCarte1.setPrefSize(250, 60);
 		bCarte1.setMinSize(250, 60);
 		bCarte1.setFont(policeBoutonC);
-		bCarte1.setOnMouseEntered(event -> {
-			bCarte1.setStyle(styleBoutonsSouris);
-		});
-		bCarte1.setOnMouseExited(event -> {
-			bCarte1.setStyle(styleBoutons);
-		});
+		bCarte1.setOnMouseEntered(event -> bCarte1.setStyle(styleBoutonsSouris));
+		bCarte1.setOnMouseExited(event -> bCarte1.setStyle(styleBoutons));
 
 		bCarte2 = new Button(International.trad("texte.c2"));
 		bCarte2.setAlignment(Pos.CENTER);
@@ -597,12 +559,8 @@ public class JeuPane extends StackPane implements IJeuListener, ITraduction {
 		bCarte2.setPrefSize(250, 60);
 		bCarte2.setMinSize(250, 60);
 		bCarte2.setFont(policeBoutonC);
-		bCarte2.setOnMouseEntered(event -> {
-			bCarte2.setStyle(styleBoutonsSouris);
-		});
-		bCarte2.setOnMouseExited(event -> {
-			bCarte2.setStyle(styleBoutons);
-		});
+		bCarte2.setOnMouseEntered(event -> bCarte2.setStyle(styleBoutonsSouris));
+		bCarte2.setOnMouseExited(event -> bCarte2.setStyle(styleBoutons));
 
 		bCarte3 = new Button(International.trad("texte.c3"));
 		bCarte3.setAlignment(Pos.CENTER);
@@ -610,12 +568,8 @@ public class JeuPane extends StackPane implements IJeuListener, ITraduction {
 		bCarte3.setPrefSize(250, 60);
 		bCarte3.setMinSize(250, 60);
 		bCarte3.setFont(policeBoutonC);
-		bCarte3.setOnMouseEntered(event -> {
-			bCarte3.setStyle(styleBoutonsSouris);
-		});
-		bCarte3.setOnMouseExited(event -> {
-			bCarte3.setStyle(styleBoutons);
-		});
+		bCarte3.setOnMouseEntered(event -> bCarte3.setStyle(styleBoutonsSouris));
+		bCarte3.setOnMouseExited(event -> bCarte3.setStyle(styleBoutons));
 
 		hboxBoutonCarte.getChildren().addAll(bCarte1, bCarte2, bCarte3);
 		vbCarte.getChildren().addAll(hboxImgCarte, hboxBoutonCarte);
@@ -628,12 +582,8 @@ public class JeuPane extends StackPane implements IJeuListener, ITraduction {
 		bChoixGarder.setPrefSize(lBoutonCamion, hautBouton);
 		bChoixGarder.setMinSize(lBoutonCamion, hautBouton);
 		bChoixGarder.setFont(policeBoutonC);
-		bChoixGarder.setOnMouseEntered(event -> {
-			bChoixGarder.setStyle(styleBoutonsSouris);
-		});
-		bChoixGarder.setOnMouseExited(event -> {
-			bChoixGarder.setStyle(styleBoutons);
-		});
+		bChoixGarder.setOnMouseEntered(event -> bChoixGarder.setStyle(styleBoutonsSouris));
+		bChoixGarder.setOnMouseExited(event -> bChoixGarder.setStyle(styleBoutons));
 		bChoixGarder.setOnAction(EventHandler -> {
 			if (selectedCarteFouille != null) {
 				core.getIdjr().setCarteChoisi(selectedCarteFouille);
@@ -649,12 +599,8 @@ public class JeuPane extends StackPane implements IJeuListener, ITraduction {
 		bChoixDonner.setPrefSize(lBoutonCamion, hautBouton);
 		bChoixDonner.setMinSize(lBoutonCamion, hautBouton);
 		bChoixDonner.setFont(policeBoutonC);
-		bChoixDonner.setOnMouseEntered(event -> {
-			bChoixDonner.setStyle(styleBoutonsSouris);
-		});
-		bChoixDonner.setOnMouseExited(event -> {
-			bChoixDonner.setStyle(styleBoutons);
-		});
+		bChoixDonner.setOnMouseEntered(event -> bChoixDonner.setStyle(styleBoutonsSouris));
+		bChoixDonner.setOnMouseExited(event -> bChoixDonner.setStyle(styleBoutons));
 		bChoixDonner.setOnAction(EventHandler -> {
 			fouilleCamion.setPrefSize(850, 650);
 			fouilleCamion.setMinSize(850, 650);
@@ -669,12 +615,8 @@ public class JeuPane extends StackPane implements IJeuListener, ITraduction {
 		bChoixDefausser.setPrefSize(lBoutonCamion, hautBouton);
 		bChoixDefausser.setMinSize(lBoutonCamion, hautBouton);
 		bChoixDefausser.setFont(policeBoutonC);
-		bChoixDefausser.setOnMouseEntered(event -> {
-			bChoixDefausser.setStyle(styleBoutonsSouris);
-		});
-		bChoixDefausser.setOnMouseExited(event -> {
-			bChoixDefausser.setStyle(styleBoutons);
-		});
+		bChoixDefausser.setOnMouseEntered(event -> bChoixDefausser.setStyle(styleBoutonsSouris));
+		bChoixDefausser.setOnMouseExited(event -> bChoixDefausser.setStyle(styleBoutons));
 		bChoixDefausser.setOnAction(EventHandler -> {
 			if (selectedCarteFouille != null) {
 				core.getIdjr().setCarteChoisi(selectedCarteFouille);
@@ -692,12 +634,8 @@ public class JeuPane extends StackPane implements IJeuListener, ITraduction {
 		joueur1c.setPrefSize(lBoutonCamion2, hautBouton);
 		joueur1c.setMinSize(lBoutonCamion2, hautBouton);
 		joueur1c.setFont(policeBoutonC);
-		joueur1c.setOnMouseEntered(event -> {
-			joueur1c.setStyle(styleBoutonsSouris);
-		});
-		joueur1c.setOnMouseExited(event -> {
-			joueur1c.setStyle(styleBoutons);
-		});
+		joueur1c.setOnMouseEntered(event -> joueur1c.setStyle(styleBoutonsSouris));
+		joueur1c.setOnMouseExited(event -> joueur1c.setStyle(styleBoutons));
 
 		joueur2c = new Button(International.trad("texte.j2"));
 		joueur2c.setAlignment(Pos.CENTER);
@@ -705,12 +643,8 @@ public class JeuPane extends StackPane implements IJeuListener, ITraduction {
 		joueur2c.setPrefSize(lBoutonCamion2, hautBouton);
 		joueur2c.setMinSize(lBoutonCamion2, hautBouton);
 		joueur2c.setFont(policeBoutonC);
-		joueur2c.setOnMouseEntered(event -> {
-			joueur2c.setStyle(styleBoutonsSouris);
-		});
-		joueur2c.setOnMouseExited(event -> {
-			joueur2c.setStyle(styleBoutons);
-		});
+		joueur2c.setOnMouseEntered(event -> joueur2c.setStyle(styleBoutonsSouris));
+		joueur2c.setOnMouseExited(event -> joueur2c.setStyle(styleBoutons));
 
 		joueur3c = new Button(International.trad("texte.j3"));
 		joueur3c.setAlignment(Pos.CENTER);
@@ -718,12 +652,8 @@ public class JeuPane extends StackPane implements IJeuListener, ITraduction {
 		joueur3c.setPrefSize(lBoutonCamion2, hautBouton);
 		joueur3c.setMinSize(lBoutonCamion2, hautBouton);
 		joueur3c.setFont(policeBoutonC);
-		joueur3c.setOnMouseEntered(event -> {
-			joueur3c.setStyle(styleBoutonsSouris);
-		});
-		joueur3c.setOnMouseExited(event -> {
-			joueur3c.setStyle(styleBoutons);
-		});
+		joueur3c.setOnMouseEntered(event -> joueur3c.setStyle(styleBoutonsSouris));
+		joueur3c.setOnMouseExited(event -> joueur3c.setStyle(styleBoutons));
 
 		joueur4c = new Button(International.trad("texte.j4"));
 		joueur4c.setAlignment(Pos.CENTER);
@@ -731,12 +661,8 @@ public class JeuPane extends StackPane implements IJeuListener, ITraduction {
 		joueur4c.setPrefSize(lBoutonCamion2, hautBouton);
 		joueur4c.setMinSize(lBoutonCamion2, hautBouton);
 		joueur4c.setFont(policeBoutonC);
-		joueur4c.setOnMouseEntered(event -> {
-			joueur4c.setStyle(styleBoutonsSouris);
-		});
-		joueur4c.setOnMouseExited(event -> {
-			joueur4c.setStyle(styleBoutons);
-		});
+		joueur4c.setOnMouseEntered(event -> joueur4c.setStyle(styleBoutonsSouris));
+		joueur4c.setOnMouseExited(event -> joueur4c.setStyle(styleBoutons));
 
 		joueur5c = new Button(International.trad("texte.j5"));
 		joueur5c.setAlignment(Pos.CENTER);
@@ -744,12 +670,8 @@ public class JeuPane extends StackPane implements IJeuListener, ITraduction {
 		joueur5c.setPrefSize(lBoutonCamion2, hautBouton);
 		joueur5c.setMinSize(lBoutonCamion2, hautBouton);
 		joueur5c.setFont(policeBoutonC);
-		joueur5c.setOnMouseEntered(event -> {
-			joueur5c.setStyle(styleBoutonsSouris);
-		});
-		joueur5c.setOnMouseExited(event -> {
-			joueur5c.setStyle(styleBoutons);
-		});
+		joueur5c.setOnMouseEntered(event -> joueur5c.setStyle(styleBoutonsSouris));
+		joueur5c.setOnMouseExited(event -> joueur5c.setStyle(styleBoutons));
 		hboxBoutonJoueur.getChildren().addAll(joueur1c, joueur2c, joueur3c, joueur4c, joueur5c);
 		vbChoix.getChildren().addAll(hboxBoutonChoix, hboxBoutonJoueur);
 		vbChoixCarteCentre.getChildren().addAll(vbCarte, vbChoix);
@@ -818,12 +740,8 @@ public class JeuPane extends StackPane implements IJeuListener, ITraduction {
 		bBlonde.setPrefSize(largBouton, hautBouton);
 		bBlonde.setMinSize(largBouton, hautBouton);
 		bBlonde.setFont(Font.font(nomPolice, FontWeight.BOLD, 20));
-		bBlonde.setOnMouseEntered(event -> {
-			bBlonde.setStyle(styleBoutonsSouris);
-		});
-		bBlonde.setOnMouseExited(event -> {
-			bBlonde.setStyle(styleBoutons);
-		});
+		bBlonde.setOnMouseEntered(event -> bBlonde.setStyle(styleBoutonsSouris));
+		bBlonde.setOnMouseExited(event -> bBlonde.setStyle(styleBoutons));
 
 		bBrute = new Button(International.trad("bouton.laBrute"));
 		bBrute.setAlignment(Pos.CENTER);
@@ -831,12 +749,8 @@ public class JeuPane extends StackPane implements IJeuListener, ITraduction {
 		bBrute.setPrefSize(largBouton, hautBouton);
 		bBrute.setMinSize(largBouton, hautBouton);
 		bBrute.setFont(Font.font(nomPolice, FontWeight.BOLD, 20));
-		bBrute.setOnMouseEntered(event -> {
-			bBrute.setStyle(styleBoutonsSouris);
-		});
-		bBrute.setOnMouseExited(event -> {
-			bBrute.setStyle(styleBoutons);
-		});
+		bBrute.setOnMouseEntered(event -> bBrute.setStyle(styleBoutonsSouris));
+		bBrute.setOnMouseExited(event -> bBrute.setStyle(styleBoutons));
 
 		bTruand = new Button(International.trad("bouton.leTruand"));
 		bTruand.setAlignment(Pos.CENTER);
@@ -844,12 +758,8 @@ public class JeuPane extends StackPane implements IJeuListener, ITraduction {
 		bTruand.setPrefSize(largBouton, hautBouton);
 		bTruand.setMinSize(largBouton, hautBouton);
 		bTruand.setFont(Font.font(nomPolice, FontWeight.BOLD, 20));
-		bTruand.setOnMouseEntered(event -> {
-			bTruand.setStyle(styleBoutonsSouris);
-		});
-		bTruand.setOnMouseExited(event -> {
-			bTruand.setStyle(styleBoutons);
-		});
+		bTruand.setOnMouseEntered(event -> bTruand.setStyle(styleBoutonsSouris));
+		bTruand.setOnMouseExited(event -> bTruand.setStyle(styleBoutons));
 
 		bFillette = new Button(International.trad("bouton.laFillette"));
 		bFillette.setAlignment(Pos.CENTER);
@@ -857,12 +767,8 @@ public class JeuPane extends StackPane implements IJeuListener, ITraduction {
 		bFillette.setPrefSize(largBouton, hautBouton);
 		bFillette.setMinSize(largBouton, hautBouton);
 		bFillette.setFont(Font.font(nomPolice, FontWeight.BOLD, 20));
-		bFillette.setOnMouseEntered(event -> {
-			bFillette.setStyle(styleBoutonsSouris);
-		});
-		bFillette.setOnMouseExited(event -> {
-			bFillette.setStyle(styleBoutons);
-		});
+		bFillette.setOnMouseEntered(event -> bFillette.setStyle(styleBoutonsSouris));
+		bFillette.setOnMouseExited(event -> bFillette.setStyle(styleBoutons));
 
 		hbHaut.getChildren().addAll(bBlonde, bBrute);
 		hbBas.getChildren().addAll(bTruand, bFillette);
@@ -912,12 +818,8 @@ public class JeuPane extends StackPane implements IJeuListener, ITraduction {
 		bToilettes.setPrefSize(largBouton, hautBouton);
 		bToilettes.setMinSize(largBouton, hautBouton);
 		bToilettes.setFont(Font.font(nomPolice, FontWeight.BOLD, 20));
-		bToilettes.setOnMouseEntered(event -> {
-			bToilettes.setStyle(styleBoutonsSouris);
-		});
-		bToilettes.setOnMouseExited(event -> {
-			bToilettes.setStyle(styleBoutons);
-		});
+		bToilettes.setOnMouseEntered(event -> bToilettes.setStyle(styleBoutonsSouris));
+		bToilettes.setOnMouseExited(event -> bToilettes.setStyle(styleBoutons));
 
 		bCachou = new Button(International.trad("texte.lieu2"));
 		bCachou.setAlignment(Pos.CENTER);
@@ -925,12 +827,8 @@ public class JeuPane extends StackPane implements IJeuListener, ITraduction {
 		bCachou.setPrefSize(largBouton, hautBouton);
 		bCachou.setMinSize(largBouton, hautBouton);
 		bCachou.setFont(Font.font(nomPolice, FontWeight.BOLD, 20));
-		bCachou.setOnMouseEntered(event -> {
-			bCachou.setStyle(styleBoutonsSouris);
-		});
-		bCachou.setOnMouseExited(event -> {
-			bCachou.setStyle(styleBoutons);
-		});
+		bCachou.setOnMouseEntered(event -> bCachou.setStyle(styleBoutonsSouris));
+		bCachou.setOnMouseExited(event -> bCachou.setStyle(styleBoutons));
 
 		bMegatoys = new Button(International.trad("texte.lieu3"));
 		bMegatoys.setAlignment(Pos.CENTER);
@@ -938,12 +836,8 @@ public class JeuPane extends StackPane implements IJeuListener, ITraduction {
 		bMegatoys.setPrefSize(largBouton, hautBouton);
 		bMegatoys.setMinSize(largBouton, hautBouton);
 		bMegatoys.setFont(Font.font(nomPolice, FontWeight.BOLD, 20));
-		bMegatoys.setOnMouseEntered(event -> {
-			bMegatoys.setStyle(styleBoutonsSouris);
-		});
-		bMegatoys.setOnMouseExited(event -> {
-			bMegatoys.setStyle(styleBoutons);
-		});
+		bMegatoys.setOnMouseEntered(event -> bMegatoys.setStyle(styleBoutonsSouris));
+		bMegatoys.setOnMouseExited(event -> bMegatoys.setStyle(styleBoutons));
 
 		bParking = new Button(International.trad("texte.lieu4"));
 		bParking.setAlignment(Pos.CENTER);
@@ -951,12 +845,8 @@ public class JeuPane extends StackPane implements IJeuListener, ITraduction {
 		bParking.setPrefSize(largBouton, hautBouton);
 		bParking.setMinSize(largBouton, hautBouton);
 		bParking.setFont(Font.font(nomPolice, FontWeight.BOLD, 20));
-		bParking.setOnMouseEntered(event -> {
-			bParking.setStyle(styleBoutonsSouris);
-		});
-		bParking.setOnMouseExited(event -> {
-			bParking.setStyle(styleBoutons);
-		});
+		bParking.setOnMouseEntered(event -> bParking.setStyle(styleBoutonsSouris));
+		bParking.setOnMouseExited(event -> bParking.setStyle(styleBoutons));
 
 		bPCSecu = new Button(International.trad("texte.lieu5") + "\n" + International.trad("texte.lieu5b"));
 		bPCSecu.setTextAlignment(TextAlignment.CENTER);
@@ -965,12 +855,8 @@ public class JeuPane extends StackPane implements IJeuListener, ITraduction {
 		bPCSecu.setPrefSize(largBouton, hautBouton);
 		bPCSecu.setMinSize(largBouton, hautBouton);
 		bPCSecu.setFont(Font.font(nomPolice, FontWeight.BOLD, 20));
-		bPCSecu.setOnMouseEntered(event -> {
-			bPCSecu.setStyle(styleBoutonsSouris);
-		});
-		bPCSecu.setOnMouseExited(event -> {
-			bPCSecu.setStyle(styleBoutons);
-		});
+		bPCSecu.setOnMouseEntered(event -> bPCSecu.setStyle(styleBoutonsSouris));
+		bPCSecu.setOnMouseExited(event -> bPCSecu.setStyle(styleBoutons));
 
 		bSuperMarche = new Button(International.trad("texte.lieu6"));
 		bSuperMarche.setAlignment(Pos.CENTER);
@@ -978,12 +864,8 @@ public class JeuPane extends StackPane implements IJeuListener, ITraduction {
 		bSuperMarche.setPrefSize(largBouton, hautBouton);
 		bSuperMarche.setMinSize(largBouton, hautBouton);
 		bSuperMarche.setFont(Font.font(nomPolice, FontWeight.BOLD, 20));
-		bSuperMarche.setOnMouseEntered(event -> {
-			bSuperMarche.setStyle(styleBoutonsSouris);
-		});
-		bSuperMarche.setOnMouseExited(event -> {
-			bSuperMarche.setStyle(styleBoutons);
-		});
+		bSuperMarche.setOnMouseEntered(event -> bSuperMarche.setStyle(styleBoutonsSouris));
+		bSuperMarche.setOnMouseExited(event -> bSuperMarche.setStyle(styleBoutons));
 
 		vbGauche.getChildren().addAll(bToilettes, bMegatoys, bPCSecu);
 		vbDroite.getChildren().addAll(bCachou, bParking, bSuperMarche);
@@ -1025,17 +907,13 @@ public class JeuPane extends StackPane implements IJeuListener, ITraduction {
 		titrede.setTextFill(Color.WHITE);
 		titrede.setFont(policeBoutonC);
 		titrede.setStyle(styleBoutons);
-		titrede.setOnMouseEntered(event -> {
-			titrede.setStyle(styleBoutonsSouris);
-		});
-		titrede.setOnMouseExited(event -> {
-			titrede.setStyle(styleBoutons);
-		});
+		titrede.setOnMouseEntered(event -> titrede.setStyle(styleBoutonsSouris));
+		titrede.setOnMouseExited(event -> titrede.setStyle(styleBoutons));
 
 		des.setPadding(new Insets(10));
 		des.setSpacing(10);
 		des.getChildren().addAll(de1, de2, titrede);
-		des.setDisable(false); // TODO ne pas oublier de le retier
+		des.setDisable(false);
 
 		//auteur remy 
 		info = new BorderPane();
@@ -1052,15 +930,9 @@ public class JeuPane extends StackPane implements IJeuListener, ITraduction {
 		bQuitterInfo.setPrefSize(largBouton * .7, hautBouton * .7);
 		bQuitterInfo.setMinSize(largBouton * .7, hautBouton * .7);
 		bQuitterInfo.setFont(Font.font(nomPolice, FontWeight.BOLD, 18));
-		bQuitterInfo.setOnAction(event -> {
-			info.setVisible(false);
-		});
-		bQuitterInfo.setOnMouseEntered(event -> {
-			bQuitterInfo.setStyle(styleBoutonsSouris);
-		});
-		bQuitterInfo.setOnMouseExited(event -> {
-			bQuitterInfo.setStyle(styleBoutons);
-		});
+		bQuitterInfo.setOnAction(event -> info.setVisible(false));
+		bQuitterInfo.setOnMouseEntered(event -> bQuitterInfo.setStyle(styleBoutonsSouris));
+		bQuitterInfo.setOnMouseExited(event -> bQuitterInfo.setStyle(styleBoutons));
 
 		VBox vTitreInfo = new VBox();
 		vTitreInfo.setAlignment(Pos.CENTER);
@@ -1101,12 +973,8 @@ public class JeuPane extends StackPane implements IJeuListener, ITraduction {
 			core.setPauseDepuis(paneName);
 			sc.setPaneOnTop(ApplicationPane.OPTION);
 		});
-		bOption.setOnMouseEntered(event -> {
-			bOption.setStyle(styleBoutonsSouris);
-		});
-		bOption.setOnMouseExited(event -> {
-			bOption.setStyle(styleBoutons);
-		});
+		bOption.setOnMouseEntered(event -> bOption.setStyle(styleBoutonsSouris));
+		bOption.setOnMouseExited(event -> bOption.setStyle(styleBoutons));
 		bOption.screenToLocal(900, 0);
 		bOption.setTranslateX(830);
 		bOption.setTranslateY(-430);
@@ -1132,12 +1000,8 @@ public class JeuPane extends StackPane implements IJeuListener, ITraduction {
 			else
 				log.setVisible(false);
 		});
-		bLog.setOnMouseEntered(event -> {
-			bLog.setStyle(styleBoutonsSouris);
-		});
-		bLog.setOnMouseExited(event -> {
-			bLog.setStyle(styleBoutons);
-		});
+		bLog.setOnMouseEntered(event -> bLog.setStyle(styleBoutonsSouris));
+		bLog.setOnMouseExited(event -> bLog.setStyle(styleBoutons));
 		bLog.setTranslateX(790);
 		bLog.setTranslateY(-305);
 
@@ -1178,20 +1042,16 @@ public class JeuPane extends StackPane implements IJeuListener, ITraduction {
 		bForce.setTextAlignment(TextAlignment.CENTER);
 		bForce.setFont(Font.font(nomPolice, FontWeight.BOLD, 23));
 		bForce.setStyle(styleBoutons);
-		bForce.setPrefSize(largBouton, hautBouton + 10);
-		bForce.setMinSize(largBouton, hautBouton + 10);
+		bForce.setPrefSize(largBouton, hautBouton + 10.0);
+		bForce.setMinSize(largBouton, hautBouton + 10.0);
 		bForce.setOnAction(event -> {
 			if (!force.isVisible())
 				force.setVisible(true);
 			else
 				force.setVisible(false);
 		});
-		bForce.setOnMouseEntered(event -> {
-			bForce.setStyle(styleBoutonsSouris);
-		});
-		bForce.setOnMouseExited(event -> {
-			bForce.setStyle(styleBoutons);
-		});
+		bForce.setOnMouseEntered(event -> bForce.setStyle(styleBoutonsSouris));
+		bForce.setOnMouseExited(event -> bForce.setStyle(styleBoutons));
 		vbForce.setTranslateX(-92);
 		vbForce.setTranslateY(240);
 		vbForce.getChildren().addAll(bForce, force);
@@ -1826,12 +1686,8 @@ public class JeuPane extends StackPane implements IJeuListener, ITraduction {
 						buttons[i].setDisable(false);
 						buttons[i].setStyle(IhmTools.color(listeCouleurJoueur.get(i))+" -fx-background-radius: 15px;");
 						int tmpi = i;
-						buttons[i].setOnMouseEntered(event -> {
-							buttons[tmpi].setStyle(styleBoutonsSouris);
-						});
-						buttons[i].setOnMouseExited(event -> {
-							buttons[tmpi].setStyle(IhmTools.color(listeCouleurJoueur.get(tmpi)));
-						});
+						buttons[i].setOnMouseEntered(event -> buttons[tmpi].setStyle(styleBoutonsSouris));
+						buttons[i].setOnMouseExited(event -> buttons[tmpi].setStyle(IhmTools.color(listeCouleurJoueur.get(tmpi))));
 						Couleur cible = listeCouleurJoueur.get(i);
 						buttons[i].setOnAction(EventHandler -> {
 							core.getIdjr().setVoteChoisi(cible);
@@ -1998,7 +1854,6 @@ public class JeuPane extends StackPane implements IJeuListener, ITraduction {
 						for (CarteType carteType2 : carteTypes) {
 							if (carteType2 == cartes.get(i)) {
 								buttons[i].setDisable(false);
-								CarteType type = cartes.get(i);
 								int tmp = i;
 								buttons[i].setOnAction(EventHandler -> {
 									estActif.set(tmp, !estActif.get(tmp));

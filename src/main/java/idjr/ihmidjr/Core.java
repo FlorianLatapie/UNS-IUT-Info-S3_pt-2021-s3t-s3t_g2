@@ -2,7 +2,6 @@ package idjr.ihmidjr;
 
 import idjr.Idjr;
 import idjr.ihmidjr.DataControl.ApplicationPane;
-import idjr.ihmidjr.event.Evenement;
 import idjr.ihmidjr.langues.International;
 import idjr.ihmidjr.langues.Langues;
 

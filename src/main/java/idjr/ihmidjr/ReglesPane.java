@@ -39,7 +39,6 @@ public class ReglesPane extends StackPane implements ITraduction {
 	private int tailleCarreCentral = 800;
 	private int hBouton = 75;
 	private int lBouton = 150;
-	private int marge = tailleCarreCentral / 25;
 	private Font policeBouton = Font.font("Segoe UI", FontWeight.BOLD, 27);
 	private CornerRadii coin = new CornerRadii(15.0);
 	private String styleBoutons = " -fx-background-color:#000000; -fx-background-radius: 15px; -fx-text-fill: #ffffff";
@@ -48,8 +47,7 @@ public class ReglesPane extends StackPane implements ITraduction {
 	private GaussianBlur flou = new GaussianBlur(30);
 
 	private Font policeNom = Font.font("Segoe UI", 17);
-	private CornerRadii coinfb = new CornerRadii(5.0);
-	private Background fondBlanc = new Background(new BackgroundFill(Color.WHITE, coinfb, null));
+
 
 	Label titre1;
 	Label desc1;
@@ -110,12 +108,8 @@ public class ReglesPane extends StackPane implements ITraduction {
 		bRetour.setMinSize(lBouton, hBouton);
 		bRetour.setFont(policeBouton);
 		bRetour.setStyle(styleBoutons);
-		bRetour.setOnMouseEntered(event -> {
-			bRetour.setStyle(styleBoutonsSouris);
-		});
-		bRetour.setOnMouseExited(event -> {
-			bRetour.setStyle(styleBoutons);
-		});
+		bRetour.setOnMouseEntered(event -> bRetour.setStyle(styleBoutonsSouris));
+		bRetour.setOnMouseExited(event -> bRetour.setStyle(styleBoutons));
 		bRetour.setOnAction(EventHandler -> sc.setPaneOnTop(core.getReglesDepuis()));
 
 		// grille contenant les boutons du bas

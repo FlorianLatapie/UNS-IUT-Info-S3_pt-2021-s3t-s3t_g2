@@ -45,8 +45,8 @@ public class InterfacePrincipale extends Application {
 		primaryStage.setTitle("IDJR - G2 - ZOMBIES la blonde la brute et le truand");
 		primaryStage.setMaxWidth(largeur);
 		primaryStage.setMaxHeight(hauteur);
-		primaryStage.setWidth(largeur - 100);
-		primaryStage.setHeight(hauteur - 100);
+		primaryStage.setWidth(largeur - 100.0);
+		primaryStage.setHeight(hauteur - 100.0);
 		primaryStage.setMinWidth(1800);
 		primaryStage.setMinHeight(960);
 

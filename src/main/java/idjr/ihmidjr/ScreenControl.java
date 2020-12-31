@@ -4,7 +4,6 @@ import idjr.ihmidjr.DataControl.ApplicationPane;
 import javafx.animation.RotateTransition;
 import javafx.event.EventHandler;
 import javafx.scene.Node;
-import javafx.scene.control.Labeled;
 import javafx.scene.input.MouseEvent;
 import javafx.util.Duration;
 
@@ -56,64 +55,6 @@ public class ScreenControl implements EventHandler<MouseEvent> {
 			primary.setOnTop(listNode.get(s));
 		}
 
-	}
-
-	/**
-	 * Informe le nf du theme selectionné et affiche l'information dans l'interface
-	 *
-	 * @param l : une référence vers le libéllé indiquand le theme
-	 */
-	public void setTheme(Labeled l) {
-		// mg.setTheme(DataControl.getTheme(l.getText()));
-		// ((OptionPane)listNode.get(ApplicationPane.OPTION)).setTheme(l);
-	}
-
-	/**
-	 * Informe le nf de la langue selectionnée et affiche l'information dans
-	 * l'interface
-	 *
-	 * @param l : une référence vers le libéllé indiquand la langue
-	 */
-	public void setLangue(Labeled l) {
-		// mg.setLangue(DataControl.getLangue(l.getText()));
-		// ((OptionPane)listNode.get(ApplicationPane.OPTION)).setLangue(l);
-		// I18N.setLocale(DataControl.getLocale(DataControl.getLangue(l.getText())));
-		// //Phase 2 : à décommenter quand on travaillera sur l'internationalisation
-	}
-
-	/**
-	 * @author Remy
-	 * modifie le sens d'un élément de l'interface
-	 * @param n objets dont il faut modifier l'angle 
-	 * @param sens sens vers lequel la rotation doit se faire 
-	 */
-	public void rotatePane(Node n, String sens) {
-		double angle = n.getRotate();
-		switch (sens) {
-		case ("haut"):
-			if (angle != 180)
-				angle = 180;
-			break;
-		case ("bas"):
-			if (angle != 0)
-				angle = 0;
-			break;
-		case ("gauche"):
-			if (angle != 90)
-				angle = 90;
-			break;
-		case ("droite"):
-			if (angle != -90)
-				angle = -90;
-			break;
-		}
-
-		RotateTransition rotateTransition = new RotateTransition();
-		rotateTransition.setDuration(Duration.millis(500));
-		rotateTransition.setNode(n);
-		rotateTransition.setToAngle(angle);
-		rotateTransition.setAutoReverse(false);
-		rotateTransition.play();
 	}
 
 	/**

@@ -50,7 +50,7 @@ public interface IhmTools {
 						if (u == (int) nom.charAt(i))
 							t &= false;
 					}
-					tmp |= true && t;
+					tmp |= t;
 				}
 			}
 			result &= tmp;
@@ -114,9 +114,9 @@ public interface IhmTools {
 			return DataControl.CARTE_SPRINT;
 		case ATR:
 			return DataControl.CARTE_TRONCENNEUSE;
+		default :
+			return null; 
 		}
-
-		return null;
 	}
 
 	/**
