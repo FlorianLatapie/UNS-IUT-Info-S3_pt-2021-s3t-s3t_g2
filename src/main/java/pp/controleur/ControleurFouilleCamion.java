@@ -6,6 +6,7 @@ import java.util.List;
 import pp.Joueur;
 import pp.Partie;
 import pp.ihm.event.EvenementStockage;
+import pp.ihm.langues.International;
 import pp.ihm.event.Evenement;
 import pp.reseau.FouilleCamionReseau;
 import reseau.type.CarteEtat;
@@ -48,7 +49,7 @@ public class ControleurFouilleCamion {
 			j = joueurFouille(jeu, partieId, numeroTour);
 			if (j != null) {
 				Evenement.quiJoue(j.getCouleur());
-				s = j + " (" + j.getCouleur() + ") fouille le camion";
+				s = j + " (" + j.getCouleur() + ") " + International.trad("text.fouilleLeCamion");
 				Evenement.fouilleCamion(s);
 				while (!EvenementStockage.isPopupAccepter())
 					Thread.yield();
@@ -65,14 +66,15 @@ public class ControleurFouilleCamion {
 						partieId, numeroTour);
 				Evenement.suppQuiJoue();
 				if ((Couleur) l.get(2) != null) {
-					String s1 = jeu.getJoueurCouleur((Couleur)l.get(2)) + " (" + (Couleur)l.get(2) + ")" + " a reçu une carte.";
-				    Evenement.fouilleCamion(s1);
+					String s1 = jeu.getJoueurCouleur((Couleur) l.get(2)) + " (" + (Couleur) l.get(2) + ") "
+							+ International.trad("text.recuCarte");
+					Evenement.fouilleCamion(s1);
 					while (!EvenementStockage.isPopupAccepter())
 						Thread.yield();
 					EvenementStockage.setPopupAccepter(false);
 				}
 			} else {
-				s = "Personne fouille le Camion";
+				s = International.trad("text.pCamion");
 				fr.finFouilleCamion(jeu, Couleur.NUL, Couleur.NUL, CarteEtat.NUL, partieId, numeroTour);
 				Evenement.fouilleCamion(s);
 				while (!EvenementStockage.isPopupAccepter())
@@ -80,7 +82,7 @@ public class ControleurFouilleCamion {
 				EvenementStockage.setPopupAccepter(false);
 			}
 		} else {
-			s = "Personne fouille le Camion";
+			s = International.trad("text.pCamion");
 			fr.finFouilleCamion(jeu, Couleur.NUL, Couleur.NUL, CarteEtat.NUL, partieId, numeroTour);
 			Evenement.fouilleCamion(s);
 			while (!EvenementStockage.isPopupAccepter())
