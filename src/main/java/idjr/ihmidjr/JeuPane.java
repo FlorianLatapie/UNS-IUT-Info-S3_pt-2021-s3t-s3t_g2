@@ -52,7 +52,7 @@ public class JeuPane extends StackPane implements IJeuListener, ITraduction {
 	private String nomPolice = "Segoe UI";
 	private Font policeBouton = Font.font(nomPolice, FontWeight.BOLD, 33);
 	private Font policeLog = Font.font(nomPolice, FontWeight.BOLD, 15);
-	private Font policeBoutonC = Font.font(nomPolice, FontWeight.BOLD, 25);
+	private Font policeBoutonC = Font.font(nomPolice, FontWeight.BOLD, 20);
 	private Font policeBoutonDe = Font.font(nomPolice, FontWeight.BOLD, 40);
 	private String styleBoutons = " -fx-background-color:#000000; -fx-background-radius: 15px; -fx-text-fill: #ffffff";
 	private String styleBoutonsSouris = "-fx-background-color:#ff0000;  -fx-text-fill:#000000; -fx-background-radius: 15px;";
@@ -1687,7 +1687,7 @@ public class JeuPane extends StackPane implements IJeuListener, ITraduction {
 						buttons[i].setStyle(IhmTools.color(listeCouleurJoueur.get(i))+" -fx-background-radius: 15px;");
 						int tmpi = i;
 						buttons[i].setOnMouseEntered(event -> buttons[tmpi].setStyle(styleBoutonsSouris));
-						buttons[i].setOnMouseExited(event -> buttons[tmpi].setStyle(IhmTools.color(listeCouleurJoueur.get(tmpi))));
+						buttons[i].setOnMouseExited(event -> buttons[tmpi].setStyle(IhmTools.color(listeCouleurJoueur.get(tmpi))+" -fx-background-radius: 15px;"));
 						Couleur cible = listeCouleurJoueur.get(i);
 						buttons[i].setOnAction(EventHandler -> {
 							core.getIdjr().setVoteChoisi(cible);
