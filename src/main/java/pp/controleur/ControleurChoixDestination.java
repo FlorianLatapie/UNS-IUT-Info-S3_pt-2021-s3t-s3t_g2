@@ -62,8 +62,8 @@ public class ControleurChoixDestination {
 		destination.add(dest);
 		Evenement.suppQuiJoue();
 		cdr.informerDestChefVigile(jeu, dest, partieId, numeroTour);
-		Evenement.prevenirDeplacementVigile("Le chef des vigile (" + jeu.getChefVIgile().getCouleur()
-				+ ") a choisi la detination :" + jeu.getLieux().get(dest));
+		Evenement.prevenirDeplacementVigile("Le chef des vigiles (" + jeu.getChefVIgile().getCouleur()
+				+ ") a choisi la destination : " + jeu.getLieux().get(dest));
 		while (!EvenementStockage.isPopupAccepter())
 			Thread.yield();
 		EvenementStockage.setPopupAccepter(false);
