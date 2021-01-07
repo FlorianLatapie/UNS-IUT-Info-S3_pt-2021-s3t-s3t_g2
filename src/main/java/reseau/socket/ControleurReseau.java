@@ -76,7 +76,12 @@ public abstract class ControleurReseau {
 		traitementPaquetUdp.init();
 		traitementPaquetTcp.init();
 		connexionType = connexionTypeCible;
-		ip = ReseauOutils.getLocalIp();
+		try {
+			ip = ReseauOutils.getWindowsIp();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} //ReseauOutils.getLocalIp();
 		tcpPort = ReseauOutils.getPortSocket(1024, 65535);
 
 		if (udpPaquets.isEmpty() || tcpPaquets.isEmpty())
