@@ -27,6 +27,8 @@ public interface IJeuListener {
 	void sacrificeChange();
 
 	void deplacementChange();
+	
+	void personnageCacheChange();
 
 	void choisirCarte(List<CarteType> listeCartes, List<Couleur> listeCouleurJoueurVivant, boolean garder,
 			boolean donner, boolean defausser);

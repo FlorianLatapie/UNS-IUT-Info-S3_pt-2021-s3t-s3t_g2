@@ -113,6 +113,10 @@ public abstract class Evenement {
 		for (IJeuListener jl : listenersjl)
 			jl.sacrificeChange();
 	}
+	public static void personnageCacheChange() {
+		for (IJeuListener jl : listenersjl)
+			jl.personnageCacheChange();
+	}
 
 	public static void deplacementChange() {
 		for (IJeuListener jl : listenersjl)
