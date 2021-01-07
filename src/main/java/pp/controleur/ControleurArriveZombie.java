@@ -47,6 +47,9 @@ public class ControleurArriveZombie {
 		azr.debutArriveZombie(jeu, ve, partieId, numeroTour);
 		azr.demanderCDS(jeu, partieId, numeroTour);
 		joueurCDS = azr.reponseCDS(jeu);
+		for (Joueur j:jeu.getJoueurs().values()) {
+			azr.informeArriveZombieCDS(jeu, j, lieuZombie, partieId, numeroTour);
+		}
 		for (Joueur j : joueurCDS) {
 			azr.informeArriveZombieCDS(jeu, j, lieuZombie, partieId, numeroTour);
 			j.getCartes().remove(CarteType.CDS);
