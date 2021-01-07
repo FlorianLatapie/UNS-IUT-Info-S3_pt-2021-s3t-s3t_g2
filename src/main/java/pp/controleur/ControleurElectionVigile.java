@@ -1,5 +1,7 @@
 package pp.controleur;
 
+import java.util.ArrayList;
+
 import pp.Joueur;
 import pp.Partie;
 import pp.ihm.event.EvenementStockage;
@@ -63,6 +65,7 @@ public class ControleurElectionVigile {
 				Thread.yield();
 			EvenementStockage.setPopupAccepter(false);
 		}
+		Evenement.nomChefVigileAll(new ArrayList<>(jeu.getJoueurs().values()));
 	}
 
 	/**
