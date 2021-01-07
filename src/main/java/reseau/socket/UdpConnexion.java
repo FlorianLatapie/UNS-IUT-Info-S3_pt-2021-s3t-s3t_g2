@@ -9,6 +9,7 @@ import java.io.IOException;
 import java.net.DatagramPacket;
 import java.net.InetAddress;
 import java.net.MulticastSocket;
+import java.net.NetworkInterface;
 import java.net.UnknownHostException;
 import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
@@ -58,7 +59,7 @@ public class UdpConnexion implements Runnable, IEchangeSocket, IControleSocket {
 		logger.log(Level.FINEST, "Ouverture multicast UDP");
 
 		multicastSocket = new MulticastSocket(MULTICAST_PORT);
-		multicastSocket.setInterface(monip);
+		multicastSocket.setNetworkInterface(NetworkInterface.getByInetAddress(monip));
  
 		multicastSocket.joinGroup(groupe);
 		System.out.println("[OK] " + ReseauOutils.getWindowsIp());
