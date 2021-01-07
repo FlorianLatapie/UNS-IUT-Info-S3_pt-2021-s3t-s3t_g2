@@ -126,7 +126,7 @@ public class TraitementPaquetTcp extends TraitementPaquet<TcpClient> {
 			break;
 		case "FP":
 			finPartie(Paquet, message);
-			logFP(Paquet, message);
+			//logFP(Paquet, message);
 			break;
 		case "RAZDD":
 			fournirActionsDefense(Paquet, message);
