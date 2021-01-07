@@ -10,6 +10,6 @@ public class ConsoleBotFaibleDev {
 
 	public static void main(String[] args) {
 		Logger.getGlobal().setLevel(Level.FINEST);
-		ThreadOutils.asyncTaskInfinite("Bot Faible", new Bot(0, BotType.FAIBLE, BotMode.Automatique, true));
+		ThreadOutils.asyncTaskInfinite("Bot Faible", new Bot(0, BotType.FAIBLE, BotMode.AUTOMATIQUE, true));
 	}
 }

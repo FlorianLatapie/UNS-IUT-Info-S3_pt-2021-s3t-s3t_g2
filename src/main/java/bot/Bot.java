@@ -124,7 +124,7 @@ public class Bot implements Runnable {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			if (botMode == BotMode.Automatique) {
+			if (botMode == BotMode.AUTOMATIQUE) {
 				ControleurReseau.envoyerUdp(ControleurReseau.construirePaquetUdp("RP", TypePartie.MIXTE, 6));
 			}
 		});
