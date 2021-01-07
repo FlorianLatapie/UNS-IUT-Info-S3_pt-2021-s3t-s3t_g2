@@ -60,6 +60,7 @@ public class UdpConnexion implements Runnable, IEchangeSocket, IControleSocket {
 		multicastSocket = new MulticastSocket(MULTICAST_PORT);
  
 		multicastSocket.joinGroup(groupe);
+		multicastSocket.setInterface(monip);
 		System.out.println("[OK] " + ReseauOutils.getWindowsIp());
 		estLancer = true;
 
