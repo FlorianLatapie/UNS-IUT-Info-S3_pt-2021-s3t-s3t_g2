@@ -173,6 +173,8 @@ public class ControleurJeu {
 	public void setJoueurCouleur(List<Couleur> couleurs, List<Joueur> joueursOrdre) {
 		this.couleurPret = true;
 		joueurs = joueursOrdre;
+		joueurs.get(0).setChefDesVigiles(true);
+		jeu = new Partie(joueursOrdre);
 		for (int i = 0; i < joueurs.size(); i++)
 			joueurs.get(i).setCouleur(couleurs.get(i));
 	}
