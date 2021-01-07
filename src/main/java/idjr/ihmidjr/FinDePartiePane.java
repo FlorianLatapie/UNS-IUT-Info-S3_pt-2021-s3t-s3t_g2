@@ -18,7 +18,6 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
-import javafx.scene.layout.TilePane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
@@ -82,12 +81,12 @@ public class FinDePartiePane extends StackPane implements IFinListener, ITraduct
 	Label nomJoueur6;
 	Label score6;
 	Label nbPersVivant6;
-	Label nbZbTue6;*/
+	Label nbZbTue6;
 
 	Label titreJoueur;
 	Label titreScore;
 	Label titreNbPersVivant;
-	Label titreNbZbTues;
+	Label titreNbZbTues;*/
 
 	Label titre1;
 	Button bRetour;
@@ -413,7 +412,11 @@ public class FinDePartiePane extends StackPane implements IFinListener, ITraduct
 				nomJoueur3.setText(International.trad("texte.j3"));
 				nomJoueur4.setText(International.trad("texte.j4"));
 				nomJoueur5.setText(International.trad("texte.j5"));
-				nomJoueur6.setText(International.trad("texte.j6"));*/
+				nomJoueur6.setText(International.trad("texte.j6"));
+				titreJoueur.setText(International.trad("texte.nom"));
+				titreScore.setText(International.trad("texte.score"));
+				titreNbPersVivant.setText(International.trad("texte.alive"));
+				titreNbZbTues.setText(International.trad("texte.zTues"));*/
 				bRetour.setText(International.trad("bouton.retour"));
 			}
 		});
