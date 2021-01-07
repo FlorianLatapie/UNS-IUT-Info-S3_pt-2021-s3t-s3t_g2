@@ -10,6 +10,6 @@ public class ConsoleBotFortDev {
 
 	public static void main(String[] args) {
 		Logger.getGlobal().setLevel(Level.FINEST);
-		ThreadOutils.asyncTaskInfinite("Bot Fort", new Bot(0, BotType.FORT, BotMode.Automatique, true));
+		ThreadOutils.asyncTaskInfinite("Bot Fort", new Bot(0, BotType.FORT, BotMode.AUTOMATIQUE, true));
 	}
 }

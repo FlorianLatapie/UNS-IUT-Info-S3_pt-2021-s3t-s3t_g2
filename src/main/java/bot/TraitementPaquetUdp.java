@@ -64,7 +64,7 @@ public class TraitementPaquetUdp extends TraitementPaquet<DatagramPacket> {
 		if (core.isConnected())
 			return;
 
-		if (core.getBotMode() != BotMode.Automatique)
+		if (core.getBotMode() != BotMode.AUTOMATIQUE)
 			return;
 
 		InetAddress address = null;
@@ -84,7 +84,7 @@ public class TraitementPaquetUdp extends TraitementPaquet<DatagramPacket> {
 		if (core.isConnected())
 			return;
 
-		if (core.getBotMode() == BotMode.Automatique) {
+		if (core.getBotMode() == BotMode.AUTOMATIQUE) {
 			InetAddress address = null;
 			try {
 				address = InetAddress.getByName((String) paquet.getValeur(message, 2));
