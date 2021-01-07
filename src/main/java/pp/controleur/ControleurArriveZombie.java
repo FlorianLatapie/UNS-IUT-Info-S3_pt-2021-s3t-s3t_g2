@@ -48,7 +48,8 @@ public class ControleurArriveZombie {
 		azr.demanderCDS(jeu, partieId, numeroTour);
 		joueurCDS = azr.reponseCDS(jeu);
 		for (Joueur j:jeu.getJoueurs().values()) {
-			azr.informeArriveZombieCDS(jeu, j, lieuZombie, partieId, numeroTour);
+			if (j.isChefDesVigiles())
+				azr.informeArriveZombieCDS(jeu, j, lieuZombie, partieId, numeroTour);
 		}
 		for (Joueur j : joueurCDS) {
 			azr.informeArriveZombieCDS(jeu, j, lieuZombie, partieId, numeroTour);
