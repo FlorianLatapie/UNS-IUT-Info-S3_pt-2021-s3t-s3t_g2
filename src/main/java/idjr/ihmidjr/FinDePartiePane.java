@@ -414,10 +414,6 @@ public class FinDePartiePane extends StackPane implements IFinListener, ITraduct
 				nomJoueur4.setText(International.trad("texte.j4"));
 				nomJoueur5.setText(International.trad("texte.j5"));
 				nomJoueur6.setText(International.trad("texte.j6"));*/
-				titreJoueur.setText(International.trad("texte.nom"));
-				titreScore.setText(International.trad("texte.score"));
-				titreNbPersVivant.setText(International.trad("texte.alive"));
-				titreNbZbTues.setText(International.trad("texte.zTues"));
 				bRetour.setText(International.trad("bouton.retour"));
 			}
 		});
