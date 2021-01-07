@@ -1767,6 +1767,7 @@ public class JeuPane extends StackPane implements IJeuListener, ITraduction {
 				Button[] buttons = { bDeCarte1, bDeCarte2, bDeCarte3, bDeCarte4, bDeCarte5, bDeCarte6, bDeCarte7,
 						bDeCarte8 };
 				selectedCarteChoi = CarteType.NUL;
+
 				attirerAttention(hbCartes);
 				for (int i = 0; i < buttons.length; i++) {
 					if (i < cartes.size()) {
@@ -1797,7 +1798,7 @@ public class JeuPane extends StackPane implements IJeuListener, ITraduction {
 				bPasserCarte.setDisable(false);
 				bPasserCarte.setOnAction(EventHandler -> {
 					core.getIdjr().setContinue(false);
-					choisirUtiliserCarte(selectedCarteChoi);
+					core.getIdjr().choisirUtiliserCarte(selectedCarteChoi);
 					core.getIdjr().utiliserCarteChoisi(true);
 					resetUtiliserCarte();
 					updateCarte();
