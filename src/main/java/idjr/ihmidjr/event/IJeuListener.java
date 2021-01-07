@@ -17,6 +17,8 @@ public interface IJeuListener {
 	void nomPhase(String nom);
 
 	void desVigiles(List<Integer> list);
+	
+	void desEnlVigiles();
 
 	void fin();
 

@@ -1332,10 +1332,10 @@ public class JeuPane extends StackPane implements IJeuListener, ITraduction {
 		Platform.runLater(new Runnable() {
 			@Override
 			public void run() {
-				infoZombie.setVisible(true);
 				linfoZombie.setText(International.trad("texte.linfoZombie",
 						list.get(0).toString(), list.get(1).toString(), list.get(2).toString(),
 						list.get(3).toString()));
+				infoZombie.setVisible(true);
 			}
 		});
 	}
@@ -2028,5 +2028,10 @@ public class JeuPane extends StackPane implements IJeuListener, ITraduction {
 						International.trad("text.forceEquipeA") + "\n" + International.trad("text.forceEquipeB"));
 			}
 		});
+	}
+
+	@Override
+	public void desEnlVigiles() {
+		infoZombie.setVisible(false);
 	}
 }
