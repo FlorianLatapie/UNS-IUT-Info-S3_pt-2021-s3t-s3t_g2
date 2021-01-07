@@ -59,7 +59,7 @@ public class FinDePartiePane extends StackPane implements IFinListener, ITraduct
 	private Font policeScoreBoard = Font.font(nomPolice, FontWeight.BOLD, 20);
 
 	Label desc;
-	Label nomJoueur1;
+	/*Label nomJoueur1;
 	Label score1;
 	Label nbPersVivant1;
 	Label nbZbTue1;
@@ -82,7 +82,7 @@ public class FinDePartiePane extends StackPane implements IFinListener, ITraduct
 	Label nomJoueur6;
 	Label score6;
 	Label nbPersVivant6;
-	Label nbZbTue6;
+	Label nbZbTue6;*/
 
 	Label titreJoueur;
 	Label titreScore;
@@ -110,13 +110,13 @@ public class FinDePartiePane extends StackPane implements IFinListener, ITraduct
 		titre.setPrefWidth(730);
 		titre.setMinWidth(730);
 
-		desc = new Label("");
+		desc = new Label("gagné/perdu");
 		desc.setTextAlignment(TextAlignment.CENTER);
 		desc.setTextFill(Color.WHITE);
 		desc.setFont(policeNom);
 		desc.setPadding(new Insets(20));
 		//auteur remy 
-		nomJoueur1 = new Label(International.trad("texte.j1"));
+		/*nomJoueur1 = new Label(International.trad("texte.j1"));
 		nomJoueur1.setAlignment(Pos.CENTER);
 		nomJoueur1.setFont(policeScoreBoard);
 		nomJoueur1.setTextFill(Color.WHITESMOKE);
@@ -237,13 +237,13 @@ public class FinDePartiePane extends StackPane implements IFinListener, ITraduct
 		titreNbZbTues.setAlignment(Pos.CENTER);
 		titreNbZbTues.setFont(policeScoreBoard);
 		titreNbZbTues.setTextFill(Color.RED);
-		
+		*/
 		VBox vbCenter = new VBox();
 		vbCenter.setAlignment(Pos.CENTER);
 		vbCenter.setPrefHeight(500);
 		vbCenter.setMinHeight(500);
 		vbCenter.setTranslateY(-50);
-
+/*
 		TilePane tile1 = new TilePane();
 		tile1.setAlignment(Pos.CENTER_LEFT);
 		tile1.setStyle(styleVBox);
@@ -329,9 +329,9 @@ public class FinDePartiePane extends StackPane implements IFinListener, ITraduct
 		vbScoreBoard.setMinSize(700, 390);
 		vbScoreBoard.setMaxSize(700, 390);
 		vbScore.getChildren().addAll(tile1, tile2, tile3, tile4, tile5, tile6);
-		vbScoreBoard.getChildren().addAll(tileTitreScore, vbScore);
+		vbScoreBoard.getChildren().addAll(tileTitreScore, vbScore);*/
 
-		vbCenter.getChildren().addAll(desc, vbScoreBoard);
+		vbCenter.getChildren().addAll(desc/*, vbScoreBoard*/);
 
 		// auteur florian 
 		// bouton
@@ -393,7 +393,7 @@ public class FinDePartiePane extends StackPane implements IFinListener, ITraduct
 				if (nom.equals(core.getIdjr().getNom()))
 					desc.setText(International.trad("text.gagne"));
 				else
-					desc.setText(International.trad("text.perd1") + "\n" + International.trad("text.perd2", nom));
+					desc.setText(International.trad("text.perd1") + "\n" + International.trad("text.perd2")+nom);
 			}
 		});
 	}
@@ -408,12 +408,12 @@ public class FinDePartiePane extends StackPane implements IFinListener, ITraduct
 			public void run() {
 				titre1.setText(International.trad("text.titreFinDePartieA") + " "
 						+ International.trad("text.titreFinDePartieB"));
-				nomJoueur1.setText(International.trad("texte.j1"));
+				/*nomJoueur1.setText(International.trad("texte.j1"));
 				nomJoueur2.setText(International.trad("texte.j2"));
 				nomJoueur3.setText(International.trad("texte.j3"));
 				nomJoueur4.setText(International.trad("texte.j4"));
 				nomJoueur5.setText(International.trad("texte.j5"));
-				nomJoueur6.setText(International.trad("texte.j6"));
+				nomJoueur6.setText(International.trad("texte.j6"));*/
 				titreJoueur.setText(International.trad("texte.nom"));
 				titreScore.setText(International.trad("texte.score"));
 				titreNbPersVivant.setText(International.trad("texte.alive"));
