@@ -1333,7 +1333,7 @@ public class JeuPane extends StackPane implements IJeuListener, ITraduction {
 			@Override
 			public void run() {
 				infoZombie.setVisible(true);
-				linfoZombie.setText(International.trad("Des zombies arriveront dans les lieux {0}, {1}, {2}, {3}",
+				linfoZombie.setText(International.trad("texte.linfoZombie",
 						list.get(0).toString(), list.get(1).toString(), list.get(2).toString(),
 						list.get(3).toString()));
 			}
