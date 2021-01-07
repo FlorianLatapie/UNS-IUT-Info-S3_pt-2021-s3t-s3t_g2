@@ -216,11 +216,10 @@ public class TraitementIdjr {
 
 	public void finPartie(Idjr core, Couleur gagnant) {
 		out.println("Le gagant est le joueur " + gagnant + " !");
-		core.setEstFini(true);
 		// getControleurReseau().arreter();
-		Evenement.fin();
 		Evenement.gagnant(core.getListeJoueursInitiale().get(gagnant));
-		// TODO ATTENTION A LA FIN PROGRAMME
+		Evenement.fin();
+		core.setEstFini(true);
 	}
 
 	public List<Object> listeCarteJouee(Idjr core, int n) {
