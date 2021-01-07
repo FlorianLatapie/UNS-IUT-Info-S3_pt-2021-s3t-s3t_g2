@@ -88,6 +88,11 @@ public abstract class Evenement {
 		for (IJeuListener jl : listenersjl)
 			jl.desVigiles(list);
 	}
+	
+	public static void desEnlVigiles() {
+		for (IJeuListener jl : listenersjl)
+			jl.desEnlVigiles();
+	}
 
 	public static void fin() {
 		for (IJeuListener jl : listenersjl)
