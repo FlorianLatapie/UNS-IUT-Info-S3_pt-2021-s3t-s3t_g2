@@ -2034,4 +2034,14 @@ public class JeuPane extends StackPane implements IJeuListener, ITraduction {
 	public void desEnlVigiles() {
 		infoZombie.setVisible(false);
 	}
+
+	@Override
+	public void personnageCacheChange() {
+		Platform.runLater(new Runnable() {
+			@Override
+			public void run() {
+				labDeplPers.setText("Personnage caché");
+			}
+		});
+	}
 }
