@@ -57,7 +57,7 @@ public interface IhmOutils {
 		List<Couleur> tmp = new ArrayList<>();
 		Couleur couleursDefault[] = { Couleur.N, Couleur.V, Couleur.M, Couleur.R, Couleur.B, Couleur.J };
 		for (int i = 0; i < couleList.size(); i++)
-			tmp.add(couleursDefault[tab[i]]);
+			tmp.add(couleursDefault[couleList.get(tab[i])]);
 
 		return tmp;
 	}
