@@ -82,6 +82,12 @@ public class PlateauPane extends StackPane implements IPlateauListener, ITraduct
 	List<VBox> vboxs = new ArrayList<>();
 	List<Integer> index = new ArrayList<>();
 
+	List<Integer> persos = new ArrayList<>();
+	List<Integer> cartess = new ArrayList<>();
+	boolean estChoisirPlace = true;
+	String currentCDV = "";
+	int currentPioche = 1;
+
 	Label nbZombies1;
 	Label nbZombies2;
 	Label nbZombies3;
@@ -1188,6 +1194,15 @@ public class PlateauPane extends StackPane implements IPlateauListener, ITraduct
 		choixCouleurReset();
 
 		enleverPlateau();
+
+		estChoisirPlace = true;
+		persos.clear();
+		cartess.clear();
+		for (int i = 0; i < 6; i++) {
+			persos.add(0);
+			cartess.add(0);
+		}
+
 		// auteur florian
 		this.getChildren().addAll(imgFond, bPileCarte, borderJoueurs, aPlateau, lChefVigile, lChefVigile2, lChefVigile3,
 				lChefVigile4, imgCarteFerme1, imgCarteFerme2, imgCarteFerme3, imgCarteFerme5, imgCarteFerme6,
@@ -1442,21 +1457,27 @@ public class PlateauPane extends StackPane implements IPlateauListener, ITraduct
 				String tmp = perso + " " + International.trad("text.perso.num");
 				switch (index.get(joueur)) {
 				case 0:
+					persos.set(0, perso);
 					nbPerso1.setText(tmp);
 					break;
 				case 1:
+					persos.set(1, perso);
 					nbPerso2.setText(tmp);
 					break;
 				case 2:
+					persos.set(2, perso);
 					nbPerso3.setText(tmp);
 					break;
 				case 3:
+					persos.set(3, perso);
 					nbPerso4.setText(tmp);
 					break;
 				case 4:
+					persos.set(4, perso);
 					nbPerso5.setText(tmp);
 					break;
 				case 5:
+					persos.set(5, perso);
 					nbPerso6.setText(tmp);
 					break;
 				default:
@@ -1481,21 +1502,27 @@ public class PlateauPane extends StackPane implements IPlateauListener, ITraduct
 
 				switch (index.get(joueur)) {
 				case 0:
+					cartess.set(0, cartes);
 					nbCartes1.setText(tmp);
 					break;
 				case 1:
+					cartess.set(1, cartes);
 					nbCartes2.setText(tmp);
 					break;
 				case 2:
+					cartess.set(2, cartes);
 					nbCartes3.setText(tmp);
 					break;
 				case 3:
+					cartess.set(3, cartes);
 					nbCartes4.setText(tmp);
 					break;
 				case 4:
+					cartess.set(4, cartes);
 					nbCartes5.setText(tmp);
 					break;
 				case 5:
+					cartess.set(5, cartes);
 					nbCartes6.setText(tmp);
 					break;
 				default:
@@ -1515,6 +1542,7 @@ public class PlateauPane extends StackPane implements IPlateauListener, ITraduct
 		Platform.runLater(new Runnable() {
 			@Override
 			public void run() {
+				currentCDV = joueur;
 				String tmp = joueur + " " + International.trad("text.chefVigile");
 				lChefVigile.setText(tmp);
 				lChefVigile2.setText(tmp);
@@ -1535,6 +1563,14 @@ public class PlateauPane extends StackPane implements IPlateauListener, ITraduct
 				sControl.setPaneOnTop(ApplicationPane.ENDGAME);
 				enleverPlateau();
 				choixCouleurReset();
+				estChoisirPlace = true;
+				persos.clear();
+				cartess.clear();
+				for (int i = 0; i < 6; i++) {
+					persos.add(0);
+					cartess.add(0);
+				}
+				currentCDV = "";
 			}
 		});
 	}
@@ -1728,6 +1764,50 @@ public class PlateauPane extends StackPane implements IPlateauListener, ITraduct
 				lInfo2.setText(International.trad("text.lInfo"));
 				lInfo3.setText(International.trad("text.lInfo"));
 				lInfo4.setText(International.trad("text.lInfo"));
+
+				if (estChoisirPlace) {
+					nomJoueur1.setStyle(tmpColor);
+					nomJoueur1.setText(International.trad("text.choisir"));
+					nbPerso1.setText("");
+					nbCartes1.setText("");
+					nomJoueur2.setStyle(tmpColor);
+					nomJoueur2.setText(International.trad("text.choisir"));
+					nbPerso2.setText("");
+					nbCartes2.setText("");
+					nomJoueur3.setStyle(tmpColor);
+					nomJoueur3.setText(International.trad("text.choisir"));
+					nbPerso3.setText("");
+					nbCartes3.setText("");
+					nomJoueur4.setStyle(tmpColor);
+					nomJoueur4.setText(International.trad("text.choisir"));
+					nbPerso4.setText("");
+					nbCartes4.setText("");
+					nomJoueur5.setStyle(tmpColor);
+					nomJoueur5.setText(International.trad("text.choisir"));
+					nbPerso5.setText("");
+					nbCartes5.setText("");
+					nomJoueur6.setStyle(tmpColor);
+					nomJoueur6.setText(International.trad("text.choisir"));
+					nbPerso6.setText("");
+					nbCartes6.setText("");
+				} else {
+					nbPerso1.setText(persos.get(0) + " " + International.trad("text.perso.num"));
+					nbPerso2.setText(persos.get(1) + " " + International.trad("text.perso.num"));
+					nbPerso3.setText(persos.get(2) + " " + International.trad("text.perso.num"));
+					nbPerso4.setText(persos.get(3) + " " + International.trad("text.perso.num"));
+					nbPerso5.setText(persos.get(4) + " " + International.trad("text.perso.num"));
+					nbPerso6.setText(persos.get(5) + " " + International.trad("text.perso.num"));
+					nbCartes1.setText(cartess.get(0) + " " + International.trad("text.cartes"));
+					nbCartes2.setText(cartess.get(1) + " " + International.trad("text.cartes"));
+					nbCartes3.setText(cartess.get(2) + " " + International.trad("text.cartes"));
+					nbCartes4.setText(cartess.get(3) + " " + International.trad("text.cartes"));
+					nbCartes5.setText(cartess.get(4) + " " + International.trad("text.cartes"));
+					nbCartes6.setText(cartess.get(5) + " " + International.trad("text.cartes"));
+				}
+				if (currentCDV != "")
+					nomChefVigile(currentCDV);
+				if (currentPioche != -1) 
+					nbCartePiocheActuel(currentPioche);
 			}
 		});
 	}
@@ -1794,6 +1874,7 @@ public class PlateauPane extends StackPane implements IPlateauListener, ITraduct
 						vboxs.add(vBox);
 						index.add(tmp);
 						if (o == couleurs1.size()) {
+							estChoisirPlace = false;
 							o = 0;
 							resetCadreJoueur();
 							visibleCadreInutile();
@@ -1962,6 +2043,7 @@ public class PlateauPane extends StackPane implements IPlateauListener, ITraduct
 		Platform.runLater(new Runnable() {
 			@Override
 			public void run() {
+				currentPioche = val;
 				lPileCarte1.setText(val + " " + International.trad("text.pioche"));
 				lPileCarte2.setText(val + " " + International.trad("text.pioche"));
 				lPileCarte3.setText(val + " " + International.trad("text.pioche"));
