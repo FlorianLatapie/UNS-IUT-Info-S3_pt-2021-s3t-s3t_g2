@@ -20,6 +20,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+import idjr.ihmidjr.IhmTools;
 import idjr.ihmidjr.event.Evenement;
 import idjr.ihmidjr.langues.International;
 
@@ -233,7 +234,7 @@ public class TraitementPaquetTcp extends TraitementPaquet<TcpClient> {
 			List<Couleur>listeJ = (List<Couleur>) paquet.getValeur(message, 2);
 			List<Couleur>listeV = (List<Couleur>) paquet.getValeur(message, 3);
 			for (int i= 0 ; i<listeJ.size();i++) {
-				log += International.trad("texte.logPVR3") + " " + listeJ.get(i).toString() + " " + International.trad("texte.logPVR4")+ listeV.get(i).toString() +".";
+				log += International.trad("texte.logPVR3") + " " + IhmTools.colorTrad(listeJ.get(i))  + " " + International.trad("texte.logPVR4")+ IhmTools.colorTrad(listeV.get(i)) +".\n";
 			}
 			
 			log += International.trad("texte.logPVR2") + " " + ((Couleur) paquet.getValeur(message, 1)).toString() + ".";
