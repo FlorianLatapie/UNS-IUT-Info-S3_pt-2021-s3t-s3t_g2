@@ -199,6 +199,16 @@ public class JeuPane extends StackPane implements IJeuListener, ITraduction {
 	int d1 = 0;
 	int d2 = 0;
 
+	int z1 = 0;
+	int z2 = 0;
+	int z3 = 0;
+	int z4 = 0;
+
+	String currentPasserValiderString = "";
+	String currentTitreDep = "texte.labDeplPers";
+	String currentPhase = "";
+	String n = null;
+
 	public JeuPane(ScreenControl sc, Core c) {
 		// auteur remy
 		core = c;
@@ -1321,7 +1331,28 @@ public class JeuPane extends StackPane implements IJeuListener, ITraduction {
 		Platform.runLater(new Runnable() {
 			@Override
 			public void run() {
-				phasePartie.setText(nom);
+				n = null;
+				currentPhase = nom;
+				phasePartie.setText(International.trad(nom));
+			}
+		});
+	}
+
+	/**
+	 * Affiche la phase du jeu
+	 * 
+	 * @param nom nom
+	 * 
+	 * @author sebastien
+	 */
+	@Override
+	public void nomPhase(String nom, String n1) {
+		Platform.runLater(new Runnable() {
+			@Override
+			public void run() {
+				n = n1;
+				currentPhase = nom;
+				phasePartie.setText(International.trad(nom) + " " + n);
 			}
 		});
 	}
@@ -1337,6 +1368,10 @@ public class JeuPane extends StackPane implements IJeuListener, ITraduction {
 		Platform.runLater(new Runnable() {
 			@Override
 			public void run() {
+				z1 = list.get(0);
+				z2 = list.get(1);
+				z3 = list.get(2);
+				z4 = list.get(3);
 				linfoZombie.setText(International.trad("texte.linfoZombie", list.get(0).toString(),
 						list.get(1).toString(), list.get(2).toString(), list.get(3).toString()));
 				infoZombie.setVisible(true);
@@ -1407,6 +1442,7 @@ public class JeuPane extends StackPane implements IJeuListener, ITraduction {
 		Platform.runLater(new Runnable() {
 			@Override
 			public void run() {
+				currentTitreDep = "texte.sacrifice";
 				labDeplPers.setText(International.trad("texte.sacrifice"));
 			}
 		});
@@ -1422,6 +1458,7 @@ public class JeuPane extends StackPane implements IJeuListener, ITraduction {
 		Platform.runLater(new Runnable() {
 			@Override
 			public void run() {
+				currentTitreDep = "texte.labDeplPers";
 				labDeplPers.setText(International.trad("texte.labDeplPers"));
 			}
 		});
@@ -1749,10 +1786,12 @@ public class JeuPane extends StackPane implements IJeuListener, ITraduction {
 									buttons[tmp].setStyle(
 											"-fx-border-color: red; -fx-border-insets: -5; -fx-border-width: 3;");
 									bPasserCarte.setText(International.trad("texte.valider"));
+									currentPasserValiderString = "texte.valider";
 								} else {
 									selectedCarteChoi = CarteType.NUL;
 									buttons[tmp].setStyle(null);
 									bPasserCarte.setText(International.trad("texte.passer"));
+									currentPasserValiderString = "texte.passer";
 								}
 								resetCartesSelection(buttons[tmp]);
 							});
@@ -1803,10 +1842,12 @@ public class JeuPane extends StackPane implements IJeuListener, ITraduction {
 										buttons[tmp].setStyle(
 												"-fx-border-color: red; -fx-border-insets: -5; -fx-border-width: 3;");
 										bPasserCarte.setText(International.trad("texte.valider"));
+										currentPasserValiderString = "texte.valider";
 									} else {
 										selectedCarteChoi = CarteType.NUL;
 										buttons[tmp].setStyle(null);
 										bPasserCarte.setText(International.trad("texte.passer"));
+										currentPasserValiderString = "texte.passer";
 									}
 									resetCartesSelection(buttons[tmp]);
 								});
@@ -2014,9 +2055,8 @@ public class JeuPane extends StackPane implements IJeuListener, ITraduction {
 		Platform.runLater(new Runnable() {
 			@Override
 			public void run() {
-				nomJoueur.setText(International.trad("texte.nomJoueur"));
-				phasePartie.setText(International.trad("texte.phase"));
-				bPasserCarte.setText(International.trad("texte.passer"));
+				if (currentPasserValiderString != "")
+					bPasserCarte.setText(International.trad(currentPasserValiderString));
 				joueur1.setText("");
 				joueur2.setText("");
 				joueur3.setText("");
@@ -2036,7 +2076,7 @@ public class JeuPane extends StackPane implements IJeuListener, ITraduction {
 				joueur5c.setText(International.trad("texte.j5"));
 				titreFouille.setText(International.trad("text.fouilleCamion"));
 				titreQuestionCarte.setText(International.trad("texte.qCarte"));
-				labDeplPers.setText(International.trad("text.deplPersonnages"));
+				labDeplPers.setText(International.trad(currentTitreDep));
 				bBlonde.setText(International.trad("bouton.laBlonde"));
 				bBrute.setText(International.trad("bouton.laBrute"));
 				bTruand.setText(International.trad("bouton.leTruand"));
@@ -2054,9 +2094,14 @@ public class JeuPane extends StackPane implements IJeuListener, ITraduction {
 				lo.setText(International.trad("texte.nomPerso") + International.trad("texte.coulPerso")
 						+ International.trad(("texte.depLieu")));
 				titreInfo.setText("Information");
-				linfoZombie.setText("Des zombies arriveront dans les lieux {0}, {1}, {2}, {3}");
+				linfoZombie.setText(International.trad("texte.linfoZombie", String.valueOf(z1), String.valueOf(z2),
+						String.valueOf(z3), String.valueOf(z4)));
 				bForce.setText(
 						International.trad("text.forceEquipeA") + "\n" + International.trad("text.forceEquipeB"));
+				if (currentPhase != "" && n == null)
+					nomPhase(currentPhase);
+				if (currentPhase != "" && n != null)
+					nomPhase(currentPhase, n);
 			}
 		});
 	}
@@ -2076,6 +2121,7 @@ public class JeuPane extends StackPane implements IJeuListener, ITraduction {
 		Platform.runLater(new Runnable() {
 			@Override
 			public void run() {
+				currentTitreDep = "text.persocache";
 				labDeplPers.setText(International.trad("text.persocache"));
 			}
 		});

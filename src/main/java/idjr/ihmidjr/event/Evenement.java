@@ -9,7 +9,7 @@ import reseau.type.Couleur;
 
 /**
  * 
- * @author sebastien 
+ * @author sebastien
  *
  */
 public abstract class Evenement {
@@ -35,11 +35,11 @@ public abstract class Evenement {
 	public static void addListener(IAttenteListener toAdd) {
 		listenersal.add(toAdd);
 	}
-	
+
 	public static void addListener(IRotationListener toAdd) {
 		listenersrl.add(toAdd);
 	}
-	
+
 	public static void addListener(IPleineEcranListener toAdd) {
 		listenerspel.add(toAdd);
 	}
@@ -69,9 +69,14 @@ public abstract class Evenement {
 			jl.nomJoueur(nom);
 	}
 
-	public static void nomPhase(String nom) {
+	public static void nomPhases(String nom) {
 		for (IJeuListener jl : listenersjl)
 			jl.nomPhase(nom);
+	}
+
+	public static void nomPhases(String nom, String n) {
+		for (IJeuListener jl : listenersjl)
+			jl.nomPhase(nom, n);
 	}
 
 	public static void stopWait() {
@@ -88,7 +93,7 @@ public abstract class Evenement {
 		for (IJeuListener jl : listenersjl)
 			jl.desVigiles(list);
 	}
-	
+
 	public static void desEnlVigiles() {
 		for (IJeuListener jl : listenersjl)
 			jl.desEnlVigiles();
@@ -113,6 +118,7 @@ public abstract class Evenement {
 		for (IJeuListener jl : listenersjl)
 			jl.sacrificeChange();
 	}
+
 	public static void personnageCacheChange() {
 		for (IJeuListener jl : listenersjl)
 			jl.personnageCacheChange();
@@ -183,7 +189,7 @@ public abstract class Evenement {
 		for (IPleineEcranListener pel : listenerspel)
 			pel.updatePleineEcran();
 	}
-	
+
 	public static void partieValider() {
 		for (IConfigListener cl : listenerscl)
 			cl.partieValider();

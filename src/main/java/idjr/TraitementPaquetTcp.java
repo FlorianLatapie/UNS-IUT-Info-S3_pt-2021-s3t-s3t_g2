@@ -721,7 +721,7 @@ public class TraitementPaquetTcp extends TraitementPaquet<TcpClient> {
 
 	public void lanceDesChefVigil(Paquet packet, String message) {
 		// TODO réorganiser
-		Evenement.nomPhase(International.trad("text.phaseariveezombies"));
+		Evenement.nomPhases("text.phaseariveezombies");
 		Couleur c1 = (Couleur) packet.getValeur(message, 1);
 		if (core.getCouleur() == c1) {
 			String m1 = (String) packet.getValeur(message, 3);
@@ -745,7 +745,7 @@ public class TraitementPaquetTcp extends TraitementPaquet<TcpClient> {
 
 	public void choixDestVigil(Paquet Paquet, String message) {
 		// TODO réorganiser
-		Evenement.nomPhase(International.trad("text.phasechoixdesti"));
+		Evenement.nomPhases("text.phasechoixdesti");
 		if (!core.getEnvie())
 			return;
 		if (core.getCouleur() == (Couleur) Paquet.getValeur(message, 1)
@@ -864,13 +864,13 @@ public class TraitementPaquetTcp extends TraitementPaquet<TcpClient> {
 
 	public void phaseFouilleCamion() {
 		// TODO réorganiser
-		Evenement.nomPhase(International.trad("text.phasefouillecam"));
+		Evenement.nomPhases("text.phasefouillecam");
 
 	}
 
 	public void phaseElectionChefVigile(Paquet paquet, String message) {
 		// TODO réorganiser
-		Evenement.nomPhase(International.trad("text.phaseeleccdv"));
+		Evenement.nomPhases("text.phaseeleccdv");
 	}
 
 	public void initialiserPartie(Paquet Paquet, String message) {
