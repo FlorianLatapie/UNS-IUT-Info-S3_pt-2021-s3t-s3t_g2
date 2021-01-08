@@ -13,8 +13,8 @@ public class ConsoleBot {
 	static Bot bot;
 
 	/*
-	 * Rien <AUTOMATIQUE> <FAIBLE|MOYEN|FORT> delai_bot
-	 * AUTOMATIQUE FAIBLE 999 0 <MANUEL> <FAIBLE|MOYEN|FORT> delai_bot nom_partie ->
+	 * Rien <AUTOMATIQUE> <FAIBLE|MOYEN|FORT> delai_bot AUTOMATIQUE FAIBLE 999 0
+	 * <MANUEL> <FAIBLE|MOYEN|FORT> delai_bot nom_partie ->
 	 */
 
 	// Mode Automatique Manuel
@@ -25,29 +25,29 @@ public class ConsoleBot {
 		BotMode botMode = getBotMode(args);
 
 		if (args.length == 3 && botMode == BotMode.AUTOMATIQUE) {
-				ThreadOutils.asyncTask("Bot", bot = new Bot(getDelay(args[2]), getBotType(args[1]), botMode, false));
-				try {
-					Thread.sleep(1000);
-				} catch (InterruptedException e) {
-					e.printStackTrace();
-				}
+			ThreadOutils.asyncTask("Bot", bot = new Bot(getDelay(args[2]), getBotType(args[1]), botMode, false));
+			try {
+				Thread.sleep(1000);
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
 		} else if (args.length == 4 && botMode == BotMode.MANUEL) {
-				ThreadOutils.asyncTask("Bot", bot = new Bot(getDelay(args[2]), getBotType(args[1]), botMode, false));
-				try {
-					Thread.sleep(1000);
-				} catch (InterruptedException e) {
-					e.printStackTrace();
-				}
-				ThreadOutils.asyncTask("Bot", () -> bot.connecter(choisirPartie(args[3])));
+			ThreadOutils.asyncTask("Bot", bot = new Bot(getDelay(args[2]), getBotType(args[1]), botMode, false));
+			try {
+				Thread.sleep(1000);
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+			ThreadOutils.asyncTask("Bot", () -> bot.connecter(choisirPartie(args[3])));
 		} else {
 			System.out.println("Il n'y a pas d'argument ou il n'y en a pas assez");
-				ThreadOutils.asyncTask("Bot", bot = new Bot(1000, choisirBot(), BotMode.MANUEL, false));
-				try {
-					Thread.sleep(1000);
-				} catch (InterruptedException e) {
-					e.printStackTrace();
-				}
-				ThreadOutils.asyncTask("Bot", () -> bot.connecter(choisirPartie("")));
+			ThreadOutils.asyncTask("Bot", bot = new Bot(1000, choisirBot(), BotMode.MANUEL, false));
+			try {
+				Thread.sleep(1000);
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+			ThreadOutils.asyncTask("Bot", () -> bot.connecter(choisirPartie("")));
 		}
 	}
 
@@ -121,10 +121,16 @@ public class ConsoleBot {
 
 		partieInfos = bot.getPartiesActuel();
 
-		for (PartieInfo partieInfo : partieInfos)
+		for (PartieInfo partieInfo : partieInfos) {
+
+			System.out.println(partieInfo.getNom());
+			System.out.println(val);
+			System.out.println(val == partieInfo.getNom());
+			System.out.println(partieInfo.getNom().equals(val));
 			if (partieInfo.getNom().equals(val))
 				return partieInfo;
 
+		}
 		System.out.println();
 		System.out.println("=======================================");
 		int reponse;
