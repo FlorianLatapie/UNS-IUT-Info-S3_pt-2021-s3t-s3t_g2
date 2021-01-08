@@ -831,7 +831,7 @@ public class TraitementPaquetTcp extends TraitementPaquet<TcpClient> {
 
 	public void attaqueZombie(Paquet Paquet, String message) {
 		traitementI.attaqueZombie(core, (List<PionCouleur>) (Paquet.getValeur(message, 2)),
-				(int) (Paquet.getValeur(message, 1)));
+				(int) (Paquet.getValeur(message, 1)),(int)(Paquet.getValeur(message, 4)));
 	}
 
 	public void choisirSacrifice(Paquet Paquet, String message) {
