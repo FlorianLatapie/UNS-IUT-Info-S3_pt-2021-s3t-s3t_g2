@@ -4,7 +4,6 @@ import java.net.InetAddress;
 
 import idjr.ihmidjr.IhmTools;
 import idjr.ihmidjr.langues.International;
-import pp.ihm.IhmOutils;
 import reseau.type.Statut;
 import reseau.type.TypeJoueur;
 import reseau.type.TypePartie;
