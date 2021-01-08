@@ -1,7 +1,6 @@
 package idjr;
 
 import idjr.ihmidjr.event.Evenement;
-import idjr.ihmidjr.event.IJeuListener;
 import reseau.socket.ControleurReseau;
 import reseau.tool.ReseauOutils;
 import reseau.tool.ThreadOutils;

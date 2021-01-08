@@ -16,11 +16,8 @@ import reseau.type.VoteType;
 import static java.lang.System.out;
 
 import java.text.MessageFormat;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-
-import com.sun.org.apache.bcel.internal.generic.IF_ACMPEQ;
 
 import idjr.ihmidjr.IhmTools;
 import idjr.ihmidjr.event.Evenement;
