@@ -45,14 +45,14 @@ public class ControleurElectionVigile {
 			if (j != null) {
 				newVigile(jeu, j);
 				ecvr.informerElectionChefVigile(jeu, jeu.getChefVIgile().getCouleur(), partieId, numeroTour);
-				Evenement.electionChef("Nouveau chef des vigiles : " + jeu.getChefVIgile());
+				Evenement.electionChef("text.nouveauchef" + jeu.getChefVIgile());
 				while (!EvenementStockage.isPopupAccepter())
 					Thread.yield();
 				EvenementStockage.setPopupAccepter(false);
 			} else {
 				jeu.setNewChef(false);
 				ecvr.informerElectionChefVigile(jeu, Couleur.NUL, partieId, numeroTour);
-				Evenement.electionChef("Il n'y a pas de nouveau chef des vigiles");
+				Evenement.electionChef("text.nonnouveauchef");
 				while (!EvenementStockage.isPopupAccepter())
 					Thread.yield();
 				EvenementStockage.setPopupAccepter(false);
@@ -60,7 +60,7 @@ public class ControleurElectionVigile {
 		} else {
 			noNewVigile(jeu);
 			ecvr.informerElectionChefVigile(jeu, Couleur.NUL, partieId, numeroTour);
-			Evenement.electionChef("Il n'y a pas de nouveau chef des vigiles");
+			Evenement.electionChef("text.nonnouveauchef");
 			while (!EvenementStockage.isPopupAccepter())
 				Thread.yield();
 			EvenementStockage.setPopupAccepter(false);
