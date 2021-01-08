@@ -183,7 +183,7 @@ public class TraitementIdjr {
 			nom = "PC de sécurité";
 		if (x == 6)
 			nom = "Supermarché";
-		Evenement.nomPhase(International.trad("text.phaseattaquelieu") + "" + nom);
+		Evenement.nomPhase(International.trad("text.phaseattaquelieu") + " " + nom);
 		List<PionCouleur> ltemp = new ArrayList<>();
 		for (PionCouleur pc : l) {
 			if (IdjrTools.getCouleurByChar(pc) == core.getCouleur()) {

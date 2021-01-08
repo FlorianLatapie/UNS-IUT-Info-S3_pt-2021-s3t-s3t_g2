@@ -131,7 +131,7 @@ public class TraitementPaquetTcp extends TraitementPaquet<TcpClient> {
 			break;
 		case "RAZDD":
 			fournirActionsDefense(Paquet, message);
-			logRAZDD(Paquet, message);
+			//logRAZDD(Paquet, message);
 			break;
 		case "PVDV":
 			ChoisirQuiVoter(Paquet, message);
@@ -701,15 +701,15 @@ public class TraitementPaquetTcp extends TraitementPaquet<TcpClient> {
 			log += carteJouee.get(carteJouee.size() - 1).toString();
 
 			log += " " + International.trad("texte.logfournirActionsDefense2") + " "
-					+ IdjrTools.getLieuByIndex((Integer) Paquet.getValeur(message, 1)) + ".";
+					+ IdjrTools.getLieuByIndex((Integer) Paquet.getValeur(message, 1)) + ". ";
 		} else
 			log += International.trad("texte.logfournirActionsDefense5") + " "
-					+ IdjrTools.getLieuByIndex((Integer) Paquet.getValeur(message, 1)) + ".";
+					+ IdjrTools.getLieuByIndex((Integer) Paquet.getValeur(message, 1)) + ". ";
 		if (!pionCachee.isEmpty()) {
 			log += International.trad("texte.logfournirActionsDefense3") + " ";
 			for (int i = 0; i < pionCachee.size() - 1; i++)
 				log += pionCachee.get(i).toString() + ", ";
-			log += pionCachee.get(pionCachee.size() - 1).toString() + ".";
+			log += pionCachee.get(pionCachee.size() - 1).toString() + ". ";
 		} else
 			log += International.trad("texte.logfournirActionsDefense4");
 		Evenement.log(log);
