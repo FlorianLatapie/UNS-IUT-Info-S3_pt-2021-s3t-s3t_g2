@@ -16,7 +16,7 @@ public class TraitementIdjr {
 
 	public void initialiserPartie(Idjr core, List<?> nomsT, List<Couleur> couleursT, String lieuferme) {
 		Evenement.stopWait();
-		Evenement.nomPhase(International.trad("text.placeperso"));
+		Evenement.nomPhases("text.placeperso");
 		List<String> noms = new ArrayList<>();
 		List<Couleur> couleurs = new ArrayList<>();
 		core.setJoueurEnVie((couleursT));
@@ -97,7 +97,7 @@ public class TraitementIdjr {
 	}
 
 	public void debutDeplacemant(Idjr core, List<?> lieuxT) {
-		Evenement.nomPhase(International.trad("text.phasedeplperso"));
+		Evenement.nomPhases("text.phasedeplperso");
 		List<Integer> lieux = new ArrayList<>();
 		for (Object o : lieuxT)
 			lieux.add((Integer) o);
@@ -165,7 +165,7 @@ public class TraitementIdjr {
 	}
 
 	public void debutPhaseAttaque(Idjr core) {
-		Evenement.nomPhase(International.trad("text.phaseresatazom"));
+		Evenement.nomPhases("text.phaseresatazom");
 	}
 
 	public void attaqueZombie(Idjr core, List<PionCouleur> l, int x, int zombie) {
@@ -183,7 +183,7 @@ public class TraitementIdjr {
 			nom = "PC de sécurité";
 		if (x == 6)
 			nom = "Supermarché";
-		Evenement.nomPhase(International.trad("text.phaseattaquelieu") + " " + nom);
+		Evenement.nomPhases("text.phaseattaquelieu", nom);
 		List<PionCouleur> ltemp = new ArrayList<>();
 		for (PionCouleur pc : l) {
 			if (IdjrTools.getCouleurByChar(pc) == core.getCouleur()) {
