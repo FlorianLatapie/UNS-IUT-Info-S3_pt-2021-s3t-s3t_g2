@@ -808,6 +808,7 @@ public class TraitementPaquetTcp extends TraitementPaquet<TcpClient> {
 	}
 
 	public void debutDeplacemant(Paquet Paquet, String message) {
+		Evenement.desEnlVigiles();
 		traitementI.debutDeplacemant(core, (List<?>) Paquet.getValeur(message, 4));
 	}
 
