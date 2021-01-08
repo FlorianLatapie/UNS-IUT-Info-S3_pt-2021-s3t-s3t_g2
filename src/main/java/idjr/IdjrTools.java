@@ -7,6 +7,7 @@ import java.util.List;
 import idjr.ihmidjr.langues.International;
 import reseau.type.Couleur;
 import reseau.type.PionCouleur;
+import reseau.type.Statut;
 
 public abstract class IdjrTools {
 	private IdjrTools() {
@@ -59,7 +60,7 @@ public abstract class IdjrTools {
 
 		return list;
 	}
-	
+
 	public static String getLieuByIndex(Integer idLieu) {
 		HashMap<Integer, String> listeLieu = new HashMap<Integer, String>();
 		listeLieu.put(1, International.trad("texte.lieu1"));
@@ -70,7 +71,7 @@ public abstract class IdjrTools {
 		listeLieu.put(6, International.trad("texte.lieu6"));
 		return listeLieu.get(idLieu);
 	}
-	
+
 	public static String getPionByIndex(Integer pionValue) {
 		HashMap<Integer, String> listePion = new HashMap<Integer, String>();
 		listePion.put(1, International.trad("texte.Fillette"));
@@ -80,5 +81,19 @@ public abstract class IdjrTools {
 		return listePion.get(pionValue);
 	}
 
+	public static String getStatutTrad(Statut statut) {
+		switch (statut) {
+		case ANNULEE:
+			return International.trad("text.statut.annulee");
+		case ATTENTE:
+			return International.trad("text.statut.attente");
+		case COMPLETE:
+			return International.trad("text.statut.complete");
+		case TERMINEE:
+			return International.trad("text.statut.terminee");
 
+		default:
+			return "";
+		}
+	}
 }

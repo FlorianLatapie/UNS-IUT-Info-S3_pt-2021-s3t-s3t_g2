@@ -1,5 +1,6 @@
 package idjr.ihmidjr;
 
+import idjr.ihmidjr.langues.International;
 import reseau.type.CarteType;
 import reseau.type.Couleur;
 /**
@@ -79,6 +80,25 @@ public interface IhmTools {
 			return jaune;
 		case M:
 			return marron;
+		default:
+			throw new IllegalArgumentException("Couleur inconnue");
+		}
+	}
+	
+	public static String colorTrad(Couleur couleur) {
+		switch (couleur) {
+		case B:
+			return International.trad("text.bleu");
+		case R:
+			return International.trad("text.rouge");
+		case V:
+			return International.trad("text.vert");
+		case N:
+			return International.trad("text.noir");
+		case J:
+			return International.trad("text.jaune");
+		case M:
+			return International.trad("text.marron");
 		default:
 			throw new IllegalArgumentException("Couleur inconnue");
 		}
