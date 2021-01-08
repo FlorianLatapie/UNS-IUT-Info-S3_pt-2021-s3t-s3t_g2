@@ -1,19 +1,25 @@
 package idjr.ihmidjr;
 
+import idjr.ihmidjr.langues.International;
 import reseau.type.CarteType;
 import reseau.type.Couleur;
-
+/**
+ * @author sebastien
+ * @author florian
+ *
+ */
 public interface IhmTools {
-	String vert = " -fx-background-color:#5EB137; -fx-text-fill: #000000";
-	String rouge = " -fx-background-color:#F30101; -fx-text-fill: #000000";
-	String marron = " -fx-background-color:#6C3505; -fx-text-fill: #000000";
-	String jaune = " -fx-background-color:#E9B902; -fx-text-fill: #000000";
-	String bleu = " -fx-background-color:#008CDA; -fx-text-fill: #ffffff";
-	String noir = " -fx-background-color:#000000; -fx-text-fill: #ffffff";
+	//auteur florian
+	String vert = " -fx-background-color:#5EB137; -fx-text-fill: #000000;";
+	String rouge = " -fx-background-color:#A80000; -fx-text-fill: #000000;";
+	String marron = " -fx-background-color:#6C3505; -fx-text-fill: #000000;";
+	String jaune = " -fx-background-color:#E9B902; -fx-text-fill: #000000;";
+	String bleu = " -fx-background-color:#008CDA; -fx-text-fill: #ffffff;";
+	String noir = " -fx-background-color:#000000; -fx-text-fill: #ffffff;";
 
 	/**
 	 * Permet de savoir si le nom est conforme
-	 * 
+	 * @author sebastien 
 	 * @param nom le nom cible
 	 * @return si le nom est valide
 	 */
@@ -45,7 +51,7 @@ public interface IhmTools {
 						if (u == (int) nom.charAt(i))
 							t &= false;
 					}
-					tmp |= true && t;
+					tmp |= t;
 				}
 			}
 			result &= tmp;
@@ -56,7 +62,7 @@ public interface IhmTools {
 
 	/**
 	 * Convertit la couleur en style
-	 * 
+	 * @author sebastien
 	 * @param couleur la couleur cible
 	 * @return le style
 	 */
@@ -78,10 +84,29 @@ public interface IhmTools {
 			throw new IllegalArgumentException("Couleur inconnue");
 		}
 	}
+	
+	public static String colorTrad(Couleur couleur) {
+		switch (couleur) {
+		case B:
+			return International.trad("text.bleu");
+		case R:
+			return International.trad("text.rouge");
+		case V:
+			return International.trad("text.vert");
+		case N:
+			return International.trad("text.noir");
+		case J:
+			return International.trad("text.jaune");
+		case M:
+			return International.trad("text.marron");
+		default:
+			throw new IllegalArgumentException("Couleur inconnue");
+		}
+	}
 
 	/**
 	 * Convertit la carte en chemin (image)
-	 * 
+	 * @author sebastien
 	 * @param carteType la carte cible
 	 * @return le chemin de l'image
 	 */
@@ -109,19 +134,19 @@ public interface IhmTools {
 			return DataControl.CARTE_SPRINT;
 		case ATR:
 			return DataControl.CARTE_TRONCENNEUSE;
+		default :
+			return null; 
 		}
-
-		return null;
 	}
 
 	/**
 	 * Covertit la carte chemin d'acces en cartetype
-	 * 
+	 * @author sebastien 
 	 * @param dataControl le chemin de l'image
 	 * @return la carte
 	 */
-	public static CarteType convertCarte(String dataControl) {
-		switch (dataControl) {
+	public static CarteType convertCarte(String carte) {
+		switch (carte) {
 		case DataControl.CARTE_BATTE:
 			return CarteType.ABA;
 		case DataControl.CARTE_CACHETTE:

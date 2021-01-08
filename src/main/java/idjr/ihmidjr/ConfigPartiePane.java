@@ -26,24 +26,29 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.TextAlignment;
-import reseau.type.Statut;
 import reseau.type.TypePartie;
 
 /**
  * The Class ConfigPartiePane.
  *
  * @author Florian
+ * @author Sebastien 
+ * @author Remy
+ * @author Tom
  * @version 0.1
  * @since 26/10/2020
  */
 public class ConfigPartiePane extends StackPane implements IConfigListener, ITraduction {
+	//auteur florian 
 	private ScreenControl sControl = null;
 	private Core core = null;
 	private final ApplicationPane paneName = ApplicationPane.CONFIG;
 	private int tailleCarreCentral = 800; // l'interface est sur un stackPane
 	private int hBouton = 75;
 	private int lBouton = 150;
-	private Font policeBouton = Font.font("Segoe UI", FontWeight.BOLD, 27);
+	
+	private String nomPolice = "Segoe UI";
+	private Font policeBouton = Font.font(nomPolice, FontWeight.BOLD, 27);
 	private CornerRadii coin = new CornerRadii(15.0);
 	private String styleBoutons = " -fx-background-color:#000000; -fx-background-radius: 15px; -fx-text-fill: #ffffff";
 	private String styleBoutonsSouris = "-fx-background-color:#ff0000;  -fx-text-fill:#000000; -fx-background-radius: 15px;";
@@ -54,7 +59,6 @@ public class ConfigPartiePane extends StackPane implements IConfigListener, ITra
 	ListView<Label> listView;
 	List<PartieInfo> partieActuelle = new ArrayList<>();
 	private Insets botPadding = new Insets(10);
-	ObservableList<Label> liste = FXCollections.observableArrayList();
 
 	ComboBox<String> cbtypePartie;
 	ComboBox<Integer> cbnbJr;
@@ -68,6 +72,7 @@ public class ConfigPartiePane extends StackPane implements IConfigListener, ITra
 	Button bRetour;
 
 	public ConfigPartiePane(ScreenControl sc, Core c) {
+		//auteur florian 
 		core = c;
 		sControl = sc;
 		stackPane.setAlignment(Pos.CENTER);
@@ -75,7 +80,7 @@ public class ConfigPartiePane extends StackPane implements IConfigListener, ITra
 		titre1 = new Label(
 				International.trad("texte.titreConfigPartieA") + "\n" + International.trad("texte.titreConfigPartieB"));
 		titre1.setTextAlignment(TextAlignment.CENTER);
-		titre1.setFont(Font.font("Segoe UI", FontWeight.BOLD, 80));
+		titre1.setFont(Font.font(nomPolice, FontWeight.BOLD, 80));
 		titre1.setTextFill(Color.BLACK);
 
 		VBox titre = new VBox(titre1);
@@ -96,13 +101,13 @@ public class ConfigPartiePane extends StackPane implements IConfigListener, ITra
 		HBox hComboTri = new HBox();
 		cbtypePartie = new ComboBox<>();
 		cbtypePartie.getItems().addAll(TypePartie.BOTU.name(), TypePartie.JRU.name(), TypePartie.MIXTE.name());
-		cbtypePartie.setValue(TypePartie.MIXTE.name());// TODO
+		cbtypePartie.setValue(TypePartie.MIXTE.name());
 		cbtypePartie.setStyle("-fx-text-fill: white;");
 		cbtypePartie.setPrefSize(200, 63);
 		cbtypePartie.setMinHeight(63);
 		cbnbJr = new ComboBox<>();
 		cbnbJr.getItems().addAll(3, 4, 5, 6);
-		cbnbJr.setValue(6);// TODO
+		cbnbJr.setValue(6);
 		cbnbJr.setStyle("-fx-text-fill: white;");
 		cbnbJr.setPadding(new Insets(0, 0, 0, 20));
 		cbnbJr.setPrefSize(100, 63);
@@ -130,12 +135,13 @@ public class ConfigPartiePane extends StackPane implements IConfigListener, ITra
 		partie.setMaxWidth(600);
 
 		// To Creating a Observable List
-		ObservableList<Label> liste = FXCollections.observableArrayList();
+		ObservableList<Label> liste = FXCollections.observableArrayList();		
 
 		// Create a ListView
-		listView = new ListView<Label>(liste);
+		listView = new ListView<>(liste);
 
 		// Only allowed to select single row in the ListView.
+
 		listView.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
 		listView.setPrefWidth(1200);
 		listView.setMaxWidth(1200);
@@ -161,12 +167,12 @@ public class ConfigPartiePane extends StackPane implements IConfigListener, ITra
 		bPbConnexion.setTextAlignment(TextAlignment.CENTER);
 		bPbConnexion.setPrefSize(120, 50);
 		bPbConnexion.setMinSize(120, 50);
-		bPbConnexion.setFont(Font.font("Segoe UI", FontWeight.BOLD, 15));
+		bPbConnexion.setFont(Font.font(nomPolice, FontWeight.BOLD, 15));
 		bPbConnexion.setStyle(styleBoutons);
 		bPbConnexion.setOnMouseEntered(event -> bPbConnexion.setStyle(styleBoutonsSouris));
 		bPbConnexion.setOnMouseExited(event -> bPbConnexion.setStyle(styleBoutons));
 		bPbConnexion.setTranslateX(540);
-
+		//auteur florian 
 		VBox vbCenter = new VBox();
 		vbCenter.setAlignment(Pos.CENTER);
 		vbCenter.setSpacing(10);
@@ -249,7 +255,7 @@ public class ConfigPartiePane extends StackPane implements IConfigListener, ITra
 
 	/**
 	 * Lance la procédure pour rejoindre une partie
-	 * 
+	 * @author Sebastien
 	 * @param id l'identifiant de la partie
 	 */
 	@Override
@@ -264,6 +270,7 @@ public class ConfigPartiePane extends StackPane implements IConfigListener, ITra
 
 	/**
 	 * Change l'affichage a l'attente
+	 * @author Sebastien
 	 */
 	@Override
 	public void partieValider() {
@@ -277,7 +284,7 @@ public class ConfigPartiePane extends StackPane implements IConfigListener, ITra
 
 	/**
 	 * Met a jour les parties sur l'affichage
-	 * 
+	 * @author Sebastien
 	 * @param partieInfo la liste des partie
 	 */
 	@Override

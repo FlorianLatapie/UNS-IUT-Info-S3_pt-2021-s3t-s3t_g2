@@ -24,8 +24,15 @@ import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.stage.Stage;
 
+/**
+ * 
+ * @author florian
+ * @author tom 
+ * @author sebastien 
+ *
+ */
 public class OptionPane extends StackPane implements IPleineEcranListener, ITraduction {
-
+	//auteur florian 
 	private ScreenControl sControl = null;
 	private Core core = null;
 	private StackPane stackPane = new StackPane();
@@ -46,6 +53,7 @@ public class OptionPane extends StackPane implements IPleineEcranListener, ITrad
 	Button bRetour;
 
 	public OptionPane(ScreenControl sc, Core c) {
+		//auteur florian 
 		core = c;
 		sControl = sc;
 
@@ -101,9 +109,7 @@ public class OptionPane extends StackPane implements IPleineEcranListener, ITrad
 		bFrancais.setStyle(styleBoutons);
 		bFrancais.setOnAction(EventHandler -> sc.setPaneOnTop(ApplicationPane.OPTION));
 
-		bFrancais.setOnMouseEntered(event -> {
-			bFrancais.setStyle(styleBoutonsSouris);
-		});
+		bFrancais.setOnMouseEntered(event -> bFrancais.setStyle(styleBoutonsSouris));
 		bFrancais.setOnMouseExited(event -> {
 			bFrancais.setStyle(styleBoutons);
 		});
@@ -152,9 +158,7 @@ public class OptionPane extends StackPane implements IPleineEcranListener, ITrad
 		bRetour.setPrefSize(180, hauteurElement);
 		bRetour.setStyle(styleBoutons);
 		bRetour.setOnAction(EventHandler -> sc.setPaneOnTop(core.getPauseDepuis()));
-		bRetour.setOnMouseEntered(event -> {
-			bRetour.setStyle(styleBoutonsSouris);
-		});
+		bRetour.setOnMouseEntered(event -> bRetour.setStyle(styleBoutonsSouris));
 		bRetour.setOnMouseExited(event -> {
 			bRetour.setStyle(styleBoutons);
 		});
@@ -179,6 +183,7 @@ public class OptionPane extends StackPane implements IPleineEcranListener, ITrad
 
 	/**
 	 * Met a jour le bouton du mode plein écran
+	 * @author sebastien
 	 */
 	@Override
 	public void updatePleineEcran() {

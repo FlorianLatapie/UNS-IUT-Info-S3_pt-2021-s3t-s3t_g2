@@ -27,18 +27,18 @@ import javafx.scene.text.FontWeight;
  * The Class AccueilPane.
  * 
  * @author Florian
- * @version 0.1
+ * @author tom
+ * @version 1.0
  * @since 01/11/2020
  */
 public class ReglesPane extends StackPane implements ITraduction {
-
+	//auteur florian 
 	private ScreenControl sControl = null;
 	private Core core = null;
 	private final ApplicationPane paneName = ApplicationPane.REGLES;
 	private int tailleCarreCentral = 800;
 	private int hBouton = 75;
 	private int lBouton = 150;
-	private int marge = tailleCarreCentral / 25;
 	private Font policeBouton = Font.font("Segoe UI", FontWeight.BOLD, 27);
 	private CornerRadii coin = new CornerRadii(15.0);
 	private String styleBoutons = " -fx-background-color:#000000; -fx-background-radius: 15px; -fx-text-fill: #ffffff";
@@ -47,14 +47,14 @@ public class ReglesPane extends StackPane implements ITraduction {
 	private GaussianBlur flou = new GaussianBlur(30);
 
 	private Font policeNom = Font.font("Segoe UI", 17);
-	private CornerRadii coinfb = new CornerRadii(5.0);
-	private Background fondBlanc = new Background(new BackgroundFill(Color.WHITE, coinfb, null));
+
 
 	Label titre1;
 	Label desc1;
 	Button bRetour;
 
 	public ReglesPane(ScreenControl sc, Core c) {
+		//auteur florian 
 		core = c;
 		sControl = sc;
 		stackPane.setAlignment(Pos.CENTER);
@@ -108,12 +108,8 @@ public class ReglesPane extends StackPane implements ITraduction {
 		bRetour.setMinSize(lBouton, hBouton);
 		bRetour.setFont(policeBouton);
 		bRetour.setStyle(styleBoutons);
-		bRetour.setOnMouseEntered(event -> {
-			bRetour.setStyle(styleBoutonsSouris);
-		});
-		bRetour.setOnMouseExited(event -> {
-			bRetour.setStyle(styleBoutons);
-		});
+		bRetour.setOnMouseEntered(event -> bRetour.setStyle(styleBoutonsSouris));
+		bRetour.setOnMouseExited(event -> bRetour.setStyle(styleBoutons));
 		bRetour.setOnAction(EventHandler -> sc.setPaneOnTop(core.getReglesDepuis()));
 
 		// grille contenant les boutons du bas

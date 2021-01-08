@@ -6,8 +6,15 @@ import idjr.ihmidjr.langues.International;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
+/**
+ * 
+ * @author Florian
+ * @author Sebastien
+ * @author Remy
+ *
+ */
 public class DataControl {
-
+	//auteur florian
 	public static enum ApplicationPane {
 		ACCUEIL, AIDE, CREATION, JEU, OPTION, PAUSE, PLATEAU, CONFIG, REGLES, ACCESSIBILITE, ENDGAME, WAIT, COULEUR
 	}
@@ -19,39 +26,39 @@ public class DataControl {
 	public final static Locale localeEN = new Locale("en", "UK");
 	public final static Locale localeFR = new Locale("fr", "FR");
 	public final static String localMsgURL = "Ressources.Textes.messages";
-	public static final String CSS = "idjr/ihmidjr/style/style.css";
+	//auteur remy pour le css 
+	public static final String CSS = "idjr/ihmidjr/style/style.css"; //CSS créé par remy
 
-	
-	public static final String FOND = "Images/ImagesIDJR/fond.png";
-	public static final String PLATEAU = "Images/ImagesIDJR/plateau.png";
-	public static final String ICONE = "Images/ImagesIDJR/desktopIcon.jpg";
-	public static final String NOIR = "Images/ImagesIDJR/noir.png";
-	public static final String VERT = "Images/ImagesIDJR/vert.png";
-	public static final String MARRON = "Images/ImagesIDJR/marron.png";
-	public static final String ROUGE = "Images/ImagesIDJR/rouge.png";
-	public static final String BLEU = "Images/ImagesIDJR/bleu.png";
-	public static final String JAUNE = "Images/ImagesIDJR/jaune.png";
+	//images modifiées ou créées par florian 
+	public static final String FOND = "Images/ImagesIDJR/fond.png"; // modifiée par florian
+	public static final String ICONE = "Images/ImagesIDJR/desktopIcon.jpg"; // modifiée par florian
+	public static final String NOIR = "Images/ImagesIDJR/noir.png";// créée par florian
+	public static final String VERT = "Images/ImagesIDJR/vert.png";// créée par florian
+	public static final String MARRON = "Images/ImagesIDJR/marron.png";// créée par florian
+	public static final String ROUGE = "Images/ImagesIDJR/rouge.png";// créée par florian
+	public static final String BLEU = "Images/ImagesIDJR/bleu.png";// créée par florian
+	public static final String JAUNE = "Images/ImagesIDJR/jaune.png";// créée par florian
 
-	public static final String BADGE_VIGILE = "Images/ImagesIDJR/badge vigile.png";
+	public static final String BADGE_VIGILE = "Images/ImagesIDJR/badge vigile.png";// modifiée par florian
 
 	// Cartes
-	public static final String CARTE_BATTE = "Images/ImagesIDJR/Cartes/Cartes_Armes/batte.png";
-	public static final String CARTE_CS = "Images/ImagesIDJR/Cartes/Cartes_Armes/Canon Scié.png";
-	public static final String CARTE_GRENADE = "Images/ImagesIDJR/Cartes/Cartes_Armes/grenade.png";
-	public static final String CARTE_HACHE = "Images/ImagesIDJR/Cartes/Cartes_Armes/hache.png";
-	public static final String CARTE_REVOLVER = "Images/ImagesIDJR/Cartes/Cartes_Armes/revolver.png";
-	public static final String CARTE_TRONCENNEUSE = "Images/ImagesIDJR/Cartes/Cartes_Armes/tronconneuse.png";
+	public static final String CARTE_BATTE = "Images/ImagesIDJR/Cartes/Cartes_Armes/batte.png";// modifiée par florian
+	public static final String CARTE_CS = "Images/ImagesIDJR/Cartes/Cartes_Armes/Canon Scié.png";// modifiée par florian
+	public static final String CARTE_GRENADE = "Images/ImagesIDJR/Cartes/Cartes_Armes/grenade.png";// modifiée par florian
+	public static final String CARTE_HACHE = "Images/ImagesIDJR/Cartes/Cartes_Armes/hache.png";// modifiée par florian
+	public static final String CARTE_REVOLVER = "Images/ImagesIDJR/Cartes/Cartes_Armes/revolver.png";// modifiée par florian
+	public static final String CARTE_TRONCENNEUSE = "Images/ImagesIDJR/Cartes/Cartes_Armes/tronconneuse.png";// modifiée par florian
 
 	// Autres artes
-	public static final String CARTE_CACHETTE = "Images/ImagesIDJR/Cartes/Cartes_Autres/cachette.png";
-	public static final String CARTE_CAMERA = "Images/ImagesIDJR/Cartes/Cartes_Autres/camera.png";
-	public static final String CARTE_MATERIEL = "Images/ImagesIDJR/Cartes/Cartes_Autres/matériel.png";
-	public static final String CARTE_MENACE = "Images/ImagesIDJR/Cartes/Cartes_Autres/menace.png";
-	public static final String CARTE_SPRINT = "Images/ImagesIDJR/Cartes/Cartes_Autres/sprint.png";
+	public static final String CARTE_CACHETTE = "Images/ImagesIDJR/Cartes/Cartes_Autres/cachette.png";// modifiée par florian
+	public static final String CARTE_CAMERA = "Images/ImagesIDJR/Cartes/Cartes_Autres/camera.png";// modifiée par florian
+	public static final String CARTE_MATERIEL = "Images/ImagesIDJR/Cartes/Cartes_Autres/matériel.png";// modifiée par florian
+	public static final String CARTE_MENACE = "Images/ImagesIDJR/Cartes/Cartes_Autres/menace.png";// modifiée par florian
+	public static final String CARTE_SPRINT = "Images/ImagesIDJR/Cartes/Cartes_Autres/sprint.png";// modifiée par florian
 
 	// Autre autre carte 
-	public static final String CARTE_VIDE = "Images/ImagesIDJR/carte_vide.png";
-	public static final String DOS_CARTE = "Images/ImagesIDJR/Cartes_Autres/dosCarte.png";
+	public static final String CARTE_VIDE = "Images/ImagesIDJR/carte_vide.png";// créée par florian
+	public static final String DOS_CARTE = "Images/ImagesIDJR/Cartes_Autres/dosCarte.png";// modifiée par florian
 
 	public static final ObservableList<Integer> nombreJoueur = FXCollections.observableArrayList(3, 4, 5, 6);
 	public static final ObservableList<Integer> nombreBot = FXCollections.observableArrayList(0, 1, 2, 3, 4, 5, 6);

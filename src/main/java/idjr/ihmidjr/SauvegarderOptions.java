@@ -10,6 +10,11 @@ import java.io.Serializable;
 
 import idjr.ihmidjr.langues.Langues;
 
+/**
+ * 
+ * @author Sebastien
+ *
+ */
 public class SauvegarderOptions implements Serializable {
 
 	private static final long serialVersionUID = 3409175594291680627L;
@@ -46,6 +51,9 @@ public class SauvegarderOptions implements Serializable {
 		}
 	}
 
+	/**
+	 * sauvegarde les options dans le fichier désigné par CHEMIN
+	 */
 	public void sauvegarder() {
 		FileOutputStream fioust;
 		try {

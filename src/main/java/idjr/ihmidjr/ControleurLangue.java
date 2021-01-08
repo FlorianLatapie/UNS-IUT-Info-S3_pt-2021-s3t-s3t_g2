@@ -13,7 +13,8 @@ import javafx.beans.binding.StringBinding;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
 
-/*
+/**
+ * @author Sebastien  
  * from : https://javafxpedia.com/en/tutorial/5434/internationalization-in-javafx
  */
 

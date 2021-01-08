@@ -1,7 +1,6 @@
 package idjr;
 
 import idjr.ihmidjr.event.Evenement;
-import idjr.ihmidjr.event.IJeuListener;
 import reseau.socket.ControleurReseau;
 import reseau.tool.ReseauOutils;
 import reseau.tool.ThreadOutils;
@@ -51,9 +50,12 @@ public class Idjr {
 	private Couleur couleurChoisi;
 	private CarteType carteUtiliser;
 	private List<CarteType> cartesUtiliser;
+	private List<Object> resultatFouille;
 	private Couleur voteChoisi;
 	private boolean isContinue;
 	private String etat;
+	private int nbZombieLieu;
+	private HashMap<Integer, Integer> Persolieu;
 
 	/* Parametre Temporaire */
 	private List<Integer> pionAPos;
@@ -76,6 +78,7 @@ public class Idjr {
 		this.envie = true;
 		this.estFini = false;
 		this.joueurEnVie = new ArrayList<>();
+		this.Persolieu = new HashMap<>();
 	}
 
 	private void initReseau() throws IOException {
@@ -135,6 +138,18 @@ public class Idjr {
 			ControleurReseau.envoyerTcp(messageTcp);
 		});
 	}
+	
+	
+
+	public int getNbZombieLieu() {
+		return nbZombieLieu;
+	}
+
+	public void setNbZombieLieu(int nbZombieLieu) {
+		this.nbZombieLieu = nbZombieLieu;
+	}
+
+
 
 	private boolean desVote = false;
 
@@ -432,4 +447,23 @@ public class Idjr {
 	public void setContinue(boolean isContinue) {
 		this.isContinue = isContinue;
 	}
+
+	public List<Object> getResultatFouille() {
+		return resultatFouille;
+	}
+
+	public void setResultatFouille(List<Object> resultatFouille) {
+		this.resultatFouille = resultatFouille;
+	}
+
+	public HashMap<Integer, Integer> getPersolieu() {
+		return Persolieu;
+	}
+
+	public void setPersolieu(HashMap<Integer, Integer> persolieu) {
+		Persolieu = persolieu;
+	}
+	
+	
+	
 }

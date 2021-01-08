@@ -6,6 +6,8 @@ import java.util.List;
 import pp.Joueur;
 import pp.Partie;
 import pp.ihm.event.EvenementStockage;
+import pp.ihm.langues.International;
+import pp.ihm.IhmOutils;
 import pp.ihm.event.Evenement;
 import pp.reseau.FouilleCamionReseau;
 import reseau.type.CarteEtat;
@@ -48,7 +50,11 @@ public class ControleurFouilleCamion {
 			j = joueurFouille(jeu, partieId, numeroTour);
 			if (j != null) {
 				Evenement.quiJoue(j.getCouleur());
-				s = "Phase fouille camion";
+				s = j + " (" + IhmOutils.getCouleurTrad(j.getCouleur()) + ") " + International.trad("text.fouilleLeCamion");
+				Evenement.fouilleCamion(s);
+				while (!EvenementStockage.isPopupAccepter())
+					Thread.yield();
+				EvenementStockage.setPopupAccepter(false);
 				fr.envoyerCarte(jeu, j, partieId, numeroTour);
 				Evenement.nbCartePiocheActuel(jeu.getCartes().size());
 				List<Object> l = fr.choixCarte(jeu, j);
@@ -60,16 +66,31 @@ public class ControleurFouilleCamion {
 				fr.finFouilleCamion(jeu, j.getCouleur(), (Couleur) l.get(2), etatCarteDefausse((CarteType) l.get(3)),
 						partieId, numeroTour);
 				Evenement.suppQuiJoue();
-			}
-			if (s == "") {
-				s = "Personne fouille le Camion";
+				if ((Couleur) l.get(2) != null) {
+					String s1 = jeu.getJoueurCouleur((Couleur) l.get(2)) + " (" + IhmOutils.getCouleurTrad((Couleur) l.get(2)) + ") "
+							+ International.trad("text.recuCarte");
+					Evenement.fouilleCamion(s1);
+					while (!EvenementStockage.isPopupAccepter())
+						Thread.yield();
+					EvenementStockage.setPopupAccepter(false);
+				}
+			} else {
+				s = International.trad("text.pCamion");
 				fr.finFouilleCamion(jeu, Couleur.NUL, Couleur.NUL, CarteEtat.NUL, partieId, numeroTour);
+				Evenement.fouilleCamion(s);
+				while (!EvenementStockage.isPopupAccepter())
+					Thread.yield();
+				EvenementStockage.setPopupAccepter(false);
 			}
+		} else {
+			s = International.trad("text.pCamion");
+			fr.finFouilleCamion(jeu, Couleur.NUL, Couleur.NUL, CarteEtat.NUL, partieId, numeroTour);
 			Evenement.fouilleCamion(s);
 			while (!EvenementStockage.isPopupAccepter())
 				Thread.yield();
 			EvenementStockage.setPopupAccepter(false);
 		}
+
 	}
 
 	/**
@@ -80,7 +101,7 @@ public class ControleurFouilleCamion {
 	 * @return On peut faire une fouille du camion.
 	 */
 	private Boolean isFouillable(Partie jeu) {
-		return !jeu.getJoueurSurLieu(jeu.getLieux().get(4)).isEmpty() || !jeu.getCartes().isEmpty();
+		return !(jeu.getLieux().get(4).getPersonnage().isEmpty()) && !(jeu.getCartes().isEmpty());
 	}
 
 	/**

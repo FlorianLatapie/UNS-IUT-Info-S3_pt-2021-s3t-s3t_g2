@@ -18,7 +18,6 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
-import javafx.scene.layout.TilePane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
@@ -29,32 +28,37 @@ import javafx.scene.text.TextAlignment;
  * The Class AccueilPane.
  * 
  * @author Florian
+ * @author Remy 
+ * @author Sebastien 
+ * @author Tom 
+ * 
  * @version 0.1
  * @since 01/11/2020
  */
 public class FinDePartiePane extends StackPane implements IFinListener, ITraduction {
-
+	//auteur florian 
 	private ScreenControl sControl = null;
 	private Core core = null;
 	private final ApplicationPane paneName = ApplicationPane.ENDGAME;
 	private int tailleCarreCentral = 800;
 	private int hBouton = 75;
 	private int lBouton = 150;
-	private int marge = tailleCarreCentral / 25;
-	private Font policeBouton = Font.font("Segoe UI", FontWeight.BOLD, 27);
+	
+	private String nomPolice = "Segoe UI";
+	private Font policeBouton = Font.font(nomPolice, FontWeight.BOLD, 27);
+
 	private CornerRadii coin = new CornerRadii(15.0);
 	private String styleBoutons = " -fx-background-color:#000000; -fx-background-radius: 15px; -fx-text-fill: #ffffff";
 	private String styleBoutonsSouris = "-fx-background-color:#ff0000;  -fx-text-fill:#000000; -fx-background-radius: 15px;";
 	private StackPane stackPane = new StackPane();
 	private GaussianBlur flou = new GaussianBlur(30);
-	private Font policeNom = Font.font("Segoe UI", FontWeight.BOLD, 35);
-	private CornerRadii coinfb = new CornerRadii(10.0);
-	private Background fondBlanc = new Background(new BackgroundFill(Color.WHITE, coinfb, null));
+
+	private Font policeNom = Font.font(nomPolice, FontWeight.BOLD, 35);
 	private String styleVBox = "-fx-border-color: #1A1A1A; -fx-border-insets: 5; -fx-border-width: 3;";
-	private Font policeScoreBoard = Font.font("Segoe UI", FontWeight.BOLD, 20);
+	private Font policeScoreBoard = Font.font(nomPolice, FontWeight.BOLD, 20);
 
 	Label desc;
-	Label nomJoueur1;
+	/*Label nomJoueur1;
 	Label score1;
 	Label nbPersVivant1;
 	Label nbZbTue1;
@@ -82,12 +86,13 @@ public class FinDePartiePane extends StackPane implements IFinListener, ITraduct
 	Label titreJoueur;
 	Label titreScore;
 	Label titreNbPersVivant;
-	Label titreNbZbTues;
+	Label titreNbZbTues;*/
 
 	Label titre1;
 	Button bRetour;
 
 	public FinDePartiePane(ScreenControl sc, Core c) {
+		//auteur florian
 		core = c;
 		sControl = sc;
 		stackPane.setAlignment(Pos.CENTER);
@@ -95,7 +100,7 @@ public class FinDePartiePane extends StackPane implements IFinListener, ITraduct
 		// titre
 		titre1 = new Label(
 				International.trad("text.titreFinDePartieA") + " " + International.trad("text.titreFinDePartieB"));
-		titre1.setFont(Font.font("Segoe UI", FontWeight.BOLD, 80));
+		titre1.setFont(Font.font(nomPolice, FontWeight.BOLD, 80));
 		titre1.setTextFill(Color.BLACK);
 
 		VBox titre = new VBox(titre1);
@@ -104,13 +109,13 @@ public class FinDePartiePane extends StackPane implements IFinListener, ITraduct
 		titre.setPrefWidth(730);
 		titre.setMinWidth(730);
 
-		desc = new Label("");
+		desc = new Label("gagné/perdu");
 		desc.setTextAlignment(TextAlignment.CENTER);
 		desc.setTextFill(Color.WHITE);
 		desc.setFont(policeNom);
 		desc.setPadding(new Insets(20));
-
-		nomJoueur1 = new Label(International.trad("texte.j1"));
+		//auteur remy 
+		/*nomJoueur1 = new Label(International.trad("texte.j1"));
 		nomJoueur1.setAlignment(Pos.CENTER);
 		nomJoueur1.setFont(policeScoreBoard);
 		nomJoueur1.setTextFill(Color.WHITESMOKE);
@@ -231,13 +236,13 @@ public class FinDePartiePane extends StackPane implements IFinListener, ITraduct
 		titreNbZbTues.setAlignment(Pos.CENTER);
 		titreNbZbTues.setFont(policeScoreBoard);
 		titreNbZbTues.setTextFill(Color.RED);
-
+		*/
 		VBox vbCenter = new VBox();
 		vbCenter.setAlignment(Pos.CENTER);
 		vbCenter.setPrefHeight(500);
 		vbCenter.setMinHeight(500);
 		vbCenter.setTranslateY(-50);
-
+/*
 		TilePane tile1 = new TilePane();
 		tile1.setAlignment(Pos.CENTER_LEFT);
 		tile1.setStyle(styleVBox);
@@ -323,22 +328,19 @@ public class FinDePartiePane extends StackPane implements IFinListener, ITraduct
 		vbScoreBoard.setMinSize(700, 390);
 		vbScoreBoard.setMaxSize(700, 390);
 		vbScore.getChildren().addAll(tile1, tile2, tile3, tile4, tile5, tile6);
-		vbScoreBoard.getChildren().addAll(tileTitreScore, vbScore);
+		vbScoreBoard.getChildren().addAll(tileTitreScore, vbScore);*/
 
-		vbCenter.getChildren().addAll(desc, vbScoreBoard);
+		vbCenter.getChildren().addAll(desc/*, vbScoreBoard*/);
 
+		// auteur florian 
 		// bouton
 		bRetour = new Button(International.trad("bouton.retour"));
 		bRetour.setPrefSize(lBouton, hBouton);
 		bRetour.setMinSize(lBouton, hBouton);
 		bRetour.setFont(policeBouton);
 		bRetour.setStyle(styleBoutons);
-		bRetour.setOnMouseEntered(event -> {
-			bRetour.setStyle(styleBoutonsSouris);
-		});
-		bRetour.setOnMouseExited(event -> {
-			bRetour.setStyle(styleBoutons);
-		});
+		bRetour.setOnMouseEntered(event -> bRetour.setStyle(styleBoutonsSouris));
+		bRetour.setOnMouseExited(event -> bRetour.setStyle(styleBoutons));
 		bRetour.setOnAction(EventHandler -> sc.setPaneOnTop(core.getReglesDepuis()));
 
 		// grille contenant les boutons du bas
@@ -379,7 +381,7 @@ public class FinDePartiePane extends StackPane implements IFinListener, ITraduct
 
 	/**
 	 * Affiche le gagnant
-	 * 
+	 * @author sebastien 
 	 * @param nom le nom du joueur
 	 */
 	@Override
@@ -390,7 +392,7 @@ public class FinDePartiePane extends StackPane implements IFinListener, ITraduct
 				if (nom.equals(core.getIdjr().getNom()))
 					desc.setText(International.trad("text.gagne"));
 				else
-					desc.setText(International.trad("text.perd1") + "\n" + International.trad("text.perd2", nom));
+					desc.setText(International.trad("text.perd1") + "\n" + International.trad("text.perd2")+nom);
 			}
 		});
 	}
@@ -405,7 +407,7 @@ public class FinDePartiePane extends StackPane implements IFinListener, ITraduct
 			public void run() {
 				titre1.setText(International.trad("text.titreFinDePartieA") + " "
 						+ International.trad("text.titreFinDePartieB"));
-				nomJoueur1.setText(International.trad("texte.j1"));
+				/*nomJoueur1.setText(International.trad("texte.j1"));
 				nomJoueur2.setText(International.trad("texte.j2"));
 				nomJoueur3.setText(International.trad("texte.j3"));
 				nomJoueur4.setText(International.trad("texte.j4"));
@@ -414,7 +416,7 @@ public class FinDePartiePane extends StackPane implements IFinListener, ITraduct
 				titreJoueur.setText(International.trad("texte.nom"));
 				titreScore.setText(International.trad("texte.score"));
 				titreNbPersVivant.setText(International.trad("texte.alive"));
-				titreNbZbTues.setText(International.trad("texte.zTues"));
+				titreNbZbTues.setText(International.trad("texte.zTues"));*/
 				bRetour.setText(International.trad("bouton.retour"));
 			}
 		});

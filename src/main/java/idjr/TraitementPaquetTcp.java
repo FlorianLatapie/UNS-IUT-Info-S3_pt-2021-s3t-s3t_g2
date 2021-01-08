@@ -16,10 +16,10 @@ import reseau.type.VoteType;
 import static java.lang.System.out;
 
 import java.text.MessageFormat;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+import idjr.ihmidjr.IhmTools;
 import idjr.ihmidjr.event.Evenement;
 import idjr.ihmidjr.langues.International;
 
@@ -69,11 +69,11 @@ public class TraitementPaquetTcp extends TraitementPaquet<TcpClient> {
 			break;
 		case "PIIJ":
 			lancerDes(Paquet, message);// savoir comment return plusieur choses
-			logPIIJ(Paquet, message);
+			// logPIIJ(Paquet, message);
 			break;
 		case "PIRD":
 			choisirDestPion(Paquet, message);
-			logPIRD(Paquet, message);
+			// logPIRD(Paquet, message);
 			break;
 		case "PIIG":
 			logPIIG(Paquet, message);
@@ -126,15 +126,15 @@ public class TraitementPaquetTcp extends TraitementPaquet<TcpClient> {
 			break;
 		case "FP":
 			finPartie(Paquet, message);
-			logFP(Paquet, message);
+			//logFP(Paquet, message);
 			break;
 		case "RAZDD":
 			fournirActionsDefense(Paquet, message);
-			logRAZDD(Paquet, message);
+			//logRAZDD(Paquet, message);
 			break;
 		case "PVDV":
 			ChoisirQuiVoter(Paquet, message);
-			logPVDV(Paquet, message);
+			// logPVDV(Paquet, message);
 			break;
 		case "AZDCS":
 			ReponseJoueurCourant(Paquet, message);
@@ -142,7 +142,7 @@ public class TraitementPaquetTcp extends TraitementPaquet<TcpClient> {
 			break;
 		case "PVD":
 			IndiquerCarteJouees(Paquet, message);
-			logPVD(Paquet, message);
+			// logPVD(Paquet, message);
 			break;
 		case "FCRC":
 			recupCarte(Paquet, message);
@@ -158,7 +158,8 @@ public class TraitementPaquetTcp extends TraitementPaquet<TcpClient> {
 			break;
 		case "FCLC":
 			choixCarteFouille(Paquet, message);
-			logFCLC(Paquet, message);
+			logFCLC1(Paquet, message);
+			// logFCLC2(core.getResultatFouille());
 			break;
 		case "RFC":
 			logRFC(Paquet, message);
@@ -225,11 +226,19 @@ public class TraitementPaquetTcp extends TraitementPaquet<TcpClient> {
 	}
 
 	private void logPVR(Paquet paquet, String message) {
-		String log;
+		String log ="";
 		if (((Couleur) paquet.getValeur(message, 1)).equals(Couleur.NUL))
 			log = International.trad("texte.logPVR1");
-		else
-			log = International.trad("texte.logPVR2") + ((Couleur) paquet.getValeur(message, 1)).toString() + ".";
+		else {
+			List<Couleur>listeJ = (List<Couleur>) paquet.getValeur(message, 2);
+			List<Couleur>listeV = (List<Couleur>) paquet.getValeur(message, 3);
+			for (int i= 0 ; i<listeJ.size();i++) {
+				log += International.trad("texte.logPVR3") + " " + IhmTools.colorTrad(listeJ.get(i))  + " " + International.trad("texte.logPVR4")+ IhmTools.colorTrad(listeV.get(i)) +".\n";
+			}
+			
+			log += International.trad("texte.logPVR2") + " " + ((Couleur) paquet.getValeur(message, 1)).toString() + ".";
+		}
+			
 		Evenement.log(log);
 
 	}
@@ -320,8 +329,8 @@ public class TraitementPaquetTcp extends TraitementPaquet<TcpClient> {
 	}
 
 	private void logIPV(Paquet paquet, String message) {
-		String log = " " + International.trad("texte.logIPV1") + ((VoteType) paquet.getValeur(message, 1)).toString()
-				+ " " + International.trad("texte.logIPV2");
+		String log = " " + International.trad("texte.logIPV1") + " ("
+				+ ((VoteType) paquet.getValeur(message, 1)).toString() + ") " + International.trad("texte.logIPV2");
 		Evenement.log(log);
 	}
 
@@ -340,13 +349,16 @@ public class TraitementPaquetTcp extends TraitementPaquet<TcpClient> {
 	}
 
 	private void logPECV(Paquet paquet, String message) {
-		String log = " " + International.trad("texte.logPECV1") + "\n " + International.trad("texte.logPECV2") + "\n ";
-		List<Couleur> couleur = new ArrayList<>();
-		for (PionCouleur pc : (List<PionCouleur>) paquet.getValeur(message, 1))
-			if (!couleur.contains(IdjrTools.getCouleurByChar(pc)))
-				couleur.add(IdjrTools.getCouleurByChar(pc));
-		for (Couleur c : couleur)
-			log += core.getListeJoueursInitiale().get(c) + "\n ";
+		String log = " " + International.trad("texte.logPECV1");
+		/*
+		 * + "\n " + International.trad("texte.logPECV2") + "\n ";
+		 * 
+		 * List<Couleur> couleur = new ArrayList<>(); for (PionCouleur pc :
+		 * (List<PionCouleur>) paquet.getValeur(message, 1)) if
+		 * (!couleur.contains(IdjrTools.getCouleurByChar(pc)))
+		 * couleur.add(IdjrTools.getCouleurByChar(pc)); for (Couleur c : couleur) log +=
+		 * core.getListeJoueursInitiale().get(c) + "\n ";
+		 */
 		Evenement.log(log);
 
 	}
@@ -359,7 +371,7 @@ public class TraitementPaquetTcp extends TraitementPaquet<TcpClient> {
 		else
 			log += International.trad("texte.logRFC3") + "\n ";
 		if (!((Couleur) paquet.getValeur(message, 2)).equals(Couleur.NUL))
-			log += International.trad("texte.logLejoueur") + " " + ((Couleur) paquet.getValeur(message, 1)).toString()
+			log += International.trad("texte.logLejoueur") + " " + ((Couleur) paquet.getValeur(message, 2)).toString()
 					+ " " + International.trad("texte.logRFC4") + "\n ";
 		else
 			log += International.trad("texte.logRFC5") + "\n ";
@@ -372,23 +384,49 @@ public class TraitementPaquetTcp extends TraitementPaquet<TcpClient> {
 
 	}
 
-	private void logFCLC(Paquet paquet, String message) {
+	private void logFCLC1(Paquet paquet, String message) {
 		List<CarteType> listeJC = (List<CarteType>) paquet.getValeur(message, 1);
 		String log = International.trad("texte.logFCLC1") + " ";
 		for (int i = 0; i < listeJC.size() - 1; i++)
 			log += listeJC.get(i).toString() + ", ";
 		log += listeJC.get(listeJC.size() - 1).toString();
-		log += " " + International.trad("texte.logFCLC2");
+//		log += " " + International.trad("texte.logFCLC2");
 		Evenement.log(log);
 
 	}
 
+	private void logFCLC2(List<Object> listeResultat) {
+		String log = "";
+		if (!((CarteType) listeResultat.get(0)).equals(CarteType.NUL))
+			log += International.trad("texte.logchoixCarteFouille1") + " "
+					+ ((CarteType) listeResultat.get(0)).toString() + ".";
+		else
+			log += International.trad("texte.logchoixCarteFouille2");
+		if (!((CarteType) listeResultat.get(1)).equals(CarteType.NUL))
+			log += International.trad("texte.logchoixCarteFouille3") + " "
+					+ ((CarteType) listeResultat.get(1)).toString() + " "
+					+ International.trad("texte.logchoixCarteFouille4") + " "
+					+ ((Couleur) listeResultat.get(3)).toString() + ".";
+		else
+			log += International.trad("texte.logchoixCarteFouille5");
+		if (!((CarteType) listeResultat.get(2)).equals(CarteType.NUL))
+			log += International.trad("texte.logchoixCarteFouille6") + " "
+					+ ((CarteType) listeResultat.get(2)).toString() + ".";
+		else
+			log += International.trad("texte.logchoixCarteFouille7");
+		Evenement.log(log);
+	}
+
 	private void logPFC(Paquet paquet, String message) {
-		String log = " " + International.trad("texte.logPFC1") + "\n " + International.trad("texte.logPFC2") + "\n ";
-		for (PionCouleur c : (List<PionCouleur>) paquet.getValeur(message, 1))
-			log += core.getListeJoueursInitiale().get(IdjrTools.getCouleurByChar(c)) + "\n ";
-		log += International.trad("texte.logPFC3") + " " + (Integer) paquet.getValeur(message, 2) + " "
-				+ International.trad("texte.logPFC4");
+		String log = " " + International.trad("texte.logPFC1");
+		/*
+		 * + "\n " + International.trad("texte.logPFC2") + "\n ";
+		 *
+		 * for (PionCouleur c : (List<PionCouleur>) paquet.getValeur(message, 1)) log +=
+		 * core.getListeJoueursInitiale().get(IdjrTools.getCouleurByChar(c)) + "\n ";
+		 * log += International.trad("texte.logPFC3") + " " + (Integer)
+		 * paquet.getValeur(message, 2) + " " + International.trad("texte.logPFC4");
+		 */
 		Evenement.log(log);
 
 	}
@@ -613,6 +651,7 @@ public class TraitementPaquetTcp extends TraitementPaquet<TcpClient> {
 				+ International.trad("texte.logchoisirDestPion2") + " " + IdjrTools.getLieuByIndex(dest) + ".";
 		Evenement.log(log);
 		ControleurReseau.envoyerTcp(ControleurReseau.construirePaquetTcp("PICD", dest, pion, m1, core.getJoueurId()));
+		core.getPersolieu().put(pion, dest);
 	}
 
 	public void ChoisirQuiVoter(Paquet Paquet, String message) {
@@ -662,15 +701,15 @@ public class TraitementPaquetTcp extends TraitementPaquet<TcpClient> {
 			log += carteJouee.get(carteJouee.size() - 1).toString();
 
 			log += " " + International.trad("texte.logfournirActionsDefense2") + " "
-					+ IdjrTools.getLieuByIndex((Integer) Paquet.getValeur(message, 1)) + ".";
+					+ IdjrTools.getLieuByIndex((Integer) Paquet.getValeur(message, 1)) + ". ";
 		} else
 			log += International.trad("texte.logfournirActionsDefense5") + " "
-					+ IdjrTools.getLieuByIndex((Integer) Paquet.getValeur(message, 1)) + ".";
+					+ IdjrTools.getLieuByIndex((Integer) Paquet.getValeur(message, 1)) + ". ";
 		if (!pionCachee.isEmpty()) {
 			log += International.trad("texte.logfournirActionsDefense3") + " ";
 			for (int i = 0; i < pionCachee.size() - 1; i++)
 				log += pionCachee.get(i).toString() + ", ";
-			log += pionCachee.get(pionCachee.size() - 1).toString() + ".";
+			log += pionCachee.get(pionCachee.size() - 1).toString() + ". ";
 		} else
 			log += International.trad("texte.logfournirActionsDefense4");
 		Evenement.log(log);
@@ -682,7 +721,7 @@ public class TraitementPaquetTcp extends TraitementPaquet<TcpClient> {
 
 	public void lanceDesChefVigil(Paquet packet, String message) {
 		// TODO réorganiser
-		Evenement.nomPhase("Phase d’arrivée des zombies");
+		Evenement.nomPhases("text.phaseariveezombies");
 		Couleur c1 = (Couleur) packet.getValeur(message, 1);
 		if (core.getCouleur() == c1) {
 			String m1 = (String) packet.getValeur(message, 3);
@@ -696,35 +735,17 @@ public class TraitementPaquetTcp extends TraitementPaquet<TcpClient> {
 	}
 
 	private void choixCarteFouille(Paquet Paquet, String message) {
-		List<Object> listeResultat = traitementI.carteFouille((List<CarteType>) Paquet.getValeur(message, 1), core);
-		String log = "";
-		if (!((CarteType) listeResultat.get(0)).equals(CarteType.NUL))
-			log += International.trad("texte.logchoixCarteFouille1") + " "
-					+ ((CarteType) listeResultat.get(0)).toString() + ".";
-		else
-			log += International.trad("texte.logchoixCarteFouille2");
-		if (!((CarteType) listeResultat.get(1)).equals(CarteType.NUL))
-			log += International.trad("texte.logchoixCarteFouille3") + " "
-					+ ((CarteType) listeResultat.get(1)).toString() + " "
-					+ International.trad("texte.logchoixCarteFouille4") + " "
-					+ ((Couleur) listeResultat.get(3)).toString() + ".";
-		else
-			log += International.trad("texte.logchoixCarteFouille5");
-		if (!((CarteType) listeResultat.get(2)).equals(CarteType.NUL))
-			log += International.trad("texte.logchoixCarteFouille6") + " "
-					+ ((CarteType) listeResultat.get(2)).toString() + ".";
-		else
-			log += International.trad("texte.logchoixCarteFouille7");
-		Evenement.log(log);
-		ControleurReseau.envoyerTcp(ControleurReseau.construirePaquetTcp("SCFC", (CarteType) listeResultat.get(0),
-				(CarteType) listeResultat.get(1), (Couleur) listeResultat.get(3), (CarteType) listeResultat.get(2),
+		core.setResultatFouille(traitementI.carteFouille((List<CarteType>) Paquet.getValeur(message, 1), core));
+		ControleurReseau.envoyerTcp(ControleurReseau.construirePaquetTcp("SCFC",
+				(CarteType) core.getResultatFouille().get(0), (CarteType) core.getResultatFouille().get(1),
+				(Couleur) core.getResultatFouille().get(3), (CarteType) core.getResultatFouille().get(2),
 				(String) Paquet.getValeur(message, 2), Paquet.getValeur(message, 3), core.getJoueurId()));
 
 	}
 
 	public void choixDestVigil(Paquet Paquet, String message) {
 		// TODO réorganiser
-		Evenement.nomPhase("Phase de choix d’une destination");
+		Evenement.nomPhases("text.phasechoixdesti");
 		if (!core.getEnvie())
 			return;
 		if (core.getCouleur() == (Couleur) Paquet.getValeur(message, 1)
@@ -796,6 +817,7 @@ public class TraitementPaquetTcp extends TraitementPaquet<TcpClient> {
 	}
 
 	public void debutDeplacemant(Paquet Paquet, String message) {
+		Evenement.desEnlVigiles();
 		traitementI.debutDeplacemant(core, (List<?>) Paquet.getValeur(message, 4));
 	}
 
@@ -814,11 +836,12 @@ public class TraitementPaquetTcp extends TraitementPaquet<TcpClient> {
 				listRenvoye.get(1), listRenvoye.get(2), (String) Paquet.getValeur(message, 3),
 				(int) Paquet.getValeur(message, 4), core.getJoueurId());
 		ControleurReseau.envoyerTcp(messageTcp);
+		core.getPersolieu().replace((Integer)listRenvoye.get(1), (Integer) listRenvoye.get(0));
 	}
 
 	public void attaqueZombie(Paquet Paquet, String message) {
 		traitementI.attaqueZombie(core, (List<PionCouleur>) (Paquet.getValeur(message, 2)),
-				(int) (Paquet.getValeur(message, 1)));
+				(int) (Paquet.getValeur(message, 1)),(int)(Paquet.getValeur(message, 4)));
 	}
 
 	public void choisirSacrifice(Paquet Paquet, String message) {
@@ -834,6 +857,7 @@ public class TraitementPaquetTcp extends TraitementPaquet<TcpClient> {
 		String messageTcp = ControleurReseau.construirePaquetTcp("RAZCS", (int) Paquet.getValeur(message, 1), sacrifice,
 				(String) Paquet.getValeur(message, 3), (int) Paquet.getValeur(message, 4), core.getJoueurId());
 		ControleurReseau.envoyerTcp(messageTcp);
+		core.getPersolieu().remove(IdjrTools.getPionByValue(sacrifice));
 	}
 
 	private void finPartie(Paquet Paquet, String message) {
@@ -842,13 +866,13 @@ public class TraitementPaquetTcp extends TraitementPaquet<TcpClient> {
 
 	public void phaseFouilleCamion() {
 		// TODO réorganiser
-		Evenement.nomPhase("Phase de fouille du camion");
+		Evenement.nomPhases("text.phasefouillecam");
 
 	}
 
 	public void phaseElectionChefVigile(Paquet paquet, String message) {
 		// TODO réorganiser
-		Evenement.nomPhase("Phase d’élection du chef des vigiles");
+		Evenement.nomPhases("text.phaseeleccdv");
 	}
 
 	public void initialiserPartie(Paquet Paquet, String message) {

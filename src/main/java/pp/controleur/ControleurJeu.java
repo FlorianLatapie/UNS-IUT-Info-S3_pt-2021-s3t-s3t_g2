@@ -112,6 +112,8 @@ public class ControleurJeu {
 		Evenement.nomChefVigileAll(new ArrayList<>(jeu.getJoueurs().values()));
 		Evenement.nomJoueurs(new ArrayList<>(jeu.getJoueurs().values()));
 		Evenement.destionationPersoAll(new ArrayList<>(jeu.getLieux().values()));
+		Evenement.nbCartePiocheActuel(jeu.getCartes().size());
+		Evenement.nbPlaceLieuAll(new ArrayList<>(jeu.getLieux().values()));
 	}
 
 	private synchronized void initPartie() {
@@ -173,6 +175,8 @@ public class ControleurJeu {
 	public void setJoueurCouleur(List<Couleur> couleurs, List<Joueur> joueursOrdre) {
 		this.couleurPret = true;
 		joueurs = joueursOrdre;
+		joueurs.get(0).setChefDesVigiles(true);
+		jeu = new Partie(joueursOrdre);
 		for (int i = 0; i < joueurs.size(); i++)
 			joueurs.get(i).setCouleur(couleurs.get(i));
 	}

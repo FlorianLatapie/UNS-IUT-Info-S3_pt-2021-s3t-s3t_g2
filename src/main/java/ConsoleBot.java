@@ -12,23 +12,41 @@ public class ConsoleBot {
 	static Scanner scanner = new Scanner(System.in);
 	static Bot bot;
 
+	/*
+	 * Rien <AUTOMATIQUE> <FAIBLE|MOYEN|FORT> delai_bot AUTOMATIQUE FAIBLE 999 0
+	 * <MANUEL> <FAIBLE|MOYEN|FORT> delai_bot nom_partie ->
+	 */
+
 	// Mode Automatique Manuel
 	// Difficulté du bot
-	// Nom de la partie a rejoindre
 	// Delay des bots
+	// Nom de la partie a rejoindre
 	public static void main(String[] args) throws InterruptedException {
 		BotMode botMode = getBotMode(args);
 
-		if (args.length == 3 && botMode == BotMode.Automatique) {
-			ThreadOutils.asyncTask("Bot", bot = new Bot(getDelay(args[2]), getBotType(args[1]), botMode, false));
-			Thread.sleep(1000);
-		} else if (args.length == 4 && botMode == BotMode.Manuel) {
-			ThreadOutils.asyncTask("Bot", bot = new Bot(getDelay(args[2]), getBotType(args[1]), botMode, false));
-			Thread.sleep(1000);
+		if (args.length == 3 && botMode == BotMode.AUTOMATIQUE) {
+			ThreadOutils.asyncTaskInfinite("Bot", bot = new Bot(getDelay(args[2]), getBotType(args[1]), botMode, false));
+			try {
+				Thread.sleep(1000);
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+		} else if (args.length == 4 && botMode == BotMode.MANUEL) {
+			ThreadOutils.asyncTaskInfinite("Bot", bot = new Bot(getDelay(args[2]), getBotType(args[1]), botMode, false));
+			try {
+				Thread.sleep(1000);
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
 			ThreadOutils.asyncTask("Bot", () -> bot.connecter(choisirPartie(args[3])));
 		} else {
-			ThreadOutils.asyncTask("Bot", bot = new Bot(1000, choisirBot(), BotMode.Manuel, false));
-			Thread.sleep(1000);
+			System.out.println("Il n'y a pas d'argument ou il n'y en a pas assez");
+			ThreadOutils.asyncTaskInfinite("Bot", bot = new Bot(1000, choisirBot(), BotMode.MANUEL, false));
+			try {
+				Thread.sleep(1000);
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
 			ThreadOutils.asyncTask("Bot", () -> bot.connecter(choisirPartie("")));
 		}
 	}
@@ -39,10 +57,10 @@ public class ConsoleBot {
 			if (args.length >= 1)
 				botMode = BotMode.valueOf(args[0]);
 			else
-				botMode = BotMode.Manuel;
+				botMode = BotMode.MANUEL;
 		} catch (Exception e) {
 			System.out.println(args[0] + " est inconnu. Le bot est passé en manuel.");
-			botMode = BotMode.Manuel;
+			botMode = BotMode.MANUEL;
 		}
 
 		return botMode;
@@ -66,6 +84,11 @@ public class ConsoleBot {
 			delay = Integer.valueOf(val);
 		} catch (Exception e) {
 			System.out.println(val + " est inconnu. Le bot est passer sur un delai de 1000ms.");
+			delay = 1000;
+		}
+
+		if (delay <= 0) {
+			System.out.println(delay + " est négatif. Le bot est passer sur un delai de 1000ms.");
 			delay = 1000;
 		}
 
@@ -98,10 +121,16 @@ public class ConsoleBot {
 
 		partieInfos = bot.getPartiesActuel();
 
-		for (PartieInfo partieInfo : partieInfos)
+		for (PartieInfo partieInfo : partieInfos) {
+
+			System.out.println(partieInfo.getNom());
+			System.out.println(val);
+			System.out.println(val == partieInfo.getNom());
+			System.out.println(partieInfo.getNom().equals(val));
 			if (partieInfo.getNom().equals(val))
 				return partieInfo;
 
+		}
 		System.out.println();
 		System.out.println("=======================================");
 		int reponse;
@@ -134,7 +163,7 @@ public class ConsoleBot {
 
 			if (partieInfos.isEmpty()) {
 				System.out.println("Aucune partie trouvé");
-				System.out.println("Appuyez sur une touche pour actualiser");
+				System.out.println("Appuyez sur une touche puis sur entrée pour actualiser");
 				scanner.next();
 			} else {
 				System.out.println("Choissisez une partie");

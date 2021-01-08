@@ -22,12 +22,15 @@ import javafx.scene.text.TextAlignment;
  * The Class AccueilPane.
  *
  * @author Florian
+ * @author Remy
+ * @author Sebastien 
+ * @author Tom
  * @version 0.1
  * @since 26/10/2020
  */
 public class AttenteJoueurPane extends StackPane implements IAttenteListener, ITraduction {
+	//auteur florian 
 	private ScreenControl sControl = null;
-	private Core core = null;
 	private final ApplicationPane paneName = ApplicationPane.WAIT;
 	private int tailleCarreCentral = 800;
 	private CornerRadii coin = new CornerRadii(15.0);
@@ -47,7 +50,7 @@ public class AttenteJoueurPane extends StackPane implements IAttenteListener, IT
 	Label desc;
 
 	public AttenteJoueurPane(ScreenControl sc, Core c) {
-		core = c;
+		// auteur florian 
 		sControl = sc;
 		stackPane.setAlignment(Pos.CENTER);
 
@@ -79,7 +82,7 @@ public class AttenteJoueurPane extends StackPane implements IAttenteListener, IT
 		VBox vbDescPartie = new VBox();
 		vbDescPartie.setAlignment(Pos.CENTER);
 		vbDescPartie.getChildren().addAll(lIDPartie, desc);
-
+		//auteur remy 
 		// les cercles passent en rouge quand le joueur à rejoint
 		Circle cercle1 = new Circle();
 		cercle1.setRadius(tailleCercle);
@@ -131,7 +134,7 @@ public class AttenteJoueurPane extends StackPane implements IAttenteListener, IT
 		vbWait.setMaxSize(700, 200);
 		vbWait.setMargin(lIDPartie, new Insets(8));
 		vbWait.getChildren().addAll(vbDescPartie, hbJoueurPret);
-
+		//auteur florian 
 		VBox vbCenter = new VBox();
 		vbCenter.setAlignment(Pos.CENTER);
 		vbCenter.setSpacing(spacing);
@@ -165,14 +168,9 @@ public class AttenteJoueurPane extends StackPane implements IAttenteListener, IT
 		sControl.setPaneOnTop(paneName);
 
 	}
-	/*
-	 * @Override public void joueurPret() {
-	 * sControl.setPaneOnTop(ApplicationPane.COULEUR); }
-	 * 
-	 * @Override public void nomPartie(String nom) { lIDPartie.setText(nom); }
-	 */
 
 	/**
+	 * @author Sebastien 
 	 * Passe a l'affichage du jeu
 	 */
 	@Override
@@ -186,6 +184,7 @@ public class AttenteJoueurPane extends StackPane implements IAttenteListener, IT
 	}
 
 	/**
+	 * @author Sebastien
 	 * Met a jour le nom de la partie
 	 * 
 	 * @param nom le nom du joueur

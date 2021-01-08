@@ -2,6 +2,8 @@ package idjr;
 
 import java.net.InetAddress;
 
+import idjr.ihmidjr.IhmTools;
+import idjr.ihmidjr.langues.International;
 import reseau.type.Statut;
 import reseau.type.TypeJoueur;
 import reseau.type.TypePartie;
@@ -31,11 +33,11 @@ public class PartieInfo {
 		this.statut = statut;
 		this.typeP = getTypePartie();
 	}
-	
+
 	private TypePartie getTypePartie() {
 		if (nbjbMax == 0)
 			return TypePartie.BOTU;
-		else if (nbjrMax == 0) 
+		else if (nbjrMax == 0)
 			return TypePartie.BOTU;
 		else
 			return TypePartie.MIXTE;
@@ -64,7 +66,7 @@ public class PartieInfo {
 	public int getNbJoueurTotalMax() {
 		return nbjbMax + nbjrMax;
 	}
-	
+
 	public int getNbJoueurTotal() {
 		return nbjb + nbjr;
 	}
@@ -75,7 +77,9 @@ public class PartieInfo {
 
 	@Override
 	public String toString() {
-		return "[" + statut.nomEntier() + "] " + idPartie + " " + nbjr + "/" + nbjrMax
-				+ " joueurs réels " + nbjb + "/" + nbjbMax + " joueurs virtuels " +  getNbJoueurTotal() + "/" + getNbJoueurTotalMax() + " joueurs total";
+		return "[" + IdjrTools.getStatutTrad(statut) + "] " + idPartie + " " + nbjr + "/" + nbjrMax + " "
+				+ International.trad("text.joueurreel") + " " + nbjb + "/" + nbjbMax + " "
+				+ International.trad("text.joueurvir") + " " + getNbJoueurTotal() + "/" + getNbJoueurTotalMax() + " "
+				+ International.trad("text.joueurtotal");
 	}
 }

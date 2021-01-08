@@ -373,7 +373,7 @@ public class TraitementPaquetTcp extends TraitementPaquet<TcpClient> {
 	}
 
 	private void traitementRAZA(Paquet paquet, String message) {
-		traitementB.traitementRAZA(core, (List<PionCouleur>) (paquet.getValeur(message, 2)));
+		traitementB.traitementRAZA(core, (List<PionCouleur>) (paquet.getValeur(message, 2)),(int)(paquet.getValeur(message, 4)));
 		core.correctionZombie((Integer) paquet.getValeur(message, 1), (Integer) paquet.getValeur(message, 4));
 	}
 
@@ -389,6 +389,8 @@ public class TraitementPaquetTcp extends TraitementPaquet<TcpClient> {
 	}
 
 	private void traitementACP(Paquet paquet, String message) {
+		if (core.isConnected())
+			return;
 		System.out.println("Connexion a la partie acceptée");
 		core.setConnected(true);
 		core.setJoueurId((String) paquet.getValeur(message, 2));

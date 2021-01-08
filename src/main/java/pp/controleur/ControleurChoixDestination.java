@@ -4,6 +4,8 @@ import java.util.List;
 import pp.Joueur;
 import pp.Partie;
 import pp.ihm.event.EvenementStockage;
+import pp.ihm.langues.International;
+import pp.ihm.IhmOutils;
 import pp.ihm.event.Evenement;
 import pp.reseau.ChoixDestinationReseau;
 import reseau.type.VigileEtat;
@@ -62,8 +64,9 @@ public class ControleurChoixDestination {
 		destination.add(dest);
 		Evenement.suppQuiJoue();
 		cdr.informerDestChefVigile(jeu, dest, partieId, numeroTour);
-		Evenement.prevenirDeplacementVigile("Le chef des vigile (" + jeu.getChefVIgile().getCouleur()
-				+ ") a choisi la detination :" + jeu.getLieux().get(dest));
+		Evenement.prevenirDeplacementVigile(
+				International.trad("text.prevenira") + IhmOutils.getCouleurTrad(jeu.getChefVIgile().getCouleur())
+						+ International.trad("text.prevenirb") + jeu.getLieux().get(dest));
 		while (!EvenementStockage.isPopupAccepter())
 			Thread.yield();
 		EvenementStockage.setPopupAccepter(false);

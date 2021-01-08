@@ -1,11 +1,15 @@
 package pp.ihm;
 
 import pp.Joueur;
+import pp.ihm.langues.International;
 import reseau.type.Couleur;
 import reseau.type.TypePersonnage;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 
 /**
  * <h1>Outils pour l'IHM</h1> Permet de facilité l'utilisation des methodes a
@@ -29,12 +33,15 @@ public interface IhmOutils {
 	 * @param couleurs la liste des couleurs a tester
 	 * @return l'unicité de chaque couleur
 	 */
-	public static boolean isDeLaMemeCouleur(List<String> couleurs) {
-		for (int i = 0; i < couleurs.size(); i++)
+	public static boolean isDeLaMemeCouleur(List<Integer> couleurs) {
+		for (int i = 0; i < couleurs.size(); i++) {
+			if (couleurs.get(i) == -1)
+				return false;
 			for (int y = 0; y < couleurs.size(); y++)
 				if (i != y)
 					if (couleurs.get(i) == couleurs.get(y))
 						return false;
+		}
 
 		return true;
 	}
@@ -46,10 +53,11 @@ public interface IhmOutils {
 	 * @param couleList liste des couleurs
 	 * @return une liste de couleur
 	 */
-	public static List<Couleur> comboStringToColorList(int[] tab, List<String> couleList) {
+	public static List<Couleur> comboStringToColorList(int[] tab, List<Integer> couleList) {
 		List<Couleur> tmp = new ArrayList<>();
-		for (int i = 0; i < tab.length; i++)
-			tmp.add(Couleur.valueOf(String.valueOf(couleList.get(tab[i]).charAt(0)).toUpperCase()));
+		Couleur couleursDefault[] = { Couleur.N, Couleur.V, Couleur.M, Couleur.R, Couleur.B, Couleur.J };
+		for (int i = 0; i < couleList.size(); i++)
+			tmp.add(couleursDefault[couleList.get(tab[i])]);
 
 		return tmp;
 	}
@@ -242,23 +250,69 @@ public interface IhmOutils {
 	 * @param couleur la couleur cible
 	 * @return la nouveau style
 	 */
-	public static String getCouleur(String couleur) {
+	public static String getCouleur(int couleur) {
 		String style = ";-fx-background-radius: 10px;";
 		switch (couleur) {
-		case "Bleu":
+		case 4:
 			return IhmOutils.bleu + style;
-		case "Rouge":
+		case 3:
 			return IhmOutils.rouge + style;
-		case "Vert":
+		case 1:
 			return IhmOutils.vert + style;
-		case "Noir":
+		case 0:
 			return IhmOutils.noir + style;
-		case "Jaune":
+		case 5:
 			return IhmOutils.jaune + style;
-		case "Marron":
+		case 2:
 			return IhmOutils.marron + style;
 		default:
-			return "#1A1A1A";
+			return " -fx-background-color:#1A1A1A; -fx-text-fill: #ffffff" + style;
 		}
+	}
+
+	public static String getCouleurTrad(int couleur) {
+		Couleur couleursDefault[] = { Couleur.N, Couleur.V, Couleur.M, Couleur.R, Couleur.B, Couleur.J };
+
+		switch (couleur) {
+		case 0:
+			return International.trad("text.noir");
+		case 1:
+			return International.trad("text.vert");
+		case 2:
+			return International.trad("text.marron");
+		case 3:
+			return International.trad("text.rouge");
+		case 4:
+			return International.trad("text.bleu");
+		case 5:
+			return International.trad("text.jaune");
+		default:
+			return "";
+		}
+	}
+	
+	public static String getCouleurTrad(Couleur couleur) {
+		switch (couleur) {
+		case N:
+			return International.trad("text.noir");
+		case V:
+			return International.trad("text.vert");
+		case M:
+			return International.trad("text.marron");
+		case R:
+			return International.trad("text.rouge");
+		case B:
+			return International.trad("text.bleu");
+		case J:
+			return International.trad("text.jaune");
+		default:
+			return "";
+		}
+	}
+
+	public static ObservableList<String> getTradCombo() {
+		return FXCollections.observableArrayList(International.trad("text.noir"), International.trad("text.vert"),
+				International.trad("text.marron"), International.trad("text.rouge"), International.trad("text.bleu"),
+				International.trad("text.jaune"));
 	}
 }

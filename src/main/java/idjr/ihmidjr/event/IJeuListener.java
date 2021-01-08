@@ -16,7 +16,11 @@ public interface IJeuListener {
 
 	void nomPhase(String nom);
 
+	void nomPhase(String nom, String n);
+
 	void desVigiles(List<Integer> list);
+
+	void desEnlVigiles();
 
 	void fin();
 
@@ -25,6 +29,8 @@ public interface IJeuListener {
 	void sacrificeChange();
 
 	void deplacementChange();
+
+	void personnageCacheChange();
 
 	void choisirCarte(List<CarteType> listeCartes, List<Couleur> listeCouleurJoueurVivant, boolean garder,
 			boolean donner, boolean defausser);

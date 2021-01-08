@@ -7,6 +7,11 @@ import idjr.PartieInfo;
 import reseau.type.CarteType;
 import reseau.type.Couleur;
 
+/**
+ * 
+ * @author sebastien
+ *
+ */
 public abstract class Evenement {
 	private static final List<IJeuListener> listenersjl = new ArrayList<>();
 	private static final List<IFinListener> listenersfl = new ArrayList<>();
@@ -30,11 +35,11 @@ public abstract class Evenement {
 	public static void addListener(IAttenteListener toAdd) {
 		listenersal.add(toAdd);
 	}
-	
+
 	public static void addListener(IRotationListener toAdd) {
 		listenersrl.add(toAdd);
 	}
-	
+
 	public static void addListener(IPleineEcranListener toAdd) {
 		listenerspel.add(toAdd);
 	}
@@ -64,9 +69,14 @@ public abstract class Evenement {
 			jl.nomJoueur(nom);
 	}
 
-	public static void nomPhase(String nom) {
+	public static void nomPhases(String nom) {
 		for (IJeuListener jl : listenersjl)
 			jl.nomPhase(nom);
+	}
+
+	public static void nomPhases(String nom, String n) {
+		for (IJeuListener jl : listenersjl)
+			jl.nomPhase(nom, n);
 	}
 
 	public static void stopWait() {
@@ -82,6 +92,11 @@ public abstract class Evenement {
 	public static void desVigiles(List<Integer> list) {
 		for (IJeuListener jl : listenersjl)
 			jl.desVigiles(list);
+	}
+
+	public static void desEnlVigiles() {
+		for (IJeuListener jl : listenersjl)
+			jl.desEnlVigiles();
 	}
 
 	public static void fin() {
@@ -102,6 +117,11 @@ public abstract class Evenement {
 	public static void sacrificeChange() {
 		for (IJeuListener jl : listenersjl)
 			jl.sacrificeChange();
+	}
+
+	public static void personnageCacheChange() {
+		for (IJeuListener jl : listenersjl)
+			jl.personnageCacheChange();
 	}
 
 	public static void deplacementChange() {
@@ -165,11 +185,11 @@ public abstract class Evenement {
 			rl.rotation(angle);
 	}
 
-	public static void updatePleineEcran() {
+	public static void updatePleinEcran() {
 		for (IPleineEcranListener pel : listenerspel)
 			pel.updatePleineEcran();
 	}
-	
+
 	public static void partieValider() {
 		for (IConfigListener cl : listenerscl)
 			cl.partieValider();

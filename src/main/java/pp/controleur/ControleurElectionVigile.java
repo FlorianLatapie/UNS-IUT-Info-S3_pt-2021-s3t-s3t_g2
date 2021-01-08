@@ -1,8 +1,11 @@
 package pp.controleur;
 
+import java.util.ArrayList;
+
 import pp.Joueur;
 import pp.Partie;
 import pp.ihm.event.EvenementStockage;
+import pp.ihm.langues.International;
 import pp.ihm.event.Evenement;
 import pp.reseau.ElectionChefVigileReseau;
 import reseau.type.Couleur;
@@ -43,14 +46,14 @@ public class ControleurElectionVigile {
 			if (j != null) {
 				newVigile(jeu, j);
 				ecvr.informerElectionChefVigile(jeu, jeu.getChefVIgile().getCouleur(), partieId, numeroTour);
-				Evenement.electionChef("Nouveau chef des vigiles : " + jeu.getChefVIgile());
+				Evenement.electionChef(International.trad("text.nouveauchef") + jeu.getChefVIgile());
 				while (!EvenementStockage.isPopupAccepter())
 					Thread.yield();
 				EvenementStockage.setPopupAccepter(false);
 			} else {
 				jeu.setNewChef(false);
 				ecvr.informerElectionChefVigile(jeu, Couleur.NUL, partieId, numeroTour);
-				Evenement.electionChef("Il n'y a pas de nouveau chef des vigiles");
+				Evenement.electionChef(International.trad("text.nonnouveauchef"));
 				while (!EvenementStockage.isPopupAccepter())
 					Thread.yield();
 				EvenementStockage.setPopupAccepter(false);
@@ -58,11 +61,12 @@ public class ControleurElectionVigile {
 		} else {
 			noNewVigile(jeu);
 			ecvr.informerElectionChefVigile(jeu, Couleur.NUL, partieId, numeroTour);
-			Evenement.electionChef("Il n'y a pas de nouveau chef des vigiles");
+			Evenement.electionChef(International.trad("text.nonnouveauchef"));
 			while (!EvenementStockage.isPopupAccepter())
 				Thread.yield();
 			EvenementStockage.setPopupAccepter(false);
 		}
+		Evenement.nomChefVigileAll(new ArrayList<>(jeu.getJoueurs().values()));
 	}
 
 	/**
@@ -86,9 +90,9 @@ public class ControleurElectionVigile {
 	 * @retrun le joueur élu chef des vigiles.
 	 */
 	public Joueur joueurElection(Partie jeu, String partieId, int numeroTour) {
-		if (jeu.getJoueurSurLieu(jeu.getLieux().get(4)).size() == 1)
-			return jeu.getJoueurSurLieu(jeu.getLieux().get(4)).get(0);
-		return cVote.phaseVote(jeu, jeu.getLieux().get(4), VoteType.FDC, partieId, numeroTour);
+		if (jeu.getJoueurSurLieu(jeu.getLieux().get(5)).size() == 1)
+			return jeu.getJoueurSurLieu(jeu.getLieux().get(5)).get(0);
+		return cVote.phaseVote(jeu, jeu.getLieux().get(5), VoteType.ECD, partieId, numeroTour);
 	}
 
 	/**
