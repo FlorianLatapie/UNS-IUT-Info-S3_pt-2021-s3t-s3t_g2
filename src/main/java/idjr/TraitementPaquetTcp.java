@@ -233,7 +233,7 @@ public class TraitementPaquetTcp extends TraitementPaquet<TcpClient> {
 			List<Couleur>listeJ = (List<Couleur>) paquet.getValeur(message, 2);
 			List<Couleur>listeV = (List<Couleur>) paquet.getValeur(message, 3);
 			for (int i= 0 ; i<listeJ.size();i++) {
-				log += International.trad("texte.logPVR3") + " " + listeJ.get(i).toString() + " " + International.trad("texte.logPVR4")+".";
+				log += International.trad("texte.logPVR3") + " " + listeJ.get(i).toString() + " " + International.trad("texte.logPVR4")+ listeV.get(i).toString() +".";
 			}
 			
 			log += International.trad("texte.logPVR2") + " " + ((Couleur) paquet.getValeur(message, 1)).toString() + ".";
