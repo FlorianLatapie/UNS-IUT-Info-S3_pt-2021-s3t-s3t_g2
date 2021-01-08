@@ -1763,7 +1763,8 @@ public class PlateauPane extends StackPane implements IPlateauListener, ITraduct
 		Platform.runLater(new Runnable() {
 			@Override
 			public void run() {
-				couleurs1 = couleurs;
+				couleurs1 = new ArrayList<>(couleurs);
+				o = 0;
 				getProchaineCouleur();
 			}
 		});
@@ -1774,6 +1775,9 @@ public class PlateauPane extends StackPane implements IPlateauListener, ITraduct
 	 * sa place.
 	 */
 	private void getProchaineCouleur() {
+		System.out.println(o);
+		System.out.println(couleurs1.get(o));
+		System.out.println(couleurs1 == null);
 		popup(International.trad("text.choisistable"), International.trad("text.thatis") + ""
 				+ IhmOutils.getCouleurTrad(couleurs1.get(o)) + " " + International.trad("text.choisistablea"), true);
 		VBox[] j = { j1, j2, j3, j4, j5, j6 };
