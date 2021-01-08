@@ -55,6 +55,7 @@ public class Idjr {
 	private Couleur voteChoisi;
 	private boolean isContinue;
 	private String etat;
+	private int nbZombieLieu;
 
 	/* Parametre Temporaire */
 	private List<Integer> pionAPos;
@@ -136,6 +137,18 @@ public class Idjr {
 			ControleurReseau.envoyerTcp(messageTcp);
 		});
 	}
+	
+	
+
+	public int getNbZombieLieu() {
+		return nbZombieLieu;
+	}
+
+	public void setNbZombieLieu(int nbZombieLieu) {
+		this.nbZombieLieu = nbZombieLieu;
+	}
+
+
 
 	private boolean desVote = false;
 
