@@ -53,6 +53,7 @@ public class Bot implements Runnable {
 	private List<PartieInfo> partiesActuel;
 	private boolean connected;
 	private boolean vite;
+	private int nbZombieSurLieux;
 
 	public boolean isConnected() {
 		return connected;
@@ -190,6 +191,15 @@ public class Bot implements Runnable {
 
 	public void setPionAPos(List<Integer> pionAPos) {
 		this.pionAPos = pionAPos;
+	}
+
+
+	public int getNbZombieSurLieux() {
+		return nbZombieSurLieux;
+	}
+
+	public void setNbZombieSurLieux(int nbZombieSurLieux) {
+		this.nbZombieSurLieux = nbZombieSurLieux;
 	}
 
 	public void setJoueurId(String joueurId) {
