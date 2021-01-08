@@ -1,7 +1,6 @@
 package idjr;
 
 import idjr.ihmidjr.event.Evenement;
-import idjr.ihmidjr.event.IJeuListener;
 import reseau.socket.ControleurReseau;
 import reseau.tool.ReseauOutils;
 import reseau.tool.ThreadOutils;
@@ -56,6 +55,7 @@ public class Idjr {
 	private boolean isContinue;
 	private String etat;
 	private int nbZombieLieu;
+	private HashMap<Integer, Integer> Persolieu;
 
 	/* Parametre Temporaire */
 	private List<Integer> pionAPos;
@@ -78,6 +78,7 @@ public class Idjr {
 		this.envie = true;
 		this.estFini = false;
 		this.joueurEnVie = new ArrayList<>();
+		this.Persolieu = new HashMap<>();
 	}
 
 	private void initReseau() throws IOException {
@@ -454,6 +455,15 @@ public class Idjr {
 	public void setResultatFouille(List<Object> resultatFouille) {
 		this.resultatFouille = resultatFouille;
 	}
+
+	public HashMap<Integer, Integer> getPersolieu() {
+		return Persolieu;
+	}
+
+	public void setPersolieu(HashMap<Integer, Integer> persolieu) {
+		Persolieu = persolieu;
+	}
+	
 	
 	
 }
