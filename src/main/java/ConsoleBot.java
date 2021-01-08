@@ -25,14 +25,14 @@ public class ConsoleBot {
 		BotMode botMode = getBotMode(args);
 
 		if (args.length == 3 && botMode == BotMode.AUTOMATIQUE) {
-			ThreadOutils.asyncTask("Bot", bot = new Bot(getDelay(args[2]), getBotType(args[1]), botMode, false));
+			ThreadOutils.asyncTaskInfinite("Bot", bot = new Bot(getDelay(args[2]), getBotType(args[1]), botMode, false));
 			try {
 				Thread.sleep(1000);
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
 		} else if (args.length == 4 && botMode == BotMode.MANUEL) {
-			ThreadOutils.asyncTask("Bot", bot = new Bot(getDelay(args[2]), getBotType(args[1]), botMode, false));
+			ThreadOutils.asyncTaskInfinite("Bot", bot = new Bot(getDelay(args[2]), getBotType(args[1]), botMode, false));
 			try {
 				Thread.sleep(1000);
 			} catch (InterruptedException e) {
@@ -41,7 +41,7 @@ public class ConsoleBot {
 			ThreadOutils.asyncTask("Bot", () -> bot.connecter(choisirPartie(args[3])));
 		} else {
 			System.out.println("Il n'y a pas d'argument ou il n'y en a pas assez");
-			ThreadOutils.asyncTask("Bot", bot = new Bot(1000, choisirBot(), BotMode.MANUEL, false));
+			ThreadOutils.asyncTaskInfinite("Bot", bot = new Bot(1000, choisirBot(), BotMode.MANUEL, false));
 			try {
 				Thread.sleep(1000);
 			} catch (InterruptedException e) {
