@@ -176,7 +176,8 @@ public class TraitementIdjr {
 		Evenement.nomPhase(International.trad("text.phaseresatazom"));
 	}
 
-	public void attaqueZombie(Idjr core, List<PionCouleur> l, int x) {
+	public void attaqueZombie(Idjr core, List<PionCouleur> l, int x,int zombie) {
+		core.setNbZombieLieu(zombie);
 		String nom = "";
 		if (x == 1)
 			nom = "Toilettes";
@@ -235,9 +236,12 @@ public class TraitementIdjr {
 		int nbCarteJouee = 0;
 		for (CarteType carte : core.getListeCarte()) {
 			if (n != 4) {
-				if (carte.name() == "MAT") {
-					listeCarteUtilisable.add(carte);
+				if((n==6)&&(core.getNbZombieLieu()<4)) {
+					if (carte.name() == "MAT") {
+						listeCarteUtilisable.add(carte);
+					}
 				}
+				
 			}
 			switch (carte.name()) {
 			case "ACS":
