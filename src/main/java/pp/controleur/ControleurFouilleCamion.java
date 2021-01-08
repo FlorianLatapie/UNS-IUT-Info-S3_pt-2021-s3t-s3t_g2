@@ -7,6 +7,7 @@ import pp.Joueur;
 import pp.Partie;
 import pp.ihm.event.EvenementStockage;
 import pp.ihm.langues.International;
+import pp.ihm.IhmOutils;
 import pp.ihm.event.Evenement;
 import pp.reseau.FouilleCamionReseau;
 import reseau.type.CarteEtat;
@@ -49,7 +50,7 @@ public class ControleurFouilleCamion {
 			j = joueurFouille(jeu, partieId, numeroTour);
 			if (j != null) {
 				Evenement.quiJoue(j.getCouleur());
-				s = j + " (" + j.getCouleur() + ") " + International.trad("text.fouilleLeCamion");
+				s = j + " (" + IhmOutils.getCouleurTrad(j.getCouleur()) + ") " + International.trad("text.fouilleLeCamion");
 				Evenement.fouilleCamion(s);
 				while (!EvenementStockage.isPopupAccepter())
 					Thread.yield();
@@ -66,7 +67,7 @@ public class ControleurFouilleCamion {
 						partieId, numeroTour);
 				Evenement.suppQuiJoue();
 				if ((Couleur) l.get(2) != null) {
-					String s1 = jeu.getJoueurCouleur((Couleur) l.get(2)) + " (" + (Couleur) l.get(2) + ") "
+					String s1 = jeu.getJoueurCouleur((Couleur) l.get(2)) + " (" + IhmOutils.getCouleurTrad((Couleur) l.get(2)) + ") "
 							+ International.trad("text.recuCarte");
 					Evenement.fouilleCamion(s1);
 					while (!EvenementStockage.isPopupAccepter())

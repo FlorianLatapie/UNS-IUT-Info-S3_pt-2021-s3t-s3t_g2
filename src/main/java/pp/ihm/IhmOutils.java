@@ -266,7 +266,7 @@ public interface IhmOutils {
 		case 2:
 			return IhmOutils.marron + style;
 		default:
-			return "#1A1A1A";
+			return " -fx-background-color:#1A1A1A; -fx-text-fill: #000000" + style;
 		}
 	}
 
@@ -285,6 +285,25 @@ public interface IhmOutils {
 		case 4:
 			return International.trad("text.bleu");
 		case 5:
+			return International.trad("text.jaune");
+		default:
+			return "";
+		}
+	}
+	
+	public static String getCouleurTrad(Couleur couleur) {
+		switch (couleur) {
+		case N:
+			return International.trad("text.noir");
+		case V:
+			return International.trad("text.vert");
+		case M:
+			return International.trad("text.marron");
+		case R:
+			return International.trad("text.rouge");
+		case B:
+			return International.trad("text.bleu");
+		case J:
 			return International.trad("text.jaune");
 		default:
 			return "";

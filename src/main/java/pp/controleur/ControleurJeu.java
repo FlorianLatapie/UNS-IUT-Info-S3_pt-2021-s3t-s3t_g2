@@ -112,6 +112,8 @@ public class ControleurJeu {
 		Evenement.nomChefVigileAll(new ArrayList<>(jeu.getJoueurs().values()));
 		Evenement.nomJoueurs(new ArrayList<>(jeu.getJoueurs().values()));
 		Evenement.destionationPersoAll(new ArrayList<>(jeu.getLieux().values()));
+		Evenement.nbCartePiocheActuel(jeu.getCartes().size());
+		Evenement.nbPlaceLieuAll(new ArrayList<>(jeu.getLieux().values()));
 	}
 
 	private synchronized void initPartie() {
