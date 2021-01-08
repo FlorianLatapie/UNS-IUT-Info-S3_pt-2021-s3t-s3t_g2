@@ -373,7 +373,7 @@ public class TraitementPaquetTcp extends TraitementPaquet<TcpClient> {
 	}
 
 	private void traitementRAZA(Paquet paquet, String message) {
-		traitementB.traitementRAZA(core, (List<PionCouleur>) (paquet.getValeur(message, 2)));
+		traitementB.traitementRAZA(core, (List<PionCouleur>) (paquet.getValeur(message, 2)),(int)(paquet.getValeur(message, 4)));
 		core.correctionZombie((Integer) paquet.getValeur(message, 1), (Integer) paquet.getValeur(message, 4));
 	}
 

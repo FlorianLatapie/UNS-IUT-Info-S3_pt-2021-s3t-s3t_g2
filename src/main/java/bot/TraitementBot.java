@@ -102,7 +102,8 @@ public class TraitementBot {
 	 * @return la liste des personnage sacrifiable après l'attaque
 	 */
 
-	private void attaqueZombie(Bot core, List<PionCouleur> l) {
+	private void attaqueZombie(Bot core, List<PionCouleur> l, int n) {
+		core.setNbZombieSurLieux(n);
 		List<PionCouleur> ltemp = new ArrayList<PionCouleur>();
 		for (PionCouleur pc : l) {
 			if (BotOutils.getCouleurByChar(pc) == core.getCouleur()) {
@@ -217,8 +218,8 @@ public class TraitementBot {
 
 	}
 
-	public void traitementRAZA(Bot core, List<PionCouleur> listelp) {
-		attaqueZombie(core, listelp);
+	public void traitementRAZA(Bot core, List<PionCouleur> listelp,int zomb) {
+		attaqueZombie(core, listelp,zomb);
 	}
 
 	public PionCouleur traitementRAZDS(Bot core, List<?> arg2) {
