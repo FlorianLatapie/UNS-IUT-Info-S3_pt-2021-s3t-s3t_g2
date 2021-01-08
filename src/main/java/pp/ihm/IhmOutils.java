@@ -266,7 +266,7 @@ public interface IhmOutils {
 		case 2:
 			return IhmOutils.marron + style;
 		default:
-			return " -fx-background-color:#1A1A1A; -fx-text-fill: #000000" + style;
+			return " -fx-background-color:#1A1A1A; -fx-text-fill: #ffffff" + style;
 		}
 	}
 
