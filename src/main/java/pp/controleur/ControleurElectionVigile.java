@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import pp.Joueur;
 import pp.Partie;
 import pp.ihm.event.EvenementStockage;
+import pp.ihm.langues.International;
 import pp.ihm.event.Evenement;
 import pp.reseau.ElectionChefVigileReseau;
 import reseau.type.Couleur;
@@ -45,14 +46,14 @@ public class ControleurElectionVigile {
 			if (j != null) {
 				newVigile(jeu, j);
 				ecvr.informerElectionChefVigile(jeu, jeu.getChefVIgile().getCouleur(), partieId, numeroTour);
-				Evenement.electionChef("text.nouveauchef" + jeu.getChefVIgile());
+				Evenement.electionChef(International.trad("text.nouveauchef") + jeu.getChefVIgile());
 				while (!EvenementStockage.isPopupAccepter())
 					Thread.yield();
 				EvenementStockage.setPopupAccepter(false);
 			} else {
 				jeu.setNewChef(false);
 				ecvr.informerElectionChefVigile(jeu, Couleur.NUL, partieId, numeroTour);
-				Evenement.electionChef("text.nonnouveauchef");
+				Evenement.electionChef(International.trad("text.nonnouveauchef"));
 				while (!EvenementStockage.isPopupAccepter())
 					Thread.yield();
 				EvenementStockage.setPopupAccepter(false);
@@ -60,7 +61,7 @@ public class ControleurElectionVigile {
 		} else {
 			noNewVigile(jeu);
 			ecvr.informerElectionChefVigile(jeu, Couleur.NUL, partieId, numeroTour);
-			Evenement.electionChef("text.nonnouveauchef");
+			Evenement.electionChef(International.trad("text.nonnouveauchef"));
 			while (!EvenementStockage.isPopupAccepter())
 				Thread.yield();
 			EvenementStockage.setPopupAccepter(false);

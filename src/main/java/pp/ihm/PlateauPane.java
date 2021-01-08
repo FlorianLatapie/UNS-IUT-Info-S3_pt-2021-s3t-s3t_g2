@@ -1439,7 +1439,7 @@ public class PlateauPane extends StackPane implements IPlateauListener, ITraduct
 		Platform.runLater(new Runnable() {
 			@Override
 			public void run() {
-				String tmp = perso + International.trad("text.perso.num");
+				String tmp = perso + " " + International.trad("text.perso.num");
 				switch (index.get(joueur)) {
 				case 0:
 					nbPerso1.setText(tmp);
@@ -1477,7 +1477,7 @@ public class PlateauPane extends StackPane implements IPlateauListener, ITraduct
 		Platform.runLater(new Runnable() {
 			@Override
 			public void run() {
-				String tmp = cartes + " cartes";
+				String tmp = cartes + " " + International.trad("text.cartes");
 
 				switch (index.get(joueur)) {
 				case 0:
@@ -1774,8 +1774,8 @@ public class PlateauPane extends StackPane implements IPlateauListener, ITraduct
 	 * sa place.
 	 */
 	private void getProchaineCouleur() {
-		popup(International.trad("text.choisistable"),
-				"C'est au " + couleurs1.get(o).nomEntier() + International.trad("text.choisistablea"), true);
+		popup(International.trad("text.choisistable"), International.trad("text.thatis") + ""
+				+ IhmOutils.getCouleurTrad(couleurs1.get(o)) + " " + International.trad("text.choisistablea"), true);
 		VBox[] j = { j1, j2, j3, j4, j5, j6 };
 		Label[] l = { nomJoueur1, nomJoueur2, nomJoueur3, nomJoueur4, nomJoueur5, nomJoueur6 };
 
@@ -1920,27 +1920,27 @@ public class PlateauPane extends StackPane implements IPlateauListener, ITraduct
 		j6.setStyle(tmpColor);
 
 		nomJoueur1.setStyle(tmpColor);
-		nomJoueur1.setText(International.trad("text.pioche"));
+		nomJoueur1.setText(International.trad("text.choisir"));
 		nbPerso1.setText("");
 		nbCartes1.setText("");
 		nomJoueur2.setStyle(tmpColor);
-		nomJoueur2.setText(International.trad("text.pioche"));
+		nomJoueur2.setText(International.trad("text.choisir"));
 		nbPerso2.setText("");
 		nbCartes2.setText("");
 		nomJoueur3.setStyle(tmpColor);
-		nomJoueur3.setText(International.trad("text.pioche"));
+		nomJoueur3.setText(International.trad("text.choisir"));
 		nbPerso3.setText("");
 		nbCartes3.setText("");
 		nomJoueur4.setStyle(tmpColor);
-		nomJoueur4.setText(International.trad("text.pioche"));
+		nomJoueur4.setText(International.trad("text.choisir"));
 		nbPerso4.setText("");
 		nbCartes4.setText("");
 		nomJoueur5.setStyle(tmpColor);
-		nomJoueur5.setText(International.trad("text.pioche"));
+		nomJoueur5.setText(International.trad("text.choisir"));
 		nbPerso5.setText("");
 		nbCartes5.setText("");
 		nomJoueur6.setStyle(tmpColor);
-		nomJoueur6.setText(International.trad("text.pioche"));
+		nomJoueur6.setText(International.trad("text.choisir"));
 		nbPerso6.setText("");
 		nbCartes6.setText("");
 
@@ -1958,10 +1958,10 @@ public class PlateauPane extends StackPane implements IPlateauListener, ITraduct
 		Platform.runLater(new Runnable() {
 			@Override
 			public void run() {
-				lPileCarte1.setText(val + International.trad("text.pioche"));
-				lPileCarte2.setText(val + International.trad("text.pioche"));
-				lPileCarte3.setText(val + International.trad("text.pioche"));
-				lPileCarte4.setText(val + International.trad("text.pioche"));
+				lPileCarte1.setText(val + " " + International.trad("text.pioche"));
+				lPileCarte2.setText(val + " " + International.trad("text.pioche"));
+				lPileCarte3.setText(val + " " + International.trad("text.pioche"));
+				lPileCarte4.setText(val + " " + International.trad("text.pioche"));
 			}
 		});
 	}
