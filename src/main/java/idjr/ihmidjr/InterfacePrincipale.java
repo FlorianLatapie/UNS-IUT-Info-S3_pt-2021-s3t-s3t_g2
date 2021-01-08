@@ -83,6 +83,7 @@ public class InterfacePrincipale extends Application {
 		International.ajouterPane(accueilPane);
 		International.ajouterPane(reglesPane);
 		International.ajouterPane(optionPane);
+		International.ajouterPane(jeuPane);
 		International.ajouterPane(attenteJoueurPane);
 		International.ajouterPane(configPartiePane);
 		International.ajouterPane(finDePartiePane);

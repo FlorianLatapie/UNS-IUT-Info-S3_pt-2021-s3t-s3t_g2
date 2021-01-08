@@ -9,6 +9,7 @@ import java.util.Map;
 import java.util.Random;
 
 import idjr.ihmidjr.event.Evenement;
+import idjr.ihmidjr.langues.International;
 import reseau.type.CarteType;
 import reseau.type.Couleur;
 import reseau.type.PionCouleur;
@@ -18,7 +19,7 @@ public class TraitementIdjr {
 
 	public void initialiserPartie(Idjr core, List<?> nomsT, List<Couleur> couleursT, String lieuferme) {
 		Evenement.stopWait();
-		Evenement.nomPhase("Placement des personnages");
+		Evenement.nomPhase(International.trad("text.placeperso"));
 		List<String> noms = new ArrayList<>();
 		List<Couleur> couleurs = new ArrayList<>();
 		core.setJoueurEnVie((couleursT));
@@ -100,7 +101,7 @@ public class TraitementIdjr {
 	}
 
 	public void debutDeplacemant(Idjr core, List<?> lieuxT) {
-		Evenement.nomPhase("Phase de déplacement des personnages");
+		Evenement.nomPhase(International.trad("text.phasedeplperso"));
 		List<Integer> lieux = new ArrayList<>();
 		for (Object o : lieuxT)
 			lieux.add((Integer) o);
@@ -172,7 +173,7 @@ public class TraitementIdjr {
 	}
 
 	public void debutPhaseAttaque(Idjr core) {
-		Evenement.nomPhase("Phase de résolution de l’attaque des zombies");
+		Evenement.nomPhase(International.trad("text.phaseresatazom"));
 	}
 
 	public void attaqueZombie(Idjr core, List<PionCouleur> l, int x) {
@@ -189,7 +190,7 @@ public class TraitementIdjr {
 			nom = "PC de sécurité";
 		if (x == 6)
 			nom = "Supermarché";
-		Evenement.nomPhase("Attaque au lieu " + nom);
+		Evenement.nomPhase(International.trad("text.phaseattaquelieu") + "" + nom);
 		List<PionCouleur> ltemp = new ArrayList<>();
 		for (PionCouleur pc : l) {
 			if (IdjrTools.getCouleurByChar(pc) == core.getCouleur()) {
@@ -268,8 +269,8 @@ public class TraitementIdjr {
 		}
 
 		int cartesCachette = 0;
-		for(CarteType carte : listeCarteJouee)
-			if(carte == CarteType.CAC)
+		for (CarteType carte : listeCarteJouee)
+			if (carte == CarteType.CAC)
 				cartesCachette++;
 
 		for (int i = 0; i < cartesCachette; i++) {
