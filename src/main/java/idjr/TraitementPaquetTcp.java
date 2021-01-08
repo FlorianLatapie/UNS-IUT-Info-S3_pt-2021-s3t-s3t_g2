@@ -20,6 +20,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+import com.sun.org.apache.bcel.internal.generic.IF_ACMPEQ;
+
 import idjr.ihmidjr.IhmTools;
 import idjr.ihmidjr.event.Evenement;
 import idjr.ihmidjr.langues.International;
@@ -652,6 +654,7 @@ public class TraitementPaquetTcp extends TraitementPaquet<TcpClient> {
 				+ International.trad("texte.logchoisirDestPion2") + " " + IdjrTools.getLieuByIndex(dest) + ".";
 		Evenement.log(log);
 		ControleurReseau.envoyerTcp(ControleurReseau.construirePaquetTcp("PICD", dest, pion, m1, core.getJoueurId()));
+		core.getPersolieu().put(pion, dest);
 	}
 
 	public void ChoisirQuiVoter(Paquet Paquet, String message) {
@@ -836,6 +839,7 @@ public class TraitementPaquetTcp extends TraitementPaquet<TcpClient> {
 				listRenvoye.get(1), listRenvoye.get(2), (String) Paquet.getValeur(message, 3),
 				(int) Paquet.getValeur(message, 4), core.getJoueurId());
 		ControleurReseau.envoyerTcp(messageTcp);
+		core.getPersolieu().replace((Integer)listRenvoye.get(1), (Integer) listRenvoye.get(0));
 	}
 
 	public void attaqueZombie(Paquet Paquet, String message) {
@@ -856,6 +860,7 @@ public class TraitementPaquetTcp extends TraitementPaquet<TcpClient> {
 		String messageTcp = ControleurReseau.construirePaquetTcp("RAZCS", (int) Paquet.getValeur(message, 1), sacrifice,
 				(String) Paquet.getValeur(message, 3), (int) Paquet.getValeur(message, 4), core.getJoueurId());
 		ControleurReseau.envoyerTcp(messageTcp);
+		core.getPersolieu().remove(IdjrTools.getPionByValue(sacrifice));
 	}
 
 	private void finPartie(Paquet Paquet, String message) {

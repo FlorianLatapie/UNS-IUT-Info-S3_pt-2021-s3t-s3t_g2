@@ -4,9 +4,13 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Random;
+
+import com.sun.org.apache.bcel.internal.generic.NEW;
 
 import idjr.ihmidjr.event.Evenement;
 import idjr.ihmidjr.langues.International;
+import jdk.internal.org.jline.terminal.impl.jna.win.JnaWinSysTerminal;
 import reseau.type.CarteType;
 import reseau.type.Couleur;
 import reseau.type.PionCouleur;
@@ -88,7 +92,26 @@ public class TraitementIdjr {
 	}
 
 	public int choixDest(Idjr core) {
-		Evenement.choisirLieu(core.getLieuOuvert());
+		List<Integer> lieuDispo = new ArrayList<>();
+		int premierpion =0;
+		lieuDispo.addAll(core.getLieuOuvert());
+		boolean memendroit = true;
+		int v1 = 0;
+		for(int pion : core.getPersolieu().keySet()) {
+			if (premierpion == 0) {
+				premierpion = pion;
+			}
+		}
+		for (int dest : core.getPersolieu().values()) {
+			if(v1 == 0)
+				v1 = dest;
+			if (dest != v1)
+				memendroit = false;
+		}
+		if (memendroit)
+			lieuDispo.remove(core.getPersolieu().get(premierpion));
+
+		Evenement.choisirLieu(lieuDispo);
 		while (!core.lieuDisponible())
 			Thread.yield();
 		int dest = core.getLieuChoisi();
@@ -107,6 +130,7 @@ public class TraitementIdjr {
 	}
 
 	public List<Object> pionADeplacer(Idjr core, int dest, HashMap<Integer, List<Integer>> listedp) {
+		int destinit = dest;
 		List<Object> listRenvoye = new ArrayList<>();
 		List<Integer> listePion = new ArrayList<>();
 		List<Integer> destPossible = new ArrayList<>();
@@ -138,10 +162,9 @@ public class TraitementIdjr {
 		int pionAdep;
 		if (listePion.isEmpty()) {
 			dest = 4;
-			for (Map.Entry<Integer, List<Integer>> dp : listedp.entrySet())
-				for (int destPos : dp.getValue())
-					if (destPos == dest)
-						listePion.add(dp.getKey());
+			for (int i : core.getPersolieu().keySet())
+				if (core.getPersolieu().get(i) != destinit)
+					listePion.add(i);
 			if (!listePion.isEmpty()) {
 				Evenement.choisirPion(listePion);
 				while (!core.pionDisponible())
@@ -307,7 +330,7 @@ public class TraitementIdjr {
 			if (ct == CarteType.MEN)
 				menPossede.add(ct);
 
-		if (core.getListeCarte().isEmpty() || !menPossede.isEmpty())
+		if (core.getListeCarte().isEmpty() || menPossede.isEmpty())
 			return 0;
 
 		Evenement.choisirUtiliserCartes(menPossede);
@@ -329,8 +352,6 @@ public class TraitementIdjr {
 	}
 
 	public Couleur getRandom(Idjr core, VoteType vt) {
-		System.out.println("Joueur Présent:" + core.couleurJoueurPresent().size());
-
 		Evenement.setVote(core.couleurJoueurPresent());
 		while (!core.voteDisponible())
 			Thread.yield();
